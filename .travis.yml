@@ -1,11 +1,15 @@
 language: python
-sudo: required
 python:
-    - "2.7"
-env: PGVERSION=9.1
-install:
-    - bash bin/travis-build.bash
-    - pip install coveralls
-script: sh bin/travis-run.sh
+  - "2.7"
+env: PGVERSION=9.2
+dist: trusty
+sudo: required
+cache: pip
+before_install:
+ - chmod +x ./bin/travis-build.bash
+ - chmod +x ./bin/travis-run.sh
+install: ./bin/travis-build.bash
+script:
+ - ./bin/travis-run.sh
 after_success:
-    - coveralls
+ - coveralls
