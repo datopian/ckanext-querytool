@@ -16,7 +16,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     # IRoutes
 
     def before_map(self, map):
-        ctrl = 'ckanext.querytool.controllers.querytool:QueryTool'
+        ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController'
 
         map.connect('querytool_edit', '/querytool/edit',
                     controller=ctrl, action='edit')
