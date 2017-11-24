@@ -49,7 +49,8 @@ class QueryToolController(base.BaseController):
 
         return render('querytool/admin/base.html',
                       extra_vars={
-                          'msg': 'This is the Query Tool administration page show'})
+                          'msg': 'This is the Query Tool'
+                                 ' administration page show'})
 
     def edit(self):
         '''
@@ -68,7 +69,8 @@ class QueryToolController(base.BaseController):
 
         return render('querytool/admin/edit.html',
                       extra_vars={
-                          'msg': 'This is the Query Tool administration page edit'})
+                          'msg': 'This is the Query Tool'
+                                 ' administration page edit'})
 
     def index(self):
         '''
