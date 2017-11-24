@@ -18,6 +18,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     def before_map(self, map):
         ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController'
 
+        map.connect('querytool_show', '/querytool/show',
+                    controller=ctrl, action='show')
         map.connect('querytool_edit', '/querytool/edit',
                     controller=ctrl, action='edit')
         map.connect('querytool_index', '/querytool/index',

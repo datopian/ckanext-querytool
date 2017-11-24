@@ -32,10 +32,29 @@ class QueryToolController(base.BaseController):
 
         return context
 
+    def show(self):
+        '''
+
+        :return: query show template
+        '''
+        context = self._get_context()
+
+        try:
+            # TODO create, integrate authorization funtions
+            # check_access('squerytool_show', context)
+            pass
+
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        return render('querytool/admin/base.html',
+                      extra_vars={
+                          'msg': 'This is the Query Tool administration page show'})
+
     def edit(self):
         '''
 
-        :return: admin template
+        :return: query edit template
         '''
         context = self._get_context()
 
@@ -47,9 +66,9 @@ class QueryToolController(base.BaseController):
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
-        return render('querytool/admin/base.html',
+        return render('querytool/admin/edit.html',
                       extra_vars={
-                          'msg': 'This is the Query Tool administration page'})
+                          'msg': 'This is the Query Tool administration page edit'})
 
     def index(self):
         '''
