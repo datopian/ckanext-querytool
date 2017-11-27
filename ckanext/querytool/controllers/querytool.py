@@ -6,6 +6,7 @@ import ckan.lib.base as base
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import config, c, _
+from ckan.common import response, request
 
 log = logging.getLogger(__name__)
 
@@ -58,7 +59,7 @@ class QueryToolController(base.BaseController):
         :return: query edit template
         '''
         context = self._get_context()
-
+        data = dict(request.POST)
         try:
             # TODO create, integrate authorization funtions
             # check_access('squerytool_edit', context)
@@ -66,11 +67,9 @@ class QueryToolController(base.BaseController):
 
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
-
+        vars = {'data': data, 'errors': ''}
         return render('querytool/admin/edit.html',
-                      extra_vars={
-                          'msg': 'This is the Query Tool'
-                                 ' administration page edit'})
+                      extra_vars= vars)
 
     def index(self):
         '''
