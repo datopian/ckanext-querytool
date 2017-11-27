@@ -16,7 +16,31 @@
 {% endblock %}
 
 {% block primary_content_inner %}
-  {{msg}}
+ {# Add all this fields in new snippet #}
+   <form method="post" action="{{ '' }}"class="form-horizontal col-sm-12" id="email-body-form">
+
+  <div class="control-group control-medium">
+
+    <label class="control-label" for="query_tool_title">{{_('Title')}}</label>
+    <div class="controls">
+      <input id="query_tool_title" name="query_tool_title" type="text" value="{{data.title}}">
+      <p class="help-block"></p>
+    </div>
+  </div>
+
+ <div class="control-group control-medium">
+
+    <label class="control-label" for="query_tool_description">{{_('Description')}}</label>
+    <div class="controls">
+      <input id="query_tool_description" name="query_tool_description" type="text" value="{{data.description}}">
+      <p class="help-block"></p>
+    </div>
+  </div>
+
+     <div class="form-actions">
+        <button type="submit" class="btn btn-primary" name="save">{{ _('Create query') }}</button>
+    </div>
+   </form>
 {% endblock %}
 
 {% block secondary_content %}
