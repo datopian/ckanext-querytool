@@ -69,7 +69,7 @@ class QueryToolController(base.BaseController):
             abort(403, _('Not authorized to see this page'))
         vars = {'data': data, 'errors': ''}
         return render('querytool/admin/edit.html',
-                      extra_vars= vars)
+                      extra_vars=vars)
 
     def index(self):
         '''
