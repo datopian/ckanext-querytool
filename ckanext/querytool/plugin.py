@@ -1,10 +1,11 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
-
+from ckanext.querytool.logic import actions
 
 class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IRoutes)
+    plugins.implements(plugins.IActions)
 
     # IConfigurer
 
@@ -29,3 +30,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def after_map(self, map):
         return map
+
+        # IActions
+
+    def get_actions(self):
+        return {
+            'querytool_create_query': actions.create_query
+        }
