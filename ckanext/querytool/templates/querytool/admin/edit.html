@@ -1,4 +1,5 @@
 {% extends "page.html" %}
+{% import 'macros/form.html' as form %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
@@ -16,31 +17,17 @@
 {% endblock %}
 
 {% block primary_content_inner %}
- {# Add all this fields in new snippet #}
-   <form method="post" action="{{ '' }}"class="form-horizontal col-sm-12" id="email-body-form">
+  {# Add all this fields in new snippet #}
+  <form method="post" action="{{ '' }}"class="form-horizontal col-sm-12" id="email-body-form">
 
-  <div class="control-group control-medium">
+    {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
-    <label class="control-label" for="query_tool_title">{{_('Title')}}</label>
-    <div class="controls">
-      <input id="query_tool_title" name="query_tool_title" type="text" value="{{data.title}}">
-      <p class="help-block"></p>
+    {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the query tool'), value=data.notes, error=errors.notes) }}
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary" name="save">{{ _('Create query') }}</button>
     </div>
-  </div>
-
- <div class="control-group control-medium">
-
-    <label class="control-label" for="query_tool_description">{{_('Description')}}</label>
-    <div class="controls">
-      <input id="query_tool_description" name="query_tool_description" type="text" value="{{data.description}}">
-      <p class="help-block"></p>
-    </div>
-  </div>
-
-     <div class="form-actions">
-        <button type="submit" class="btn btn-primary" name="save">{{ _('Create query') }}</button>
-    </div>
-   </form>
+  </form>
 {% endblock %}
 
 {% block secondary_content %}

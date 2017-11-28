@@ -67,7 +67,7 @@ class QueryToolController(base.BaseController):
 
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
-        vars = {'data': data, 'errors': ''}
+        vars = {'data': data, 'errors': {}}
         return render('querytool/admin/edit.html',
                       extra_vars=vars)
 
