@@ -7,6 +7,8 @@ import ckan.logic as logic
 import ckan.model as model
 from ckan.common import config, c, _
 from ckan.common import response, request
+from ckan.plugins import toolkit
+import ckan.lib.helpers as h
 
 log = logging.getLogger(__name__)
 
@@ -23,22 +25,26 @@ clean_dict = logic.clean_dict
 parse_params = logic.parse_params
 
 
+def _get_context():
+    context = {'model': model,
+               'session': model.Session,
+               'user': c.user,
+               'for_view': True,
+               'with_private': False}
+
+    return context
+
+
+def _get_action(action, data_dict):
+    return toolkit.get_action(action)(_get_context(), data_dict)
+
 class QueryToolController(base.BaseController):
-
-    def _get_context(self):
-
-        context = {'model': model, 'session': model.Session,
-                   'user': c.user, 'for_view': True,
-                   'with_private': False}
-
-        return context
 
     def show(self):
         '''
 
         :return: query show template
         '''
-        context = self._get_context()
 
         try:
             # TODO create, integrate authorization funtions
@@ -58,18 +64,23 @@ class QueryToolController(base.BaseController):
 
         :return: query edit template
         '''
-        context = self._get_context()
-        data = dict(request.POST)
-        try:
-            # TODO create, integrate authorization funtions
-            # check_access('squerytool_edit', context)
-            pass
-
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
+        data = request.POST
+        # TODO create, integrate authorization funtions
+        if 'save' in data:
+            try:
+                data_dict = dict(request.POST)
+                del data_dict['save']
+                data = _get_action('querytool_create_query', data_dict)
+                h.flash_success(_('Successfully updated.'))
+            except logic.ValidationError, e:
+                errors = e.error_dict
+                error_summary = e.error_summary
+                vars = {'data': data, 'errors': errors,
+                        'error_summary': error_summary}
         vars = {'data': data, 'errors': {}}
+
         return render('querytool/admin/edit.html',
-                      extra_vars=vars)
+                              extra_vars=vars)
 
     def index(self):
         '''
