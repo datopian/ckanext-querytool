@@ -38,6 +38,7 @@ def _get_context():
 def _get_action(action, data_dict):
     return toolkit.get_action(action)(_get_context(), data_dict)
 
+
 class QueryToolController(base.BaseController):
 
     def show(self):
@@ -45,7 +46,6 @@ class QueryToolController(base.BaseController):
 
         :return: query show template
         '''
-
         try:
             # TODO create, integrate authorization funtions
             # check_access('squerytool_show', context)
@@ -86,7 +86,7 @@ class QueryToolController(base.BaseController):
         vars = {'data': data, 'errors': {}}
 
         return render('querytool/admin/edit.html',
-                              extra_vars=vars)
+                      extra_vars=vars)
 
     def index(self):
         '''

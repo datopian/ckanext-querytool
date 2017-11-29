@@ -72,7 +72,7 @@ def define_query_tool_table():
                              Column('description', types.UnicodeText,
                                     default=False),
                              Index('ckanext_querytool_id_idx',
-                                  'id'))
+                                   'id'))
 
     mapper(
         CkanextQueryTool,
