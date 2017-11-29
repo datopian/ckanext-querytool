@@ -61,6 +61,7 @@ class QueryToolController(base.BaseController):
 
     def edit(self):
         '''
+            Add/edit query tool logic
 
         :return: query edit template
         '''
@@ -72,11 +73,16 @@ class QueryToolController(base.BaseController):
                 del data_dict['save']
                 data = _get_action('querytool_create_query', data_dict)
                 h.flash_success(_('Successfully updated.'))
+            except NotAuthorized:
+                abort(403, _('Not authorized to see this page'))
             except logic.ValidationError, e:
                 errors = e.error_dict
                 error_summary = e.error_summary
                 vars = {'data': data, 'errors': errors,
                         'error_summary': error_summary}
+                return render('querytool/admin/edit.html',
+                              extra_vars=vars)
+
         vars = {'data': data, 'errors': {}}
 
         return render('querytool/admin/edit.html',

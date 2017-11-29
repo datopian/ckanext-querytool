@@ -1,11 +1,14 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 from ckanext.querytool.logic import actions
+from ckanext.querytool.model import setup as model_setup
 
 class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IActions)
+    plugins.implements(plugins.IConfigurable)
+
 
     # IConfigurer
 
@@ -13,6 +16,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'querytool')
+
 
     # IRoutes
 
@@ -31,9 +35,15 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     def after_map(self, map):
         return map
 
-        # IActions
+    # IActions
 
     def get_actions(self):
         return {
             'querytool_create_query': actions.create_query
         }
+
+    # IConfigurable
+
+    def configure(self, config):
+        # Setup querytool model
+        model_setup()
