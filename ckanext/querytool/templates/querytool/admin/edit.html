@@ -18,11 +18,12 @@
 
 {% block primary_content_inner %}
   {# Add all this fields in new snippet #}
-  <form method="post" action="{{ '' }}"class="form-horizontal col-sm-12" id="email-body-form">
+ {% set action_url = h.url_for('querytool_edit') %}
+  <form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="email-body-form">
 
     {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
-    {{ form.markdown('notes', id='field-notes', label=_('Description'), placeholder=_('eg. Some useful notes about the query tool'), value=data.notes, error=errors.notes) }}
+    {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
 
     <div class="form-actions">
       <button type="submit" class="btn btn-primary" name="save">{{ _('Create query') }}</button>
