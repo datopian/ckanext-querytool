@@ -9,6 +9,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IConfigurable)
+    plugins.implements(plugins.ITemplateHelpers)
 
     # IConfigurer
 
@@ -46,3 +47,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     def configure(self, config):
         # Setup querytool model
         model_setup()
+
+    # ITemplateHelpers
+
+    def get_helpers(self):
+        return {
+
+        }
