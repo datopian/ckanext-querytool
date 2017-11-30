@@ -1,5 +1,4 @@
 {% extends "page.html" %}
-{% import 'macros/form.html' as form %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
@@ -17,18 +16,8 @@
 {% endblock %}
 
 {% block primary_content_inner %}
-  {# Add all this fields in new snippet #}
- {% set action_url = h.url_for('querytool_edit') %}
-  <form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="email-body-form">
-
-    {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('eg. A descriptive title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
-
-    {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
-
-    <div class="form-actions">
-      <button type="submit" class="btn btn-primary" name="save">{{ _('Create query') }}</button>
-    </div>
-  </form>
+  {{ data }}
+  {% snippet 'querytool/snippets/querytool_fields.html', data=data, errors= errors%}
 {% endblock %}
 
 {% block secondary_content %}
