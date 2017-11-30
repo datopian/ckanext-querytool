@@ -61,9 +61,9 @@ class QueryToolController(base.BaseController):
 
     def edit(self):
         '''
-            Add/edit query tool logic
+            Create or edit query tool functionality
 
-        :return: query edit template
+        :return: query edit template page
         '''
         data = request.POST
         # TODO create, integrate authorization funtions
