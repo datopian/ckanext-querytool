@@ -1,0 +1,20 @@
+{% extends "querytool/admin/base.html" %}
+
+{% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
+
+{% block subtitle %}{{ _('Query Tool') }}{% endblock %}
+
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('Query Tool'), controller=ctrl, action='show' %}</li>
+{% endblock %}
+
+{% block content_action %}
+  {# {% if h.check_access('querytool_edit') %} #}
+    {% link_for _('Manage'), controller=ctrl, action='edit', class_='btn', icon='wrench' %}
+  {# {% endif %} #}
+{% endblock %}
+
+{% block primary_content_inner %}
+  {{msg}}
+{% endblock %}
