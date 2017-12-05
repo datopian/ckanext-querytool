@@ -1,24 +1,26 @@
 {% extends "page.html" %}
 
-{% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
+{% block main_content %}
+  {% block flash %}
+    {{ super() }}
+  {% endblock %}
 
-{% block subtitle %}{{ _('Query Tool') }}{% endblock %}
+  {% block toolbar %}
+    {{ super() }}
+  {% endblock %}
 
-{% block breadcrumb_content %}
-  <li class="active">{% link_for _('Query Tool'), controller=ctrl, action='show' %}</li>
+  <div class="row wrapper no-nav">
+    {% block primary %}
+      <div class="primary span12">
+        {% block primary_content %}
+          {{ super() }}
+        {% endblock %}
+      </div>
+    {% endblock %}
+  </div>
 {% endblock %}
 
-{% block content_action %}
-  {# {% if h.check_access('querytool_edit') %} #}
-    {% link_for _('Manage'), controller=ctrl, action='edit', class_='btn', icon='wrench' %}
-  {# {% endif %} #}
-{% endblock %}
-
-{% block primary_content_inner %}
-  {{msg}}
-{% endblock %}
 
 
-{% block secondary_content %}
-  {% snippet "querytool/admin/snippets/helper.html" %}
-{% endblock %}
+
+

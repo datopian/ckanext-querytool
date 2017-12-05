@@ -54,7 +54,7 @@ class QueryToolController(base.BaseController):
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
-        return render('querytool/admin/base.html',
+        return render('querytool/admin/base_show.html',
                       extra_vars={
                           'msg': 'This is the Query Tool'
                                  ' administration page show'})
