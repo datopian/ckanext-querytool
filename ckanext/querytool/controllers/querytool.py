@@ -85,7 +85,7 @@ class QueryToolController(base.BaseController):
 
         vars = {'data': data, 'errors': {}}
 
-        return render('querytool/admin/edit.html',
+        return render('querytool/admin/base_edit.html',
                       extra_vars=vars)
 
     def index(self):
