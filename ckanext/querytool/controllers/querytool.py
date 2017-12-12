@@ -111,7 +111,7 @@ class QueryToolController(base.BaseController):
                 error_summary = e.error_summary
                 vars = {'data': data, 'errors': errors,
                         'error_summary': error_summary}
-                return render('querytool/admin/edit.html',
+                return render('querytool/admin/base_edit_data.html',
                               extra_vars=vars)
             # redirect to manage visualisations
             url = h.url_for(controller=self.ctrl,
@@ -145,7 +145,7 @@ class QueryToolController(base.BaseController):
                 error_summary = e.error_summary
                 vars = {'data': data, 'errors': errors,
                         'error_summary': error_summary}
-                return render('querytool/admin/edit.html',
+                return render('querytool/admin/base_edit_visualizations.html',
                               extra_vars=vars)
             # redirect to query tools list
             url = h.url_for(controller=self.ctrl,
