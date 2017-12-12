@@ -3,7 +3,7 @@
 {% block header_site_navigation_tabs %}
   {% if c.userobj.sysadmin %}
     {{ h.build_nav_main(
-      ('querytool_show', _('Query Tool'))
+      ('querytool_list', _('Query Tools'))
     ) }}
   {% endif %}
   {{ super() }}
