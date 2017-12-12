@@ -22,7 +22,7 @@ def _get_context():
     }
 
 
-def _get_functions(module_root, logic_functions={}):
+def _get_functions(module_root, functions={}):
     '''
      Helper function that scans extension
      logic/auth dir for all logic/auth functions.
@@ -39,6 +39,6 @@ def _get_functions(module_root, logic_functions={}):
             if not key.startswith('_') \
                     and (hasattr(value, '__call__')
                          and (value.__module__ == module_path)):
-                logic_functions[key] = value
+                functions[key] = value
 
-    return logic_functions
+    return functions
