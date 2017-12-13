@@ -10,8 +10,6 @@
   {{ form.errors(error_summary) }}
 {% endblock %}
 
-ke vidime
-
 <div class="form-actions">
     <a class="btn btn-danger pull-left" href="{% url_for controller=ctrl, action='list' %}" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this Query Tool?') }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
   <button type="submit" class="btn btn-primary" name="save">{{ _('Save') }}</button>

@@ -1,5 +1,4 @@
 {% extends "querytool/admin/base.html" %}
-
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
 {% block subtitle %}{{ _('Query Tools') }}{% endblock %}
@@ -10,6 +9,7 @@
 {% endblock %}
 
 {% block page_header %}
+{% resource 'querytool/css/query-tools.css' %}
 {% endblock %}
 
 {% block page_primary_action %}
@@ -21,9 +21,8 @@
 {% endblock %}
 
 
-
-
-
 {% block primary_content_inner %}
-  {{msg}}
+  {% for querytool in data %}
+       {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
+  {% endfor%}
 {% endblock %}
