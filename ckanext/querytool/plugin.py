@@ -30,8 +30,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     controller=ctrl, action='list')
         map.connect('querytool_show', '/querytool/show',
                     controller=ctrl, action='show')
-        map.connect('querytool_edit', '/querytool/edit',
-                    controller=ctrl, action='edit')
+        map.connect('querytool_create', '/querytool/create',
+                    controller=ctrl, action='create')
         map.connect('querytool_edit_visualizations',
                     '/querytool/edit_visualizations',
                     controller=ctrl, action='edit_visualizations')

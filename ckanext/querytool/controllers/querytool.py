@@ -82,11 +82,11 @@ class QueryToolController(base.BaseController):
                       extra_vars={
                           'msg': 'This is the Query Tool'})
 
-    def edit(self):
+    def create(self):
         '''
-            Create or edit query tool functionality
+            Create new query tool
 
-        :return: query edit template page
+        :return: query create template page
 
         '''
 
