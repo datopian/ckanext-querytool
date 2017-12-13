@@ -41,14 +41,39 @@ def _get_action(action, data_dict):
 
 class QueryToolController(base.BaseController):
 
+    ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController'
+
+    def list(self):
+        '''
+
+        :return: query list template
+        '''
+
+        context = _get_context()
+
+        try:
+            check_access('querytool_list', context)
+            pass
+
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        return render('querytool/admin/base_list.html',
+                      extra_vars={
+                          'msg': 'This is the Query Tools'
+                                 ' list page, here will be '
+                                 'listed all created queru tools'})
+
     def show(self):
         '''
 
-        :return: query show template
+        :return: query list template
         '''
+
+        context = _get_context()
+
         try:
-            # TODO create, integrate authorization funtions
-            # check_access('squerytool_show', context)
+            check_access('querytool_show', context)
             pass
 
         except NotAuthorized:
@@ -56,10 +81,49 @@ class QueryToolController(base.BaseController):
 
         return render('querytool/admin/base_show.html',
                       extra_vars={
-                          'msg': 'This is the Query Tool'
-                                 ' administration page show'})
+                          'msg': 'This is the Query Tool'})
 
     def edit(self):
+        '''
+            Create or edit query tool functionality
+
+        :return: query edit template page
+
+        '''
+
+        context = _get_context()
+
+        try:
+            check_access('querytool_create', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        data = request.POST
+
+        if 'save' in data:
+            try:
+                data_dict = dict(request.POST)
+                del data_dict['save']
+                data = _get_action('querytool_create', data_dict)
+                h.flash_success(_('Data Successfully updated.'))
+            except logic.ValidationError, e:
+                errors = e.error_dict
+                error_summary = e.error_summary
+                vars = {'data': data, 'errors': errors,
+                        'error_summary': error_summary}
+                return render('querytool/admin/base_edit_data.html',
+                              extra_vars=vars)
+            # redirect to manage visualisations
+            url = h.url_for(controller=self.ctrl,
+                            action='edit_visualizations')
+            h.redirect_to(url)
+
+        vars = {'data': data, 'errors': {}}
+
+        return render('querytool/admin/base_edit_data.html',
+                      extra_vars=vars)
+
+    def edit_visualizations(self):
         '''
             Create or edit query tool functionality
 
@@ -71,8 +135,9 @@ class QueryToolController(base.BaseController):
             try:
                 data_dict = dict(request.POST)
                 del data_dict['save']
-                data = _get_action('querytool_create_query', data_dict)
-                h.flash_success(_('Successfully updated.'))
+                # data = _get_action('querytool_create_visualizations',
+                # data_dict)
+                h.flash_success(_('Query Tool successfully updated.'))
             except NotAuthorized:
                 abort(403, _('Not authorized to see this page'))
             except logic.ValidationError, e:
@@ -80,12 +145,16 @@ class QueryToolController(base.BaseController):
                 error_summary = e.error_summary
                 vars = {'data': data, 'errors': errors,
                         'error_summary': error_summary}
-                return render('querytool/admin/edit.html',
+                return render('querytool/admin/base_edit_visualizations.html',
                               extra_vars=vars)
+            # redirect to query tools list
+            url = h.url_for(controller=self.ctrl,
+                            action='list')
+            h.redirect_to(url)
 
         vars = {'data': data, 'errors': {}}
 
-        return render('querytool/admin/base_edit.html',
+        return render('querytool/admin/base_edit_visualizations.html',
                       extra_vars=vars)
 
     def index(self):

@@ -1,7 +1,7 @@
 from ckanext.querytool.model import CkanextQueryTool
 
 
-def create_query(context, data_dict):
+def querytool_create(context, data_dict):
     '''
 
     :param context:

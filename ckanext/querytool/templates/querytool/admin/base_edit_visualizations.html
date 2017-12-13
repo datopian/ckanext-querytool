@@ -2,17 +2,16 @@
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
-{% block subtitle %}{{ _('Query Tools') }}{% endblock %}
-
+{% block subtitle %}{{ _('Query Tool Manage Visualisations') }}{% endblock %}
 
 {% block breadcrumb_content %}
   <li>{% link_for _('Query Tools'), controller=ctrl, action='list' %}</li>
-  <li class="active">{% link_for _('Nekoj query tool'), controller=ctrl, action='list' %}</li>
 {% endblock %}
 
 {% block page_header %}
 {% endblock %}
 
+
 {% block primary_content_inner %}
-  {{msg}}
+  {% snippet 'querytool/admin/snippets/edit_visualizations_form.html', data=data, errors= errors%}
 {% endblock %}

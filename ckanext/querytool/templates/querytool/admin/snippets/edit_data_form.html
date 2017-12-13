@@ -13,12 +13,15 @@ Example usage:
 
 {% set action_url = h.url_for('querytool_edit') %}
 <form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="email-body-form">
+{% block stages %}
+  {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
+{% endblock %}
 
 {{ form.input('title', id='field-title', label=_('Title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
 {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
 
 <div class="form-actions">
-  <button type="submit" class="btn btn-primary" name="save">{{ _('Create query') }}</button>
+  <button type="submit" class="btn btn-primary" name="save">{{ _('Set visualisations') }}</button>
 </div>
 </form>
