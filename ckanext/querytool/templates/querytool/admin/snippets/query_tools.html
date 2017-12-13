@@ -1,0 +1,18 @@
+{#
+
+Creates list of query tools.
+
+description - The information about query tool
+title - The title of the querytool.
+
+Example usage:
+  {% snippet 'querytool/admin/snippets/query_tools.html', querytool=data %}
+
+#}
+
+<div class="panel panel-default">
+  <div class="panel-heading">{{ querytool.title }}</div>
+  <div class="panel-body">
+    {{ querytool.description}}
+  </div>
+</div>
