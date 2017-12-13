@@ -57,12 +57,11 @@ class QueryToolController(base.BaseController):
 
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
+        querytools = _get_action('querytool_list', {})
 
         return render('querytool/admin/base_list.html',
                       extra_vars={
-                          'msg': 'This is the Query Tools'
-                                 ' list page, here will be '
-                                 'listed all created queru tools'})
+                          'data': querytools})
 
     def show(self):
         '''
