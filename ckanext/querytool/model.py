@@ -13,13 +13,10 @@ query_tool_table = None
 
 
 def setup():
-    print 'Vo seti['
     if query_tool_table is None:
         define_query_tool_table()
         log.debug('Querytool table defined in memory.')
-    print 'stignav'
     if not query_tool_table.exists():
-        print 'ovde'
         query_tool_table.create()
     else:
         log.debug('Querytool table already exists.')
@@ -30,7 +27,6 @@ def setup():
             inspector.get_indexes('ckanext_querytool')]
 
     if 'ckanext_querytool_id_idx' not in index_names:
-        print 'Podolu so index'
         log.debug('Creating index for Querytool.')
         Index('ckanext_querytool_id_idx',
               query_tool_table.c.id).create()
@@ -66,6 +62,9 @@ def define_query_tool_table():
                              Column('id', types.UnicodeText,
                                     primary_key=True,
                                     default=make_uuid),
+                             Column('name',
+                                    types.UnicodeText,
+                                    nullable=False),
                              Column('title',
                                     types.UnicodeText,
                                     nullable=False),

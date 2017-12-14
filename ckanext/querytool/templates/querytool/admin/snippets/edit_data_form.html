@@ -4,20 +4,22 @@ Creates layout for a query tool fields.
 
 title - The title of the query tool.
 description - description what kind of data is in the query tool.
+name -
 
 Example usage:
-  {% snippet 'querytool/snippets/querytool_fields.html', data=data, errors= errors%}
+  {% snippet 'querytool/snippets/edit_data_form.html', data=data, errors= errors%}
 
 #}
 {% import 'macros/form.html' as form %}
 
-{% set action_url = h.url_for('querytool_edit') %}
-<form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="email-body-form">
+{% set action_url = h.url_for('querytool_create') %}
+<form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="">
 {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
 {% endblock %}
 
 {{ form.input('title', id='field-title', label=_('Title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+{{ form.input('name', id='field-name', label=_('Name'), placeholder=_('Name of the query tool'), value=data.name, error=errors.name, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
 {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
 

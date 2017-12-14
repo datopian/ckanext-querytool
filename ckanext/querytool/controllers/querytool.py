@@ -57,12 +57,11 @@ class QueryToolController(base.BaseController):
 
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
+        querytools = _get_action('querytool_list', {})
 
         return render('querytool/admin/base_list.html',
                       extra_vars={
-                          'msg': 'This is the Query Tools'
-                                 ' list page, here will be '
-                                 'listed all created queru tools'})
+                          'data': querytools})
 
     def show(self):
         '''
@@ -83,11 +82,11 @@ class QueryToolController(base.BaseController):
                       extra_vars={
                           'msg': 'This is the Query Tool'})
 
-    def edit(self):
+    def create(self):
         '''
-            Create or edit query tool functionality
+            Create new query tool
 
-        :return: query edit template page
+        :return: query create template page
 
         '''
 
@@ -119,6 +118,32 @@ class QueryToolController(base.BaseController):
             h.redirect_to(url)
 
         vars = {'data': data, 'errors': {}}
+
+        return render('querytool/admin/base_edit_data.html',
+                      extra_vars=vars)
+
+    def edit(self, name):
+        '''
+            Edit query tool
+        :param name: Name of the query tool
+        :return: query create template page
+
+        '''
+
+        context = _get_context()
+
+        try:
+            # check_access('querytool_edit', context)
+            pass
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        data = {
+            'name': name
+        }
+        query_tool = _get_action('querytool_get', data_dict=data)
+
+        vars = {'data': query_tool, 'errors': {}}
 
         return render('querytool/admin/base_edit_data.html',
                       extra_vars=vars)
