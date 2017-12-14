@@ -122,6 +122,32 @@ class QueryToolController(base.BaseController):
         return render('querytool/admin/base_edit_data.html',
                       extra_vars=vars)
 
+    def edit(self, name):
+        '''
+            Edit query tool
+        :param name: Name of the query tool
+        :return: query create template page
+
+        '''
+
+        context = _get_context()
+
+        try:
+            #check_access('querytool_edit', context)
+            pass
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        data = {
+            'name' : name
+        }
+        query_tool = _get_action('querytool_get', data_dict=data)
+
+        vars = {'data': query_tool, 'errors': {}}
+
+        return render('querytool/admin/base_edit_data.html',
+                      extra_vars=vars)
+
     def edit_visualizations(self):
         '''
             Create or edit query tool functionality
