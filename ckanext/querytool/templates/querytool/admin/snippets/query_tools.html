@@ -9,10 +9,12 @@ Example usage:
   {% snippet 'querytool/admin/snippets/query_tools.html', querytool=data %}
 
 #}
+{% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
 <div class="panel panel-default">
-  <div class="panel-heading">{{ querytool.title }}</div>
+  <div class="panel-heading">{% link_for querytool.name, controller=ctrl, action='edit',  name=querytool.name, class_='btn btn-primary', icon='plus-square' %}</div>
   <div class="panel-body">
-    {{ querytool.description}}
+    <h2>{{ querytool.title }}</h2>
+    <p>{{ querytool.description}}</p>
   </div>
 </div>

@@ -19,7 +19,7 @@ Example usage:
 {% endblock %}
 
 {{ form.input('title', id='field-title', label=_('Title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
-{{ form.input('name', id='field-name', label=_('Name'), placeholder=_('Name of the query tool'), value=data.name, error=errors.name) }}
+{{ form.input('name', id='field-name', label=_('Name'), placeholder=_('Name of the query tool'), value=data.name, error=errors.name, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
 {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
 
