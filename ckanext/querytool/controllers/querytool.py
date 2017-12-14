@@ -82,7 +82,7 @@ class QueryToolController(base.BaseController):
                       extra_vars={
                           'msg': 'This is the Query Tool'})
 
-    def create(self):
+    def edit(self, page=None):
         '''
             Create new query tool
 
@@ -91,14 +91,27 @@ class QueryToolController(base.BaseController):
         '''
 
         context = _get_context()
+        data_q = {}
+        _page = ''
+        if page:
+            data_q = {
+                'name': page[1:]
+            }
+            _page = _get_action('querytool_get', data_dict=data_q)
+
+        if _page is None and len(page) > 0:
+            toolkit.abort(404, _('Page not found.'))
+
+        if _page is None:
+            _page = {}
 
         try:
             check_access('querytool_create', context)
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
-
         data = request.POST
 
+        vars = {'data': _page, 'errors': {}}
         if 'save' in data:
             try:
                 data_dict = dict(request.POST)
@@ -117,36 +130,11 @@ class QueryToolController(base.BaseController):
                             action='edit_visualizations')
             h.redirect_to(url)
 
-        vars = {'data': data, 'errors': {}}
+            vars = {'data': data, 'errors': {}}
 
         return render('querytool/admin/base_edit_data.html',
                       extra_vars=vars)
 
-    def edit(self, name):
-        '''
-            Edit query tool
-        :param name: Name of the query tool
-        :return: query create template page
-
-        '''
-
-        context = _get_context()
-
-        try:
-            # check_access('querytool_edit', context)
-            pass
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
-
-        data = {
-            'name': name
-        }
-        query_tool = _get_action('querytool_get', data_dict=data)
-
-        vars = {'data': query_tool, 'errors': {}}
-
-        return render('querytool/admin/base_edit_data.html',
-                      extra_vars=vars)
 
     def edit_visualizations(self):
         '''
