@@ -6,6 +6,7 @@ from ckanext.querytool.model import CkanextQueryTool
 
 log = logging.getLogger(__name__)
 
+
 @toolkit.side_effect_free
 def querytool_list(context, data_dict):
     '''Returns a list of all query tools.
@@ -25,6 +26,7 @@ def querytool_list(context, data_dict):
         out.append(querytool)
 
     return out
+
 
 @toolkit.side_effect_free
 def querytool_get(context, data_dict):

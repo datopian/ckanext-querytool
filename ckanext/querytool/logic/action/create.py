@@ -15,7 +15,7 @@ def querytool_create(context, data_dict):
     data = {
         'title': data_dict['title'],
         'description': data_dict['description'],
-        'name' : data_dict['name']
+        'name': data_dict['name']
     }
     query = CkanextQueryTool.get(name=data_dict['name'])
     result = {}

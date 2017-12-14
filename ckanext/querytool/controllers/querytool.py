@@ -133,13 +133,13 @@ class QueryToolController(base.BaseController):
         context = _get_context()
 
         try:
-            #check_access('querytool_edit', context)
+            # check_access('querytool_edit', context)
             pass
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
         data = {
-            'name' : name
+            'name': name
         }
         query_tool = _get_action('querytool_get', data_dict=data)
 
