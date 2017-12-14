@@ -23,5 +23,23 @@ def querytool_list(context, data_dict):
 
     for querytool in querytools:
         out.append(querytool)
+
     return out
+
+@toolkit.side_effect_free
+def querytool_get(context, data_dict):
+    '''Returns  query tool.
+    :param name: querytool name
+    :rtype: query tool object
+    '''
+
+    # check_access('',
+    #            context, data_dict)
+
+    log.info('Querytool : %r', data_dict)
+    name = data_dict['name']
+
+    querytool = CkanextQueryTool.get(name=name)
+
+    return querytool
 
