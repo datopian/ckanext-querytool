@@ -44,4 +44,3 @@ def querytool_get(context, data_dict):
     querytool = CkanextQueryTool.get(name=name)
 
     return querytool
-
