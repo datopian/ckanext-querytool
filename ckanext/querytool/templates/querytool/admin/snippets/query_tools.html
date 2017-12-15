@@ -10,11 +10,19 @@ Example usage:
 
 #}
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
-
+{% set action_url = h.url_for('querytool_edit', page='/' + querytool.name) %}
+{% set delete_url = h.url_for('querytool_delete', page='/' + querytool.name) %}
 <div class="panel panel-default">
-  <div class="panel-heading">{% link_for querytool.name, controller=ctrl, action='edit',  name=querytool.name, class_='btn btn-primary', icon='plus-square' %}</div>
-  <div class="panel-body">
+  <div class="panel-heading">{{querytool.name}}</div>
+  <div class="panel-body row-fluid">
+    <div class="span10">
     <h2>{{ querytool.title }}</h2>
     <p>{{ querytool.description}}</p>
+    </div>
+    <a href="{{action_url}}">
+      <div class="span2">
+          <a class="btn btn-danger pull-left" href="{{ delete_url }}" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this Query Tool?') }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
+          <a class="btn btn-success pull-left" href="{{ action_url}}" type="submit" name="edit">{{ _('Edit') }}</a>
+      </div>
   </div>
 </div>

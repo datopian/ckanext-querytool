@@ -12,12 +12,11 @@ Example usage:
 #}
 {% import 'macros/form.html' as form %}
 
-{% set action_url = h.url_for('querytool_create') %}
+{% set action_url = h.url_for('querytool_edit', page='') %}
 <form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="">
 {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
 {% endblock %}
-
 {{ form.input('title', id='field-title', label=_('Title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 {{ form.input('name', id='field-name', label=_('Name'), placeholder=_('Name of the query tool'), value=data.name, error=errors.name, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
