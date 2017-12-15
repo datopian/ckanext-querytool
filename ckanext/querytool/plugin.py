@@ -34,6 +34,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     controller=ctrl, action='create')
         map.connect('querytool_edit', '/querytool/edit{page:/.*|}',
                     controller=ctrl, action='edit')
+        map.connect('querytool_delete', '/querytool/delete{page:/.*|}',
+                    controller=ctrl, action='delete')
         map.connect('querytool_edit_visualizations',
                     '/querytool/edit_visualizations',
                     controller=ctrl, action='edit_visualizations')

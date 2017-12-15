@@ -1,4 +1,5 @@
 import logging
+import ckan.logic as l
 
 from sqlalchemy import Table, Column, Index, ForeignKey
 from sqlalchemy import types, func
@@ -53,6 +54,16 @@ class CkanextQueryTool(DomainObject):
         query = query.filter_by(**kwds)
 
         return query.all()
+
+    @classmethod
+    def delete(cls, id):
+        # Delete single event
+        obj = Session.query(cls).filter_by(name=id).first()
+        if not obj:
+            raise l.NotFound
+
+        Session.delete(obj)
+        Session.commit()
 
 
 def define_query_tool_table():
