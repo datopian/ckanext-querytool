@@ -1,5 +1,5 @@
 import logging
-import ckan.logic as l
+import ckan.logic as logic
 
 from sqlalchemy import Table, Column, Index, ForeignKey
 from sqlalchemy import types, func
@@ -60,7 +60,7 @@ class CkanextQueryTool(DomainObject):
         # Delete single event
         obj = Session.query(cls).filter_by(name=id).first()
         if not obj:
-            raise l.NotFound
+            raise logic.NotFound
 
         Session.delete(obj)
         Session.commit()
