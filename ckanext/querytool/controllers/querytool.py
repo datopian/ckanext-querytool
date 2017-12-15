@@ -135,6 +135,11 @@ class QueryToolController(base.BaseController):
         return render('querytool/admin/base_edit_data.html',
                       extra_vars=vars)
 
+    def delete(self, page=None):
+        id = page[1:]
+        resp = _get_action('querytool_delete', {'id': id})
+        h.flash_success(_('Querytool was removed successfully.'))
+        toolkit.redirect_to(h.url_for('querytool_list'))
 
     def edit_visualizations(self):
         '''
