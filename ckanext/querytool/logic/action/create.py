@@ -1,4 +1,10 @@
 from ckanext.querytool.model import CkanextQueryTool
+import ckan.logic as logic
+import ckan.lib.navl.dictization_functions as df
+from ckan.plugins import toolkit
+from ckanext.querytool.logic import schema
+
+check_access = logic.check_access
 
 
 def querytool_create(context, data_dict):
@@ -12,14 +18,25 @@ def querytool_create(context, data_dict):
     :rtype dictionary
     '''
 
+    check_access('querytool_create', context)
+    data, errors = df.validate(data_dict, schema.querytool_create_schema(),
+                               context)
+
+    if errors:
+        raise toolkit.ValidationError(errors)
+    title = data.get('title')
+    description = data.get('description')
+    name = data.get('name')
+
     data = {
-        'title': data_dict['title'],
-        'description': data_dict['description'],
-        'name': data_dict['name']
+        'title': title,
+        'description': description,
+        'name': name,
     }
-    query = CkanextQueryTool.get(name=data_dict['name'])
+
+    query = CkanextQueryTool.get(name=data['name'])
     result = {}
-    print query
+
     if query is None:
         query = CkanextQueryTool(**data)
         query.save()
