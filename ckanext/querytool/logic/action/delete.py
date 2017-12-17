@@ -1,7 +1,10 @@
 import logging
+import ckan.logic as logic
 from ckanext.querytool.model import CkanextQueryTool
-
 from ckan.plugins import toolkit
+
+check_access = logic.check_access
+
 log = logging.getLogger(__name__)
 
 
@@ -11,7 +14,8 @@ def querytool_delete(context, data_dict):
     :type id: string
     :rtype: dictionary
     '''
-    # logic.check_access('querytool_delete', context, data_dict)
+
+    check_access('querytool_delete', context)
 
     id = toolkit.get_or_bust(data_dict, 'id')
 
