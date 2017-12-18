@@ -12,15 +12,26 @@ Example usage:
 #}
 {% import 'macros/form.html' as form %}
 
-{% set action_url = h.url_for('querytool_edit', page='') %}
+{% if querytool %}
+  {% set action_url = h.url_for('querytool_edit', querytool= '/' + querytool.name) %}
+{% else %}
+  {% set action_url = h.url_for('querytool_edit', querytool= '') %}
+{% endif %}
 <form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="">
 {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
 {% endblock %}
-{{ form.input('title', id='field-title', label=_('Title'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
-{{ form.input('name', id='field-name', label=_('Name'), placeholder=_('Name of the query tool'), value=data.name, error=errors.name, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
-{{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
+
+  {% set prefix = h.url_for('querytool_edit', querytool= '') %}
+  {% set domain = h.url_for('querytool_edit', querytool= '') %}
+  {% set domain = domain|replace("http://", "")|replace("https://", "") %}
+  {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain + '/', 'data-module-placeholder': '<querytool>', 'class': 'form-control input-sm'} %}
+
+  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix + '/', placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
+
+  {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
 
 <div class="form-actions">
   <button type="submit" class="btn btn-primary" name="save">{{ _('Set visualisations') }}</button>

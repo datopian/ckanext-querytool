@@ -78,11 +78,12 @@ class QueryToolController(base.BaseController):
                       extra_vars={
                           'msg': 'This is the Query Tool'})
 
-    def edit(self, page=None):
+    def querytool_edit(self, querytool=None, data=None,
+                       errors=None, error_summary=None):
         '''
-            Create new query tool
+            Create/edit query tool
 
-        :return: query create template page
+        :return: query create/edit template page
 
         '''
         context = _get_context()
@@ -91,46 +92,60 @@ class QueryToolController(base.BaseController):
             check_access('querytool_create', context)
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
-        data_q = {}
-        _page = ''
-        if page:
-            data_q = {
-                'name': page[1:]
-            }
-            _page = _get_action('querytool_get', data_dict=data_q)
 
-        if _page is None and len(page) > 0:
-            toolkit.abort(404, _('Page not found.'))
+        if querytool:
+            querytool = querytool[1:]
 
-        if _page is None:
-            _page = {}
-        data = request.POST
+        data_dict = {
+            'name': querytool
+        }
+        _querytool = get_action('querytool_get')({}, data_dict)
 
-        vars = {'data': _page, 'errors': {}}
-        if 'save' in data:
+        if _querytool is None and len(querytool) > 0:
+            abort(404, _('Querytool not found.'))
+
+        if _querytool is None:
+            _querytool = {}
+
+        if toolkit.request.method == 'POST' and not data:
+            data = dict(toolkit.request.POST)
+
+            _querytool.update(data)
+            _querytool['querytool'] = querytool
+
             try:
-                data_dict = dict(request.POST)
-                del data_dict['save']
-                data = _get_action('querytool_create', data_dict)
+                junk = _get_action('querytool_update', _querytool)
                 h.flash_success(_('Data Successfully updated.'))
-            except logic.ValidationError, e:
+            except ValidationError, e:
                 errors = e.error_dict
                 error_summary = e.error_summary
-                vars = {'data': data, 'errors': errors,
-                        'error_summary': error_summary}
-                return render('querytool/admin/base_edit_data.html',
-                              extra_vars=vars)
+                return self.querytool_edit('/' + querytool, data,
+                                           errors, error_summary)
             # redirect to manage visualisations
             url = h.url_for(controller=self.ctrl,
                             action='edit_visualizations')
             h.redirect_to(url)
 
-            vars = {'data': data, 'errors': {}}
+        if not data:
+            data = _querytool
+
+        errors = errors or {}
+        error_summary = error_summary or {}
+
+        vars = {'data': data, 'errors': errors,
+                'error_summary': error_summary,
+                'querytool': _querytool}
 
         return render('querytool/admin/base_edit_data.html',
                       extra_vars=vars)
 
-    def delete(self, page=None):
+    def delete(self, querytool):
+        '''
+            Delete query tool
+
+        :return: querytools list template page
+
+        '''
 
         context = _get_context()
 
@@ -139,12 +154,13 @@ class QueryToolController(base.BaseController):
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
-        id = page[1:]
+        id = querytool[1:]
 
         try:
-            resp = _get_action('querytool_delete', {'id': id})
-        except logic.ValidationError, e:
-            pass
+            junk = _get_action('querytool_delete', {'id': id})
+        except NotFound:
+            abort(404, _('Querytool not found'))
+
         h.flash_success(_('Querytool was removed successfully.'))
         toolkit.redirect_to(h.url_for('querytool_list'))
 
