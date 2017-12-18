@@ -1,5 +1,10 @@
 {% extends "querytool/admin/base.html" %}
 
+{% block scripts %}
+  {{ super() }}
+  {% resource 'querytool/javascript/querytool_data.js' %}
+{% endblock %}
+
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
 {% block subtitle %}{{ _('Query Tool Manage') }}{% endblock %}
