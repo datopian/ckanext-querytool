@@ -42,3 +42,32 @@ def _get_functions(module_root, functions={}):
                 functions[key] = value
 
     return functions
+
+
+def user_is_sysadmin(context):
+    '''
+        Checks if the user defined in the context is a sysadmin
+        rtype: boolean
+    '''
+    model = context['model']
+    user = context['user']
+    user_obj = model.User.get(user)
+    if not user_obj:
+        log.error('User {0} not found').format(user)
+        return False
+
+    return user_obj.sysadmin
+
+
+def user_is_registered(context):
+    '''
+        Checks if the user is registered user
+    '''
+    model = context['model']
+    user = context['user']
+    user_obj = model.User.get(user)
+    if not user_obj:
+        log.error('User {0} not found').format(user)
+        return False
+
+    return True

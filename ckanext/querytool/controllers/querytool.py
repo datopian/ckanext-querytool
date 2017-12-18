@@ -53,11 +53,10 @@ class QueryToolController(base.BaseController):
 
         try:
             check_access('querytool_list', context)
-            pass
 
+            querytools = _get_action('querytool_list', {})
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
-        querytools = _get_action('querytool_list', {})
 
         return render('querytool/admin/base_list.html',
                       extra_vars={
@@ -68,13 +67,10 @@ class QueryToolController(base.BaseController):
 
         :return: query list template
         '''
-
         context = _get_context()
 
         try:
             check_access('querytool_show', context)
-            pass
-
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
@@ -89,8 +85,12 @@ class QueryToolController(base.BaseController):
         :return: query create template page
 
         '''
-
         context = _get_context()
+
+        try:
+            check_access('querytool_create', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
         data_q = {}
         _page = ''
         if page:
@@ -104,11 +104,6 @@ class QueryToolController(base.BaseController):
 
         if _page is None:
             _page = {}
-
-        try:
-            check_access('querytool_create', context)
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
         data = request.POST
 
         vars = {'data': _page, 'errors': {}}
@@ -136,8 +131,20 @@ class QueryToolController(base.BaseController):
                       extra_vars=vars)
 
     def delete(self, page=None):
+
+        context = _get_context()
+
+        try:
+            check_access('querytool_delete', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
         id = page[1:]
-        resp = _get_action('querytool_delete', {'id': id})
+
+        try:
+            resp = _get_action('querytool_delete', {'id': id})
+        except logic.ValidationError, e:
+            pass
         h.flash_success(_('Querytool was removed successfully.'))
         toolkit.redirect_to(h.url_for('querytool_list'))
 
