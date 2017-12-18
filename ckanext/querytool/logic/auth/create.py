@@ -10,10 +10,5 @@ def querytool_create(context, data_dict):
     '''
         Authorization check for creating new querytool
     '''
-    success = helpers.user_is_sysadmin(context)
-    out = {
-        'success': success,
-        'msg': '' if success else
-        toolkit._('User not authorized to create new query')
-    }
-    return out
+    # sysadmins only
+    return {'success': False}
