@@ -119,7 +119,7 @@ class QueryToolController(base.BaseController):
         id = page[1:]
         try:
             resp = _get_action('querytool_delete', {'id': id})
-        except:
+        except logic.ValidationError, e:
             pass
         h.flash_success(_('Querytool was removed successfully.'))
         toolkit.redirect_to(h.url_for('querytool_list'))

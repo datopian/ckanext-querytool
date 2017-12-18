@@ -17,5 +17,3 @@ def querytool_create(context, data_dict):
         toolkit._('User not authorized to create new query')
     }
     return out
-
-
