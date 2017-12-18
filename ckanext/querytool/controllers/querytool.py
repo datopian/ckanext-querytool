@@ -49,7 +49,11 @@ class QueryToolController(base.BaseController):
         :return: query list template
         '''
 
+        context = _get_context()
+
         try:
+            check_access('querytool_list', context)
+
             querytools = _get_action('querytool_list', {})
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
@@ -63,6 +67,12 @@ class QueryToolController(base.BaseController):
 
         :return: query list template
         '''
+        context = _get_context()
+
+        try:
+            check_access('querytool_show', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
 
         return render('querytool/admin/base_show.html',
                       extra_vars={
@@ -75,7 +85,12 @@ class QueryToolController(base.BaseController):
         :return: query create template page
 
         '''
+        context = _get_context()
 
+        try:
+            check_access('querytool_create', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
         data_q = {}
         _page = ''
         if page:
@@ -116,7 +131,16 @@ class QueryToolController(base.BaseController):
                       extra_vars=vars)
 
     def delete(self, page=None):
+
+        context = _get_context()
+
+        try:
+            check_access('querytool_delete', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
         id = page[1:]
+
         try:
             resp = _get_action('querytool_delete', {'id': id})
         except logic.ValidationError, e:
