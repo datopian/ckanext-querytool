@@ -14,14 +14,6 @@ def querytool_delete(context, data_dict):
     :type id: string
     :rtype: dictionary
     '''
-
     check_access('querytool_delete', context)
-
     id = toolkit.get_or_bust(data_dict, 'id')
-
     CkanextQueryTool.delete(id=id)
-
-    log.info('Querytool delete: %r', data_dict)
-    return {
-        'message': 'Querytool successfully deleted'
-    }

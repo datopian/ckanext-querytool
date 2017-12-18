@@ -3,6 +3,7 @@ import logging
 from ckan.plugins import toolkit
 from ckan.logic import check_access, NotFound
 from ckanext.querytool.model import CkanextQueryTool
+from ckanext.querytool.model import table_dictize
 
 log = logging.getLogger(__name__)
 
@@ -23,6 +24,7 @@ def querytool_list(context, data_dict):
     out = []
 
     for querytool in querytools:
+        querytool = table_dictize(querytool, context)
         out.append(querytool)
 
     return out
@@ -42,5 +44,7 @@ def querytool_get(context, data_dict):
     name = data_dict['name']
 
     querytool = CkanextQueryTool.get(name=name)
+    if querytool:
+        querytool = table_dictize(querytool, context)
 
     return querytool

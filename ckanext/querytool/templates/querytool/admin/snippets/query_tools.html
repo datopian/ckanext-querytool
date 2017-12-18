@@ -10,8 +10,8 @@ Example usage:
 
 #}
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
-{% set action_url = h.url_for('querytool_edit', page='/' + querytool.name) %}
-{% set delete_url = h.url_for('querytool_delete', page='/' + querytool.name) %}
+{% set action_url = h.url_for('querytool_edit', querytool='/' + querytool.name) %}
+{% set delete_url = h.url_for('querytool_delete', querytool='/' + querytool.name) %}
 <div class="panel panel-default">
   <div class="panel-heading">{{querytool.name}}</div>
   <div class="panel-body row-fluid">

@@ -28,13 +28,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                      _redirect_code='301 Moved Permanently')
         map.connect('querytool_list', '/querytool/list',
                     controller=ctrl, action='list')
-        map.connect('querytool_show', '/querytool/show',
+        map.connect('querytool_show', '/querytool/show/{querytool}',
                     controller=ctrl, action='show')
-        map.connect('querytool_create', '/querytool/create',
-                    controller=ctrl, action='create')
-        map.connect('querytool_edit', '/querytool/edit{page:/.*|}',
-                    controller=ctrl, action='edit')
-        map.connect('querytool_delete', '/querytool/delete{page:/.*|}',
+        map.connect('querytool_edit', '/querytool/edit{querytool:/.*|}',
+                    controller=ctrl, action='querytool_edit')
+        map.connect('querytool_delete', '/querytool/delete{querytool:/.*|}',
                     controller=ctrl, action='delete')
         map.connect('querytool_edit_visualizations',
                     '/querytool/edit_visualizations',
