@@ -158,7 +158,7 @@ class QueryToolController(base.BaseController):
 
         try:
             junk = _get_action('querytool_delete', {'id': id})
-        except toolkit.NotFound:
+        except NotFound:
             abort(404, _('Querytool not found'))
 
         h.flash_success(_('Querytool was removed successfully.'))
