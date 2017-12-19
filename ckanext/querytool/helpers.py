@@ -8,6 +8,7 @@ except ImportError:
 import logging
 import ckan.model as m
 from ckan.common import c
+from ckan.plugins import toolkit
 
 
 log = logging.getLogger(__name__)
@@ -20,6 +21,10 @@ def _get_context():
         'user': c.user or c.author,
         'auth_user_obj': c.userobj
     }
+
+
+def _get_action(action, data_dict):
+    return toolkit.get_action(action)(_get_context(), data_dict)
 
 
 def _get_functions(module_root, functions={}):
@@ -44,21 +49,6 @@ def _get_functions(module_root, functions={}):
     return functions
 
 
-def user_is_sysadmin(context):
-    '''
-        Checks if the user defined in the context is a sysadmin
-        rtype: boolean
-    '''
-    model = context['model']
-    user = context['user']
-    user_obj = model.User.get(user)
-    if not user_obj:
-        log.error('User {0} not found').format(user)
-        return False
-
-    return user_obj.sysadmin
-
-
 def user_is_registered(context):
     '''
         Checks if the user is registered user
@@ -71,3 +61,17 @@ def user_is_registered(context):
         return False
 
     return True
+
+
+def get_all_datasets():
+
+    context = _get_context()
+
+    data_dict = {
+
+    }
+
+    datasets = _get_action('package_list', data_dict)
+
+    print datasets
+    return datasets
