@@ -1,7 +1,6 @@
 import logging
 
 from ckan.plugins import toolkit
-from ckan.logic import check_access, NotFound
 from ckanext.querytool.model import CkanextQueryTool
 from ckanext.querytool.model import table_dictize
 

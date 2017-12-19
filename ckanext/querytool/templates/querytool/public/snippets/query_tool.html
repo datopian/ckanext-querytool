@@ -1,0 +1,22 @@
+{#
+
+Creates query tool.
+
+description - The information about query tool
+title - The title of the querytool.
+
+Example usage:
+  {% snippet 'querytool/public/snippets/query_tool.html', querytool=data %}
+
+#}
+{% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
+
+<div class="card" style="width: 20rem;">
+  <div class="card-body">
+    <h4 class="card-title">{{querytool.name}}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">{{ querytool.title}}</h6>
+
+    <p class="card-text">{{ querytool.description}}</p>
+    <a href="#" class="btn btn-primary">Open</a>
+  </div>
+</div>

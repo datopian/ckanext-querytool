@@ -2,6 +2,7 @@ import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckanext.querytool.helpers as h
 from ckanext.querytool.model import setup as model_setup
+import ckanext.querytool.helpers as helpers
 
 
 class QuerytoolPlugin(plugins.SingletonPlugin):
@@ -37,8 +38,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         map.connect('querytool_edit_visualizations',
                     '/querytool/edit_visualizations',
                     controller=ctrl, action='edit_visualizations')
-        map.connect('querytool_index', '/querytool/index',
-                    controller=ctrl, action='index')
+        map.connect('querytool_public_index', '/querytool/public/index',
+                    controller=ctrl, action='querytool_public_index')
+        map.connect('querytool_public_list', '/querytool/public/list',
+                    controller=ctrl, action='querytool_public_list')
 
         return map
 
@@ -63,6 +66,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def get_helpers(self):
         return {
+            'querytool_get_datasets': helpers.get_all_datasets
         }
 
     # IAuthFunctions

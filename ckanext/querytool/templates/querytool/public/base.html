@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Query Tool</title>
-</head>
-<body>
-  <h1>{{msg}}</h1>
-</body>
-</html>
+{% extends "querytool/public/querytool_page.html" %}
+
+{% block main %}
+  {% include 'querytool/public/base_main.html' %}
+{% endblock %}
