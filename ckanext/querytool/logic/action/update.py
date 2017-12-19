@@ -19,7 +19,7 @@ def querytool_update(context, data_dict):
     :param name
     '''
 
-    check_access('querytool_create', context)
+    check_access('querytool_update', context)
 
     # we need the querytool name in the context for name validation
     context['querytool'] = data_dict['querytool']

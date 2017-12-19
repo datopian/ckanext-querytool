@@ -89,7 +89,7 @@ class QueryToolController(base.BaseController):
         context = _get_context()
 
         try:
-            check_access('querytool_create', context)
+            check_access('querytool_update', context)
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
