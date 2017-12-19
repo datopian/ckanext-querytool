@@ -1,7 +1,7 @@
 {% extends "querytool/public/querytool_page.html" %}
 
 
-{% block mainsummarize %}
+{% block main %}
   {% for querytool in data %}
        {% snippet 'querytool/public/snippets/query_tool.html', querytool=querytool %}
   {% endfor%}

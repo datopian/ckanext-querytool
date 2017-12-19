@@ -66,7 +66,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def get_helpers(self):
         return {
-            'querytool_get_datasets' : helpers.get_all_datasets
+            'querytool_get_datasets': helpers.get_all_datasets
         }
 
     # IAuthFunctions
