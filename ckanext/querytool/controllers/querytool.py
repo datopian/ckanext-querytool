@@ -171,7 +171,7 @@ class QueryToolController(base.BaseController):
         :return: query edit template page
         '''
         data = request.POST
-        # TODO create, integrate authorization funtions
+        # TODO create, integrate authorization functions
         if 'save' in data:
             try:
                 data_dict = dict(request.POST)
@@ -198,7 +198,7 @@ class QueryToolController(base.BaseController):
         return render('querytool/admin/base_edit_visualizations.html',
                       extra_vars=vars)
 
-    def index(self):
+    def querytool_public_index(self):
         '''
 
         :return: base template
@@ -206,3 +206,13 @@ class QueryToolController(base.BaseController):
         return render('querytool/public/base.html',
                       extra_vars={'msg': 'This is the Query Tool public '
                                   'page and will be build from scratch'})
+
+    def querytool_public_list(self):
+        '''
+
+        :return: base template
+        '''
+        querytools = _get_action('querytool_list', {})
+
+        return render('querytool/public/base_list.html',
+                      extra_vars={'data': querytools})
