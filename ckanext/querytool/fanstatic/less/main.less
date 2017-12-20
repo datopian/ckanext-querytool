@@ -1,0 +1,17 @@
+/* Mixin */.border-radius (@radius: 5px) {
+-webkit-border-radius: @radius;
+-moz-border-radius: @radius;
+border-radius: @radius;
+}
+
+/* Implementation */#somediv {
+.border-radius(20px);
+
+}
+
+.btn {
+  background-image: none;
+  border-color: transparent;
+  box-shadow: none;
+  border-radius: 2px;
+}

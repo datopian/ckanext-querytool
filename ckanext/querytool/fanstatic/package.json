@@ -1,0 +1,11 @@
+{
+  "name": "ckanext-querytool",
+  "scripts": {
+    "watch": "less-watch-compiler less/ css/ main.less",
+    "less": "./node_modules/.bin/lessc less/main.less css/main.css"
+  },
+  "devDependencies": {
+    "less": "^2.7.2",
+    "less-watch-compiler": "^1.6.7"
+  }
+}
