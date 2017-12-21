@@ -65,13 +65,6 @@ def user_is_registered(context):
 
 def get_all_datasets():
 
-    context = _get_context()
+    datasets = _get_action('package_list', {})
 
-    data_dict = {
-
-    }
-
-    datasets = _get_action('package_list', data_dict)
-
-    print datasets
     return datasets
