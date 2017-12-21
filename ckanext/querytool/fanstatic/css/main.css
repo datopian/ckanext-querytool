@@ -1,0 +1,13 @@
+/* Mixin */
+/* Implementation */
+#somediv {
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+.btn {
+  background-image: none;
+  border-color: transparent;
+  box-shadow: none;
+  border-radius: 2px;
+}
