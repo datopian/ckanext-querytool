@@ -7,7 +7,7 @@ description - description what kind of data is in the query tool.
 name - name of the query tool (unique)
 
 Example usage:
-  {% snippet 'querytool/snippets/edit_data_form.html', data=data, errors= errors%}
+  {% snippet 'querytool/snippets/edit_data_form.html', querytool=querytool, data=data, errors= errors%}
 
 #}
 {% import 'macros/form.html' as form %}
@@ -17,23 +17,25 @@ Example usage:
 {% else %}
   {% set action_url = h.url_for('querytool_edit', querytool= '') %}
 {% endif %}
+{% set datasets = h.querytool_get_datasets() %}
 <form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="">
 {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
 {% endblock %}
+
+  <legend>{{ _('Basic info') }}</legend>
+
   {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
-
-  {% set prefix = h.url_for('querytool_edit', querytool= '') %}
-  {% set domain = h.url_for('querytool_edit', querytool= '') %}
+  {% set prefix = h.url_for('querytool_show', querytool= '') %}
+  {% set domain = h.url_for('querytool_show', querytool= '') %}
   {% set domain = domain|replace("http://", "")|replace("https://", "") %}
-  {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain + '/', 'data-module-placeholder': '<querytool>', 'class': 'form-control input-sm'} %}
+  {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<querytool>', 'class': 'form-control input-sm'} %}
 
-  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix + '/', placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
+  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
-  {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}{% block querytool_datasets %}
-
-  {% set datasets = h.querytool_get_datasets() %}
+  {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
+  {% block querytool_dataset %}
     <div class="control-group">
       <label class="control-label" for="field-datasets"><span title="This field is required" class="control-required">*</span>{{ _("Dataset") }}</label>
       <div class="controls">
@@ -44,6 +46,17 @@ Example usage:
         </select>
       </div>
     </div>
+  {% endblock %}
+
+  {% block querytool_main_filters %}
+    <legend>{{ _('Main filters') }}</legend>
+    <button class="btn btn-primary">
+      <span class="fa fa-filter"></span>
+      <span class="fa-label">{{_('Add Filter')}}</span>
+    </button>
+    <fieldset id="main-filters">
+      {% snippet 'querytool/admin/snippets/main_filter_fields.html', querytool=querytool, data=data, errors= errors %}
+    </fieldset>
   {% endblock %}
 
 <div class="form-actions">
