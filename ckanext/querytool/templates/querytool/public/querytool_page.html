@@ -1,7 +1,111 @@
 {% block styles %}
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-{% endblock %}
 
-{% block main %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+  }
 
-{% endblock %}
+  .wrapper {
+
+    background: linear-gradient( rgba(18, 30, 136, 0.8),
+    rgba(18, 30, 136, 0.8)),
+    url(/base/images/public-header-bg.png) top left no-repeat;
+  }
+
+  .list-inline li a {
+    text-decoration: none;
+  }
+
+  .list-inline li a:hover {
+    color: #F97859;
+  }
+
+  .caption {
+    background-color: #fff;
+    padding: 50px 40px;
+    letter-spacing: 0.07rem;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .caption:hover {
+    box-shadow: 0px 8px 60px 0 rgba(0, 0, 0, 0.2), 0 10px 60px 0 rgba(0, 0, 0, 0.19);
+  }
+
+  .page-header {
+    border-bottom: none;
+    margin: 10px 0 70px;
+    padding: 15px 150px;
+  }
+
+  .content {
+    padding-bottom: 200px;
+  }
+
+  .content-block {
+    padding: 30px 50px 30px 50px;
+  }
+
+  .main-navigation {
+    text-align: right;
+    font-size: 16px;
+  }
+
+  .main-navigation a {
+    color: #fff;
+    padding: 0px 10px;
+  }
+
+
+  .desc {
+    color: #fff;
+    letter-spacing: 0.07rem;
+    font-weight: lighter;
+    font-size: 13px
+  }
+
+  h1 {
+
+    color: #fff;
+    letter-spacing: 0.07rem;
+    font-weight: 400;
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+
+  .short-desc {
+    margin: 25px 0px 30px 0px;
+  }
+
+  .public-button {
+    background-color: #F97859;
+    border-radius: 0px;
+    border: none;
+    padding: 10px 50px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .public-button:hover,
+   :focus,
+   :active {
+    background-color: #FF562B;
+  }
+
+  .box-items {
+    margin-right: 50px;
+    margin-left: 50px;
+    padding: 0px 50px 0px 50px;
+  }
+
+  .thumbnail {
+    background-color: transparent;
+    border: none;
+  }
+
+  .tool-title {
+    color: #121E87;
+  }
+</style>
+{% endblock %} {% block main %} {% endblock %}
