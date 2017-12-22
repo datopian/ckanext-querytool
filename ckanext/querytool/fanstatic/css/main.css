@@ -1,13 +1,84 @@
-/* Mixin */
-/* Implementation */
-#somediv {
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-radius: 20px;
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.logo {
+  bottom: 6.8rem;
+  position: relative;
+}
+.account-masthead {
+  background-color: #121e87;
+}
+.account-masthead .account ul li a {
+  color: rgba(255, 255, 255, 0.6);
+}
+.account-masthead .account ul li a:hover {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: #121e87;
+}
+.masthead {
+  background-color: #121e87;
+  background: url("../images/admin-header-bg.jpg");
+  min-height: 180px;
+}
+.masthead .container {
+  position: relative;
+  top: 8.1rem;
+}
+.masthead .nav > li > a {
+  color: rgba(255, 255, 255, 0.6);
+}
+.masthead .navigation .nav-pills li a:hover {
+  background-color: transparent;
+  border-radius: 0px;
+  border-bottom: 4px solid #f97859;
+  box-shadow: none;
+}
+.masthead .navigation .nav-pills li.active a {
+  background-color: transparent;
+  border-radius: 0px;
+  border-bottom: 4px solid #f97859;
+  box-shadow: none;
+}
+.masthead input[type="text"]:focus {
+  -webkit-box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.7);
+  box-shadow: inset 0px 0px 2px 0px rgba(0, 0, 0, 0.7);
 }
 .btn {
   background-image: none;
-  border-color: transparent;
-  box-shadow: none;
-  border-radius: 2px;
+}
+.btn-primary,
+.btn-danger,
+.btn-success {
+  border-radius: 0;
+}
+.btn-primary {
+  background-color: #121e87;
+}
+.btn-primary:hover {
+  background-color: #010a5c;
+}
+.btn-primary:focus {
+  background-color: #121e87;
+}
+.btn-danger {
+  background-color: #cf0000;
+}
+.btn-success {
+  background-color: #00c853;
+}
+.btn,
+label {
+  font-weight: 400;
+}
+.site-footer,
+body {
+  background-color: #121e87;
+}
+.site-footer,
+.site-footer label,
+.site-footer small {
+  color: rgba(255, 255, 255, 0.6);
+}
+.site-footer a {
+  color: rgba(255, 255, 255, 0.6);
 }
