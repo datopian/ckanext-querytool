@@ -47,6 +47,23 @@ cd ckanext-querytool
 python setup.py develop
 pip install -r dev-requirements.txt
 ```
+All code MUST follow [PEP8 Style Guide](https://www.python.org/dev/peps/pep-0008/). Most editors have plugins or integrations and automatic checking for PEP8 compliance so make sure you use them.
+
+You should add a pre-commit hook that will
+check for PEP8 errors. Follow the next steps to enable this check.
+
+1. Make sure you have installed the PEP8 style checker:
+```
+$ pip install pycodestyle
+```
+2. In the `.git/hooks` folder which is located inside the project's root
+directory, create a file named `pre-commit` and inside put [this code](https://github.com/keitaroinc/pep8-git-hook/blob/master/pre-commit).
+3. Make `pre-commit` executable by running this command:
+```
+$ chmod +x ckanext-querytool/.git/hooks/pre-commit
+```
+Now, every time you commit code, the pre-commit hook will run and check for
+PEP8 errors.
 
 ## Running the Tests
 
