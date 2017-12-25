@@ -1,0 +1,23 @@
+{% import 'macros/form.html' as form %}
+
+<fieldset>
+  <legend>{{ _('Visualizations settings') }}</legend>
+
+    <div id="visualization-settings-items">
+
+    </div>
+
+</fieldset>
+<fieldset>
+  <div id="create-visualization-item-section">
+
+  {{ form.select('item_type', 'item_type', _('Item Type'), options=[{'value': '', 'text': 'Choose item'},
+                                                                    {'value': 'chart', 'text': 'Chart'},
+                                                                    {'value': 'map', 'text': 'Map'}], selected='') }}
+
+    <a id="create-visualization-btn" class="btn btn-default" style="display: {{ btn_display  }}">Create item</a>
+  </div>
+  <div class="hidden" id="visualization-info-msg">
+    <span>Some msg</span>
+  </div>
+</fieldset>
