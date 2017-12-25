@@ -82,3 +82,9 @@ body {
 .site-footer a {
   color: rgba(255, 255, 255, 0.6);
 }
+
+.chart-fields-section {
+  border: 1px solid #CCCCCC !important;
+  padding: 5px;
+  margin-bottom: 5px;
+}
