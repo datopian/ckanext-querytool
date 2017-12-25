@@ -166,32 +166,11 @@ class QueryToolController(base.BaseController):
 
     def edit_visualizations(self):
         '''
-            Create or edit query tool functionality
+            Create or edit visualizations for the querytool
 
         :return: query edit template page
         '''
         data = request.POST
-        # TODO create, integrate authorization functions
-        if 'save' in data:
-            try:
-                data_dict = dict(request.POST)
-                del data_dict['save']
-                # data = _get_action('querytool_create_visualizations',
-                # data_dict)
-                h.flash_success(_('Query Tool successfully updated.'))
-            except NotAuthorized:
-                abort(403, _('Not authorized to see this page'))
-            except logic.ValidationError, e:
-                errors = e.error_dict
-                error_summary = e.error_summary
-                vars = {'data': data, 'errors': errors,
-                        'error_summary': error_summary}
-                return render('querytool/admin/base_edit_visualizations.html',
-                              extra_vars=vars)
-            # redirect to query tools list
-            url = h.url_for(controller=self.ctrl,
-                            action='list')
-            h.redirect_to(url)
 
         vars = {'data': data, 'errors': {}}
 
