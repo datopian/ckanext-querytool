@@ -109,6 +109,7 @@ class QueryToolController(base.BaseController):
 
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
+            print data
 
             _querytool.update(data)
             _querytool['querytool'] = querytool
