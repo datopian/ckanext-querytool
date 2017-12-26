@@ -50,12 +50,12 @@ Example usage:
 
   {% block querytool_main_filters %}
     <legend>{{ _('Main filters') }}</legend>
-    <button class="btn btn-primary">
+    <a class="btn btn-primary" id="add-filter-button">
       <span class="fa fa-filter"></span>
       <span class="fa-label">{{_('Add Filter')}}</span>
-    </button>
+    </a>
     <fieldset id="main-filters">
-      {% snippet 'querytool/admin/snippets/main_filter_fields.html', querytool=querytool, data=data, errors= errors %}
+      {% snippet 'querytool/admin/snippets/main_filter_fields.html', querytool=querytool, data=data, errors=errors %}
     </fieldset>
   {% endblock %}
 
