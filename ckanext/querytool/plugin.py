@@ -38,10 +38,13 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         map.connect('querytool_edit_visualizations',
                     '/querytool/edit_visualizations',
                     controller=ctrl, action='edit_visualizations')
-        map.connect('querytool_public_index', '/querytool/public/index',
-                    controller=ctrl, action='querytool_public_index')
-        map.connect('querytool_public_list', '/querytool/public/list',
-                    controller=ctrl, action='querytool_public_list')
+        map.connect('querytool_public', '/querytool/public',
+                    controller=ctrl, action='querytool_public')
+        map.connect('querytool_public_data', '/querytool/public/data',
+                    controller=ctrl, action='querytool_public_data')
+        map.connect('querytool_public_data_list',
+                    '/querytool/public/data/{name}',
+                    controller=ctrl, action='querytool_public_data_list')
 
         return map
 
