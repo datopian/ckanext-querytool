@@ -26,8 +26,8 @@
      {% endfor%}
     #}
 
-    {% set mortality = h.url_for('querytool_public_list_data', name='mortality') %}
-    {% set behavioural = h.url_for('querytool_public_list_data', name='behavioural') %}
+    {% set mortality = h.url_for('querytool_public_data_list', name='mortality') %}
+    {% set behavioural = h.url_for('querytool_public_data_list', name='behavioural') %}
 
     <div class="row list-group-boxes">
         <ul class="list-items list-inline list-box">
