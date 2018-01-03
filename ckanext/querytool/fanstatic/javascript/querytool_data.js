@@ -19,6 +19,11 @@
 
   $(document).ready(function () {
 
+  $('#field-datasets').change(function (event) {
+    $('#main-filters').html('');
+  });
+
+
   $('#add-filter-button').click(function (event) {
     event.preventDefault();
     var package_name  = $('#field-datasets').find(':selected').val();
