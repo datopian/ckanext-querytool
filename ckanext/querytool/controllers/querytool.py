@@ -183,7 +183,7 @@ class QueryToolController(base.BaseController):
 
         :return: base template
         '''
-        return render('querytool/public/base.html',
+        return render('querytool/public/base_main.html',
                       extra_vars={'msg': 'This is the Query Tool public '
                                   'page and will be build from scratch'})
 
