@@ -50,7 +50,7 @@ def querytool_get(context, data_dict):
     return querytool
 
 
-def resource_view_get_fields(context, data_dict):
+def get_resource_fields(context, data_dict):
     '''Returns sorted list of text and time fields of a datastore resource.'''
 
     resource = data_dict.pop('resource')
