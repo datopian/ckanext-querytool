@@ -79,7 +79,6 @@ class QueryToolController(base.BaseController):
                       extra_vars={
                           'msg': 'This is the Query Tool'})
 
-
     def delete(self, querytool):
         '''
             Delete query tool
@@ -163,7 +162,8 @@ class QueryToolController(base.BaseController):
                 return self.querytool_edit('/' + querytool, data,
                                            errors, error_summary)
             # redirect to manage visualisations
-            url = h.url_for('querytool_edit_visualizations', querytool='/' + querytool)
+            url = h.url_for('querytool_edit_visualizations',
+                            querytool='/' + querytool)
             h.redirect_to(url)
 
         if not data:

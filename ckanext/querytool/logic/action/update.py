@@ -55,15 +55,15 @@ def querytool_visualizations_update(context, data_dict):
     :param
     '''
 
-    #check_access('querytool_update', context)
+    # check_access('querytool_update', context)
 
     # we need the querytool name in the context for name validation
-    #context['querytool'] = data_dict['querytool']
+    # context['querytool'] = data_dict['querytool']
     session = context['session']
-    #data, errors = df.validate(data_dict, schema.querytool_schema(),
-     #                          context)
+    # data, errors = df.validate(data_dict, schema.querytool_schema(),
+    #                          context)
 
-    #if errors:
+    # if errors:
     #    raise toolkit.ValidationError(errors)
     print 'XXX', data_dict['name']
     visualizations = \
