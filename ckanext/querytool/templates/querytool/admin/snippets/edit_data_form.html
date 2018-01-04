@@ -59,7 +59,7 @@ Example usage:
 
         {% for filter in data.filters %}
 
-          {% snippet 'ajax_snippets/filter_item.html', n=filter.order, filter=filter %}
+          {% snippet 'ajax_snippets/filter_item.html', n=filter.order, active_filters=c.active_filters, selected_filter=filter %}
 
         {% endfor %}
 

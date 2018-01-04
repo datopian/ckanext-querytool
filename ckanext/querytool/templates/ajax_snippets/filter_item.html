@@ -1,39 +1,36 @@
-{% if active_filters %}
-  {% set active_filters = active_filters.split(',') %}
-{% endif %}
-
+{% set active_filters = active_filters.split(',') %}
 
 <div id="filter_item_{{ n }}" class="filter_item row">
-
 
     <div class="control-group control-select">
       <label class="control-label" for="data_filter_name_{{ n }}">Select filter</label>
       <div class="controls ">
         <select id="data_filter_name_{{ n }}" name="data_filter_name_{{ n }}" required=required>
             <option value="">Choose filter</option>
-          {% if active_filters %}
-            {% for filter in active_filters %}
-              <option value="{{ filter }}" {{ 'selected' if filter == '' }}>{{ filter }}</option>
-            {% endfor %}
+          {% for filter in active_filters %}
+            <option value="{{ filter }}" {% if selected_filter %}{{ 'selected' if filter == selected_filter.name }}{% endif %}>{{ filter }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="control-group control-select data_filter_value_{{ n }} {{ class }}">
+      <label class="control-label" for="data_filter_value_{{ n }}">Select value</label>
+      <div class="controls ">
+        <select id="data_filter_value_{{ n }}" name="data_filter_value_{{ n }}" required=required>
+          <option value="">Choose default value</option>
+            {% if selected_filter %}
+            <option value="{{ selected_filter.value }}" selected>{{ selected_filter.value }}</option>
           {% endif %}
         </select>
       </div>
     </div>
 
-    <div class="control-group control-select data_filter_value_{{ n }} hidden">
-      <label class="control-label" for="data_filter_value_{{ n }}">Select value</label>
-      <div class="controls ">
-        <select id="data_filter_value_{{ n }}" name="data_filter_value_{{ n }}" required=required>
-          <option value="">Choose default value</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="control-group data_filter_alias_{{ n }} hidden">
+    <div class="control-group data_filter_alias_{{ n }} {{ class }}">
       <label class="control-label" for="data_filter_alias_{{ n }}">Filter alias</label>
       <div class="controls ">
         <input id="data_filter_alias_{{ n }}" name="data_filter_alias_{{ n }}"
-             value=""
+             {% if selected_filter %}value="{{selected_filter.alias}}"{% else %}value=""{% endif %}
              placeholder="Enter filter alias" type="text" required=required>
       </div>
     </div>
@@ -41,5 +38,4 @@
     <a class="btn btn-danger remove-filter-item-btn"><i class="fa fa-trash" aria-hidden="true"></i> Remove </a>
     <hr>
 
-    
 </div>

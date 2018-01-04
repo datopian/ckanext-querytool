@@ -23,8 +23,15 @@
     $('#main-filters').html('');
   });
 
+  var add_filter_button = $('#add-filter-button');
+  var remove_filter_button = $('.remove-filter-item-btn');
 
-  $('#add-filter-button').click(function (event) {
+  remove_filter_button.on('click', function (e) {
+              $(e.target).parent().remove();
+            });
+
+
+  add_filter_button.click(function (event) {
     event.preventDefault();
     var package_name  = $('#field-datasets').find(':selected').val();
     api.get('package_show', {'id': package_name}).done(function (data) {
@@ -34,13 +41,13 @@
 
         var resource = data.result.resources[0];
 
-        api.post('resource_view_get_fields', {'resource': resource}).done(function (data) {
+        api.post('get_resource_fields', {'resource': resource}).done(function (data) {
 
           var active_filters = data.result.toString();
           var filter_items = $('.filter_item');
           var total_items = filter_items.length + 1;
 
-          ckan.sandbox().client.getTemplate('filter_item.html', {active_filters: active_filters, n: total_items})
+          ckan.sandbox().client.getTemplate('filter_item.html', {active_filters: active_filters, n: total_items, class:'hidden'})
           .done(function (data) {
 
             $('#main-filters').append(data);
@@ -79,6 +86,8 @@
           });
 
         });
+      } else {
+        alert('Choosen dataset contains more than one resource');
       }
 
     });

@@ -148,7 +148,17 @@ class QueryToolController(base.BaseController):
             data['filters'] = json.loads(data['filters'])
             data['filters'].sort(key=itemgetter('order'))
 
-        print data
+        if 'dataset_name' in data:
+            try:
+                package = _get_action('package_show',
+                                      {'id': data['dataset_name']})
+                resource = package['resources'][0]
+                resource_fields = _get_action('get_resource_fields',
+                                              {'resource': resource})
+                c.active_filters = ','.join(resource_fields)
+                print c.active_filters
+            except NotFound:
+                abort(404, _('Package not found'))
 
         errors = errors or {}
         error_summary = error_summary or {}
