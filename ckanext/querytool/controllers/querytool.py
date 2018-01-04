@@ -79,6 +79,32 @@ class QueryToolController(base.BaseController):
                       extra_vars={
                           'msg': 'This is the Query Tool'})
 
+
+    def delete(self, querytool):
+        '''
+            Delete query tool
+
+        :return: querytools list template page
+
+        '''
+
+        context = _get_context()
+
+        try:
+            check_access('querytool_delete', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        id = querytool[1:]
+
+        try:
+            junk = _get_action('querytool_delete', {'id': id})
+        except NotFound:
+            abort(404, _('Querytool not found'))
+
+        h.flash_success(_('Querytool was removed successfully.'))
+        toolkit.redirect_to(h.url_for('querytool_list'))
+
     def querytool_edit(self, querytool=None, data=None,
                        errors=None, error_summary=None):
         '''
@@ -137,8 +163,7 @@ class QueryToolController(base.BaseController):
                 return self.querytool_edit('/' + querytool, data,
                                            errors, error_summary)
             # redirect to manage visualisations
-            url = h.url_for(controller=self.ctrl,
-                            action='edit_visualizations')
+            url = h.url_for('querytool_edit_visualizations', querytool='/' + querytool)
             h.redirect_to(url)
 
         if not data:
@@ -170,41 +195,52 @@ class QueryToolController(base.BaseController):
         return render('querytool/admin/base_edit_data.html',
                       extra_vars=vars)
 
-    def delete(self, querytool):
-        '''
-            Delete query tool
-
-        :return: querytools list template page
-
-        '''
-
-        context = _get_context()
-
-        try:
-            check_access('querytool_delete', context)
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
-
-        id = querytool[1:]
-
-        try:
-            junk = _get_action('querytool_delete', {'id': id})
-        except NotFound:
-            abort(404, _('Querytool not found'))
-
-        h.flash_success(_('Querytool was removed successfully.'))
-        toolkit.redirect_to(h.url_for('querytool_list'))
-
-    def edit_visualizations(self):
+    def edit_visualizations(self, querytool=None, data=None,
+                            errors=None, error_summary=None):
         '''
             Create or edit visualizations for the querytool
 
         :return: query edit template page
         '''
-        data = request.POST
+        if querytool:
+            querytool = querytool[1:]
 
-        vars = {'data': data, 'errors': {}}
+        data_dict = {
+            'name': querytool
+        }
+        _visualization_items = \
+            get_action('querytool_get_visualizations')({}, data_dict)
 
+        if _visualization_items is None and len(querytool) > 0:
+            abort(404, _('Querytool visualizations not found.'))
+
+        if _visualization_items is None:
+            _visualization_items = {}
+
+        if toolkit.request.method == 'POST' and not data:
+            data = dict(toolkit.request.POST)
+
+            try:
+                junk = _get_action('querytool_visualizations_update',
+                                   _visualization_items)
+                h.flash_success(_('Visualizations Successfully updated.'))
+            except ValidationError, e:
+                errors = e.error_dict
+                error_summary = e.error_summary
+                return self.querytool_edit('/' + querytool, data,
+                                           errors, error_summary)
+            # redirect to querytool
+            url = h.url_for('querytool')
+            h.redirect_to(url)
+
+        if not data:
+            data = _visualization_items
+
+        errors = errors or {}
+        error_summary = error_summary or {}
+
+        vars = {'data': data, 'errors': errors,
+                'error_summary': error_summary}
         return render('querytool/admin/base_edit_visualizations.html',
                       extra_vars=vars)
 
