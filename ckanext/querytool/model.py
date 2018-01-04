@@ -90,6 +90,8 @@ def define_query_tool_table():
                                     default=u''),
                              Column('dataset_name', types.UnicodeText,
                                     nullable=False),
+                             Column('filters', types.UnicodeText,
+                                    default=u''),
                              Column('created', types.DateTime,
                                     default=datetime.datetime.utcnow),
                              Column('modified', types.DateTime,

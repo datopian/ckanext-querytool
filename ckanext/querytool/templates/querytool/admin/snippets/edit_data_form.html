@@ -55,7 +55,16 @@ Example usage:
       <span class="fa-label">{{_('Add Filter')}}</span>
     </a>
     <fieldset id="main-filters">
-      {% snippet 'querytool/admin/snippets/main_filter_fields.html', querytool=querytool, data=data, errors=errors %}
+      {% if data.filters  %}
+
+        {% for filter in data.filters %}
+
+          {% snippet 'ajax_snippets/filter_item.html', n=filter.order, filter=filter %}
+
+        {% endfor %}
+
+      {% endif %}
+
     </fieldset>
   {% endblock %}
 

@@ -1,6 +1,7 @@
 # encoding: utf-8
-
 import logging
+import json
+from operator import itemgetter
 
 import ckan.lib.base as base
 import ckan.logic as logic
@@ -109,8 +110,21 @@ class QueryToolController(base.BaseController):
 
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
-            print data
+            filters = []
 
+            for k, v in data.items():
+
+                if k.startswith('data_filter_name_'):
+                    filter = {}
+                    id = k.split('_')[-1]
+                    filter['order'] = int(id)
+                    filter['name'] = data['data_filter_name_{}'.format(id)]
+                    filter['value'] = data['data_filter_value_{}'.format(id)]
+                    filter['alias'] = data['data_filter_alias_{}'.format(id)]
+
+                    filters.append(filter)
+
+            _querytool['filters'] = json.dumps(filters)
             _querytool.update(data)
             _querytool['querytool'] = querytool
 
@@ -129,6 +143,12 @@ class QueryToolController(base.BaseController):
 
         if not data:
             data = _querytool
+
+        if 'filters' in data and len(data['filters']) > 0:
+            data['filters'] = json.loads(data['filters'])
+            data['filters'].sort(key=itemgetter('order'))
+
+        print data
 
         errors = errors or {}
         error_summary = error_summary or {}
