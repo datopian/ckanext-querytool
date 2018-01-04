@@ -18,9 +18,11 @@ from ckan.model.domain_object import DomainObject
 
 log = logging.getLogger(__name__)
 query_tool_table = None
+query_tool_visualizations_table = None
 
 
 def setup():
+    # Check if query tool table exist
     if query_tool_table is None:
         define_query_tool_table()
         log.debug('Querytool table defined in memory.')
@@ -38,6 +40,25 @@ def setup():
         log.debug('Creating index for Querytool.')
         Index('ckanext_querytool_id_idx',
               query_tool_table.c.id).create()
+
+    # Check if query tool visualizations table exist
+    if query_tool_visualizations_table is None:
+        define_querytool_visualizations_table()
+        log.debug('Querytool visualizations table defined in memory.')
+    if not query_tool_visualizations_table.exists():
+        query_tool_visualizations_table.create()
+    else:
+        log.debug('Querytool visualizations table already exists.')
+    inspector = Inspector.from_engine(engine)
+
+    index_names =\
+        [index['name'] for index in
+            inspector.get_indexes('ckanext_querytool_visualizations')]
+
+    if 'ckanext_querytool_visualizations_id_idx' not in index_names:
+        log.debug('Creating index for Querytool visualizations.')
+        Index('ckanext_querytool_visualizations_id_idx',
+              query_tool_visualizations_table.c.id).create()
 
 
 class CkanextQueryTool(DomainObject):
@@ -102,6 +123,64 @@ def define_query_tool_table():
     mapper(
         CkanextQueryTool,
         query_tool_table
+    )
+
+
+class CkanextQueryToolVisualizations(DomainObject):
+    @classmethod
+    def get(self, **kwds):
+        '''Finds a single entity in the table.
+        '''
+
+        query = Session.query(self).autoflush(False)
+        query = query.filter_by(**kwds).first()
+        return query
+
+    @classmethod
+    def search(self, **kwds):
+        '''Finds entities in the table that satisfy certain criteria.
+        :param order: Order rows by specified column.
+        :type order: string
+        '''
+
+        query = Session.query(self).autoflush(False)
+        query = query.filter_by(**kwds)
+
+        return query.all()
+
+    @classmethod
+    def delete(cls, id):
+        # Delete single event
+        obj = Session.query(cls).filter_by(name=id).first()
+        if not obj:
+            raise logic.NotFound
+
+        Session.delete(obj)
+        Session.commit()
+
+
+def define_querytool_visualizations_table():
+    global query_tool_visualizations_table
+
+    query_tool_visualizations_table = \
+        Table('ckanext_querytool_visualizations', metadata,
+                             Column('id', types.UnicodeText,
+                                    primary_key=True,
+                                    default=make_uuid),
+                             Column('name',
+                                    types.UnicodeText,
+                                    nullable=False),
+                             Column('axisX',
+                                    types.UnicodeText,
+                                    nullable=False),
+                             Column('axisY', types.UnicodeText,
+                                    nullable=False),
+                             Index('ckanext_querytool_visualizations_id_idx',
+                                   'id'))
+
+    mapper(
+        CkanextQueryToolVisualizations,
+        query_tool_visualizations_table
     )
 
 
