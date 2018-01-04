@@ -2,7 +2,9 @@
   "name": "ckanext-querytool",
   "scripts": {
     "watch": "less-watch-compiler less/ css/ main.less",
-    "less": "./node_modules/.bin/lessc less/main.less css/main.css"
+    "less": ["./node_modules/.bin/lessc less/main.less css/main.css",
+            "./node_modules/.bin/lessc less/public-query-tool.less css/public-query-tool.css"
+    ]
   },
   "devDependencies": {
     "less": "^2.7.2",

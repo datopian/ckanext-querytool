@@ -1,47 +1,13 @@
-<body>
+{% extends "querytool/public/querytool_page.html" %}
 
-  <div class="wrapper">
-
-
-    <div class="container-fluid">
-      <header class="main-navbar content-block">
-        <div class="row">
-          <div class="col-sm-3 col-md-3 col-lg-2">
-            <a href="#">
-              <img src="/base/images/Vital_Strategies_Logo_white.png" alt="Vital Strategies" class="img-responsive">
-            </a>
-          </div>
-          <div class="col-sm-9 col-md-9 col-lg-10">
-            <nav class="main-navigation">
-              <ul class="list-inline">
-                <li>
-                  <a href="#">Query Tool</a>
-                </li>
-                <li>
-                  <a href="#">Story Tool</a>
-                </li>
-                <li>
-                  <a href="#">About Us</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
-    </div>
-
-
+{% block main %}
     <div class="row">
       <div class="col-md-12 public-header">
         <div class="container">
           <div class="page-header">
             <h1 class="text-center">Welcome</h1>
-            <p class="desc text-center">Credibly cultivate distinctive core competencies after client-based outsourcing. Rapidiously incentivize client-based
-              intellectual capital and enterprise-wide information. Proactively utilize emerging action items via just in
-              time total linkage. Phosfluorescently repurpose optimal alignments vis-a-vis extensible e-services. Conveniently
-              network client-based technology and unique infrastructures. Objectively pursue clicks-and-mortar outsourcing
-              vis-a-vis integrated schemas. Conveniently create interdependent content without front-end data. Quickly redefine
-              viral ideas after covalent leadership.Continually seize plug-and-play synergy.</p>
+            <p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis.
+              Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed. </p>
           </div>
         </div>
       </div>
@@ -56,11 +22,13 @@
             <div class="thumbnail">
               <img src="/base/images/query-icon.png" alt="Query Tool">
             </div>
+              {% set querytool_list = h.url_for('querytool_public_data') %}
+
             <h3 class="tool-title">Query Tool</h3>
             <p class="short-desc">Intrinsicly visualize one-to-one functionalities for client-centric data. Uniquely grow viral web services after
               interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</p>
             <p>
-              <a href="#" class="btn btn-primary public-button" role="button">Start Querying</a>
+              <a href="{{ querytool_list }}" class="btn btn-primary public-button" role="button">Start Querying</a>
             </p>
 
           </div>
@@ -82,261 +50,10 @@
       </div>
 
 
-      <div class="cointainer">
-
-        <div class="row">
-          <div class="col-md-12 public-header">
-            <div class="container">
-              <div class="page-header">
-                <div class="icon-tittle">
-                  <img src="/base/images/query-icon-tittle.png">
-                </div>
-                <h1 class="text-center">Query Tool</h1>
-                <p class="desc text-center">Collaboratively plagiarize holistic imperatives whereas team building applications. Uniquely create multidisciplinary
-                  "outside the box" thinking without intuitive e-markets. Rapidiously drive innovative supply chains without
-                  effective methods of empowerment. Objectively administrate front-end growth strategies after impactful
-                  products. Monotonectally reconceptualize multimedia based internal or "organic" sources for equity invested
-                  e-tailers.Collaboratively syndicate viral schemas whereas compelling ideas. Completely initiate 24/365
-                  collaboration and idea-sharing before intuitive internal or "organic" sources.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-        <div class="row list-group-boxes">
-          <ul class="list-items list-inline list-box">
-            <li class="folder-icon">
-              <img src="/base/images/folder-icon.png" alt="">
-            </li>
-            <li class="list-headline">Mortality</li>
-            <li class="arrow-icon">
-              <a href="#">
-                <img src="/base/images/arrow-icon.png" alt="">
-              </a>
-            </li>
-          </ul>
-
-          <ul class="list-items list-inline list-box">
-            <li class="folder-icon">
-              <img src="/base/images/folder-icon.png" alt="">
-            </li>
-            <li class="list-headline">Behavioral Risk Factors</li>
-            <li class="arrow-icon">
-              <a href="#">
-                <img src="/base/images/arrow-icon.png" alt="">
-              </a>
-            </li>
-          </ul>
-        </div>
-
-
-        <div class="row">
-          <div class="col-md-12 public-header">
-            <div class="container">
-              <div class="page-header">
-                <div class="icon-tittle">
-                  <img src="/base/images/story-icon-tittle.png">
-                </div>
-                <h1 class="text-center">Story Tool</h1>
-                <p class="desc text-center">Collaboratively plagiarize holistic imperatives whereas team building applications. Uniquely create multidisciplinary
-                  "outside the box" thinking without intuitive e-markets. Rapidiously drive innovative supply chains without
-                  effective methods of empowerment. Objectively administrate front-end growth strategies after impactful
-                  products. Monotonectally reconceptualize multimedia based internal or "organic" sources for equity invested
-                  e-tailers.Collaboratively syndicate viral schemas whereas compelling ideas. Completely initiate 24/365
-                  collaboration and idea-sharing before intuitive internal or "organic" sources.</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
 
 
-
-        <div class="row list-group-boxes">
-          <ul class="list-items list-inline list-box">
-            <li class="folder-icon">
-              <img src="/base/images/folder-icon.png" alt="">
-            </li>
-            <li class="list-headline">Tobacco Use</li>
-            <li class="arrow-icon">
-              <a href="#">
-                <img src="/base/images/arrow-icon.png" alt="">
-              </a>
-            </li>
-          </ul>
-
-          <ul class="list-items list-inline list-box">
-            <li class="folder-icon">
-              <img src="/base/images/folder-icon.png" alt="">
-            </li>
-            <li class="list-headline">Diet</li>
-            <li class="arrow-icon">
-              <a href="#">
-                <img src="/base/images/arrow-icon.png" alt="">
-              </a>
-            </li>
-          </ul>
-          <ul class="list-items list-inline list-box">
-            <li class="folder-icon">
-              <img src="/base/images/folder-icon.png" alt="">
-            </li>
-            <li class="list-headline">Hypertension</li>
-            <li class="arrow-icon">
-              <a href="#">
-                <img src="/base/images/arrow-icon.png" alt="">
-              </a>
-            </li>
-          </ul>
-          <ul class="list-items list-inline list-box">
-            <li class="folder-icon">
-              <img src="/base/images/folder-icon.png" alt="">
-            </li>
-            <li class="list-headline">Alcohol Consumption</li>
-            <li class="arrow-icon">
-              <a href="#">
-                <img src="/base/images/arrow-icon.png" alt="">
-              </a>
-            </li>
-          </ul>
-          <ul class="list-items list-inline list-box">
-            <li class="folder-icon">
-              <img src="/base/images/folder-icon.png" alt="">
-            </li>
-            <li class="list-headline">Physical Activity</li>
-            <li class="arrow-icon">
-              <a href="#">
-                <img src="/base/images/arrow-icon.png" alt="">
-              </a>
-            </li>
-          </ul>
-          <ul class="list-items list-inline list-box">
-            <li class="folder-icon">
-              <img src="/base/images/folder-icon.png" alt="">
-            </li>
-            <li class="list-headline">Overweight and Obesity</li>
-            <li class="arrow-icon">
-              <a href="#">
-                <img src="/base/images/arrow-icon.png" alt="">
-              </a>
-            </li>
-          </ul>
-
-
-        </div>
 
       </div>
-
     </div>
-
-
-
-    <div class="container-fluid">
-      <div class="row">
-        <div class="container">
-          <div class="page-header">
-            <h1 class="text-center">Mortality</h1>
-            <p class="desc text-center">Conveniently evisculate superior leadership skills before open-source synergy. Dramatically maximize backward-compatible
-              quality vectors without team driven e-commerce. Authoritatively drive adaptive e-business whereas 24/365 interfaces.
-              Seamlessly conceptualize 24/365 platforms vis-a-vis adaptive synergy. Uniquely transition fully researched
-              opportunities and client-centric human capital. Authoritatively maintain innovative customer service whereas
-              performance based imperatives. Interactively seize world-class manufactured products without backward-compatible
-              communities. Competently evolve global services vis-a-vis scalable web-readiness. Credibly maximize value-added
-              ROI before worldwide strategic theme areas. Efficiently iterate scalable results before scalable collaboration
-              and idea-sharing.
-
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="cause-menu">
-          <div class="row" align="left" id="cause-selectors">
-
-            <div class="col-md-2">
-              <span class="causes-tittle">CAUSE 1</span>
-              <div class="dropdown">
-                <button class="btn btn-default btn-select dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="true">
-                  Please choose cause
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li>
-                    <a href="#">Action</a>
-                  </li>
-                  <li>
-                    <a href="#">Another action</a>
-                  </li>
-                  <li>
-                    <a href="#">Something else here</a>
-                  </li>
-                  <li role="separator" class="divider"></li>
-                  <li>
-                    <a href="#">Separated link</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="col-md-0 arrow-icon-steps">
-              <img src="/base/images/cause-arrow-steps.png" alt="">
-
-            </div>
-
-
-            <div class="col-md-2">
-              <span class="causes-tittle">CAUSE 2</span>
-              <div class="dropdown">
-                <button class="btn btn-default btn-select dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="true">
-                  Please choose cause
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li>
-                    <a href="#">Action</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            
-                <div class="col-md-0 arrow-icon-steps">
-                    <img src="/base/images/cause-arrow-steps.png" alt="">
-      
-                  </div>
-          
-
-
-
-
-            <div class="col-md-2">
-              <span class="causes-tittle">CAUSE 3</span>
-              <div class="dropdown">
-                <button class="btn btn-default btn-select dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
-                  aria-expanded="true">
-                  Please choose cause
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li>
-                    <a href="#">Action</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="col-md-2">
-              <button type="button" class="btn btn-primary dark-blue">Start Querying</button>
-            </div>
-
-
-
-
-          </div>
-        </div>
-      </div>
-
-
-</body>
+{% endblock %}
