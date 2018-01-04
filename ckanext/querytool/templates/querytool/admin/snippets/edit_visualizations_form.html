@@ -5,7 +5,12 @@
 {% endblock %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
-{% set action_url = h.url_for('querytool_edit_visualizations') %}
+{% if data %}
+    {% set name = data.name %}
+{% else %}
+    {% set name = '' %}
+{% endif %}
+{% set action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name) %}
 
 <form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="visualizations-form">
 {% block stages %}
