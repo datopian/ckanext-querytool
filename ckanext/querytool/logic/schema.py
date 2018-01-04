@@ -20,6 +20,7 @@ def querytool_schema():
         'title': [not_empty, unicode],
         'dataset_name': [not_empty, unicode],
         'description': [ignore_missing, unicode],
+        'filters': [ignore_missing, unicode],
         'created': [ignore_missing, isodate],
         'modified': [ignore_missing, isodate]
     }

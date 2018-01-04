@@ -1,4 +1,6 @@
-{% set filters = active_filters.split(',') %}
+{% if active_filters %}
+  {% set active_filters = active_filters.split(',') %}
+{% endif %}
 
 
 <div id="filter_item_{{ n }}" class="filter_item row">
@@ -9,9 +11,11 @@
       <div class="controls ">
         <select id="data_filter_name_{{ n }}" name="data_filter_name_{{ n }}" required=required>
             <option value="">Choose filter</option>
-          {% for filter in filters %}
-            <option value="{{ filter }}" {{ 'selected' if filter == '' }}>{{ filter }}</option>
-          {% endfor %}
+          {% if active_filters %}
+            {% for filter in active_filters %}
+              <option value="{{ filter }}" {{ 'selected' if filter == '' }}>{{ filter }}</option>
+            {% endfor %}
+          {% endif %}
         </select>
       </div>
     </div>
