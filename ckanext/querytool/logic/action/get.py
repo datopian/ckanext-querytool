@@ -49,6 +49,7 @@ def querytool_get(context, data_dict):
 
     return querytool
 
+
 @toolkit.side_effect_free
 def querytool_get_visualizations(context, data_dict):
     '''Returns  query tool.

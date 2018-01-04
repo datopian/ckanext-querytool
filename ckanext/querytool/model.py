@@ -164,19 +164,19 @@ def define_querytool_visualizations_table():
 
     query_tool_visualizations_table = \
         Table('ckanext_querytool_visualizations', metadata,
-                             Column('id', types.UnicodeText,
-                                    primary_key=True,
-                                    default=make_uuid),
-                             Column('name',
-                                    types.UnicodeText,
-                                    nullable=False),
-                             Column('axisX',
-                                    types.UnicodeText,
-                                    nullable=False),
-                             Column('axisY', types.UnicodeText,
-                                    nullable=False),
-                             Index('ckanext_querytool_visualizations_id_idx',
-                                   'id'))
+              Column('id', types.UnicodeText,
+                     primary_key=True,
+                     default=make_uuid),
+              Column('name',
+                     types.UnicodeText,
+                     nullable=False),
+              Column('axisX',
+                     types.UnicodeText,
+                     nullable=False),
+              Column('axisY', types.UnicodeText,
+                     nullable=False),
+              Index('ckanext_querytool_visualizations_id_idx',
+                    'id'))
 
     mapper(
         CkanextQueryToolVisualizations,
