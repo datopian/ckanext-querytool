@@ -20,15 +20,11 @@
         </div>
     </div>
     {% block tools %}
-    {#
-     {% for querytool in data %}
+
+    {% for querytool in data %}
         {% snippet 'querytool/public/snippets/query_tool.html', querytool=querytool %}
-     {% endfor%}
-    #}
-
-    {% set mortality = h.url_for('querytool_public_data_list', name='mortality') %}
-    {% set behavioural = h.url_for('querytool_public_data_list', name='behavioural') %}
-
+    {% endfor%}
+    <!--
     <div class="row list-group-boxes">
         <ul class="list-items list-inline list-box">
             <li class="folder-icon">
@@ -55,6 +51,7 @@
             </li>
         </ul>
     </div>
+    --->
     {% endblock %}
 </div>
 {% endblock %}
