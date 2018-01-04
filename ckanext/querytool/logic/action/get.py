@@ -2,8 +2,8 @@ import logging
 
 import ckan.logic as logic
 from ckan.plugins import toolkit
-from ckanext.querytool.model import CkanextQueryTool
-from ckanext.querytool.model import table_dictize
+from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
+                                    CkanextQueryToolVisualizations
 
 log = logging.getLogger(__name__)
 
@@ -48,6 +48,24 @@ def querytool_get(context, data_dict):
         querytool = table_dictize(querytool, context)
 
     return querytool
+
+@toolkit.side_effect_free
+def querytool_get_visualizations(context, data_dict):
+    '''Returns  query tool.
+    :param name: querytool name
+    :rtype: query tool object
+    '''
+
+    # check_access('',
+    #            context, data_dict)
+
+    log.info('Querytool visualizations: %r', data_dict)
+    name = data_dict['name']
+
+    visualizations = CkanextQueryToolVisualizations.get(name='test1')
+    if visualizations:
+        visualizations = table_dictize(visualizations, context)
+    return visualizations
 
 
 def get_resource_fields(context, data_dict):
