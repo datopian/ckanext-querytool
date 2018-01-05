@@ -83,9 +83,7 @@ def get_filter_values(resource_id, filter_name):
         'limit': 0
     }
     result = _get_action('datastore_search', data)
-
     fields = [field['id'] for field in result.get('fields', [])]
-
     values = []
 
     if filter_name in fields:
@@ -95,10 +93,8 @@ def get_filter_values(resource_id, filter_name):
             column=filter_name,
             resource=resource_id
         )
-        print sql_string
 
         result = _get_action('datastore_search_sql', {'sql': sql_string})
-
         values = [field[filter_name] for field in result.get('records', [])]
 
     return sorted(values)
