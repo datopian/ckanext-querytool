@@ -25,5 +25,4 @@ class StoryToolController(base.BaseController):
     def show(self):
 
         return render('storytool/public/base_storytool.html',
-                      extra_vars={
-                          'data': {}})
+                      extra_vars={'data': {}})

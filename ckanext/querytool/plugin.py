@@ -54,7 +54,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     action='querytool_public_data_list')
 
         # Story tool controllers
-        map.connect('storytool_public','/storytool/public/',
+        map.connect('storytool_public', '/storytool/public/',
                     controller=storytool_controller,
                     action='show')
 
