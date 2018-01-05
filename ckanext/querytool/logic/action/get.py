@@ -62,8 +62,7 @@ def querytool_get_visualizations(context, data_dict):
 
     log.info('Querytool visualizations: %r', data_dict)
     name = data_dict['name']
-
-    visualizations = CkanextQueryToolVisualizations.get(name='test1')
+    visualizations = CkanextQueryToolVisualizations.get(name=name)
     if visualizations:
         visualizations = table_dictize(visualizations, context)
     return visualizations
