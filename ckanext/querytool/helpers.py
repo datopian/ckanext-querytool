@@ -68,3 +68,37 @@ def get_all_datasets():
     datasets = _get_action('package_list', {})
 
     return datasets
+
+
+def get_filter_values(resource_id, filter_name):
+    '''Returns resource field values with no duplicates.'''
+
+    resource = _get_action('resource_show', {'id': resource_id})
+
+    if not resource.get('datastore_active'):
+        return []
+
+    data = {
+        'resource_id': resource['id'],
+        'limit': 0
+    }
+    result = _get_action('datastore_search', data)
+
+    fields = [field['id'] for field in result.get('fields', [])]
+
+    values = []
+
+    if filter_name in fields:
+
+        sql_string = '''SELECT DISTINCT "{column}"
+         FROM "{resource}" '''.format(
+            column=filter_name,
+            resource=resource_id
+        )
+        print sql_string
+
+        result = _get_action('datastore_search_sql', {'sql': sql_string})
+
+        values = [field[filter_name] for field in result.get('records', [])]
+
+    return sorted(values)
