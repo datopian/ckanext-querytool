@@ -158,7 +158,7 @@ class QueryToolController(base.BaseController):
             except ValidationError, e:
                 errors = e.error_dict
                 error_summary = e.error_summary
-                return self.querytool_edit('/' + querytool, data,
+                return self.querytool_edit('/' + querytool, _querytool,
                                            errors, error_summary)
             # redirect to manage visualisations
             url = h.url_for('querytool_edit_visualizations',
