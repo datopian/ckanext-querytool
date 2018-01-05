@@ -210,7 +210,6 @@ class QueryToolController(base.BaseController):
         }
         _visualization_items = \
             get_action('querytool_get_visualizations')({}, data_dict)
-
         if _visualization_items is None and len(querytool) > 0:
             abort(404, _('Querytool visualizations not found.'))
 
@@ -222,7 +221,7 @@ class QueryToolController(base.BaseController):
 
             try:
                 junk = _get_action('querytool_visualizations_update',
-                                   _visualization_items)
+                                   data)
                 h.flash_success(_('Visualizations Successfully updated.'))
             except ValidationError, e:
                 errors = e.error_dict
@@ -230,7 +229,7 @@ class QueryToolController(base.BaseController):
                 return self.querytool_edit('/' + querytool, data,
                                            errors, error_summary)
             # redirect to querytool
-            url = h.url_for('querytool')
+            url = h.url_for('querytool_list')
             h.redirect_to(url)
 
         if not data:
