@@ -4,6 +4,7 @@ import ckan.logic as logic
 from ckan.plugins import toolkit
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
+import ckanext.querytool.helpers as h
 
 log = logging.getLogger(__name__)
 
@@ -86,3 +87,11 @@ def get_resource_fields(context, data_dict):
     fields = [field['id'] for field in result.get('fields', [])]
 
     return sorted(fields)
+
+
+def get_filter_values(context, data_dict):
+
+    resource_id = data_dict.pop('resource_id')
+    filter_name = data_dict.pop('filter_name')
+
+    return h.get_filter_values(resource_id, filter_name)

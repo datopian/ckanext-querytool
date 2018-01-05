@@ -181,7 +181,7 @@ class QueryToolController(base.BaseController):
                 resource_fields = _get_action('get_resource_fields',
                                               {'resource': resource})
                 c.active_filters = ','.join(resource_fields)
-                print c.active_filters
+                c.resource_id = resource['id']
             except NotFound:
                 abort(404, _('Package not found'))
 

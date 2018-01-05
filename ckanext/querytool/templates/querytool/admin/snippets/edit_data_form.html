@@ -50,22 +50,21 @@ Example usage:
 
   {% block querytool_main_filters %}
     <legend>{{ _('Main filters') }}</legend>
+
+    <fieldset id="main-filters">
+
+      {% if data.filters  %}
+        {% for filter in data.filters %}
+          {% snippet 'ajax_snippets/filter_item.html', n=filter.order, active_filters=c.active_filters, selected_filter=filter %}
+        {% endfor %}
+      {% endif %}
+
+    </fieldset>
+
     <a class="btn btn-primary" id="add-filter-button">
       <span class="fa fa-filter"></span>
       <span class="fa-label">{{_('Add Filter')}}</span>
     </a>
-    <fieldset id="main-filters">
-      {% if data.filters  %}
-
-        {% for filter in data.filters %}
-
-          {% snippet 'ajax_snippets/filter_item.html', n=filter.order, active_filters=c.active_filters, selected_filter=filter %}
-
-        {% endfor %}
-
-      {% endif %}
-
-    </fieldset>
   {% endblock %}
 
 <div class="form-actions">

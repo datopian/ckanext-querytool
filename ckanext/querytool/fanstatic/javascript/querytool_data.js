@@ -64,16 +64,20 @@
 
             filter_name_select.change(function (event) {
 
-             // Empty child select and input
-            if ($('#data_filter_value_' + total_items + ' option').length > 0)
-            filter_values_select.find('option').not(':first').remove();
-            filter_alias_input.val('');
+              // Empty child select and input
+              if ($('#data_filter_value_' + total_items + ' option').length > 0)
+              filter_values_select.find('option').not(':first').remove();
+              filter_alias_input.val('');
 
-             var test_items = ['test1', 'test2', 'test3'];
-             $.each(test_items, function (idx, elem) {
-               filter_values_select.append(new Option(elem, elem));
-             });
-             $('.data_filter_value_' + total_items).removeClass('hidden');
+              var filter_name = filter_name_select.val();
+              api.post('get_filter_values', {'resource_id': resource.id, 'filter_name': filter_name}).done(function (data) {
+
+                $.each(data.result, function (idx, elem) {
+                  filter_values_select.append(new Option(elem, elem));
+                });
+                $('.data_filter_value_' + total_items).removeClass('hidden');
+
+              });
 
             });
 
