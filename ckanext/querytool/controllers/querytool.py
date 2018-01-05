@@ -7,7 +7,6 @@ import ckan.lib.base as base
 import ckan.logic as logic
 import ckan.model as model
 from ckan.common import config, c, _
-from ckan.common import response, request
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 
