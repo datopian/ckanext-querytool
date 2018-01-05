@@ -23,28 +23,40 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     # IRoutes
 
     def before_map(self, map):
-        ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController'
+        querytool_controller\
+            = 'ckanext.querytool.controllers.querytool:QueryToolController'
+        storytool_controller = \
+            'ckanext.querytool.controllers.storytool:StoryToolController'
 
+        # Query tool controllers
         map.redirect('/querytool', '/querytool/list',
                      _redirect_code='301 Moved Permanently')
         map.connect('querytool_list', '/querytool/list',
-                    controller=ctrl, action='list')
+                    controller=querytool_controller, action='list')
         map.connect('querytool_show', '/querytool/show/{querytool}',
-                    controller=ctrl, action='show')
+                    controller=querytool_controller, action='show')
         map.connect('querytool_edit', '/querytool/edit{querytool:/.*|}',
-                    controller=ctrl, action='querytool_edit')
+                    controller=querytool_controller, action='querytool_edit')
         map.connect('querytool_delete', '/querytool/delete{querytool:/.*|}',
-                    controller=ctrl, action='delete')
+                    controller=querytool_controller, action='delete')
         map.connect('querytool_edit_visualizations',
                     '/querytool/edit_visualizations{querytool:/.*|}',
-                    controller=ctrl, action='edit_visualizations')
+                    controller=querytool_controller,
+                    action='edit_visualizations')
         map.connect('querytool_public', '/querytool/public',
-                    controller=ctrl, action='querytool_public')
+                    controller=querytool_controller, action='querytool_public')
         map.connect('querytool_public_data', '/querytool/public/data',
-                    controller=ctrl, action='querytool_public_data')
+                    controller=querytool_controller,
+                    action='querytool_public_data')
         map.connect('querytool_public_data_list',
                     '/querytool/public/data/{name}',
-                    controller=ctrl, action='querytool_public_data_list')
+                    controller=querytool_controller,
+                    action='querytool_public_data_list')
+
+        # Story tool controllers
+        map.connect('storytool_public','/storytool/public/',
+                    controller=storytool_controller,
+                    action='show')
 
         return map
 
