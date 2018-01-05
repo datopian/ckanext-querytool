@@ -12,8 +12,6 @@
         </div>
       </div>
     </div>
-
-
     <div class="container content">
       <div class="row text-center box-items">
         <div class="col-md-5 query-tool">
@@ -23,16 +21,15 @@
               <img src="/base/images/query-icon.png" alt="Query Tool">
             </div>
               {% set querytool_list = h.url_for('querytool_public_data') %}
-
             <h3 class="tool-title">Query Tool</h3>
             <p class="short-desc">Intrinsicly visualize one-to-one functionalities for client-centric data. Uniquely grow viral web services after
               interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</p>
             <p>
               <a href="{{ querytool_list }}" class="btn btn-primary public-button" role="button">Start Querying</a>
             </p>
-
           </div>
         </div>
+        {% set storytool = h.url_for('storytool_public') %}
         <div class="col-md-5 story-tool">
           <div class="caption">
             <div class="thumbnail">
@@ -42,18 +39,12 @@
             <p class="short-desc">Intrinsicly visualize one-to-one functionalities for client-centric data. Uniquely grow viral web services after
               interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</p>
             <p>
-              <a href="#" class="btn btn-primary public-button" role="button">View A Story</a>
+              <a href="{{ storytool }}" class="btn btn-primary public-button" role="button">View A Story</a>
             </p>
 
           </div>
         </div>
       </div>
-
-
-
-
-
-
       </div>
     </div>
 {% endblock %}
