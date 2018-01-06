@@ -73,10 +73,11 @@ def querytool_visualizations_update(context, data_dict):
     if not visualizations:
         visualizations = CkanextQueryToolVisualizations()
 
-    visualizations.axisX = data_dict['axis_x']
-    visualizations.axisY = data_dict['axis_y']
+    visualizations.x_axis = data_dict['axis_x']
+    visualizations.y_axis = data_dict['axis_y']
     visualizations.name = data_dict['num_rows']
-
+    visualizations.chart_type = data_dict['graph']
+    visualizations.color_scheme = data_dict['color']
     visualizations.save()
     session.add(visualizations)
     session.commit()
