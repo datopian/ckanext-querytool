@@ -98,3 +98,30 @@ def get_filter_values(resource_id, filter_name):
         values = [field[filter_name] for field in result.get('records', [])]
 
     return sorted(values)
+
+
+def get_chart_types():
+    chart_types = ['Bar Chart','Stacked Bar Chart','Donut Chart',
+     'Line Chart', 'Pie Chart', 'Spline Chart',
+     'Table Chart', 'Simple Chart']
+    return chart_types
+
+
+def get_color_scheme():
+    colors = [{'value': '#B80000, #995522, #556677, #118888, #115588, '
+              '#4C3D3D, #2B2B2B, #660000, #221100',
+               'text': 'Saturated'},
+              {'value': '#DDBBAA, #79E6F2, #88AA99, #00A864, #228899, '
+                        '#3F797F, #775555, #118855, #008751, #3D4C46',
+               'text': 'Light'},
+              {'value': '#ADC0D8, #79AFF2, #8899AA, #0EAAB2, #00A0A8, '
+                        '#776655, #118888, #885511, #3F5C7F, #225599',
+               'text': 'Pastel'},
+              {'value': '#ADB1D8, #8899AA, #7983F2, #777752, #887711, '
+                        '#0070C0, #0062A8, #3F457F, #115588, #3D464C',
+               'text': 'Pastel 2'},
+              {'value': '#AA9988, #A88600, #779922, #6C7F3F, #887711, '
+                        '#555577, #665500, #665100, #4C493D, #2B2B2V',
+               'text': 'Contrast'}]
+
+    return colors
