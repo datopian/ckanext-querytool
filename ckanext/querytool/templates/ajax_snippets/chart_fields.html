@@ -1,10 +1,25 @@
 <div id="chart_fields" class="chart-fields-section">
 
+  {% set chart_types = h.querytool_get_chart_types() %}
   <div class="control-group control-select">
     <label class="control-label" for="chart_field_graph">Graph type</label>
     <div class="controls ">
       <select id="chart_field_graph" name="graph">
-        <option value="line">Line</option>
+      {% for type in chart_types %}
+        <option value="{{ type }}">{{type}}</option>
+       {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  {% set color_scheme = h.querytool_get_color_scheme() %}
+   <div class="control-group control-select">
+    <label class="control-label" for="chart_field_graph">Color scheme</label>
+    <div class="controls ">
+      <select id="chart_field_color" name="color">
+      {% for color in color_scheme %}
+        <option value="{{ color.value }}">{{color.text}}</option>
+       {% endfor %}
       </select>
     </div>
   </div>
