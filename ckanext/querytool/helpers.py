@@ -101,9 +101,9 @@ def get_filter_values(resource_id, filter_name):
 
 
 def get_chart_types():
-    chart_types = ['Bar Chart','Stacked Bar Chart','Donut Chart',
-     'Line Chart', 'Pie Chart', 'Spline Chart',
-     'Table Chart', 'Simple Chart']
+    chart_types = ['Bar Chart', 'Stacked Bar Chart', 'Donut Chart',
+                   'Line Chart', 'Pie Chart', 'Spline Chart',
+                   'Table Chart', 'Simple Chart']
     return chart_types
 
 

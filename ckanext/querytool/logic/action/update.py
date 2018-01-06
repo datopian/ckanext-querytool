@@ -78,9 +78,6 @@ def querytool_visualizations_update(context, data_dict):
     visualizations.name = data_dict['num_rows']
     visualizations.chart_type = data_dict['graph']
     visualizations.color_scheme = data_dict['color']
-
-
-
     visualizations.save()
     session.add(visualizations)
     session.commit()
