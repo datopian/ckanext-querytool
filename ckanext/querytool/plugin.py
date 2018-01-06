@@ -82,7 +82,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     def get_helpers(self):
         return {
             'querytool_get_datasets': helpers.get_all_datasets,
-            'querytool_get_filter_values': helpers.get_filter_values
+            'querytool_get_filter_values': helpers.get_filter_values,
+            'querytool_get_chart_types': helpers.get_chart_types,
+            'querytool_get_color_scheme': helpers.get_color_scheme
         }
 
     # IAuthFunctions
