@@ -9,6 +9,8 @@ import ckan.model as model
 from ckan.common import config, c, _
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
+import ckanext.querytool.helpers as helpers
+
 
 log = logging.getLogger(__name__)
 
@@ -148,7 +150,10 @@ class QueryToolController(base.BaseController):
 
                     filters.append(filter)
 
-            _querytool['filters'] = json.dumps(filters)
+            if any(filters):
+                _querytool['filters'] = json.dumps(filters)
+                # TODO Create and store the new state of the query
+                # helpers.create_query_str(data['resource_id'], filters)
             _querytool.update(data)
             _querytool['querytool'] = querytool
 
@@ -186,6 +191,7 @@ class QueryToolController(base.BaseController):
 
         errors = errors or {}
         error_summary = error_summary or {}
+        print error_summary
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary,

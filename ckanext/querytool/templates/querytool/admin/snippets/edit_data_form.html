@@ -23,6 +23,11 @@ Example usage:
   {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
 {% endblock %}
 
+{% block error_summary %}
+  {{ form.errors(error_summary) }}
+{% endblock %}
+
+
   <legend>{{ _('Basic info') }}</legend>
 
   {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
