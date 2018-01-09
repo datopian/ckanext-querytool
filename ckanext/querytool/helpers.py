@@ -125,3 +125,17 @@ def get_color_scheme():
                'text': 'Contrast'}]
 
     return colors
+
+
+def create_query_str(resource_id, filters):
+
+    columns = map(lambda f: '"{0}"'.format(f['name'].encode('utf-8')), filters)
+    select = ', '.join(columns)
+    print select
+
+    # # generate the final SQL query string
+    # sql_string = '''SELECT {select} FROM "{resource}" {where}'''.format(
+    #     select=select,
+    #     resource=resource_id,
+    #     where=where_clause)
+    return ''

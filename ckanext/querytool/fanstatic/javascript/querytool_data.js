@@ -95,7 +95,8 @@
             var filter_items = $('.filter_item');
             var total_items = filter_items.length + 1;
 
-            ckan.sandbox().client.getTemplate('filter_item.html', {active_filters: active_filters, n: total_items, class:'hidden'})
+            ckan.sandbox().client.getTemplate('filter_item.html', {active_filters: active_filters, n: total_items,
+                                                    resource_id: resource.id, class:'hidden'})
             .done(function (data) {
 
               $('#main-filters').append(data);
