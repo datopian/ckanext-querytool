@@ -5,6 +5,7 @@ from ckan.plugins import toolkit
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
 import ckanext.querytool.helpers as h
+import ckan.lib.helpers as ch
 
 log = logging.getLogger(__name__)
 
@@ -74,18 +75,7 @@ def get_resource_fields(context, data_dict):
 
     resource = data_dict.pop('resource')
 
-    if not resource.get('datastore_active'):
-        return []
-
-    data = {
-        'resource_id': resource['id'],
-        'limit': 0
-    }
-    result = logic.get_action('datastore_search')(context, data)
-
-    fields = [field['id'] for field in result.get('fields', [])]
-
-    return sorted(fields)
+    return ch.resource_view_get_fields(resource)
 
 
 def get_filter_values(context, data_dict):
