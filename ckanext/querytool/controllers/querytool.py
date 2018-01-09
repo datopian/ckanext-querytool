@@ -162,7 +162,7 @@ class QueryToolController(base.BaseController):
                                            errors, error_summary)
             # redirect to manage visualisations
             url = h.url_for('querytool_edit_visualizations',
-                            querytool='/' + querytool)
+                            querytool='/' + _querytool['name'])
             h.redirect_to(url)
 
         if not data:
@@ -209,6 +209,7 @@ class QueryToolController(base.BaseController):
         }
         _visualization_items = \
             get_action('querytool_get_visualizations')({}, data_dict)
+
         if _visualization_items is None and len(querytool) > 0:
             abort(404, _('Querytool visualizations not found.'))
 
