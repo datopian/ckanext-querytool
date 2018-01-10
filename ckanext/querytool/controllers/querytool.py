@@ -225,7 +225,7 @@ class QueryToolController(base.BaseController):
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
             visualizations = []
-            for k,v in data.items():
+            for k, v in data.items():
 
                 if k.startswith('chart_field_graph_'):
                     visualization = {}

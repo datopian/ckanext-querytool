@@ -65,9 +65,7 @@ def querytool_visualizations_update(context, data_dict):
 
     # if errors:
     #    raise toolkit.ValidationError(errors)
-    visualizations = \
-            CkanextQueryToolVisualizations.get(name=data_dict['name'])
-    print 'OVA', visualizations
+    visualizations = CkanextQueryToolVisualizations.get(name=data_dict['name'])
     if not visualizations:
         visualizations = CkanextQueryToolVisualizations()
 

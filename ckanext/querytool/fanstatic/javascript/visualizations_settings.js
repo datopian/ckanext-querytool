@@ -26,7 +26,6 @@
               if (visualization === 'chart') {
                 var charts =  $('.chart_field');
                 var total_items = charts.length + 1;
-                console.log(total_items);
                 ckan.sandbox().client.getTemplate('chart_fields.html', {n: total_items})
                    .done(function (data) {
 
