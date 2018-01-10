@@ -65,19 +65,12 @@ def querytool_visualizations_update(context, data_dict):
 
     # if errors:
     #    raise toolkit.ValidationError(errors)
-    visualizations = {}
-    if 'name' in data_dict:
-        visualizations = \
-            CkanextQueryToolVisualizations.get(name=data_dict['name'])
-
+    visualizations = CkanextQueryToolVisualizations.get(name=data_dict['name'])
     if not visualizations:
         visualizations = CkanextQueryToolVisualizations()
 
-    visualizations.x_axis = data_dict['axis_x']
-    visualizations.y_axis = data_dict['axis_y']
-    visualizations.name = data_dict['num_rows']
-    visualizations.chart_type = data_dict['graph']
-    visualizations.color_scheme = data_dict['color']
+    visualizations.name = data_dict['name']
+    visualizations.charts = data_dict['charts']
     visualizations.save()
     session.add(visualizations)
     session.commit()

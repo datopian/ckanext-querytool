@@ -24,8 +24,9 @@
 
               var visualization = $('#item_type').val();
               if (visualization === 'chart') {
-
-                ckan.sandbox().client.getTemplate('chart_fields.html', {})
+                var charts =  $('.chart_field');
+                var total_items = charts.length + 1;
+                ckan.sandbox().client.getTemplate('chart_fields.html', {n: total_items})
                    .done(function (data) {
 
                      $('#visualization-settings-items').append(data);

@@ -48,7 +48,6 @@ def querytool_get(context, data_dict):
     querytool = CkanextQueryTool.get(name=name)
     if querytool:
         querytool = table_dictize(querytool, context)
-
     return querytool
 
 
