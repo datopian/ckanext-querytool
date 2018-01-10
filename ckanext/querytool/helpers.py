@@ -64,7 +64,10 @@ def user_is_registered(context):
 
 
 def get_all_datasets():
-
+    '''
+    Get all public datasets
+    :return:
+    '''
     datasets = _get_action('package_list', {})
 
     return datasets
@@ -101,6 +104,10 @@ def get_filter_values(resource_id, filter_name):
 
 
 def get_chart_types():
+    '''
+    Get all avaiable types of chart following c3 specification
+    :return:
+    '''
     chart_types = ['Bar Chart', 'Stacked Bar Chart', 'Donut Chart',
                    'Line Chart', 'Pie Chart', 'Spline Chart',
                    'Table Chart', 'Simple Chart']
@@ -108,6 +115,10 @@ def get_chart_types():
 
 
 def get_color_scheme():
+    '''
+    Get color schemes for displaying the charts
+    :return:
+    '''
     colors = [{'value': '#B80000, #995522, #556677, #118888, #115588, '
               '#4C3D3D, #2B2B2B, #660000, #221100',
                'text': 'Saturated'},
