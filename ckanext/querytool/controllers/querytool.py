@@ -137,7 +137,6 @@ class QueryToolController(base.BaseController):
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
             filters = []
-
             for k, v in data.items():
 
                 if k.startswith('data_filter_name_'):
@@ -218,18 +217,37 @@ class QueryToolController(base.BaseController):
         _visualization_items = \
             get_action('querytool_get_visualizations')({}, data_dict)
 
-        if _visualization_items is None and len(querytool) > 0:
-            abort(404, _('Querytool visualizations not found.'))
-
         if _visualization_items is None:
-            _visualization_items = {}
+            _visualization_items = {
+                'name': querytool
+            }
 
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
+            visualizations = []
+            for k,v in data.items():
+
+                if k.startswith('chart_field_graph_'):
+                    visualization = {}
+                    id = k.split('_')[-1]
+                    visualization['order'] = int(id)
+                    visualization['graph'] = \
+                        data['chart_field_graph_{}'.format(id)]
+                    visualization['x_axis'] = \
+                        data['chart_field_axis_x_{}'.format(id)]
+                    visualization['y_axis'] = \
+                        data['chart_field_axis_y_{}'.format(id)]
+                    visualization['color'] = \
+                        data['chart_field_color_{}'.format(id)]
+
+                    visualizations.append(visualization)
+
+            if any(visualizations):
+                _visualization_items['charts'] = json.dumps(visualizations)
 
             try:
                 junk = _get_action('querytool_visualizations_update',
-                                   data)
+                                   _visualization_items)
                 h.flash_success(_('Visualizations Successfully updated.'))
             except ValidationError, e:
                 errors = e.error_dict
