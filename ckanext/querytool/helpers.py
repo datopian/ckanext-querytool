@@ -142,11 +142,35 @@ def create_query_str(resource_id, filters):
 
     columns = map(lambda f: '"{0}"'.format(f['name'].encode('utf-8')), filters)
     select = ', '.join(columns)
-    print resource_id
+    where_clause = ''
 
-    # # generate the final SQL query string
-    # sql_string = '''SELECT {select} FROM "{resource}" {where}'''.format(
-    #     select=select,
-    #     resource=resource_id,
-    #     where=where_clause)
-    return ''
+    if any(filters):
+        if len(filters) > 1:
+            # Loop through filters and create SQL query
+            for idx, _ in enumerate(filters):
+                op = '='
+                name = _['name'].encode('utf-8')
+                value = _['value']
+
+                if idx == 0:
+                    where_clause = 'WHERE ("{0}" {1} \'{2}\')'.format(
+                        name, op, value)
+                else:
+                    where_clause += ' AND ("{0}" {1} \'{2}\')'.format(
+                        name, op, value)
+
+        else:
+            _ = filters[0]
+            op = '='
+            name = _['name'].encode('utf-8')
+            value = _['value']
+            where_clause = 'WHERE ("{0}" {1} \'{2}\')'.format(name,
+                                                              op, value)
+
+    # generate the final SQL query string
+    sql_string = '''SELECT {select} FROM "{resource}" {where}'''.format(
+        select=select,
+        resource=resource_id,
+        where=where_clause)
+    print sql_string
+    return sql_string

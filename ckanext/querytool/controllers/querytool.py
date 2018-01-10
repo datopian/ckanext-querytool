@@ -151,10 +151,11 @@ class QueryToolController(base.BaseController):
 
             if any(filters):
                 _querytool['filters'] = json.dumps(filters)
-                # TODO create and store the query
-                helpers.create_query_str(data['resource_id_1'], filters)
+                # TODO store the query
+                sql_string = helpers.create_query_str(data['resource_id_1'],
+                                                      filters)
             else:
-                _querytool.pop('filters')
+                _querytool['filters'] = ''
 
             _querytool.update(data)
             _querytool['querytool'] = querytool
