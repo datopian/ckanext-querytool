@@ -131,7 +131,7 @@ def create_query_str(resource_id, filters):
 
     columns = map(lambda f: '"{0}"'.format(f['name'].encode('utf-8')), filters)
     select = ', '.join(columns)
-    print select
+    print resource_id
 
     # # generate the final SQL query string
     # sql_string = '''SELECT {select} FROM "{resource}" {where}'''.format(
