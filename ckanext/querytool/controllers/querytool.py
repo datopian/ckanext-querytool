@@ -262,6 +262,10 @@ class QueryToolController(base.BaseController):
         if not data:
             data = _visualization_items
 
+        if 'charts' in data and len(data['charts']) > 0:
+            data['charts'] = json.loads(data['charts'])
+            data['charts'].sort(key=itemgetter('order'))
+
         errors = errors or {}
         error_summary = error_summary or {}
 
