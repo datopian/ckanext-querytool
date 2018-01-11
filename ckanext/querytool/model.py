@@ -12,7 +12,7 @@ except ImportError:
     from sqlalchemy.engine.base import RowProxy
 
 from sqlalchemy.engine.reflection import Inspector
-from ckan.model.meta import metadata, mapper, Session, engine
+from ckan.model.meta import orm, metadata, mapper, Session, engine
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
 
@@ -167,6 +167,8 @@ def define_querytool_visualizations_table():
               Column('id', types.UnicodeText,
                      primary_key=True,
                      default=make_uuid),
+              Column('ckanext_querytool_id', types.UnicodeText,
+                     ForeignKey('ckanext_querytool.id')),
               Column('name',
                      types.UnicodeText,
                      nullable=False),
@@ -178,7 +180,16 @@ def define_querytool_visualizations_table():
 
     mapper(
         CkanextQueryToolVisualizations,
-        query_tool_visualizations_table
+        query_tool_visualizations_table,
+        properties={
+                    'ckanext_querytool': orm.relation(CkanextQueryTool,
+                     backref=orm.backref('ckanext_querytool_visualizations',
+                                         collection_class=orm.collections.attribute_mapped_collection(
+                                             u'id'),
+                     cascade='all, delete, delete-orphan',
+            ),
+        )
+    },
     )
 
 
