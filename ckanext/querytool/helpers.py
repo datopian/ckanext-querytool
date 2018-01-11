@@ -9,7 +9,7 @@ import logging
 import ckan.model as m
 from ckan.common import c
 from ckan.plugins import toolkit
-
+import json
 
 log = logging.getLogger(__name__)
 
@@ -174,3 +174,18 @@ def create_query_str(resource_id, filters):
         where=where_clause)
 
     return sql_string
+
+
+def get_avaiable_filters(name):
+
+    data_dict = {
+        'name': name
+    }
+    _querytool = _get_action('querytool_get', data_dict)
+
+    filters = json.loads(_querytool['filters'])
+    axis_filters = []
+    for filter in filters:
+        axis_filters.append(filter['name'])
+
+    return axis_filters

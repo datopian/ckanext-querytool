@@ -1,6 +1,9 @@
 {% set active_charts = chart %}
 
-<h1>{{ active_charts }}</h1>
+{% if not filters %}
+  {% set filters = h.querytool_get_avaiable_filters(querytool) %}
+{% endif %}
+
 <div id="chart_field_{{ n }}" class="chart_field chart-fields-section">
 
   {% set chart_types = h.querytool_get_chart_types() %}
@@ -31,7 +34,9 @@
     <label class="control-label" for="chart_field_axis_y_{{ n }}">Select (Axis Y)</label>
     <div class="controls ">
       <select id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}">
-        <option value="y">id</option>
+        {% for filter in filters %}
+        <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.x_axis }}{% endif %}>{{filter}}</option>
+        {% endfor %}
       </select>
     </div>
   </div>
@@ -40,7 +45,9 @@
     <label class="control-label" for="chart_field_axis_x_{{ n }}">Select(Axis X)</label>
     <div class="controls ">
       <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
-        <option value="x">id</option>
+        {% for filter in filters %}
+        <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.y_axis }}{% endif %}>{{filter}}</option>
+        {% endfor %}
       </select>
     </div>
   </div>
