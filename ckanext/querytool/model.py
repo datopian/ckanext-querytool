@@ -181,15 +181,14 @@ def define_querytool_visualizations_table():
     mapper(
         CkanextQueryToolVisualizations,
         query_tool_visualizations_table,
-        properties={
-                    'ckanext_querytool': orm.relation(CkanextQueryTool,
-                     backref=orm.backref('ckanext_querytool_visualizations',
-                                         collection_class=orm.collections.attribute_mapped_collection(
-                                             u'id'),
-                     cascade='all, delete, delete-orphan',
-            ),
+        properties={'ckanext_querytool': orm.relation(CkanextQueryTool,
+                    backref=orm.backref('ckanext_querytool_visualizations',
+                                        collection_class=orm.collections.
+                                        attribute_mapped_collection(u'id'),
+                                        cascade='all, delete, delete-orphan',
+                                        ),
         )
-    },
+                    }
     )
 
 
