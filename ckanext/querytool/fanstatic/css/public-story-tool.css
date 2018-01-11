@@ -1,3 +1,137 @@
-#header{
-    color:red;
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+.category-tag {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.8rem;
+    letter-spacing: 0.1rem;
+}
+
+.category-bg {
+    background-color: #F97859;
+    position: absolute;
+    top: -50px;
+    padding: 15px 45px 0px 45px;
+}
+
+.story-header-bg {
+    display: inline-block;
+    position: relative;
+}
+
+.story-header-bg:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(rgba(18, 30, 136, 0.8), rgba(18, 30, 136, 0.8));
+}
+
+.headline-bg {
+    background-color: #fff;
+    bottom: 70;
+    padding: 0px 50px;
+}
+
+.story-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 4.4rem;
+    color: #121E87;
+    letter-spacing: 0.17rem;
+    line-height: 5.5rem;
+    margin: 30px 0;
+}
+
+.date-and-author {
+    color: #BCBFD9;
+    letter-spacing: 0.1rem;
+    text-transform: uppercase;
+    margin: 20px 0;
+}
+
+.basic-text {
+    font-size: 1.7rem;
+    color: #333;
+    letter-spacing: 0.1rem;
+    margin: 50px 0;
+    line-height: 2.7rem;
+}
+
+.two-charts,
+.map,
+.table {
+    background-color: #f7f7f7;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.quote-text {
+    font-family: 'Playfair Display', serif;
+    color: #333;
+    letter-spacing: 0.1rem;
+    margin: 30px 0;
+    line-height: 3.5rem;
+}
+
+.quote {
+    display: flex;
+    justify-content: center;
+    padding: 70px 0px;
+}
+
+.basic-headline {
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    font-size: 4rem;
+    color: #121E87;
+    letter-spacing: 0.12rem;
+    line-height: 5.5rem;
+    margin: 60px 0;
+}
+
+.share-menu {
+    background-color: #121E87;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    margin-top: 50px;
+}
+
+.share-items>li>a {
+    border-radius: 0px;
+    color: #fff;
+    font-size: 1.7rem;
+    letter-spacing: 0.1rem;
+    margin-left: 20px;
+}
+
+.share-items>li>a:hover,
+.share-items>li>a:active,
+.share-items>li>a:focus {
+    background: transparent;
+    color: #FF562B;
+}
+
+.input-group-addon {
+    padding: 15px 20px;
+    font-size: 17px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #F97859;
+    border: none;
+    border-radius: 0px;
+}
+
+.form-control {
+    padding: 25px 15px;
+    font-size: 16px;
+    color: #333;
+    border-radius: 0px;
 }
