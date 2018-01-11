@@ -152,14 +152,15 @@ class QueryToolController(base.BaseController):
 
             if any(filters):
                 _querytool['filters'] = json.dumps(filters)
-                # TODO store the query
                 sql_string = helpers.create_query_str(data['resource_id_1'],
                                                       filters)
             else:
                 _querytool['filters'] = ''
+                sql_string = ''
 
             _querytool.update(data)
             _querytool['querytool'] = querytool
+            _querytool['sql_string'] = sql_string
 
             try:
                 junk = _get_action('querytool_update', _querytool)
@@ -218,6 +219,11 @@ class QueryToolController(base.BaseController):
         }
         _visualization_items = \
             get_action('querytool_get_visualizations')({}, data_dict)
+
+        _querytool = get_action('querytool_get')({}, data_dict)
+
+        if _querytool is None and len(querytool) > 0:
+            abort(404, _('Querytool not found.'))
 
         if _visualization_items is None:
             _visualization_items = {
