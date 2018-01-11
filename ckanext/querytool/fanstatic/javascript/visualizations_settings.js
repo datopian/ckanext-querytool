@@ -26,11 +26,12 @@
             if (visualization === 'chart') {
                 var charts = $('.chart_field');
                 var total_items = charts.length + 1;
+                var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') +1).split("?")[0];
                 ckan.sandbox().client.getTemplate('chart_fields.html', {
-                        n: total_items
+                        n: total_items,
+                        querytool: querytool
                     })
                     .done(function(data) {
-
                         $('#visualization-settings-items').append(data);
 
                     });
