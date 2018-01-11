@@ -20,14 +20,13 @@
 {% block error_summary %}
   {{ form.errors(error_summary) }}
 {% endblock %}
-<h1>{{ data }}</h1>
 {% block charts %}
     <fieldset>
       <legend>{{ _('Visualizations settings') }}</legend>
         <div id="visualization-settings-items">
              {% if data.charts  %}
                 {% for chart in data.charts %}
-                  {% snippet 'ajax_snippets/chart_fields.html', n=chart.order, chart=chart %}
+                  {% snippet 'ajax_snippets/chart_fields.html', n=chart.order, chart=chart, filters=c.axis_filters %}
                 {% endfor %}
              {% endif %}
         </div>
