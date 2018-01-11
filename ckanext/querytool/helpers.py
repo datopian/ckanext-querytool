@@ -189,3 +189,4 @@ def get_avaiable_filters(name):
         axis_filters.append(filter['name'])
 
     return axis_filters
+
