@@ -55,22 +55,20 @@ def querytool_visualizations_update(context, data_dict):
     :param
     '''
 
-    # check_access('querytool_update', context)
-
-    # we need the querytool name in the context for name validation
-    # context['querytool'] = data_dict['querytool']
     session = context['session']
     # data, errors = df.validate(data_dict, schema.querytool_schema(),
     #                          context)
 
     # if errors:
     #    raise toolkit.ValidationError(errors)
+    querytool = CkanextQueryTool.get(name=data_dict['name'])
     visualizations = CkanextQueryToolVisualizations.get(name=data_dict['name'])
     if not visualizations:
         visualizations = CkanextQueryToolVisualizations()
 
     visualizations.name = data_dict['name']
     visualizations.charts = data_dict['charts']
+    visualizations.ckanext_querytool_id = querytool.id
     visualizations.save()
     session.add(visualizations)
     session.commit()

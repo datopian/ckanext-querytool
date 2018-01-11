@@ -102,7 +102,8 @@ class QueryToolController(base.BaseController):
         except NotFound:
             abort(404, _('Querytool not found'))
 
-        h.flash_success(_('Querytool was removed successfully.'))
+        h.flash_success(_('Querytool and visualizations were'
+                                                    ' removed successfully.'))
         toolkit.redirect_to(h.url_for('querytool_list'))
 
     def querytool_edit(self, querytool=None, data=None,
