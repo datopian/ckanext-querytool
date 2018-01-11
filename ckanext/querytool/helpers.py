@@ -172,5 +172,5 @@ def create_query_str(resource_id, filters):
         select=select,
         resource=resource_id,
         where=where_clause)
-    print sql_string
+
     return sql_string

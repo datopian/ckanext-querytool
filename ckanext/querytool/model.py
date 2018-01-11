@@ -113,6 +113,8 @@ def define_query_tool_table():
                                     nullable=False),
                              Column('filters', types.UnicodeText,
                                     default=u''),
+                             Column('sql_string', types.UnicodeText,
+                                    default=u''),
                              Column('created', types.DateTime,
                                     default=datetime.datetime.utcnow),
                              Column('modified', types.DateTime,
