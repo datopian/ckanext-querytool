@@ -178,7 +178,7 @@ def create_query_str(resource_id, filters):
 
 def get_avaiable_filters(name):
 
-    data_dict= {
+    data_dict = {
         'name': name
     }
     _querytool = _get_action('querytool_get', data_dict)
