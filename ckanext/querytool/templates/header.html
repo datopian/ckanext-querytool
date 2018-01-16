@@ -1,10 +1,46 @@
 {% ckan_extends %}
 
-{% block header_site_navigation_tabs %}
-  {% if c.userobj.sysadmin %}
-    {{ h.build_nav_main(
-      ('querytool_list', _('Query Tools'))
-    ) }}
-  {% endif %}
+{% block header_wrapper %}
+{% block header_account %}
+<header class="account-masthead">
+  <div class="container-fluid">
+    {% block header_account_container_content %}
+    {{ super() }}
+    {% endblock %}
+  </div>
+</header>
+{% endblock %}
+<header class="navbar navbar-static-top masthead">
+  {% block header_debug %}
   {{ super() }}
+  {% endblock %}
+  <div class="container-fluid">
+    <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+      <span class="fa fa-bars"></span>
+    </button>
+    {% block header_logo %}
+    {% endblock %}
+
+    <div class="nav-collapse collapse">
+      {% block header_site_navigation %}
+        <nav class="section navigation">
+          <ul class="nav nav-pills">
+            {% block header_site_navigation_tabs %}
+            {{ h.build_nav_main(('home', _('Home'))) }}
+            {% if c.userobj.sysadmin %}
+              {{ h.build_nav_main(('querytool_list', _('Queries'))) }}
+            {% endif %}
+            {{ super() }}
+            {% endblock %}
+          </ul>
+        </nav>
+      {% endblock %}
+
+      {% block header_site_search %}
+      {{ super() }}
+      {% endblock %}
+
+    </div>
+  </div>
+</header>
 {% endblock %}
