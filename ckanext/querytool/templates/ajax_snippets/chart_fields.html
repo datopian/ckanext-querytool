@@ -24,7 +24,7 @@
     <div class="controls ">
       <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
       {% for color in color_scheme %}
-        <option value="{{ color.value }}">{{color.text}}</option>
+        <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{color.text}}</option>
        {% endfor %}
       </select>
     </div>
@@ -35,7 +35,7 @@
     <div class="controls ">
       <select id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}">
         {% for filter in filters %}
-        <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.x_axis }}{% endif %}>{{filter}}</option>
+        <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.y_axis }}{% endif %}>{{filter}}</option>
         {% endfor %}
       </select>
     </div>
@@ -46,7 +46,7 @@
     <div class="controls ">
       <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
         {% for filter in filters %}
-        <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.y_axis }}{% endif %}>{{filter}}</option>
+        <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.x_axis }}{% endif %}>{{filter}}</option>
         {% endfor %}
       </select>
     </div>
@@ -61,4 +61,6 @@
     </div>
   </div>
 
+
+  <span class="grippy"></span>
 </div>
