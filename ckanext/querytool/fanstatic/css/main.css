@@ -18,6 +18,12 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+.homepage .module-search .module-content {
+  background-color: #121e87;
+}
+.homepage .module-search .tags {
+  background-color: #010a5c;
+}
 .account-masthead {
   background-color: #121e87;
 }
@@ -151,4 +157,3 @@ input[type="color"],
   padding: 5px;
   margin-bottom: 5px;
 }
-/*# sourceMappingURL=main.css.map */
