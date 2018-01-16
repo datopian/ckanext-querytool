@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,400i,700,700i');
+/* Colors */
+/* Fonts */
+/* Grid */
+/* Media query breakpoints */
+/* Extra small screen / phone */
+/* Small screen / tablet */
+/* Medium screen / desktop */
+/* Large screen / wide desktop */
+/* So media queries don't overlap when required, provide a maximum */
+.toolbar .breadcrumb {
+  font-size: 14px;
+}
+.toolbar .breadcrumb li::after {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.homepage .module-search .module-content {
+  background-color: #121e87;
+}
+.homepage .module-search .tags {
+  background-color: #010a5c;
+}
+.account-masthead {
+  background-color: #121e87;
+}
+.account-masthead .account ul li a {
+  color: rgba(255, 255, 255, 0.7);
+}
+.account-masthead .account ul li a:hover {
+  color: rgba(255, 255, 255, 0.9);
+  background-color: #121e87;
+}
+.masthead {
+  background-color: #121e87;
+  background: url("../images/admin-header-bg.jpg") center no-repeat;
+  background-size: cover;
+  height: auto;
+}
+.masthead .navigation .nav-pills li a {
+  margin-left: 0;
+  margin-right: 0;
+  border-bottom: 4px solid transparent;
+}
+.masthead .navigation .nav-pills li a:hover {
+  background-color: transparent;
+  border-radius: 0;
+  border-bottom: 4px solid rgba(249, 120, 89, 0.7);
+  box-shadow: none;
+}
+.masthead .navigation .nav-pills li.active a {
+  background-color: transparent;
+  border-radius: 0;
+  border-bottom: 4px solid #f97859;
+  box-shadow: none;
+}
+.masthead .site-search {
+  float: right;
+}
+.masthead .nav > li > a {
+  color: rgba(255, 255, 255, 0.7);
+}
+.masthead #field-sitewide-search:focus {
+  box-shadow: inset 0 0 0 2px #f97859;
+}
+.btn {
+  background-image: none;
+  border-radius: 0;
+}
+.btn-primary {
+  background-color: #121e87;
+}
+.btn-primary:focus {
+  background-color: #121e87;
+}
+.btn-primary:hover {
+  background-color: #010a5c;
+}
+.btn-danger {
+  background-color: #cf0000;
+}
+.btn-success {
+  background-color: #00c853;
+}
+.btn,
+label {
+  font-weight: 400;
+}
+.site-footer,
+body {
+  background-color: #121e87;
+}
+.site-footer,
+.site-footer label,
+.site-footer small {
+  color: rgba(255, 255, 255, 0.7);
+}
+.site-footer a {
+  color: rgba(255, 255, 255, 0.7);
+}
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  border-radius: 0;
+}
+/* Large desktop */
+/* Desktop */
+@media (min-width: 980px) {
+  .masthead {
+    padding-top: 20px;
+  }
+  .masthead .nav-collapse {
+    float: none;
+  }
+  .masthead .nav-pills li {
+    position: relative;
+    bottom: -5px;
+  }
+}
+/* Portrait tablet to landscape and desktop */
+/* Up to desktop */
+@media (max-width: 979px) {
+  .btn-navbar {
+    margin: 10px 0;
+  }
+  .toolbar {
+    margin-bottom: 0;
+  }
+  .toolbar .breadcrumb .home {
+    display: inline-block;
+  }
+  .masthead .navigation .nav-pills {
+    margin-bottom: 20px;
+  }
+}
+/* Landscape phone to portrait tablet */
+/* Landscape phones and down */
+.chart-fields-section {
+  border: 1px solid #CCCCCC !important;
+  padding: 5px;
+  margin-bottom: 5px;
+  position: relative;
+}
