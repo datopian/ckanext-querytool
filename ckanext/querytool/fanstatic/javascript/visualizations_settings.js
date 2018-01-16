@@ -18,6 +18,8 @@
     };
 
     $(document).ready(function() {
+        var visualizationItems = $('#visualization-settings-items');
+
         $('#create-visualization-btn').on('click', function() {
 
             $.proxyAll(this, /_on/);
@@ -32,7 +34,7 @@
                         querytool: querytool
                     })
                     .done(function(data) {
-                        $('#visualization-settings-items').append(data);
+                        visualizationItems.append(data);
 
                     });
             } else if (visualization === 'map') {
@@ -40,6 +42,48 @@
             }
 
         });
+
+        // Initialize drag and drop functionality for visualization items
+        dragula([visualizationItems[0]], {
+            moves: function(el, container, handle) {
+                return handle.classList.contains('grippy');
+            }
+        }).on('drag', function(el, container, handle) {
+            el.querySelector('.grippy').classList.add('cursor-grabbing');
+        }).on('dragend', function(el) {
+            el.querySelector('.grippy').classList.remove('cursor-grabbing');
+
+            handleItemsOrder();
+        });
+
+        // This function updates the order numbers for the form elements.
+        function handleItemsOrder() {
+            var items = $('.chart_field');
+
+            $.each(items, function(i, item) {
+                item = $(item);
+
+                var order = i + 1;
+                var dropdownGraphType = item.find('[id*=chart_field_graph_]');
+                var dropdownColorScheme = item.find('[id*=chart_field_color_]');
+                var dropdownAxisY = item.find('[id*=chart_field_axis_y_]');
+                var dropdownAxisX = item.find('[id*=chart_field_axis_x_]');
+
+                item.attr('id', 'chart_field_' + order);
+
+                dropdownGraphType.attr('id', 'chart_field_graph_' + order);
+                dropdownGraphType.attr('name', 'chart_field_graph_' + order);
+
+                dropdownColorScheme.attr('id', 'chart_field_color_' + order);
+                dropdownColorScheme.attr('name', 'chart_field_color_' + order);
+
+                dropdownAxisY.attr('id', 'chart_field_axis_y_' + order);
+                dropdownAxisY.attr('name', 'chart_field_axis_y_' + order);
+
+                dropdownAxisX.attr('id', 'chart_field_axis_x_' + order);
+                dropdownAxisX.attr('name', 'chart_field_axis_x_' + order);
+            });
+        }
     });
 
 })($);
