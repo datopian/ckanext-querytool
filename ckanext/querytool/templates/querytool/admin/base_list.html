@@ -1,9 +1,5 @@
 {% extends "querytool/admin/base.html" %}
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
-{% block styles %}
-  {{ super() }}
-  {% resource 'querytool/css/query-tool.css' %}
-{% endblock %}
 
 {% block subtitle %}{{ _('Queries') }}{% endblock %}
 
@@ -17,9 +13,7 @@
 
 {% block page_primary_action %}
   {% if h.check_access('querytool_update') %}
-    <div class="page_primary_action">
-      {% link_for _('Create Query'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
-    </div>
+    {% link_for _('Create Query'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
   {% endif %}
 {% endblock %}
 
