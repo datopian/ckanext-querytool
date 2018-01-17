@@ -14,6 +14,22 @@ input[type="url"],
 input[type="search"],
 input[type="tel"],
 input[type="color"],
-.uneditable-input{
+.uneditable-input {
   border-radius: 0;
+}
+
+.search-form {
+  .search-input {
+    &.search-giant {
+      button {
+        margin-top: -@grid-gutter-width/2 - 5px;
+      }
+    }
+  }
+}
+
+.search-giant {
+  .search {
+    .search-input-focus(2px);
+  }
 }
