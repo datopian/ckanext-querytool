@@ -1,13 +1,25 @@
-{% block styles %}
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous"> {% resource 'querytool/css/public-story-tool.css' %} {% endblock %}
-<header>
-</header>
+{% extends 'page.html' %}
 
-<body>
+{% block styles %}
+  {{ super() }}
+  {% resource 'querytool/css/public-story-tool.css' %}
+{% endblock %}
+
+{% block skip %}
+{# Keep this block empty #}
+{% endblock %}
+
+{% block header %}
+{# Keep this block empty #}
+{% endblock %}
+
+{% block footer %}
+{# Keep this block empty #}
+{% endblock %}
+
+{% block content %}
     <div class="container">
         <div class="row story-header">
-
             <div class="story-header-bg">
                 <img src="/base/images/story-header-bg.png" alt="">
             </div>
@@ -171,5 +183,4 @@
 
         </div>
     </div>
-
-</body>
+{% endblock %}
