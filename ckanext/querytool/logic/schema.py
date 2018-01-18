@@ -23,5 +23,7 @@ def querytool_schema():
         'filters': [not_missing, not_empty, unicode],
         'sql_string': [ignore_missing, unicode],
         'created': [ignore_missing, isodate],
-        'modified': [ignore_missing, isodate]
+        'modified': [ignore_missing, isodate],
+        'map_resource': [not_empty, unicode],
+        'chart_resource': [not_empty, unicode],
     }

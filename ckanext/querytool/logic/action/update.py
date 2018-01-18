@@ -19,6 +19,8 @@ def querytool_update(context, data_dict):
     :param dataset
     :param filters
     :param created
+    :param map_resource
+    :param chart_resource
     '''
 
     check_access('querytool_update', context)
@@ -38,7 +40,7 @@ def querytool_update(context, data_dict):
         querytool = CkanextQueryTool()
 
     items = ['title', 'description', 'name', 'dataset_name',
-             'filters', 'sql_string']
+             'filters', 'sql_string', 'map_resource', 'chart_resource']
     for item in items:
         setattr(querytool, item, data.get(item))
 

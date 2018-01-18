@@ -1,32 +1,35 @@
 {% import 'macros/form.html' as form %}
-
 {% block scripts %}
-    {% resource 'querytool/javascript/visualizations_settings.js' %}
+{% resource 'querytool/javascript/visualizations_settings.js' %}
 {% endblock %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 {% if data %}
-    {% set name = data.name %}
+{% set name = data.name %}
 {% else %}
-    {% set name = '' %}
+{% set name = '' %}
 {% endif %}
 {% set action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name) %}
-
-<form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="visualizations-form">
-{% block stages %}
+<form method="post" action="{{ action_url }}" data-chart-resource="{{ data.chart_resource }}" data-map-resource="{{ data.map_resource }}" class="form-horizontal col-sm-12" id="visualizations-form">
+  {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['complete', 'active'] %}
-{% endblock %}
+  {% endblock %}
 
-{% block error_summary %}
+  {% block error_summary %}
   {{ form.errors(error_summary) }}
-{% endblock %}
-{% block charts %}
-    <fieldset>
+  {% endblock %}
+  {% block charts %}
+  <fieldset>
       <legend>{{ _('Visualizations settings') }}</legend>
         <div id="visualization-settings-items">
              {% if data.charts  %}
                 {% for chart in data.charts %}
-                  {% snippet 'ajax_snippets/chart_fields.html', n=chart.order, chart=chart, filters=c.axis_filters %}
+                  {% snippet 'ajax_snippets/chart_fields.html',
+                    n=chart.order,
+                    chart=chart,
+                    filters=c.axis_filters,
+                    map_resource=data.map_resource,
+                    chart_resource=data.chart_resource %}
                 {% endfor %}
              {% endif %}
         </div>
