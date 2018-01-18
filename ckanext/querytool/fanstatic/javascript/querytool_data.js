@@ -71,7 +71,16 @@
 
         handleRenderedFilters();
 
-        $('#field-datasets').change(function(event) {
+        var datasetField = $('#field-datasets');
+        var chartResourceSelect = $('#chart_resource');
+        var mapResourceSelect = $('#map_resource');
+
+        datasetField.change(function(event) {
+            $('#main-filters').html('');
+            get_dataset_resources(this.value);
+        });
+
+        chartResourceSelect.change(function(event) {
             $('#main-filters').html('');
         });
 
@@ -84,52 +93,72 @@
 
         add_filter_button.click(function(event) {
             event.preventDefault();
-            var package_name = $('#field-datasets').find(':selected').val();
-            api.get('package_show', {
-                'id': package_name
+            var resource_id = chartResourceSelect.val();
+            api.get('resource_show', {
+                'id': resource_id
             }).done(function(data) {
+                var resource = data.result;
 
-                var num_resources = data.result.num_resources;
-                if (num_resources == 1) {
+                api.post('get_resource_fields', {
+                    'resource': resource
+                }).done(function(data) {
 
-                    var resource = data.result.resources[0];
+                    var active_filters = data.result.toString();
+                    var filter_items = $('.filter_item');
+                    var total_items = filter_items.length + 1;
 
-                    api.post('get_resource_fields', {
-                        'resource': resource
-                    }).done(function(data) {
+                    ckan.sandbox().client.getTemplate('filter_item.html', {
+                            active_filters: active_filters,
+                            n: total_items,
+                            resource_id: resource.id,
+                            class: 'hidden'
+                        })
+                        .done(function(data) {
 
-                        var active_filters = data.result.toString();
-                        var filter_items = $('.filter_item');
-                        var total_items = filter_items.length + 1;
+                            $('#main-filters').append(data);
 
-                        ckan.sandbox().client.getTemplate('filter_item.html', {
-                                active_filters: active_filters,
-                                n: total_items,
-                                resource_id: resource.id,
-                                class: 'hidden'
-                            })
-                            .done(function(data) {
-
-                                $('#main-filters').append(data);
-
-                                // Remove item event handler
-                                var removeMediaItemBtn = $('.remove-filter-item-btn');
-                                removeMediaItemBtn.on('click', function(e) {
-                                    $(e.target).parent().remove();
-                                });
-
-                                handleRenderedFilters(total_items, resource.id);
-
+                            // Remove item event handler
+                            var removeMediaItemBtn = $('.remove-filter-item-btn');
+                            removeMediaItemBtn.on('click', function(e) {
+                                $(e.target).parent().remove();
                             });
-                    });
 
-                } else {
-                    alert('Choosen dataset contains more than one resource');
-                }
+                            handleRenderedFilters(total_items, resource.id);
 
+                        });
+                });
             });
 
         });
+
+        function get_dataset_resources(dataset_name) {
+            chartResourceSelect.attr('disabled', 'true');
+            mapResourceSelect.attr('disabled', 'true');
+
+            chartResourceSelect.empty();
+            mapResourceSelect.empty();
+
+            api.get('package_show', {id: dataset_name})
+                .done(function(data) {
+                    var resources = data.result.resources;
+                    var dataset_resources = resources.map(function(res) {
+                        return {
+                            id: res.id,
+                            name: res.name
+                        }
+                    });
+
+                    chartResourceSelect.removeAttr('disabled');
+                    mapResourceSelect.removeAttr('disabled');
+
+                    $.each(dataset_resources, function(i, res) {
+                        chartResourceSelect.append($('<option></option>')
+                         .attr('value', res.id).text(res.name));
+                         mapResourceSelect.append($('<option></option>')
+                         .attr('value', res.id).text(res.name));
+                    });
+                });
+        }
 
     });
 })($);

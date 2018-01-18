@@ -168,7 +168,7 @@ def create_query_str(resource_id, filters):
                                                               op, value)
 
     # generate the final SQL query string
-    sql_string = '''SELECT {select} FROM "{resource}" {where}'''.format(
+    sql_string = '''SELECT * FROM "{resource}" {where}'''.format(
         select=select,
         resource=resource_id,
         where=where_clause)
@@ -189,3 +189,24 @@ def get_avaiable_filters(name):
         axis_filters.append(filter['name'])
 
     return axis_filters
+
+
+def get_dataset_resources(dataset_name):
+    dataset_resources = []
+
+    if dataset_name:
+        dataset = _get_action('package_show', {'id': dataset_name})
+
+        for res in dataset.get('resources'):
+            dataset_resources.append({
+                'value': res.get('id'), 'text': res.get('name')
+            })
+
+    return dataset_resources
+
+
+def get_resource_columns(res_id):
+    res_info = _get_action('datastore_info', {'id': res_id})
+    fields = res_info.get('schema').keys()
+
+    return fields

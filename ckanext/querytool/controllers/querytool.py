@@ -282,6 +282,10 @@ class QueryToolController(base.BaseController):
         errors = errors or {}
         error_summary = error_summary or {}
 
+        data['sql_string'] = _querytool.get('sql_string')
+        data['map_resource'] = _querytool.get('map_resource')
+        data['chart_resource'] = _querytool.get('chart_resource')
+
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
         return render('querytool/admin/base_edit_visualizations.html',

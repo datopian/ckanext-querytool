@@ -19,6 +19,9 @@
 
     $(document).ready(function() {
         var visualizationItems = $('#visualization-settings-items');
+        var vizForm = $('#visualizations-form');
+        var chart_resource = vizForm.data('chartResource');
+        var map_resource = vizForm.data('mapResource');
 
         $('#create-visualization-btn').on('click', function() {
 
@@ -31,7 +34,9 @@
                 var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') +1).split("?")[0];
                 ckan.sandbox().client.getTemplate('chart_fields.html', {
                         n: total_items,
-                        querytool: querytool
+                        querytool: querytool,
+                        chart_resource: chart_resource,
+                        map_resource: map_resource,
                     })
                     .done(function(data) {
                         visualizationItems.append(data);
