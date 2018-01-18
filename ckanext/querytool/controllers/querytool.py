@@ -267,12 +267,6 @@ class QueryToolController(base.BaseController):
             h.redirect_to(url)
 
         if not data:
-            filters = json.loads(_querytool['filters'])
-            axis_filters = []
-            for filter in filters:
-                axis_filters.append(filter['name'])
-
-            c.axis_filters = axis_filters
             data = _visualization_items
 
         if 'charts' in data and len(data['charts']) > 0:
