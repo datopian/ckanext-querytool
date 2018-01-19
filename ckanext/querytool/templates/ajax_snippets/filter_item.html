@@ -1,9 +1,5 @@
 {% set active_filters = active_filters.split(',') %}
 
-{% if c.resource_id and selected_filter %}
-  {% set selected_filter_values = h.querytool_get_filter_values(c.resource_id, selected_filter.name) %}
-{% endif %}
-
 <div id="filter_item_{{ n }}" class="filter_item row">
 
     <div class="control-group control-select">
@@ -23,10 +19,8 @@
       <div class="controls ">
         <select id="data_filter_value_{{ n }}" name="data_filter_value_{{ n }}" required=required>
           <option value="">Choose default value</option>
-            {% if selected_filter_values %}
-              {% for value in selected_filter_values %}
-                <option value="{{ value }}" {{ 'selected' if value == selected_filter.value }}>{{ value }}</option>
-              {% endfor %}
+            {% if selected_filter %}
+                <option value="{{ selected_filter.value }}" selected>{{ selected_filter.value }}</option>
           {% endif %}
         </select>
       </div>
