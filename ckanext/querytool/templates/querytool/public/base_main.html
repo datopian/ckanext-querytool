@@ -2,39 +2,44 @@
 
 {% block content %}
 <div class="container-wrapper">
-<div class="public-header">
-  <div class="container">
-    <div class="row">
-      <div class="span8 offset2">
-          <div class="page-header">
-            <h1 class="text-center">Welcome</h1>
-            <p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.</p>
-          </div>
+
+  <div class="public-header">
+    <div class="container">
+      <div class="row">
+        <div class="span8 offset2">
+            <div class="page-header">
+              {% block page_header_content %}
+              <h1>Welcome</h1>
+              <p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.</p>
+              {% endblock %}
+            </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div class="container content">
-  <div class="row text-center box-items">
-    <div class="span5 offset1">
-      <a class="query-tool box" href="{{ querytool_list }}">
-        <img class="thumbnail" src="/base/images/query-icon.png" alt="Query Tool">
-        {% set querytool_list = h.url_for('querytool_public_data') %}
-        <span class="tool-title">Query Tool</span>
-        <span class="short-desc">Intrinsicly visualize one-to-one functionalities for client-centric data. Uniquely grow viral web services after interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</span>
-        <span class="btn btn-primary btn-box" role="button">Start Querying</span>
-      </a>
-    </div>
-    {% set storytool = h.url_for('storytool_public') %}
-    <div class="span5">
-      <a href="{{ storytool }}" class="story-tool box">
-      <img class="thumbnail" src="/base/images/story-icon.png" alt="Story Tool">
-      <span class="tool-title">Story Tool</span>
-      <span class="short-desc">Intrinsicly visspanalize one-to-one functionalities for client-centric data. Uniquely grow viral web services after interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</span>
-      <span class="btn btn-primary btn-box" role="button">View A Story</span>
-    </a>
-    </div>
+  <div class="container content">
+    <div class="box-items">
+      {% block tools %}
+      <div class="row">
+        <div class="span5 offset1">
+          <a class="query-tool box" href="{{ h.url_for('querytool_public_data') }}">
+            <img class="thumbnail" src="/base/images/query-icon.png" alt="Query Tool">
+            <span class="tool-title">Query Tool</span>
+            <span class="short-desc">Intrinsicly visualize one-to-one functionalities for client-centric data. Uniquely grow viral web services after interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</span>
+            <span class="btn btn-primary btn-box" role="button">Start Querying</span>
+          </a>
+        </div>
+        <div class="span5">
+          <a href="{{ h.url_for('storytool_public') }}" class="story-tool box">
+          <img class="thumbnail" src="/base/images/story-icon.png" alt="Story Tool">
+          <span class="tool-title">Story Tool</span>
+          <span class="short-desc">Intrinsicly visspanalize one-to-one functionalities for client-centric data. Uniquely grow viral web services after interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</span>
+          <span class="btn btn-primary btn-box" role="button">View A Story</span>
+        </a>
+        </div>
+      </div>
+      {% endblock %}
   </div>
-</div>
+  </div>
 </div>
 {% endblock %}

@@ -13,16 +13,10 @@ Example usage:
 
 {% set tool = h.url_for('querytool_public_data_list', name=querytool.name) %}
 
-<div class="row list-group-boxes">
-   <ul class="list-items list-inline list-box">
-      <li class="folder-icon">
-         <img src="/base/images/folder-icon.png" alt="">
-      </li>
-      <li class="list-headline">{{querytool.title}}</li>
-      <li class="arrow-icon">
-         <a href="{{ tool }}">
-         <img src="/base/images/arrow-icon.png" alt="">
-         </a>
-      </li>
-   </ul>
-</div>
+<a class="box box-full-width" href="{{ tool }}">
+  <span class="box-title">
+    <img class="thumbnail" src="/base/images/folder-icon.png" alt="">
+    <span class="tool-title">{{querytool.title}}</span>
+  </span>
+  <span class="fa fa-3x fa-angle-right"></span>
+</a>

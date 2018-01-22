@@ -1,7 +1,7 @@
-{% extends "querytool/public/querytool_page.html" %}
+{% extends "querytool/public/base_main.html" %}
 
-{% block main %}
-    {% if querytool== 'mortality' %}
+{% block tools %}
+    {% if querytool == 'mortality' %}
         {% snippet 'querytool/public/snippets/mortality.html' %}
     {% elif querytool == 'behavioural' %}
         {% snippet 'querytool/public/snippets/behavioural_risk.html'%}
