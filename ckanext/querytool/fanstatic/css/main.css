@@ -20,6 +20,9 @@ body {
   background-image: none;
   background-color: #121e87;
 }
+a {
+  color: #121e87;
+}
 .homepage .module-search .module-content {
   background-color: #121e87;
 }
