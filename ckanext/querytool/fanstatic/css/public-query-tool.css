@@ -1,174 +1,194 @@
-
-body {
-    font-family: 'Roboto', sans-serif;
-}
-
-.wrapper {
-    background: linear-gradient(rgba(18, 30, 136, 0.8), rgba(18, 30, 136, 0.8)), url(/base/images/public-header-bg.png) top left no-repeat;
-    min-height: 100vh;
-}
-
-.list-inline li a {
-    text-decoration: none;
-}
-
-.list-inline li a:hover {
-    color: #F97859;
-}
-
-.caption {
-    background-color: #fff;
-    padding: 50px 40px;
-    letter-spacing: 0.07rem;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.list-box {
-    background-color: #f5f5f5;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding: 35px 35px;
-    display: flex;
-    align-items: center;
+/* Colors */
+/* Fonts */
+/* Grid */
+/* Media query breakpoints */
+/* Extra small screen / phone */
+/* Small screen / tablet */
+/* Medium screen / desktop */
+/* Large screen / wide desktop */
+/* So media queries don't overlap when required, provide a maximum */
+/* Large desktop */
+/* Desktop */
+@media (min-width: 980px) {
+  .masthead {
+    padding-top: 20px;
+  }
+  .masthead .nav-collapse {
+    float: none;
+  }
+  .masthead .nav-pills li {
     position: relative;
-    margin-bottom: 30px;
+    bottom: -5px;
+  }
 }
-
-.caption:hover,
-.list-box:hover {
-    background-color: #fff;
-    box-shadow: 0px 8px 60px 0 rgba(0, 0, 0, 0.2), 0 10px 60px 0 rgba(0, 0, 0, 0.19);
-}
-
-.page-header {
-    border-bottom: none;
-    margin: 10px 0 70px;
-    padding: 15px 150px;
-}
-
-.content-block {
-    width: 80vw;
-    margin: auto;
-    margin-top: 5rem;
-}
-
-.main-navigation {
-    text-align: right;
-    font-size: 16px;
-}
-
-.main-navigation a {
-    color: #fff;
-    padding: 0px 10px;
-}
-
-.desc {
-    color: #fff;
-    letter-spacing: 0.06rem;
-    font-weight: lighter;
-    font-size: 13px;
-}
-
-h1 {
-    color: #fff;
-    letter-spacing: 0.07rem;
-    font-weight: 400;
-    font-size: 40px;
+/* Portrait tablet to landscape and desktop */
+/* Up to desktop */
+@media (max-width: 979px) {
+  .btn-navbar {
+    margin: 10px 0;
+  }
+  .toolbar {
+    margin-bottom: 0;
+  }
+  .toolbar .breadcrumb .home {
+    display: inline-block;
+  }
+  .masthead .navigation .nav-pills {
     margin-bottom: 20px;
+  }
 }
-
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  .container-wrapper {
+    background: none;
+  }
+}
+/* Landscape phones and down */
+body {
+  background: #010a5c;
+}
+.container-wrapper {
+  background: linear-gradient(rgba(18, 30, 135, 0.8), #010a5c), url(/base/images/public-header-bg.png) top center no-repeat;
+  background-size: contain;
+  padding-bottom: 60px;
+}
+.box {
+  text-align: center;
+  opacity: 0.95;
+  margin: 10px;
+  display: block;
+  background-color: #fff;
+  padding: 60px 40px;
+  border-radius: 0;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  color: inherit;
+  transition: 200ms opacity ease-in-out;
+}
+.box:focus,
+.box:hover {
+  text-decoration: none;
+  color: inherit;
+}
+.box:hover {
+  opacity: 1;
+  box-shadow: 0px 8px 60px 0 rgba(0, 0, 0, 0.2), 0 10px 60px 0 rgba(0, 0, 0, 0.19);
+}
+.box:hover .btn-box {
+  background-color: #FF562B;
+}
+.box:hover > .fa {
+  color: #f97859;
+}
+.box-full-width {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 40px;
+}
+.box-full-width .thumbnail {
+  margin: 0;
+}
+.box-full-width .tool-title {
+  margin: 0 20px;
+}
+.box-full-width .fa {
+  color: #121e87;
+}
+.box-title {
+  display: flex;
+  align-items: center;
+}
+.page-header {
+  text-align: center;
+  background: transparent;
+  border-bottom: none;
+  margin: 80px 0 40px;
+}
+.desc {
+  color: #fff;
+  font-size: 15px;
+}
+h1 {
+  color: #fff;
+  font-weight: 400;
+  font-size: 42px;
+  margin-bottom: 20px;
+}
 .short-desc {
-    margin: 25px 0px 30px 0px;
+  display: block;
+  margin: 20px 0 30px;
 }
-
-.public-button {
-    background-color: #F97859;
-    border-radius: 0px;
-    border: none;
-    padding: 10px 50px;
-    font-size: 16px;
-    font-weight: bold;
+.btn-box {
+  transition: 200ms background-color ease-in-out;
+  background-color: #f97859;
+  border-radius: 0px;
+  border: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  font-weight: 500;
 }
-
-.public-button:hover,
-.public-button:active,
-.public-button:focus {
-    background-color: #FF562B;
-}
-
-.box-items {
-    padding: 1px 120px 0px 122px;
-    display: flex;
-    justify-content: space-around;
-}
-
 .list-group-boxes {
-    padding: 0px 200px 0px 200px;
+  padding: 0px 200px 0px 200px;
 }
-
 .thumbnail {
-    background-color: transparent;
-    border: none;
+  display: block;
+  margin: 10px auto 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
-
 .tool-title {
-    color: #121E87;
+  display: block;
+  font-weight: 500;
+  margin: 20px 0;
+  font-size: 22px;
+  color: #121e87;
 }
-
 .list-headline {
-    color: #121E87;
-    font-size: 24px;
+  color: #121e87;
+  font-size: 24px;
 }
-
 .arrow-icon {
-    position: absolute;
-    right: 35px;
-    opacity: 0.6;
+  position: absolute;
+  right: 35px;
+  opacity: 0.6;
 }
-
 .arrow-icon:hover {
-    opacity: 1;
+  opacity: 1;
 }
-
 .folder-icon {
-    margin-right: 10px;
+  margin-right: 10px;
 }
-
 .icon-tittle {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
-
 .cause-menu {
-    background-color: #F97859;
-    width: 80vw;
-    height: 90px;
-    margin: auto;
-    margin-bottom: 200px;
+  background-color: #f97859;
+  width: 80vw;
+  height: 90px;
+  margin: auto;
+  margin-bottom: 200px;
 }
-
 #cause-selectors {
-    display: flex;
-    align-items: center;
-    padding-top: 10px;
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
 }
-
 .btn-select {
-    border-radius: 0px;
-    padding: 10px 15px 10px 50px;
-    border-color: transparent;
-    margin-top: 2px;
+  border-radius: 0px;
+  padding: 10px 15px 10px 50px;
+  border-color: transparent;
+  margin-top: 2px;
 }
-
 .btn .caret {
-    margin-left: 40;
+  margin-left: 40;
 }
-
 .causes-tittle {
-    color: #fff;
-    font-size: 1.2rem;
-    letter-spacing: 0.15rem;
+  color: #fff;
+  font-size: 1.2rem;
+  letter-spacing: 0.15rem;
 }
-
 .arrow-icon-steps {
-    margin: auto;
+  margin: auto;
 }

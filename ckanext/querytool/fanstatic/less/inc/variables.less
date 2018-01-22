@@ -1,0 +1,56 @@
+/* Colors */
+
+@color-white: #fff;
+@color-black: #000;
+@color-primary: #121e87;
+@color-primary-dark: #010a5c;
+@color-secondary: #f97859;
+@color-secondary-darker: #FF562B;
+@color-neutral-pale: #f7f7f7;
+@color-success: #51a351;
+@color-error: #cf0000;
+@color-masthead-links: fade(@color-white, 70%);
+@color-masthead-links-hover: fade(@color-white, 90%);
+@nav-pills-border-size: 4px;
+
+/* Fonts */
+
+@base-font-size: 14px;
+@base-font-family: 'Roboto', sans-serif;
+
+/* Grid */
+
+@grid-gutter-width: 20px;
+
+/* Media query breakpoints */
+
+
+/* Extra small screen / phone */
+
+@screen-xs: 480px;
+@screen-xs-min: @screen-xs;
+@screen-phone: @screen-xs-min;
+
+/* Small screen / tablet */
+
+@screen-sm: 768px;
+@screen-sm-min: @screen-sm;
+@screen-tablet: @screen-sm-min;
+
+/* Medium screen / desktop */
+
+@screen-md: 980px;
+@screen-md-min: @screen-md;
+@screen-desktop: @screen-md-min;
+
+/* Large screen / wide desktop */
+
+@screen-lg: 1200px;
+@screen-lg-min: @screen-lg;
+@screen-lg-desktop: @screen-lg-min;
+
+/* So media queries don't overlap when required, provide a maximum */
+
+@screen-xs-max: (@screen-sm-min - 1);
+@screen-sm-max: (@screen-md-min - 1);
+@screen-md-max: (@screen-lg-min - 1);
