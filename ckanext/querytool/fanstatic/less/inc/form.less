@@ -33,3 +33,23 @@ input[type="color"],
     .search-input-focus(2px);
   }
 }
+
+.dropdown-menu {
+  >li {
+    >a {
+      &:hover,
+      &:focus {
+        background: @color-secondary;
+      }
+    }
+  }
+}
+
+.dropdown-submenu {
+  &:hover,
+  &:focus {
+    >a {
+      background: @color-secondary;
+    }
+  }
+}

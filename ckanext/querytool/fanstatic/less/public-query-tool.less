@@ -1,18 +1,18 @@
 @import "inc/variables.less";
 @import "inc/mixins.less";
 @import "inc/responsive.less";
-
 body {
   background: @color-primary-dark;
 }
 
 .container-wrapper {
-  background: linear-gradient( fade(@color-primary, 80%), @color-primary-dark), url(/base/images/public-header-bg.png) top left no-repeat;
+  background: linear-gradient( fade(@color-primary, 80%), @color-primary-dark), url(/base/images/public-header-bg.png) top center no-repeat;
   background-size: contain;
   padding-bottom: @grid-gutter-width*3;
 }
 
 .box {
+  text-align: center;
   opacity: 0.95;
   margin: @grid-gutter-width/2;
   display: block;
@@ -33,13 +33,38 @@ body {
     .btn-box {
       background-color: @color-secondary-darker;
     }
+    > .fa{
+      color: @color-secondary;
+    }
   }
 }
 
+.box-full-width {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: @grid-gutter-width*1.5 @grid-gutter-width*2;
+  .thumbnail {
+    margin: 0;
+  }
+  .tool-title{
+    margin: 0 @grid-gutter-width;
+  }
+  .fa{
+    color: @color-primary;
+  }
+}
+
+.box-title {
+  display: flex;
+  align-items: center;
+}
+
 .page-header {
+  text-align: center;
   background: transparent;
   border-bottom: none;
-  margin: @grid-gutter-width*5 0 @grid-gutter-width*2;
+  margin: @grid-gutter-width*4 0 @grid-gutter-width*2;
 }
 
 .desc {
@@ -78,6 +103,7 @@ h1 {
   margin: @grid-gutter-width/2 auto 0;
   background-color: transparent;
   border: none;
+  box-shadow: none;
 }
 
 .tool-title {
