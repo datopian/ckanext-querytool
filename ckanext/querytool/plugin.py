@@ -85,7 +85,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'querytool_get_filter_values': helpers.get_filter_values,
             'querytool_get_chart_types': helpers.get_chart_types,
             'querytool_get_color_scheme': helpers.get_color_scheme,
-            'querytool_get_avaiable_filters': helpers.get_avaiable_filters
+            'querytool_get_avaiable_filters': helpers.get_avaiable_filters,
+            'querytool_get_dataset_resources': helpers.get_dataset_resources,
+            'querytool_get_resource_columns': helpers.get_resource_columns,
         }
 
     # IAuthFunctions

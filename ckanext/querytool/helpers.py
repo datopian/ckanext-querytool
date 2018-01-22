@@ -73,7 +73,7 @@ def get_all_datasets():
     return datasets
 
 
-def get_filter_values(resource_id, filter_name):
+def get_filter_values(resource_id, filter_name, previous_filters):
     '''Returns resource field values with no duplicates.'''
 
     resource = _get_action('resource_show', {'id': resource_id})
@@ -86,15 +86,19 @@ def get_filter_values(resource_id, filter_name):
         'limit': 0
     }
     result = _get_action('datastore_search', data)
+
+    where_clause = _create_where_clause(previous_filters)
+
     fields = [field['id'] for field in result.get('fields', [])]
     values = []
 
     if filter_name in fields:
 
         sql_string = '''SELECT DISTINCT "{column}"
-         FROM "{resource}" '''.format(
+         FROM "{resource}" {where}'''.format(
             column=filter_name,
-            resource=resource_id
+            resource=resource_id,
+            where=where_clause
         )
 
         result = _get_action('datastore_search_sql', {'sql': sql_string})
@@ -138,10 +142,8 @@ def get_color_scheme():
     return colors
 
 
-def create_query_str(resource_id, filters):
+def _create_where_clause(filters):
 
-    columns = map(lambda f: '"{0}"'.format(f['name'].encode('utf-8')), filters)
-    select = ', '.join(columns)
     where_clause = ''
 
     if any(filters):
@@ -166,9 +168,17 @@ def create_query_str(resource_id, filters):
             value = _['value']
             where_clause = 'WHERE ("{0}" {1} \'{2}\')'.format(name,
                                                               op, value)
+    return where_clause
+
+
+def create_query_str(resource_id, filters):
+
+    columns = map(lambda f: '"{0}"'.format(f['name'].encode('utf-8')), filters)
+    select = ', '.join(columns)
+    where_clause = _create_where_clause(filters)
 
     # generate the final SQL query string
-    sql_string = '''SELECT {select} FROM "{resource}" {where}'''.format(
+    sql_string = '''SELECT * FROM "{resource}" {where}'''.format(
         select=select,
         resource=resource_id,
         where=where_clause)
@@ -189,3 +199,24 @@ def get_avaiable_filters(name):
         axis_filters.append(filter['name'])
 
     return axis_filters
+
+
+def get_dataset_resources(dataset_name):
+    dataset_resources = []
+
+    if dataset_name:
+        dataset = _get_action('package_show', {'id': dataset_name})
+
+        for res in dataset.get('resources'):
+            dataset_resources.append({
+                'value': res.get('id'), 'text': res.get('name')
+            })
+
+    return dataset_resources
+
+
+def get_resource_columns(res_id):
+    res_info = _get_action('datastore_info', {'id': res_id})
+    fields = res_info.get('schema').keys()
+
+    return fields

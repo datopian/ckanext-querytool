@@ -1,11 +1,8 @@
 {% set active_charts = chart %}
 
-{% if not filters %}
-  {% set filters = h.querytool_get_avaiable_filters(querytool) %}
-{% endif %}
+{% set columns = h.querytool_get_resource_columns(chart_resource) %}
 
 <div id="chart_field_{{ n }}" class="chart_field chart-fields-section">
-
   {% set chart_types = h.querytool_get_chart_types() %}
   <div class="control-group control-select">
     <label class="control-label" for="chart_field_graph_{{ n }}">Graph type</label>
@@ -34,8 +31,8 @@
     <label class="control-label" for="chart_field_axis_y_{{ n }}">Select (Axis Y)</label>
     <div class="controls ">
       <select id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}">
-        {% for filter in filters %}
-        <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.y_axis }}{% endif %}>{{filter}}</option>
+        {% for column in columns %}
+        <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.y_axis }}{% endif %}>{{column}}</option>
         {% endfor %}
       </select>
     </div>
@@ -45,8 +42,8 @@
     <label class="control-label" for="chart_field_axis_x_{{ n }}">Select(Axis X)</label>
     <div class="controls ">
       <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
-        {% for filter in filters %}
-        <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.x_axis }}{% endif %}>{{filter}}</option>
+        {% for column in columns %}
+        <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.x_axis }}{% endif %}>{{column}}</option>
         {% endfor %}
       </select>
     </div>
@@ -61,6 +58,13 @@
     </div>
   </div>
 
-
   <span class="grippy"></span>
+
+  {% if chart %}
+    {% set colors = chart.color %}
+  {% else %}
+    {% set colors = color_scheme[0].value %}
+  {% endif %}
+
+  {% snippet 'ajax_snippets/visualization_item.html', type='chart', colors='' %}
 </div>
