@@ -91,16 +91,15 @@ body {
 label {
   font-weight: 400;
 }
-.site-footer,
-body {
+.site-footer {
   background-color: #121e87;
+}
+.site-footer a {
+  color: rgba(255, 255, 255, 0.7);
 }
 .site-footer,
 .site-footer label,
 .site-footer small {
-  color: rgba(255, 255, 255, 0.7);
-}
-.site-footer a {
   color: rgba(255, 255, 255, 0.7);
 }
 select,
@@ -128,6 +127,14 @@ input[type="color"],
 .search-giant .search:focus {
   box-shadow: inset 0 0 0 2px #f97859;
   border-color: #f97859;
+}
+.dropdown-menu > li > a:hover,
+.dropdown-menu > li > a:focus {
+  background: #f97859;
+}
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a {
+  background: #f97859;
 }
 .panel {
   padding: 15px;
