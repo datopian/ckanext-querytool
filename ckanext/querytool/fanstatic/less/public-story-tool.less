@@ -1,0 +1,115 @@
+@import "inc/variables.less";
+@import "inc/mixins.less";
+@import "inc/responsive.less";
+body {
+  background: @color-white;
+}
+
+.map {
+  img {
+    min-width: 100%;
+  }
+}
+
+.story {
+  p {
+    font-size: @base-font-size + 4px;
+    line-height: 1.5;
+  }
+  .background-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-height: @grid-gutter-width*12;
+  }
+  .background {
+    background-color: @color-primary;
+    img {
+      width: 100%;
+    }
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(fade(@color-primary, 70%), fade(@color-primary, 70%));
+    }
+  }
+  header {
+    margin: @grid-gutter-width*5 0;
+  }
+  .container-header{
+    .row-fluid{
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+  .container-wrapper {
+    padding: @grid-gutter-width*2 0;
+  }
+  >.container-wrapper:nth-child(odd) {
+    background: @color-neutral-pale;
+  }
+  .title {
+    color: @color-primary;
+    margin-right: @grid-gutter-width*2;
+  }
+  .meta {
+    margin: @grid-gutter-width*2 0;
+    text-transform: uppercase;
+  }
+  .lead{
+    margin: @grid-gutter-width*2 0;
+    background: @color-neutral-pale;
+    padding: @grid-gutter-width;
+  }
+  .tag {
+    color: @color-white;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: @base-font-size + 4px;
+    background: @color-secondary;
+    position: absolute;
+    bottom: 0;
+    padding: @grid-gutter-width @grid-gutter-width*2;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.2;
+    margin: @grid-gutter-width*2 0;
+  }
+  h1 {
+    font-size: @base-font-size*4.5;
+  }
+  h2 {
+    font-size: @base-font-size*3;
+  }
+  .quote {
+    padding: @grid-gutter-width*3 0;
+  }
+  blockquote {
+    color: #333;
+    margin: @grid-gutter-width*2 0 0;
+    line-height: 1.5;
+    border: 0;
+    font-size: @base-font-size*2;
+  }
+  .img-full-width{
+    min-width: 100%;
+  }
+}
+
+.site-footer {
+  .dropdown-toggle {
+    color: @color-primary-dark;
+  }
+}
