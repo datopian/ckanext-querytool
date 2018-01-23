@@ -27,11 +27,8 @@
         get_resource_datа();
 
         var chartSnippet = $('#visualization-settings-items').length > 0;
-        var saveBtnState = true;
-        if(chartSnippet){
-            saveBtnState = false;
-        }
-        $('#save-visualization-btn').attr('disabled', saveBtnState);
+
+        $('#save-visualization-btn').attr('disabled', chartSnippet);
 
         $('#create-visualization-btn').on('click', function() {
 
