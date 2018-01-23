@@ -55,11 +55,11 @@ Example usage:
 
   {% set dataset_resources = h.querytool_get_dataset_resources(data.dataset_name) %}
   {% block querytool_choose_chart_resource %}
-    {{ form.select('chart_resource', label=_('Choose resource for chart'), options=dataset_resources, selected=data.chart_resource, error=error) }}
+    {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=error) }}
   {% endblock %}
 
   {% block querytool_choose_map_resource %}
-    {{ form.select('map_resource', label=_('Choose resource for map'), options=dataset_resources, selected=map_resource, error=error) }}
+    {{ form.select('map_resource', label=_('Map resoure'), options=dataset_resources, selected=map_resource, error=error) }}
   {% endblock %}
 
   {% block querytool_main_filters %}
