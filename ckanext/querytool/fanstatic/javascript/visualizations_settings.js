@@ -26,6 +26,13 @@
 
         get_resource_datа();
 
+        var chartSnippet = $('#visualization-settings-items').length > 0;
+        var saveBtnState = true;
+        if(chartSnippet){
+            saveBtnState = false;
+        }
+        $('#save-visualization-btn').attr('disabled', saveBtnState);
+
         $('#create-visualization-btn').on('click', function() {
 
             $.proxyAll(this, /_on/);
@@ -43,7 +50,7 @@
                     })
                     .done(function(data) {
                         visualizationItems.append(data);
-
+                        $('#save-visualization-btn').attr('disabled', false);
                     });
             } else if (visualization === 'map') {
                 alert('Not implemented yet.')
