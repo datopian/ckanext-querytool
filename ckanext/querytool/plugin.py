@@ -28,32 +28,40 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         storytool_controller = \
             'ckanext.querytool.controllers.storytool:StoryToolController'
 
-        # Query tool controllers
+        # Query tool routes
         map.redirect('/querytool', '/querytool/list',
                      _redirect_code='301 Moved Permanently')
+
         map.connect('querytool_list', '/querytool/list',
                     controller=querytool_controller, action='list')
+
         map.connect('querytool_show', '/querytool/show/{querytool}',
                     controller=querytool_controller, action='show')
+
         map.connect('querytool_edit', '/querytool/edit{querytool:/.*|}',
                     controller=querytool_controller, action='querytool_edit')
+
         map.connect('querytool_delete', '/querytool/delete{querytool:/.*|}',
                     controller=querytool_controller, action='delete')
+
         map.connect('querytool_edit_visualizations',
                     '/querytool/edit_visualizations{querytool:/.*|}',
                     controller=querytool_controller,
                     action='edit_visualizations')
+
         map.connect('querytool_public', '/querytool/public',
                     controller=querytool_controller, action='querytool_public')
-        map.connect('querytool_public_data', '/querytool/public/data',
-                    controller=querytool_controller,
-                    action='querytool_public_data')
-        map.connect('querytool_public_data_list',
-                    '/querytool/public/data/{name}',
-                    controller=querytool_controller,
-                    action='querytool_public_data_list')
 
-        # Story tool controllers
+        map.connect('querytool_public_list', '/querytool/public/list',
+                    controller=querytool_controller,
+                    action='querytool_public_list')
+
+        map.connect('querytool_public_read',
+                    '/querytool/public/{name}',
+                    controller=querytool_controller,
+                    action='querytool_public_read')
+
+        # Story tool routes
         map.connect('storytool_public', '/storytool/public/',
                     controller=storytool_controller,
                     action='show')

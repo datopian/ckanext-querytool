@@ -1,9 +1,0 @@
-{% extends "querytool/public/base_main.html" %}
-
-{% block tools %}
-    {% if querytool == 'mortality' %}
-        {% snippet 'querytool/public/snippets/mortality.html' %}
-    {% elif querytool == 'behavioural' %}
-        {% snippet 'querytool/public/snippets/behavioural_risk.html'%}
-    {% endif %}
-{% endblock %}
