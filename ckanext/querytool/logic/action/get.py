@@ -84,3 +84,13 @@ def get_filter_values(context, data_dict):
     previous_filters = data_dict.pop('previous_filters')
 
     return h.get_filter_values(resource_id, filter_name, previous_filters)
+
+
+@toolkit.side_effect_free
+def querytool_get_resource_data(context, data_dict):
+    sql_string = data_dict.get('sql_string')
+    response = toolkit.get_action('datastore_search_sql')(
+        {}, {'sql': sql_string}
+    )
+
+    return response

@@ -22,6 +22,9 @@
         var vizForm = $('#visualizations-form');
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
+        var resourceData, records;
+
+        get_resource_datа();
 
         $('#create-visualization-btn').on('click', function() {
 
@@ -88,6 +91,24 @@
                 dropdownAxisX.attr('id', 'chart_field_axis_x_' + order);
                 dropdownAxisX.attr('name', 'chart_field_axis_x_' + order);
             });
+        }
+
+        function get_resource_datа() {
+            api.get('querytool_get_resource_data', {
+                group: true,
+                sql_string: vizForm.data('sqlString')
+            })
+            .done(function(data) {
+                console.log(data)
+            });
+        }
+
+        function initCharts() {
+            var items = $('.chart_field');
+
+            $.each(items, function(i, item) {
+                console.log(item)
+            })
         }
     });
 

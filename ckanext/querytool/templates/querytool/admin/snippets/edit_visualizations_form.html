@@ -10,7 +10,7 @@
 {% set name = '' %}
 {% endif %}
 {% set action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name) %}
-<form method="post" action="{{ action_url }}" data-chart-resource="{{ data.chart_resource }}" data-map-resource="{{ data.map_resource }}" class="form-horizontal col-sm-12" id="visualizations-form">
+<form method="post" action="{{ action_url }}" data-sql-string="{{ data.sql_string }}" data-chart-resource="{{ data.chart_resource }}" data-map-resource="{{ data.map_resource }}" class="form-horizontal col-sm-12" id="visualizations-form">
   {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['complete', 'active'] %}
   {% endblock %}
