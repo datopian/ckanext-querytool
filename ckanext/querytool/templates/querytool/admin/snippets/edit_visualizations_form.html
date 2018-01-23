@@ -19,34 +19,39 @@
   {{ form.errors(error_summary) }}
   {% endblock %}
   {% block charts %}
+  <legend>{{ _('Data visualizations') }}</legend>
   <fieldset>
-      <legend>{{ _('Visualizations settings') }}</legend>
-        <div id="visualization-settings-items">
-             {% if data.charts  %}
-                {% for chart in data.charts %}
-                  {% snippet 'ajax_snippets/chart_fields.html',
-                    n=chart.order,
-                    chart=chart,
-                    map_resource=data.map_resource,
-                    chart_resource=data.chart_resource %}
-                {% endfor %}
-             {% endif %}
-        </div>
-    </fieldset>
-    <fieldset>
       <div id="create-visualization-item-section">
-      {{ form.select('item_type', 'item_type', _('Item Type'), options=[{'value': '', 'text': 'Choose item'},
-                                                                        {'value': 'chart', 'text': 'Chart'},
-                                                                        {'value': 'map', 'text': 'Map'}], selected='') }}
-        <a id="create-visualization-btn" class="btn btn-default" style="display: {{ btn_display  }}">Create item</a>
-      </div>
-      <div class="hidden" id="visualization-info-msg">
-        <span>Some msg</span>
+        <ul class="inline">
+          <li>
+            {{ form.select('item_type', 'item_type', _('Visualization type'), options=[{'value': '', 'text': '— Select type —'}, {'value': 'chart', 'text': 'Chart'}, {'value': 'map', 'text': 'Map'}]) }}
+          </li>
+          <li>
+            <a id="create-visualization-btn" class="btn btn-info" style="display: {{ btn_display  }}"><span class="fa fa-plus-square"></span> {{ _('Add visualization') }}</a>
+          </li>
+        </ul>
+        <div class="hidden" id="visualization-info-msg">
+          <span>Some msg</span>
+        </div>
       </div>
     </fieldset>
+  <fieldset>
+    <div id="visualization-settings-items">
+      {% if data.charts  %}
+        {% for chart in data.charts %}
+          {% snippet 'ajax_snippets/chart_fields.html',
+            n=chart.order,
+            chart=chart,
+            map_resource=data.map_resource,
+            chart_resource=data.chart_resource %}
+        {% endfor %}
+      {% endif %}
+    </div>
+  </fieldset>
+
 {% endblock %}
 
 <div class="form-actions">
-  <button type="submit" class="btn btn-primary" name="save">{{ _('Save') }}</button>
+  <button type="submit" class="btn btn-success" name="save">{{ _('Save') }}</button>
 </div>
 </form>

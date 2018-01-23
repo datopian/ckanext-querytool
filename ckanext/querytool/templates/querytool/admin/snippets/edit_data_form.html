@@ -18,7 +18,7 @@ Example usage:
   {% set action_url = h.url_for('querytool_edit', querytool= '') %}
 {% endif %}
 {% set datasets = h.querytool_get_datasets() %}
-<form method="post" action="{{ action_url }}" class="form-horizontal col-sm-12" id="">
+<form method="post" action="{{ action_url }}" class="form-horizontal" id="">
 {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
 {% endblock %}
@@ -40,6 +40,7 @@ Example usage:
   {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
   {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
+  <legend>{{ _('Data and resources') }}</legend>
   {% block querytool_dataset %}
     <div class="control-group">
       <label class="control-label" for="field-datasets"><span title="This field is required" class="control-required">*</span>{{ _("Dataset") }}</label>
@@ -63,7 +64,7 @@ Example usage:
   {% endblock %}
 
   {% block querytool_main_filters %}
-    <legend>{{ _('Main filters') }}</legend>
+    <legend>{{ _('Filters') }}</legend>
 
     <fieldset id="main-filters">
 
@@ -75,13 +76,13 @@ Example usage:
 
     </fieldset>
 
-    <a class="btn btn-primary" id="add-filter-button">
-      <span class="fa fa-filter"></span>
+    <a class="btn btn-info" id="add-filter-button">
+      <span class="fa fa-plus-square"></span>
       <span class="fa-label">{{_('Add Filter')}}</span>
     </a>
   {% endblock %}
 
 <div class="form-actions">
-  <button type="submit" class="btn btn-primary" name="save">{{ _('Set visualisations') }}</button>
+  <button type="submit" class="btn btn-success" name="save">{{ _('Set visualisations') }}</button>
 </div>
 </form>

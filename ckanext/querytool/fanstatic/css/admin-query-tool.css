@@ -1,6 +1,7 @@
 span.grippy {
   position: absolute;
   top: 50%;
+  left: 10px;
   content: '....';
   width: 10px;
   height: 20px;
