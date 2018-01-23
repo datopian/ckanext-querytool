@@ -7,10 +7,10 @@
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
-{% block subtitle %}{{ _('Query Tool Manage') }}{% endblock %}
+{% block subtitle %}{{ _('Manage Query Data') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li>{% link_for _('Query Tool'), controller=ctrl, action='list' %}</li>
+  <li>{% link_for _('Queries'), controller=ctrl, action='list' %}</li>
 {% endblock %}
 
 {% block page_header %}
