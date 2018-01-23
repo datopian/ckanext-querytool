@@ -69,6 +69,32 @@ def querytool_get_visualizations(context, data_dict):
     return visualizations
 
 
+@toolkit.side_effect_free
+def querytool_public_read(context, data_dict):
+    '''Returns  query tool.
+    :param name: querytool name
+    :rtype: query tool object
+    '''
+
+    # check_access('',
+    #            context, data_dict)
+    session = context['session']
+    name = data_dict['name']
+
+    query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
+        .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
+               CkanextQueryToolVisualizations.ckanext_querytool_id)) \
+        .filter(CkanextQueryToolVisualizations.name == name)
+
+    result = query.first()
+    querytool = {}
+
+    if result and len(result) > 0:
+        for item in result:
+            querytool.update(table_dictize(item, context))
+    return querytool
+
+
 def get_resource_fields(context, data_dict):
     '''Returns sorted list of text and time fields of a datastore resource.'''
 

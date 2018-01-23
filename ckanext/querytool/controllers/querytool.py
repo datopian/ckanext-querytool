@@ -127,7 +127,7 @@ class QueryToolController(base.BaseController):
         data_dict = {
             'name': querytool
         }
-        _querytool = get_action('querytool_get')({}, data_dict)
+        _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
             abort(404, _('Querytool not found.'))
@@ -218,9 +218,9 @@ class QueryToolController(base.BaseController):
             'name': querytool
         }
         _visualization_items = \
-            get_action('querytool_get_visualizations')({}, data_dict)
+            _get_action('querytool_get_visualizations', data_dict)
 
-        _querytool = get_action('querytool_get')({}, data_dict)
+        _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
             abort(404, _('Querytool not found.'))
@@ -306,12 +306,12 @@ class QueryToolController(base.BaseController):
 
     def querytool_public_read(self, name):
         '''
-
         :return: base template
         '''
-        querytool = ''
-        if name:
-            querytool = name
+        querytool = _get_action('querytool_public_read', {'name': name})
+
+        if querytool is None:
+            abort(404, _('Querytool not found.'))
 
         return render('querytool/public/read.html',
                       extra_vars={'querytool': querytool})
