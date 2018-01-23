@@ -214,6 +214,7 @@
         });
 
         function get_dataset_resources(dataset_name) {
+
             chartResourceSelect.attr('disabled', 'true');
             mapResourceSelect.attr('disabled', 'true');
 
@@ -233,11 +234,12 @@
                     chartResourceSelect.removeAttr('disabled');
                     mapResourceSelect.removeAttr('disabled');
 
-                    $.each(dataset_resources, function(i, res) {
+                     $.each(dataset_resources, function(i, res) {
+                        var name = res.name || 'Unnamed resource';
                         chartResourceSelect.append($('<option></option>')
-                         .attr('value', res.id).text(res.name));
+                         .attr('value', res.id).text(name));
                          mapResourceSelect.append($('<option></option>')
-                         .attr('value', res.id).text(res.name));
+                         .attr('value', res.id).text(name));
                     });
                 });
         }
