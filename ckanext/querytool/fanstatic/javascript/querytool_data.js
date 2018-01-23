@@ -160,7 +160,7 @@
 
         remove_filter_button.on('click', function(e) {
             $(e.target).parent().remove();
-            // TODO requires implementation
+            // TODO requires implementation of _handleFilterItemsOrder()
             _handleFilterItemsOrder();
         });
 
@@ -194,7 +194,7 @@
                             var removeMediaItemBtn = $('.remove-filter-item-btn');
                             removeMediaItemBtn.on('click', function(e) {
                                 $(e.target).parent().remove();
-                                // TODO requires implementation
+                                // TODO requires implementation of _handleFilterItemsOrder()
                                 _handleFilterItemsOrder();
                             });
 

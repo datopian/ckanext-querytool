@@ -8,6 +8,6 @@
 
 {% block tools %}
 {% for querytool in data %}
-{% snippet 'querytool/public/snippets/query_tool.html', querytool=querytool %}
+{% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
 {% endfor%}
 {% endblock %}

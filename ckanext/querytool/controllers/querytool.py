@@ -294,17 +294,17 @@ class QueryToolController(base.BaseController):
                       extra_vars={'msg': 'This is the Query Tool public '
                                   'page and will be build from scratch'})
 
-    def querytool_public_data(self):
+    def querytool_public_list(self):
         '''
 
         :return: base template
         '''
         querytools = _get_action('querytool_list', {})
 
-        return render('querytool/public/base_data.html',
+        return render('querytool/public/list.html',
                       extra_vars={'data': querytools})
 
-    def querytool_public_data_list(self, name):
+    def querytool_public_read(self, name):
         '''
 
         :return: base template
@@ -313,5 +313,5 @@ class QueryToolController(base.BaseController):
         if name:
             querytool = name
 
-        return render('querytool/public/base_data_list.html',
+        return render('querytool/public/read.html',
                       extra_vars={'querytool': querytool})

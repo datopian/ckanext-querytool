@@ -11,7 +11,7 @@ Example usage:
 
 #}
 
-{% set tool = h.url_for('querytool_public_data_list', name=querytool.name) %}
+{% set tool = h.url_for('querytool_public_read', name=querytool.name) %}
 
 <a class="box box-full-width" href="{{ tool }}">
   <span class="box-title">
