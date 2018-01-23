@@ -146,6 +146,13 @@
         var chartResourceSelect = $('#chart_resource');
         var mapResourceSelect = $('#map_resource');
 
+        var defaultDataset = datasetField.find("option:first")[0].value;
+        var defaultResource = chartResourceSelect.find("option:first")[0];
+
+        if(!defaultResource){
+            get_dataset_resources(defaultDataset);
+        }
+
         datasetField.change(function(event) {
             $('#main-filters').html('');
             get_dataset_resources(this.value);
