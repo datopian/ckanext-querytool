@@ -21,7 +21,7 @@ Example usage:
   </div>
   <ul class="inline query-actions">
     <li><a class="btn" href="{{ action_url}}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit') }}</a></li>
-    <li><a class="btn" href="{{ h.url_for('querytool_public_data_list', name=querytool.name) }}" type="submit" name="view"><span class="fa fa-eye" aria-hidden="true"></span> {{ _('View') }}</a></li>
+    <li><a class="btn" href="{{ h.url_for('querytool_public_read', name=querytool.name) }}" type="submit" name="view"><span class="fa fa-eye" aria-hidden="true"></span> {{ _('View') }}</a></li>
     <li><a class="btn" href="{{ delete_url }}" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this Query?') }}">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
   </ul>
 </div>
