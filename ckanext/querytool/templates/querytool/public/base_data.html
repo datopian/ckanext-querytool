@@ -1,48 +1,13 @@
-{% extends "querytool/public/querytool_page.html" %} {% block main %}
+{% extends "querytool/public/base_main.html" %}
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-12 public-header">
-            <div class="page-header">
-                <div class="icon-tittle">
-                    <img src="/base/images/query-icon-tittle.png">
-                </div>
-                <h1 class="text-center">Query Tool</h1>
-                <p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque
-                    ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat
-                    pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.
-                </p>
-            </div>
-        </div>
-        {% block tools %} {% for querytool in data %} {% snippet 'querytool/public/snippets/query_tool.html', querytool=querytool
-        %} {% endfor%}
-        <div class="row list-group-boxes">
-            <ul class="list-items list-inline list-box">
-                <li class="folder-icon">
-                    <img src="/base/images/folder-icon.png" alt="">
-                </li>
-                <li class="list-headline">Mortality</li>
-                <li class="arrow-icon">
-                    <a href="{{ mortality }}">
-                        <img src="/base/images/arrow-icon.png" alt="">
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <div class="row list-group-boxes">
-            <ul class="list-items list-inline list-box">
-                <li class="folder-icon">
-                    <img src="/base/images/folder-icon.png" alt="">
-                </li>
-                <li class="list-headline">Behavioural Risk Factors</li>
-                <li class="arrow-icon">
-                    <a href="{{ behavioural }}">
-                        <img src="/base/images/arrow-icon.png" alt="">
-                    </a>
-                </li>
-            </ul>
-        </div>
-        {% endblock %}
-    </div>
-</div>
+{% block page_header_content %}
+<img src="/base/images/query-icon-tittle.png">
+<h1>Query Tool</h1>
+<p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.</p>
+{% endblock %}
+
+{% block tools %}
+{% for querytool in data %}
+{% snippet 'querytool/public/snippets/query_tool.html', querytool=querytool %}
+{% endfor%}
 {% endblock %}

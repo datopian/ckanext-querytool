@@ -1,0 +1,13 @@
+.nav-pills-hover(@border-size: @nav-pills-border-size, @border-color: @color-secondary) {
+  background-color: transparent;
+  border-radius: 0;
+  border-bottom: @border-size solid @border-color;
+  box-shadow: none;
+}
+
+.search-input-focus(@border-width: 1px){
+  &:focus {
+    box-shadow: inset 0 0 0 @border-width @color-secondary;
+    border-color: @color-secondary;
+  }
+}

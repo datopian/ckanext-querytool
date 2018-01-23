@@ -73,7 +73,7 @@ def get_all_datasets():
     return datasets
 
 
-def get_filter_values(resource_id, filter_name):
+def get_filter_values(resource_id, filter_name, previous_filters):
     '''Returns resource field values with no duplicates.'''
 
     resource = _get_action('resource_show', {'id': resource_id})
@@ -86,15 +86,19 @@ def get_filter_values(resource_id, filter_name):
         'limit': 0
     }
     result = _get_action('datastore_search', data)
+
+    where_clause = _create_where_clause(previous_filters)
+
     fields = [field['id'] for field in result.get('fields', [])]
     values = []
 
     if filter_name in fields:
 
         sql_string = '''SELECT DISTINCT "{column}"
-         FROM "{resource}" '''.format(
+         FROM "{resource}" {where}'''.format(
             column=filter_name,
-            resource=resource_id
+            resource=resource_id,
+            where=where_clause
         )
 
         result = _get_action('datastore_search_sql', {'sql': sql_string})
@@ -138,10 +142,8 @@ def get_color_scheme():
     return colors
 
 
-def create_query_str(resource_id, filters):
+def _create_where_clause(filters):
 
-    columns = map(lambda f: '"{0}"'.format(f['name'].encode('utf-8')), filters)
-    select = ', '.join(columns)
     where_clause = ''
 
     if any(filters):
@@ -166,6 +168,14 @@ def create_query_str(resource_id, filters):
             value = _['value']
             where_clause = 'WHERE ("{0}" {1} \'{2}\')'.format(name,
                                                               op, value)
+    return where_clause
+
+
+def create_query_str(resource_id, filters):
+
+    columns = map(lambda f: '"{0}"'.format(f['name'].encode('utf-8')), filters)
+    select = ', '.join(columns)
+    where_clause = _create_where_clause(filters)
 
     # generate the final SQL query string
     sql_string = '''SELECT * FROM "{resource}" {where}'''.format(

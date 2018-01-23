@@ -81,8 +81,9 @@ def get_filter_values(context, data_dict):
 
     resource_id = data_dict.pop('resource_id')
     filter_name = data_dict.pop('filter_name')
+    previous_filters = data_dict.pop('previous_filters')
 
-    return h.get_filter_values(resource_id, filter_name)
+    return h.get_filter_values(resource_id, filter_name, previous_filters)
 
 
 @toolkit.side_effect_free
