@@ -26,6 +26,10 @@
 
         get_resource_datа();
 
+        var chartSnippet = $('#visualization-settings-items').length > 0;
+
+        $('#save-visualization-btn').attr('disabled', chartSnippet);
+
         $('#create-visualization-btn').on('click', function() {
 
             $.proxyAll(this, /_on/);
@@ -43,7 +47,7 @@
                     })
                     .done(function(data) {
                         visualizationItems.append(data);
-
+                        $('#save-visualization-btn').attr('disabled', false);
                     });
             } else if (visualization === 'map') {
                 alert('Not implemented yet.')
