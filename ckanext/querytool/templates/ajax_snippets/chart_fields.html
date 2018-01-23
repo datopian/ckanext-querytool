@@ -2,69 +2,78 @@
 
 {% set columns = h.querytool_get_resource_columns(chart_resource) %}
 
-<div id="chart_field_{{ n }}" class="chart_field chart-fields-section">
-  {% set chart_types = h.querytool_get_chart_types() %}
-  <div class="control-group control-select">
-    <label class="control-label" for="chart_field_graph_{{ n }}">Graph type</label>
-    <div class="controls ">
-      <select id="chart_field_graph_{{ n }}" name="chart_field_graph_{{ n }}">
-      {% for type in chart_types %}
-        <option value="{{ type }}" {% if chart %}{{ 'selected' if type == chart.graph }}{% endif %}>{{type}}</option>
-       {% endfor %}
-      </select>
+  <div id="chart_field_{{ n }}" class="chart_field chart-fields-section">
+    {% set chart_types = h.querytool_get_chart_types() %}
+    <div class="chart-form-wrapper">
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_graph_{{ n }}">{{ _('Chart type') }}</label>
+        <div class="controls ">
+          <select id="chart_field_graph_{{ n }}" name="chart_field_graph_{{ n }}">
+          {% for type in chart_types %}
+            <option value="{{ type }}" {% if chart %}{{ 'selected' if type == chart.graph }}{% endif %}>{{type}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      {% set color_scheme = h.querytool_get_color_scheme() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color scheme') }}</label>
+        <div class="controls ">
+          <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
+          {% for color in color_scheme %}
+            <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{color.text}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_axis_x_{{ n }}">{{ _('X axis column') }}</label>
+        <div class="controls ">
+          <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
+            {% for column in columns %}
+            <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.x_axis }}{% endif %}>{{column}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_axis_y_{{ n }}">{{ _('Y axis column') }}</label>
+        <div class="controls ">
+          <select id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}">
+            {% for column in columns %}
+            <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.y_axis }}{% endif %}>{{column}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group ">
+        <label class="control-label" for="chart_field_num_row">{{ _('Number of rows') }}</label>
+        <div class="controls ">
+          <input id="chart_field_num_row" name="num_rows" value="" placeholder="{{ _('Number of rows') }}" type="text">
+        </div>
+      </div>
+
+      <ul class="inline text-right chart-actions">
+          <li><a class="btn" href="" type="submit" name="update"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
+          <li class="pull-left"><a class="btn" href="" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this chart?') }}">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+      </ul>
+
+      <span class="grippy"></span>
     </div>
-  </div>
 
-  {% set color_scheme = h.querytool_get_color_scheme() %}
-   <div class="control-group control-select">
-    <label class="control-label" for="chart_field_color_{{ n }}">Color scheme</label>
-    <div class="controls ">
-      <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
-      {% for color in color_scheme %}
-        <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{color.text}}</option>
-       {% endfor %}
-      </select>
+    <div class="chart-preview-wrapper">
+      {% if chart %}
+      {% set colors = chart.color %}
+      {% else %}
+      {% set colors = color_scheme[0].value %}
+      {% endif %}
+      {% snippet 'ajax_snippets/visualization_item.html', type='chart', colors='' %}
+
     </div>
-  </div>
-
-    <div class="control-group control-select">
-    <label class="control-label" for="chart_field_axis_y_{{ n }}">Select (Axis Y)</label>
-    <div class="controls ">
-      <select id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}">
-        {% for column in columns %}
-        <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.y_axis }}{% endif %}>{{column}}</option>
-        {% endfor %}
-      </select>
+    <div class="chart-controls-wrapper">
     </div>
-  </div>
-
-    <div class="control-group control-select">
-    <label class="control-label" for="chart_field_axis_x_{{ n }}">Select(Axis X)</label>
-    <div class="controls ">
-      <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
-        {% for column in columns %}
-        <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.x_axis }}{% endif %}>{{column}}</option>
-        {% endfor %}
-      </select>
-    </div>
-  </div>
-
-  <div class="control-group ">
-    <label class="control-label" for="chart_field_num_row">Number of rows</label>
-    <div class="controls ">
-      <input id="chart_field_num_row" name="num_rows"
-             value=""
-             placeholder="Enter rows number" type="text">
-    </div>
-  </div>
-
-  <span class="grippy"></span>
-
-  {% if chart %}
-    {% set colors = chart.color %}
-  {% else %}
-    {% set colors = color_scheme[0].value %}
-  {% endif %}
-
-  {% snippet 'ajax_snippets/visualization_item.html', type='chart', colors='' %}
 </div>
