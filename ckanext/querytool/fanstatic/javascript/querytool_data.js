@@ -9,10 +9,13 @@
             var url = base_url + '/api/' + api_ver + '/action/' + action + '?' + params;
             return $.getJSON(url);
         },
-        post: function(action, data) {
+        post: function(action, data, async) {
             var api_ver = 3;
             var base_url = ckan.sandbox().client.endpoint;
             var url = base_url + '/api/' + api_ver + '/action/' + action;
+            if (!async) {
+              $.ajaxSetup({async:false});
+            }
             return $.post(url, JSON.stringify(data), 'json');
         }
     };
@@ -51,13 +54,6 @@
       // TODO implement
     };
 
-    function unique(list) {
-        var result = [];
-        $.each(list, function(i, e) {
-            if ($.inArray(e, result) == -1) result.push(e);
-        });
-        return result;
-    }
 
     function handleRenderedFilters(item_id, resource_id) {
 
@@ -96,10 +92,11 @@
 
         });
 
-        filter_value_select.hover(function(event) {
+        filter_value_select.mousedown(function(event) {
 
           var elem = $(this);
           var filter_value_select_id = elem.attr('id');
+          var filter_value = elem.find(":selected").val();
 
           var filter_item_id = filter_value_select_id.replace('data_filter_value', 'filter_item')
 
@@ -107,6 +104,7 @@
 
           var filter_name_select_id = filter_value_select_id.replace('value', 'name');
           var filter_name = $('#' + filter_name_select_id).find(":selected").val();
+
           var resource_input_id = filter_name_select_id.replace('data_filter_name', 'resource_id');
           var select_size = $(this).find("option").size();
 
@@ -117,20 +115,21 @@
               id = $('#' + resource_input_id).val();
           }
 
-          if (select_size == 1 || select_size == 2) {
+          if (select_size <= 2) {
 
             api.post('get_filter_values', {
               'resource_id': id,
               'filter_name': filter_name,
               'previous_filters': previous_filters
-            }).done(function(data) {
-              var optionsVal = []
-              $.each(data.result, function(idx, elem) {
-                optionsVal.push(new Option(elem, elem));
-              });
-              var uniqueVal = unique(a);
-              $('#' + filter_value_select_id).append(uniqueVal);
+            }, false).done(function(data) {
 
+              $.each(data.result, function(idx, elem) {
+
+                if (filter_value != elem) {
+                  $('#' + filter_value_select_id).append(new Option(elem, elem));
+                }
+
+              });
             });
           }
         });
@@ -181,6 +180,7 @@
 
         add_filter_button.click(function(event) {
             event.preventDefault();
+            console.log('na')
             var resource_id = chartResourceSelect.val();
             api.get('resource_show', {
                 'id': resource_id
@@ -189,7 +189,7 @@
 
                 api.post('get_resource_fields', {
                     'resource': resource
-                }).done(function(data) {
+                }, true).done(function(data) {
 
                     var active_filters = data.result.toString();
                     var filter_items = $('.filter_item');
