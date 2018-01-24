@@ -181,8 +181,11 @@ input[type="color"],
   border-radius: 5px;
   margin: 20px 0;
 }
-.chart-actions li:last-child {
-  margin-right: 0;
+.chart-actions {
+  margin-bottom: 0;
+}
+.chart-actions.inline > li:last-child {
+  padding-right: 0;
 }
 .chart-fields-section {
   position: relative;
