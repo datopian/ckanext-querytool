@@ -51,7 +51,13 @@
       // TODO implement
     };
 
-
+    function unique(list) {
+        var result = [];
+        $.each(list, function(i, e) {
+            if ($.inArray(e, result) == -1) result.push(e);
+        });
+        return result;
+    }
 
     function handleRenderedFilters(item_id, resource_id) {
 
@@ -90,7 +96,7 @@
 
         });
 
-        filter_value_select.mousedown(function(event) {
+        filter_value_select.hover(function(event) {
 
           var elem = $(this);
           var filter_value_select_id = elem.attr('id');
@@ -118,10 +124,12 @@
               'filter_name': filter_name,
               'previous_filters': previous_filters
             }).done(function(data) {
-
+              var optionsVal = []
               $.each(data.result, function(idx, elem) {
-                $('#' + filter_value_select_id).append(new Option(elem, elem))
+                optionsVal.push(new Option(elem, elem));
               });
+              var uniqueVal = unique(a);
+              $('#' + filter_value_select_id).append(uniqueVal);
 
             });
           }
