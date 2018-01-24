@@ -17,6 +17,19 @@
   }
 }
 
+.btn-secondary{
+  background-color: @color-secondary;
+  border-color: @color-secondary;
+  color: @color-white;
+  text-shadow: none;
+  &:focus,
+  &:hover {
+    color: @color-white;
+    border-color: @color-secondary-darker;
+    background-color: @color-secondary-darker;
+  }
+}
+
 .btn-danger {
   background-color: rgb(207, 0, 0);
 }
