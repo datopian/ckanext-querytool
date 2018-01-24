@@ -1,29 +1,124 @@
-{% extends "querytool/public/querytool_page.html" %}
+{% resource "querytool/javascript/public_query.js" %}
+{% extends "querytool/public/base_main.html" %}
 
-{% block content %}
-<div class="container-wrapper">
+{% block page_header_content %}
+<div class="container-fluid">
+  <div class="public-query-header">
+    <div class="row-fluid">
+      <div class="span5 offset1">
+        {% block page_header_title %}
+          {% if querytool.title %}
+            <h1>{{ querytool.title }}</h1>
+          {% endif %}
+        {% endblock %}
+        <button class="btn btn-secondary btn-filter-toggle"><span class="fa fa-filter"></span> {{ _('Filter data') }}</button>
+      </div>
+      <div class="span5">
+        {% block page_header_description %}
+          {% if querytool.title %}
+            <p class="desc">{{ querytool.description }}</p>
+          {% endif %}
+        {% endblock %}
+      </div>
+  </div>
+</div>
+{% endblock %}
 
-  <div class="public-header">
-    <div class="container">
-      <div class="row">
-        <div class="span8 offset2">
-            <div class="page-header">
-              {% block page_header_content %}
-              <h1>Welcome</h1>
-              <p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.</p>
-              {% endblock %}
+
+{% block tools %}
+<div class="container-fluid public-query">
+  <div class="controls">
+    <div class="row-fluid">
+      <div class="span10 offset1">
+        <div class="flex">
+          <div class="filters">
+            <!-- Empty lines somehow affect the appearance of the select items -->
+            <div class="filter-group">
+              <select class="filter-item filter-item-column"><option>&mdash; Select filter &mdash;</option><option>Column</option></select>
+              <select class="filter-item filter-item-value"><option>&mdash; Select value &mdash;</option><option>Value</option></select>
             </div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-info btn-add-filter"><span class="fa fa-plus"></span> {{ _('Add filter') }}</button>
+            <button class="btn btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-    <div class="container content">
-    <div class="box-items">
-      {% block tools %}
+  <div class="row-fluid">
+    <div class="span10 offset1">
+      <div class="">
+        {# querytool #}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
 
-        {{querytool}}
-      {% endblock %}
-  </div>
-  </div>
+{% block footer %}
+<div class="site-footer">
+    <div class="container">
+        <h3>Share or Download Story</h3>
+        <div class="row">
+            <div class="span6">
+                <div class="input-append">
+                    <input class="span4" id="appendedInputButtons" type="text" value="https://story-tool/Df6dFd3xPC4">
+                    <button class="btn" type="button">Copy</button>
+                </div>
+            </div>
+            <div class="span6">
+                <ul class="inline pull-right">
+                    <li>
+                        <div class="btn-group dropup">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                            <span class="fa fa-code"></span> Embed <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Submenu 1</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="btn-group dropup">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span class="fa fa-download"></span> Download
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">PDF</a>
+                                </li>
+                                <li>
+                                    <a href="#">JPG</a>
+                                </li>
+                                <li>
+                                    <a href="#">Download as ...</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="btn-group dropup">
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                                <span class="fa fa-share"></span> Share
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="#">Facebook</a>
+                                </li>
+                                <li>
+                                    <a href="#">Twitter</a>
+                                </li>
+                                <li>
+                                    <a href="#">Share on ...</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
