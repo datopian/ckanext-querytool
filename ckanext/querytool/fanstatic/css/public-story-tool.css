@@ -11,7 +11,7 @@
 /* Desktop */
 @media (min-width: 980px) {
   .masthead {
-    padding-top: 20px;
+    padding-top: 10px;
   }
   .masthead .nav-collapse {
     float: none;
@@ -141,7 +141,4 @@ body {
 }
 .story .img-full-width {
   min-width: 100%;
-}
-.site-footer .dropdown-toggle {
-  color: #010a5c;
 }

@@ -11,7 +11,7 @@
 /* Desktop */
 @media (min-width: 980px) {
   .masthead {
-    padding-top: 20px;
+    padding-top: 10px;
   }
   .masthead .nav-collapse {
     float: none;
@@ -49,7 +49,7 @@ body {
 }
 .container-wrapper {
   background: linear-gradient(rgba(18, 30, 135, 0.8), #010a5c), url(/base/images/public-header-bg.png) top center no-repeat;
-  background-size: contain;
+  background-size: 100%;
   padding-bottom: 60px;
 }
 .box {
@@ -106,6 +106,7 @@ body {
 }
 .desc {
   color: #fff;
+  margin-bottom: 20px;
   font-size: 15px;
 }
 h1 {
@@ -113,6 +114,7 @@ h1 {
   font-weight: 400;
   font-size: 42px;
   margin-bottom: 20px;
+  line-height: 1.2;
 }
 .short-desc {
   display: block;
@@ -125,7 +127,7 @@ h1 {
   border: none;
   padding: 10px 30px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
 }
 .list-group-boxes {
   padding: 0px 200px 0px 200px;
@@ -191,4 +193,65 @@ h1 {
 }
 .arrow-icon-steps {
   margin: auto;
+}
+.public-query-header {
+  padding: 20px 0;
+  min-height: 100px;
+}
+.public-query-header h1 {
+  font-weight: 700;
+}
+.public-query-header .desc {
+  padding: 20px;
+  background-color: rgba(1, 10, 92, 0.6);
+}
+.public-query {
+  padding: 0;
+  background: #fff;
+}
+.public-query .controls {
+  background: #f97859;
+  display: none;
+}
+.public-query .controls.on {
+  display: block;
+}
+.public-query .flex {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.public-query .filters {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.public-query .filters .fa {
+  align-self: center;
+  margin: auto 10px;
+  color: #fff;
+}
+.public-query .filter-item {
+  margin-bottom: 10px;
+  border-color: transparent;
+}
+.public-query .filter-item-value {
+  display: none;
+}
+.public-query .filter-group {
+  display: inline-flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+  background: #FF562B;
+  padding: 10px 10px 0;
+}
+.public-query .actions {
+  flex-shrink: 0;
+  position: static;
+}
+.public-query .actions .btn {
+  margin-left: 10px;
+}
+.btn-filter-toggle.on {
+  border-color: #51a351;
+  background-color: #51a351;
 }

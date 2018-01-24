@@ -30,7 +30,7 @@ a {
   background-color: #010a5c;
 }
 .account-masthead {
-  background-color: #121e87;
+  background-color: #010a5c;
 }
 .account-masthead .account ul li a {
   color: rgba(255, 255, 255, 0.7);
@@ -41,8 +41,6 @@ a {
 }
 .masthead {
   background-color: #121e87;
-  background: url("../images/admin-header-bg.jpg") center no-repeat;
-  background-size: cover;
   height: auto;
 }
 .masthead .navigation .nav-pills li a {
@@ -99,6 +97,18 @@ a {
 .btn-primary:hover {
   background-color: #010a5c;
 }
+.btn-secondary {
+  background-color: #f97859;
+  border-color: #f97859;
+  color: #fff;
+  text-shadow: none;
+}
+.btn-secondary:focus,
+.btn-secondary:hover {
+  color: #fff;
+  border-color: #FF562B;
+  background-color: #FF562B;
+}
 .btn-danger {
   background-color: #cf0000;
 }
@@ -114,6 +124,9 @@ label {
 }
 .site-footer a {
   color: rgba(255, 255, 255, 0.7);
+}
+.site-footer .dropdown-toggle {
+  color: #010a5c;
 }
 .site-footer,
 .site-footer label,
@@ -211,7 +224,7 @@ input[type="color"],
 /* Desktop */
 @media (min-width: 980px) {
   .masthead {
-    padding-top: 20px;
+    padding-top: 10px;
   }
   .masthead .nav-collapse {
     float: none;
