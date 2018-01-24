@@ -1,13 +1,15 @@
 {% extends "querytool/public/base_main.html" %}
 
-{% block page_header_content %}
-<img src="/base/images/query-icon-tittle.png">
-<h1>Query Tool</h1>
-<p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.</p>
-{% endblock %}
+{% block page_header_icon %}<img src="/base/images/query-icon-tittle.png">{% endblock %}
+
+{% block page_header_title %}<h1>{{ _('Query Tool') }}</h1>{% endblock %}
+
+{% block page_header_description %}<p class="desc">{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.') }}</p>{% endblock %}
 
 {% block tools %}
-{% for querytool in data %}
-{% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
-{% endfor%}
+<div class="container">
+  {% for querytool in data %}
+    {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
+  {% endfor%}
+</div>
 {% endblock %}
