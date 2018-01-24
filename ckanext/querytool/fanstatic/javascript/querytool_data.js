@@ -180,7 +180,6 @@
 
         add_filter_button.click(function(event) {
             event.preventDefault();
-            console.log('na')
             var resource_id = chartResourceSelect.val();
             api.get('resource_show', {
                 'id': resource_id
