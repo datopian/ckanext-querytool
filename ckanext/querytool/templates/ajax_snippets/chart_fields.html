@@ -1,3 +1,5 @@
+{% import 'macros/form.html' as form %}
+
 {% set active_charts = chart %}
 
 {% set columns = h.querytool_get_resource_columns(chart_resource) %}
@@ -5,16 +7,12 @@
   <div id="chart_field_{{ n }}" class="chart_field chart-fields-section">
     {% set chart_types = h.querytool_get_chart_types() %}
     <div class="chart-form-wrapper">
-      <div class="control-group control-select">
-        <label class="control-label" for="chart_field_graph_{{ n }}">{{ _('Chart type') }}</label>
-        <div class="controls ">
-          <select id="chart_field_graph_{{ n }}" name="chart_field_graph_{{ n }}">
-          {% for type in chart_types %}
-            <option value="{{ type }}" {% if chart %}{{ 'selected' if type == chart.graph }}{% endif %}>{{type}}</option>
-          {% endfor %}
-          </select>
-        </div>
-      </div>
+      {% if chart %}
+        {% set selected_chart_type = chart.graph %}
+      {% else %}
+        {% set selected_chart_type = chart_types[0].value %}
+      {% endif %}
+      {{ form.select('chart_field_graph_' ~ n, label=_('Chart type'), options=chart_types, selected=selected_chart_type) }}
 
       {% set color_scheme = h.querytool_get_color_scheme() %}
       <div class="control-group control-select">
@@ -58,8 +56,8 @@
       </div>
 
       <ul class="inline text-right chart-actions">
-          <li><a class="btn" href="" type="submit" name="update"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
-          <li class="pull-left"><a class="btn" href="" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this chart?') }}">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+          <li><a class="btn update-chart-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
+          <li class="pull-left"><a class="btn delete-chart-btn" data-module="querytool-viz-delete">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
       </ul>
 
       <span class="grippy"></span>
@@ -67,12 +65,24 @@
 
     <div class="chart-preview-wrapper">
       {% if chart %}
-      {% set colors = chart.color %}
+        {% set colors = chart.color %}
+        {% set x_axis = chart.x_axis %}
+        {% set y_axis = chart.y_axis %}
+        {% set chart_type = chart.graph %}
       {% else %}
-      {% set colors = color_scheme[0].value %}
+        {% set colors = color_scheme[0].value %}
+        {% set x_axis = columns[0] %}
+        {% set y_axis = columns[0] %}
+        {% set chart_type = chart_types[0].value %}
       {% endif %}
-      {% snippet 'ajax_snippets/visualization_item.html', type='chart', colors='' %}
 
+      {% snippet 'ajax_snippets/visualization_item.html',
+          type='chart',
+          colors=colors,
+          x_axis=x_axis,
+          y_axis=y_axis,
+          chart_type=chart_type,
+          sql_string=sql_string %}
     </div>
     <div class="chart-controls-wrapper">
     </div>

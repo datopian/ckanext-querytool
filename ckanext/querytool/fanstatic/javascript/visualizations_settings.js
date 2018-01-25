@@ -20,15 +20,16 @@
     $(document).ready(function() {
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
+        var sqlString = vizForm.data('sqlString');
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
-        var resourceData, records;
-
-        get_resource_datа();
-
         var chartSnippet = $('#visualization-settings-items').length > 0;
+        var charts = $('.chart_field');
 
-        $('#save-visualization-btn').attr('disabled', chartSnippet);
+        // Only disable Save button if there aren't visualizations
+        if (charts.length === 0) {
+            $('#save-visualization-btn').attr('disabled', chartSnippet);
+        }
 
         $('#create-visualization-btn').on('click', function() {
 
@@ -44,10 +45,13 @@
                         querytool: querytool,
                         chart_resource: chart_resource,
                         map_resource: map_resource,
+                        sql_string: sqlString
                     })
                     .done(function(data) {
-                        visualizationItems.append(data);
-                        $('#save-visualization-btn').attr('disabled', false);
+                        var item = visualizationItems.prepend(data);
+                        $('#save-visualization-btn').removeAttr('disabled', false);
+                        ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
+                        handleItemsOrder();
                     });
             } else if (visualization === 'map') {
                 alert('Not implemented yet.')
@@ -97,23 +101,8 @@
             });
         }
 
-        function get_resource_datа() {
-            api.get('querytool_get_resource_data', {
-                group: true,
-                sql_string: vizForm.data('sqlString')
-            })
-            .done(function(data) {
-                console.log(data)
-            });
-        }
-
-        function initCharts() {
-            var items = $('.chart_field');
-
-            $.each(items, function(i, item) {
-                console.log(item)
-            })
-        }
+        // Expose this function on window to be accessible in other files
+        window.handleItemsOrder = handleItemsOrder;
     });
 
 })($);

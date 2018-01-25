@@ -112,9 +112,14 @@ def get_chart_types():
     Get all avaiable types of chart following c3 specification
     :return:
     '''
-    chart_types = ['Bar Chart', 'Stacked Bar Chart', 'Donut Chart',
-                   'Line Chart', 'Pie Chart', 'Spline Chart',
-                   'Table Chart', 'Simple Chart']
+    chart_types = [
+        {'text': 'Line', 'value': 'line'},
+        {'text': 'Bar', 'value': 'bar'},
+        {'text': 'Area', 'value': 'area'},
+        {'text': 'Spline', 'value': 'spline'},
+        {'text': 'Donut', 'value': 'donut'},
+        {'text': 'Pie', 'value': 'pie'},
+    ]
     return chart_types
 
 
