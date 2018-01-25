@@ -4,7 +4,11 @@
     "watch": "less-watch-compiler less css"
   },
   "devDependencies": {
-    "less": "^2.7.2",
-    "less-watch-compiler": "^1.6.7"
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^4.1.0",
+    "gulp-clean-css": "^3.9.2",
+    "gulp-less": "^3.4.0",
+    "gulp-sourcemaps": "^1.12.1",
+    "less": "^2.7.2"
   }
 }
