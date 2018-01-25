@@ -25,7 +25,12 @@
         var map_resource = vizForm.data('mapResource');
         var chartSnippet = $('#chart-form-wrapper').length > 0;
 
-        $('#save-visualization-btn').attr('disabled', !chartSnippet);
+        var charts = $('.chart_field');
+
+        // Only disable Save button if there aren't visualizations
+        if (charts.length === 0) {
+            $('#save-visualization-btn').attr('disabled', 'true');
+        }
 
         var createVisualization = $('#create-visualization-btn');
         createVisualization.on('click', function() {
