@@ -74,7 +74,7 @@ body {
   box-shadow: 0px 8px 60px 0 rgba(0, 0, 0, 0.2), 0 10px 60px 0 rgba(0, 0, 0, 0.19);
 }
 .box:hover .btn-box {
-  background-color: #FF562B;
+  background-color: #f75028;
 }
 .box:hover > .fa {
   color: #f97859;
@@ -211,19 +211,14 @@ h1 {
 }
 .public-query .controls {
   background: #f97859;
-  display: none;
-}
-.public-query .controls.on {
-  display: block;
 }
 .public-query .flex {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
 }
 .public-query .filters {
-  margin-top: 20px;
-  margin-bottom: 10px;
+  flex-basis: 80%;
 }
 .public-query .filters .fa {
   align-self: center;
@@ -231,25 +226,43 @@ h1 {
   color: #fff;
 }
 .public-query .filter-item {
-  margin-bottom: 10px;
   border-color: transparent;
 }
-.public-query .filter-item-value {
-  display: none;
-}
 .public-query .filter-group {
+  align-self: center;
   display: inline-flex;
   flex-direction: column;
+  margin-top: 10px;
   margin-bottom: 10px;
-  background: #FF562B;
+  background: #f75028;
   padding: 10px 10px 0;
+}
+.public-query .filter-y {
+  flex-shrink: 0;
+  display: flex;
+  align-self: stretch;
+  align-items: flex-start;
+  justify-content: space-between;
+  color: #fff;
+  padding: 20px 40px;
+  margin-right: 30px;
+  background: #49afcd;
+}
+.public-query .filter-y select {
+  margin-bottom: 0;
+}
+.public-query .filter-y label {
+  margin-top: 3.33333333px;
+  margin-right: 20px;
+  font-weight: 700;
 }
 .public-query .actions {
   flex-shrink: 0;
+  align-self: stretch;
   position: static;
 }
 .public-query .actions .btn {
-  margin-left: 10px;
+  margin: 13px 0 10px 10px;
 }
 .btn-filter-toggle.on {
   border-color: #51a351;

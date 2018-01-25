@@ -79,7 +79,11 @@ a {
 }
 .btn {
   background-image: none;
+  box-shadow: none;
   border-radius: 0;
+}
+.btn:hover {
+  box-shadow: none;
 }
 .btn .fa {
   display: inline;
@@ -98,7 +102,7 @@ a {
   background-color: #010a5c;
 }
 .btn-secondary {
-  background-color: #f97859;
+  background-color: #e43308;
   border-color: #f97859;
   color: #fff;
   text-shadow: none;
@@ -106,8 +110,7 @@ a {
 .btn-secondary:focus,
 .btn-secondary:hover {
   color: #fff;
-  border-color: #FF562B;
-  background-color: #FF562B;
+  background-color: #cb2d07;
 }
 .btn-danger {
   background-color: #cf0000;
