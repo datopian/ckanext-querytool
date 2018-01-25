@@ -29,6 +29,7 @@
             {{ h.build_nav_main(('home', _('Home'))) }}
             {% if c.userobj.sysadmin %}
               {{ h.build_nav_main(('querytool_list', _('Queries'))) }}
+              {{ h.build_nav_main(('querytool_public', _('Tools'))) }}
             {% endif %}
             {{ super() }}
             {% endblock %}

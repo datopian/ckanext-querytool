@@ -12,7 +12,11 @@
 {% endblock %}
 
 {% block header %}
-{# Keep this block empty #}
+  {% if c.userobj.sysadmin %}
+    {{ super() }}
+  {% else %}
+    {# Keep this block empty #}
+  {% endif %}
 {% endblock %}
 
 {% block footer %}

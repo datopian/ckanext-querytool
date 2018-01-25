@@ -16,7 +16,7 @@ Example usage:
   <img class="query-icon" src="/base/images/query-icon.png" alt="Query Tool">
   <div class="query-body">
     <h2>{{ querytool.title }}</h2>
-    <p class="muted">{{ querytool.description}}</p>
+    <p class="muted">{{ h.markdown_extract(querytool.description, extract_length=150) }}</p>
     <p>{{_('Queried dataset:')}} <a href="{{ h.url_for(controller='package', action='read', id=querytool.dataset_name) }}">{{ querytool.dataset_name }}</a></p>
   </div>
   <ul class="inline query-actions">

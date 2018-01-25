@@ -1,14 +1,13 @@
 @import "inc/variables.less";
 @import "inc/mixins.less";
 @import "inc/responsive.less";
-
 body {
   background: @color-primary-dark;
 }
 
 .container-wrapper {
   background: linear-gradient( fade(@color-primary, 80%), @color-primary-dark), url(/base/images/public-header-bg.png) top center no-repeat;
-  background-size: contain;
+  background-size: 100%;
   padding-bottom: @grid-gutter-width*3;
 }
 
@@ -34,7 +33,7 @@ body {
     .btn-box {
       background-color: @color-secondary-darker;
     }
-    > .fa{
+    >.fa {
       color: @color-secondary;
     }
   }
@@ -48,10 +47,10 @@ body {
   .thumbnail {
     margin: 0;
   }
-  .tool-title{
+  .tool-title {
     margin: 0 @grid-gutter-width;
   }
-  .fa{
+  .fa {
     color: @color-primary;
   }
 }
@@ -70,6 +69,7 @@ body {
 
 .desc {
   color: @color-white;
+  margin-bottom: @grid-gutter-width;
   font-size: @base-font-size + 1px;
 }
 
@@ -78,6 +78,7 @@ h1 {
   font-weight: 400;
   font-size: @base-font-size * 3;
   margin-bottom: @grid-gutter-width;
+  line-height: 1.2;
 }
 
 .short-desc {
@@ -92,7 +93,7 @@ h1 {
   border: none;
   padding: @grid-gutter-width/2 (@grid-gutter-width + @grid-gutter-width/2);
   font-size: @base-font-size + 2px;
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .list-group-boxes {
@@ -172,4 +173,84 @@ h1 {
 
 .arrow-icon-steps {
   margin: auto;
+}
+
+// Public queries UI
+.public-query-header {
+  padding: @grid-gutter-width 0;
+  min-height: @grid-gutter-width*5;
+  h1 {
+    font-weight: 700;
+  }
+  .desc {
+    padding: @grid-gutter-width;
+    background-color: fade(@color-primary-dark, 60%);
+  }
+}
+
+.public-query {
+  padding: 0;
+  background: @color-white;
+  .controls {
+    background: @color-secondary;
+  }
+  .flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .filters {
+    flex-basis: 80%;
+    .fa {
+      align-self: center;
+      margin: auto @grid-gutter-width/2;
+      color: @color-white;
+    }
+  }
+  .filter-item {
+    border-color: transparent;
+  }
+  .filter-group {
+    align-self: center;
+    display: inline-flex;
+    flex-direction: column;
+    margin-top: @grid-gutter-width/2;
+    margin-bottom: @grid-gutter-width/2;
+    background: @color-secondary-darker;
+    padding: @grid-gutter-width/2 @grid-gutter-width/2 0;
+  }
+  .filter-y {
+    flex-shrink: 0;
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    justify-content: space-between;
+    color: @color-white;
+    padding: @grid-gutter-width @grid-gutter-width*2;
+    margin-right: @grid-gutter-width*1.5;
+    background: @color-info;
+    select {
+      margin-bottom: 0;
+    }
+    label {
+      margin-top: @grid-gutter-width/6;
+      margin-right: @grid-gutter-width;
+      font-weight: 700;
+    }
+  }
+  .actions {
+    flex-shrink: 0;
+    align-self: stretch;
+    position: static;
+    .btn {
+      margin: (@grid-gutter-width/2 + 3px) 0 @grid-gutter-width/2 @grid-gutter-width/2;
+    }
+  }
+}
+
+.btn-filter-toggle {
+  &.on {
+    border-color: @color-success;
+    background-color: @color-success;
+  }
 }

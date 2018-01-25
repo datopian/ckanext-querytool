@@ -2,24 +2,26 @@
 
 {% block content %}
 <div class="container-wrapper">
-
   <div class="public-header">
+  {% block page_header_content %}
     <div class="container">
       <div class="row">
-        <div class="span8 offset2">
-            <div class="page-header">
-              {% block page_header_content %}
-              <h1>Welcome</h1>
-              <p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.</p>
-              {% endblock %}
-            </div>
+        <div class="span10 offset1">
+          <div class="page-header">
+            {% block page_header_inner_content %}
+              {% block page_header_icon %}{% endblock %}
+              {% block page_header_title %}<h1>Welcome</h1>{% endblock %}
+              {% block page_header_description %}<p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt   pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla   congue commodo velit, non ultrices magna hendrerit sed.</p>{% endblock %}>
+            {% endblock %}
+          </div>
         </div>
       </div>
     </div>
+  {% endblock %}
   </div>
+  {% block tools %}
   <div class="container content">
     <div class="box-items">
-      {% block content_inner %}
       <div class="row">
         <div class="span5 offset1">
           <a class="query-tool box" href="{{ h.url_for('querytool_public_list') }}">
@@ -38,8 +40,8 @@
         </a>
         </div>
       </div>
-      {% endblock %}
+    </div>
   </div>
-  </div>
+  {% endblock %}
 </div>
 {% endblock %}
