@@ -25,8 +25,15 @@
         var resourceData, records;
 
         get_resource_datа();
+        removeChart();
 
-        $('#create-visualization-btn').on('click', function() {
+
+        var chartSnippet = $('#chart-form-wrapper').length > 0;
+        console.log(chartSnippet)
+        $('#save-visualization-btn').attr('disabled', !chartSnippet);
+
+        var createVisualization = $('#create-visualization-btn');
+        createVisualization.on('click', function() {
 
             $.proxyAll(this, /_on/);
 
@@ -43,7 +50,8 @@
                     })
                     .done(function(data) {
                         visualizationItems.append(data);
-
+                        $('#save-visualization-btn').attr('disabled', false);
+                        removeChart();
                     });
             } else if (visualization === 'map') {
                 alert('Not implemented yet.')
@@ -63,6 +71,18 @@
 
             handleItemsOrder();
         });
+
+        function removeChart(){
+             var remove_chart_button = $('.remove-chart-button');
+
+            remove_chart_button.on('click', function(e) {
+                $(e.target).closest('.chart_field').remove();
+                // TODO requires implementation
+                //_handleChartsItemsOrder();
+            });
+
+
+        }
 
         // This function updates the order numbers for the form elements.
         function handleItemsOrder() {
