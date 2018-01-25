@@ -6,7 +6,7 @@
 <p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.</p>
 {% endblock %}
 
-{% block tools %}
+{% block content_inner %}
 {% for querytool in data %}
 {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
 {% endfor%}

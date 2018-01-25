@@ -23,15 +23,12 @@
         var sqlString = vizForm.data('sqlString');
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
-        var chartSnippet = $('#visualization-settings-items').length > 0;
-        var charts = $('.chart_field');
+        var chartSnippet = $('#chart-form-wrapper').length > 0;
 
-        // Only disable Save button if there aren't visualizations
-        if (charts.length === 0) {
-            $('#save-visualization-btn').attr('disabled', chartSnippet);
-        }
+        $('#save-visualization-btn').attr('disabled', !chartSnippet);
 
-        $('#create-visualization-btn').on('click', function() {
+        var createVisualization = $('#create-visualization-btn');
+        createVisualization.on('click', function() {
 
             $.proxyAll(this, /_on/);
 
@@ -49,7 +46,7 @@
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
-                        $('#save-visualization-btn').removeAttr('disabled', false);
+                        $('#save-visualization-btn').attr('disabled', false);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
                         handleItemsOrder();
                     });

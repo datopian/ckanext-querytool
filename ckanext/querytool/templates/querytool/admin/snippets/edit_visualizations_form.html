@@ -39,8 +39,7 @@
         </div>
       </div>
     </fieldset>
-  <fieldset>
-    <div id="visualization-settings-items">
+  <fieldset id="visualization-settings-items">
       {% if data.charts  %}
         {% for chart in data.charts %}
           {% snippet 'ajax_snippets/chart_fields.html',
@@ -51,7 +50,6 @@
             chart_resource=data.chart_resource %}
         {% endfor %}
       {% endif %}
-    </div>
   </fieldset>
 
 {% endblock %}

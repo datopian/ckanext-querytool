@@ -1,29 +1,5 @@
-{% extends "querytool/public/querytool_page.html" %}
+{% extends "querytool/public/base_main.html" %}
 
-{% block content %}
-<div class="container-wrapper">
-
-  <div class="public-header">
-    <div class="container">
-      <div class="row">
-        <div class="span8 offset2">
-            <div class="page-header">
-              {% block page_header_content %}
-              <h1>Welcome</h1>
-              <p class="desc text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.</p>
-              {% endblock %}
-            </div>
-        </div>
-      </div>
-    </div>
-  </div>
-    <div class="container content">
-    <div class="box-items">
-      {% block tools %}
-
-        {{querytool}}
-      {% endblock %}
-  </div>
-  </div>
-</div>
+{% block content_inner %}
+  {{querytool}}
 {% endblock %}
