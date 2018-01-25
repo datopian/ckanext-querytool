@@ -29,47 +29,40 @@
 {% block tools %}
 <div class="container-fluid public-query">
   <div class="controls">
-    <div class="row-fluid">
-      <div class="span10 offset1">
-        <div class="flex">
-          <div class="filter-y">
-            <label for="y_axis_column">{{ _('Y axis value') }}</label>
-            <select id="y_axis_column" class="filter-item filter-item-column"><option>Preselected column</option></select>
-          </div>
-          <div class="filters">
-            <!-- Empty lines somehow affect the appearance of the select items -->
-            <div class="filter-group">
-              <select class="filter-item filter-item-column"><option>&mdash; Select filter &mdash;</option><option>Column</option></select>
-              <select class="filter-item filter-item-value hidden"><option>&mdash; Select value &mdash;</option><option>Value</option></select>
-            </div>
-          </div>
-          <div class="actions">
-            <button class="btn btn-large btn-secondary btn-add-filter"><span class="fa fa-plus"></span> {{ _('Add filter') }}</button>
-            <button class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
+    <form method="GET">
+      <div class="flex">
+        <div class="filter-y">
+          <label for="y_axis_column">{{ _('Y axis value') }}</label>
+          <select id="y_axis_column" class="filter-item filter-item-column"><option>Preselected column</option></select>
+        </div>
+        <div class="filters">
+          <!-- Empty lines somehow affect the appearance of the select items -->
+          <div class="filter-group">
+            <select class="filter-item filter-item-column"><option>&mdash; Select filter &mdash;</option><option>Column</option></select>
+            <select class="filter-item filter-item-value hidden"><option>&mdash; Select value &mdash;</option><option>Value</option></select>
           </div>
         </div>
-      </div>
+        <div class="actions">
+          <button type="button" class="btn btn-large btn-secondary btn-add-filter"><span class="fa fa-plus"></span> {{ _('Add filter') }}</button>
+          <button type="submit" class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="row-fluid">
-    <div class="span10 offset1">
-      <div class="">
-        {# querytool #}
+  <div class="charts">
+    {% for item in querytool.charts %}
+      <div class="container-chart">
+        {% snippet 'ajax_snippets/visualization_item.html',
+        type='chart',
+        colors=item.color,
+        x_axis=item.x_axis,
+        y_axis=item.y_axis,
+        chart_type=item.graph,
+        sql_string=querytool.sql_string %}
       </div>
-    </div>
+    {% endfor %}
   </div>
   <!-- Visualizations container -->
-    <div>
-        {% for item in querytool.charts %}
-            {% snippet 'ajax_snippets/visualization_item.html',
-                type='chart',
-                colors=item.color,
-                x_axis=item.x_axis,
-                y_axis=item.y_axis,
-                chart_type=item.graph,
-                sql_string=querytool.sql_string %}
-        {% endfor %}
-    </div>
 </div>
 {% endblock %}
 
