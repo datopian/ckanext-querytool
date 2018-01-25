@@ -50,6 +50,14 @@
       $(this).closest('.filter-group').children('.filter-item-value').removeClass('hidden');
     });
 
-  })
+    $('#appendedInputButtons').val(window.location.href);
+    $('.copyToClipboard').on('click',
+        function () {
+          var $temp = $("<input>");
+          $("body").append($temp);
+          $temp.val($('#appendedInputButtons').val()).select();
+          document.execCommand("copy");
+    });
+  });
 
 })($);

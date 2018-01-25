@@ -23,7 +23,6 @@
         var sqlString = vizForm.data('sqlString');
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
-        var chartSnippet = $('#chart-form-wrapper').length > 0;
 
         var charts = $('.chart_field');
 
