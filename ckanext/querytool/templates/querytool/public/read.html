@@ -3,17 +3,14 @@
 
 {% block page_header_content %}
 <div class="container-fluid">
-  <div class="public-query-header">
+  <div class="page-header">
     <div class="row-fluid">
-      <div class="span5 offset1">
+      <div class="span8 offset2">
         {% block page_header_title %}
           {% if querytool.title %}
             <h1>{{ querytool.title }}</h1>
           {% endif %}
         {% endblock %}
-        <button class="btn btn-secondary btn-filter-toggle"><span class="fa fa-filter"></span> {{ _('Filter data') }}</button>
-      </div>
-      <div class="span5">
         {% block page_header_description %}
           {% if querytool.title %}
             <p class="desc">{{ querytool.description }}</p>
@@ -24,23 +21,26 @@
 </div>
 {% endblock %}
 
-
 {% block tools %}
 <div class="container-fluid public-query">
   <div class="controls">
     <div class="row-fluid">
       <div class="span10 offset1">
         <div class="flex">
+          <div class="filter-y">
+            <label for="y_axis_column">{{ _('Y axis value') }}</label>
+            <select id="y_axis_column" class="filter-item filter-item-column"><option>Preselected column</option></select>
+          </div>
           <div class="filters">
             <!-- Empty lines somehow affect the appearance of the select items -->
             <div class="filter-group">
               <select class="filter-item filter-item-column"><option>&mdash; Select filter &mdash;</option><option>Column</option></select>
-              <select class="filter-item filter-item-value"><option>&mdash; Select value &mdash;</option><option>Value</option></select>
+              <select class="filter-item filter-item-value hidden"><option>&mdash; Select value &mdash;</option><option>Value</option></select>
             </div>
           </div>
           <div class="actions">
-            <button class="btn btn-info btn-add-filter"><span class="fa fa-plus"></span> {{ _('Add filter') }}</button>
-            <button class="btn btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
+            <button class="btn btn-large btn-secondary btn-add-filter"><span class="fa fa-plus"></span> {{ _('Add filter') }}</button>
+            <button class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
           </div>
         </div>
       </div>
