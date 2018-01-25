@@ -64,19 +64,20 @@ body {
   text-align: center;
   background: transparent;
   border-bottom: none;
-  margin: @grid-gutter-width*4 0 @grid-gutter-width*2;
+  margin: @grid-gutter-width*3 0;
+  .desc {
+    color: @color-masthead-links;
+    margin-bottom: 0;
+    font-size: @base-font-size + 1px;
+  }
 }
 
-.desc {
-  color: @color-white;
-  margin-bottom: @grid-gutter-width;
-  font-size: @base-font-size + 1px;
-}
 
 h1 {
   color: @color-white;
   font-weight: 400;
   font-size: @base-font-size * 3;
+  margin-top: 0;
   margin-bottom: @grid-gutter-width;
   line-height: 1.2;
 }
@@ -102,7 +103,7 @@ h1 {
 
 .thumbnail {
   display: block;
-  margin: @grid-gutter-width/2 auto 0;
+  margin: @grid-gutter-width/2 auto;
   background-color: transparent;
   border: none;
   box-shadow: none;
@@ -198,9 +199,12 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    flex: 1;
+    // Need to work on the responsiveness of this container more.
+    // flex-wrap: wrap;
   }
   .filters {
-    flex-basis: 80%;
+    flex-grow: 2;
     .fa {
       align-self: center;
       margin: auto @grid-gutter-width/2;
@@ -242,8 +246,30 @@ h1 {
     flex-shrink: 0;
     align-self: stretch;
     position: static;
+    margin-right: @grid-gutter-width*2;
     .btn {
       margin: (@grid-gutter-width/2 + 3px) 0 @grid-gutter-width/2 @grid-gutter-width/2;
+    }
+  }
+  .charts{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: @grid-gutter-width/2;
+  }
+  .container-chart{
+    flex: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-around;
+    min-height: @grid-gutter-width*20;
+    background-color: @color-neutral-pale;
+    max-width: 100%;
+    padding: @grid-gutter-width;
+    margin: 0 @grid-gutter-width/2 @grid-gutter-width;
+    &:last-child{
+      margin-bottom: @grid-gutter-width/2;
     }
   }
 }
