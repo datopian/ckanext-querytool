@@ -312,6 +312,8 @@ class QueryToolController(base.BaseController):
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
 
+        querytool['charts'] = json.loads(querytool['charts'])
+
         if querytool is None:
             abort(404, _('Querytool not found.'))
 
