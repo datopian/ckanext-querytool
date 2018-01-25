@@ -1,7 +1,6 @@
 {
   "name": "ckanext-querytool",
   "scripts": {
-    "watch": "less-watch-compiler less css"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
