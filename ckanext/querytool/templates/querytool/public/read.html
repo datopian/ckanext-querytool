@@ -3,6 +3,8 @@
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
+{% resource 'querytool/javascript/modules/tool-embed.js' %}
+{% import 'macros/form.html' as form %}
 
 {% extends "querytool/public/base_main.html" %}
 
@@ -75,20 +77,40 @@
         <div class="row">
             <div class="span6">
                 <div class="input-append">
-                    <input class="span4" id="appendedInputButtons" type="text" value="https://story-tool/Df6dFd3xPC4">
-                    <button class="btn" type="button">Copy</button>
+                    <input class="span4" id="appendedInputButtons" type="text" value="">
+                    <button class="btn copyToClipboard" type="button">Copy</button>
                 </div>
             </div>
             <div class="span6">
                 <ul class="inline pull-right">
                     <li>
-                        <div class="btn-group dropup">
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span class="fa fa-code"></span> Embed <span class="caret"></span></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Submenu 1</a></li>
-                            </ul>
+                        <div class="btn-group">
+                            <a class="btn"
+                               href="#embed-{{ querytool.name }}"
+                               data-module="tool-embed"
+                               data-module-id="{{ querytool.id }}">
+                                <span class="fa fa-code"></span>
+                                                 Embed
+                            </a>
                         </div>
+                        <div id="embed-{{ querytool.id }}" class="modal tool-embed hide">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                              <h3><b>Embed query tool view</b></h3>
+                          </div>
+                          <div class="modal-body">
+                            <p class="embed-content">You can copy and paste the embed code </p>
+                            <div class="row-fluid">
+                              <div class="span6">
+                                {{ form.input("width", label=_("Width"), value=700, classes=["control-full"]) }}
+                              </div>
+                              <div class="span6">
+                                {{ form.input("height", label=_("Height"), value=400, classes=["control-full"]) }}
+                              </div>
+                            </div>
+                            {{ form.textarea("code", label=_("Code"), value="", classes=["pre"], rows=3) }}
+                          </div>
+                         </div>
                     </li>
                     <li>
                         <div class="btn-group dropup">
@@ -130,7 +152,7 @@
                     </li>
                 </ul>
             </div>
-        </div>
     </div>
+</div>
 </div>
 {% endblock %}
