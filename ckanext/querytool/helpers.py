@@ -161,18 +161,22 @@ def _create_where_clause(filters):
 
                 if idx == 0:
                     where_clause = 'WHERE ("{0}" {1} \'{2}\')'.format(
-                        name, op, value)
+                        name, op, value.encode('utf-8'))
                 else:
                     where_clause += ' AND ("{0}" {1} \'{2}\')'.format(
-                        name, op, value)
+                        name, op, value.encode('utf-8'))
 
         else:
             _ = filters[0]
             op = '='
             name = _['name'].encode('utf-8')
             value = _['value']
-            where_clause = 'WHERE ("{0}" {1} \'{2}\')'.format(name,
-                                                              op, value)
+            where_clause = \
+                'WHERE ("{0}" {1} \'{2}\')'.format(
+                    name,
+                    op,
+                    value.encode('utf-8')
+                )
     return where_clause
 
 
