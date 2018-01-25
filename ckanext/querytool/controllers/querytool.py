@@ -252,6 +252,8 @@ class QueryToolController(base.BaseController):
 
             if any(visualizations):
                 _visualization_items['charts'] = json.dumps(visualizations)
+            else:
+                _visualization_items['charts'] = ''
 
             try:
                 junk = _get_action('querytool_visualizations_update',

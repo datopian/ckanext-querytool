@@ -1,7 +1,11 @@
 {% import 'macros/form.html' as form %}
-{% block scripts %}
+
+{% resource 'querytool/vendor/c3/c3.css' %}
+{% resource 'querytool/vendor/d3/d3.js' %}
+{% resource 'querytool/vendor/c3/c3.js' %}
 {% resource 'querytool/javascript/visualizations_settings.js' %}
-{% endblock %}
+{% resource 'querytool/javascript/modules/viz-preview.js' %}
+{% resource 'querytool/javascript/modules/viz-delete.js' %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 {% if data %}
@@ -41,6 +45,7 @@
           {% snippet 'ajax_snippets/chart_fields.html',
             n=chart.order,
             chart=chart,
+            sql_string=data.sql_string,
             map_resource=data.map_resource,
             chart_resource=data.chart_resource %}
         {% endfor %}
