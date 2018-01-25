@@ -20,16 +20,11 @@
     $(document).ready(function() {
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
+        var sqlString = vizForm.data('sqlString');
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
-        var resourceData, records;
-
-        get_resource_datа();
-        removeChart();
-
-
         var chartSnippet = $('#chart-form-wrapper').length > 0;
-        console.log(chartSnippet)
+
         $('#save-visualization-btn').attr('disabled', !chartSnippet);
 
         var createVisualization = $('#create-visualization-btn');
@@ -47,11 +42,13 @@
                         querytool: querytool,
                         chart_resource: chart_resource,
                         map_resource: map_resource,
+                        sql_string: sqlString
                     })
                     .done(function(data) {
-                        visualizationItems.append(data);
+                        var item = visualizationItems.prepend(data);
                         $('#save-visualization-btn').attr('disabled', false);
-                        removeChart();
+                        ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
+                        handleItemsOrder();
                     });
             } else if (visualization === 'map') {
                 alert('Not implemented yet.')
@@ -71,18 +68,6 @@
 
             handleItemsOrder();
         });
-
-        function removeChart(){
-             var remove_chart_button = $('.remove-chart-button');
-
-            remove_chart_button.on('click', function(e) {
-                $(e.target).closest('.chart_field').remove();
-                // TODO requires implementation
-                //_handleChartsItemsOrder();
-            });
-
-
-        }
 
         // This function updates the order numbers for the form elements.
         function handleItemsOrder() {
@@ -113,23 +98,8 @@
             });
         }
 
-        function get_resource_datа() {
-            api.get('querytool_get_resource_data', {
-                group: true,
-                sql_string: vizForm.data('sqlString')
-            })
-            .done(function(data) {
-                console.log(data)
-            });
-        }
-
-        function initCharts() {
-            var items = $('.chart_field');
-
-            $.each(items, function(i, item) {
-                console.log(item)
-            })
-        }
+        // Expose this function on window to be accessible in other files
+        window.handleItemsOrder = handleItemsOrder;
     });
 
 })($);
