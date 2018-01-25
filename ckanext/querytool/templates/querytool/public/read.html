@@ -15,7 +15,7 @@
       <div class="span8 offset2">
         {% block page_header_title %}
           {% if querytool.title %}
-            <h1>{{ querytool.title }}</h1>
+            <h1>{{ querytool.title }}</h1>`
           {% endif %}
         {% endblock %}
         {% block page_header_description %}
@@ -38,11 +38,6 @@
           <select id="y_axis_column" class="filter-item filter-item-column"><option>Preselected column</option></select>
         </div>
         <div class="filters">
-          <!-- Empty lines somehow affect the appearance of the select items -->
-          <div class="filter-group">
-            <select class="filter-item filter-item-column"><option>&mdash; Select filter &mdash;</option><option>Column</option></select>
-            <select class="filter-item filter-item-value hidden"><option>&mdash; Select value &mdash;</option><option>Value</option></select>
-          </div>
         </div>
         <div class="actions">
           <button type="button" class="btn btn-large btn-secondary btn-add-filter"><span class="fa fa-plus"></span> {{ _('Add filter') }}</button>
@@ -67,6 +62,7 @@
   <!-- Visualizations container -->
 </div>
 <input type="hidden" id="query_init_filters" name="query_init_filters" value="{{ querytool.filters }}"/>
+<input type="hidden" id="resource_id" name="resource_id" value="{{ querytool.chart_resource }}"/>
 
 {% endblock %}
 
