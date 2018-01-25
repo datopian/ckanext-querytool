@@ -1,8 +1,11 @@
 .btn {
   background-image: none;
+  box-shadow: none;
   border-radius: 0;
-
-  .fa{
+  &:hover {
+    box-shadow: none;
+  }
+  .fa {
     .fa-icon-margin(0 @fa-margin 0 0);
   }
 }
@@ -17,16 +20,15 @@
   }
 }
 
-.btn-secondary{
-  background-color: @color-secondary;
+.btn-secondary {
+  background-color: @color-secondary-dark;
   border-color: @color-secondary;
   color: @color-white;
   text-shadow: none;
   &:focus,
   &:hover {
     color: @color-white;
-    border-color: @color-secondary-darker;
-    background-color: @color-secondary-darker;
+    background-color: darken(@color-secondary-dark, 5%);
   }
 }
 
