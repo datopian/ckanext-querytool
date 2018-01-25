@@ -181,12 +181,12 @@ class QueryToolController(base.BaseController):
         if 'filters' in data and len(data['filters']) > 0:
             data['filters'] = json.loads(data['filters'])
             data['filters'].sort(key=itemgetter('order'))
+        print data
 
-        if 'dataset_name' in data:
+        if 'chart_resource' in data:
             try:
-                package = _get_action('package_show',
-                                      {'id': data['dataset_name']})
-                resource = package['resources'][0]
+                resource = _get_action('resource_show',
+                                       {'id': data['chart_resource']})
                 resource_fields = _get_action('get_resource_fields',
                                               {'resource': resource})
                 c.active_filters = ','.join(resource_fields)
@@ -311,6 +311,8 @@ class QueryToolController(base.BaseController):
         :return: base template
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
+
+        querytool['charts'] = json.loads(querytool['charts'])
 
         if querytool is None:
             abort(404, _('Querytool not found.'))
