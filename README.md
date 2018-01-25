@@ -68,34 +68,12 @@ PEP8 errors.
 
 ## Modify CSS
 
-
 This extension uses LESS for styles. All changes must be made in one of the LESS
-files located in the ``ckanext-querytool/ckanext/querytool/fanstatic/less`` folder.
+files located in the `ckanext-querytool/ckanext/querytool/fanstatic/less` folder.
 
-In order to compile those files to CSS, the `less <https://www.npmjs.com/package/less>`
-npm module is used.
+Gulp.js is used for building CSS assets.
 
-First make sure that you have installed `Node.js <https://nodejs.org/en/>`. That
-will install the ``npm`` package manager. After that, open up the terminal and
-change the current directory to `ckanext-querytool/ckanext/querytool/fanstatic`.
-
-Then run the following command that is going to install LESS:
-
-   npm install less
-
-After a successful installation, run the next command to compile the main less
-file `public-query-tool.less` to public-query-tool.css`
-```
-  ./node_modules/.bin/lessc less/public-query-tool.less css/public-query-tool.css
-
-```
-or `main.less` to main.css`
-```
-  ./node_modules/.bin/lessc less/main.less css/main.css
-
-```
-Every time there is some change in one of the less files, the upper command
-needs to be run to compile those files to one css file.
+In order to build all CSS assets **run `gulp` once**. Gulp.js is watching for changes in the source LESS assets and will rebuild CSS on each change.
 
 ## Running the Tests
 
