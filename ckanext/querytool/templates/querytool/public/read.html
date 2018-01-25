@@ -1,4 +1,9 @@
 {% resource "querytool/javascript/public_query.js" %}
+{% resource 'querytool/vendor/c3/c3.css' %}
+{% resource 'querytool/vendor/d3/d3.js' %}
+{% resource 'querytool/vendor/c3/c3.js' %}
+{% resource 'querytool/javascript/modules/viz-preview.js' %}
+
 {% extends "querytool/public/base_main.html" %}
 
 {% block page_header_content %}
@@ -53,6 +58,18 @@
       </div>
     </div>
   </div>
+  <!-- Visualizations container -->
+    <div>
+        {% for item in querytool.charts %}
+            {% snippet 'ajax_snippets/visualization_item.html',
+                type='chart',
+                colors=item.color,
+                x_axis=item.x_axis,
+                y_axis=item.y_axis,
+                chart_type=item.graph,
+                sql_string=querytool.sql_string %}
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
 
