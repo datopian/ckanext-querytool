@@ -176,37 +176,31 @@ h1 {
 }
 
 // Public queries UI
-.public-query-header{
+.public-query-header {
   padding: @grid-gutter-width 0;
   min-height: @grid-gutter-width*5;
-
-  h1{
+  h1 {
     font-weight: 700;
   }
-
-  .desc{
+  .desc {
     padding: @grid-gutter-width;
     background-color: fade(@color-primary-dark, 60%);
   }
 }
+
 .public-query {
   padding: 0;
   background: @color-white;
   .controls {
     background: @color-secondary;
-    display: none;
-    &.on{
-      display: block;
-    }
   }
   .flex {
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: flex-start;
   }
   .filters {
-    margin-top: @grid-gutter-width;
-    margin-bottom: @grid-gutter-width/2;
+    flex-basis: 80%;
     .fa {
       align-self: center;
       margin: auto @grid-gutter-width/2;
@@ -214,30 +208,48 @@ h1 {
     }
   }
   .filter-item {
-    margin-bottom: @grid-gutter-width/2;
     border-color: transparent;
   }
-  .filter-item-value{
-    display: none;
-  }
   .filter-group {
+    align-self: center;
     display: inline-flex;
     flex-direction: column;
+    margin-top: @grid-gutter-width/2;
     margin-bottom: @grid-gutter-width/2;
     background: @color-secondary-darker;
     padding: @grid-gutter-width/2 @grid-gutter-width/2 0;
   }
+  .filter-y {
+    flex-shrink: 0;
+    display: flex;
+    align-self: stretch;
+    align-items: flex-start;
+    justify-content: space-between;
+    color: @color-white;
+    padding: @grid-gutter-width @grid-gutter-width*2;
+    margin-right: @grid-gutter-width*1.5;
+    background: @color-info;
+    select {
+      margin-bottom: 0;
+    }
+    label {
+      margin-top: @grid-gutter-width/6;
+      margin-right: @grid-gutter-width;
+      font-weight: 700;
+    }
+  }
   .actions {
     flex-shrink: 0;
+    align-self: stretch;
     position: static;
     .btn {
-      margin-left: @grid-gutter-width/2;
+      margin: (@grid-gutter-width/2 + 3px) 0 @grid-gutter-width/2 @grid-gutter-width/2;
     }
   }
 }
 
-.btn-filter-toggle{
-  &.on{
+.btn-filter-toggle {
+  &.on {
     border-color: @color-success;
     background-color: @color-success;
   }
