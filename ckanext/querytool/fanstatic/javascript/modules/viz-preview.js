@@ -71,8 +71,8 @@ ckan.module('querytool-viz-preview', function() {
             }.bind(this));
         },
         createChart: function(data) {
-            var x_axis = this.options.x_axis;
-            var y_axis = this.options.y_axis;
+            var x_axis = this.options.x_axis.toLowerCase();
+            var y_axis = this.options.y_axis.toLowerCase();
             var records = data.records;
             var options = {
                 bindto: this.el[0],
