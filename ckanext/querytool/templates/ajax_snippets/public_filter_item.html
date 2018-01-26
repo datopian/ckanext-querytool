@@ -1,19 +1,20 @@
 {% set filter_names = filter_names.split(',') %}
 
-
-<div id="filter_item_{{ n }}" class="filter-group">
+<div class="filter-group-wrapper">
+  <span class="fa fa-arrow-right"></span>
+  <div id="filter_item_{{ n }}" class="filter-group">
     <select class="filter-item filter-item-column" id="data_filter_name_{{ n }}" name="data_filter_name_{{ n }}">
-        <option>&mdash; Select filter &mdash;</option>
-        {% for filter in filter_names %}
-          <option value="{{ filter }}" {% if selected_filter %}{{ 'selected' if filter == selected_filter.name }}{% endif %}>{{ filter }}</option>
-        {% endfor %}
+      <option>&mdash; Select filter &mdash;</option>
+      {% for filter in filter_names %}
+      <option value="{{ filter }}" {% if selected_filter %}{{ 'selected' if filter == selected_filter.name }}{% endif %}>{{ filter }}</option>
+      {% endfor %}
     </select>
     <select class="filter-item filter-item-value {{ class }}" id="data_filter_value_{{ n }}" name="data_filter_value_{{ n }}">
-        <option>&mdash; Select value &mdash;</option>
-        {% if selected_filter %}
-          <option value="{{ selected_filter.value }}" selected>{{ selected_filter.value }}</option>
-        {% endif %}
+      <option>&mdash; Select value &mdash;</option>
+      {% if selected_filter %}
+      <option value="{{ selected_filter.value }}" selected>{{ selected_filter.value }}</option>
+      {% endif %}
     </select>
-    <span class="fa fa-arrow-right"></span>
+  </div>
 </div>
 
