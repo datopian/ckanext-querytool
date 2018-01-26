@@ -40,12 +40,11 @@
         <div class="filters">
             {% if querytool.public_filters  %}
               {% for filter in querytool.public_filters %}
-                {% snippet 'ajax_snippets/public_filter_item.html', n=filter.order, filter_names=c.filter_names, selected_filter=filter %}
+                {% snippet 'ajax_snippets/public_filter_item.html', n=filter.order, selected_filter=filter %}
               {% endfor %}
             {% endif %}
         </div>
         <div class="actions">
-          {# <button type="button" class="btn btn-large btn-secondary btn-add-filter"><span class="fa fa-plus"></span> {{ _('Add filter') }}</button> #}
           <button type="submit" class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
         </div>
       </form>
