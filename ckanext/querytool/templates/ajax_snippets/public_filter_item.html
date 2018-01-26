@@ -1,8 +1,8 @@
 {% set filter_names = filter_names.split(',') %}
 
-<div class="filter-group-wrapper">
+<div id="filter_item_{{ n }}" class="filter-group-wrapper">
   <span class="fa fa-arrow-right"></span>
-  <div id="filter_item_{{ n }}" class="filter-group">
+  <div class="filter-group">
     <select class="filter-item filter-item-column" id="data_filter_name_{{ n }}" name="data_filter_name_{{ n }}">
       <option>&mdash; Select filter &mdash;</option>
       {% for filter in filter_names %}
