@@ -1,3 +1,14 @@
+/*
+
+This modules handles displaying a pop up in whic will be embded iframe with link
+to the query or story tool
+
+Options:
+    - id (Tool id)
+    - href (link to tool)
+    - module (Data module name)
+*/
+
 this.ckan.module('tool-embed', function ($) {
   var modal;
   var self;

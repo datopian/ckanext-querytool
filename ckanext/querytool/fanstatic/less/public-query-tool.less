@@ -197,29 +197,33 @@ h1 {
   }
   .flex {
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex: 1;
+    align-items: stretch;
+    // justify-content: flex-start;
     // Need to work on the responsiveness of this container more.
-    // flex-wrap: wrap;
+    flex-wrap: wrap;
   }
   .filters {
-    flex-grow: 2;
+    flex: 1;
+    margin: 0 @grid-gutter-width/2 @grid-gutter-width/2;
     .fa {
       align-self: center;
       margin: auto @grid-gutter-width/2;
+      position: relative;
+      top: @grid-gutter-width/4;
       color: @color-white;
     }
   }
   .filter-item {
     border-color: transparent;
   }
-  .filter-group {
+  .filter-group-wrapper{
     align-self: center;
+    display: inline-flex;
+  }
+  .filter-group {
     display: inline-flex;
     flex-direction: column;
     margin-top: @grid-gutter-width/2;
-    margin-bottom: @grid-gutter-width/2;
     background: @color-secondary-darker;
     padding: @grid-gutter-width/2 @grid-gutter-width/2 0;
   }
@@ -230,8 +234,7 @@ h1 {
     align-items: flex-start;
     justify-content: space-between;
     color: @color-white;
-    padding: @grid-gutter-width @grid-gutter-width*2;
-    margin-right: @grid-gutter-width*1.5;
+    padding: @grid-gutter-width;
     background: @color-info;
     select {
       margin-bottom: 0;
@@ -244,9 +247,9 @@ h1 {
   }
   .actions {
     flex-shrink: 0;
-    align-self: stretch;
     position: static;
-    margin-right: @grid-gutter-width*2;
+    align-self: flex-start;
+    margin: 0 @grid-gutter-width;
     .btn {
       margin: (@grid-gutter-width/2 + 3px) 0 @grid-gutter-width/2 @grid-gutter-width/2;
     }
