@@ -34,6 +34,16 @@
       </div>
     </div>
 
+    <div class="control-group control-select data_filter_value_{{ n }} {{ class }}">
+      <label class="control-label" for="data_filter_visibility_{{ n }}">{{ _('Visibility') }}</label>
+      <div class="controls ">
+        <select id="data_filter_visibility_{{ n }}" name="data_filter_visibility_{{ n }}" required=required>
+          <option value="public" {% if selected_filter %}{{ 'selected' if selected_filter.visibility == 'public' }}{% endif %}>{{ _('Public') }}</option>
+          <option value="private" {% if selected_filter %}{{ 'selected' if selected_filter.visibility == 'private' }}{% endif %}>{{ _('Private') }}</option>
+        </select>
+      </div>
+    </div>
+
     <input type="hidden" id="resource_id_{{ n }}" name="resource_id_{{ n }}" value="{{ c.resource_id or resource_id }}"/>
     <ul class="inline text-right filter-actions">
       <li>

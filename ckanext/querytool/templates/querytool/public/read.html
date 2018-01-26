@@ -40,7 +40,9 @@
         <div class="filters">
             {% if querytool.public_filters  %}
               {% for filter in querytool.public_filters %}
-                {% snippet 'ajax_snippets/public_filter_item.html', n=filter.order, selected_filter=filter %}
+                {% if filter.visibility == 'public'  %}
+                  {% snippet 'ajax_snippets/public_filter_item.html', n=filter.order, selected_filter=filter %}
+                {% endif %}
               {% endfor %}
             {% endif %}
         </div>

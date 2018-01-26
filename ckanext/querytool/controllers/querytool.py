@@ -147,6 +147,8 @@ class QueryToolController(base.BaseController):
                     filter['name'] = data['data_filter_name_{}'.format(id)]
                     filter['value'] = data['data_filter_value_{}'.format(id)]
                     filter['alias'] = data['data_filter_alias_{}'.format(id)]
+                    filter['visibility'] = \
+                        data['data_filter_visibility_{}'.format(id)]
 
                     filters.append(filter)
 
