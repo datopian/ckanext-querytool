@@ -312,10 +312,31 @@ class QueryToolController(base.BaseController):
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
 
-        querytool['charts'] = json.loads(querytool['charts'])
-
         if querytool is None:
             abort(404, _('Querytool not found.'))
+
+        if querytool.get('charts'):
+            querytool['charts'] = json.loads(querytool['charts'])
+
+        params = toolkit.request.params
+
+        new_filters = querytool.get('filters')
+        new_filters = json.loads(new_filters)
+
+        for k, v in params.items():
+            if k.startswith('data_filter_name_'):
+                id = k.split('_')[-1]
+                for filter in new_filters:
+                    if v == filter.get('name'):
+                        filter['value'] =\
+                            params.get('data_filter_value_{}'.format(id))
+
+        sql_string = helpers.create_query_str(
+            querytool.get('chart_resource'), new_filters
+        )
+
+        querytool['public_filters'] = new_filters
+        querytool['sql_string'] = sql_string
 
         return render('querytool/public/read.html',
                       extra_vars={'querytool': querytool})
