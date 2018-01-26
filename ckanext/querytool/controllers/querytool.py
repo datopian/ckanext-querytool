@@ -334,9 +334,16 @@ class QueryToolController(base.BaseController):
         sql_string = helpers.create_query_str(
             querytool.get('chart_resource'), new_filters
         )
+        filter_names = []
+        for filter in new_filters:
+            filter_names.append(filter['name'])
 
         querytool['public_filters'] = new_filters
+        querytool['public_filters'].sort(key=itemgetter('order'))
         querytool['sql_string'] = sql_string
+        c.filter_names = ','.join(filter_names)
+        print querytool['filters']
+        print querytool['public_filters']
 
         return render('querytool/public/read.html',
                       extra_vars={'querytool': querytool})

@@ -71,6 +71,7 @@
         }
 
         filter_name_select.change(function(event) {
+        console.log('aaaaaaa');
             var elem = $(this);
             var filter_name = elem.find(":selected").val();
             var filter_name_select_id = elem.attr('id');
@@ -137,6 +138,8 @@
     }
 
   $(document).ready(function (e) {
+
+    handleRenderedFilters();
 
     var add_filter_button = $('.btn-add-filter');
 
