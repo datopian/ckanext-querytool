@@ -142,10 +142,9 @@
     $('#appendedInputButtons').val(window.location.href);
     $('.copyToClipboard').on('click',
         function () {
-          var $temp = $("<input>");
-          $("body").append($temp);
-          $temp.val($('#appendedInputButtons').val()).select();
-          document.execCommand("copy");
+          var copyText = $('#appendedInputButtons');
+          copyText.select();
+          document.execCommand("Copy");
     });
   });
 
