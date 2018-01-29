@@ -152,6 +152,9 @@
         var datasetField = $('#field-datasets');
         var chartResourceSelect = $('#chart_resource');
         var mapResourceSelect = $('#map_resource');
+        var yAxisColumnsResults = $('#y-axis-columns-results');
+        var yAxisColumnsNotice = $('#y-axis-columns-notice');
+        var yAxisColumnsContainer = $('#y-axis-columns-container');
 
         var defaultDataset = datasetField.find("option:first")[0].value;
         var defaultResource = chartResourceSelect.find("option:first")[0];
@@ -163,10 +166,19 @@
         datasetField.change(function(event) {
             $('#main-filters').html('');
             get_dataset_resources(this.value);
+            yAxisColumnsResults.html('');
+            yAxisColumnsNotice.text('Please choose a chart resource to see available columns.');
+            yAxisColumnsNotice.css('display', 'block');
+            yAxisColumnsContainer.css('display', 'none');
         });
 
         chartResourceSelect.change(function(event) {
             $('#main-filters').html('');
+
+            yAxisColumnsResults.html('');
+            yAxisColumnsNotice.text('');
+            yAxisColumnsContainer.css('display', 'none');
+            populateYAxisColumns(event.target.value);
         });
 
         var add_filter_button = $('#add-filter-button');
@@ -241,6 +253,9 @@
                     chartResourceSelect.removeAttr('disabled');
                     mapResourceSelect.removeAttr('disabled');
 
+                    chartResourceSelect.append($('<option></option>').attr('value', 'none').text('-- Choose resource --'));
+                    mapResourceSelect.append($('<option></option>').attr('value', 'none').text('-- Choose resource --'));
+
                      $.each(dataset_resources, function(i, res) {
                         var name = res.name || 'Unnamed resource';
                         chartResourceSelect.append($('<option></option>')
@@ -248,6 +263,38 @@
                          mapResourceSelect.append($('<option></option>')
                          .attr('value', res.id).text(name));
                     });
+                });
+        }
+
+        function populateYAxisColumns(value) {
+            api.get('querytool_get_resource_columns', {res_id: value})
+                .done(function(response) {
+                    if (response.success) {
+                        if (response.result.length > 0) {
+                            yAxisColumnsContainer.css('display', 'block');
+                            response.result.forEach(function(item, i) {
+                                var element = [
+                                    '<li class="checkbox-marked">',
+                                        '<input name="y_axis_column_' + item +'" for="d-t-0' + i +'" type="checkbox" value="' + item + '" />',
+                                        '<label for="d-t-0' + item + '">' + item + '</label>',
+                                    '</li>'
+                                ].join('');
+
+                                yAxisColumnsResults.append(element);
+                            });
+                        } else {
+                            yAxisColumnsNotice.css('display', 'block');
+                            yAxisColumnsNotice.text('No columns retrieved.');
+                        }
+                    } else {
+                        yAxisColumnsNotice.css('display', 'block');
+                        yAxisColumnsNotice.text('An error occured while getting columns.');
+                    }
+                })
+                .error(function(error) {
+                    yAxisColumnsNotice.css('display', 'block');
+                    yAxisColumnsNotice.text('An error occured while getting columns.');
+                    console.log(error);
                 });
         }
 

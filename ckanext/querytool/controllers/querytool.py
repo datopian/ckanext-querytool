@@ -138,6 +138,7 @@ class QueryToolController(base.BaseController):
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
             filters = []
+            y_axis_columns = []
             for k, v in data.items():
 
                 if k.startswith('data_filter_name_'):
@@ -149,6 +150,8 @@ class QueryToolController(base.BaseController):
                     filter['alias'] = data['data_filter_alias_{}'.format(id)]
 
                     filters.append(filter)
+                elif k.startswith('y_axis_column_'):
+                    y_axis_columns.append(v)
 
             if any(filters):
                 _querytool['filters'] = json.dumps(filters)
@@ -161,6 +164,7 @@ class QueryToolController(base.BaseController):
             _querytool.update(data)
             _querytool['querytool'] = querytool
             _querytool['sql_string'] = sql_string
+            _querytool['y_axis_columns'] = ','.join(y_axis_columns)
 
             try:
                 junk = _get_action('querytool_update', _querytool)
@@ -181,7 +185,6 @@ class QueryToolController(base.BaseController):
         if 'filters' in data and len(data['filters']) > 0:
             data['filters'] = json.loads(data['filters'])
             data['filters'].sort(key=itemgetter('order'))
-        print data
 
         if 'chart_resource' in data:
             try:
@@ -196,6 +199,10 @@ class QueryToolController(base.BaseController):
 
         errors = errors or {}
         error_summary = error_summary or {}
+
+        if _querytool.get('y_axis_columns'):
+            _querytool['y_axis_columns'] =\
+                _querytool.get('y_axis_columns').split(',')
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary,
@@ -281,6 +288,18 @@ class QueryToolController(base.BaseController):
         data['sql_string'] = _querytool.get('sql_string')
         data['map_resource'] = _querytool.get('map_resource')
         data['chart_resource'] = _querytool.get('chart_resource')
+        data['y_axis_columns'] = _querytool.get('y_axis_columns')
+
+        data['y_axis_columns'] = data['y_axis_columns'].split(',')
+
+        data['y_axis_columns'] = map(lambda column: {
+            'value': column,
+            'text': column
+        }, data['y_axis_columns'])
+
+        data['y_axis_columns'].insert(0, {
+            'value': '$none$', 'text': '-- Select column --'
+        })
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
@@ -342,8 +361,6 @@ class QueryToolController(base.BaseController):
         querytool['public_filters'].sort(key=itemgetter('order'))
         querytool['sql_string'] = sql_string
         c.filter_names = ','.join(filter_names)
-        print querytool['filters']
-        print querytool['public_filters']
 
         return render('querytool/public/read.html',
                       extra_vars={'querytool': querytool})

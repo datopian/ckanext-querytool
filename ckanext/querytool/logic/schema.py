@@ -26,4 +26,5 @@ def querytool_schema():
         'modified': [ignore_missing, isodate],
         'map_resource': [not_empty, unicode],
         'chart_resource': [not_empty, unicode],
+        'y_axis_columns': [not_empty, unicode],
     }

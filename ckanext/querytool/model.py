@@ -117,6 +117,8 @@ def define_query_tool_table():
                                     nullable=False),
                              Column('filters', types.UnicodeText,
                                     default=u''),
+                             Column('y_axis_columns', types.UnicodeText,
+                                    default=u''),
                              Column('sql_string', types.UnicodeText,
                                     default=u''),
                              Column('created', types.DateTime,

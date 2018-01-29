@@ -45,6 +45,8 @@ ckan.module('querytool-viz-preview', function() {
 
                 updateBtn.click(this.updateChart.bind(this));
             }
+
+            this.sandbox.subscribe('querytool:updateCharts', this.updateChart.bind(this));
         },
         // Enhance the SQL query with grouping and only select 2 columns.
         create_sql_string: function() {
@@ -121,16 +123,16 @@ ckan.module('querytool-viz-preview', function() {
         updateChart: function() {
             var chartField = this.el.closest('.chart_field');
 
-            var chartTypeSelect = chartField.find('select[name*=chart_field_graph_]');
+            var chartTypeSelect = chartField.find('[name*=chart_field_graph_]');
             var chartTypeValue = chartTypeSelect.val();
 
-            var colorSelect = chartField.find('select[name*=chart_field_color_]');
+            var colorSelect = chartField.find('[name*=chart_field_color_]');
             var colorValue = colorSelect.val();
 
-            var axisXSelect = chartField.find('select[name*=chart_field_axis_x_]');
+            var axisXSelect = chartField.find('[name*=chart_field_axis_x_]');
             var axisXValue = axisXSelect.val();
 
-            var axisYSelect = chartField.find('select[name*=chart_field_axis_y_]');
+            var axisYSelect = chartField.find('[name*=chart_field_axis_y_]');
             var axisYValue = axisYSelect.val();
 
 

@@ -120,3 +120,8 @@ def querytool_get_resource_data(context, data_dict):
     )
 
     return response
+
+
+@toolkit.side_effect_free
+def querytool_get_resource_columns(context, data_dict):
+    return h.get_resource_columns(data_dict.get('res_id'))
