@@ -91,6 +91,9 @@ ckan.module('querytool-viz-preview', function() {
                     options.data = {
                         columns: values,
                         type : this.options.chart_type
+                    };
+                    options.title = {
+                        text:  this.options.title
                     }
                 } else {
                     values = records.map(function(item) {
@@ -113,6 +116,9 @@ ckan.module('querytool-viz-preview', function() {
                             categories: categories
                         }
                     };
+                    options.title = {
+                        text: this.options.title
+                    }
                 }
 
             var chart = c3.generate(options);
@@ -133,7 +139,8 @@ ckan.module('querytool-viz-preview', function() {
             var axisYSelect = chartField.find('select[name*=chart_field_axis_y_]');
             var axisYValue = axisYSelect.val();
 
-
+            var chartTitle = chartField.find('input[name*=chart_field_title_]');
+            var chartTitleVal = chartTitle.val();
             // If the changed values from the dropdowns are from color or chart type
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -142,7 +149,7 @@ ckan.module('querytool-viz-preview', function() {
             ) && (this.options.colors !== colorValue || this.options.chart_type !== chartTypeValue)) {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
-
+                this.options.title = chartTitleVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -152,7 +159,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.chart_type = chartTypeValue;
             this.options.x_axis = axisXValue;
             this.options.y_axis = axisYValue;
-
+            this.options.title = chartTitleVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);

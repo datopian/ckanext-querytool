@@ -48,10 +48,13 @@
         </div>
       </div>
 
+      {% if chart %}
+        {% set chart_title = chart.title %}
+      {% endif %}
       <div class="control-group ">
-        <label class="control-label" for="chart_field_num_row">{{ _('Number of rows') }}</label>
+        <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Chart title') }}</label>
         <div class="controls ">
-          <input id="chart_field_num_row" name="num_rows" value="" placeholder="{{ _('Number of rows') }}" type="text">
+          <input id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" value="{{ chart_title }}" placeholder="{{ _('Chart title') }}" type="text">
         </div>
       </div>
 
@@ -69,11 +72,13 @@
         {% set x_axis = chart.x_axis %}
         {% set y_axis = chart.y_axis %}
         {% set chart_type = chart.graph %}
+        {% set title = chart.title %}
       {% else %}
         {% set colors = color_scheme[0].value %}
         {% set x_axis = columns[0] %}
         {% set y_axis = columns[0] %}
         {% set chart_type = chart_types[0].value %}
+        {% set title = '' %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -82,7 +87,8 @@
           x_axis=x_axis,
           y_axis=y_axis,
           chart_type=chart_type,
-          sql_string=sql_string %}
+          sql_string=sql_string,
+          title= title%}
     </div>
     <div class="chart-controls-wrapper">
     </div>

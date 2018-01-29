@@ -249,6 +249,8 @@ class QueryToolController(base.BaseController):
                         data['chart_field_axis_y_{}'.format(id)]
                     visualization['color'] = \
                         data['chart_field_color_{}'.format(id)]
+                    visualization['title'] = \
+                        data['chart_field_title_{}'.format(id)]
 
                     visualizations.append(visualization)
 
@@ -286,6 +288,7 @@ class QueryToolController(base.BaseController):
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
+
         return render('querytool/admin/base_edit_visualizations.html',
                       extra_vars=vars)
 

@@ -53,8 +53,8 @@ def querytool_update(context, data_dict):
 def querytool_visualizations_update(context, data_dict):
     '''
         Create new query tool visualizations
-    :param
-    :param
+    :param name
+    :param charts
     :param
     '''
 
