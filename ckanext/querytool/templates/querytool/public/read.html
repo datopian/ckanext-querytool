@@ -29,7 +29,7 @@
 {% endblock %}
 
 {% block tools %}
-<div class="container-fluid public-query">
+<div class="public-query">
   <div class="controls">
     <form method="GET">
       <div class="flex">
@@ -38,19 +38,19 @@
           <select id="y_axis_column" class="filter-item filter-item-column"><option>Preselected column</option></select>
         </div>
         <div class="filters">
-            {% if querytool.public_filters  %}
-              {% for filter in querytool.public_filters %}
-                {% if filter.visibility == 'public'  %}
-                  {% snippet 'ajax_snippets/public_filter_item.html', n=filter.order, selected_filter=filter %}
-                {% endif %}
-              {% endfor %}
-            {% endif %}
+          {% if querytool.public_filters  %}
+            {% for filter in querytool.public_filters %}
+              {% if filter.visibility == 'public'  %}
+                {% snippet 'ajax_snippets/public_filter_item.html', n=filter.order, selected_filter=filter %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
         </div>
         <div class="actions">
           <button type="submit" class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
   <div class="charts">
     {% for item in querytool.charts %}
