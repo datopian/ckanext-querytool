@@ -139,8 +139,30 @@
 
     });
 
+    // Add validation on public filters if no valid values are selected
+    var updateBtn = $('.btn-update');
+    updateBtn.on('click', function(event, data){
+        event.preventDefault();
+        var filter_value_inputs = $('[id*=data_filter_value_]')
+        var value = '';
+        var valid = true;
+        $.each(filter_value_inputs, function(idx, elem) {
+            value = $(elem).find(":selected").val();
+            if(!value){
+                valid = false;
+            }
+        });
+        if(valid){
+            $('#public-filters').submit();
+        }else{
+            //in the future display some error
+            alert('Please select filter value')
+        }
+    });
+
     $('#appendedInputButtons').val(window.location.href);
-    $('.copyToClipboard').on('click',
+    var copyBtn = $('.copyToClipboard');
+    copyBtn.on('click',
         function () {
           var copyText = $('#appendedInputButtons');
           copyText.select();
