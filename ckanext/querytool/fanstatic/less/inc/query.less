@@ -31,9 +31,14 @@
 }
 
 .chart-actions {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 0;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   &.inline {
-    > li {
+    >li {
       &:last-child {
         padding-right: 0;
       }
@@ -60,10 +65,18 @@
   border: 1px solid darken(@color-neutral-pale, 10%);
 }
 
+.chart-form-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  min-height: @grid-gutter-width*16;
+}
+
 .chart-controls-wrapper {
   flex-direction: column;
 }
 
-.tool-embed{
-   color: black !important;
+.tool-embed {
+  color: black !important;
 }

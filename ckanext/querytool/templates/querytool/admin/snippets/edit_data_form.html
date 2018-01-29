@@ -67,7 +67,7 @@ Example usage:
   <legend>{{ _('Y Axis columns') }}</legend>
   {% set columns = h.querytool_get_resource_columns(data.chart_resource) %}
 
-  <div class="control-group"
+  <div class="control-group control-checkbox-group"
        id="y-axis-columns-container"
        {% if columns | length == 0 %} style="display: none;" {% endif %}>
     <label class="control-label" for="field-y-axis"><span title="This field is required" class="control-required">*</span>{{ _("Y Axis columns") }}</label>
@@ -75,8 +75,8 @@ Example usage:
         <ul class="inline" id="y-axis-columns-results">
             {% for column in columns %}
             <li class="checkbox-marked">
-                <input name="y_axis_column_{{ column }}" for="d-t-0{{ loop.index }}" type="checkbox" value="{{ column }}" {% if column in data.y_axis_columns %} checked {% endif %} />
-                <label for="d-t-0{{ loop.index }}">{{ column }}</label>
+                <input name="y_axis_column_{{ column }}" id="y_axis_column_{{ column }}" type="checkbox" value="{{ column }}" {% if column in data.y_axis_columns %} checked {% endif %} />
+                <label for="y_axis_column_{{ column }}">{{ column }}</label>
             </li>
             {% endfor %}
         </ul>
