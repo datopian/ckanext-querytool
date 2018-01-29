@@ -148,6 +148,8 @@ class QueryToolController(base.BaseController):
                     filter['name'] = data['data_filter_name_{}'.format(id)]
                     filter['value'] = data['data_filter_value_{}'.format(id)]
                     filter['alias'] = data['data_filter_alias_{}'.format(id)]
+                    filter['visibility'] = \
+                        data['data_filter_visibility_{}'.format(id)]
 
                     filters.append(filter)
                 elif k.startswith('y_axis_column_'):
@@ -254,6 +256,8 @@ class QueryToolController(base.BaseController):
                         data['chart_field_axis_y_{}'.format(id)]
                     visualization['color'] = \
                         data['chart_field_color_{}'.format(id)]
+                    visualization['title'] = \
+                        data['chart_field_title_{}'.format(id)]
 
                     visualizations.append(visualization)
 
@@ -303,6 +307,7 @@ class QueryToolController(base.BaseController):
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
+
         return render('querytool/admin/base_edit_visualizations.html',
                       extra_vars=vars)
 
@@ -353,14 +358,10 @@ class QueryToolController(base.BaseController):
         sql_string = helpers.create_query_str(
             querytool.get('chart_resource'), new_filters
         )
-        filter_names = []
-        for filter in new_filters:
-            filter_names.append(filter['name'])
 
         querytool['public_filters'] = new_filters
         querytool['public_filters'].sort(key=itemgetter('order'))
         querytool['sql_string'] = sql_string
-        c.filter_names = ','.join(filter_names)
 
         return render('querytool/public/read.html',
                       extra_vars={'querytool': querytool})

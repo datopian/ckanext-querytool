@@ -118,6 +118,11 @@ def querytool_get_resource_data(context, data_dict):
     response = toolkit.get_action('datastore_search_sql')(
         {}, {'sql': sql_string}
     )
+    records_to_lower = []
+    for record in response['records']:
+        records_to_lower.append({k.lower(): v for k, v in record.items()})
+
+    response['records'] = records_to_lower
 
     return response
 

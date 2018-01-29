@@ -1,7 +1,7 @@
-{% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/vendor/c3/c3.css' %}
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
+{% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/javascript/modules/tool-embed.js' %}
 {% import 'macros/form.html' as form %}
@@ -19,7 +19,7 @@
           {% endif %}
         {% endblock %}
         {% block page_header_description %}
-          {% if querytool.title %}
+          {% if querytool.description %}
             <p class="desc">{{ querytool.description }}</p>
           {% endif %}
         {% endblock %}
@@ -40,12 +40,13 @@
         <div class="filters">
             {% if querytool.public_filters  %}
               {% for filter in querytool.public_filters %}
-                {% snippet 'ajax_snippets/public_filter_item.html', n=filter.order, filter_names=c.filter_names, selected_filter=filter %}
+                {% if filter.visibility == 'public'  %}
+                  {% snippet 'ajax_snippets/public_filter_item.html', n=filter.order, selected_filter=filter %}
+                {% endif %}
               {% endfor %}
             {% endif %}
         </div>
         <div class="actions">
-          {# <button type="button" class="btn btn-large btn-secondary btn-add-filter"><span class="fa fa-plus"></span> {{ _('Add filter') }}</button> #}
           <button type="submit" class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
         </div>
       </form>
@@ -60,7 +61,8 @@
         x_axis=item.x_axis,
         y_axis=item.y_axis,
         chart_type=item.graph,
-        sql_string=querytool.sql_string %}
+        sql_string=querytool.sql_string,
+        title=item.title  %}
       </div>
     {% endfor %}
   </div>

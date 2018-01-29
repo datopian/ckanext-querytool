@@ -22,7 +22,6 @@
 
   function _getPreviousFilters (element_id) {
 
-
      var filter_items = $('#' + element_id ).prevAll();
      var filters = [];
      var name = '';
@@ -30,7 +29,7 @@
 
       $.each(filter_items, function(idx, elem) {
 
-        name = $(elem).find('[id*=data_filter_name_]').find(":selected").val();
+        name = $(elem).find('[id*=data_filter_name_]').val();
         value = $(elem).find('[id*=data_filter_value_]').find(":selected").val();
         filters.push({
           'name': name,
@@ -53,43 +52,13 @@
 
   function handleRenderedFilters(item_id) {
 
-
-        var filter_name_select;
         var filter_value_select;
-        var filter_value_select_id;
-
-        if (item_id) {
-            filter_name_select = $('[id=data_filter_name_' + item_id + ']');
-        } else {
-            filter_name_select = $('[id*=data_filter_name_]');
-        }
 
         if (item_id) {
             filter_value_select = $('[id=data_filter_value_' + item_id + ']');
         } else {
             filter_value_select = $('[id*=data_filter_value_]');
         }
-
-        filter_name_select.change(function(event) {
-        console.log('aaaaaaa');
-            var elem = $(this);
-            var filter_name = elem.find(":selected").val();
-            var filter_name_select_id = elem.attr('id');
-
-
-
-            filter_value_select_id = filter_name_select_id.replace('name', 'value');
-            var filter_alias_input_id = filter_value_select_id.replace('value', 'alias');
-            var resource_input_id = filter_name_select_id.replace('data_filter_name', 'resource_id');
-
-            // Empty child fields
-            if ($('#' + filter_value_select_id + ' option').length > 0)
-                $('#' + filter_value_select_id).find('option').not(':first').remove();
-
-
-            $('#' + filter_value_select_id).removeClass('hidden');
-
-        });
 
         filter_value_select.mousedown(function(event) {
 
@@ -101,8 +70,8 @@
 
           var previous_filters = _getPreviousFilters(filter_item_id);
 
-          var filter_name_select_id = filter_value_select_id.replace('value', 'name');
-          var filter_name = $('#' + filter_name_select_id).find(":selected").val();
+          var filter_name_input_id = filter_value_select_id.replace('value', 'name');
+          var filter_name = $('#' + filter_name_input_id).val();
 
           var resource_id = $('#resource_id').val();
           var select_size = $(this).find("option").size();
@@ -173,10 +142,9 @@
     $('#appendedInputButtons').val(window.location.href);
     $('.copyToClipboard').on('click',
         function () {
-          var $temp = $("<input>");
-          $("body").append($temp);
-          $temp.val($('#appendedInputButtons').val()).select();
-          document.execCommand("copy");
+          var copyText = $('#appendedInputButtons');
+          copyText.select();
+          document.execCommand("Copy");
     });
   });
 
