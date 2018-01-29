@@ -1,7 +1,7 @@
 <div id="filter_item_{{ n }}" class="filter-group-wrapper">
   <span class="fa fa-arrow-right"></span>
   <div class="filter-group">
-    <span>{{ selected_filter.alias }}</span>
+    <label for="data_filter_value_{{ n }}">{{ selected_filter.alias }}</label>
     <input type="hidden" id="data_filter_name_{{ n }}" name="data_filter_name_{{ n }}" value="{{ selected_filter.name }}"/>
     <select class="filter-item filter-item-value {{ class }}" id="data_filter_value_{{ n }}" name="data_filter_value_{{ n }}">
       <option>&mdash; Select value &mdash;</option>
