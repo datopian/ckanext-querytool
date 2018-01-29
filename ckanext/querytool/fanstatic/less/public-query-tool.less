@@ -8,7 +8,7 @@ body {
 .container-wrapper {
   background: linear-gradient( fade(@color-primary, 80%), @color-primary-dark), url(/base/images/public-header-bg.png) top center no-repeat;
   background-size: 100%;
-  padding-bottom: @grid-gutter-width*3;
+  margin-bottom: @grid-gutter-width*3;
 }
 
 .box {
@@ -194,6 +194,9 @@ h1 {
   background: @color-white;
   .controls {
     background: @color-secondary;
+    form{
+      margin-bottom: 0;
+    }
   }
   .flex {
     display: flex;
@@ -262,10 +265,11 @@ h1 {
   }
   .charts{
     display: flex;
-    align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin: @grid-gutter-width/2;
+    background-color: @color-neutral-pale;
+    max-width: 100%;
+    padding: 0 @grid-gutter-width/2 @grid-gutter-width;
   }
   .container-chart{
     flex: 1;
@@ -273,13 +277,10 @@ h1 {
     align-items: center;
     justify-content: space-around;
     min-height: @grid-gutter-width*20;
-    background-color: @color-neutral-pale;
+    background-color: @color-white;
     max-width: 100%;
     padding: @grid-gutter-width;
-    margin: 0 @grid-gutter-width/2 @grid-gutter-width;
-    &:last-child{
-      margin-bottom: @grid-gutter-width/2;
-    }
+    margin: @grid-gutter-width @grid-gutter-width/2 0;
   }
 }
 
