@@ -29,7 +29,9 @@
     {% set selected_y_axis_column = data.charts[0].y_axis %}
   {% endif %}
 
-  {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Choose Y axis column'), options=data.y_axis_columns, selected=selected_y_axis_column) }}
+  <div class="chart-global-controls">
+    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Y axis column'), options=data.y_axis_columns, selected=selected_y_axis_column) }}
+  </div>
 
   <fieldset>
     <div id="choose-y-axis-column-container">
@@ -47,16 +49,16 @@
     </div>
   </fieldset>
   <fieldset id="visualization-settings-items">
-      {% if data.charts  %}
-        {% for chart in data.charts %}
-          {% snippet 'ajax_snippets/chart_fields.html',
-            n=chart.order,
-            chart=chart,
-            sql_string=data.sql_string,
-            map_resource=data.map_resource,
-            chart_resource=data.chart_resource %}
-        {% endfor %}
-      {% endif %}
+    {% if data.charts  %}
+      {% for chart in data.charts %}
+        {% snippet 'ajax_snippets/chart_fields.html',
+          n=chart.order,
+          chart=chart,
+          sql_string=data.sql_string,
+          map_resource=data.map_resource,
+          chart_resource=data.chart_resource %}
+      {% endfor %}
+    {% endif %}
   </fieldset>
 
 {% endblock %}
