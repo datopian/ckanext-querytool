@@ -28,6 +28,15 @@
 </div>
 {% endblock %}
 
+{% set y_axis_columns = querytool.y_axis_columns.split(',') %}
+
+{% if querytool.y_axis_column %}
+  {% set y_axis_selected = querytool.y_axis_column %}
+{% else %}
+  {% set y_axis_selected = querytool.charts[0].y_axis %}
+{% endif %}
+
+
 {% block tools %}
 <div class="container-fluid public-query">
   <div class="controls">
@@ -35,7 +44,11 @@
       <div class="flex">
         <div class="filter-y">
           <label for="y_axis_column">{{ _('Y axis value') }}</label>
-          <select id="y_axis_column" class="filter-item filter-item-column"><option>Preselected column</option></select>
+          <select id="y_axis_column" name="y_axis_column" class="filter-item filter-item-column">
+            {% for y_axis in y_axis_columns %}
+              <option value="{{ y_axis }}" {{ 'selected' if y_axis == y_axis_selected }}>{{ y_axis }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div class="filters">
             {% if querytool.public_filters  %}
@@ -59,7 +72,7 @@
         type='chart',
         colors=item.color,
         x_axis=item.x_axis,
-        y_axis=item.y_axis,
+        y_axis=y_axis_selected,
         chart_type=item.graph,
         sql_string=querytool.sql_string,
         title=item.title  %}

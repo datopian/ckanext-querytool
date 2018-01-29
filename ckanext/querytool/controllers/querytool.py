@@ -354,6 +354,8 @@ class QueryToolController(base.BaseController):
                     if v == filter.get('name'):
                         filter['value'] =\
                             params.get('data_filter_value_{}'.format(id))
+            if k.startswith('y_axis_column'):
+                querytool['y_axis_column'] = v
 
         sql_string = helpers.create_query_str(
             querytool.get('chart_resource'), new_filters
