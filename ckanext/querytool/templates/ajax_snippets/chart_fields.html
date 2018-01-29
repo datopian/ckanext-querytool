@@ -8,6 +8,16 @@
     {% set chart_types = h.querytool_get_chart_types() %}
     <div class="chart-form-wrapper">
       {% if chart %}
+        {% set chart_title = chart.title %}
+      {% endif %}
+      <div class="control-group ">
+        <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Chart title') }}</label>
+        <div class="controls ">
+          <input id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" value="{{ chart_title }}" placeholder="{{ _('Chart title') }}" type="text">
+        </div>
+      </div>
+
+      {% if chart %}
         {% set selected_chart_type = chart.graph %}
       {% else %}
         {% set selected_chart_type = chart_types[0].value %}
@@ -39,19 +49,9 @@
 
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
 
-      {% if chart %}
-        {% set chart_title = chart.title %}
-      {% endif %}
-      <div class="control-group ">
-        <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Chart title') }}</label>
-        <div class="controls ">
-          <input id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" value="{{ chart_title }}" placeholder="{{ _('Chart title') }}" type="text">
-        </div>
-      </div>
-
       <ul class="inline text-right chart-actions">
-          <li class="pull-left"><a class="btn delete-chart-btn" data-module="querytool-viz-delete">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
-          <li><a class="btn update-chart-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
+        <li><a class="btn delete-chart-btn" data-module="querytool-viz-delete">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+        <li><a class="btn update-chart-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
       </ul>
 
       <span class="grippy"></span>
@@ -80,7 +80,5 @@
           chart_type=chart_type,
           sql_string=sql_string,
           title= title%}
-    </div>
-    <div class="chart-controls-wrapper">
     </div>
 </div>
