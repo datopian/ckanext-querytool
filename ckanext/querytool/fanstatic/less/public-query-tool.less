@@ -224,8 +224,14 @@ h1 {
     display: inline-flex;
     flex-direction: column;
     margin-top: @grid-gutter-width/2;
-    background: @color-secondary-darker;
     padding: @grid-gutter-width/2 @grid-gutter-width/2 0;
+    label{
+      display: block;
+      background: @color-secondary-dark;
+      color: @color-white;
+      padding: (@grid-gutter-width/4 + 2px) @grid-gutter-width/2;
+      margin-bottom: 0;
+    }
   }
   .filter-y {
     flex-shrink: 0;
