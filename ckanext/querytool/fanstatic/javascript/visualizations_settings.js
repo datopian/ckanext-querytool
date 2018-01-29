@@ -23,6 +23,7 @@
         var sqlString = vizForm.data('sqlString');
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
+        var chooseYAxisColumn = $('#choose_y_axis_column');
 
         var charts = $('.chart_field');
 
@@ -31,6 +32,17 @@
             $('#save-visualization-btn').attr('disabled', 'true');
         }
 
+        chooseYAxisColumn.change(function(event) {
+            // Update the hidden inputs for the y axis
+            var axisY = $('[name*=chart_field_axis_y_]');
+            axisY.val(event.target.value);
+
+            // Send a message to update charts when a new column is selected.
+            // The JavaScript module "querytool-viz-preview" subscribes to this
+            // event to update the chart.
+            ckan.sandbox().publish('querytool:updateCharts');
+        });
+
         var createVisualization = $('#create-visualization-btn');
         createVisualization.on('click', function() {
 
@@ -38,6 +50,13 @@
 
             var visualization = $('#item_type').val();
             if (visualization === 'chart') {
+                var axisYValue = chooseYAxisColumn.val();
+
+                if (axisYValue === '$none$') {
+                    alert('Please choose a column for y axis.');
+                    return;
+                }
+
                 var charts = $('.chart_field');
                 var total_items = charts.length + 1;
                 var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') +1).split("?")[0];
@@ -53,6 +72,9 @@
                         $('#save-visualization-btn').attr('disabled', false);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
                         handleItemsOrder();
+
+                        var axisY = $('[name*=chart_field_axis_y_]');
+                        axisY.val(axisYValue);
                     });
             } else if (visualization === 'map') {
                 alert('Not implemented yet.')

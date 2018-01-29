@@ -225,7 +225,19 @@ def get_dataset_resources(dataset_name):
 
 
 def get_resource_columns(res_id):
-    res_info = _get_action('datastore_info', {'id': res_id})
+    '''
+
+    Get the names of the columns for the resource stored in Datastore
+
+        - res_id: (string) ID of the CKAN resource
+
+    '''
+
+    try:
+        res_info = _get_action('datastore_info', {'id': res_id})
+    except Exception:
+        return []
+
     fields = res_info.get('schema').keys()
 
     return fields

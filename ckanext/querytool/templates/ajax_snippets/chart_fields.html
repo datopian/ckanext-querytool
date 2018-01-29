@@ -37,16 +37,7 @@
         </div>
       </div>
 
-      <div class="control-group control-select">
-        <label class="control-label" for="chart_field_axis_y_{{ n }}">{{ _('Y axis column') }}</label>
-        <div class="controls ">
-          <select id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}">
-            {% for column in columns %}
-            <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.y_axis }}{% endif %}>{{column}}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
+      <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
 
       {% if chart %}
         {% set chart_title = chart.title %}

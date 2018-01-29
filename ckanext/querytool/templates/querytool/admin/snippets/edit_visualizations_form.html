@@ -24,21 +24,28 @@
   {% endblock %}
   {% block charts %}
   <legend>{{ _('Data visualizations') }}</legend>
+
+  {% if data.charts %}
+    {% set selected_y_axis_column = data.charts[0].y_axis %}
+  {% endif %}
+
+  {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Choose Y axis column'), options=data.y_axis_columns, selected=selected_y_axis_column) }}
+
   <fieldset>
-      <div id="create-visualization-item-section">
-        <ul class="inline">
-          <li>
-            {{ form.select('item_type', 'item_type', _('Visualization type'), options=[{'value': '', 'text': '— Select type —'}, {'value': 'chart', 'text': 'Chart'}, {'value': 'map', 'text': 'Map'}]) }}
-          </li>
-          <li>
-            <a id="create-visualization-btn" class="btn btn-info" style="display: {{ btn_display  }}"><span class="fa fa-plus-square"></span> {{ _('Add visualization') }}</a>
-          </li>
-        </ul>
-        <div class="hidden" id="visualization-info-msg">
-          <span>Some msg</span>
-        </div>
+    <div id="choose-y-axis-column-container">
+      <ul class="inline">
+        <li>
+          {{ form.select('item_type', 'item_type', _('Visualization type'), options=[{'value': '', 'text': '— Select type —'}, {'value': 'chart', 'text': 'Chart'}, {'value': 'map', 'text': 'Map'}]) }}
+        </li>
+        <li>
+          <a id="create-visualization-btn" class="btn btn-info" style="display: {{ btn_display  }}"><span class="fa fa-plus-square"></span> {{ _('Add visualization') }}</a>
+        </li>
+      </ul>
+      <div class="hidden" id="visualization-info-msg">
+        <span>Some msg</span>
       </div>
-    </fieldset>
+    </div>
+  </fieldset>
   <fieldset id="visualization-settings-items">
       {% if data.charts  %}
         {% for chart in data.charts %}
