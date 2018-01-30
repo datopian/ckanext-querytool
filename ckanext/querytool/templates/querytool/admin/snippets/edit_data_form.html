@@ -60,11 +60,11 @@ Example usage:
   {% endif %}
 
   {% block querytool_choose_chart_resource %}
-    {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=error) }}
+    {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=errors.name) }}
   {% endblock %}
 
   {% block querytool_choose_map_resource %}
-    {{ form.select('map_resource', label=_('Map resoure'), options=dataset_resources, selected=map_resource, error=error) }}
+    {{ form.select('map_resource', label=_('Map resoure'), options=dataset_resources, selected=map_resource, error=errors.name) }}
   {% endblock %}
 
   <legend>{{ _('Y Axis columns') }}</legend>
