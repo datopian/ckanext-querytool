@@ -46,7 +46,7 @@ Example usage:
       <label class="control-label" for="field-datasets"><span title="This field is required" class="control-required">*</span>{{ _("Dataset") }}</label>
       <div class="controls">
         <select id="field-datasets" name="dataset_name" data-module="autocomplete">
-          <option value="$none$" {{ 'selected' if not data.dataset_name }}>-- Choose Dataset --</option>
+          <option value="" {{ 'selected' if not data.dataset_name }}>-- Choose Dataset --</option>
           {% for dataset in datasets %}
             <option value="{{ dataset }}" {{ 'selected' if dataset == data.dataset_name }}>{{ dataset }}</option>
           {% endfor %}
@@ -55,13 +55,16 @@ Example usage:
     </div>
   {% endblock %}
 
-  {% set dataset_resources = h.querytool_get_dataset_resources(data.dataset_name) %}
+  {% if data.dataset_name %}
+      {% set dataset_resources = h.querytool_get_dataset_resources(data.dataset_name) %}
+  {% endif %}
+
   {% block querytool_choose_chart_resource %}
-    {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=error) }}
+    {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=errors.name) }}
   {% endblock %}
 
   {% block querytool_choose_map_resource %}
-    {{ form.select('map_resource', label=_('Map resoure'), options=dataset_resources, selected=map_resource, error=error) }}
+    {{ form.select('map_resource', label=_('Map resoure'), options=dataset_resources, selected=map_resource, error=errors.name) }}
   {% endblock %}
 
   <legend>{{ _('Y Axis columns') }}</legend>
@@ -70,7 +73,7 @@ Example usage:
   <div class="control-group control-checkbox-group"
        id="y-axis-columns-container"
        {% if columns | length == 0 %} style="display: none;" {% endif %}>
-    <label class="control-label" for="field-y-axis"><span title="This field is required" class="control-required">*</span>{{ _("Y Axis columns") }}</label>
+    <label class="control-label" for="y-axis-columns-results"><span title="This field is required" class="control-required">*</span>{{ _("Y Axis columns") }}</label>
     <div class="controls">
         <ul class="inline" id="y-axis-columns-results">
             {% for column in columns %}

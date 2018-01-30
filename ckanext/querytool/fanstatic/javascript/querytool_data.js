@@ -294,7 +294,6 @@
                 .error(function(error) {
                     yAxisColumnsNotice.css('display', 'block');
                     yAxisColumnsNotice.text('An error occured while getting columns.');
-                    console.log(error);
                 });
         }
 
