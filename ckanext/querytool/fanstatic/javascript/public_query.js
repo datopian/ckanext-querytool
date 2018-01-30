@@ -130,16 +130,13 @@
           filter_names: filter_names.toString()
         })
         .done(function(data) {
-
           $('.filters').append(data);
-
           handleRenderedFilters(total_items);
-
         });
 
     });
 
-    // Add validation on public filters if no valid values are selected
+    // Add validation for public filters if no valid values are selected
     var updateBtn = $('.btn-update');
     updateBtn.on('click', function(event, data){
         event.preventDefault();
