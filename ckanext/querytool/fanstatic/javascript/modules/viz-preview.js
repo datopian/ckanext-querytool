@@ -84,18 +84,22 @@ ckan.module('querytool-viz-preview', function() {
             };
             var values;
 
+            var titleVal = this.options.title;
+            if(titleVal === true){
+                titleVal = '';
+            }
+
             if (this.options.chart_type === 'donut' ||
                 this.options.chart_type === 'pie') {
                     values = records.map(function(item) {
                         return [item[x_axis], item[y_axis]]
                     });
-
                     options.data = {
                         columns: values,
                         type : this.options.chart_type
                     };
                     options.title = {
-                        text:  this.options.title
+                        text:  titleVal
                     }
                 } else {
                     values = records.map(function(item) {
@@ -119,7 +123,7 @@ ckan.module('querytool-viz-preview', function() {
                         }
                     };
                     options.title = {
-                        text: this.options.title
+                        text: titleVal
                     }
                 }
 
