@@ -42,8 +42,10 @@ ckan.module('querytool-viz-preview', function() {
             // updating of viz items will be applied with a reload of the page.
             if (chartField.length > 0) {
                 var updateBtn = chartField.find('.update-chart-btn');
+                var deleteBtn = chartField.find('.delete-chart-btn');
 
                 updateBtn.click(this.updateChart.bind(this));
+                deleteBtn.click(this.deleteChart.bind(this));
             }
 
             this.sandbox.subscribe('querytool:updateCharts', this.updateChart.bind(this));
@@ -169,6 +171,11 @@ ckan.module('querytool-viz-preview', function() {
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
+        },
+
+        // Delete the current chart
+        deleteChart: function(){
+             this.el.closest('.chart_field').remove();
         }
     }
 })
