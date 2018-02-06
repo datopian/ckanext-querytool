@@ -43,7 +43,8 @@ def querytool_public_list(context, data_dict):
 
     query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
         .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
-               CkanextQueryToolVisualizations.ckanext_querytool_id))
+               CkanextQueryToolVisualizations.ckanext_querytool_id))\
+        .filter(CkanextQueryToolVisualizations.charts != '')
 
     result = query.all()
     querytools_list = []
