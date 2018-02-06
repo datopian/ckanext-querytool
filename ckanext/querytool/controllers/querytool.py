@@ -336,8 +336,8 @@ class QueryToolController(base.BaseController):
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
 
-        if not querytool:
-            abort(404, _('Querytool is not fully set.'))
+        if not querytool or not querytool['charts']:
+            abort(404, _('Querytool not fully set.'))
 
         if querytool.get('charts'):
             querytool['charts'] = json.loads(querytool['charts'])
