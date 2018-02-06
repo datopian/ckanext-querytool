@@ -46,11 +46,11 @@ def querytool_public_list(context, data_dict):
                CkanextQueryToolVisualizations.ckanext_querytool_id))
 
     result = query.all()
-    querytool = {}
     querytools_list = []
 
     if result and len(result) > 0:
         for item in result:
+            querytool = {}
             for _ in item:
                 querytool.update(table_dictize(_, context))
             querytools_list.append(querytool)
