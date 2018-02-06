@@ -33,6 +33,31 @@ def querytool_list(context, data_dict):
 
 
 @toolkit.side_effect_free
+def querytool_public_list(context, data_dict):
+    '''Returns a list of all query tools
+    which are fully set.
+    :rtype: list of dictionaries
+    '''
+
+    session = context['session']
+
+    query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
+        .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
+               CkanextQueryToolVisualizations.ckanext_querytool_id))
+
+    result = query.all()
+    querytool = {}
+    querytools_list = []
+
+    if result and len(result) > 0:
+        for item in result:
+            for _ in item:
+                querytool.update(table_dictize(_, context))
+            querytools_list.append(querytool)
+    return querytools_list
+
+
+@toolkit.side_effect_free
 def querytool_get(context, data_dict):
     '''Returns  query tool.
     :param name: querytool name
