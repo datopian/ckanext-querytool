@@ -325,7 +325,7 @@ class QueryToolController(base.BaseController):
 
         :return: base template
         '''
-        querytools = _get_action('querytool_list', {})
+        querytools = _get_action('querytool_public_list', {})
 
         return render('querytool/public/list.html',
                       extra_vars={'data': querytools})
@@ -336,8 +336,8 @@ class QueryToolController(base.BaseController):
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
 
-        if querytool is None:
-            abort(404, _('Querytool not found.'))
+        if not querytool:
+            abort(404, _('Querytool is not fully set.'))
 
         if querytool.get('charts'):
             querytool['charts'] = json.loads(querytool['charts'])
