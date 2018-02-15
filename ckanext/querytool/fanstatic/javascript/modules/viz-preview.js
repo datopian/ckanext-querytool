@@ -104,8 +104,10 @@ ckan.module('querytool-viz-preview', function() {
                         text:  titleVal
                     }
             }
-            else if(this.options.chart_type === 'sbar')
+            else if(this.options.chart_type === 'sbar' ||
+                    this.options.chart_type == 'shbar')
             {
+                var horizontal = (this.options.chart_type === 'shbar');
                 values = records.map(function(item) {
                     return [item[x_axis], item[y_axis]]
                 });
@@ -117,6 +119,11 @@ ckan.module('querytool-viz-preview', function() {
                     text:  titleVal
                 }
                 options.data.groups = [[x_axis, y_axis]];
+                if(horizontal){
+                    options.axis = {
+                        rotated: true
+                    }
+                }
             }
             else
             {
