@@ -115,13 +115,15 @@ def get_chart_types():
     chart_types = [
         {'text': 'Line', 'value': 'line'},
         {'text': 'Bar', 'value': 'bar'},
+        {'text': 'Horizontal bar', 'value': 'hbar'},
         {'text': 'Stacked bar', 'value': 'sbar'},
+        {'text': 'Stacked horizontal bar', 'value': 'shbar'},
         {'text': 'Area', 'value': 'area'},
+        {'text': 'Stacked area', 'value': 'area-spline'},
         {'text': 'Spline', 'value': 'spline'},
         {'text': 'Donut', 'value': 'donut'},
         {'text': 'Pie', 'value': 'pie'},
-        {'text': 'Scatter', 'value': 'scatter'},
-        {'text': 'Stacked area', 'value': 'area-spline'}
+        {'text': 'Scatter', 'value': 'scatter'}
     ]
     return chart_types
 

@@ -103,44 +103,52 @@ ckan.module('querytool-viz-preview', function() {
                     options.title = {
                         text:  titleVal
                     }
+            }
+            else if(this.options.chart_type === 'sbar')
+            {
+                values = records.map(function(item) {
+                    return [item[x_axis], item[y_axis]]
+                });
+                options.data = {
+                    columns: values,
+                    type : 'bar'
+                };
+                options.title = {
+                    text:  titleVal
                 }
-                else if(this.options.chart_type === 'sbar')
+                options.data.groups = [[x_axis, y_axis]];
+            }
+            else
+            {
+                var rotate = false;
+                var ctype = this.options.chart_type;
+                if (this.options.chart_type === 'hbar')
                 {
-                    values = records.map(function(item) {
-                        return [item[x_axis], item[y_axis]]
-                    });
-                    options.data = {
-                        columns: values,
-                        type : 'bar'
-                    };
-                    options.title = {
-                        text:  titleVal
-                    }
-                    options.data.groups = [[x_axis, y_axis]];
+                    rotate = true;
+                    ctype = 'bar';
                 }
-                else
-                {
-                    values = records.map(function(item) {
-                        return Number(item[y_axis]);
-                    });
-                    var categories = records.map(function(item) {
-                        return item[x_axis];
-                    });
-                    values.unshift(this.options.y_axis);
-                    options.data = {
-                        columns: [values],
-                        type: this.options.chart_type
-                    };
-                    options.axis = {
-                        x: {
-                            type: 'category',
-                            categories: categories
-                        }
-                    };
-                    options.title = {
-                        text: titleVal
-                    }
+                values = records.map(function(item) {
+                    return Number(item[y_axis]);
+                });
+                var categories = records.map(function(item) {
+                    return item[x_axis];
+                });
+                values.unshift(this.options.y_axis);
+                options.data = {
+                    columns: [values],
+                    type: ctype
+                };
+                options.axis = {
+                    x: {
+                        type: 'category',
+                        categories: categories
+                    },
+                    rotated: rotate
+                };
+                options.title = {
+                    text: titleVal
                 }
+            }
             var chart = c3.generate(options);
         },
         // Get the values from dropdowns and rerender the chart.
