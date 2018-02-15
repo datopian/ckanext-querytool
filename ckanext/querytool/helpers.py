@@ -109,16 +109,22 @@ def get_filter_values(resource_id, filter_name, previous_filters):
 
 def get_chart_types():
     '''
-    Get all avaiable types of chart following c3 specification
+    Get all available types of chart following c3 specification
     :return:
     '''
     chart_types = [
         {'text': 'Line', 'value': 'line'},
         {'text': 'Bar', 'value': 'bar'},
+        {'text': 'Horizontal bar', 'value': 'hbar'},
+        {'text': 'Stacked bar', 'value': 'sbar'},
+        {'text': 'Stacked horizontal bar', 'value': 'shbar'},
         {'text': 'Area', 'value': 'area'},
+        {'text': 'Stacked area', 'value': 'area-spline'},
         {'text': 'Spline', 'value': 'spline'},
         {'text': 'Donut', 'value': 'donut'},
         {'text': 'Pie', 'value': 'pie'},
+        {'text': 'Scatter', 'value': 'scatter'},
+        {'text': 'Bubble', 'value': 'bscatter'}
     ]
     return chart_types
 

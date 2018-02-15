@@ -103,32 +103,71 @@ ckan.module('querytool-viz-preview', function() {
                     options.title = {
                         text:  titleVal
                     }
-                } else {
-                    values = records.map(function(item) {
-                        return Number(item[y_axis]);
-                    });
-                    var categories = records.map(function(item) {
-                        return item[x_axis];
-                    });
-
-                    values.unshift(this.options.y_axis);
-
-                    options.data = {
-                        columns: [values],
-                        type: this.options.chart_type
-                    };
-
+            }
+            else if(this.options.chart_type === 'sbar' ||
+                    this.options.chart_type == 'shbar')
+            {
+                var horizontal = (this.options.chart_type === 'shbar');
+                values = records.map(function(item) {
+                    return [item[x_axis], item[y_axis]]
+                });
+                options.data = {
+                    columns: values,
+                    type : 'bar'
+                };
+                options.title = {
+                    text:  titleVal
+                }
+                options.data.groups = [[x_axis, y_axis]];
+                if(horizontal){
                     options.axis = {
-                        x: {
-                            type: 'category',
-                            categories: categories
-                        }
-                    };
-                    options.title = {
-                        text: titleVal
+                        rotated: true
                     }
                 }
-
+            }
+            else
+            {
+                var rotate = false;
+                var ctype = this.options.chart_type;
+                if (this.options.chart_type === 'hbar')
+                {
+                    rotate = true;
+                    ctype = 'bar';
+                }
+                if(this.options.chart_type === 'bscatter'){
+                    ctype = 'scatter';
+                    options.point = {
+                        r: 50, // This is workaround for bubbles.
+                        sensitivity: 100,
+                        focus: {
+                          expand: {
+                            enabled: true
+                          }
+                        }
+                    };
+                }
+                values = records.map(function(item) {
+                    return Number(item[y_axis]);
+                });
+                var categories = records.map(function(item) {
+                    return item[x_axis];
+                });
+                values.unshift(this.options.y_axis);
+                options.data = {
+                    columns: [values],
+                    type: ctype
+                };
+                options.axis = {
+                    x: {
+                        type: 'category',
+                        categories: categories
+                    },
+                    rotated: rotate
+                };
+                options.title = {
+                    text: titleVal
+                }
+            }
             var chart = c3.generate(options);
         },
         // Get the values from dropdowns and rerender the chart.
