@@ -134,6 +134,18 @@ ckan.module('querytool-viz-preview', function() {
                     rotate = true;
                     ctype = 'bar';
                 }
+                if(this.options.chart_type === 'bscatter'){
+                    ctype = 'scatter';
+                    options.point = {
+                        r: 50, // This is workaround for bubbles.
+                        sensitivity: 100,
+                        focus: {
+                          expand: {
+                            enabled: true
+                          }
+                        }
+                    };
+                }
                 values = records.map(function(item) {
                     return Number(item[y_axis]);
                 });
