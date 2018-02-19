@@ -135,15 +135,23 @@ ckan.module('querytool-viz-preview', function() {
                     ctype = 'bar';
                 }
                 if(this.options.chart_type === 'bscatter'){
+
+                    var rs = d3.scale.linear()
+                          .domain([0.01, 100000])
+                          .range([5, 50]);
                     ctype = 'scatter';
                     options.point = {
-                        r: 50, // This is workaround for bubbles.
-                        sensitivity: 100,
-                        focus: {
-                          expand: {
-                            enabled: true
-                          }
-                        }
+                         r: function(d) {
+                                //workaround for bubble charts, divide by 10 because of large values
+                                var num = d.value / 10;
+                                return rs(num)
+                            },
+                            sensitivity: 100,
+                            focus: {
+                              expand: {
+                                enabled: true
+                              }
+                            }
                     };
                 }
                 values = records.map(function(item) {
@@ -168,6 +176,7 @@ ckan.module('querytool-viz-preview', function() {
                     text: titleVal
                 }
             }
+            console.log(values)
             var chart = c3.generate(options);
         },
         // Get the values from dropdowns and rerender the chart.
