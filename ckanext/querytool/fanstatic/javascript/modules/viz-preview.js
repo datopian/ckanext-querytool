@@ -78,6 +78,7 @@ ckan.module('querytool-viz-preview', function() {
             var x_axis = this.options.x_axis.toLowerCase();
             var y_axis = this.options.y_axis.toLowerCase();
             var records = data.records;
+            var show_legend = this.options.show_legend;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -90,7 +91,9 @@ ckan.module('querytool-viz-preview', function() {
             if(titleVal === true){
                 titleVal = '';
             }
-
+            options.legend = {
+                show: show_legend
+            }
             if (this.options.chart_type === 'donut' ||
                 this.options.chart_type === 'pie') {
                     values = records.map(function(item) {
@@ -200,6 +203,9 @@ ckan.module('querytool-viz-preview', function() {
 
             var chartTitle = chartField.find('input[name*=chart_field_title_]');
             var chartTitleVal = chartTitle.val();
+
+            var legend =  chartField.find('input[name*=chart_field_legend_]');
+            var legendVal = legend.is(':checked')
             // If the changed values from the dropdowns are from color or chart type
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -209,6 +215,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
+                this.options.show_legend = legendVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -219,6 +226,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.x_axis = axisXValue;
             this.options.y_axis = axisYValue;
             this.options.title = chartTitleVal;
+            this.options.show_legend = legendVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
