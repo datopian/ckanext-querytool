@@ -108,6 +108,7 @@ ckan.module('querytool-viz-preview', function() {
                     this.options.chart_type == 'shbar')
             {
                 var horizontal = (this.options.chart_type === 'shbar');
+
                 values = records.map(function(item) {
                     return [item[x_axis], item[y_axis]]
                 });
@@ -118,7 +119,10 @@ ckan.module('querytool-viz-preview', function() {
                 options.title = {
                     text:  titleVal
                 }
-                options.data.groups = [[x_axis, y_axis]];
+                var groups = values.map(function(item){
+                    return item[0];
+                });
+                options.data.groups = [groups];
                 if(horizontal){
                     options.axis = {
                         rotated: true
@@ -176,7 +180,6 @@ ckan.module('querytool-viz-preview', function() {
                     text: titleVal
                 }
             }
-            console.log(values)
             var chart = c3.generate(options);
         },
         // Get the values from dropdowns and rerender the chart.
