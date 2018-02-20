@@ -257,6 +257,8 @@ class QueryToolController(base.BaseController):
                         data['chart_field_color_{}'.format(id)]
                     visualization['title'] = \
                         data['chart_field_title_{}'.format(id)]
+                    visualization['x_text_rotate'] = \
+                        data['chart_field_x_text_rotate_{}'.format(id)]
                     if 'chart_field_legend_{}'.format(id) in data:
                         visualization['show_legend'] = 'true'
                     else:
