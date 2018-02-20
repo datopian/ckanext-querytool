@@ -148,7 +148,35 @@ def get_color_scheme():
                'text': 'Pastel 2'},
               {'value': '#AA9988, #A88600, #779922, #6C7F3F, #887711, '
                         '#555577, #665500, #665100, #4C493D, #2B2B2V',
-               'text': 'Contrast'}]
+               'text': 'Contrast'},
+              {'value': '#b9fff2, #6cdeff, #00a3d3, #00778d, #006351, '
+                        '#b9fff5, #6cdeff, #01a3d3, #02778d, #006389',
+               'text': 'Ocean'},
+              {'value': '#6EF752, #75F070, #8ADBC2, #85E0AD, #80E699, '
+                        '#7DE88F, #7AEB85,  #70F55C, #6BFA47, #66FF33',
+               'text': 'Limes'},
+              {'value': '#2f1313, #451611, #60191c, #6f1a31, #890a3e, '
+                        '#BD4587, #CC4C80,  #DB5478, #EB5C70, #FF6666',
+               'text': 'Dark cherry'},
+              {'value': '#eba7ff, #ff7878, #e057ff, #de47ff, #890a3e, '
+                        '#B866FF, #8F66FF,  #5C66FF, #5266FF, #3366FF',
+               'text': 'Purple'},
+              {'value': '#1f2439, #e4f714, #114ee8, #e4e4e4, #000000, '
+                        '#cc885b, #321108,  #6c3b2c, #94b0a4, #d6b5a4',
+               'text': 'Urban'},
+              {'value': '#ff3366, #00ff99, #33cccc, #ffff66, #993399, '
+                        '#f3c6f2, #efa6b6,  #bd98e0, #8d90e2, #7554ae',
+               'text': 'Candy'},
+              {'value': '#22758e, #b63b3b, #f9c414, #e3e8e6, #4c4555, '
+                        '#d53c3c, #80add3,  #97cfcc, #e4b03d, #c39de0',
+               'text': 'Orient'},
+              {'value': '#3b5998, #8b9dc3, #dfe3ee, #f7f7f7, #ffffff, ',
+               'text': 'Facebook'},
+              {'value': '#ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, ',
+               'text': 'Rainbow'},
+              {'value': '#2e4045, #83adb5, #c7bbc9, #5e3c58, #bfb5b2, ',
+               'text': 'Muted'}
+              ]
 
     return colors
 
