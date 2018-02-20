@@ -178,7 +178,8 @@ ckan.module('querytool-viz-preview', function() {
                         type: 'category',
                         categories: categories,
                         tick: {
-                            rotate: x_text_rotate
+                            rotate: x_text_rotate,
+                            multiline: true
                         }
                     },
                     rotated: rotate
