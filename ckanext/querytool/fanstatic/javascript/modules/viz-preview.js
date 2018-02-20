@@ -92,6 +92,9 @@ ckan.module('querytool-viz-preview', function() {
             if(titleVal === true){
                 titleVal = '';
             }
+            options.title = {
+                text: titleVal
+            }
             options.legend = {
                 show: show_legend
             }
@@ -104,9 +107,6 @@ ckan.module('querytool-viz-preview', function() {
                         columns: values,
                         type : this.options.chart_type
                     };
-                    options.title = {
-                        text:  titleVal
-                    }
             }
             else if(this.options.chart_type === 'sbar' ||
                     this.options.chart_type == 'shbar')
@@ -120,9 +120,6 @@ ckan.module('querytool-viz-preview', function() {
                     columns: values,
                     type : 'bar'
                 };
-                options.title = {
-                    text:  titleVal
-                }
                 var groups = values.map(function(item){
                     return item[0];
                 });
@@ -184,9 +181,6 @@ ckan.module('querytool-viz-preview', function() {
                     },
                     rotated: rotate
                 };
-                options.title = {
-                    text: titleVal
-                }
             }
             var chart = c3.generate(options);
         },
