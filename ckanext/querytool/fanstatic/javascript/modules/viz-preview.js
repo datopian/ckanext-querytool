@@ -79,6 +79,7 @@ ckan.module('querytool-viz-preview', function() {
             var y_axis = this.options.y_axis.toLowerCase();
             var records = data.records;
             var show_legend = this.options.show_legend;
+            var x_text_rotate = this.options.x_text_rotate;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -90,6 +91,9 @@ ckan.module('querytool-viz-preview', function() {
             var titleVal = this.options.title;
             if(titleVal === true){
                 titleVal = '';
+            }
+            options.title = {
+                text: titleVal
             }
             options.legend = {
                 show: show_legend
@@ -103,9 +107,6 @@ ckan.module('querytool-viz-preview', function() {
                         columns: values,
                         type : this.options.chart_type
                     };
-                    options.title = {
-                        text:  titleVal
-                    }
             }
             else if(this.options.chart_type === 'sbar' ||
                     this.options.chart_type == 'shbar')
@@ -119,9 +120,6 @@ ckan.module('querytool-viz-preview', function() {
                     columns: values,
                     type : 'bar'
                 };
-                options.title = {
-                    text:  titleVal
-                }
                 var groups = values.map(function(item){
                     return item[0];
                 });
@@ -141,8 +139,8 @@ ckan.module('querytool-viz-preview', function() {
                     rotate = true;
                     ctype = 'bar';
                 }
-                if(this.options.chart_type === 'bscatter'){
 
+                if(this.options.chart_type === 'bscatter'){
                     var rs = d3.scale.linear()
                           .domain([0.01, 100000])
                           .range([5, 50]);
@@ -161,6 +159,7 @@ ckan.module('querytool-viz-preview', function() {
                             }
                     };
                 }
+
                 values = records.map(function(item) {
                     return Number(item[y_axis]);
                 });
@@ -175,13 +174,14 @@ ckan.module('querytool-viz-preview', function() {
                 options.axis = {
                     x: {
                         type: 'category',
-                        categories: categories
+                        categories: categories,
+                        tick: {
+                            rotate: x_text_rotate,
+                            multiline: true
+                        }
                     },
                     rotated: rotate
                 };
-                options.title = {
-                    text: titleVal
-                }
             }
             var chart = c3.generate(options);
         },
@@ -206,16 +206,21 @@ ckan.module('querytool-viz-preview', function() {
 
             var legend =  chartField.find('input[name*=chart_field_legend_]');
             var legendVal = legend.is(':checked')
-            // If the changed values from the dropdowns are from color or chart type
+
+            var xTextRotate = chartField.find('[name*=chart_field_x_text_rotate_]');
+            var xTextRotateVal = xTextRotate.val();
+            // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
                 this.options.y_axis === axisYValue
-            ) && (this.options.colors !== colorValue || this.options.chart_type !== chartTypeValue)) {
+            ) && (this.options.colors !== colorValue || this.options.chart_type !== chartTypeValue ||
+                  this.options.x_text_rotate !== xTextRotateVal)) {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
                 this.options.show_legend = legendVal;
+                this.options.x_text_rotate = xTextRotateVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -227,6 +232,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.y_axis = axisYValue;
             this.options.title = chartTitleVal;
             this.options.show_legend = legendVal;
+            this.options.x_text_rotate = xTextRotateVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);

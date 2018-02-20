@@ -18,23 +18,36 @@
       </div>
 
       {% if chart %}
-        {% set show_legend = chart.show_legend %}
-      {% endif %}
-      <div class="control-group ">
-        <label class="control-label" for="chart_field_legend_{{ n }}">{{ _('Show legend') }}</label>
-        <div class="controls ">
-          <input id="chart_field_legend_{{ n }}" type="checkbox" name="chart_field_legend_{{ n }}" value="{{ show_legend }}"{% if show_legend=='false' %}{% else %}checked{% endif %}>
-        </div>
-      </div>
-
-      {% if chart %}
         {% set selected_chart_type = chart.graph %}
       {% else %}
         {% set selected_chart_type = chart_types[0].value %}
       {% endif %}
       {{ form.select('chart_field_graph_' ~ n, label=_('Chart type'), options=chart_types, selected=selected_chart_type) }}
 
-      {% set color_scheme = h.querytool_get_color_scheme() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_axis_x_{{ n }}">{{ _('X axis column') }}</label>
+        <div class="controls ">
+          <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
+            {% for column in columns %}
+            <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.x_axis }}{% endif %}>{{column}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      {% set text_rotation = h.querytool_get_tick_text_rotation() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_x_text_rotate_{{ n }}">{{ _('X axis text rotation') }}</label>
+        <div class="controls ">
+          <select id="chart_field_x_text_rotate_{{ n }}" name="chart_field_x_text_rotate_{{ n }}">
+           {% for rotate in text_rotation %}
+            <option value="{{ rotate.value }}" {% if chart %}{{ 'selected' if rotate.value == chart.x_text_rotate }}{% endif %}>{{rotate.text}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+       {% set color_scheme = h.querytool_get_color_scheme() %}
       <div class="control-group control-select">
         <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color scheme') }}</label>
         <div class="controls ">
@@ -46,14 +59,13 @@
         </div>
       </div>
 
-      <div class="control-group control-select">
-        <label class="control-label" for="chart_field_axis_x_{{ n }}">{{ _('X axis column') }}</label>
+      {% if chart %}
+        {% set show_legend = chart.show_legend %}
+      {% endif %}
+      <div class="control-group ">
+        <label class="control-label" for="chart_field_legend_{{ n }}">{{ _('Show legend') }}</label>
         <div class="controls ">
-          <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
-            {% for column in columns %}
-            <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.x_axis }}{% endif %}>{{column}}</option>
-            {% endfor %}
-          </select>
+          <input id="chart_field_legend_{{ n }}" type="checkbox" name="chart_field_legend_{{ n }}" value="{{ show_legend }}"{% if show_legend=='false' %}{% else %}checked{% endif %}>
         </div>
       </div>
 
@@ -75,12 +87,14 @@
         {% set chart_type = chart.graph %}
         {% set title = chart.title %}
         {% set show_legend = chart.show_legend %}
+        {% set x_text_rotate = chart.x_text_rotate %}
       {% else %}
         {% set colors = color_scheme[0].value %}
         {% set x_axis = columns[0] %}
         {% set y_axis = columns[0] %}
         {% set chart_type = chart_types[0].value %}
         {% set title = '' %}
+        {% set x_text_rotate = text_rotation[0].value %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -91,7 +105,8 @@
           chart_type=chart_type,
           sql_string=sql_string,
           title= title,
-          show_legend = show_legend
+          show_legend = show_legend,
+          x_text_rotate= x_text_rotate
       %}
     </div>
 </div>
