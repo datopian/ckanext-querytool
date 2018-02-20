@@ -115,7 +115,6 @@ class QueryToolController(base.BaseController):
 
         '''
         context = _get_context()
-
         try:
             check_access('querytool_update', context)
         except NotAuthorized:
@@ -258,6 +257,10 @@ class QueryToolController(base.BaseController):
                         data['chart_field_color_{}'.format(id)]
                     visualization['title'] = \
                         data['chart_field_title_{}'.format(id)]
+                    if 'chart_field_legend_{}'.format(id) in data:
+                        visualization['show_legend'] = 'true'
+                    else:
+                        visualization['show_legend'] = 'false'
 
                     visualizations.append(visualization)
 
