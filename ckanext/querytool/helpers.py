@@ -186,8 +186,9 @@ def get_tick_text_rotation():
        Get available options for rotating chart x axis
        :return:
     '''
-    options = [{'text': 'Right', 'value': '30'},
-               {'text': 'Center', 'value': '90'},
+    options = [{'text': 'Horizontal', 'value': '0'},
+               {'text': 'Right', 'value': '30'},
+               {'text': 'Vertical', 'value': '90'},
                {'text': 'Left', 'value': '-30'},
                {'text': 'Reverse', 'value': '180'}]
 

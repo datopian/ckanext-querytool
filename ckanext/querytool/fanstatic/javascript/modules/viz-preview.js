@@ -139,8 +139,8 @@ ckan.module('querytool-viz-preview', function() {
                     rotate = true;
                     ctype = 'bar';
                 }
-                if(this.options.chart_type === 'bscatter'){
 
+                if(this.options.chart_type === 'bscatter'){
                     var rs = d3.scale.linear()
                           .domain([0.01, 100000])
                           .range([5, 50]);
@@ -159,6 +159,7 @@ ckan.module('querytool-viz-preview', function() {
                             }
                     };
                 }
+
                 values = records.map(function(item) {
                     return Number(item[y_axis]);
                 });
