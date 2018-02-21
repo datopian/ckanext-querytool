@@ -233,7 +233,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.y_axis === axisYValue
             ) && (this.options.colors !== colorValue || this.options.chart_type !== chartTypeValue ||
                   this.options.x_text_rotate !== xTextRotateVal ||
-                  this.options.tooltip_name !== tooltipNameVal)) {
+                  this.options.tooltip_name !== tooltipNameVal || this.options.show_legend !== legendVal)) {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
