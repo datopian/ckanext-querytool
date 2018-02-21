@@ -81,6 +81,7 @@ ckan.module('querytool-viz-preview', function() {
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
             var tooltip_name = this.options.tooltip_name;
+            var tooltip_format = this.options.tooltip_format;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -104,7 +105,7 @@ ckan.module('querytool-viz-preview', function() {
                 format: {
                     title: function (d) { return tooltip_name + ' ' +  d; },
                     value: function (value, ratio, id) {
-                        var format =  d3.format('$');
+                        var format =  d3.format(tooltip_format);
                         return format(value);
                         }
                     }
@@ -226,6 +227,9 @@ ckan.module('querytool-viz-preview', function() {
             var tooltipName = chartField.find('input[name*=chart_field_tooltip_name_]');
             var tooltipNameVal = tooltipName.val();
 
+            var tooltipFormat = chartField.find('[name*=chart_field_tooltip_format_]');
+            var tooltipFormatVal = tooltipFormat.val();
+
             // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -240,6 +244,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.show_legend = legendVal;
                 this.options.x_text_rotate = xTextRotateVal;
                 this.options.tooltip_name = tooltipNameVal;
+                this.options.tooltip_format = tooltipFormatVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -253,6 +258,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.show_legend = legendVal;
             this.options.x_text_rotate = xTextRotateVal;
             this.options.tooltip_name = tooltipNameVal;
+            this.options.tooltip_format = tooltipFormatVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
