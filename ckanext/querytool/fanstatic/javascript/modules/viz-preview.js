@@ -80,6 +80,7 @@ ckan.module('querytool-viz-preview', function() {
             var records = data.records;
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
+            var tooltip_name = this.options.tooltip_name;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -87,8 +88,8 @@ ckan.module('querytool-viz-preview', function() {
                 }
             };
             var values;
-
             var titleVal = this.options.title;
+
             if(titleVal === true){
                 titleVal = '';
             }
@@ -98,6 +99,18 @@ ckan.module('querytool-viz-preview', function() {
             options.legend = {
                 show: show_legend
             }
+            if(tooltip_name !== true && tooltip_name !== ''){
+                options.tooltip = {
+                format: {
+                    title: function (d) { return tooltip_name + ' ' +  d; },
+                    value: function (value, ratio, id) {
+                        var format =  d3.format('$');
+                        return format(value);
+                        }
+                    }
+                }
+            }
+
             if (this.options.chart_type === 'donut' ||
                 this.options.chart_type === 'pie') {
                     values = records.map(function(item) {
@@ -148,7 +161,7 @@ ckan.module('querytool-viz-preview', function() {
                     options.point = {
                          r: function(d) {
                                 //workaround for bubble charts, divide by 10 because of large values
-                                var num = d.value / 10;
+                                var num = d.value;
                                 return rs(num)
                             },
                             sensitivity: 100,
@@ -177,7 +190,7 @@ ckan.module('querytool-viz-preview', function() {
                         categories: categories,
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: true
+                            multiline: false
                         }
                     },
                     rotated: rotate
@@ -209,18 +222,24 @@ ckan.module('querytool-viz-preview', function() {
 
             var xTextRotate = chartField.find('[name*=chart_field_x_text_rotate_]');
             var xTextRotateVal = xTextRotate.val();
+
+            var tooltipName = chartField.find('input[name*=chart_field_tooltip_name_]');
+            var tooltipNameVal = tooltipName.val();
+
             // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
                 this.options.y_axis === axisYValue
             ) && (this.options.colors !== colorValue || this.options.chart_type !== chartTypeValue ||
-                  this.options.x_text_rotate !== xTextRotateVal)) {
+                  this.options.x_text_rotate !== xTextRotateVal ||
+                  this.options.tooltip_name !== tooltipNameVal)) {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
                 this.options.show_legend = legendVal;
                 this.options.x_text_rotate = xTextRotateVal;
+                this.options.tooltip_name = tooltipNameVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -233,6 +252,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.title = chartTitleVal;
             this.options.show_legend = legendVal;
             this.options.x_text_rotate = xTextRotateVal;
+            this.options.tooltip_name = tooltipNameVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
