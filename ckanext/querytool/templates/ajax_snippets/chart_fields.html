@@ -69,6 +69,16 @@
         </div>
       </div>
 
+      {% if chart %}
+        {% set tooltip_name = chart.tooltip_name %}
+      {% endif %}
+       <div class="control-group ">
+        <label class="control-label" for="chart_field_tooltip_name_{{ n }}">{{ _('Tooltip name') }}</label>
+        <div class="controls ">
+          <input id="chart_field_tooltip_name_{{ n }}" type="text" name="chart_field_tooltip_name_{{ n }}" value="{{ tooltip_name }}">
+        </div>
+      </div>
+
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
 
       <ul class="inline text-right chart-actions">
@@ -88,6 +98,7 @@
         {% set title = chart.title %}
         {% set show_legend = chart.show_legend %}
         {% set x_text_rotate = chart.x_text_rotate %}
+        {% set tooltip_name = chart.tooltip_name %}
       {% else %}
         {% set colors = color_scheme[0].value %}
         {% set x_axis = columns[0] %}
@@ -95,6 +106,7 @@
         {% set chart_type = chart_types[0].value %}
         {% set title = '' %}
         {% set x_text_rotate = text_rotation[0].value %}
+        {% set tooltip_name = '' %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -106,7 +118,8 @@
           sql_string=sql_string,
           title= title,
           show_legend = show_legend,
-          x_text_rotate= x_text_rotate
+          x_text_rotate= x_text_rotate,
+          tooltip_name = tooltip_name
       %}
     </div>
 </div>
