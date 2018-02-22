@@ -101,21 +101,21 @@ ckan.module('querytool-viz-preview', function() {
             options.legend = {
                 show: show_legend
             }
+            options.tooltip = {
+                format: {}
+            }
+
             if(tooltip_name !== true && tooltip_name !== ''){
-                options.tooltip = {
-                format: {
-                    title: function (d) {
-                        if(options.data.type === 'donut' || options.data.type === 'pie'){
-                            return tooltip_name;
-                        }
-                        return tooltip_name + ' ' +  d;
-                    },
-                    value: function (value, ratio, id) {
-                        var format =  d3.format(tooltip_format);
-                        return format(value);
-                        }
+                options.tooltip.format['title'] =  function (d) {
+                    if(options.data.type === 'donut' || options.data.type === 'pie'){
+                        return tooltip_name;
                     }
-                }
+                        return tooltip_name + ' ' +  d;
+                    }
+            }
+            options.tooltip.format['value'] = function (value, ratio, id) {
+                var format =  d3.format(tooltip_format);
+                return format(value);
             }
 
             if (this.options.chart_type === 'donut' ||
