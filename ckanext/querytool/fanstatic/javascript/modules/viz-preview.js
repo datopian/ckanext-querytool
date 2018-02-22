@@ -249,11 +249,8 @@ ckan.module('querytool-viz-preview', function() {
             // then just update the chart without fetching new data. This leads
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
-                this.options.y_axis === axisYValue
-            ) && (this.options.colors !== colorValue || this.options.chart_type !== chartTypeValue ||
-                  this.options.x_text_rotate !== xTextRotateVal ||
-                  this.options.tooltip_name !== tooltipNameVal || this.options.show_legend !== legendVal ||
-                  this.options.y_tick_format !== yTickFormatVal)) {
+                this.options.y_axis === axisYValue))
+            {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
