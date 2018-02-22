@@ -131,7 +131,7 @@ ckan.module('querytool-viz-preview', function() {
             else if(this.options.chart_type === 'sbar' ||
                     this.options.chart_type == 'shbar')
             {
-                var horizontal = (this.options.chart_type === 'shbar');
+                var horizontal = (this.options.chart_type === 'shbar') ? true : false
 
                 values = records.map(function(item) {
                     return [item[x_axis], item[y_axis]]
@@ -144,11 +144,23 @@ ckan.module('querytool-viz-preview', function() {
                     return item[0];
                 });
                 options.data.groups = [groups];
-                if(horizontal){
-                    options.axis = {
-                        rotated: true
+
+                options.axis = {
+                    rotated : horizontal,
+                    y: {
+                        tick: {
+                          format: d3.format(y_tick_format)
+                          //or format: function (d) { return '$' + d; }
+                        }
+                    },
+                    x: {
+                        tick:{
+                            rotate: x_text_rotate,
+                            multiline: false
+                        }
                     }
                 }
+                console.log(options.axis)
             }
             else
             {
