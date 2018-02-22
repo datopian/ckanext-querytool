@@ -101,21 +101,21 @@ ckan.module('querytool-viz-preview', function() {
             options.legend = {
                 show: show_legend
             }
+            options.tooltip = {
+                format: {}
+            }
+
             if(tooltip_name !== true && tooltip_name !== ''){
-                options.tooltip = {
-                format: {
-                    title: function (d) {
-                        if(options.data.type === 'donut' || options.data.type === 'pie'){
-                            return tooltip_name;
-                        }
-                        return tooltip_name + ' ' +  d;
-                    },
-                    value: function (value, ratio, id) {
-                        var format =  d3.format(tooltip_format);
-                        return format(value);
-                        }
+                options.tooltip.format['title'] =  function (d) {
+                    if(options.data.type === 'donut' || options.data.type === 'pie'){
+                        return tooltip_name;
                     }
-                }
+                        return tooltip_name + ' ' +  d;
+                    }
+            }
+            options.tooltip.format['value'] = function (value, ratio, id) {
+                var format =  d3.format(tooltip_format);
+                return format(value);
             }
 
             if (this.options.chart_type === 'donut' ||
@@ -131,7 +131,7 @@ ckan.module('querytool-viz-preview', function() {
             else if(this.options.chart_type === 'sbar' ||
                     this.options.chart_type == 'shbar')
             {
-                var horizontal = (this.options.chart_type === 'shbar');
+                var horizontal = (this.options.chart_type === 'shbar') ? true : false
 
                 values = records.map(function(item) {
                     return [item[x_axis], item[y_axis]]
@@ -144,11 +144,23 @@ ckan.module('querytool-viz-preview', function() {
                     return item[0];
                 });
                 options.data.groups = [groups];
-                if(horizontal){
-                    options.axis = {
-                        rotated: true
+
+                options.axis = {
+                    rotated : horizontal,
+                    y: {
+                        tick: {
+                          format: d3.format(y_tick_format)
+                          //or format: function (d) { return '$' + d; }
+                        }
+                    },
+                    x: {
+                        tick:{
+                            rotate: x_text_rotate,
+                            multiline: false
+                        }
                     }
                 }
+                console.log(options.axis)
             }
             else
             {
@@ -249,11 +261,8 @@ ckan.module('querytool-viz-preview', function() {
             // then just update the chart without fetching new data. This leads
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
-                this.options.y_axis === axisYValue
-            ) && (this.options.colors !== colorValue || this.options.chart_type !== chartTypeValue ||
-                  this.options.x_text_rotate !== xTextRotateVal ||
-                  this.options.tooltip_name !== tooltipNameVal || this.options.show_legend !== legendVal ||
-                  this.options.y_tick_format !== yTickFormatVal)) {
+                this.options.y_axis === axisYValue))
+            {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
