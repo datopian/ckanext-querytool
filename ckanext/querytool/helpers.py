@@ -195,7 +195,11 @@ def get_tick_text_rotation():
     return options
 
 
-def get_tooltip_data_formats():
+def get_charts_data_formats():
+    '''
+        Get available formats for charts tooltip and axis ticks
+    :return:
+    '''
     options = [{'text': 'Dolar e.g 2000$', 'value': '$'},
                {'text': 'Rounded e.g 2k', 'value': 's'},
                {'text': 'Percentage (multiply by 100) e.g 200000%',

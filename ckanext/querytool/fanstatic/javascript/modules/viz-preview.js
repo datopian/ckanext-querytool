@@ -82,6 +82,7 @@ ckan.module('querytool-viz-preview', function() {
             var x_text_rotate = this.options.x_text_rotate;
             var tooltip_name = this.options.tooltip_name;
             var tooltip_format = this.options.tooltip_format;
+            var y_tick_format = this.options.y_tick_format;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -103,7 +104,12 @@ ckan.module('querytool-viz-preview', function() {
             if(tooltip_name !== true && tooltip_name !== ''){
                 options.tooltip = {
                 format: {
-                    title: function (d) { return tooltip_name + ' ' +  d; },
+                    title: function (d) {
+                        if(options.data.type === 'donut' || options.data.type === 'pie'){
+                            return tooltip_name;
+                        }
+                        return tooltip_name + ' ' +  d;
+                    },
                     value: function (value, ratio, id) {
                         var format =  d3.format(tooltip_format);
                         return format(value);
@@ -186,12 +192,19 @@ ckan.module('querytool-viz-preview', function() {
                     type: ctype
                 };
                 options.axis = {
+                    y: {
+                        tick: {
+                          format: d3.format(y_tick_format)
+                          //or format: function (d) { return '$' + d; }
+                        }
+                    },
                     x: {
                         type: 'category',
                         categories: categories,
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: false
+                            multiline: false,
+                            fit: true
                         }
                     },
                     rotated: rotate
@@ -230,6 +243,8 @@ ckan.module('querytool-viz-preview', function() {
             var tooltipFormat = chartField.find('[name*=chart_field_tooltip_format_]');
             var tooltipFormatVal = tooltipFormat.val();
 
+            var yTickFormat = chartField.find('[name*=chart_field_y_ticks_format_]');
+            var yTickFormatVal = yTickFormat.val();
             // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -237,7 +252,8 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.y_axis === axisYValue
             ) && (this.options.colors !== colorValue || this.options.chart_type !== chartTypeValue ||
                   this.options.x_text_rotate !== xTextRotateVal ||
-                  this.options.tooltip_name !== tooltipNameVal || this.options.show_legend !== legendVal)) {
+                  this.options.tooltip_name !== tooltipNameVal || this.options.show_legend !== legendVal ||
+                  this.options.y_tick_format !== yTickFormatVal)) {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
@@ -245,6 +261,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.x_text_rotate = xTextRotateVal;
                 this.options.tooltip_name = tooltipNameVal;
                 this.options.tooltip_format = tooltipFormatVal;
+                this.options.y_tick_format = yTickFormatVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -259,6 +276,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.x_text_rotate = xTextRotateVal;
             this.options.tooltip_name = tooltipNameVal;
             this.options.tooltip_format = tooltipFormatVal;
+            this.options.y_tick_format = yTickFormatVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
