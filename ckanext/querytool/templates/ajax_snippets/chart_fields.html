@@ -47,12 +47,12 @@
         </div>
       </div>
 
-       {% set color_scheme = h.querytool_get_color_scheme() %}
+       {% set color_schemes = h.querytool_get_color_scheme() %}
       <div class="control-group control-select">
         <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color scheme') }}</label>
         <div class="controls ">
           <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
-          {% for color in color_scheme %}
+          {% for color in color_schemes %}
             <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{color.text}}</option>
           {% endfor %}
           </select>
@@ -79,6 +79,18 @@
         </div>
       </div>
 
+       {% set tooltip_formats = h.queytool_get_tooltip_data_formats() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_tooltip_format_{{ n }}">{{ _('Tooltip data format') }}</label>
+        <div class="controls ">
+          <select id="chart_field_tooltip_format_{{ n }}" name="chart_field_tooltip_format_{{ n }}">
+          {% for format in tooltip_formats %}
+            <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == chart.tooltip_format }}{% endif %} >{{format.text}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
 
       <ul class="inline text-right chart-actions">
@@ -99,6 +111,7 @@
         {% set show_legend = chart.show_legend %}
         {% set x_text_rotate = chart.x_text_rotate %}
         {% set tooltip_name = chart.tooltip_name %}
+        {% set tooltip_format = chart.tooltip_format %}
       {% else %}
         {% set colors = color_scheme[0].value %}
         {% set x_axis = columns[0] %}
@@ -107,6 +120,7 @@
         {% set title = '' %}
         {% set x_text_rotate = text_rotation[0].value %}
         {% set tooltip_name = '' %}
+        {% set tooltip_format = tooltip_formats[0].val %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -119,7 +133,8 @@
           title= title,
           show_legend = show_legend,
           x_text_rotate= x_text_rotate,
-          tooltip_name = tooltip_name
+          tooltip_name = tooltip_name,
+          tooltip_format = tooltip_format
       %}
     </div>
 </div>
