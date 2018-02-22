@@ -103,6 +103,27 @@
         </div>
       </div>
 
+
+        {% if chart %}
+          {% set ptop = chart.padding_top %}
+        {% endif %}
+       <div class="control-group ">
+        <label class="control-label" for="chart_field_padding_top{{ n }}">{{ _('Padding top') }}</label>
+        <div class="controls ">
+          <input id="chart_field_padding_top{{ n }}" type="text" name="chart_field_padding_top{{ n }}" value="{{ ptop }}">
+        </div>
+       </div>
+
+         {% if chart %}
+          {% set pbtm = chart.padding_bottom %}
+        {% endif %}
+        <div class="control-group ">
+        <label class="control-label" for="chart_field_padding_btm{{ n }}">{{ _('Padding bottom') }}</label>
+        <div class="controls ">
+          <input id="chart_field_padding_btm{{ n }}" type="text" name="chart_field_padding_btm{{ n }}" value="{{ pbtm }}">
+        </div>
+      </div>
+
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
 
       <ul class="inline text-right chart-actions">
@@ -125,6 +146,8 @@
         {% set tooltip_name = chart.tooltip_name %}
         {% set tooltip_format = chart.tooltip_format %}
         {% set y_tick_format = chart.y_tick_format %}
+        {% set padding_bottom = chart.padding_bottom %}
+        {% set padding_top = chart.padding_top %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -139,7 +162,9 @@
           x_text_rotate= x_text_rotate,
           tooltip_name = tooltip_name,
           tooltip_format = tooltip_format,
-          y_tick_format = y_tick_format
+          y_tick_format = y_tick_format,
+          padding_bottom = padding_bottom,
+          padding_top = padding_top
       %}
     </div>
 </div>
