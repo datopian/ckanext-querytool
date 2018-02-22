@@ -103,7 +103,12 @@ ckan.module('querytool-viz-preview', function() {
             if(tooltip_name !== true && tooltip_name !== ''){
                 options.tooltip = {
                 format: {
-                    title: function (d) { return tooltip_name + ' ' +  d; },
+                    title: function (d) {
+                        if(options.data.type === 'donut' || options.data.type === 'pie'){
+                            return tooltip_name;
+                        }
+                        return tooltip_name + ' ' +  d;
+                    },
                     value: function (value, ratio, id) {
                         var format =  d3.format(tooltip_format);
                         return format(value);
@@ -191,7 +196,8 @@ ckan.module('querytool-viz-preview', function() {
                         categories: categories,
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: false
+                            multiline: false,
+                            fit: true
                         }
                     },
                     rotated: rotate
