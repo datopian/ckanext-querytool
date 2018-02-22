@@ -97,8 +97,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'querytool_get_dataset_resources': helpers.get_dataset_resources,
             'querytool_get_resource_columns': helpers.get_resource_columns,
             'querytool_get_tick_text_rotation': helpers.get_tick_text_rotation,
-            'queytool_get_tooltip_data_formats':
-                helpers.get_tooltip_data_formats
+            'queytool_get_charts_data_formats':
+                helpers.get_charts_data_formats
         }
 
     # IAuthFunctions

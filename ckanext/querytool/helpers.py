@@ -195,9 +195,9 @@ def get_tick_text_rotation():
     return options
 
 
-def get_tooltip_data_formats():
+def get_charts_data_formats():
     '''
-        Get available data formats for charts tooltip
+        Get available formats for charts tooltip and axis ticks
     :return:
     '''
     options = [{'text': 'Dolar e.g 2000$', 'value': '$'},
