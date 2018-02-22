@@ -79,7 +79,7 @@
         </div>
       </div>
 
-       {% set tooltip_formats = h.get_charts_data_formats() %}
+       {% set tooltip_formats = h.queytool_get_charts_data_formats() %}
       <div class="control-group control-select">
         <label class="control-label" for="chart_field_tooltip_format_{{ n }}">{{ _('Tooltip data format') }}</label>
         <div class="controls ">
@@ -91,7 +91,7 @@
         </div>
       </div>
 
-      {% set ticks_formats = h.get_charts_data_formats() %}
+      {% set ticks_formats = h.queytool_get_charts_data_formats() %}
       <div class="control-group control-select">
         <label class="control-label" for="chart_field_y_ticks_format_{{ n }}">{{ _('Y axis tick format') }}</label>
         <div class="controls ">
