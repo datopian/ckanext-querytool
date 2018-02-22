@@ -83,6 +83,8 @@ ckan.module('querytool-viz-preview', function() {
             var tooltip_name = this.options.tooltip_name;
             var tooltip_format = this.options.tooltip_format;
             var y_tick_format = this.options.y_tick_format;
+            var padding_top = this.options.padding_top;
+            var padding_bottom = this.options.padding_bottom;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -208,7 +210,11 @@ ckan.module('querytool-viz-preview', function() {
                         tick: {
                           format: d3.format(y_tick_format)
                           //or format: function (d) { return '$' + d; }
-                        }
+                        },
+                    padding: {
+                         top: padding_top,
+                         bottom: padding_bottom
+                         }
                     },
                     x: {
                         type: 'category',
@@ -257,6 +263,13 @@ ckan.module('querytool-viz-preview', function() {
 
             var yTickFormat = chartField.find('[name*=chart_field_y_ticks_format_]');
             var yTickFormatVal = yTickFormat.val();
+
+            var paddingTop = chartField.find('input[name*=chart_field_padding_top]');
+            var paddingTopVal = paddingTop.val();
+
+            var paddingBottom = chartField.find('input[name*=chart_field_padding_bottom]');
+            var paddingBottomVal = paddingBottom.val();
+
             // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -271,6 +284,8 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.tooltip_name = tooltipNameVal;
                 this.options.tooltip_format = tooltipFormatVal;
                 this.options.y_tick_format = yTickFormatVal;
+                this.options.padding_top = paddingTopVal;
+                this.options.padding_bottom = paddingBottom;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -286,6 +301,8 @@ ckan.module('querytool-viz-preview', function() {
             this.options.tooltip_name = tooltipNameVal;
             this.options.tooltip_format = tooltipFormatVal;
             this.options.y_tick_format = yTickFormatVal;
+            this.options.padding_top = paddingTopVal;
+            this.options.padding_bottom = paddingBottom;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
