@@ -300,7 +300,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.tooltip_format = tooltipFormatVal;
             this.options.y_tick_format = yTickFormatVal;
             this.options.padding_top = paddingTopVal;
-            this.options.padding_bottom = paddingBottom;
+            this.options.padding_bottom = paddingBottomVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
