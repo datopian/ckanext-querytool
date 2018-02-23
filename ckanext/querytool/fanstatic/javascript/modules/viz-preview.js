@@ -158,7 +158,11 @@ ckan.module('querytool-viz-preview', function() {
                         tick: {
                           format: d3.format(y_tick_format),
                           rotate: yrotate
-                        }
+                         },
+                         padding: {
+                            top: padding_top,
+                            bottom: padding_bottom
+                         }
                     },
                     x: {
                         tick:{
