@@ -135,6 +135,11 @@ ckan.module('querytool-viz-preview', function() {
             {
                 var horizontal = (this.options.chart_type === 'shbar') ? true : false
 
+                var yrotate = 0;
+                if(horizontal){
+                     // On horizontal bar the x axis is now actually the y axis
+                    yrotate = x_text_rotate;
+                }
                 values = records.map(function(item) {
                     return [item[x_axis], item[y_axis]]
                 });
@@ -151,8 +156,8 @@ ckan.module('querytool-viz-preview', function() {
                     rotated : horizontal,
                     y: {
                         tick: {
-                          format: d3.format(y_tick_format)
-                          //or format: function (d) { return '$' + d; }
+                          format: d3.format(y_tick_format),
+                          rotate: yrotate
                         }
                     },
                     x: {
@@ -216,7 +221,7 @@ ckan.module('querytool-viz-preview', function() {
                     padding: {
                          top: padding_top,
                          bottom: padding_bottom
-                         }
+                    }
                     },
                     x: {
                         type: 'category',
