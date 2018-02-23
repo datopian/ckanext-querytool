@@ -162,7 +162,6 @@ ckan.module('querytool-viz-preview', function() {
                         }
                     }
                 }
-                console.log(options.axis)
             }
             else
             {
@@ -264,12 +263,11 @@ ckan.module('querytool-viz-preview', function() {
             var yTickFormat = chartField.find('[name*=chart_field_y_ticks_format_]');
             var yTickFormatVal = yTickFormat.val();
 
-            var paddingTop = chartField.find('input[name*=chart_field_padding_top]');
+            var paddingTop = chartField.find('input[name*=chart_field_padding_top_]');
             var paddingTopVal = paddingTop.val();
 
-            var paddingBottom = chartField.find('input[name*=chart_field_padding_bottom]');
+            var paddingBottom = chartField.find('input[name*=chart_field_padding_bottom_]');
             var paddingBottomVal = paddingBottom.val();
-
             // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -285,7 +283,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.tooltip_format = tooltipFormatVal;
                 this.options.y_tick_format = yTickFormatVal;
                 this.options.padding_top = paddingTopVal;
-                this.options.padding_bottom = paddingBottom;
+                this.options.padding_bottom = paddingBottomVal;
                 this.createChart(this.fetched_data);
 
                 return;
