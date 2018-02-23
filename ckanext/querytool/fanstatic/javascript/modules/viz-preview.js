@@ -135,6 +135,11 @@ ckan.module('querytool-viz-preview', function() {
             {
                 var horizontal = (this.options.chart_type === 'shbar') ? true : false
 
+                var yrotate = 0;
+                if(horizontal){
+                     // On horizontal bar the x axis is now actually the y axis
+                    yrotate = x_text_rotate;
+                }
                 values = records.map(function(item) {
                     return [item[x_axis], item[y_axis]]
                 });
@@ -151,9 +156,13 @@ ckan.module('querytool-viz-preview', function() {
                     rotated : horizontal,
                     y: {
                         tick: {
-                          format: d3.format(y_tick_format)
-                          //or format: function (d) { return '$' + d; }
-                        }
+                          format: d3.format(y_tick_format),
+                          rotate: yrotate
+                         },
+                         padding: {
+                            top: padding_top,
+                            bottom: padding_bottom
+                         }
                     },
                     x: {
                         tick:{
@@ -162,16 +171,18 @@ ckan.module('querytool-viz-preview', function() {
                         }
                     }
                 }
-                console.log(options.axis)
             }
             else
             {
                 var rotate = false;
                 var ctype = this.options.chart_type;
+                var yrotate = 0;
                 if (this.options.chart_type === 'hbar')
                 {
                     rotate = true;
                     ctype = 'bar';
+                    // On horizontal bar the x axis is now actually the y axis
+                    yrotate = x_text_rotate;
                 }
 
                 if(this.options.chart_type === 'bscatter'){
@@ -208,13 +219,13 @@ ckan.module('querytool-viz-preview', function() {
                 options.axis = {
                     y: {
                         tick: {
-                          format: d3.format(y_tick_format)
-                          //or format: function (d) { return '$' + d; }
+                          format: d3.format(y_tick_format),
+                          rotate: yrotate
                         },
                     padding: {
                          top: padding_top,
                          bottom: padding_bottom
-                         }
+                    }
                     },
                     x: {
                         type: 'category',
@@ -264,12 +275,11 @@ ckan.module('querytool-viz-preview', function() {
             var yTickFormat = chartField.find('[name*=chart_field_y_ticks_format_]');
             var yTickFormatVal = yTickFormat.val();
 
-            var paddingTop = chartField.find('input[name*=chart_field_padding_top]');
+            var paddingTop = chartField.find('input[name*=chart_field_padding_top_]');
             var paddingTopVal = paddingTop.val();
 
-            var paddingBottom = chartField.find('input[name*=chart_field_padding_bottom]');
+            var paddingBottom = chartField.find('input[name*=chart_field_padding_bottom_]');
             var paddingBottomVal = paddingBottom.val();
-
             // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -285,7 +295,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.tooltip_format = tooltipFormatVal;
                 this.options.y_tick_format = yTickFormatVal;
                 this.options.padding_top = paddingTopVal;
-                this.options.padding_bottom = paddingBottom;
+                this.options.padding_bottom = paddingBottomVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -302,7 +312,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.tooltip_format = tooltipFormatVal;
             this.options.y_tick_format = yTickFormatVal;
             this.options.padding_top = paddingTopVal;
-            this.options.padding_bottom = paddingBottom;
+            this.options.padding_bottom = paddingBottomVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);

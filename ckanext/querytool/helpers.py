@@ -187,9 +187,8 @@ def get_tick_text_rotation():
        :return:
     '''
     options = [{'text': 'Horizontal', 'value': '0'},
-               {'text': 'Right', 'value': '30'},
+               {'text': 'Diagonal', 'value': '30'},
                {'text': 'Vertical', 'value': '90'},
-               {'text': 'Left', 'value': '-15'},
                {'text': 'Reverse', 'value': '180'}]
 
     return options
