@@ -60,6 +60,16 @@
       </div>
 
       {% if chart %}
+        {% set show_labels = chart.show_labels %}
+      {% endif %}
+      <div class="control-group ">
+        <label class="control-label" for="chart_field_labels_{{ n }}">{{ _('Show data labels') }}</label>
+        <div class="controls ">
+          <input id="chart_field_labels_{{ n }}" type="checkbox" name="chart_field_labels_{{ n }}" value="{{ show_labels }}"{% if show_labels=='false' %}{% else %}checked{% endif %}>
+        </div>
+      </div>
+
+        {% if chart %}
         {% set show_legend = chart.show_legend %}
       {% endif %}
       <div class="control-group ">
@@ -148,6 +158,7 @@
         {% set y_tick_format = chart.y_tick_format %}
         {% set padding_bottom = chart.padding_bottom %}
         {% set padding_top = chart.padding_top %}
+        {% set show_labels = chart.show_labels %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -164,7 +175,8 @@
           tooltip_format = tooltip_format,
           y_tick_format = y_tick_format,
           padding_bottom = padding_bottom,
-          padding_top = padding_top
+          padding_top = padding_top,
+          show_labels = show_labels
       %}
     </div>
 </div>
