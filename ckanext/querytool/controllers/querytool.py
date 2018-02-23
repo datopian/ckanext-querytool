@@ -273,6 +273,10 @@ class QueryToolController(base.BaseController):
                         visualization['show_legend'] = 'true'
                     else:
                         visualization['show_legend'] = 'false'
+                    if 'chart_field_labels_{}'.format(id) in data:
+                        visualization['show_labels'] = 'true'
+                    else:
+                        visualization['show_labels'] = 'false'
 
                     visualizations.append(visualization)
 

@@ -85,6 +85,8 @@ ckan.module('querytool-viz-preview', function() {
             var y_tick_format = this.options.y_tick_format;
             var padding_top = this.options.padding_top;
             var padding_bottom = this.options.padding_bottom;
+            var show_labels = this.options.show_labels;
+
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -214,7 +216,8 @@ ckan.module('querytool-viz-preview', function() {
                 values.unshift(this.options.y_axis);
                 options.data = {
                     columns: [values],
-                    type: ctype
+                    type: ctype,
+                    labels: show_labels
                 };
                 options.axis = {
                     y: {
@@ -261,7 +264,7 @@ ckan.module('querytool-viz-preview', function() {
             var chartTitleVal = chartTitle.val();
 
             var legend =  chartField.find('input[name*=chart_field_legend_]');
-            var legendVal = legend.is(':checked')
+            var legendVal = legend.is(':checked');
 
             var xTextRotate = chartField.find('[name*=chart_field_x_text_rotate_]');
             var xTextRotateVal = xTextRotate.val();
@@ -280,6 +283,10 @@ ckan.module('querytool-viz-preview', function() {
 
             var paddingBottom = chartField.find('input[name*=chart_field_padding_bottom_]');
             var paddingBottomVal = paddingBottom.val();
+
+            var dataLabels =  chartField.find('input[name*=chart_field_labels_]');
+            var dataLabelsVal = dataLabels.is(':checked');
+
             // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -296,6 +303,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.y_tick_format = yTickFormatVal;
                 this.options.padding_top = paddingTopVal;
                 this.options.padding_bottom = paddingBottomVal;
+                this.options.show_labels = dataLabelsVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -313,6 +321,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.y_tick_format = yTickFormatVal;
             this.options.padding_top = paddingTopVal;
             this.options.padding_bottom = paddingBottomVal;
+            this.options.show_labels = dataLabelsVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
