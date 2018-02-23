@@ -167,10 +167,13 @@ ckan.module('querytool-viz-preview', function() {
             {
                 var rotate = false;
                 var ctype = this.options.chart_type;
+                var yrotate = 0;
                 if (this.options.chart_type === 'hbar')
                 {
                     rotate = true;
                     ctype = 'bar';
+                    // On horizontal bar the x axis is now actually the y axis
+                    yrotate = x_text_rotate;
                 }
 
                 if(this.options.chart_type === 'bscatter'){
@@ -207,8 +210,8 @@ ckan.module('querytool-viz-preview', function() {
                 options.axis = {
                     y: {
                         tick: {
-                          format: d3.format(y_tick_format)
-                          //or format: function (d) { return '$' + d; }
+                          format: d3.format(y_tick_format),
+                          rotate: yrotate
                         },
                     padding: {
                          top: padding_top,
