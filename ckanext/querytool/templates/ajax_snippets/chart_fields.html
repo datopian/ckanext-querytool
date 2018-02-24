@@ -113,6 +113,16 @@
         </div>
       </div>
 
+      {% if chart %}
+        {% set y_label = chart.y_label %}
+      {% endif %}
+       <div class="control-group ">
+        <label class="control-label" for="chart_field_y_label_{{ n }}">{{ _('Y axis label') }}</label>
+        <div class="controls ">
+          <input id="chart_field_y_label_{{ n }}" type="text" name="chart_field_y_label_{{ n }}" value="{{ y_label }}">
+        </div>
+      </div>
+
 
         {% if chart %}
           {% set ptop = chart.padding_top %}
@@ -159,6 +169,7 @@
         {% set padding_bottom = chart.padding_bottom %}
         {% set padding_top = chart.padding_top %}
         {% set show_labels = chart.show_labels %}
+        {% set y_label = chart.y_label %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -176,7 +187,8 @@
           y_tick_format = y_tick_format,
           padding_bottom = padding_bottom,
           padding_top = padding_top,
-          show_labels = show_labels
+          show_labels = show_labels,
+          y_label = y_label
       %}
     </div>
 </div>
