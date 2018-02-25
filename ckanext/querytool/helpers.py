@@ -170,14 +170,14 @@ def get_color_scheme():
               {'value': '#22758e, #b63b3b, #f9c414, #e3e8e6, #4c4555, '
                         '#d53c3c, #80add3,  #97cfcc, #e4b03d, #c39de0',
                'text': 'Orient'},
-              {'value': '#3b5998, #8b9dc3, #dfe3ee, #f7f7f7, #ffffff, ',
-                        '#011f4b, #03396c, #005b96, #6497b1, #6497b1'
+              {'value': '#3b5998, #8b9dc3, #dfe3ee, #f7f7f7, #ffffff, '
+                        '#011f4b, #03396c, #005b96, #6497b1, #6497b1',
                'text': 'Blue'},
-              {'value': '#ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, ',
-                        '#ee4035, #f37736, #fdf498, #7bc043, #0392cf'
+              {'value': '#ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, '
+                        '#ee4035, #f37736, #fdf498, #7bc043, #0392cf',
                'text': 'Rainbow'},
-              {'value': '#2e4045, #83adb5, #c7bbc9, #5e3c58, #bfb5b2, ',
-                        '#a69eb0, #efeff2, #f2e2cd, #dadae3, #000000'
+              {'value': '#2e4045, #83adb5, #c7bbc9, #5e3c58, #bfb5b2, '
+                        '#a69eb0, #efeff2, #f2e2cd, #dadae3, #000000',
                'text': 'Muted'}
               ]
 
