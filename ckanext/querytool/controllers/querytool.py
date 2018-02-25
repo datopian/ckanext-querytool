@@ -269,6 +269,8 @@ class QueryToolController(base.BaseController):
                         data['chart_field_padding_bottom_{}'.format(id)]
                     visualization['padding_top'] = \
                         data['chart_field_padding_top_{}'.format(id)]
+                    visualization['y_label'] = \
+                        data['chart_field_y_label_{}'.format(id)]
                     if 'chart_field_legend_{}'.format(id) in data:
                         visualization['show_legend'] = 'true'
                     else:

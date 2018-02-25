@@ -86,7 +86,7 @@ ckan.module('querytool-viz-preview', function() {
             var padding_top = this.options.padding_top;
             var padding_bottom = this.options.padding_bottom;
             var show_labels = this.options.show_labels;
-
+            var y_label = this.options.y_label;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -228,7 +228,8 @@ ckan.module('querytool-viz-preview', function() {
                     padding: {
                          top: padding_top,
                          bottom: padding_bottom
-                    }
+                    },
+                    label: y_label
                     },
                     x: {
                         type: 'category',
@@ -287,6 +288,9 @@ ckan.module('querytool-viz-preview', function() {
             var dataLabels =  chartField.find('input[name*=chart_field_labels_]');
             var dataLabelsVal = dataLabels.is(':checked');
 
+            var yLabbel = chartField.find('input[name*=chart_field_y_label_]');
+            var yLabbelVal = yLabbel.val();
+
             // If the changed values from the dropdowns are from color, chart type or text rotate
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -304,6 +308,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.padding_top = paddingTopVal;
                 this.options.padding_bottom = paddingBottomVal;
                 this.options.show_labels = dataLabelsVal;
+                this.options.y_label = yLabbelVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -322,6 +327,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.padding_top = paddingTopVal;
             this.options.padding_bottom = paddingBottomVal;
             this.options.show_labels = dataLabelsVal;
+            this.options.y_label = yLabbelVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
