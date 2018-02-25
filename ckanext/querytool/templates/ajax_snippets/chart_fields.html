@@ -130,7 +130,7 @@
        <div class="control-group ">
         <label class="control-label" for="chart_field_padding_top_{{ n }}">{{ _('Padding top') }}</label>
         <div class="controls ">
-          <input id="chart_field_padding_top_{{ n }}" type="text" name="chart_field_padding_top_{{ n }}" value="{{ ptop }}">
+          <input id="chart_field_padding_top_{{ n }}" type="number" min="0" name="chart_field_padding_top_{{ n }}" value="{{ ptop }}">
         </div>
        </div>
 
@@ -140,7 +140,7 @@
         <div class="control-group ">
         <label class="control-label" for="chart_field_padding_bottom_{{ n }}">{{ _('Padding bottom') }}</label>
         <div class="controls ">
-          <input id="chart_field_padding_bottom_{{ n }}" type="text" name="chart_field_padding_bottom_{{ n }}" value="{{ pbtm }}">
+          <input id="chart_field_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_padding_bottom_{{ n }}" value="{{ pbtm }}">
         </div>
       </div>
 
