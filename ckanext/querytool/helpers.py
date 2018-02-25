@@ -199,7 +199,8 @@ def get_charts_data_formats():
         Get available formats for charts tooltip and axis ticks
     :return:
     '''
-    options = [{'text': 'Dolar e.g 2000$', 'value': '$'},
+    options = [{'text': 'Default', 'value': ''},
+               {'text': 'Dolar e.g 2000$', 'value': '$'},
                {'text': 'Rounded e.g 2k', 'value': 's'},
                {'text': 'Percentage (multiply by 100) e.g 200000%',
                 'value': 'p'},
