@@ -186,15 +186,12 @@ ckan.module('querytool-viz-preview', function() {
                     // On horizontal bar the x axis is now actually the y axis
                     yrotate = x_text_rotate;
                 }
-
                 if(this.options.chart_type === 'bscatter'){
-                    var rs = d3.scale.linear()
-                          .domain([0.01, 100000])
-                          .range([5, 50]);
+                    //workaround for bubble charts, scale log base 10 because of large values
+                    var rs = d3.scale.log().base(10).domain([1,1000]).range([0,10]);
                     ctype = 'scatter';
                     options.point = {
                          r: function(d) {
-                                //workaround for bubble charts, divide by 10 because of large values
                                 var num = d.value;
                                 return rs(num)
                             },
