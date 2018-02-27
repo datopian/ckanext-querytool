@@ -10,6 +10,16 @@ Options:
     - y_axis (Column name of y axis)
     - sql_string (SQL string the contains filters)
     - chart_type (What type of chart needs to be rendered)
+    - title (Chart title)
+    - show_legend ( Display or hide charts legend)
+    - x_text_rotate ( Display text horizontal or vertical)
+    - tooltip_name (Title of the tooltip)
+    - data_format (Charts data format e.g 2k, $2000, 2000.0, 2000.00)
+    - y_tick_format (Y axis data format e.g 2k, $2000, 2000.0, 2000.00)
+    - padding_top (Add charts padding)
+    - padding_bottom (Add charts padding)
+    - show_labels (Display or hide charts labels)
+    - y_label (Aditional label added in y axis)
 
 */
 
