@@ -9,7 +9,9 @@
 {% block tools %}
 <div class="container">
   {% for querytool in data %}
-    {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
+    {% if not querytool.private %}
+      {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
+    {% endif %}
   {% endfor%}
 </div>
 {% endblock %}

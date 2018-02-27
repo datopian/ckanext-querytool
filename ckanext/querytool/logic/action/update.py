@@ -40,7 +40,7 @@ def querytool_update(context, data_dict):
     if not querytool:
         querytool = CkanextQueryTool()
 
-    items = ['title', 'description', 'name', 'dataset_name',
+    items = ['title', 'description', 'name', 'private', 'dataset_name',
              'filters', 'sql_string', 'map_resource', 'chart_resource',
              'y_axis_columns']
     for item in items:
