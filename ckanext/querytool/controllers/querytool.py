@@ -261,8 +261,8 @@ class QueryToolController(base.BaseController):
                         data['chart_field_x_text_rotate_{}'.format(id)]
                     visualization['tooltip_name'] = \
                         data['chart_field_tooltip_name_{}'.format(id)]
-                    visualization['tooltip_format'] = \
-                        data['chart_field_tooltip_format_{}'.format(id)]
+                    visualization['data_format'] = \
+                        data['chart_field_data_format_{}'.format(id)]
                     visualization['y_tick_format'] = \
                         data['chart_field_y_ticks_format_{}'.format(id)]
                     visualization['padding_bottom'] = \
