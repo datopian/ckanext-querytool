@@ -93,8 +93,8 @@ ckan.module('querytool-viz-preview', function() {
             var tooltip_name = this.options.tooltip_name;
             var data_format = this.options.data_format;
             var y_tick_format = this.options.y_tick_format;
-            var padding_top = this.options.padding_top;
-            var padding_bottom = this.options.padding_bottom;
+            var padding_top = (this.options.padding_top === true) ? '' : this.options.padding_top;
+            var padding_bottom = (this.options.padding_bottom === true) ? '' : this.options.padding_bottom;
             var show_labels = this.options.show_labels;
             var y_label = this.options.y_label;
             var options = {
@@ -104,11 +104,8 @@ ckan.module('querytool-viz-preview', function() {
                 }
             };
             var values;
-            var titleVal = this.options.title;
+            var titleVal = (this.options.title === true) ? '' : this.options.title;
 
-            if(titleVal === true){
-                titleVal = '';
-            }
             options.title = {
                 text: titleVal
             }
