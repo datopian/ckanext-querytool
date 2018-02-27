@@ -253,8 +253,8 @@
                     chartResourceSelect.removeAttr('disabled');
                     mapResourceSelect.removeAttr('disabled');
 
-                    chartResourceSelect.append($('<option></option>').attr('value', 'none').text('-- Choose resource --'));
-                    mapResourceSelect.append($('<option></option>').attr('value', 'none').text('-- Choose resource --'));
+                    chartResourceSelect.append($('<option></option>').attr('value', '').text('-- Choose resource --'));
+                    mapResourceSelect.append($('<option></option>').attr('value', '').text('-- Choose resource --'));
 
                      $.each(dataset_resources, function(i, res) {
                         var name = res.name || 'Unnamed resource';

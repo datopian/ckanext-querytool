@@ -125,6 +125,8 @@ def define_query_tool_table():
                                     default=datetime.datetime.utcnow),
                              Column('modified', types.DateTime,
                                     default=datetime.datetime.utcnow),
+                             Column('private', types.Boolean,
+                                    default=False),
                              Index('ckanext_querytool_id_idx',
                                    'id'))
 

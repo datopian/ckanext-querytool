@@ -40,6 +40,22 @@ Example usage:
   {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
   {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
+
+
+  <legend>{{ _('Basic settings') }}</legend>
+
+  <div class="control-group">
+    <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
+    <div class="controls">
+      <select id="field-private" name="private">
+        {% for option in [('True', _('Private')), ('False', _('Public'))] %}
+        <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+
   <legend>{{ _('Data and resources') }}</legend>
   {% block querytool_dataset %}
     <div class="control-group">
@@ -60,11 +76,11 @@ Example usage:
   {% endif %}
 
   {% block querytool_choose_chart_resource %}
-    {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=errors.name) }}
+    {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
   {% endblock %}
 
   {% block querytool_choose_map_resource %}
-    {{ form.select('map_resource', label=_('Map resoure'), options=dataset_resources, selected=map_resource, error=errors.name) }}
+    {{ form.select('map_resource', label=_('Map resoure'), options=dataset_resources, selected=map_resource, error=errors.map_resource, attrs={'required': 'required'}) }}
   {% endblock %}
 
   <legend>{{ _('Y Axis columns') }}</legend>

@@ -9,6 +9,7 @@ ignore_missing = toolkit.get_validator('ignore_missing')
 package_id_exists = toolkit.get_validator('package_id_exists')
 name_validator = toolkit.get_validator('name_validator')
 isodate = toolkit.get_validator('isodate')
+boolean_validator = toolkit.get_validator('boolean_validator')
 
 
 def querytool_schema():
@@ -19,6 +20,7 @@ def querytool_schema():
                  unicode],
         'title': [not_empty, unicode],
         'dataset_name': [not_empty, unicode],
+        'private': [ignore_missing, boolean_validator],
         'description': [ignore_missing, unicode],
         'filters': [not_missing, not_empty, unicode],
         'sql_string': [ignore_missing, unicode],
