@@ -81,7 +81,7 @@ ckan.module('querytool-viz-preview', function() {
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
             var tooltip_name = this.options.tooltip_name;
-            var tooltip_format = this.options.tooltip_format;
+            var data_format = this.options.data_format;
             var y_tick_format = this.options.y_tick_format;
             var padding_top = this.options.padding_top;
             var padding_bottom = this.options.padding_bottom;
@@ -118,7 +118,7 @@ ckan.module('querytool-viz-preview', function() {
                     }
             }
             options.tooltip.format['value'] = function (value, ratio, id) {
-                var format =  d3.format(tooltip_format);
+                var format =  d3.format(data_format);
                 return format(value);
             }
 
@@ -211,11 +211,17 @@ ckan.module('querytool-viz-preview', function() {
                     return item[x_axis];
                 });
                 values.unshift(this.options.y_axis);
+                var a = values[0];
                 options.data = {
                     columns: [values],
                     type: ctype,
                     labels: show_labels
                 };
+                if(show_labels){
+                    options.data['labels'] =  {
+                        format:  d3.format(data_format)
+                    }
+                }
                 options.axis = {
                     y: {
                         tick: {
@@ -270,8 +276,8 @@ ckan.module('querytool-viz-preview', function() {
             var tooltipName = chartField.find('input[name*=chart_field_tooltip_name_]');
             var tooltipNameVal = tooltipName.val();
 
-            var tooltipFormat = chartField.find('[name*=chart_field_tooltip_format_]');
-            var tooltipFormatVal = tooltipFormat.val();
+            var dataFormat = chartField.find('[name*=chart_field_data_format_]');
+            var dataFormatVal = dataFormat.val();
 
             var yTickFormat = chartField.find('[name*=chart_field_y_ticks_format_]');
             var yTickFormatVal = yTickFormat.val();
@@ -300,7 +306,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.show_legend = legendVal;
                 this.options.x_text_rotate = xTextRotateVal;
                 this.options.tooltip_name = tooltipNameVal;
-                this.options.tooltip_format = tooltipFormatVal;
+                this.options.data_format = dataFormatVal;
                 this.options.y_tick_format = yTickFormatVal;
                 this.options.padding_top = paddingTopVal;
                 this.options.padding_bottom = paddingBottomVal;
@@ -319,7 +325,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.show_legend = legendVal;
             this.options.x_text_rotate = xTextRotateVal;
             this.options.tooltip_name = tooltipNameVal;
-            this.options.tooltip_format = tooltipFormatVal;
+            this.options.data_format = dataFormatVal;
             this.options.y_tick_format = yTickFormatVal;
             this.options.padding_top = paddingTopVal;
             this.options.padding_bottom = paddingBottomVal;
