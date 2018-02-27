@@ -267,7 +267,11 @@ def create_query_str(resource_id, filters):
 
 
 def get_avaiable_filters(name):
-
+    '''
+     Get all available filters for querytool
+    :param name: Querytool name
+    :return:
+    '''
     data_dict = {
         'name': name
     }
@@ -282,6 +286,11 @@ def get_avaiable_filters(name):
 
 
 def get_dataset_resources(dataset_name):
+    '''
+    Get resources for particular dataset
+    :param dataset_name: Name of the dataset
+    :return:
+    '''
     dataset_resources = []
 
     if dataset_name:

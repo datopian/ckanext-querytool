@@ -89,13 +89,13 @@
         </div>
       </div>
 
-       {% set tooltip_formats = h.queytool_get_charts_data_formats() %}
+       {% set data_formats = h.queytool_get_charts_data_formats() %}
       <div class="control-group control-select">
-        <label class="control-label" for="chart_field_tooltip_format_{{ n }}">{{ _('Tooltip data format') }}</label>
+        <label class="control-label" for="chart_field_data_format_{{ n }}">{{ _('Data format') }}</label>
         <div class="controls ">
-          <select id="chart_field_tooltip_format_{{ n }}" name="chart_field_tooltip_format_{{ n }}">
-          {% for format in tooltip_formats %}
-            <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == chart.tooltip_format }}{% endif %} >{{format.text}}</option>
+          <select id="chart_field_data_format_{{ n }}" name="chart_field_data_format_{{ n }}">
+          {% for format in data_formats %}
+            <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == chart.data_format }}{% endif %} >{{format.text}}</option>
           {% endfor %}
           </select>
         </div>
@@ -164,7 +164,7 @@
         {% set show_legend = chart.show_legend %}
         {% set x_text_rotate = chart.x_text_rotate %}
         {% set tooltip_name = chart.tooltip_name %}
-        {% set tooltip_format = chart.tooltip_format %}
+        {% set data_format = chart.data_format %}
         {% set y_tick_format = chart.y_tick_format %}
         {% set padding_bottom = chart.padding_bottom %}
         {% set padding_top = chart.padding_top %}
@@ -183,7 +183,7 @@
           show_legend = show_legend,
           x_text_rotate= x_text_rotate,
           tooltip_name = tooltip_name,
-          tooltip_format = tooltip_format,
+          data_format = data_format,
           y_tick_format = y_tick_format,
           padding_bottom = padding_bottom,
           padding_top = padding_top,
