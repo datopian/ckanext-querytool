@@ -53,7 +53,6 @@
     function _handleFilterItemsOrder () {
 
       var filter_items = $('.filter_item');
-      console.log(filter_items);
 
       $.each(filter_items, function(i, item) {
         item = $(item);
