@@ -144,6 +144,18 @@
         </div>
       </div>
 
+      {% set sizes = h.querytool_get_chart_size() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Chart size') }}</label>
+        <div class="controls ">
+          <select id="chart_field_size_{{ n }}" name="chart_field_size_{{ n }}">
+          {% for size in sizes %}
+            <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{size.text}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
 
       <ul class="inline text-right chart-actions">
