@@ -67,7 +67,7 @@
   </div>
   <div class="charts">
     {% for item in querytool.charts %}
-      <div class="container-chart">
+      <div class="container-chart" style="flex: {{ item.size }}">
         {% snippet 'ajax_snippets/visualization_item.html',
         type='chart',
         colors=item.color,
