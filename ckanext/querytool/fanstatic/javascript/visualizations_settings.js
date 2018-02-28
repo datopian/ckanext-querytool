@@ -118,6 +118,7 @@
                 var inputLabelAxisY = item.find('[id*=chart_field_y_label_]');
                 var inputPaddingTop = item.find('[id*=chart_field_padding_top_]');
                 var inputPaddingBottom = item.find('[id*=chart_field_padding_bottom_]');
+                var inputChartSize = item.find('[id*=chart_field_size_]');
 
 
                 item.attr('id', 'chart_field_' + order);
@@ -164,6 +165,8 @@
                 inputPaddingBottom.attr('id', 'chart_field_padding_bottom_' + order);
                 inputPaddingBottom.attr('name', 'chart_field_padding_bottom_' + order);
 
+                inputChartSize.attr('id', 'chart_field_size_' + order);
+                inputChartSize.attr('name', 'chart_field_size_' + order);
             });
         }
 
