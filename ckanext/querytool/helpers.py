@@ -218,6 +218,16 @@ def get_charts_data_formats():
     return options
 
 
+def get_chart_size():
+    '''
+    Get available sizes for displaying charts
+    :return:
+    '''
+    options = [{'text': 'Small', 'value': '0 30%'},
+               {'text': 'Medium', 'value': '0 50%'},
+               {'text': 'Large', 'value': '1 100%'}]
+    return options
+
 def _create_where_clause(filters):
 
     where_clause = ''
