@@ -51,7 +51,34 @@
     };
 
     function _handleFilterItemsOrder () {
-      // TODO implement
+
+      var filter_items = $('.filter_item');
+      console.log(filter_items);
+
+      $.each(filter_items, function(i, item) {
+        item = $(item);
+
+        var order = i + 1;
+        var selectFilterName = item.find('[id*=data_filter_name_]');
+        var selectFilterValue = item.find('[id*=data_filter_value_]');
+        var inputFilterAlias = item.find('[id*=data_filter_alias_]');
+        var selectFilterVisibility = item.find('[id*=data_filter_visibility_]');
+
+        item.attr('id', 'filter_item_' + order);
+
+        selectFilterName.attr('id', 'data_filter_name_' + order);
+        selectFilterName.attr('name', 'data_filter_name_' + order);
+
+        selectFilterValue.attr('id', 'data_filter_value_' + order);
+        selectFilterValue.attr('name', 'data_filter_value_' + order);
+
+        inputFilterAlias.attr('id', 'data_filter_alias_' + order);
+        inputFilterAlias.attr('name', 'data_filter_alias_' + order);
+
+        selectFilterVisibility.attr('id', 'data_filter_visibility_' + order);
+        selectFilterVisibility.attr('name', 'data_filter_visibility_' + order);
+
+      });
     };
 
 
@@ -186,7 +213,6 @@
 
         remove_filter_button.on('click', function(e) {
             $(e.target).closest('.filter_item').remove();
-            // TODO requires implementation
             _handleFilterItemsOrder();
         });
 
@@ -220,7 +246,6 @@
                             var removeMediaItemBtn = $('.remove-filter-item-btn');
                             removeMediaItemBtn.on('click', function(e) {
                                 $(e.target).closest('.filter_item').remove();
-                                // TODO requires implementation
                                 _handleFilterItemsOrder();
                             });
 
