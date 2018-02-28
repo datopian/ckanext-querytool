@@ -228,6 +228,7 @@ def get_chart_size():
                {'text': 'Large', 'value': '1 100%'}]
     return options
 
+
 def _create_where_clause(filters):
 
     where_clause = ''
