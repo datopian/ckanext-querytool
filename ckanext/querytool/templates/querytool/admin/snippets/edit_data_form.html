@@ -45,6 +45,17 @@ Example usage:
   <legend>{{ _('Basic settings') }}</legend>
 
   <div class="control-group">
+    <label for="field-private" class="control-label">{{ _('Querytool Type') }}</label>
+    <div class="controls">
+      <select id="field-type" name="type">
+        {% for option in [('main', _('Main')), ('related', _('Related'))] %}
+        <option value="{{ option[0] }}" {% if option[0] == data.type|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group">
     <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
     <div class="controls">
       <select id="field-private" name="private">
@@ -54,7 +65,6 @@ Example usage:
       </select>
     </div>
   </div>
-
 
   <legend>{{ _('Data and resources') }}</legend>
   {% block querytool_dataset %}
@@ -126,6 +136,7 @@ Example usage:
   {% endblock %}
 
 <div class="form-actions">
+  <button type="submit" class="btn btn-success" name="save_data">{{ _('Save') }}</button>
   <button type="submit" class="btn btn-success" name="save">{{ _('Set visualisations') }}</button>
 </div>
 </form>

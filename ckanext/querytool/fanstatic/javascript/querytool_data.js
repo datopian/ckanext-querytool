@@ -169,11 +169,24 @@
            _clearDependentFilters(filter_item_id);
 
         });
+    };
+
+
+    function handlePrivacyForType (element) {
+
+      var type = element.find(":selected").val();
+      if (type == 'related') {
+        $('#field-private').val('True').change().prop('disabled', 'disabled');
+      } else {
+        $('#field-private').prop('disabled', false);
+      }
     }
 
     $(document).ready(function() {
 
         handleRenderedFilters();
+        var typeField = $('#field-type');
+        handlePrivacyForType(typeField);
 
         var datasetField = $('#field-datasets');
         var chartResourceSelect = $('#chart_resource');
@@ -184,6 +197,11 @@
 
         var defaultDataset = datasetField.find("option:first")[0].value;
         var defaultResource = chartResourceSelect.find("option:first")[0];
+
+        typeField.change(function (event) {
+          var elem = $(this);
+          handlePrivacyForType(elem);
+        });
 
         if(!defaultResource){
             get_dataset_resources(defaultDataset);
