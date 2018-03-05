@@ -136,6 +136,7 @@ class QueryToolController(base.BaseController):
 
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
+            print data.keys()
             filters = []
             y_axis_columns = []
             for k, v in data.items():
@@ -175,9 +176,13 @@ class QueryToolController(base.BaseController):
                 error_summary = e.error_summary
                 return self.querytool_edit('/' + querytool, _querytool,
                                            errors, error_summary)
-            # redirect to manage visualisations
-            url = h.url_for('querytool_edit_visualizations',
-                            querytool='/' + _querytool['name'])
+            if 'save_data' in data.keys():
+                # redirect to querytools
+                url = h.url_for('querytool_list')
+            else:
+                # redirect to manage visualisations
+                url = h.url_for('querytool_edit_visualizations',
+                                querytool='/' + _querytool['name'])
             h.redirect_to(url)
 
         if not data:

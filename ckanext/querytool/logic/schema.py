@@ -21,6 +21,7 @@ def querytool_schema():
         'title': [not_empty, unicode],
         'dataset_name': [not_empty, unicode],
         'private': [ignore_missing, boolean_validator],
+        'type': [not_empty, unicode],
         'description': [ignore_missing, unicode],
         'filters': [not_missing, not_empty, unicode],
         'sql_string': [ignore_missing, unicode],
