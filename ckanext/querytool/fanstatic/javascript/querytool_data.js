@@ -177,8 +177,10 @@
       var type = element.find(":selected").val();
       if (type == 'related') {
         $('#field-private').val('True').change().prop('disabled', 'disabled');
+        $('#field-related-querytool').val('').change().prop('disabled', 'disabled')
       } else {
         $('#field-private').prop('disabled', false);
+        $('#field-related-querytool').prop('disabled', false);
       }
     }
 

@@ -1,15 +1,19 @@
 # -*- coding: utf-8 -
+import logging
+import json
+
 try:
     # CKAN 2.7 and later
     from ckan.common import config
 except ImportError:
     # CKAN 2.6 and earlier
     from pylons import config
-import logging
 import ckan.model as m
 from ckan.common import c
 from ckan.plugins import toolkit
-import json
+
+from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
+                                    CkanextQueryToolVisualizations
 
 log = logging.getLogger(__name__)
 
@@ -332,3 +336,26 @@ def get_resource_columns(res_id):
     fields = res_info.get('schema').keys()
 
     return fields
+
+
+def get_available_related_querytools():
+
+    session = m.Session
+
+    query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
+        .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
+               CkanextQueryToolVisualizations.ckanext_querytool_id)) \
+        .filter(CkanextQueryTool.type == 'related').\
+        filter(CkanextQueryToolVisualizations.charts != '')
+
+    result = query.all()
+    querytools_list = []
+
+    if result and len(result) > 0:
+        for item in result:
+            querytool = {}
+            for _ in item:
+                querytool.update(table_dictize(_, _get_context()))
+            querytools_list.append(querytool)
+    print querytools_list
+    return querytools_list
