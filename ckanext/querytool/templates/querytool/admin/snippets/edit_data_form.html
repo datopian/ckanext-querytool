@@ -58,9 +58,21 @@ Example usage:
   <div class="control-group">
     <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
     <div class="controls">
-      <select id="field-private" name="private">
+      <select id="field-private" name="private" disabled>
         {% for option in [('True', _('Private')), ('False', _('Public'))] %}
         <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="field-private" class="control-label">{{ _('Related Querytool') }}</label>
+    <div class="controls">
+      <select id="field-related-querytool" name="related_querytool" disabled>
+        <option value="">&mdash; {{ _('Select Querytool') }} &mdash;</option>
+        {% for querytool in h.querytool_get_available_related_querytools() %}
+          <option value="{{ querytool.name }}" {{ 'selected' if querytool.name == data.related_querytool }}>{{ querytool.title }}</option>
         {% endfor %}
       </select>
     </div>

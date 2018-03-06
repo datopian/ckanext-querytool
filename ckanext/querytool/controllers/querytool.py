@@ -136,7 +136,6 @@ class QueryToolController(base.BaseController):
 
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
-            print data.keys()
             filters = []
             y_axis_columns = []
             for k, v in data.items():
@@ -162,6 +161,12 @@ class QueryToolController(base.BaseController):
             else:
                 _querytool['filters'] = ''
                 sql_string = ''
+
+            if 'private' not in data.keys():
+                _querytool['private'] = True
+
+            if 'related_querytool' not in data.keys():
+                _querytool['related_querytool'] = ''
 
             _querytool.update(data)
             _querytool['querytool'] = querytool
@@ -365,6 +370,14 @@ class QueryToolController(base.BaseController):
 
         if not querytool or not querytool['charts']:
             abort(404, _('Querytool not fully set.'))
+
+        # only sysadmins can access private querytool
+        if querytool['private'] is True:
+            context = _get_context()
+            try:
+                check_access('querytool_show', context)
+            except NotAuthorized:
+                abort(403, _('Not authorized to see this page'))
 
         if querytool.get('charts'):
             querytool['charts'] = json.loads(querytool['charts'])
