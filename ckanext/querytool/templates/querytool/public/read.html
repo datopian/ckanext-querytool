@@ -65,6 +65,7 @@
       </div>
     </form>
   </div>
+    <h1>{{ querytool }}</h1>
   <div class="charts">
     {% for item in querytool.charts %}
       <div class="container-chart" style="flex: {{ item.size }}">
@@ -144,6 +145,11 @@
                                 <span class="fa fa-download"></span> Download
                                 <span class="caret"></span>
                             </a>
+                           {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
+                           {% set csv = '?format=csv'%}
+                           {% set xml = '?format=xml'%}
+                           {% set json = '?format=json'%}
+                           {% set xlsx = '?format=xlsx'%}
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="#">PDF</a>
@@ -152,7 +158,16 @@
                                     <a href="#">JPG</a>
                                 </li>
                                 <li>
-                                    <a href="#">Download as ...</a>
+                                    <a href="{{ download_url }}{{ csv }}">CSV</a>
+                                </li>
+                                <li>
+                                    <a href="{{ download_url }}{{ xml }}">XML</a>
+                                </li>
+                                <li>
+                                    <a href="{{ download_url }}{{ json }}">JSON</a>
+                                </li>
+                                <li>
+                                    <a href="{{ download_url }}{{ xlsx }}">Microsoft Excel (OpenXML)</a>
                                 </li>
                             </ul>
                         </div>
