@@ -435,6 +435,6 @@ class QueryToolController(base.BaseController):
         response.headerlist = \
             [('Content-Type', resp_format),
              ('Content-Disposition',
-              'attachment;filename='+ file_name + '.' + file_format)]
+              'attachment;filename=' + file_name + '.' + file_format)]
 
         return resp.getvalue()

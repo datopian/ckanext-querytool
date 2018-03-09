@@ -10,7 +10,7 @@ import json
 import csv
 import cStringIO
 
-import ckan.logic as l
+import ckan.logic as logic
 
 from xlsxwriter.workbook import Workbook
 from xml.etree.cElementTree import Element, SubElement, ElementTree
@@ -148,8 +148,6 @@ class FileWriterService():
     def _xml_writer(self, fields, records):
 
         columns = [x['id'].encode("utf-8") for x in fields]
-        del columns[1]
-        del columns[2]
         output = cStringIO.StringIO()
 
         output.write(b'<data>\n')
@@ -202,5 +200,5 @@ class FileWriterService():
             return self._xml_writer(fields, records)
         if format == 'xlsx':
             return self._xlsx_writer(fields, records)
-        raise l.ValidationError(_(
+        raise logic.ValidationError(_(
             u'format: must be one of %s') % u', '.join(DUMP_FORMATS))

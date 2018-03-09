@@ -168,7 +168,7 @@ def querytool_download_data(context, data_dict):
         {}, {'sql': sql_string}
     )
 
-    records  = response['records']
+    records = response['records']
     fields = response['fields']
 
     # remove _full_text from datastore results
