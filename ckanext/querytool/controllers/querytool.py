@@ -406,8 +406,42 @@ class QueryToolController(base.BaseController):
         querytool['public_filters'].sort(key=itemgetter('order'))
         querytool['sql_string'] = sql_string
 
+        # TODO this should be list with more querytools
+        related_querytool = {}
+        if querytool['related_querytool']:
+            related_querytool = _get_action(
+                'querytool_public_read',
+                {'name': querytool['related_querytool']}
+            )
+            related_querytool['charts'] = json.loads(
+                related_querytool['charts']
+            )
+            q_name = related_querytool['name']
+            related_new_filters = json.loads(related_querytool['filters'])
+
+            for k, v in params.items():
+                if k.startswith('{}_data_filter_name_'.format(q_name)):
+                    id = k.split('_')[-1]
+                    for filter in related_new_filters:
+                        if v == filter.get('name'):
+                            filter['value'] = \
+                                params.get('{}_data_filter_value_{}'
+                                           .format(q_name, id))
+                if k.startswith('{}_y_axis_column'.format(q_name)):
+                    related_querytool['y_axis_column'] = v
+
+            related_sql_string = helpers.create_query_str(
+                related_querytool.get('chart_resource'),
+                related_new_filters
+            )
+            related_querytool['public_filters'] = related_new_filters
+            related_querytool['public_filters'].sort(key=itemgetter('order'))
+
+            related_querytool['sql_string'] = related_sql_string
+
         return render('querytool/public/read.html',
-                      extra_vars={'querytool': querytool})
+                      extra_vars={'querytool': querytool,
+                                  'related_querytool': related_querytool})
 
     def querytool_download_data(self, name):
         qs = request.query_string

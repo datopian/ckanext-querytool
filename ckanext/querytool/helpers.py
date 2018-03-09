@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -
 import logging
 import json
+import uuid
 
 try:
     # CKAN 2.7 and later
@@ -357,5 +358,8 @@ def get_available_related_querytools():
             for _ in item:
                 querytool.update(table_dictize(_, _get_context()))
             querytools_list.append(querytool)
-    print querytools_list
     return querytools_list
+
+
+def get_uuid():
+    return uuid.uuid4()

@@ -106,7 +106,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.get_charts_data_formats,
             'querytool_get_chart_size': helpers.get_chart_size,
             'querytool_get_available_related_querytools':
-                helpers.get_available_related_querytools
+                helpers.get_available_related_querytools,
+            'querytool_get_uuid': helpers.get_uuid
         }
 
     # IAuthFunctions
