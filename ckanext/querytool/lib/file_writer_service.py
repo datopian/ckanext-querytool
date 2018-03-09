@@ -52,7 +52,8 @@ class CustomJSONEncoder(json.JSONEncoder):
 class XMLWriter(object):
     def __init__(self, output, columns):
 
-        self.delimiter = config.get('ckanext.dataextractor.headers_names_delimiter', "_")
+        self.delimiter = \
+            config.get('ckanext.dataextractor.headers_names_delimiter', "_")
         self.output = output
         self.id_col = columns[0] == u'_id'
         if self.id_col:
@@ -130,7 +131,8 @@ class FileWriterService():
 
         output.write(
             b'{\n  "fields": %s,\n  "records": [' % json.dumps(
-                fields, ensure_ascii=False, separators=(u',', u':')).encode(u'utf-8'))
+                fields, ensure_ascii=False, separators=(u',', u':'))
+            .encode(u'utf-8'))
 
         # Initiate json writer and columns
         wr = JSONWriter(output, [f['id'].encode("utf-8") for f in fields])
