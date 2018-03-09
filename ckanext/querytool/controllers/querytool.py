@@ -10,6 +10,7 @@ from ckan.common import config, c, _
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 import ckanext.querytool.helpers as helpers
+from ckan.common import response, request
 
 
 log = logging.getLogger(__name__)
@@ -407,3 +408,33 @@ class QueryToolController(base.BaseController):
 
         return render('querytool/public/read.html',
                       extra_vars={'querytool': querytool})
+
+    def querytool_download_data(self, name):
+        qs = request.query_string
+        file_format = qs.split('=')[1]
+
+        query = _get_action('querytool_get', {'name': name})
+        sql_string = query['sql_string']
+
+        data_dict = {
+            'sql_string': sql_string,
+            'format': file_format
+        }
+
+        resp = _get_action('querytool_download_data', data_dict)
+
+        resp_formats = \
+            {'csv': 'text/csv', 'json': 'application/json',
+             'xml': 'application/xml',
+             'xlsx': 'application/vnd.openxmlformats-officedocument'
+                     '.spreadsheetml.sheet'}
+
+        resp_format = resp_formats[file_format]
+
+        file_name = name
+        response.headerlist = \
+            [('Content-Type', resp_format),
+             ('Content-Disposition',
+              'attachment;filename=' + file_name + '.' + file_format)]
+
+        return resp.getvalue()

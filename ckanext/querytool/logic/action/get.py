@@ -6,6 +6,7 @@ from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
 import ckanext.querytool.helpers as h
 import ckan.lib.helpers as ch
+from ckanext.querytool.lib.file_writer_service import FileWriterService
 
 log = logging.getLogger(__name__)
 
@@ -156,3 +157,26 @@ def querytool_get_resource_data(context, data_dict):
 @toolkit.side_effect_free
 def querytool_get_resource_columns(context, data_dict):
     return h.get_resource_columns(data_dict.get('res_id'))
+
+
+@toolkit.side_effect_free
+def querytool_download_data(context, data_dict):
+    sql_string = data_dict.get('sql_string')
+    data_format = data_dict.get('format')
+
+    response = toolkit.get_action('datastore_search_sql')(
+        {}, {'sql': sql_string}
+    )
+
+    records = response['records']
+    fields = response['fields']
+
+    # remove _full_text from datastore results
+    del fields[1]
+
+    writer = FileWriterService()
+    stream = writer.write_to_file(fields,
+                                  records,
+                                  data_format,
+                                  'comma')
+    return stream

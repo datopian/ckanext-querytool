@@ -61,6 +61,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     controller=querytool_controller,
                     action='querytool_public_read')
 
+        map.connect('querytool_download_data',
+                    '/querytool/download/{name}',
+                    controller=querytool_controller,
+                    action='querytool_download_data')
+
         # Story tool routes
         map.connect('storytool_public', '/storytool/public/',
                     controller=storytool_controller,
