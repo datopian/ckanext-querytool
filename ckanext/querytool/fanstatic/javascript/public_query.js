@@ -121,61 +121,61 @@
     }
 
     function convertSVGGraphToImage(svg, callback) {
-          var width = 0;
-          var fontSize = 15;
-          var lines = [];
-          var i, j, result, canvasWidth, canvasHeight, img;
-          var canvas = document.createElement('canvas');
-          var ctx = canvas.getContext('2d');
-          var svgData = new XMLSerializer().serializeToString(svg);
-          var canvasWidth = Number(svg.getAttribute('width')) + 50;
-          var canvasHeight = Number(svg.getAttribute('height')) + 100;
+        var width = 0;
+        var fontSize = 15;
+        var lines = [];
+        var i, j, result, img;
+        var canvas = document.createElement('canvas');
+        var ctx = canvas.getContext('2d');
+        var svgData = new XMLSerializer().serializeToString(svg);
+        var canvasWidth = Number(svg.getAttribute('width')) + 50;
+        var canvasHeight = Number(svg.getAttribute('height')) + 100;
 
-          canvas.style.backgroundColor = 'white';
-          canvas.width = canvasWidth;
-          canvas.height = canvasHeight;
+        canvas.style.backgroundColor = 'white';
+        canvas.width = canvasWidth;
+        canvas.height = canvasHeight;
 
-          ctx.fillStyle = '#fff';
-          ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-          ctx.fillStyle = '#000';
-          ctx.font = fontSize + 'px Arial';
+        ctx.fillStyle = '#000';
+        ctx.font = fontSize + 'px Arial';
 
-          for (i = 0, j = lines.length; i < j; ++i) {
+        for (i = 0; j = lines.length; i < j; ++i) {
             ctx.fillText(lines[i], 20, 10 + fontSize + (fontSize + 5) * i);
-          }
+        }
 
-          img = document.createElement('img');
-          img.setAttribute('src', 'data:image/svg+xml;base64,' + btoa(svgData));
+        img = document.createElement('img');
+        img.setAttribute('src', 'data:image/svg+xml;base64,' + btoa(svgData));
 
-          img.onload = function() {
-            ctx.drawImage( img, 0, 70 );
+        img.onload = function() {
+            ctx.drawImage(img, 0, 70);
 
             callback(canvas.toDataURL('image/png'));
-      };
+        };
     }
 
     $(document).ready(function(e) {
         handleRenderedFilters();
 
         var downloadBtn = $('.download-charth-btn');
-        downloadBtn.on('click', function(){
+        downloadBtn.on('click', function() {
             var target = $(event.target);
             var graphFileName = 'charth';
             var svg;
             if (target.hasClass('download-charth-btn')) {
-              svg = target.parent().parent().find('svg')[0];
+                svg = target.parent().parent().find('svg')[0];
 
-              convertSVGGraphToImage(svg, function(imageData) {
-                var link = document.createElement('a');
+                convertSVGGraphToImage(svg, function(imageData) {
+                    var link = document.createElement('a');
 
-                link.download = graphFileName;
-                link.href = imageData;
+                    link.download = graphFileName;
+                    link.href = imageData;
 
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-              });
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                });
             }
         });
 

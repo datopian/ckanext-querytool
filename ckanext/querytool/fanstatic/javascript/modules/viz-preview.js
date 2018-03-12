@@ -23,6 +23,7 @@ Options:
 
 */
 
+"use strict";
 ckan.module('querytool-viz-preview', function() {
     var api = {
         get: function(action, params) {
