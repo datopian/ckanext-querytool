@@ -436,7 +436,6 @@ class QueryToolController(base.BaseController):
             )
             related_querytool['public_filters'] = related_new_filters
             related_querytool['public_filters'].sort(key=itemgetter('order'))
-
             related_querytool['sql_string'] = related_sql_string
 
         return render('querytool/public/read.html',

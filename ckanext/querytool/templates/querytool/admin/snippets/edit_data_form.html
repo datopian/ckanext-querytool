@@ -71,7 +71,7 @@ Example usage:
     <div class="controls">
       <select id="field-related-querytool" name="related_querytool" disabled>
         <option value="">&mdash; {{ _('Select Querytool') }} &mdash;</option>
-        {% for querytool in h.querytool_get_available_related_querytools() %}
+        {% for querytool in h.querytool_get_available_related_querytools(querytool.name) %}
           <option value="{{ querytool.name }}" {{ 'selected' if querytool.name == data.related_querytool }}>{{ querytool.title }}</option>
         {% endfor %}
       </select>
