@@ -120,7 +120,7 @@
         });
     }
 
-    function convertSVGGraphToImage(svg, graphTitle, callback) {
+    function convertSVGGraphToImage(svg, callback) {
           var width = 0;
           var fontSize = 15;
           var lines = [];
@@ -140,21 +140,6 @@
 
           ctx.fillStyle = '#000';
           ctx.font = fontSize + 'px Arial';
-
-          // Split the graph's title into multiple lines if it's wider than the canvas's width
-          while (graphTitle.length) {
-            for (i = graphTitle.length; ctx.measureText(graphTitle.substr(0, i)).width > (canvasWidth - 20); i--);
-
-            result = graphTitle.substr(0,i);
-
-            if (i !== graphTitle.length) {
-              for (j = 0; result.indexOf(' ', j) !== -1; j = result.indexOf(' ', j) + 1);
-            }
-
-            lines.push(result.substr(0, j || result.length));
-            width = Math.max(width, ctx.measureText(lines[lines.length - 1]).width);
-            graphTitle = graphTitle.substr(lines[lines.length - 1].length, graphTitle.length);
-          }
 
           for (i = 0, j = lines.length; i < j; ++i) {
             ctx.fillText(lines[i], 20, 10 + fontSize + (fontSize + 5) * i);
@@ -176,13 +161,12 @@
         var downloadBtn = $('.download-charth-btn');
         downloadBtn.on('click', function(){
             var target = $(event.target);
-            var graphTitle = target.parent().parent().find('.graph-title').text();
             var graphFileName = 'charth';
             var svg;
             if (target.hasClass('download-charth-btn')) {
               svg = target.parent().parent().find('svg')[0];
 
-              convertSVGGraphToImage(svg, graphTitle, function(imageData) {
+              convertSVGGraphToImage(svg, function(imageData) {
                 var link = document.createElement('a');
 
                 link.download = graphFileName;
