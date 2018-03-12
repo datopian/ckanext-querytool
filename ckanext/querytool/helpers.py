@@ -339,15 +339,25 @@ def get_resource_columns(res_id):
     return fields
 
 
-def get_available_related_querytools():
+def get_available_related_querytools(name=None):
 
     session = m.Session
 
-    query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
-        .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
-               CkanextQueryToolVisualizations.ckanext_querytool_id)) \
-        .filter(CkanextQueryTool.type == 'related').\
-        filter(CkanextQueryToolVisualizations.charts != '')
+    if name:
+        query = session.query(CkanextQueryTool,
+                              CkanextQueryToolVisualizations) \
+            .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
+                   CkanextQueryToolVisualizations.ckanext_querytool_id)) \
+            .filter(CkanextQueryTool.type == 'related').\
+            filter(CkanextQueryTool.name != name).\
+            filter(CkanextQueryToolVisualizations.charts != '')
+    else:
+        query = session.query(CkanextQueryTool,
+                              CkanextQueryToolVisualizations) \
+            .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
+                   CkanextQueryToolVisualizations.ckanext_querytool_id)) \
+            .filter(CkanextQueryTool.type == 'related'). \
+            filter(CkanextQueryToolVisualizations.charts != '')
 
     result = query.all()
     querytools_list = []

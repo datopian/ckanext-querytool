@@ -20,7 +20,16 @@
 
 
 {% block primary_content_inner %}
+  <legend>{{ _('Main') }}</legend>
   {% for querytool in data %}
-       {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
+    {% if querytool.type == 'main' %}
+      {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
+    {% endif %}
+  {% endfor%}
+  <legend>{{ _('Related') }}</legend>
+  {% for querytool in data %}
+    {% if querytool.type == 'related' %}
+      {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
+    {% endif %}
   {% endfor%}
 {% endblock %}
