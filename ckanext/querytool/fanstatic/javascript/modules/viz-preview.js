@@ -64,7 +64,6 @@ ckan.module('querytool-viz-preview', function() {
         create_sql_string: function() {
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
-
             return 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + this.options.y_axis + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
         },
         // Get the data from Datastore.
@@ -301,7 +300,7 @@ ckan.module('querytool-viz-preview', function() {
             var yLabbel = chartField.find('input[name*=chart_field_y_label_]');
             var yLabbelVal = yLabbel.val();
 
-            // If the changed values from the dropdowns are from color, chart type or text rotate
+            // If the changed values from the dropdowns are not from x_axis or y_axis
             // then just update the chart without fetching new data. This leads
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
@@ -346,6 +345,11 @@ ckan.module('querytool-viz-preview', function() {
         // Delete the current chart
         deleteChart: function(){
              this.el.closest('.chart_field').remove();
-        }
+        },
+
+        teardown: function () {
+            // We must always unsubscribe on teardown to prevent memory leaks.
+            this.sandbox.unsubscribe('querytool:updateCharts', this.updateChart.bind(this));
+        },
     }
 })
