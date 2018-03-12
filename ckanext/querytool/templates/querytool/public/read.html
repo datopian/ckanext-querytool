@@ -1,9 +1,11 @@
 {% resource 'querytool/vendor/c3/c3.css' %}
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
+{% resource 'querytool/vendor/html2canvas/html2canvas.js' %}
 {% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/javascript/modules/tool-embed.js' %}
+
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
 {% block page_header_content %}
@@ -64,26 +66,30 @@
     <!-- Visualizations container -->
     <div class="charts">
       {% for item in querytool.charts %}
-      <div class="container-chart" style="flex: {{ item.size }}">
-        {% snippet 'ajax_snippets/visualization_item.html',
-        type='chart',
-        colors=item.color,
-        x_axis=item.x_axis,
-        y_axis=y_axis_selected,
-        chart_type=item.graph,
-        sql_string=querytool.sql_string,
-        title=item.title,
-        show_legend = item.show_legend,
-        x_text_rotate= item.x_text_rotate,
-        tooltip_name = item.tooltip_name,
-        data_format = item.data_format,
-        y_tick_format = item.y_tick_format,
-        padding_bottom = item.padding_bottom,
-        padding_top = item.padding_top,
-        show_labels = item.show_labels,
-        y_label = item.y_label
-        %}
+      <div class="container-chart" id="container-chart" style="flex: {{ item.size }}">
+          {% snippet 'ajax_snippets/visualization_item.html',
+          type='chart',
+          colors=item.color,
+          x_axis=item.x_axis,
+          y_axis=y_axis_selected,
+          chart_type=item.graph,
+          sql_string=querytool.sql_string,
+          title=item.title,
+          show_legend = item.show_legend,
+          x_text_rotate= item.x_text_rotate,
+          tooltip_name = item.tooltip_name,
+          data_format = item.data_format,
+          y_tick_format = item.y_tick_format,
+          padding_bottom = item.padding_bottom,
+          padding_top = item.padding_top,
+          show_labels = item.show_labels,
+          y_label = item.y_label
+          %}
+          <div>
+            <i class="fa fa-download fa-lg download-charth-btn" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
+          </div>
       </div>
+
       {% endfor %}
     </div>
     {% if related_querytool %}
@@ -202,12 +208,6 @@
               {% set json = '?format=json'%}
               {% set xlsx = '?format=xlsx'%}
               <ul class="dropdown-menu">
-                <li>
-                  <a href="#">PDF</a>
-                </li>
-                <li>
-                  <a href="#">JPG</a>
-                </li>
                 <li>
                   <a href="{{ download_url }}{{ csv }}">CSV</a>
                 </li>
