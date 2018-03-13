@@ -179,4 +179,4 @@ def querytool_download_data(context, data_dict):
                                   records,
                                   data_format,
                                   'comma')
-    return stream
+    return stream.getvalue()

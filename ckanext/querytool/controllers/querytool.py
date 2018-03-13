@@ -457,7 +457,8 @@ class QueryToolController(base.BaseController):
         resp = _get_action('querytool_download_data', data_dict)
 
         resp_formats = \
-            {'csv': 'text/csv', 'json': 'application/json',
+            {'csv': 'text/csv',
+             'json': 'application/json',
              'xml': 'application/xml',
              'xlsx': 'application/vnd.openxmlformats-officedocument'
                      '.spreadsheetml.sheet'}
@@ -470,4 +471,4 @@ class QueryToolController(base.BaseController):
              ('Content-Disposition',
               'attachment;filename=' + file_name + '.' + file_format)]
 
-        return resp.getvalue()
+        return resp
