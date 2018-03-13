@@ -36,7 +36,7 @@
           'value': value
         });
       });
-      return filters
+      return filters;
     };
 
     function _clearDependentFilters (element_id) {

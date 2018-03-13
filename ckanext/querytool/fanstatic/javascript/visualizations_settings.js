@@ -77,7 +77,7 @@
                         axisY.val(axisYValue);
                     });
             } else if (visualization === 'map') {
-                alert('Not implemented yet.')
+                alert('Not implemented yet.');
             }
 
         });
