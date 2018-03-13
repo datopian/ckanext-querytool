@@ -180,3 +180,8 @@ def querytool_download_data(context, data_dict):
                                   data_format,
                                   'comma')
     return stream.getvalue()
+
+
+@toolkit.side_effect_free
+def get_available_querytools(context, data_dict):
+    return h.get_available_related_querytools()

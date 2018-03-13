@@ -66,17 +66,18 @@ Example usage:
     </div>
   </div>
 
-  <div class="control-group">
-    <label for="field-private" class="control-label">{{ _('Related Querytool') }}</label>
-    <div class="controls">
-      <select id="field-related-querytool" name="related_querytool" disabled>
-        <option value="">&mdash; {{ _('Select Querytool') }} &mdash;</option>
-        {% for querytool in h.querytool_get_available_related_querytools(querytool.name) %}
-          <option value="{{ querytool.name }}" {{ 'selected' if querytool.name == data.related_querytool }}>{{ querytool.title }}</option>
-        {% endfor %}
-      </select>
-    </div>
-  </div>
+  <fieldset id="related_querytools">
+    {% if data.related_querytools  %}
+      {% for querytool in data.related_querytools %}
+        {% snippet 'ajax_snippets/related_querytool_item.html', n=querytool.order, querytool_name=querytool.name %}
+      {% endfor %}
+    {% endif %}
+  </fieldset>
+
+  <a class="btn btn-info pull-right" id="add-querytool-button">
+    <span class="fa fa-plus-square"></span>
+    <span class="fa-label">{{_('Add Querytool')}}</span>
+  </a>
 
   <legend>{{ _('Data and resources') }}</legend>
   {% block querytool_dataset %}

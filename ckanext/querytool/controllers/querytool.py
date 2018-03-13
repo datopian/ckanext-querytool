@@ -139,6 +139,7 @@ class QueryToolController(base.BaseController):
             data = dict(toolkit.request.POST)
             filters = []
             y_axis_columns = []
+            related_querytools = []
             for k, v in data.items():
 
                 if k.startswith('data_filter_name_'):
@@ -155,6 +156,14 @@ class QueryToolController(base.BaseController):
                 elif k.startswith('y_axis_column_'):
                     y_axis_columns.append(v)
 
+                elif k.startswith('related_querytool_'):
+                    related_querytool = {}
+                    id = k.split('_')[-1]
+                    related_querytool['order'] = int(id)
+                    related_querytool['name'] = \
+                        data['related_querytool_{}'.format(id)]
+                    related_querytools.append(related_querytool)
+
             if any(filters):
                 _querytool['filters'] = json.dumps(filters)
                 sql_string = helpers.create_query_str(data['resource_id_1'],
@@ -166,8 +175,11 @@ class QueryToolController(base.BaseController):
             if 'private' not in data.keys():
                 _querytool['private'] = True
 
-            if 'related_querytool' not in data.keys():
-                _querytool['related_querytool'] = ''
+            if any(related_querytools):
+                _querytool['related_querytools'] = json.\
+                    dumps(related_querytools)
+            else:
+                _querytool['related_querytools'] = ''
 
             _querytool.update(data)
             _querytool['querytool'] = querytool
@@ -197,6 +209,11 @@ class QueryToolController(base.BaseController):
         if 'filters' in data and len(data['filters']) > 0:
             data['filters'] = json.loads(data['filters'])
             data['filters'].sort(key=itemgetter('order'))
+
+        if 'related_querytools' in data \
+                and len(data['related_querytools']) > 0:
+            data['related_querytools'] = json.loads(data['related_querytools'])
+            data['related_querytools'].sort(key=itemgetter('order'))
 
         if 'chart_resource' in data:
             try:
@@ -380,44 +397,27 @@ class QueryToolController(base.BaseController):
             except NotAuthorized:
                 abort(403, _('Not authorized to see this page'))
 
-        if querytool.get('charts'):
-            querytool['charts'] = json.loads(querytool['charts'])
-
         params = toolkit.request.params
 
-        new_filters = querytool.get('filters')
-        new_filters = json.loads(new_filters)
+        querytools = []
+        items = []
+        items.append({u'order': 0, u'name': querytool['name']})
 
-        for k, v in params.items():
-            if k.startswith('data_filter_name_'):
-                id = k.split('_')[-1]
-                for filter in new_filters:
-                    if v == filter.get('name'):
-                        filter['value'] =\
-                            params.get('data_filter_value_{}'.format(id))
-            if k.startswith('y_axis_column'):
-                querytool['y_axis_column'] = v
+        if querytool['related_querytools']:
+            items.extend(json.loads(querytool['related_querytools']))
 
-        sql_string = helpers.create_query_str(
-            querytool.get('chart_resource'), new_filters
-        )
+        items.sort(key=itemgetter('order'))
+        for item in items:
 
-        querytool['public_filters'] = new_filters
-        querytool['public_filters'].sort(key=itemgetter('order'))
-        querytool['sql_string'] = sql_string
-
-        # TODO this should be list with more querytools
-        related_querytool = {}
-        if querytool['related_querytool']:
-            related_querytool = _get_action(
+            q_item = _get_action(
                 'querytool_public_read',
-                {'name': querytool['related_querytool']}
+                {'name': item['name']}
             )
-            related_querytool['charts'] = json.loads(
-                related_querytool['charts']
+            q_item['charts'] = json.loads(
+                q_item['charts']
             )
-            q_name = related_querytool['name']
-            related_new_filters = json.loads(related_querytool['filters'])
+            q_name = q_item['name']
+            related_new_filters = json.loads(q_item['filters'])
 
             for k, v in params.items():
                 if k.startswith('{}_data_filter_name_'.format(q_name)):
@@ -428,19 +428,19 @@ class QueryToolController(base.BaseController):
                                 params.get('{}_data_filter_value_{}'
                                            .format(q_name, id))
                 if k.startswith('{}_y_axis_column'.format(q_name)):
-                    related_querytool['y_axis_column'] = v
+                    q_item['y_axis_column'] = v
 
             related_sql_string = helpers.create_query_str(
-                related_querytool.get('chart_resource'),
+                q_item.get('chart_resource'),
                 related_new_filters
             )
-            related_querytool['public_filters'] = related_new_filters
-            related_querytool['public_filters'].sort(key=itemgetter('order'))
-            related_querytool['sql_string'] = related_sql_string
+            q_item['public_filters'] = related_new_filters
+            q_item['public_filters'].sort(key=itemgetter('order'))
+            q_item['sql_string'] = related_sql_string
+            querytools.append(q_item)
 
         return render('querytool/public/read.html',
-                      extra_vars={'querytool': querytool,
-                                  'related_querytool': related_querytool})
+                      extra_vars={'querytools': querytools})
 
     def querytool_download_data(self, name):
         qs = request.query_string
