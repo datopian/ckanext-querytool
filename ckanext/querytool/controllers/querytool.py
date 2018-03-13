@@ -417,12 +417,12 @@ class QueryToolController(base.BaseController):
                 q_item['charts']
             )
             q_name = q_item['name']
-            related_new_filters = json.loads(q_item['filters'])
+            new_filters = json.loads(q_item['filters'])
 
             for k, v in params.items():
                 if k.startswith('{}_data_filter_name_'.format(q_name)):
                     id = k.split('_')[-1]
-                    for filter in related_new_filters:
+                    for filter in new_filters:
                         if v == filter.get('name'):
                             filter['value'] = \
                                 params.get('{}_data_filter_value_{}'
@@ -432,9 +432,9 @@ class QueryToolController(base.BaseController):
 
             related_sql_string = helpers.create_query_str(
                 q_item.get('chart_resource'),
-                related_new_filters
+                new_filters
             )
-            q_item['public_filters'] = related_new_filters
+            q_item['public_filters'] = new_filters
             q_item['public_filters'].sort(key=itemgetter('order'))
             q_item['sql_string'] = related_sql_string
             querytools.append(q_item)
