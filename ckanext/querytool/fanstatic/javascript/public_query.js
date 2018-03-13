@@ -141,7 +141,7 @@
         ctx.fillStyle = '#000';
         ctx.font = fontSize + 'px Arial';
 
-        for (i = 0; j = lines.length; i < j; ++i) {
+        for (i = 0, j = lines.length; i < j; ++i) {
             ctx.fillText(lines[i], 20, 10 + fontSize + (fontSize + 5) * i);
         }
 

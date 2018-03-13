@@ -27,28 +27,6 @@ UTF8_BOM = u'\uFEFF'.encode(u'utf-8')
 
 log = logging.getLogger(__name__)
 
-
-class CustomJSONEncoder(json.JSONEncoder):
-    def default(self, obj):
-        try:
-            return json.JSONEncoder.default(self, obj)
-        except TypeError:
-            if type(obj) is date:
-                return obj.strftime(DATE_FORMAT)
-
-            if type(obj) is datetime:
-                return obj.strftime(NAIVE_DATETIME_FORMAT)
-
-            if type(obj) is timedelta:
-                # return it as rounded milliseconds
-                return int(obj.total_seconds() * 1000)
-
-            if type(obj) is Decimal:
-                return str(obj)
-
-            raise
-
-
 class XMLWriter(object):
     def __init__(self, output, columns):
 
@@ -95,8 +73,7 @@ class JSONWriter(object):
             row,
             ensure_ascii=False,
             separators=(u',', u':'),
-            sort_keys=True,
-            cls=CustomJSONEncoder).encode('utf-8'))
+            sort_keys=True))
 
 
 class FileWriterService():
