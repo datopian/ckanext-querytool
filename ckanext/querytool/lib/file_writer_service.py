@@ -27,6 +27,7 @@ UTF8_BOM = u'\uFEFF'.encode(u'utf-8')
 
 log = logging.getLogger(__name__)
 
+
 class XMLWriter(object):
     def __init__(self, output, columns):
 
