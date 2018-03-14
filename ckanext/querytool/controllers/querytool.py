@@ -467,5 +467,4 @@ class QueryToolController(base.BaseController):
 
         file_name = name
 
-
         return resp
