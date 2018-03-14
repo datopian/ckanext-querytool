@@ -466,9 +466,6 @@ class QueryToolController(base.BaseController):
         resp_format = resp_formats[file_format]
 
         file_name = name
-        response.headerlist = \
-            [('Content-Type', resp_format),
-             ('Content-Disposition',
-              'attachment;filename=' + file_name + '.' + file_format)]
+
 
         return resp
