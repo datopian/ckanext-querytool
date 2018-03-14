@@ -172,6 +172,22 @@
         });
     };
 
+    function _handleQuerytoolItemsOrder() {
+
+        var querytool_items = $('.querytool_item');
+
+        $.each(querytool_items, function(i, item) {
+            item = $(item);
+
+            var order = i + 1;
+            var selectQuerytoolName = item.find('[id*=field-related-querytool_]');
+
+            item.attr('id', 'querytool_item_' + order);
+            selectQuerytoolName.attr('id', 'field-related-querytool_' + order);
+            selectQuerytoolName.attr('name', 'related_querytool_' + order);
+
+        });
+    };
 
     function handleRenderedQuerytools(item_id) {
 
@@ -210,10 +226,18 @@
             }
         });
 
+        querytool_name_select.change(function(event) {
+            var elem = $(this);
+            var querytool_name_select_id = elem.attr('id');
+            var edit_querytool_btn_id = querytool_name_select_id.replace('field-related-querytool', 'edit-querytool-item-btn');
+            $('#' + edit_querytool_btn_id).addClass('hidden')
+        });
+
         // Remove item event handler
         var removeRenderedQuerytool = $('.remove-querytool-item-btn');
         removeRenderedQuerytool.on('click', function(e) {
             $(e.target).closest('.querytool_item').remove();
+            _handleQuerytoolItemsOrder();
         });
     };
 
@@ -242,7 +266,6 @@
                 querytools.push(querytool);
             }
         });
-        console.log(querytools);
         return querytools
     };
 
