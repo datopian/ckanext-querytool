@@ -4,7 +4,6 @@
 {% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/javascript/modules/tool-embed.js' %}
-
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
 {% block page_header_content %}
@@ -13,35 +12,36 @@
   <div class="row-fluid">
     <div class="span8 offset2">
       {% block page_header_title %}
-      {% if querytool.title %}
-      <h1>{{ querytool.title }}</h1>
-      `
+      {% if querytools[0].title %}
+      <h1>{{ querytools[0].title }}</h1>
       {% endif %}
       {% endblock %}
       {% block page_header_description %}
-      {% if querytool.description %}
-      <p class="desc">{{ querytool.description }}</p>
+      {% if querytools[0].description %}
+      <p class="desc">{{ querytools[0].description }}</p>
       {% endif %}
       {% endblock %}
     </div>
   </div>
 </div>
 {% endblock %}
-{% set y_axis_columns = querytool.y_axis_columns.split(',') %}
-{% if querytool.y_axis_column %}
-{% set y_axis_selected = querytool.y_axis_column %}
-{% else %}
-{% set y_axis_selected = querytool.charts[0].y_axis %}
-{% endif %}
 {% block tools %}
 <form id="public-filters" method="GET">
   <!-- Filtering container -->
   <div class="public-query">
+    {% if querytools %}
+    {% for querytool in querytools %}
+    {% set y_axis_columns = querytool.y_axis_columns.split(',') %}
+    {% if querytool.y_axis_column %}
+    {% set y_axis_selected = querytool.y_axis_column %}
+    {% else %}
+    {% set y_axis_selected = querytool.charts[0].y_axis %}
+    {% endif %}
     <div class="controls">
       <div class="flex">
         <div class="filter-y">
-          <label for="y_axis_column">{{ _('Y axis value') }}</label>
-          <select id="y_axis_column" name="y_axis_column" class="filter-item filter-item-column">
+          <label for="{{querytool.name}}_y_axis_column">{{ _('Y axis value') }}</label>
+          <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column">
           {% for y_axis in y_axis_columns %}
           <option value="{{ y_axis }}" {{ 'selected' if y_axis == y_axis_selected }}>{{ y_axis }}</option>
           {% endfor %}
@@ -51,7 +51,8 @@
           {% if querytool.public_filters  %}
           {% for filter in querytool.public_filters %}
           {% if filter.visibility == 'public'  %}
-          {% snippet 'ajax_snippets/public_filter_item.html', id=filter.order, n=filter.order, selected_filter=filter %}
+          {% set id = h.querytool_get_uuid() %}
+          {% snippet 'ajax_snippets/public_filter_item.html', id=id, q_name=querytool.name, n=filter.order, selected_filter=filter %}
           {% endif %}
           {% endfor %}
           {% endif %}
@@ -65,76 +66,14 @@
     <!-- Visualizations container -->
     <div class="charts">
       {% for item in querytool.charts %}
-      <div class="container-chart" id="container-chart" style="flex: {{ item.size }}">
-          {% snippet 'ajax_snippets/visualization_item.html',
-          type='chart',
-          colors=item.color,
-          x_axis=item.x_axis,
-          y_axis=y_axis_selected,
-          chart_type=item.graph,
-          sql_string=querytool.sql_string,
-          title=item.title,
-          show_legend = item.show_legend,
-          x_text_rotate= item.x_text_rotate,
-          tooltip_name = item.tooltip_name,
-          data_format = item.data_format,
-          y_tick_format = item.y_tick_format,
-          padding_bottom = item.padding_bottom,
-          padding_top = item.padding_top,
-          show_labels = item.show_labels,
-          y_label = item.y_label
-          %}
-          <div>
-            <i class="fa fa-download fa-lg download-charth-btn" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
-          </div>
-      </div>
-
-      {% endfor %}
-    </div>
-    {% if related_querytool %}
-    {% set related_y_axis_columns = related_querytool.y_axis_columns.split(',') %}
-    {% if related_querytool.y_axis_column %}
-    {% set related_y_axis_selected = related_querytool.y_axis_column %}
-    {% else %}
-    {% set related_y_axis_selected = related_querytool.charts[0].y_axis %}
-    {% endif %}
-    <div class="controls">
-      <div class="flex">
-        <div class="filter-y">
-          <label for="related_y_axis_column">{{ _('Y axis value') }}</label>
-          <select id="related_y_axis_column" name="{{related_querytool.name}}_y_axis_column" class="filter-item filter-item-column">
-          {% for y_axis in related_y_axis_columns %}
-          <option value="{{ y_axis }}" {{ 'selected' if y_axis == related_y_axis_selected }}>{{ y_axis }}</option>
-          {% endfor %}
-          </select>
-        </div>
-        <div class="filters">
-          {% if related_querytool.public_filters  %}
-          {% for filter in related_querytool.public_filters %}
-          {% if filter.visibility == 'public'  %}
-          {% set id = h.querytool_get_uuid() %}
-          {% snippet 'ajax_snippets/public_filter_item.html', id=id, q_name=related_querytool.name, n=filter.order, selected_filter=filter %}
-          {% endif %}
-          {% endfor %}
-          {% endif %}
-          <input type="hidden" class="field_resource_id" value="{{ related_querytool.chart_resource }}"/>
-        </div>
-        <div class="actions">
-          <button type="submit" class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
-        </div>
-      </div>
-    </div>
-    <!-- Visualizations container -->
-    <div class="charts">
-      {% for item in related_querytool.charts %}
       <div class="container-chart" style="flex: {{ item.size }}">
         {% snippet 'ajax_snippets/visualization_item.html',
         type='chart',
         colors=item.color,
         x_axis=item.x_axis,
-        y_axis=related_y_axis_selected,
+        y_axis=y_axis_selected,
         chart_type=item.graph,
-        sql_string=related_querytool.sql_string,
+        sql_string=querytool.sql_string,
         title=item.title,
         show_legend = item.show_legend,
         x_text_rotate= item.x_text_rotate,
@@ -146,9 +85,13 @@
         show_labels = item.show_labels,
         y_label = item.y_label
         %}
+        <div>
+          <i class="fa fa-download fa-lg download-charth-btn" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
+        </div>
       </div>
       {% endfor %}
     </div>
+    {% endfor %}
     {% endif %}
   </div>
 </form>
@@ -169,14 +112,14 @@
           <li>
             <div class="btn-group">
               <button class="btn"
-                href="#embed-{{ querytool.name }}"
+                href="#embed-{{ querytools[0].name }}"
                 data-module="tool-embed"
-                data-module-id="{{ querytool.id }}">
+                data-module-id="{{ querytools[0].id }}">
               <span class="fa fa-code"></span>
               Embed
               </button>
             </div>
-            <div id="embed-{{ querytool.id }}" class="modal tool-embed hide">
+            <div id="embed-{{ querytools[0].id }}" class="modal tool-embed hide">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h3><b>Embed query tool view</b></h3>
@@ -201,7 +144,7 @@
               <span class="fa fa-download"></span> Download
               <span class="caret"></span>
               </a>
-              {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
+              {% set download_url = h.url_for('querytool_download_data', name=querytools[0].name) %}
               {% set csv = '?format=csv'%}
               {% set xml = '?format=xml'%}
               {% set json = '?format=json'%}

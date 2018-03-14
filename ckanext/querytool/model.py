@@ -121,7 +121,7 @@ def define_query_tool_table():
                                     default=u''),
                              Column('sql_string', types.UnicodeText,
                                     default=u''),
-                             Column('related_querytool', types.UnicodeText,
+                             Column('related_querytools', types.UnicodeText,
                                     default=u''),
                              Column('created', types.DateTime,
                                     default=datetime.datetime.utcnow),

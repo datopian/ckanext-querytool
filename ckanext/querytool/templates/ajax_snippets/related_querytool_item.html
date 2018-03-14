@@ -1,0 +1,24 @@
+<div id="querytool_item_{{ n }}" class="querytool_item">
+    <div class="control-group">
+    <label for="field-related-querytool_{{ n }}" class="control-label">{{ _('Related Querytool')  }}</label>
+    <div class="controls">
+      <select id="field-related-querytool_{{ n }}" name="related_querytool_{{ n }}" required=required>
+          <option value="">&mdash; {{ _('Select querytool') }} &mdash;</option>
+            {% if querytool_name %}
+                <option value="{{ querytool_name }}" selected>{{ querytool_name }}</option>
+          {% endif %}
+      </select>
+    </div>
+    </div>
+
+    <ul class="inline text-right filter-actions">
+      <li>
+        <a class="btn edit-querytool-item-btn">
+          <span class="fa fa-edit" aria-hidden="true"></span> {{ _('Edit') }}
+        </a>
+        <a class="btn remove-querytool-item-btn">
+          <span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}
+        </a>
+      </li>
+    </ul>
+</div>
