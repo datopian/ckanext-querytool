@@ -13,12 +13,12 @@
     <div class="span8 offset2">
       {% block page_header_title %}
       {% if querytools[0].title %}
-      <h1>{{ querytools[0].title }}</h1>
+        <h1>{{ querytools[0].title }}</h1>
       {% endif %}
       {% endblock %}
       {% block page_header_description %}
       {% if querytools[0].description %}
-      <p class="desc">{{ querytools[0].description }}</p>
+        <p class="desc">{{ querytools[0].description }}</p>
       {% endif %}
       {% endblock %}
     </div>
@@ -30,12 +30,12 @@
   <!-- Filtering container -->
   <div class="public-query">
     {% if querytools %}
-    {% for querytool in querytools %}
-    {% set y_axis_columns = querytool.y_axis_columns.split(',') %}
-    {% if querytool.y_axis_column %}
-    {% set y_axis_selected = querytool.y_axis_column %}
-    {% else %}
-    {% set y_axis_selected = querytool.charts[0].y_axis %}
+      {% for querytool in querytools %}
+        {% set y_axis_columns = querytool.y_axis_columns.split(',') %}
+        {% if querytool.y_axis_column %}
+          {% set y_axis_selected = querytool.y_axis_column %}
+        {% else %}
+      {% set y_axis_selected = querytool.charts[0].y_axis %}
     {% endif %}
     <div class="controls">
       <div class="flex">
@@ -49,15 +49,40 @@
         </div>
         <div class="filters">
           {% if querytool.public_filters  %}
-          {% for filter in querytool.public_filters %}
-          {% if filter.visibility == 'public'  %}
-          {% set id = h.querytool_get_uuid() %}
-          {% snippet 'ajax_snippets/public_filter_item.html', id=id, q_name=querytool.name, n=filter.order, selected_filter=filter %}
-          {% endif %}
-          {% endfor %}
+            {% for filter in querytool.public_filters %}
+              {% if filter.visibility == 'public'  %}
+                {% set id = h.querytool_get_uuid() %}
+                {% snippet 'ajax_snippets/public_filter_item.html', id=id, q_name=querytool.name, n=filter.order, selected_filter=filter %}
+              {% endif %}
+            {% endfor %}
           {% endif %}
           <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>
         </div>
+         <div class="btn-group dropup">
+          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
+            <span class="fa fa-download"></span> Download
+            <span class="caret"></span>
+          </button>
+          {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
+          {% set csv = '?format=csv'%}
+          {% set xml = '?format=xml'%}
+          {% set json = '?format=json'%}
+          {% set xlsx = '?format=xlsx'%}
+          <ul class="dropdown-menu">
+            <li>
+              <a href="{{ download_url }}{{ csv }}">CSV</a>
+            </li>
+            <li>
+              <a href="{{ download_url }}{{ xml }}">XML</a>
+            </li>
+            <li>
+              <a href="{{ download_url }}{{ json }}">JSON</a>
+            </li>
+            <li>
+              <a href="{{ download_url }}{{ xlsx }}">Microsoft Excel (OpenXML)</a>
+            </li>
+          </ul>
+       </div>
         <div class="actions">
           <button type="submit" class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
         </div>
@@ -139,31 +164,6 @@
             </div>
           </li>
           <li>
-            <div class="btn-group dropup">
-              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <span class="fa fa-download"></span> Download
-              <span class="caret"></span>
-              </a>
-              {% set download_url = h.url_for('querytool_download_data', name=querytools[0].name) %}
-              {% set csv = '?format=csv'%}
-              {% set xml = '?format=xml'%}
-              {% set json = '?format=json'%}
-              {% set xlsx = '?format=xlsx'%}
-              <ul class="dropdown-menu">
-                <li>
-                  <a href="{{ download_url }}{{ csv }}">CSV</a>
-                </li>
-                <li>
-                  <a href="{{ download_url }}{{ xml }}">XML</a>
-                </li>
-                <li>
-                  <a href="{{ download_url }}{{ json }}">JSON</a>
-                </li>
-                <li>
-                  <a href="{{ download_url }}{{ xlsx }}">Microsoft Excel (OpenXML)</a>
-                </li>
-              </ul>
-            </div>
           </li>
           <li>
             <div class="btn-group dropup">
@@ -188,5 +188,6 @@
       </div>
     </div>
   </div>
+</div>
 </div>
 {% endblock %}
