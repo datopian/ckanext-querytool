@@ -416,6 +416,8 @@ class QueryToolController(base.BaseController):
             q_item['charts'] = json.loads(
                 q_item['charts']
             )
+            q_item['charts'].sort(key=itemgetter('order'))
+
             q_name = q_item['name']
             new_filters = json.loads(q_item['filters'])
 
