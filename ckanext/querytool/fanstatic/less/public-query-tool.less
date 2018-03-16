@@ -72,7 +72,6 @@ body {
   }
 }
 
-
 h1 {
   color: @color-white;
   font-weight: 400;
@@ -194,14 +193,13 @@ h1 {
   background: @color-white;
   .controls {
     background: @color-secondary;
-    form{
+    form {
       margin-bottom: 0;
     }
   }
   .flex {
     display: flex;
-    align-items: stretch;
-    // justify-content: flex-start;
+    align-items: stretch; // justify-content: flex-start;
     // Need to work on the responsiveness of this container more.
     flex-wrap: wrap;
   }
@@ -219,7 +217,7 @@ h1 {
   .filter-item {
     border-color: transparent;
   }
-  .filter-group-wrapper{
+  .filter-group-wrapper {
     align-self: center;
     display: inline-flex;
   }
@@ -228,7 +226,7 @@ h1 {
     flex-direction: column;
     margin-top: @grid-gutter-width/2;
     padding: @grid-gutter-width/2 @grid-gutter-width/2 0;
-    label{
+    label {
       display: block;
       background: @color-secondary-dark;
       color: @color-white;
@@ -259,29 +257,59 @@ h1 {
     position: static;
     align-self: center;
     margin: 0 @grid-gutter-width;
-    // .btn {
-    //   margin: (@grid-gutter-width/2 + 3px) 0 @grid-gutter-width/2 @grid-gutter-width/2;
-    // }
   }
-  .charts{
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
+  .visualizations {
+    display: grid;
+    grid-gap: @grid-gutter-width;
+    grid-template-columns: repeat(auto-fill, minmax(20vw, 1fr));
+    grid-auto-flow: dense;
+    counter-reset: visualizations;
     background-color: @color-neutral-pale;
     max-width: 100%;
-    padding: 0 @grid-gutter-width/2 @grid-gutter-width;
-  }
-  .container-chart{
-    flex: 1;
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-around;
-    min-height: @grid-gutter-width*20;
-    background-color: @color-white;
-    max-width: 100%;
     padding: @grid-gutter-width;
-    margin: @grid-gutter-width @grid-gutter-width/2 0;
+  }
+  .item {
+    counter-increment: visualizations;
     position: relative;
+    &:before{
+      font-size: 35px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: counter(visualizations);
+    }
+    display: inline-flex;
+    background-color: @color-white;
+    padding: @grid-gutter-width;
+    &.size-sm {
+      grid-column: span 1;
+      height: 10vw;
+      &.square {
+        height: 25vw;
+      }
+    }
+    &.size-md {
+      grid-column: span 2;
+      height: 25vw;
+      &.vertical {
+        min-height: 50vw;
+      }
+    }
+    &.size-lg {
+      grid-column: span 3;
+      height: 25vw;
+      &.square {
+        flex-basis: 50vw;
+        min-height: 50vw;
+      }
+      &.vertical {
+        flex-basis: 50vw;
+        min-height: 80vw;
+      }
+    }
+  }
+  .item-content{
+    max-width: 100%;
   }
 }
 
@@ -293,9 +321,9 @@ h1 {
 }
 
 .download-charth-btn {
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    margin-top: 5px;
-    margin-right: 2px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  margin-top: 5px;
+  margin-right: 2px;
 }
