@@ -4,7 +4,7 @@
 
 {% set columns = h.querytool_get_resource_columns(chart_resource) %}
 
-  <div id="chart_field_{{ n }}" class="chart_field chart-fields-section">
+  <div id="chart_field_{{ n }}" class="chart_field chart-fields-section item">
     {% set chart_types = h.querytool_get_chart_types() %}
     <div class="chart-form-wrapper">
       {% if chart %}
