@@ -257,8 +257,19 @@ h1 {
   .actions {
     flex-shrink: 0;
     position: static;
+    display: flex;
     align-self: center;
     margin: 0 @grid-gutter-width;
+    li{
+      margin: auto;
+      display: block;
+    }
+    > * {
+      margin-left: @grid-gutter-width/2;
+    }
+    .btn{
+      border-radius: 0;
+    }
     // .btn {
     //   margin: (@grid-gutter-width/2 + 3px) 0 @grid-gutter-width/2 @grid-gutter-width/2;
     // }

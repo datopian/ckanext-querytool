@@ -58,32 +58,34 @@
           {% endif %}
           <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>
         </div>
-         <div class="btn-group dropup">
-          <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#">
-            <span class="fa fa-download"></span> Download
-            <span class="caret"></span>
-          </button>
-          {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
-          {% set csv = '?format=csv'%}
-          {% set xml = '?format=xml'%}
-          {% set json = '?format=json'%}
-          {% set xlsx = '?format=xlsx'%}
-          <ul class="dropdown-menu">
-            <li>
-              <a href="{{ download_url }}{{ csv }}">CSV</a>
-            </li>
-            <li>
-              <a href="{{ download_url }}{{ xml }}">XML</a>
-            </li>
-            <li>
-              <a href="{{ download_url }}{{ json }}">JSON</a>
-            </li>
-            <li>
-              <a href="{{ download_url }}{{ xlsx }}">Microsoft Excel (OpenXML)</a>
-            </li>
-          </ul>
-       </div>
         <div class="actions">
+          <div class="btn-download">
+              <div class="btn-group dropdown">
+                  <button class="btn btn-large btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="fa fa-download"></span> Download
+                    <span class="caret"></span>
+                  </button>
+                  {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
+                  {% set csv = '?format=csv'%}
+                  {% set xml = '?format=xml'%}
+                  {% set json = '?format=json'%}
+                  {% set xlsx = '?format=xlsx'%}
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{ download_url }}{{ csv }}">CSV</a>
+                    </li>
+                    <li>
+                      <a href="{{ download_url }}{{ xml }}">XML</a>
+                    </li>
+                    <li>
+                      <a href="{{ download_url }}{{ json }}">JSON</a>
+                    </li>
+                    <li>
+                      <a href="{{ download_url }}{{ xlsx }}">Microsoft Excel (OpenXML)</a>
+                    </li>
+                  </ul>
+               </div>
+          </div>
           <button type="submit" class="btn btn-large btn-primary btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
         </div>
       </div>
