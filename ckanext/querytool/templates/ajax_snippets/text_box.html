@@ -7,23 +7,26 @@
           <div class="textbox-form-wrapper">
 
         <div class="control-group ">
-            <label class="control-label" for="text_box_{{ number }}">{{ _('Description') }}</label>
+            <label class="control-label" for="text_box_description_{{ number }}">{{ _('Text box description') }}</label>
             <div class="controls ">
-                <textarea id="text_box_description_{{ number }}" name="text_box_description_{{ number }}" value="{{ description }}"  type="text">{{ text_description }}</textarea>
+                <textarea id="text_box_description_{{ number }}" name="text_box_description_{{ number }}" value="{{ text_description }}"  type="text">{{ text_description }}</textarea>
             </div>
         </div>
 
 
   {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
-        <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Chart size') }}</label>
+        <label class="control-label" for="text_box_size_{{ number }}">{{ _('Text box size') }}</label>
         <div class="controls ">
-          <select id="chart_field_size_{{ n }}" name="chart_field_size_{{ n }}">
+          <select id="text_box_size_{{ number }}" name="text_box_size_{{ number }}">
           {% for size in sizes %}
-            <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{size.text}}</option>
+            <option value="{{ size.value }}" {% if box %}{{ 'selected' if size.value == box.size }}{% endif %} >{{size.text}}</option>
           {% endfor %}
           </select>
         </div>
       </div>
-          </div>
+      <ul class="inline text-right chart-actions">
+        <li class="remove"><a id="delete-textbox-btn" class="btn delete-textbox-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+      </ul>
+   </div>
   </div>

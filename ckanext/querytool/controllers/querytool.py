@@ -314,14 +314,15 @@ class QueryToolController(base.BaseController):
 
                     visualizations.append(visualization)
 
-                if k.startswith('text_box_'):
+                if k.startswith('text_box_description_'):
                     text_box = {}
                     id = k.split('_')[-1]
                     text_box['type'] = 'text_box'
                     text_box['order'] = int(id)
-
                     text_box['description'] = \
                         data['text_box_description_{}'.format(id)]
+                    text_box['size'] = \
+                        data['text_box_size_{}'.format(id)]
 
                     text_boxes.append(text_box)
 
@@ -347,14 +348,11 @@ class QueryToolController(base.BaseController):
 
         if not data:
             data = _visualization_items
-        print 'OD baza ', _visualization_items
 
         if 'visualizations' in data and len(data['visualizations']) > 0:
             data['visualizations'] = json.loads(data['visualizations'])
-            print 'JSON LOADS ', data['visualizations']
             data['visualizations'].sort(key=itemgetter('order'))
 
-            print 'POSLEM SORT ', data['visualizations']
         errors = errors or {}
         error_summary = error_summary or {}
 
@@ -376,7 +374,6 @@ class QueryToolController(base.BaseController):
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
-        print 'DATATA ',data
         return render('querytool/admin/base_edit_visualizations.html',
                       extra_vars=vars)
 

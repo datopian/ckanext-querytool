@@ -43,7 +43,12 @@
             ckan.sandbox().publish('querytool:updateCharts');
         });
 
-        var createVisualization = $('#create-visualization-btn');
+        //delete dynamicly created textbox section
+        $(document).on('click', '.delete-textbox-btn' , function(el){
+            el.target.closest('.item').remove();
+        });
+
+        var createVisualization = $('#add-visualization-btn');
         createVisualization.on('click', function() {
             $.proxyAll(this, /_on/);
 
@@ -57,7 +62,6 @@
                     alert('Please choose a column for y axis.');
                     return;
                 }
-                console.log('CHART' + items)
                 //TODO: parse query params simple
                 var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') +1).split("?")[0];
                 ckan.sandbox().client.getTemplate('chart_fields.html', {
@@ -79,8 +83,6 @@
             } else if (visualization === 'map') {
                 alert('Not implemented yet.');
             } else if (visualization == 'text-box'){
-                console.log('tex' + items)
-
                 ckan.sandbox().client.getTemplate('text_box.html', {
                         number: items
                     })
@@ -113,11 +115,9 @@
             $.each(items, function(i, item) {
 
                 item = $(item);
-                console.log('aaaa ', item.context.id);
                 console.log(i)
                 var order = i + 1;
                 if(item.context.id.indexOf('chart_field') >= 0){
-                console.log(order)
                     var dropdownGraphType = item.find('[id*=chart_field_graph_]');
                     var dropdownColorScheme = item.find('[id*=chart_field_color_]');
                     var dropdownAxisY = item.find('[id*=chart_field_axis_y_]');
@@ -183,15 +183,18 @@
                     inputChartSize.attr('id', 'chart_field_size_' + order);
                     inputChartSize.attr('name', 'chart_field_size_' + order);
                  } else if(item.context.id.indexOf('text_box') >= 0){
-                                     console.log('in')
-                console.log(order)
 
                     var description = item.find('[id*=text_box_description_]');
+                    var size = item.find('[id*=text_box_size_]');
 
                     item.attr('id', 'text_box_' + order);
 
                     description.attr('id', 'text_box_description_' + order);
                     description.attr('name', 'text_box_description_' + order);
+
+                    size.attr('id', 'text_box_size_' + order);
+                    size.attr('name', 'text_box_size_' + order);
+
                  }
             });
         }
