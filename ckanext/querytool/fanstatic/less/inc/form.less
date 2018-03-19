@@ -71,7 +71,10 @@ input[type="color"],
       input[type=checkbox] {
         top: auto;
         &:checked + label{
-          color: @color-secondary-dark;
+          background: @color-primary;
+          color: @color-white;
+          padding: 0 @grid-gutter-width/4;
+          border-radius: 2px;
         }
       }
       label{
