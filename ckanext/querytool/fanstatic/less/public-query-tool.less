@@ -8,7 +8,6 @@ body {
 .container-wrapper {
   background: linear-gradient( fade(@color-primary, 80%), @color-primary-dark), url(/base/images/public-header-bg.png) top center no-repeat;
   background-size: 100%;
-  margin-bottom: @grid-gutter-width*3;
 }
 
 .box {
@@ -64,10 +63,11 @@ body {
   text-align: center;
   background: transparent;
   border-bottom: none;
+  padding-bottom: 0;
   margin: @grid-gutter-width*3 0;
   .desc {
     color: @color-masthead-links;
-    margin-bottom: 0;
+    margin: @grid-gutter-width 0 0;
     font-size: @base-font-size + 1px;
   }
 }
@@ -76,8 +76,7 @@ h1 {
   color: @color-white;
   font-weight: 400;
   font-size: @base-font-size * 3;
-  margin-top: 0;
-  margin-bottom: @grid-gutter-width;
+  margin: 0;
   line-height: 1.2;
 }
 
@@ -190,9 +189,9 @@ h1 {
 
 .public-query {
   padding: 0;
-  background: @color-white;
   .controls {
     background: @color-secondary;
+    margin: 0 @grid-gutter-width;
     form {
       margin-bottom: 0;
     }
@@ -263,9 +262,10 @@ h1 {
       display: block;
     }
     >* {
-      margin-left: @grid-gutter-width/2;
+      margin-left: @grid-gutter-width;
     }
     .btn {
+      border-color: transparent;
       border-radius: 0;
     }
   }
@@ -275,7 +275,6 @@ h1 {
     grid-template-columns: repeat(auto-fit, minmax(@visualization-grid-base-size, 1fr));
     grid-auto-rows: minmax(@visualization-grid-base-size, auto);
     grid-auto-flow: dense;
-    background-color: @color-neutral-pale;
     padding: @grid-gutter-width;
   }
   .item {

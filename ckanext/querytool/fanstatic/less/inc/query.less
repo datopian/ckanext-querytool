@@ -20,10 +20,6 @@
   margin-bottom: 0;
 }
 
-.filter-actions {
-  margin: -@grid-gutter-width 0 @grid-gutter-width;
-}
-
 .filter_item {
   border-bottom: 1px solid darken(@color-neutral-pale, 10%);
   border-radius: @grid-gutter-width/4;
@@ -78,4 +74,25 @@
 
 .tool-embed {
   color: black !important;
+}
+
+.related-query-item {
+  // padding: @grid-gutter-width 0;
+  margin-bottom: @grid-gutter-width;
+  // border: 1px solid @color-neutral-light;
+  .control-group{
+    margin-bottom: 0;
+  }
+  .filter-actions{
+    margin-right: @grid-gutter-width;
+    margin-bottom: 0;
+  }
+}
+
+.filter-actions{
+  margin-right: @grid-gutter-width;
+}
+
+hr{
+  border-top-color: @color-hr-border;
 }
