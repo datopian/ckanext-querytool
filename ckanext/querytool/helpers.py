@@ -228,9 +228,13 @@ def get_chart_size():
     Get available sizes for displaying charts
     :return:
     '''
-    options = [{'text': 'Small', 'value': '0 30%'},
-               {'text': 'Medium', 'value': '0 50%'},
-               {'text': 'Large', 'value': '1 100%'}]
+    options = [{'text': 'Small Rectangle', 'value': 'size-sm rectangle'},
+               {'text': 'Small Square', 'value': 'size-sm square'},
+               {'text': 'Medium Rectangle', 'value': 'size-md'},
+               {'text': 'Medium Vertical', 'value': 'size-md vertical'},
+               {'text': 'Large Rectangle', 'value': 'size-lg'},
+               {'text': 'Large Square', 'value': 'size-lg square'},
+               {'text': 'Large Vertical', 'value': 'size-lg vertical'}]
     return options
 
 
