@@ -4,10 +4,26 @@
      {% set text_description = box.description %}
   {% endif %}
   <div id="text_box_{{ number }}" class="item text-boxs-section text_box visualization-fields-section">
+          <div class="textbox-form-wrapper">
+
         <div class="control-group ">
-        <label class="control-label" for="text_box_{{ number }}">{{ _('Description') }}</label>
+            <label class="control-label" for="text_box_{{ number }}">{{ _('Description') }}</label>
+            <div class="controls ">
+                <textarea id="text_box_description_{{ number }}" name="text_box_description_{{ number }}" value="{{ description }}"  type="text">{{ text_description }}</textarea>
+            </div>
+        </div>
+
+
+  {% set sizes = h.querytool_get_visualization_size() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Chart size') }}</label>
         <div class="controls ">
-            <textarea id="text_box_description_{{ number }}" name="text_box_description_{{ number }}" value="{{ description }}"  type="text">{{ text_description }}</textarea>
+          <select id="chart_field_size_{{ n }}" name="chart_field_size_{{ n }}">
+          {% for size in sizes %}
+            <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{size.text}}</option>
+          {% endfor %}
+          </select>
         </div>
       </div>
+          </div>
   </div>
