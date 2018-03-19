@@ -255,8 +255,19 @@ h1 {
   .actions {
     flex-shrink: 0;
     position: static;
+    display: flex;
     align-self: center;
     margin: 0 @grid-gutter-width;
+    li {
+      margin: auto;
+      display: block;
+    }
+    >* {
+      margin-left: @grid-gutter-width/2;
+    }
+    .btn {
+      border-radius: 0;
+    }
   }
   .visualizations {
     display: grid;
@@ -310,7 +321,7 @@ h1 {
   }
 }
 
-.download-charth-btn {
+.btn-chart-download {
   position: absolute;
   top: 0px;
   right: 0px;

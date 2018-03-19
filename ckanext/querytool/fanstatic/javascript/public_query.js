@@ -158,25 +158,23 @@
     $(document).ready(function(e) {
         handleRenderedFilters();
 
-        var downloadBtn = $('.download-charth-btn');
+        var downloadBtn = $('.btn-chart-download');
         downloadBtn.on('click', function() {
             var target = $(event.target);
-            var graphFileName = 'charth';
+            var graphFileName = 'chart';
             var svg;
-            if (target.hasClass('download-charth-btn')) {
-                svg = target.parent().parent().find('svg')[0];
+            svg = target.parent().parent().find('svg')[0];
 
-                convertSVGGraphToImage(svg, function(imageData) {
-                    var link = document.createElement('a');
+            convertSVGGraphToImage(svg, function(imageData) {
+                var link = document.createElement('a');
 
-                    link.download = graphFileName;
-                    link.href = imageData;
+                link.download = graphFileName;
+                link.href = imageData;
 
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                });
-            }
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            });
         });
 
         // Add validation for public filters if no valid values are selected
