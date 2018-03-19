@@ -1,6 +1,14 @@
 {% set active_filters = active_filters.split(',') %}
 
 <div id="filter_item_{{ n }}" class="filter_item">
+    <ul class="inline text-right pull-right filter-actions">
+      <li>
+        <a class="btn remove-filter-item-btn">
+          <span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}
+        </a>
+      </li>
+    </ul>
+
     <div class="control-group control-select">
       <label class="control-label" for="data_filter_name_{{ n }}">{{ _('Column') }}</label>
       <div class="controls ">
@@ -45,11 +53,4 @@
     </div>
 
     <input type="hidden" id="resource_id_{{ n }}" name="resource_id_{{ n }}" value="{{ c.resource_id or resource_id }}"/>
-    <ul class="inline text-right filter-actions">
-      <li>
-        <a class="btn remove-filter-item-btn">
-          <span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}
-        </a>
-      </li>
-    </ul>
 </div>
