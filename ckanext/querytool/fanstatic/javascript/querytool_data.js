@@ -174,7 +174,7 @@
 
     function _handleQuerytoolItemsOrder() {
 
-        var querytool_items = $('.querytool_item');
+        var querytool_items = $('.related-query-item');
 
         $.each(querytool_items, function(i, item) {
             item = $(item);
@@ -205,7 +205,7 @@
             var querytool_name_select_id = elem.attr('id');
             var selected = elem.find(":selected").val();
 
-            var querytool_item_id = querytool_name_select_id.replace('field-related-querytool', 'querytool_item')
+            var querytool_item_id = querytool_name_select_id.replace('field-related-querytool', 'related-query-item')
             var selected_querytools = _getSelectedQuerytools(querytool_item_id);
             var select_size = $(this).find("option").size();
 
@@ -236,7 +236,7 @@
         // Remove item event handler
         var removeRenderedQuerytool = $('.remove-querytool-item-btn');
         removeRenderedQuerytool.on('click', function(e) {
-            $(e.target).closest('.querytool_item').remove();
+            $(e.target).closest('.related-query-item').remove();
             _handleQuerytoolItemsOrder();
         });
     };
@@ -257,7 +257,7 @@
 
     function _getSelectedQuerytools(querytool_item_id) {
 
-        var querytool_items = $('.querytool_item');
+        var querytool_items = $('.related-query-item');
         var querytools = [];
 
         $.each(querytool_items, function(idx, elem) {
@@ -366,7 +366,7 @@
         add_querytool_button.click(function(event) {
 
             event.preventDefault();
-            var querytool_items = $('.querytool_item');
+            var querytool_items = $('.related-query-item');
 
             if (querytool_items.length < 3) {
                 var total_querytools = querytool_items.length + 1;
@@ -380,7 +380,7 @@
                         handleRenderedQuerytools(total_querytools);
                     });
             } else {
-                alert('Maximum number of allowed querytools is reached.');
+                alert('Maximum number of allowed related queries reached.');
             }
 
         });

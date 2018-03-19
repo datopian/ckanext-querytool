@@ -2,7 +2,6 @@
   background-image: none;
   box-shadow: none;
   border-radius: 0;
-  border-color: transparent;
   &:hover {
     box-shadow: none;
   }
@@ -34,11 +33,11 @@
 }
 
 .btn-danger {
-  background-color: rgb(207, 0, 0);
+  background-color: @color-error;
 }
 
 .btn-success {
-  background-color: rgb(0, 200, 83);
+  background-color: @color-success;
 }
 
 .btn,
@@ -46,7 +45,20 @@ label {
   font-weight: 400;
 }
 
+.btn-large{
+  .caret{
+    margin-top: @grid-gutter-width/2 - 2;
+    margin-left: @grid-gutter-width/4;
+  }
+}
+
 .btn-chart-download {
   cursor: pointer;
-  padding: @grid-gutter-width/2;
+  padding: @grid-gutter-width/2 @grid-gutter-width;
+}
+
+.form-actions{
+  .btn{
+    margin-left: @grid-gutter-width/2;
+  }
 }

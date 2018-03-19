@@ -1,27 +1,29 @@
-<div id="querytool_item_{{ n }}" class="querytool_item">
+<div id="querytool_item_{{ n }}" class="related-query-item">
     <div class="control-group">
-    <label for="field-related-querytool_{{ n }}" class="control-label">{{ _('Related Querytool')  }}</label>
+      <ul class="inline text-right filter-actions pull-right">
+        <li>
+          {% if querytool_name %}
+          {% set action_url = h.url_for('querytool_edit', querytool= '/' + querytool_name) %}
+          <a id="edit-querytool-item-btn_{{ n }}" class="btn edit-querytool-item-btn" href="{{ action_url }}">
+            <span class="fa fa-edit" aria-hidden="true"></span> {{ _('Edit') }}
+          </a>
+          {% endif %}
+        </li>
+        <li>
+          <a class="btn remove-querytool-item-btn">
+            <span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}
+          </a>
+        </li>
+      </ul>
+    <label for="field-related-querytool_{{ n }}" class="control-label">{{ _('Related Query')  }}</label>
     <div class="controls">
-      <select id="field-related-querytool_{{ n }}" name="related_querytool_{{ n }}" required=required>
-          <option value="">&mdash; {{ _('Select querytool') }} &mdash;</option>
-            {% if querytool_name %}
-              <option value="{{ querytool_name }}" selected>{{ querytool_name }}</option>
-            {% endif %}
+      <select id="field-related-querytool_{{ n }}" name="related_querytool_{{ n }}" required="required">
+          <option value="">&mdash; {{ _('Select query') }} &mdash;</option>
+          {% if querytool_name %}
+            <option value="{{ querytool_name }}" selected>{{ querytool_name }}</option>
+          {% endif %}
       </select>
     </div>
-    </div>
-
-    <ul class="inline text-right filter-actions">
-      <li>
-        {% if querytool_name %}
-        {% set action_url = h.url_for('querytool_edit', querytool= '/' + querytool_name) %}
-        <a id="edit-querytool-item-btn_{{ n }}" class="btn edit-querytool-item-btn" href="{{ action_url }}">
-          <span class="fa fa-edit" aria-hidden="true"></span> {{ _('Edit') }}
-        </a>
-        {% endif %}
-        <a class="btn remove-querytool-item-btn">
-          <span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}
-        </a>
-      </li>
-    </ul>
+  </div>
+  <hr>
 </div>
