@@ -24,6 +24,7 @@
     </div>
   </div>
 </div>
+</div>
 {% endblock %}
 {% block tools %}
 <form id="public-filters" method="GET">
@@ -91,9 +92,9 @@
       </div>
     </div>
     <!-- Visualizations container -->
-    <div class="charts">
+    <div class="visualizations">
       {% for item in querytool.charts %}
-      <div class="container-chart" style="flex: {{ item.size }}">
+      <div class="item {{ item.size }}">
         {% snippet 'ajax_snippets/visualization_item.html',
         type='chart',
         colors=item.color,
@@ -112,9 +113,9 @@
         show_labels = item.show_labels,
         y_label = item.y_label
         %}
-        <div>
-          <i class="fa fa-download fa-lg download-charth-btn" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
-        </div>
+        <a class="btn-chart-download">
+          <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
+        </a>
       </div>
       {% endfor %}
     </div>
@@ -190,6 +191,5 @@
       </div>
     </div>
   </div>
-</div>
 </div>
 {% endblock %}
