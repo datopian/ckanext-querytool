@@ -1,0 +1,13 @@
+ {% import 'macros/form.html' as form %}
+
+   {% if box %}
+     {% set text_description = box.description %}
+  {% endif %}
+  <div id="text_box_{{ number }}" class="item text-boxs-section text_box visualization-fields-section">
+        <div class="control-group ">
+        <label class="control-label" for="text_box_{{ number }}">{{ _('Description') }}</label>
+        <div class="controls ">
+            <textarea id="text_box_description_{{ number }}" name="text_box_description_{{ number }}" value="{{ description }}"  type="text">{{ text_description }}</textarea>
+        </div>
+      </div>
+  </div>
