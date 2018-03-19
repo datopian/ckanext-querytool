@@ -26,7 +26,7 @@ Example usage:
 
     <p class="muted">{{ h.markdown_extract(querytool.description, extract_length=150) }}</p>
     <p>{{_('Queried dataset:')}} <a href="{{ h.url_for(controller='package', action='read', id=querytool.dataset_name) }}">{{ querytool.dataset_name }}</a></p>
-    <p>{{_('Querytool Type:')}} <a>{{ querytool.type|capitalize }}</a></p>
+    <p>{{_('Query Type:')}} <span class="text-primary">{{ querytool.type|capitalize }}</span></p>
   </div>
   <ul class="inline query-actions">
     <li><a class="btn" href="{{ edit_data_url}}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit data') }}</a></li>
