@@ -45,7 +45,7 @@ Example usage:
   <legend>{{ _('Basic settings') }}</legend>
 
   <div class="control-group">
-    <label for="field-private" class="control-label">{{ _('Querytool Type') }}</label>
+    <label for="field-private" class="control-label">{{ _('Query Type') }}</label>
     <div class="controls">
       <select id="field-type" name="type">
         {% for option in [('main', _('Main')), ('related', _('Related'))] %}
@@ -74,10 +74,12 @@ Example usage:
     {% endif %}
   </fieldset>
 
-  <a class="btn btn-info pull-right" id="add-querytool-button">
-    <span class="fa fa-plus-square"></span>
-    <span class="fa-label">{{_('Add Querytool')}}</span>
-  </a>
+  <div class="control-group">
+    <a class="btn btn-info" id="add-querytool-button">
+      <span class="fa fa-plus-square"></span>
+      <span class="fa-label">{{_('Add Related Query')}}</span>
+    </a>
+  </div>
 
   <legend>{{ _('Data and resources') }}</legend>
   {% block querytool_dataset %}
@@ -142,10 +144,12 @@ Example usage:
 
     </fieldset>
 
-    <a class="btn btn-info" id="add-filter-button">
-      <span class="fa fa-plus-square"></span>
-      <span class="fa-label">{{_('Add Filter')}}</span>
-    </a>
+    <div class="control-group">
+      <a class="btn btn-info" id="add-filter-button">
+        <span class="fa fa-plus-square"></span>
+        <span class="fa-label">{{_('Add Filter')}}</span>
+      </a>
+    </div>
   {% endblock %}
 
 <div class="form-actions">
