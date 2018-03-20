@@ -4,7 +4,7 @@
 
 {% set columns = h.querytool_get_resource_columns(chart_resource) %}
 
-  <div id="chart_field_{{ n }}" class="chart_field chart-fields-section item">
+  <div id="chart_field_{{ n }}" class="item chart_field visualization-fields-section">
     {% set chart_types = h.querytool_get_chart_types() %}
     <div class="chart-form-wrapper">
       {% if chart %}
@@ -144,7 +144,7 @@
         </div>
       </div>
 
-      {% set sizes = h.querytool_get_chart_size() %}
+      {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
         <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Chart size') }}</label>
         <div class="controls ">
@@ -159,7 +159,7 @@
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
 
       <ul class="inline text-right chart-actions">
-        <li class="remove"><a class="btn delete-chart-btn" data-module="querytool-viz-delete">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+        <li class="remove"><a class="btn delete-chart-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
         <li><a class="btn update-chart-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
       </ul>
 

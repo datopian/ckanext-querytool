@@ -187,7 +187,7 @@ def define_querytool_visualizations_table():
               Column('name',
                      types.UnicodeText,
                      nullable=False),
-              Column('charts',
+              Column('visualizations',
                      types.UnicodeText,
                      nullable=False),
               Index('ckanext_querytool_visualizations_id_idx',

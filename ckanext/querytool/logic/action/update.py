@@ -57,7 +57,7 @@ def querytool_visualizations_update(context, data_dict):
     '''
         Create new query tool visualizations
     :param name
-    :param charts
+    :param visualizations
     :param
     '''
 
@@ -73,7 +73,7 @@ def querytool_visualizations_update(context, data_dict):
         visualizations = CkanextQueryToolVisualizations()
 
     visualizations.name = data_dict['name']
-    visualizations.charts = data_dict['charts']
+    visualizations.visualizations = data_dict['visualizations']
     visualizations.ckanext_querytool_id = querytool.id
     visualizations.save()
     session.add(visualizations)

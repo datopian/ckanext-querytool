@@ -223,9 +223,9 @@ def get_charts_data_formats():
     return options
 
 
-def get_chart_size():
+def get_visualization_size():
     '''
-    Get available sizes for displaying charts
+    Get available sizes for displaying visualizations: charts, text box
     :return:
     '''
     options = [{'text': 'Small Rectangle', 'value': 'size-sm'},

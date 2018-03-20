@@ -269,11 +269,13 @@ class QueryToolController(base.BaseController):
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
             visualizations = []
+            text_boxes = []
             for k, v in data.items():
 
                 if k.startswith('chart_field_graph_'):
                     visualization = {}
                     id = k.split('_')[-1]
+                    visualization['type'] = 'chart'
                     visualization['order'] = int(id)
                     visualization['graph'] = \
                         data['chart_field_graph_{}'.format(id)]
@@ -312,10 +314,24 @@ class QueryToolController(base.BaseController):
 
                     visualizations.append(visualization)
 
+                if k.startswith('text_box_description_'):
+                    text_box = {}
+                    id = k.split('_')[-1]
+                    text_box['type'] = 'text_box'
+                    text_box['order'] = int(id)
+                    text_box['description'] = \
+                        data['text_box_description_{}'.format(id)]
+                    text_box['size'] = \
+                        data['text_box_size_{}'.format(id)]
+
+                    text_boxes.append(text_box)
+
             if any(visualizations):
-                _visualization_items['charts'] = json.dumps(visualizations)
+                vis = visualizations + text_boxes
+                _visualization_items['visualizations'] = json.dumps(vis)
+
             else:
-                _visualization_items['charts'] = ''
+                _visualization_items['visualizations'] = ''
 
             try:
                 junk = _get_action('querytool_visualizations_update',
@@ -333,9 +349,9 @@ class QueryToolController(base.BaseController):
         if not data:
             data = _visualization_items
 
-        if 'charts' in data and len(data['charts']) > 0:
-            data['charts'] = json.loads(data['charts'])
-            data['charts'].sort(key=itemgetter('order'))
+        if 'visualizations' in data and len(data['visualizations']) > 0:
+            data['visualizations'] = json.loads(data['visualizations'])
+            data['visualizations'].sort(key=itemgetter('order'))
 
         errors = errors or {}
         error_summary = error_summary or {}
@@ -358,7 +374,6 @@ class QueryToolController(base.BaseController):
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
-
         return render('querytool/admin/base_edit_visualizations.html',
                       extra_vars=vars)
 
@@ -386,7 +401,7 @@ class QueryToolController(base.BaseController):
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
 
-        if not querytool or not querytool['charts']:
+        if not querytool or not querytool['visualizations']:
             abort(404, _('Querytool not fully set.'))
 
         # only sysadmins can access private querytool
@@ -413,10 +428,10 @@ class QueryToolController(base.BaseController):
                 'querytool_public_read',
                 {'name': item['name']}
             )
-            q_item['charts'] = json.loads(
-                q_item['charts']
+            q_item['visualizations'] = json.loads(
+                q_item['visualizations']
             )
-            q_item['charts'].sort(key=itemgetter('order'))
+            q_item['visualizations'].sort(key=itemgetter('order'))
 
             q_name = q_item['name']
             new_filters = json.loads(q_item['filters'])
@@ -440,7 +455,6 @@ class QueryToolController(base.BaseController):
             q_item['public_filters'].sort(key=itemgetter('order'))
             q_item['sql_string'] = related_sql_string
             querytools.append(q_item)
-
         return render('querytool/public/read.html',
                       extra_vars={'querytools': querytools})
 

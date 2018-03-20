@@ -13,7 +13,7 @@
     <div class="span8 offset2">
       {% block page_header_title %}
       {% if querytools[0].title %}
-        <h1>{{ querytools[0].title }}</h1>
+        <h1 class="querytool-title">{{ querytools[0].title }}</h1>
       {% endif %}
       {% endblock %}
       {% block page_header_description %}
@@ -36,8 +36,13 @@
         {% if querytool.y_axis_column %}
           {% set y_axis_selected = querytool.y_axis_column %}
         {% else %}
-      {% set y_axis_selected = querytool.charts[0].y_axis %}
+            {% if querytool.type == 'chart'  %}
+      {% set y_axis_selected = querytool.visualizations[0].y_axis %}
     {% endif %}
+    {% endif %}
+
+
+
     <div class="controls">
       <div class="flex">
         <div class="filter-y">
@@ -93,29 +98,36 @@
     </div>
     <!-- Visualizations container -->
     <div class="visualizations">
-      {% for item in querytool.charts %}
+      {% for item in querytool.visualizations %}
       <div class="item {{ item.size }}">
-        {% snippet 'ajax_snippets/visualization_item.html',
-        type='chart',
-        colors=item.color,
-        x_axis=item.x_axis,
-        y_axis=y_axis_selected,
-        chart_type=item.graph,
-        sql_string=querytool.sql_string,
-        title=item.title,
-        show_legend = item.show_legend,
-        x_text_rotate= item.x_text_rotate,
-        tooltip_name = item.tooltip_name,
-        data_format = item.data_format,
-        y_tick_format = item.y_tick_format,
-        padding_bottom = item.padding_bottom,
-        padding_top = item.padding_top,
-        show_labels = item.show_labels,
-        y_label = item.y_label
-        %}
-        <a class="btn-chart-download">
-          <i class="fa fa-picture-o fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
+        {% if item.type == 'chart'  %}
+            {% snippet 'ajax_snippets/visualization_item.html',
+            type='chart',
+            colors=item.color,
+            x_axis=item.x_axis,
+            y_axis=y_axis_selected,
+            chart_type=item.graph,
+            sql_string=querytool.sql_string,
+            title=item.title,
+            show_legend = item.show_legend,
+            x_text_rotate= item.x_text_rotate,
+            tooltip_name = item.tooltip_name,
+            data_format = item.data_format,
+            y_tick_format = item.y_tick_format,
+            padding_bottom = item.padding_bottom,
+            padding_top = item.padding_top,
+            show_labels = item.show_labels,
+            y_label = item.y_label
+            %}
+         <a class="btn-chart-download">
+          <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
         </a>
+        {% endif %}
+        {% if item.type == 'text_box' %}
+          <div class="item-content" >
+                      {{ h.render_markdown(h.get_translated(item, 'description'), True, True) }}
+          </div>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

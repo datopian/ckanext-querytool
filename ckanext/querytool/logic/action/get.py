@@ -45,7 +45,7 @@ def querytool_public_list(context, data_dict):
     query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
         .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
                CkanextQueryToolVisualizations.ckanext_querytool_id))\
-        .filter(CkanextQueryToolVisualizations.charts != '')
+        .filter(CkanextQueryToolVisualizations.visualizations != '')
 
     result = query.all()
     querytools_list = []
@@ -75,6 +75,7 @@ def querytool_get(context, data_dict):
     querytool = CkanextQueryTool.get(name=name)
     if querytool:
         querytool = table_dictize(querytool, context)
+
     return querytool
 
 
@@ -93,6 +94,7 @@ def querytool_get_visualizations(context, data_dict):
     visualizations = CkanextQueryToolVisualizations.get(name=name)
     if visualizations:
         visualizations = table_dictize(visualizations, context)
+
     return visualizations
 
 
