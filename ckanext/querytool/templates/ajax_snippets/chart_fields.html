@@ -4,6 +4,12 @@
 
 {% set columns = h.querytool_get_resource_columns(chart_resource) %}
 
+{% if chart and chart.filter_name %}
+  {% set class = '' %}
+{% else %}
+  {% set class = 'hidden' %}
+{% endif %}
+
   <div id="chart_field_{{ n }}" class="item chart_field visualization-fields-section">
     {% set chart_types = h.querytool_get_chart_types() %}
     <div class="chart-form-wrapper">
@@ -58,6 +64,44 @@
           </select>
         </div>
       </div>
+
+
+    <div class="control-group control-select">
+      <label class="control-label" for="chart_field_filter_name_{{ n }}">{{ _('Filter column') }}</label>
+      <div class="controls ">
+        <select id="chart_field_filter_name_{{ n }}" name="chart_field_filter_name_{{ n }}">
+            <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+            {% for column in columns %}
+            <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.filter_name }}{% endif %}>{{column}}</option>
+            {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div id="chart_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
+      <label class="control-label" for="chart_field_filter_value_{{ n }}">{{ _('Filter value') }}</label>
+      <div class="controls ">
+        <select id="chart_field_filter_value_{{ n }}" name="chart_field_filter_value_{{ n }}" >
+          <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
+            {% if chart and chart.filter_value %}
+                <option value="{{ chart.filter_value }}" selected>{{ chart.filter_value }}</option>
+          {% endif %}
+        </select>
+      </div>
+    </div>
+
+    <div id="chart_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
+      <label class="control-label" for="chart_field_filter_visibility_{{ n }}">{{ _('Filter visibility') }}</label>
+      <div class="controls ">
+        <select id="chart_field_filter_visibility_{{ n }}" name="chart_field_filter_visibility_{{ n }}" >
+          <option value="public" {{ 'selected' if chart and chart.filter_visibility == 'public' }}>{{ _('Public') }}</option>
+          <option value="private" {{ 'selected' if chart and chart.filter_visibility == 'private' }}>{{ _('Private') }}</option>
+        </select>
+      </div>
+    </div>
+    <input type="hidden" id="resource_id_{{ n }}" name="resource_id_{{ n }}" value="{{ chart_resource }}"/>
+
+
 
       {% if chart %}
         {% set show_labels = chart.show_labels %}
