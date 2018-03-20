@@ -401,7 +401,7 @@ class QueryToolController(base.BaseController):
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
 
-        if not querytool or not querytool['charts']:
+        if not querytool or not querytool['visualizations']:
             abort(404, _('Querytool not fully set.'))
 
         # only sysadmins can access private querytool
@@ -428,10 +428,10 @@ class QueryToolController(base.BaseController):
                 'querytool_public_read',
                 {'name': item['name']}
             )
-            q_item['charts'] = json.loads(
-                q_item['charts']
+            q_item['visualizations'] = json.loads(
+                q_item['visualizations']
             )
-            q_item['charts'].sort(key=itemgetter('order'))
+            q_item['visualizations'].sort(key=itemgetter('order'))
 
             q_name = q_item['name']
             new_filters = json.loads(q_item['filters'])
@@ -455,7 +455,6 @@ class QueryToolController(base.BaseController):
             q_item['public_filters'].sort(key=itemgetter('order'))
             q_item['sql_string'] = related_sql_string
             querytools.append(q_item)
-
         return render('querytool/public/read.html',
                       extra_vars={'querytools': querytools})
 
