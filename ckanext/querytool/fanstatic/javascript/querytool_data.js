@@ -432,8 +432,8 @@
                             response.result.forEach(function(item, i) {
                                 var element = [
                                     '<li class="checkbox-marked">',
-                                    '<input name="y_axis_column_' + item + '" for="d-t-0' + i + '" type="checkbox" value="' + item + '" />',
-                                    '<label for="d-t-0' + item + '">' + item + '</label>',
+                                    '<input name="y_axis_column_' + item + '" id="y_axis_column_' + item + '" type="checkbox" value="' + item + '" />',
+                                    '<label for="y_axis_column_' + item + '">' + item + '</label>',
                                     '</li>'
                                 ].join('');
 
