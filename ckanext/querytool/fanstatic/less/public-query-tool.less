@@ -272,9 +272,9 @@ h1 {
   .visualizations {
     display: grid;
     grid-gap: @grid-gutter-width;
-    grid-template-columns: repeat(auto-fit, minmax(@visualization-grid-base-size, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(@visualization-grid-base-size, 1fr));
     grid-auto-rows: minmax(@visualization-grid-base-size, auto);
-    grid-auto-flow: dense;
+    // grid-auto-flow: dense;
     padding: @grid-gutter-width;
   }
   .item {
@@ -289,22 +289,22 @@ h1 {
       }
     }
     &.size-md {
-      grid-column: span 4;
+      grid-column: span 3;
       grid-row: span 2;
       &.vertical {
-        grid-row: span 6;
+        grid-row: span 4;
       }
     }
     &.size-lg {
-      grid-column: span 8;
+      grid-column: 1 e("/") -1;
       grid-row: span 2;
       &.square {
         grid-column: span 4;
-        grid-row: span 3;
+        grid-row: span 4;
       }
       &.vertical {
         grid-column: span 4;
-        grid-row: span 8;
+        grid-row: span 6;
       }
     }
   }
