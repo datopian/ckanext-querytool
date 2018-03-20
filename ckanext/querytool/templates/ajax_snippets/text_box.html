@@ -6,12 +6,7 @@
   <div id="text_box_{{ number }}" class="item text-boxs-section text_box visualization-fields-section">
           <div class="textbox-form-wrapper">
 
-        <div class="control-group ">
-            <label class="control-label" for="text_box_description_{{ number }}">{{ _('Text box description') }}</label>
-            <div class="controls ">
-                <textarea id="text_box_description_{{ number }}" name="text_box_description_{{ number }}" value="{{ text_description }}"  type="text">{{ text_description }}</textarea>
-            </div>
-        </div>
+  {{ form.markdown('text_box_description_' ~ number, id='text_box_description_' ~ number, label=_('Description'), placeholder=_('Description'), value=text_description) }}
 
 
   {% set sizes = h.querytool_get_visualization_size() %}
