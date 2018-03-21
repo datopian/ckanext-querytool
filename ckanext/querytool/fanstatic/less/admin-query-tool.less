@@ -2,9 +2,9 @@
 @import "inc/mixins.less";
 span.grippy {
   position: absolute;
-  top: 50%;
+  top: @grid-gutter-width;
   content: '....';
-  left: 0;
+  left: -@grid-gutter-width + 2;
   width: @grid-gutter-width/2;
   height: @grid-gutter-width;
   display: inline-block;
@@ -14,7 +14,7 @@ span.grippy {
   cursor: grab;
   font-size: @base-font-size;
   line-height: @grid-gutter-width/4;
-  padding: @grid-gutter-width/4;
+  padding: @grid-gutter-width @grid-gutter-width;
   margin-top: -@grid-gutter-width/2;
   vertical-align: middle;
   letter-spacing: 2px;
@@ -44,17 +44,29 @@ span.grippy.cursor-grabbing {
 
 .visualizations {
   counter-reset: visualizations;
+  max-width: 100%;
   .item {
     position: relative;
     counter-increment: visualizations;
+    &.gu-transit{
+      max-height: @grid-gutter-width*5;
+      overflow: hidden;
+      align-items: flex-start;
+    }
     &:before {
       font-size: @base-font-size*2;
       padding: @grid-gutter-width;
-      color: @color-neutral-light;
+      color: @color-primary;
       position: absolute;
       top: 0;
       left: 0;
       content: counter(visualizations);
     }
   }
+}
+
+.gu-mirror{
+  overflow: hidden;
+  max-height: @grid-gutter-width*5;
+  align-items: flex-start;
 }
