@@ -352,7 +352,7 @@ def get_available_related_querytools():
         .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
                CkanextQueryToolVisualizations.ckanext_querytool_id)) \
         .filter(CkanextQueryTool.type == 'related'). \
-        filter(CkanextQueryToolVisualizations.charts != '')
+        filter(CkanextQueryToolVisualizations.visualizations != '')
 
     result = query.all()
     querytools_list = []
