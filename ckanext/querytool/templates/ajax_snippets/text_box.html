@@ -4,12 +4,9 @@
      {% set text_description = box.description %}
   {% endif %}
   <div id="text_box_{{ number }}" class="item text-boxs-section text_box visualization-fields-section">
-          <div class="textbox-form-wrapper">
-
-  {{ form.markdown('text_box_description_' ~ number, id='text_box_description_' ~ number, label=_('Description'), placeholder=_('Description'), value=text_description) }}
-
-
-  {% set sizes = h.querytool_get_visualization_size() %}
+    <div class="textbox-form-wrapper">
+      {{ form.markdown('text_box_description_' ~ number, id='text_box_description_' ~ number, label=_('Content'), placeholder=_('Description'), value=text_description) }}
+      {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
         <label class="control-label" for="text_box_size_{{ number }}">{{ _('Text box size') }}</label>
         <div class="controls ">
@@ -20,11 +17,11 @@
           </select>
         </div>
       </div>
+
       <ul class="inline text-right chart-actions">
         <li class="remove"><a id="delete-textbox-btn" class="btn delete-textbox-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
       </ul>
 
       <span class="grippy"></span>
-
-   </div>
+    </div>
   </div>
