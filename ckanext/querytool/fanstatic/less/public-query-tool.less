@@ -60,6 +60,7 @@ body {
 }
 
 .page-header {
+  color: @color-white;
   text-align: center;
   background: transparent;
   border-bottom: none;
@@ -274,42 +275,68 @@ body {
     grid-gap: @grid-gutter-width;
     grid-template-columns: repeat(auto-fill, minmax(@visualization-grid-base-size, 1fr));
     grid-auto-rows: minmax(@visualization-grid-base-size, auto);
-    // grid-auto-flow: dense;
     padding: @grid-gutter-width;
   }
   .item {
     position: relative;
     background-color: @color-white;
     padding: @grid-gutter-width;
+    overflow-y: auto;
+    word-wrap: break-word;
     &.size-sm {
       grid-column: span 2;
       grid-row: span 1;
+      height: @visualization-grid-base-size;
       &.square {
         grid-row: span 2;
+        height: @visualization-grid-base-size*2;
       }
     }
     &.size-md {
       grid-column: span 3;
       grid-row: span 2;
+      height: @visualization-grid-base-size*2;
       &.vertical {
         grid-row: span 4;
+        height: @visualization-grid-base-size*4;
       }
     }
     &.size-lg {
       grid-column: 1 e("/") -1;
       grid-row: span 2;
+      height: @visualization-grid-base-size*2;
       &.square {
         grid-column: span 4;
         grid-row: span 4;
+        height: @visualization-grid-base-size*4;
       }
       &.vertical {
         grid-column: span 4;
         grid-row: span 6;
+        height: @visualization-grid-base-size*6;
       }
     }
   }
   .item-content {
-    min-height: 100%;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      line-height: 1.25;
+    }
+    > :first-child {
+      padding-top: 0;
+      margin-top: 0;
+    }
+    > :last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    &.c3 {
+      min-height: 100%;
+    }
   }
 }
 
