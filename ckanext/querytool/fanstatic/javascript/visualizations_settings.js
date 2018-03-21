@@ -1,4 +1,4 @@
-(function() {
+(function(_, jQuery) {
     'use strict';
 
     var api = {
@@ -9,15 +9,81 @@
             var url = base_url + '/api/' + api_ver + '/action/' + action + '?' + params;
             return $.getJSON(url);
         },
-        post: function(action, data) {
+        post: function(action, data, async) {
             var api_ver = 3;
             var base_url = ckan.sandbox().client.endpoint;
             var url = base_url + '/api/' + api_ver + '/action/' + action;
+            if (!async) {
+                $.ajaxSetup({
+                    async: false
+                });
+            }
             return $.post(url, JSON.stringify(data), 'json');
         }
     };
 
+    function handleRenderedChartFilters(item_id) {
+
+        var chart_filter_name_select;
+
+        if (item_id) {
+            chart_filter_name_select = $('[id=chart_field_filter_name_' + item_id + ']');
+        } else {
+            chart_filter_name_select = $('[id*=chart_field_filter_name_]');
+        }
+
+        chart_filter_name_select.change(function(event) {
+            var elem = $(this);
+            var chart_filter_name = elem.find(":selected").val();
+            var filter_name_select_id = elem.attr('id');
+
+            var chart_filter_value_select_id = filter_name_select_id.replace('name', 'value');
+            var chart_filter_visibility_id = chart_filter_value_select_id.replace('value', 'visibility');
+
+            var chart_filter_value_div_id = chart_filter_value_select_id.replace('field', 'div');
+            var chart_filter_visibility_div_id = chart_filter_visibility_id.replace('field', 'div');
+
+            var resource_input_id = filter_name_select_id.replace('chart_field_filter_name', 'resource_id');
+            var resource_id = $('#' + resource_input_id).val();
+
+
+            if (chart_filter_name === '') {
+                // Empty filter value select
+                if ($('#' + chart_filter_value_select_id + ' option').length > 0) {
+                    $('#' + chart_filter_value_select_id).find('option').not(':first').remove();
+                }
+                $('#' + chart_filter_value_div_id).addClass('hidden');
+                $('#' + chart_filter_value_select_id).prop('required', false);
+                $('#' + chart_filter_visibility_div_id).addClass('hidden');
+
+            } else {
+                // Reinitialize filter value select
+                if ($('#' + chart_filter_value_select_id + ' option').length > 0) {
+                    $('#' + chart_filter_value_select_id).find('option').not(':first').remove();
+                }
+
+                api.post('get_filter_values', {
+                    'resource_id': resource_id,
+                    'filter_name': chart_filter_name,
+                    'previous_filters': []
+                }).done(function(data) {
+
+                    $.each(data.result, function(idx, elem) {
+
+                        $('#' + chart_filter_value_select_id).append(new Option(elem, elem));
+                    });
+
+                    $('#' + chart_filter_value_div_id).removeClass('hidden');
+                    $('#' + chart_filter_value_select_id).prop('required', true);
+                    $('#' + chart_filter_visibility_div_id).removeClass('hidden');
+                });
+
+            }
+        });
+    };
+
     $(document).ready(function() {
+        handleRenderedChartFilters();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
         var sqlString = vizForm.data('sqlString');
@@ -44,7 +110,7 @@
         });
 
         //delete dynamicly created textbox section
-        $(document).on('click', '.delete-textbox-btn' , function(el){
+        $(document).on('click', '.delete-textbox-btn', function(el) {
             el.target.closest('.item').remove();
         });
 
@@ -53,7 +119,7 @@
             $.proxyAll(this, /_on/);
 
             var visualization = $('#item_type').val();
-            var item =  $('.item');
+            var item = $('.item');
             var items = item.length + 1;
             if (visualization === 'chart') {
                 var axisYValue = chooseYAxisColumn.val();
@@ -63,18 +129,20 @@
                     return;
                 }
                 //TODO: parse query params simple
-                var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') +1).split("?")[0];
+                var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split("?")[0];
                 ckan.sandbox().client.getTemplate('chart_fields.html', {
                         n: items,
                         querytool: querytool,
                         chart_resource: chart_resource,
                         map_resource: map_resource,
-                        sql_string: sqlString
+                        sql_string: sqlString,
+                        class: 'hidden'
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
                         $('#save-visualization-btn').attr('disabled', false);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
+                        handleRenderedChartFilters(items);
                         handleItemsOrder();
 
                         var axisY = $('[name*=chart_field_axis_y_]');
@@ -82,13 +150,13 @@
                     });
             } else if (visualization === 'map') {
                 alert('Not implemented yet.');
-            } else if (visualization == 'text-box'){
+            } else if (visualization == 'text-box') {
                 ckan.sandbox().client.getTemplate('text_box.html', {
                         number: items
                     })
                     .done(function(data) {
-                           var item = visualizationItems.prepend(data);
-                                                handleItemsOrder();
+                        var item = visualizationItems.prepend(data);
+                        handleItemsOrder();
 
                     });
             }
@@ -110,14 +178,13 @@
 
         // This function updates the order numbers for the form elements.
         function handleItemsOrder() {
-           // var items = $('.chart_field');
-                        var items = $('.item');
+            // var items = $('.chart_field');
+            var items = $('.item');
             $.each(items, function(i, item) {
 
                 item = $(item);
-                console.log(i)
                 var order = i + 1;
-                if(item.context.id.indexOf('chart_field') >= 0){
+                if (item.context.id.indexOf('chart_field') >= 0) {
                     var dropdownGraphType = item.find('[id*=chart_field_graph_]');
                     var dropdownColorScheme = item.find('[id*=chart_field_color_]');
                     var dropdownAxisY = item.find('[id*=chart_field_axis_y_]');
@@ -134,6 +201,12 @@
                     var inputPaddingTop = item.find('[id*=chart_field_padding_top_]');
                     var inputPaddingBottom = item.find('[id*=chart_field_padding_bottom_]');
                     var inputChartSize = item.find('[id*=chart_field_size_]');
+                    var selectFilterName = item.find('[id*=chart_field_filter_name_]');
+                    var selectFilterValue = item.find('[id*=chart_field_filter_value_]');
+                    var selectFilterValueDiv = item.find('[id*=chart_div_filter_value_]');
+                    var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
+                    var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
+                    var resource_id = item.find('[id*=resource_id_]');
 
 
                     item.attr('id', 'chart_field_' + order);
@@ -182,7 +255,23 @@
 
                     inputChartSize.attr('id', 'chart_field_size_' + order);
                     inputChartSize.attr('name', 'chart_field_size_' + order);
-                 } else if(item.context.id.indexOf('text_box') >= 0){
+
+                    selectFilterName.attr('id', 'chart_field_filter_name_' + order);
+                    selectFilterName.attr('name', 'chart_field_filter_name_' + order);
+
+                    selectFilterValue.attr('id', 'chart_field_filter_value_' + order);
+                    selectFilterValue.attr('name', 'chart_field_filter_value_' + order);
+                    selectFilterValueDiv.attr('id', 'chart_div_filter_value_' + order);
+
+                    selectFilterVisibility.attr('id', 'chart_field_filter_visibility_' + order);
+                    selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
+                    selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
+
+                    resource_id.attr('id', 'resource_id_' + order);
+                    resource_id.attr('name', 'resource_id_' + order);
+
+
+                } else if (item.context.id.indexOf('text_box') >= 0) {
 
                     var description = item.find('[id*=text_box_description_]');
                     var size = item.find('[id*=text_box_size_]');
@@ -195,7 +284,7 @@
                     size.attr('id', 'text_box_size_' + order);
                     size.attr('name', 'text_box_size_' + order);
 
-                 }
+                }
             });
         }
 

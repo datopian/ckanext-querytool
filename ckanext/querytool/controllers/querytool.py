@@ -311,6 +311,17 @@ class QueryToolController(base.BaseController):
                         visualization['show_labels'] = 'true'
                     else:
                         visualization['show_labels'] = 'false'
+                    if data['chart_field_filter_name_{}'.format(id)]:
+                        visualization['filter_name'] = \
+                            data['chart_field_filter_name_{}'.format(id)]
+                        visualization['filter_value'] = \
+                            data['chart_field_filter_value_{}'.format(id)]
+                        visualization['filter_visibility'] = \
+                            data['chart_field_filter_visibility_{}'.format(id)]
+                    else:
+                        visualization['filter_name'] = ''
+                        visualization['filter_value'] = ''
+                        visualization['filter_visibility'] = ''
 
                     visualizations.append(visualization)
 
