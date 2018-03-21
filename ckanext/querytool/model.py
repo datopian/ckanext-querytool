@@ -192,7 +192,7 @@ def define_querytool_visualizations_table():
                      nullable=False),
               Column('y_axis_column',
                      types.UnicodeText,
-                     nullable = False),
+                     nullable=False),
               Index('ckanext_querytool_visualizations_id_idx',
                     'id'))
 

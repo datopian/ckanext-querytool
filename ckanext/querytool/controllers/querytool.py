@@ -340,7 +340,8 @@ class QueryToolController(base.BaseController):
             if any(visualizations):
                 vis = visualizations + text_boxes
                 _visualization_items['visualizations'] = json.dumps(vis)
-                _visualization_items['y_axis_column'] = visualizations[0].get('y_axis')
+                _visualization_items['y_axis_column'] =\
+                    visualizations[0].get('y_axis')
 
             else:
                 _visualization_items['visualizations'] = ''
