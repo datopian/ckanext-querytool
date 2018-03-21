@@ -92,7 +92,7 @@
     <!-- Visualizations container -->
     <div class="visualizations">
       {% for item in querytool.visualizations %}
-      <div class="item {{ item.size }}">
+      <div class="item {{ item.size }} {{ item.type }}">
         {% if item.type == 'chart'  %}
             {% snippet 'ajax_snippets/visualization_item.html',
             type='chart',

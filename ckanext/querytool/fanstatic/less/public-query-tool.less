@@ -10,7 +10,7 @@ body {
   background-size: 100%;
 }
 
-.public-filters{
+.public-filters {
   margin: 0;
 }
 
@@ -291,37 +291,55 @@ body {
     padding: @grid-gutter-width;
     overflow-y: auto;
     word-wrap: break-word;
+    &.text_box {
+      background: transparent;
+      color: @color-white;
+      &.size-sm {
+        max-height: @visualization-grid-base-size;
+        &.square {
+          max-height: @visualization-grid-base-size*2;
+        }
+      }
+      &.size-md {
+        max-height: @visualization-grid-base-size*2;
+        &.vertical {
+          max-height: @visualization-grid-base-size*4;
+        }
+      }
+      &.size-lg {
+        max-height: @visualization-grid-base-size*2;
+        &.square {
+          max-height: @visualization-grid-base-size*4;
+        }
+        &.vertical {
+          max-height: @visualization-grid-base-size*6;
+        }
+      }
+    }
     &.size-sm {
       grid-column: span 2;
       grid-row: span 1;
-      height: @visualization-grid-base-size;
       &.square {
         grid-row: span 2;
-        height: @visualization-grid-base-size*2;
       }
     }
     &.size-md {
       grid-column: span 3;
       grid-row: span 2;
-      height: @visualization-grid-base-size*2;
       &.vertical {
         grid-row: span 4;
-        height: @visualization-grid-base-size*4;
       }
     }
     &.size-lg {
       grid-column: 1 e("/") -1;
       grid-row: span 2;
-      height: @visualization-grid-base-size*2;
       &.square {
         grid-column: span 4;
         grid-row: span 4;
-        height: @visualization-grid-base-size*4;
       }
       &.vertical {
         grid-column: span 4;
         grid-row: span 6;
-        height: @visualization-grid-base-size*6;
       }
     }
   }
