@@ -20,6 +20,8 @@ Options:
     - padding_bottom (Add charts padding)
     - show_labels (Display or hide charts labels)
     - y_label (Aditional label added in y axis)
+    - filter_name (The name of the chart filter)
+    - filter_value (The value of the chart filter)
 
 */
 
@@ -65,6 +67,16 @@ ckan.module('querytool-viz-preview', function() {
         create_sql_string: function() {
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
+            var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
+            var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+            
+            // If additional chart filter is set extend the current sql with the new filter
+            if (chart_filter_name && chart_filter_value) {
+                var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
+                sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
+            }
+            console.log(sqlStringExceptSelect);
+
             return 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + this.options.y_axis + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
         },
         // Get the data from Datastore.
@@ -295,6 +307,14 @@ ckan.module('querytool-viz-preview', function() {
             var paddingBottom = chartField.find('input[name*=chart_field_padding_bottom_]');
             var paddingBottomVal = paddingBottom.val();
 
+            var filterName =  chartField.find('[name*=chart_field_filter_name_]');
+            var filterNameVal = filterName.val();
+
+            var filterValue = chartField.find('[name*=chart_field_filter_value_]');
+            var filterValueVal = filterValue.val();
+
+
+
             var dataLabels =  chartField.find('input[name*=chart_field_labels_]');
             var dataLabelsVal = dataLabels.is(':checked');
 
@@ -305,7 +325,8 @@ ckan.module('querytool-viz-preview', function() {
             // then just update the chart without fetching new data. This leads
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
-                this.options.y_axis === axisYValue))
+                this.options.y_axis === axisYValue) && (this.options.filter_name === filterNameVal &&
+                this.options.filter_value === filterValueVal))
             {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
@@ -338,6 +359,8 @@ ckan.module('querytool-viz-preview', function() {
             this.options.padding_bottom = paddingBottomVal;
             this.options.show_labels = dataLabelsVal;
             this.options.y_label = yLabbelVal;
+            this.options.filter_name = filterNameVal;
+            this.options.filter_value = filterValueVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);

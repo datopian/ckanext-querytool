@@ -25,11 +25,18 @@
     function handleRenderedChartFilters(item_id) {
 
         var chart_filter_name_select;
+        var chart_filter_value_select;
 
         if (item_id) {
             chart_filter_name_select = $('[id=chart_field_filter_name_' + item_id + ']');
         } else {
             chart_filter_name_select = $('[id*=chart_field_filter_name_]');
+        }
+
+        if (item_id) {
+            chart_filter_value_select = $('[id=chart_field_filter_value_' + item_id + ']');
+        } else {
+            chart_filter_value_select = $('[id*=chart_field_filter_value_]');
         }
 
         chart_filter_name_select.change(function(event) {
@@ -46,40 +53,52 @@
             var resource_input_id = filter_name_select_id.replace('chart_field_filter_name', 'resource_id');
             var resource_id = $('#' + resource_input_id).val();
 
-
-            if (chart_filter_name === '') {
-                // Empty filter value select
-                if ($('#' + chart_filter_value_select_id + ' option').length > 0) {
+            // Empty filter value select
+            if ($('#' + chart_filter_value_select_id + ' option').length > 0) {
                     $('#' + chart_filter_value_select_id).find('option').not(':first').remove();
                 }
+
+            if (chart_filter_name === '') {
                 $('#' + chart_filter_value_div_id).addClass('hidden');
                 $('#' + chart_filter_value_select_id).prop('required', false);
                 $('#' + chart_filter_visibility_div_id).addClass('hidden');
-
             } else {
-                // Reinitialize filter value select
-                if ($('#' + chart_filter_value_select_id + ' option').length > 0) {
-                    $('#' + chart_filter_value_select_id).find('option').not(':first').remove();
-                }
+                $('#' + chart_filter_value_div_id).removeClass('hidden');
+                $('#' + chart_filter_value_select_id).prop('required', true);
+                $('#' + chart_filter_visibility_div_id).removeClass('hidden');
+            }
+        });
+
+        chart_filter_value_select.mousedown(function (event) {
+
+            var elem = $(this);
+            var chart_filter_value_select_id = elem.attr('id');
+            var chart_filter_value = elem.find(":selected").val();
+            var chart_filter_name_select_id = chart_filter_value_select_id.replace('value', 'name');
+            var chart_filter_name = $('#' + chart_filter_name_select_id).find(":selected").val();
+            var resource_input_id = chart_filter_value_select_id.replace('chart_field_filter_value', 'resource_id');
+            var resource_id = $('#' + resource_input_id).val();
+            var select_size = $(this).find("option").size();
+
+            if (select_size <= 2) {
 
                 api.post('get_filter_values', {
                     'resource_id': resource_id,
                     'filter_name': chart_filter_name,
                     'previous_filters': []
-                }).done(function(data) {
+                }, false).done(function(data) {
 
                     $.each(data.result, function(idx, elem) {
 
-                        $('#' + chart_filter_value_select_id).append(new Option(elem, elem));
+                        if (chart_filter_value != elem) {
+                            $('#' + chart_filter_value_select_id).append(new Option(elem, elem));
+                        }
                     });
-
-                    $('#' + chart_filter_value_div_id).removeClass('hidden');
-                    $('#' + chart_filter_value_select_id).prop('required', true);
-                    $('#' + chart_filter_visibility_div_id).removeClass('hidden');
                 });
-
             }
+
         });
+
     };
 
     $(document).ready(function() {

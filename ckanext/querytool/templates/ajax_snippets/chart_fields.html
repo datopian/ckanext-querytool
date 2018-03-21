@@ -226,6 +226,8 @@
         {% set padding_top = chart.padding_top %}
         {% set show_labels = chart.show_labels %}
         {% set y_label = chart.y_label %}
+        {% set filter_name = chart.filter_name %}
+        {% set filter_value = chart.filter_value %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -244,7 +246,9 @@
           padding_bottom = padding_bottom,
           padding_top = padding_top,
           show_labels = show_labels,
-          y_label = y_label
+          y_label = y_label,
+          filter_name=filter_name,
+          filter_value=filter_value
       %}
     </div>
 </div>
