@@ -35,14 +35,7 @@
         {% set y_axis_columns = querytool.y_axis_columns.split(',') %}
         {% if querytool.y_axis_column %}
           {% set y_axis_selected = querytool.y_axis_column %}
-        {% else %}
-            {% if querytool.type == 'chart'  %}
-      {% set y_axis_selected = querytool.visualizations[0].y_axis %}
-    {% endif %}
-    {% endif %}
-
-
-
+       {% endif %}
     <div class="controls">
       <div class="flex">
         <div class="filter-y">

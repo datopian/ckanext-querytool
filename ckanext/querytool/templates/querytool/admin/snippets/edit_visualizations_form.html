@@ -24,10 +24,10 @@
   {% block charts %}
   <legend>{{ _('Data visualizations') }}</legend>
 
-  {% if data.charts %}
-    {% set selected_y_axis_column = data.charts[0].y_axis %}
+  {% if data.visualizations %}
+    {% set selected_y_axis_column = data.y_axis_column %}
   {% endif %}
-
+  <p>{{ selected_y_axis_column }}</p>
   <div class="chart-global-controls">
     {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Y axis column'), options=data.y_axis_columns, selected=selected_y_axis_column) }}
   </div>
