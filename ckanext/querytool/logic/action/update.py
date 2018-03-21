@@ -74,6 +74,7 @@ def querytool_visualizations_update(context, data_dict):
 
     visualizations.name = data_dict['name']
     visualizations.visualizations = data_dict['visualizations']
+    visualizations.y_axis_column = data_dict['y_axis_column']
     visualizations.ckanext_querytool_id = querytool.id
     visualizations.save()
     session.add(visualizations)

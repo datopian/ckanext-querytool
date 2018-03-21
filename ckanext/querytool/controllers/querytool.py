@@ -340,6 +340,8 @@ class QueryToolController(base.BaseController):
             if any(visualizations):
                 vis = visualizations + text_boxes
                 _visualization_items['visualizations'] = json.dumps(vis)
+                _visualization_items['y_axis_column'] =\
+                    visualizations[0].get('y_axis')
 
             else:
                 _visualization_items['visualizations'] = ''
@@ -382,9 +384,9 @@ class QueryToolController(base.BaseController):
         data['y_axis_columns'].insert(0, {
             'value': '$none$', 'text': '-- Select column --'
         })
-
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
+
         return render('querytool/admin/base_edit_visualizations.html',
                       extra_vars=vars)
 
@@ -465,7 +467,9 @@ class QueryToolController(base.BaseController):
             q_item['public_filters'] = new_filters
             q_item['public_filters'].sort(key=itemgetter('order'))
             q_item['sql_string'] = related_sql_string
+
             querytools.append(q_item)
+
         return render('querytool/public/read.html',
                       extra_vars={'querytools': querytools})
 
