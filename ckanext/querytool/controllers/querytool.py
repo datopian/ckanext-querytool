@@ -316,11 +316,14 @@ class QueryToolController(base.BaseController):
                             data['chart_field_filter_name_{}'.format(id)]
                         visualization['filter_value'] = \
                             data['chart_field_filter_value_{}'.format(id)]
+                        visualization['filter_alias'] = \
+                            data['chart_field_filter_alias_{}'.format(id)]
                         visualization['filter_visibility'] = \
                             data['chart_field_filter_visibility_{}'.format(id)]
                     else:
                         visualization['filter_name'] = ''
                         visualization['filter_value'] = ''
+                        visualization['filter_alias'] = ''
                         visualization['filter_visibility'] = ''
 
                     visualizations.append(visualization)
@@ -450,6 +453,7 @@ class QueryToolController(base.BaseController):
             new_filters = json.loads(q_item['filters'])
 
             for k, v in params.items():
+                # Update query filters
                 if k.startswith('{}_data_filter_name_'.format(q_name)):
                     id = k.split('_')[-1]
                     for filter in new_filters:
@@ -457,8 +461,20 @@ class QueryToolController(base.BaseController):
                             filter['value'] = \
                                 params.get('{}_data_filter_value_{}'
                                            .format(q_name, id))
+                # Update charts y_axis value
                 if k.startswith('{}_y_axis_column'.format(q_name)):
                     q_item['y_axis_column'] = v
+                # Update charts filters
+                if k.startswith('{}_chart_filter_name'.format(q_name)):
+                    id = k.split('_')[-1]
+                    for visualization in q_item['visualizations']:
+                        if visualization['order'] == int(id):
+                            visualization['filter_name'] = \
+                                params.get('{}_chart_filter_name_{}'.
+                                           format(q_name, id))
+                            visualization['filter_value'] = \
+                                params.get('{}_chart_filter_value_{}'.
+                                           format(q_name, id))
 
             related_sql_string = helpers.create_query_str(
                 q_item.get('chart_resource'),

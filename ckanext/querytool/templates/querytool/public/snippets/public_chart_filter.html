@@ -1,0 +1,10 @@
+<div id="chart_filter_item_{{ id }}" class="filter-group-wrapper">
+  <div class="filter-group">
+    <label for="chart_filter_value_{{ id }}">{{ alias }}</label>
+    <input type="hidden" id="chart_filter_name_{{ id }}" name="{{q_name}}_chart_filter_name_{{ n }}" value="{{ name }}"/>
+    <select class="filter-item filter-item-value" id="chart_filter_value_{{ id }}" name="{{q_name}}_chart_filter_value_{{ n }}">
+      <option value="{{ value }}" selected>{{ value }}</option>
+    </select>
+    <input type="hidden" id="chart_filter_resource_{{ id }}" value="{{ resource_id }}"/>
+  </div>
+</div>

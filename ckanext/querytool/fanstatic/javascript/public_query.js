@@ -120,6 +120,50 @@
         });
     }
 
+    function handleRenderedChartFilters() {
+        var chart_filter_value_select = $("[id*=chart_filter_value_]");
+
+        chart_filter_value_select.mousedown(function(event) {
+            var elem = $(this);
+            var chart_filter_value_select_id = elem.attr("id");
+            var chart_filter_value = elem.find(":selected").val();
+
+            var chart_filter_name_input_id = chart_filter_value_select_id.replace(
+                "value",
+                "name"
+            );
+            var chart_filter_resource_input_id = chart_filter_value_select_id.replace(
+                "value",
+                "resource"
+            );
+
+            var chart_filter_name = $("#" + chart_filter_name_input_id).val();
+            var resource_id = $("#" + chart_filter_resource_input_id).val();
+            var select_size = $(this)
+                .find("option")
+                .size();
+
+            if (select_size <= 1) {
+                api
+                    .post(
+                        "get_filter_values", {
+                            resource_id: resource_id,
+                            filter_name: chart_filter_name,
+                            previous_filters: []
+                        },
+                        false
+                    )
+                    .done(function(data) {
+                        $.each(data.result, function(idx, elem) {
+                            if (chart_filter_value != elem) {
+                                $("#" + chart_filter_value_select_id).append(new Option(elem, elem));
+                            }
+                        });
+                    });
+            }
+        });
+    }
+
     function convertSVGGraphToImage(svg, callback) {
         var width = 0;
         var fontSize = 15;
@@ -157,6 +201,7 @@
 
     $(document).ready(function(e) {
         handleRenderedFilters();
+        handleRenderedChartFilters();
 
         var downloadBtn = $('.btn-chart-download');
         downloadBtn.on('click', function() {
