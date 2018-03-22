@@ -90,6 +90,15 @@
       </div>
     </div>
 
+    <div id="chart_div_filter_alias_{{ n }}" class="control-group {{ class }}">
+      <label class="control-label" for="chart_field_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
+      <div class="controls ">
+        <input id="chart_field_filter_alias_{{ n }}" name="chart_field_filter_alias_{{ n }}"
+             {% if chart and chart.filter_alias %}value="{{chart.filter_alias}}"{% else %}value=""{% endif %}
+             placeholder="Enter filter alias" type="text">
+      </div>
+    </div>
+
     <div id="chart_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
       <label class="control-label" for="chart_field_filter_visibility_{{ n }}">{{ _('Filter visibility') }}</label>
       <div class="controls ">

@@ -75,7 +75,6 @@ ckan.module('querytool-viz-preview', function() {
                 var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
-            console.log(sqlStringExceptSelect);
 
             return 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + this.options.y_axis + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
         },

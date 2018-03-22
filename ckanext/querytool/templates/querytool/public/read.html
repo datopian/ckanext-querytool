@@ -117,10 +117,21 @@
          <a class="btn-chart-download">
           <i class="fa fa-picture-o fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
         </a>
+          {% if item.filter_visibility == 'public'  %}
+            {% set id = h.querytool_get_uuid() %}
+            {% snippet 'querytool/public/snippets/public_chart_filter.html',
+              id=id,
+              q_name=querytool.name,
+              n=item.order,
+              name=item.filter_name,
+              alias=item.filter_alias,
+              value=item.filter_value,
+              resource_id=querytool.chart_resource %}
+          {% endif %}
         {% endif %}
         {% if item.type == 'text_box' %}
           <div class="item-content" >
-                      {{ h.render_markdown(h.get_translated(item, 'description'), True, True) }}
+            {{ h.render_markdown(h.get_translated(item, 'description'), True, True) }}
           </div>
         {% endif %}
       </div>
