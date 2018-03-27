@@ -18,6 +18,7 @@
                     async: false
                 });
             }
+            console.log('Response ' + $.post(url, JSON.stringify(data), 'json'));
             return $.post(url, JSON.stringify(data), 'json');
         }
     };
@@ -157,6 +158,8 @@
                             $('#' + filter_value_select_id).append(new Option(elem, elem));
                         }
                     });
+                }).error(function(err){
+                    console.log("Error " + err);
                 });
             }
         });
