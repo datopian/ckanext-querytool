@@ -270,6 +270,7 @@ class QueryToolController(base.BaseController):
             data = dict(toolkit.request.POST)
             visualizations = []
             text_boxes = []
+            images = []
             for k, v in data.items():
 
                 if k.startswith('chart_field_graph_'):
@@ -340,8 +341,20 @@ class QueryToolController(base.BaseController):
 
                     text_boxes.append(text_box)
 
+                if k.startswith('image_field_size_'):
+                    image = {}
+                    id = k.split('_')[-1]
+                    image['type'] = 'image'
+                    image['order'] = int(id)
+                    image['url'] = \
+                        data['image_field_url_{}'.format(id)]
+                    image['size'] = \
+                        data['image_field_size_{}'.format(id)]
+
+                    images.append(image)
+
             if any(visualizations):
-                vis = visualizations + text_boxes
+                vis = visualizations + text_boxes + images
                 _visualization_items['visualizations'] = json.dumps(vis)
                 _visualization_items['y_axis_column'] =\
                     visualizations[0].get('y_axis')

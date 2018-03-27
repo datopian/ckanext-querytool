@@ -3,7 +3,7 @@
    {% if image %}
      {% set url = image.url %}
   {% endif %}
-      <div class="item image_item visualization-fields-section">
+      <div id="image_item_{{ number }}" class="item image_item visualization-fields-section">
      {% if uploads_enabled %}
       <div class="image-upload "
         data-module="image-upload"
