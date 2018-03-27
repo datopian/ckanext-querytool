@@ -1,0 +1,45 @@
+  {% set uploads_enabled = h.uploads_enabled() %}
+
+   {% if image %}
+     {% set url = image.url %}
+  {% endif %}
+      <div class="item image_item visualization-fields-section">
+     {% if uploads_enabled %}
+      <div class="image-upload "
+        data-module="image-upload"
+        data-module-is_url="{{ is_url or 'false' }}"
+        data-module-is_upload="{{ is_upload or 'false' }}"
+        data-module-upload_label="Image">
+          <div class="control-group control-full">
+            <label class="control-label" for="image_field_url_{{ number }}">Image URL</label>
+            <div class="controls ">
+              <input id="image_field_url_{{ number }}" type="text" name="image_field_url_{{ number }}" value="{{ url }}" placeholder="http://example.com/my-image.jpg">
+            </div>
+          </div>
+          <div class="control-group control-full">
+            <label class="control-label" for="field-image-upload">Image</label>
+            <div class="controls ">
+              <input id="field-image-upload" type="file" name="{{ media_image_upload }}" value="{{ image_url }}" placeholder="">
+            </div>
+          </div>
+      </div>
+    {% else %}
+      <div class="control-group control-full">
+        <label class="control-label" for="image_field_url_{{ number }}">Image URL</label>
+        <div class="controls ">
+          <input id="image_field_url_{{ number }}" type="text" name="image_field_url_{{ number }}" value="{{ url }}" placeholder="http://example.com/my-image.jpg">
+        </div>
+      </div>
+      {% endif %}
+        {% set sizes = h.querytool_get_visualization_size() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="image_field_size_{{ number }}">{{ _('Chart size') }}</label>
+        <div class="controls ">
+          <select id="image_field_size_{{ number }}" name="image_field_size_{{ number }}">
+          {% for size in sizes %}
+            <option value="{{ size.value }}" {% if image %}{{ 'selected' if size.value == image.size }}{% endif %} >{{size.text}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+          </div>
