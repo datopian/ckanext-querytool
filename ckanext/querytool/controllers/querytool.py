@@ -347,11 +347,12 @@ class QueryToolController(base.BaseController):
                     image['type'] = 'image'
                     image['order'] = int(id)
                     image['url'] = \
-                        data['image_field_url_{}'.format(id)]
+                        data['media_image_url_{}'.format(id)]
                     image['size'] = \
                         data['image_field_size_{}'.format(id)]
 
                     images.append(image)
+
 
             if any(visualizations):
                 vis = visualizations + text_boxes + images

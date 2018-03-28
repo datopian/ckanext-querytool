@@ -106,6 +106,7 @@
 
     $(document).ready(function() {
         handleRenderedChartFilters();
+        handleImageItems();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
         var sqlString = vizForm.data('sqlString');
@@ -114,7 +115,6 @@
         var chooseYAxisColumn = $('#choose_y_axis_column');
 
         var charts = $('.chart_field');
-
         // Only disable Save button if there aren't visualizations
         if (charts.length === 0) {
             $('#save-visualization-btn').attr('disabled', 'true');
@@ -183,12 +183,12 @@
                     });
             } else if (visualization === 'image'){
                 ckan.sandbox().client.getTemplate('image_item.html', {
-                        number: items
+                        n: items
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
                         handleItemsOrder();
-
+                        handleImageItems(items);
                     });
 
             }
@@ -324,13 +324,13 @@
 
                 } else if (item.context.id.indexOf('image_item') >= 0){
 
-                    var url = item.find('[id*=image_field_url_]');
+                    var url = item.find('[name*=media_image_url_]');
                     var size = item.find('[id*=image_field_size_]');
 
                     item.attr('id', 'image_item' + order);
 
-                    url.attr('id', 'image_field_url_' + order);
-                    url.attr('name', 'image_field_url_' + order);
+                    url.attr('id', 'field-image-url');
+                    url.attr('name', 'media_image_url_' + order);
 
                     size.attr('id', 'image_field_size_' + order);
                     size.attr('name', 'image_field_size_' + order);
@@ -341,5 +341,41 @@
         // Expose this function on window to be accessible in other files
         window.handleItemsOrder = handleItemsOrder;
     });
+
+        function handleImageItems(item_id) {
+            var contentContainer = $('#content-settings-items');
+            var contentContainerChildren = contentContainer.children();
+            //TODO:set uploadsEnabled from helper
+            var uploadsEnabled = 'True';
+            var fieldImageUrl;
+            var fieldImageUpload;
+            var imageUploadModule;
+            var mediaImage;
+            var mediaUpload;
+            var image_url_inputs;
+            var image_upload_inputs;
+            var item = $('.orgportal-media-item');
+
+            if (item_id) {
+              mediaImage = item.find('#field-image-url');
+              mediaUpload = item.find('#field-image-upload');
+
+              fieldImageUrl = 'media_image_url_' + item_id;
+              fieldImageUpload = 'media_image_upload_' + item_id;
+              mediaImage.attr('name', fieldImageUrl);
+              mediaUpload.attr('name', fieldImageUpload);
+
+                   if (uploadsEnabled == 'True') {
+                imageUploadModule = item.find('[data-module="custom-image-upload"]');
+                imageUploadModule.attr('data-module', 'image-upload');
+                imageUploadModule.attr('data-module-field_upload', fieldImageUpload);
+                imageUploadModule.attr('data-module-field_url', fieldImageUrl);
+
+                ckan.module.initializeElement(imageUploadModule[0]);
+            }
+            }
+
+
+          }
 
 })($);
