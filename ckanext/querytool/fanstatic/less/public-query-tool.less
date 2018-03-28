@@ -283,7 +283,7 @@ body {
     grid-gap: @grid-gutter-width;
     grid-template-columns: repeat(auto-fit, @visualization-grid-base-size);
     grid-auto-flow: row dense;
-    grid-auto-rows: @visualization-grid-base-size;
+    grid-auto-rows: minmax(@visualization-grid-base-size, auto);
     padding: @grid-gutter-width;
     align-content: center;
     justify-content: center;
