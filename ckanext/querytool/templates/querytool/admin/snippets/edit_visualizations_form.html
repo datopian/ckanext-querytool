@@ -58,14 +58,14 @@
       {% endif %}
       {% if item.type == 'text_box'  %}
         {% snippet 'ajax_snippets/text_box_item.html',
-          number=item.order,
-          box = item
+          n=item.order,
+          data = item
         %}
       {% endif %}
       {% if item.type == 'image'  %}
         {% snippet 'ajax_snippets/image_item.html',
           number=item.order,
-          image = item
+          data = item
         %}
       {% endif %}
     {% endfor %}
