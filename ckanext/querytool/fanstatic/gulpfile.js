@@ -15,7 +15,12 @@ gulp.task('less', function () {
     .pipe(cleanCSS({
       compatibility: 'ie8'
     }))
-    .pipe(autoprefixer())
+    .pipe(autoprefixer({
+      browsers: [
+        "last 5 versions",
+        "ie >= 11"
+      ]
+    }))
     // .pipe(sourcemaps.write()) - Uncomment when developing
     .pipe(gulp.dest('css'));
 });

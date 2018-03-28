@@ -281,9 +281,24 @@ body {
   .visualizations {
     display: grid;
     grid-gap: @grid-gutter-width;
-    grid-template-columns: repeat(auto-fill, minmax(@visualization-grid-base-size, 1fr));
-    grid-auto-rows: minmax(@visualization-grid-base-size, auto);
+    grid-template-columns: repeat(auto-fit, @visualization-grid-base-size);
+    grid-auto-flow: row dense;
+    grid-auto-rows: @visualization-grid-base-size;
     padding: @grid-gutter-width;
+    align-content: center;
+    justify-content: center;
+    .filter-item {
+      margin-bottom: 0;
+      background-color: darken(@color-neutral-pale, 5%);
+    }
+    .filter-group-wrapper {
+      display: block;
+    }
+    .filter-group {
+      display: block;
+      padding-left: 0;
+      padding-right: 0;
+    }
   }
   .item {
     position: relative;
@@ -331,7 +346,7 @@ body {
       }
     }
     &.size-lg {
-      grid-column: 1 e("/") -1;
+      grid-column: e("1 / -1");
       grid-row: span 2;
       &.square {
         grid-column: span 4;
