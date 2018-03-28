@@ -134,6 +134,11 @@
             {{ h.render_markdown(h.get_translated(item, 'description'), True, True) }}
           </div>
         {% endif %}
+        {% if item.type == 'image' %}
+          <div class="item-content" >
+            <img src="{{ item.url }}">
+          </div>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

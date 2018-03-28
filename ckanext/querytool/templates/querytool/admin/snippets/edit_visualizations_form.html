@@ -35,7 +35,7 @@
     <div id="choose-y-axis-column-container">
       <ul class="inline">
         <li>
-          {{ form.select('item_type', 'item_type', _('Visualization type'), options=[{'value': '', 'text': '— Select type —'}, {'value': 'chart', 'text': 'Chart'}, {'value': 'map', 'text': 'Map'}, {'value':'text-box', 'text': 'Text box'}]) }}
+          {{ form.select('item_type', 'item_type', _('Visualization type'), options=[{'value': '', 'text': '— Select type —'}, {'value': 'chart', 'text': 'Chart'}, {'value': 'map', 'text': 'Map'}, {'value':'text-box', 'text': 'Text box'},{'value':'image', 'text': 'Image'}]) }}
         </li>
         <li>
           <a id="add-visualization-btn" class="btn btn-info" style="display: {{ btn_display  }}"><span class="fa fa-plus-square"></span> {{ _('Add visualization') }}</a>
@@ -49,7 +49,7 @@
   <fieldset id="visualization-settings-items" class="visualizations">
     {% for item in data.visualizations %}
       {% if item.type == 'chart'  %}
-        {% snippet 'ajax_snippets/chart_fields.html',
+        {% snippet 'ajax_snippets/chart_item.html',
           n=item.order,
           chart=item,
           sql_string=data.sql_string,
@@ -57,9 +57,15 @@
           chart_resource=data.chart_resource %}
       {% endif %}
       {% if item.type == 'text_box'  %}
-        {% snippet 'ajax_snippets/text_box.html',
+        {% snippet 'ajax_snippets/text_box_item.html',
+          n=item.order,
+          data = item
+        %}
+      {% endif %}
+      {% if item.type == 'image'  %}
+        {% snippet 'ajax_snippets/image_item.html',
           number=item.order,
-          box = item
+          data = item
         %}
       {% endif %}
     {% endfor %}

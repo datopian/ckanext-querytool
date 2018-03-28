@@ -106,6 +106,7 @@
 
     $(document).ready(function() {
         handleRenderedChartFilters();
+        handleImageItems();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
         var sqlString = vizForm.data('sqlString');
@@ -114,7 +115,6 @@
         var chooseYAxisColumn = $('#choose_y_axis_column');
 
         var charts = $('.chart_field');
-
         // Only disable Save button if there aren't visualizations
         if (charts.length === 0) {
             $('#save-visualization-btn').attr('disabled', 'true');
@@ -152,7 +152,7 @@
                 }
                 //TODO: parse query params simple
                 var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split("?")[0];
-                ckan.sandbox().client.getTemplate('chart_fields.html', {
+                ckan.sandbox().client.getTemplate('chart_item.html', {
                         n: items,
                         querytool: querytool,
                         chart_resource: chart_resource,
@@ -173,7 +173,7 @@
             } else if (visualization === 'map') {
                 alert('Not implemented yet.');
             } else if (visualization == 'text-box') {
-                ckan.sandbox().client.getTemplate('text_box.html', {
+                ckan.sandbox().client.getTemplate('text_box_item.html', {
                         number: items
                     })
                     .done(function(data) {
@@ -181,6 +181,16 @@
                         handleItemsOrder();
 
                     });
+            } else if (visualization === 'image'){
+                ckan.sandbox().client.getTemplate('image_item.html', {
+                        n: items
+                    })
+                    .done(function(data) {
+                        var item = visualizationItems.prepend(data);
+                        handleItemsOrder();
+                        handleImageItems(items);
+                    });
+
             }
 
         });
@@ -312,6 +322,17 @@
                     size.attr('id', 'text_box_size_' + order);
                     size.attr('name', 'text_box_size_' + order);
 
+                } else if (item.context.id.indexOf('image_item') >= 0){
+                    var url = item.find('[name*=media_image_url_]');
+                    var size = item.find('[id*=image_field_size_]');
+
+                    item.attr('id', 'image_item_' + order);
+
+                    url.attr('id', 'field-image-url');
+                    url.attr('name', 'media_image_url_' + order);
+
+                    size.attr('id', 'image_field_size_' + order);
+                    size.attr('name', 'image_field_size_' + order);
                 }
             });
         }
@@ -319,5 +340,46 @@
         // Expose this function on window to be accessible in other files
         window.handleItemsOrder = handleItemsOrder;
     });
+
+        function handleImageItems(item_id) {
+            var contentContainer = $('#content-settings-items');
+            var contentContainerChildren = contentContainer.children();
+            //TODO:set uploadsEnabled from helper
+            var uploadsEnabled = 'True';
+            var fieldImageUrl;
+            var fieldImageUpload;
+            var imageUploadModule;
+            var mediaImage;
+            var mediaUpload;
+            var image_url_inputs;
+            var image_upload_inputs;
+            var item = $('.image_item');
+
+            if (item_id) {
+              mediaImage = item.find('#field-image-url');
+              mediaUpload = item.find('#field-image-upload');
+              fieldImageUrl = 'media_image_url_' + item_id;
+              fieldImageUpload = 'media_image_upload_' + item_id;
+              //mediaImage.attr('name', fieldImageUrl);
+
+
+                   if (uploadsEnabled == 'True') {
+                imageUploadModule = item.find('[data-module="custom-image-upload"]');
+                imageUploadModule.attr('data-module', 'image-upload');
+                imageUploadModule.attr('data-module-field_upload', fieldImageUpload);
+                imageUploadModule.attr('data-module-field_url', fieldImageUrl);
+                //mediaUpload.attr('name', fieldImageUpload);
+                ckan.module.initializeElement(imageUploadModule[0]);
+            }
+            }
+
+if (item_id) {
+      image_url_inputs = $('[name=media_image_url_'+ item_id +']');
+      image_upload_inputs = $('[name=media_image_upload_'+ item_id +']');
+    } else {
+      image_url_inputs = $('[name*=media_image_url_]');
+      image_upload_inputs = $('[name*=media_image_upload_]');
+    }
+          }
 
 })($);
