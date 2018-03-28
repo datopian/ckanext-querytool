@@ -1,13 +1,10 @@
-<div id="image_item_{{n}}" class="item image_item orgportal-media-item visualization-fields-section">
+<div id="image_item_{{ n }}" class="item image_item visualization-fields-section">
   {% set uploads_enabled = h.uploads_enabled() %}
 
   {% if data %}
     {% set n =  data.order | string %}
     {% set media_type =  data.media_type %}
     {% set image_url =  data.url %}
-    {% set image_title =  data.image_title %}
-    {% set image_title_url = data.image_title_url %}
-    {% set image_size = data.image_size %}
 
     {% set media_image_url = 'media_image_url_' + n %}
     {% set media_image_upload = 'media_image_upload_' + n %}
@@ -18,6 +15,7 @@
 
 
     {% if uploads_enabled %}
+    <p>{{data.size}}</p>
       <div
         class="image-upload"
         data-module="image-upload"
@@ -54,7 +52,7 @@
         <div class="controls ">
           <select id="image_field_size_{{ n }}" name="image_field_size_{{ n }}">
           {% for size in sizes %}
-            <option value="{{ size.value }}" {% if image %}{{ 'selected' if size.value == image.size }}{% endif %} >{{size.text}}</option>
+            <option value="{{ size.value }}" {% if data %}{{ 'selected' if size.value == data.size }}{% endif %} >{{size.text}}</option>
           {% endfor %}
           </select>
         </div>
@@ -73,7 +71,7 @@
           <div class="control-group control-full">
             <label class="control-label" for="field-image-url">Image URL</label>
             <div class="controls ">
-              <input id="field-image-url" type="text" name="media_image_url_{{ n }}" value="{{ url }}" placeholder="http://example.com/my-image.jpg">
+              <input id="field-image-url" type="text" name="media_image_url_{{ n }}" value="" placeholder="http://example.com/my-image.jpg">
             </div>
           </div>
           <div class="control-group control-full">
@@ -87,7 +85,7 @@
       <div class="control-group control-full">
         <label class="control-label" for="field-image-url">Image URL</label>
         <div class="controls ">
-          <input id="field-image-url" type="text" name="media_image_url_{{ n }}" value="{{ url}}" placeholder="http://example.com/my-image.jpg">
+          <input id="field-image-url" type="text" name="media_image_url_{{ n }}" value="" placeholder="http://example.com/my-image.jpg">
         </div>
       </div>
    {% endif %}
@@ -97,7 +95,7 @@
         <div class="controls ">
           <select id="image_field_size_{{ n }}" name="image_field_size_{{ n }}">
           {% for size in sizes %}
-            <option value="{{ size.value }}" {% if image %}{{ 'selected' if size.value == image.size }}{% endif %} >{{size.text}}</option>
+            <option value="{{ size.value }}"  >{{size.text}}</option>
           {% endfor %}
           </select>
         </div>
