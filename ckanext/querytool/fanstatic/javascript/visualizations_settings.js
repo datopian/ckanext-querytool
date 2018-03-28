@@ -187,8 +187,8 @@
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
-                        handleItemsOrder();
                         handleImageItems(items);
+                        handleItemsOrder();
                     });
 
             }
@@ -325,14 +325,16 @@
                 } else if (item.context.id.indexOf('image_item') >= 0){
                     var url = item.find('[name*=media_image_url_]');
                     var size = item.find('[id*=image_field_size_]');
+                    var upload = item.find('[name*=media_image_upload_]');
 
                     item.attr('id', 'image_item_' + order);
 
-                    url.attr('id', 'field-image-url');
                     url.attr('name', 'media_image_url_' + order);
 
                     size.attr('id', 'image_field_size_' + order);
                     size.attr('name', 'image_field_size_' + order);
+
+                    upload.attr('name', 'media_image_upload_' + order);
                 }
             });
         }
@@ -360,26 +362,24 @@
               mediaUpload = item.find('#field-image-upload');
               fieldImageUrl = 'media_image_url_' + item_id;
               fieldImageUpload = 'media_image_upload_' + item_id;
-              //mediaImage.attr('name', fieldImageUrl);
 
 
                    if (uploadsEnabled == 'True') {
+
                 imageUploadModule = item.find('[data-module="custom-image-upload"]');
                 imageUploadModule.attr('data-module', 'image-upload');
                 imageUploadModule.attr('data-module-field_upload', fieldImageUpload);
                 imageUploadModule.attr('data-module-field_url', fieldImageUrl);
-                //mediaUpload.attr('name', fieldImageUpload);
-                ckan.module.initializeElement(imageUploadModule[0]);
-            }
+                console.log('MD '+ item_id)
+                mediaUpload.attr('name', fieldImageUpload);
             }
 
-if (item_id) {
-      image_url_inputs = $('[name=media_image_url_'+ item_id +']');
-      image_upload_inputs = $('[name=media_image_upload_'+ item_id +']');
-    } else {
-      image_url_inputs = $('[name*=media_image_url_]');
-      image_upload_inputs = $('[name*=media_image_upload_]');
-    }
+              mediaImage.attr('name', fieldImageUrl);
+
+              ckan.module.initializeElement(imageUploadModule[0]);
+            }
+
           }
 
 })($);
+
