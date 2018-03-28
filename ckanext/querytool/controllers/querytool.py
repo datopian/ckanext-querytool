@@ -353,7 +353,6 @@ class QueryToolController(base.BaseController):
 
                     images.append(image)
 
-
             if any(visualizations):
                 vis = visualizations + text_boxes + images
                 _visualization_items['visualizations'] = json.dumps(vis)
