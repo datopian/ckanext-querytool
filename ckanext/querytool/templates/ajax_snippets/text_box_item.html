@@ -4,7 +4,7 @@
      {% set text_description = box.description %}
   {% endif %}
   <div id="text_box_{{ number }}" class="item text-boxs-section text_box visualization-fields-section">
-    <div class="textbox-form-wrapper">
+    <div class="item-wrapper">
       {{ form.markdown('text_box_description_' ~ number, id='text_box_description_' ~ number, label=_('Content'), placeholder=_('Description'), value=text_description) }}
       {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
