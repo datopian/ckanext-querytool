@@ -60,23 +60,12 @@
   border: 1px solid darken(@color-neutral-pale, 10%);
 }
 
-.textbox-form-wrapper {
+.item-wrapper {
+  flex: 1;
   textarea {
     min-height: @grid-gutter-width*15;
     max-width: 100%;
   }
-}
-
-.textbox-form-wrapper,
-.chart-form-wrapper {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-.chart-form-wrapper {
-  min-height: @grid-gutter-width*16;
 }
 
 .chart-controls-wrapper {
@@ -105,8 +94,4 @@
 
 hr {
   border-top-color: @color-hr-border;
-}
-
-.textbox-form-wrapper {
-  flex: 1;
 }
