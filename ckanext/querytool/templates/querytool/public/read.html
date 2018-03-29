@@ -4,6 +4,7 @@
 {% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/javascript/modules/tool-embed.js' %}
+{% resource 'querytool/map' %}
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
 {% block page_header_content %}
@@ -138,6 +139,12 @@
           <div class="item-content" >
             <img src="{{ item.url }}">
           </div>
+        {% endif %}
+        {% if item.type == 'map'  %}
+          {% snippet 'ajax_snippets/map_module.html',
+            n=item.order,
+            map_resource=item.map_resource
+          %}
         {% endif %}
       </div>
       {% endfor %}

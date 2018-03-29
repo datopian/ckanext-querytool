@@ -273,6 +273,7 @@ class QueryToolController(base.BaseController):
             visualizations = []
             text_boxes = []
             images = []
+            maps = []
             for k, v in data.items():
 
                 if k.startswith('chart_field_graph_'):
@@ -373,8 +374,21 @@ class QueryToolController(base.BaseController):
 
                     images.append(image)
 
+                if k.startswith('map_resource_'):
+                    map_item = {}
+                    id = k.split('_')[-1]
+                    map_item['type'] = 'map'
+                    map_item['order'] = int(id)
+                    map_item['map_resource'] = \
+                        data['map_resource_{}'.format(id)]
+                    map_item['size'] = \
+                        data['map_size_{}'.format(id)]
+
+                    maps.append(map_item)
+                    print map_item
+
             if any(visualizations):
-                vis = visualizations + text_boxes + images
+                vis = visualizations + text_boxes + images + maps
                 _visualization_items['visualizations'] = json.dumps(vis)
                 _visualization_items['y_axis_column'] =\
                     visualizations[0].get('y_axis')
@@ -409,6 +423,7 @@ class QueryToolController(base.BaseController):
         data['map_resource'] = _querytool.get('map_resource')
         data['chart_resource'] = _querytool.get('chart_resource')
         data['y_axis_columns'] = _querytool.get('y_axis_columns')
+        data['dataset_name'] = _querytool.get('dataset_name')
 
         data['y_axis_columns'] = data['y_axis_columns'].split(',')
 
