@@ -368,3 +368,26 @@ def get_available_related_querytools():
 
 def get_uuid():
     return uuid.uuid4()
+
+
+def get_dataset_map_resources(dataset_name):
+
+    resources = []
+    result = []
+
+    package = toolkit.get_action('package_show')({}, {'id': dataset_name})
+    if not package['num_resources'] > 0:
+        return result
+
+    resources.\
+        extend(filter(lambda r: r['format'].lower() in ['geojson', 'gjson'],
+                      package['resources']))
+
+    for item in resources:
+        data = {
+            'value': item['url'],
+            'text': 'UNNAMED' if item['name'] == '' else item['name']
+        }
+        result.append(data)
+
+    return result

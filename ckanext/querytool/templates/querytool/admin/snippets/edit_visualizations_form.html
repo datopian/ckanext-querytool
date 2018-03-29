@@ -5,6 +5,7 @@
 {% resource 'querytool/vendor/c3/c3.js' %}
 {% resource 'querytool/javascript/visualizations_settings.js' %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
+{% resource 'querytool/map' %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 {% if data %}
@@ -68,7 +69,15 @@
           data = item
         %}
       {% endif %}
+      {% if item.type == 'map'  %}
+        {% snippet 'ajax_snippets/map_fields.html',
+          n=item.order,
+          map = item,
+          dataset_name = data.dataset_name
+        %}
+      {% endif %}
     {% endfor %}
+    <input type="hidden" id="visualizations_dataset_name" value="{{ data.dataset_name }}"/>
   </fieldset>
 
 {% endblock %}

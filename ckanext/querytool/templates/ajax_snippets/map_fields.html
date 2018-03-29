@@ -1,0 +1,45 @@
+{% import 'macros/form.html' as form %}
+
+  <div id="map_item_{{ n }}" class="item visualization-fields-section">
+    <div class="chart-form-wrapper">
+      {% set resources = h.querytool_get_dataset_map_resources(dataset_name) %}
+      <div class="control-group control-select">
+        <label class="control-label" for="map_resource_{{ n }}">{{ _('Map resource') }}</label>
+        <div class="controls ">
+          <select id="map_resource_{{ n }}" name="map_resource_{{ n }}" required=required>
+          <option value="">&mdash; {{ _('Select map resource') }} &mdash;</option>
+          {% for resource in resources %}
+            <option value="{{ resource.value }}" {% if map %}{{ 'selected' if resource.value == map.map_resource }}{% endif %} >{{resource.text}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      {% set sizes = h.querytool_get_visualization_size() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="map_size_{{ n }}">{{ _('Map size') }}</label>
+        <div class="controls ">
+          <select id="map_size_{{ n }}" name="map_size_{{ n }}">
+          {% for size in sizes %}
+            <option value="{{ size.value }}" {% if map %}{{ 'selected' if size.value == map.size }}{% endif %} >{{size.text}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <ul class="inline text-right chart-actions">
+        <li class="remove"><a id="delete-item-btn" class="btn delete-tmap-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+      </ul>
+
+      <span class="grippy"></span>
+    </div>
+    <div class="chart-preview-wrapper">
+      {% if map %}
+        map_resource=map.map_resource
+      {% endif %}
+      {% snippet 'ajax_snippets/map_module.html',
+          n=n,
+          map_resource=map_resource
+      %}
+    </div>
+  </div>
