@@ -54,8 +54,8 @@
 
             // Empty filter value select
             if ($('#' + chart_filter_value_select_id + ' option').length > 0) {
-                    $('#' + chart_filter_value_select_id).find('option').not(':first').remove();
-                }
+                $('#' + chart_filter_value_select_id).find('option').not(':first').remove();
+            }
 
             if (chart_filter_name === '') {
                 $('#' + chart_filter_value_select_id).prop('required', false);
@@ -72,7 +72,7 @@
             }
         });
 
-        chart_filter_value_select.mousedown(function (event) {
+        chart_filter_value_select.mousedown(function(event) {
 
             var elem = $(this);
             var chart_filter_value_select_id = elem.attr('id');
@@ -132,7 +132,7 @@
         });
 
         //delete dynamicly created textbox section
-        $(document).on('click', '.delete-textbox-btn', function(el) {
+        $(document).on('click', '.delete-item-btn', function(el) {
             el.target.closest('.item').remove();
         });
 
@@ -192,14 +192,14 @@
                         handleItemsOrder();
 
                     });
-            } else if (visualization === 'image'){
+            } else if (visualization === 'image') {
                 ckan.sandbox().client.getTemplate('image_item.html', {
                         n: items
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
-                        handleItemsOrder();
                         handleImageItems(items);
+                        handleItemsOrder();
                     });
 
             }
@@ -217,6 +217,7 @@
             el.querySelector('.grippy').classList.remove('cursor-grabbing');
 
             handleItemsOrder();
+            window.location.hash = el.id;
         });
 
         // This function updates the order numbers for the form elements.
@@ -333,17 +334,18 @@
                     size.attr('id', 'text_box_size_' + order);
                     size.attr('name', 'text_box_size_' + order);
 
-                } else if (item.context.id.indexOf('image_item') >= 0){
+                } else if (item.context.id.indexOf('image_item') >= 0) {
                     var url = item.find('[name*=media_image_url_]');
                     var size = item.find('[id*=image_field_size_]');
+                    var upload = item.find('[name*=media_image_upload_]');
+                    var clear = item.find('[name*=media_clear_upload_]');
 
                     item.attr('id', 'image_item_' + order);
-
-                    url.attr('id', 'field-image-url');
                     url.attr('name', 'media_image_url_' + order);
-
                     size.attr('id', 'image_field_size_' + order);
                     size.attr('name', 'image_field_size_' + order);
+                    upload.attr('name', 'media_image_upload_' + order);
+                    clear.attr('name', 'media_clear_upload_' + order);
 
                 } else if (item.context.id.indexOf('map_item') >= 0){
                     var map_rsource_url = item.find('[id*=map_resource_]');
@@ -351,14 +353,12 @@
                     var map_module = item.find('[id*=map_module_]');
 
                     item.attr('id', 'map_item_' + order);
-
                     map_rsource_url.attr('id', 'map_resource_' + order);
                     map_rsource_url.attr('name', 'map_resource_' + order);
-
                     map_size.attr('id', 'map_size_' + order);
                     map_size.attr('name', 'map_size_' + order);
-
                     map_module.attr('id', 'map_module_' + order);
+
                 }
             });
         }
@@ -367,45 +367,60 @@
         window.handleItemsOrder = handleItemsOrder;
     });
 
-        function handleImageItems(item_id) {
-            var contentContainer = $('#content-settings-items');
-            var contentContainerChildren = contentContainer.children();
-            //TODO:set uploadsEnabled from helper
-            var uploadsEnabled = 'True';
-            var fieldImageUrl;
-            var fieldImageUpload;
-            var imageUploadModule;
-            var mediaImage;
-            var mediaUpload;
-            var image_url_inputs;
-            var image_upload_inputs;
-            var item = $('.image_item');
+    function handleImageItems(item_id) {
+        var contentContainer = $('#content-settings-items');
+        var contentContainerChildren = contentContainer.children();
+        //TODO:set uploadsEnabled from helper
+        var uploadsEnabled = 'True';
+        var fieldImageUrl;
+        var fieldImageUpload;
+        var imageUploadModule;
+        var mediaImage;
+        var mediaUpload;
+        var image_url_inputs;
+        var image_upload_inputs;
+        var item = $('.image_item');
 
-            if (item_id) {
-              mediaImage = item.find('#field-image-url');
-              mediaUpload = item.find('#field-image-upload');
-              fieldImageUrl = 'media_image_url_' + item_id;
-              fieldImageUpload = 'media_image_upload_' + item_id;
-              //mediaImage.attr('name', fieldImageUrl);
+        if (item_id) {
+            mediaImage = item.find('#field-image-url');
+            mediaUpload = item.find('#field-image-upload');
+            fieldImageUrl = 'media_image_url_' + item_id;
+            fieldImageUpload = 'media_image_upload_' + item_id;
 
 
-                   if (uploadsEnabled == 'True') {
+            if (uploadsEnabled == 'True') {
+
                 imageUploadModule = item.find('[data-module="custom-image-upload"]');
                 imageUploadModule.attr('data-module', 'image-upload');
                 imageUploadModule.attr('data-module-field_upload', fieldImageUpload);
                 imageUploadModule.attr('data-module-field_url', fieldImageUrl);
-                //mediaUpload.attr('name', fieldImageUpload);
-                ckan.module.initializeElement(imageUploadModule[0]);
-            }
+
+                mediaUpload.attr('name', fieldImageUpload);
             }
 
-if (item_id) {
-      image_url_inputs = $('[name=media_image_url_'+ item_id +']');
-      image_upload_inputs = $('[name=media_image_upload_'+ item_id +']');
-    } else {
-      image_url_inputs = $('[name*=media_image_url_]');
-      image_upload_inputs = $('[name*=media_image_upload_]');
+            mediaImage.attr('name', fieldImageUrl);
+
+            ckan.module.initializeElement(imageUploadModule[0]);
+        }
+
+        if (item_id) {
+            image_url_inputs = $('[name*=media_image_url_' + item_id + ']');
+            image_upload_inputs = $('[name*=media_image_upload_' + item_id + ']');
+        } else {
+            image_url_inputs = $('[name*=media_image_url_]');
+            image_upload_inputs = $('[name*=media_image_upload_]');
+        }
+
+
+        image_upload_inputs.on('change', function onMediaImageChange() {
+            var elem = $(this);
+            var image_upload_id = elem.attr('name');
+            var image_id = image_upload_id.substr(image_upload_id.lastIndexOf('_') + 1);
+            var imageUpload = $('#image_upload_' + image_id);
+
+            imageUpload.val(elem.val());
+        });
+
     }
-          }
 
 })($);

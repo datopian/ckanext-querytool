@@ -1,107 +1,15 @@
 <div id="image_item_{{ n }}" class="item image_item visualization-fields-section">
-  {% set uploads_enabled = h.uploads_enabled() %}
-
-  {% if data %}
-    {% set n =  data.order | string %}
-    {% set media_type =  data.media_type %}
-    {% set image_url =  data.url %}
-
-    {% set media_image_url = 'media_image_url_' + n %}
-    {% set media_image_upload = 'media_image_upload_' + n %}
-    {% set media_clear_upload = 'media_clear_upload_' + n %}
-
-    {% set is_upload = image_url and not image_url.startswith('http') %}
-    {% set is_url = image_url and image_url.startswith('http') %}
-
-
-    {% if uploads_enabled %}
-    <p>{{data.size}}</p>
-      <div
-        class="image-upload"
-        data-module="image-upload"
-        data-module-is_url="{{ is_url or 'false' }}"
-        data-module-is_upload="{{ is_upload or 'false' }}"
-        data-module-field_url="{{ media_image_url }}"
-        data-module-field_upload="{{ media_image_upload }}"
-        data-module-field_clear="{{ media_clear_upload }}"
-        data-module-upload_label="Image">
-          <div class="control-group control-full">
-            <label class="control-label" for="field-image-url">Image URL</label>
-            <div class="controls ">
-              <input id="field-image-url" type="text" name="{{ media_image_url }}" value="{{ image_url }}" placeholder="http://example.com/my-image.jpg">
-            </div>
-          </div>
-          <div class="control-group control-full">
-            <label class="control-label" for="field-image-upload">Image</label>
-            <div class="controls ">
-              <input id="field-image-upload" type="file" name="{{ media_image_upload }}" value="{{ image_url }}" placeholder="">
-            </div>
-          </div>
-      </div>
-    {% else %}
-      <div class="control-group control-full">
-        <label class="control-label" for="field-image-url">Image URL</label>
-        <div class="controls ">
-          <input id="field-image-url" type="text" name="{{ media_image_url }}" value="{{ image_url }}" placeholder="http://example.com/my-image.jpg">
-        </div>
-      </div>
-    {% endif %}
-     {% set sizes = h.querytool_get_visualization_size() %}
-      <div class="control-group control-select">
-        <label class="control-label" for="image_field_size_{{ n }}">{{ _('Chart size') }}</label>
-        <div class="controls ">
-          <select id="image_field_size_{{ n }}" name="image_field_size_{{ n }}">
-          {% for size in sizes %}
-            <option value="{{ size.value }}" {% if data %}{{ 'selected' if size.value == data.size }}{% endif %} >{{size.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
-      </div>
-  {% else %}
-  {% if uploads_enabled %}
-      <div
-        class="image-upload"
-        data-module="custom-image-upload"
-        data-module-is_url="false"
-        data-module-is_upload="false"
-        data-module-field_url="media_image_url_{{ n }}"
-        data-module-field_upload="media_image_upload_{{ n }}"
-        data-module-field_clear="media_clear_upload_{{ n }}"
-        data-module-upload_label="Image">
-          <div class="control-group control-full">
-            <label class="control-label" for="field-image-url">Image URL</label>
-            <div class="controls ">
-              <input id="field-image-url" type="text" name="media_image_url_{{ n }}" value="" placeholder="http://example.com/my-image.jpg">
-            </div>
-          </div>
-          <div class="control-group control-full">
-            <label class="control-label" for="field-image-upload">Image</label>
-            <div class="controls ">
-              <input id="field-image-upload" type="file" name="media_image_upload_{{ n }}" value="" placeholder="">
-            </div>
-          </div>
-      </div>
-    {% else %}
-      <div class="control-group control-full">
-        <label class="control-label" for="field-image-url">Image URL</label>
-        <div class="controls ">
-          <input id="field-image-url" type="text" name="media_image_url_{{ n }}" value="" placeholder="http://example.com/my-image.jpg">
-        </div>
-      </div>
+  <div class="item-wrapper">
+   {% set uploads_enabled = h.uploads_enabled() %}
+   {% if data %}
+        {% snippet 'querytool/admin/snippets/image_upload.html', data=data,uploads_enabled=uploads_enabled,n=n  %}
+   {% else %}
+        {% snippet 'querytool/admin/snippets/image_upload_display.html', uploads_enabled=uploads_enabled,n=n  %}
    {% endif %}
-      {% set sizes = h.querytool_get_visualization_size() %}
-      <div class="control-group control-select">
-        <label class="control-label" for="image_field_size_{{ n }}">{{ _('Chart size') }}</label>
-        <div class="controls ">
-          <select id="image_field_size_{{ n }}" name="image_field_size_{{ n }}">
-          {% for size in sizes %}
-            <option value="{{ size.value }}"  >{{size.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
-      </div>
-   {% endif %}
-
-
-  <span class="grippy"></span>
+   <ul class="inline text-right chart-actions">
+      <li class="remove"><a id="delete-textbox-btn" class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+   </ul>
+   <input type="hidden" id="image_upload_{{ n }}" name="image_upload_{{ n }}" value="{{ image_upload }}"/>
+   <span class="grippy"></span>
+  </div>
 </div>
