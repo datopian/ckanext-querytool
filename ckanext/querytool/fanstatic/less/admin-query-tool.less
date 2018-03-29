@@ -46,8 +46,10 @@ span.grippy.cursor-grabbing {
   counter-reset: visualizations;
   max-width: 100%;
   .item {
-    position: relative;
     counter-increment: visualizations;
+    &.image_item{
+      flex-direction: column;
+    }
     &.gu-transit{
       max-height: @grid-gutter-width*5;
       overflow: hidden;
@@ -62,6 +64,9 @@ span.grippy.cursor-grabbing {
       left: 0;
       content: counter(visualizations);
     }
+  }
+  .item-wrapper{
+    position: relative;
   }
 }
 

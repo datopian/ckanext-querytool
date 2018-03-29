@@ -1,6 +1,7 @@
 # encoding: utf-8
 import logging
 import json
+import cgi
 from operator import itemgetter
 
 import ckan.lib.base as base
@@ -10,6 +11,7 @@ from ckan.common import config, c, _
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 import ckanext.querytool.helpers as helpers
+import ckan.lib.uploader as uploader
 from ckan.common import response, request
 
 
@@ -346,8 +348,26 @@ class QueryToolController(base.BaseController):
                     id = k.split('_')[-1]
                     image['type'] = 'image'
                     image['order'] = int(id)
-                    image['url'] = \
-                        data['media_image_url_{}'.format(id)]
+
+                    image_url = data['media_image_url_{}'.format(id)]
+
+                    if h.uploads_enabled():
+                        image_upload = data['media_image_upload_{}'.format(id)]
+                        if isinstance(image_upload, cgi.FieldStorage):
+                            upload = uploader.get_uploader('vs', image_url)
+                            upload.update_data_dict(data,
+                                                    'media_image_url_{}'
+                                                    .format(
+                                                        id),
+                                                    'media_image_upload_{}'
+                                                    .format(
+                                                        id),
+                                                    'False')
+                            upload.upload(uploader.get_max_image_size())
+                            image_url = upload.filename
+
+                        image['url'] = image_url
+
                     image['size'] = \
                         data['image_field_size_{}'.format(id)]
 
@@ -488,6 +508,15 @@ class QueryToolController(base.BaseController):
                             visualization['filter_value'] = \
                                 params.get('{}_chart_filter_value_{}'.
                                            format(q_name, id))
+
+            for image in q_item['visualizations']:
+                if image['type'] == 'image':
+                    is_upload = image['url'] and not image[
+                        'url'].startswith('http')
+
+                    if is_upload:
+                        image['url'] = '{0}/uploads/vs/{1}'.format(
+                            toolkit.request.host_url, image['url'])
 
             related_sql_string = helpers.create_query_str(
                 q_item.get('chart_resource'),

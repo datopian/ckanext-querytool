@@ -306,6 +306,19 @@ body {
     padding: @grid-gutter-width;
     overflow-y: auto;
     word-wrap: break-word;
+    &.image {
+      padding: 0;
+      .item-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100%;
+      }
+      img{
+        margin: auto;
+        max-width: 100%;
+      }
+    }
     &.text_box {
       background: transparent;
       color: @color-white;
