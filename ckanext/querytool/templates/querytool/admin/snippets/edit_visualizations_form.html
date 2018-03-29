@@ -59,7 +59,7 @@
       {% if item.type == 'text_box'  %}
         {% snippet 'ajax_snippets/text_box_item.html',
           n=item.order,
-          data = item
+          box=item
         %}
       {% endif %}
       {% if item.type == 'image'  %}
