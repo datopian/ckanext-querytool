@@ -48,6 +48,9 @@ span.grippy.cursor-grabbing {
   .item {
     position: relative;
     counter-increment: visualizations;
+    &.image_item{
+      flex-direction: column;
+    }
     &.gu-transit{
       max-height: @grid-gutter-width*5;
       overflow: hidden;
