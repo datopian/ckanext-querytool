@@ -206,6 +206,7 @@
             el.querySelector('.grippy').classList.remove('cursor-grabbing');
 
             handleItemsOrder();
+            window.location.hash = el.id;
         });
 
         // This function updates the order numbers for the form elements.
