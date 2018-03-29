@@ -3,14 +3,14 @@
    {% if box %}
      {% set text_description = box.description %}
   {% endif %}
-  <div id="text_box_{{ number }}" class="item text-boxs-section text_box visualization-fields-section">
+  <div id="text_box_{{ n }}" class="item text-boxs-section text_box visualization-fields-section">
     <div class="item-wrapper">
-      {{ form.markdown('text_box_description_' ~ number, id='text_box_description_' ~ number, label=_('Content'), placeholder=_('Description'), value=text_description) }}
+      {{ form.markdown('text_box_description_' ~ n, id='text_box_description_' ~ n, label=_('Content'), placeholder=_('Description'), value=text_description) }}
       {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
-        <label class="control-label" for="text_box_size_{{ number }}">{{ _('Text box size') }}</label>
+        <label class="control-label" for="text_box_size_{{ n }}">{{ _('Text box size') }}</label>
         <div class="controls ">
-          <select id="text_box_size_{{ number }}" name="text_box_size_{{ number }}">
+          <select id="text_box_size_{{ n }}" name="text_box_size_{{ n }}">
           {% for size in sizes %}
             <option value="{{ size.value }}" {% if box %}{{ 'selected' if size.value == box.size }}{% endif %} >{{size.text}}</option>
           {% endfor %}
