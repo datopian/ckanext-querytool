@@ -349,7 +349,7 @@ class QueryToolController(base.BaseController):
                     image['type'] = 'image'
                     image['order'] = int(id)
 
-                    image_url =  data['media_image_url_{}'.format(id)]
+                    image_url = data['media_image_url_{}'.format(id)]
 
                     if h.uploads_enabled():
                         image_upload = data['media_image_upload_{}'.format(id)]
@@ -517,7 +517,6 @@ class QueryToolController(base.BaseController):
                     if is_upload:
                         image['url'] = '{0}/uploads/vs/{1}'.format(
                             toolkit.request.host_url, image['url'])
-
 
             related_sql_string = helpers.create_query_str(
                 q_item.get('chart_resource'),
