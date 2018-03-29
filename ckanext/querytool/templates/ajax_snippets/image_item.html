@@ -1,4 +1,5 @@
 <div id="image_item_{{ n }}" class="item image_item visualization-fields-section">
+  <div class="item-wrapper">
    {% set uploads_enabled = h.uploads_enabled() %}
    {% if data %}
         {% snippet 'querytool/admin/snippets/image_upload.html', data=data,uploads_enabled=uploads_enabled,n=n  %}
@@ -10,4 +11,5 @@
    </ul>
    <input type="hidden" id="image_upload_{{ n }}" name="image_upload_{{ n }}" value="{{ image_upload }}"/>
    <span class="grippy"></span>
+  </div>
 </div>
