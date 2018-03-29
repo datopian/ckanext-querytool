@@ -356,9 +356,11 @@ class QueryToolController(base.BaseController):
                         if isinstance(image_upload, cgi.FieldStorage):
                             upload = uploader.get_uploader('vs', image_url)
                             upload.update_data_dict(data,
-                                                    'media_image_url_{}'.format(
+                                                    'media_image_url_{}'
+                                                    .format(
                                                         id),
-                                                    'media_image_upload_{}'.format(
+                                                    'media_image_upload_{}'
+                                                    .format(
                                                         id),
                                                     'False')
                             upload.upload(uploader.get_max_image_size())
