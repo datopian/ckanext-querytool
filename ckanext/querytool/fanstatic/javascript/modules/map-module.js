@@ -38,7 +38,7 @@ ckan.module('querytool_map', function($, _) {
             var zoom = 2;
 
             this.map = new L.Map(elementId, {
-                scrollWheelZoom: true,
+                scrollWheelZoom: false,
                 inertiaMaxSpeed: 200
             }).setView([lat, lng], zoom);
 
