@@ -1,11 +1,6 @@
 <div id="image_item_{{ n }}" class="item image_item visualization-fields-section">
   <div class="item-wrapper">
-   {% set uploads_enabled = h.uploads_enabled() %}
-   {% if data %}
-        {% snippet 'querytool/admin/snippets/image_upload.html', data=data,uploads_enabled=uploads_enabled,n=n  %}
-   {% else %}
-        {% snippet 'querytool/admin/snippets/image_upload_display.html', uploads_enabled=uploads_enabled,n=n  %}
-   {% endif %}
+        {% snippet 'querytool/admin/snippets/image_upload.html', data=data,n=n  %}
    <ul class="inline text-right chart-actions">
       <li class="remove"><a id="delete-textbox-btn" class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
    </ul>
