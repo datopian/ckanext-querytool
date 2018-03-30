@@ -306,6 +306,9 @@ body {
     padding: @grid-gutter-width;
     overflow-y: auto;
     word-wrap: break-word;
+    &.map{
+      padding: 0;
+    }
     &.image {
       padding: 0;
       .item-content {
@@ -388,6 +391,7 @@ body {
       margin-bottom: 0;
       padding-bottom: 0;
     }
+    &.leaflet-container,
     &.c3 {
       min-height: 100%;
     }
