@@ -111,8 +111,6 @@ def define_query_tool_table():
                                     default=u''),
                              Column('dataset_name', types.UnicodeText,
                                     nullable=False),
-                             Column('map_resource', types.UnicodeText,
-                                    nullable=False),
                              Column('chart_resource', types.UnicodeText,
                                     nullable=False),
                              Column('filters', types.UnicodeText,
