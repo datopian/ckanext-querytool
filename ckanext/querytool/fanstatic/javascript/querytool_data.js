@@ -281,7 +281,6 @@
 
         var datasetField = $('#field-datasets');
         var chartResourceSelect = $('#chart_resource');
-        var mapResourceSelect = $('#map_resource');
         var yAxisColumnsResults = $('#y-axis-columns-results');
         var yAxisColumnsNotice = $('#y-axis-columns-notice');
         var yAxisColumnsContainer = $('#y-axis-columns-container');
@@ -391,10 +390,7 @@
         function get_dataset_resources(dataset_name) {
 
             chartResourceSelect.attr('disabled', 'true');
-            mapResourceSelect.attr('disabled', 'true');
-
             chartResourceSelect.empty();
-            mapResourceSelect.empty();
 
             api.get('package_show', {
                     id: dataset_name
@@ -409,16 +405,11 @@
                     });
 
                     chartResourceSelect.removeAttr('disabled');
-                    mapResourceSelect.removeAttr('disabled');
-
                     chartResourceSelect.append($('<option></option>').attr('value', '').text('-- Choose resource --'));
-                    mapResourceSelect.append($('<option></option>').attr('value', '').text('-- Choose resource --'));
 
                     $.each(dataset_resources, function(i, res) {
                         var name = res.name || 'Unnamed resource';
                         chartResourceSelect.append($('<option></option>')
-                            .attr('value', res.id).text(name));
-                        mapResourceSelect.append($('<option></option>')
                             .attr('value', res.id).text(name));
                     });
                 });
