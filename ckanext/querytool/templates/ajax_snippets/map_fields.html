@@ -1,6 +1,6 @@
 {% import 'macros/form.html' as form %}
 
-  <div id="map_item_{{ n }}" class="item visualization-fields-section">
+  <div id="map_item_{{ n }}" class="item visualization-fields-section map_item">
     <div class="item-wrapper">
       {% set resources = h.querytool_get_dataset_map_resources(dataset_name) %}
       <div class="control-group control-select">
