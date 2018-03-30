@@ -4,7 +4,7 @@ ckan.module('querytool_map', function($, _) {
     return {
         initialize: function() {
 
-            this.initLeaflet();
+            this.initLeaflet.call(this);
             this.mapResource = this.el.parent().parent().find('[id*=map_resource_]');
             this.mapResource.change(this.updateMap.bind(this))
 
@@ -22,7 +22,10 @@ ckan.module('querytool_map', function($, _) {
             var mapResourceVal = this.mapResource.val();
 
             if (this.options.map_resource != mapResourceVal) {
-                this.map.removeLayer(this.geoL);
+
+                if (this.map.hasLayer(this.geoL)) {
+                    this.map.removeLayer(this.geoL);
+                }
                 this.options.map_resource = mapResourceVal;
                 this.initializeMarkers.call(this, this.options.map_resource);
             }
@@ -59,7 +62,6 @@ ckan.module('querytool_map', function($, _) {
 
         },
         initializeMarkers: function(mapURL) {
-
 
             var smallIcon = L.icon({
                 iconUrl: '/base/images/marker-icon.png',
