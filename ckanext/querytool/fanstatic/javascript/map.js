@@ -14,7 +14,7 @@ this.ckan.querytool.map = this.ckan.querytool.map || {};
 
 
 
-    fitBounds = true;
+    var fitBounds = true;
     initLeaflet(elementId, 39, 40, 2);
 
 
