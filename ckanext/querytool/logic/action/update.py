@@ -36,7 +36,8 @@ def querytool_update(context, data_dict):
         raise toolkit.ValidationError(errors)
 
     querytool = CkanextQueryTool.get(name=data_dict['querytool'])
-    visualizations = CkanextQueryToolVisualizations.get(name=data_dict['querytool'])
+    visualizations = \
+        CkanextQueryToolVisualizations.get(name=data_dict['querytool'])
 
     # if name is not changed don't insert in visualizations table
     is_changed = False
