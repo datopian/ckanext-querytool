@@ -138,6 +138,7 @@ class QueryToolController(base.BaseController):
             _querytool = {}
 
         if toolkit.request.method == 'POST' and not data:
+
             data = dict(toolkit.request.POST)
             filters = []
             y_axis_columns = []

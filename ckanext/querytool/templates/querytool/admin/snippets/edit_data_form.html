@@ -103,9 +103,6 @@ Example usage:
     {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
   {% endblock %}
 
-  {% block querytool_choose_map_resource %}
-    {{ form.select('map_resource', label=_('Map resoure'), options=dataset_resources, selected=map_resource, error=errors.map_resource, attrs={'required': 'required'}) }}
-  {% endblock %}
 
   <legend>{{ _('Y Axis columns') }}</legend>
   {% set columns = h.querytool_get_resource_columns(data.chart_resource) %}
