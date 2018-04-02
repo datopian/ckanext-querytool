@@ -23,7 +23,10 @@
   {{ form.errors(error_summary) }}
   {% endblock %}
   {% block charts %}
-  <legend>{{ _('Data visualizations') }}</legend>
+  <legend class="sticky-title">{{ _('Data visualizations') }}
+    <button id="save-visualization-btn" type="submit" class="pull-right btn btn-success" name="save">{{ _('Save') }}</button>
+  </legend>
+
 
   {% if data.visualizations %}
     {% set selected_y_axis_column = data.y_axis_column %}
@@ -82,9 +85,9 @@
 
 {% endblock %}
 
-<div class="form-actions">
+<!-- <div class="form-actions">
   <div class="wrap-btn-save-visualizations">
     <button id="save-visualization-btn" type="submit" class="btn btn-success" name="save">{{ _('Save') }}</button>
   </div>
-</div>
+</div> -->
 </form>
