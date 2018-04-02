@@ -114,9 +114,9 @@
         var map_resource = vizForm.data('mapResource');
         var chooseYAxisColumn = $('#choose_y_axis_column');
 
-        var charts = $('.chart_field');
+        var viz_item = $('.item');
         // Only disable Save button if there aren't visualizations
-        if (charts.length === 0) {
+        if (viz_item.length === 0) {
             $('#save-visualization-btn').attr('disabled', 'true');
         }
 
@@ -134,6 +134,7 @@
         //delete dynamicly created textbox section
         $(document).on('click', '.delete-item-btn', function(el) {
             el.target.closest('.item').remove();
+            enableSave();
         });
 
         var createVisualization = $('#add-visualization-btn');
@@ -163,13 +164,12 @@
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
-                        $('#save-visualization-btn').attr('disabled', false);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
                         handleRenderedChartFilters(items);
                         handleItemsOrder();
-
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
+                        enableSave();
                     });
             } else if (visualization === 'map') {
                 ckan.sandbox().client.getTemplate('map_fields.html', {
@@ -179,7 +179,7 @@
                         var item = visualizationItems.prepend(data);
                         ckan.module.initializeElement(item.find('div[data-module=querytool_map]')[0]);
                         handleItemsOrder();
-
+                        enableSave();
                     });
             } else if (visualization == 'text-box') {
                 ckan.sandbox().client.getTemplate('text_box_item.html', {
@@ -188,7 +188,7 @@
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
                         handleItemsOrder();
-
+                        enableSave();
                     });
             } else if (visualization === 'image') {
                 ckan.sandbox().client.getTemplate('image_item.html', {
@@ -198,8 +198,8 @@
                         var item = visualizationItems.prepend(data);
                         handleImageItems(items);
                         handleItemsOrder();
+                        enableSave();
                     });
-
             }
 
         });
@@ -218,6 +218,13 @@
             window.location.hash = el.id;
             window.scrollTo(0, el.offsetTop);
         });
+
+        //enable or disable save button
+        function enableSave(){
+            var isEmpty = $('#visualization-settings-items').find('.item');
+            var isDisabled = (isEmpty.length >= 1);
+            $('#save-visualization-btn').attr('disabled', !isDisabled);
+        }
 
         // This function updates the order numbers for the form elements.
         function handleItemsOrder() {

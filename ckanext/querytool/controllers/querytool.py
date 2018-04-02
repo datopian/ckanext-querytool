@@ -388,16 +388,12 @@ class QueryToolController(base.BaseController):
                         data['map_size_{}'.format(id)]
 
                     maps.append(map_item)
-                    print map_item
 
-            if any(visualizations):
-                vis = visualizations + text_boxes + images + maps
-                _visualization_items['visualizations'] = json.dumps(vis)
+            vis = visualizations + text_boxes + images + maps
+            _visualization_items['visualizations'] = json.dumps(vis)
+            if visualizations:
                 _visualization_items['y_axis_column'] =\
                     visualizations[0].get('y_axis')
-
-            else:
-                _visualization_items['visualizations'] = ''
 
             try:
                 junk = _get_action('querytool_visualizations_update',

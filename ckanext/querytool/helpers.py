@@ -345,29 +345,6 @@ def get_resource_columns(res_id):
     return fields
 
 
-def get_available_related_querytools():
-
-    session = m.Session
-
-    query = session.query(CkanextQueryTool,
-                          CkanextQueryToolVisualizations) \
-        .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
-               CkanextQueryToolVisualizations.ckanext_querytool_id)) \
-        .filter(CkanextQueryTool.type == 'related'). \
-        filter(CkanextQueryToolVisualizations.visualizations != '')
-
-    result = query.all()
-    querytools_list = []
-
-    if result and len(result) > 0:
-        for item in result:
-            querytool = {}
-            for _ in item:
-                querytool.update(table_dictize(_, _get_context()))
-            querytools_list.append(querytool)
-    return querytools_list
-
-
 def get_uuid():
     return uuid.uuid4()
 
