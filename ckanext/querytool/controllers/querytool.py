@@ -382,6 +382,8 @@ class QueryToolController(base.BaseController):
                     map_item['order'] = int(id)
                     map_item['map_resource'] = \
                         data['map_resource_{}'.format(id)]
+                    map_item['main_property'] = \
+                        data['map_main_property_{}'.format(id)]
                     map_item['size'] = \
                         data['map_size_{}'.format(id)]
 
@@ -420,7 +422,6 @@ class QueryToolController(base.BaseController):
         data['map_resource'] = _querytool.get('map_resource')
         data['chart_resource'] = _querytool.get('chart_resource')
         data['y_axis_columns'] = _querytool.get('y_axis_columns')
-        data['dataset_name'] = _querytool.get('dataset_name')
 
         data['y_axis_columns'] = data['y_axis_columns'].split(',')
 

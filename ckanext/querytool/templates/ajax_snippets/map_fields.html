@@ -2,7 +2,7 @@
 
   <div id="map_item_{{ n }}" class="item map visualization-fields-section">
     <div class="item-wrapper">
-      {% set resources = h.querytool_get_dataset_map_resources(dataset_name) %}
+      {% set resources = h.querytool_get_geojson_resources() %}
       <div class="control-group control-select">
         <label class="control-label" for="map_resource_{{ n }}">{{ _('Map resource') }}</label>
         <div class="controls ">
@@ -11,6 +11,26 @@
           {% for resource in resources %}
             <option value="{{ resource.value }}" {% if map %}{{ 'selected' if resource.value == map.map_resource }}{% endif %} >{{resource.text}}</option>
           {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      {% if map %}
+        {% set map_properties = h.querytool_get_geojson_properties(map.map_resource) %}
+      {% else %}
+        {% set map_properties = [] %}
+      {% endif %}
+
+      <div class="control-group control-select">
+        <label class="control-label" for="map_main_property_{{ n }}">{{ _('Main property') }}</label>
+        <div class="controls ">
+          <select id="map_main_property_{{ n }}" name="map_main_property_{{ n }}" required=required>
+          <option value="">&mdash; {{ _('Select map property') }} &mdash;</option>
+          {% if map_properties %}
+            {% for property in map_properties %}
+              <option value="{{ property.value }}" {% if map %}{{ 'selected' if property.value == map.main_property }}{% endif %} >{{property.text}}</option>
+            {% endfor %}
+          {% endif %}
           </select>
         </div>
       </div>
@@ -36,10 +56,12 @@
     <div class="preview-wrapper">
       {% if map %}
         {% set map_resource=map.map_resource %}
+        {% set main_property=map.main_property %}
       {% endif %}
       {% snippet 'ajax_snippets/map_module.html',
           n=n,
-          map_resource=map_resource
+          map_resource=map_resource,
+          main_property=main_property
       %}
     </div>
   </div>

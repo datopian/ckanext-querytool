@@ -107,8 +107,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'querytool_get_visualization_size':
                 helpers.get_visualization_size,
             'querytool_get_uuid': helpers.get_uuid,
-            'querytool_get_dataset_map_resources':
-                helpers.get_dataset_map_resources
+            'querytool_get_geojson_resources':
+                helpers.get_geojson_resources,
+            'querytool_get_geojson_properties':
+                helpers.get_geojson_properties
         }
 
     # IAuthFunctions

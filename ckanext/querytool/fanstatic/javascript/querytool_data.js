@@ -18,7 +18,6 @@
                     async: false
                 });
             }
-            console.log('Response ' + $.post(url, JSON.stringify(data), 'json'));
             return $.post(url, JSON.stringify(data), 'json');
         }
     };

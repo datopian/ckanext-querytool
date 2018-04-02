@@ -144,7 +144,6 @@
             var visualization = $('#item_type').val();
             var item = $('.item');
             var items = item.length + 1;
-            var dataset_name = $('#visualizations_dataset_name').val();
 
             if (visualization === 'chart') {
                 var axisYValue = chooseYAxisColumn.val();
@@ -174,8 +173,7 @@
                     });
             } else if (visualization === 'map') {
                 ckan.sandbox().client.getTemplate('map_fields.html', {
-                        n: items,
-                        dataset_name: dataset_name
+                        n: items
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -356,13 +354,16 @@
                     clear.attr('name', 'media_clear_upload_' + order);
 
                 } else if (item.context.id.indexOf('map_item') >= 0){
-                    var map_rsource_url = item.find('[id*=map_resource_]');
+                    var map_resource_url = item.find('[id*=map_resource_]');
+                    var map_main_property = item.find('[id*=map_main_property_]');
                     var map_size = item.find('[id*=map_size_]');
                     var map_module = item.find('[id*=map_module_]');
 
                     item.attr('id', 'map_item_' + order);
-                    map_rsource_url.attr('id', 'map_resource_' + order);
-                    map_rsource_url.attr('name', 'map_resource_' + order);
+                    map_resource_url.attr('id', 'map_resource_' + order);
+                    map_resource_url.attr('name', 'map_resource_' + order);
+                    map_main_property.attr('id', 'map_main_property_' + order);
+                    map_main_property.attr('name', 'map_main_property_' + order);
                     map_size.attr('id', 'map_size_' + order);
                     map_size.attr('name', 'map_size_' + order);
                     map_module.attr('id', 'map_module_' + order);

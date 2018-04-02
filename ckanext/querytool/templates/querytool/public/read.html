@@ -136,7 +136,8 @@
         {% if item.type == 'map'  %}
           {% snippet 'ajax_snippets/map_module.html',
             n=item.order,
-            map_resource=item.map_resource
+            map_resource=item.map_resource,
+            main_property=item.main_property
           %}
         {% endif %}
       </div>
