@@ -187,3 +187,10 @@ def querytool_download_data(context, data_dict):
 @toolkit.side_effect_free
 def get_available_querytools(context, data_dict):
     return h.get_available_related_querytools()
+
+
+@toolkit.side_effect_free
+def querytool_get_geojson_properties(context, data_dict):
+    map_resource_url = data_dict.get('map_resource')
+
+    return h.get_geojson_properties(map_resource_url)

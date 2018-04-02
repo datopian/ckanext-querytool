@@ -2,6 +2,7 @@
 import logging
 import json
 import uuid
+import urllib
 
 try:
     # CKAN 2.7 and later
@@ -371,24 +372,37 @@ def get_uuid():
     return uuid.uuid4()
 
 
-def get_dataset_map_resources(dataset_name):
+def get_geojson_resources():
+    data = {
+        'query': 'format:geojson',
+        'order_by': 'name',
+    }
+    result = _get_action('resource_search', data)
+    return [{'text': r['name'], 'value': r['url']}
+            for r in result.get('results', [])]
 
-    resources = []
+
+def get_geojson_properties(url):
+    # TODO handle if no url
+
+    r = urllib.urlopen(url)
+
+    data = unicode(r.read(), errors='ignore')
+    geojson = json.loads(data)
+
     result = []
+    exclude_keys = [
+        'marker-symbol',
+        'marker-color',
+        'marker-size',
+        'stroke',
+        'stroke-width',
+        'stroke-opacity',
+        'fill',
+        'fill-opacity'
+    ]
 
-    package = toolkit.get_action('package_show')({}, {'id': dataset_name})
-    if not package['num_resources'] > 0:
-        return result
-
-    resources.\
-        extend(filter(lambda r: r['format'].lower() in ['geojson', 'gjson'],
-                      package['resources']))
-
-    for item in resources:
-        data = {
-            'value': item['url'],
-            'text': 'UNNAMED' if item['name'] == '' else item['name']
-        }
-        result.append(data)
-
+    for k, v in geojson.get('features')[0].get('properties').iteritems():
+        if k not in exclude_keys and type(v) is int:
+            result.append({'value': k, 'text': k})
     return result
