@@ -100,7 +100,7 @@ Example usage:
   {% endif %}
 
   {% block querytool_choose_chart_resource %}
-    {{ form.select('chart_resource', label=_('Chart resource'), options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
+    {{ form.select('chart_resource', label=_('Chart resources'), options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
   {% endblock %}
 
 

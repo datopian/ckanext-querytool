@@ -317,9 +317,10 @@ def get_dataset_resources(dataset_name):
         dataset = _get_action('package_show', {'id': dataset_name})
 
         for res in dataset.get('resources'):
-            dataset_resources.append({
-                'value': res.get('id'), 'text': res.get('name')
-            })
+            if res['format'].lower() != 'geojson':
+                dataset_resources.append({
+                    'value': res.get('id'), 'text': res.get('name')
+                })
 
     return dataset_resources
 
