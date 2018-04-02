@@ -45,20 +45,44 @@ label {
   font-weight: 400;
 }
 
-.btn-large{
-  .caret{
+.btn-large {
+  .caret {
     margin-top: @grid-gutter-width/2 - 2;
     margin-left: @grid-gutter-width/4;
   }
 }
 
-.btn-chart-download {
-  cursor: pointer;
-  padding: @grid-gutter-width/2 @grid-gutter-width;
+.btn-download {
+  .btn {
+    font-family: inherit;
+  }
 }
 
-.form-actions{
-  .btn{
+.btn-update{
+  font-size: @base-font-size + 10;
+  padding: 0 @grid-gutter-width*2;
+  border-color: transparent;
+  font-weight: 500;
+  font-family: inherit;
+}
+.btn-filter-toggle {
+  &.on {
+    border-color: @color-success;
+    background-color: @color-success;
+  }
+}
+
+.btn-chart-download {
+  position: absolute;
+  cursor: pointer;
+  padding: @grid-gutter-width/2;
+  top: 0px;
+  right: 0px;
+  margin-right: 2px;
+}
+
+.form-actions {
+  .btn {
     margin-left: @grid-gutter-width/2;
   }
 }
