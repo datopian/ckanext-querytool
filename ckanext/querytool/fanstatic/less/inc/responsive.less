@@ -2,12 +2,10 @@
 
 @media (min-width: @screen-lg-desktop) {
   .wrap-btn-save-visualizations {
+    z-index: 99999;
     position: fixed;
-    padding: @grid-gutter-width/2;
-    background: @color-neutral-pale;
-    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
-    top: @grid-gutter-width*9 + 20;
-    right: @grid-gutter-width*20;
+    top: @grid-gutter-width*10.5;
+    right: @grid-gutter-width*2.2;
     text-align: right;
     .btn {
       &.btn-success {
@@ -31,6 +29,15 @@
         bottom: -@grid-gutter-width/4;
       }
     }
+  }
+  .preview-wrapper {
+    margin-left: @grid-gutter-width;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .visualization-fields-section {
+    padding-left: @grid-gutter-width*3;
   }
 }
 

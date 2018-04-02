@@ -1,5 +1,6 @@
 @import "inc/variables.less";
 @import "inc/mixins.less";
+
 span.grippy {
   position: absolute;
   top: @grid-gutter-width;
@@ -73,7 +74,20 @@ span.grippy.cursor-grabbing {
     }
   }
   .item-wrapper {
+    flex-shrink: 1;
     position: relative;
+  }
+  .preview-wrapper {
+    flex-grow: 2;
+    .item-content {
+      max-width: 70%;
+    }
+  }
+}
+
+.text_box{
+  .item-wrapper{
+    min-width: 100%;
   }
 }
 
@@ -81,6 +95,7 @@ span.grippy.cursor-grabbing {
   overflow: hidden;
   max-height: @grid-gutter-width*5;
   align-items: flex-start;
+  cursor: move;
 }
 
 .gu-unselectable {
@@ -90,5 +105,18 @@ span.grippy.cursor-grabbing {
       overflow: hidden;
       align-items: flex-start;
     }
+  }
+}
+
+.sticky-title{
+  position: sticky;
+  top: 0;
+  padding: @grid-gutter-width/2 0;
+  background: fade(@color-white, 90%);
+  z-index: 99999;
+
+  .btn{
+    position: relative;
+    top: @grid-gutter-width/4;
   }
 }
