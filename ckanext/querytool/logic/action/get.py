@@ -1,5 +1,7 @@
 import logging
+import ckan.model as m
 
+from ckan.common import c
 from ckan.plugins import toolkit
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
@@ -9,8 +11,6 @@ from ckanext.querytool.lib.file_writer_service import FileWriterService
 
 log = logging.getLogger(__name__)
 
-import ckan.model as m
-from ckan.common import c
 
 def _get_context():
     return {
@@ -19,6 +19,7 @@ def _get_context():
         'user': c.user or c.author,
         'auth_user_obj': c.userobj
     }
+
 
 @toolkit.side_effect_free
 def querytool_list(context, data_dict):
@@ -195,7 +196,7 @@ def querytool_download_data(context, data_dict):
 
 @toolkit.side_effect_free
 def get_available_querytools(context, data_dict):
-    selected_query =  data_dict['exclude']
+    selected_query = data_dict['exclude']
     session = m.Session
 
     query = session.query(CkanextQueryTool,
