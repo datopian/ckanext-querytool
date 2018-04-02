@@ -8,24 +8,17 @@
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
 {% block page_header_content %}
+{% if querytools[0].description %}
 <div class="container-fluid">
-<div class="page-header">
   <div class="row-fluid">
     <div class="span8 offset2">
-      {% block page_header_title %}
-      {% if querytools[0].title %}
-        <h1 class="querytool-title">{{ querytools[0].title }}</h1>
-      {% endif %}
-      {% endblock %}
-      {% block page_header_description %}
-      {% if querytools[0].description %}
-        <p class="desc">{{ h.render_markdown(querytools[0].description) }}</p>
-      {% endif %}
-      {% endblock %}
+      <div class="page-header">
+        {{ h.render_markdown(querytools[0].description) }}
+      </div>
     </div>
   </div>
 </div>
-</div>
+{% endif %}
 {% endblock %}
 {% block tools %}
 <form id="public-filters" class="public-filters" method="GET">
