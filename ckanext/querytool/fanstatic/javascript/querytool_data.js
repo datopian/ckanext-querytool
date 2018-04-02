@@ -211,22 +211,23 @@
             var querytool_item_id = querytool_name_select_id.replace('field-related-querytool', 'related-query-item')
             var selected_querytools = _getSelectedQuerytools(querytool_item_id);
             var select_size = $(this).find("option").size();
-
-            if (select_size <= 2) {
-
                 api.post('get_available_querytools', {
                     'exclude': selected_querytools
-                }, false).done(function(data) {
-
+                }, false)
+                .done(function(data) {
+                     // Empty child fields
+                    if ( $('#' + querytool_name_select_id).length > 0){
+                        $('#' + querytool_name_select_id).find('option').not(':first').not(':selected').remove();
+                    }
                     $.each(data.result, function(idx, elem) {
-
-                        if (selected != elem.name) {
-                            $('#' + querytool_name_select_id).append(new Option(elem.name, elem.name));
-                        }
-
+                             if(selected == elem.name){
+                                $('#' + querytool_name_select_id).append(new Option(elem.name, elem.name, false, true));
+                             }else{
+                                $('#' + querytool_name_select_id).append(new Option(elem.name, elem.name));
+                             }
                     });
                 });
-            }
+
         });
 
         querytool_name_select.change(function(event) {
