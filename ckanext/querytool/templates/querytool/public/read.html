@@ -19,7 +19,7 @@
       {% endblock %}
       {% block page_header_description %}
       {% if querytools[0].description %}
-        <p class="desc">{{ querytools[0].description }}</p>
+        <p class="desc">{{ h.render_markdown(querytools[0].description) }}</p>
       {% endif %}
       {% endblock %}
     </div>
