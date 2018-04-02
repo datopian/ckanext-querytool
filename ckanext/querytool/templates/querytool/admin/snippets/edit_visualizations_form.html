@@ -13,7 +13,9 @@
 {% else %}
 {% set name = '' %}
 {% endif %}
+
 {% set action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name) %}
+{% set edit_data_url = h.url_for('querytool_edit', querytool='/' + name) %}
 <form method="post" action="{{ action_url }}" data-sql-string="{{ data.sql_string }}" data-chart-resource="{{ data.chart_resource }}" data-map-resource="{{ data.map_resource }}" class="form-horizontal col-sm-12" id="visualizations-form" enctype='multipart/form-data'>
   {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['complete', 'active'] %}
@@ -24,9 +26,11 @@
   {% endblock %}
   {% block charts %}
   <legend class="sticky-title">{{ _('Data visualizations') }}
-    <button id="save-visualization-btn" type="submit" class="pull-right btn btn-success" name="save">{{ _('Save') }}</button>
+    <ul class="inline pull-right">
+      <li><a class="btn" href="{{ edit_data_url}}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit data') }}</a></li>
+      <li><button id="save-visualization-btn" type="submit" class="btn btn-success" name="save">{{ _('Save') }}</button></li>
+    </ul>
   </legend>
-
 
   {% if data.visualizations %}
     {% set selected_y_axis_column = data.y_axis_column %}
