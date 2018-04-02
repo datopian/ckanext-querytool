@@ -1,7 +1,21 @@
 /* Large desktop */
 
-@media (min-width: @screen-lg-desktop) {}
-
+@media (min-width: @screen-lg-desktop) {
+  .wrap-btn-save-visualizations {
+    position: fixed;
+    padding: @grid-gutter-width/2;
+    background: @color-neutral-pale;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.05);
+    top: @grid-gutter-width*9 + 20;
+    right: @grid-gutter-width*20;
+    text-align: right;
+    .btn {
+      &.btn-success {
+        margin: 0;
+      }
+    }
+  }
+}
 
 /* Desktop */
 
@@ -20,11 +34,9 @@
   }
 }
 
-
 /* Portrait tablet to landscape and desktop */
 
 @media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {}
-
 
 /* Up to desktop */
 
@@ -47,22 +59,20 @@
       }
     }
   }
-  .public-query{
-    .container-chart{
+  .public-query {
+    .container-chart {
       flex: auto;
     }
   }
 }
 
-
 /* Landscape phone to portrait tablet */
 
 @media (max-width: @screen-xs-max) {
-  .container-wrapper{
+  .container-wrapper {
     background: none;
   }
 }
-
 
 /* Landscape phones and down */
 

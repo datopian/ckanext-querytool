@@ -4,7 +4,7 @@ span.grippy {
   position: absolute;
   top: @grid-gutter-width;
   content: '....';
-  left: -@grid-gutter-width + 2;
+  left: -@grid-gutter-width*3;
   width: @grid-gutter-width/2;
   height: @grid-gutter-width;
   display: inline-block;
@@ -47,10 +47,10 @@ span.grippy.cursor-grabbing {
   .item {
     flex-wrap: wrap;
     counter-increment: visualizations;
-    &.image_item{
+    &.image_item {
       flex-direction: column;
     }
-    &.gu-transit{
+    &.gu-transit {
       max-height: @grid-gutter-width*5;
       overflow: hidden;
       align-items: flex-start;
@@ -65,27 +65,27 @@ span.grippy.cursor-grabbing {
       content: counter(visualizations);
     }
   }
-  .map{
-    .preview-wrapper{
+  .map {
+    .preview-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
     }
   }
-  .item-wrapper{
+  .item-wrapper {
     position: relative;
   }
 }
 
-.gu-mirror{
+.gu-mirror {
   overflow: hidden;
   max-height: @grid-gutter-width*5;
   align-items: flex-start;
 }
 
-.gu-unselectable{
-  .visualizations{
-    .item{
+.gu-unselectable {
+  .visualizations {
+    .item {
       max-height: @grid-gutter-width*5;
       overflow: hidden;
       align-items: flex-start;
