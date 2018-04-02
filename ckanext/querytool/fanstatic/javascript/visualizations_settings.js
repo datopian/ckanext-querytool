@@ -218,6 +218,7 @@
 
             handleItemsOrder();
             window.location.hash = el.id;
+            window.scrollTo(0, el.offsetTop);
         });
 
         // This function updates the order numbers for the form elements.
