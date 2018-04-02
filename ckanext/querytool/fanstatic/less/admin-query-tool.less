@@ -1,10 +1,11 @@
 @import "inc/variables.less";
 @import "inc/mixins.less";
+
 span.grippy {
   position: absolute;
   top: @grid-gutter-width;
   content: '....';
-  left: -@grid-gutter-width + 2;
+  left: -@grid-gutter-width*3;
   width: @grid-gutter-width/2;
   height: @grid-gutter-width;
   display: inline-block;
@@ -47,10 +48,10 @@ span.grippy.cursor-grabbing {
   .item {
     flex-wrap: wrap;
     counter-increment: visualizations;
-    &.image_item{
+    &.image_item {
       flex-direction: column;
     }
-    &.gu-transit{
+    &.gu-transit {
       max-height: @grid-gutter-width*5;
       overflow: hidden;
       align-items: flex-start;
@@ -65,30 +66,57 @@ span.grippy.cursor-grabbing {
       content: counter(visualizations);
     }
   }
-  .map{
-    .preview-wrapper{
+  .map {
+    .preview-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
     }
   }
-  .item-wrapper{
+  .item-wrapper {
+    flex-shrink: 1;
     position: relative;
+  }
+  .preview-wrapper {
+    flex-grow: 2;
+    .item-content {
+      max-width: 70%;
+    }
   }
 }
 
-.gu-mirror{
+.text_box{
+  .item-wrapper{
+    min-width: 100%;
+  }
+}
+
+.gu-mirror {
   overflow: hidden;
   max-height: @grid-gutter-width*5;
   align-items: flex-start;
+  cursor: move;
 }
 
-.gu-unselectable{
-  .visualizations{
-    .item{
+.gu-unselectable {
+  .visualizations {
+    .item {
       max-height: @grid-gutter-width*5;
       overflow: hidden;
       align-items: flex-start;
     }
+  }
+}
+
+.sticky-title{
+  position: sticky;
+  top: 0;
+  padding: @grid-gutter-width/2 0;
+  background: fade(@color-white, 90%);
+  z-index: 99999;
+
+  .btn{
+    position: relative;
+    top: @grid-gutter-width/4;
   }
 }

@@ -29,7 +29,6 @@
 .chart-actions {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 0;
   bottom: 0;
   width: 100%;
   &.inline {
@@ -53,7 +52,6 @@
 .preview-wrapper {
   background: @color-white;
   flex-grow: 1;
-  margin-left: @grid-gutter-width;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,12 +61,12 @@
 .map {
   .item-content {
     min-width: 100%;
-    min-height: @visualization-grid-base-size;
+    min-height: @visualization-grid-base-size*2;
   }
 }
 
 .item-wrapper {
-  flex: 1;
+  // flex: 1;
   textarea {
     min-height: @grid-gutter-width*15;
     max-width: 100%;
