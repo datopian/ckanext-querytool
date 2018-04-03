@@ -40,9 +40,12 @@ ckan.module('querytool_map', function($, _) {
             this.options.main_property = this.mainPropertyVal;
 
             this.mainProperty.find('option').not(':first').remove();
-            if (this.map.hasLayer(this.geoL)) {
-                this.map.removeLayer(this.geoL);
-            }
+
+            this.map.eachLayer(function(layer) {
+                if (layer != this.osm)
+                    this.map.removeLayer(layer);
+            }.bind(this));
+
             if (this.legend) {
                 this.map.removeControl(this.legend);
             }
@@ -69,9 +72,11 @@ ckan.module('querytool_map', function($, _) {
                                 this.mainProperty.append(new Option(elem.text, elem.value));
                             }.bind(this));
 
-                            if (this.map.hasLayer(this.geoL)) {
-                                this.map.removeLayer(this.geoL);
-                            }
+                            this.map.eachLayer(function(layer) {
+                                if (layer != this.osm)
+                                    this.map.removeLayer(layer);
+                            }.bind(this));
+
                             if (this.legend) {
                                 this.map.removeControl(this.legend);
                             }
@@ -118,13 +123,13 @@ ckan.module('querytool_map', function($, _) {
 
             var osmUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
             var osmAttrib = 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ';
-            var osm = new L.TileLayer(osmUrl, {
+            this.osm = new L.TileLayer(osmUrl, {
                 minZoom: 2,
                 maxZoom: 18,
                 attribution: osmAttrib
             });
 
-            this.map.addLayer(osm);
+            this.map.addLayer(this.osm);
 
             if (mapURL) {
                 // Initialize markers
@@ -133,15 +138,7 @@ ckan.module('querytool_map', function($, _) {
 
         },
         createScale: function(featuresValues) {
-            var colors = ['#ffeda0',
-                '#fed976',
-                '#feb24c',
-                '#fd8d3c',
-                '#fc4e2a',
-                '#e31a1c',
-                '#bd0026',
-                '#800026'
-            ];
+            var colors = ['#ffffcc','#ffeda0','#fed976','#feb24c','#fd8d3c','#fc4e2a','#e31a1c','#bd0026','#800026'];
 
             var values = featuresValues.sort(function(a, b) {
                     return a - b;
@@ -157,7 +154,6 @@ ckan.module('querytool_map', function($, _) {
             return (num % 1 ? num.toFixed(2) : num);
         },
         createLegend: function() {
-            var self = this;
             var scale = this.createScale(this.mainPropertieValues);
             var opacity = 1;
             var noDataLabel = 'No data'
@@ -182,22 +178,21 @@ ckan.module('querytool_map', function($, _) {
                 for (var i = 0, len = grades.length; i < len; i++) {
                     ul.innerHTML +=
                         '<li><span style="background:' + scale(grades[i]) + '; opacity: ' + opacity + '"></span> ' +
-                        self.formatNumber(grades[i]) +
-                        (grades[i + 1] ? '&ndash;' + self.formatNumber(grades[i + 1]) + '</li>' : '+</li></ul>');
+                        this.formatNumber(grades[i]) +
+                        (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1]) + '</li>' : '+</li></ul>');
                 }
 
                 ul.innerHTML +=
-                    '<li><span style="background:' + '#F7FBFF' + '; opacity: ' + opacity + '"></span> ' +
+                    '<li><span style="background:' + '#bdbdbd' + '; opacity: ' + opacity + '"></span> ' +
                     noDataLabel + '</li>';
 
                 return div;
-            };
+            }.bind(this);
 
             this.legend.addTo(this.map);
         },
         initializeMarkers: function(mapURL) {
 
-            var self = this;
             var smallIcon = L.icon({
                 iconUrl: '/base/images/marker-icon.png',
                 shadowUrl: '/base/images/marker-shadow.png',
@@ -210,26 +205,26 @@ ckan.module('querytool_map', function($, _) {
 
             $.getJSON(mapURL).done(function(data) {
 
-                self.mainPropertieValues = [];
+                this.mainPropertieValues = [];
                 data.features.forEach(function(feature) {
-                    var str = feature.properties[self.options.main_property];
-                    self.mainPropertieValues.push(parseInt(str));
-                });
+                    var str = feature.properties[this.options.main_property];
+                    this.mainPropertieValues.push(parseInt(str));
+                }.bind(this));
 
-                var scale = this.createScale(self.mainPropertieValues);
+                var scale = this.createScale(this.mainPropertieValues);
                 this.geoL = L.geoJSON(data, {
                     style: function(feature) {
-                        var property = feature.properties[self.options.main_property];
+                        var property = feature.properties[this.options.main_property];
 
                         return {
-                            fillColor: (property) ? scale(property) : '#F7FBFF',
+                            fillColor: (property) ? scale(property) : '#737373',
                             weight: 2,
                             opacity: 1,
                             color: 'white',
                             dashArray: '3',
                             fillOpacity: 0.7
                         };
-                    },
+                    }.bind(this),
                     pointToLayer: function(fauture, latlng) {
                         return L.marker(latlng, {
                             icon: smallIcon
