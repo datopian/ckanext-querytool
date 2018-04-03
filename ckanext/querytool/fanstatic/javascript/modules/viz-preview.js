@@ -106,6 +106,7 @@ ckan.module('querytool-viz-preview', function() {
             var y_tick_format = this.options.y_tick_format;
             var padding_top = (this.options.padding_top === true) ? '' : this.options.padding_top;
             var padding_bottom = (this.options.padding_bottom === true) ? '' : this.options.padding_bottom;
+            var tick_count = (this.options.tick_count === true) ? '' : this.options.tick_count;
             var show_labels = this.options.show_labels;
             var y_label = this.options.y_label;
             var options = {
@@ -176,6 +177,7 @@ ckan.module('querytool-viz-preview', function() {
                     rotated : horizontal,
                     y: {
                         tick: {
+                          count: tick_count,
                           format: d3.format(y_tick_format),
                           rotate: yrotate
                          },
@@ -229,7 +231,6 @@ ckan.module('querytool-viz-preview', function() {
                     return item[x_axis];
                 });
                 values.unshift(this.options.y_axis);
-                var a = values[0];
                 options.data = {
                     columns: [values],
                     type: ctype,
@@ -243,6 +244,7 @@ ckan.module('querytool-viz-preview', function() {
                 options.axis = {
                     y: {
                         tick: {
+                          count: tick_count,
                           format: d3.format(y_tick_format),
                           rotate: yrotate
                         },
@@ -306,6 +308,9 @@ ckan.module('querytool-viz-preview', function() {
             var paddingBottom = chartField.find('input[name*=chart_field_padding_bottom_]');
             var paddingBottomVal = paddingBottom.val();
 
+            var tickCount = chartField.find('input[name*=chart_field_tick_count_]');
+            var tickCountVal = tickCount.val();
+
             var filterName =  chartField.find('[name*=chart_field_filter_name_]');
             var filterNameVal = filterName.val();
 
@@ -339,6 +344,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.padding_bottom = paddingBottomVal;
                 this.options.show_labels = dataLabelsVal;
                 this.options.y_label = yLabbelVal;
+                this.options.tick_count = tickCountVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -357,6 +363,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.padding_top = paddingTopVal;
             this.options.padding_bottom = paddingBottomVal;
             this.options.show_labels = dataLabelsVal;
+            this.options.tick_count = tickCountVal;
             this.options.y_label = yLabbelVal;
             this.options.filter_name = filterNameVal;
             this.options.filter_value = filterValueVal;
