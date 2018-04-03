@@ -304,6 +304,8 @@ class QueryToolController(base.BaseController):
                         data['chart_field_padding_bottom_{}'.format(id)]
                     visualization['padding_top'] = \
                         data['chart_field_padding_top_{}'.format(id)]
+                    visualization['tick_count'] = \
+                        data['chart_field_tick_count_{}'.format(id)]
                     visualization['y_label'] = \
                         data['chart_field_y_label_{}'.format(id)]
                     visualization['size'] = \
