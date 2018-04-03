@@ -172,7 +172,7 @@
                         enableSave();
                     });
             } else if (visualization === 'map') {
-                ckan.sandbox().client.getTemplate('map_fields.html', {
+                ckan.sandbox().client.getTemplate('map_item.html', {
                         n: items
                     })
                     .done(function(data) {
@@ -199,6 +199,16 @@
                         handleImageItems(items);
                         handleItemsOrder();
                         enableSave();
+                    });
+            } else if(visualization === 'table'){
+                ckan.sandbox().client.getTemplate('table_item.html', {
+                        n: items
+                    })
+                    .done(function(data) {
+                        var item = visualizationItems.prepend(data);
+                        //handleImageItems(items);
+                        //handleItemsOrder();
+                        //enableSave();
                     });
             }
 
@@ -250,6 +260,7 @@
                     var inputLabelAxisY = item.find('[id*=chart_field_y_label_]');
                     var inputPaddingTop = item.find('[id*=chart_field_padding_top_]');
                     var inputPaddingBottom = item.find('[id*=chart_field_padding_bottom_]');
+                    var selectTickCount = item.find('[id*=chart_field_tick_count_]');
                     var inputChartSize = item.find('[id*=chart_field_size_]');
                     var selectFilterName = item.find('[id*=chart_field_filter_name_]');
                     var selectFilterValue = item.find('[id*=chart_field_filter_value_]');
@@ -310,6 +321,9 @@
 
                     selectFilterName.attr('id', 'chart_field_filter_name_' + order);
                     selectFilterName.attr('name', 'chart_field_filter_name_' + order);
+
+                    selectTickCount.attr('id', 'chart_field_tick_count_' + order);
+                    selectTickCount.attr('name', 'chart_field_tick_count_' + order);
 
                     selectFilterValue.attr('id', 'chart_field_filter_value_' + order);
                     selectFilterValue.attr('name', 'chart_field_filter_value_' + order);

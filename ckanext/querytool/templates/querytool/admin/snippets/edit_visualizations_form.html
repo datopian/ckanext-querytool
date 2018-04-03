@@ -6,6 +6,7 @@
 {% resource 'querytool/javascript/visualizations_settings.js' %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/map' %}
+{% resource 'querytool/table' %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 {% if data %}
@@ -42,7 +43,7 @@
     <div id="choose-y-axis-column-container">
       <ul class="inline">
         <li>
-          {{ form.select('item_type', 'item_type', _('Visualization type'), options=[{'value': '', 'text': '— Select type —'}, {'value': 'chart', 'text': 'Chart'}, {'value': 'map', 'text': 'Map'}, {'value':'text-box', 'text': 'Text box'},{'value':'image', 'text': 'Image'}]) }}
+          {{ form.select('item_type', 'item_type', _('Visualization type'), options=[{'value': '', 'text': '— Select type —'}, {'value': 'chart', 'text': 'Chart'}, {'value': 'map', 'text': 'Map'}, {'value':'text-box', 'text': 'Text box'},{'value':'image', 'text': 'Image'}, {'value':'table', 'text':'Table'}]) }}
         </li>
         <li>
           <a id="add-visualization-btn" class="btn btn-info" style="display: {{ btn_display  }}"><span class="fa fa-plus-square"></span> {{ _('Add visualization') }}</a>
@@ -76,7 +77,7 @@
         %}
       {% endif %}
       {% if item.type == 'map'  %}
-        {% snippet 'ajax_snippets/map_fields.html',
+        {% snippet 'ajax_snippets/map_item.html',
           n=item.order,
           map = item,
           dataset_name = data.dataset_name
