@@ -197,6 +197,16 @@
         </div>
       </div>
 
+        {% if chart %}
+          {% set tick_count = chart.tick_count %}
+        {% endif %}
+        <div class="control-group ">
+        <label class="control-label" for="chart_field_tick_count_{{ n }}">{{ _('Y axis tick count') }}</label>
+        <div class="controls ">
+          <input id="chart_field_tick_count_{{ n }}" type="number" min="0" name="chart_field_tick_count_{{ n }}" value="{{ tick_count }}" placeholder="Default 0">
+        </div>
+      </div>
+
       {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
         <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Chart size') }}</label>
@@ -233,6 +243,7 @@
         {% set y_tick_format = chart.y_tick_format %}
         {% set padding_bottom = chart.padding_bottom %}
         {% set padding_top = chart.padding_top %}
+        {% set tick_count = chart.tick_count %}
         {% set show_labels = chart.show_labels %}
         {% set y_label = chart.y_label %}
         {% set filter_name = chart.filter_name %}
@@ -254,6 +265,7 @@
           y_tick_format = y_tick_format,
           padding_bottom = padding_bottom,
           padding_top = padding_top,
+          tick_count = tick_count,
           show_labels = show_labels,
           y_label = y_label,
           filter_name=filter_name,
