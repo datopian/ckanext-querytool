@@ -58,13 +58,17 @@ label {
   }
 }
 
-.btn-update{
+.btn-update {
   font-size: @base-font-size + 10;
-  padding: 0 @grid-gutter-width*2;
+  padding: @grid-gutter-width @grid-gutter-width*2;
   border-color: transparent;
   font-weight: 500;
   font-family: inherit;
+  @media (min-width: @screen-lg-min) {
+    margin-left: @grid-gutter-width;
+  }
 }
+
 .btn-filter-toggle {
   &.on {
     border-color: @color-success;
