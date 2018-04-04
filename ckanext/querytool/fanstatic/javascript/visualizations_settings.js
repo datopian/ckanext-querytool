@@ -22,6 +22,78 @@
         }
     };
 
+    function handleTickFormat(item_id) {
+
+        var tick_count_name;
+        var tick_format_name;
+
+        if (item_id) {
+            tick_count_name = $('[id=chart_field_tick_count_' + item_id + ']');
+            tick_format_name = $('[id=chart_field_y_ticks_format_' + item_id + ']');
+        } else {
+            tick_count_name = $('[id*=chart_field_tick_count_]');
+            tick_format_name = $('[id*=chart_field_y_ticks_format_]');
+        }
+
+        tick_count_name.change(function(event) {
+            var selectValues = [{
+                    'text': 'Decimal (1 digit) e.g 2.5',
+                    'value': '.1f' },
+                {
+                    'text': 'Decimal (2 digit) e.g 2.50',
+                    'value': '.2f'
+                },
+                {
+                    'text': 'Decimal (3 digit) e.g 2.501',
+                    'value': '.3f'
+                },
+                {
+                    'text': 'Decimal (4 digit) e.g 2.5012',
+                    'value': '.4f'
+                },
+                {
+                    'text': 'Dolar e.g 2000$',
+                    'value': '$'
+                },
+                {
+                    'text': 'Rounded e.g 2k',
+                    'value': 's'
+                },
+                {
+                    'text': 'Percentage (multiply by 100) e.g 200000%',
+                    'value': 'p'
+                },
+                {
+                    'text': 'Comma (thousands separator) e.g 2,000',
+                    'value': ','
+                },
+                {
+                    'text': 'Binary e.g 11111010000',
+                    'value': 'b'
+                }
+            ]
+
+            var elem = $(this);
+
+            if (elem.val() !== '') {
+                populateOptionValues(tick_format_name, selectValues.slice(0, 3));
+            } else {
+                populateOptionValues(tick_format_name, selectValues);
+            }
+        })
+    }
+
+    function populateOptionValues(elem, values){
+        elem.children('option:not(:first)').remove();
+
+                $.each(values, function(key, v) {
+                    elem
+                        .append($("<option></option>")
+                            .attr("value", v.value)
+                            .text(v.text));
+                });
+    }
+
     function handleRenderedChartFilters(item_id) {
 
         var chart_filter_name_select;
@@ -113,6 +185,7 @@
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
         var chooseYAxisColumn = $('#choose_y_axis_column');
+        handleTickFormat();
 
         var viz_item = $('.item');
         // Only disable Save button if there aren't visualizations
@@ -170,6 +243,7 @@
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
                         enableSave();
+                        handleTickFormat(items);
                     });
             } else if (visualization === 'map') {
                 ckan.sandbox().client.getTemplate('map_item.html', {
@@ -200,12 +274,13 @@
                         handleItemsOrder();
                         enableSave();
                     });
-            } else if(visualization === 'table'){
+            } else if (visualization === 'table') {
                 ckan.sandbox().client.getTemplate('table_item.html', {
                         n: items
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
+                        $('#example').DataTable();
                         //handleImageItems(items);
                         //handleItemsOrder();
                         //enableSave();
@@ -230,11 +305,13 @@
         });
 
         //enable or disable save button
-        function enableSave(){
+        function enableSave() {
             var isEmpty = $('#visualization-settings-items').find('.item');
             var isDisabled = (isEmpty.length >= 1);
             $('#save-visualization-btn').attr('disabled', !isDisabled);
         }
+
+
 
         // This function updates the order numbers for the form elements.
         function handleItemsOrder() {
@@ -367,7 +444,7 @@
                     upload.attr('name', 'media_image_upload_' + order);
                     clear.attr('name', 'media_clear_upload_' + order);
 
-                } else if (item.context.id.indexOf('map_item') >= 0){
+                } else if (item.context.id.indexOf('map_item') >= 0) {
                     var map_resource_url = item.find('[id*=map_resource_]');
                     var map_main_property = item.find('[id*=map_main_property_]');
                     var map_size = item.find('[id*=map_size_]');
