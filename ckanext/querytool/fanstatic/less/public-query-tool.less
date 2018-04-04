@@ -74,26 +74,26 @@ body {
   border-bottom: none;
   padding-bottom: 0;
   margin: @grid-gutter-width*3 0;
-  :first-child{
+  :first-child {
     margin-top: 0;
   }
-  h1{
+  h1 {
     font-size: 2.5rem;
   }
-  h2{
+  h2 {
     font-size: 2rem;
   }
-  h3{
+  h3 {
     font-size: 1.5rem;
   }
-  h4{
+  h4 {
     font-size: 1.3rem;
   }
-  h5{
+  h5 {
     font-size: 1.2rem;
   }
   h6,
-  p{
+  p {
     font-size: @base-font-size + 2;
   }
 }
@@ -224,8 +224,8 @@ body {
   }
   .flex {
     display: flex;
-    align-items: stretch; // justify-content: flex-start;
-    // Need to work on the responsiveness of this container more.
+    align-items: stretch;
+    justify-content: space-between;
     flex-wrap: wrap;
   }
   .filters {
@@ -237,6 +237,9 @@ body {
       position: relative;
       top: @grid-gutter-width/4;
       color: @color-white;
+    }
+    @media (max-width: @screen-md-max) {
+      flex-basis: 100%;
     }
   }
   .filter-item {
@@ -260,7 +263,6 @@ body {
     }
   }
   .filter-y {
-    flex-shrink: 0;
     display: flex;
     align-self: stretch;
     align-items: center;
@@ -268,6 +270,9 @@ body {
     color: @color-white;
     padding: @grid-gutter-width;
     background: @color-info;
+    @media (max-width: @screen-md-max) {
+      flex-basis: 100%;
+    }
     select {
       margin-bottom: 0;
     }
@@ -282,7 +287,6 @@ body {
     position: static;
     display: flex;
     align-self: center;
-    margin: 0 @grid-gutter-width;
     li {
       margin: auto;
       display: block;
@@ -323,7 +327,7 @@ body {
     padding: @grid-gutter-width;
     overflow-y: auto;
     word-wrap: break-word;
-    &.map{
+    &.map {
       padding: 0;
     }
     &.image {
@@ -334,7 +338,7 @@ body {
         justify-content: center;
         min-height: 100%;
       }
-      img{
+      img {
         margin: auto;
         max-width: 100%;
       }
