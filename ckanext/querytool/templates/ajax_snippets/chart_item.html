@@ -154,7 +154,11 @@
         </div>
       </div>
 
-      {% set ticks_formats = h.queytool_get_charts_data_formats() %}
+      {% if chart and chart.tick_count%}
+            {% set ticks_formats = h.queytool_get_charts_data_formats(5) %}
+      {% else %}
+        {% set ticks_formats = h.queytool_get_charts_data_formats() %}
+      {% endif %}
       <div class="control-group control-select">
         <label class="control-label" for="chart_field_y_ticks_format_{{ n }}">{{ _('Y axis tick format') }}</label>
         <div class="controls ">

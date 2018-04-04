@@ -69,7 +69,7 @@ ckan.module('querytool-viz-preview', function() {
             var sqlStringExceptSelect = parsedSqlString[1];
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
-            
+
             // If additional chart filter is set extend the current sql with the new filter
             if (chart_filter_name && chart_filter_value) {
                 var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
