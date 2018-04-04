@@ -209,10 +209,10 @@ def get_charts_data_formats(num=None):
     :return:
     '''
     options = [{'text': 'Integer e.g 2', 'value': '.0f'},
-                {'text': 'Decimal (1 digit) e.g 2.5','value': '.1f'},
-                {'text': 'Decimal (2 digit) e.g 2.50', 'value': '.2f'},
-                {'text': 'Decimal (3 digit) e.g 2.501', 'value': '.3f'},
-                {'text': 'Decimal (4 digit) e.g 2.5012', 'value': '.4f'},
+               {'text': 'Decimal (1 digit) e.g 2.5', 'value': '.1f'},
+               {'text': 'Decimal (2 digit) e.g 2.50', 'value': '.2f'},
+               {'text': 'Decimal (3 digit) e.g 2.501', 'value': '.3f'},
+               {'text': 'Decimal (4 digit) e.g 2.5012', 'value': '.4f'},
                {'text': 'Dolar e.g 2000$', 'value': '$'},
                {'text': 'Rounded e.g 2k', 'value': 's'},
                {'text': 'Percentage (multiply by 100) e.g 200000%',
@@ -220,7 +220,7 @@ def get_charts_data_formats(num=None):
                {'text': 'Comma (thousands separator) e.g 2,000', 'value': ','},
                {'text': 'Binary e.g 11111010000', 'value': 'b'}]
     if num:
-        return  options[:num]
+        return options[:num]
     return options
 
 
