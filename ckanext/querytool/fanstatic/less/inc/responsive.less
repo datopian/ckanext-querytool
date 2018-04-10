@@ -25,14 +25,14 @@
         width: calc(100%/3.105);
         height: @visualization-grid-base-size;
         &.square {
-          height: @visualization-grid-base-size*2;
+          height: @visualization-grid-base-size*2 + @grid-gutter-width;
         }
       }
       &.size-md {
         width: calc(100%/2.05);
         height: @visualization-grid-base-size*2;
         &.vertical {
-          height: @visualization-grid-base-size*4;
+          height: @visualization-grid-base-size*4 + @grid-gutter-width;
         }
       }
       &.size-lg {
