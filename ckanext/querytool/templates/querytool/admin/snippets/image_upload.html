@@ -5,20 +5,19 @@ n - Order of the item
 Example usage:
 {% snippet 'querytool/admin/snippets/image_upload.html', data=data,n=order  %}
 #}
-
 {% set uploads_enabled = h.uploads_enabled() %}
 {% if data %}
-   {% set n =  data.order | string %}
-   {% set media_type =  data.media_type %}
-   {% set image_url =  data.url %}
-   {% set media_image_url = 'media_image_url_' + n %}
-   {% set media_image_upload = 'media_image_upload_' + n %}
-   {% set media_clear_upload = 'media_clear_upload_' + n %}
-   {% set is_upload = image_url and not image_url.startswith('http') %}
-   {% set is_url = image_url and image_url.startswith('http') %}
-   {% set data_module = 'image-upload' %}
+{% set n =  data.order | string %}
+{% set media_type =  data.media_type %}
+{% set image_url =  data.url %}
+{% set media_image_url = 'media_image_url_' + n %}
+{% set media_image_upload = 'media_image_upload_' + n %}
+{% set media_clear_upload = 'media_clear_upload_' + n %}
+{% set is_upload = image_url and not image_url.startswith('http') %}
+{% set is_url = image_url and image_url.startswith('http') %}
+{% set data_module = 'image-upload' %}
 {% else %}
-   {% set data_module = 'custom-image-upload' %}
+{% set data_module = 'custom-image-upload' %}
 {% endif %}
 {% if uploads_enabled %}
 <div
@@ -53,7 +52,7 @@ Example usage:
 {% endif %}
 {% set sizes = h.querytool_get_visualization_size() %}
 <div class="control-group control-select">
-   <label class="control-label" for="image_field_size_{{ n }}">{{ _('Chart size') }}</label>
+   <label class="control-label" for="image_field_size_{{ n }}">{{ _('Image size') }}</label>
    <div class="controls ">
       <select id="image_field_size_{{ n }}" name="image_field_size_{{ n }}">
       {% for size in sizes %}
