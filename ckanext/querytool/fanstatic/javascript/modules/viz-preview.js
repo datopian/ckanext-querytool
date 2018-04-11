@@ -1,10 +1,9 @@
 /*
 
-This modules handles displaying a visualization item, which can be a chart or
-a map.
+This modules handles displaying a visualization item
 
 Options:
-    - type (Type of the visualization item: chart or map)
+    - type (Type of the visualization item: chart)
     - colors (Pattern of colors)
     - x_axis (Column name of x axis)
     - y_axis (Column name of y axis)
@@ -382,4 +381,4 @@ ckan.module('querytool-viz-preview', function() {
             this.sandbox.unsubscribe('querytool:updateCharts', this.updateChart.bind(this));
         },
     }
-})
+});
