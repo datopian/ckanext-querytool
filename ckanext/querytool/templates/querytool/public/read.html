@@ -5,6 +5,8 @@
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/javascript/modules/tool-embed.js' %}
 {% resource 'querytool/map' %}
+{% resource 'querytool/table' %}
+
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
 {% block page_header_content %}
@@ -139,6 +141,11 @@
             n=item.order,
             map_resource=item.map_resource,
             main_property=item.main_property
+          %}
+        {% endif %}
+         {% if item.type == 'table'  %}
+          {% snippet 'ajax_snippets/table_module.html',
+             sql_string = querytool.sql_string
           %}
         {% endif %}
       </div>
