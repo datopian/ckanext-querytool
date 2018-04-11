@@ -19,7 +19,7 @@
                 });
             }
             return $.post(url, JSON.stringify(data), 'json');
-        }
+        },
     };
 
     function handleTickFormat(item_id) {
@@ -276,14 +276,14 @@
                     });
             } else if (visualization === 'table') {
                 ckan.sandbox().client.getTemplate('table_item.html', {
-                        n: items
+                        n: items,
+                        sql_string : sqlString
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
-                        $('#example').DataTable();
-                        //handleImageItems(items);
-                        //handleItemsOrder();
-                        //enableSave();
+                        ckan.module.initializeElement(item.find('div[data-module=querytool-table]')[0]);
+                        handleItemsOrder();
+                        enableSave();
                     });
             }
 
@@ -459,6 +459,13 @@
                     map_size.attr('name', 'map_size_' + order);
                     map_module.attr('id', 'map_module_' + order);
 
+                } else if (item.context.id.indexOf('table_item') >= 0) {
+                    var table_size = item.find('[id*=table_size_]');
+
+                    item.attr('id', 'map_item_' + order);
+
+                    table_size.attr('id', 'table_size_' + order);
+                    table_size.attr('name', 'table_size_' + order);
                 }
             });
         }

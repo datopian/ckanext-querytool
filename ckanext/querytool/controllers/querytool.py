@@ -275,6 +275,7 @@ class QueryToolController(base.BaseController):
             text_boxes = []
             images = []
             maps = []
+            tables = []
             for k, v in data.items():
 
                 if k.startswith('chart_field_graph_'):
@@ -391,7 +392,17 @@ class QueryToolController(base.BaseController):
 
                     maps.append(map_item)
 
-            vis = visualizations + text_boxes + images + maps
+                if k.startswith('table_size_'):
+                    table_item = {}
+                    id = k.split('_')[-1]
+                    table_item['type'] = 'table'
+                    table_item['order'] = int(id)
+                    table_item['size'] = \
+                        data['table_size_{}'.format(id)]
+
+                    tables.append(table_item)
+
+            vis = visualizations + text_boxes + images + maps + tables
             _visualization_items['visualizations'] = json.dumps(vis)
             if visualizations:
                 _visualization_items['y_axis_column'] =\
