@@ -277,7 +277,8 @@
             } else if (visualization === 'table') {
                 ckan.sandbox().client.getTemplate('table_item.html', {
                         n: items,
-                        sql_string : sqlString
+                        sql_string : sqlString,
+                        resource_id : chart_resource
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);

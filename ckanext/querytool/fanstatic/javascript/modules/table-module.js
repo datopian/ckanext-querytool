@@ -9,6 +9,9 @@ Options:
 ckan.module('querytool-table', function() {
     var api = {
         get: function(action, params) {
+            $.ajaxSetup({
+                async: false
+            });
             var api_ver = 3;
             var base_url = ckan.sandbox().client.endpoint;
             params = $.param(params);
@@ -21,7 +24,7 @@ ckan.module('querytool-table', function() {
             var url = base_url + '/api/' + api_ver + '/action/' + action;
             return $.post(url, JSON.stringify(data), 'json');
         },
-        url: function(action, params){
+        url: function(action, params) {
             var api_ver = 3;
             var base_url = ckan.sandbox().client.endpoint;
             var url = base_url + '/api/' + api_ver + '/action/' + action + '?' + params;
@@ -34,26 +37,20 @@ ckan.module('querytool-table', function() {
         initialize: function() {
 
             var sql_string = this.options.sql_string;
-            console.log('SQL STRING ' + sql_string)
-            $('#example').DataTable({
+            var resource_id = this.options.resource_id;
+
+            var columns = api.get('querytool_get_table_columns', {
+                res_id: resource_id
+            }).done(function(response) {});
+
+            $('#table-item').DataTable({
+                "processing": true,
                 "ajax": {
-                    "url": api.url('querytool_get_resource_data', 'sql_string='+sql_string),
+                    "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
                     "dataSrc": "result.records"
                 },
-                "columns": [{
-                        "data": "death"
-                    },
-                    {
-                        "data": "area"
-                    },
-                    {
-                        "data": "gender"
-                    },
-                    {
-                        "data": "region"
-                    }
+                "columns": columns.responseJSON.result
 
-                ]
             });
         },
 
