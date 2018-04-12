@@ -145,7 +145,8 @@
         {% endif %}
          {% if item.type == 'table'  %}
           {% snippet 'ajax_snippets/table_module.html',
-             sql_string = querytool.sql_string
+             sql_string = querytool.sql_string,
+             resource_id=querytool.chart_resource
           %}
         {% endif %}
       </div>
