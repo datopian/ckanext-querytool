@@ -335,18 +335,16 @@ body {
     }
     &.image {
       overflow-y: hidden;
-      .item-content {
+      .item-content{
         display: flex;
-        align-items: center;
         justify-content: center;
-        width: 100%;
-        min-height: 100%;
+        align-items: center;
+        max-width: 100%;
+        height: 100%;
       }
       img {
-        margin: auto;
-        width: inherit !important; // Because IE.
         max-width: 100%;
-        height: auto;
+        max-height: 100%;
       }
     }
     &.text_box {
