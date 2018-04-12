@@ -172,6 +172,24 @@ def querytool_get_resource_columns(context, data_dict):
 
 
 @toolkit.side_effect_free
+def querytool_get_table_columns(context, data_dict):
+    '''
+    Return resource columns in key/value pair format as Datatables expect
+    :param context:
+    :param data_dict:
+    :return:
+    '''
+    columns =  h.get_resource_columns(data_dict.get('res_id'))
+    table_columns = []
+    for column in columns:
+        table_columns.append({
+            'data': column,
+            'title': column
+        })
+    return table_columns
+
+
+@toolkit.side_effect_free
 def querytool_download_data(context, data_dict):
     sql_string = data_dict.get('sql_string')
     data_format = data_dict.get('format')
