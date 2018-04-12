@@ -202,11 +202,16 @@
             // The JavaScript module "querytool-viz-preview" subscribes to this
             // event to update the chart.
             ckan.sandbox().publish('querytool:updateCharts');
+            // Send a message to update map when a new column is selected.
+            // The JavaScript module "querytool-map" subscribes to this
+            // event to update the map.
+            ckan.sandbox().publish('querytool:updateMaps');
         });
 
         //delete dynamicly created textbox section
         $(document).on('click', '.delete-item-btn', function(el) {
             el.target.closest('.item').remove();
+            handleItemsOrder();
             enableSave();
         });
 
@@ -246,12 +251,21 @@
                         handleTickFormat(items);
                     });
             } else if (visualization === 'map') {
+                var axisYValue = chooseYAxisColumn.val();
+
+                if (axisYValue === '$none$') {
+                    alert('Please choose a value for y axis.');
+                    return;
+                }
                 ckan.sandbox().client.getTemplate('map_item.html', {
-                        n: items
+                        n: items,
+                        chart_resource: chart_resource,
+                        sql_string: sqlString,
+                        y_axis_column: axisYValue
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
-                        ckan.module.initializeElement(item.find('div[data-module=querytool_map]')[0]);
+                        ckan.module.initializeElement(item.find('div[data-module=querytool-map]')[0]);
                         handleItemsOrder();
                         enableSave();
                     });
@@ -447,15 +461,18 @@
 
                 } else if (item.context.id.indexOf('map_item') >= 0) {
                     var map_resource_url = item.find('[id*=map_resource_]');
-                    var map_main_property = item.find('[id*=map_main_property_]');
+                    var map_key_field = item.find('[id*=map_key_field_]');
+                    var data_key_field = item.find('[id*=map_data_key_field_]');
                     var map_size = item.find('[id*=map_size_]');
                     var map_module = item.find('[id*=map_module_]');
 
                     item.attr('id', 'map_item_' + order);
                     map_resource_url.attr('id', 'map_resource_' + order);
                     map_resource_url.attr('name', 'map_resource_' + order);
-                    map_main_property.attr('id', 'map_main_property_' + order);
-                    map_main_property.attr('name', 'map_main_property_' + order);
+                    map_key_field.attr('id', 'map_key_field_' + order);
+                    map_key_field.attr('name', 'map_key_field_' + order);
+                    data_key_field.attr('id', 'map_data_key_field_' + order);
+                    data_key_field.attr('name', 'map_data_key_field_' + order);
                     map_size.attr('id', 'map_size_' + order);
                     map_size.attr('name', 'map_size_' + order);
                     map_module.attr('id', 'map_module_' + order);

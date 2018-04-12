@@ -140,7 +140,10 @@
           {% snippet 'ajax_snippets/map_module.html',
             n=item.order,
             map_resource=item.map_resource,
-            main_property=item.main_property
+            map_key_field=item.map_key_field,
+            data_key_field=item.data_key_field,
+            sql_string=querytool.sql_string,
+            y_axis_column=y_axis_selected
           %}
         {% endif %}
          {% if item.type == 'table'  %}

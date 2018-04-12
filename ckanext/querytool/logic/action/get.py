@@ -243,3 +243,16 @@ def querytool_get_geojson_properties(context, data_dict):
     map_resource_url = data_dict.get('map_resource')
 
     return h.get_geojson_properties(map_resource_url)
+
+
+@toolkit.side_effect_free
+def querytool_get_map_data(context, data_dict):
+
+    geojson_url = data_dict.get('geojson_url')
+    map_key_field = data_dict.get('map_key_field')
+    data_key_field = data_dict.get('data_key_field')
+    data_value_field = data_dict.get('data_value_field')
+    sql_string = data_dict.get('sql_string')
+
+    return h.get_map_data(geojson_url, map_key_field, data_key_field,
+                          data_value_field, sql_string)

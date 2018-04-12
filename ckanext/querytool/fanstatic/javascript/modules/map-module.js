@@ -1,4 +1,4 @@
-ckan.module('querytool_map', function($, _) {
+ckan.module('querytool-map', function($, _) {
     'use strict';
 
     var api = {
@@ -20,11 +20,18 @@ ckan.module('querytool_map', function($, _) {
     return {
         initialize: function() {
 
+            //            console.log(this.options.map_key_field);
+            //            console.log(this.options.data_key_field);
+            //            console.log(this.options.sql_string);
+            //            console.log(this.options.y_axis_column);
+
             this.initLeaflet.call(this);
             this.mapResource = this.el.parent().parent().find('[id*=map_resource_]');
-            this.mainProperty = this.el.parent().parent().find('[id*=map_main_property_]');
+            this.mapKeyField = this.el.parent().parent().find('[id*=map_key_field_]');
+            this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
             this.mapResource.change(this.onResourceChange.bind(this));
-            this.mainProperty.change(this.onPropertyChange.bind(this))
+            this.mapKeyField.change(this.onPropertyChange.bind(this));
+            this.dataKeyField.change(this.onPropertyChange.bind(this));
 
             $('.leaflet-control-zoom-in').css({
                 'color': '#121e87'
@@ -33,13 +40,16 @@ ckan.module('querytool_map', function($, _) {
                 'color': '#121e87'
             });
 
+            this.sandbox.subscribe('querytool:updateMaps', this.onDataValueFieldChange.bind(this));
+
         },
         resetMap: function() {
 
             this.options.map_resource = this.mapResourceVal;
-            this.options.main_property = this.mainPropertyVal;
+            this.options.map_key_field = this.mapKeyFieldVal;
+            this.options.data_key_field = this.dataKeyField;
 
-            this.mainProperty.find('option').not(':first').remove();
+            //            this.mapKeyField.find('option').not(':first').remove();
 
             this.map.eachLayer(function(layer) {
                 if (layer != this.osm)
@@ -56,7 +66,7 @@ ckan.module('querytool_map', function($, _) {
         onResourceChange: function() {
 
             this.mapResourceVal = this.mapResource.val();
-            this.mainPropertyVal = this.mainProperty.val();
+            this.mapKeyFieldVal = this.mapKeyField.val();
 
             if (this.options.map_resource != this.mapResourceVal && this.mapResourceVal != '') {
 
@@ -66,23 +76,13 @@ ckan.module('querytool_map', function($, _) {
                     .done(function(data) {
                         if (data.success) {
 
-                            this.mainProperty.find('option').not(':first').remove();
+                            this.mapKeyField.find('option').not(':first').remove();
 
                             $.each(data.result, function(idx, elem) {
-                                this.mainProperty.append(new Option(elem.text, elem.value));
-                            }.bind(this));
 
-                            this.map.eachLayer(function(layer) {
-                                if (layer != this.osm)
-                                    this.map.removeLayer(layer);
+                                this.mapKeyField.append(new Option(elem.text, elem.value));
                             }.bind(this));
-
-                            if (this.legend) {
-                                this.map.removeControl(this.legend);
-                            }
-                            this.options.map_resource = this.mapResourceVal;
-                            this.options.main_property = this.mainPropertyVal;
-                            this.initializeMarkers.call(this, this.options.map_resource);
+                            this.resetMap.call(this);
 
                         } else {
                             this.resetMap.call(this);
@@ -99,11 +99,26 @@ ckan.module('querytool_map', function($, _) {
         },
         onPropertyChange: function() {
 
-            var mainPropertyVal = this.mainProperty.val();
+            var mapKeyFieldVal = this.mapKeyField.val();
+            var dataKeyFieldVal = this.dataKeyField.val();
             if (this.legend) {
                 this.map.removeControl(this.legend);
             }
-            this.options.main_property = mainPropertyVal;
+            this.options.map_key_field = mapKeyFieldVal;
+            this.options.data_key_field = dataKeyFieldVal;
+
+            this.initializeMarkers.call(this, this.options.map_resource);
+
+        },
+        onDataValueFieldChange: function() {
+
+            var valueField = $('#choose_y_axis_column');
+
+            var valueFieldVal = valueField.val();
+            if (this.legend) {
+                this.map.removeControl(this.legend);
+            }
+            this.options.y_axis_column = valueFieldVal;
             this.initializeMarkers.call(this, this.options.map_resource);
 
         },
@@ -138,9 +153,11 @@ ckan.module('querytool_map', function($, _) {
 
         },
         createScale: function(featuresValues) {
-            var colors = ['#ffffcc','#ffeda0','#fed976','#feb24c','#fd8d3c','#fc4e2a','#e31a1c','#bd0026','#800026'];
+            var colors = ['#ffffcc', '#ffeda0', '#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026', '#800026'];
 
-            var values = featuresValues.sort(function(a, b) {
+            var values = $.map(featuresValues, function(feature, key) {
+                    return feature.value;
+                }).sort(function(a, b) {
                     return a - b;
                 }),
                 min = values[0],
@@ -154,7 +171,7 @@ ckan.module('querytool_map', function($, _) {
             return (num % 1 ? num.toFixed(2) : num);
         },
         createLegend: function() {
-            var scale = this.createScale(this.mainPropertieValues);
+            var scale = this.createScale(this.featuresValues);
             var opacity = 1;
             var noDataLabel = 'No data'
             this.legend = L.control({
@@ -203,83 +220,124 @@ ckan.module('querytool_map', function($, _) {
                 shadowSize: [41, 41]
             });
 
-            $.getJSON(mapURL).done(function(data) {
+            var parsedSqlString = this.options.sql_string.split('*');
+            var sqlStringExceptSelect = parsedSqlString[1];
 
-                this.mainPropertieValues = [];
-                data.features.forEach(function(feature) {
-                    var str = feature.properties[this.options.main_property];
-                    this.mainPropertieValues.push(parseInt(str));
-                }.bind(this));
+            api.get('querytool_get_map_data', {
+                    geojson_url: mapURL,
+                    map_key_field: this.options.map_key_field,
+                    data_key_field: this.options.data_key_field,
+                    data_value_field: this.options.y_axis_column,
+                    sql_string: sqlStringExceptSelect
 
-                var scale = this.createScale(this.mainPropertieValues);
-                this.geoL = L.geoJSON(data, {
-                    style: function(feature) {
-                        var property = feature.properties[this.options.main_property];
+                })
+                .done(function(data) {
+                    if (data.success) {
+                        var geoJSON = data.result['geojson_data'];
+                        this.featuresValues = data.result['features_values'];
 
-                        return {
-                            fillColor: (property) ? scale(property) : '#737373',
-                            weight: 2,
-                            opacity: 1,
-                            color: 'white',
-                            dashArray: '3',
-                            fillOpacity: 0.7
-                        };
-                    }.bind(this),
-                    pointToLayer: function(fauture, latlng) {
-                        return L.marker(latlng, {
-                            icon: smallIcon
-                        });
-                    },
-                    onEachFeature: function(feature, layer) {
-                        var popup = document.createElement("div"),
-                            list = document.createElement("ul"),
-                            listElement,
-                            listElementText,
-                            boldElement,
-                            boldElementText;
-                        for (var info in feature.properties) {
-                            boldElementText = document.createTextNode(info + ': ');
-                            boldElement = document.createElement("b");
-                            boldElement.appendChild(boldElementText);
-                            listElementText = document.createTextNode(feature.properties[info]);
-                            listElement = document.createElement("li");
-                            listElement.appendChild(boldElement);
-                            listElement.appendChild(listElementText);
-                            list.appendChild(listElement);
-                        }
-                        popup.appendChild(list);
-                        layer.bindPopup(popup);
-                        //              layer.name = feature.properties[mainField];
-                    }
-                }).addTo(this.map);
 
-                this.createLegend.call(this);
+                        var scale = this.createScale(this.featuresValues);
+                        this.geoL = L.geoJSON(geoJSON, {
+                            style: function(feature) {
 
-                this.map.on('popupopen', function(e) {
-                    if (this.map._zoom == 10) {
-                        var px = this.map.project(e.popup._latlng, 10);
-                        px.y -= e.popup._container.clientHeight / 2;
-                        this.map.flyTo(this.map.unproject(px), 10, {
-                            animate: true,
-                            duration: 1
-                        });
+                                var elementData = this.featuresValues[feature.properties[this.options.map_key_field]],
+                                    value = elementData && elementData.value,
+                                    color = (value) ? scale(value) : '#737373';
+
+                                return {
+                                    fillColor: color,
+                                    weight: 2,
+                                    opacity: 1,
+                                    color: 'white',
+                                    dashArray: '3',
+                                    fillOpacity: 0.7
+                                };
+                            }.bind(this),
+                            pointToLayer: function(fauture, latlng) {
+                                return L.marker(latlng, {
+                                    icon: smallIcon
+                                });
+                            },
+                            onEachFeature: function(feature, layer) {
+                                var elementData = this.featuresValues[feature.properties[this.options.map_key_field]];
+
+
+                                if (elementData) {
+                                    var popup = document.createElement("div"),
+                                        list = document.createElement("ul"),
+                                        listElement,
+                                        listElementText,
+                                        boldElement,
+                                        boldElementText;
+
+                                    boldElementText = document.createTextNode(this.options.data_key_field + ': ');
+                                    boldElement = document.createElement("b");
+                                    boldElement.appendChild(boldElementText);
+                                    listElementText = document.createTextNode(elementData['key']);
+                                    listElement = document.createElement("li");
+                                    listElement.appendChild(boldElement);
+                                    listElement.appendChild(listElementText);
+                                    list.appendChild(listElement);
+
+                                    boldElementText = document.createTextNode(this.options.y_axis_column + ': ');
+                                    boldElement = document.createElement("b");
+                                    boldElement.appendChild(boldElementText);
+                                    listElementText = document.createTextNode(this.formatNumber(parseFloat(elementData['value'])));
+                                    listElement = document.createElement("li");
+                                    listElement.appendChild(boldElement);
+                                    listElement.appendChild(listElementText);
+                                    list.appendChild(listElement);
+
+                                    popup.appendChild(list);
+                                    layer.bindPopup(popup);
+
+                                }
+
+
+                                //              layer.name = feature.properties[mainField];
+                            }.bind(this)
+                        }).addTo(this.map);
+
+                        this.createLegend.call(this);
+
+                        this.map.on('popupopen', function(e) {
+                            if (this.map._zoom == 10) {
+                                var px = this.map.project(e.popup._latlng, 10);
+                                px.y -= e.popup._container.clientHeight / 2;
+                                this.map.flyTo(this.map.unproject(px), 10, {
+                                    animate: true,
+                                    duration: 1
+                                });
+                            } else {
+                                this.map.flyTo(e.popup._latlng, 10, {
+                                    animate: true,
+                                    duration: 1
+                                })
+                            }
+                            $('.leaflet-popup-content-wrapper').css({
+                                'border-top': '5px solid ' + '#121e87'
+                            });
+                        }.bind(this));
+
+                        // Properly zoom the map to fit all markers/polygons
+                        this.map.fitBounds(this.geoL.getBounds().pad(0.5));
+
+
                     } else {
-                        this.map.flyTo(e.popup._latlng, 10, {
-                            animate: true,
-                            duration: 1
-                        })
+                        this.resetMap.call(this);
                     }
-                    $('.leaflet-popup-content-wrapper').css({
-                        'border-top': '5px solid ' + '#121e87'
-                    });
+                }.bind(this))
+                .error(function(error) {
+                    this.resetMap.call(this);
                 }.bind(this));
 
-                // Properly zoom the map to fit all markers/polygons
-                this.map.fitBounds(this.geoL.getBounds().pad(0.5));
-            }.bind(this)).fail(function(data) {
-                console.log("GeoJSON could not be loaded " + mapURL);
-            });
 
-        }
+
+        },
+        teardown: function() {
+            // We must always unsubscribe on teardown to prevent memory leaks.
+            this.sandbox.unsubscribe('querytool:updateMaps', this.onDataValueFieldChange.bind(this));
+        },
     }
 });
