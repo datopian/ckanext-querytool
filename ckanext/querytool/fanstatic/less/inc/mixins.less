@@ -23,9 +23,24 @@
 .dataTable {
   .dataTables_wrapper {
     .paginate_button {
+      &:hover {
+        background: @color-secondary;
+        border-color: @color-secondary-dark;
+      }
+      &.disabled {
+        &,
+        &:hover {
+          background: transparent;
+          border: transparent;
+        }
+      }
       &.current {
-        background: @color-neutral-pale;
-        border-color: @color-neutral-light;
+        &,
+        &:hover {
+          color: @color-white !important;
+          background: @color-primary;
+          border-color: @color-primary;
+        }
       }
     }
     input {
