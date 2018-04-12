@@ -1,28 +1,27 @@
 <div id="table_item_{{ n }}" class="item table_item visualization-fields-section">
-  <div class="item-wrapper">
-
-     {% set sizes = h.querytool_get_visualization_size() %}
+   <div class="item-wrapper">
+      {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
-        <label class="control-label" for="table_size_{{ n }}">{{ _('Table size') }}</label>
-        <div class="controls ">
-          <select id="table_size_{{ n }}" name="table_size_{{ n }}">
-          {% for size in sizes %}
+         <label class="control-label" for="table_size_{{ n }}">{{ _('Table size') }}</label>
+         <div class="controls ">
+            <select id="table_size_{{ n }}" name="table_size_{{ n }}">
+            {% for size in sizes %}
             <option value="{{ size.value }}" {% if table %}{{ 'selected' if size.value == table.size }}{% endif %} >{{size.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
+            {% endfor %}
+            </select>
+         </div>
       </div>
-
-   <span class="grippy"></span>
-
-  </div>
-    {% set sql_query = sql_string %}
-    {% set resource = resource_id %}
-     <div class="preview-wrapper">
-        {% snippet 'ajax_snippets/table_module.html',
-             sql_string =sql_query,
-             resource_id = resource
-         %}
-     </div>
-
+      <span class="grippy"></span>
+      <ul class="inline text-right chart-actions">
+         <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+      </ul>
+   </div>
+   {% set sql_query = sql_string %}
+   {% set resource = resource_id %}
+   <div class="preview-wrapper">
+      {% snippet 'ajax_snippets/table_module.html',
+      sql_string =sql_query,
+      resource_id = resource
+      %}
+   </div>
 </div>
