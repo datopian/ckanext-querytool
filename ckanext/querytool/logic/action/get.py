@@ -179,7 +179,7 @@ def querytool_get_table_columns(context, data_dict):
     :param data_dict:
     :return:
     '''
-    columns =  h.get_resource_columns(data_dict.get('res_id'))
+    columns = h.get_resource_columns(data_dict.get('res_id'))
     table_columns = []
     for column in columns:
         table_columns.append({
