@@ -88,7 +88,7 @@
     <!-- Visualizations container -->
     <div class="visualizations">
       {% for item in querytool.visualizations %}
-      <div class="item {{ item.size }} {{ item.type }}">
+      <div class="item {{ item.size }} {{ item.type }} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
         {% if item.type == 'chart'  %}
             {% snippet 'ajax_snippets/visualization_item.html',
             type='chart',
