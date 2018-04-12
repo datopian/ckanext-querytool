@@ -11,11 +11,11 @@
             </select>
          </div>
       </div>
-      <span class="grippy"></span>
       <ul class="inline text-right chart-actions">
-         <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+        <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
       </ul>
-   </div>
+      <span class="grippy"></span>
+    </div>
    {% set sql_query = sql_string %}
    {% set resource = resource_id %}
    <div class="preview-wrapper">
