@@ -2,7 +2,7 @@
    <div class="item-wrapper">
       {% snippet 'querytool/admin/snippets/image_upload.html', data=data,n=n  %}
       <ul class="inline text-right chart-actions">
-         <li class="remove"><a id="delete-textbox-btn" class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+         <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
       </ul>
       <input type="hidden" id="image_upload_{{ n }}" name="image_upload_{{ n }}" value="{{ image_upload }}"/>
       <span class="grippy"></span>

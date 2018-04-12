@@ -1,4 +1,5 @@
 {% import 'macros/form.html' as form %}
+
 {% resource 'querytool/vendor/c3/c3.css' %}
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
@@ -16,6 +17,7 @@
 
 {% set action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name) %}
 {% set edit_data_url = h.url_for('querytool_edit', querytool='/' + name) %}
+
 <form method="post" action="{{ action_url }}" data-sql-string="{{ data.sql_string }}" data-chart-resource="{{ data.chart_resource }}" data-map-resource="{{ data.map_resource }}" class="form-horizontal col-sm-12" id="visualizations-form" enctype='multipart/form-data'>
   {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['complete', 'active'] %}
@@ -65,8 +67,8 @@
       {% endif %}
       {% if item.type == 'text_box'  %}
         {% snippet 'ajax_snippets/text_box_item.html',
-          n=item.order,
-          box=item
+          n = item.order,
+          box = item
         %}
       {% endif %}
       {% if item.type == 'image'  %}
@@ -77,19 +79,21 @@
       {% endif %}
       {% if item.type == 'map'  %}
         {% snippet 'ajax_snippets/map_item.html',
-          n=item.order,
+          n = item.order,
           map = item,
           dataset_name = data.dataset_name
+        %}
+      {% endif %}
+     {% if item.type == 'table'  %}
+        {% snippet 'ajax_snippets/table_item.html',
+          n = item.order,
+          table = item,
+          sql_string = data.sql_string,
+          resource_id = data.chart_resource
         %}
       {% endif %}
     {% endfor %}
   </fieldset>
 
 {% endblock %}
-
-<!-- <div class="form-actions">
-  <div class="wrap-btn-save-visualizations">
-    <button id="save-visualization-btn" type="submit" class="btn btn-success" name="save">{{ _('Save') }}</button>
-  </div>
-</div> -->
 </form>

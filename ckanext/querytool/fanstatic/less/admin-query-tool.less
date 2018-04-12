@@ -20,7 +20,7 @@ span.grippy {
   vertical-align: middle;
   letter-spacing: 2px;
   color: @color-neutral-light;
-  text-shadow: 1px 0 1px black;
+  text-shadow: 1px 0 1px @color-black;
 }
 
 span.grippy::after {
@@ -66,6 +66,10 @@ span.grippy.cursor-grabbing {
       content: counter(visualizations);
     }
   }
+  .dataTables_wrapper{
+    padding: @grid-gutter-width;
+  }
+  .dataTable;
   .map {
     .preview-wrapper {
       display: flex;
