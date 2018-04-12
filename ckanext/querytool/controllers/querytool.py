@@ -397,6 +397,8 @@ class QueryToolController(base.BaseController):
                     id = k.split('_')[-1]
                     table_item['type'] = 'table'
                     table_item['order'] = int(id)
+                    table_item['y_axis'] = \
+                        data['choose_y_axis_column']
                     table_item['size'] = \
                         data['table_size_{}'.format(id)]
 
@@ -407,6 +409,10 @@ class QueryToolController(base.BaseController):
             if visualizations:
                 _visualization_items['y_axis_column'] =\
                     visualizations[0].get('y_axis')
+            else:
+                if tables:
+                    _visualization_items['y_axis_column'] = \
+                        tables[0].get('y_axis')
 
             try:
                 junk = _get_action('querytool_visualizations_update',
