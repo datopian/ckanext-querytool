@@ -149,7 +149,9 @@
          {% if item.type == 'table'  %}
           {% snippet 'ajax_snippets/table_module.html',
              sql_string = querytool.sql_string,
-             resource_id=querytool.chart_resource
+             resource_id=querytool.chart_resource,
+             y_axis = y_axis_selected,
+             main_value = item.main_value
           %}
         {% endif %}
       </div>

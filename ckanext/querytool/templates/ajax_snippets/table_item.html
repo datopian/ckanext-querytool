@@ -1,5 +1,6 @@
 <div id="table_item_{{ n }}" class="item table_item visualization-fields-section">
    <div class="item-wrapper">
+
       {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
          <label class="control-label" for="table_size_{{ n }}">{{ _('Table size') }}</label>
@@ -11,14 +12,31 @@
             </select>
          </div>
       </div>
+
+      {% set columns = h.querytool_get_resource_columns(resource_id) %}
+       <div class="control-group control-select">
+        <label class="control-label" for="table_main_value_{{ n }}">{{ _('Main value') }}</label>
+        <div class="controls ">
+          <select id="table_main_value_{{ n }}" name="table_main_value_{{ n }}">
+            {% for column in columns %}
+            <option value="{{column}}"{% if table %}{{ 'selected' if column == table.main_value }}{% endif %}>{{column}}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
       <span class="grippy"></span>
     </div>
-   {% set sql_query = sql_string %}
-   {% set resource = resource_id %}
+
+   {% if table %}
+      {% set main_value = table.main_value %}
+   {% endif %}
    <div class="preview-wrapper">
       {% snippet 'ajax_snippets/table_module.html',
-      sql_string = sql_query,
-      resource_id = resource
+      sql_string = sql_string,
+      resource_id = resource_id,
+      y_axis = y_axis,
+      main_value = main_value
       %}
    </div>
    <ul class="inline text-right chart-actions">
