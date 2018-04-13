@@ -289,6 +289,12 @@
                         enableSave();
                     });
             } else if (visualization === 'table') {
+                var axisYValue = chooseYAxisColumn.val();
+
+                if (axisYValue === '$none$') {
+                    alert('Please choose a column for y axis.');
+                    return;
+                }
                 ckan.sandbox().client.getTemplate('table_item.html', {
                         n: items,
                         sql_string : sqlString,
@@ -479,12 +485,16 @@
 
                 } else if (item.context.id.indexOf('table_item') >= 0) {
                     var table_size = item.find('[id*=table_size_]');
+                    var table_main_value = item.find('[id*=table_main_value_]');
+
 
                     item.attr('id', 'map_item_' + order);
 
                     table_size.attr('id', 'table_size_' + order);
                     table_size.attr('name', 'table_size_' + order);
 
+                    table_main_value.attr('id', 'table_main_value_' + order);
+                    table_main_value.attr('name', 'table_main_value_' + order);
                 }
             });
         }

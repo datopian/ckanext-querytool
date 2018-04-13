@@ -403,6 +403,8 @@ class QueryToolController(base.BaseController):
                         data['choose_y_axis_column']
                     table_item['size'] = \
                         data['table_size_{}'.format(id)]
+                    table_item['main_value'] = \
+                        data['table_main_value_{}'.format(id)]
 
                     tables.append(table_item)
 
@@ -413,11 +415,7 @@ class QueryToolController(base.BaseController):
                 _visualization_items['y_axis_column'] = \
                     data['choose_y_axis_column']
             else:
-                if tables:
-                    _visualization_items['y_axis_column'] = \
-                        tables[0].get('y_axis')
-                else:
-                    _visualization_items['y_axis_column'] = ''
+                _visualization_items['y_axis_column'] = ''
 
             try:
                 junk = _get_action('querytool_visualizations_update',

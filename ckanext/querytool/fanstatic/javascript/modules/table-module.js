@@ -36,10 +36,11 @@ ckan.module('querytool-table', function() {
     return {
         initialize: function() {
 
-            var sql_string = this.options.sql_string;
+            var sql_string = this.create_sql_string();
             var resource_id = this.options.resource_id;
+            var y_axis = this.options.y_axis;
             var id = this.options.table_id;
-
+            var main_value = this.options.main_value;
             var columns = api.get('querytool_get_table_columns', {
                 res_id: resource_id
             }).done(function(response) {});
@@ -50,9 +51,22 @@ ckan.module('querytool-table', function() {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
                     "dataSrc": "result.records"
                 },
-                "columns": columns.responseJSON.result
+                "columns": [
+                    {'data': main_value,
+                    'title':main_value},
+                    {'data':y_axis,
+                    'title': y_axis}
+                ]
 
             });
+        },
+
+         create_sql_string: function() {
+            var parsedSqlString = this.options.sql_string.split('*');
+            var sqlStringExceptSelect = parsedSqlString[1];
+
+
+            return 'SELECT ' + '"' + this.options.main_value + '", SUM("' + this.options.y_axis + '") as ' + this.options.y_axis + sqlStringExceptSelect + ' GROUP BY "' + this.options.main_value + '"';
         },
 
         teardown: function() {
