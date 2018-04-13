@@ -38,12 +38,13 @@ ckan.module('querytool-table', function() {
 
             var sql_string = this.options.sql_string;
             var resource_id = this.options.resource_id;
+            var id = this.options.table_id;
 
             var columns = api.get('querytool_get_table_columns', {
                 res_id: resource_id
             }).done(function(response) {});
 
-            $('#table-item').DataTable({
+            $('#table-item-'+ id).DataTable({
                 "processing": true,
                 "ajax": {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
