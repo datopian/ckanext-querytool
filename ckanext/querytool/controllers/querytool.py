@@ -385,8 +385,10 @@ class QueryToolController(base.BaseController):
                     map_item['order'] = int(id)
                     map_item['map_resource'] = \
                         data['map_resource_{}'.format(id)]
-                    map_item['main_property'] = \
-                        data['map_main_property_{}'.format(id)]
+                    map_item['map_key_field'] = \
+                        data['map_key_field_{}'.format(id)]
+                    map_item['data_key_field'] = \
+                        data['map_data_key_field_{}'.format(id)]
                     map_item['size'] = \
                         data['map_size_{}'.format(id)]
 
@@ -406,13 +408,12 @@ class QueryToolController(base.BaseController):
 
             vis = visualizations + text_boxes + images + maps + tables
             _visualization_items['visualizations'] = json.dumps(vis)
-            if visualizations:
-                _visualization_items['y_axis_column'] =\
-                    visualizations[0].get('y_axis')
+
+            if 'choose_y_axis_column' in data:
+                _visualization_items['y_axis_column'] = \
+                    data['choose_y_axis_column']
             else:
-                if tables:
-                    _visualization_items['y_axis_column'] = \
-                        tables[0].get('y_axis')
+                _visualization_items['y_axis_column'] = ''
 
             try:
                 junk = _get_action('querytool_visualizations_update',

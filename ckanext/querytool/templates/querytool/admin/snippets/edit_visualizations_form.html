@@ -81,7 +81,9 @@
         {% snippet 'ajax_snippets/map_item.html',
           n = item.order,
           map = item,
-          dataset_name = data.dataset_name
+          sql_string=data.sql_string,
+          chart_resource=data.chart_resource,
+          y_axis_column = data.y_axis_column
         %}
       {% endif %}
      {% if item.type == 'table'  %}

@@ -380,6 +380,54 @@ def get_geojson_properties(url):
     ]
 
     for k, v in geojson.get('features')[0].get('properties').iteritems():
-        if k not in exclude_keys and (type(v) is int or type(v) is float):
+        if k not in exclude_keys:
             result.append({'value': k, 'text': k})
     return result
+
+
+def get_map_data(geojson_url, map_key_field, data_key_field,
+                 data_value_field, from_where_clause):
+    print map_key_field
+    print data_key_field
+    print data_value_field
+
+    geojson_keys = []
+    geojson_data = json.load(urllib.urlopen(geojson_url))
+
+    for feature in geojson_data['features']:
+        geojson_keys.append(feature['properties'][map_key_field])
+
+    sql = 'SELECT ' + '"' + data_key_field + \
+          '", SUM("' + data_value_field + '") as ' + \
+          data_value_field + from_where_clause + \
+          ' GROUP BY "' + data_key_field + '"'
+
+    response = toolkit.get_action('datastore_search_sql')(
+        {}, {'sql': sql}
+    )
+    records_to_lower = []
+    for record in response['records']:
+        records_to_lower.append({k.lower(): v for k, v in record.items()})
+    response['records'] = records_to_lower
+
+    mapping = {}
+
+    for record in records_to_lower:
+
+        key = record[data_key_field.lower()]
+        value = record[data_value_field.lower()]
+
+        if key not in geojson_keys:
+            continue
+
+        mapping[key] = {
+            'key': key,
+            'value': value
+        }
+
+    map_data = {
+        'geojson_data': geojson_data,
+        'features_values': mapping
+    }
+
+    return map_data

@@ -1,4 +1,5 @@
 {% import 'macros/form.html' as form %}
+{% set columns = h.querytool_get_resource_columns(chart_resource) %}
 
   <div id="map_item_{{ n }}" class="item map visualization-fields-section">
     <div class="item-wrapper">
@@ -22,15 +23,27 @@
       {% endif %}
 
       <div class="control-group control-select">
-        <label class="control-label" for="map_main_property_{{ n }}">{{ _('Main property') }}</label>
+        <label class="control-label" for="map_key_field_{{ n }}">{{ _('Map key field') }}</label>
         <div class="controls ">
-          <select id="map_main_property_{{ n }}" name="map_main_property_{{ n }}" required=required>
-          <option value="">&mdash; {{ _('Select map property') }} &mdash;</option>
+          <select id="map_key_field_{{ n }}" name="map_key_field_{{ n }}" required=required>
+          <option value="">&mdash; {{ _('Select map key field') }} &mdash;</option>
           {% if map_properties %}
             {% for property in map_properties %}
-              <option value="{{ property.value }}" {% if map %}{{ 'selected' if property.value == map.main_property }}{% endif %} >{{property.text}}</option>
+              <option value="{{ property.value }}" {% if map %}{{ 'selected' if property.value == map.map_key_field }}{% endif %} >{{property.text}}</option>
             {% endfor %}
           {% endif %}
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group control-select">
+        <label class="control-label" for="map_data_key_field_{{ n }}">{{ _('Data key field') }}</label>
+        <div class="controls ">
+          <select id="map_data_key_field_{{ n }}" name="map_data_key_field_{{ n }}" required=required>
+            <option value="">&mdash; {{ _('Select data key field') }} &mdash;</option>
+            {% for column in columns %}
+            <option value="{{column}}"{% if map %}{{ 'selected' if column == map.data_key_field }}{% endif %}>{{column}}</option>
+            {% endfor %}
           </select>
         </div>
       </div>
@@ -56,12 +69,16 @@
     <div class="preview-wrapper">
       {% if map %}
         {% set map_resource=map.map_resource %}
-        {% set main_property=map.main_property %}
+        {% set map_key_field=map.map_key_field %}
+        {% set data_key_field=map.data_key_field %}
       {% endif %}
       {% snippet 'ajax_snippets/map_module.html',
           n=n,
           map_resource=map_resource,
-          main_property=main_property
+          map_key_field=map_key_field,
+          data_key_field=data_key_field,
+          sql_string=sql_string,
+          y_axis_column=y_axis_column
       %}
     </div>
   </div>
