@@ -413,7 +413,11 @@ class QueryToolController(base.BaseController):
                 _visualization_items['y_axis_column'] = \
                     data['choose_y_axis_column']
             else:
-                _visualization_items['y_axis_column'] = ''
+                if tables:
+                    _visualization_items['y_axis_column'] = \
+                        tables[0].get('y_axis')
+                else:
+                    _visualization_items['y_axis_column'] = ''
 
             try:
                 junk = _get_action('querytool_visualizations_update',
