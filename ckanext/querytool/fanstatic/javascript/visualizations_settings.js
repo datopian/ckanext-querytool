@@ -484,6 +484,7 @@
 
                     table_size.attr('id', 'table_size_' + order);
                     table_size.attr('name', 'table_size_' + order);
+
                 }
             });
         }

@@ -1,2 +1,3 @@
-<div data-module="querytool-table" data-module-sql_string="{{ sql_string }}" data-module-resource_id="{{ resource_id }}"></div>
-<table id="table-item"></table>
+{% set id = h.querytool_get_uuid() %}
+<div data-module="querytool-table" data-module-sql_string="{{ sql_string }}" data-module-resource_id="{{ resource_id }}" data-module-table_id="{{ id }}"></div>
+<table id="table-item-{{ id }}"></table>
