@@ -289,6 +289,12 @@
                         enableSave();
                     });
             } else if (visualization === 'table') {
+                var axisYValue = chooseYAxisColumn.val();
+
+                if (axisYValue === '$none$') {
+                    alert('Please choose a column for y axis.');
+                    return;
+                }
                 ckan.sandbox().client.getTemplate('table_item.html', {
                         n: items,
                         sql_string : sqlString,
