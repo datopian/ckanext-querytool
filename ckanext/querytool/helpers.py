@@ -387,9 +387,6 @@ def get_geojson_properties(url):
 
 def get_map_data(geojson_url, map_key_field, data_key_field,
                  data_value_field, from_where_clause):
-    print map_key_field
-    print data_key_field
-    print data_value_field
 
     geojson_keys = []
     geojson_data = json.load(urllib.urlopen(geojson_url))

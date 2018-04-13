@@ -20,15 +20,11 @@ ckan.module('querytool-map', function($, _) {
     return {
         initialize: function() {
 
-            //            console.log(this.options.map_key_field);
-            //            console.log(this.options.data_key_field);
-            //            console.log(this.options.sql_string);
-            //            console.log(this.options.y_axis_column);
-
             this.initLeaflet.call(this);
             this.mapResource = this.el.parent().parent().find('[id*=map_resource_]');
             this.mapKeyField = this.el.parent().parent().find('[id*=map_key_field_]');
             this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
+            this.valueField = $('#choose_y_axis_column');
             this.mapResource.change(this.onResourceChange.bind(this));
             this.mapKeyField.change(this.onPropertyChange.bind(this));
             this.dataKeyField.change(this.onPropertyChange.bind(this));
@@ -39,39 +35,37 @@ ckan.module('querytool-map', function($, _) {
             $('.leaflet-control-zoom-out').css({
                 'color': '#121e87'
             });
-
-            this.sandbox.subscribe('querytool:updateMaps', this.onDataValueFieldChange.bind(this));
-
+            this.sandbox.subscribe('querytool:updateMaps', this.onPropertyChange.bind(this));
         },
         resetMap: function() {
 
-            this.options.map_resource = this.mapResourceVal;
-            this.options.map_key_field = this.mapKeyFieldVal;
-            this.options.data_key_field = this.dataKeyField;
-
-            //            this.mapKeyField.find('option').not(':first').remove();
+            this.options.map_resource = this.mapResource.val();
+            this.options.map_key_field = this.mapKeyField.val();
+            this.options.data_key_field = this.dataKeyField.val();
+            this.options.y_axis_column = this.valueField.val();
 
             this.map.eachLayer(function(layer) {
-                if (layer != this.osm)
+                if (layer != this.osm) {
                     this.map.removeLayer(layer);
+                }
             }.bind(this));
 
             if (this.legend) {
                 this.map.removeControl(this.legend);
             }
-
             this.map.setView([39, 40], 2);
-
         },
         onResourceChange: function() {
 
-            this.mapResourceVal = this.mapResource.val();
-            this.mapKeyFieldVal = this.mapKeyField.val();
+            this.options.map_key_field = this.mapKeyField.val();
+            this.options.data_key_field = this.dataKeyField.val();
+            this.options.y_axis_column = this.valueField.val();
 
-            if (this.options.map_resource != this.mapResourceVal && this.mapResourceVal != '') {
+            if (this.options.map_resource != this.mapResource.val() && this.mapResource.val() != '') {
+                this.options.map_resource = this.mapResource.val();
 
                 api.get('querytool_get_geojson_properties', {
-                        map_resource: this.mapResourceVal
+                        map_resource: this.options.map_resource
                     })
                     .done(function(data) {
                         if (data.success) {
@@ -79,11 +73,9 @@ ckan.module('querytool-map', function($, _) {
                             this.mapKeyField.find('option').not(':first').remove();
 
                             $.each(data.result, function(idx, elem) {
-
                                 this.mapKeyField.append(new Option(elem.text, elem.value));
                             }.bind(this));
                             this.resetMap.call(this);
-
                         } else {
                             this.resetMap.call(this);
                         }
@@ -92,35 +84,31 @@ ckan.module('querytool-map', function($, _) {
                         this.resetMap.call(this);
                     }.bind(this));
             } else {
-
                 this.resetMap.call(this);
-
             }
         },
         onPropertyChange: function() {
 
-            var mapKeyFieldVal = this.mapKeyField.val();
-            var dataKeyFieldVal = this.dataKeyField.val();
-            if (this.legend) {
-                this.map.removeControl(this.legend);
+            this.options.map_resource = this.mapResource.val();
+            this.options.map_key_field = this.mapKeyField.val();
+            this.options.data_key_field = this.dataKeyField.val();
+            this.options.y_axis_column = this.valueField.val();
+
+
+            if (this.options.map_key_field && this.options.data_key_field && this.options.map_resource && this.options.y_axis_column != '$none$') {
+
+                if (this.legend) {
+                    this.map.removeControl(this.legend);
+                }
+                this.map.eachLayer(function(layer) {
+                    if (layer != this.osm) {
+                        this.map.removeLayer(layer);
+                    }
+                }.bind(this));
+                this.initializeMarkers.call(this, this.options.map_resource);
+            } else {
+                this.resetMap.call(this);
             }
-            this.options.map_key_field = mapKeyFieldVal;
-            this.options.data_key_field = dataKeyFieldVal;
-
-            this.initializeMarkers.call(this, this.options.map_resource);
-
-        },
-        onDataValueFieldChange: function() {
-
-            var valueField = $('#choose_y_axis_column');
-
-            var valueFieldVal = valueField.val();
-            if (this.legend) {
-                this.map.removeControl(this.legend);
-            }
-            this.options.y_axis_column = valueFieldVal;
-            this.initializeMarkers.call(this, this.options.map_resource);
-
         },
         initLeaflet: function() {
             // geo layer
@@ -198,7 +186,6 @@ ckan.module('querytool-map', function($, _) {
                         this.formatNumber(grades[i]) +
                         (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1]) + '</li>' : '+</li></ul>');
                 }
-
                 ul.innerHTML +=
                     '<li><span style="background:' + '#bdbdbd' + '; opacity: ' + opacity + '"></span> ' +
                     noDataLabel + '</li>';
@@ -293,9 +280,6 @@ ckan.module('querytool-map', function($, _) {
                                     layer.bindPopup(popup);
 
                                 }
-
-
-                                //              layer.name = feature.properties[mainField];
                             }.bind(this)
                         }).addTo(this.map);
 
@@ -319,11 +303,8 @@ ckan.module('querytool-map', function($, _) {
                                 'border-top': '5px solid ' + '#121e87'
                             });
                         }.bind(this));
-
                         // Properly zoom the map to fit all markers/polygons
                         this.map.fitBounds(this.geoL.getBounds().pad(0.5));
-
-
                     } else {
                         this.resetMap.call(this);
                     }
@@ -332,12 +313,10 @@ ckan.module('querytool-map', function($, _) {
                     this.resetMap.call(this);
                 }.bind(this));
 
-
-
         },
         teardown: function() {
             // We must always unsubscribe on teardown to prevent memory leaks.
-            this.sandbox.unsubscribe('querytool:updateMaps', this.onDataValueFieldChange.bind(this));
+            this.sandbox.unsubscribe('querytool:updateMaps', this.onPropertyChange.bind(this));
         },
     }
 });
