@@ -1,6 +1,5 @@
 @import "inc/variables.less";
 @import "inc/mixins.less";
-
 span.grippy {
   position: absolute;
   top: @grid-gutter-width;
@@ -48,8 +47,15 @@ span.grippy.cursor-grabbing {
   .item {
     flex-wrap: wrap;
     counter-increment: visualizations;
-    &.image_item {
+    &.image_item,
+    &.table_item {
       flex-direction: column;
+    }
+    &.table_item{
+      .preview-wrapper{
+        margin-left: 0;
+        margin-bottom: @grid-gutter-width;
+      }
     }
     &.gu-transit {
       max-height: @grid-gutter-width*5;
@@ -66,7 +72,7 @@ span.grippy.cursor-grabbing {
       content: counter(visualizations);
     }
   }
-  .dataTables_wrapper{
+  .dataTables_wrapper {
     padding: @grid-gutter-width;
   }
   .dataTable;
@@ -89,8 +95,8 @@ span.grippy.cursor-grabbing {
   }
 }
 
-.text_box{
-  .item-wrapper{
+.text_box {
+  .item-wrapper {
     min-width: 100%;
   }
 }
@@ -112,7 +118,7 @@ span.grippy.cursor-grabbing {
   }
 }
 
-.sticky-title{
+.sticky-title {
   position: sticky;
   top: 0;
   padding: @grid-gutter-width/2 0;
