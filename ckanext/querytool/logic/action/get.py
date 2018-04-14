@@ -162,7 +162,6 @@ def querytool_get_resource_data(context, data_dict):
         records_to_lower.append({k.lower(): v for k, v in record.items()})
 
     response['records'] = records_to_lower
-
     return response
 
 
