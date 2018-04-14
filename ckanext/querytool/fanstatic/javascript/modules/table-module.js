@@ -35,16 +35,15 @@ ckan.module('querytool-table', function() {
 
     return {
         initialize: function() {
-
-            var sql_string = this.create_sql_string();
             var resource_id = this.options.resource_id;
             var y_axis = this.options.y_axis;
             var id = this.options.table_id;
             var main_value = this.options.main_value;
-            var columns = api.get('querytool_get_table_columns', {
-                res_id: resource_id
-            }).done(function(response) {});
-
+            if(main_value === true){
+                var mainVal = $('[name*=table_main_value_]');
+                main_value = mainVal.val();
+            }
+            var sql_string = this.create_sql_string(main_value);
             $('#table-item-'+ id).DataTable({
                 "processing": true,
                 "ajax": {
@@ -61,12 +60,12 @@ ckan.module('querytool-table', function() {
             });
         },
 
-         create_sql_string: function() {
+         create_sql_string: function(main_value) {
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
 
 
-            return 'SELECT ' + '"' + this.options.main_value + '", SUM("' + this.options.y_axis + '") as ' + this.options.y_axis + sqlStringExceptSelect + ' GROUP BY "' + this.options.main_value + '"';
+            return 'SELECT ' + '"' + main_value + '", SUM("' + this.options.y_axis + '") as ' + this.options.y_axis + sqlStringExceptSelect + ' GROUP BY "' + main_value + '"';
         },
 
         teardown: function() {
