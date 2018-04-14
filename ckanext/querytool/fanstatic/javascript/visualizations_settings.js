@@ -225,7 +225,6 @@
 
             if (visualization === 'chart') {
                 var axisYValue = chooseYAxisColumn.val();
-
                 if (axisYValue === '$none$') {
                     alert('Please choose a column for y axis.');
                     return;
@@ -290,15 +289,16 @@
                     });
             } else if (visualization === 'table') {
                 var axisYValue = chooseYAxisColumn.val();
-
                 if (axisYValue === '$none$') {
                     alert('Please choose a column for y axis.');
                     return;
                 }
-                ckan.sandbox().client.getTemplate('table_item.html', {
+                ckan.sandbox().client.getTemplate('table_item.html',{
                         n: items,
                         sql_string : sqlString,
-                        resource_id : chart_resource
+                        resource_id : chart_resource,
+                        y_axis : axisYValue
+
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -327,6 +327,7 @@
 
         //enable or disable save button
         function enableSave() {
+
             var isEmpty = $('#visualization-settings-items').find('.item');
             var isDisabled = (isEmpty.length >= 1);
             $('#save-visualization-btn').attr('disabled', !isDisabled);
@@ -487,8 +488,7 @@
                     var table_size = item.find('[id*=table_size_]');
                     var table_main_value = item.find('[id*=table_main_value_]');
 
-
-                    item.attr('id', 'map_item_' + order);
+                    item.attr('id', 'table_item_' + order);
 
                     table_size.attr('id', 'table_size_' + order);
                     table_size.attr('name', 'table_size_' + order);
