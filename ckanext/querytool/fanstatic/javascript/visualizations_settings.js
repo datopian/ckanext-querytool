@@ -198,14 +198,13 @@
             var axisY = $('[name*=chart_field_axis_y_]');
             axisY.val(event.target.value);
 
-            // Send a message to update charts when a new column is selected.
-            // The JavaScript module "querytool-viz-preview" subscribes to this
-            // event to update the chart.
+            // Send a message to update charts,tables and maps when a new column is selected.
+            // The JavaScript modules "querytool-viz-preview","table-module" and "map-module" subscribes to this
+            // event to update the visualizations.
             ckan.sandbox().publish('querytool:updateCharts');
-            // Send a message to update map when a new column is selected.
-            // The JavaScript module "querytool-map" subscribes to this
-            // event to update the map.
             ckan.sandbox().publish('querytool:updateMaps');
+            ckan.sandbox().publish('querytool:updateTables');
+
         });
 
         //delete dynamicly created textbox section
