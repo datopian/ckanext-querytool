@@ -35,16 +35,36 @@ ckan.module('querytool-table', function() {
 
     return {
         initialize: function() {
+
+
+            this.createTable();
+
+             var tableField = this.el.closest('.table_item');
+
+            // The Update table button is only in the admin area. In the public
+            // updating of tables will be applied with a reload of the page.
+            if (tableField.length > 0) {
+                var updateBtn = tableField.find('.update-table-btn');
+
+                updateBtn.click(this.updateTable.bind(this));
+            }
+
+            this.sandbox.subscribe('querytool:updateTables', this.updateTable.bind(this));
+        },
+
+        createTable: function(yVal){
+
             var resource_id = this.options.resource_id;
-            var y_axis = this.options.y_axis;
+            var y_axis = (yVal) ? yVal : this.options.y_axis;
             var id = this.options.table_id;
             var main_value = this.options.main_value;
             if(main_value === true){
                 var mainVal = $('[name*=table_main_value_]');
                 main_value = mainVal.val();
             }
-            var sql_string = this.create_sql_string(main_value);
-            $('#table-item-'+ id).DataTable({
+            var sql_string = this.create_sql_string(main_value, y_axis);
+
+            this.dataTable = $('#table-item-'+ id).DataTable({
                 "processing": true,
                 "ajax": {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
@@ -55,17 +75,23 @@ ckan.module('querytool-table', function() {
                     'title':main_value},
                     {'data':y_axis,
                     'title': y_axis}
-                ]
+                ],
+                "destroy" : true /* <---- this setting reinitialize the table */
 
             });
         },
 
-         create_sql_string: function(main_value) {
+        updateTable : function(){
+            var yVal = $('[name=choose_y_axis_column]').val();
+            this.createTable(yVal);
+        },
+
+        create_sql_string: function(main_value, y_axis) {
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
 
 
-            return 'SELECT ' + '"' + main_value + '", SUM("' + this.options.y_axis + '") as ' + this.options.y_axis + sqlStringExceptSelect + ' GROUP BY "' + main_value + '"';
+            return 'SELECT ' + '"' + main_value + '", SUM("' + y_axis + '") as ' + y_axis + sqlStringExceptSelect + ' GROUP BY "' + main_value + '"';
         },
 
         teardown: function() {
