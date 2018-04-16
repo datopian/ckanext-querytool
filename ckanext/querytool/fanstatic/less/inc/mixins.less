@@ -22,6 +22,15 @@
 
 .dataTable {
   .dataTables_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-basis: 100%;
+    table{
+      width: auto;
+      flex-basis: 100%;
+      table-layout: auto;
+    }
     .paginate_button {
       &:hover {
         background: @color-secondary;
@@ -84,6 +93,9 @@
     .dataTables_info,
     .dataTables_paginate {
       margin: @grid-gutter-width/2 0;
+    }
+    .dataTables_info{
+      flex: auto;
     }
   }
 }

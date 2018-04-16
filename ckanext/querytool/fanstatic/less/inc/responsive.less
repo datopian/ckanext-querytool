@@ -127,6 +127,13 @@
 /* Up to desktop */
 
 @media (max-width: @screen-sm-max) {
+  .dataTables_wrapper {
+    .dataTables_filter,
+    .dataTables_length {
+      text-align: left;
+      flex-basis: 100%;
+    }
+  }
   .btn-navbar {
     margin: @grid-gutter-width/2 0;
   }
