@@ -222,13 +222,10 @@
             var visualization = $('#item_type').val();
             var item = $('.item');
             var items = item.length + 1;
+            var axisYValue = chooseYAxisColumn.val();
 
             if (visualization === 'chart') {
-                var axisYValue = chooseYAxisColumn.val();
-                if (axisYValue === '$none$') {
-                    alert('Please choose a column for y axis.');
-                    return;
-                }
+
                 //TODO: parse query params simple
                 var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split("?")[0];
                 ckan.sandbox().client.getTemplate('chart_item.html', {
@@ -250,12 +247,7 @@
                         handleTickFormat(items);
                     });
             } else if (visualization === 'map') {
-                var axisYValue = chooseYAxisColumn.val();
 
-                if (axisYValue === '$none$') {
-                    alert('Please choose a value for y axis.');
-                    return;
-                }
                 ckan.sandbox().client.getTemplate('map_item.html', {
                         n: items,
                         chart_resource: chart_resource,
@@ -288,11 +280,7 @@
                         enableSave();
                     });
             } else if (visualization === 'table') {
-                var axisYValue = chooseYAxisColumn.val();
-                if (axisYValue === '$none$') {
-                    alert('Please choose a column for y axis.');
-                    return;
-                }
+
                 ckan.sandbox().client.getTemplate('table_item.html',{
                         n: items,
                         sql_string : sqlString,
