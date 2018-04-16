@@ -66,6 +66,7 @@ ckan.module('querytool-table', function() {
 
             this.dataTable = $('#table-item-'+ id).DataTable({
                 "processing": true,
+                "searching": true,
                 "ajax": {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
                     "dataSrc": "result.records"
@@ -96,6 +97,7 @@ ckan.module('querytool-table', function() {
 
         teardown: function() {
             // We must always unsubscribe on teardown to prevent memory leaks.
+            this.sandbox.unsubscribe('querytool:updateTables', this.updateTable.bind(this));
         }
     }
 });
