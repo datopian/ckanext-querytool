@@ -52,15 +52,20 @@ ckan.module('querytool-table', function() {
             this.sandbox.subscribe('querytool:updateTables', this.updateTable.bind(this));
         },
 
-        createTable: function(yVal){
+        createTable: function(yVal, xVal, fromUpdate){
 
             var resource_id = this.options.resource_id;
             var y_axis = (yVal) ? yVal : this.options.y_axis;
             var id = this.options.table_id;
             var main_value = this.options.main_value;
+            console.log('MAIN '+ main_value)
             if(main_value === true){
                 var mainVal = $('[name*=table_main_value_]');
                 main_value = mainVal.val();
+            }
+            //check if main value is updated
+            if(fromUpdate){
+                main_value = xVal;
             }
             var sql_string = this.create_sql_string(main_value, y_axis);
 
@@ -84,7 +89,8 @@ ckan.module('querytool-table', function() {
 
         updateTable : function(){
             var yVal = $('[name=choose_y_axis_column]').val();
-            this.createTable(yVal);
+            var xVal = $('[name*=table_main_value_]').val();
+            this.createTable(yVal, xVal, true);
         },
 
         create_sql_string: function(main_value, y_axis) {
