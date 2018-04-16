@@ -2,7 +2,7 @@
 
 {% set active_charts = chart %}
 
-{% set columns = h.querytool_get_resource_columns(chart_resource) %}
+{% set columns = h.querytool_get_resource_columns(chart_resource, y_axis_values) %}
 
 {% if chart and chart.filter_name %}
   {% set class = '' %}

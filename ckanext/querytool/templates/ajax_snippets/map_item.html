@@ -1,5 +1,5 @@
 {% import 'macros/form.html' as form %}
-{% set columns = h.querytool_get_resource_columns(chart_resource) %}
+{% set columns = h.querytool_get_resource_columns(chart_resource, y_axis_values) %}
 
   <div id="map_item_{{ n }}" class="item map visualization-fields-section">
     <div class="item-wrapper">

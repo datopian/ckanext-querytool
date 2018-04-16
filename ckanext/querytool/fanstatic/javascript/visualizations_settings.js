@@ -184,6 +184,7 @@
         var sqlString = vizForm.data('sqlString');
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
+        var yAxisValues = vizForm.data('yAxisValues');
         var chooseYAxisColumn = $('#choose_y_axis_column');
         handleTickFormat();
 
@@ -233,7 +234,8 @@
                         chart_resource: chart_resource,
                         map_resource: map_resource,
                         sql_string: sqlString,
-                        class: 'hidden'
+                        class: 'hidden',
+                        y_axis_values: yAxisValues
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -251,7 +253,8 @@
                         n: items,
                         chart_resource: chart_resource,
                         sql_string: sqlString,
-                        y_axis_column: axisYValue
+                        y_axis_column: axisYValue,
+                        y_axis_values: yAxisValues
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -284,7 +287,8 @@
                         n: items,
                         sql_string : sqlString,
                         resource_id : chart_resource,
-                        y_axis : axisYValue
+                        y_axis : axisYValue,
+                        y_axis_values: yAxisValues
 
                     })
                     .done(function(data) {
