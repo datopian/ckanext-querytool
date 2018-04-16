@@ -184,6 +184,7 @@
         var sqlString = vizForm.data('sqlString');
         var chart_resource = vizForm.data('chartResource');
         var map_resource = vizForm.data('mapResource');
+        var yAxisValues = vizForm.data('yAxisValues');
         var chooseYAxisColumn = $('#choose_y_axis_column');
         handleTickFormat();
 
@@ -221,13 +222,10 @@
             var visualization = $('#item_type').val();
             var item = $('.item');
             var items = item.length + 1;
+            var axisYValue = chooseYAxisColumn.val();
 
             if (visualization === 'chart') {
-                var axisYValue = chooseYAxisColumn.val();
-                if (axisYValue === '$none$') {
-                    alert('Please choose a column for y axis.');
-                    return;
-                }
+
                 //TODO: parse query params simple
                 var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split("?")[0];
                 ckan.sandbox().client.getTemplate('chart_item.html', {
@@ -236,7 +234,8 @@
                         chart_resource: chart_resource,
                         map_resource: map_resource,
                         sql_string: sqlString,
-                        class: 'hidden'
+                        class: 'hidden',
+                        y_axis_values: yAxisValues
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -249,17 +248,13 @@
                         handleTickFormat(items);
                     });
             } else if (visualization === 'map') {
-                var axisYValue = chooseYAxisColumn.val();
 
-                if (axisYValue === '$none$') {
-                    alert('Please choose a value for y axis.');
-                    return;
-                }
                 ckan.sandbox().client.getTemplate('map_item.html', {
                         n: items,
                         chart_resource: chart_resource,
                         sql_string: sqlString,
-                        y_axis_column: axisYValue
+                        y_axis_column: axisYValue,
+                        y_axis_values: yAxisValues
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -287,16 +282,13 @@
                         enableSave();
                     });
             } else if (visualization === 'table') {
-                var axisYValue = chooseYAxisColumn.val();
-                if (axisYValue === '$none$') {
-                    alert('Please choose a column for y axis.');
-                    return;
-                }
+
                 ckan.sandbox().client.getTemplate('table_item.html',{
                         n: items,
                         sql_string : sqlString,
                         resource_id : chart_resource,
-                        y_axis : axisYValue
+                        y_axis : axisYValue,
+                        y_axis_values: yAxisValues
 
                     })
                     .done(function(data) {

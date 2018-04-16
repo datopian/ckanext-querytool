@@ -95,7 +95,7 @@ ckan.module('querytool-map', function($, _) {
             this.options.y_axis_column = this.valueField.val();
 
 
-            if (this.options.map_key_field && this.options.data_key_field && this.options.map_resource && this.options.y_axis_column != '$none$') {
+            if (this.options.map_key_field && this.options.data_key_field && this.options.map_resource && this.options.y_axis_column) {
 
                 if (this.legend) {
                     this.map.removeControl(this.legend);

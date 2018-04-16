@@ -452,9 +452,6 @@ class QueryToolController(base.BaseController):
             'text': column
         }, data['y_axis_columns'])
 
-        data['y_axis_columns'].insert(0, {
-            'value': '$none$', 'text': '-- Select column --'
-        })
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
 

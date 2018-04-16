@@ -326,7 +326,7 @@ def get_dataset_resources(dataset_name):
     return dataset_resources
 
 
-def get_resource_columns(res_id):
+def get_resource_columns(res_id, y_axis_values=[]):
     '''
 
     Get the names of the columns for the resource stored in Datastore
@@ -334,15 +334,15 @@ def get_resource_columns(res_id):
         - res_id: (string) ID of the CKAN resource
 
     '''
-
     try:
         res_info = _get_action('datastore_info', {'id': res_id})
     except Exception:
         return []
 
     fields = res_info.get('schema').keys()
+    result = [x for x in fields if x not in y_axis_values]
 
-    return fields
+    return result
 
 
 def get_uuid():
