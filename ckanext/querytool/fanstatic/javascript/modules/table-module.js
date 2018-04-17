@@ -77,9 +77,9 @@ ckan.module('querytool-table', function() {
                     "dataSrc": "result.records"
                 },
                 "columns": [
-                    {'data': main_value,
+                    {'data': main_value.toLowerCase(),
                     'title':main_value},
-                    {'data':y_axis,
+                    {'data':y_axis.toLowerCase(),
                     'title': y_axis}
                 ],
                 "destroy" : true /* <---- this setting reinitialize the table */
