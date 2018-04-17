@@ -89,6 +89,16 @@ ckan.module('querytool-table', function() {
                 ],
                 "destroy" : true /* <---- this setting reinitialize the table */
             });
+
+            var download_formats = ['CSV', 'JSON', 'XML'];
+
+            var download_btns = '<ul class="inline table-download-controls">';
+            $.each(download_formats, function(i, value){
+              download_btns += '<li><button class="btn btn-default" type="button"><span class="fa fa-download"></span> ' + value + '</button></li>';
+            });
+            download_btns += '</ul>';
+
+            $('.dataTables_length').after(download_btns);
         },
 
         updateTable : function(){
