@@ -1,7 +1,6 @@
 {
   "name": "ckanext-querytool",
-  "scripts": {
-  },
+  "scripts": {},
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
