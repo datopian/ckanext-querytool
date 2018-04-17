@@ -82,8 +82,12 @@ ckan.module('querytool-table', function() {
                     {'data':y_axis,
                     'title': y_axis}
                 ],
+                //download table data options
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf'
+                ],
                 "destroy" : true /* <---- this setting reinitialize the table */
-
             });
         },
 
