@@ -48,6 +48,18 @@
         </div>
       </div>
 
+      {% set color_schemes = h.querytool_get_map_color_scheme() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="map_color_scheme_{{ n }}">{{ _('Color scheme') }}</label>
+        <div class="controls ">
+          <select id="map_color_scheme_{{ n }}" name="map_color_scheme_{{ n }}">
+          {% for color in color_schemes %}
+            <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{color.text}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+
       {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
         <label class="control-label" for="map_size_{{ n }}">{{ _('Map size') }}</label>
@@ -71,6 +83,7 @@
         {% set map_resource=map.map_resource %}
         {% set map_key_field=map.map_key_field %}
         {% set data_key_field=map.data_key_field %}
+        {% set map_color_scheme=map.map_color_scheme %}
       {% endif %}
       {% snippet 'ajax_snippets/map_module.html',
           n=n,
@@ -78,6 +91,7 @@
           map_key_field=map_key_field,
           data_key_field=data_key_field,
           sql_string=sql_string,
+          map_color_scheme=map_color_scheme,
           y_axis_column=y_axis_column
       %}
     </div>
