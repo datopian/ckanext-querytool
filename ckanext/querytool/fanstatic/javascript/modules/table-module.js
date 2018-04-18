@@ -68,10 +68,10 @@ ckan.module('querytool-table', function() {
                 main_value = xVal;
             }
             var sql_string = this.create_sql_string(main_value, y_axis);
+            var dt_buttons_className = 'btn btn-default';
 
             this.dataTable = $('#table-item-'+ id).DataTable({
                 "processing": true,
-                "searching": true,
                 "ajax": {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
                     "dataSrc": "result.records"
@@ -82,19 +82,24 @@ ckan.module('querytool-table', function() {
                     {'data':y_axis.toLowerCase(),
                     'title': y_axis}
                 ],
+                //download table data options
+                dom: 'lBfrtip',
+                buttons: [
+                    {
+                    'extend': 'csv',
+                    'className' : dt_buttons_className
+                    },
+                       {
+                    'extend': 'excel',
+                    'className' : dt_buttons_className
+                    },
+                     {
+                    'extend': 'pdf',
+                    'className' : dt_buttons_className
+                    }
+                ],
                 "destroy" : true /* <---- this setting reinitialize the table */
-
             });
-
-            var download_formats = ['CSV', 'JSON', 'XML'];
-
-            var download_btns = '<ul class="inline table-download-controls">';
-            $.each(download_formats, function(i, value){
-              download_btns += '<li><button class="btn btn-default" type="button"><span class="fa fa-download"></span> ' + value + '</button></li>';
-            });
-            download_btns += '</ul>';
-
-            $('.dataTables_length').after(download_btns);
         },
 
         updateTable : function(){

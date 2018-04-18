@@ -21,6 +21,16 @@
 }
 
 .dataTable {
+  .dt-button{
+    margin: auto 2px;
+    span{
+      &:before{
+        margin-right: @grid-gutter-width/4;
+        font-family: 'FontAwesome';
+        content: "\f019";
+      }
+    }
+  }
   .dataTables_wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -72,7 +82,7 @@
         margin-bottom: 0;
       }
     }
-    .table-download-controls,
+    .dt-buttons,
     .dataTables_filter,
     .dataTables_length {
       background: @color-neutral-pale;
