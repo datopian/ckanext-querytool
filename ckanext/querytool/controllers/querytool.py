@@ -506,60 +506,61 @@ class QueryToolController(base.BaseController):
                 'querytool_public_read',
                 {'name': item['name']}
             )
-            q_item['visualizations'] = json.loads(
-                q_item['visualizations']
-            )
-            q_item['visualizations'].sort(key=itemgetter('order'))
+            if q_item:
+                q_item['visualizations'] = json.loads(
+                    q_item['visualizations']
+                )
+                q_item['visualizations'].sort(key=itemgetter('order'))
 
-            q_name = q_item['name']
-            new_filters = json.loads(q_item['filters'])
+                q_name = q_item['name']
+                new_filters = json.loads(q_item['filters'])
 
-            for k, v in params.items():
-                # Update query filters
-                if k.startswith('{}_data_filter_name_'.format(q_name)):
-                    id = k.split('_')[-1]
-                    for filter in new_filters:
-                        # Apply changes only on public filters
-                        # to protect changing private
-                        # filters by changing the url query params
-                        if filter['visibility'] == 'public':
-                            if v == filter.get('name'):
-                                filter['value'] = \
-                                    params.get('{}_data_filter_value_{}'
-                                               .format(q_name, id))
-                # Update charts y_axis value
-                if k.startswith('{}_y_axis_column'.format(q_name)):
-                    q_item['y_axis_column'] = v
-                # Update charts filters
-                if k.startswith('{}_chart_filter_name'.format(q_name)):
-                    id = k.split('_')[-1]
-                    for visualization in q_item['visualizations']:
-                        if visualization['order'] == int(id):
-                            visualization['filter_name'] = \
-                                params.get('{}_chart_filter_name_{}'.
-                                           format(q_name, id))
-                            visualization['filter_value'] = \
-                                params.get('{}_chart_filter_value_{}'.
-                                           format(q_name, id))
+                for k, v in params.items():
+                    # Update query filters
+                    if k.startswith('{}_data_filter_name_'.format(q_name)):
+                        id = k.split('_')[-1]
+                        for filter in new_filters:
+                            # Apply changes only on public filters
+                            # to protect changing private
+                            # filters by changing the url query params
+                            if filter['visibility'] == 'public':
+                                if v == filter.get('name'):
+                                    filter['value'] = \
+                                        params.get('{}_data_filter_value_{}'
+                                                   .format(q_name, id))
+                    # Update charts y_axis value
+                    if k.startswith('{}_y_axis_column'.format(q_name)):
+                        q_item['y_axis_column'] = v
+                    # Update charts filters
+                    if k.startswith('{}_chart_filter_name'.format(q_name)):
+                        id = k.split('_')[-1]
+                        for visualization in q_item['visualizations']:
+                            if visualization['order'] == int(id):
+                                visualization['filter_name'] = \
+                                    params.get('{}_chart_filter_name_{}'.
+                                               format(q_name, id))
+                                visualization['filter_value'] = \
+                                    params.get('{}_chart_filter_value_{}'.
+                                               format(q_name, id))
 
-            for image in q_item['visualizations']:
-                if image['type'] == 'image':
-                    is_upload = image['url'] and not image[
-                        'url'].startswith('http')
+                for image in q_item['visualizations']:
+                    if image['type'] == 'image':
+                        is_upload = image['url'] and not image[
+                            'url'].startswith('http')
 
-                    if is_upload:
-                        image['url'] = '{0}/uploads/vs/{1}'.format(
-                            toolkit.request.host_url, image['url'])
+                        if is_upload:
+                            image['url'] = '{0}/uploads/vs/{1}'.format(
+                                toolkit.request.host_url, image['url'])
 
-            related_sql_string = helpers.create_query_str(
-                q_item.get('chart_resource'),
-                new_filters
-            )
-            q_item['public_filters'] = new_filters
-            q_item['public_filters'].sort(key=itemgetter('order'))
-            q_item['sql_string'] = related_sql_string
+                related_sql_string = helpers.create_query_str(
+                    q_item.get('chart_resource'),
+                    new_filters
+                )
+                q_item['public_filters'] = new_filters
+                q_item['public_filters'].sort(key=itemgetter('order'))
+                q_item['sql_string'] = related_sql_string
 
-            querytools.append(q_item)
+                querytools.append(q_item)
 
         return render('querytool/public/read.html',
                       extra_vars={'querytools': querytools})

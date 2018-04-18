@@ -423,7 +423,8 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
                  data_value_field, from_where_clause):
 
     geojson_keys = []
-    geojson_data = json.load(urllib.urlopen(geojson_url))
+    response = urllib.urlopen(geojson_url)
+    geojson_data = json.loads(response.read())
 
     for feature in geojson_data['features']:
         geojson_keys.append(feature['properties'][map_key_field])
