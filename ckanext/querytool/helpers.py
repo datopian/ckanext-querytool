@@ -3,6 +3,7 @@ import logging
 import json
 import uuid
 import urllib
+import requests
 
 try:
     # CKAN 2.7 and later
@@ -423,8 +424,10 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
                  data_value_field, from_where_clause):
 
     geojson_keys = []
-    response = urllib.urlopen(geojson_url)
-    geojson_data = json.loads(response.read())
+    # response = urllib.urlopen(geojson_url)
+    resp = requests.get(geojson_url)
+    # geojson_data = json.loads(response.read())
+    geojson_data = resp.json()
 
     for feature in geojson_data['features']:
         geojson_keys.append(feature['properties'][map_key_field])
