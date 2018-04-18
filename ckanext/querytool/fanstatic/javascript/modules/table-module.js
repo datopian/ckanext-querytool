@@ -71,7 +71,6 @@ ckan.module('querytool-table', function() {
 
             this.dataTable = $('#table-item-'+ id).DataTable({
                 "processing": true,
-                "searching": true,
                 "ajax": {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
                     "dataSrc": "result.records"
@@ -83,13 +82,24 @@ ckan.module('querytool-table', function() {
                     'title': y_axis}
                 ],
                 //download table data options
-                dom: 'Bfrtip',
+                dom: 'lBfrtip',
                 buttons: [
-                    'csv', 'excel', 'pdf'
+                    {
+                    'extend': 'csv',
+                    'className' : 'btn btn-default fa fa-download'
+                    },
+                       {
+                    'extend': 'excel',
+                    'className' : 'btn btn-default fa fa-download'
+                    },
+                     {
+                    'extend': 'pdf',
+                    'className' : 'btn btn-default fa fa-download'
+                    }
                 ],
                 "destroy" : true /* <---- this setting reinitialize the table */
             });
-
+            /*
             var download_formats = ['CSV', 'JSON', 'XML'];
 
             var download_btns = '<ul class="inline table-download-controls">';
@@ -99,6 +109,7 @@ ckan.module('querytool-table', function() {
             download_btns += '</ul>';
 
             $('.dataTables_length').after(download_btns);
+            */
         },
 
         updateTable : function(){
