@@ -140,8 +140,9 @@
           </div>
         {% endif %}
         {% if item.type == 'map'  %}
+          {% set map_id = h.querytool_get_uuid() %}
           {% snippet 'ajax_snippets/map_module.html',
-            n=item.order,
+            n=map_id,
             map_resource=item.map_resource,
             map_key_field=item.map_key_field,
             data_key_field=item.data_key_field,
