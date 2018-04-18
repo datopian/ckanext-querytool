@@ -528,7 +528,6 @@ class QueryToolController(base.BaseController):
                         # to protect changing private
                         # filters by changing the url query params
                         if filter['visibility'] == 'public':
-                            print filter
                             if v == filter.get('name'):
                                 filter['value'] = \
                                     params.get('{}_data_filter_value_{}'
