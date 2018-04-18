@@ -48,6 +48,9 @@
               {% if filter.visibility == 'public'  %}
                 {% set id = h.querytool_get_uuid() %}
                 {% snippet 'ajax_snippets/public_filter_item.html', id=id, q_name=querytool.name, n=filter.order, selected_filter=filter %}
+              {% else %}
+                {% set id = h.querytool_get_uuid() %}
+                {% snippet 'ajax_snippets/public_filter_item.html', id=id, q_name=querytool.name, n=filter.order, selected_filter=filter, class='hidden' %}
               {% endif %}
             {% endfor %}
           {% endif %}

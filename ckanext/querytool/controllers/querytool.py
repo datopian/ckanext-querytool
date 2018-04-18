@@ -524,10 +524,14 @@ class QueryToolController(base.BaseController):
                 if k.startswith('{}_data_filter_name_'.format(q_name)):
                     id = k.split('_')[-1]
                     for filter in new_filters:
-                        if v == filter.get('name'):
-                            filter['value'] = \
-                                params.get('{}_data_filter_value_{}'
-                                           .format(q_name, id))
+                        # Apply changes only on public filters
+                        # to protect changing private
+                        # filters by changing the url query params
+                        if filter['visibility'] == 'public':
+                            if v == filter.get('name'):
+                                filter['value'] = \
+                                    params.get('{}_data_filter_value_{}'
+                                               .format(q_name, id))
                 # Update charts y_axis value
                 if k.startswith('{}_y_axis_column'.format(q_name)):
                     q_item['y_axis_column'] = v
