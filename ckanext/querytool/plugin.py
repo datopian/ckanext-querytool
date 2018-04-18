@@ -110,7 +110,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'querytool_get_geojson_resources':
                 helpers.get_geojson_resources,
             'querytool_get_geojson_properties':
-                helpers.get_geojson_properties
+                helpers.get_geojson_properties,
+            'querytool_get_map_color_scheme':
+                helpers.get_map_color_scheme
         }
 
     # IAuthFunctions

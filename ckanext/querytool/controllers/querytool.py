@@ -389,6 +389,8 @@ class QueryToolController(base.BaseController):
                         data['map_key_field_{}'.format(id)]
                     map_item['data_key_field'] = \
                         data['map_data_key_field_{}'.format(id)]
+                    map_item['map_color_scheme'] = \
+                        data['map_color_scheme_{}'.format(id)]
                     map_item['size'] = \
                         data['map_size_{}'.format(id)]
 

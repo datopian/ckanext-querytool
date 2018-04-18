@@ -24,10 +24,12 @@ ckan.module('querytool-map', function($, _) {
             this.mapResource = this.el.parent().parent().find('[id*=map_resource_]');
             this.mapKeyField = this.el.parent().parent().find('[id*=map_key_field_]');
             this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
+            this.mapColorScheme = this.el.parent().parent().find('[id*=map_color_scheme_]');
             this.valueField = $('#choose_y_axis_column');
             this.mapResource.change(this.onResourceChange.bind(this));
             this.mapKeyField.change(this.onPropertyChange.bind(this));
             this.dataKeyField.change(this.onPropertyChange.bind(this));
+            this.mapColorScheme.change(this.onPropertyChange.bind(this));
 
             $('.leaflet-control-zoom-in').css({
                 'color': '#121e87'
@@ -93,6 +95,7 @@ ckan.module('querytool-map', function($, _) {
             this.options.map_key_field = this.mapKeyField.val();
             this.options.data_key_field = this.dataKeyField.val();
             this.options.y_axis_column = this.valueField.val();
+            this.options.map_color_scheme = this.mapColorScheme.val();
 
 
             if (this.options.map_key_field && this.options.data_key_field && this.options.map_resource && this.options.y_axis_column) {
@@ -141,7 +144,7 @@ ckan.module('querytool-map', function($, _) {
 
         },
         createScale: function(featuresValues) {
-            var colors = ['#ffffcc', '#ffeda0', '#fed976', '#feb24c', '#fd8d3c', '#fc4e2a', '#e31a1c', '#bd0026', '#800026'];
+            var colors = this.options.map_color_scheme.split(',');
 
             var values = $.map(featuresValues, function(feature, key) {
                     return feature.value;
@@ -249,7 +252,6 @@ ckan.module('querytool-map', function($, _) {
                             onEachFeature: function(feature, layer) {
                                 var elementData = this.featuresValues[feature.properties[this.options.map_key_field]];
 
-
                                 if (elementData) {
                                     var popup = document.createElement("div"),
                                         list = document.createElement("ul"),
@@ -279,30 +281,34 @@ ckan.module('querytool-map', function($, _) {
                                     popup.appendChild(list);
                                     layer.bindPopup(popup);
 
+                                    layer.on({
+                                        mouseover: function highlightFeature(e) {
+                                            var layer = e.target;
+
+                                            layer.setStyle({
+                                                weight: 3,
+                                                color: '#737373',
+                                                dashArray: '3',
+                                                fillOpacity: 0.7
+                                            });
+
+                                            if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+                                                layer.bringToFront();
+                                            }
+                                        },
+                                        mouseout: function resetHighlight(e) {
+                                            this.geoL.resetStyle(e.target);
+                                        }.bind(this),
+                                        click: function zoomToFeature(e) {
+                                            this.map.flyToBounds(e.target.getBounds());
+                                        }.bind(this)
+                                    });
+
                                 }
                             }.bind(this)
                         }).addTo(this.map);
-
+                        // Create the legend
                         this.createLegend.call(this);
-
-                        this.map.on('popupopen', function(e) {
-                            if (this.map._zoom == 10) {
-                                var px = this.map.project(e.popup._latlng, 10);
-                                px.y -= e.popup._container.clientHeight / 2;
-                                this.map.flyTo(this.map.unproject(px), 10, {
-                                    animate: true,
-                                    duration: 1
-                                });
-                            } else {
-                                this.map.flyTo(e.popup._latlng, 10, {
-                                    animate: true,
-                                    duration: 1
-                                })
-                            }
-                            $('.leaflet-popup-content-wrapper').css({
-                                'border-top': '5px solid ' + '#121e87'
-                            });
-                        }.bind(this));
                         // Properly zoom the map to fit all markers/polygons
                         this.map.fitBounds(this.geoL.getBounds().pad(0.5));
                     } else {
