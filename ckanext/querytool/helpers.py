@@ -190,6 +190,20 @@ def get_color_scheme():
     return colors
 
 
+def get_map_color_scheme():
+    '''
+    Get color schemes for displaying the maps
+    :return:
+    '''
+    colors = [{'value': '#feedde,#fdbe85,#fd8d3c,#e6550d,#a63603',
+               'text': 'Sequential'},
+              {'value': '#d7191c,#fdae61,#ffffbf,#a6d96a,#1a9641',
+               'text': 'Diverging '}
+              ]
+
+    return colors
+
+
 def get_tick_text_rotation():
     '''
        Get available options for rotating chart x axis
