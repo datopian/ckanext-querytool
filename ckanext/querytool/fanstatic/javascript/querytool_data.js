@@ -157,7 +157,7 @@
                             $('#' + filter_value_select_id).append(new Option(elem, elem));
                         }
                     });
-                }).error(function(err){
+                }).error(function(err) {
                     console.log("Error " + err);
                 });
             }
@@ -210,20 +210,20 @@
             var querytool_item_id = querytool_name_select_id.replace('field-related-querytool', 'related-query-item')
             var selected_querytools = _getSelectedQuerytools(querytool_item_id);
             var select_size = $(this).find("option").size();
-                api.post('get_available_querytools', {
+            api.post('get_available_querytools', {
                     'exclude': selected_querytools
                 }, false)
                 .done(function(data) {
-                     // Empty child fields
-                    if ( $('#' + querytool_name_select_id).length > 0){
+                    // Empty child fields
+                    if ($('#' + querytool_name_select_id).length > 0) {
                         $('#' + querytool_name_select_id).find('option').not(':first').not(':selected').remove();
                     }
                     $.each(data.result, function(idx, elem) {
-                             if(selected == elem.name){
-                                $('#' + querytool_name_select_id).append(new Option(elem.name, elem.name, false, true));
-                             }else{
-                                $('#' + querytool_name_select_id).append(new Option(elem.name, elem.name));
-                             }
+                        if (selected == elem.name) {
+                            $('#' + querytool_name_select_id).append(new Option(elem.name, elem.name, false, true));
+                        } else {
+                            $('#' + querytool_name_select_id).append(new Option(elem.name, elem.name));
+                        }
                     });
                 });
 
@@ -326,40 +326,35 @@
         add_filter_button.click(function(event) {
             event.preventDefault();
             var resource_id = chartResourceSelect.val();
-            api.get('resource_show', {
-                'id': resource_id
-            }).done(function(data) {
-                var resource = data.result;
 
-                api.post('get_resource_fields', {
-                    'resource': resource
-                }, true).done(function(data) {
+            api.get('querytool_get_resource_columns', {
+                res_id: resource_id
+            }, true).done(function(data) {
 
-                    var active_filters = data.result.toString();
-                    var filter_items = $('.filter_item');
-                    var total_items = filter_items.length + 1;
+                var active_filters = data.result.toString();
+                var filter_items = $('.filter_item');
+                var total_items = filter_items.length + 1;
 
-                    ckan.sandbox().client.getTemplate('filter_item.html', {
-                            active_filters: active_filters,
-                            n: total_items,
-                            resource_id: resource.id,
-                            class: 'hidden'
-                        })
-                        .done(function(data) {
+                ckan.sandbox().client.getTemplate('filter_item.html', {
+                        active_filters: active_filters,
+                        n: total_items,
+                        resource_id: resource_id,
+                        class: 'hidden'
+                    })
+                    .done(function(data) {
 
-                            $('#main-filters').append(data);
+                        $('#main-filters').append(data);
 
-                            // Remove item event handler
-                            var removeMediaItemBtn = $('.remove-filter-item-btn');
-                            removeMediaItemBtn.on('click', function(e) {
-                                $(e.target).closest('.filter_item').remove();
-                                _handleFilterItemsOrder();
-                            });
-
-                            handleRenderedFilters(total_items, resource.id);
-
+                        // Remove item event handler
+                        var removeMediaItemBtn = $('.remove-filter-item-btn');
+                        removeMediaItemBtn.on('click', function(e) {
+                            $(e.target).closest('.filter_item').remove();
+                            _handleFilterItemsOrder();
                         });
-                });
+
+                        handleRenderedFilters(total_items, resource_id);
+
+                    });
             });
 
         });
@@ -416,7 +411,7 @@
         }
 
         function populateYAxisColumns(value) {
-            api.get('querytool_get_resource_columns', {
+            api.get('querytool_get_numeric_resource_columns', {
                     res_id: value
                 })
                 .done(function(response) {

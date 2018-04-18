@@ -94,14 +94,22 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def get_helpers(self):
         return {
-            'querytool_get_datasets': helpers.get_all_datasets,
-            'querytool_get_filter_values': helpers.get_filter_values,
-            'querytool_get_chart_types': helpers.get_chart_types,
-            'querytool_get_color_scheme': helpers.get_color_scheme,
-            'querytool_get_avaiable_filters': helpers.get_avaiable_filters,
-            'querytool_get_dataset_resources': helpers.get_dataset_resources,
-            'querytool_get_resource_columns': helpers.get_resource_columns,
-            'querytool_get_tick_text_rotation': helpers.get_tick_text_rotation,
+            'querytool_get_datasets':
+                helpers.get_all_datasets,
+            'querytool_get_filter_values':
+                helpers.get_filter_values,
+            'querytool_get_chart_types':
+                helpers.get_chart_types,
+            'querytool_get_color_scheme':
+                helpers.get_color_scheme,
+            'querytool_get_dataset_resources':
+                helpers.get_dataset_resources,
+            'querytool_get_resource_columns':
+                helpers.get_resource_columns,
+            'querytool_get_numeric_resource_columns':
+                helpers.get_numeric_resource_columns,
+            'querytool_get_tick_text_rotation':
+                helpers.get_tick_text_rotation,
             'queytool_get_charts_data_formats':
                 helpers.get_charts_data_formats,
             'querytool_get_visualization_size':

@@ -30,8 +30,6 @@ def querytool_list(context, data_dict):
     # check_access('',
     #            context, data_dict)
 
-    log.info('Querytool list: %r', data_dict)
-
     querytools = CkanextQueryTool.search()
 
     out = []
@@ -168,6 +166,11 @@ def querytool_get_resource_data(context, data_dict):
 @toolkit.side_effect_free
 def querytool_get_resource_columns(context, data_dict):
     return h.get_resource_columns(data_dict.get('res_id'))
+
+
+@toolkit.side_effect_free
+def querytool_get_numeric_resource_columns(context, data_dict):
+    return h.get_numeric_resource_columns(data_dict.get('res_id'))
 
 
 @toolkit.side_effect_free

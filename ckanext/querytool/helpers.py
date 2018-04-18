@@ -55,6 +55,14 @@ def _get_functions(module_root, functions={}):
     return functions
 
 
+def _isnt_id(v):
+    return v['id'] != '_id'
+
+
+def _is_numeric(v):
+    return v['type'] == 'numeric'
+
+
 def user_is_registered(context):
     '''
         Checks if the user is registered user
@@ -301,25 +309,6 @@ def create_query_str(resource_id, filters):
     return sql_string
 
 
-def get_avaiable_filters(name):
-    '''
-     Get all available filters for querytool
-    :param name: Querytool name
-    :return:
-    '''
-    data_dict = {
-        'name': name
-    }
-    _querytool = _get_action('querytool_get', data_dict)
-
-    filters = json.loads(_querytool['filters'])
-    axis_filters = []
-    for filter in filters:
-        axis_filters.append(filter['name'])
-
-    return axis_filters
-
-
 def get_dataset_resources(dataset_name):
     '''
     Get resources for particular dataset
@@ -340,23 +329,54 @@ def get_dataset_resources(dataset_name):
     return dataset_resources
 
 
-def get_resource_columns(res_id, y_axis_values=[]):
+def get_resource_columns(res_id, escape_columns=[]):
     '''
 
     Get the names of the columns for the resource stored in Datastore
 
         - res_id: (string) ID of the CKAN resource
+        - escape_columns: (array) names of the columns that should be omitted
 
     '''
+    data = {
+        'resource_id': res_id,
+        'limit': 0
+    }
+
     try:
-        res_info = _get_action('datastore_info', {'id': res_id})
+        result = toolkit.get_action('datastore_search')({}, data)
     except Exception:
         return []
 
-    fields = res_info.get('schema').keys()
-    result = [x for x in fields if x not in y_axis_values]
+    fields = [field['id'] for field in result.get('fields', [])
+              if field['id'] not in escape_columns and _isnt_id(field)]
 
-    return result
+    return fields
+
+
+def get_numeric_resource_columns(res_id):
+    '''
+
+    Get the names of the columns from numeric type
+     for the resource stored in Datastore
+
+        - res_id: (string) ID of the CKAN resource
+
+    '''
+    data = {
+        'resource_id': res_id,
+        'limit': 0
+    }
+
+    try:
+        result = toolkit.get_action('datastore_search')({}, data)
+    except Exception:
+        return []
+
+    fields = [field['id'] for field in result.get('fields', [])
+              if field['id'] and _isnt_id(field) and _is_numeric(field)]
+
+    return fields
 
 
 def get_uuid():

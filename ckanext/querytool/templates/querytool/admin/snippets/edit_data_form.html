@@ -105,7 +105,7 @@ Example usage:
 
 
   <legend>{{ _('Y Axis columns') }}</legend>
-  {% set columns = h.querytool_get_resource_columns(data.chart_resource) %}
+  {% set columns = h.querytool_get_numeric_resource_columns(data.chart_resource) %}
 
   <div class="control-group control-checkbox-group"
        id="y-axis-columns-container"

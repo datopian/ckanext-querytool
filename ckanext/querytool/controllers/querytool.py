@@ -219,15 +219,10 @@ class QueryToolController(base.BaseController):
             data['related_querytools'].sort(key=itemgetter('order'))
 
         if 'chart_resource' in data:
-            try:
-                resource = _get_action('resource_show',
-                                       {'id': data['chart_resource']})
-                resource_fields = _get_action('get_resource_fields',
-                                              {'resource': resource})
-                c.active_filters = ','.join(resource_fields)
-                c.resource_id = resource['id']
-            except NotFound:
-                abort(404, _('Package not found'))
+            resource_fields = helpers.\
+                get_resource_columns(data['chart_resource'])
+            c.active_filters = ','.join(resource_fields)
+            c.resource_id = data['chart_resource']
 
         errors = errors or {}
         error_summary = error_summary or {}
