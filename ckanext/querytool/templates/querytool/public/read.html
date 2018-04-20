@@ -1,9 +1,12 @@
 {% resource 'querytool/vendor/c3/c3.css' %}
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
+{% resource 'querytool/vendor/html2canvas.js' %}
+{% resource 'querytool/vendor/canvas2image.js' %}
 {% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/javascript/modules/tool-embed.js' %}
+
 {% resource 'querytool/map' %}
 {% resource 'querytool/table' %}
 
@@ -23,6 +26,9 @@
 {% endif %}
 {% endblock %}
 {% block tools %}
+
+<button id="download-as-image">Download image</button>
+
 <form id="public-filters" class="public-filters" method="GET">
   <!-- Filtering container -->
   <div class="public-query">
