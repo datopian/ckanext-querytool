@@ -239,8 +239,6 @@
 
 
             html2canvas(document.body, {
-                allowTaint: false,
-                useCORS: true
             }).then(function(canvas) {
                 // Put the SVGs back in place
                 nodesToRemove.forEach(function(pair) {

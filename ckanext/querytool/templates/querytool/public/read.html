@@ -26,9 +26,6 @@
 {% endif %}
 {% endblock %}
 {% block tools %}
-
-<button id="download-as-image">Download image</button>
-
 <form id="public-filters" class="public-filters" method="GET">
   <!-- Filtering container -->
   <div class="public-query">
@@ -216,6 +213,9 @@
             </div>
           </li>
           <li>
+              <button class="btn btn-default" id="download-as-image">
+                   <span class="fa fa-download"></span>Download image
+              </button>
           </li>
           <li>
             <div class="btn-group dropup">
