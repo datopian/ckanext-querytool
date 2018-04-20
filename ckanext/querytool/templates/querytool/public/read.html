@@ -1,9 +1,12 @@
 {% resource 'querytool/vendor/c3/c3.css' %}
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
+{% resource 'querytool/vendor/html2canvas.js' %}
+{% resource 'querytool/vendor/canvas2image.js' %}
 {% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/javascript/modules/tool-embed.js' %}
+
 {% resource 'querytool/map' %}
 {% resource 'querytool/table' %}
 
@@ -210,6 +213,9 @@
             </div>
           </li>
           <li>
+              <button class="btn btn-default" id="download-as-image">
+                   <span class="fa fa-download"></span>Download image
+              </button>
           </li>
           <li>
             <div class="btn-group dropup">

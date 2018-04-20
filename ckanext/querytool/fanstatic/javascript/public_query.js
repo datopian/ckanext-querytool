@@ -203,6 +203,57 @@
         handleRenderedFilters();
         handleRenderedChartFilters();
 
+        //download screen as an image option
+        var buttonImg = $('#download-as-image');
+
+        buttonImg.on('click', function(targetElem) {
+
+            // First render all SVGs to canvases
+            var targetElemS = $('.container-wrapper').find('svg');
+            var nodesToRecover = [];
+            var nodesToRemove = [];
+
+            var svgElem = targetElemS.find('svg');
+
+            svgElem.each(function(index, node) {
+                var parentNode = node.parentNode;
+                var svg = parentNode.innerHTML;
+
+                var canvas = document.createElement('canvas');
+
+                canvg(canvas, svg);
+
+                nodesToRecover.push({
+                    parent: parentNode,
+                    child: node
+                });
+                parentNode.removeChild(node);
+
+                nodesToRemove.push({
+                    parent: parentNode,
+                    child: canvas
+                });
+
+                parentNode.appendChild(canvas);
+            });
+
+
+            html2canvas(document.body, {
+            }).then(function(canvas) {
+                // Put the SVGs back in place
+                nodesToRemove.forEach(function(pair) {
+                    pair.parent.removeChild(pair.child);
+                });
+
+                nodesToRecover.forEach(function(pair) {
+                    pair.parent.appendChild(pair.child);
+                });
+
+                Canvas2Image.saveAsJPEG(canvas);
+            });
+        });
+
+        //download chart as an image option
         var downloadBtn = $('.btn-chart-download');
         downloadBtn.on('click', function() {
             var target = $(event.target);
