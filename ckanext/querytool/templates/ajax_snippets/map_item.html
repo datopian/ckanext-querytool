@@ -54,7 +54,7 @@
         <div class="controls ">
           <select id="map_color_scheme_{{ n }}" name="map_color_scheme_{{ n }}">
           {% for color in color_schemes %}
-            <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{color.text}}</option>
+            <option value="{{ color.value }}" {% if map %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{color.text}}</option>
           {% endfor %}
           </select>
         </div>
