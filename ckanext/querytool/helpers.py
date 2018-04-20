@@ -15,9 +15,6 @@ import ckan.model as m
 from ckan.common import c
 from ckan.plugins import toolkit
 
-from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
-                                    CkanextQueryToolVisualizations
-
 log = logging.getLogger(__name__)
 
 
