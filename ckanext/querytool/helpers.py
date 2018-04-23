@@ -236,7 +236,7 @@ def get_charts_data_formats(num=None):
                {'text': 'Dolar e.g 2000$', 'value': '$'},
                {'text': 'Rounded e.g 2k', 'value': 's'},
                {'text': 'Percentage (multiply by 100) e.g 200000%',
-                'value': 'p'},
+                'value': '.0%'},
                {'text': 'Comma (thousands separator) e.g 2,000', 'value': ','},
                {'text': 'Binary e.g 11111010000', 'value': 'b'}]
     if num:
