@@ -202,10 +202,10 @@
                 <p class="embed-content">You can copy and paste the embed code </p>
                 <div class="row-fluid">
                   <div class="span6">
-                    {{ form.input("width", label=_("Width"), value=700, classes=["control-full"]) }}
+                    {{ form.input("width", label=_("Width"), value=700, type="number", classes=["control-full"]) }}
                   </div>
                   <div class="span6">
-                    {{ form.input("height", label=_("Height"), value=400, classes=["control-full"]) }}
+                    {{ form.input("height", label=_("Height"), value=400, type="number", classes=["control-full"]) }}
                   </div>
                 </div>
                 {{ form.textarea("code", label=_("Code"), value="", classes=["pre"], rows=3) }}
