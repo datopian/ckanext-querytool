@@ -38,7 +38,8 @@
         tick_count_name.change(function(event) {
             var selectValues = [{
                     'text': 'Decimal (1 digit) e.g 2.5',
-                    'value': '.1f' },
+                    'value': '.1f'
+                },
                 {
                     'text': 'Decimal (2 digit) e.g 2.50',
                     'value': '.2f'
@@ -83,15 +84,15 @@
         })
     }
 
-    function populateOptionValues(elem, values){
+    function populateOptionValues(elem, values) {
         elem.children('option:not(:first)').remove();
 
-                $.each(values, function(key, v) {
-                    elem
-                        .append($("<option></option>")
-                            .attr("value", v.value)
-                            .text(v.text));
-                });
+        $.each(values, function(key, v) {
+            elem
+                .append($("<option></option>")
+                    .attr("value", v.value)
+                    .text(v.text));
+        });
     }
 
     function handleRenderedChartFilters(item_id) {
@@ -188,11 +189,16 @@
         var chooseYAxisColumn = $('#choose_y_axis_column');
         handleTickFormat();
 
-        var viz_item = $('.item');
-        // Only disable Save button if there aren't visualizations
-        if (viz_item.length === 0) {
-            $('#save-visualization-btn').attr('disabled', 'true');
-        }
+        $('#save-edit-data-btn').removeAttr('disabled');
+        $('#save-visualization-btn').removeAttr('disabled');
+
+        $('.save-visualization-btn').click(function(e) {
+            var viz_items = $('.item');
+            if (viz_items.length === 0) {
+                e.preventDefault();
+                alert('Please create at least one visualization.');
+            }
+        });
 
         chooseYAxisColumn.change(function(event) {
             // Update the hidden inputs for the y axis
@@ -212,7 +218,6 @@
         $(document).on('click', '.delete-item-btn', function(el) {
             el.target.closest('.item').remove();
             handleItemsOrder();
-            enableSave();
         });
 
         var createVisualization = $('#add-visualization-btn');
@@ -244,7 +249,6 @@
                         handleItemsOrder();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
-                        enableSave();
                         handleTickFormat(items);
                     });
             } else if (visualization === 'map') {
@@ -260,7 +264,6 @@
                         var item = visualizationItems.prepend(data);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-map]')[0]);
                         handleItemsOrder();
-                        enableSave();
                     });
             } else if (visualization == 'text-box') {
                 ckan.sandbox().client.getTemplate('text_box_item.html', {
@@ -269,7 +272,6 @@
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
                         handleItemsOrder();
-                        enableSave();
                     });
             } else if (visualization === 'image') {
                 ckan.sandbox().client.getTemplate('image_item.html', {
@@ -279,15 +281,14 @@
                         var item = visualizationItems.prepend(data);
                         handleImageItems(items);
                         handleItemsOrder();
-                        enableSave();
                     });
             } else if (visualization === 'table') {
 
-                ckan.sandbox().client.getTemplate('table_item.html',{
+                ckan.sandbox().client.getTemplate('table_item.html', {
                         n: items,
-                        sql_string : sqlString,
-                        resource_id : chart_resource,
-                        y_axis : axisYValue,
+                        sql_string: sqlString,
+                        resource_id: chart_resource,
+                        y_axis: axisYValue,
                         y_axis_values: yAxisValues
 
                     })
@@ -295,7 +296,6 @@
                         var item = visualizationItems.prepend(data);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-table]')[0]);
                         handleItemsOrder();
-                        enableSave();
                     });
             }
 
@@ -315,16 +315,6 @@
             window.location.hash = el.id;
             window.scrollTo(0, el.offsetTop);
         });
-
-        //enable or disable save button
-        function enableSave() {
-
-            var isEmpty = $('#visualization-settings-items').find('.item');
-            var isDisabled = (isEmpty.length >= 1);
-            $('#save-visualization-btn').attr('disabled', !isDisabled);
-        }
-
-
 
         // This function updates the order numbers for the form elements.
         function handleItemsOrder() {

@@ -423,8 +423,14 @@ class QueryToolController(base.BaseController):
                 error_summary = e.error_summary
                 return self.querytool_edit('/' + querytool, data,
                                            errors, error_summary)
-            # redirect to querytool
-            url = h.url_for('querytool_list')
+
+            if 'save-edit-data' in data.keys():
+                # redirect to edit data
+                url = h.url_for('querytool_edit',
+                                querytool='/' + _querytool['name'])
+            else:
+                # redirect to querytool
+                url = h.url_for('querytool_list')
             h.redirect_to(url)
 
         if not data:
