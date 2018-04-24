@@ -208,14 +208,13 @@
 
         buttonImg.on('click', function(targetElem) {
             var scrollY = window.pageYOffset;
-            console.log(scrollY);
             window.scrollTo(0, 0);
             html2canvas(document.body, {
                 allowTaint: false,
                 useCORS: true,
                 foreignObjectRendering: true
             }).then(function(canvas) {
-                Canvas2Image.saveAsJPEG(canvas);
+                Canvas2Image.saveAsPNG(canvas);
             });
             window.scrollTo(0, scrollY);
         });

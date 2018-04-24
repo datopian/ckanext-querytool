@@ -1,17 +1,23 @@
 {% extends "querytool/public/base_main.html" %}
-
 {% block page_header_icon %}<img class="thumbnail" src="/base/images/query-icon-tittle.png">{% endblock %}
-
-{% block page_header_title %}<h1>{{ _('Query Tool') }}</h1>{% endblock %}
-
-{% block page_header_description %}<p class="desc">{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.') }}</p>{% endblock %}
-
+{% block page_header_title %}
+<h1>{{ _('Query Tool') }}</h1>
+{% endblock %}
+{% block page_header_description %}
+<p class="desc">{{ _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla congue commodo velit, non ultrices magna hendrerit sed.') }}</p>
+{% endblock %}
 {% block tools %}
 <div class="container">
-  {% for querytool in data %}
-    {% if not querytool.private %}
-      {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
-    {% endif %}
-  {% endfor%}
+   {% if data %}
+     {% for querytool in data %}
+       {% if not querytool.private %}
+        {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
+       {% endif %}
+     {% endfor%}
+   {% else %}
+   <div class="alert alert-danger">
+      <strong>There are no query tools created</strong>
+   </div>
+   {% endif %}
 </div>
 {% endblock %}
