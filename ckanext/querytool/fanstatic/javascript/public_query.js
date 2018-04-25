@@ -137,6 +137,14 @@
                 "resource"
             );
 
+            var querytool_name_input_id = chart_filter_value_select_id.replace(
+                "value",
+                "querytool_name"
+            );
+            var querytool_name = $("#" + querytool_name_input_id).val();
+            var filtersDiv = $("#" + querytool_name + "_public_filters");
+            var mainFilters = filtersDiv.data('mainFilters');
+
             var chart_filter_name = $("#" + chart_filter_name_input_id).val();
             var resource_id = $("#" + chart_filter_resource_input_id).val();
             var select_size = $(this)
@@ -149,7 +157,7 @@
                         "get_filter_values", {
                             resource_id: resource_id,
                             filter_name: chart_filter_name,
-                            previous_filters: []
+                            previous_filters: mainFilters
                         },
                         false
                     )

@@ -58,6 +58,7 @@
             {% endfor %}
           {% endif %}
           <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>
+          <div type="hidden" id="{{querytool.name}}_public_filters" data-main-filters="{{ querytool.public_main_filters }}"></div>
         </div>
         <div class="actions">
           <div class="btn-download">

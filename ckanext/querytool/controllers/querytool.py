@@ -457,6 +457,7 @@ class QueryToolController(base.BaseController):
         data['map_resource'] = _querytool.get('map_resource')
         data['chart_resource'] = _querytool.get('chart_resource')
         data['y_axis_columns'] = _querytool.get('y_axis_columns')
+        data['main_filters'] = _querytool.get('filters')
 
         data['y_axis_columns'] = data['y_axis_columns'].split(',')
 
@@ -575,6 +576,8 @@ class QueryToolController(base.BaseController):
                 q_item['public_filters'] = new_filters
                 q_item['public_filters'].sort(key=itemgetter('order'))
                 q_item['sql_string'] = related_sql_string
+                # Need this hack for chart filter
+                q_item['public_main_filters'] = json.dumps(new_filters)
 
                 querytools.append(q_item)
 
