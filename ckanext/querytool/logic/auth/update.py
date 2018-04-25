@@ -9,3 +9,4 @@ def querytool_update(context, data_dict):
     '''
     # sysadmins only
     return {'success': False}
+
