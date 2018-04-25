@@ -86,8 +86,8 @@ def querytool_visualizations_update(context, data_dict):
     querytool = CkanextQueryTool.get(name=data_dict['name'])
     visualizations = CkanextQueryToolVisualizations.get(name=data_dict['name'])
 
+    images = []
     if visualizations:
-        images = []
         items = json.loads(visualizations.visualizations)
         for image in items:
             if image['type'] == 'image':
