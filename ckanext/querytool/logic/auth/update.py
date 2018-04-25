@@ -9,3 +9,11 @@ def querytool_update(context, data_dict):
     '''
     # sysadmins only
     return {'success': False}
+
+
+def querytool_edit(context, data_dict):
+    '''
+        Authorization check for updating visualizations
+    '''
+    # sysadmins only
+    return {'success': False}
