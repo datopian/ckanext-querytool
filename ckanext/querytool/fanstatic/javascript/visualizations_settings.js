@@ -19,7 +19,7 @@
                 });
             }
             return $.post(url, JSON.stringify(data), 'json');
-        },
+        }
     };
 
     function handleTickFormat(item_id) {

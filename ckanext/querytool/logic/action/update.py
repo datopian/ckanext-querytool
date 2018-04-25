@@ -1,8 +1,9 @@
 import datetime
-
+import json
 import ckan.logic as logic
 import ckan.lib.navl.dictization_functions as df
 from ckan.plugins import toolkit
+import ckan.lib.uploader as uploader
 
 from ckanext.querytool.logic import schema
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
@@ -82,6 +83,35 @@ def querytool_visualizations_update(context, data_dict):
     #    raise toolkit.ValidationError(errors)
     querytool = CkanextQueryTool.get(name=data_dict['name'])
     visualizations = CkanextQueryToolVisualizations.get(name=data_dict['name'])
+
+    if visualizations:
+        images = []
+        items = json.loads(visualizations.visualizations)
+        for image in items:
+            if image['type'] == 'image':
+                images.append(image)
+
+    new_items = json.loads(data_dict['visualizations'])
+    if new_items:
+        new_images = []
+        for new in new_items:
+            if new['type'] == 'image':
+                new_images.append(new['url'])
+
+    if new_images or images:
+        for old in images:
+            old_img_url = old['url']
+            if old_img_url not in new_images:
+                upload = uploader.get_uploader('vs', old_img_url)
+                new_data = {
+                    'image_url': old_img_url,
+                    'image_upload': 'true',
+                    'clear_upload': 'true'
+                }
+                upload.update_data_dict(new_data, 'image_url', 'image_upload',
+                                        'clear_upload')
+                upload.upload(uploader)
+
     if not visualizations:
         visualizations = CkanextQueryToolVisualizations()
 
@@ -92,3 +122,4 @@ def querytool_visualizations_update(context, data_dict):
     visualizations.save()
     session.add(visualizations)
     session.commit()
+

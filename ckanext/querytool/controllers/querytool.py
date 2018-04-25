@@ -272,7 +272,10 @@ class QueryToolController(base.BaseController):
             maps = []
             tables = []
             for k, v in data.items():
-
+                '''
+                TODO: save visualizations with key value e.g {'charts' :[]
+                # 'images': []} for easier itteration
+                '''
                 if k.startswith('chart_field_graph_'):
                     visualization = {}
                     id = k.split('_')[-1]

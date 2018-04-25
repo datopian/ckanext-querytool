@@ -1,8 +1,4 @@
 import logging
-
-from ckan.plugins import toolkit as toolkit
-import ckanext.querytool.helpers as helpers
-
 log = logging.getLogger(__name__)
 
 
