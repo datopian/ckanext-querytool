@@ -122,4 +122,3 @@ def querytool_visualizations_update(context, data_dict):
     visualizations.save()
     session.add(visualizations)
     session.commit()
-
