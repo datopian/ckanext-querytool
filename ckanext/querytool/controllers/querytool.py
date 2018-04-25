@@ -245,6 +245,13 @@ class QueryToolController(base.BaseController):
 
         :return: query edit template page
         '''
+        context = _get_context()
+
+        try:
+            check_access('querytool_update', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
         if querytool:
             querytool = querytool[1:]
 
