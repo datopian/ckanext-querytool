@@ -75,6 +75,8 @@ def querytool_visualizations_update(context, data_dict):
     :param
     '''
 
+    check_access('querytool_update', context)
+
     session = context['session']
     # data, errors = df.validate(data_dict, schema.querytool_schema(),
     #                          context)
