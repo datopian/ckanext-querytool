@@ -155,13 +155,15 @@
             var resource_input_id = chart_filter_value_select_id.replace('chart_field_filter_value', 'resource_id');
             var resource_id = $('#' + resource_input_id).val();
             var select_size = $(this).find("option").size();
+            var vizForm = $('#visualizations-form');
+            var mainFilters = vizForm.data('mainFilters');
 
             if (select_size <= 2) {
 
                 api.post('get_filter_values', {
                     'resource_id': resource_id,
                     'filter_name': chart_filter_name,
-                    'previous_filters': []
+                    'previous_filters': mainFilters
                 }, false).done(function(data) {
 
                     $.each(data.result, function(idx, elem) {
