@@ -316,7 +316,11 @@ def get_dataset_resources(dataset_name):
     dataset_resources = []
 
     if dataset_name:
-        dataset = _get_action('package_show', {'id': dataset_name})
+
+        try:
+            dataset = _get_action('package_show', {'id': dataset_name})
+        except Exception:
+            return dataset_resources
 
         for res in dataset.get('resources'):
             if res['format'].lower() != 'geojson':
