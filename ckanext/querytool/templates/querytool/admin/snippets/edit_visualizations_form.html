@@ -17,13 +17,8 @@
 
 {% set action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name) %}
 
-{% set y_axis_values = [] %}
-{% for item in data.y_axis_columns %}
-  {% do y_axis_values.append(item.value) %}
-{% endfor %}
-
-<form method="post" action="{{ action_url }}" data-y-axis-values="{{ y_axis_values }}"
-      data-sql-string="{{ data.sql_string }}" data-chart-resource="{{ data.chart_resource }}" data-main-filters="{{ data.main_filters }}"
+<form method="post" action="{{ action_url }}" data-y-axis-values="{{ data.y_axis_values }}" data-main-filters-names="{{ data.main_filters_names }}"
+      data-sql-string="{{ data.sql_string }}" data-chart-resource="{{ data.chart_resource }}" data-main-filters="{{ data.main_filters or [] }}"
       data-map-resource="{{ data.map_resource }}" class="form-horizontal col-sm-12" id="visualizations-form" enctype='multipart/form-data'>
   {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['complete', 'active'] %}
@@ -70,7 +65,8 @@
           sql_string = data.sql_string,
           map_resource = data.map_resource,
           chart_resource = data.chart_resource,
-          y_axis_values = y_axis_values
+          y_axis_values = data.y_axis_values,
+          main_filters = data.main_filters_names
         %}
       {% endif %}
       {% if item.type == 'text_box'  %}
@@ -93,7 +89,7 @@
           chart_resource = data.chart_resource,
           y_axis_column = data.y_axis_column,
           map_color_scheme = data.map_color_scheme,
-          y_axis_values = y_axis_values
+          y_axis_values = data.y_axis_values
         %}
       {% endif %}
      {% if item.type == 'table'  %}
@@ -103,7 +99,7 @@
           sql_string = data.sql_string,
           resource_id = data.chart_resource,
           y_axis = data.y_axis_column,
-          y_axis_values = y_axis_values
+          y_axis_values = data.y_axis_values
         %}
       {% endif %}
     {% endfor %}

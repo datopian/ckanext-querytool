@@ -1,6 +1,8 @@
 {% import 'macros/form.html' as form %}
 
 {% set active_charts = chart %}
+{% set main_filters = main_filters.split(',') %}
+{% set y_axis_values = y_axis_values.split(',') %}
 
 {% set columns = h.querytool_get_resource_columns(chart_resource, y_axis_values) %}
 
@@ -9,6 +11,7 @@
 {% else %}
   {% set class = 'hidden' %}
 {% endif %}
+
 
   <div id="chart_field_{{ n }}" class="item chart_field visualization-fields-section">
     {% set chart_types = h.querytool_get_chart_types() %}
@@ -66,13 +69,19 @@
       </div>
 
 
+    {% for item in y_axis_values %}
+        {% do main_filters.append(item) %}
+    {% endfor %}
+
+    {% set chart_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
+
     <div class="control-group control-select">
       <label class="control-label" for="chart_field_filter_name_{{ n }}">{{ _('Filter column') }}</label>
       <div class="controls ">
         <select id="chart_field_filter_name_{{ n }}" name="chart_field_filter_name_{{ n }}">
             <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-            {% for column in columns %}
-            <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.filter_name }}{% endif %}>{{column}}</option>
+            {% for filter in chart_filters %}
+            <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.filter_name }}{% endif %}>{{filter}}</option>
             {% endfor %}
         </select>
       </div>
