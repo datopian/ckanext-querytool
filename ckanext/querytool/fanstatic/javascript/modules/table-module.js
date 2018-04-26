@@ -113,7 +113,7 @@ ckan.module('querytool-table', function() {
             var sqlStringExceptSelect = parsedSqlString[1];
 
 
-            return 'SELECT ' + '"' + main_value + '", SUM("' + y_axis + '") as ' + y_axis + sqlStringExceptSelect + ' GROUP BY "' + main_value + '"';
+            return 'SELECT ' + '"' + main_value + '", SUM("' + y_axis + '") as ' + '"' + y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + main_value + '"';
         },
 
         teardown: function() {
