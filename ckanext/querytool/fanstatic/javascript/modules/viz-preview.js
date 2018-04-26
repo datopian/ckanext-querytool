@@ -74,7 +74,7 @@ ckan.module('querytool-viz-preview', function() {
                 var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
-            return 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + this.options.y_axis + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
+            return 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
         },
         // Get the data from Datastore.
         get_resource_datа: function(sqlString) {
