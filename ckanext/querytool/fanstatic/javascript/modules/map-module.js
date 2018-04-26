@@ -310,7 +310,7 @@ ckan.module('querytool-map', function($, _) {
                         // Create the legend
                         this.createLegend.call(this);
                         // Properly zoom the map to fit all markers/polygons
-                        this.map.fitBounds(this.geoL.getBounds().pad(0.5));
+                        this.map.fitBounds(this.geoL.getBounds());
                     } else {
                         this.resetMap.call(this);
                     }
