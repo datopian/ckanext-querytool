@@ -137,6 +137,16 @@ class QueryToolController(base.BaseController):
         if _querytool is None:
             _querytool = {}
 
+        # Check if the data for this querytool still exists
+        if 'dataset_name' in _querytool.keys():
+            try:
+                _get_action('package_show',
+                            {'id': _querytool['dataset_name']})
+            except NotFound:
+                abort(404, _('The data used for creating this '
+                             'Querytool has been removed '
+                             'by the administrator.'))
+
         if toolkit.request.method == 'POST' and not data:
 
             data = dict(toolkit.request.POST)
@@ -258,13 +268,24 @@ class QueryToolController(base.BaseController):
         data_dict = {
             'name': querytool
         }
-        _visualization_items = \
-            _get_action('querytool_get_visualizations', data_dict)
 
         _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
             abort(404, _('Querytool not found.'))
+
+        # Check if the data for this querytool still exists
+        if _querytool['dataset_name']:
+            try:
+                _get_action('package_show',
+                            {'id': _querytool['dataset_name']})
+            except NotFound:
+                abort(404, _('The data used for creating this '
+                             'Querytool has been removed by '
+                             'the administrator.'))
+
+        _visualization_items = \
+            _get_action('querytool_get_visualizations', data_dict)
 
         if _visualization_items is None:
             _visualization_items = {
@@ -510,9 +531,6 @@ class QueryToolController(base.BaseController):
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
 
-        if not querytool or not querytool['visualizations']:
-            abort(404, _('Querytool not fully set.'))
-
         # only sysadmins can access private querytool
         if querytool['private'] is True:
             context = _get_context()
@@ -520,6 +538,19 @@ class QueryToolController(base.BaseController):
                 check_access('querytool_show', context)
             except NotAuthorized:
                 abort(403, _('Not authorized to see this page'))
+
+        # Check if the data for this querytool still exists
+        if querytool['dataset_name']:
+            try:
+                _get_action('package_show',
+                            {'id': querytool['dataset_name']})
+            except NotFound:
+                abort(404, _('The data used for creating this '
+                             'Querytool has been removed '
+                             'by the administrator.'))
+
+        if not querytool or not querytool['visualizations']:
+            abort(404, _('Querytool not fully set.'))
 
         params = toolkit.request.params
 
