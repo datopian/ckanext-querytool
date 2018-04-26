@@ -459,6 +459,20 @@ class QueryToolController(base.BaseController):
         data['y_axis_columns'] = _querytool.get('y_axis_columns')
         data['main_filters'] = _querytool.get('filters')
 
+        # We need y_axis_columns names in comma separated
+        # format because ajax snippets only support String parameters
+        # This parameter is used for removing
+        # Y axis values from the rest of the
+        #  filtering options and the X axis values in viz items
+        data['y_axis_values'] = data['y_axis_columns']
+
+        # This is required in order to exclude
+        # main filters in chart item filter options
+        main_filters_names = []
+        for filter in json.loads(data['main_filters']):
+            main_filters_names.append(filter['name'])
+        data['main_filters_names'] = ','.join(main_filters_names)
+
         data['y_axis_columns'] = data['y_axis_columns'].split(',')
 
         data['y_axis_columns'] = map(lambda column: {

@@ -13,6 +13,7 @@
          </div>
       </div>
 
+      {% set y_axis_values = y_axis_values.split(',') %}
       {% set columns = h.querytool_get_resource_columns(resource_id, y_axis_values) %}
        <div class="control-group control-select">
         <label class="control-label" for="table_main_value_{{ n }}">{{ _('Main value') }}</label>
