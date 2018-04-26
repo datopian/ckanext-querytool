@@ -431,7 +431,7 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
 
     sql = 'SELECT ' + '"' + data_key_field + \
           '", SUM("' + data_value_field + '") as ' + \
-          data_value_field + from_where_clause + \
+          '"' + data_value_field + '"' + from_where_clause + \
           ' GROUP BY "' + data_key_field + '"'
 
     response = toolkit.get_action('datastore_search_sql')(
