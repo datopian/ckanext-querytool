@@ -420,6 +420,21 @@ class QueryToolController(base.BaseController):
                     map_item['size'] = \
                         data['map_size_{}'.format(id)]
 
+                    if data['map_field_filter_name_{}'.format(id)]:
+                        map_item['filter_name'] = \
+                            data['map_field_filter_name_{}'.format(id)]
+                        map_item['filter_value'] = \
+                            data['map_field_filter_value_{}'.format(id)]
+                        map_item['filter_alias'] = \
+                            data['map_field_filter_alias_{}'.format(id)]
+                        map_item['filter_visibility'] = \
+                            data['map_field_filter_visibility_{}'.format(id)]
+                    else:
+                        map_item['filter_name'] = ''
+                        map_item['filter_value'] = ''
+                        map_item['filter_alias'] = ''
+                        map_item['filter_visibility'] = ''
+
                     maps.append(map_item)
 
                 if k.startswith('table_size_'):
@@ -593,16 +608,16 @@ class QueryToolController(base.BaseController):
                     # Update charts y_axis value
                     if k.startswith('{}_y_axis_column'.format(q_name)):
                         q_item['y_axis_column'] = v
-                    # Update charts filters
-                    if k.startswith('{}_chart_filter_name'.format(q_name)):
+                    # Update visualizations filters
+                    if k.startswith('{}_viz_filter_name'.format(q_name)):
                         id = k.split('_')[-1]
                         for visualization in q_item['visualizations']:
                             if visualization['order'] == int(id):
                                 visualization['filter_name'] = \
-                                    params.get('{}_chart_filter_name_{}'.
+                                    params.get('{}_viz_filter_name_{}'.
                                                format(q_name, id))
                                 visualization['filter_value'] = \
-                                    params.get('{}_chart_filter_value_{}'.
+                                    params.get('{}_viz_filter_value_{}'.
                                                format(q_name, id))
 
                 for image in q_item['visualizations']:

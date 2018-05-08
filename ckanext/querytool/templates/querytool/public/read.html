@@ -123,7 +123,7 @@
         </a>
           {% if item.filter_visibility == 'public'  %}
             {% set id = h.querytool_get_uuid() %}
-            {% snippet 'querytool/public/snippets/public_chart_filter.html',
+            {% snippet 'querytool/public/snippets/public_viz_filter.html',
               id=id,
               q_name=querytool.name,
               n=item.order,
@@ -152,8 +152,21 @@
             data_key_field=item.data_key_field,
             map_color_scheme=item.map_color_scheme,
             sql_string=querytool.sql_string,
-            y_axis_column=y_axis_selected
+            y_axis_column=y_axis_selected,
+            filter_name=item.filter_name,
+            filter_value=item.filter_value
           %}
+            {% if item.filter_visibility == 'public'  %}
+            {% set id = h.querytool_get_uuid() %}
+            {% snippet 'querytool/public/snippets/public_viz_filter.html',
+              id=id,
+              q_name=querytool.name,
+              n=item.order,
+              name=item.filter_name,
+              alias=item.filter_alias,
+              value=item.filter_value,
+              resource_id=querytool.chart_resource %}
+          {% endif %}
         {% endif %}
          {% if item.type == 'table'  %}
           {% snippet 'ajax_snippets/table_module.html',

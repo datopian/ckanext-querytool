@@ -25,11 +25,16 @@ ckan.module('querytool-map', function($, _) {
             this.mapKeyField = this.el.parent().parent().find('[id*=map_key_field_]');
             this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
             this.mapColorScheme = this.el.parent().parent().find('[id*=map_color_scheme_]');
+            this.mapFilterName = this.el.parent().parent().find('[id*=map_field_filter_name_]');
+            this.mapFilterValue = this.el.parent().parent().find('[id*=map_field_filter_value_]');
+
             this.valueField = $('#choose_y_axis_column');
             this.mapResource.change(this.onResourceChange.bind(this));
             this.mapKeyField.change(this.onPropertyChange.bind(this));
             this.dataKeyField.change(this.onPropertyChange.bind(this));
             this.mapColorScheme.change(this.onPropertyChange.bind(this));
+            this.mapFilterName.change(this.onPropertyChange.bind(this));
+            this.mapFilterValue.change(this.onPropertyChange.bind(this));
 
             $('.leaflet-control-zoom-in').css({
                 'color': '#121e87'
@@ -96,6 +101,8 @@ ckan.module('querytool-map', function($, _) {
             this.options.data_key_field = this.dataKeyField.val();
             this.options.y_axis_column = this.valueField.val();
             this.options.map_color_scheme = this.mapColorScheme.val();
+            this.options.filter_name = this.mapFilterName.val();
+            this.options.filter_value = this.mapFilterValue.val();
 
 
             if (this.options.map_key_field && this.options.data_key_field && this.options.map_resource && this.options.y_axis_column) {
@@ -213,6 +220,15 @@ ckan.module('querytool-map', function($, _) {
 
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
+
+            var filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
+            var filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+
+            // If additional map filter is set extend the current sql with the new filter
+            if (filter_name && filter_value) {
+                var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
+                sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
+            }
 
             api.get('querytool_get_map_data', {
                     geojson_url: mapURL,

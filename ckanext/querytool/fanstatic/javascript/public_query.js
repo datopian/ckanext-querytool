@@ -120,24 +120,24 @@
         });
     }
 
-    function handleRenderedChartFilters() {
-        var chart_filter_value_select = $("[id*=chart_filter_value_]");
+    function handleRenderedVisualizationsFilters() {
+        var filter_value_select = $("[id*=viz_filter_value_]");
 
-        chart_filter_value_select.mousedown(function(event) {
+        filter_value_select.mousedown(function(event) {
             var elem = $(this);
-            var chart_filter_value_select_id = elem.attr("id");
-            var chart_filter_value = elem.find(":selected").val();
+            var filter_value_select_id = elem.attr("id");
+            var filter_value = elem.find(":selected").val();
 
-            var chart_filter_name_input_id = chart_filter_value_select_id.replace(
+            var filter_name_input_id = filter_value_select_id.replace(
                 "value",
                 "name"
             );
-            var chart_filter_resource_input_id = chart_filter_value_select_id.replace(
+            var filter_resource_input_id = filter_value_select_id.replace(
                 "value",
                 "resource"
             );
 
-            var querytool_name_input_id = chart_filter_value_select_id.replace(
+            var querytool_name_input_id = filter_value_select_id.replace(
                 "value",
                 "querytool_name"
             );
@@ -145,8 +145,8 @@
             var filtersDiv = $("#" + querytool_name + "_public_filters");
             var mainFilters = filtersDiv.data('mainFilters');
 
-            var chart_filter_name = $("#" + chart_filter_name_input_id).val();
-            var resource_id = $("#" + chart_filter_resource_input_id).val();
+            var filter_name = $("#" + filter_name_input_id).val();
+            var resource_id = $("#" + filter_resource_input_id).val();
             var select_size = $(this)
                 .find("option")
                 .size();
@@ -156,15 +156,15 @@
                     .post(
                         "get_filter_values", {
                             resource_id: resource_id,
-                            filter_name: chart_filter_name,
+                            filter_name: filter_name,
                             previous_filters: mainFilters
                         },
                         false
                     )
                     .done(function(data) {
                         $.each(data.result, function(idx, elem) {
-                            if (chart_filter_value != elem) {
-                                $("#" + chart_filter_value_select_id).append(new Option(elem, elem));
+                            if (filter_value != elem) {
+                                $("#" + filter_value_select_id).append(new Option(elem, elem));
                             }
                         });
                     });
@@ -209,7 +209,7 @@
 
     $(document).ready(function(e) {
         handleRenderedFilters();
-        handleRenderedChartFilters();
+        handleRenderedVisualizationsFilters();
 
         //download screen as an image option
         var buttonImg = $('#download-as-image');
