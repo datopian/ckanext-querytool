@@ -95,65 +95,65 @@
         });
     }
 
-    function handleRenderedChartFilters(item_id) {
+    function handleRenderedVizFilters(type, item_id) {
 
-        var chart_filter_name_select;
-        var chart_filter_value_select;
+        var filter_name_select;
+        var filter_value_select;
 
         if (item_id) {
-            chart_filter_name_select = $('[id=chart_field_filter_name_' + item_id + ']');
+            filter_name_select = $('[id=' + type + '_field_filter_name_' + item_id + ']');
         } else {
-            chart_filter_name_select = $('[id*=chart_field_filter_name_]');
+            filter_name_select = $('[id*=' + type + '_field_filter_name_]');
         }
 
         if (item_id) {
-            chart_filter_value_select = $('[id=chart_field_filter_value_' + item_id + ']');
+            filter_value_select = $('[id=' + type + '_field_filter_value_' + item_id + ']');
         } else {
-            chart_filter_value_select = $('[id*=chart_field_filter_value_]');
+            filter_value_select = $('[id*=' + type + '_field_filter_value_]');
         }
 
-        chart_filter_name_select.change(function(event) {
+        filter_name_select.change(function(event) {
             var elem = $(this);
-            var chart_filter_name = elem.find(":selected").val();
+            var filter_name = elem.find(":selected").val();
             var filter_name_select_id = elem.attr('id');
 
-            var chart_filter_value_select_id = filter_name_select_id.replace('name', 'value');
-            var chart_filter_alias_input_id = filter_name_select_id.replace('name', 'alias');
-            var chart_filter_visibility_id = chart_filter_value_select_id.replace('value', 'visibility');
+            var filter_value_select_id = filter_name_select_id.replace('name', 'value');
+            var filter_alias_input_id = filter_name_select_id.replace('name', 'alias');
+            var filter_visibility_id = filter_value_select_id.replace('value', 'visibility');
 
-            var chart_filter_value_div_id = chart_filter_value_select_id.replace('field', 'div');
-            var chart_filter_alias_div_id = chart_filter_alias_input_id.replace('field', 'div');
-            var chart_filter_visibility_div_id = chart_filter_visibility_id.replace('field', 'div');
+            var filter_value_div_id = filter_value_select_id.replace('field', 'div');
+            var filter_alias_div_id = filter_alias_input_id.replace('field', 'div');
+            var filter_visibility_div_id = filter_visibility_id.replace('field', 'div');
 
             // Empty filter value select
-            if ($('#' + chart_filter_value_select_id + ' option').length > 0) {
-                $('#' + chart_filter_value_select_id).find('option').not(':first').remove();
+            if ($('#' + filter_value_select_id + ' option').length > 0) {
+                $('#' + filter_value_select_id).find('option').not(':first').remove();
             }
 
-            if (chart_filter_name === '') {
-                $('#' + chart_filter_value_select_id).prop('required', false);
-                $('#' + chart_filter_alias_input_id).prop('required', false);
-                $('#' + chart_filter_value_div_id).addClass('hidden');
-                $('#' + chart_filter_alias_div_id).addClass('hidden');
-                $('#' + chart_filter_visibility_div_id).addClass('hidden');
+            if (filter_name === '') {
+                $('#' + filter_value_select_id).prop('required', false);
+                $('#' + filter_alias_input_id).prop('required', false);
+                $('#' + filter_value_div_id).addClass('hidden');
+                $('#' + filter_alias_div_id).addClass('hidden');
+                $('#' + filter_visibility_div_id).addClass('hidden');
             } else {
-                $('#' + chart_filter_value_select_id).prop('required', true);
-                $('#' + chart_filter_alias_input_id).prop('required', true);
-                $('#' + chart_filter_value_div_id).removeClass('hidden');
-                $('#' + chart_filter_alias_div_id).removeClass('hidden');
-                $('#' + chart_filter_visibility_div_id).removeClass('hidden');
+                $('#' + filter_value_select_id).prop('required', true);
+                $('#' + filter_alias_input_id).prop('required', true);
+                $('#' + filter_value_div_id).removeClass('hidden');
+                $('#' + filter_alias_div_id).removeClass('hidden');
+                $('#' + filter_visibility_div_id).removeClass('hidden');
             }
         });
 
-        chart_filter_value_select.mousedown(function(event) {
+        filter_value_select.mousedown(function(event) {
 
             var elem = $(this);
-            var chart_filter_value_select_id = elem.attr('id');
+            var filter_value_select_id = elem.attr('id');
             var chart_filter_value = elem.find(":selected").val();
-            var chart_filter_name_select_id = chart_filter_value_select_id.replace('value', 'name');
-            var chart_filter_name = $('#' + chart_filter_name_select_id).find(":selected").val();
-            var resource_input_id = chart_filter_value_select_id.replace('chart_field_filter_value', 'resource_id');
-            var resource_id = $('#' + resource_input_id).val();
+            var chart_filter_name_select_id = filter_value_select_id.replace('value', 'name');
+            var filter_name = $('#' + chart_filter_name_select_id).find(":selected").val();
+            var vizForm = $('#visualizations-form');
+            var resource_id = vizForm.data('chartResource');
             var select_size = $(this).find("option").size();
             var vizForm = $('#visualizations-form');
             var mainFilters = vizForm.data('mainFilters');
@@ -162,14 +162,14 @@
 
                 api.post('get_filter_values', {
                     'resource_id': resource_id,
-                    'filter_name': chart_filter_name,
+                    'filter_name': filter_name,
                     'previous_filters': mainFilters
                 }, false).done(function(data) {
 
                     $.each(data.result, function(idx, elem) {
 
                         if (chart_filter_value != elem) {
-                            $('#' + chart_filter_value_select_id).append(new Option(elem, elem));
+                            $('#' + filter_value_select_id).append(new Option(elem, elem));
                         }
                     });
                 });
@@ -180,7 +180,8 @@
     };
 
     $(document).ready(function() {
-        handleRenderedChartFilters();
+        handleRenderedVizFilters('chart');
+        handleRenderedVizFilters('map');
         handleImageItems();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
@@ -250,7 +251,7 @@
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
-                        handleRenderedChartFilters(items);
+                        handleRenderedVizFilters('chart', items);
                         handleItemsOrder();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
@@ -263,11 +264,14 @@
                         chart_resource: chart_resource,
                         sql_string: sqlString,
                         y_axis_column: axisYValue,
-                        y_axis_values: yAxisValues
+                        y_axis_values: yAxisValues,
+                        main_filters: mainFiltersNames,
+                        class: 'hidden'
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-map]')[0]);
+                        handleRenderedVizFilters('map', items);
                         handleItemsOrder();
                     });
             } else if (visualization == 'text-box') {
@@ -460,6 +464,14 @@
                     var map_size = item.find('[id*=map_size_]');
                     var map_module = item.find('[id*=map_module_]');
 
+                    var selectMapFilterName = item.find('[id*=map_field_filter_name_]');
+                    var selectMapFilterValue = item.find('[id*=map_field_filter_value_]');
+                    var selectMapFilterValueDiv = item.find('[id*=map_div_filter_value_]');
+                    var selectMapFilterAlias = item.find('[id*=map_field_filter_alias_]');
+                    var selectMapFilterVAliasDiv = item.find('[id*=map_div_filter_alias_]');
+                    var selectMapFilterVisibility = item.find('[id*=map_field_filter_visibility_]');
+                    var selectMapFilterVisibilityDiv = item.find('[id*=map_div_filter_visibility_]');
+
                     item.attr('id', 'map_item_' + order);
                     map_resource_url.attr('id', 'map_resource_' + order);
                     map_resource_url.attr('name', 'map_resource_' + order);
@@ -472,6 +484,21 @@
                     map_size.attr('id', 'map_size_' + order);
                     map_size.attr('name', 'map_size_' + order);
                     map_module.attr('id', 'map_module_' + order);
+
+                    selectMapFilterName.attr('id', 'map_field_filter_name_' + order);
+                    selectMapFilterName.attr('name', 'map_field_filter_name_' + order);
+
+                    selectMapFilterValue.attr('id', 'map_field_filter_value_' + order);
+                    selectMapFilterValue.attr('name', 'map_field_filter_value_' + order);
+                    selectMapFilterValueDiv.attr('id', 'map_div_filter_value_' + order);
+
+                    selectMapFilterAlias.attr('id', 'map_field_filter_alias_' + order);
+                    selectMapFilterAlias.attr('name', 'map_field_filter_alias_' + order);
+                    selectMapFilterVAliasDiv.attr('id', 'map_div_filter_alias_' + order);
+
+                    selectMapFilterVisibility.attr('id', 'map_field_filter_visibility_' + order);
+                    selectMapFilterVisibility.attr('name', 'map_field_filter_visibility_' + order);
+                    selectMapFilterVisibilityDiv.attr('id', 'map_div_filter_visibility_' + order);
 
                 } else if (item.context.id.indexOf('table_item') >= 0) {
                     var table_size = item.find('[id*=table_size_]');

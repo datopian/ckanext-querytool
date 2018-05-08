@@ -1,0 +1,11 @@
+<div id="viz_filter_item_{{ id }}" class="filter-group-wrapper">
+  <div class="filter-group">
+    <label for="viz_filter_value_{{ id }}">{{ alias }}</label>
+    <input type="hidden" id="viz_filter_name_{{ id }}" name="{{q_name}}_viz_filter_name_{{ n }}" value="{{ name }}"/>
+    <select class="filter-item filter-item-value input-block-level" id="viz_filter_value_{{ id }}" name="{{q_name}}_viz_filter_value_{{ n }}">
+      <option value="{{ value }}" selected>{{ value }}</option>
+    </select>
+    <input type="hidden" id="viz_filter_resource_{{ id }}" value="{{ resource_id }}"/>
+    <input type="hidden" id="viz_filter_querytool_name_{{ id }}" value="{{ q_name }}"/>
+  </div>
+</div>
