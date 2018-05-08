@@ -3,6 +3,12 @@
 {% set main_filters = main_filters.split(',') %}
 {% set columns = h.querytool_get_resource_columns(chart_resource, y_axis_values) %}
 
+{% if map and map.filter_name %}
+  {% set class = '' %}
+{% else %}
+  {% set class = 'hidden' %}
+{% endif %}
+
   <div id="map_item_{{ n }}" class="item map visualization-fields-section">
     <div class="item-wrapper">
       {% set resources = h.querytool_get_geojson_resources() %}
