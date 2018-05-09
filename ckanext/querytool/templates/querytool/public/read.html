@@ -97,7 +97,7 @@
       {% for item in querytool.visualizations %}
       <div class="item {{ item.size }} {{ item.type }} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
         {% if item.type == 'chart'  %}
-            {% snippet 'ajax_snippets/visualization_item.html',
+          {% snippet 'ajax_snippets/visualization_item.html',
             type='chart',
             colors=item.color,
             x_axis=item.x_axis,
@@ -117,10 +117,10 @@
             y_label = item.y_label,
             filter_name=item.filter_name,
             filter_value=item.filter_value
-            %}
-         <a class="btn-chart-download">
-          <i class="fa fa-picture-o fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
-        </a>
+          %}
+           <a class="btn-chart-download">
+             <i class="fa fa-picture-o fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
+           </a>
           {% if item.filter_visibility == 'public'  %}
             {% set id = h.querytool_get_uuid() %}
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
@@ -130,7 +130,8 @@
               name=item.filter_name,
               alias=item.filter_alias,
               value=item.filter_value,
-              resource_id=querytool.chart_resource %}
+              resource_id=querytool.chart_resource
+            %}
           {% endif %}
         {% endif %}
         {% if item.type == 'text_box' %}
@@ -156,7 +157,7 @@
             filter_name=item.filter_name,
             filter_value=item.filter_value
           %}
-            {% if item.filter_visibility == 'public'  %}
+          {% if item.filter_visibility == 'public'  %}
             {% set id = h.querytool_get_uuid() %}
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
               id=id,
@@ -165,16 +166,31 @@
               name=item.filter_name,
               alias=item.filter_alias,
               value=item.filter_value,
-              resource_id=querytool.chart_resource %}
+              resource_id=querytool.chart_resource
+            %}
           {% endif %}
         {% endif %}
-         {% if item.type == 'table'  %}
+        {% if item.type == 'table'  %}
           {% snippet 'ajax_snippets/table_module.html',
-             sql_string = querytool.sql_string,
-             resource_id=querytool.chart_resource,
-             y_axis = y_axis_selected,
-             main_value = item.main_value
+            sql_string = querytool.sql_string,
+            resource_id=querytool.chart_resource,
+            y_axis = y_axis_selected,
+            main_value = item.main_value,
+            filter_name=item.filter_name,
+            filter_value=item.filter_value
           %}
+          {% if item.filter_visibility == 'public'  %}
+            {% set id = h.querytool_get_uuid() %}
+            {% snippet 'querytool/public/snippets/public_viz_filter.html',
+              id=id,
+              q_name=querytool.name,
+              n=item.order,
+              name=item.filter_name,
+              alias=item.filter_alias,
+              value=item.filter_value,
+              resource_id=querytool.chart_resource
+            %}
+          {% endif %}
         {% endif %}
       </div>
       {% endfor %}
