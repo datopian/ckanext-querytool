@@ -68,6 +68,7 @@ ckan.module('querytool-table', function() {
             }
             var sql_string = this.create_sql_string(main_value, y_axis);
             var dt_buttons_className = 'btn btn-default';
+            var title = this.options.table_title;
 
             this.dataTable = $('#table-item-'+ id).DataTable({
                 "processing": true,
@@ -77,12 +78,12 @@ ckan.module('querytool-table', function() {
                 },
                 "columns": [
                     {'data': main_value.toLowerCase(),
-                    'title':main_value},
-                    {'data':y_axis.toLowerCase(),
-                    'title': y_axis}
+                    'title': main_value.charAt(0).toUpperCase() + main_value.slice(1)},
+                    {'data': y_axis.toLowerCase(),
+                    'title': y_axis.charAt(0).toUpperCase() + y_axis.slice(1)}
                 ],
                 //download table data options
-                dom: 'lBfrtip',
+                dom: '<"dt-header">lBfrtip',
                 buttons: [
                     {
                     'extend': 'csv',
@@ -99,6 +100,8 @@ ckan.module('querytool-table', function() {
                 ],
                 "destroy" : true /* <---- this setting reinitialize the table */
             });
+            $("div.dt-header").html(title);
+
         },
 
         updateTable : function(){
@@ -106,6 +109,7 @@ ckan.module('querytool-table', function() {
             var xVal = this.el.parent().parent().find('[id*=table_main_value_]').val();
             this.options.filter_name = this.el.parent().parent().find('[id*=table_field_filter_name_]').val();
             this.options.filter_value = this.el.parent().parent().find('[id*=table_field_filter_value_]').val();
+            this.options.table_title = this.el.parent().parent().find('[id*=table_field_title_]').val();
             this.createTable(yVal, xVal, true);
         },
 
