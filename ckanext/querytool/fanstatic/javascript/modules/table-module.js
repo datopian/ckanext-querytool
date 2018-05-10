@@ -101,7 +101,7 @@ ckan.module('querytool-table', function() {
                 "destroy" : true /* <---- this setting reinitialize the table */
             });
             $("div.dt-header").html(title);
-
+            this.dataTable.buttons().container().insertAfter($('div.dataTables_paginate', this.dataTable.table().container() ));
         },
 
         updateTable : function(){
