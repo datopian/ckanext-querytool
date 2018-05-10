@@ -449,6 +449,21 @@ class QueryToolController(base.BaseController):
                     table_item['main_value'] = \
                         data['table_main_value_{}'.format(id)]
 
+                    if data['table_field_filter_name_{}'.format(id)]:
+                        table_item['filter_name'] = \
+                            data['table_field_filter_name_{}'.format(id)]
+                        table_item['filter_value'] = \
+                            data['table_field_filter_value_{}'.format(id)]
+                        table_item['filter_alias'] = \
+                            data['table_field_filter_alias_{}'.format(id)]
+                        table_item['filter_visibility'] = \
+                            data['table_field_filter_visibility_{}'.format(id)]
+                    else:
+                        table_item['filter_name'] = ''
+                        table_item['filter_value'] = ''
+                        table_item['filter_alias'] = ''
+                        table_item['filter_visibility'] = ''
+
                     tables.append(table_item)
 
             vis = visualizations + text_boxes + images + maps + tables

@@ -182,6 +182,7 @@
     $(document).ready(function() {
         handleRenderedVizFilters('chart');
         handleRenderedVizFilters('map');
+        handleRenderedVizFilters('table');
         handleImageItems();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
@@ -298,12 +299,15 @@
                         sql_string: sqlString,
                         resource_id: chart_resource,
                         y_axis: axisYValue,
-                        y_axis_values: yAxisValues
+                        y_axis_values: yAxisValues,
+                        main_filters: mainFiltersNames,
+                        class: 'hidden'
 
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-table]')[0]);
+                        handleRenderedVizFilters('table', items);
                         handleItemsOrder();
                     });
             }
@@ -504,6 +508,14 @@
                     var table_size = item.find('[id*=table_size_]');
                     var table_main_value = item.find('[id*=table_main_value_]');
 
+                    var selectTableFilterName = item.find('[id*=table_field_filter_name_]');
+                    var selectTableFilterValue = item.find('[id*=table_field_filter_value_]');
+                    var selectTableFilterValueDiv = item.find('[id*=table_div_filter_value_]');
+                    var selectTableFilterAlias = item.find('[id*=table_field_filter_alias_]');
+                    var selectTableFilterVAliasDiv = item.find('[id*=table_div_filter_alias_]');
+                    var selectTableFilterVisibility = item.find('[id*=table_field_filter_visibility_]');
+                    var selectTableFilterVisibilityDiv = item.find('[id*=table_div_filter_visibility_]');
+
                     item.attr('id', 'table_item_' + order);
 
                     table_size.attr('id', 'table_size_' + order);
@@ -511,6 +523,21 @@
 
                     table_main_value.attr('id', 'table_main_value_' + order);
                     table_main_value.attr('name', 'table_main_value_' + order);
+
+                    selectTableFilterName.attr('id', 'table_field_filter_name_' + order);
+                    selectTableFilterName.attr('name', 'table_field_filter_name_' + order);
+
+                    selectTableFilterValue.attr('id', 'table_field_filter_value_' + order);
+                    selectTableFilterValue.attr('name', 'table_field_filter_value_' + order);
+                    selectTableFilterValueDiv.attr('id', 'table_div_filter_value_' + order);
+
+                    selectTableFilterAlias.attr('id', 'table_field_filter_alias_' + order);
+                    selectTableFilterAlias.attr('name', 'table_field_filter_alias_' + order);
+                    selectTableFilterVAliasDiv.attr('id', 'table_div_filter_alias_' + order);
+
+                    selectTableFilterVisibility.attr('id', 'table_field_filter_visibility_' + order);
+                    selectTableFilterVisibility.attr('name', 'table_field_filter_visibility_' + order);
+                    selectTableFilterVisibilityDiv.attr('id', 'table_div_filter_visibility_' + order);
                 }
             });
         }

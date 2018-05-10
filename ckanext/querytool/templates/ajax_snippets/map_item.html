@@ -9,151 +9,151 @@
   {% set class = 'hidden' %}
 {% endif %}
 
-  <div id="map_item_{{ n }}" class="item map visualization-fields-section">
-    <div class="item-wrapper">
-      {% set resources = h.querytool_get_geojson_resources() %}
-      <div class="control-group control-select">
-        <label class="control-label" for="map_resource_{{ n }}">{{ _('Map resource') }}</label>
-        <div class="controls ">
-          <select id="map_resource_{{ n }}" name="map_resource_{{ n }}" required=required>
-          <option value="">&mdash; {{ _('Select map resource') }} &mdash;</option>
-          {% for resource in resources %}
-            <option value="{{ resource.value }}" {% if map %}{{ 'selected' if resource.value == map.map_resource }}{% endif %} >{{resource.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
-      </div>
-
-      {% if map %}
-        {% set map_properties = h.querytool_get_geojson_properties(map.map_resource) %}
-      {% else %}
-        {% set map_properties = [] %}
-      {% endif %}
-
-      <div class="control-group control-select">
-        <label class="control-label" for="map_key_field_{{ n }}">{{ _('Map key field') }}</label>
-        <div class="controls ">
-          <select id="map_key_field_{{ n }}" name="map_key_field_{{ n }}" required=required>
-          <option value="">&mdash; {{ _('Select map key field') }} &mdash;</option>
-          {% if map_properties %}
-            {% for property in map_properties %}
-              <option value="{{ property.value }}" {% if map %}{{ 'selected' if property.value == map.map_key_field }}{% endif %} >{{property.text}}</option>
-            {% endfor %}
-          {% endif %}
-          </select>
-        </div>
-      </div>
-
-      <div class="control-group control-select">
-        <label class="control-label" for="map_data_key_field_{{ n }}">{{ _('Data key field') }}</label>
-        <div class="controls ">
-          <select id="map_data_key_field_{{ n }}" name="map_data_key_field_{{ n }}" required=required>
-            <option value="">&mdash; {{ _('Select data key field') }} &mdash;</option>
-            {% for column in columns %}
-            <option value="{{column}}"{% if map %}{{ 'selected' if column == map.data_key_field }}{% endif %}>{{column}}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-
-      {% set color_schemes = h.querytool_get_map_color_scheme() %}
-      <div class="control-group control-select">
-        <label class="control-label" for="map_color_scheme_{{ n }}">{{ _('Color scheme') }}</label>
-        <div class="controls ">
-          <select id="map_color_scheme_{{ n }}" name="map_color_scheme_{{ n }}">
-          {% for color in color_schemes %}
-            <option value="{{ color.value }}" {% if map %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{color.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
-      </div>
-
-            {% for item in y_axis_values %}
-              {% do main_filters.append(item) %}
-          {% endfor %}
-
-          {% set map_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
-
-          <div class="control-group control-select">
-            <label class="control-label" for="map_field_filter_name_{{ n }}">{{ _('Filter column') }}</label>
-            <div class="controls ">
-              <select id="map_field_filter_name_{{ n }}" name="map_field_filter_name_{{ n }}">
-                  <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-                  {% for filter in map_filters %}
-                  <option value="{{filter}}"{% if map %}{{ 'selected' if filter == map.filter_name }}{% endif %}>{{filter}}</option>
-                  {% endfor %}
-              </select>
-            </div>
-          </div>
-
-          <div id="map_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
-            <label class="control-label" for="map_field_filter_value_{{ n }}">{{ _('Filter value') }}</label>
-            <div class="controls ">
-              <select id="map_field_filter_value_{{ n }}" name="map_field_filter_value_{{ n }}" >
-                <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
-                  {% if map and map.filter_value %}
-                      <option value="{{ map.filter_value }}" selected>{{ map.filter_value }}</option>
-                {% endif %}
-              </select>
-            </div>
-          </div>
-
-          <div id="map_div_filter_alias_{{ n }}" class="control-group {{ class }}">
-            <label class="control-label" for="map_field_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
-            <div class="controls ">
-              <input id="map_field_filter_alias_{{ n }}" name="map_field_filter_alias_{{ n }}"
-                   {% if map and map.filter_alias %}value="{{map.filter_alias}}"{% else %}value=""{% endif %}
-                   placeholder="Enter filter alias" type="text">
-            </div>
-          </div>
-
-         <div id="map_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
-          <label class="control-label" for="map_field_filter_visibility_{{ n }}">{{ _('Filter visibility') }}</label>
-          <div class="controls ">
-            <select id="map_field_filter_visibility_{{ n }}" name="map_field_filter_visibility_{{ n }}" >
-              <option value="public" {{ 'selected' if chart and chart.filter_visibility == 'public' }}>{{ _('Public') }}</option>
-              <option value="private" {{ 'selected' if chart and chart.filter_visibility == 'private' }}>{{ _('Private') }}</option>
-            </select>
-          </div>
-        </div>
-
-      {% set sizes = h.querytool_get_visualization_size() %}
-      <div class="control-group control-select">
-        <label class="control-label" for="map_size_{{ n }}">{{ _('Map size') }}</label>
-        <div class="controls ">
-          <select id="map_size_{{ n }}" name="map_size_{{ n }}">
-          {% for size in sizes %}
-            <option value="{{ size.value }}" {% if map %}{{ 'selected' if size.value == map.size }}{% endif %} >{{size.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
-      </div>
-
-      <ul class="inline text-right chart-actions">
-        <li class="remove"><a id="delete-item-btn" class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
-      </ul>
-
-      <span class="grippy"></span>
-    </div>
-    <div class="preview-wrapper">
-      {% if map %}
-        {% set map_resource=map.map_resource %}
-        {% set map_key_field=map.map_key_field %}
-        {% set data_key_field=map.data_key_field %}
-        {% set map_color_scheme=map.map_color_scheme %}
-        {% set filter_name = map.filter_name %}
-        {% set filter_value = map.filter_value %}
-      {% endif %}
-      {% snippet 'ajax_snippets/map_module.html',
-          n=n,
-          map_resource=map_resource,
-          map_key_field=map_key_field,
-          data_key_field=data_key_field,
-          sql_string=sql_string,
-          map_color_scheme=map_color_scheme,
-          y_axis_column=y_axis_column,
-          filter_name=filter_name,
-          filter_value=filter_value
-      %}
+<div id="map_item_{{ n }}" class="item map visualization-fields-section">
+<div class="item-wrapper">
+  {% set resources = h.querytool_get_geojson_resources() %}
+  <div class="control-group control-select">
+    <label class="control-label" for="map_resource_{{ n }}">{{ _('Map resource') }}</label>
+    <div class="controls ">
+      <select id="map_resource_{{ n }}" name="map_resource_{{ n }}" required=required>
+      <option value="">&mdash; {{ _('Select map resource') }} &mdash;</option>
+      {% for resource in resources %}
+        <option value="{{ resource.value }}" {% if map %}{{ 'selected' if resource.value == map.map_resource }}{% endif %} >{{resource.text}}</option>
+      {% endfor %}
+      </select>
     </div>
   </div>
+
+  {% if map %}
+    {% set map_properties = h.querytool_get_geojson_properties(map.map_resource) %}
+  {% else %}
+    {% set map_properties = [] %}
+  {% endif %}
+
+  <div class="control-group control-select">
+    <label class="control-label" for="map_key_field_{{ n }}">{{ _('Map key field') }}</label>
+    <div class="controls ">
+      <select id="map_key_field_{{ n }}" name="map_key_field_{{ n }}" required=required>
+      <option value="">&mdash; {{ _('Select map key field') }} &mdash;</option>
+      {% if map_properties %}
+        {% for property in map_properties %}
+          <option value="{{ property.value }}" {% if map %}{{ 'selected' if property.value == map.map_key_field }}{% endif %} >{{property.text}}</option>
+        {% endfor %}
+      {% endif %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group control-select">
+    <label class="control-label" for="map_data_key_field_{{ n }}">{{ _('Data key field') }}</label>
+    <div class="controls ">
+      <select id="map_data_key_field_{{ n }}" name="map_data_key_field_{{ n }}" required=required>
+        <option value="">&mdash; {{ _('Select data key field') }} &mdash;</option>
+        {% for column in columns %}
+        <option value="{{column}}"{% if map %}{{ 'selected' if column == map.data_key_field }}{% endif %}>{{column}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  {% set color_schemes = h.querytool_get_map_color_scheme() %}
+  <div class="control-group control-select">
+    <label class="control-label" for="map_color_scheme_{{ n }}">{{ _('Color scheme') }}</label>
+    <div class="controls ">
+      <select id="map_color_scheme_{{ n }}" name="map_color_scheme_{{ n }}">
+      {% for color in color_schemes %}
+        <option value="{{ color.value }}" {% if map %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{color.text}}</option>
+      {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  {% for item in y_axis_values %}
+    {% do main_filters.append(item) %}
+  {% endfor %}
+
+  {% set map_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
+
+  <div class="control-group control-select">
+    <label class="control-label" for="map_field_filter_name_{{ n }}">{{ _('Filter column') }}</label>
+    <div class="controls ">
+      <select id="map_field_filter_name_{{ n }}" name="map_field_filter_name_{{ n }}">
+        <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+        {% for filter in map_filters %}
+        <option value="{{filter}}"{% if map %}{{ 'selected' if filter == map.filter_name }}{% endif %}>{{filter}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div id="map_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
+    <label class="control-label" for="map_field_filter_value_{{ n }}">{{ _('Filter value') }}</label>
+    <div class="controls ">
+      <select id="map_field_filter_value_{{ n }}" name="map_field_filter_value_{{ n }}" >
+        <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
+        {% if map and map.filter_value %}
+        <option value="{{ map.filter_value }}" selected>{{ map.filter_value }}</option>
+        {% endif %}
+      </select>
+    </div>
+  </div>
+
+  <div id="map_div_filter_alias_{{ n }}" class="control-group {{ class }}">
+    <label class="control-label" for="map_field_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
+    <div class="controls ">
+      <input id="map_field_filter_alias_{{ n }}" name="map_field_filter_alias_{{ n }}"
+           {% if map and map.filter_alias %}value="{{map.filter_alias}}"{% else %}value=""{% endif %}
+           placeholder="Enter filter alias" type="text">
+    </div>
+  </div>
+
+  <div id="map_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
+    <label class="control-label" for="map_field_filter_visibility_{{ n }}">{{ _('Filter visibility') }}</label>
+    <div class="controls ">
+      <select id="map_field_filter_visibility_{{ n }}" name="map_field_filter_visibility_{{ n }}" >
+        <option value="public" {{ 'selected' if map and map.filter_visibility == 'public' }}>{{ _('Public') }}</option>
+        <option value="private" {{ 'selected' if map and map.filter_visibility == 'private' }}>{{ _('Private') }}</option>
+      </select>
+    </div>
+  </div>
+
+  {% set sizes = h.querytool_get_visualization_size() %}
+  <div class="control-group control-select">
+    <label class="control-label" for="map_size_{{ n }}">{{ _('Map size') }}</label>
+      <div class="controls ">
+        <select id="map_size_{{ n }}" name="map_size_{{ n }}">
+        {% for size in sizes %}
+          <option value="{{ size.value }}" {% if map %}{{ 'selected' if size.value == map.size }}{% endif %} >{{size.text}}</option>
+        {% endfor %}
+        </select>
+      </div>
+  </div>
+
+  <ul class="inline text-right chart-actions">
+    <li class="remove"><a id="delete-item-btn" class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+  </ul>
+
+  <span class="grippy"></span>
+</div>
+<div class="preview-wrapper">
+  {% if map %}
+    {% set map_resource=map.map_resource %}
+    {% set map_key_field=map.map_key_field %}
+    {% set data_key_field=map.data_key_field %}
+    {% set map_color_scheme=map.map_color_scheme %}
+    {% set filter_name = map.filter_name %}
+    {% set filter_value = map.filter_value %}
+  {% endif %}
+  {% snippet 'ajax_snippets/map_module.html',
+    n=n,
+    map_resource=map_resource,
+    map_key_field=map_key_field,
+    data_key_field=data_key_field,
+    sql_string=sql_string,
+    map_color_scheme=map_color_scheme,
+    y_axis_column=y_axis_column,
+    filter_name=filter_name,
+    filter_value=filter_value
+  %}
+</div>
+</div>

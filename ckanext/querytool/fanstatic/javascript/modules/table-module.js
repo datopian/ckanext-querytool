@@ -58,7 +58,6 @@ ckan.module('querytool-table', function() {
             var y_axis = (yVal) ? yVal : this.options.y_axis;
             var id = this.options.table_id;
             var main_value = this.options.main_value;
-            console.log('MAIN '+ main_value)
             if(main_value === true){
                 var mainVal = $('[name*=table_main_value_]');
                 main_value = mainVal.val();
@@ -104,7 +103,9 @@ ckan.module('querytool-table', function() {
 
         updateTable : function(){
             var yVal = $('[name=choose_y_axis_column]').val();
-            var xVal = $('[name*=table_main_value_]').val();
+            var xVal = this.el.parent().parent().find('[id*=table_main_value_]').val();
+            this.options.filter_name = this.el.parent().parent().find('[id*=table_field_filter_name_]').val();
+            this.options.filter_value = this.el.parent().parent().find('[id*=table_field_filter_value_]').val();
             this.createTable(yVal, xVal, true);
         },
 
@@ -112,6 +113,14 @@ ckan.module('querytool-table', function() {
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
 
+            var filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
+            var filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+
+            // If additional table filter is set extend the current sql with the new filter
+            if (filter_name && filter_value) {
+                var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
+                sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
+            }
 
             return 'SELECT ' + '"' + main_value + '", SUM("' + y_axis + '") as ' + '"' + y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + main_value + '"';
         },

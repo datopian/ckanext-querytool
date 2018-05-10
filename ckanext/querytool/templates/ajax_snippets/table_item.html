@@ -1,46 +1,98 @@
+{% set y_axis_values = y_axis_values.split(',') %}
+{% set main_filters = main_filters.split(',') %}
+
+{% if table and table.filter_name %}
+  {% set class = '' %}
+{% else %}
+  {% set class = 'hidden' %}
+{% endif %}
+
 <div id="table_item_{{ n }}" class="item table_item visualization-fields-section">
-   <div class="item-wrapper">
+  <div class="item-wrapper">
 
-      {% set sizes = h.querytool_get_visualization_size() %}
-      <div class="control-group control-select">
-         <label class="control-label" for="table_size_{{ n }}">{{ _('Table size') }}</label>
-         <div class="controls ">
-            <select id="table_size_{{ n }}" name="table_size_{{ n }}">
-            {% for size in sizes %}
-            <option value="{{ size.value }}" {% if table %}{{ 'selected' if size.value == table.size }}{% endif %} >{{size.text}}</option>
-            {% endfor %}
-            </select>
-         </div>
+    {% set columns = h.querytool_get_resource_columns(resource_id, y_axis_values) %}
+    <div class="control-group control-select">
+      <label class="control-label" for="table_main_value_{{ n }}">{{ _('Main value') }}</label>
+      <div class="controls ">
+        <select id="table_main_value_{{ n }}" name="table_main_value_{{ n }}">
+        {% for column in columns %}
+        <option value="{{column}}"{% if table %}{{ 'selected' if column == table.main_value }}{% endif %}>{{column}}</option>
+        {% endfor %}
+        </select>
       </div>
-
-      {% set y_axis_values = y_axis_values.split(',') %}
-      {% set columns = h.querytool_get_resource_columns(resource_id, y_axis_values) %}
-       <div class="control-group control-select">
-        <label class="control-label" for="table_main_value_{{ n }}">{{ _('Main value') }}</label>
-        <div class="controls ">
-          <select id="table_main_value_{{ n }}" name="table_main_value_{{ n }}">
-            {% for column in columns %}
-            <option value="{{column}}"{% if table %}{{ 'selected' if column == table.main_value }}{% endif %}>{{column}}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-
-      <span class="grippy"></span>
     </div>
-
-   {% if table %}
-      {% set main_value = table.main_value %}
-   {% endif %}
-   <div class="preview-wrapper">
-      {% snippet 'ajax_snippets/table_module.html',
+    {% for item in y_axis_values %}
+      {% do main_filters.append(item) %}
+    {% endfor %}
+    {% set table_filters = h.querytool_get_resource_columns(resource_id, main_filters) %}
+    <div class="control-group control-select">
+      <label class="control-label" for="table_field_filter_name_{{ n }}">{{ _('Filter column') }}</label>
+      <div class="controls ">
+        <select id="table_field_filter_name_{{ n }}" name="table_field_filter_name_{{ n }}">
+          <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+          {% for filter in table_filters %}
+          <option value="{{filter}}"{% if table %}{{ 'selected' if filter == table.filter_name }}{% endif %}>{{filter}}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    <div id="table_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
+      <label class="control-label" for="table_field_filter_value_{{ n }}">{{ _('Filter value') }}</label>
+      <div class="controls ">
+        <select id="table_field_filter_value_{{ n }}" name="table_field_filter_value_{{ n }}" >
+          <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
+          {% if table and table.filter_value %}
+          <option value="{{ table.filter_value }}" selected>{{ table.filter_value }}</option>
+          {% endif %}
+        </select>
+      </div>
+    </div>
+    <div id="table_div_filter_alias_{{ n }}" class="control-group {{ class }}">
+      <label class="control-label" for="table_field_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
+      <div class="controls ">
+        <input id="table_field_filter_alias_{{ n }}" name="table_field_filter_alias_{{ n }}"
+        {% if table and table.filter_alias %}value="{{table.filter_alias}}"{% else %}value=""{% endif %}
+        placeholder="Enter filter alias" type="text">
+      </div>
+    </div>
+    <div id="table_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
+      <label class="control-label" for="table_field_filter_visibility_{{ n }}">{{ _('Filter visibility') }}</label>
+      <div class="controls ">
+        <select id="table_field_filter_visibility_{{ n }}" name="table_field_filter_visibility_{{ n }}" >
+        <option value="public" {{ 'selected' if table and table.filter_visibility == 'public' }}>{{ _('Public') }}</option>
+        <option value="private" {{ 'selected' if table and table.filter_visibility == 'private' }}>{{ _('Private') }}</option>
+        </select>
+      </div>
+    </div>
+    {% set sizes = h.querytool_get_visualization_size() %}
+    <div class="control-group control-select">
+      <label class="control-label" for="table_size_{{ n }}">{{ _('Table size') }}</label>
+      <div class="controls ">
+        <select id="table_size_{{ n }}" name="table_size_{{ n }}">
+        {% for size in sizes %}
+        <option value="{{ size.value }}" {% if table %}{{ 'selected' if size.value == table.size }}{% endif %} >{{size.text}}</option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
+    <span class="grippy"></span>
+  </div>
+  {% if table %}
+    {% set main_value = table.main_value %}
+    {% set filter_name = table.filter_name %}
+    {% set filter_value = table.filter_value %}
+  {% endif %}
+  <div class="preview-wrapper">
+    {% snippet 'ajax_snippets/table_module.html',
       sql_string = sql_string,
       resource_id = resource_id,
       y_axis = y_axis,
-      main_value = main_value
-      %}
-   </div>
-   <ul class="inline text-right chart-actions">
+      main_value = main_value,
+      filter_name=filter_name,
+      filter_value=filter_value
+    %}
+  </div>
+  <ul class="inline text-right chart-actions">
     <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
     <li><a class="btn update-table-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
   </ul>
