@@ -39,11 +39,15 @@
       <div class="flex">
         <div class="filter-y">
           <label for="{{querytool.name}}_y_axis_column">{{ _('Y axis value') }}</label>
-          <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column">
-          {% for y_axis in y_axis_columns %}
-          <option value="{{ y_axis }}" {{ 'selected' if y_axis == y_axis_selected }}>{{ y_axis }}</option>
-          {% endfor %}
-          </select>
+          {% if y_axis_columns|length == 1 %}
+             <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column" value="{{ y_axis_selected }}" disabled/>
+          {% else %}
+            <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column">
+            {% for y_axis in y_axis_columns %}
+              <option value="{{ y_axis }}" {{ 'selected' if y_axis == y_axis_selected }}>{{ y_axis }}</option>
+            {% endfor %}
+            </select>
+          {% endif %}
         </div>
         <div class="filters">
           {% if querytool.public_filters  %}
