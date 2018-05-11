@@ -181,7 +181,8 @@
             y_axis = y_axis_selected,
             main_value = item.main_value,
             filter_name=item.filter_name,
-            filter_value=item.filter_value
+            filter_value=item.filter_value,
+            table_title = item.title
           %}
           {% if item.filter_visibility == 'public'  %}
             {% set id = h.querytool_get_uuid() %}

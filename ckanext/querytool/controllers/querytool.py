@@ -448,7 +448,8 @@ class QueryToolController(base.BaseController):
                         data['table_size_{}'.format(id)]
                     table_item['main_value'] = \
                         data['table_main_value_{}'.format(id)]
-
+                    table_item['title'] = \
+                        data['table_field_title_{}'.format(id)]
                     if data['table_field_filter_name_{}'.format(id)]:
                         table_item['filter_name'] = \
                             data['table_field_filter_name_{}'.format(id)]
