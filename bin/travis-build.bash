@@ -3,7 +3,7 @@ set -e
 echo "This is travis-install-dependencies..."
 
 echo "Installing the packages that CKAN requires..."
-sudo apt-get install postgresql-$PGVERSION solr-jetty
+sudo apt-get update && sudo apt-get install postgresql-$PGVERSION solr-jetty
 
 echo "Installing CKAN and its Python dependencies..."
 git clone https://github.com/ckan/ckan
