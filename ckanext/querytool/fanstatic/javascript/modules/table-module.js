@@ -68,8 +68,8 @@ ckan.module('querytool-table', function() {
             }
             var sql_string = this.create_sql_string(main_value, y_axis);
             var dt_buttons_className = 'btn btn-default';
-            var title = this.options.table_title;
-
+            var title = (this.options.table_title === true) ? '' : this.options.table_title;
+            var dom_class = '<"dt-header'+id+'">';
             this.dataTable = $('#table-item-'+ id).DataTable({
                 "processing": true,
                 "ajax": {
@@ -83,7 +83,7 @@ ckan.module('querytool-table', function() {
                     'title': y_axis.charAt(0).toUpperCase() + y_axis.slice(1)}
                 ],
                 //download table data options
-                dom: '<"dt-header">lBfrtip',
+                dom: dom_class+'r<lf>tip<"dtf-butons"B>',
                 buttons: [
                     {
                     'extend': 'csv',
@@ -100,8 +100,9 @@ ckan.module('querytool-table', function() {
                 ],
                 "destroy" : true /* <---- this setting reinitialize the table */
             });
-            $("div.dt-header").html(title);
-            this.dataTable.buttons().container().insertAfter($('div.dataTables_paginate', this.dataTable.table().container() ));
+            // Change table Title value
+            $("div.dt-header"+ id).html(title);
+            //this.dataTable.buttons().container().insertAfter($('div.dataTables_paginate', this.dataTable.table().container() ));
         },
 
         updateTable : function(){
