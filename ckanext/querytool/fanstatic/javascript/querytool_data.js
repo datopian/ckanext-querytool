@@ -2,11 +2,16 @@
     'use strict';
 
     var api = {
-        get: function(action, params) {
+        get: function(action, params, async) {
             var api_ver = 3;
             var base_url = ckan.sandbox().client.endpoint;
             params = $.param(params);
             var url = base_url + '/api/' + api_ver + '/action/' + action + '?' + params;
+            if (!async) {
+                $.ajaxSetup({
+                    async: false
+                });
+            }
             return $.getJSON(url);
         },
         post: function(action, data, async) {
@@ -145,10 +150,10 @@
 
             if (select_size <= 2) {
 
-                api.post('get_filter_values', {
+                api.get('get_filter_values', {
                     'resource_id': id,
                     'filter_name': filter_name,
-                    'previous_filters': previous_filters
+                    'previous_filters': JSON.stringify(previous_filters)
                 }, false).done(function(data) {
 
                     $.each(data.result, function(idx, elem) {

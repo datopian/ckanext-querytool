@@ -22,6 +22,7 @@ ckan.module('querytool-map', function($, _) {
 
             this.initLeaflet.call(this);
             this.mapResource = this.el.parent().parent().find('[id*=map_resource_]');
+            this.mapTitleField = this.el.parent().parent().find('[id*=map_title_field_]');
             this.mapKeyField = this.el.parent().parent().find('[id*=map_key_field_]');
             this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
             this.mapColorScheme = this.el.parent().parent().find('[id*=map_color_scheme_]');
@@ -30,6 +31,7 @@ ckan.module('querytool-map', function($, _) {
 
             this.valueField = $('#choose_y_axis_column');
             this.mapResource.change(this.onResourceChange.bind(this));
+            this.mapTitleField.change(this.onPropertyChange.bind(this));
             this.mapKeyField.change(this.onPropertyChange.bind(this));
             this.dataKeyField.change(this.onPropertyChange.bind(this));
             this.mapColorScheme.change(this.onPropertyChange.bind(this));
@@ -47,6 +49,7 @@ ckan.module('querytool-map', function($, _) {
         resetMap: function() {
 
             this.options.map_resource = this.mapResource.val();
+            this.options.map_title_field = this.mapTitleField.val();
             this.options.map_key_field = this.mapKeyField.val();
             this.options.data_key_field = this.dataKeyField.val();
             this.options.y_axis_column = this.valueField.val();
@@ -64,6 +67,7 @@ ckan.module('querytool-map', function($, _) {
         },
         onResourceChange: function() {
 
+            this.options.map_title_field = this.mapTitleField.val();
             this.options.map_key_field = this.mapKeyField.val();
             this.options.data_key_field = this.dataKeyField.val();
             this.options.y_axis_column = this.valueField.val();
@@ -77,11 +81,17 @@ ckan.module('querytool-map', function($, _) {
                     .done(function(data) {
                         if (data.success) {
 
+                            this.mapTitleField.find('option').not(':first').remove();
                             this.mapKeyField.find('option').not(':first').remove();
+
+                            $.each(data.result, function(idx, elem) {
+                                this.mapTitleField.append(new Option(elem.text, elem.value));
+                            }.bind(this));
 
                             $.each(data.result, function(idx, elem) {
                                 this.mapKeyField.append(new Option(elem.text, elem.value));
                             }.bind(this));
+
                             this.resetMap.call(this);
                         } else {
                             this.resetMap.call(this);
@@ -97,6 +107,7 @@ ckan.module('querytool-map', function($, _) {
         onPropertyChange: function() {
 
             this.options.map_resource = this.mapResource.val();
+            this.options.map_title_field = this.mapTitleField.val();
             this.options.map_key_field = this.mapKeyField.val();
             this.options.data_key_field = this.dataKeyField.val();
             this.options.y_axis_column = this.valueField.val();
@@ -105,7 +116,9 @@ ckan.module('querytool-map', function($, _) {
             this.options.filter_value = this.mapFilterValue.val();
 
 
-            if (this.options.map_key_field && this.options.data_key_field && this.options.map_resource && this.options.y_axis_column) {
+            if (this.options.map_title_field && this.options.map_key_field &&
+                this.options.data_key_field && this.options.map_resource &&
+                this.options.y_axis_column) {
 
                 if (this.legend) {
                     this.map.removeControl(this.legend);
@@ -128,6 +141,7 @@ ckan.module('querytool-map', function($, _) {
             var lat = 39;
             var lng = 40;
             var zoom = 2;
+            console.log(!L.Browser.mobile);
 
             this.map = new L.Map(elementId, {
                 scrollWheelZoom: false,
@@ -277,10 +291,10 @@ ckan.module('querytool-map', function($, _) {
                                         boldElement,
                                         boldElementText;
 
-                                    boldElementText = document.createTextNode(this.options.data_key_field + ': ');
+                                    boldElementText = document.createTextNode(this.options.map_title_field + ': ');
                                     boldElement = document.createElement("b");
                                     boldElement.appendChild(boldElementText);
-                                    listElementText = document.createTextNode(elementData['key']);
+                                    listElementText = document.createTextNode(feature.properties[this.options.map_title_field]);
                                     listElement = document.createElement("li");
                                     listElement.appendChild(boldElement);
                                     listElement.appendChild(listElementText);

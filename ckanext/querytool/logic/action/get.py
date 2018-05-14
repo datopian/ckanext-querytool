@@ -1,4 +1,5 @@
 import logging
+import json
 import ckan.model as m
 
 from ckan.common import c
@@ -140,11 +141,12 @@ def get_resource_fields(context, data_dict):
     return ch.resource_view_get_fields(resource)
 
 
+@toolkit.side_effect_free
 def get_filter_values(context, data_dict):
 
     resource_id = data_dict.pop('resource_id')
     filter_name = data_dict.pop('filter_name')
-    previous_filters = data_dict.pop('previous_filters')
+    previous_filters = json.loads(data_dict.pop('previous_filters'))
 
     return h.get_filter_values(resource_id, filter_name, previous_filters)
 
