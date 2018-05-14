@@ -507,6 +507,7 @@
                 } else if (item.context.id.indexOf('table_item') >= 0) {
                     var table_size = item.find('[id*=table_size_]');
                     var table_main_value = item.find('[id*=table_main_value_]');
+                    var table_title = item.find('[id*=table_field_title_]');
 
                     var selectTableFilterName = item.find('[id*=table_field_filter_name_]');
                     var selectTableFilterValue = item.find('[id*=table_field_filter_value_]');
@@ -523,6 +524,9 @@
 
                     table_main_value.attr('id', 'table_main_value_' + order);
                     table_main_value.attr('name', 'table_main_value_' + order);
+
+                    table_title.attr('id', 'table_field_title_' + order);
+                    table_title.attr('name', 'table_field_title_' + order);
 
                     selectTableFilterName.attr('id', 'table_field_filter_name_' + order);
                     selectTableFilterName.attr('name', 'table_field_filter_name_' + order);
