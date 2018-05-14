@@ -31,6 +31,20 @@
   {% endif %}
 
   <div class="control-group control-select">
+    <label class="control-label" for="map_title_field_{{ n }}">{{ _('Title field') }}</label>
+    <div class="controls ">
+      <select id="map_title_field_{{ n }}" name="map_title_field_{{ n }}" required=required>
+      <option value="">&mdash; {{ _('Select title field') }} &mdash;</option>
+      {% if map_properties %}
+        {% for property in map_properties %}
+          <option value="{{ property.value }}" {% if map %}{{ 'selected' if property.value == map.map_title_field }}{% endif %} >{{property.text}}</option>
+        {% endfor %}
+      {% endif %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group control-select">
     <label class="control-label" for="map_key_field_{{ n }}">{{ _('Map key field') }}</label>
     <div class="controls ">
       <select id="map_key_field_{{ n }}" name="map_key_field_{{ n }}" required=required>
@@ -138,6 +152,7 @@
 <div class="preview-wrapper">
   {% if map %}
     {% set map_resource=map.map_resource %}
+    {% set map_title_field=map.map_title_field %}
     {% set map_key_field=map.map_key_field %}
     {% set data_key_field=map.data_key_field %}
     {% set map_color_scheme=map.map_color_scheme %}
@@ -147,6 +162,7 @@
   {% snippet 'ajax_snippets/map_module.html',
     n=n,
     map_resource=map_resource,
+    map_title_field=map_title_field,
     map_key_field=map_key_field,
     data_key_field=data_key_field,
     sql_string=sql_string,

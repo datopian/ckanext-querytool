@@ -2,11 +2,16 @@
     'use strict';
 
     var api = {
-        get: function(action, params) {
+        get: function(action, params, async) {
             var api_ver = 3;
             var base_url = ckan.sandbox().client.endpoint;
             params = $.param(params);
             var url = base_url + '/api/' + api_ver + '/action/' + action + '?' + params;
+            if (!async) {
+                $.ajaxSetup({
+                    async: false
+                });
+            }
             return $.getJSON(url);
         },
         post: function(action, data, async) {
@@ -160,10 +165,10 @@
 
             if (select_size <= 2) {
 
-                api.post('get_filter_values', {
+                api.get('get_filter_values', {
                     'resource_id': resource_id,
                     'filter_name': filter_name,
-                    'previous_filters': mainFilters
+                    'previous_filters': JSON.stringify(mainFilters)
                 }, false).done(function(data) {
 
                     $.each(data.result, function(idx, elem) {
@@ -462,6 +467,7 @@
 
                 } else if (item.context.id.indexOf('map_item') >= 0) {
                     var map_resource_url = item.find('[id*=map_resource_]');
+                    var map_title_field = item.find('[id*=map_title_field_]');
                     var map_key_field = item.find('[id*=map_key_field_]');
                     var data_key_field = item.find('[id*=map_data_key_field_]');
                     var map_color_scheme = item.find('[id*=map_color_scheme_]');
@@ -479,6 +485,8 @@
                     item.attr('id', 'map_item_' + order);
                     map_resource_url.attr('id', 'map_resource_' + order);
                     map_resource_url.attr('name', 'map_resource_' + order);
+                    map_title_field.attr('id', 'map_title_field_' + order);
+                    map_title_field.attr('name', 'map_title_field_' + order);
                     map_key_field.attr('id', 'map_key_field_' + order);
                     map_key_field.attr('name', 'map_key_field_' + order);
                     data_key_field.attr('id', 'map_data_key_field_' + order);
