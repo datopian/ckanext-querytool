@@ -467,3 +467,14 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
     }
 
     return map_data
+
+
+def get_chart_sort():
+    '''
+    Get available values for sorting charts data
+    :return:
+    '''
+    options = [{'text': 'Default', 'value': 'default'},
+               {'text': 'Ascending', 'value': 'asc'},
+               {'text': 'Descending', 'value': 'desc'}]
+    return options
