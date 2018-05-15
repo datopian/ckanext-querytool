@@ -220,6 +220,18 @@
         </div>
       </div>
 
+      {% set sort_options = h.querytool_get_chart_sort() %}
+      <div class="control-group control-select">
+        <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Sort data') }}</label>
+        <div class="controls ">
+          <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}">
+          {% for sort in sort_options %}
+            <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{sort.text}}</option>
+          {% endfor %}
+          </select>
+        </div>
+      </div>
+
       {% set sizes = h.querytool_get_visualization_size() %}
       <div class="control-group control-select">
         <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Chart size') }}</label>
@@ -261,6 +273,7 @@
         {% set y_label = chart.y_label %}
         {% set filter_name = chart.filter_name %}
         {% set filter_value = chart.filter_value %}
+        {% set data_sort = chart.sort %}
       {% endif %}
 
       {% snippet 'ajax_snippets/visualization_item.html',
@@ -282,7 +295,8 @@
           show_labels = show_labels,
           y_label = y_label,
           filter_name=filter_name,
-          filter_value=filter_value
+          filter_value=filter_value,
+          data_sort = data_sort
       %}
     </div>
 </div>
