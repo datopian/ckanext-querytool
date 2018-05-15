@@ -367,8 +367,8 @@
                     var selectFilterVAliasDiv = item.find('[id*=chart_div_filter_alias_]');
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
-                    var resource_id = item.find('[id*=resource_id_]');
-
+                    var resourceId = item.find('[id*=resource_id_]');
+                    var dataSort = item.find('[id*=chart_field_sort_]');
 
                     item.attr('id', 'chart_field_' + order);
 
@@ -435,8 +435,11 @@
                     selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
 
-                    resource_id.attr('id', 'resource_id_' + order);
-                    resource_id.attr('name', 'resource_id_' + order);
+                    resourceId.attr('id', 'resource_id_' + order);
+                    resourceId.attr('name', 'resource_id_' + order);
+
+                    dataSort.attr('id', 'chart_field_sort_' + order);
+                    dataSort.attr('name', 'chart_field_sort_' + order);
 
 
                 } else if (item.context.id.indexOf('text_box') >= 0) {

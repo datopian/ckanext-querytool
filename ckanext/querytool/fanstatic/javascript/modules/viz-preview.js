@@ -107,6 +107,7 @@ ckan.module('querytool-viz-preview', function() {
             var tick_count = (this.options.tick_count === true) ? '' : this.options.tick_count;
             var show_labels = this.options.show_labels;
             var y_label = this.options.y_label;
+            var data_sort = this.options.data_sort;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -124,6 +125,22 @@ ckan.module('querytool-viz-preview', function() {
             }
             options.tooltip = {
                 format: {}
+            }
+
+            if(data_sort === 'asc'){
+                records.sort(function(a, b){return a[y_axis] - b[y_axis]});
+            }else if(data_sort === 'desc'){
+                records.sort(function(a, b){return a[y_axis] - b[y_axis]});
+                records.reverse();
+            }else{
+                records.sort(function(a, b){
+                    var x=a[x_axis].toLowerCase(), y=b[x_axis].toLowerCase()
+                    if (x < y) //sort string ascending
+                        return -1
+                    if (x > y)
+                        return 1
+                    return 0 //default return value (no sorting)
+                });
             }
 
             if(tooltip_name !== true && tooltip_name !== ''){
@@ -315,7 +332,8 @@ ckan.module('querytool-viz-preview', function() {
             var filterValue = chartField.find('[name*=chart_field_filter_value_]');
             var filterValueVal = filterValue.val();
 
-
+            var sortOpt = chartField.find('[name*=chart_field_sort_]');
+            var sortVal = sortOpt.val();
 
             var dataLabels =  chartField.find('input[name*=chart_field_labels_]');
             var dataLabelsVal = dataLabels.is(':checked');
@@ -343,6 +361,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.show_labels = dataLabelsVal;
                 this.options.y_label = yLabbelVal;
                 this.options.tick_count = tickCountVal;
+                this.options.data_sort = sortVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -365,6 +384,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.y_label = yLabbelVal;
             this.options.filter_name = filterNameVal;
             this.options.filter_value = filterValueVal;
+            this.options.data_sort = sortVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
