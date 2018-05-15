@@ -107,6 +107,7 @@ ckan.module('querytool-viz-preview', function() {
             var tick_count = (this.options.tick_count === true) ? '' : this.options.tick_count;
             var show_labels = this.options.show_labels;
             var y_label = this.options.y_label;
+            var data_sort = this.options.data_sort;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -124,6 +125,22 @@ ckan.module('querytool-viz-preview', function() {
             }
             options.tooltip = {
                 format: {}
+            }
+
+            if(data_sort === 'asc'){
+                records.sort(function(a, b){return a[y_axis] - b[y_axis]});
+            }else if(data_sort === 'desc'){
+                records.sort(function(a, b){return a[y_axis] - b[y_axis]});
+                records.reverse();
+            }else{
+                records.sort(function(a, b){
+                    var x=a[x_axis].toLowerCase(), y=b[x_axis].toLowerCase()
+                    if (x < y) //sort string ascending
+                        return -1
+                    if (x > y)
+                        return 1
+                    return 0 //default return value (no sorting)
+                });
             }
 
             if(tooltip_name !== true && tooltip_name !== ''){
