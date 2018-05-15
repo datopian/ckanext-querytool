@@ -106,7 +106,7 @@ def get_filter_values(resource_id, filter_name, previous_filters):
 
     if filter_name in fields:
 
-        sql_string = '''SELECT DISTINCT "{column}"
+        sql_string = u'''SELECT DISTINCT "{column}"
          FROM "{resource}" {where}'''.format(
             column=filter_name,
             resource=resource_id,
@@ -261,45 +261,45 @@ def get_visualization_size():
 
 def _create_where_clause(filters):
 
-    where_clause = ''
+    where_clause = u''
 
     if any(filters):
         if len(filters) > 1:
             # Loop through filters and create SQL query
             for idx, _ in enumerate(filters):
-                op = '='
-                name = _['name'].encode('utf-8')
+                op = u'='
+                name = _['name']
                 value = _['value']
 
                 if idx == 0:
-                    where_clause = 'WHERE ("{0}" {1} \'{2}\')'.format(
-                        name, op, value.encode('utf-8'))
+                    where_clause = u'WHERE ("{0}" {1} \'{2}\')'.format(
+                        name, op, value)
                 else:
-                    where_clause += ' AND ("{0}" {1} \'{2}\')'.format(
-                        name, op, value.encode('utf-8'))
+                    where_clause += u' AND ("{0}" {1} \'{2}\')'.format(
+                        name, op, value)
 
         else:
             _ = filters[0]
-            op = '='
-            name = _['name'].encode('utf-8')
+            op = u'='
+            name = _['name']
             value = _['value']
             where_clause = \
-                'WHERE ("{0}" {1} \'{2}\')'.format(
+                u'WHERE ("{0}" {1} \'{2}\')'.format(
                     name,
                     op,
-                    value.encode('utf-8')
+                    value
                 )
     return where_clause
 
 
 def create_query_str(resource_id, filters):
 
-    columns = map(lambda f: '"{0}"'.format(f['name'].encode('utf-8')), filters)
+    columns = map(lambda f: u'"{0}"'.format(f['name']), filters)
     select = ', '.join(columns)
     where_clause = _create_where_clause(filters)
 
     # generate the final SQL query string
-    sql_string = '''SELECT * FROM "{resource}" {where}'''.format(
+    sql_string = u'''SELECT * FROM "{resource}" {where}'''.format(
         select=select,
         resource=resource_id,
         where=where_clause)
@@ -433,10 +433,10 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
     for feature in geojson_data['features']:
         geojson_keys.append(feature['properties'][map_key_field])
 
-    sql = 'SELECT ' + '"' + data_key_field + \
-          '", SUM("' + data_value_field + '") as ' + \
-          '"' + data_value_field + '"' + from_where_clause + \
-          ' GROUP BY "' + data_key_field + '"'
+    sql = u'SELECT ' + u'"' + data_key_field + \
+          u'", SUM("' + data_value_field + u'") as ' + \
+          u'"' + data_value_field + u'"' + from_where_clause + \
+          u' GROUP BY "' + data_key_field + u'"'
 
     response = toolkit.get_action('datastore_search_sql')(
         {}, {'sql': sql}
