@@ -332,7 +332,8 @@ ckan.module('querytool-viz-preview', function() {
             var filterValue = chartField.find('[name*=chart_field_filter_value_]');
             var filterValueVal = filterValue.val();
 
-
+            var sortOpt = chartField.find('[name*=chart_field_sort_]');
+            var sortVal = sortOpt.val();
 
             var dataLabels =  chartField.find('input[name*=chart_field_labels_]');
             var dataLabelsVal = dataLabels.is(':checked');
@@ -360,6 +361,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.show_labels = dataLabelsVal;
                 this.options.y_label = yLabbelVal;
                 this.options.tick_count = tickCountVal;
+                this.options.data_sort = sortVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -382,6 +384,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.y_label = yLabbelVal;
             this.options.filter_name = filterNameVal;
             this.options.filter_value = filterValueVal;
+            this.options.data_sort = sortVal;
             var newSqlString = this.create_sql_string();
 
             this.get_resource_datа(newSqlString);
