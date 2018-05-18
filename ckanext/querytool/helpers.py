@@ -469,6 +469,19 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
     return map_data
 
 
+def get_resource_data(sql_string):
+
+    response = toolkit.get_action('datastore_search_sql')(
+        {}, {'sql': sql_string}
+    )
+    records_to_lower = []
+    for record in response['records']:
+        records_to_lower.append({k.lower(): v for k, v in record.items()})
+
+    response['records'] = records_to_lower
+    return response
+
+
 def get_chart_sort():
     '''
     Get available values for sorting charts data

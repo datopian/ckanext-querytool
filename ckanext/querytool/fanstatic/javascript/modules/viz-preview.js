@@ -44,9 +44,9 @@ ckan.module('querytool-viz-preview', function() {
 
     return {
         initialize: function() {
-            var newSqlString = this.create_sql_string();
+            var newSqlData = this.create_sql();
 
-            this.get_resource_datа(newSqlString);
+            this.get_resource_datа(newSqlData);
 
             var chartField = this.el.closest('.chart_field');
 
@@ -59,34 +59,53 @@ ckan.module('querytool-viz-preview', function() {
                 updateBtn.click(this.updateChart.bind(this));
                 deleteBtn.click(this.deleteChart.bind(this));
             }
-            console.log(this.options.category_name);
-            console.log(this.options.category_value);
 
             this.sandbox.subscribe('querytool:updateCharts', this.updateChart.bind(this));
         },
         // Enhance the SQL query with grouping and only select 2 columns.
-        create_sql_string: function() {
+        create_sql: function() {
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+
+            var chart_category_name = (this.options.category_name === true) ? '' : this.options.category_name;
+            var chart_category_value = (this.options.category_value === true) ? '' : this.options.category_value;
 
             // If additional chart filter is set extend the current sql with the new filter
             if (chart_filter_name && chart_filter_value) {
                 var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
-            return 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
+            var mainSql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
+
+            // If additional chart category is set create new sql for the new category
+            var categorySql = '';
+            if (chart_category_name && chart_category_value) {
+                var sqlFromWhereClause = parsedSqlString[1];
+                var filterSql = ' AND ("' + this.options.category_name + '"' + " = '" + this.options.category_value + "')"
+                sqlFromWhereClause = sqlFromWhereClause + filterSql;
+                categorySql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlFromWhereClause + ' GROUP BY "' + this.options.x_axis + '"';
+            }
+
+            var sqlData = {
+                'mainSql': mainSql,
+                'categorySql': categorySql
+            }
+            return sqlData
         },
         // Get the data from Datastore.
-        get_resource_datа: function(sqlString) {
-            api.get('querytool_get_resource_data', {
-                sql_string: sqlString
+        get_resource_datа: function(sqlData) {
+            api.get('querytool_get_chart_data', {
+                mainSql: sqlData.mainSql,
+                categorySql: sqlData.categorySql
             })
             .done(function(data) {
                 if (data.success) {
                     this.fetched_data = data.result;
-                    this.createChart(this.fetched_data);
+//                    TODO now we have two data sets, one is the main and the other is the category data which is not not required
+                    console.log(this.fetched_data);
+                    this.createChart(this.fetched_data.main_data);
                 } else {
                     this.el.text('Chart could not be created.');
                 }
@@ -334,6 +353,12 @@ ckan.module('querytool-viz-preview', function() {
             var filterValue = chartField.find('[name*=chart_field_filter_value_]');
             var filterValueVal = filterValue.val();
 
+            var categoryName =  chartField.find('[name*=chart_field_category_name_]');
+            var categoryNameVal = categoryName.val();
+
+            var categoryValue = chartField.find('[name*=chart_field_category_value_]');
+            var categoryValueVal = categoryValue.val();
+
             var sortOpt = chartField.find('[name*=chart_field_sort_]');
             var sortVal = sortOpt.val();
 
@@ -348,7 +373,8 @@ ckan.module('querytool-viz-preview', function() {
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
                 this.options.y_axis === axisYValue) && (this.options.filter_name === filterNameVal &&
-                this.options.filter_value === filterValueVal))
+                this.options.filter_value === filterValueVal) && (this.options.category_name === categoryNameVal &&
+                this.options.category_value === categoryValueVal))
             {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
@@ -386,10 +412,12 @@ ckan.module('querytool-viz-preview', function() {
             this.options.y_label = yLabbelVal;
             this.options.filter_name = filterNameVal;
             this.options.filter_value = filterValueVal;
+            this.options.category_name = categoryNameVal;
+            this.options.category_value = categoryValueVal;
             this.options.data_sort = sortVal;
-            var newSqlString = this.create_sql_string();
+            var newSqlData = this.create_sql();
 
-            this.get_resource_datа(newSqlString);
+            this.get_resource_datа(newSqlData);
         },
 
         // Delete the current chart

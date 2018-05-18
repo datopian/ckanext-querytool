@@ -154,15 +154,7 @@ def get_filter_values(context, data_dict):
 @toolkit.side_effect_free
 def querytool_get_resource_data(context, data_dict):
     sql_string = data_dict.get('sql_string')
-    response = toolkit.get_action('datastore_search_sql')(
-        {}, {'sql': sql_string}
-    )
-    records_to_lower = []
-    for record in response['records']:
-        records_to_lower.append({k.lower(): v for k, v in record.items()})
-
-    response['records'] = records_to_lower
-    return response
+    return h.get_resource_data(sql_string)
 
 
 @toolkit.side_effect_free
@@ -260,3 +252,20 @@ def querytool_get_map_data(context, data_dict):
 
     return h.get_map_data(geojson_url, map_key_field, data_key_field,
                           data_value_field, sql_string)
+
+
+@toolkit.side_effect_free
+def querytool_get_chart_data(context, data_dict):
+
+    main_sql = data_dict.get('mainSql')
+    category_sql = data_dict.get('categorySql')
+
+    main_data = h.get_resource_data(main_sql) if main_sql else {}
+    category_data = h.get_resource_data(category_sql) if category_sql else {}
+
+    chart_data = {
+        'main_data': main_data,
+        'category_data': category_data
+    }
+
+    return chart_data
