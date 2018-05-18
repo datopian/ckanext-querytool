@@ -141,7 +141,6 @@ ckan.module('querytool-map', function($, _) {
             var lat = 39;
             var lng = 40;
             var zoom = 2;
-            console.log(!L.Browser.mobile);
 
             this.map = new L.Map(elementId, {
                 scrollWheelZoom: false,

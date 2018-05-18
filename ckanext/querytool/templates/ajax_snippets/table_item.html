@@ -36,7 +36,7 @@
     {% endfor %}
     {% set table_filters = h.querytool_get_resource_columns(resource_id, main_filters) %}
     <div class="control-group control-select">
-      <label class="control-label" for="table_field_filter_name_{{ n }}">{{ _('Filter column') }}</label>
+      <label class="control-label" for="table_field_filter_name_{{ n }}">{{ _('Filter') }}</label>
       <div class="controls ">
         <select id="table_field_filter_name_{{ n }}" name="table_field_filter_name_{{ n }}">
           <option value="">&mdash; {{ _('Select column') }} &mdash;</option>

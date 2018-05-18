@@ -12,6 +12,12 @@
   {% set class = 'hidden' %}
 {% endif %}
 
+{% if chart and chart.category_name %}
+  {% set c_class = '' %}
+{% else %}
+  {% set c_class = 'hidden' %}
+{% endif %}
+
 
   <div id="chart_field_{{ n }}" class="item chart_field visualization-fields-section">
     {% set chart_types = h.querytool_get_chart_types() %}
@@ -76,7 +82,7 @@
     {% set chart_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
 
     <div class="control-group control-select">
-      <label class="control-label" for="chart_field_filter_name_{{ n }}">{{ _('Filter column') }}</label>
+      <label class="control-label" for="chart_field_filter_name_{{ n }}">{{ _('Filter') }}</label>
       <div class="controls ">
         <select id="chart_field_filter_name_{{ n }}" name="chart_field_filter_name_{{ n }}">
             <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
@@ -117,8 +123,36 @@
         </select>
       </div>
     </div>
-    <input type="hidden" id="resource_id_{{ n }}" name="resource_id_{{ n }}" value="{{ chart_resource }}"/>
 
+    <hr>
+
+    <div class="control-group control-select">
+      <label class="control-label" for="chart_field_category_name_{{ n }}">{{ _('Category') }}</label>
+      <div class="controls ">
+        <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}">
+            <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+            {% for category in chart_filters %}
+            <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
+            {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div id="chart_div_category_value_{{ n }}" class="control-group control-select {{ c_class }}">
+      <label class="control-label" for="chart_field_category_value_{{ n }}">{{ _('Category value') }}</label>
+      <div class="controls ">
+        <select id="chart_field_category_value_{{ n }}" name="chart_field_category_value_{{ n }}" >
+          <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
+            {% if chart and chart.category_value %}
+                <option value="{{ chart.category_value }}" selected>{{ chart.category_value }}</option>
+          {% endif %}
+        </select>
+      </div>
+    </div>
+
+    <hr>
+
+    <input type="hidden" id="resource_id_{{ n }}" name="resource_id_{{ n }}" value="{{ chart_resource }}"/>
 
 
       {% if chart %}
@@ -273,6 +307,8 @@
         {% set y_label = chart.y_label %}
         {% set filter_name = chart.filter_name %}
         {% set filter_value = chart.filter_value %}
+        {% set category_name = chart.category_name %}
+        {% set category_value = chart.category_value %}
         {% set data_sort = chart.sort %}
       {% endif %}
 
@@ -296,6 +332,8 @@
           y_label = y_label,
           filter_name=filter_name,
           filter_value=filter_value,
+          category_name=category_name,
+          category_value=category_value,
           data_sort = data_sort
       %}
     </div>
