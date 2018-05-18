@@ -362,6 +362,15 @@ class QueryToolController(base.BaseController):
                         visualization['filter_alias'] = ''
                         visualization['filter_visibility'] = ''
 
+                    if data['chart_field_category_name_{}'.format(id)]:
+                        visualization['category_name'] = \
+                            data['chart_field_category_name_{}'.format(id)]
+                        visualization['category_value'] = \
+                            data['chart_field_category_value_{}'.format(id)]
+                    else:
+                        visualization['category_name'] = ''
+                        visualization['category_value'] = ''
+
                     visualizations.append(visualization)
 
                 if k.startswith('text_box_description_'):

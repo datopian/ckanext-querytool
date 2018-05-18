@@ -154,9 +154,9 @@
 
             var elem = $(this);
             var filter_value_select_id = elem.attr('id');
-            var chart_filter_value = elem.find(":selected").val();
-            var chart_filter_name_select_id = filter_value_select_id.replace('value', 'name');
-            var filter_name = $('#' + chart_filter_name_select_id).find(":selected").val();
+            var filter_value = elem.find(":selected").val();
+            var filter_name_select_id = filter_value_select_id.replace('value', 'name');
+            var filter_name = $('#' + filter_name_select_id).find(":selected").val();
             var vizForm = $('#visualizations-form');
             var resource_id = vizForm.data('chartResource');
             var select_size = $(this).find("option").size();
@@ -173,7 +173,7 @@
 
                     $.each(data.result, function(idx, elem) {
 
-                        if (chart_filter_value != elem) {
+                        if (filter_value != elem) {
                             $('#' + filter_value_select_id).append(new Option(elem, elem));
                         }
                     });
@@ -184,10 +184,83 @@
 
     };
 
+    function handleRenderedChartsCategories(item_id) {
+
+        var category_name_select;
+        var category_value_select;
+
+        if (item_id) {
+            category_name_select = $('[id=chart_field_category_name_' + item_id + ']');
+        } else {
+            category_name_select = $('[id*=chart_field_category_name_]');
+        }
+
+        if (item_id) {
+            category_value_select = $('[id=chart_field_category_value_' + item_id + ']');
+        } else {
+            category_value_select = $('[id*=chart_field_category_value_]');
+        }
+
+        category_name_select.change(function(event) {
+            var elem = $(this);
+            var category_name = elem.find(":selected").val();
+            var category_name_select_id = elem.attr('id');
+
+            var category_value_select_id = category_name_select_id.replace('name', 'value');
+
+            var category_value_div_id = category_value_select_id.replace('field', 'div');
+
+            // Empty filter value select
+            if ($('#' + category_value_select_id + ' option').length > 0) {
+                $('#' + category_value_select_id).find('option').not(':first').remove();
+            }
+
+            if (category_name === '') {
+                $('#' + category_value_select_id).prop('required', false);
+                $('#' + category_value_div_id).addClass('hidden');
+            } else {
+                $('#' + category_value_select_id).prop('required', true);
+                $('#' + category_value_div_id).removeClass('hidden');
+            }
+        });
+
+        category_value_select.mousedown(function(event) {
+
+            var elem = $(this);
+            var category_value_select_id = elem.attr('id');
+            var category_value = elem.find(":selected").val();
+            var category_name_select_id = category_value_select_id.replace('value', 'name');
+            var category_name = $('#' + category_name_select_id).find(":selected").val();
+            var vizForm = $('#visualizations-form');
+            var resource_id = vizForm.data('chartResource');
+            var select_size = $(this).find("option").size();
+            var vizForm = $('#visualizations-form');
+            var mainFilters = vizForm.data('mainFilters');
+
+            if (select_size <= 2) {
+
+                api.get('get_filter_values', {
+                    'resource_id': resource_id,
+                    'filter_name': category_name,
+                    'previous_filters': JSON.stringify(mainFilters)
+                }, false).done(function(data) {
+
+                    $.each(data.result, function(idx, elem) {
+
+                        if (category_value != elem) {
+                            $('#' + category_value_select_id).append(new Option(elem, elem));
+                        }
+                    });
+                });
+            }
+        });
+    };
+
     $(document).ready(function() {
         handleRenderedVizFilters('chart');
         handleRenderedVizFilters('map');
         handleRenderedVizFilters('table');
+        handleRenderedChartsCategories();
         handleImageItems();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
@@ -250,7 +323,6 @@
                         chart_resource: chart_resource,
                         map_resource: map_resource,
                         sql_string: sqlString,
-                        class: 'hidden',
                         y_axis_values: yAxisValues,
                         main_filters: mainFiltersNames
                     })
@@ -258,6 +330,7 @@
                         var item = visualizationItems.prepend(data);
                         ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
                         handleRenderedVizFilters('chart', items);
+                        handleRenderedChartsCategories(items);
                         handleItemsOrder();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
@@ -271,8 +344,7 @@
                         sql_string: sqlString,
                         y_axis_column: axisYValue,
                         y_axis_values: yAxisValues,
-                        main_filters: mainFiltersNames,
-                        class: 'hidden'
+                        main_filters: mainFiltersNames
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -305,8 +377,7 @@
                         resource_id: chart_resource,
                         y_axis: axisYValue,
                         y_axis_values: yAxisValues,
-                        main_filters: mainFiltersNames,
-                        class: 'hidden'
+                        main_filters: mainFiltersNames
 
                     })
                     .done(function(data) {
@@ -367,6 +438,11 @@
                     var selectFilterVAliasDiv = item.find('[id*=chart_div_filter_alias_]');
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
+
+                    var selectCategoryName = item.find('[id*=chart_field_category_name_]');
+                    var selectCategoryValue = item.find('[id*=chart_field_category_value_]');
+                    var selectCategoryValueDiv = item.find('[id*=chart_div_category_value_]');
+
                     var resourceId = item.find('[id*=resource_id_]');
                     var dataSort = item.find('[id*=chart_field_sort_]');
 
@@ -426,14 +502,19 @@
                     selectFilterValue.attr('id', 'chart_field_filter_value_' + order);
                     selectFilterValue.attr('name', 'chart_field_filter_value_' + order);
                     selectFilterValueDiv.attr('id', 'chart_div_filter_value_' + order);
-
                     selectFilterAlias.attr('id', 'chart_field_filter_alias_' + order);
                     selectFilterAlias.attr('name', 'chart_field_filter_alias_' + order);
                     selectFilterVAliasDiv.attr('id', 'chart_div_filter_alias_' + order);
-
                     selectFilterVisibility.attr('id', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
+
+                    selectCategoryName.attr('id', 'chart_field_category_name_' + order);
+                    selectCategoryName.attr('name', 'chart_field_category_name_' + order);
+                    selectCategoryValue.attr('id', 'chart_field_category_value_' + order);
+                    selectCategoryValue.attr('name', 'chart_field_category_value_' + order);
+                    selectCategoryValueDiv.attr('id', 'chart_div_category_value_' + order);
+
 
                     resourceId.attr('id', 'resource_id_' + order);
                     resourceId.attr('name', 'resource_id_' + order);

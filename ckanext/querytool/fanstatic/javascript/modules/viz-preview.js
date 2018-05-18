@@ -59,6 +59,8 @@ ckan.module('querytool-viz-preview', function() {
                 updateBtn.click(this.updateChart.bind(this));
                 deleteBtn.click(this.deleteChart.bind(this));
             }
+            console.log(this.options.category_name);
+            console.log(this.options.category_value);
 
             this.sandbox.subscribe('querytool:updateCharts', this.updateChart.bind(this));
         },
