@@ -158,13 +158,13 @@ ckan.module('querytool-viz-preview', function() {
                     var x = a[x_axis];
                     var y = b[x_axis];
                     if(!isNaN(x)){
-                        return a[y_axis] - b[y_axis]
+                        return Number(x) - Number(y);
                     }else{
                         if (x < y) //sort string ascending
-                            return -1
+                            return -1;
                         if (x > y)
-                            return 1
-                        return 0 //default return value (no sorting)
+                            return 1;
+                        return 0; //default return value (no sorting)
                     }
                 });
             }
