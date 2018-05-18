@@ -155,12 +155,17 @@ ckan.module('querytool-viz-preview', function() {
                 records.reverse();
             }else{
                 records.sort(function(a, b){
-                    var x=a[x_axis].toLowerCase(), y=b[x_axis].toLowerCase()
-                    if (x < y) //sort string ascending
-                        return -1
-                    if (x > y)
-                        return 1
-                    return 0 //default return value (no sorting)
+                    var x = a[x_axis];
+                    var y = b[x_axis];
+                    if(!isNaN(x)){
+                        return a[y_axis] - b[y_axis]
+                    }else{
+                        if (x < y) //sort string ascending
+                            return -1
+                        if (x > y)
+                            return 1
+                        return 0 //default return value (no sorting)
+                    }
                 });
             }
 
@@ -390,7 +395,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.y_label = yLabbelVal;
                 this.options.tick_count = tickCountVal;
                 this.options.data_sort = sortVal;
-                this.createChart(this.fetched_data);
+                this.createChart(this.fetched_data.main_data);
 
                 return;
             }
