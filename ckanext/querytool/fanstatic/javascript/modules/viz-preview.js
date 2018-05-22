@@ -107,7 +107,6 @@ ckan.module('querytool-viz-preview', function() {
                 if (data.success) {
                     this.fetched_data = data.result;
 //                    TODO now we have two data sets, one is the main and the other is the category data which is not not required
-                    console.log(this.fetched_data);
                     this.createChart(this.fetched_data);
                 } else {
                     this.el.text('Chart could not be created.');
@@ -284,15 +283,21 @@ ckan.module('querytool-viz-preview', function() {
                     return item[x_axis];
                 });
 
-                var valuesCategory = recordsCategory.map(function(item) {
-                    return Number(item[y_axis]);
-                });
-
+                var dataValues = [];
                 values.unshift(this.options.y_axis);
-                //TODO: Add new name e.g Death by Year
-                valuesCategory.unshift(this.options.y_axis + '2');
+                dataValues.push(values);
+
+                if(recordsCategory){
+                    var valuesCategory = recordsCategory.map(function(item) {
+                        return Number(item[y_axis]);
+                    });
+                    //TODO: Add new name e.g Death by Year
+                    valuesCategory.unshift(this.options.y_axis + '2');
+                    dataValues.push(valuesCategory);
+                }
+
                 options.data = {
-                    columns: [values, valuesCategory],
+                    columns: dataValues,
                     type: ctype,
                     labels: show_labels
                 };
