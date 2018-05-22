@@ -148,26 +148,32 @@ ckan.module('querytool-viz-preview', function() {
                 format: {}
             }
 
-            if(data_sort === 'asc'){
-                records.sort(function(a, b){return a[y_axis] - b[y_axis]});
-            }else if(data_sort === 'desc'){
-                records.sort(function(a, b){return a[y_axis] - b[y_axis]});
-                records.reverse();
-            }else{
-                records.sort(function(a, b){
-                    var x = a[x_axis];
-                    var y = b[x_axis];
-                    if(!isNaN(x)){
-                        return Number(x) - Number(y);
-                    }else{
-                        if (x < y) //sort string ascending
-                            return -1;
-                        if (x > y)
-                            return 1;
-                        return 0; //default return value (no sorting)
-                    }
-                });
+            var sBarOrder = data_sort;
+
+            if(this.options.chart_type !== 'sbar' ||
+                    this.options.chart_type !== 'shbar'){
+                if(data_sort === 'asc'){
+                    records.sort(function(a, b){return a[y_axis] - b[y_axis]});
+                }else if(data_sort === 'desc'){
+                    records.sort(function(a, b){return a[y_axis] - b[y_axis]});
+                    records.reverse();
+                }else{
+                    records.sort(function(a, b){
+                        var x = a[x_axis];
+                        var y = b[x_axis];
+                        if(!isNaN(x)){
+                            return Number(x) - Number(y);
+                        }else{
+                            if (x < y) //sort string ascending
+                                return -1;
+                            if (x > y)
+                                return 1;
+                            return 0; //default return value (no sorting)
+                        }
+                    });
+                }
             }
+
 
             if(tooltip_name !== true && tooltip_name !== ''){
                 options.tooltip.format['title'] =  function (d) {
@@ -193,7 +199,7 @@ ckan.module('querytool-viz-preview', function() {
                     };
             }
             else if(this.options.chart_type === 'sbar' ||
-                    this.options.chart_type == 'shbar')
+                    this.options.chart_type === 'shbar')
             {
                 var horizontal = (this.options.chart_type === 'shbar') ? true : false
 
@@ -207,7 +213,8 @@ ckan.module('querytool-viz-preview', function() {
                 });
                 options.data = {
                     columns: values,
-                    type : 'bar'
+                    type : 'bar',
+                    order: sBarOrder
                 };
                 var groups = values.map(function(item){
                     return item[0];
