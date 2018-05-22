@@ -21,10 +21,13 @@ Options:
     - y_label (Aditional label added in y axis)
     - filter_name (The name of the chart filter)
     - filter_value (The value of the chart filter)
+    - category_name (Additional category on the x axis)
+    - category_value (Additional category on the x axis)
+    - data_sort (Sort data, asc or desc)
 
 */
 
-"use strict";
+'use strict';
 ckan.module('querytool-viz-preview', function() {
     var api = {
         get: function(action, params) {
@@ -105,7 +108,7 @@ ckan.module('querytool-viz-preview', function() {
                     this.fetched_data = data.result;
 //                    TODO now we have two data sets, one is the main and the other is the category data which is not not required
                     console.log(this.fetched_data);
-                    this.createChart(this.fetched_data.main_data);
+                    this.createChart(this.fetched_data);
                 } else {
                     this.el.text('Chart could not be created.');
                 }
@@ -117,7 +120,8 @@ ckan.module('querytool-viz-preview', function() {
         createChart: function(data) {
             var x_axis = this.options.x_axis.toLowerCase();
             var y_axis = this.options.y_axis.toLowerCase();
-            var records = data.records;
+            var records = data.main_data.records;
+            var recordsCategory = data.category_data.records;
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
             var tooltip_name = this.options.tooltip_name;
@@ -151,7 +155,7 @@ ckan.module('querytool-viz-preview', function() {
             var sBarOrder = data_sort;
 
             if(this.options.chart_type !== 'sbar' ||
-                    this.options.chart_type !== 'shbar'){
+               this.options.chart_type !== 'shbar'){
                 if(data_sort === 'asc'){
                     records.sort(function(a, b){return a[y_axis] - b[y_axis]});
                 }else if(data_sort === 'desc'){
@@ -275,12 +279,20 @@ ckan.module('querytool-viz-preview', function() {
                 values = records.map(function(item) {
                     return Number(item[y_axis]);
                 });
+
                 var categories = records.map(function(item) {
                     return item[x_axis];
                 });
+
+                var valuesCategory = recordsCategory.map(function(item) {
+                    return Number(item[y_axis]);
+                });
+
                 values.unshift(this.options.y_axis);
+                //TODO: Add new name e.g Death by Year
+                valuesCategory.unshift(this.options.y_axis + '2');
                 options.data = {
-                    columns: [values],
+                    columns: [values, valuesCategory],
                     type: ctype,
                     labels: show_labels
                 };
@@ -402,7 +414,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.y_label = yLabbelVal;
                 this.options.tick_count = tickCountVal;
                 this.options.data_sort = sortVal;
-                this.createChart(this.fetched_data.main_data);
+                this.createChart(this.fetched_data);
 
                 return;
             }
