@@ -95,6 +95,7 @@ ckan.module('querytool-viz-preview', function() {
                 'mainSql': mainSql,
                 'categorySql': categorySql
             }
+            console.log('SQL ', sqlData)
             return sqlData
         },
         // Get the data from Datastore.
@@ -107,7 +108,6 @@ ckan.module('querytool-viz-preview', function() {
                 if (data.success) {
                     this.fetched_data = data.result;
 //                    TODO now we have two data sets, one is the main and the other is the category data which is not not required
-                    console.log(this.fetched_data);
                     this.createChart(this.fetched_data);
                 } else {
                     this.el.text('Chart could not be created.');
@@ -156,26 +156,10 @@ ckan.module('querytool-viz-preview', function() {
 
             if(this.options.chart_type !== 'sbar' ||
                this.options.chart_type !== 'shbar'){
-                if(data_sort === 'asc'){
-                    records.sort(function(a, b){return a[y_axis] - b[y_axis]});
-                }else if(data_sort === 'desc'){
-                    records.sort(function(a, b){return a[y_axis] - b[y_axis]});
-                    records.reverse();
-                }else{
-                    records.sort(function(a, b){
-                        var x = a[x_axis];
-                        var y = b[x_axis];
-                        if(!isNaN(x)){
-                            return Number(x) - Number(y);
-                        }else{
-                            if (x < y) //sort string ascending
-                                return -1;
-                            if (x > y)
-                                return 1;
-                            return 0; //default return value (no sorting)
-                        }
-                    });
-                }
+                    this.sortData(data_sort, records, y_axis, x_axis);
+                    if(recordsCategory){
+                       this.sortData(data_sort, recordsCategory, y_axis, x_axis);
+                    }
             }
 
 
@@ -284,15 +268,25 @@ ckan.module('querytool-viz-preview', function() {
                     return item[x_axis];
                 });
 
-                var valuesCategory = recordsCategory.map(function(item) {
-                    return Number(item[y_axis]);
-                });
-
+                var dataValues = [];
                 values.unshift(this.options.y_axis);
-                //TODO: Add new name e.g Death by Year
-                valuesCategory.unshift(this.options.y_axis + '2');
+                dataValues.push(values);
+
+                var categories2 = 0;
+                if(recordsCategory){
+                    var valuesCategory = recordsCategory.map(function(item) {
+                        return Number(item[y_axis]);
+                    });
+                    categories2 = recordsCategory.map(function(item) {
+                        return item[x_axis];
+                    });
+                    //TODO: Add new name e.g Death by Year
+                    valuesCategory.unshift(this.options.y_axis + '2');
+                    dataValues.push(valuesCategory);
+                }
+                var xCategories = (categories.length > categories2.length) ? categories : categories2;
                 options.data = {
-                    columns: [values, valuesCategory],
+                    columns: dataValues,
                     type: ctype,
                     labels: show_labels
                 };
@@ -316,7 +310,7 @@ ckan.module('querytool-viz-preview', function() {
                     },
                     x: {
                         type: 'category',
-                        categories: categories,
+                        categories: xCategories,
                         tick: {
                             rotate: x_text_rotate,
                             multiline: true,
@@ -453,5 +447,28 @@ ckan.module('querytool-viz-preview', function() {
             // We must always unsubscribe on teardown to prevent memory leaks.
             this.sandbox.unsubscribe('querytool:updateCharts', this.updateChart.bind(this));
         },
+
+        sortData: function(data_sort, records, y_axis, x_axis){
+            if(data_sort === 'asc'){
+                    records.sort(function(a, b){return a[y_axis] - b[y_axis]});
+                }else if(data_sort === 'desc'){
+                    records.sort(function(a, b){return a[y_axis] - b[y_axis]});
+                    records.reverse();
+                }else{
+                    records.sort(function(a, b){
+                        var x = a[x_axis];
+                        var y = b[x_axis];
+                        if(!isNaN(x)){
+                            return Number(x) - Number(y);
+                        }else{
+                            if (x < y) //sort string ascending
+                                return -1;
+                            if (x > y)
+                                return 1;
+                            return 0; //default return value (no sorting)
+                        }
+                    });
+                }
+        }
     }
 });
