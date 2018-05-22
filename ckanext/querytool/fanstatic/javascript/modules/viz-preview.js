@@ -272,11 +272,12 @@ ckan.module('querytool-viz-preview', function() {
                 values.unshift(this.options.y_axis);
                 dataValues.push(values);
 
+                var categories2 = 0;
                 if(recordsCategory){
                     var valuesCategory = recordsCategory.map(function(item) {
                         return Number(item[y_axis]);
                     });
-                    var categories2 = recordsCategory.map(function(item) {
+                    categories2 = recordsCategory.map(function(item) {
                         return item[x_axis];
                     });
                     //TODO: Add new name e.g Death by Year
