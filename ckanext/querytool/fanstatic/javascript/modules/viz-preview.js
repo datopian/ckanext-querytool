@@ -263,7 +263,6 @@ ckan.module('querytool-viz-preview', function() {
                 values = records.map(function(item) {
                     return Number(item[y_axis]);
                 });
-
                 var categories = records.map(function(item) {
                     return item[x_axis];
                 });
@@ -272,7 +271,7 @@ ckan.module('querytool-viz-preview', function() {
                 values.unshift(this.options.y_axis);
                 dataValues.push(values);
 
-                var categories2 = 0;
+                var categories2 = '';
                 if(recordsCategory){
                     var valuesCategory = recordsCategory.map(function(item) {
                         return Number(item[y_axis]);
@@ -284,7 +283,9 @@ ckan.module('querytool-viz-preview', function() {
                     valuesCategory.unshift(this.options.y_axis + '2');
                     dataValues.push(valuesCategory);
                 }
+
                 var xCategories = (categories.length > categories2.length) ? categories : categories2;
+
                 options.data = {
                     columns: dataValues,
                     type: ctype,
