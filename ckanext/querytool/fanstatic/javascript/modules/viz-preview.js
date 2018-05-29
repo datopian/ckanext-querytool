@@ -102,7 +102,9 @@ ckan.module('querytool-viz-preview', function() {
         get_resource_datа: function(sqlData) {
             api.get('querytool_get_chart_data', {
                 mainSql: sqlData.mainSql,
-                categorySql: sqlData.categorySql
+                categorySql: sqlData.categorySql,
+                x_axis: this.options.x_axis.toLowerCase(),
+                y_axis: this.options.y_axis.toLowerCase()
             })
             .done(function(data) {
                 if (data.success) {
@@ -263,6 +265,7 @@ ckan.module('querytool-viz-preview', function() {
                 values = records.map(function(item) {
                     return Number(item[y_axis]);
                 });
+
                 var categories = records.map(function(item) {
                     return item[x_axis];
                 });
@@ -271,7 +274,7 @@ ckan.module('querytool-viz-preview', function() {
                 values.unshift(this.options.y_axis);
                 dataValues.push(values);
 
-                var categories2 = '';
+                var categories2 = [];
                 if(recordsCategory){
                     var valuesCategory = recordsCategory.map(function(item) {
                         return Number(item[y_axis]);
@@ -279,6 +282,7 @@ ckan.module('querytool-viz-preview', function() {
                     categories2 = recordsCategory.map(function(item) {
                         return item[x_axis];
                     });
+
                     //TODO: Add new name e.g Death by Year
                     valuesCategory.unshift(this.options.y_axis + '2');
                     dataValues.push(valuesCategory);
@@ -286,11 +290,13 @@ ckan.module('querytool-viz-preview', function() {
 
                 var xCategories = (categories.length > categories2.length) ? categories : categories2;
 
+
                 options.data = {
                     columns: dataValues,
                     type: ctype,
                     labels: show_labels
                 };
+
                 if(show_labels){
                     options.data['labels'] =  {
                         format:  d3.format(data_format)
