@@ -270,10 +270,9 @@ def querytool_get_chart_data(context, data_dict):
         cd_set = set([r[x_key] for r in category_data['records']])
 
         for k in md_set-cd_set:
-            category_data['records'].append({x_key:k, y_key:0})
+            category_data['records'].append({x_key : k, y_key:0})
         for k in cd_set-md_set:
-            main_data['records'].append({x_key:k, y_key:0})
-
+            main_data['records'].append({x_key : k, y_key:0})
 
     chart_data = {
         'main_data': main_data,
