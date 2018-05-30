@@ -207,8 +207,8 @@
             var category_name_select_id = elem.attr('id');
 
             var category_value_select_id = category_name_select_id.replace('name', 'value');
-
             var category_value_div_id = category_value_select_id.replace('field', 'div');
+            var sort_value_div_id = category_value_div_id.replace('category', 'sort');
 
             // Empty filter value select
             if ($('#' + category_value_select_id + ' option').length > 0) {
@@ -218,9 +218,11 @@
             if (category_name === '') {
                 $('#' + category_value_select_id).prop('required', false);
                 $('#' + category_value_div_id).addClass('hidden');
+                $('#' + sort_value_div_id).removeClass('hidden');
             } else {
                 $('#' + category_value_select_id).prop('required', true);
                 $('#' + category_value_div_id).removeClass('hidden');
+                $('#' + sort_value_div_id).addClass('hidden');
             }
         });
 
@@ -445,6 +447,7 @@
 
                     var resourceId = item.find('[id*=resource_id_]');
                     var dataSort = item.find('[id*=chart_field_sort_]');
+                    var dataSortDiv = item.find('[id*=chart_div_sort_value_]');
 
                     item.attr('id', 'chart_field_' + order);
 
@@ -521,6 +524,7 @@
 
                     dataSort.attr('id', 'chart_field_sort_' + order);
                     dataSort.attr('name', 'chart_field_sort_' + order);
+                    dataSortDiv.attr('id', 'chart_div_sort_value_' + order);
 
 
                 } else if (item.context.id.indexOf('text_box') >= 0) {
