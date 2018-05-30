@@ -95,7 +95,6 @@ ckan.module('querytool-viz-preview', function() {
                 'mainSql': mainSql,
                 'categorySql': categorySql
             }
-            console.log('SQL ', sqlData)
             return sqlData
         },
         // Get the data from Datastore.

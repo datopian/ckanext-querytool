@@ -255,7 +255,7 @@
       </div>
 
       {% set sort_options = h.querytool_get_chart_sort() %}
-      <div class="control-group control-select">
+      <div id="chart_div_sort_value_{{ n }}" class="control-group control-select {% if chart and chart.category_value %}hidden{% endif %}">
         <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Sort data') }}</label>
         <div class="controls ">
           <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}">
