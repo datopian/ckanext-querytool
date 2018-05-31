@@ -102,8 +102,8 @@ ckan.module('querytool-viz-preview', function() {
             api.get('querytool_get_chart_data', {
                 mainSql: sqlData.mainSql,
                 categorySql: sqlData.categorySql,
-                x_axis: this.options.x_axis.toLowerCase(),
-                y_axis: this.options.y_axis.toLowerCase()
+                x_axis: this.options.x_axis,
+                y_axis: this.options.y_axis
             })
             .done(function(data) {
                 if (data.success) {
