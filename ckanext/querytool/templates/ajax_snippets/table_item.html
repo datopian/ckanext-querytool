@@ -14,7 +14,7 @@
         {% set table_title = table.title %}
       {% endif %}
       <div class="control-group ">
-        <label class="control-label" for="table_field_title_{{ n }}">{{ _('Table title') }}</label>
+        <label class="control-label" for="table_field_title_{{ n }}">{{ _('Title') }}</label>
         <div class="controls ">
           <input id="table_field_title_{{ n }}" name="table_field_title_{{ n }}" value="{{ table_title }}" placeholder="Table title" type="text">
         </div>
@@ -22,7 +22,7 @@
 
     {% set columns = h.querytool_get_resource_columns(resource_id, y_axis_values) %}
     <div class="control-group control-select">
-      <label class="control-label" for="table_main_value_{{ n }}">{{ _('Main value') }}</label>
+      <label class="control-label" for="table_main_value_{{ n }}">{{ _('Dimension') }}</label>
       <div class="controls ">
         <select id="table_main_value_{{ n }}" name="table_main_value_{{ n }}">
         {% for column in columns %}
@@ -36,7 +36,7 @@
     {% endfor %}
     {% set table_filters = h.querytool_get_resource_columns(resource_id, main_filters) %}
     <div class="control-group control-select">
-      <label class="control-label" for="table_field_filter_name_{{ n }}">{{ _('Filter') }}</label>
+      <label class="control-label" for="table_field_filter_name_{{ n }}">{{ _('Optional Filter') }}</label>
       <div class="controls ">
         <select id="table_field_filter_name_{{ n }}" name="table_field_filter_name_{{ n }}">
           <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
@@ -47,7 +47,7 @@
       </div>
     </div>
     <div id="table_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
-      <label class="control-label" for="table_field_filter_value_{{ n }}">{{ _('Filter value') }}</label>
+      <label class="control-label" for="table_field_filter_value_{{ n }}">{{ _('Default value') }}</label>
       <div class="controls ">
         <select id="table_field_filter_value_{{ n }}" name="table_field_filter_value_{{ n }}" >
           <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
@@ -76,7 +76,7 @@
     </div>
     {% set sizes = h.querytool_get_visualization_size() %}
     <div class="control-group control-select">
-      <label class="control-label" for="table_size_{{ n }}">{{ _('Table size') }}</label>
+      <label class="control-label" for="table_size_{{ n }}">{{ _('Size') }}</label>
       <div class="controls ">
         <select id="table_size_{{ n }}" name="table_size_{{ n }}">
         {% for size in sizes %}

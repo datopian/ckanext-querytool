@@ -89,7 +89,7 @@
   {% set map_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
 
   <div class="control-group control-select">
-    <label class="control-label" for="map_field_filter_name_{{ n }}">{{ _('Filter') }}</label>
+    <label class="control-label" for="map_field_filter_name_{{ n }}">{{ _('Optional Filter') }}</label>
     <div class="controls ">
       <select id="map_field_filter_name_{{ n }}" name="map_field_filter_name_{{ n }}">
         <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
@@ -101,7 +101,7 @@
   </div>
 
   <div id="map_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
-    <label class="control-label" for="map_field_filter_value_{{ n }}">{{ _('Filter value') }}</label>
+    <label class="control-label" for="map_field_filter_value_{{ n }}">{{ _('Default value') }}</label>
     <div class="controls ">
       <select id="map_field_filter_value_{{ n }}" name="map_field_filter_value_{{ n }}" >
         <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
@@ -133,7 +133,7 @@
 
   {% set sizes = h.querytool_get_visualization_size() %}
   <div class="control-group control-select">
-    <label class="control-label" for="map_size_{{ n }}">{{ _('Map size') }}</label>
+    <label class="control-label" for="map_size_{{ n }}">{{ _('Size') }}</label>
       <div class="controls ">
         <select id="map_size_{{ n }}" name="map_size_{{ n }}">
         {% for size in sizes %}
