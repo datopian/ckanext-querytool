@@ -1,317 +1,281 @@
 {% import 'macros/form.html' as form %}
-
 {% set active_charts = chart %}
 {% set main_filters = main_filters.split(',') %}
 {% set y_axis_values = y_axis_values.split(',') %}
-
 {% set columns = h.querytool_get_resource_columns(chart_resource, y_axis_values) %}
-
 {% if chart and chart.filter_name %}
-  {% set class = '' %}
+    {% set class = '' %}
 {% else %}
-  {% set class = 'hidden' %}
+{% set class = 'hidden' %}
 {% endif %}
-
 {% if chart and chart.category_name %}
-  {% set c_class = '' %}
+    {% set c_class = '' %}
 {% else %}
-  {% set c_class = 'hidden' %}
+{% set c_class = 'hidden' %}
 {% endif %}
-
-
-  <div id="chart_field_{{ n }}" class="item chart_field visualization-fields-section">
-    {% set chart_types = h.querytool_get_chart_types() %}
-    <div class="item-wrapper">
+<div id="chart_field_{{ n }}" class="item chart_field visualization-fields-section">
+   {% set chart_types = h.querytool_get_chart_types() %}
+   <div class="item-wrapper">
       {% if chart %}
         {% set chart_title = chart.title %}
       {% endif %}
       <div class="control-group ">
-        <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Title') }}</label>
-        <div class="controls ">
-          <input id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" value="{{ chart_title }}" placeholder="Chart title" type="text">
-        </div>
+         <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Title') }}</label>
+         <div class="controls ">
+            <input id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" value="{{ chart_title }}" placeholder="Chart title" type="text">
+         </div>
       </div>
-
       {% if chart %}
         {% set selected_chart_type = chart.graph %}
       {% else %}
         {% set selected_chart_type = chart_types[0].value %}
       {% endif %}
       {{ form.select('chart_field_graph_' ~ n, label=_('Type'), options=chart_types, selected=selected_chart_type) }}
-
       <div class="control-group control-select">
-        <label class="control-label" for="chart_field_axis_x_{{ n }}">{{ _('X axis dimension') }}</label>
-        <div class="controls ">
-          <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
+         <label class="control-label" for="chart_field_axis_x_{{ n }}">{{ _('X axis dimension') }}</label>
+         <div class="controls ">
+            <select id="chart_field_axis_x_{{ n }}" name="chart_field_axis_x_{{ n }}">
             {% for column in columns %}
             <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.x_axis }}{% endif %}>{{column}}</option>
             {% endfor %}
-          </select>
-        </div>
+            </select>
+         </div>
       </div>
-
+      <hr>
+      {% for item in y_axis_values %}
+        {% do main_filters.append(item) %}
+      {% endfor %}
+      {% set chart_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
+      <div class="control-group control-select">
+         <label class="control-label" for="chart_field_filter_name_{{ n }}">{{ _('Optional Filter') }}</label>
+         <div class="controls ">
+            <select id="chart_field_filter_name_{{ n }}" name="chart_field_filter_name_{{ n }}">
+               <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+               {% for filter in chart_filters %}
+               <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.filter_name }}{% endif %}>{{filter}}</option>
+               {% endfor %}
+            </select>
+         </div>
+      </div>
+      <div id="chart_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
+         <label class="control-label" for="chart_field_filter_value_{{ n }}">{{ _('Default value') }}</label>
+         <div class="controls ">
+            <select id="chart_field_filter_value_{{ n }}" name="chart_field_filter_value_{{ n }}" >
+               <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
+               {% if chart and chart.filter_value %}
+               <option value="{{ chart.filter_value }}" selected>{{ chart.filter_value }}</option>
+               {% endif %}
+            </select>
+         </div>
+      </div>
+      <div id="chart_div_filter_alias_{{ n }}" class="control-group {{ class }}">
+         <label class="control-label" for="chart_field_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
+         <div class="controls ">
+            <input id="chart_field_filter_alias_{{ n }}" name="chart_field_filter_alias_{{ n }}"
+            {% if chart and chart.filter_alias %}value="{{chart.filter_alias}}"{% else %}value=""{% endif %}
+            placeholder="Enter filter alias" type="text">
+         </div>
+      </div>
+      <div id="chart_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
+         <label class="control-label" for="chart_field_filter_visibility_{{ n }}">{{ _('Filter visibility') }}</label>
+         <div class="controls ">
+            <select id="chart_field_filter_visibility_{{ n }}" name="chart_field_filter_visibility_{{ n }}" >
+            <option value="public" {{ 'selected' if chart and chart.filter_visibility == 'public' }}>{{ _('Public') }}</option>
+            <option value="private" {{ 'selected' if chart and chart.filter_visibility == 'private' }}>{{ _('Private') }}</option>
+            </select>
+         </div>
+      </div>
+      <hr>
+      {% set color_schemes = h.querytool_get_color_scheme() %}
+      <div class="control-group control-select">
+         <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color') }}</label>
+         <div class="controls ">
+            <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
+            {% for color in color_schemes %}
+            <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{color.text}}</option>
+            {% endfor %}
+            </select>
+         </div>
+      </div>
+      {% set sizes = h.querytool_get_visualization_size() %}
+      <div class="control-group control-select">
+         <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Size') }}</label>
+         <div class="controls ">
+            <select id="chart_field_size_{{ n }}" name="chart_field_size_{{ n }}">
+            {% for size in sizes %}
+            <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{size.text}}</option>
+            {% endfor %}
+            </select>
+         </div>
+      </div>
+      <hr>
       {% set text_rotation = h.querytool_get_tick_text_rotation() %}
       <div class="control-group control-select">
-        <label class="control-label" for="chart_field_x_text_rotate_{{ n }}">{{ _('X axis label orientation') }}</label>
-        <div class="controls ">
-          <select id="chart_field_x_text_rotate_{{ n }}" name="chart_field_x_text_rotate_{{ n }}">
-           {% for rotate in text_rotation %}
+         <label class="control-label" for="chart_field_x_text_rotate_{{ n }}">{{ _('X axis label orientation') }}</label>
+         <div class="controls ">
+            <select id="chart_field_x_text_rotate_{{ n }}" name="chart_field_x_text_rotate_{{ n }}">
+            {% for rotate in text_rotation %}
             <option value="{{ rotate.value }}" {% if chart %}{{ 'selected' if rotate.value == chart.x_text_rotate }}{% endif %}>{{rotate.text}}</option>
             {% endfor %}
-          </select>
-        </div>
+            </select>
+         </div>
       </div>
-
-       {% set color_schemes = h.querytool_get_color_scheme() %}
-      <div class="control-group control-select">
-        <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color') }}</label>
-        <div class="controls ">
-          <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
-          {% for color in color_schemes %}
-            <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{color.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
-      </div>
-
-
-    {% for item in y_axis_values %}
-        {% do main_filters.append(item) %}
-    {% endfor %}
-
-    {% set chart_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
-
-    <div class="control-group control-select">
-      <label class="control-label" for="chart_field_filter_name_{{ n }}">{{ _('Optional Filter') }}</label>
-      <div class="controls ">
-        <select id="chart_field_filter_name_{{ n }}" name="chart_field_filter_name_{{ n }}">
-            <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-            {% for filter in chart_filters %}
-            <option value="{{filter}}"{% if chart %}{{ 'selected' if filter == chart.filter_name }}{% endif %}>{{filter}}</option>
-            {% endfor %}
-        </select>
-      </div>
-    </div>
-
-    <div id="chart_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
-      <label class="control-label" for="chart_field_filter_value_{{ n }}">{{ _('Default value') }}</label>
-      <div class="controls ">
-        <select id="chart_field_filter_value_{{ n }}" name="chart_field_filter_value_{{ n }}" >
-          <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
-            {% if chart and chart.filter_value %}
-                <option value="{{ chart.filter_value }}" selected>{{ chart.filter_value }}</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <div id="chart_div_filter_alias_{{ n }}" class="control-group {{ class }}">
-      <label class="control-label" for="chart_field_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
-      <div class="controls ">
-        <input id="chart_field_filter_alias_{{ n }}" name="chart_field_filter_alias_{{ n }}"
-             {% if chart and chart.filter_alias %}value="{{chart.filter_alias}}"{% else %}value=""{% endif %}
-             placeholder="Enter filter alias" type="text">
-      </div>
-    </div>
-
-    <div id="chart_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
-      <label class="control-label" for="chart_field_filter_visibility_{{ n }}">{{ _('Filter visibility') }}</label>
-      <div class="controls ">
-        <select id="chart_field_filter_visibility_{{ n }}" name="chart_field_filter_visibility_{{ n }}" >
-          <option value="public" {{ 'selected' if chart and chart.filter_visibility == 'public' }}>{{ _('Public') }}</option>
-          <option value="private" {{ 'selected' if chart and chart.filter_visibility == 'private' }}>{{ _('Private') }}</option>
-        </select>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="control-group control-select">
-      <label class="control-label" for="chart_field_category_name_{{ n }}">{{ _('Category') }}</label>
-      <div class="controls ">
-        <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}">
-            <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-            {% for category in chart_filters %}
-            <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
-            {% endfor %}
-        </select>
-      </div>
-    </div>
-
-    <div id="chart_div_category_value_{{ n }}" class="control-group control-select {{ c_class }}">
-      <label class="control-label" for="chart_field_category_value_{{ n }}">{{ _('Category value') }}</label>
-      <div class="controls ">
-        <select id="chart_field_category_value_{{ n }}" name="chart_field_category_value_{{ n }}" >
-          <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
-            {% if chart and chart.category_value %}
-                <option value="{{ chart.category_value }}" selected>{{ chart.category_value }}</option>
-          {% endif %}
-        </select>
-      </div>
-    </div>
-
-    <hr>
-
-    <input type="hidden" id="resource_id_{{ n }}" name="resource_id_{{ n }}" value="{{ chart_resource }}"/>
-
-
       {% if chart %}
         {% set show_labels = chart.show_labels %}
       {% endif %}
       <div class="control-group ">
-        <label class="control-label" for="chart_field_labels_{{ n }}">{{ _('Show data labels') }}</label>
-        <div class="controls ">
-          <input id="chart_field_labels_{{ n }}" type="checkbox" name="chart_field_labels_{{ n }}" value="{{ show_labels }}"{% if show_labels=='false' %}{% else %}checked{% endif %}>
-        </div>
+         <label class="control-label" for="chart_field_labels_{{ n }}">{{ _('Show data labels') }}</label>
+         <div class="controls ">
+            <input id="chart_field_labels_{{ n }}" type="checkbox" name="chart_field_labels_{{ n }}" value="{{ show_labels }}"{% if show_labels=='false' %}{% else %}checked{% endif %}>
+         </div>
       </div>
-
-        {% if chart %}
+      {% if chart %}
         {% set show_legend = chart.show_legend %}
       {% endif %}
       <div class="control-group ">
-        <label class="control-label" for="chart_field_legend_{{ n }}">{{ _('Show legend') }}</label>
-        <div class="controls ">
-          <input id="chart_field_legend_{{ n }}" type="checkbox" name="chart_field_legend_{{ n }}" value="{{ show_legend }}"{% if show_legend=='false' %}{% else %}checked{% endif %}>
-        </div>
+         <label class="control-label" for="chart_field_legend_{{ n }}">{{ _('Show legend') }}</label>
+         <div class="controls ">
+            <input id="chart_field_legend_{{ n }}" type="checkbox" name="chart_field_legend_{{ n }}" value="{{ show_legend }}"{% if show_legend=='false' %}{% else %}checked{% endif %}>
+         </div>
       </div>
-
       {% if chart %}
         {% set tooltip_name = chart.tooltip_name %}
       {% endif %}
-       <div class="control-group ">
-        <label class="control-label" for="chart_field_tooltip_name_{{ n }}">{{ _('Tooltip name') }}</label>
-        <div class="controls ">
-          <input id="chart_field_tooltip_name_{{ n }}" type="text" name="chart_field_tooltip_name_{{ n }}" value="{{ tooltip_name }}" placeholder="Tooltip name">
-        </div>
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_tooltip_name_{{ n }}">{{ _('Tooltip name') }}</label>
+         <div class="controls ">
+            <input id="chart_field_tooltip_name_{{ n }}" type="text" name="chart_field_tooltip_name_{{ n }}" value="{{ tooltip_name }}" placeholder="Tooltip name">
+         </div>
       </div>
-
-       {% set data_formats = h.queytool_get_charts_data_formats() %}
+      {% set data_formats = h.queytool_get_charts_data_formats() %}
       <div class="control-group control-select">
-        <label class="control-label" for="chart_field_data_format_{{ n }}">{{ _('Data format') }}</label>
-        <div class="controls ">
-          <select id="chart_field_data_format_{{ n }}" name="chart_field_data_format_{{ n }}">
-          {% for format in data_formats %}
+         <label class="control-label" for="chart_field_data_format_{{ n }}">{{ _('Data format') }}</label>
+         <div class="controls ">
+            <select id="chart_field_data_format_{{ n }}" name="chart_field_data_format_{{ n }}">
+            {% for format in data_formats %}
             <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == chart.data_format }}{% endif %} >{{format.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
+            {% endfor %}
+            </select>
+         </div>
       </div>
-
+      <hr>
       {% if chart and chart.tick_count%}
-            {% set ticks_formats = h.queytool_get_charts_data_formats(5) %}
+        {% set ticks_formats = h.queytool_get_charts_data_formats(5) %}
       {% else %}
         {% set ticks_formats = h.queytool_get_charts_data_formats() %}
       {% endif %}
       <div class="control-group control-select">
-        <label class="control-label" for="chart_field_y_ticks_format_{{ n }}">{{ _('Y axis label format') }}</label>
-        <div class="controls ">
-          <select id="chart_field_y_ticks_format_{{ n }}" name="chart_field_y_ticks_format_{{ n }}">
-          {% for tick in ticks_formats %}
+         <label class="control-label" for="chart_field_y_ticks_format_{{ n }}">{{ _('Y axis label format') }}</label>
+         <div class="controls ">
+            <select id="chart_field_y_ticks_format_{{ n }}" name="chart_field_y_ticks_format_{{ n }}">
+            {% for tick in ticks_formats %}
             <option value="{{ tick.value }}" {% if chart %}{{ 'selected' if tick.value == chart.y_tick_format }}{% endif %} >{{tick.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
+            {% endfor %}
+            </select>
+         </div>
       </div>
-
       {% if chart %}
         {% set y_label = chart.y_label %}
       {% endif %}
-       <div class="control-group ">
-        <label class="control-label" for="chart_field_y_label_{{ n }}">{{ _('Y axis title') }}</label>
-        <div class="controls ">
-          <input id="chart_field_y_label_{{ n }}" type="text" name="chart_field_y_label_{{ n }}" value="{{ y_label }}" placeholder="Y axis label">
-        </div>
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_y_label_{{ n }}">{{ _('Y axis title') }}</label>
+         <div class="controls ">
+            <input id="chart_field_y_label_{{ n }}" type="text" name="chart_field_y_label_{{ n }}" value="{{ y_label }}" placeholder="Y axis label">
+         </div>
       </div>
-
-
-        {% if chart %}
-          {% set ptop = chart.padding_top %}
-        {% endif %}
-       <div class="control-group ">
-        <label class="control-label" for="chart_field_padding_top_{{ n }}">{{ _('Padding top') }}</label>
-        <div class="controls ">
-          <input id="chart_field_padding_top_{{ n }}" type="number" min="0" name="chart_field_padding_top_{{ n }}" value="{{ ptop }}" placeholder="Default">
-        </div>
-       </div>
-
-         {% if chart %}
-          {% set pbtm = chart.padding_bottom %}
-        {% endif %}
-        <div class="control-group ">
-        <label class="control-label" for="chart_field_padding_bottom_{{ n }}">{{ _('Padding bottom') }}</label>
-        <div class="controls ">
-          <input id="chart_field_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_padding_bottom_{{ n }}" value="{{ pbtm }}" placeholder="Default">
-        </div>
+      {% if chart %}
+        {% set ptop = chart.padding_top %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_padding_top_{{ n }}">{{ _('Padding top') }}</label>
+         <div class="controls ">
+            <input id="chart_field_padding_top_{{ n }}" type="number" min="0" name="chart_field_padding_top_{{ n }}" value="{{ ptop }}" placeholder="Default">
+         </div>
       </div>
-
-        {% if chart %}
-          {% set tick_count = chart.tick_count %}
-        {% endif %}
-        <div class="control-group ">
-        <label class="control-label" for="chart_field_tick_count_{{ n }}">{{ _('Y axis tick count') }}</label>
-        <div class="controls ">
-          <input id="chart_field_tick_count_{{ n }}" type="number" min="0" name="chart_field_tick_count_{{ n }}" value="{{ tick_count }}" placeholder="Default">
-        </div>
+      {% if chart %}
+        {% set pbtm = chart.padding_bottom %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_padding_bottom_{{ n }}">{{ _('Padding bottom') }}</label>
+         <div class="controls ">
+            <input id="chart_field_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_padding_bottom_{{ n }}" value="{{ pbtm }}" placeholder="Default">
+         </div>
       </div>
-
+      {% if chart %}
+        {% set tick_count = chart.tick_count %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_tick_count_{{ n }}">{{ _('Y axis tick count') }}</label>
+         <div class="controls ">
+            <input id="chart_field_tick_count_{{ n }}" type="number" min="0" name="chart_field_tick_count_{{ n }}" value="{{ tick_count }}" placeholder="Default">
+         </div>
+      </div>
+      <hr>
+      <div class="control-group control-select">
+         <label class="control-label" for="chart_field_category_name_{{ n }}">{{ _('Category') }}</label>
+         <div class="controls ">
+            <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}">
+               <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+               {% for category in chart_filters %}
+               <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
+               {% endfor %}
+            </select>
+         </div>
+      </div>
+      <div id="chart_div_category_value_{{ n }}" class="control-group control-select {{ c_class }}">
+         <label class="control-label" for="chart_field_category_value_{{ n }}">{{ _('Category value') }}</label>
+         <div class="controls ">
+            <select id="chart_field_category_value_{{ n }}" name="chart_field_category_value_{{ n }}" >
+               <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
+               {% if chart and chart.category_value %}
+               <option value="{{ chart.category_value }}" selected>{{ chart.category_value }}</option>
+               {% endif %}
+            </select>
+         </div>
+      </div>
+      <hr>
+      <input type="hidden" id="resource_id_{{ n }}" name="resource_id_{{ n }}" value="{{ chart_resource }}"/>
       {% set sort_options = h.querytool_get_chart_sort() %}
       <div id="chart_div_sort_value_{{ n }}" class="control-group control-select {% if chart and chart.category_value %}hidden{% endif %}">
-        <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Sort data') }}</label>
-        <div class="controls ">
-          <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}">
-          {% for sort in sort_options %}
+         <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Sort data') }}</label>
+         <div class="controls ">
+            <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}">
+            {% for sort in sort_options %}
             <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{sort.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
+            {% endfor %}
+            </select>
+         </div>
       </div>
-
-      {% set sizes = h.querytool_get_visualization_size() %}
-      <div class="control-group control-select">
-        <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Size') }}</label>
-        <div class="controls ">
-          <select id="chart_field_size_{{ n }}" name="chart_field_size_{{ n }}">
-          {% for size in sizes %}
-            <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{size.text}}</option>
-          {% endfor %}
-          </select>
-        </div>
-      </div>
-
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
-
       <ul class="inline text-right chart-actions">
-        <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
-        <li><a class="btn update-chart-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
+         <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+         <li><a class="btn update-chart-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
       </ul>
-
       <span class="grippy"></span>
-    </div>
-
-    <div class="preview-wrapper">
+   </div>
+   <div class="preview-wrapper">
       {% if chart %}
-        {% set colors = chart.color %}
-        {% set x_axis = chart.x_axis %}
-        {% set y_axis = chart.y_axis %}
-        {% set chart_type = chart.graph %}
-        {% set title = chart.title %}
-        {% set show_legend = chart.show_legend %}
-        {% set x_text_rotate = chart.x_text_rotate %}
-        {% set tooltip_name = chart.tooltip_name %}
-        {% set data_format = chart.data_format %}
-        {% set y_tick_format = chart.y_tick_format %}
-        {% set padding_bottom = chart.padding_bottom %}
-        {% set padding_top = chart.padding_top %}
-        {% set tick_count = chart.tick_count %}
-        {% set show_labels = chart.show_labels %}
-        {% set y_label = chart.y_label %}
-        {% set filter_name = chart.filter_name %}
-        {% set filter_value = chart.filter_value %}
-        {% set category_name = chart.category_name %}
-        {% set category_value = chart.category_value %}
-        {% set data_sort = chart.sort %}
+          {% set colors = chart.color %}
+          {% set x_axis = chart.x_axis %}
+          {% set y_axis = chart.y_axis %}
+          {% set chart_type = chart.graph %}
+          {% set title = chart.title %}
+          {% set show_legend = chart.show_legend %}
+          {% set x_text_rotate = chart.x_text_rotate %}
+          {% set tooltip_name = chart.tooltip_name %}
+          {% set data_format = chart.data_format %}
+          {% set y_tick_format = chart.y_tick_format %}
+          {% set padding_bottom = chart.padding_bottom %}
+          {% set padding_top = chart.padding_top %}
+          {% set tick_count = chart.tick_count %}
+          {% set show_labels = chart.show_labels %}
+          {% set y_label = chart.y_label %}
+          {% set filter_name = chart.filter_name %}
+          {% set filter_value = chart.filter_value %}
+          {% set category_name = chart.category_name %}
+          {% set category_value = chart.category_value %}
+          {% set data_sort = chart.sort %}
       {% endif %}
-
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
           colors=colors,
@@ -336,5 +300,5 @@
           category_value=category_value,
           data_sort = data_sort
       %}
-    </div>
+   </div>
 </div>
