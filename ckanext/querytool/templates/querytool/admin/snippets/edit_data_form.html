@@ -30,7 +30,7 @@ Example usage:
 
   <legend>{{ _('Basic info') }}</legend>
 
-  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+  {{ form.input('title', id='field-title', label=_('Save As'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
   {% set prefix = h.url_for('querytool_show', querytool= '') %}
   {% set domain = h.url_for('querytool_show', querytool= '') %}
@@ -39,13 +39,13 @@ Example usage:
 
   {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
-  {{ form.markdown('description', id='field-description', label=_('Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
+  {{ form.markdown('description', id='field-description', label=_('Display Title and Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
 
 
-  <legend>{{ _('Basic settings') }}</legend>
+  <legend>{{ _('Settings') }}</legend>
 
   <div class="control-group">
-    <label for="field-private" class="control-label">{{ _('Query Type') }}</label>
+    <label for="field-private" class="control-label">{{ _('Application Type') }}</label>
     <div class="controls">
       <select id="field-type" name="type">
         {% for option in [('main', _('Main')), ('related', _('Related'))] %}
@@ -76,11 +76,11 @@ Example usage:
   <div class="control-group">
     <a class="btn btn-info" id="add-related-querytool">
       <span class="fa fa-plus-square"></span>
-      <span class="fa-label">{{_('Add Related Query')}}</span>
+      <span class="fa-label">{{_('Add Related Application')}}</span>
     </a>
   </div>
 
-  <legend>{{ _('Data and resources') }}</legend>
+  <legend>{{ _('Select dataset and resource') }}</legend>
   {% block querytool_dataset %}
     <div class="control-group">
       <label class="control-label" for="field-datasets"><span title="This field is required" class="control-required">*</span>{{ _("Dataset") }}</label>
@@ -100,17 +100,17 @@ Example usage:
   {% endif %}
 
   {% block querytool_choose_chart_resource %}
-    {{ form.select('chart_resource', label=_('Chart resources'), options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
+    {{ form.select('chart_resource', label=_('Resource'), options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
   {% endblock %}
 
 
-  <legend>{{ _('Y Axis columns') }}</legend>
+  <legend>{{ _('Measure(s)') }}</legend>
   {% set columns = h.querytool_get_numeric_resource_columns(data.chart_resource) %}
 
   <div class="control-group control-checkbox-group"
        id="y-axis-columns-container"
        {% if columns | length == 0 %} style="display: none;" {% endif %}>
-    <label class="control-label" for="y-axis-columns-results"><span title="This field is required" class="control-required">*</span>{{ _("Y Axis columns") }}</label>
+    <label class="control-label" for="y-axis-columns-results"><span title="This field is required" class="control-required">*</span>{{ _("Measure(s)") }}</label>
     <div class="controls">
         <ul class="inline" id="y-axis-columns-results">
             {% for column in columns %}
@@ -126,10 +126,10 @@ Example usage:
 
   <em class="muted"
       id="y-axis-columns-notice"
-      {% if data.chart_resource %} style="display: none;" {% endif %}>Please choose a chart resource to see available columns.</em><br><br>
+      {% if data.chart_resource %} style="display: none;" {% endif %}>Please choose a resource to see available numeric columns.</em><br><br>
 
   {% block querytool_main_filters %}
-    <legend>{{ _('Filters') }}</legend>
+    <legend>{{ _('Filter(s)') }}</legend>
 
     <fieldset id="main-filters">
 
@@ -151,6 +151,6 @@ Example usage:
 
 <div class="form-actions">
   <button type="submit" class="btn btn-success" name="save_data">{{ _('Save') }}</button>
-  <button type="submit" class="btn" name="save"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Set visualisations') }}</button>
+  <button type="submit" class="btn" name="save"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Save & Add/Edit Visualizations') }}</button>
 </div>
 </form>

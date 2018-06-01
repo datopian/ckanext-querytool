@@ -10,7 +10,7 @@
     </ul>
 
     <div class="control-group control-select">
-      <label class="control-label" for="data_filter_name_{{ n }}">{{ _('Column') }}</label>
+      <label class="control-label" for="data_filter_name_{{ n }}">{{ _('Dimension') }}</label>
       <div class="controls ">
         <select id="data_filter_name_{{ n }}" name="data_filter_name_{{ n }}" required=required>
             <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="control-group control-select data_filter_value_{{ n }} {{ class }}">
-      <label class="control-label" for="data_filter_value_{{ n }}">{{ _('Value') }}</label>
+      <label class="control-label" for="data_filter_value_{{ n }}">{{ _('Default Value') }}</label>
       <div class="controls ">
         <select id="data_filter_value_{{ n }}" name="data_filter_value_{{ n }}" required=required>
           <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
@@ -34,7 +34,7 @@
     </div>
 
     <div class="control-group data_filter_alias_{{ n }} {{ class }}">
-      <label class="control-label" for="data_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
+      <label class="control-label" for="data_filter_alias_{{ n }}">{{ _('Alias') }}</label>
       <div class="controls ">
         <input id="data_filter_alias_{{ n }}" name="data_filter_alias_{{ n }}"
              {% if selected_filter %}value="{{selected_filter.alias}}"{% else %}value=""{% endif %}

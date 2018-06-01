@@ -28,7 +28,7 @@
   {{ form.errors(error_summary) }}
   {% endblock %}
   {% block charts %}
-  <legend class="sticky-title">{{ _('Data visualizations') }}
+  <legend class="sticky-title">{{ _('Visualizations') }}
     <ul class="inline pull-right">
       <li><button class="btn save-visualization-btn" type="submit" id="save-edit-data-btn" name="save-edit-data" disabled="disabled"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Save & Edit data') }}</button></li>
       <li><button id="save-visualization-btn" type="submit" class="btn btn-success save-visualization-btn" name="save" disabled="disabled">{{ _('Save') }}</button></li>
@@ -38,7 +38,7 @@
     {% set selected_y_axis_column = data.y_axis_column %}
   {% endif %}
   <div class="chart-global-controls">
-    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Y axis column'), options=data.y_axis_columns, selected=selected_y_axis_column) }}
+    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Default measure'), options=data.y_axis_columns, selected=selected_y_axis_column) }}
   </div>
 
   <fieldset>

@@ -38,7 +38,7 @@
     <div class="controls">
       <div class="flex">
         <div class="filter-y">
-          <label for="{{querytool.name}}_y_axis_column">{{ _('Y axis value') }}</label>
+          <label for="{{querytool.name}}_y_axis_column">{{ _('Displayed Measure') }}</label>
           {% if y_axis_columns|length == 1 %}
              <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column" value="{{ y_axis_selected }}" disabled/>
           {% else %}
@@ -212,7 +212,7 @@
 {% block footer %}
 <div class="site-footer">
   <div class="container">
-    <h3>Share or Download Story</h3>
+    <h3>Share</h3>
     <div class="row">
       <div class="span6">
         <div class="input-append">

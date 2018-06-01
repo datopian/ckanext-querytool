@@ -28,8 +28,8 @@
             {% block header_site_navigation_tabs %}
             {{ h.build_nav_main(('home', _('Home'))) }}
             {% if c.userobj.sysadmin %}
-              {{ h.build_nav_main(('querytool_list', _('Queries'))) }}
-              {{ h.build_nav_main(('querytool_public', _('Tools'))) }}
+              {{ h.build_nav_main(('querytool_list', _('Design Applications'))) }}
+              {{ h.build_nav_main(('querytool_public', _('Use Applications'))) }}
             {% endif %}
             {{ super() }}
             {% endblock %}

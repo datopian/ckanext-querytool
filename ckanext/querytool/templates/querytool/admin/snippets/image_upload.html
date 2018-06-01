@@ -52,7 +52,7 @@ Example usage:
 {% endif %}
 {% set sizes = h.querytool_get_visualization_size() %}
 <div class="control-group control-select">
-   <label class="control-label" for="image_field_size_{{ n }}">{{ _('Image size') }}</label>
+   <label class="control-label" for="image_field_size_{{ n }}">{{ _('Size') }}</label>
    <div class="controls ">
       <select id="image_field_size_{{ n }}" name="image_field_size_{{ n }}">
       {% for size in sizes %}
