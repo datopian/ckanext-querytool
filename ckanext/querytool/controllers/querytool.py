@@ -67,22 +67,6 @@ class QueryToolController(base.BaseController):
                       extra_vars={
                           'data': querytools})
 
-    def show(self):
-        '''
-
-        :return: query list template
-        '''
-        context = _get_context()
-
-        try:
-            check_access('querytool_show', context)
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
-
-        return render('querytool/admin/base_show.html',
-                      extra_vars={
-                          'msg': 'This is the Query Tool'})
-
     def delete(self, querytool):
         '''
             Delete query tool

@@ -491,3 +491,7 @@ def get_chart_sort():
                {'text': 'Ascending', 'value': 'asc'},
                {'text': 'Descending', 'value': 'desc'}]
     return options
+
+
+def get_groups():
+    return config.get('ckanext.querytool.groups', '').split(',')

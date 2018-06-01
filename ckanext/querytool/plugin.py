@@ -123,6 +123,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.get_map_color_scheme,
             'querytool_get_chart_sort':
                 helpers.get_chart_sort,
+            'querytool_get_groups':
+                helpers.get_groups
         }
 
     # IAuthFunctions
