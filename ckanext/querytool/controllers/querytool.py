@@ -543,12 +543,12 @@ class QueryToolController(base.BaseController):
         return render('querytool/public/base_main.html',
                       extra_vars={'msg': 'Query or story tool'})
 
-    def querytool_public_list(self):
+    def querytool_public_list(self, group):
         '''
         List all of the available query tools
         :return: querytool list template page
         '''
-        querytools = _get_action('querytool_public_list', {})
+        querytools = _get_action('querytool_public_list', {'group': group})
 
         return render('querytool/public/list.html',
                       extra_vars={'data': querytools})

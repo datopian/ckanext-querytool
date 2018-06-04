@@ -25,8 +25,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     def before_map(self, map):
         querytool_controller\
             = 'ckanext.querytool.controllers.querytool:QueryToolController'
-        storytool_controller = \
-            'ckanext.querytool.controllers.storytool:StoryToolController'
 
         # Query tool routes
         map.redirect('/querytool', '/querytool/list',
@@ -52,7 +50,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         map.connect('querytool_public', '/querytool/public',
                     controller=querytool_controller, action='querytool_public')
 
-        map.connect('querytool_public_list', '/querytool/public/list',
+        map.connect('querytool_public_list_by_group',
+                    '/querytool/public/group/{group}',
                     controller=querytool_controller,
                     action='querytool_public_list')
 
@@ -65,11 +64,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     '/querytool/download/{name}',
                     controller=querytool_controller,
                     action='querytool_download_data')
-
-        # Story tool routes
-        map.connect('storytool_public', '/storytool/public/',
-                    controller=storytool_controller,
-                    action='show')
 
         return map
 

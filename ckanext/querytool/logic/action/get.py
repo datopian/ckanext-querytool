@@ -48,12 +48,15 @@ def querytool_public_list(context, data_dict):
     which are fully set.
     :rtype: list of dictionaries
     '''
+    group = data_dict.get('group')
 
     session = context['session']
 
     query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
         .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
-               CkanextQueryToolVisualizations.ckanext_querytool_id))\
+               CkanextQueryToolVisualizations.ckanext_querytool_id)) \
+        .filter(CkanextQueryTool.group == group) \
+        .filter(CkanextQueryTool.type == 'main') \
         .filter(CkanextQueryToolVisualizations.visualizations != '')
 
     result = query.all()

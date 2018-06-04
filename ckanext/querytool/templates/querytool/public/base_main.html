@@ -23,22 +23,18 @@
   <div class="container content">
     <div class="box-items">
       <div class="row">
-        <div class="span5 offset1">
-          <a class="query-tool box" href="{{ h.url_for('querytool_public_list') }}">
-            <img class="thumbnail" src="/base/images/query-icon.png" alt="Query Tool">
-            <span class="tool-title">Query Tool</span>
-            <span class="short-desc">Intrinsicly visualize one-to-one functionalities for client-centric data. Uniquely grow viral web services after interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</span>
+        {% for group in h.querytool_get_groups() %}
+        {% set url = h.url_for('querytool_public_list_by_group', group=group) %}
+          <div class="span4">
+            <a class="query-tool box" href="{{ url }}">
+            <img class="thumbnail" src="/base/images/query-icon.png" alt="{{ group }}">
+            <span class="tool-title">{{ group }}</span>
+            <span class="short-desc">Some test static description regarding the tool</span>
             <span class="btn btn-primary btn-box" role="button">Start Querying</span>
-          </a>
-        </div>
-        <div class="span5">
-          <a href="{{ h.url_for('storytool_public') }}" class="story-tool box">
-          <img class="thumbnail" src="/base/images/story-icon.png" alt="Story Tool">
-          <span class="tool-title">Story Tool</span>
-          <span class="short-desc">Intrinsicly visspanalize one-to-one functionalities for client-centric data. Uniquely grow viral web services after interoperable functionalities. Interactively drive dynamic services through emerging intellectual capital</span>
-          <span class="btn btn-primary btn-box" role="button">View A Story</span>
-        </a>
-        </div>
+            </a>
+          </div>
+        {% endfor %}
+
       </div>
     </div>
   </div>
