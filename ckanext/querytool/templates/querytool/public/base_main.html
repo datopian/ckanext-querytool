@@ -11,7 +11,7 @@
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}<h1>Welcome</h1>{% endblock %}
-              {% block page_header_description %}<p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut lectus at erat tincidunt   pellentesque ut quis lorem. In varius nunc in lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis consequat pretium sit amet eget mi. Nulla   congue commodo velit, non ultrices magna hendrerit sed.</p>{% endblock %}
+              {% block page_header_description %}<p class="desc">Some static description regarding the application and the grouping.</p>{% endblock %}
             {% endblock %}
           </div>
         </div>
@@ -29,8 +29,8 @@
             <a class="query-tool box" href="{{ url }}">
             <img class="thumbnail" src="/base/images/query-icon.png" alt="{{ group }}">
             <span class="tool-title">{{ group }}</span>
-            <span class="short-desc">Some test static description regarding the tool</span>
-            <span class="btn btn-primary btn-box" role="button">Start Querying</span>
+            {#<span class="short-desc">Some test static description.</span>#}
+            <span class="btn btn-primary btn-box" role="button">{{ _('List Applications') }}</span>
             </a>
           </div>
         {% endfor %}
