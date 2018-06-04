@@ -172,10 +172,10 @@ ckan.module('querytool-viz-preview', function() {
                         return tooltip_name + ' ' +  d;
                     }
             }
-            options.tooltip.format['value'] = function (value, ratio, id) {
-                var format =  d3.format(data_format);
-                return format(value);
-            }
+             options.tooltip.format['value'] = function (value, ratio, id) {
+                 var dataf = this.sortData(data_format, value);
+                 return dataf;
+            }.bind(this);
 
             if (this.options.chart_type === 'donut' ||
                 this.options.chart_type === 'pie') {
@@ -215,7 +215,10 @@ ckan.module('querytool-viz-preview', function() {
                     y: {
                         tick: {
                           count: tick_count,
-                          format: d3.format(y_tick_format),
+                          format: function (value) {
+                            var dataf = this.sortData(y_tick_format, value);
+                            return dataf;
+                        }.bind(this),
                           rotate: yrotate
                          },
                          padding: {
@@ -295,17 +298,22 @@ ckan.module('querytool-viz-preview', function() {
                     type: ctype,
                     labels: show_labels
                 };
-
                 if(show_labels){
                     options.data['labels'] =  {
-                        format:  d3.format(data_format)
+                        format:   function (value) {
+                           var dataf = this.sortData(data_format, value);
+                            return dataf;
+                        }.bind(this),
                     }
                 }
                 options.axis = {
                     y: {
                         tick: {
                           count: tick_count,
-                          format: d3.format(y_tick_format),
+                          format: function (value) {
+                            var dataf = this.sortData(y_tick_format, value);
+                            return dataf;
+                        }.bind(this),
                           rotate: yrotate
                         },
                     padding: {
@@ -475,6 +483,19 @@ ckan.module('querytool-viz-preview', function() {
                         }
                     });
                 }
+        },
+
+        //Check data format, if % or comma round decimal numbers
+        sortData: function(dataf, val){
+            var format = '';
+            if(dataf ===  ','){
+                format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
+            }else if(dataf === '.0%'){
+                format = !(val % 1) ? d3.format(dataf) : d3.format('.2%');
+            }else{
+               format =  d3.format(dataf);
+            }
+             return format(val);
         }
     }
 });
