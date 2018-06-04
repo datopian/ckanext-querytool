@@ -173,16 +173,9 @@ ckan.module('querytool-viz-preview', function() {
                     }
             }
              options.tooltip.format['value'] = function (value, ratio, id) {
-                var format = '';
-                if(data_format ===  ','){
-                    format = !(value % 1) ? d3.format(data_format) : d3.format(',.2f');
-                }else if(data_format === '.0%'){
-                    format = !(value % 1) ? d3.format(data_format) : d3.format('.2%');
-                }else{
-                   format =  d3.format(data_format);
-                }
-                return format(value);
-            }
+                 var dataf = this.sortData(data_format, value);
+                 return dataf;
+            }.bind(this);
 
             if (this.options.chart_type === 'donut' ||
                 this.options.chart_type === 'pie') {
@@ -223,16 +216,9 @@ ckan.module('querytool-viz-preview', function() {
                         tick: {
                           count: tick_count,
                           format: function (value) {
-                                    var format = '';
-                                    if(y_tick_format ===  ','){
-                                        format = !(value % 1) ? d3.format(y_tick_format) : d3.format(',.2f');
-                                    }else if(data_format === '.0%'){
-                                        format = !(value % 1) ? d3.format(y_tick_format) : d3.format('.2%');
-                                    }else{
-                                       format =  d3.format(y_tick_format);
-                                    }
-                                     return format(value);
-                        },
+                            var dataf = this.sortData(y_tick_format, value);
+                            return dataf;
+                        }.bind(this),
                           rotate: yrotate
                          },
                          padding: {
@@ -315,17 +301,9 @@ ckan.module('querytool-viz-preview', function() {
                 if(show_labels){
                     options.data['labels'] =  {
                         format:   function (value) {
-                            //TODO: ADD this in one function
-                            var format = '';
-                            if(data_format ===  ','){
-                                format = !(value % 1) ? d3.format(data_format) : d3.format(',.2f');
-                            }else if(data_format === '.0%'){
-                                format = !(value % 1) ? d3.format(data_format) : d3.format('.2%');
-                            }else{
-                               format =  d3.format(data_format);
-                            }
-                             return format(value);
-                        }
+                           var dataf = this.sortData(data_format, value);
+                            return dataf;
+                        }.bind(this),
                     }
                 }
                 options.axis = {
@@ -333,16 +311,9 @@ ckan.module('querytool-viz-preview', function() {
                         tick: {
                           count: tick_count,
                           format: function (value) {
-                            var format = '';
-                            if(y_tick_format ===  ','){
-                                format = !(value % 1) ? d3.format(y_tick_format) : d3.format(',.2f');
-                            }else if(y_tick_format === '.0%'){
-                                format = !(value % 1) ? d3.format(y_tick_format) : d3.format('.2%');
-                            }else{
-                               format =  d3.format(y_tick_format);
-                            }
-                             return format(value);
-                        },
+                            var dataf = this.sortData(y_tick_format, value);
+                            return dataf;
+                        }.bind(this),
                           rotate: yrotate
                         },
                     padding: {
@@ -513,5 +484,18 @@ ckan.module('querytool-viz-preview', function() {
                     });
                 }
         },
+
+        //Check data format, if % or comma round decimal numbers
+        sortData: function(dataf, val){
+            var format = '';
+            if(dataf ===  ','){
+                format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
+            }else if(dataf === '.0%'){
+                format = !(val % 1) ? d3.format(dataf) : d3.format('.2%');
+            }else{
+               format =  d3.format(dataf);
+            }
+             return format(val);
+        }
     }
 });
