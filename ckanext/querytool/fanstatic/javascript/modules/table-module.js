@@ -39,7 +39,7 @@ ckan.module('querytool-table', function() {
 
             this.createTable();
 
-             var tableField = this.el.closest('.table_item');
+            var tableField = this.el.closest('.table_item');
 
             // The Update table button is only in the admin area. In the public
             // updating of tables will be applied with a reload of the page.
@@ -52,60 +52,96 @@ ckan.module('querytool-table', function() {
             this.sandbox.subscribe('querytool:updateTables', this.updateTable.bind(this));
         },
 
-        createTable: function(yVal, xVal, fromUpdate){
+        createTable: function(yVal, xVal, fromUpdate) {
 
             var resource_id = this.options.resource_id;
             var y_axis = (yVal) ? yVal : this.options.y_axis;
             var id = this.options.table_id;
             var main_value = this.options.main_value;
-            if(main_value === true){
+            if (main_value === true) {
                 var mainVal = $('[name*=table_main_value_]');
                 main_value = mainVal.val();
             }
             //check if main value is updated
-            if(fromUpdate){
+            if (fromUpdate) {
                 main_value = xVal;
             }
             var sql_string = this.create_sql_string(main_value, y_axis);
             var dt_buttons_className = 'btn btn-default';
             var title = (this.options.table_title === true) ? '' : this.options.table_title;
-            var dom_class = '<"dt-header'+id+'">';
-            this.dataTable = $('#table-item-'+ id).DataTable({
+            var dom_class = '<"dt-header' + id + '">';
+            this.dataTable = $('#table-item-' + id).DataTable({
                 "processing": true,
                 "ajax": {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
                     "dataSrc": "result.records"
                 },
-                "columns": [
-                    {'data': main_value.toLowerCase(),
-                    'title': main_value.charAt(0).toUpperCase() + main_value.slice(1)},
-                    {'data': y_axis.toLowerCase(),
-                    'title': y_axis.charAt(0).toUpperCase() + y_axis.slice(1)}
-                ],
-                //download table data options
-                dom: dom_class+'r<lf>tip<"dtf-butons"B>',
-                buttons: [
+                "columns": [{
+                        'data': main_value.toLowerCase(),
+                        'title': main_value.charAt(0).toUpperCase() + main_value.slice(1),
+                        //check for long decimal numbers and round to fixed 5 decimal points
+                        render: function(val) {
+                            if (!isNaN(val)) {
+                                var data = '';
+                                if ((val % 1) != 0) {
+                                    var places = val.toString().split(".")[1].length;
+                                    if (places > 5) {
+                                        var data = parseFloat(val).toFixed(5);
+                                        return data;
+                                    }
+                                    return val;
+                                } else {
+                                    return val;
+                                }
+                            }
+                            return val;
+                        }
+                    },
                     {
-                    'extend': 'csv',
-                    'className' : dt_buttons_className
-                    },
-                       {
-                    'extend': 'excel',
-                    'className' : dt_buttons_className
-                    },
-                     {
-                    'extend': 'pdf',
-                    'className' : dt_buttons_className
+                        'data': y_axis.toLowerCase(),
+                        'title': y_axis.charAt(0).toUpperCase() + y_axis.slice(1),
+                        //check for long decimal numbers and round to fixed 5 decimal points
+                        render: function(val) {
+                            if (!isNaN(val)) {
+                                var data = '';
+                                if ((val % 1) != 0) {
+                                    var places = val.toString().split(".")[1].length;
+                                    if (places > 5) {
+                                        var data = parseFloat(val).toFixed(5);
+                                        return data;
+                                    }
+                                    return val;
+                                } else {
+                                    return val;
+                                }
+                            }
+                            return val;
+                        }
                     }
                 ],
-                "destroy" : true /* <---- this setting reinitialize the table */
+                //download table data options
+                dom: dom_class + 'r<lf>tip<"dtf-butons"B>',
+                buttons: [{
+                        'extend': 'csv',
+                        'className': dt_buttons_className
+                    },
+                    {
+                        'extend': 'excel',
+                        'className': dt_buttons_className
+                    },
+                    {
+                        'extend': 'pdf',
+                        'className': dt_buttons_className
+                    }
+                ],
+                "destroy": true /* <---- this setting reinitialize the table */
             });
             // Change table Title value
-            $("div.dt-header"+ id).html(title);
+            $("div.dt-header" + id).html(title);
             //this.dataTable.buttons().container().insertAfter($('div.dataTables_paginate', this.dataTable.table().container() ));
         },
 
-        updateTable : function(){
+        updateTable: function() {
             var yVal = $('[name=choose_y_axis_column]').val();
             var xVal = this.el.parent().parent().find('[id*=table_main_value_]').val();
             this.options.filter_name = this.el.parent().parent().find('[id*=table_field_filter_name_]').val();
