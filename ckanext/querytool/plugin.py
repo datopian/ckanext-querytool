@@ -30,8 +30,14 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         map.redirect('/querytool', '/querytool/list',
                      _redirect_code='301 Moved Permanently')
 
-        map.connect('querytool_list', '/querytool/list',
-                    controller=querytool_controller, action='list')
+        map.connect('querytool_groups', '/querytool/groups',
+                    controller=querytool_controller, action='groups')
+
+        map.connect('querytool_list_by_group', '/querytool/group/{group}',
+                    controller=querytool_controller, action='list_by_group')
+
+        map.connect('querytool_list_other', '/querytool/group/other',
+                    controller=querytool_controller, action='list_other')
 
         map.connect('querytool_show', '/querytool/show/{querytool}',
                     controller=querytool_controller, action='show')
@@ -47,7 +53,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     controller=querytool_controller,
                     action='edit_visualizations')
 
-        map.connect('querytool_public', '/querytool/public',
+        map.connect('querytool_public', '/querytool/public/groups',
                     controller=querytool_controller, action='querytool_public')
 
         map.connect('querytool_public_list_by_group',

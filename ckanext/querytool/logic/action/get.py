@@ -23,13 +23,36 @@ def _get_context():
 
 
 @toolkit.side_effect_free
-def querytool_list(context, data_dict):
+def querytool_list_by_group(context, data_dict):
     '''Returns a list of all query tools.
     :rtype: list of dictionaries
     '''
 
     # check_access('',
     #            context, data_dict)
+    group = data_dict.get('group')
+
+    querytools = CkanextQueryTool.search(group=group)
+
+    out = []
+
+    for querytool in querytools:
+        querytool = table_dictize(querytool, context)
+        out.append(querytool)
+
+    return out
+
+
+@toolkit.side_effect_free
+def querytool_list_other(context, data_dict):
+    '''Returns a list of all query tools.
+    :rtype: list of dictionaries
+    '''
+
+    # check_access('',
+    #            context, data_dict)
+    # TODO implement
+    groups = data_dict.get('groups')
 
     querytools = CkanextQueryTool.search()
 
