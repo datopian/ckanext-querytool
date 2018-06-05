@@ -173,7 +173,7 @@ ckan.module('querytool-viz-preview', function() {
                     }
             }
              options.tooltip.format['value'] = function (value, ratio, id) {
-                 var dataf = this.sortData(data_format, value);
+                 var dataf = this.sortFormatData(data_format, value);
                  return dataf;
             }.bind(this);
 
@@ -216,7 +216,7 @@ ckan.module('querytool-viz-preview', function() {
                         tick: {
                           count: tick_count,
                           format: function (value) {
-                            var dataf = this.sortData(y_tick_format, value);
+                            var dataf = this.sortFormatData(y_tick_format, value);
                             return dataf;
                         }.bind(this),
                           rotate: yrotate
@@ -301,8 +301,8 @@ ckan.module('querytool-viz-preview', function() {
                 if(show_labels){
                     options.data['labels'] =  {
                         format:   function (value) {
-                           var dataf = this.sortData(data_format, value);
-                            return dataf;
+                           var dataf = this.sortFormatData(data_format, value);
+                           return dataf;
                         }.bind(this),
                     }
                 }
@@ -311,7 +311,7 @@ ckan.module('querytool-viz-preview', function() {
                         tick: {
                           count: tick_count,
                           format: function (value) {
-                            var dataf = this.sortData(y_tick_format, value);
+                            var dataf = this.sortFormatData(y_tick_format, value);
                             return dataf;
                         }.bind(this),
                           rotate: yrotate
@@ -486,7 +486,7 @@ ckan.module('querytool-viz-preview', function() {
         },
 
         //Check data format, if % or comma round decimal numbers
-        sortData: function(dataf, val){
+        sortFormatData: function(dataf, val){
             var format = '';
             if(dataf ===  ','){
                 format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
