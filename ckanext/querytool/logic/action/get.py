@@ -255,31 +255,3 @@ def querytool_get_map_data(context, data_dict):
 
     return h.get_map_data(geojson_url, map_key_field, data_key_field,
                           data_value_field, sql_string)
-
-
-@toolkit.side_effect_free
-def querytool_get_chart_data(context, data_dict):
-
-    main_sql = data_dict.get('mainSql')
-    category_sql = data_dict.get('categorySql')
-
-    main_data = h.get_resource_data(main_sql) if main_sql else {}
-    category_data = h.get_resource_data(category_sql) if category_sql else {}
-
-    if category_data:
-        x_key = data_dict.get('x_axis')
-        y_key = data_dict.get('y_axis')
-        md_set = set([r[x_key] for r in main_data['records']])
-        cd_set = set([r[x_key] for r in category_data['records']])
-
-        for k in md_set-cd_set:
-            category_data['records'].append({x_key: k, y_key: 0})
-        for k in cd_set-md_set:
-            main_data['records'].append({x_key: k, y_key: 0})
-
-    chart_data = {
-        'main_data': main_data,
-        'category_data': category_data
-    }
-
-    return chart_data

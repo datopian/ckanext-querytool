@@ -21,8 +21,6 @@ Options:
     - y_label (Aditional label added in y axis)
     - filter_name (The name of the chart filter)
     - filter_value (The value of the chart filter)
-    - category_name (Additional category on the x axis)
-    - category_value (Additional category on the x axis)
     - data_sort (Sort data, asc or desc)
 
 */
@@ -47,9 +45,9 @@ ckan.module('querytool-viz-preview', function() {
 
     return {
         initialize: function() {
-            var newSqlData = this.create_sql();
+            var newSql = this.create_sql();
 
-            this.get_resource_datа(newSqlData);
+            this.get_resource_datа(newSql);
 
             var chartField = this.el.closest('.chart_field');
 
@@ -72,43 +70,23 @@ ckan.module('querytool-viz-preview', function() {
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
 
-            var chart_category_name = (this.options.category_name === true) ? '' : this.options.category_name;
-            var chart_category_value = (this.options.category_value === true) ? '' : this.options.category_value;
-
             // If additional chart filter is set extend the current sql with the new filter
             if (chart_filter_name && chart_filter_value) {
                 var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
-            var mainSql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
+            var sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
 
-            // If additional chart category is set create new sql for the new category
-            var categorySql = '';
-            if (chart_category_name && chart_category_value) {
-                var sqlFromWhereClause = parsedSqlString[1];
-                var filterSql = ' AND ("' + this.options.category_name + '"' + " = '" + this.options.category_value + "')"
-                sqlFromWhereClause = sqlFromWhereClause + filterSql;
-                categorySql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlFromWhereClause + ' GROUP BY "' + this.options.x_axis + '"';
-            }
-
-            var sqlData = {
-                'mainSql': mainSql,
-                'categorySql': categorySql
-            }
-            return sqlData
+            return sql
         },
         // Get the data from Datastore.
-        get_resource_datа: function(sqlData) {
-            api.get('querytool_get_chart_data', {
-                mainSql: sqlData.mainSql,
-                categorySql: sqlData.categorySql,
-                x_axis: this.options.x_axis,
-                y_axis: this.options.y_axis
+        get_resource_datа: function(sql) {
+            api.get('querytool_get_resource_data', {
+                sql_string: sql
             })
             .done(function(data) {
                 if (data.success) {
                     this.fetched_data = data.result;
-//                    TODO now we have two data sets, one is the main and the other is the category data which is not not required
                     this.createChart(this.fetched_data);
                 } else {
                     this.el.text('Chart could not be created.');
@@ -121,7 +99,7 @@ ckan.module('querytool-viz-preview', function() {
         createChart: function(data) {
             var x_axis = this.options.x_axis.toLowerCase();
             var y_axis = this.options.y_axis.toLowerCase();
-            var records = data.main_data.records;
+            var records = data.records;
             var recordsCategory = data.category_data.records;
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
@@ -389,12 +367,6 @@ ckan.module('querytool-viz-preview', function() {
             var filterValue = chartField.find('[name*=chart_field_filter_value_]');
             var filterValueVal = filterValue.val();
 
-            var categoryName =  chartField.find('[name*=chart_field_category_name_]');
-            var categoryNameVal = categoryName.val();
-
-            var categoryValue = chartField.find('[name*=chart_field_category_value_]');
-            var categoryValueVal = categoryValue.val();
-
             var sortOpt = chartField.find('[name*=chart_field_sort_]');
             var sortVal = sortOpt.val();
 
@@ -409,8 +381,7 @@ ckan.module('querytool-viz-preview', function() {
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
                 this.options.y_axis === axisYValue) && (this.options.filter_name === filterNameVal &&
-                this.options.filter_value === filterValueVal) && (this.options.category_name === categoryNameVal &&
-                this.options.category_value === categoryValueVal))
+                this.options.filter_value === filterValueVal))
             {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
@@ -448,12 +419,10 @@ ckan.module('querytool-viz-preview', function() {
             this.options.y_label = yLabbelVal;
             this.options.filter_name = filterNameVal;
             this.options.filter_value = filterValueVal;
-            this.options.category_name = categoryNameVal;
-            this.options.category_value = categoryValueVal;
             this.options.data_sort = sortVal;
-            var newSqlData = this.create_sql();
+            var newSql = this.create_sql();
 
-            this.get_resource_datа(newSqlData);
+            this.get_resource_datа(newSql);
         },
 
         // Delete the current chart
