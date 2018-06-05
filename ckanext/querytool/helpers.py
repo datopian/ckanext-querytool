@@ -397,11 +397,8 @@ def get_geojson_resources():
 
 def get_geojson_properties(url):
     # TODO handle if no url
-
-    r = urllib.urlopen(url)
-
-    data = unicode(r.read(), errors='ignore')
-    geojson = json.loads(data)
+    resp = requests.get(url)
+    geojson = resp.json()
 
     result = []
     exclude_keys = [
