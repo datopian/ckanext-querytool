@@ -76,8 +76,8 @@ ckan.module('querytool-viz-preview', function() {
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
             var sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
-
-            return sql
+            console.log(sql);
+            return sql;
         },
         // Get the data from Datastore.
         get_resource_datа: function(sql) {
@@ -100,7 +100,6 @@ ckan.module('querytool-viz-preview', function() {
             var x_axis = this.options.x_axis.toLowerCase();
             var y_axis = this.options.y_axis.toLowerCase();
             var records = data.records;
-            var recordsCategory = data.category_data.records;
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
             var tooltip_name = this.options.tooltip_name;
@@ -136,9 +135,6 @@ ckan.module('querytool-viz-preview', function() {
             if(this.options.chart_type !== 'sbar' ||
                this.options.chart_type !== 'shbar'){
                     this.sortData(data_sort, records, y_axis, x_axis);
-                    if(recordsCategory){
-                       this.sortData(data_sort, recordsCategory, y_axis, x_axis);
-                    }
             }
 
 
@@ -254,32 +250,15 @@ ckan.module('querytool-viz-preview', function() {
                     return category;
                 });
 
-                var dataValues = [];
+
                 values.unshift(this.options.y_axis);
-                dataValues.push(values);
-
-                var categories2 = [];
-                if(recordsCategory){
-                    var valuesCategory = recordsCategory.map(function(item) {
-                        return Number(item[y_axis]);
-                    });
-                    categories2 = recordsCategory.map(function(item) {
-                        return item[x_axis];
-                    });
-
-                    //TODO: Add new name e.g Death by Year
-                    valuesCategory.unshift(this.options.y_axis + '2');
-                    dataValues.push(valuesCategory);
-                }
-
-                var xCategories = (categories.length > categories2.length) ? categories : categories2;
-
 
                 options.data = {
-                    columns: dataValues,
+                    columns: [values],
                     type: ctype,
                     labels: show_labels
                 };
+
                 if(show_labels){
                     options.data['labels'] =  {
                         format:   function (value) {
@@ -288,6 +267,7 @@ ckan.module('querytool-viz-preview', function() {
                         }.bind(this),
                     }
                 }
+
                 options.axis = {
                     y: {
                         tick: {
@@ -306,7 +286,7 @@ ckan.module('querytool-viz-preview', function() {
                     },
                     x: {
                         type: 'category',
-                        categories: xCategories,
+                        categories: categories,
                         tick: {
                             rotate: x_text_rotate,
                             multiline: true,
