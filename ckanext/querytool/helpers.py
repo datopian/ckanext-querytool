@@ -493,4 +493,4 @@ def get_chart_sort():
 
 def get_groups():
     return config.\
-        get('ckanext.querytool.groups', 'Please set groups config').split(',')
+        get('ckanext.querytool.groups', 'Not set').split(',')
