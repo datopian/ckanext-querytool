@@ -24,7 +24,8 @@ def _get_context():
 
 @toolkit.side_effect_free
 def querytool_list_by_group(context, data_dict):
-    '''Returns a list of all query tools.
+    '''Returns a list of query tools that
+     belong to a specified group.
     :rtype: list of dictionaries
     '''
 
@@ -45,23 +46,18 @@ def querytool_list_by_group(context, data_dict):
 
 @toolkit.side_effect_free
 def querytool_list_other(context, data_dict):
-    '''Returns a list of all query tools.
+    '''Returns a list of query tools that
+     don't belong to any of the existing groups.
     :rtype: list of dictionaries
     '''
-
-    # check_access('',
-    #            context, data_dict)
-    # TODO implement
     groups = data_dict.get('groups')
-
     querytools = CkanextQueryTool.search()
-
     out = []
 
     for querytool in querytools:
-        querytool = table_dictize(querytool, context)
-        out.append(querytool)
-
+        if querytool.group not in groups:
+            querytool = table_dictize(querytool, context)
+            out.append(querytool)
     return out
 
 
