@@ -228,7 +228,8 @@ def get_charts_data_formats(num=None):
         Get available formats for charts tooltip and axis ticks
     :return:
     '''
-    options = [{'text': 'Integer e.g 2', 'value': '.0f'},
+    options = [{'text': 'Default', 'value': ''},
+               {'text': 'Integer e.g 2', 'value': '.0f'},
                {'text': 'Decimal (1 digit) e.g 2.5', 'value': '.1f'},
                {'text': 'Decimal (2 digit) e.g 2.50', 'value': '.2f'},
                {'text': 'Decimal (3 digit) e.g 2.501', 'value': '.3f'},
