@@ -48,10 +48,18 @@ class QueryToolController(base.BaseController):
 
     ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController'
 
-    def list(self):
+    def groups(self):
+        '''
+        Lists all available groups
+        :return: base template
+        '''
+        return render('querytool/admin/base_groups.html',
+                      extra_vars={'msg': 'Groups'})
+
+    def list_by_group(self, group):
         '''
 
-        :return: query list template
+        :return: query list by group template
         '''
 
         context = _get_context()
@@ -59,7 +67,28 @@ class QueryToolController(base.BaseController):
         try:
             check_access('querytool_list', context)
 
-            querytools = _get_action('querytool_list', {})
+            querytools = _get_action('querytool_list_by_group',
+                                     {'group': group})
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
+        return render('querytool/admin/base_list.html',
+                      extra_vars={
+                          'data': querytools})
+
+    def list_other(self):
+        '''
+
+        :return: list querytools that don't belong to
+         any of the existing groups
+        '''
+
+        context = _get_context()
+
+        try:
+            check_access('querytool_list', context)
+
+            querytools = _get_action('querytool_list_other', {})
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
@@ -91,7 +120,7 @@ class QueryToolController(base.BaseController):
 
         h.flash_success(_('Querytool and visualizations were '
                           'removed successfully.'))
-        toolkit.redirect_to(h.url_for('querytool_list'))
+        toolkit.redirect_to(h.url_for('querytool_groups'))
 
     def querytool_edit(self, querytool=None, data=None,
                        errors=None, error_summary=None):
@@ -192,8 +221,9 @@ class QueryToolController(base.BaseController):
                 return self.querytool_edit('/' + querytool, _querytool,
                                            errors, error_summary)
             if 'save_data' in data.keys():
-                # redirect to querytools
-                url = h.url_for('querytool_list')
+                # redirect to querytools group
+                url = h.url_for('querytool_list_by_group',
+                                group=_querytool['group'])
             else:
                 # redirect to manage visualisations
                 url = h.url_for('querytool_edit_visualizations',
@@ -479,8 +509,9 @@ class QueryToolController(base.BaseController):
                 url = h.url_for('querytool_edit',
                                 querytool='/' + _querytool['name'])
             else:
-                # redirect to querytool
-                url = h.url_for('querytool_list')
+                # redirect to querytools group
+                url = h.url_for('querytool_list_by_group',
+                                group=_querytool['group'])
             h.redirect_to(url)
 
         if not data:
@@ -528,11 +559,11 @@ class QueryToolController(base.BaseController):
 
     def querytool_public(self):
         '''
-        Choose between query or story tool
+        Lists all available groups
         :return: base template
         '''
         return render('querytool/public/base_main.html',
-                      extra_vars={'msg': 'Query or story tool'})
+                      extra_vars={'msg': 'Groups'})
 
     def querytool_public_list(self, group):
         '''

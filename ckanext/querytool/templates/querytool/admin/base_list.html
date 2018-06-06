@@ -5,7 +5,8 @@
 
 
 {% block breadcrumb_content %}
-  <li class="active">{% link_for _('Queries'), controller=ctrl, action='list' %}</li>
+  <li>{% link_for _('Application Groups'), controller=ctrl, action='groups' %}</li>
+  <li class="active">{% link_for c.group, controller=ctrl, action='list_by_group', group=c.group %}</li>
 {% endblock %}
 
 {% block page_header %}
