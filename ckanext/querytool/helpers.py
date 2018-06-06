@@ -492,5 +492,10 @@ def get_chart_sort():
 
 
 def get_groups():
-    return config.\
+    '''
+    Get avaiable groups from config
+    :return: list of groups without duplicate
+    '''
+    groups = config.\
         get('ckanext.querytool.groups', 'Not set').split(',')
+    return set(groups)
