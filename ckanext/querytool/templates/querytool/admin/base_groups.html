@@ -1,3 +1,5 @@
+
+{% resource 'querytool/css/admin-query-tool.css' %}
 {% extends "querytool/admin/base.html" %}
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
@@ -23,7 +25,7 @@
   <div class="row">
     {% for group in h.querytool_get_groups() %}
     {% set url = h.url_for('querytool_list_by_group', group=group) %}
-      <div class="span4 media-item">
+      <div class="span4 media-item admin-groups">
         <img src="{{ h.url_for_static('/base/images/query-icon.png') }}" alt="{{ group }}" class="media-image">
         <h3 class="media-heading">{{ group }}</h3>
         <a href="{{ url }}" title="{{ group }}" class="media-view">
@@ -31,14 +33,15 @@
         </a>
       </div>
     {% endfor %}
-    {% set other_groups = h.url_for('querytool_list_other') %}
-      <div class="span4 media-item">
-        <img src="{{ h.url_for_static('/base/images/query-icon.png') }}" alt="{{ _('Other') }}" class="media-image">
-        <h3 class="media-heading">{{ _('Other') }}</h3>
-        <a href="{{ other_groups }}" title="{{  _('Other') }}" class="media-view">
-          <span>{{  _('Other') }}</span>
-        </a>
-      </div>
+
+  {% set other_groups = h.url_for('querytool_list_other') %}
+    <div class="span4 media-item admin-groups">
+      <img src="{{ h.url_for_static('/base/images/query-icon.png') }}" alt="{{ _('Other') }}" class="media-image">
+      <h3 class="media-heading">{{ _('Other') }}</h3>
+      <a href="{{ other_groups }}" title="{{  _('Other') }}" class="media-view">
+        <span>{{  _('Other') }}</span>
+      </a>
+    </div>
   </div>
 
 {% endblock %}
