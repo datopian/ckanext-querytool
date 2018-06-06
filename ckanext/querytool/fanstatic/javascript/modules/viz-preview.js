@@ -21,6 +21,7 @@ Options:
     - y_label (Aditional label added in y axis)
     - filter_name (The name of the chart filter)
     - filter_value (The value of the chart filter)
+    - category_name (The value of the chart category)
     - data_sort (Sort data, asc or desc)
 
 */
@@ -76,13 +77,23 @@ ckan.module('querytool-viz-preview', function() {
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
             var sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
-            console.log(sql);
+
             return sql;
         },
         // Get the data from Datastore.
         get_resource_datа: function(sql) {
+
+            var category = (this.options.category_name === true) ? '' : this.options.category_name;
+            var x_axis = (this.options.x_axis === true) ? '' : this.options.x_axis;
+            var y_axis = (this.options.y_axis === true) ? '' : this.options.y_axis;
+            var resource_id = sql.split('FROM')[1].split('WHERE')[0].split('"')[1];
+
             api.get('querytool_get_resource_data', {
-                sql_string: sql
+                category: category,
+                sql_string: sql,
+                resource_id: resource_id,
+                x_axis: x_axis,
+                y_axis: y_axis
             })
             .done(function(data) {
                 if (data.success) {
@@ -99,7 +110,7 @@ ckan.module('querytool-viz-preview', function() {
         createChart: function(data) {
             var x_axis = this.options.x_axis.toLowerCase();
             var y_axis = this.options.y_axis.toLowerCase();
-            var records = data.records;
+            var records = data;
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
             var tooltip_name = this.options.tooltip_name;
@@ -132,10 +143,10 @@ ckan.module('querytool-viz-preview', function() {
 
             var sBarOrder = data_sort;
 
-            if(this.options.chart_type !== 'sbar' ||
-               this.options.chart_type !== 'shbar'){
-                    this.sortData(data_sort, records, y_axis, x_axis);
-            }
+//            if(this.options.chart_type !== 'sbar' ||
+//               this.options.chart_type !== 'shbar'){
+//                    this.sortData(data_sort, records, y_axis, x_axis);
+//            }
 
 
             if(tooltip_name !== true && tooltip_name !== ''){
@@ -238,23 +249,16 @@ ckan.module('querytool-viz-preview', function() {
                     };
                 }
 
-                values = records.map(function(item) {
-                    return Number(item[y_axis]);
-                });
+                var columns = [];
+                for (var key in records) {
 
-                var categories = records.map(function(item) {
-                    var category = item[x_axis];
-                    if(category.length > 35){
-                        return category.substring(0, 30) + '...'
-                    }
-                    return category;
-                });
+                  columns.push(records[key]);
 
-
-                values.unshift(this.options.y_axis);
+                }
 
                 options.data = {
-                    columns: [values],
+                    x: 'x',
+                    columns: columns,
                     type: ctype,
                     labels: show_labels
                 };
@@ -286,7 +290,6 @@ ckan.module('querytool-viz-preview', function() {
                     },
                     x: {
                         type: 'category',
-                        categories: categories,
                         tick: {
                             rotate: x_text_rotate,
                             multiline: true,
@@ -347,6 +350,9 @@ ckan.module('querytool-viz-preview', function() {
             var filterValue = chartField.find('[name*=chart_field_filter_value_]');
             var filterValueVal = filterValue.val();
 
+            var categoryName =  chartField.find('[name*=chart_field_category_name_]');
+            var categoryNameVal = categoryName.val();
+
             var sortOpt = chartField.find('[name*=chart_field_sort_]');
             var sortVal = sortOpt.val();
 
@@ -361,7 +367,7 @@ ckan.module('querytool-viz-preview', function() {
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
                 this.options.y_axis === axisYValue) && (this.options.filter_name === filterNameVal &&
-                this.options.filter_value === filterValueVal))
+                this.options.filter_value === filterValueVal) && this.options.category_name === categoryNameVal)
             {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
@@ -399,6 +405,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.y_label = yLabbelVal;
             this.options.filter_name = filterNameVal;
             this.options.filter_value = filterValueVal;
+            this.options.category_name = categoryNameVal;
             this.options.data_sort = sortVal;
             var newSql = this.create_sql();
 

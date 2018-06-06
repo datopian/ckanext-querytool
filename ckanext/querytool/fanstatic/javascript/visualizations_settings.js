@@ -365,6 +365,8 @@
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
 
+                    var selectCategoryName = item.find('[id*=chart_field_category_name_]');
+
                     var resourceId = item.find('[id*=resource_id_]');
                     var dataSort = item.find('[id*=chart_field_sort_]');
                     var dataSortDiv = item.find('[id*=chart_div_sort_value_]');
@@ -434,6 +436,9 @@
 
                     resourceId.attr('id', 'resource_id_' + order);
                     resourceId.attr('name', 'resource_id_' + order);
+
+                    selectCategoryName.attr('id', 'chart_field_category_name_' + order);
+                    selectCategoryName.attr('name', 'chart_field_category_name_' + order);
 
                     dataSort.attr('id', 'chart_field_sort_' + order);
                     dataSort.attr('name', 'chart_field_sort_' + order);
