@@ -210,8 +210,28 @@ def querytool_get_resource_data(context, data_dict):
 
         categories_data['x'] = x
         return categories_data
+    else:
+        x = []
+        x.append('x')
+        x.append(x_axis)
 
-    return h.get_resource_data(sql_string)
+        x_axis_values = sorted(h.get_filter_values(resource_id, x_axis))
+
+        for x_value in x_axis_values:
+            categories_data[x_value] = []
+            categories_data[x_value].append(x_value)
+
+        records = h.get_resource_data(sql_string)
+
+        for record in records:
+            categories_data[record[x_axis.lower()]] \
+                .append(record[y_axis.lower()])
+
+        categories_data['x'] = x
+        print categories_data
+        return categories_data
+
+    # return h.get_resource_data(sql_string)
 
 
 @toolkit.side_effect_free
