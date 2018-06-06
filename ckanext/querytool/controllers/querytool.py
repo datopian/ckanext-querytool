@@ -82,13 +82,13 @@ class QueryToolController(base.BaseController):
         :return: list querytools that don't belong to
          any of the existing groups
         '''
-
         context = _get_context()
+        groups = helpers.get_groups()
 
         try:
             check_access('querytool_list', context)
-
-            querytools = _get_action('querytool_list_other', {})
+            querytools = _get_action('querytool_list_other',
+                                     {'groups': groups})
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 

@@ -6,7 +6,14 @@
 
 {% block breadcrumb_content %}
   <li>{% link_for _('Application Groups'), controller=ctrl, action='groups' %}</li>
-  <li class="active">{% link_for c.group, controller=ctrl, action='list_by_group', group=c.group %}</li>
+
+  {% if c.group %}
+    <li class="active">{% link_for c.group, controller=ctrl, action='list_by_group', group=c.group %}</li>
+  {% else %}
+    <li class="active">{% link_for _('Other'), controller=ctrl, action='list_other' %}</li>
+  {% endif %}
+
+
 {% endblock %}
 
 {% block page_header %}

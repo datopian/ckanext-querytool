@@ -33,11 +33,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         map.connect('querytool_groups', '/querytool/groups',
                     controller=querytool_controller, action='groups')
 
-        map.connect('querytool_list_by_group', '/querytool/group/{group}',
-                    controller=querytool_controller, action='list_by_group')
-
         map.connect('querytool_list_other', '/querytool/group/other',
                     controller=querytool_controller, action='list_other')
+
+        map.connect('querytool_list_by_group', '/querytool/group/{group}',
+                    controller=querytool_controller, action='list_by_group')
 
         map.connect('querytool_show', '/querytool/show/{querytool}',
                     controller=querytool_controller, action='show')
