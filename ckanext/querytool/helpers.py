@@ -85,7 +85,7 @@ def get_all_datasets():
     return datasets
 
 
-def get_filter_values(resource_id, filter_name, previous_filters):
+def get_filter_values(resource_id, filter_name, previous_filters=[]):
     '''Returns resource field values with no duplicates.'''
 
     resource = _get_action('resource_show', {'id': resource_id})
@@ -476,8 +476,7 @@ def get_resource_data(sql_string):
     for record in response['records']:
         records_to_lower.append({k.lower(): v for k, v in record.items()})
 
-    response['records'] = records_to_lower
-    return response
+    return records_to_lower
 
 
 def get_chart_sort():

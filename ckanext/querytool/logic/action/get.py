@@ -1,7 +1,8 @@
 import logging
 import json
-import ckan.model as m
+from operator import itemgetter
 
+import ckan.model as m
 from ckan.common import c
 from ckan.plugins import toolkit
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
@@ -175,7 +176,41 @@ def get_filter_values(context, data_dict):
 
 @toolkit.side_effect_free
 def querytool_get_resource_data(context, data_dict):
+
+    category = data_dict.get('category')
     sql_string = data_dict.get('sql_string')
+    x_axis = data_dict.get('x_axis')
+    y_axis = data_dict.get('y_axis')
+    resource_id = data_dict.get('resource_id').strip()
+    sql_without_group = sql_string.split('GROUP BY')[0]
+    sql_group = sql_string.split('GROUP BY')[1]
+    categories_data = {}
+
+    if category:
+        x = []
+        x.append('x')
+
+        category_values = sorted(h.get_filter_values(resource_id, category))
+        x_axis_values = sorted(h.get_filter_values(resource_id, x_axis))
+
+        for x_value in x_axis_values:
+            categories_data[x_value] = []
+            categories_data[x_value].append(x_value)
+
+        for value in category_values:
+            category_value_sql = sql_without_group + u'AND ("' + \
+                                 category + u'" = ' + u"'" + value + \
+                                 u"'" + u') ' + u'GROUP BY' + sql_group
+            records = h.get_resource_data(category_value_sql)
+            x.append(value)
+
+            for record in records:
+                categories_data[record[x_axis.lower()]]\
+                    .append(record[y_axis.lower()])
+
+        categories_data['x'] = x
+        return categories_data
+
     return h.get_resource_data(sql_string)
 
 
