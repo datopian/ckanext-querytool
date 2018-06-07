@@ -181,6 +181,7 @@ def querytool_get_resource_data(context, data_dict):
     sql_string = data_dict.get('sql_string')
     x_axis = data_dict.get('x_axis')
     y_axis = data_dict.get('y_axis')
+    chart_type = data_dict.get('chart_type')
     resource_id = data_dict.get('resource_id').strip()
     sql_without_group = sql_string.split('GROUP BY')[0]
     sql_group = sql_string.split('GROUP BY')[1]
@@ -210,7 +211,8 @@ def querytool_get_resource_data(context, data_dict):
 
         categories_data['x'] = x
         return categories_data
-    else:
+
+    elif chart_type == 'bar':
         x = []
         x.append('x')
         x.append(x_axis)
@@ -228,10 +230,12 @@ def querytool_get_resource_data(context, data_dict):
                 .append(record[y_axis.lower()])
 
         categories_data['x'] = x
-        print categories_data
-        return categories_data
 
-    # return h.get_resource_data(sql_string)
+        return  categories_data
+
+    else:
+
+        return h.get_resource_data(sql_string)
 
 
 @toolkit.side_effect_free
