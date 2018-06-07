@@ -212,7 +212,7 @@ def querytool_get_resource_data(context, data_dict):
         categories_data['x'] = x
         return categories_data
 
-    elif chart_type == 'bar':
+    elif chart_type in ['bar', 'hbar']:
         x = []
         x.append('x')
         x.append(x_axis)
@@ -231,7 +231,7 @@ def querytool_get_resource_data(context, data_dict):
 
         categories_data['x'] = x
 
-        return  categories_data
+        return categories_data
 
     else:
 

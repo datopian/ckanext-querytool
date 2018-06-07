@@ -25,7 +25,6 @@ Options:
     - data_sort (Sort data, asc or desc)
 
 */
-
 'use strict';
 ckan.module('querytool-viz-preview', function() {
     var api = {
@@ -90,24 +89,24 @@ ckan.module('querytool-viz-preview', function() {
             var chart_type = this.options.chart_type;
 
             api.get('querytool_get_resource_data', {
-                category: category,
-                sql_string: sql,
-                resource_id: resource_id,
-                x_axis: x_axis,
-                y_axis: y_axis,
-                chart_type: chart_type
-            })
-            .done(function(data) {
-                if (data.success) {
-                    this.fetched_data = data.result;
-                    this.createChart(this.fetched_data);
-                } else {
+                    category: category,
+                    sql_string: sql,
+                    resource_id: resource_id,
+                    x_axis: x_axis,
+                    y_axis: y_axis,
+                    chart_type: chart_type
+                })
+                .done(function(data) {
+                    if (data.success) {
+                        this.fetched_data = data.result;
+                        this.createChart(this.fetched_data);
+                    } else {
+                        this.el.text('Chart could not be created.');
+                    }
+                }.bind(this))
+                .error(function(error) {
                     this.el.text('Chart could not be created.');
-                }
-            }.bind(this))
-            .error(function(error) {
-                this.el.text('Chart could not be created.');
-            }.bind(this));
+                }.bind(this));
         },
         createChart: function(data) {
             var x_axis = this.options.x_axis.toLowerCase();
@@ -146,43 +145,41 @@ ckan.module('querytool-viz-preview', function() {
 
             var sBarOrder = data_sort;
 
-//            if(this.options.chart_type !== 'sbar' ||
-//               this.options.chart_type !== 'shbar'){
-//                    this.sortData(data_sort, records, y_axis, x_axis);
-//            }
+            //            if(this.options.chart_type !== 'sbar' ||
+            //               this.options.chart_type !== 'shbar'){
+            //                    this.sortData(data_sort, records, y_axis, x_axis);
+            //            }
 
 
-            if(tooltip_name !== true && tooltip_name !== ''){
-                options.tooltip.format['title'] =  function (d) {
-                    if(options.data.type === 'donut' || options.data.type === 'pie'){
+            if (tooltip_name !== true && tooltip_name !== '') {
+                options.tooltip.format['title'] = function(d) {
+                    if (options.data.type === 'donut' || options.data.type === 'pie') {
                         return tooltip_name;
                     }
-                        return tooltip_name + ' ' +  d;
-                    }
+                    return tooltip_name + ' ' + d;
+                }
             }
-             options.tooltip.format['value'] = function (value, ratio, id) {
-                 var dataf = this.sortFormatData(data_format, value);
-                 return dataf;
+            options.tooltip.format['value'] = function(value, ratio, id) {
+                var dataf = this.sortFormatData(data_format, value);
+                return dataf;
             }.bind(this);
 
             if (this.options.chart_type === 'donut' ||
                 this.options.chart_type === 'pie') {
-                    values = records.map(function(item) {
-                        return [item[x_axis], item[y_axis]]
-                    });
-                    options.data = {
-                        columns: values,
-                        type : this.options.chart_type
-                    };
-            }
-            else if(this.options.chart_type === 'sbar' ||
-                    this.options.chart_type === 'shbar')
-            {
+                values = records.map(function(item) {
+                    return [item[x_axis], item[y_axis]]
+                });
+                options.data = {
+                    columns: values,
+                    type: this.options.chart_type
+                };
+            } else if (this.options.chart_type === 'sbar' ||
+                this.options.chart_type === 'shbar') {
                 var horizontal = (this.options.chart_type === 'shbar') ? true : false
 
                 var yrotate = 0;
-                if(horizontal){
-                     // On horizontal bar the x axis is now actually the y axis
+                if (horizontal) {
+                    // On horizontal bar the x axis is now actually the y axis
                     yrotate = x_text_rotate;
                 }
                 values = records.map(function(item) {
@@ -190,92 +187,91 @@ ckan.module('querytool-viz-preview', function() {
                 });
                 options.data = {
                     columns: values,
-                    type : 'bar',
+                    type: 'bar',
                     order: sBarOrder
                 };
-                var groups = values.map(function(item){
+                var groups = values.map(function(item) {
                     return item[0];
                 });
                 options.data.groups = [groups];
 
                 options.axis = {
-                    rotated : horizontal,
+                    rotated: horizontal,
                     y: {
                         tick: {
-                          count: tick_count,
-                          format: function (value) {
-                            var dataf = this.sortFormatData(y_tick_format, value);
-                            return dataf;
-                        }.bind(this),
-                          rotate: yrotate
-                         },
-                         padding: {
+                            count: tick_count,
+                            format: function(value) {
+                                var dataf = this.sortFormatData(y_tick_format, value);
+                                return dataf;
+                            }.bind(this),
+                            rotate: yrotate
+                        },
+                        padding: {
                             top: padding_top,
                             bottom: padding_bottom
-                         }
+                        }
                     },
                     x: {
-                        tick:{
+                        tick: {
                             rotate: x_text_rotate,
                             multiline: true
                         }
                     }
                 }
-            }
-            else
-            {
+            } else {
                 var rotate = false;
                 var ctype = this.options.chart_type;
                 var yrotate = 0;
-                if (this.options.chart_type === 'hbar')
-                {
+                if (this.options.chart_type === 'hbar') {
                     rotate = true;
                     ctype = 'bar';
                     // On horizontal bar the x axis is now actually the y axis
                     yrotate = x_text_rotate;
                 }
-                if(this.options.chart_type === 'bscatter'){
+                if (this.options.chart_type === 'bscatter') {
                     //workaround for bubble charts, scale log base 10 because of large values
-                    var rs = d3.scale.log().base(10).domain([1,1000]).range([0,10]);
+                    var rs = d3.scale.log().base(10).domain([1, 1000]).range([0, 10]);
                     ctype = 'scatter';
                     options.point = {
-                         r: function(d) {
-                                var num = d.value;
-                                return rs(num)
-                            },
-                            sensitivity: 100,
-                            focus: {
-                              expand: {
+                        r: function(d) {
+                            var num = d.value;
+                            return rs(num)
+                        },
+                        sensitivity: 100,
+                        focus: {
+                            expand: {
                                 enabled: true
-                              }
                             }
+                        }
                     };
                 }
 
-
                 var columns = [];
-                console.log(additionalCategory)
-                if(this.options.chart_type === 'bar' || additionalCategory){
+                console.log(this.options.chart_type)
+                if (this.options.chart_type === 'bar' ||
+                    this.options.chart_type === 'hbar' ||
+                    additionalCategory) {
+
                     for (var key in records) {
-                      columns.push(records[key]);
+                        columns.push(records[key]);
                     }
-                     options.data = {
+                    options.data = {
                         x: 'x',
                         columns: columns,
                         type: ctype,
                         labels: show_labels
                     };
-                }else{
+                } else {
                     columns = records.map(function(item) {
                         return Number(item[y_axis]);
                     });
 
                     var categories = records.map(function(item) {
-                         var category = item[x_axis];
-                         if(category.length > 35){
-                             return category.substring(0, 30) + '...'
-                         }
-                         return category;
+                        var category = item[x_axis];
+                        if (category.length > 35) {
+                            return category.substring(0, 30) + '...'
+                        }
+                        return category;
                     });
 
                     columns.unshift(this.options.x_axis);
@@ -288,13 +284,11 @@ ckan.module('querytool-viz-preview', function() {
 
                 }
 
-
-
-                if(show_labels){
-                    options.data['labels'] =  {
-                        format:   function (value) {
-                           var dataf = this.sortFormatData(data_format, value);
-                           return dataf;
+                if (show_labels) {
+                    options.data['labels'] = {
+                        format: function(value) {
+                            var dataf = this.sortFormatData(data_format, value);
+                            return dataf;
                         }.bind(this),
                     }
                 }
@@ -302,22 +296,23 @@ ckan.module('querytool-viz-preview', function() {
                 options.axis = {
                     y: {
                         tick: {
-                          count: tick_count,
-                          format: function (value) {
-                            var dataf = this.sortFormatData(y_tick_format, value);
-                            return dataf;
-                        }.bind(this),
-                          rotate: yrotate
+                            count: tick_count,
+                            format: function(value) {
+                                var dataf = this.sortFormatData(y_tick_format, value);
+                                return dataf;
+                            }.bind(this),
+                            rotate: yrotate
                         },
-                    padding: {
-                         top: padding_top,
-                         bottom: padding_bottom
-                    },
-                    label: y_label
+                        padding: {
+                            top: padding_top,
+                            bottom: padding_bottom
+                        },
+                        label: y_label
                     },
                     x: {
                         type: 'category',
-                        categories, categories,
+                        categories,
+                        categories,
                         tick: {
                             rotate: x_text_rotate,
                             multiline: true,
@@ -348,7 +343,7 @@ ckan.module('querytool-viz-preview', function() {
             var chartTitle = chartField.find('input[name*=chart_field_title_]');
             var chartTitleVal = chartTitle.val();
 
-            var legend =  chartField.find('input[name*=chart_field_legend_]');
+            var legend = chartField.find('input[name*=chart_field_legend_]');
             var legendVal = legend.is(':checked');
 
             var xTextRotate = chartField.find('[name*=chart_field_x_text_rotate_]');
@@ -372,19 +367,19 @@ ckan.module('querytool-viz-preview', function() {
             var tickCount = chartField.find('input[name*=chart_field_tick_count_]');
             var tickCountVal = tickCount.val();
 
-            var filterName =  chartField.find('[name*=chart_field_filter_name_]');
+            var filterName = chartField.find('[name*=chart_field_filter_name_]');
             var filterNameVal = filterName.val();
 
             var filterValue = chartField.find('[name*=chart_field_filter_value_]');
             var filterValueVal = filterValue.val();
 
-            var categoryName =  chartField.find('[name*=chart_field_category_name_]');
+            var categoryName = chartField.find('[name*=chart_field_category_name_]');
             var categoryNameVal = categoryName.val();
 
             var sortOpt = chartField.find('[name*=chart_field_sort_]');
             var sortVal = sortOpt.val();
 
-            var dataLabels =  chartField.find('input[name*=chart_field_labels_]');
+            var dataLabels = chartField.find('input[name*=chart_field_labels_]');
             var dataLabelsVal = dataLabels.is(':checked');
 
             var yLabbel = chartField.find('input[name*=chart_field_y_label_]');
@@ -394,9 +389,10 @@ ckan.module('querytool-viz-preview', function() {
             // then just update the chart without fetching new data. This leads
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
-                this.options.y_axis === axisYValue) && (this.options.filter_name === filterNameVal &&
-                this.options.filter_value === filterValueVal) && this.options.category_name === categoryNameVal)
-            {
+                    this.options.y_axis === axisYValue) && (this.options.filter_name === filterNameVal &&
+                    this.options.filter_value === filterValueVal) &&
+                this.options.category_name === categoryNameVal &&
+                this.options.chart_type === chartTypeValue) {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
@@ -441,49 +437,53 @@ ckan.module('querytool-viz-preview', function() {
         },
 
         // Delete the current chart
-        deleteChart: function(){
-             this.el.closest('.chart_field').remove();
+        deleteChart: function() {
+            this.el.closest('.chart_field').remove();
         },
 
-        teardown: function () {
+        teardown: function() {
             // We must always unsubscribe on teardown to prevent memory leaks.
             this.sandbox.unsubscribe('querytool:updateCharts', this.updateChart.bind(this));
         },
 
-        sortData: function(data_sort, records, y_axis, x_axis){
-            if(data_sort === 'asc'){
-                    records.sort(function(a, b){return a[y_axis] - b[y_axis]});
-                }else if(data_sort === 'desc'){
-                    records.sort(function(a, b){return a[y_axis] - b[y_axis]});
-                    records.reverse();
-                }else{
-                    records.sort(function(a, b){
-                        var x = a[x_axis];
-                        var y = b[x_axis];
-                        if(!isNaN(x)){
-                            return Number(x) - Number(y);
-                        }else{
-                            if (x < y) //sort string ascending
-                                return -1;
-                            if (x > y)
-                                return 1;
-                            return 0; //default return value (no sorting)
-                        }
-                    });
-                }
+        sortData: function(data_sort, records, y_axis, x_axis) {
+            if (data_sort === 'asc') {
+                records.sort(function(a, b) {
+                    return a[y_axis] - b[y_axis]
+                });
+            } else if (data_sort === 'desc') {
+                records.sort(function(a, b) {
+                    return a[y_axis] - b[y_axis]
+                });
+                records.reverse();
+            } else {
+                records.sort(function(a, b) {
+                    var x = a[x_axis];
+                    var y = b[x_axis];
+                    if (!isNaN(x)) {
+                        return Number(x) - Number(y);
+                    } else {
+                        if (x < y) //sort string ascending
+                            return -1;
+                        if (x > y)
+                            return 1;
+                        return 0; //default return value (no sorting)
+                    }
+                });
+            }
         },
 
         //Check data format, if % or comma round decimal numbers
-        sortFormatData: function(dataf, val){
+        sortFormatData: function(dataf, val) {
             var format = '';
-            if(dataf ===  ','){
+            if (dataf === ',') {
                 format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
-            }else if(dataf === '.0%'){
+            } else if (dataf === '.0%') {
                 format = !(val % 1) ? d3.format(dataf) : d3.format('.2%');
-            }else{
-               format =  d3.format(dataf);
+            } else {
+                format = d3.format(dataf);
             }
-             return format(val);
+            return format(val);
         }
     }
 });
