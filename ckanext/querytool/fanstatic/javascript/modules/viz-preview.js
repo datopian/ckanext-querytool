@@ -87,13 +87,15 @@ ckan.module('querytool-viz-preview', function() {
             var x_axis = (this.options.x_axis === true) ? '' : this.options.x_axis;
             var y_axis = (this.options.y_axis === true) ? '' : this.options.y_axis;
             var resource_id = sql.split('FROM')[1].split('WHERE')[0].split('"')[1];
+            var chart_type = this.options.chart_type;
 
             api.get('querytool_get_resource_data', {
                 category: category,
                 sql_string: sql,
                 resource_id: resource_id,
                 x_axis: x_axis,
-                y_axis: y_axis
+                y_axis: y_axis,
+                chart_type: chart_type
             })
             .done(function(data) {
                 if (data.success) {
@@ -122,6 +124,7 @@ ckan.module('querytool-viz-preview', function() {
             var show_labels = this.options.show_labels;
             var y_label = this.options.y_label;
             var data_sort = this.options.data_sort;
+            var additionalCategory = (this.options.category_name === true) ? '' : this.options.category_name;
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -249,19 +252,43 @@ ckan.module('querytool-viz-preview', function() {
                     };
                 }
 
-                var columns = [];
-                for (var key in records) {
 
-                  columns.push(records[key]);
+                var columns = [];
+                console.log(additionalCategory)
+                if(this.options.chart_type === 'bar' || additionalCategory){
+                    for (var key in records) {
+                      columns.push(records[key]);
+                    }
+                     options.data = {
+                        x: 'x',
+                        columns: columns,
+                        type: ctype,
+                        labels: show_labels
+                    };
+                }else{
+                    columns = records.map(function(item) {
+                        return Number(item[y_axis]);
+                    });
+
+                    var categories = records.map(function(item) {
+                         var category = item[x_axis];
+                         if(category.length > 35){
+                             return category.substring(0, 30) + '...'
+                         }
+                         return category;
+                    });
+
+                    columns.unshift(this.options.x_axis);
+
+                    options.data = {
+                        columns: [columns],
+                        type: ctype,
+                        labels: show_labels
+                    };
 
                 }
 
-                options.data = {
-                    x: 'x',
-                    columns: columns,
-                    type: ctype,
-                    labels: show_labels
-                };
+
 
                 if(show_labels){
                     options.data['labels'] =  {
@@ -290,6 +317,7 @@ ckan.module('querytool-viz-preview', function() {
                     },
                     x: {
                         type: 'category',
+                        categories, categories,
                         tick: {
                             rotate: x_text_rotate,
                             multiline: true,
