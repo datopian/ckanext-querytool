@@ -176,6 +176,12 @@ def get_filter_values(context, data_dict):
 
 @toolkit.side_effect_free
 def querytool_get_resource_data(context, data_dict):
+    sql_string = data_dict.get('sql_string')
+    return h.get_resource_data(sql_string)
+
+
+@toolkit.side_effect_free
+def querytool_get_chart_data(context, data_dict):
 
     category = data_dict.get('category')
     sql_string = data_dict.get('sql_string')
@@ -230,11 +236,9 @@ def querytool_get_resource_data(context, data_dict):
                 .append(record[y_axis.lower()])
 
         categories_data['x'] = x
-
         return categories_data
 
     else:
-
         return h.get_resource_data(sql_string)
 
 
