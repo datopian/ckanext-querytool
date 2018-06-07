@@ -74,7 +74,7 @@ ckan.module('querytool-table', function() {
                 "processing": true,
                 "ajax": {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
-                    "dataSrc": "result.records"
+                    "dataSrc": "result"
                 },
                 "columns": [{
                         'data': main_value.toLowerCase(),
