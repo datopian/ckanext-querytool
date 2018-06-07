@@ -88,7 +88,7 @@ ckan.module('querytool-viz-preview', function() {
             var resource_id = sql.split('FROM')[1].split('WHERE')[0].split('"')[1];
             var chart_type = this.options.chart_type;
 
-            api.get('querytool_get_resource_data', {
+            api.get('querytool_get_chart_data', {
                     category: category,
                     sql_string: sql,
                     resource_id: resource_id,
