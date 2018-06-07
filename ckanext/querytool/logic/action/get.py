@@ -188,17 +188,27 @@ def querytool_get_chart_data(context, data_dict):
     x_axis = data_dict.get('x_axis')
     y_axis = data_dict.get('y_axis')
     chart_type = data_dict.get('chart_type')
+    previous_filters = json.loads(data_dict.pop('previous_filters'))
+    chart_filter = json.loads(data_dict.get('chart_filter', {}))
     resource_id = data_dict.get('resource_id').strip()
     sql_without_group = sql_string.split('GROUP BY')[0]
     sql_group = sql_string.split('GROUP BY')[1]
     categories_data = {}
 
+    if chart_filter:
+        previous_filters.append(chart_filter)
+
     if category:
         x = []
         x.append('x')
 
-        category_values = sorted(h.get_filter_values(resource_id, category))
-        x_axis_values = sorted(h.get_filter_values(resource_id, x_axis))
+        category_values = \
+            sorted(h.get_filter_values(resource_id,
+                                       category,
+                                       previous_filters))
+        x_axis_values = \
+            sorted(h.get_filter_values(resource_id,
+                                       x_axis, previous_filters))
 
         for x_value in x_axis_values:
             categories_data[x_value] = []
@@ -223,7 +233,9 @@ def querytool_get_chart_data(context, data_dict):
         x.append('x')
         x.append(x_axis)
 
-        x_axis_values = sorted(h.get_filter_values(resource_id, x_axis))
+        x_axis_values = \
+            sorted(h.get_filter_values(resource_id,
+                                       x_axis, previous_filters))
 
         for x_value in x_axis_values:
             categories_data[x_value] = []
