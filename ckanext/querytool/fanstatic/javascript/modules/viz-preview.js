@@ -88,13 +88,31 @@ ckan.module('querytool-viz-preview', function() {
             var resource_id = sql.split('FROM')[1].split('WHERE')[0].split('"')[1];
             var chart_type = this.options.chart_type;
 
+            var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
+            var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+
+            var viz_form = $('#visualizations-form');
+            var f = viz_form.data('mainFilters');
+            var previous_filters = (this.options.query_filters === true) ? f : this.options.query_filters;
+
+            var chart_filter = {};
+
+            if (chart_filter_name && chart_filter_value) {
+                chart_filter = {
+                    name: chart_filter_name,
+                    value: chart_filter_value
+                }
+            }
+
             api.get('querytool_get_chart_data', {
                     category: category,
                     sql_string: sql,
                     resource_id: resource_id,
                     x_axis: x_axis,
                     y_axis: y_axis,
-                    chart_type: chart_type
+                    chart_type: chart_type,
+                    previous_filters: JSON.stringify(previous_filters),
+                    chart_filter: JSON.stringify(chart_filter)
                 })
                 .done(function(data) {
                     if (data.success) {
@@ -247,7 +265,7 @@ ckan.module('querytool-viz-preview', function() {
                 }
 
                 var columns = [];
-                console.log(this.options.chart_type)
+
                 if (this.options.chart_type === 'bar' ||
                     this.options.chart_type === 'hbar' ||
                     additionalCategory) {
