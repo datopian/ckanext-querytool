@@ -189,7 +189,7 @@ def querytool_get_chart_data(context, data_dict):
     y_axis = data_dict.get('y_axis')
     chart_type = data_dict.get('chart_type')
     previous_filters = json.loads(data_dict.pop('previous_filters'))
-    chart_filter = json.loads(data_dict.get('chart_filter', {}))
+    chart_filter = json.loads(data_dict.get('chart_filter'))
     resource_id = data_dict.get('resource_id').strip()
     sql_without_group = sql_string.split('GROUP BY')[0]
     sql_group = sql_string.split('GROUP BY')[1]
