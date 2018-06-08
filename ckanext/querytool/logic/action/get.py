@@ -227,29 +227,6 @@ def querytool_get_chart_data(context, data_dict):
 
         categories_data['x'] = x
         return categories_data
-
-    elif chart_type in ['bar']:
-        x = []
-        x.append('x')
-        x.append(x_axis)
-
-        x_axis_values = \
-            sorted(h.get_filter_values(resource_id,
-                                       x_axis, previous_filters))
-
-        for x_value in x_axis_values:
-            categories_data[x_value] = []
-            categories_data[x_value].append(x_value)
-
-        records = h.get_resource_data(sql_string)
-
-        for record in records:
-            categories_data[record[x_axis.lower()]] \
-                .append(record[y_axis.lower()])
-
-        categories_data['x'] = x
-        return categories_data
-
     else:
         return h.get_resource_data(sql_string)
 
