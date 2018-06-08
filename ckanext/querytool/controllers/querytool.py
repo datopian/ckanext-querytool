@@ -192,7 +192,7 @@ class QueryToolController(base.BaseController):
 
             if any(filters):
                 _querytool['filters'] = json.dumps(filters)
-                sql_string = helpers.create_query_str(data['resource_id_1'],
+                sql_string = helpers.create_query_str(data['chart_resource'],
                                                       filters)
             else:
                 _querytool['filters'] = ''
