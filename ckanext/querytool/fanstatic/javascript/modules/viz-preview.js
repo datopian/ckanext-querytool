@@ -266,7 +266,7 @@ ckan.module('querytool-viz-preview', function() {
 
                 var columns = [];
 
-                if (this.options.chart_type === 'bar' || additionalCategory) {
+                if (additionalCategory) {
 
                     for (var key in records) {
                         columns.push(records[key]);
