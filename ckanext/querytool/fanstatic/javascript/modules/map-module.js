@@ -257,7 +257,24 @@ ckan.module('querytool-map', function($, _) {
                         this.featuresValues = data.result['features_values'];
 
 
-                        var scale = this.createScale(this.featuresValues);
+//                      Workaround for generating color if data for only one region
+                        var valuesKeys = Object.keys(this.featuresValues)
+                        var valuesLength = valuesKeys.length;
+                        var scale;
+                        if (valuesLength === 1) {
+
+                            scale = function (value) {
+                                if (value == this.featuresValues[valuesKeys[0]].value) {
+                                    var colors = this.options.map_color_scheme.split(',');
+                                    return colors[colors.length -1];
+                                }
+                            }.bind(this)
+
+                        } else {
+                            scale = this.createScale(this.featuresValues);
+                        }
+//                      -----------------------------------------------------------------
+
                         this.geoL = L.geoJSON(geoJSON, {
                             style: function(feature) {
 
