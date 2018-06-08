@@ -228,7 +228,7 @@ def querytool_get_chart_data(context, data_dict):
         categories_data['x'] = x
         return categories_data
 
-    elif chart_type in ['bar', 'hbar']:
+    elif chart_type in ['bar']:
         x = []
         x.append('x')
         x.append(x_axis)
