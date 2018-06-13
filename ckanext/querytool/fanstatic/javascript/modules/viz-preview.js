@@ -283,11 +283,7 @@ ckan.module('querytool-viz-preview', function() {
                     });
 
                     var categories = records.map(function(item) {
-                        var category = item[x_axis];
-                        if (category.length > 35) {
-                            return category.substring(0, 30) + '...'
-                        }
-                        return category;
+                        return item[x_axis];
                     });
 
                     columns.unshift(this.options.x_axis);
