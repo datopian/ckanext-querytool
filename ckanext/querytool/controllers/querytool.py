@@ -116,9 +116,9 @@ class QueryToolController(base.BaseController):
         try:
             junk = _get_action('querytool_delete', {'id': id})
         except NotFound:
-            abort(404, _('Querytool not found'))
+            abort(404, _('Application not found'))
 
-        h.flash_success(_('Querytool and visualizations were '
+        h.flash_success(_('Application and visualizations were '
                           'removed successfully.'))
         toolkit.redirect_to(h.url_for('querytool_groups'))
 
@@ -145,7 +145,7 @@ class QueryToolController(base.BaseController):
         _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
-            abort(404, _('Querytool not found.'))
+            abort(404, _('Application not found.'))
 
         if _querytool is None:
             _querytool = {}
@@ -157,7 +157,7 @@ class QueryToolController(base.BaseController):
                             {'id': _querytool['dataset_name']})
             except NotFound:
                 abort(404, _('The data used for creating this '
-                             'Querytool has been removed '
+                             'Application has been removed '
                              'by the administrator.'))
 
         if toolkit.request.method == 'POST' and not data:
@@ -286,7 +286,7 @@ class QueryToolController(base.BaseController):
         _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
-            abort(404, _('Querytool not found.'))
+            abort(404, _('Application not found.'))
 
         # Check if the data for this querytool still exists
         if _querytool['dataset_name']:
@@ -295,7 +295,7 @@ class QueryToolController(base.BaseController):
                             {'id': _querytool['dataset_name']})
             except NotFound:
                 abort(404, _('The data used for creating this '
-                             'Querytool has been removed by '
+                             'Application has been removed by '
                              'the administrator.'))
 
         _visualization_items = \
@@ -587,6 +587,9 @@ class QueryToolController(base.BaseController):
         '''
         querytool = _get_action('querytool_public_read', {'name': name})
 
+        if not querytool:
+            abort(404, _('Application not found.'))
+
         # only sysadmins can access private querytool
         if querytool['private'] is True:
             context = _get_context()
@@ -602,11 +605,11 @@ class QueryToolController(base.BaseController):
                             {'id': querytool['dataset_name']})
             except NotFound:
                 abort(404, _('The data used for creating this '
-                             'Querytool has been removed '
+                             'Application has been removed '
                              'by the administrator.'))
 
-        if not querytool or not querytool['visualizations']:
-            abort(404, _('Querytool not fully set.'))
+        if not querytool['visualizations']:
+            abort(404, _('Application not fully set.'))
 
         params = toolkit.request.params
 
