@@ -232,26 +232,6 @@
             window.scrollTo(0, scrollY);
         });
 
-        //download chart as an image option
-        var downloadBtn = $('.btn-chart-download');
-        downloadBtn.on('click', function(event) {
-            var target = $(event.target);
-            var graphFileName = 'chart';
-            var svg;
-            svg = target.parent().parent().find('svg')[0];
-
-            convertSVGGraphToImage(svg, function(imageData) {
-                var link = document.createElement('a');
-
-                link.download = graphFileName;
-                link.href = imageData;
-
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
-        });
-
         // Add validation for public filters if no valid values are selected
         var updateBtn = $(".btn-update");
         updateBtn.on("click", function(event, data) {

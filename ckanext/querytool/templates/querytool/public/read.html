@@ -1,8 +1,8 @@
 {% resource 'querytool/vendor/c3/c3.css' %}
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
-{% resource 'querytool/vendor/html2canvas.js' %}
-{% resource 'querytool/vendor/canvas2image.js' %}
+{% resource 'querytool/vendor/save-svg-png.js' %}
+{% resource 'querytool/javascript/modules/export-to-png.js' %}
 {% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/javascript/modules/tool-embed.js' %}
@@ -99,7 +99,8 @@
     <!-- Visualizations container -->
     <div class="visualizations">
       {% for item in querytool.visualizations %}
-      <div class="item {{ item.size }} {{ item.type }} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
+        {% set id = h.querytool_get_uuid() %}
+      <div class="item {{ item.size }} {{ item.type }} chart-{{id}} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
         {% if item.type == 'chart'  %}
           {% snippet 'ajax_snippets/visualization_item.html',
             type='chart',
@@ -125,7 +126,7 @@
             category_name = item.category_name,
             data_sort = item.sort
           %}
-           <a class="btn-chart-download">
+           <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{id}}">
              <i class="fa fa-picture-o fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
            </a>
           {% if item.filter_visibility == 'public'  %}
