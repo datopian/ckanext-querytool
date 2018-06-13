@@ -243,7 +243,7 @@ ckan.module('querytool-map', function($, _) {
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
 
-            api.get('querytool_get_map_data', {
+            api.post('querytool_get_map_data', {
                     geojson_url: mapURL,
                     map_key_field: this.options.map_key_field,
                     data_key_field: this.options.data_key_field,
