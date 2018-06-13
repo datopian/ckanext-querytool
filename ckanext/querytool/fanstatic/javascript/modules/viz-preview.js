@@ -104,7 +104,7 @@ ckan.module('querytool-viz-preview', function() {
                 }
             }
 
-            api.get('querytool_get_chart_data', {
+            api.post('querytool_get_chart_data', {
                     category: category,
                     sql_string: sql,
                     resource_id: resource_id,
