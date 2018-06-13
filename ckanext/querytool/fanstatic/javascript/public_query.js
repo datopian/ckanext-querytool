@@ -234,7 +234,7 @@
 
         //download chart as an image option
         var downloadBtn = $('.btn-chart-download');
-        downloadBtn.on('click', function() {
+        downloadBtn.on('click', function(event) {
             var target = $(event.target);
             var graphFileName = 'chart';
             var svg;
