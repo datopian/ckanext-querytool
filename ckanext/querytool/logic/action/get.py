@@ -272,7 +272,7 @@ def querytool_download_data(context, data_dict):
     fields = response['fields']
 
     # remove _full_text from datastore results
-    del fields[1]
+    fields[:] = [d for d in fields if d.get('id') != '_full_text']
 
     writer = FileWriterService()
     stream = writer.write_to_file(fields,

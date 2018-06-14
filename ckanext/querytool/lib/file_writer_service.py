@@ -74,14 +74,17 @@ class JSONWriter(object):
             row,
             ensure_ascii=False,
             separators=(u',', u':'),
-            sort_keys=True))
+            sort_keys=True).encode(u'utf-8'))
 
 
 class FileWriterService():
     def _csv_writer(self, fields, records, delimiter):
 
         d = str(delimiter).lower()
-        columns = [x['id'].encode("utf-8") for x in fields]
+
+        columns = [x['id'] for x in fields]
+        columns_utf8 = [x['id'].encode("utf-8") for x in fields]
+
         output = cStringIO.StringIO()
 
         if d == 'semicolon':
@@ -94,17 +97,21 @@ class FileWriterService():
             writer = csv.writer(output, delimiter=',')
 
         # Writing headers
-        writer.writerow([f['id'].encode("utf-8") for f in fields])
+        writer.writerow(columns_utf8)
 
         # Writing records
         for record in records:
-            writer.writerow([record[column] for column in columns])
+            writer.writerow([record[column]
+                             if type(record[column]) in [int, float]
+                             else
+                             record[column].encode("utf-8")
+                             for column in columns])
 
         return cStringIO.StringIO(output.getvalue())
 
     def _json_writer(self, fields, records):
 
-        columns = [x['id'].encode("utf-8") for x in fields]
+        columns = [x['id'] for x in fields]
         output = cStringIO.StringIO()
 
         output.write(
@@ -113,7 +120,7 @@ class FileWriterService():
             .encode(u'utf-8'))
 
         # Initiate json writer and columns
-        wr = JSONWriter(output, [f['id'].encode("utf-8") for f in fields])
+        wr = JSONWriter(output, columns)
 
         # Write records
         for record in records:
@@ -125,13 +132,13 @@ class FileWriterService():
 
     def _xml_writer(self, fields, records):
 
-        columns = [x['id'].encode("utf-8") for x in fields]
+        columns = [x['id'] for x in fields]
         output = cStringIO.StringIO()
 
         output.write(b'<data>\n')
 
         # Initiate xml writer and columns
-        wr = XMLWriter(output, [f['id'] for f in fields])
+        wr = XMLWriter(output, columns)
 
         # Write records
         for record in records:
@@ -143,7 +150,7 @@ class FileWriterService():
 
     def _xlsx_writer(self, fields, records):
 
-        columns = [x['id'].encode("utf-8") for x in fields]
+        columns = [x['id'] for x in fields]
         output = cStringIO.StringIO()
 
         workbook = Workbook(output)
@@ -151,8 +158,8 @@ class FileWriterService():
 
         # Writing headers
         col = 0
-        for f in fields:
-            worksheet.write(0, col, f['id'])
+        for c in columns:
+            worksheet.write(0, col, c)
             col += 1
 
         # Writing records
