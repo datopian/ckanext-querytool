@@ -501,5 +501,5 @@ def get_groups():
     ugroups = set(groups)
     for group in ugroups:
         val = group.split(':')
-        ugroup.update({val[0] : val[1].decode('utf-8')})
+        ugroup.update({val[0]: val[1].decode('utf-8')})
     return ugroup
