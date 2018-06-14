@@ -35,7 +35,7 @@ These are the required configuration options used by the extension:
 
 1. Add config for application groups in a comma separated key:value pairs:
 ```
-ckanext.querytool.groups = brazil:Brazil,china:营养, mexico:Mexico
+ckanext.querytool.groups = brazil:Brazil,china:营养,mexico:Mexico
 ```
 
 ## Development Installation
