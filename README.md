@@ -33,10 +33,9 @@ sudo service apache2 reload
 
 These are the required configuration options used by the extension:
 
-1. Add config for application groups in a comma separated values:
+1. Add config for application groups in a comma separated key:value pairs:
 ```
-ckanext.querytool.groups = Group One,Group Two,Group Three
-
+ckanext.querytool.groups = brazil:Brazil,china:营养, mexico:Mexico
 ```
 
 ## Development Installation
