@@ -102,7 +102,8 @@ class FileWriterService():
         # Writing records
         for record in records:
             writer.writerow([record[column]
-                             if type(record[column]) in [int, float]
+                             if record[column] is None or
+                             type(record[column]) in [int, float]
                              else
                              record[column].encode("utf-8")
                              for column in columns])
