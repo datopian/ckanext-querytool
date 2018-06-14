@@ -25,7 +25,7 @@
       <div class="row">
       {% set tools = h.querytool_get_groups() %}
       {% for key, value in tools.iteritems() %}
-      {% set url = h.url_for('querytool_list_by_group', group=key) %}
+      {% set url = h.url_for('querytool_public_list_by_group', group=key) %}
           <div class="span4">
             <a class="query-tool box" href="{{ url }}">
             <img class="thumbnail" src="/base/images/query-icon.png" alt="{{ value }}">
