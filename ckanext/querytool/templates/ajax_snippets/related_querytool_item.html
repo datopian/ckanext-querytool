@@ -18,7 +18,7 @@
     <label for="field-related-querytool_{{ n }}" class="control-label">{{ _('Related Application')  }}</label>
     <div class="controls">
       <select id="field-related-querytool_{{ n }}" name="related_querytool_{{ n }}" required="required">
-          <option value="">&mdash; {{ _('Select query') }} &mdash;</option>
+          <option value="">&mdash; {{ _('Select Application') }} &mdash;</option>
           {% if querytool_name %}
             <option value="{{ querytool_name }}" selected>{{ querytool_name }}</option>
           {% endif %}
