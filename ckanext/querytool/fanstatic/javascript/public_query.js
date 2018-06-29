@@ -220,16 +220,50 @@
         var buttonImg = $('#download-as-image');
 
         buttonImg.on('click', function(targetElem) {
-            var scrollY = window.pageYOffset;
-            window.scrollTo(0, 0);
+
+            // First render all SVGs to canvases
+            var targetElemS = $('.container-wrapper').find('svg');
+            var nodesToRecover = [];
+            var nodesToRemove = [];
+
+            var svgElem = targetElemS.find('svg');
+
+            svgElem.each(function(index, node) {
+                var parentNode = node.parentNode;
+                var svg = parentNode.innerHTML;
+
+                var canvas = document.createElement('canvas');
+
+                canvg(canvas, svg);
+
+                nodesToRecover.push({
+                    parent: parentNode,
+                    child: node
+                });
+                parentNode.removeChild(node);
+
+                nodesToRemove.push({
+                    parent: parentNode,
+                    child: canvas
+                });
+
+                parentNode.appendChild(canvas);
+            });
+
+
             html2canvas(document.body, {
-                allowTaint: false,
-                useCORS: true,
-                foreignObjectRendering: true
             }).then(function(canvas) {
+                // Put the SVGs back in place
+                nodesToRemove.forEach(function(pair) {
+                    pair.parent.removeChild(pair.child);
+                });
+
+                nodesToRecover.forEach(function(pair) {
+                    pair.parent.appendChild(pair.child);
+                });
+
                 Canvas2Image.saveAsPNG(canvas);
             });
-            window.scrollTo(0, scrollY);
         });
 
         // Add validation for public filters if no valid values are selected
