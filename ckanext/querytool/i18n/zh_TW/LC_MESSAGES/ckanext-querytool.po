@@ -127,7 +127,7 @@ msgstr ""
 
 #: ckanext/querytool/templates/header.html:30
 msgid "Organizations"
-msgstr "Traditional"
+msgstr ""
 
 #: ckanext/querytool/templates/header.html:31
 msgid "Groups"
