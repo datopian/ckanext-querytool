@@ -1,11 +1,14 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+from ckan.lib.plugins import DefaultTranslation
+
 import ckanext.querytool.helpers as h
 from ckanext.querytool.model import setup as model_setup
 import ckanext.querytool.helpers as helpers
 
 
-class QuerytoolPlugin(plugins.SingletonPlugin):
+class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
+    plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IConfigurer)
     plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IActions)
