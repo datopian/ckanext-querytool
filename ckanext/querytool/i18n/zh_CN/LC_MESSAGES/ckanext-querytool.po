@@ -549,15 +549,6 @@ msgstr "应用列表"
 msgid "Query Tool"
 msgstr "查询工具"
 
-#: ckanext/querytool/templates/querytool/public/list.html:7
-msgid ""
-"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut "
-"lectus at erat tincidunt pellentesque ut quis lorem. In varius nunc in "
-"lorem blandit, at finibus risus lobortis. Nulla ac ipsum in felis "
-"consequat pretium sit amet eget mi. Nulla congue commodo velit, non "
-"ultrices magna hendrerit sed."
-msgstr ""
-
 #: ckanext/querytool/templates/querytool/public/read.html:43
 msgid "Displayed Measure"
 msgstr "已显示的指标"
