@@ -11,7 +11,7 @@
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}<h1>Welcome</h1>{% endblock %}
-              {% block page_header_description %}<p class="desc">Some static description regarding the application and the grouping.</p>{% endblock %}
+              {% block page_header_description %}<p class="desc"></p>{% endblock %}
             {% endblock %}
           </div>
         </div>
@@ -23,8 +23,8 @@
   <div class="container content">
     <div class="box-items">
       <div class="row">
-      {% set tools = h.querytool_get_groups() %}
-      {% for key, value in tools.iteritems() %}
+      {% set groups = h.querytool_get_groups() %}
+      {% for key, value in groups.iteritems() %}
       {% set url = h.url_for('querytool_public_list_by_group', group=key) %}
           <div class="span4">
             <a class="query-tool box" href="{{ url }}">
