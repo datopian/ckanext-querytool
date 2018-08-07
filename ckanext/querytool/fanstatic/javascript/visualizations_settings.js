@@ -24,6 +24,20 @@
                 });
             }
             return $.post(url, JSON.stringify(data), 'json');
+        },
+        getTemplate: function(filename, params, success, error) {
+
+            var locale = $('html').attr('lang');
+            var url = ckan.url(locale + '/api/1/util/snippet/' + encodeURIComponent(filename));
+
+            // Allow function to be called without params argument.
+            if (typeof params === 'function') {
+                error = success;
+                success = params;
+                params = {};
+            }
+
+            return $.get(url, params || {}).then(success, error);
         }
     };
 
@@ -244,7 +258,7 @@
 
                 //TODO: parse query params simple
                 var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split("?")[0];
-                ckan.sandbox().client.getTemplate('chart_item.html', {
+                api.getTemplate('chart_item.html', {
                         n: items,
                         querytool: querytool,
                         chart_resource: chart_resource,
@@ -264,7 +278,7 @@
                     });
             } else if (visualization === 'map') {
 
-                ckan.sandbox().client.getTemplate('map_item.html', {
+                api.getTemplate('map_item.html', {
                         n: items,
                         chart_resource: chart_resource,
                         sql_string: sqlString,
@@ -279,7 +293,7 @@
                         handleItemsOrder();
                     });
             } else if (visualization == 'text-box') {
-                ckan.sandbox().client.getTemplate('text_box_item.html', {
+                api.getTemplate('text_box_item.html', {
                         number: items
                     })
                     .done(function(data) {
@@ -287,7 +301,7 @@
                         handleItemsOrder();
                     });
             } else if (visualization === 'image') {
-                ckan.sandbox().client.getTemplate('image_item.html', {
+                api.getTemplate('image_item.html', {
                         n: items
                     })
                     .done(function(data) {
@@ -297,7 +311,7 @@
                     });
             } else if (visualization === 'table') {
 
-                ckan.sandbox().client.getTemplate('table_item.html', {
+                api.getTemplate('table_item.html', {
                         n: items,
                         sql_string: sqlString,
                         resource_id: chart_resource,

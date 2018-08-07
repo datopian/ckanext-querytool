@@ -24,6 +24,20 @@
                 });
             }
             return $.post(url, JSON.stringify(data), 'json');
+        },
+        getTemplate: function(filename, params, success, error) {
+
+            var locale = $('html').attr('lang');
+            var url = ckan.url(locale + '/api/1/util/snippet/' + encodeURIComponent(filename));
+
+            // Allow function to be called without params argument.
+            if (typeof params === 'function') {
+                error = success;
+                success = params;
+                params = {};
+            }
+
+            return $.get(url, params || {}).then(success, error);
         }
     };
 
@@ -350,7 +364,7 @@
                 var filter_items = $('.filter_item');
                 var total_items = filter_items.length + 1;
 
-                ckan.sandbox().client.getTemplate('filter_item.html', {
+                api.getTemplate('filter_item.html', {
                         active_filters: active_filters,
                         n: total_items,
                         resource_id: resource_id,
@@ -383,7 +397,8 @@
             if (querytool_items.length < 3) {
                 var total_querytools = querytool_items.length + 1;
 
-                ckan.sandbox().client.getTemplate('related_querytool_item.html', {
+
+                api.getTemplate('related_querytool_item.html', {
                         n: total_querytools
                     })
                     .done(function(data) {
