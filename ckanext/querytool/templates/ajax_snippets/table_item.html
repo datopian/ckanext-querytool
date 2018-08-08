@@ -80,7 +80,7 @@
       <div class="controls ">
         <select id="table_size_{{ n }}" name="table_size_{{ n }}">
         {% for size in sizes %}
-        <option value="{{ size.value }}" {% if table %}{{ 'selected' if size.value == table.size }}{% endif %} >{{size.text}}</option>
+        <option value="{{ size.value }}" {% if table %}{{ 'selected' if size.value == table.size }}{% endif %} >{{ _(size.text) }}</option>
         {% endfor %}
         </select>
       </div>

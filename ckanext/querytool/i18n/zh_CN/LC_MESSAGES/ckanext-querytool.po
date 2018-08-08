@@ -10,15 +10,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-07-25 13:08+0200\n"
 "PO-Revision-Date: 2018-07-30 12:46-0400\n"
-"Language: zh_CN\n"
+"Last-Translator: \n"
+"Language: zh_Hans_CN\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"Last-Translator: \n"
-"X-Generator: Poedit 2.1\n"
 
 #: ckanext/querytool/controllers/querytool.py:73
 #: ckanext/querytool/controllers/querytool.py:93
@@ -568,3 +567,247 @@ msgstr "高度"
 #: ckanext/querytool/templates/querytool/public/read.html:253
 msgid "Code"
 msgstr "代码"
+
+#: ckanext/querytool/templates/querytool/public/read.html:241
+msgid "Embed query tool view"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/public/read.html:244
+msgid "You can copy and paste the embed code"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/public/read.html:235
+msgid "Embed"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:99
+msgid "Choose Dataset"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+msgid "— Select type —"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+msgid "Chart"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+msgid "Map"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+msgid "Text box"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:151
+msgid "Saturated"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:154
+msgid "Light"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:157
+msgid "Pastel"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:160
+msgid "Pastel 2"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:163
+msgid "Contrast"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:166
+msgid "Ocean"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:169
+msgid "Limes"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:172
+msgid "Dark cherry"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:175
+msgid "Purple"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:178
+msgid "Urban"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:181
+msgid "Candy"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:184
+msgid "Orient"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:187
+msgid "Blue"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:190
+msgid "Rainbow"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:193
+msgid "Muted"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:128
+msgid "Line"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:129
+msgid "Bar"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:130
+msgid "Horizontal bar"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:131
+msgid "Stacked bar"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:132
+msgid "Stacked horizontal bar"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:133
+msgid "Area"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:134
+msgid "Stacked area"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:135
+msgid "Spline"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:136
+msgid "Donut"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:137
+msgid "Pie"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:138
+msgid "Scatter"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:139
+msgid "Bubble"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:253
+msgid "Small Rectangle"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:254
+msgid "Small Square"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:255
+msgid "Medium Rectangle"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:256
+msgid "Medium Vertical"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:257
+msgid "Large Rectangle"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:258
+msgid "Large Square"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:259
+msgid "Large Vertical"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:218
+msgid "Horizontal"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:219
+msgid "Diagonal"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:220
+msgid "Vertical"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:221
+msgid "Reverse"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:231
+msgid "Default"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:232
+msgid "Integer e.g 2"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:233
+msgid "Decimal (1 digit) e.g 2.5"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:234
+msgid "Decimal (2 digit) e.g 2.50"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:235
+msgid "Decimal (3 digit) e.g 2.501"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:236
+msgid "Decimal (4 digit) e.g 2.5012"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:237
+msgid "Dolar e.g 2000$"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:238
+msgid "Rounded e.g 2k"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:239
+msgid "Percentage (multiply by 100) e.g 200000%"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:241
+msgid "Comma (thousands separator) e.g 2,000"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:242
+msgid "Binary e.g 11111010000"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:488
+msgid "Ascending"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:488
+msgid "Descending"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:205
+msgid "Sequential"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:207
+msgid "Diverging"
+msgstr ""

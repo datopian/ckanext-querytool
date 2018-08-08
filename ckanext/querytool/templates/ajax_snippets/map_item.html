@@ -76,7 +76,7 @@
     <div class="controls ">
       <select id="map_color_scheme_{{ n }}" name="map_color_scheme_{{ n }}">
       {% for color in color_schemes %}
-        <option value="{{ color.value }}" {% if map %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{color.text}}</option>
+        <option value="{{ color.value }}" {% if map %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{ _(color.text) }}</option>
       {% endfor %}
       </select>
     </div>
@@ -137,7 +137,7 @@
       <div class="controls ">
         <select id="map_size_{{ n }}" name="map_size_{{ n }}">
         {% for size in sizes %}
-          <option value="{{ size.value }}" {% if map %}{{ 'selected' if size.value == map.size }}{% endif %} >{{size.text}}</option>
+          <option value="{{ size.value }}" {% if map %}{{ 'selected' if size.value == map.size }}{% endif %} >{{ _(size.text) }}</option>
         {% endfor %}
         </select>
       </div>

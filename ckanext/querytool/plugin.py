@@ -42,9 +42,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         map.connect('querytool_list_by_group', '/querytool/group/{group}',
                     controller=querytool_controller, action='list_by_group')
 
-        map.connect('querytool_show', '/querytool/show/{querytool}',
-                    controller=querytool_controller, action='show')
-
         map.connect('querytool_edit', '/querytool/edit{querytool:/.*|}',
                     controller=querytool_controller, action='querytool_edit')
 
