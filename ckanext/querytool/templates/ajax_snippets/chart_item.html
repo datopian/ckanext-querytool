@@ -100,7 +100,7 @@
          <div class="controls ">
             <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
             {% for color in color_schemes %}
-            <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{color.text}}</option>
+            <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{ _(color.text) }}</option>
             {% endfor %}
             </select>
          </div>
@@ -111,7 +111,7 @@
          <div class="controls ">
             <select id="chart_field_size_{{ n }}" name="chart_field_size_{{ n }}">
             {% for size in sizes %}
-            <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{size.text}}</option>
+            <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{ _(size.text) }}</option>
             {% endfor %}
             </select>
          </div>
@@ -123,7 +123,7 @@
          <div class="controls ">
             <select id="chart_field_x_text_rotate_{{ n }}" name="chart_field_x_text_rotate_{{ n }}">
             {% for rotate in text_rotation %}
-            <option value="{{ rotate.value }}" {% if chart %}{{ 'selected' if rotate.value == chart.x_text_rotate }}{% endif %}>{{rotate.text}}</option>
+            <option value="{{ rotate.value }}" {% if chart %}{{ 'selected' if rotate.value == chart.x_text_rotate }}{% endif %}>{{ _(rotate.text) }}</option>
             {% endfor %}
             </select>
          </div>
@@ -161,7 +161,7 @@
          <div class="controls ">
             <select id="chart_field_data_format_{{ n }}" name="chart_field_data_format_{{ n }}">
             {% for format in data_formats %}
-            <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == chart.data_format }}{% endif %} >{{format.text}}</option>
+            <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == chart.data_format }}{% endif %} >{{ _(format.text) }}</option>
             {% endfor %}
             </select>
          </div>
@@ -177,7 +177,7 @@
          <div class="controls ">
             <select id="chart_field_y_ticks_format_{{ n }}" name="chart_field_y_ticks_format_{{ n }}">
             {% for tick in ticks_formats %}
-            <option value="{{ tick.value }}" {% if chart %}{{ 'selected' if tick.value == chart.y_tick_format }}{% endif %} >{{tick.text}}</option>
+            <option value="{{ tick.value }}" {% if chart %}{{ 'selected' if tick.value == chart.y_tick_format }}{% endif %} >{{ _(tick.text) }}</option>
             {% endfor %}
             </select>
          </div>
@@ -225,7 +225,7 @@
          <div class="controls ">
             <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}">
             {% for sort in sort_options %}
-            <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{sort.text}}</option>
+            <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{ _(sort.text) }}</option>
             {% endfor %}
             </select>
          </div>

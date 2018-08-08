@@ -32,10 +32,10 @@ Example usage:
 
   {{ form.input('title', id='field-title', label=_('Save As'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
-  {% set prefix = h.url_for('querytool_show', querytool= '') %}
-  {% set domain = h.url_for('querytool_show', querytool= '') %}
+  {% set prefix = h.url_for('querytool_public_read', name= '') %}
+  {% set domain = h.url_for('querytool_public_read', name= '') %}
   {% set domain = domain|replace("http://", "")|replace("https://", "") %}
-  {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<querytool>', 'class': 'form-control input-sm'} %}
+  {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<application>', 'class': 'form-control input-sm'} %}
 
   {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
@@ -96,7 +96,7 @@ Example usage:
       <label class="control-label" for="field-datasets"><span title="This field is required" class="control-required">*</span>{{ _("Dataset") }}</label>
       <div class="controls">
         <select id="field-datasets" name="dataset_name" data-module="autocomplete">
-          <option value="" {{ 'selected' if not data.dataset_name }}>-- Choose Dataset --</option>
+          <option value="" {{ 'selected' if not data.dataset_name }}>-- {{ _('Choose Dataset') }} --</option>
           {% for dataset in datasets %}
             <option value="{{ dataset }}" {{ 'selected' if dataset == data.dataset_name }}>{{ dataset }}</option>
           {% endfor %}

@@ -70,7 +70,7 @@
           <div class="btn-download">
               <div class="btn-group dropdown">
                   <button class="btn btn-large dropdown-toggle" data-toggle="dropdown" href="#">
-                    <span class="fa fa-download"></span> Download
+                    <span class="fa fa-download"></span> {{ _('Download') }}
                     <span class="caret"></span>
                   </button>
                   {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
@@ -220,7 +220,7 @@
       <div class="span6">
         <div class="input-append">
           <input class="span4" id="appendedInputButtons" type="text" value="">
-          <button class="btn copyToClipboard" type="button">Copy</button>
+          <button class="btn copyToClipboard" type="button">{{ _('Copy') }}</button>
         </div>
       </div>
       <div class="span6">
@@ -232,16 +232,16 @@
                 data-module="tool-embed"
                 data-module-id="{{ querytools[0].id }}">
               <span class="fa fa-code"></span>
-              Embed
+              {{ _('Embed') }}
               </button>
             </div>
             <div id="embed-{{ querytools[0].id }}" class="modal tool-embed hide">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3><b>Embed query tool view</b></h3>
+                <h3><b>{{ _('Embed query tool view') }}</b></h3>
               </div>
               <div class="modal-body">
-                <p class="embed-content">You can copy and paste the embed code </p>
+                <p class="embed-content">{{ _('You can copy and paste the embed code') }}</p>
                 <div class="row-fluid">
                   <div class="span6">
                     {{ form.input("width", label=_("Width"), value=700, type="number", classes=["control-full"]) }}
@@ -256,7 +256,7 @@
           </li>
           <li>
             <button class="btn btn-default" id="download-as-image">
-            <span class="fa fa-download"></span> Download image</button>
+            <span class="fa fa-download"></span>{{ _('Download image') }}</button>
           </li>
         </ul>
       </div>
