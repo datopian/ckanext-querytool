@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-07-25 13:08+0200\n"
-"PO-Revision-Date: 2018-07-30 12:46-0400\n"
+"PO-Revision-Date: 2018-08-09 17:37+0800\n"
 "Last-Translator: \n"
-"Language: zh_Hans_CN\n"
+"Language: zh\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 2.1.1\n"
 
 #: ckanext/querytool/controllers/querytool.py:73
 #: ckanext/querytool/controllers/querytool.py:93
@@ -65,7 +66,7 @@ msgstr "应用程序尚未设置完成。"
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:25
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid " "
-msgstr ""
+msgstr " "
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:25
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
@@ -147,7 +148,7 @@ msgstr "设计应用"
 
 #: ckanext/querytool/templates/header.html:53
 msgid "Use Applications"
-msgstr "使用应用"
+msgstr "发布应用"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:19
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:17
@@ -216,7 +217,7 @@ msgstr "公开"
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:71
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:21
 msgid "Private"
-msgstr "私密"
+msgstr "仅自己"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:86
 msgid "Category"
@@ -298,7 +299,7 @@ msgstr "更新"
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:13
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:25
 msgid "Dimension"
-msgstr "大小"
+msgstr "名称"
 
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:25
 msgid "Default Value"
@@ -315,11 +316,11 @@ msgstr "是否可见"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:16
 msgid "Map resource"
-msgstr "地图来源"
+msgstr "地图数据源"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:19
 msgid "Select map resource"
-msgstr "选择地图来源"
+msgstr "选择地图数据源"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:34
 msgid "Title field"
@@ -418,7 +419,7 @@ msgstr "基本信息"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
 msgid "Save As"
-msgstr "另存为"
+msgstr "名称"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
 msgid "Title of the query tool"
@@ -458,7 +459,7 @@ msgstr "添加相关应用"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:93
 msgid "Select dataset and resource"
-msgstr "选择数据集和资源"
+msgstr "选择数据集和数据源"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:96
 msgid "Dataset"
@@ -466,7 +467,7 @@ msgstr "数据集"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:113
 msgid "Resource"
-msgstr "资源"
+msgstr "数据源"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:117
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:123
@@ -550,7 +551,7 @@ msgstr "查询工具"
 
 #: ckanext/querytool/templates/querytool/public/read.html:43
 msgid "Displayed Measure"
-msgstr "已显示的指标"
+msgstr "显示统计指标"
 
 #: ckanext/querytool/templates/querytool/public/read.html:132
 msgid "Download image"
@@ -570,244 +571,244 @@ msgstr "代码"
 
 #: ckanext/querytool/templates/querytool/public/read.html:241
 msgid "Embed query tool view"
-msgstr ""
+msgstr "将查询工具视图嵌入网站中"
 
 #: ckanext/querytool/templates/querytool/public/read.html:244
 msgid "You can copy and paste the embed code"
-msgstr ""
+msgstr "您可以复制并粘贴嵌入代码"
 
 #: ckanext/querytool/templates/querytool/public/read.html:235
 msgid "Embed"
-msgstr ""
+msgstr "嵌入"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:99
 msgid "Choose Dataset"
-msgstr ""
+msgstr "选择数据集"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "— Select type —"
-msgstr ""
+msgstr "—选择类型—"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "Chart"
-msgstr ""
+msgstr "图表"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "Map"
-msgstr ""
+msgstr "地图"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "Text box"
-msgstr ""
+msgstr "文本框"
 
 #: ckanext/querytool/helpers.py:151
 msgid "Saturated"
-msgstr ""
+msgstr "深色"
 
 #: ckanext/querytool/helpers.py:154
 msgid "Light"
-msgstr ""
+msgstr "浅色"
 
 #: ckanext/querytool/helpers.py:157
 msgid "Pastel"
-msgstr ""
+msgstr "淡色"
 
 #: ckanext/querytool/helpers.py:160
 msgid "Pastel 2"
-msgstr ""
+msgstr "淡色2"
 
 #: ckanext/querytool/helpers.py:163
 msgid "Contrast"
-msgstr ""
+msgstr "反差"
 
 #: ckanext/querytool/helpers.py:166
 msgid "Ocean"
-msgstr ""
+msgstr "海洋"
 
 #: ckanext/querytool/helpers.py:169
 msgid "Limes"
-msgstr ""
+msgstr "酸橙"
 
 #: ckanext/querytool/helpers.py:172
 msgid "Dark cherry"
-msgstr ""
+msgstr "樱桃"
 
 #: ckanext/querytool/helpers.py:175
 msgid "Purple"
-msgstr ""
+msgstr "紫色"
 
 #: ckanext/querytool/helpers.py:178
 msgid "Urban"
-msgstr ""
+msgstr "乡村"
 
 #: ckanext/querytool/helpers.py:181
 msgid "Candy"
-msgstr ""
+msgstr "糖果"
 
 #: ckanext/querytool/helpers.py:184
 msgid "Orient"
-msgstr ""
+msgstr "闪光"
 
 #: ckanext/querytool/helpers.py:187
 msgid "Blue"
-msgstr ""
+msgstr "蓝色"
 
 #: ckanext/querytool/helpers.py:190
 msgid "Rainbow"
-msgstr ""
+msgstr "彩虹"
 
 #: ckanext/querytool/helpers.py:193
 msgid "Muted"
-msgstr ""
+msgstr "柔和"
 
 #: ckanext/querytool/helpers.py:128
 msgid "Line"
-msgstr ""
+msgstr "线图"
 
 #: ckanext/querytool/helpers.py:129
 msgid "Bar"
-msgstr ""
+msgstr "柱状图"
 
 #: ckanext/querytool/helpers.py:130
 msgid "Horizontal bar"
-msgstr ""
+msgstr "水平柱状图"
 
 #: ckanext/querytool/helpers.py:131
 msgid "Stacked bar"
-msgstr ""
+msgstr "堆叠柱状图"
 
 #: ckanext/querytool/helpers.py:132
 msgid "Stacked horizontal bar"
-msgstr ""
+msgstr "水平堆叠柱状图"
 
 #: ckanext/querytool/helpers.py:133
 msgid "Area"
-msgstr ""
+msgstr "区域"
 
 #: ckanext/querytool/helpers.py:134
 msgid "Stacked area"
-msgstr ""
+msgstr "堆叠区域"
 
 #: ckanext/querytool/helpers.py:135
 msgid "Spline"
-msgstr ""
+msgstr "曲线图"
 
 #: ckanext/querytool/helpers.py:136
 msgid "Donut"
-msgstr ""
+msgstr "环形图"
 
 #: ckanext/querytool/helpers.py:137
 msgid "Pie"
-msgstr ""
+msgstr "饼图"
 
 #: ckanext/querytool/helpers.py:138
 msgid "Scatter"
-msgstr ""
+msgstr "散点图"
 
 #: ckanext/querytool/helpers.py:139
 msgid "Bubble"
-msgstr ""
+msgstr "气泡图"
 
 #: ckanext/querytool/helpers.py:253
 msgid "Small Rectangle"
-msgstr ""
+msgstr "小型矩形"
 
 #: ckanext/querytool/helpers.py:254
 msgid "Small Square"
-msgstr ""
+msgstr "小型正方形"
 
 #: ckanext/querytool/helpers.py:255
 msgid "Medium Rectangle"
-msgstr ""
+msgstr "中型矩形"
 
 #: ckanext/querytool/helpers.py:256
 msgid "Medium Vertical"
-msgstr ""
+msgstr "中型垂直布局"
 
 #: ckanext/querytool/helpers.py:257
 msgid "Large Rectangle"
-msgstr ""
+msgstr "大型矩形"
 
 #: ckanext/querytool/helpers.py:258
 msgid "Large Square"
-msgstr ""
+msgstr "大型正方形"
 
 #: ckanext/querytool/helpers.py:259
 msgid "Large Vertical"
-msgstr ""
+msgstr "大型垂直布局"
 
 #: ckanext/querytool/helpers.py:218
 msgid "Horizontal"
-msgstr ""
+msgstr "水平的"
 
 #: ckanext/querytool/helpers.py:219
 msgid "Diagonal"
-msgstr ""
+msgstr "斜线"
 
 #: ckanext/querytool/helpers.py:220
 msgid "Vertical"
-msgstr ""
+msgstr "垂直的"
 
 #: ckanext/querytool/helpers.py:221
 msgid "Reverse"
-msgstr ""
+msgstr "反置"
 
 #: ckanext/querytool/helpers.py:231
 msgid "Default"
-msgstr ""
+msgstr "默认"
 
 #: ckanext/querytool/helpers.py:232
 msgid "Integer e.g 2"
-msgstr ""
+msgstr "整数（例如2）"
 
 #: ckanext/querytool/helpers.py:233
 msgid "Decimal (1 digit) e.g 2.5"
-msgstr ""
+msgstr "小数（1位，例如2.5）"
 
 #: ckanext/querytool/helpers.py:234
 msgid "Decimal (2 digit) e.g 2.50"
-msgstr ""
+msgstr "小数（2位，例如2.50）"
 
 #: ckanext/querytool/helpers.py:235
 msgid "Decimal (3 digit) e.g 2.501"
-msgstr ""
+msgstr "小数（3位，例如2.501）"
 
 #: ckanext/querytool/helpers.py:236
 msgid "Decimal (4 digit) e.g 2.5012"
-msgstr ""
+msgstr "小数（4位，例如2.5012）"
 
 #: ckanext/querytool/helpers.py:237
 msgid "Dolar e.g 2000$"
-msgstr ""
+msgstr "美元（例如2000$）"
 
 #: ckanext/querytool/helpers.py:238
 msgid "Rounded e.g 2k"
-msgstr ""
+msgstr "取整（例如2k）"
 
 #: ckanext/querytool/helpers.py:239
 msgid "Percentage (multiply by 100) e.g 200000%"
-msgstr ""
+msgstr "百分比（除以100，例如200000%）"
 
 #: ckanext/querytool/helpers.py:241
 msgid "Comma (thousands separator) e.g 2,000"
-msgstr ""
+msgstr "带分隔符的数字（每三位加逗号分隔符，例如2,000）"
 
 #: ckanext/querytool/helpers.py:242
 msgid "Binary e.g 11111010000"
-msgstr ""
+msgstr "二进制（例如11111010000）"
 
 #: ckanext/querytool/helpers.py:488
 msgid "Ascending"
-msgstr ""
+msgstr "升序"
 
 #: ckanext/querytool/helpers.py:488
 msgid "Descending"
-msgstr ""
+msgstr "降序"
 
 #: ckanext/querytool/helpers.py:205
 msgid "Sequential"
-msgstr ""
+msgstr "连续"
 
 #: ckanext/querytool/helpers.py:207
 msgid "Diverging"
-msgstr ""
+msgstr "离散"
