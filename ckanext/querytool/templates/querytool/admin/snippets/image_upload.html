@@ -56,7 +56,7 @@ Example usage:
    <div class="controls ">
       <select id="image_field_size_{{ n }}" name="image_field_size_{{ n }}">
       {% for size in sizes %}
-      <option value="{{ size.value }}" {% if data %}{{ 'selected' if size.value == data.size }}{% endif %} >{{size.text}}</option>
+      <option value="{{ size.value }}" {% if data %}{{ 'selected' if size.value == data.size }}{% endif %} >{{ _(size.text) }}</option>
       {% endfor %}
       </select>
    </div>
