@@ -38,7 +38,7 @@
       <div class="controls ">
         <input id="data_filter_alias_{{ n }}" name="data_filter_alias_{{ n }}"
              {% if selected_filter %}value="{{selected_filter.alias}}"{% else %}value=""{% endif %}
-             placeholder="Enter filter alias" type="text" required=required>
+             placeholder="{{ _('Enter filter alias') }}" type="text" required=required>
       </div>
     </div>
 

@@ -62,7 +62,7 @@
       <div class="controls ">
         <input id="table_field_filter_alias_{{ n }}" name="table_field_filter_alias_{{ n }}"
         {% if table and table.filter_alias %}value="{{table.filter_alias}}"{% else %}value=""{% endif %}
-        placeholder="Enter filter alias" type="text">
+        placeholder="{{ _('Enter filter alias') }}" type="text">
       </div>
     </div>
     <div id="table_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
@@ -80,7 +80,7 @@
       <div class="controls ">
         <select id="table_size_{{ n }}" name="table_size_{{ n }}">
         {% for size in sizes %}
-        <option value="{{ size.value }}" {% if table %}{{ 'selected' if size.value == table.size }}{% endif %} >{{ _(size.text) }}</option>
+        <option value="{{ size.value }}" {% if table %}{{ 'selected' if size.value == table.size }}{% endif %} >{{ size.text }}</option>
         {% endfor %}
         </select>
       </div>

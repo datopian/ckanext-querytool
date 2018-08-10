@@ -11,7 +11,7 @@
         <div class="controls ">
           <select id="text_box_size_{{ n }}" name="text_box_size_{{ n }}">
           {% for size in sizes %}
-            <option value="{{ size.value }}" {% if box %}{{ 'selected' if size.value == box.size }}{% endif %} >{{ _(size.text) }}</option>
+            <option value="{{ size.value }}" {% if box %}{{ 'selected' if size.value == box.size }}{% endif %} >{{ size.text }}</option>
           {% endfor %}
           </select>
         </div>

@@ -330,7 +330,7 @@
             $('#main-filters').html('');
             get_dataset_resources(this.value);
             yAxisColumnsResults.html('');
-            yAxisColumnsNotice.text('Please choose a chart resource to see available columns.');
+            yAxisColumnsNotice.text(_('Please choose a resource to see available numeric columns.'));
             yAxisColumnsNotice.css('display', 'block');
             yAxisColumnsContainer.css('display', 'none');
         });
@@ -406,7 +406,7 @@
                         handleRenderedQuerytools(total_querytools);
                     });
             } else {
-                alert('Maximum number of allowed related queries reached.');
+                alert(_('Maximum number of allowed related queries reached.'));
             }
 
         });
@@ -429,10 +429,10 @@
                     });
 
                     chartResourceSelect.removeAttr('disabled');
-                    chartResourceSelect.append($('<option></option>').attr('value', '').text('-- Choose resource --'));
+                    chartResourceSelect.append($('<option></option>').attr('value', '').text(_('-- Choose resource --')));
 
                     $.each(dataset_resources, function(i, res) {
-                        var name = res.name || 'Unnamed resource';
+                        var name = res.name || _('Unnamed resource');
                         chartResourceSelect.append($('<option></option>')
                             .attr('value', res.id).text(name));
                     });
@@ -460,18 +460,18 @@
                             });
                         } else {
                             yAxisColumnsNotice.css('display', 'block');
-                            yAxisColumnsNotice.text('No columns retrieved.');
+                            yAxisColumnsNotice.text(_('No columns retrieved.'));
                         }
                     } else {
                         yAxisColumnsNotice.css('display', 'block');
-                        yAxisColumnsNotice.text('An error occured while getting columns.');
+                        yAxisColumnsNotice.text(_('An error occured while getting columns.'));
                     }
                 })
                 .error(function(error) {
                     yAxisColumnsNotice.css('display', 'block');
-                    yAxisColumnsNotice.text('An error occured while getting columns.');
+                    yAxisColumnsNotice.text(_('An error occured while getting columns.'));
                 });
         }
 
     });
-})($);
+})(ckan.i18n.ngettext, $);

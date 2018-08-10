@@ -136,7 +136,7 @@ Example usage:
 
   <em class="muted"
       id="y-axis-columns-notice"
-      {% if data.chart_resource %} style="display: none;" {% endif %}>Please choose a resource to see available numeric columns.</em><br><br>
+      {% if data.chart_resource %} style="display: none;" {% endif %}>{{ _('Please choose a resource to see available numeric columns.') }}</em><br><br>
 
   {% block querytool_main_filters %}
     <legend>{{ _('Filter(s)') }}</legend>
