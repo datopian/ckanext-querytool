@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-10 13:31+0200\n"
+"POT-Creation-Date: 2018-08-10 14:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,7 +150,7 @@ msgstr ""
 msgid "Reverse"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:232 ckanext/querytool/helpers.py:488
+#: ckanext/querytool/helpers.py:232 ckanext/querytool/helpers.py:489
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:200
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:209
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:218
@@ -202,43 +202,43 @@ msgid "Comma (thousands separator) e.g 2,000"
 msgstr ""
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:91
-#: ckanext/querytool/helpers.py:243
+#: ckanext/querytool/helpers.py:244
 msgid "Binary e.g 11111010000"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:254
+#: ckanext/querytool/helpers.py:255
 msgid "Small Rectangle"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:255
+#: ckanext/querytool/helpers.py:256
 msgid "Small Square"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:256
+#: ckanext/querytool/helpers.py:257
 msgid "Medium Rectangle"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:257
+#: ckanext/querytool/helpers.py:258
 msgid "Medium Vertical"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:258
+#: ckanext/querytool/helpers.py:259
 msgid "Large Rectangle"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:259
+#: ckanext/querytool/helpers.py:260
 msgid "Large Square"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:260
+#: ckanext/querytool/helpers.py:261
 msgid "Large Vertical"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:489
+#: ckanext/querytool/helpers.py:490
 msgid "Ascending"
 msgstr ""
 
-#: ckanext/querytool/helpers.py:490
+#: ckanext/querytool/helpers.py:491
 msgid "Descending"
 msgstr ""
 
@@ -631,6 +631,10 @@ msgstr ""
 
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:21
 msgid "Select Application"
+msgstr ""
+
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:19
+msgid "Table title"
 msgstr ""
 
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
