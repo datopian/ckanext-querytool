@@ -56,39 +56,39 @@
 
         tick_count_name.change(function(event) {
             var selectValues = [{
-                    'text': 'Decimal (1 digit) e.g 2.5',
+                    'text': _('Decimal (1 digit) e.g 2.5'),
                     'value': '.1f'
                 },
                 {
-                    'text': 'Decimal (2 digit) e.g 2.50',
+                    'text': _('Decimal (2 digit) e.g 2.50'),
                     'value': '.2f'
                 },
                 {
-                    'text': 'Decimal (3 digit) e.g 2.501',
+                    'text': _('Decimal (3 digit) e.g 2.501'),
                     'value': '.3f'
                 },
                 {
-                    'text': 'Decimal (4 digit) e.g 2.5012',
+                    'text': _('Decimal (4 digit) e.g 2.5012'),
                     'value': '.4f'
                 },
                 {
-                    'text': 'Dolar e.g 2000$',
+                    'text': _('Dolar e.g 2000$'),
                     'value': '$'
                 },
                 {
-                    'text': 'Rounded e.g 2k',
+                    'text': _('Rounded e.g 2k'),
                     'value': 's'
                 },
                 {
-                    'text': 'Percentage (multiply by 100) e.g 200000%',
+                    'text': _('Percentage (multiply by 100) e.g 200000%'),
                     'value': 'p'
                 },
                 {
-                    'text': 'Comma (thousands separator) e.g 2,000',
+                    'text': _('Comma (thousands separator) e.g 2,000'),
                     'value': ','
                 },
                 {
-                    'text': 'Binary e.g 11111010000',
+                    'text': _('Binary e.g 11111010000'),
                     'value': 'b'
                 }
             ]
@@ -221,7 +221,7 @@
             var viz_items = $('.item');
             if (viz_items.length === 0) {
                 e.preventDefault();
-                alert('Please create at least one visualization.');
+                alert(_('Please create at least one visualization.'));
             }
         });
 
@@ -634,4 +634,4 @@
 
     }
 
-})($);
+})(ckan.i18n.ngettext, $);

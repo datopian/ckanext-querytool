@@ -119,11 +119,11 @@ ckan.module('querytool-viz-preview', function() {
                         this.fetched_data = data.result;
                         this.createChart(this.fetched_data);
                     } else {
-                        this.el.text('Chart could not be created.');
+                        this.el.text(this._('Chart could not be created.'));
                     }
                 }.bind(this))
                 .error(function(error) {
-                    this.el.text('Chart could not be created.');
+                    this.el.text(this._('Chart could not be created.'));
                 }.bind(this));
         },
         createChart: function(data) {

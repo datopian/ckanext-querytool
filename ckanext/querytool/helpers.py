@@ -14,6 +14,7 @@ except ImportError:
 import ckan.model as m
 from ckan.common import c
 from ckan.plugins import toolkit
+from ckan.plugins.toolkit import _
 
 log = logging.getLogger(__name__)
 
@@ -125,18 +126,18 @@ def get_chart_types():
     :return:
     '''
     chart_types = [
-        {'text': 'Line', 'value': 'line'},
-        {'text': 'Bar', 'value': 'bar'},
-        {'text': 'Horizontal bar', 'value': 'hbar'},
-        {'text': 'Stacked bar', 'value': 'sbar'},
-        {'text': 'Stacked horizontal bar', 'value': 'shbar'},
-        {'text': 'Area', 'value': 'area'},
-        {'text': 'Stacked area', 'value': 'area-spline'},
-        {'text': 'Spline', 'value': 'spline'},
-        {'text': 'Donut', 'value': 'donut'},
-        {'text': 'Pie', 'value': 'pie'},
-        {'text': 'Scatter', 'value': 'scatter'},
-        {'text': 'Bubble', 'value': 'bscatter'}
+        {'text': _('Line'), 'value': 'line'},
+        {'text': _('Bar'), 'value': 'bar'},
+        {'text': _('Horizontal bar'), 'value': 'hbar'},
+        {'text': _('Stacked bar'), 'value': 'sbar'},
+        {'text': _('Stacked horizontal bar'), 'value': 'shbar'},
+        {'text': _('Area'), 'value': 'area'},
+        {'text': _('Stacked area'), 'value': 'area-spline'},
+        {'text': _('Spline'), 'value': 'spline'},
+        {'text': _('Donut'), 'value': 'donut'},
+        {'text': _('Pie'), 'value': 'pie'},
+        {'text': _('Scatter'), 'value': 'scatter'},
+        {'text': _('Bubble'), 'value': 'bscatter'}
     ]
     return chart_types
 
@@ -148,49 +149,49 @@ def get_color_scheme():
     '''
     colors = [{'value': '#B80000, #995522, #556677, #118888, #115588, '
               '#4C3D3D, #2B2B2B, #660000, #221100',
-               'text': 'Saturated'},
+               'text': _('Saturated')},
               {'value': '#DDBBAA, #79E6F2, #88AA99, #00A864, #228899, '
                         '#3F797F, #775555, #118855, #008751, #3D4C46',
-               'text': 'Light'},
+               'text': _('Light')},
               {'value': '#ADC0D8, #79AFF2, #8899AA, #0EAAB2, #00A0A8, '
                         '#776655, #118888, #885511, #3F5C7F, #225599',
-               'text': 'Pastel'},
+               'text': _('Pastel')},
               {'value': '#ADB1D8, #8899AA, #7983F2, #777752, #887711, '
                         '#0070C0, #0062A8, #3F457F, #115588, #3D464C',
-               'text': 'Pastel 2'},
+               'text': _('Pastel 2')},
               {'value': '#AA9988, #A88600, #779922, #6C7F3F, #887711, '
                         '#555577, #665500, #665100, #4C493D, #2B2B2V',
-               'text': 'Contrast'},
+               'text': _('Contrast')},
               {'value': '#b9fff2, #6cdeff, #00a3d3, #00778d, #006351, '
                         '#b9fff5, #6cdeff, #01a3d3, #02778d, #006389',
-               'text': 'Ocean'},
+               'text': _('Ocean')},
               {'value': '#6EF752, #75F070, #8ADBC2, #85E0AD, #80E699, '
                         '#7DE88F, #7AEB85,  #70F55C, #6BFA47, #66FF33',
-               'text': 'Limes'},
+               'text': _('Limes')},
               {'value': '#2f1313, #451611, #60191c, #6f1a31, #890a3e, '
                         '#BD4587, #CC4C80,  #DB5478, #EB5C70, #FF6666',
-               'text': 'Dark cherry'},
+               'text': _('Dark cherry')},
               {'value': '#eba7ff, #ff7878, #e057ff, #de47ff, #890a3e, '
                         '#B866FF, #8F66FF,  #5C66FF, #5266FF, #3366FF',
-               'text': 'Purple'},
+               'text': _('Purple')},
               {'value': '#1f2439, #e4f714, #114ee8, #e4e4e4, #000000, '
                         '#cc885b, #321108,  #6c3b2c, #94b0a4, #d6b5a4',
-               'text': 'Urban'},
+               'text': _('Urban')},
               {'value': '#ff3366, #00ff99, #33cccc, #ffff66, #993399, '
                         '#f3c6f2, #efa6b6,  #bd98e0, #8d90e2, #7554ae',
-               'text': 'Candy'},
+               'text': _('Candy')},
               {'value': '#22758e, #b63b3b, #f9c414, #e3e8e6, #4c4555, '
                         '#d53c3c, #80add3,  #97cfcc, #e4b03d, #c39de0',
-               'text': 'Orient'},
+               'text': _('Orient')},
               {'value': '#3b5998, #8b9dc3, #dfe3ee, #f7f7f7, #ffffff, '
                         '#011f4b, #03396c, #005b96, #6497b1, #6497b1',
-               'text': 'Blue'},
+               'text': _('Blue')},
               {'value': '#ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, '
                         '#ee4035, #f37736, #fdf498, #7bc043, #0392cf',
-               'text': 'Rainbow'},
+               'text': _('Rainbow')},
               {'value': '#2e4045, #83adb5, #c7bbc9, #5e3c58, #bfb5b2, '
                         '#a69eb0, #efeff2, #f2e2cd, #dadae3, #000000',
-               'text': 'Muted'}
+               'text': _('Muted')}
               ]
 
     return colors
@@ -202,9 +203,9 @@ def get_map_color_scheme():
     :return:
     '''
     colors = [{'value': '#feedde,#fdbe85,#fd8d3c,#e6550d,#a63603',
-               'text': 'Sequential'},
+               'text': _('Sequential')},
               {'value': '#d7191c,#fdae61,#ffffbf,#a6d96a,#1a9641',
-               'text': 'Diverging '}
+               'text': _('Diverging')}
               ]
 
     return colors
@@ -215,10 +216,10 @@ def get_tick_text_rotation():
        Get available options for rotating chart x axis
        :return:
     '''
-    options = [{'text': 'Horizontal', 'value': '0'},
-               {'text': 'Diagonal', 'value': '30'},
-               {'text': 'Vertical', 'value': '90'},
-               {'text': 'Reverse', 'value': '180'}]
+    options = [{'text': _('Horizontal'), 'value': '0'},
+               {'text': _('Diagonal'), 'value': '30'},
+               {'text': _('Vertical'), 'value': '90'},
+               {'text': _('Reverse'), 'value': '180'}]
 
     return options
 
@@ -228,18 +229,19 @@ def get_charts_data_formats(num=None):
         Get available formats for charts tooltip and axis ticks
     :return:
     '''
-    options = [{'text': 'Default', 'value': ''},
-               {'text': 'Integer e.g 2', 'value': '.0f'},
-               {'text': 'Decimal (1 digit) e.g 2.5', 'value': '.1f'},
-               {'text': 'Decimal (2 digit) e.g 2.50', 'value': '.2f'},
-               {'text': 'Decimal (3 digit) e.g 2.501', 'value': '.3f'},
-               {'text': 'Decimal (4 digit) e.g 2.5012', 'value': '.4f'},
-               {'text': 'Dolar e.g 2000$', 'value': '$'},
-               {'text': 'Rounded e.g 2k', 'value': 's'},
-               {'text': 'Percentage (multiply by 100) e.g 200000%',
+    options = [{'text': _('Default'), 'value': ''},
+               {'text': _('Integer e.g 2'), 'value': '.0f'},
+               {'text': _('Decimal (1 digit) e.g 2.5'), 'value': '.1f'},
+               {'text': _('Decimal (2 digit) e.g 2.50'), 'value': '.2f'},
+               {'text': _('Decimal (3 digit) e.g 2.501'), 'value': '.3f'},
+               {'text': _('Decimal (4 digit) e.g 2.5012'), 'value': '.4f'},
+               {'text': _('Dolar e.g 2000$'), 'value': '$'},
+               {'text': _('Rounded e.g 2k'), 'value': 's'},
+               {'text': _('Percentage (multiply by 100) e.g 200000%'),
                 'value': '.0%'},
-               {'text': 'Comma (thousands separator) e.g 2,000', 'value': ','},
-               {'text': 'Binary e.g 11111010000', 'value': 'b'}]
+               {'text': _('Comma (thousands separator) e.g 2,000'),
+                'value': ','},
+               {'text': _('Binary e.g 11111010000'), 'value': 'b'}]
     if num:
         return options[:num]
     return options
@@ -250,13 +252,13 @@ def get_visualization_size():
     Get available sizes for displaying visualizations: charts, text box
     :return:
     '''
-    options = [{'text': 'Small Rectangle', 'value': 'size-sm'},
-               {'text': 'Small Square', 'value': 'size-sm square'},
-               {'text': 'Medium Rectangle', 'value': 'size-md'},
-               {'text': 'Medium Vertical', 'value': 'size-md vertical'},
-               {'text': 'Large Rectangle', 'value': 'size-lg'},
-               {'text': 'Large Square', 'value': 'size-lg square'},
-               {'text': 'Large Vertical', 'value': 'size-lg vertical'}]
+    options = [{'text': _('Small Rectangle'), 'value': 'size-sm'},
+               {'text': _('Small Square'), 'value': 'size-sm square'},
+               {'text': _('Medium Rectangle'), 'value': 'size-md'},
+               {'text': _('Medium Vertical'), 'value': 'size-md vertical'},
+               {'text': _('Large Rectangle'), 'value': 'size-lg'},
+               {'text': _('Large Square'), 'value': 'size-lg square'},
+               {'text': _('Large Vertical'), 'value': 'size-lg vertical'}]
     return options
 
 
@@ -484,9 +486,9 @@ def get_chart_sort():
     Get available values for sorting charts data
     :return:
     '''
-    options = [{'text': 'Default', 'value': 'default'},
-               {'text': 'Ascending', 'value': 'asc'},
-               {'text': 'Descending', 'value': 'desc'}]
+    options = [{'text': _('Default'), 'value': 'default'},
+               {'text': _('Ascending'), 'value': 'asc'},
+               {'text': _('Descending'), 'value': 'desc'}]
     return options
 
 
