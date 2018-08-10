@@ -66,11 +66,18 @@ ckan.module('querytool-table', function() {
             if (fromUpdate) {
                 main_value = xVal;
             }
+            var locale = $('html').attr('lang');
+            var languages = {
+                'zh_CN' : '//cdn.datatables.net/plug-ins/1.10.19/i18n/Chinese.json'
+            };
             var sql_string = this.create_sql_string(main_value, y_axis);
             var dt_buttons_className = 'btn btn-default';
             var title = (this.options.table_title === true) ? '' : this.options.table_title;
             var dom_class = '<"dt-header' + id + '">';
             this.dataTable = $('#table-item-' + id).DataTable({
+                "language": {
+                    "url": languages[locale]
+                },
                 "processing": true,
                 "ajax": {
                     "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
