@@ -11,14 +11,13 @@ msgstr ""
 "POT-Creation-Date: 2018-08-10 14:00+0200\n"
 "PO-Revision-Date: 2018-08-14 10:55+0800\n"
 "Last-Translator: \n"
-"Language: zh\n"
+"Language: zh_Hans_CN\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
-"X-Generator: Poedit 2.1.1\n"
 
 #: ckanext/querytool/helpers.py:129
 msgid "Line"
@@ -908,4 +907,13 @@ msgstr "高度"
 #: ckanext/querytool/templates/querytool/public/read.html:253
 msgid "Code"
 msgstr "代码"
+
+msgid "Y axis columns"
+msgstr "指标"
+
+msgid "Chart resource"
+msgstr "图表数据源"
+
+msgid "Dataset name"
+msgstr "数据集名称"
 

@@ -907,3 +907,14 @@ msgstr ""
 msgid "Code"
 msgstr ""
 
+#:
+msgid "Y axis columns"
+msgstr ""
+
+#:
+msgid "Chart resource"
+msgstr ""
+
+#:
+msgid "Dataset name"
+msgstr ""
