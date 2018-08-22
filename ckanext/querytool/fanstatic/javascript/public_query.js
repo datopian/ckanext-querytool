@@ -221,47 +221,23 @@
 
         buttonImg.on('click', function(targetElem) {
 
-            // First render all SVGs to canvases
-            var targetElemS = $('.container-wrapper').find('svg');
-            var nodesToRecover = [];
-            var nodesToRemove = [];
+            var nodeList = document.querySelectorAll('.c3-lines path');
+            var nodeList2 = document.querySelectorAll('.c3-axis path');
+            var line_graph = Array.from(nodeList);
+            var x_and_y = Array.from(nodeList2);
 
-            var svgElem = targetElemS.find('svg');
-
-            svgElem.each(function(index, node) {
-                var parentNode = node.parentNode;
-                var svg = parentNode.innerHTML;
-
-                var canvas = document.createElement('canvas');
-
-                canvg(canvas, svg);
-
-                nodesToRecover.push({
-                    parent: parentNode,
-                    child: node
-                });
-                parentNode.removeChild(node);
-
-                nodesToRemove.push({
-                    parent: parentNode,
-                    child: canvas
-                });
-
-                parentNode.appendChild(canvas);
+            //fix weird back fill
+            line_graph.forEach(function(element){
+                element.style.fill = "none";
             });
-
+            //fix axes
+            x_and_y.forEach(function(element){
+                element.style.fill = "none";
+                element.style.stroke = "black";
+            });
 
             html2canvas(document.body, {
             }).then(function(canvas) {
-                // Put the SVGs back in place
-                nodesToRemove.forEach(function(pair) {
-                    pair.parent.removeChild(pair.child);
-                });
-
-                nodesToRecover.forEach(function(pair) {
-                    pair.parent.appendChild(pair.child);
-                });
-
                 Canvas2Image.saveAsPNG(canvas);
             });
         });
