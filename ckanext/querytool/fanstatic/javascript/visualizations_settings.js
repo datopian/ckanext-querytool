@@ -198,7 +198,31 @@
 
     };
 
+    function handleChartSortingField () {
+
+        var category_name_select = $('[id*=chart_field_category_name_]');
+
+        category_name_select.change(function(event) {
+            var elem = $(this);
+            var category_name = elem.find(":selected").val();
+            var category_name_select_id = elem.attr('id');
+
+
+            var sorting_select_div_id = category_name_select_id.replace('category_name', 'sort_div');
+
+            console.log(sorting_select_div_id);
+
+            if (category_name === '') {
+                $('#' + sorting_select_div_id).removeClass('hidden');
+            } else {
+                $('#' + sorting_select_div_id).addClass('hidden');
+            }
+
+        });
+    };
+
     $(document).ready(function() {
+        handleChartSortingField();
         handleRenderedVizFilters('chart');
         handleRenderedVizFilters('map');
         handleRenderedVizFilters('table');
@@ -272,6 +296,7 @@
                         ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
                         handleRenderedVizFilters('chart', items);
                         handleItemsOrder();
+                        handleChartSortingField();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
                         handleTickFormat(items);
@@ -383,7 +408,7 @@
 
                     var resourceId = item.find('[id*=resource_id_]');
                     var dataSort = item.find('[id*=chart_field_sort_]');
-                    var dataSortDiv = item.find('[id*=chart_div_sort_value_]');
+                    var dataSortDiv = item.find('[id*=chart_field_sort_div_]');
 
                     item.attr('id', 'chart_field_' + order);
 
@@ -456,7 +481,7 @@
 
                     dataSort.attr('id', 'chart_field_sort_' + order);
                     dataSort.attr('name', 'chart_field_sort_' + order);
-                    dataSortDiv.attr('id', 'chart_div_sort_value_' + order);
+                    dataSortDiv.attr('id', 'chart_field_sort_div_' + order);
 
 
                 } else if (item.context.id.indexOf('text_box') >= 0) {
