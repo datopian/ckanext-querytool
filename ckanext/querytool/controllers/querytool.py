@@ -351,8 +351,16 @@ class QueryToolController(base.BaseController):
                         data['chart_field_y_label_{}'.format(id)]
                     visualization['size'] = \
                         data['chart_field_size_{}'.format(id)]
+                    visualization['chart_padding_left'] = \
+                        data['chart_field_chart_padding_left_{}'.format(id)]
+                    visualization['chart_padding_bottom'] = \
+                        data['chart_field_chart_padding_bottom_{}'.format(id)]
                     visualization['sort'] = \
                         data['chart_field_sort_{}'.format(id)]
+                    if 'chart_field_x_text_multiline_{}'.format(id) in data:
+                        visualization['x_text_multiline'] = 'true'
+                    else:
+                        visualization['x_text_multiline'] = 'false'
                     if 'chart_field_legend_{}'.format(id) in data:
                         visualization['show_legend'] = 'true'
                     else:

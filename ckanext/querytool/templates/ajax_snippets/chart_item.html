@@ -116,6 +116,24 @@
             </select>
          </div>
       </div>
+       {% if chart %}
+        {% set padding_left = chart.chart_padding_left %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_chart_padding_left_{{ n }}">{{ _('Chart Padding left') }}</label>
+         <div class="controls ">
+            <input id="chart_field_chart_padding_left_{{ n }}" type="number" min="0" name="chart_field_chart_padding_left_{{ n }}" value="{{ padding_left }}" placeholder="{{ _('Default') }}">
+         </div>
+      </div>
+      {% if chart %}
+        {% set padding_bottom = chart.chart_padding_bottom %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_chart_padding_bottom_{{ n }}">{{ _('Chart Padding bottom') }}</label>
+         <div class="controls ">
+            <input id="chart_field_chart_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_chart_padding_bottom_{{ n }}" value="{{ padding_bottom }}" placeholder="{{ _('Default') }}">
+         </div>
+      </div>
       <hr>
       {% set text_rotation = h.querytool_get_tick_text_rotation() %}
       <div class="control-group control-select">
@@ -126,6 +144,15 @@
             <option value="{{ rotate.value }}" {% if chart %}{{ 'selected' if rotate.value == chart.x_text_rotate }}{% endif %}>{{ rotate.text }}</option>
             {% endfor %}
             </select>
+         </div>
+      </div>
+       {% if chart %}
+        {% set x_text_multiline = chart.x_text_multiline %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_x_text_multiline_{{ n }}">{{ _('X axis label multiline') }}</label>
+         <div class="controls ">
+            <input id="chart_field_x_text_multiline_{{ n }}" type="checkbox" name="chart_field_x_text_multiline_{{ n }}" value="{{ x_text_multiline }}"{% if x_text_multiline=='false' %}{% else %}checked{% endif %}>
          </div>
       </div>
       {% if chart %}
@@ -246,9 +273,12 @@
           {% set title = chart.title %}
           {% set show_legend = chart.show_legend %}
           {% set x_text_rotate = chart.x_text_rotate %}
+          {% set x_text_multiline = chart.x_text_multiline %}
           {% set tooltip_name = chart.tooltip_name %}
           {% set data_format = chart.data_format %}
           {% set y_tick_format = chart.y_tick_format %}
+          {% set chart_padding_left = chart.chart_padding_left %}
+          {% set chart_padding_bottom = chart.chart_padding_bottom %}
           {% set padding_bottom = chart.padding_bottom %}
           {% set padding_top = chart.padding_top %}
           {% set tick_count = chart.tick_count %}
@@ -269,9 +299,12 @@
           title= title,
           show_legend = show_legend,
           x_text_rotate= x_text_rotate,
+          x_text_multiline= x_text_multiline,
           tooltip_name = tooltip_name,
           data_format = data_format,
           y_tick_format = y_tick_format,
+          chart_padding_left = chart_padding_left,
+          chart_padding_bottom = chart_padding_bottom,
           padding_bottom = padding_bottom,
           padding_top = padding_top,
           tick_count = tick_count,

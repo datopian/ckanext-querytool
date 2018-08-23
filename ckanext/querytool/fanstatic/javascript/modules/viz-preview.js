@@ -12,9 +12,12 @@ Options:
     - title (Chart title)
     - show_legend ( Display or hide charts legend)
     - x_text_rotate ( Display text horizontal or vertical)
+    - x_text_multiline ( Display the x axis text in one line or multiline)
     - tooltip_name (Title of the tooltip)
     - data_format (Charts data format e.g 2k, $2000, 2000.0, 2000.00)
     - y_tick_format (Y axis data format e.g 2k, $2000, 2000.0, 2000.00)
+    - chart_padding_top (Add chart padding from the outside)
+    - chart_padding_bottom (Add chart padding from the outside)
     - padding_top (Add charts padding)
     - padding_bottom (Add charts padding)
     - show_labels (Display or hide charts labels)
@@ -132,22 +135,32 @@ ckan.module('querytool-viz-preview', function() {
             var records = data;
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
+            var x_text_multiline = this.options.x_text_multiline;
             var tooltip_name = this.options.tooltip_name;
             var data_format = this.options.data_format;
             var y_tick_format = this.options.y_tick_format;
-            var padding_top = (this.options.padding_top === true) ? '' : this.options.padding_top;
-            var padding_bottom = (this.options.padding_bottom === true) ? '' : this.options.padding_bottom;
+            var chart_padding_left = (this.options.chart_padding_left === true) ? null : this.options.chart_padding_left;
+            var chart_padding_bottom = (this.options.chart_padding_bottom === true) ? null : this.options.chart_padding_bottom;
+            var padding_top = (this.options.padding_top === true) ? null : this.options.padding_top;
+            var padding_bottom = (this.options.padding_bottom === true) ? null : this.options.padding_bottom;
             var tick_count = (this.options.tick_count === true) ? '' : this.options.tick_count;
             var show_labels = this.options.show_labels;
             var y_label = this.options.y_label;
             var data_sort = this.options.data_sort;
             var additionalCategory = (this.options.category_name === true) ? '' : this.options.category_name;
+
             var options = {
                 bindto: this.el[0],
                 color: {
                     pattern: this.options.colors.split(',')
+                },
+                padding: {
+                    left: parseInt(chart_padding_left),
+                    right: 50,
+                    bottom: parseInt(chart_padding_bottom)
                 }
             };
+
             var values;
             var titleVal = (this.options.title === true) ? '' : this.options.title;
 
@@ -225,14 +238,14 @@ ckan.module('querytool-viz-preview', function() {
                             rotate: yrotate
                         },
                         padding: {
-                            top: padding_top,
-                            bottom: padding_bottom
+                            top: parseInt(padding_top),
+                            bottom: parseInt(padding_bottom)
                         }
                     },
                     x: {
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: true
+                            multiline: x_text_multiline
                         }
                     }
                 }
@@ -316,18 +329,17 @@ ckan.module('querytool-viz-preview', function() {
                             rotate: yrotate
                         },
                         padding: {
-                            top: padding_top,
-                            bottom: padding_bottom
+                            top: parseInt(padding_top),
+                            bottom: parseInt(padding_bottom)
                         },
                         label: y_label
                     },
                     x: {
                         type: 'category',
-                        categories,
-                        categories,
+                        categories: categories,
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: true,
+                            multiline: x_text_multiline,
                             fit: true
                         }
                     },
@@ -346,6 +358,13 @@ ckan.module('querytool-viz-preview', function() {
             var colorSelect = chartField.find('[name*=chart_field_color_]');
             var colorValue = colorSelect.val();
 
+            var chartPaddingLeft = chartField.find('input[name*=chart_field_chart_padding_left_]');
+            var chartPaddingLeftVal = chartPaddingLeft.val();
+
+            var chartPaddingBottom = chartField.find('input[name*=chart_field_chart_padding_bottom_]');
+            var chartPaddingBottomVal = chartPaddingBottom.val();
+
+
             var axisXSelect = chartField.find('[name*=chart_field_axis_x_]');
             var axisXValue = axisXSelect.val();
 
@@ -360,6 +379,9 @@ ckan.module('querytool-viz-preview', function() {
 
             var xTextRotate = chartField.find('[name*=chart_field_x_text_rotate_]');
             var xTextRotateVal = xTextRotate.val();
+
+            var xTextMultiline = chartField.find('[name*=chart_field_x_text_multiline_]');
+            var xTextMultilineVal = xTextMultiline.is(':checked');
 
             var tooltipName = chartField.find('input[name*=chart_field_tooltip_name_]');
             var tooltipNameVal = tooltipName.val();
@@ -410,9 +432,12 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.title = chartTitleVal;
                 this.options.show_legend = legendVal;
                 this.options.x_text_rotate = xTextRotateVal;
+                this.options.x_text_multiline = xTextMultilineVal;
                 this.options.tooltip_name = tooltipNameVal;
                 this.options.data_format = dataFormatVal;
                 this.options.y_tick_format = yTickFormatVal;
+                this.options.chart_padding_left = chartPaddingLeftVal;
+                this.options.chart_padding_bottom = chartPaddingBottomVal;
                 this.options.padding_top = paddingTopVal;
                 this.options.padding_bottom = paddingBottomVal;
                 this.options.show_labels = dataLabelsVal;
@@ -431,9 +456,12 @@ ckan.module('querytool-viz-preview', function() {
             this.options.title = chartTitleVal;
             this.options.show_legend = legendVal;
             this.options.x_text_rotate = xTextRotateVal;
+            this.options.x_text_multiline = xTextMultilineVal;
             this.options.tooltip_name = tooltipNameVal;
             this.options.data_format = dataFormatVal;
             this.options.y_tick_format = yTickFormatVal;
+            this.options.chart_padding_left = chartPaddingLeftVal;
+            this.options.chart_padding_bottom = chartPaddingBottomVal;
             this.options.padding_top = paddingTopVal;
             this.options.padding_bottom = paddingBottomVal;
             this.options.show_labels = dataLabelsVal;
