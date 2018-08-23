@@ -9,6 +9,11 @@
 {% set class = 'hidden' %}
 {% endif %}
 
+{% for item in y_axis_values %}
+    {% do main_filters.append(item) %}
+{% endfor %}
+{% set chart_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
+
 <div id="chart_field_{{ n }}" class="item chart_field visualization-fields-section">
    {% set chart_types = h.querytool_get_chart_types() %}
    <div class="item-wrapper">
@@ -37,11 +42,29 @@
             </select>
          </div>
       </div>
+       <div class="control-group control-select">
+        <label class="control-label" for="chart_field_category_name_{{ n }}">{{ _('Category') }}</label>
+        <div class="controls ">
+        <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}">
+          <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+          {% for category in columns %}
+            <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
+          {% endfor %}
+        </select>
+        </div>
+       </div>
+       {% set sort_options = h.querytool_get_chart_sort() %}
+      <div id="chart_field_sort_div_{{ n }}" class="control-group control-select {% if chart and chart.category_name %}hidden{% endif %}">
+         <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Sort data') }}</label>
+         <div class="controls ">
+            <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}">
+            {% for sort in sort_options %}
+            <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{ sort.text }}</option>
+            {% endfor %}
+            </select>
+         </div>
+      </div>
       <hr>
-      {% for item in y_axis_values %}
-        {% do main_filters.append(item) %}
-      {% endfor %}
-      {% set chart_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
       <div class="control-group control-select">
          <label class="control-label" for="chart_field_filter_name_{{ n }}">{{ _('Optional Filter') }}</label>
          <div class="controls ">
@@ -82,18 +105,7 @@
          </div>
       </div>
       <hr>
-      <div class="control-group control-select">
-        <label class="control-label" for="chart_field_category_name_{{ n }}">{{ _('Category') }}</label>
-        <div class="controls ">
-        <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}">
-          <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-          {% for category in chart_filters %}
-            <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
-          {% endfor %}
-        </select>
-        </div>
-       </div>
-       <hr>
+
       {% set color_schemes = h.querytool_get_color_scheme() %}
       <div class="control-group control-select">
          <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color') }}</label>
@@ -114,24 +126,6 @@
             <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{ size.text }}</option>
             {% endfor %}
             </select>
-         </div>
-      </div>
-       {% if chart %}
-        {% set padding_left = chart.chart_padding_left %}
-      {% endif %}
-      <div class="control-group ">
-         <label class="control-label" for="chart_field_chart_padding_left_{{ n }}">{{ _('Chart Padding left') }}</label>
-         <div class="controls ">
-            <input id="chart_field_chart_padding_left_{{ n }}" type="number" min="0" name="chart_field_chart_padding_left_{{ n }}" value="{{ padding_left }}" placeholder="{{ _('Default') }}">
-         </div>
-      </div>
-      {% if chart %}
-        {% set padding_bottom = chart.chart_padding_bottom %}
-      {% endif %}
-      <div class="control-group ">
-         <label class="control-label" for="chart_field_chart_padding_bottom_{{ n }}">{{ _('Chart Padding bottom') }}</label>
-         <div class="controls ">
-            <input id="chart_field_chart_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_chart_padding_bottom_{{ n }}" value="{{ padding_bottom }}" placeholder="{{ _('Default') }}">
          </div>
       </div>
       <hr>
@@ -246,15 +240,22 @@
          </div>
       </div>
       <hr>
-      {% set sort_options = h.querytool_get_chart_sort() %}
-      <div id="chart_div_sort_value_{{ n }}" class="control-group control-select {% if chart and chart.category_value %}hidden{% endif %}">
-         <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Sort data') }}</label>
+       {% if chart %}
+        {% set chart_padding_left = chart.chart_padding_left %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_chart_padding_left_{{ n }}">{{ _('Chart Padding left') }}</label>
          <div class="controls ">
-            <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}">
-            {% for sort in sort_options %}
-            <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{ sort.text }}</option>
-            {% endfor %}
-            </select>
+            <input id="chart_field_chart_padding_left_{{ n }}" type="number" min="0" name="chart_field_chart_padding_left_{{ n }}" value="{{ chart_padding_left }}" placeholder="{{ _('Default') }}">
+         </div>
+      </div>
+      {% if chart %}
+        {% set chart_padding_bottom = chart.chart_padding_bottom %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_chart_padding_bottom_{{ n }}">{{ _('Chart Padding bottom') }}</label>
+         <div class="controls ">
+            <input id="chart_field_chart_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_chart_padding_bottom_{{ n }}" value="{{ chart_padding_bottom }}" placeholder="{{ _('Default') }}">
          </div>
       </div>
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />

@@ -364,7 +364,6 @@ ckan.module('querytool-viz-preview', function() {
             var chartPaddingBottom = chartField.find('input[name*=chart_field_chart_padding_bottom_]');
             var chartPaddingBottomVal = chartPaddingBottom.val();
 
-
             var axisXSelect = chartField.find('[name*=chart_field_axis_x_]');
             var axisXValue = axisXSelect.val();
 
