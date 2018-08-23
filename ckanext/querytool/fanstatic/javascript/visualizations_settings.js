@@ -207,10 +207,7 @@
             var category_name = elem.find(":selected").val();
             var category_name_select_id = elem.attr('id');
 
-
             var sorting_select_div_id = category_name_select_id.replace('category_name', 'sort_div');
-
-            console.log(sorting_select_div_id);
 
             if (category_name === '') {
                 $('#' + sorting_select_div_id).removeClass('hidden');
