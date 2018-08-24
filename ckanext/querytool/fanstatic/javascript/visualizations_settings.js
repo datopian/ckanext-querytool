@@ -401,6 +401,10 @@
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
 
+                    var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
+                    var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
+                    var checkboxXLabelMultiline = item.find('[id*=chart_field_x_text_multiline_]');
+
                     var selectCategoryName = item.find('[id*=chart_field_category_name_]');
 
                     var resourceId = item.find('[id*=resource_id_]');
@@ -479,6 +483,15 @@
                     dataSort.attr('id', 'chart_field_sort_' + order);
                     dataSort.attr('name', 'chart_field_sort_' + order);
                     dataSortDiv.attr('id', 'chart_field_sort_div_' + order);
+
+                    inputChartPaddingLeft.attr('id', 'chart_field_chart_padding_left_' + order);
+                    inputChartPaddingLeft.attr('name', 'chart_field_chart_padding_left_' + order);
+
+                    inputChartPaddingBottom.attr('id', 'chart_field_chart_padding_bottom_' + order);
+                    inputChartPaddingBottom.attr('name', 'chart_field_chart_padding_bottom_' + order);
+
+                    checkboxXLabelMultiline.attr('id', 'chart_field_x_text_multiline_' + order);
+                    checkboxXLabelMultiline.attr('name', 'chart_field_x_text_multiline_' + order);
 
 
                 } else if (item.context.id.indexOf('text_box') >= 0) {
