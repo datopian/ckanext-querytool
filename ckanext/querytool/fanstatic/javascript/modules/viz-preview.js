@@ -281,9 +281,15 @@ ckan.module('querytool-viz-preview', function() {
 
                 if (additionalCategory) {
 
-                    for (var key in records) {
-                        columns.push(records[key]);
+                    var orderedRecords = {};
+                    Object.keys(records).sort().forEach(function(key) {
+                        orderedRecords[key] = records[key];
+                    });
+
+                    for (var key in orderedRecords) {
+                        columns.push(orderedRecords[key]);;
                     }
+
                     options.data = {
                         x: 'x',
                         columns: columns,
