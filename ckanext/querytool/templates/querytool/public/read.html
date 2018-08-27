@@ -189,6 +189,7 @@
         {% if item.type == 'table'  %}
          {% if item.filter_visibility == 'public'  %}
             {% set id = h.querytool_get_uuid() %}
+         <div class="table-filter">
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
               id=id,
               q_name=querytool.name,
@@ -198,6 +199,7 @@
               value=item.filter_value,
               resource_id=querytool.chart_resource
             %}
+         </div>
           {% endif %}
           {% snippet 'ajax_snippets/table_module.html',
             sql_string = querytool.sql_string,
