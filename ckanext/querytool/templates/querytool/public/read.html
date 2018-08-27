@@ -104,6 +104,21 @@
         {% set id = h.querytool_get_uuid() %}
       <div class="item {{ item.size }} {{ item.type }} chart-{{id}} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
         {% if item.type == 'chart'  %}
+           {% if item.filter_visibility == 'public'  %}
+            {% set id = h.querytool_get_uuid() %}
+            {% snippet 'querytool/public/snippets/public_viz_filter.html',
+              id=id,
+              q_name=querytool.name,
+              n=item.order,
+              name=item.filter_name,
+              alias=item.filter_alias,
+              value=item.filter_value,
+              resource_id=querytool.chart_resource
+            %}
+          {% endif %}
+          <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{id}}">
+             <i class="fa fa-picture-o fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
+           </a>
           {% snippet 'ajax_snippets/visualization_item.html',
             type='chart',
             colors=item.color,
@@ -131,21 +146,6 @@
             category_name = item.category_name,
             data_sort = item.sort
           %}
-           <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{id}}">
-             <i class="fa fa-picture-o fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
-           </a>
-          {% if item.filter_visibility == 'public'  %}
-            {% set id = h.querytool_get_uuid() %}
-            {% snippet 'querytool/public/snippets/public_viz_filter.html',
-              id=id,
-              q_name=querytool.name,
-              n=item.order,
-              name=item.filter_name,
-              alias=item.filter_alias,
-              value=item.filter_value,
-              resource_id=querytool.chart_resource
-            %}
-          {% endif %}
         {% endif %}
         {% if item.type == 'text_box' %}
           <div class="item-content" >
@@ -158,6 +158,20 @@
           </div>
         {% endif %}
         {% if item.type == 'map'  %}
+         {% if item.filter_visibility == 'public'  %}
+            {% set id = h.querytool_get_uuid() %}
+          <div class="map-filter">
+            {% snippet 'querytool/public/snippets/public_viz_filter.html',
+              id=id,
+              q_name=querytool.name,
+              n=item.order,
+              name=item.filter_name,
+              alias=item.filter_alias,
+              value=item.filter_value,
+              resource_id=querytool.chart_resource
+            %}
+          </div>
+          {% endif %}
           {% set map_id = h.querytool_get_uuid() %}
           {% snippet 'ajax_snippets/map_module.html',
             n=map_id,
@@ -171,7 +185,9 @@
             filter_name=item.filter_name,
             filter_value=item.filter_value
           %}
-          {% if item.filter_visibility == 'public'  %}
+        {% endif %}
+        {% if item.type == 'table'  %}
+         {% if item.filter_visibility == 'public'  %}
             {% set id = h.querytool_get_uuid() %}
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
               id=id,
@@ -183,8 +199,6 @@
               resource_id=querytool.chart_resource
             %}
           {% endif %}
-        {% endif %}
-        {% if item.type == 'table'  %}
           {% snippet 'ajax_snippets/table_module.html',
             sql_string = querytool.sql_string,
             resource_id=querytool.chart_resource,
@@ -194,18 +208,6 @@
             filter_value=item.filter_value,
             table_title = item.title
           %}
-          {% if item.filter_visibility == 'public'  %}
-            {% set id = h.querytool_get_uuid() %}
-            {% snippet 'querytool/public/snippets/public_viz_filter.html',
-              id=id,
-              q_name=querytool.name,
-              n=item.order,
-              name=item.filter_name,
-              alias=item.filter_alias,
-              value=item.filter_value,
-              resource_id=querytool.chart_resource
-            %}
-          {% endif %}
         {% endif %}
       </div>
       {% endfor %}
