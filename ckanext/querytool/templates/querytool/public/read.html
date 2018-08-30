@@ -14,7 +14,14 @@
 
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
+
+{% block breadcrumb_content %}
+  <li>{% link_for _('Application Groups'), controller=c.controller, action='querytool_public' %}</li>
+  <li class="active">{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
+{% endblock %}
+
 {% block page_header_content %}
+
 {% if querytools[0].description %}
 <div class="container-fluid">
   <div class="row-fluid">

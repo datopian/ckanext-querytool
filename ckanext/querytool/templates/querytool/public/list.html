@@ -1,9 +1,14 @@
 {% extends "querytool/public/base_main.html" %}
-{% block page_header_icon %}<img class="thumbnail" src="/base/images/query-icon-tittle.png">{% endblock %}
-{% block page_header_title %}
 {% set groups = h.querytool_get_groups() %}
-<h1>{{ groups[c.group] }}</h1>
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('Application Groups'), controller=c.controller, action='querytool_public' %}</li>
 {% endblock %}
+
+{% block page_header_icon %}<img class="thumbnail" src="/base/images/query-icon-tittle.png">{% endblock %}
+
+{% block page_header_title %}<h1>{{ groups[c.group] }}</h1>{% endblock %}
+
 {% block page_header_description %}
 {% endblock %}
 {% block tools %}
