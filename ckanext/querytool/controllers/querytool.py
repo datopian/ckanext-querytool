@@ -177,6 +177,8 @@ class QueryToolController(base.BaseController):
                     filter['alias'] = data['data_filter_alias_{}'.format(id)]
                     filter['visibility'] = \
                         data['data_filter_visibility_{}'.format(id)]
+                    filter['filter_color'] = \
+                        data['data_filter_color_{}'.format(id)]
 
                     filters.append(filter)
                 elif k.startswith('y_axis_column_'):
