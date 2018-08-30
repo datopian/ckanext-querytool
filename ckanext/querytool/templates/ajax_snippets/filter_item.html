@@ -52,5 +52,13 @@
       </div>
     </div>
 
+    <div class="control-group control-select data_filter_color_{{ n }}">
+    <label class="control-label" for="data_filter_color_{{ n }}">{{ _('Color') }}</label>
+    <div class="controls ">
+     <input id="data_filter_color_{{ n }}" name="data_filter_color_{{ n }}" class="jscolor {closable:true,closeText:'X'}"
+         {% if selected_filter %}value="{{selected_filter.filter_color}}"{% else %}value="ff3300"{% endif %}>
+    </div>
+   </div>
+
     <input type="hidden" id="resource_id_{{ n }}" name="resource_id_{{ n }}" value="{{ c.resource_id or resource_id }}"/>
 </div>
