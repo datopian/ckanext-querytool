@@ -1,6 +1,19 @@
 {% extends "querytool/public/querytool_page.html" %}
 
 {% block content %}
+
+{% block toolbar %}
+  <div class="toolbar">
+    {% block breadcrumb %}
+      {% if self.breadcrumb_content() | trim %}
+        <ol class="breadcrumb">
+          {% block breadcrumb_content %}{% endblock %}
+        </ol>
+      {% endif %}
+    {% endblock %}
+  </div>
+{% endblock %}
+
 <div class="container-wrapper">
   <div class="public-header">
   {% block page_header_content %}
