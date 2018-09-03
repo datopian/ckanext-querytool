@@ -148,8 +148,8 @@ ckan.module('querytool-map', function($, _) {
                 dragging: !L.Browser.mobile
             }).setView([lat, lng], zoom);
 
-            var osmUrl = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}';
-            var osmAttrib = 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ';
+            var osmUrl = this.options.map_config.osm_url;
+            var osmAttrib = this.options.map_config.osm_attribute;
             this.osm = new L.TileLayer(osmUrl, {
                 minZoom: 2,
                 maxZoom: 18,

@@ -180,7 +180,9 @@
           </div>
           {% endif %}
           {% set map_id = h.querytool_get_uuid() %}
+          {% set map_config = h.querytool_get_map_config() %}
           {% snippet 'ajax_snippets/map_module.html',
+            map_config=map_config,
             n=map_id,
             map_resource=item.map_resource,
             map_title_field=item.map_title_field,

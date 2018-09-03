@@ -505,3 +505,12 @@ def get_groups():
         val = group.split(':')
         ugroup.update({val[0]: val[1].decode('utf-8')})
     return ugroup
+
+
+def get_map_config():
+
+    map_config = {
+        'osm_url': config.get('ckanext.querytool.map_osm_url', ''),
+        'osm_attribute': config.get('ckanext.querytool.map_osm_attribute', '')
+    }
+    return json.dumps(map_config)
