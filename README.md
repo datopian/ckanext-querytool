@@ -38,6 +38,13 @@ These are the required configuration options used by the extension:
 ckanext.querytool.groups = brazil:Brazil,china:营养,mexico:Mexico
 ```
 
+2. Add config for map item base layer:
+```
+ckanext.querytool.map_osm_url = https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}
+
+ckanext.querytool.map_osm_attribute = Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ
+```
+
 ## Development Installation
 
 To install ckanext-querytool for development, activate your CKAN virtualenv

@@ -124,7 +124,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'querytool_get_chart_sort':
                 helpers.get_chart_sort,
             'querytool_get_groups':
-                helpers.get_groups
+                helpers.get_groups,
+            'querytool_get_map_config':
+                helpers.get_map_config,
         }
 
     # IAuthFunctions

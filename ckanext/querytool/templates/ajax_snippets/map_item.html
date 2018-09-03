@@ -159,7 +159,9 @@
     {% set filter_name = map.filter_name %}
     {% set filter_value = map.filter_value %}
   {% endif %}
+  {% set map_config = h.querytool_get_map_config() %}
   {% snippet 'ajax_snippets/map_module.html',
+    map_config=map_config,
     n=n,
     map_resource=map_resource,
     map_title_field=map_title_field,
