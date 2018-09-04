@@ -1,4 +1,4 @@
-ckan.module('querytool-map', function($, _) {
+ckan.module('querytool-map', function($) {
     'use strict';
 
     var api = {
@@ -144,6 +144,7 @@ ckan.module('querytool-map', function($, _) {
 
             this.map = new L.Map(elementId, {
                 scrollWheelZoom: false,
+//                zoomControl: false,
                 inertiaMaxSpeed: 200,
                 dragging: !L.Browser.mobile
             }).setView([lat, lng], zoom);
@@ -219,6 +220,27 @@ ckan.module('querytool-map', function($, _) {
 
             this.legend.addTo(this.map);
         },
+        createInfo: function() {
+            var options = this.options;
+            var self = this;
+
+            this.info = L.control();
+
+            this.info.onAdd = function (map) {
+                this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+                this.update();
+                return this._div;
+            };
+
+            // method that we will use to update the control based on feature properties passed
+            this.info.update = function (infoData) {
+                this._div.innerHTML = '<h4></h4>' +  (infoData ?
+                    '<b>' + options.map_title_field + ': ' + infoData.title + '</b><br/>---------------<br/>'
+                     + options.y_axis_column + ': ' + infoData.measure : self._('Hover over a region'));
+            };
+
+            this.info.addTo(this.map);
+        },
         initializeMarkers: function(mapURL) {
 
             var smallIcon = L.icon({
@@ -274,6 +296,8 @@ ckan.module('querytool-map', function($, _) {
                             scale = this.createScale(this.featuresValues);
                         }
 //                      -----------------------------------------------------------------
+                        // Create the info window
+                        this.createInfo.call(this);
 
                         this.geoL = L.geoJSON(geoJSON, {
                             style: function(feature) {
@@ -300,33 +324,6 @@ ckan.module('querytool-map', function($, _) {
                                 var elementData = this.featuresValues[feature.properties[this.options.map_key_field]];
 
                                 if (elementData) {
-                                    var popup = document.createElement("div"),
-                                        list = document.createElement("ul"),
-                                        listElement,
-                                        listElementText,
-                                        boldElement,
-                                        boldElementText;
-
-                                    boldElementText = document.createTextNode(this.options.map_title_field + ': ');
-                                    boldElement = document.createElement("b");
-                                    boldElement.appendChild(boldElementText);
-                                    listElementText = document.createTextNode(feature.properties[this.options.map_title_field]);
-                                    listElement = document.createElement("li");
-                                    listElement.appendChild(boldElement);
-                                    listElement.appendChild(listElementText);
-                                    list.appendChild(listElement);
-
-                                    boldElementText = document.createTextNode(this.options.y_axis_column + ': ');
-                                    boldElement = document.createElement("b");
-                                    boldElement.appendChild(boldElementText);
-                                    listElementText = document.createTextNode(this.formatNumber(parseFloat(elementData['value'])));
-                                    listElement = document.createElement("li");
-                                    listElement.appendChild(boldElement);
-                                    listElement.appendChild(listElementText);
-                                    list.appendChild(listElement);
-
-                                    popup.appendChild(list);
-                                    layer.bindPopup(popup);
 
                                     layer.on({
                                         mouseover: function highlightFeature(e) {
@@ -342,15 +339,19 @@ ckan.module('querytool-map', function($, _) {
                                             if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
                                                 layer.bringToFront();
                                             }
-                                        },
+
+                                            var infoData = {
+                                                title: feature.properties[this.options.map_title_field],
+                                                measure: this.formatNumber(parseFloat(elementData['value']))
+                                            };
+
+                                            this.info.update(infoData);
+                                        }.bind(this),
                                         mouseout: function resetHighlight(e) {
                                             this.geoL.resetStyle(e.target);
-                                        }.bind(this),
-                                        click: function zoomToFeature(e) {
-                                            this.map.flyToBounds(e.target.getBounds());
+                                            this.info.update();
                                         }.bind(this)
                                     });
-
                                 }
                             }.bind(this)
                         }).addTo(this.map);
