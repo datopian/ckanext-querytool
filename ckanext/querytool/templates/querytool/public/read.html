@@ -16,7 +16,7 @@
 {% extends "querytool/public/base_main.html" %}
 
 {% block breadcrumb_content %}
-  <li>{% link_for _('Application Groups'), controller=c.controller, action='querytool_public' %}</li>
+  <li>{% link_for _('Health Topics'), controller=c.controller, action='querytool_public' %}</li>
   <li class="active">{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
 {% endblock %}
 
