@@ -1,0 +1,39 @@
+<div role="main">
+  <div class="container">
+     <div class="row row1">
+        <div class="span6">
+           {% block platform %}
+           <div class="platform-info">
+              <h1>{{ _('Portal Development Platform') }}</h1>
+              <span>
+              {{ _('This Platform allows Ministries of Health to publish data via user friendly applications, using visual and interactive elements') }}
+              </span>
+           </div>
+           {% endblock %}
+        </div>
+        <div class="span6">
+           {% block logos %}
+           <div class="span12">
+                 <img src="/base/images/vs-logo.png" alt="Vital Strategies" />
+              </div>
+           {% endblock %}
+        </div>
+     </div>
+  </div>
+</div>
+<div role="main">
+  <div class="container">
+     <div class="row row2">
+        {% block instructions %}
+        <div class="platform-instructions">
+           <h1>{{ _('How to use the Platform') }}</h1>
+           <div>
+              <ul class="list-group">
+                 <li class="list-group-item active">Cras justo odio</li>
+                 <li class="list-group-item">Dapibus ac facilisis in</li>
+           </div>
+        </div>
+        {% endblock %}
+     </div>
+  </div>
+</div>
