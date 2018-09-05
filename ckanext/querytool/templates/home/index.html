@@ -1,0 +1,13 @@
+{% resource 'querytool/css/home-page.css' %}
+{% ckan_extends %}
+
+{% block content %}
+  <div class="homepage layout-{{ homepage_style }}">
+    <div class="container">
+      {{ self.flash() }}
+    </div>
+    {% block primary_content %}
+        {% snippet "home/vs-home-page.html" %}
+    {% endblock %}
+  </div>
+{% endblock %}
