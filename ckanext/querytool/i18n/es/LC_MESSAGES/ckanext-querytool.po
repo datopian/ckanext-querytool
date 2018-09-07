@@ -1,18 +1,19 @@
-# Translations template for ckanext-querytool.
+# Spanish translations for ckanext-querytool.
 # Copyright (C) 2018 ORGANIZATION
 # This file is distributed under the same license as the ckanext-querytool
 # project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2018.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-09-06 14:42+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-09-06 14:48+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -670,8 +671,8 @@ msgstr ""
 
 #: ckanext/querytool/templates/home/vs-home-page.html:9
 msgid ""
-"This Platform allows Ministries of Health to publish data via user friendly "
-"applications, using visual and interactive elements"
+"This Platform allows Ministries of Health to publish data via user "
+"friendly applications, using visual and interactive elements"
 msgstr ""
 
 #: ckanext/querytool/templates/home/vs-home-page.html:29
