@@ -8,7 +8,9 @@
       {% block breadcrumb %}
         {% if self.breadcrumb_content() | trim %}
           <ul class="breadcrumb">
-            <li class="home"><a href="/"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
+            {% if h.check_access('querytool_update') %}
+              <li class="home"><a href="/"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
+            {% endif %}
             {% block breadcrumb_content %}
             {% endblock %}
           </ul>
