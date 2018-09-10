@@ -14,50 +14,48 @@
    {{ super() }}
    {% endblock %}
    <div class="container-fluid">
-      <div class="row">
-         <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-         <span class="fa fa-bars"></span>
-         </button>
-         {% block header_logo %}
-         {% endblock %}
-         <div class="nav-collapse collapse vs-header">
-            {% block header_site_navigation %}
-            <nav class="section navigation">
-               <ul class="nav nav-pills">
-               {% block header_site_navigation_tabs %}
+      <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
+       <span class="fa fa-bars"></span>
+      </button>
+      {% block header_logo %}
+      {# Don't show default logo. #}
+      {% endblock %}
+
+      <div class="nav-collapse collapse">
+        {% block header_site_navigation %}
+        <nav class="section navigation">
+            <ul class="nav nav-pills">
+            {% block header_site_navigation_tabs %}
+              {{ h.build_nav_main(
+                  ('home', _('Home'))
+              )}}
+              {% if c.userobj.sysadmin %}
                   {{ h.build_nav_main(
-                     ('home', _('Home'))
+                    ('search', _('Load Datasets')),
+                    ('querytool_groups', _('Design Applications')),
+                    ('querytool_public', _('Use Applications'))
                   )}}
-                  {% if c.userobj.sysadmin %}
-                     {{ h.build_nav_main(
-                        ('search', _('Load Datasets')),
-                        ('querytool_groups', _('Design Applications')),
-                        ('querytool_public', _('Use Applications'))
-                     )}}
-                  {% endif %}
-                  {% endblock %}
-               </ul>
-            </nav>
-            {% endblock %}
-            {% block header_site_search %}
-            {{ super() }}
-            {% endblock %}
-         </div>
-         <div class="nav-collapse collapse vs-header">
-            {% block vitalst_header_site_navigation %}
-            <nav class="section navigation default-menu">
-               <ul class="nav nav-pills">
-                   {% block header_site_navigation_ckan %}
-                     {{ h.build_nav_main(
-                        ('organizations_index', _('Organizations')),
-                        ('group_index', _('Groups')),
-                        ('about', _('About'))
-                     ) }}
-                  {% endblock %}
-               </ul>
-            </nav>
-            {% endblock %}
-         </div>
+              {% endif %}
+              {% endblock %}
+            </ul>
+        </nav>
+        {% endblock %}
+        {% block header_site_search %}
+        {{ super() }}
+        {% endblock %}
+        {% block vitalst_header_site_navigation %}
+        <nav class="section navigation default-menu">
+            <ul class="nav nav-pills">
+                {% block header_site_navigation_ckan %}
+                  {{ h.build_nav_main(
+                    ('organizations_index', _('Organizations')),
+                    ('group_index', _('Groups')),
+                    ('about', _('About'))
+                  ) }}
+              {% endblock %}
+            </ul>
+        </nav>
+        {% endblock %}
       </div>
    </div>
 </header>
