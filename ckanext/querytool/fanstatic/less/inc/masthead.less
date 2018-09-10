@@ -22,8 +22,8 @@
     .nav-pills {
       li {
         a {
-          margin-left: 0;
-          margin-right: 0;
+          margin: 0;
+          padding: @grid-gutter-width - 5;
           border-bottom: @nav-pills-border-size solid transparent;
           &:hover {
             .nav-pills-hover(@nav-pills-border-size,
@@ -40,6 +40,7 @@
   }
   .site-search {
     float: right;
+    margin-top: @grid-gutter-width/4;
   }
   .nav {
     >li {

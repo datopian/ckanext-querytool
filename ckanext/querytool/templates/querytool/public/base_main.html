@@ -2,20 +2,20 @@
 
 {% block content %}
 
-{% block toolbar %}
-  <div class="toolbar public-breadcrumb">
-    {% block breadcrumb %}
-      {% if self.breadcrumb_content() | trim %}
-        <ol class="breadcrumb">
-          {% block breadcrumb_content %}
-          {% endblock %}
-        </ol>
-      {% endif %}
-    {% endblock %}
-  </div>
-{% endblock %}
-
 <div class="container-wrapper">
+  {% block toolbar %}
+    <div class="toolbar">
+      {% block breadcrumb %}
+        {% if self.breadcrumb_content() | trim %}
+          <ul class="breadcrumb">
+            <li class="home"><a href="/"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
+            {% block breadcrumb_content %}
+            {% endblock %}
+          </ul>
+        {% endif %}
+      {% endblock %}
+    </div>
+  {% endblock %}
   <div class="public-header">
   {% block page_header_content %}
     <div class="container">
