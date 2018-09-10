@@ -53,6 +53,14 @@ class QueryToolController(base.BaseController):
         Lists all available groups
         :return: base template
         '''
+
+        context = _get_context()
+
+        try:
+            check_access('querytool_list', context)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
         return render('querytool/admin/base_groups.html',
                       extra_vars={'msg': 'Groups'})
 

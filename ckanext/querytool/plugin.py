@@ -30,7 +30,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
             = 'ckanext.querytool.controllers.querytool:QueryToolController'
 
         # Query tool routes
-        map.redirect('/querytool', '/querytool/list',
+        map.redirect('/querytool', '/querytool/groups',
+                     _redirect_code='301 Moved Permanently')
+
+        map.redirect('/querytool/public', '/querytool/public/groups',
                      _redirect_code='301 Moved Permanently')
 
         map.connect('querytool_groups', '/querytool/groups',
