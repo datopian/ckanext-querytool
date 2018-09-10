@@ -523,10 +523,8 @@ msgid "X axis label orientation"
 msgstr "X轴标签方向"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:147
-#, fuzzy
-#| msgid "Y axis label format"
 msgid "X axis label multiline"
-msgstr "Y轴标签格式"
+msgstr ""
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:156
 msgid "Show data labels"
@@ -571,10 +569,8 @@ msgid "Chart Padding left"
 msgstr ""
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:256
-#, fuzzy
-#| msgid "Padding bottom"
 msgid "Chart Padding bottom"
-msgstr "下部内边距"
+msgstr ""
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:263
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:7
@@ -905,10 +901,8 @@ msgid "List Applications"
 msgstr "应用列表"
 
 #: ckanext/querytool/templates/querytool/public/list.html:25
-#, fuzzy
-#| msgid "Manage application data"
 msgid "There are no applications created"
-msgstr "管理应用数据"
+msgstr ""
 
 #: ckanext/querytool/templates/querytool/public/querytool_page.html:8
 msgid "Query Tool"
