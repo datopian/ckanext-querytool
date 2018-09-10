@@ -236,6 +236,7 @@ body {
   }
   .filters {
     flex: 1;
+    padding: 0 @grid-gutter-width/2;
     .fa {
       align-self: center;
       margin: auto @grid-gutter-width / 2;
@@ -261,6 +262,7 @@ body {
     display: inline-flex;
     flex-direction: column;
     margin-top: @grid-gutter-width / 2;
+    margin-bottom: @grid-gutter-width / 2;
     padding: @grid-gutter-width / 2 @grid-gutter-width / 2 0;
     label {
       display: block;
@@ -295,13 +297,16 @@ body {
     position: static;
     display: flex;
     align-self: center;
+    justify-content: center;
+    top: auto;
+    right: auto;
     li {
       margin: auto;
       display: block;
     }
-    > * {
-      margin-left: @grid-gutter-width;
-    }
+    // > * {
+    //   margin-left: @grid-gutter-width;
+    // }
     .btn {
       border-color: transparent;
       border-radius: 0;
