@@ -1,92 +1,98 @@
-.btn {
-  background-image: none;
-  box-shadow: none;
-  border-radius: 0;
-  &:hover {
-    box-shadow: none;
-  }
-  .fa {
-    .fa-icon-margin(0 @fa-margin 0 0);
-  }
-}
-
-.btn-primary {
-  background-color: @color-primary;
-  &:focus {
-    background-color: @color-primary;
-  }
-  &:hover {
-    background-color: @color-primary-dark;
-  }
-}
-
-.btn-secondary {
-  background-color: @color-secondary-dark;
-  border-color: @color-secondary;
-  color: @color-white;
-  text-shadow: none;
-  &:focus,
-  &:hover {
-    color: @color-white;
-    background-color: darken(@color-secondary-dark, 5%);
-  }
-}
-
-.btn-danger {
-  background-color: @color-error;
-}
-
-.btn-success {
-  background-color: @color-success;
-}
-
-.btn,
-label {
-  font-weight: 400;
-}
-
-.btn-large {
-  .caret {
-    margin-top: @grid-gutter-width/2 - 2;
-    margin-left: @grid-gutter-width/4;
-  }
-}
-
-.btn-download {
   .btn {
-    font-family: inherit;
+    background-image: none;
+    box-shadow: none;
+    border-radius: 0;
+    &:hover {
+      box-shadow: none;
+    }
   }
-}
 
-.btn-update {
-  font-size: @base-font-size + 10;
-  padding: @grid-gutter-width @grid-gutter-width*2;
-  border-color: transparent;
-  font-weight: 500;
-  font-family: inherit;
-  @media (min-width: @screen-lg-min) {
-    margin-left: @grid-gutter-width;
+  .primary,
+  .secodary {
+    .btn {
+      .fa {
+        .fa-icon-margin(0 @fa-margin 0 0);
+      }
+    }
   }
-}
 
-.btn-filter-toggle {
-  &.on {
-    border-color: @color-success;
+  .btn-primary {
+    background-color: @color-primary;
+    &:focus {
+      background-color: @color-primary;
+    }
+    &:hover {
+      background-color: @color-primary-dark;
+    }
+  }
+
+  .btn-secondary {
+    background-color: @color-secondary-dark;
+    border-color: @color-secondary;
+    color: @color-white;
+    text-shadow: none;
+    &:focus,
+    &:hover {
+      color: @color-white;
+      background-color: darken(@color-secondary-dark, 5%);
+    }
+  }
+
+  .btn-danger {
+    background-color: @color-error;
+  }
+
+  .btn-success {
     background-color: @color-success;
   }
-}
 
-.btn-chart-download {
-  position: absolute;
-  cursor: pointer;
-  padding: @grid-gutter-width/2;
-  top: 0px;
-  right: 0px;
-  margin: 7px 0px;
-}
-
-.form-actions {
-  .btn {
-    margin-left: @grid-gutter-width/2;
+  .btn,
+  label {
+    font-weight: 400;
   }
-}
+
+  .btn-large {
+    .caret {
+      margin-top: @grid-gutter-width/2 - 2;
+      margin-left: @grid-gutter-width/4;
+    }
+  }
+
+  .btn-download {
+    .btn {
+      font-family: inherit;
+    }
+  }
+
+  .btn-update {
+    font-size: @base-font-size + 10;
+    padding: @grid-gutter-width @grid-gutter-width*2;
+    border-color: transparent;
+    font-weight: 500;
+    font-family: inherit;
+    @media (min-width: @screen-lg-min) {
+      margin-left: @grid-gutter-width;
+    }
+  }
+
+  .btn-filter-toggle {
+    &.on {
+      border-color: @color-success;
+      background-color: @color-success;
+    }
+  }
+
+  .btn-chart-download {
+    position: absolute;
+    cursor: pointer;
+    padding: @grid-gutter-width/2;
+    top: 0px;
+    right: 0px;
+    margin: 7px 0px;
+  }
+
+  .form-actions {
+    .btn {
+      margin-left: @grid-gutter-width/2;
+    }
+  }
