@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-09-06 14:42+0200\n"
+"POT-Creation-Date: 2018-09-10 21:17+0200\n"
 "PO-Revision-Date: 2018-09-06 14:45+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: fr\n"
@@ -245,46 +245,47 @@ msgstr ""
 msgid "Descending"
 msgstr ""
 
-#: ckanext/querytool/controllers/querytool.py:73
-#: ckanext/querytool/controllers/querytool.py:93
-#: ckanext/querytool/controllers/querytool.py:112
-#: ckanext/querytool/controllers/querytool.py:137
-#: ckanext/querytool/controllers/querytool.py:279
-#: ckanext/querytool/controllers/querytool.py:609
+#: ckanext/querytool/controllers/querytool.py:62
+#: ckanext/querytool/controllers/querytool.py:81
+#: ckanext/querytool/controllers/querytool.py:101
+#: ckanext/querytool/controllers/querytool.py:120
+#: ckanext/querytool/controllers/querytool.py:145
+#: ckanext/querytool/controllers/querytool.py:287
+#: ckanext/querytool/controllers/querytool.py:617
 msgid "Not authorized to see this page"
 msgstr ""
 
-#: ckanext/querytool/controllers/querytool.py:119
+#: ckanext/querytool/controllers/querytool.py:127
 msgid "Application not found"
 msgstr ""
 
-#: ckanext/querytool/controllers/querytool.py:121
+#: ckanext/querytool/controllers/querytool.py:129
 msgid "Application and visualizations were removed successfully."
 msgstr ""
 
-#: ckanext/querytool/controllers/querytool.py:148
-#: ckanext/querytool/controllers/querytool.py:291
-#: ckanext/querytool/controllers/querytool.py:601
+#: ckanext/querytool/controllers/querytool.py:156
+#: ckanext/querytool/controllers/querytool.py:299
+#: ckanext/querytool/controllers/querytool.py:609
 msgid "Application not found."
 msgstr ""
 
-#: ckanext/querytool/controllers/querytool.py:159
-#: ckanext/querytool/controllers/querytool.py:299
-#: ckanext/querytool/controllers/querytool.py:617
+#: ckanext/querytool/controllers/querytool.py:167
+#: ckanext/querytool/controllers/querytool.py:307
+#: ckanext/querytool/controllers/querytool.py:625
 msgid ""
 "The data used for creating this Application has been removed by the "
 "administrator."
 msgstr ""
 
-#: ckanext/querytool/controllers/querytool.py:219
+#: ckanext/querytool/controllers/querytool.py:227
 msgid "Data Successfully updated."
 msgstr ""
 
-#: ckanext/querytool/controllers/querytool.py:516
+#: ckanext/querytool/controllers/querytool.py:524
 msgid "Visualizations Successfully updated."
 msgstr ""
 
-#: ckanext/querytool/controllers/querytool.py:622
+#: ckanext/querytool/controllers/querytool.py:630
 msgid "Application not fully set."
 msgstr ""
 
@@ -386,31 +387,32 @@ msgstr ""
 msgid "About Vital Strategies"
 msgstr ""
 
-#: ckanext/querytool/templates/header.html:29
+#: ckanext/querytool/templates/header.html:30
+#: ckanext/querytool/templates/querytool/public/base_main.html:12
 msgid "Home"
 msgstr ""
 
-#: ckanext/querytool/templates/header.html:33
+#: ckanext/querytool/templates/header.html:34
 msgid "Load Datasets"
 msgstr ""
 
-#: ckanext/querytool/templates/header.html:34
+#: ckanext/querytool/templates/header.html:35
 msgid "Design Applications"
 msgstr ""
 
-#: ckanext/querytool/templates/header.html:35
+#: ckanext/querytool/templates/header.html:36
 msgid "Use Applications"
 msgstr ""
 
-#: ckanext/querytool/templates/header.html:52
+#: ckanext/querytool/templates/header.html:51
 msgid "Organizations"
 msgstr ""
 
-#: ckanext/querytool/templates/header.html:53
+#: ckanext/querytool/templates/header.html:52
 msgid "Groups"
 msgstr ""
 
-#: ckanext/querytool/templates/header.html:54
+#: ckanext/querytool/templates/header.html:53
 msgid "About"
 msgstr ""
 
@@ -583,7 +585,7 @@ msgstr ""
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:264
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:109
-#: ckanext/querytool/templates/querytool/public/read.html:105
+#: ckanext/querytool/templates/querytool/public/read.html:78
 msgid "Update"
 msgstr ""
 
@@ -675,7 +677,7 @@ msgid ""
 "friendly applications, using visual and interactive elements"
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:29
+#: ckanext/querytool/templates/home/vs-home-page.html:22
 msgid "How to use the Platform"
 msgstr ""
 
@@ -687,7 +689,6 @@ msgstr ""
 #: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:12
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:10
 #: ckanext/querytool/templates/querytool/admin/base_list.html:8
-#: ckanext/querytool/templates/querytool/public/list.html:5
 msgid "Application Groups"
 msgstr ""
 
@@ -885,15 +886,21 @@ msgstr ""
 msgid "Application data"
 msgstr ""
 
-#: ckanext/querytool/templates/querytool/public/base_main.html:27
+#: ckanext/querytool/templates/querytool/public/base_main.html:15
+#: ckanext/querytool/templates/querytool/public/list.html:5
+#: ckanext/querytool/templates/querytool/public/read.html:20
+msgid "Health Topics"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:30
 msgid "Welcome"
 msgstr ""
 
-#: ckanext/querytool/templates/querytool/public/base_main.html:48
+#: ckanext/querytool/templates/querytool/public/base_main.html:51
 msgid "List Applications"
 msgstr ""
 
-#: ckanext/querytool/templates/querytool/public/list.html:24
+#: ckanext/querytool/templates/querytool/public/list.html:25
 msgid "There are no applications created"
 msgstr ""
 
@@ -901,15 +908,11 @@ msgstr ""
 msgid "Query Tool"
 msgstr ""
 
-#: ckanext/querytool/templates/querytool/public/read.html:19
-msgid "Health Topics"
-msgstr ""
-
-#: ckanext/querytool/templates/querytool/public/read.html:50
+#: ckanext/querytool/templates/querytool/public/read.html:67
 msgid "Displayed Measure"
 msgstr ""
 
-#: ckanext/querytool/templates/querytool/public/read.html:80
+#: ckanext/querytool/templates/querytool/public/read.html:82
 msgid "Download"
 msgstr ""
 

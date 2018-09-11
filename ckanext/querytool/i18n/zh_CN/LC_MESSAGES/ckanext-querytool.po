@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-08-10 14:00+0200\n"
+"POT-Creation-Date: 2018-09-10 21:17+0200\n"
 "PO-Revision-Date: 2018-08-14 10:55+0800\n"
 "Last-Translator: \n"
 "Language: zh_Hans_CN\n"
@@ -152,9 +152,11 @@ msgid "Reverse"
 msgstr "翻转"
 
 #: ckanext/querytool/helpers.py:232 ckanext/querytool/helpers.py:489
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:200
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:209
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:218
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:221
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:230
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:239
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:249
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:258
 msgid "Default"
 msgstr "默认"
 
@@ -243,46 +245,47 @@ msgstr "升序"
 msgid "Descending"
 msgstr "降序"
 
-#: ckanext/querytool/controllers/querytool.py:73
-#: ckanext/querytool/controllers/querytool.py:93
-#: ckanext/querytool/controllers/querytool.py:112
-#: ckanext/querytool/controllers/querytool.py:137
-#: ckanext/querytool/controllers/querytool.py:277
-#: ckanext/querytool/controllers/querytool.py:599
+#: ckanext/querytool/controllers/querytool.py:62
+#: ckanext/querytool/controllers/querytool.py:81
+#: ckanext/querytool/controllers/querytool.py:101
+#: ckanext/querytool/controllers/querytool.py:120
+#: ckanext/querytool/controllers/querytool.py:145
+#: ckanext/querytool/controllers/querytool.py:287
+#: ckanext/querytool/controllers/querytool.py:617
 msgid "Not authorized to see this page"
 msgstr "未授权查看此页"
 
-#: ckanext/querytool/controllers/querytool.py:119
+#: ckanext/querytool/controllers/querytool.py:127
 msgid "Application not found"
 msgstr "找不到应用"
 
-#: ckanext/querytool/controllers/querytool.py:121
+#: ckanext/querytool/controllers/querytool.py:129
 msgid "Application and visualizations were removed successfully."
 msgstr "已成功删除应用和可视化视图。"
 
-#: ckanext/querytool/controllers/querytool.py:148
-#: ckanext/querytool/controllers/querytool.py:289
-#: ckanext/querytool/controllers/querytool.py:591
+#: ckanext/querytool/controllers/querytool.py:156
+#: ckanext/querytool/controllers/querytool.py:299
+#: ckanext/querytool/controllers/querytool.py:609
 msgid "Application not found."
 msgstr "找不到应用 。"
 
-#: ckanext/querytool/controllers/querytool.py:159
-#: ckanext/querytool/controllers/querytool.py:297
-#: ckanext/querytool/controllers/querytool.py:607
+#: ckanext/querytool/controllers/querytool.py:167
+#: ckanext/querytool/controllers/querytool.py:307
+#: ckanext/querytool/controllers/querytool.py:625
 msgid ""
 "The data used for creating this Application has been removed by the "
 "administrator."
 msgstr "用于创建此应用的数据已被管理员删除。"
 
-#: ckanext/querytool/controllers/querytool.py:217
+#: ckanext/querytool/controllers/querytool.py:227
 msgid "Data Successfully updated."
 msgstr "数据已成功更新。"
 
-#: ckanext/querytool/controllers/querytool.py:506
+#: ckanext/querytool/controllers/querytool.py:524
 msgid "Visualizations Successfully updated."
 msgstr "已成功更新可视化视图。"
 
-#: ckanext/querytool/controllers/querytool.py:612
+#: ckanext/querytool/controllers/querytool.py:630
 msgid "Application not fully set."
 msgstr "应用程序尚未设置完成。"
 
@@ -312,12 +315,16 @@ msgstr "没有列检索。"
 msgid "An error occured while getting columns."
 msgstr "在获取列时发生错误。"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:224
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:245
 msgid "Please create at least one visualization."
 msgstr "请创建至少一个可视化。"
 
-#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:122
-#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:126
+#: ckanext/querytool/fanstatic/javascript/modules/map-module.js:239
+msgid "Hover over a region"
+msgstr ""
+
+#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:125
+#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:129
 msgid "Chart could not be created."
 msgstr "无法创建图表。"
 
@@ -380,72 +387,81 @@ msgstr "该查询工具的名称已经存在。请另外选择一个。"
 msgid "About Vital Strategies"
 msgstr "关于Vital Strategies"
 
-#: ckanext/querytool/templates/header.html:29
+#: ckanext/querytool/templates/header.html:30
+#: ckanext/querytool/templates/querytool/public/base_main.html:12
 msgid "Home"
 msgstr "主页"
 
-#: ckanext/querytool/templates/header.html:30
-msgid "Organizations"
-msgstr "组织"
-
-#: ckanext/querytool/templates/header.html:31
-msgid "Groups"
-msgstr "组"
-
-#: ckanext/querytool/templates/header.html:32
-msgid "About"
-msgstr "关于"
-
-#: ckanext/querytool/templates/header.html:51
+#: ckanext/querytool/templates/header.html:34
 msgid "Load Datasets"
 msgstr "加载数据集"
 
-#: ckanext/querytool/templates/header.html:52
+#: ckanext/querytool/templates/header.html:35
 msgid "Design Applications"
 msgstr "设计应用"
 
-#: ckanext/querytool/templates/header.html:53
+#: ckanext/querytool/templates/header.html:36
 msgid "Use Applications"
 msgstr "使用应用"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:19
+#: ckanext/querytool/templates/header.html:51
+msgid "Organizations"
+msgstr "组织"
+
+#: ckanext/querytool/templates/header.html:52
+msgid "Groups"
+msgstr "组"
+
+#: ckanext/querytool/templates/header.html:53
+msgid "About"
+msgstr "关于"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:24
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:17
 msgid "Title"
 msgstr "标题"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:21
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:26
 msgid "Chart title"
 msgstr "图表标题"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:29
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:34
 msgid "Type"
 msgstr "类型"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:31
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:36
 msgid "X axis dimension"
 msgstr "X轴尺寸"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:46
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:92
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:39
-msgid "Optional Filter"
-msgstr "可选的筛选项"
+msgid "Category"
+msgstr "类别"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:49
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:89
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:72
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:16
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:95
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:42
 msgid "Select column"
 msgstr "选择列"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:57
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:58
+msgid "Sort data"
+msgstr "数据排序"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:69
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:92
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:39
+msgid "Optional Filter"
+msgstr "可选的筛选项"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:80
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:104
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:50
 msgid "Default value"
 msgstr "默认值"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:60
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:83
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:28
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:107
 #: ckanext/querytool/templates/ajax_snippets/public_filter_item.html:13
@@ -453,26 +469,26 @@ msgstr "默认值"
 msgid "Select value"
 msgstr "选择值"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:68
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:91
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:116
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:61
 msgid "Filter alias"
 msgstr "筛选项别名"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:72
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:95
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:41
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:120
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:65
 msgid "Enter filter alias"
 msgstr "输入过滤器别名"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:76
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:125
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:69
 msgid "Filter visibility"
 msgstr "筛选项是否可见"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:79
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:102
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:49
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:128
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:72
@@ -480,7 +496,7 @@ msgstr "筛选项是否可见"
 msgid "Public"
 msgstr "公开"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:80
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:103
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:50
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:129
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:73
@@ -489,15 +505,12 @@ msgstr "公开"
 msgid "Private"
 msgstr "仅自己"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:86
-msgid "Category"
-msgstr "类别"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:111
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:56
 msgid "Color"
 msgstr "颜色"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:110
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:136
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:79
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
@@ -505,53 +518,61 @@ msgstr "颜色"
 msgid "Size"
 msgstr "尺寸"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:134
 msgid "X axis label orientation"
 msgstr "X轴标签方向"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:135
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:147
+msgid "X axis label multiline"
+msgstr ""
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:156
 msgid "Show data labels"
 msgstr "显示数据标签"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:144
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:165
 msgid "Show legend"
 msgstr "显示图例"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:153
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:155
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:174
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:176
 msgid "Tooltip name"
 msgstr "提示框名称"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:160
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:181
 msgid "Data format"
 msgstr "数据格式"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:176
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:197
 msgid "Y axis label format"
 msgstr "Y轴标签格式"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:189
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:191
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:210
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:212
 msgid "Y axis title"
 msgstr "Y轴标题"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:198
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:219
 msgid "Padding top"
 msgstr "上部内边距"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:207
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:228
 msgid "Padding bottom"
 msgstr "下部内边距"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:216
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:237
 msgid "Y axis tick count"
 msgstr "Y轴分段数量"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:224
-msgid "Sort data"
-msgstr "数据排序"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:247
+msgid "Chart Padding left"
+msgstr ""
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:235
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:256
+msgid "Chart Padding bottom"
+msgstr ""
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:263
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:7
 #: ckanext/querytool/templates/ajax_snippets/image_item.html:5
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:147
@@ -562,9 +583,9 @@ msgstr "数据排序"
 msgid "Delete"
 msgstr "删除"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:236
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:264
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:109
-#: ckanext/querytool/templates/querytool/public/read.html:98
+#: ckanext/querytool/templates/querytool/public/read.html:78
 msgid "Update"
 msgstr "更新"
 
@@ -646,11 +667,25 @@ msgstr "内容"
 msgid "Description"
 msgstr "描述"
 
-#: ckanext/querytool/templates/querytool/admin/base_edit_data.html:10
+#: ckanext/querytool/templates/home/vs-home-page.html:7
+msgid "Portal Development Platform"
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:9
+msgid ""
+"This Platform allows Ministries of Health to publish data via user "
+"friendly applications, using visual and interactive elements"
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:22
+msgid "How to use the Platform"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/admin/base_edit_data.html:11
 msgid "Manage application data"
 msgstr "管理应用数据"
 
-#: ckanext/querytool/templates/querytool/admin/base_edit_data.html:13
+#: ckanext/querytool/templates/querytool/admin/base_edit_data.html:14
 #: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:12
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:10
 #: ckanext/querytool/templates/querytool/admin/base_list.html:8
@@ -851,69 +886,87 @@ msgstr "您确定要删除这个查询工具吗？"
 msgid "Application data"
 msgstr "应用数据"
 
-#: ckanext/querytool/templates/querytool/public/base_main.html:13
+#: ckanext/querytool/templates/querytool/public/base_main.html:15
+#: ckanext/querytool/templates/querytool/public/list.html:5
+#: ckanext/querytool/templates/querytool/public/read.html:20
+msgid "Health Topics"
+msgstr ""
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:30
 msgid "Welcome"
 msgstr "欢迎"
 
-#: ckanext/querytool/templates/querytool/public/base_main.html:34
+#: ckanext/querytool/templates/querytool/public/base_main.html:51
 msgid "List Applications"
 msgstr "应用列表"
+
+#: ckanext/querytool/templates/querytool/public/list.html:25
+msgid "There are no applications created"
+msgstr ""
 
 #: ckanext/querytool/templates/querytool/public/querytool_page.html:8
 msgid "Query Tool"
 msgstr "查询工具"
 
-#: ckanext/querytool/templates/querytool/public/read.html:43
+#: ckanext/querytool/templates/querytool/public/read.html:67
 msgid "Displayed Measure"
 msgstr "显示统计指标"
 
-#: ckanext/querytool/templates/querytool/public/read.html:73
+#: ckanext/querytool/templates/querytool/public/read.html:82
 msgid "Download"
 msgstr "下载"
 
-#: ckanext/querytool/templates/querytool/public/read.html:132
-#: ckanext/querytool/templates/querytool/public/read.html:259
+#: ckanext/querytool/templates/querytool/public/read.html:127
+#: ckanext/querytool/templates/querytool/public/read.html:275
 msgid "Download image"
 msgstr "下载图片"
 
-#: ckanext/querytool/templates/querytool/public/read.html:218
+#: ckanext/querytool/templates/querytool/public/read.html:234
 msgid "Share"
 msgstr "分享"
 
-#: ckanext/querytool/templates/querytool/public/read.html:223
+#: ckanext/querytool/templates/querytool/public/read.html:239
 msgid "Copy"
 msgstr "复制"
 
-#: ckanext/querytool/templates/querytool/public/read.html:235
+#: ckanext/querytool/templates/querytool/public/read.html:251
 msgid "Embed"
 msgstr "嵌入"
 
-#: ckanext/querytool/templates/querytool/public/read.html:241
+#: ckanext/querytool/templates/querytool/public/read.html:257
 msgid "Embed query tool view"
 msgstr "嵌入查询工具视图"
 
-#: ckanext/querytool/templates/querytool/public/read.html:244
+#: ckanext/querytool/templates/querytool/public/read.html:260
 msgid "You can copy and paste the embed code"
 msgstr "您可以复制并粘贴嵌入代码"
 
-#: ckanext/querytool/templates/querytool/public/read.html:247
+#: ckanext/querytool/templates/querytool/public/read.html:263
 msgid "Width"
 msgstr "宽度"
 
-#: ckanext/querytool/templates/querytool/public/read.html:250
+#: ckanext/querytool/templates/querytool/public/read.html:266
 msgid "Height"
 msgstr "高度"
 
-#: ckanext/querytool/templates/querytool/public/read.html:253
+#: ckanext/querytool/templates/querytool/public/read.html:269
 msgid "Code"
 msgstr "代码"
 
-msgid "Y axis columns"
-msgstr "指标"
+#: ckanext/querytool/templates/snippets/language_selector.html:3
+msgid "Language"
+msgstr ""
 
-msgid "Chart resource"
-msgstr "图表数据源"
+#: ckanext/querytool/templates/snippets/language_selector.html:11
+msgid "Go"
+msgstr ""
 
-msgid "Dataset name"
-msgstr "数据集名称"
+#~ msgid "Y axis columns"
+#~ msgstr "指标"
+
+#~ msgid "Chart resource"
+#~ msgstr "图表数据源"
+
+#~ msgid "Dataset name"
+#~ msgstr "数据集名称"
 

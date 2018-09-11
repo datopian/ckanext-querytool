@@ -8,7 +8,9 @@
   }
 
   .primary,
-  .secodary {
+  .secodary,
+  .public-query,
+  .site-footer {
     .btn {
       .fa {
         .fa-icon-margin(0 @fa-margin 0 0);
@@ -42,9 +44,9 @@
     background-color: @color-error;
   }
 
-  .btn-success {
-    background-color: @color-success;
-  }
+  //.btn-success {
+    //background-color: @color-success;
+  //}
 
   .btn,
   label {
@@ -59,8 +61,20 @@
   }
 
   .btn-download {
+    &,
+    .btn-group{
+      display: flex;
+      .btn{
+        border-radius: 0;
+      }
+    }
     .btn {
+      padding-left: @grid-gutter-width*1.5;
+      padding-right: @grid-gutter-width*1.5;
+      font-weight: 500;
+      font-size: @base-font-size + 10;
       font-family: inherit;
+      border: transparent;
     }
   }
 
@@ -70,9 +84,6 @@
     border-color: transparent;
     font-weight: 500;
     font-family: inherit;
-    @media (min-width: @screen-lg-min) {
-      margin-left: @grid-gutter-width;
-    }
   }
 
   .btn-filter-toggle {
