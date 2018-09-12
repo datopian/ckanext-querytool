@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i');
 @import "inc/variables.less";
 @import "inc/mixins.less";
 @import "inc/responsive.less";
@@ -314,8 +315,9 @@ body {
   }
   .visualizations {
     box-sizing: border-box;
-    max-width: 95%;
+    max-width: calc(100% - @visualization-grid-gutter);
     margin: 0 auto;
+    text-align: center;
     overflow: auto;
     padding: 0 @grid-gutter-width @grid-gutter-width 0;
     .filter-item {
@@ -335,9 +337,10 @@ body {
   }
   .item {
     box-sizing: border-box;
-    margin: @grid-gutter-width 0 0 @grid-gutter-width;
+    margin: @grid-gutter-width/2;
     position: relative;
     background-color: @color-white;
+    margin: @grid-gutter-width 0 0 @grid-gutter-width;
     padding: @grid-gutter-width;
     overflow-y: auto;
     word-wrap: break-word;
@@ -400,12 +403,12 @@ body {
     }
   }
 }
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
 .c3 svg {
-    font-family: "Roboto Condensed script=all rev=1", "Adobe Blank" !important;
+    font-family: "Roboto Condensed", sans-serif !important;
     font-weight: 300 !important;
 }
 .c3-title {
-    font-family: "Roboto Condensed script=all rev=1", "Adobe Blank" !important;
+    font-family: "Roboto Condensed", sans-serif !important;
     font-weight: 300 !important;
 }
