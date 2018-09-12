@@ -58,36 +58,50 @@
         }
       }
       &.size-sm {
-        width: calc(100%/3.105);
+        width: calc(100% / 3);
         height: @visualization-grid-base-size;
+        &.double{
+          width: calc(100% * 0.65);
+        }
         &.square {
           height: @visualization-grid-base-size*2 + @grid-gutter-width;
         }
+        &.vertical{
+          height: @visualization-grid-base-size*4 + @grid-gutter-width;
+        }
+        &.wide {
+          clear: both;
+          min-width: 98.8%;
+        }
       }
       &.size-md {
-        width: calc(100%/2.05);
-        height: @visualization-grid-base-size*2;
+        width: calc(100% / 1.5267);
+        height: @visualization-grid-base-size*2 + @grid-gutter-width;
         &.vertical {
           height: @visualization-grid-base-size*4 + @grid-gutter-width;
         }
       }
       &.size-lg {
-        clear: left;
-        display: block;
-        min-width: 98.8%;
-        height: @visualization-grid-base-size*2;
+        width: calc(100% * 0.486);
+        height: @visualization-grid-base-size*2 + @grid-gutter-width;
         &.square {
           float: left;
           min-width: auto;
-          width: calc(100%/1.528);
-          height: @visualization-grid-base-size*4 + @grid-gutter-width;
+          width: calc(100% * 0.65);
+          height: @visualization-grid-base-size*4 + @grid-gutter-width*3;
         }
         &.vertical {
           float: left;
           min-width: auto;
-          width: calc(100%/1.528);
+          width: calc(100% * 0.65);
           height: @visualization-grid-base-size*6 + @grid-gutter-width;
         }
+      }
+      &.size-xl {
+        clear: left;
+        display: block;
+        min-width: 98.8%;
+        height: @visualization-grid-base-size*2 + @grid-gutter-width;
       }
     }
   }
@@ -113,11 +127,11 @@
 }
 
 @media (max-width: @screen-md-max) {
-  .masthead{
-    .site-search{
-      input{
+  .masthead {
+    .site-search {
+      input {
         width: @grid-gutter-width / 2;
-        &::placeholder{
+        &::placeholder {
           color: @color-white;
         }
       }
@@ -154,12 +168,12 @@
       flex-basis: 100%;
     }
   }
-  .masthead{
+  .masthead {
     .btn-navbar {
       background-color: @color-primary-dark;
       &:hover,
       &:focus,
-      &.active{
+      &.active {
         background-color: lighten(@color-primary-dark, 20%);
       }
     }
