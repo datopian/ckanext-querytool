@@ -14,11 +14,10 @@
     }
   }
   .public-query {
-    .visualizations {
-      text-align: center;
-    }
     .item {
+      position: relative;
       text-align: left;
+      display: inline-block;
       float: left;
       &.has-filter {
         &.size-sm {
@@ -58,49 +57,44 @@
         }
       }
       &.size-sm {
-        width: calc(100% / 3);
+        width: calc(100% * (1/3) - @visualization-grid-gutter);
         height: @visualization-grid-base-size;
-        &.double{
-          width: calc(100% * 0.6385);
+        &.double {
+          width: calc(100% * (2/3) - @visualization-grid-gutter);
         }
         &.square {
           height: @visualization-grid-base-size*2 + @grid-gutter-width;
         }
-        &.vertical{
-          height: @visualization-grid-base-size*4 + @grid-gutter-width;
+        &.vertical {
+          height: @visualization-grid-base-size*4 + @grid-gutter-width*3;
         }
         &.wide {
           clear: both;
-          min-width: 98.8%;
+          width: calc(100% - @visualization-grid-gutter);
         }
       }
       &.size-md {
-        width: calc(100% / 1.5267);
+        width: calc(100% * (3/4) - @visualization-grid-gutter);
         height: @visualization-grid-base-size*2 + @grid-gutter-width;
         &.vertical {
           height: @visualization-grid-base-size*4 + @grid-gutter-width;
         }
       }
       &.size-lg {
-        width: calc(100% * 0.4865);
+        width: calc(100% * (1/2) - @visualization-grid-gutter);
         height: @visualization-grid-base-size*2 + @grid-gutter-width;
         &.square {
-          float: left;
-          min-width: auto;
-          width: calc(100% * 0.6385);
-          height: @visualization-grid-base-size*4 + @grid-gutter-width*3;
+          width: calc(100% * (3/4.5) - @visualization-grid-gutter);
+          height: @visualization-grid-base-size*4 + @grid-gutter-width;
         }
         &.vertical {
-          float: left;
-          min-width: auto;
-          width: calc(100% * 0.6385);
+          width: calc(100% * (3/4) - @visualization-grid-gutter);
           height: @visualization-grid-base-size*6 + @grid-gutter-width;
         }
       }
       &.size-xl {
-        clear: left;
-        display: block;
-        min-width: 98.8%;
+        clear: both;
+        width: calc(100% - @visualization-grid-gutter);
         height: @visualization-grid-base-size*2 + @grid-gutter-width;
       }
     }
