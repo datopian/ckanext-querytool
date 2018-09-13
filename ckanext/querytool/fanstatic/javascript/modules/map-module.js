@@ -230,7 +230,7 @@ ckan.module('querytool-map', function($) {
             this.info = L.control();
 
             this.info.onAdd = function (map) {
-                this._div = L.DomUtil.create('div', ''); // create a information div
+                this._div = L.DomUtil.create('div', 'map-info'); // create a information div
                 this.update();
                 return this._div;
             };
@@ -238,8 +238,8 @@ ckan.module('querytool-map', function($) {
             // method that we will use to update the control based on feature properties passed
             this.info.update = function (infoData) {
                 this._div.innerHTML = '<h4></h4>' +  (infoData ?
-                    '<b>' + options.map_title_field + ': ' + infoData.title + '</b><br/>---------------<br/>'
-                     + options.y_axis_column + ': ' + infoData.measure : '');
+                      options.map_title_field + ': ' + '<b>' + infoData.title + '</b><br/>'
+                     + options.y_axis_column + ': ' + '<b>' + infoData.measure + '</b>' : '');
             };
 
             this.info.addTo(this.map);
