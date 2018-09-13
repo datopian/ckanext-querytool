@@ -63,6 +63,9 @@ ckan.module('querytool-map', function($) {
             if (this.legend) {
                 this.map.removeControl(this.legend);
             }
+            if (this.info) {
+                this.map.removeControl(this.info);
+            }
             this.map.setView([39, 40], 2);
         },
         onResourceChange: function() {
