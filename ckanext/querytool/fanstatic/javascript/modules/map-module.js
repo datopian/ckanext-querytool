@@ -227,7 +227,7 @@ ckan.module('querytool-map', function($) {
             this.info = L.control();
 
             this.info.onAdd = function (map) {
-                this._div = L.DomUtil.create('div', 'info'); // create a div with a class "info"
+                this._div = L.DomUtil.create('div', ''); // create a information div
                 this.update();
                 return this._div;
             };
@@ -236,7 +236,7 @@ ckan.module('querytool-map', function($) {
             this.info.update = function (infoData) {
                 this._div.innerHTML = '<h4></h4>' +  (infoData ?
                     '<b>' + options.map_title_field + ': ' + infoData.title + '</b><br/>---------------<br/>'
-                     + options.y_axis_column + ': ' + infoData.measure : self._('Hover over a region'));
+                     + options.y_axis_column + ': ' + infoData.measure : '');
             };
 
             this.info.addTo(this.map);
