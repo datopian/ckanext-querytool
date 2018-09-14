@@ -247,18 +247,31 @@ def get_charts_data_formats(num=None):
     return options
 
 
+def hex_to_rgba(value, alpha):
+    value = value.lstrip('#')
+    if len(value) == 3:
+        value = ''.join([v*2 for v in list(value)])
+    return tuple(int(value[i:i+2], 16) for i in range(0, 6, 2))+(alpha,)
+
+
 def get_visualization_size():
     '''
     Get available sizes for displaying visualizations: charts, text box
     :return:
     '''
     options = [{'text': _('Small Rectangle'), 'value': 'size-sm'},
+               {'text': _('Long Small Rectangle'), 'value': 'size-sm wide'},
                {'text': _('Small Square'), 'value': 'size-sm square'},
-               {'text': _('Medium Rectangle'), 'value': 'size-md'},
-               {'text': _('Medium Vertical'), 'value': 'size-md vertical'},
+               {'text': _('Horizontal Double Small Square'),
+                'value': 'size-sm double square'},
                {'text': _('Large Rectangle'), 'value': 'size-lg'},
+               {'text': _('Extra Large Rectangle'), 'value': 'size-xl'},
                {'text': _('Large Square'), 'value': 'size-lg square'},
-               {'text': _('Large Vertical'), 'value': 'size-lg vertical'}]
+               {'text': _('Vertical Double Small Square'),
+                'value': 'size-sm vertical'},
+               {'text': _('Large Vertical'), 'value': 'size-lg vertical'},
+               {'text': _('Extra Large Vertical'),
+                'value': 'size-xl vertical'}]
     return options
 
 

@@ -40,9 +40,9 @@ ckanext.querytool.groups = brazil:Brazil,china:营养,mexico:Mexico
 
 2. Add config for map item base layer:
 ```
-ckanext.querytool.map_osm_url = https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}
+ckanext.querytool.map_osm_url = https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{r}.png
 
-ckanext.querytool.map_osm_attribute = Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ
+ckanext.querytool.map_osm_attribute = &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>
 ```
 
 ## Development Installation
