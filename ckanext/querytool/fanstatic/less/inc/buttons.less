@@ -65,25 +65,26 @@
     .btn-group{
       display: flex;
       .btn{
-        border-radius: 0;
+        padding: @grid-gutter-width @grid-gutter-width*2;
       }
     }
     .btn {
       padding-left: @grid-gutter-width*1.5;
       padding-right: @grid-gutter-width*1.5;
       font-weight: 500;
-      font-size: @base-font-size + 10;
+      font-size: @base-font-size + 6;
       font-family: inherit;
       border: transparent;
     }
   }
 
   .btn-update {
-    font-size: @base-font-size + 10;
+    font-size: @base-font-size + 6;
     padding: @grid-gutter-width @grid-gutter-width*2;
     border-color: transparent;
     font-weight: 500;
     font-family: inherit;
+    border-radius: 4px;
   }
 
   .btn-filter-toggle {

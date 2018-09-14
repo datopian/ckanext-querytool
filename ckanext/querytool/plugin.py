@@ -130,6 +130,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_groups,
             'querytool_get_map_config':
                 helpers.get_map_config,
+            'querytool_hex_to_rgba':
+                helpers.hex_to_rgba,
         }
 
     # IAuthFunctions

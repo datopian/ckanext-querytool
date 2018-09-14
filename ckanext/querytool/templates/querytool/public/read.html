@@ -47,7 +47,7 @@
           {% set y_axis_selected = querytool.y_axis_column %}
        {% endif %}
     <div class="controls">
-      <div class="flex">
+      <div class="flex filters-wrap">
         <div class="filters">
           {% if querytool.public_filters  %}
             {% for filter in querytool.public_filters %}
@@ -63,46 +63,48 @@
           <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>
           <div type="hidden" id="{{querytool.name}}_public_filters" data-main-filters="{{ querytool.public_main_filters or [] }}"></div>
         </div>
-        <div class="filter-y">
+        <div class="filter-group filter-y">
           <label for="{{querytool.name}}_y_axis_column">{{ _('Displayed Measure') }}</label>
           {% if y_axis_columns|length == 1 %}
-             <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="form-control filter-item filter-item-column" value="{{ y_axis_selected }}" disabled/>
+             <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
           {% else %}
-            <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="form-control filter-item filter-item-column">
+            <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
             {% for y_axis in y_axis_columns %}
               <option value="{{ y_axis }}" {{ 'selected' if y_axis == y_axis_selected }}>{{ y_axis }}</option>
             {% endfor %}
             </select>
           {% endif %}
         </div>
-        <button type="submit" class="btn btn-large btn-success btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
-        <div class="btn-download">
-            <div class="btn-group dropdown">
-                <button class="btn btn-large btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
-                  <span class="fa fa-download"></span> {{ _('Download') }}
-                  <span class="caret"></span>
-                </button>
-                {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
-                {% set csv = '?format=csv'%}
-                {% set xml = '?format=xml'%}
-                {% set json = '?format=json'%}
-                {% set xlsx = '?format=xlsx'%}
-                <ul class="dropdown-menu">
-                  <li>
-                    <a href="{{ download_url }}{{ csv }}">CSV</a>
-                  </li>
-                  <li>
-                    <a href="{{ download_url }}{{ xml }}">XML</a>
-                  </li>
-                  <li>
-                    <a href="{{ download_url }}{{ json }}">JSON</a>
-                  </li>
-                  <li>
-                    <a href="{{ download_url }}{{ xlsx }}">Microsoft Excel (OpenXML)</a>
-                  </li>
-                </ul>
-              </div>
-        </div>
+      </div>
+      <div class="flex buttons">
+          <div class="btn-download">
+              <div class="btn-group dropdown">
+                  <button class="btn btn-large btn-warning dropdown-toggle" data-toggle="dropdown" href="#">
+                    <span class="fa fa-download"></span> {{ _('Download') }}
+                    <span class="caret"></span>
+                  </button>
+                  {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
+                  {% set csv = '?format=csv'%}
+                  {% set xml = '?format=xml'%}
+                  {% set json = '?format=json'%}
+                  {% set xlsx = '?format=xlsx'%}
+                  <ul class="dropdown-menu">
+                    <li>
+                      <a href="{{ download_url }}{{ csv }}">CSV</a>
+                    </li>
+                    <li>
+                      <a href="{{ download_url }}{{ xml }}">XML</a>
+                    </li>
+                    <li>
+                      <a href="{{ download_url }}{{ json }}">JSON</a>
+                    </li>
+                    <li>
+                      <a href="{{ download_url }}{{ xlsx }}">Microsoft Excel (OpenXML)</a>
+                    </li>
+                  </ul>
+                </div>
+          </div>
+          <button type="submit" class="btn btn-large btn-success btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
       </div>
     </div>
     <!-- Visualizations container -->
