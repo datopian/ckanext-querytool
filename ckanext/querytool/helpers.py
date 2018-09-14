@@ -246,6 +246,7 @@ def get_charts_data_formats(num=None):
         return options[:num]
     return options
 
+
 def hex_to_rgba(value, alpha):
     value = value.lstrip('#')
     if len(value) == 3:
