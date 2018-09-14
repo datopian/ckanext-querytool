@@ -220,10 +220,17 @@ body {
 .public-query {
   padding: 0;
   .controls {
-    background: @color-secondary;
-    margin: 0 @grid-gutter-width;
+    margin: 0 0 @grid-gutter-width/2;
     form {
       margin-bottom: 0;
+    }
+    .filters-wrap{
+      box-shadow: inset 0 0 @grid-gutter-width*5 rgba(0, 0, 0, 0.5);
+      padding: @grid-gutter-width;
+    }
+    .buttons{
+      padding: @grid-gutter-width @grid-gutter-width*2.5;
+      background: linear-gradient(fade(@color-primary, 90%), fade(@color-primary, 0%));
     }
   }
   .leaflet-map-pane {
@@ -231,22 +238,20 @@ body {
   }
   .flex {
     display: flex;
-    align-items: stretch;
+    align-items: flex-end;
     justify-content: space-between;
     flex-wrap: wrap;
   }
   .filters {
-    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    flex: 3 1 auto;
     padding: 0 @grid-gutter-width/2;
     .fa {
       align-self: center;
-      margin: auto @grid-gutter-width / 2;
+      margin: auto @grid-gutter-width;
       position: relative;
-      top: @grid-gutter-width / 4;
       color: @color-white;
-    }
-    @media (max-width: @screen-md-max) {
-      flex-basis: 100%;
     }
   }
   .filter-item {
@@ -255,7 +260,7 @@ body {
 
   .filter-group-wrapper {
     align-self: center;
-    display: inline-flex;
+    display: flex;
   }
   .filter-group {
     display: inline-flex;
@@ -263,33 +268,21 @@ body {
     margin-top: @grid-gutter-width / 2;
     margin-bottom: @grid-gutter-width / 2;
     padding: @grid-gutter-width / 2 @grid-gutter-width / 2 0;
+    border-radius: @grid-gutter-width/4;
     label {
       display: block;
-      background: @color-secondary-dark;
       color: @color-white;
-      padding: (@grid-gutter-width / 4 + 2px) @grid-gutter-width / 2;
+      padding: 0 @grid-gutter-width / 2 (@grid-gutter-width / 4 + 2px);
       margin-bottom: 0;
     }
   }
   .filter-y {
-    display: flex;
-    align-self: stretch;
-    align-items: center;
-    justify-content: space-between;
+    align-self: flex-end;
+    flex: 1 1 auto;
+    justify-content: center;
     color: @color-white;
-    padding: @grid-gutter-width;
-    background: @color-info;
-    @media (max-width: @screen-md-max) {
-      flex-basis: 100%;
-    }
-    select {
-      margin-bottom: 0;
-    }
-    label {
-      margin-top: @grid-gutter-width / 6;
-      margin-right: @grid-gutter-width;
-      font-weight: 700;
-    }
+    background: fade(@color-info, 70%);
+    border-radius: @grid-gutter-width/4;
   }
   .actions {
     flex-shrink: 0;
@@ -303,9 +296,6 @@ body {
       margin: auto;
       display: block;
     }
-    // > * {
-    //   margin-left: @grid-gutter-width;
-    // }
     .btn {
       border-color: transparent;
       border-radius: 0;
