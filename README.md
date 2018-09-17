@@ -45,6 +45,11 @@ ckanext.querytool.map_osm_url = https://cartodb-basemaps-{s}.global.ssl.fastly.n
 ckanext.querytool.map_osm_attribute = &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>
 ```
 
+3. Add config for the base public breadcrumb name:
+```
+ckanext.querytool.public_breadcrumb_name = Health Topics
+```
+
 ## Development Installation
 
 To install ckanext-querytool for development, activate your CKAN virtualenv
