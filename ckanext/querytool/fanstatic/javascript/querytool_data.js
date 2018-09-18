@@ -380,8 +380,9 @@
                             $(e.target).closest('.filter_item').remove();
                             _handleFilterItemsOrder();
                         });
-
+                        
                         handleRenderedFilters(total_items, resource_id);
+                        jscolor.installByClassName("jscolor");
 
                     });
             });
@@ -416,7 +417,8 @@
             chartResourceSelect.attr('disabled', 'true');
             chartResourceSelect.empty();
 
-            api.get('package_show', {
+            if (dataset_name) {
+                api.get('package_show', {
                     id: dataset_name
                 })
                 .done(function(data) {
@@ -437,6 +439,8 @@
                             .attr('value', res.id).text(name));
                     });
                 });
+            }
+
         }
 
         function populateYAxisColumns(value) {
