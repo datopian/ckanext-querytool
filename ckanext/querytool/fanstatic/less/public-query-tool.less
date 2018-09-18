@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,700,700i');
 @import "inc/variables.less";
 @import "inc/mixins.less";
 @import "inc/responsive.less";
@@ -277,10 +277,8 @@ body {
     }
   }
   .filter-y {
-    align-self: flex-end;
-    flex: 1 1 auto;
-    height: 80px;
-    justify-content: center;
+    flex-basis: auto;
+    margin-left: auto;
     color: @color-white;
     background: fade(@color-info, 70%);
     border-radius: @grid-gutter-width/4;
@@ -400,4 +398,9 @@ body {
 .c3-title {
     font-family: "Roboto Condensed", sans-serif !important;
     font-weight: 300 !important;
+}
+
+.c3-axis-x,
+.c3-axis-y{
+  font-weight: 700;
 }
