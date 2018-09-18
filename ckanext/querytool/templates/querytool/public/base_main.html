@@ -13,7 +13,7 @@
               <li class="home"><a href="/"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
             {% endif %}
             {% block breadcrumb_content %}
-              <li class="active">{% link_for _('Health Topics'), controller=c.controller, action='querytool_public' %}</li>
+              <li class="active">{% link_for _(breadcrumb_name), controller=c.controller, action='querytool_public' %}</li>
             {% endblock %}
           </ul>
         {% endif %}
