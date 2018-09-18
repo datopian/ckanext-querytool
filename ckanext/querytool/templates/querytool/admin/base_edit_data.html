@@ -2,8 +2,8 @@
 
 {% block scripts %}
   {{ super() }}
-  {% resource 'querytool/javascript/querytool_data.js' %}
   {% resource 'querytool/vendor/jscolor.js' %}
+  {% resource 'querytool/javascript/querytool_data.js' %}
 {% endblock %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
