@@ -63,7 +63,7 @@
           {% endif %}
           <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>
           <div type="hidden" id="{{querytool.name}}_public_filters" data-main-filters="{{ querytool.public_main_filters or [] }}"></div>
-        </div>
+
         <div class="filter-group filter-y">
           <label for="{{querytool.name}}_y_axis_column">{{ _('Displayed Measure') }}</label>
           {% if y_axis_columns|length == 1 %}
@@ -76,6 +76,7 @@
             </select>
           {% endif %}
         </div>
+      </div>
       </div>
       <div class="flex buttons">
           <div class="btn-download">
