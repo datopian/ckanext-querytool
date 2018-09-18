@@ -132,6 +132,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_map_config,
             'querytool_hex_to_rgba':
                 helpers.hex_to_rgba,
+            'querytool_get_public_breadcrumb_name':
+                helpers.get_public_breadcrumb_name,
         }
 
     # IAuthFunctions

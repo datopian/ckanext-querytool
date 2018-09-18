@@ -1,8 +1,9 @@
 {% extends "querytool/public/base_main.html" %}
 {% set groups = h.querytool_get_groups() %}
+{% set breadcrumb_name = h.querytool_get_public_breadcrumb_name() %}
 
 {% block breadcrumb_content %}
-  <li>{% link_for _('Health Topics'), controller=c.controller, action='querytool_public' %}</li>
+  <li>{% link_for _(breadcrumb_name), controller=c.controller, action='querytool_public' %}</li>
   <li class="active">{% link_for groups[c.group], controller=c.controller, action='querytool_public_list', group=c.group %}</li>
 {% endblock %}
 

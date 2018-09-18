@@ -523,7 +523,21 @@ def get_groups():
 def get_map_config():
 
     map_config = {
-        'osm_url': config.get('ckanext.querytool.map_osm_url', ''),
-        'osm_attribute': config.get('ckanext.querytool.map_osm_attribute', '')
+        'osm_url': config.get('ckanext.querytool.map_osm_url',
+                              'https://cartodb-basemaps-{s}.global.ssl'
+                              '.fastly.net/'
+                              'light_nolabels/{z}/{x}/{y}{r}.png'),
+        'osm_attribute': config.get('ckanext.querytool.map_osm_attribute',
+                                    '&copy; <a href='
+                                    '"http://www.openstreetmap.org/'
+                                    'copyright">OpenStreetMap</a> &copy; '
+                                    '<a href="http://cartodb.com/'
+                                    'attributions">CartoDB</a>')
     }
     return json.dumps(map_config)
+
+
+def get_public_breadcrumb_name():
+
+    return config.get('ckanext.querytool.public_breadcrumb_name',
+                      'Health Topics')
