@@ -540,4 +540,4 @@ def get_map_config():
 def get_public_breadcrumb_name():
 
     return config.get('ckanext.querytool.public_breadcrumb_name',
-                      'Health Topics')
+                      'Health Topics').decode('utf-8')
