@@ -8,9 +8,10 @@ Options:
     - href (link to tool)
     - module (Data module name)
 */
-"use strict";
 
 ckan.module("tool-embed", function($) {
+    "use strict";
+
     var modal;
     var self;
 

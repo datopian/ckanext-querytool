@@ -267,8 +267,11 @@ body {
     flex-direction: column;
     margin-top: @grid-gutter-width / 2;
     margin-bottom: @grid-gutter-width / 2;
-    padding: @grid-gutter-width / 2 @grid-gutter-width / 2 0;
+    padding: @grid-gutter-width / 2;
     border-radius: @grid-gutter-width/4;
+    > select{
+      margin-bottom: 0;
+    }
     label {
       display: block;
       color: @color-white;
@@ -314,12 +317,16 @@ body {
     .filter-group-wrapper {
       display: block;
       margin-bottom: 15px;
-      padding-right: 15px;
     }
     .filter-group {
       display: block;
-      padding: 0 0 0 0;
-      margin-top: 0px;
+      padding: 0;
+      margin-top: 0;
+    }
+    .has-filter{
+        label{
+          color: inherit;
+      }
     }
   }
   .item {
