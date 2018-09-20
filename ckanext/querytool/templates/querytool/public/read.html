@@ -53,11 +53,11 @@
           {% if querytool.public_filters  %}
             {% for filter in querytool.public_filters %}
               {% if filter.visibility == 'public'  %}
-                {% set id = h.querytool_get_uuid() %}
-                {% snippet 'ajax_snippets/public_filter_item.html', id=id, q_name=querytool.name, n=filter.order, selected_filter=filter %}
+                {% set public_filter_id = h.querytool_get_uuid() %}
+                {% snippet 'ajax_snippets/public_filter_item.html', id=public_filter_id, q_name=querytool.name, n=filter.order, selected_filter=filter %}
               {% else %}
-                {% set id = h.querytool_get_uuid() %}
-                {% snippet 'ajax_snippets/public_filter_item.html', id=id, q_name=querytool.name, n=filter.order, selected_filter=filter, class='hidden' %}
+                {% set public_filter_id = h.querytool_get_uuid() %}
+                {% snippet 'ajax_snippets/public_filter_item.html', id=public_filter_id, q_name=querytool.name, n=filter.order, selected_filter=filter, class='hidden' %}
               {% endif %}
             {% endfor %}
           {% endif %}
@@ -112,13 +112,13 @@
     <!-- Visualizations container -->
     <div class="visualizations">
       {% for item in querytool.visualizations %}
-        {% set id = h.querytool_get_uuid() %}
-      <div class="item {{ item.size }} {{ item.type }} chart-{{id}} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
+        {% set chart_id = h.querytool_get_uuid() %}
+      <div class="item {{ item.size }} {{ item.type }} chart-{{chart_id}} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
         {% if item.type == 'chart'  %}
            {% if item.filter_visibility == 'public'  %}
-            {% set id = h.querytool_get_uuid() %}
+            {% set chart_filter_id = h.querytool_get_uuid() %}
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
-              id=id,
+              id=chart_filter_id,
               q_name=querytool.name,
               n=item.order,
               name=item.filter_name,
@@ -127,7 +127,7 @@
               resource_id=querytool.chart_resource
             %}
           {% endif %}
-          <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{id}}">
+          <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}">
              <i class="fa fa-picture-o fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
            </a>
           {% snippet 'ajax_snippets/visualization_item.html',
@@ -170,10 +170,10 @@
         {% endif %}
         {% if item.type == 'map'  %}
          {% if item.filter_visibility == 'public'  %}
-            {% set id = h.querytool_get_uuid() %}
+            {% set map_filter_id = h.querytool_get_uuid() %}
           <div class="map-filter">
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
-              id=id,
+              id=map_filter_id,
               q_name=querytool.name,
               n=item.order,
               name=item.filter_name,
@@ -201,10 +201,10 @@
         {% endif %}
         {% if item.type == 'table'  %}
          {% if item.filter_visibility == 'public'  %}
-            {% set id = h.querytool_get_uuid() %}
+            {% set table_filter_id = h.querytool_get_uuid() %}
          <div class="table-filter">
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
-              id=id,
+              id=table_filter_id,
               q_name=querytool.name,
               n=item.order,
               name=item.filter_name,
