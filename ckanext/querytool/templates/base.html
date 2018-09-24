@@ -1,6 +1,11 @@
-{% ckan_extends %} 
+{% ckan_extends %}
 
-{% block styles %} 
+{% block meta %}
+  {{ super() }}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% endblock %}
+
+{% block styles %}
 {{ super() }}
       {% resource 'querytool/css/main.css' %}
 {% endblock %}
