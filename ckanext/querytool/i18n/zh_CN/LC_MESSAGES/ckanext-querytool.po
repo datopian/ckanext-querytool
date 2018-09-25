@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-09-10 21:17+0200\n"
+"POT-Creation-Date: 2018-09-25 16:30+0200\n"
 "PO-Revision-Date: 2018-08-14 10:55+0800\n"
 "Last-Translator: \n"
 "Language: zh_Hans_CN\n"
@@ -151,7 +151,7 @@ msgstr "垂直的"
 msgid "Reverse"
 msgstr "翻转"
 
-#: ckanext/querytool/helpers.py:232 ckanext/querytool/helpers.py:489
+#: ckanext/querytool/helpers.py:232 ckanext/querytool/helpers.py:502
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:221
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:230
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:239
@@ -209,39 +209,51 @@ msgstr "带分隔符的数字（每三位加逗号分隔符，例如2,000）"
 msgid "Binary e.g 11111010000"
 msgstr "二进制（例如11111010000）"
 
-#: ckanext/querytool/helpers.py:255
+#: ckanext/querytool/helpers.py:262
 msgid "Small Rectangle"
 msgstr "小型矩形"
 
-#: ckanext/querytool/helpers.py:256
+#: ckanext/querytool/helpers.py:263
+msgid "Long Small Rectangle"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:264
 msgid "Small Square"
 msgstr "小型正方形"
 
-#: ckanext/querytool/helpers.py:257
-msgid "Medium Rectangle"
-msgstr "中型矩形"
+#: ckanext/querytool/helpers.py:265
+msgid "Horizontal Double Small Square"
+msgstr ""
 
-#: ckanext/querytool/helpers.py:258
-msgid "Medium Vertical"
-msgstr "中型垂直布局"
-
-#: ckanext/querytool/helpers.py:259
+#: ckanext/querytool/helpers.py:267
 msgid "Large Rectangle"
 msgstr "大型矩形"
 
-#: ckanext/querytool/helpers.py:260
+#: ckanext/querytool/helpers.py:268
+msgid "Extra Large Rectangle"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:269
 msgid "Large Square"
 msgstr "大型正方形"
 
-#: ckanext/querytool/helpers.py:261
+#: ckanext/querytool/helpers.py:270
+msgid "Vertical Double Small Square"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:272
 msgid "Large Vertical"
 msgstr "大型垂直布局"
 
-#: ckanext/querytool/helpers.py:490
+#: ckanext/querytool/helpers.py:273
+msgid "Extra Large Vertical"
+msgstr ""
+
+#: ckanext/querytool/helpers.py:503
 msgid "Ascending"
 msgstr "升序"
 
-#: ckanext/querytool/helpers.py:491
+#: ckanext/querytool/helpers.py:504
 msgid "Descending"
 msgstr "降序"
 
@@ -294,34 +306,30 @@ msgstr "应用程序尚未设置完成。"
 msgid "Please choose a resource to see available numeric columns."
 msgstr "请选择资源以查看可用的数字列。"
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:409
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:410
 msgid "Maximum number of allowed related queries reached."
 msgstr "允许查询的最大相关量。"
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:432
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:434
 msgid "-- Choose resource --"
 msgstr "--选择资源--"
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:435
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:437
 msgid "Unnamed resource"
 msgstr "未命名的据源"
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:463
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:467
 msgid "No columns retrieved."
 msgstr "没有列检索。"
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:467
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:472
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:471
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:476
 msgid "An error occured while getting columns."
 msgstr "在获取列时发生错误。"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:245
 msgid "Please create at least one visualization."
 msgstr "请创建至少一个可视化。"
-
-#: ckanext/querytool/fanstatic/javascript/modules/map-module.js:239
-msgid "Hover over a region"
-msgstr ""
 
 #: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:125
 #: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:129
@@ -388,7 +396,7 @@ msgid "About Vital Strategies"
 msgstr "关于Vital Strategies"
 
 #: ckanext/querytool/templates/header.html:30
-#: ckanext/querytool/templates/querytool/public/base_main.html:12
+#: ckanext/querytool/templates/querytool/public/base_main.html:13
 msgid "Home"
 msgstr "主页"
 
@@ -413,6 +421,9 @@ msgid "Groups"
 msgstr "组"
 
 #: ckanext/querytool/templates/header.html:53
+#: ckanext/querytool/templates/home/about.html:3
+#: ckanext/querytool/templates/home/about.html:6
+#: ckanext/querytool/templates/home/about.html:16
 msgid "About"
 msgstr "关于"
 
@@ -464,7 +475,7 @@ msgstr "默认值"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:83
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:28
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:107
-#: ckanext/querytool/templates/ajax_snippets/public_filter_item.html:13
+#: ckanext/querytool/templates/ajax_snippets/public_filter_item.html:22
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:53
 msgid "Select value"
 msgstr "选择值"
@@ -585,7 +596,7 @@ msgstr "删除"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:264
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:109
-#: ckanext/querytool/templates/querytool/public/read.html:78
+#: ckanext/querytool/templates/querytool/public/read.html:109
 msgid "Update"
 msgstr "更新"
 
@@ -673,12 +684,103 @@ msgstr ""
 
 #: ckanext/querytool/templates/home/vs-home-page.html:9
 msgid ""
-"This Platform allows Ministries of Health to publish data via user "
-"friendly applications, using visual and interactive elements"
+"The Portal Development Platform allows public health agencies to design "
+"applications that let the public explore and access a diverse range of "
+"health data sources. The Platform has a simple interface that minimizes "
+"the time dedicated to creating applications while providing the essential"
+" visual and interactive elements for public access to data. It was "
+"developed on opensource license with minimal technological requirements, "
+"minimizing the resources needed for its use and maintenance."
 msgstr ""
 
 #: ckanext/querytool/templates/home/vs-home-page.html:22
 msgid "How to use the Platform"
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:24
+msgid ""
+"Four main steps are necessary to successfully design an application, with"
+" the first one taking place outside the Platform."
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:27
+msgid "Step 1."
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:28
+msgid ""
+"Prepare data Before uploading the data into the Platform, it needs to be "
+"cleaned, validated and, depending on its source, transformed into a "
+"tabular dataset."
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:32
+msgid "Step 2."
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:33
+msgid ""
+"Load datasets In the Load datasets tab, the prepared data is uploaded "
+"through familiar menus and metadata is filled to help identify and "
+"differentiate the datasets. "
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:37
+msgid "Step 3."
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:38
+msgid ""
+"Design application In Design application, drop-down menus are used to add"
+" data-driven visualizations (charts, maps and tables), support elements "
+"(text and images) and interactive elements (filters, download options, "
+"sharing options). These elements can be combined and arranged in "
+"different ways to provide a user-friendly experience for exploring public"
+" health data."
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:42
+msgid "Step 4."
+msgstr ""
+
+#: ckanext/querytool/templates/home/vs-home-page.html:43
+msgid "Publish application The application becomes available for public use. "
+msgstr ""
+
+#: ckanext/querytool/templates/home/snippets/about_text.html:1
+msgid ""
+" <p>Online access to public health data is generally limited. Most "
+"countries do not have an integrated tool for public users to access their"
+" data and although some have well-developed tools, they often have "
+"limited functionality or complicated interfaces. To make it easier for "
+"public health agencies to publish their data, Vital Strategies, as part "
+"of the Data for Health Initiative, created the Portal Development "
+"Platform. The Platform provides a straightforward process to create "
+"applications through four simple steps: prepare data, load datasets, "
+"design and publish applications.</p> <p>The Platform has features and "
+"benefits aimed at simplifying its use and minimizing the human, physical "
+"and monetary resources required for its operation. Benefits of the "
+"Platform include: Developed in opensource language which makes "
+"improvements and customizations free and easy to share. Focus placed on "
+"essential visual and interactive elements that prioritize public access "
+"to data. Ease-of-use for administrators and public users. Scalability of "
+"functions and content to support different types of data sources and "
+"audiences.</p> <p><a href=\"www.vitalstrategies.org\">Vital Strategies "
+"</a> is a global public health organization whose goal is to strengthen "
+"public health systems. Vital Strategies partners with governments to "
+"design and implement public health initiatives that bridge the gap "
+"between public health needs and solutions, especially in low- and middle-"
+" income countries. It operates in every region in the world.</p> <p><a "
+"href=\"https://www.bloomberg.org/program/public-health/data-health/\">The"
+" Data for Health Initiative</a> co-funded by Bloomberg Philanthropies and"
+" the Australian government, aims to help governments use data "
+"strategically to target resources and policies that will translate into "
+"saving lives and improved health.</p> <p> <a "
+"href=\"https://www.viderum.com\">Viderum</a> is an open data solutions "
+"provider spun off from Open Knowledge. Viderum provides services and "
+"products for governments, institutions, and local authorities to publish "
+"open data, such as: CKAN hosting, CKAN technical support, custom open "
+"data website and CKAN extension development.</p> </p> "
 msgstr ""
 
 #: ckanext/querytool/templates/querytool/admin/base_edit_data.html:11
@@ -886,21 +988,15 @@ msgstr "您确定要删除这个查询工具吗？"
 msgid "Application data"
 msgstr "应用数据"
 
-#: ckanext/querytool/templates/querytool/public/base_main.html:15
-#: ckanext/querytool/templates/querytool/public/list.html:5
-#: ckanext/querytool/templates/querytool/public/read.html:20
-msgid "Health Topics"
-msgstr ""
-
-#: ckanext/querytool/templates/querytool/public/base_main.html:30
+#: ckanext/querytool/templates/querytool/public/base_main.html:31
 msgid "Welcome"
 msgstr "欢迎"
 
-#: ckanext/querytool/templates/querytool/public/base_main.html:51
+#: ckanext/querytool/templates/querytool/public/base_main.html:52
 msgid "List Applications"
 msgstr "应用列表"
 
-#: ckanext/querytool/templates/querytool/public/list.html:25
+#: ckanext/querytool/templates/querytool/public/list.html:26
 msgid "There are no applications created"
 msgstr ""
 
@@ -908,48 +1004,48 @@ msgstr ""
 msgid "Query Tool"
 msgstr "查询工具"
 
-#: ckanext/querytool/templates/querytool/public/read.html:67
+#: ckanext/querytool/templates/querytool/public/read.html:68
 msgid "Displayed Measure"
 msgstr "显示统计指标"
 
-#: ckanext/querytool/templates/querytool/public/read.html:82
+#: ckanext/querytool/templates/querytool/public/read.html:85
 msgid "Download"
 msgstr "下载"
 
-#: ckanext/querytool/templates/querytool/public/read.html:127
-#: ckanext/querytool/templates/querytool/public/read.html:275
+#: ckanext/querytool/templates/querytool/public/read.html:131
+#: ckanext/querytool/templates/querytool/public/read.html:279
 msgid "Download image"
 msgstr "下载图片"
 
-#: ckanext/querytool/templates/querytool/public/read.html:234
+#: ckanext/querytool/templates/querytool/public/read.html:238
 msgid "Share"
 msgstr "分享"
 
-#: ckanext/querytool/templates/querytool/public/read.html:239
+#: ckanext/querytool/templates/querytool/public/read.html:243
 msgid "Copy"
 msgstr "复制"
 
-#: ckanext/querytool/templates/querytool/public/read.html:251
+#: ckanext/querytool/templates/querytool/public/read.html:255
 msgid "Embed"
 msgstr "嵌入"
 
-#: ckanext/querytool/templates/querytool/public/read.html:257
+#: ckanext/querytool/templates/querytool/public/read.html:261
 msgid "Embed query tool view"
 msgstr "嵌入查询工具视图"
 
-#: ckanext/querytool/templates/querytool/public/read.html:260
+#: ckanext/querytool/templates/querytool/public/read.html:264
 msgid "You can copy and paste the embed code"
 msgstr "您可以复制并粘贴嵌入代码"
 
-#: ckanext/querytool/templates/querytool/public/read.html:263
+#: ckanext/querytool/templates/querytool/public/read.html:267
 msgid "Width"
 msgstr "宽度"
 
-#: ckanext/querytool/templates/querytool/public/read.html:266
+#: ckanext/querytool/templates/querytool/public/read.html:270
 msgid "Height"
 msgstr "高度"
 
-#: ckanext/querytool/templates/querytool/public/read.html:269
+#: ckanext/querytool/templates/querytool/public/read.html:273
 msgid "Code"
 msgstr "代码"
 
@@ -969,4 +1065,23 @@ msgstr ""
 
 #~ msgid "Dataset name"
 #~ msgstr "数据集名称"
+
+#~ msgid "Medium Rectangle"
+#~ msgstr "中型矩形"
+
+#~ msgid "Medium Vertical"
+#~ msgstr "中型垂直布局"
+
+#~ msgid "Hover over a region"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This Platform allows Ministries of "
+#~ "Health to publish data via user "
+#~ "friendly applications, using visual and "
+#~ "interactive elements"
+#~ msgstr ""
+
+#~ msgid "Health Topics"
+#~ msgstr ""
 
