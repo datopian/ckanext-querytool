@@ -9,147 +9,148 @@ msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2018-09-25 16:30+0200\n"
-"PO-Revision-Date: 2018-09-06 14:45+0200\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language: fr\n"
+"PO-Revision-Date: 2018-09-25 18:57-0400\n"
+"Last-Translator: \n"
 "Language-Team: fr <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 2.1\n"
 
 #: ckanext/querytool/helpers.py:129
 msgid "Line"
-msgstr ""
+msgstr "Ligne"
 
 #: ckanext/querytool/helpers.py:130
 msgid "Bar"
-msgstr ""
+msgstr "Barres"
 
 #: ckanext/querytool/helpers.py:131
 msgid "Horizontal bar"
-msgstr ""
+msgstr "Barres horizontales"
 
 #: ckanext/querytool/helpers.py:132
 msgid "Stacked bar"
-msgstr ""
+msgstr "Barres empilées"
 
 #: ckanext/querytool/helpers.py:133
 msgid "Stacked horizontal bar"
-msgstr ""
+msgstr "Barres horizontales empilées"
 
 #: ckanext/querytool/helpers.py:134
 msgid "Area"
-msgstr ""
+msgstr "Aires"
 
 #: ckanext/querytool/helpers.py:135
 msgid "Stacked area"
-msgstr ""
+msgstr "Aires empilées"
 
 #: ckanext/querytool/helpers.py:136
 msgid "Spline"
-msgstr ""
+msgstr "Spline"
 
 #: ckanext/querytool/helpers.py:137
 msgid "Donut"
-msgstr ""
+msgstr "Anneau"
 
 #: ckanext/querytool/helpers.py:138
 msgid "Pie"
-msgstr ""
+msgstr "Secteurs"
 
 #: ckanext/querytool/helpers.py:139
 msgid "Scatter"
-msgstr ""
+msgstr "Nuage"
 
 #: ckanext/querytool/helpers.py:140
 msgid "Bubble"
-msgstr ""
+msgstr "Bulles"
 
 #: ckanext/querytool/helpers.py:152
 msgid "Saturated"
-msgstr ""
+msgstr "Saturé"
 
 #: ckanext/querytool/helpers.py:155
 msgid "Light"
-msgstr ""
+msgstr "Clair"
 
 #: ckanext/querytool/helpers.py:158
 msgid "Pastel"
-msgstr ""
+msgstr "Pastel"
 
 #: ckanext/querytool/helpers.py:161
 msgid "Pastel 2"
-msgstr ""
+msgstr "Pastel 2"
 
 #: ckanext/querytool/helpers.py:164
 msgid "Contrast"
-msgstr ""
+msgstr "Contraste"
 
 #: ckanext/querytool/helpers.py:167
 msgid "Ocean"
-msgstr ""
+msgstr "Océan"
 
 #: ckanext/querytool/helpers.py:170
 msgid "Limes"
-msgstr ""
+msgstr "Citron vert"
 
 #: ckanext/querytool/helpers.py:173
 msgid "Dark cherry"
-msgstr ""
+msgstr "Cerise noire"
 
 #: ckanext/querytool/helpers.py:176
 msgid "Purple"
-msgstr ""
+msgstr "Violet"
 
 #: ckanext/querytool/helpers.py:179
 msgid "Urban"
-msgstr ""
+msgstr "Urbain"
 
 #: ckanext/querytool/helpers.py:182
 msgid "Candy"
-msgstr ""
+msgstr "Bonbon"
 
 #: ckanext/querytool/helpers.py:185
 msgid "Orient"
-msgstr ""
+msgstr "Oriental"
 
 #: ckanext/querytool/helpers.py:188
 msgid "Blue"
-msgstr ""
+msgstr "Bleu"
 
 #: ckanext/querytool/helpers.py:191
 msgid "Rainbow"
-msgstr ""
+msgstr "Arc-en-ciel"
 
 #: ckanext/querytool/helpers.py:194
 msgid "Muted"
-msgstr ""
+msgstr "En sourdine"
 
 #: ckanext/querytool/helpers.py:206
 msgid "Sequential"
-msgstr ""
+msgstr "Séquentiel"
 
 #: ckanext/querytool/helpers.py:208
 msgid "Diverging"
-msgstr ""
+msgstr "Divergent"
 
 #: ckanext/querytool/helpers.py:219
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontal"
 
 #: ckanext/querytool/helpers.py:220
 msgid "Diagonal"
-msgstr ""
+msgstr "En diagonale"
 
 #: ckanext/querytool/helpers.py:221
 msgid "Vertical"
-msgstr ""
+msgstr "Vertical"
 
 #: ckanext/querytool/helpers.py:222
 msgid "Reverse"
-msgstr ""
+msgstr "Inversé"
 
 #: ckanext/querytool/helpers.py:232 ckanext/querytool/helpers.py:502
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:221
@@ -158,104 +159,104 @@ msgstr ""
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:249
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:258
 msgid "Default"
-msgstr ""
+msgstr "Par défaut"
 
 #: ckanext/querytool/helpers.py:233
 msgid "Integer e.g 2"
-msgstr ""
+msgstr "Entier ex. 2"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:59
 #: ckanext/querytool/helpers.py:234
 msgid "Decimal (1 digit) e.g 2.5"
-msgstr ""
+msgstr "Décimal (1 chiffre) ex. 2.5"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:63
 #: ckanext/querytool/helpers.py:235
 msgid "Decimal (2 digit) e.g 2.50"
-msgstr ""
+msgstr "Décimal (2 chiffres) ex. 2.50"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:67
 #: ckanext/querytool/helpers.py:236
 msgid "Decimal (3 digit) e.g 2.501"
-msgstr ""
+msgstr "Décimal (3 chiffres) ex. 2.501"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:71
 #: ckanext/querytool/helpers.py:237
 msgid "Decimal (4 digit) e.g 2.5012"
-msgstr ""
+msgstr "Décimal (4 chiffres) ex. 2.5012"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:75
 #: ckanext/querytool/helpers.py:238
 msgid "Dolar e.g 2000$"
-msgstr ""
+msgstr "Monnaie ex. $ 2000"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:79
 #: ckanext/querytool/helpers.py:239
 msgid "Rounded e.g 2k"
-msgstr ""
+msgstr "Arrondi ex. 2m"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:83
 #: ckanext/querytool/helpers.py:240
 msgid "Percentage (multiply by 100) e.g 200000%"
-msgstr ""
+msgstr "Pourcentage (multipliez la valeur par 100) ex. 20%"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
 #: ckanext/querytool/helpers.py:242
 msgid "Comma (thousands separator) e.g 2,000"
-msgstr ""
+msgstr "Virgule (séparateur de milliers) ex. 2,000"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:91
 #: ckanext/querytool/helpers.py:244
 msgid "Binary e.g 11111010000"
-msgstr ""
+msgstr "Binaire ex. 11111010000"
 
 #: ckanext/querytool/helpers.py:262
 msgid "Small Rectangle"
-msgstr ""
+msgstr "Petit rectangle"
 
 #: ckanext/querytool/helpers.py:263
 msgid "Long Small Rectangle"
-msgstr ""
+msgstr "Long petit rectangle"
 
 #: ckanext/querytool/helpers.py:264
 msgid "Small Square"
-msgstr ""
+msgstr "Petit carré"
 
 #: ckanext/querytool/helpers.py:265
 msgid "Horizontal Double Small Square"
-msgstr ""
+msgstr "Double petit carré horizontal"
 
 #: ckanext/querytool/helpers.py:267
 msgid "Large Rectangle"
-msgstr ""
+msgstr "Grand rectangle"
 
 #: ckanext/querytool/helpers.py:268
 msgid "Extra Large Rectangle"
-msgstr ""
+msgstr "Extra grand rectangle"
 
 #: ckanext/querytool/helpers.py:269
 msgid "Large Square"
-msgstr ""
+msgstr "Grand carré"
 
 #: ckanext/querytool/helpers.py:270
 msgid "Vertical Double Small Square"
-msgstr ""
+msgstr "Double petit carré vertical"
 
 #: ckanext/querytool/helpers.py:272
 msgid "Large Vertical"
-msgstr ""
+msgstr "Grande verticale"
 
 #: ckanext/querytool/helpers.py:273
 msgid "Extra Large Vertical"
-msgstr ""
+msgstr "Extra grande verticale"
 
 #: ckanext/querytool/helpers.py:503
 msgid "Ascending"
-msgstr ""
+msgstr "Ascendant"
 
 #: ckanext/querytool/helpers.py:504
 msgid "Descending"
-msgstr ""
+msgstr "Descendant"
 
 #: ckanext/querytool/controllers/querytool.py:62
 #: ckanext/querytool/controllers/querytool.py:81
@@ -265,21 +266,21 @@ msgstr ""
 #: ckanext/querytool/controllers/querytool.py:287
 #: ckanext/querytool/controllers/querytool.py:617
 msgid "Not authorized to see this page"
-msgstr ""
+msgstr "Vous n'êtes pas autorisé à voir cette page"
 
 #: ckanext/querytool/controllers/querytool.py:127
 msgid "Application not found"
-msgstr ""
+msgstr "L'application n'a pas été trouvée"
 
 #: ckanext/querytool/controllers/querytool.py:129
 msgid "Application and visualizations were removed successfully."
-msgstr ""
+msgstr "L'application et les visualisations ont été supprimées correctement."
 
 #: ckanext/querytool/controllers/querytool.py:156
 #: ckanext/querytool/controllers/querytool.py:299
 #: ckanext/querytool/controllers/querytool.py:609
 msgid "Application not found."
-msgstr ""
+msgstr "L'application n'a pas été trouvée."
 
 #: ckanext/querytool/controllers/querytool.py:167
 #: ckanext/querytool/controllers/querytool.py:307
@@ -288,165 +289,168 @@ msgid ""
 "The data used for creating this Application has been removed by the "
 "administrator."
 msgstr ""
+"Les données utilisées pour créer cette application ont été supprimées par "
+"l'administrateur."
 
 #: ckanext/querytool/controllers/querytool.py:227
 msgid "Data Successfully updated."
-msgstr ""
+msgstr "Données mises à jour correctement."
 
 #: ckanext/querytool/controllers/querytool.py:524
 msgid "Visualizations Successfully updated."
-msgstr ""
+msgstr "Visualisation mis à jour correctement."
 
 #: ckanext/querytool/controllers/querytool.py:630
 msgid "Application not fully set."
-msgstr ""
+msgstr "L'application est incomplète."
 
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:333
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:139
 msgid "Please choose a resource to see available numeric columns."
 msgstr ""
+"Veuillez choisir une ressource pour voir les colonnes numériques disponibles."
 
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:410
 msgid "Maximum number of allowed related queries reached."
-msgstr ""
+msgstr "Le nombre maximal d'applications associées autorisées a été atteint."
 
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:434
 msgid "-- Choose resource --"
-msgstr ""
+msgstr "-- Choisissez une ressource --"
 
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:437
 msgid "Unnamed resource"
-msgstr ""
+msgstr "Ressource sans nom"
 
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:467
 msgid "No columns retrieved."
-msgstr ""
+msgstr "Les colonnes n'ont pas été récupérées."
 
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:471
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:476
 msgid "An error occured while getting columns."
-msgstr ""
+msgstr "Une erreur s'est produite lors de la récupération des colonnes."
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:245
 msgid "Please create at least one visualization."
-msgstr ""
+msgstr "Veuillez créer au moins une visualisation."
 
 #: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:125
 #: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:129
 msgid "Chart could not be created."
-msgstr ""
+msgstr "Le graphique n'a pas pu être créé."
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:25
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid " "
-msgstr ""
+msgstr " "
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:25
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid "."
-msgstr ""
+msgstr "."
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid "*"
-msgstr ""
+msgstr "*"
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid "import"
-msgstr ""
+msgstr "importer"
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid "{}"
-msgstr ""
+msgstr "{}"
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid ",\n"
-msgstr ""
+msgstr ",\n"
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid " = "
-msgstr ""
+msgstr " = "
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid "\n"
-msgstr ""
+msgstr "\n"
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid "debugger;"
-msgstr ""
+msgstr "débogage;"
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid ":"
-msgstr ""
+msgstr ":"
 
 #: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ckanext/querytool/lib/file_writer_service.py:189
 #, python-format
 msgid "format: must be one of %s"
-msgstr ""
+msgstr "format: doit etre l'un de %s"
 
 #: ckanext/querytool/logic/validators.py:21
 msgid "This querytool name already exists. Choose another one."
-msgstr ""
+msgstr "Le nom de l'application existe déjà. Choisissez un autre nom."
 
 #: ckanext/querytool/templates/footer.html:4
 msgid "About Vital Strategies"
-msgstr ""
+msgstr "À propos des Vital Strategies"
 
 #: ckanext/querytool/templates/header.html:30
 #: ckanext/querytool/templates/querytool/public/base_main.html:13
 msgid "Home"
-msgstr ""
+msgstr "Accueil"
 
 #: ckanext/querytool/templates/header.html:34
 msgid "Load Datasets"
-msgstr ""
+msgstr "Télécharger des données"
 
 #: ckanext/querytool/templates/header.html:35
 msgid "Design Applications"
-msgstr ""
+msgstr "Concevoir des applications"
 
 #: ckanext/querytool/templates/header.html:36
 msgid "Use Applications"
-msgstr ""
+msgstr "Utiliser les applications"
 
 #: ckanext/querytool/templates/header.html:51
 msgid "Organizations"
-msgstr ""
+msgstr "Organisations"
 
 #: ckanext/querytool/templates/header.html:52
 msgid "Groups"
-msgstr ""
+msgstr "Groupes"
 
 #: ckanext/querytool/templates/header.html:53
 #: ckanext/querytool/templates/home/about.html:3
 #: ckanext/querytool/templates/home/about.html:6
 #: ckanext/querytool/templates/home/about.html:16
 msgid "About"
-msgstr ""
+msgstr "À propos"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:24
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:17
 msgid "Title"
-msgstr ""
+msgstr "Titre"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:26
 msgid "Chart title"
-msgstr ""
+msgstr "Titre du graphique"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:34
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:36
 msgid "X axis dimension"
-msgstr ""
+msgstr "Dimension de l'axe X"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:46
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:49
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:72
@@ -454,23 +458,23 @@ msgstr ""
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:95
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:42
 msgid "Select column"
-msgstr ""
+msgstr "Sélectionnez la colonne"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:58
 msgid "Sort data"
-msgstr ""
+msgstr "Trier les données"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:69
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:92
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:39
 msgid "Optional Filter"
-msgstr ""
+msgstr "Filtre optionnel"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:80
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:104
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:50
 msgid "Default value"
-msgstr ""
+msgstr "Valeur par défaut"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:83
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:28
@@ -478,26 +482,26 @@ msgstr ""
 #: ckanext/querytool/templates/ajax_snippets/public_filter_item.html:22
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:53
 msgid "Select value"
-msgstr ""
+msgstr "Sélectionnez une valeur"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:91
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:116
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:61
 msgid "Filter alias"
-msgstr ""
+msgstr "Alias de filtre"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:95
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:41
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:120
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:65
 msgid "Enter filter alias"
-msgstr ""
+msgstr "Entrez l'alias de filtre"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:125
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:69
 msgid "Filter visibility"
-msgstr ""
+msgstr "Visibilité du filtre"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:102
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:49
@@ -505,7 +509,7 @@ msgstr ""
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:72
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:71
 msgid "Public"
-msgstr ""
+msgstr "Public"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:103
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:50
@@ -514,12 +518,12 @@ msgstr ""
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:71
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:21
 msgid "Private"
-msgstr ""
+msgstr "Privé"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:111
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:56
 msgid "Color"
-msgstr ""
+msgstr "Couleur"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:136
@@ -527,61 +531,61 @@ msgstr ""
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
 #: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:55
 msgid "Size"
-msgstr ""
+msgstr "Taille"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:134
 msgid "X axis label orientation"
-msgstr ""
+msgstr "Orientation des étiquettes d'axe X"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:147
 msgid "X axis label multiline"
-msgstr ""
+msgstr "Étiquettes d'axe X sur plusieurs lignes"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:156
 msgid "Show data labels"
-msgstr ""
+msgstr "Afficher les étiquettes de données"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:165
 msgid "Show legend"
-msgstr ""
+msgstr "Afficher la légende"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:174
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:176
 msgid "Tooltip name"
-msgstr ""
+msgstr "Nom dans le infobulle"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:181
 msgid "Data format"
-msgstr ""
+msgstr "Format des données"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:197
 msgid "Y axis label format"
-msgstr ""
+msgstr "Format d'étiquettes d'axe Y"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:210
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:212
 msgid "Y axis title"
-msgstr ""
+msgstr "Titre de l'axe Y"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:219
 msgid "Padding top"
-msgstr ""
+msgstr "Espacement supérieur"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:228
 msgid "Padding bottom"
-msgstr ""
+msgstr "Espacement inférieur"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:237
 msgid "Y axis tick count"
-msgstr ""
+msgstr "Nombre de marques de l'axe Y"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:247
 msgid "Chart Padding left"
-msgstr ""
+msgstr "Espacement du graphique à gauche"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:256
 msgid "Chart Padding bottom"
-msgstr ""
+msgstr "Espacement du graphique en bas"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:263
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:7
@@ -592,131 +596,144 @@ msgstr ""
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:21
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
 msgid "Delete"
-msgstr ""
+msgstr "Supprimer"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:264
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:109
 #: ckanext/querytool/templates/querytool/public/read.html:109
 msgid "Update"
-msgstr ""
+msgstr "Mise à jour"
 
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:13
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:25
 msgid "Dimension"
-msgstr ""
+msgstr "Dimension"
 
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:25
 msgid "Default Value"
-msgstr ""
+msgstr "Valeur par défaut"
 
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:37
 msgid "Alias"
-msgstr ""
+msgstr "Alias"
 
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:46
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:68
 msgid "Visibility"
-msgstr ""
+msgstr "Visibilité"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:16
 msgid "Map resource"
-msgstr ""
+msgstr "Ressource pour la carte"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:19
 msgid "Select map resource"
-msgstr ""
+msgstr "Sélectionnez la ressource pour la carte"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:34
 msgid "Title field"
-msgstr ""
+msgstr "Champ pour le titre"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:37
 msgid "Select title field"
-msgstr ""
+msgstr "Sélectionnez le champ pour le titre"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:48
 msgid "Map key field"
-msgstr ""
+msgstr "Champ clé dans la ressource cartographique"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:51
 msgid "Select map key field"
-msgstr ""
+msgstr "Sélectionnez le champ clé dans la ressource cartographique"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:62
 msgid "Data key field"
-msgstr ""
+msgstr "Champ clé dans les données"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:65
 msgid "Select data key field"
-msgstr ""
+msgstr "Sélectionnez le champ clé dans les données"
 
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:75
 msgid "Color scheme"
-msgstr ""
+msgstr "Schéma de couleur"
 
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:8
 msgid "Edit"
-msgstr ""
+msgstr "Éditer"
 
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:18
 msgid "Related Application"
-msgstr ""
+msgstr "Application associée"
 
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:21
 msgid "Select Application"
-msgstr ""
+msgstr "Sélectionnez l'application"
 
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:19
 msgid "Table title"
-msgstr ""
+msgstr "Titre du tableau"
 
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
 msgid "Content"
-msgstr ""
+msgstr "Contenu"
 
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:7
 msgid "Portal Development Platform"
-msgstr ""
+msgstr "Plateforme de Développement de Portail"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:9
 msgid ""
 "The Portal Development Platform allows public health agencies to design "
 "applications that let the public explore and access a diverse range of "
-"health data sources. The Platform has a simple interface that minimizes "
-"the time dedicated to creating applications while providing the essential"
-" visual and interactive elements for public access to data. It was "
-"developed on opensource license with minimal technological requirements, "
-"minimizing the resources needed for its use and maintenance."
+"health data sources. The Platform has a simple interface that minimizes the "
+"time dedicated to creating applications while providing the essential visual "
+"and interactive elements for public access to data. It was developed on "
+"opensource license with minimal technological requirements, minimizing the "
+"resources needed for its use and maintenance."
 msgstr ""
+"La Plateforme de Développement de Portail permet aux agences de santé "
+"publique de concevoir des applications qui permettent au public d'explorer "
+"et d'accéder à de diverses sources de données de santé. La Plateforme "
+"bénéficie d’une interface simple qui réduit le temps dédié à la création "
+"d’applications tout en lui donnant les éléments visuels et interactifs "
+"essentiels pour l’accès du public à ce jour. Il a été développé sous licence "
+"open source avec des exigences technologiques minimales, réduisant ainsi les "
+"ressources nécessaires à son utilisation et à sa maintenance."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:22
 msgid "How to use the Platform"
-msgstr ""
+msgstr "Comment utiliser la Plate-forme"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:24
 msgid ""
-"Four main steps are necessary to successfully design an application, with"
-" the first one taking place outside the Platform."
+"Four main steps are necessary to successfully design an application, with "
+"the first one taking place outside the Platform."
 msgstr ""
+"Quatre étapes principales sont nécessaires pour concevoir une application "
+"avec succès, la première ayant lieu en dehors de la Plateforme."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:27
 msgid "Step 1."
-msgstr ""
+msgstr "Étape 1."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:28
 msgid ""
 "Prepare data Before uploading the data into the Platform, it needs to be "
-"cleaned, validated and, depending on its source, transformed into a "
-"tabular dataset."
+"cleaned, validated and, depending on its source, transformed into a tabular "
+"dataset."
 msgstr ""
+"Préparer la date. Avant de télécharger les données dans la plate-forme, "
+"elles doivent être nettoyées, validées et, selon leur source, transformées "
+"en un jeu de données tabulaire."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:32
 msgid "Step 2."
-msgstr ""
+msgstr "Étape 2."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:33
 msgid ""
@@ -724,89 +741,134 @@ msgid ""
 "through familiar menus and metadata is filled to help identify and "
 "differentiate the datasets. "
 msgstr ""
+"Charger des jeux de données. Dans l’onglet Charger les jeux de données, les "
+"données préparées sont téléchargées via des menus habituels et les "
+"métadonnées sont ajoutées pour aider à identifier et différencier les jeux "
+"de données. "
 
 #: ckanext/querytool/templates/home/vs-home-page.html:37
 msgid "Step 3."
-msgstr ""
+msgstr "Étape 3."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:38
 msgid ""
-"Design application In Design application, drop-down menus are used to add"
-" data-driven visualizations (charts, maps and tables), support elements "
-"(text and images) and interactive elements (filters, download options, "
-"sharing options). These elements can be combined and arranged in "
-"different ways to provide a user-friendly experience for exploring public"
-" health data."
+"Design application In Design application, drop-down menus are used to add "
+"data-driven visualizations (charts, maps and tables), support elements (text "
+"and images) and interactive elements (filters, download options, sharing "
+"options). These elements can be combined and arranged in different ways to "
+"provide a user-friendly experience for exploring public health data."
 msgstr ""
+"Conception des applications. Dans l’onglet Conception d’application, des "
+"menus déroulants sont utilisés pour ajouter des visualisations basées sur "
+"des données (graphiques, cartes et tableaux), des éléments de support (texte "
+"et images) et des éléments interactifs (filtres, options de téléchargement, "
+"options de partage). Ces éléments peuvent être combinés et disposés de "
+"différentes manières pour fournir une expérience conviviale pour "
+"l'exploration de données de santé publique."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:42
 msgid "Step 4."
-msgstr ""
+msgstr "Étape 4."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:43
 msgid "Publish application The application becomes available for public use. "
-msgstr ""
+msgstr "Publier l'application. L'application devient disponible au public. "
 
 #: ckanext/querytool/templates/home/snippets/about_text.html:1
 msgid ""
-" <p>Online access to public health data is generally limited. Most "
-"countries do not have an integrated tool for public users to access their"
-" data and although some have well-developed tools, they often have "
-"limited functionality or complicated interfaces. To make it easier for "
-"public health agencies to publish their data, Vital Strategies, as part "
-"of the Data for Health Initiative, created the Portal Development "
-"Platform. The Platform provides a straightforward process to create "
-"applications through four simple steps: prepare data, load datasets, "
-"design and publish applications.</p> <p>The Platform has features and "
-"benefits aimed at simplifying its use and minimizing the human, physical "
-"and monetary resources required for its operation. Benefits of the "
-"Platform include: Developed in opensource language which makes "
-"improvements and customizations free and easy to share. Focus placed on "
-"essential visual and interactive elements that prioritize public access "
-"to data. Ease-of-use for administrators and public users. Scalability of "
-"functions and content to support different types of data sources and "
-"audiences.</p> <p><a href=\"www.vitalstrategies.org\">Vital Strategies "
-"</a> is a global public health organization whose goal is to strengthen "
-"public health systems. Vital Strategies partners with governments to "
-"design and implement public health initiatives that bridge the gap "
-"between public health needs and solutions, especially in low- and middle-"
-" income countries. It operates in every region in the world.</p> <p><a "
-"href=\"https://www.bloomberg.org/program/public-health/data-health/\">The"
-" Data for Health Initiative</a> co-funded by Bloomberg Philanthropies and"
-" the Australian government, aims to help governments use data "
-"strategically to target resources and policies that will translate into "
-"saving lives and improved health.</p> <p> <a "
-"href=\"https://www.viderum.com\">Viderum</a> is an open data solutions "
-"provider spun off from Open Knowledge. Viderum provides services and "
-"products for governments, institutions, and local authorities to publish "
-"open data, such as: CKAN hosting, CKAN technical support, custom open "
-"data website and CKAN extension development.</p> </p> "
+" <p>Online access to public health data is generally limited. Most countries "
+"do not have an integrated tool for public users to access their data and "
+"although some have well-developed tools, they often have limited "
+"functionality or complicated interfaces. To make it easier for public health "
+"agencies to publish their data, Vital Strategies, as part of the Data for "
+"Health Initiative, created the Portal Development Platform. The Platform "
+"provides a straightforward process to create applications through four "
+"simple steps: prepare data, load datasets, design and publish applications.</"
+"p> <p>The Platform has features and benefits aimed at simplifying its use "
+"and minimizing the human, physical and monetary resources required for its "
+"operation. Benefits of the Platform include: Developed in opensource "
+"language which makes improvements and customizations free and easy to share. "
+"Focus placed on essential visual and interactive elements that prioritize "
+"public access to data. Ease-of-use for administrators and public users. "
+"Scalability of functions and content to support different types of data "
+"sources and audiences.</p> <p><a href=\"www.vitalstrategies.org\">Vital "
+"Strategies </a> is a global public health organization whose goal is to "
+"strengthen public health systems. Vital Strategies partners with governments "
+"to design and implement public health initiatives that bridge the gap "
+"between public health needs and solutions, especially in low- and middle- "
+"income countries. It operates in every region in the world.</p> <p><a href="
+"\"https://www.bloomberg.org/program/public-health/data-health/\">The Data "
+"for Health Initiative</a> co-funded by Bloomberg Philanthropies and the "
+"Australian government, aims to help governments use data strategically to "
+"target resources and policies that will translate into saving lives and "
+"improved health.</p> <p> <a href=\"https://www.viderum.com\">Viderum</a> is "
+"an open data solutions provider spun off from Open Knowledge. Viderum "
+"provides services and products for governments, institutions, and local "
+"authorities to publish open data, such as: CKAN hosting, CKAN technical "
+"support, custom open data website and CKAN extension development.</p> </p> "
 msgstr ""
+" <p>L'accès en ligne aux données de santé publique est généralement limité. "
+"La plupart des pays ne disposent pas d'un outil intégré permettant aux "
+"utilisateurs publics d'accéder à leurs données et, même s'ils disposent "
+"d'outils bien développés, ils disposent souvent de fonctionnalités limitées "
+"ou d’interfaces complexes. Pour faciliter la publication des données par les "
+"agences de santé publique, Vital Strategies, dans le cadre de l’initiative "
+"Data for Health, a créé la Plateforme de développement de portail. La "
+"Plateforme fournit un processus simple pour créer des applications en quatre "
+"étapes simples : préparer les données, charger les jeux de données, "
+"concevoir et publier des applications.</p> <p>La plateforme a des "
+"caractéristiques et des avantages visant à simplifier son utilisation et à "
+"minimiser les ressources humaines, physiques et monétaires nécessaires a son "
+"fonctionnement. Les avantages de la plateforme comprennent : développé en "
+"langage open source, ce qui rend les améliorations et les personnalisations "
+"gratuites et faciles à partager ; attention focalisée sur les éléments "
+"visuels et interactifs essentiels qui favorisent l’accès du public aux "
+"données ; facilité d'utilisation pour les administrateurs et les "
+"utilisateurs publics ; fonctions et contenu qui peuvent évoluer pour prendre "
+"en charge différents types de sources de données et de publics.</p> <p><a "
+"href=\"www.vitalstrategies.org\">Vital Strategies </a> est une organisation "
+"internationale de santé publique dont le but est de renforcer les systèmes "
+"de santé publique. Vital Strategies travaille en partenariat avec les "
+"gouvernements pour concevoir et mettre en œuvre des initiatives de santé "
+"publique qui comblent le fossé entre les besoins et les solutions de santé "
+"publique, en particulier dans les pays à revenu faible et intermédiaire. "
+"Elle travaille dans toutes les régions du monde.</p> <p><a href=\"https://"
+"www.bloomberg.org/program/public-health/data-health/\">Data for Health "
+"Initiative</a> cofinancé par Bloomberg Philanthropies et le gouvernement "
+"australien, vise à aider les gouvernements à utiliser les données de façon "
+"stratégique pour cibler les ressources et les politiques qui permettront de "
+"sauver les vies et d’améliorer la santé.</p> <p> <a href=\"https://www."
+"viderum.com\">Viderum</a> est une solution de données ouvertes issue de Open "
+"Knowledge. Viderum fournit des services et des produits permettant aux "
+"gouvernements, aux institutions et aux autorités locales de publier des "
+"données. Ces services comprennent : l’hébergement CKAN, le support technique "
+"CKAN, le site Web ouvert personnalisé et le développement de l’extension "
+"CKAN.</p> </p> "
 
 #: ckanext/querytool/templates/querytool/admin/base_edit_data.html:11
 msgid "Manage application data"
-msgstr ""
+msgstr "Gérer les données de l'application"
 
 #: ckanext/querytool/templates/querytool/admin/base_edit_data.html:14
 #: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:12
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:10
 #: ckanext/querytool/templates/querytool/admin/base_list.html:8
 msgid "Application Groups"
-msgstr ""
+msgstr "Groupes d'applications"
 
 #: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:9
 msgid "Manage Visualizations"
-msgstr ""
+msgstr "Gérer les visualisations"
 
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:6
 #: ckanext/querytool/templates/querytool/admin/base_list.html:4
 msgid "Queries"
-msgstr ""
+msgstr "Applications"
 
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:18
 #: ckanext/querytool/templates/querytool/admin/base_list.html:24
 msgid "Add New Application"
-msgstr ""
+msgstr "Ajouter une nouvelle application"
 
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:40
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:41
@@ -814,265 +876,265 @@ msgstr ""
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:43
 #: ckanext/querytool/templates/querytool/admin/base_list.html:13
 msgid "Other"
-msgstr ""
+msgstr "Autre"
 
 #: ckanext/querytool/templates/querytool/admin/base_list.html:30
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:61
 msgid "Main"
-msgstr ""
+msgstr "Principale"
 
 #: ckanext/querytool/templates/querytool/admin/base_list.html:36
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:61
 msgid "Related"
-msgstr ""
+msgstr "Associé"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:31
 msgid "Basic info"
-msgstr ""
+msgstr "Information de base"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
 msgid "Save As"
-msgstr ""
+msgstr "Enregistrer sous"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
 msgid "Title of the query tool"
-msgstr ""
+msgstr "Titre de l'application"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
 msgid "eg. my-querytool"
-msgstr ""
+msgstr "ex. ma-application"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
 msgid "Display Title and Description"
-msgstr ""
+msgstr "Titre et description visibles"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
 msgid "eg. Some useful description about the query tool"
-msgstr ""
+msgstr "ex. Une description utile de l'application"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Group"
-msgstr ""
+msgstr "Groupe"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:55
 msgid "Settings"
-msgstr ""
+msgstr "Configuration"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:58
 msgid "Application Type"
-msgstr ""
+msgstr "Type d'application"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:89
 msgid "Add Related Application"
-msgstr ""
+msgstr "Ajouter une application associée"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:93
 msgid "Select dataset and resource"
-msgstr ""
+msgstr "Sélectionnez le jeu de données et la ressource"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:96
 msgid "Dataset"
-msgstr ""
+msgstr "Jeu de données"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:99
 msgid "Choose Dataset"
-msgstr ""
+msgstr "Choisir un jeu de données"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:113
 msgid "Resource"
-msgstr ""
+msgstr "Ressource"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:117
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:123
 msgid "Measure(s)"
-msgstr ""
+msgstr "Unité(s) de mesure"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:142
 msgid "Filter(s)"
-msgstr ""
+msgstr "Filtre(s)"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:157
 msgid "Add Filter"
-msgstr ""
+msgstr "Ajouter un filtre"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:163
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:34
 msgid "Save"
-msgstr ""
+msgstr "Enregistrer"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:164
 msgid "Save & Add/Edit Visualizations"
-msgstr ""
+msgstr "Enregistrer et ajouter/modifier des visualisations"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:31
 #: ckanext/querytool/templates/querytool/admin/snippets/stages.html:12
 msgid "Visualizations"
-msgstr ""
+msgstr "Visualisations"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:33
 msgid "Save & Edit data"
-msgstr ""
+msgstr "Enregistrer et modifier les données"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:41
 msgid "Default measure"
-msgstr ""
+msgstr "Unité de mesure par défaut"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "Visualization type"
-msgstr ""
+msgstr "Type de visualisation"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "— Select type —"
-msgstr ""
+msgstr "— Sélectionnez le type —"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "Chart"
-msgstr ""
+msgstr "Graphique"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "Map"
-msgstr ""
+msgstr "Carte"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "Text box"
-msgstr ""
+msgstr "Cadre de texte"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 #: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:31
 #: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:39
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
 msgid "Table"
-msgstr ""
+msgstr "Table"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:51
 msgid "Add visualization"
-msgstr ""
+msgstr "Ajouter une visualisation"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:33
 #: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:47
 msgid "Image URL"
-msgstr ""
+msgstr "URL de l'image"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:27
 msgid "Used dataset:"
-msgstr ""
+msgstr "Jeu de données utilisé:"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:28
 msgid "Application Type:"
-msgstr ""
+msgstr "Type d'application:"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:31
 msgid "Edit filters and data"
-msgstr ""
+msgstr "Éditer les filtres et les données"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:32
 msgid "Edit visualizations"
-msgstr ""
+msgstr "Éditer les visualisations"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:33
 msgid "View"
-msgstr ""
+msgstr "Afficher"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
 msgid "Are you sure you want to delete this Query?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer cette application?"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/stages.html:9
 msgid "Application data"
-msgstr ""
+msgstr "Données du l'application"
 
 #: ckanext/querytool/templates/querytool/public/base_main.html:31
 msgid "Welcome"
-msgstr ""
+msgstr "Bienvenue"
 
 #: ckanext/querytool/templates/querytool/public/base_main.html:52
 msgid "List Applications"
-msgstr ""
+msgstr "Liste des applications"
 
 #: ckanext/querytool/templates/querytool/public/list.html:26
 msgid "There are no applications created"
-msgstr ""
+msgstr "Aucune application crée"
 
 #: ckanext/querytool/templates/querytool/public/querytool_page.html:8
 msgid "Query Tool"
-msgstr ""
+msgstr "Plateforme"
 
 #: ckanext/querytool/templates/querytool/public/read.html:68
 msgid "Displayed Measure"
-msgstr ""
+msgstr "Unité de mesure visualisée"
 
 #: ckanext/querytool/templates/querytool/public/read.html:85
 msgid "Download"
-msgstr ""
+msgstr "Télécharger"
 
 #: ckanext/querytool/templates/querytool/public/read.html:131
 #: ckanext/querytool/templates/querytool/public/read.html:279
 msgid "Download image"
-msgstr ""
+msgstr "Télécharger l'image"
 
 #: ckanext/querytool/templates/querytool/public/read.html:238
 msgid "Share"
-msgstr ""
+msgstr "Partager"
 
 #: ckanext/querytool/templates/querytool/public/read.html:243
 msgid "Copy"
-msgstr ""
+msgstr "Copier"
 
 #: ckanext/querytool/templates/querytool/public/read.html:255
 msgid "Embed"
-msgstr ""
+msgstr "Intégrer"
 
 #: ckanext/querytool/templates/querytool/public/read.html:261
 msgid "Embed query tool view"
-msgstr ""
+msgstr "Intégrer l'application"
 
 #: ckanext/querytool/templates/querytool/public/read.html:264
 msgid "You can copy and paste the embed code"
-msgstr ""
+msgstr "Vous pouvez copier et coller le code d'incorporation"
 
 #: ckanext/querytool/templates/querytool/public/read.html:267
 msgid "Width"
-msgstr ""
+msgstr "Largeur"
 
 #: ckanext/querytool/templates/querytool/public/read.html:270
 msgid "Height"
-msgstr ""
+msgstr "Hauteur"
 
 #: ckanext/querytool/templates/querytool/public/read.html:273
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #: ckanext/querytool/templates/snippets/language_selector.html:3
 msgid "Language"
-msgstr ""
+msgstr "Langage"
 
 #: ckanext/querytool/templates/snippets/language_selector.html:11
 msgid "Go"
-msgstr ""
+msgstr "Aller"
 
 #~ msgid "Medium Rectangle"
-#~ msgstr ""
+#~ msgstr "Moyen rectangle"
 
 #~ msgid "Medium Vertical"
-#~ msgstr ""
-
-#~ msgid "Hover over a region"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "This Platform allows Ministries of "
-#~ "Health to publish data via user "
-#~ "friendly applications, using visual and "
-#~ "interactive elements"
-#~ msgstr ""
+#~ msgstr "Moyenne verticale"
 
 #~ msgid "Health Topics"
-#~ msgstr ""
+#~ msgstr "Thèmes de Santé"
 
+# Modify original translation
+#, fuzzy
+#~ msgid "Y axis columns"
+#~ msgstr "Mesures"
+
+#~ msgid "Chart resource"
+#~ msgstr "Ressource pour les graphiques"
+
+#~ msgid "Dataset name"
+#~ msgstr "Nom du jeu de données"
