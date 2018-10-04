@@ -134,6 +134,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.hex_to_rgba,
             'querytool_get_public_breadcrumb_name':
                 helpers.get_public_breadcrumb_name,
+            'querytool_allow_nav_bar':
+                helpers.allow_nav_bar
         }
 
     # IAuthFunctions

@@ -1,25 +1,27 @@
 {% extends "querytool/public/querytool_page.html" %}
 {% set breadcrumb_name = h.querytool_get_public_breadcrumb_name() %}
-
+{% set nav_bar = h.querytool_allow_nav_bar() %}
 {% block content %}
 
 <div class="container-wrapper">
-  {% block toolbar %}
-    <div class="toolbar">
-      {% block breadcrumb %}
-        {% if self.breadcrumb_content() | trim %}
-          <ul class="breadcrumb">
-            {% if h.check_access('querytool_update') %}
-              <li class="home"><a href="/"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
-            {% endif %}
-            {% block breadcrumb_content %}
-              <li class="active">{% link_for _(breadcrumb_name), controller=c.controller, action='querytool_public' %}</li>
-            {% endblock %}
-          </ul>
-        {% endif %}
-      {% endblock %}
-    </div>
-  {% endblock %}
+  {% if nav_bar == 'True' %}
+    {% block toolbar %}
+      <div class="toolbar">
+        {% block breadcrumb %}
+          {% if self.breadcrumb_content() | trim %}
+            <ul class="breadcrumb">
+              {% if h.check_access('querytool_update') %}
+                <li class="home"><a href="/"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
+              {% endif %}
+                {% block breadcrumb_content %}
+                  <li class="active">{% link_for _(breadcrumb_name), controller=c.controller, action='querytool_public' %}</li>
+                {% endblock %}
+            </ul>
+          {% endif %}
+        {% endblock %}
+      </div>
+    {% endblock %}
+  {% endif %}
   <div class="public-header">
   {% block page_header_content %}
     <div class="container">

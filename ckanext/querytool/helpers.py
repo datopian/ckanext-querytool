@@ -541,3 +541,12 @@ def get_public_breadcrumb_name():
 
     return config.get('ckanext.querytool.public_breadcrumb_name',
                       'Health Topics').decode('utf-8')
+
+
+def allow_nav_bar():
+    '''
+    Get config var to enable or disable navigation bar on public query page
+    :return: True or False
+    '''
+    isAllowed = config.get('ckanext.querytool.allow_nav_bar', default=True)
+    return isAllowed
