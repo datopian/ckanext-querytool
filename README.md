@@ -50,6 +50,11 @@ ckanext.querytool.map_osm_attribute = &copy; <a href="http://www.openstreetmap.o
 ckanext.querytool.public_breadcrumb_name = Health Topics
 ```
 
+4. Add config for visibility of navigation bar in the public query tools:
+```
+ckanext.querytool.allow_nav_bar = False
+```
+
 ## Development Installation
 
 To install ckanext-querytool for development, activate your CKAN virtualenv
