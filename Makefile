@@ -1,27 +1,26 @@
-.PHONY: build docs server static shell test upgrade
+.PHONY: assets docker readme start shell test
 
 
 list:
 	@grep '^\.PHONY' Makefile | cut -d' ' -f2- | tr ' ' '\n'
 
-build:
+
+assets:
+	npx gulp less
+
+docker:
+	docker pull openknowledge/ckan-base:2.7 &&
+	docker pull openknowledge/ckan-dev:2.7 &&
 	docker-compose -f docker/docker-compose.dev.yml build
 
-docs:
+readme:
 	npx doctoc README.md
 
-server:
+start:
 	docker-compose -f docker/docker-compose.dev.yml up
-
-static:
-	npx gulp less
 
 shell:
 	docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -it
 
 test:
 	npx nightwatch -e chrome
-
-upgrade:
-	docker pull openknowledge/ckan-base:2.8 && docker pull openknowledge/ckan-dev:2.8 &&
-	docker-compose -f docker/docker-compose.dev.yml build ckan-dev
