@@ -1,8 +1,28 @@
+# ckanext-querytool
+
 [![Build Status](https://travis-ci.org/ViderumGlobal/ckanext-querytool.svg?branch=master)](https://travis-ci.org/ViderumGlobal/ckanext-querytool)
 
-# Querytool
+A CKAN extension to create visualizations based on the uploaded datasets.
 
-## Installation
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Docker-based development](#docker-based-development)
+- [Classical development](#classical-development)
+  - [Installation](#installation)
+  - [Config Settings](#config-settings)
+  - [Development Installation](#development-installation)
+  - [Modify CSS](#modify-css)
+  - [Running the Tests](#running-the-tests)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Docker-based development
+
+## Classical development
+
+### Installation
 
 To install ckanext-querytool:
 
@@ -28,8 +48,7 @@ pip install ckanext-querytool
 sudo service apache2 reload
 ```
 
-
-## Config Settings
+### Config Settings
 
 These are the required configuration options used by the extension:
 
@@ -55,7 +74,7 @@ ckanext.querytool.public_breadcrumb_name = Health Topics
 ckanext.querytool.allow_nav_bar = False
 ```
 
-## Development Installation
+### Development Installation
 
 To install ckanext-querytool for development, activate your CKAN virtualenv
 and do:
@@ -84,8 +103,7 @@ $ chmod +x ckanext-querytool/.git/hooks/pre-commit
 Now, every time you commit code, the pre-commit hook will run and check for
 PEP8 errors.
 
-
-## Modify CSS
+### Modify CSS
 
 This extension uses LESS for styles. All changes must be made in one of the LESS
 files located in the `ckanext-querytool/ckanext/querytool/fanstatic/less` folder.
@@ -94,7 +112,7 @@ Gulp.js is used for building CSS assets.
 
 In order to build all CSS assets **run `node_modules/gulp/bin/gulp.js` once**. Gulp.js is watching for changes in the source LESS assets and will rebuild CSS on each change. If you have gulp.js installed globally on the system, you can just type `gulp` to run it.
 
-## Running the Tests
+### Running the Tests
 
 To run the tests, first make sure that you have installed the required
 development dependencies in CKAN, which can be done by running the following

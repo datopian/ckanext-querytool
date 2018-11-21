@@ -1,0 +1,52 @@
+FROM openknowledge/ckan-dev:2.8
+
+MAINTAINER Viderum <info@Viderum.com>
+
+# Install utilities
+RUN pip install ipdb ipdbplugin
+
+# Install any extensions needed by your CKAN instance
+# (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
+# TODO: pin when possible
+RUN echo 'Installing extensions' && \
+    # scheming
+    pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-scheming/master/requirements.txt && \
+    # harvest
+    pip install -e git+https://github.com/ckan/ckanext-harvest.git@v1.1.4#egg=ckanext-harvest && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/v1.1.4/pip-requirements.txt && \
+    # googleanalytics
+    pip install -e git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics && \
+    pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt && \
+    # showcase
+    pip install -e git+https://github.com/keitaroinc/ckanext-showcase.git@ckan-2.8#egg=ckanext-showcase && \
+    # pages
+    pip install -e git+https://github.com/keitaroinc/ckanext-pages.git@pages-ckan-2.8#egg=ckanext-pages && \
+    # disqus
+    pip install -e git+https://github.com/ckan/ckanext-disqus#egg=ckanext-disqus && \
+    # datajson
+    pip install -e git+https://github.com/okfn/ckanext-datajson.git@ed#egg=ckanext-datajson && \
+    pip install -r ${APP_DIR}/src/ckanext-datajson/requirements.txt && \
+    # hierarchy
+    pip install -e git+https://github.com/okfn/ckanext-hierarchy.git#egg=ckanext-hierarchy && \
+    # geoview
+    pip install -e git+https://github.com/okfn/ckanext-geoview.git@#egg=ckanext-geoview && \
+    # pdfview
+    pip install -e git+https://github.com/okfn/ckanext-pdfview.git#egg=ckanext-pdfview  && \
+    # contact
+    pip install -e git+https://github.com/okfn/ckanext-contact.git@lacounts-0.1#egg=ckanext-contact
+
+# Install project extension
+RUN pip install -e git+https://github.com/CivicActions/ckanext-ed.git#egg=ckanext-ed
+
+# Apply patches
+# COPY patches ${APP_DIR}/patches
+# RUN git config --global user.email "autopatcher@okfn.org" && \
+    # git config --global user.name "autopatcher" && \
+    # cd $SRC_DIR/ckan && \
+    # for f in $APP_DIR/patches/ckan/*.patch; do echo "$0: Applying patch $f"; git apply "$f" ; done
+
+# Copy config files
+COPY crontabs/* /etc/crontabs/
+COPY docker-entrypoint.d/* /docker-entrypoint.d/
+COPY supervisor.d/* /etc/supervisord.d/

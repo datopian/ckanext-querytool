@@ -1,0 +1,4 @@
+# It will be run under the <filename> user
+# 0 * * * * /usr/bin/paster --plugin=ckan tracking update --config=/srv/app/production.ini
+# 5 * * * * /usr/bin/paster --plugin=ckan search-index rebuild --config=/srv/app/production.ini
+# 10 * * * * /usr/bin/paster --plugin=ckanext-harvest harvester run --config=/srv/app/production.ini

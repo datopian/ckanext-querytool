@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  ckan-dev:
+    build:
+      context: ckan/
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .dev.env
+    environment:
+        - CKAN_SQLALCHEMY_URL=postgres://ckan:ckan@db/ckan_test
+    links:
+      - db
+      - solr
+      - redis
+      - datapusher
