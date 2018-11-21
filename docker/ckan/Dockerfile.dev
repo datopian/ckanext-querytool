@@ -1,4 +1,4 @@
-FROM openknowledge/ckan-dev:2.8
+FROM openknowledge/ckan-dev:2.7
 
 MAINTAINER Viderum <info@Viderum.com>
 
@@ -9,35 +9,11 @@ RUN pip install ipdb ipdbplugin
 # (Make sure to add the plugins to CKAN__PLUGINS in the .env file)
 # TODO: pin when possible
 RUN echo 'Installing extensions' && \
-    # scheming
-    pip install -e git+https://github.com/ckan/ckanext-scheming.git#egg=ckanext-scheming && \
-    pip install -r https://raw.githubusercontent.com/ckan/ckanext-scheming/master/requirements.txt && \
-    # harvest
-    pip install -e git+https://github.com/ckan/ckanext-harvest.git@v1.1.4#egg=ckanext-harvest && \
-    pip install -r https://raw.githubusercontent.com/ckan/ckanext-harvest/v1.1.4/pip-requirements.txt && \
-    # googleanalytics
-    pip install -e git+https://github.com/ckan/ckanext-googleanalytics.git#egg=ckanext-googleanalytics && \
-    pip install -r https://raw.githubusercontent.com/ckan/ckanext-googleanalytics/master/requirements.txt && \
-    # showcase
-    pip install -e git+https://github.com/keitaroinc/ckanext-showcase.git@ckan-2.8#egg=ckanext-showcase && \
-    # pages
-    pip install -e git+https://github.com/keitaroinc/ckanext-pages.git@pages-ckan-2.8#egg=ckanext-pages && \
-    # disqus
-    pip install -e git+https://github.com/ckan/ckanext-disqus#egg=ckanext-disqus && \
-    # datajson
-    pip install -e git+https://github.com/okfn/ckanext-datajson.git@ed#egg=ckanext-datajson && \
-    pip install -r ${APP_DIR}/src/ckanext-datajson/requirements.txt && \
-    # hierarchy
-    pip install -e git+https://github.com/okfn/ckanext-hierarchy.git#egg=ckanext-hierarchy && \
     # geoview
     pip install -e git+https://github.com/okfn/ckanext-geoview.git@#egg=ckanext-geoview && \
-    # pdfview
-    pip install -e git+https://github.com/okfn/ckanext-pdfview.git#egg=ckanext-pdfview  && \
-    # contact
-    pip install -e git+https://github.com/okfn/ckanext-contact.git@lacounts-0.1#egg=ckanext-contact
-
-# Install project extension
-RUN pip install -e git+https://github.com/CivicActions/ckanext-ed.git#egg=ckanext-ed
+    # querytool
+    pip install --no-cache-dir -e git+https://github.com/ViderumGlobal/ckanext-querytool.git#egg=ckanext-querytool && \
+    pip install -r https://raw.githubusercontent.com/ViderumGlobal/ckanext-querytool/master/requirements.txt
 
 # Apply patches
 # COPY patches ${APP_DIR}/patches
