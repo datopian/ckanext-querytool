@@ -130,6 +130,15 @@ To update this readme's table of contents run:
 $ make readme
 ```
 
+### Managing docker
+
+There are a few useful docker commands:
+
+- list all containers (only IDs): `docker ps -aq`.
+- stop all running containers: `docker stop $(docker ps -aq)`
+- remove all containers: `docker rm $(docker ps -aq)``
+- remove all images: `docker rmi $(docker images -q)`
+
 ### Reseting docker
 
 > It will destroy all your projects inside docker!!!
