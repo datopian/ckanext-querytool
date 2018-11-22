@@ -32,13 +32,18 @@ A CKAN extension to create visualizations based on the uploaded datasets.
 
 ### Requirements
 
-Please follow installation instructions of the software below if needed. The following steps require:
+Please follow installation instructions of the software below if needed. Also, take a look inside the `Makefile` to understand what's going on under the hood:
 - `docker`
 - `docker-compose`
 - `/etc/hosts` contains the `127.0.0.1 ckan-dev` line
-- `nvm/Node.js` (optional to build static assets and run end-to-end tests)
 
-Take a look inside the `Makefile` to understand what's going on under the hood in the following steps.
+For building static assets and running end-to-end tests Node.js is required and can be installed with these commands:
+
+```bash
+$ nvm install 10
+$ nvm use 10
+$ npm install
+```
 
 ### Setting up environment
 
@@ -77,8 +82,6 @@ http://ckan-dev:5000/
 ```
 
 ### Running project tests
-
-> To run end-to-end tests install Node.js with `nvm install 10 && nvm use 10 && npm install`
 
 We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-end tests inside the `tests` directory. To run the tests you should have the development server up and running:
 
