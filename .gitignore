@@ -46,3 +46,4 @@ docs/_build/
 
 #Node
 package-lock.json
+selenium-debug.log

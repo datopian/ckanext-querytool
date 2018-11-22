@@ -1,8 +1,143 @@
+# ckanext-querytool
+
 [![Build Status](https://travis-ci.org/ViderumGlobal/ckanext-querytool.svg?branch=master)](https://travis-ci.org/ViderumGlobal/ckanext-querytool)
 
-# Querytool
+A CKAN extension to create visualizations based on the uploaded datasets.
 
-## Installation
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Docker-based development](#docker-based-development)
+  - [Requirements](#requirements)
+  - [Setting up environment](#setting-up-environment)
+  - [Working with docker](#working-with-docker)
+  - [Starting development server](#starting-development-server)
+  - [Running the tests](#running-the-tests)
+  - [Working with static files](#working-with-static-files)
+  - [Working with i18n](#working-with-i18n)
+  - [Loging into the container](#loging-into-the-container)
+  - [Reseting docker](#reseting-docker)
+  - [Updating readme](#updating-readme)
+- [Classical development](#classical-development)
+  - [Installation](#installation)
+  - [Config Settings](#config-settings)
+  - [Development Installation](#development-installation)
+  - [Modify CSS](#modify-css)
+  - [Running the Tests](#running-the-tests)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Docker-based development
+
+### Requirements
+
+Please follow installation instructions of the software below if needed. The following steps require:
+- `docker`
+- `docker-compose`
+- `/etc/hosts` contains the `127.0.0.1 ckan-dev` line
+- `nvm/Node.js` (optional to build static assets)
+
+Take a look inside the `Makefile` to understand what's going on under the hood in the following steps.
+
+### Setting up environment
+
+Clone the `ckanext-querytool` repository (assuming that we're inside the `projects` directory):
+
+```bash
+$ git clone git@github.com:ViderumGlobal/ckanext-querytool.git
+$ cd ckanext-querytool
+```
+
+This is a CKAN extension and docker compose setup for local development. It's designed to support live development of extensions. The only one requirement is that the folder with the project should be named `ckanext-querytool`.
+
+### Working with docker
+
+The whole docker setup is inside the `docker` directory. You can tweak any CKAN instance's aspects there (e.g. patches/cron/etc). To add other CKAN extensions to the work - add its folders to `docker/docker-compose.dev.yml` (see `ckan-dev` volumes).
+
+Pull the latest `ckan-base/dev` images and build the project's images:
+
+```
+$ make docker
+```
+
+### Starting development server
+
+Let's start the development server. It's recommended to run this command in an additional terminal window because you neede it running during the work. All changes to connected extensions will trigger live-reloading of the server:
+
+```bash
+$ make start
+# see CKAN logs here
+```
+
+Now we can visit our local ckan instance at (you can login using `ckan_admin@test1234`):
+
+```
+http://ckan-dev:5000/
+```
+
+### Running the tests
+
+We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-edn tests inside the `tests` directory. To run the tests you should have the development server up and running:
+
+```bash
+$ make test
+```
+
+See the `how to write E2E tests` guide:
+- http://nightwatchjs.org/guide
+
+### Working with static files
+
+Put your scripts/fonts/etc inside the `ckanext/querytool/fanstatic` folder and images inside the `ckanext/querytool/public` folder. It can be used as usual ckan `fanstatic` and `public` contents. At the same time, we use CSS preprocessor (LESS) to build our styles. Put your styles inside the `ckanext/ed/less` and build it:
+
+```bash
+$ make assets
+```
+
+Processed styles will be put to the `ckanext/querytool/fanstatic/css` folder.
+
+### Working with i18n
+
+To extract i18n messages and compile the catalog we have to have our development server running. In another terminal window run a command:
+
+```
+$ make i18n
+```
+
+See CKAN documentation for more on i18n management.
+
+### Loging into the container
+
+To issue commands inside a running container:
+
+```
+$ make shell
+```
+
+Now you can tweak the running `ckan-dev` docker container from inside. Please take into account that all changes will be lost after the next container restart.
+
+### Reseting docker
+
+If you want to start everything from scratch there is a way to prune your docker environment:
+
+> It will destroy all your projects inside docker!!!
+
+```
+$ docker system prune -a --volumes
+```
+
+### Updating readme
+
+To update this readme's table of contents run:
+
+```bash
+$ make readme
+```
+
+## Classical development
+
+### Installation
 
 To install ckanext-querytool:
 
@@ -28,8 +163,7 @@ pip install ckanext-querytool
 sudo service apache2 reload
 ```
 
-
-## Config Settings
+### Config Settings
 
 These are the required configuration options used by the extension:
 
@@ -55,7 +189,7 @@ ckanext.querytool.public_breadcrumb_name = Health Topics
 ckanext.querytool.allow_nav_bar = False
 ```
 
-## Development Installation
+### Development Installation
 
 To install ckanext-querytool for development, activate your CKAN virtualenv
 and do:
@@ -84,8 +218,7 @@ $ chmod +x ckanext-querytool/.git/hooks/pre-commit
 Now, every time you commit code, the pre-commit hook will run and check for
 PEP8 errors.
 
-
-## Modify CSS
+### Modify CSS
 
 This extension uses LESS for styles. All changes must be made in one of the LESS
 files located in the `ckanext-querytool/ckanext/querytool/fanstatic/less` folder.
@@ -94,7 +227,7 @@ Gulp.js is used for building CSS assets.
 
 In order to build all CSS assets **run `node_modules/gulp/bin/gulp.js` once**. Gulp.js is watching for changes in the source LESS assets and will rebuild CSS on each change. If you have gulp.js installed globally on the system, you can just type `gulp` to run it.
 
-## Running the Tests
+### Running the Tests
 
 To run the tests, first make sure that you have installed the required
 development dependencies in CKAN, which can be done by running the following
