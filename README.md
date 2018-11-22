@@ -36,7 +36,7 @@ Please follow installation instructions of the software below if needed. The fol
 - `docker`
 - `docker-compose`
 - `/etc/hosts` contains the `127.0.0.1 ckan-dev` line
-- `nvm/Node.js` (optional to build static assets)
+- `nvm/Node.js` (optional to build static assets and run end-to-end tests)
 
 Take a look inside the `Makefile` to understand what's going on under the hood in the following steps.
 
