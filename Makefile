@@ -13,6 +13,10 @@ docker:
 	docker pull openknowledge/ckan-dev:2.7 && \
 	docker-compose -f docker/docker-compose.dev.yml build
 
+i18n:
+	docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -c 'cd /srv/app/src_extensions/ckanext-querytool && python setup.py compile_catalog -l es -f' && \
+	docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -c 'cd /srv/app/src_extensions/ckanext-querytool && python setup.py extract_messages'
+
 readme:
 	npx doctoc README.md
 
