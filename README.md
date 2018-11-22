@@ -87,7 +87,7 @@ $ make test
 See the `how to write E2E tests` guide:
 - http://nightwatchjs.org/guide
 
-### Working with static files
+### Building static assets
 
 Put your scripts/fonts/etc inside the `ckanext/querytool/fanstatic` folder and images inside the `ckanext/querytool/public` folder. It can be used as usual ckan `fanstatic` and `public` contents. At the same time, we use CSS preprocessor (LESS) to build our styles. Put your styles inside the `ckanext/ed/less` and build it:
 
@@ -107,7 +107,7 @@ $ make i18n
 
 See CKAN documentation for more on i18n management.
 
-### Loging into the container
+### Loging into container
 
 To issue commands inside a running container:
 
@@ -117,22 +117,22 @@ $ make shell
 
 Now you can tweak the running `ckan-dev` docker container from inside. Please take into account that all changes will be lost after the next container restart.
 
-### Reseting docker
-
-If you want to start everything from scratch there is a way to prune your docker environment:
-
-> It will destroy all your projects inside docker!!!
-
-```
-$ docker system prune -a --volumes
-```
-
 ### Updating readme
 
 To update this readme's table of contents run:
 
 ```bash
 $ make readme
+```
+
+### Reseting docker
+
+> It will destroy all your projects inside docker!!!
+
+If you want to start everything from scratch there is a way to prune your docker environment:
+
+```
+$ docker system prune -a --volumes
 ```
 
 ## Classical development
