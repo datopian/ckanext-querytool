@@ -13,12 +13,12 @@ A CKAN extension to create visualizations based on the uploaded datasets.
   - [Setting up environment](#setting-up-environment)
   - [Working with docker](#working-with-docker)
   - [Starting development server](#starting-development-server)
-  - [Running the tests](#running-the-tests)
-  - [Working with static files](#working-with-static-files)
+  - [Running project tests](#running-project-tests)
+  - [Building static assets](#building-static-assets)
   - [Working with i18n](#working-with-i18n)
-  - [Loging into the container](#loging-into-the-container)
-  - [Reseting docker](#reseting-docker)
+  - [Loging into container](#loging-into-container)
   - [Updating readme](#updating-readme)
+  - [Reseting docker](#reseting-docker)
 - [Classical development](#classical-development)
   - [Installation](#installation)
   - [Config Settings](#config-settings)
@@ -78,10 +78,7 @@ http://ckan-dev:5000/
 
 ### Running project tests
 
-> To run end-to-end tests install Node.js:
-> - `nvm install 10`
-> - `nvm use 10`
-> - `npm install`
+> To run end-to-end tests install Node.js with `nvm install 10 && nvm use 10 && npm install`
 
 We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-end tests inside the `tests` directory. To run the tests you should have the development server up and running:
 
