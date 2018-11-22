@@ -76,9 +76,14 @@ Now we can visit our local ckan instance at (you can login using `ckan_admin@tes
 http://ckan-dev:5000/
 ```
 
-### Running the tests
+### Running project tests
 
-We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-edn tests inside the `tests` directory. To run the tests you should have the development server up and running:
+> To run end-to-end tests install Node.js:
+> - `nvm install 10`
+> - `nvm use 10`
+> - `npm install`
+
+We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-end tests inside the `tests` directory. To run the tests you should have the development server up and running:
 
 ```bash
 $ make test
