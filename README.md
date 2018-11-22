@@ -134,10 +134,12 @@ $ make readme
 
 There are a few useful docker commands:
 
-- list all containers (only IDs): `docker ps -aq`.
-- stop all running containers: `docker stop $(docker ps -aq)`
-- remove all containers: `docker rm $(docker ps -aq)``
-- remove all images: `docker rmi $(docker images -q)`
+```bash
+$ docker ps -aq # list all containers
+$ docker stop $(docker ps -aq) # stop all containers
+$ docker rm $(docker ps -aq) # remove all containers
+$ docker rmi $(docker images -q) # remove all images
+```
 
 ### Reseting docker
 
