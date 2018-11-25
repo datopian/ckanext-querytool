@@ -1,0 +1,15 @@
+diff --git a/ckanext/datastore/helpers.py b/ckanext/datastore/helpers.py
+index b616f0f94..98eaad2fc 100644
+--- a/ckanext/datastore/helpers.py
++++ b/ckanext/datastore/helpers.py
+@@ -105,8 +105,8 @@ def get_table_names_from_sql(context, sql):
+     table_names = []
+
+     try:
+-        query_plan = json.loads(result['QUERY PLAN'])
+-        plan = query_plan[0]['Plan']
++        # https://github.com/okfn/docker-ckan/issues/23
++        plan = result['QUERY PLAN'][0]['Plan']
+
+         table_names.extend(_get_table_names_from_plan(plan))
+

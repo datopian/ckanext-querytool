@@ -16,11 +16,11 @@ RUN echo 'Installing extensions' && \
     pip install -r https://raw.githubusercontent.com/ViderumGlobal/ckanext-querytool/master/requirements.txt
 
 # Apply patches
-# COPY patches ${APP_DIR}/patches
-# RUN git config --global user.email "autopatcher@okfn.org" && \
-    # git config --global user.name "autopatcher" && \
-    # cd $SRC_DIR/ckan && \
-    # for f in $APP_DIR/patches/ckan/*.patch; do echo "$0: Applying patch $f"; git apply "$f" ; done
+COPY patches ${APP_DIR}/patches
+RUN git config --global user.email "autopatcher@okfn.org" && \
+    git config --global user.name "autopatcher" && \
+    cd $SRC_DIR/ckan && \
+    for f in $APP_DIR/patches/ckan/*.patch; do echo "$0: Applying patch $f"; git apply "$f" ; done
 
 # Copy config files
 COPY crontabs/* /etc/crontabs/
