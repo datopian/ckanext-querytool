@@ -338,7 +338,10 @@ ckan.module('querytool-viz-preview', function() {
                             top: parseInt(padding_top),
                             bottom: parseInt(padding_bottom)
                         },
-                        label: y_label
+                        label: {
+                          text: y_label,
+                          position: 'outer-middle',
+                        }
                     },
                     x: {
                         type: 'category',

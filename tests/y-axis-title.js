@@ -1,4 +1,5 @@
 // It requires "Detailed Mortality by Cause" application (see staging)
+// Add "Title from config" as a title to the Y-axis of the 4th viz
 
 module.exports = {
   afterEach: (client, done) => client.globals.report(client, done),
