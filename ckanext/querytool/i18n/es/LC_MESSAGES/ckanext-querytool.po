@@ -227,8 +227,8 @@ msgid "Medium Rectangle (2x4)"
 msgstr "Doble cuadrado pequeño horizontal (2x4)"
 
 #: ckanext/querytool/helpers.py:267
-msgid "Large Rectangle"
-msgstr "Rectángulo grande"
+msgid "Large Rectangle (2x3)"
+msgstr "Rectángulo grande (2x3)"
 
 #: ckanext/querytool/helpers.py:268
 msgid "Extra Large Rectangle"
