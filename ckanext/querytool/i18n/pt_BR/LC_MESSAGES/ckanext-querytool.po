@@ -219,8 +219,8 @@ msgid "Small Wide Rectangle (1x6)"
 msgstr "Retângulo longo pequeno (1x6)"
 
 #: ckanext/querytool/helpers.py:264
-msgid "Small Square"
-msgstr "Quadrado pequeno"
+msgid "Medium Square (2x2)"
+msgstr "Quadrado pequeno (2x2)"
 
 #: ckanext/querytool/helpers.py:265
 msgid "Horizontal Double Small Square"

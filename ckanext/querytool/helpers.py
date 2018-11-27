@@ -261,7 +261,7 @@ def get_visualization_size():
     '''
     options = [{'text': _('Small Rectangle (1x2)'), 'value': 'size-sm'},
                {'text': _('Small Wide Rectangle (1x6)'), 'value': 'size-sm wide'},
-               {'text': _('Small Square'), 'value': 'size-sm square'},
+               {'text': _('Medium Square (2x2)'), 'value': 'size-sm square'},
                {'text': _('Horizontal Double Small Square'),
                 'value': 'size-sm double square'},
                {'text': _('Large Rectangle'), 'value': 'size-lg'},
