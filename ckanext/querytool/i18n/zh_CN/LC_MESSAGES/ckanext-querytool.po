@@ -210,8 +210,8 @@ msgid "Binary e.g 11111010000"
 msgstr "二进制（例如11111010000）"
 
 #: ckanext/querytool/helpers.py:262
-msgid "Small Rectangle"
-msgstr "小型矩形"
+msgid "Small Rectangle (1x2)"
+msgstr "小型矩形 (1x2)"
 
 #: ckanext/querytool/helpers.py:263
 msgid "Long Small Rectangle"

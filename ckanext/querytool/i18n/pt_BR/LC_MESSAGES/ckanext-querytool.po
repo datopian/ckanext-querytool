@@ -211,8 +211,8 @@ msgid "Binary e.g 11111010000"
 msgstr "Binário ex. 11111010000"
 
 #: ckanext/querytool/helpers.py:262
-msgid "Small Rectangle"
-msgstr "Retângulo pequeno"
+msgid "Small Rectangle (1x2)"
+msgstr "Retângulo pequeno (1x2)"
 
 #: ckanext/querytool/helpers.py:263
 msgid "Long Small Rectangle"

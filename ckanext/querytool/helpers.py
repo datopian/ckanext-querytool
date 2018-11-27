@@ -259,7 +259,7 @@ def get_visualization_size():
     Get available sizes for displaying visualizations: charts, text box
     :return:
     '''
-    options = [{'text': _('Small Rectangle'), 'value': 'size-sm'},
+    options = [{'text': _('Small Rectangle (1x2)'), 'value': 'size-sm'},
                {'text': _('Long Small Rectangle'), 'value': 'size-sm wide'},
                {'text': _('Small Square'), 'value': 'size-sm square'},
                {'text': _('Horizontal Double Small Square'),
