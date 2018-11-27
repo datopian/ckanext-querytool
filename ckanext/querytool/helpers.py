@@ -266,8 +266,7 @@ def get_visualization_size():
                {'text': _('Large Rectangle (2x3)'), 'value': 'size-lg'},
                {'text': _('Extra Large Rectangle (2x6)'), 'value': 'size-xl'},
                {'text': _('Large Square (4x4)'), 'value': 'size-lg square'},
-               {'text': _('Vertical Double Small Square'),
-                'value': 'size-sm vertical'},
+               {'text': _('Medium Vertical (4x2)'), 'value': 'size-sm vertical'},
                {'text': _('Large Vertical'), 'value': 'size-lg vertical'},
                {'text': _('Extra Large Vertical'),
                 'value': 'size-xl vertical'}]

@@ -238,7 +238,7 @@ msgid "Large Square (4x4)"
 msgstr "大型正方形 (4x4)"
 
 #: ckanext/querytool/helpers.py:270
-msgid "Vertical Double Small Square"
+msgid "Medium Vertical (4x2)"
 msgstr ""
 
 #: ckanext/querytool/helpers.py:272
