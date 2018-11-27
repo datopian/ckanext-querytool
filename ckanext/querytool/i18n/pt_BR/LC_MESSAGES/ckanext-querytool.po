@@ -235,8 +235,8 @@ msgid "Extra Large Rectangle (2x6)"
 msgstr "Retângulo extra grande (2x6)"
 
 #: ckanext/querytool/helpers.py:269
-msgid "Large Square"
-msgstr "Quadrado grande"
+msgid "Large Square (4x4)"
+msgstr "Quadrado grande (4x4)"
 
 #: ckanext/querytool/helpers.py:270
 msgid "Vertical Double Small Square"
