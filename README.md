@@ -83,10 +83,13 @@ http://ckan-dev:5000/
 
 ### Running project tests
 
-We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-end tests inside the `tests` directory. To run the tests you should have the development server up and running:
+> To pass the end-to-end tests you have to add required applictions from the staging site to your development server. See notes for every single test
+
+We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-end tests inside the `tests` directory. Prefer to name test files after feature/bug names. To run the tests you should have the development server up and running:
 
 ```bash
 $ make test
+$ npx nightwatch tests/<testname>.js # for a single test
 ```
 
 See the `how to write E2E tests` guide:

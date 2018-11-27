@@ -35,8 +35,6 @@ if (!process.env.TRAVIS) {
         globals: {
           report,
         },
-      },
-      chrome: {
         desiredCapabilities: {
           browserName: 'chrome',
         }

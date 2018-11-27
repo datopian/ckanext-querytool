@@ -27,4 +27,4 @@ shell:
 	docker exec -it docker_ckan-dev_1 bash
 
 test:
-	npx nightwatch -e chrome
+	npx nightwatch
