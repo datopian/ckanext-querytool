@@ -214,7 +214,7 @@ msgid "Small Rectangle (1x2)"
 msgstr "小型矩形 (1x2)"
 
 #: ckanext/querytool/helpers.py:263
-msgid "Long Small Rectangle"
+msgid "Small Wide Rectangle (1x6)"
 msgstr ""
 
 #: ckanext/querytool/helpers.py:264

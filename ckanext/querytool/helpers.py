@@ -260,7 +260,7 @@ def get_visualization_size():
     :return:
     '''
     options = [{'text': _('Small Rectangle (1x2)'), 'value': 'size-sm'},
-               {'text': _('Long Small Rectangle'), 'value': 'size-sm wide'},
+               {'text': _('Small Wide Rectangle (1x6)'), 'value': 'size-sm wide'},
                {'text': _('Small Square'), 'value': 'size-sm square'},
                {'text': _('Horizontal Double Small Square'),
                 'value': 'size-sm double square'},
