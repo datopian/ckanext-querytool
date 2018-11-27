@@ -243,8 +243,8 @@ msgid "Medium Vertical (4x2)"
 msgstr "Double petit carré vertical (4x2)"
 
 #: ckanext/querytool/helpers.py:272
-msgid "Large Vertical"
-msgstr "Grande verticale"
+msgid "Large Vertical (4x3)"
+msgstr "Grande verticale (4x3)"
 
 #: ckanext/querytool/helpers.py:273
 msgid "Extra Large Vertical"

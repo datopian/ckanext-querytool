@@ -242,8 +242,8 @@ msgid "Medium Vertical (4x2)"
 msgstr ""
 
 #: ckanext/querytool/helpers.py:272
-msgid "Large Vertical"
-msgstr "大型垂直布局"
+msgid "Large Vertical (4x3)"
+msgstr "大型垂直布局 (4x3)"
 
 #: ckanext/querytool/helpers.py:273
 msgid "Extra Large Vertical"
