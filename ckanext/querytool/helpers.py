@@ -260,14 +260,18 @@ def get_visualization_size():
     :return:
     '''
     options = [{'text': _('Small Rectangle (1x2)'), 'value': 'size-sm'},
-               {'text': _('Small Wide Rectangle (1x6)'), 'value': 'size-sm wide'},
+               {'text': _('Small Wide Rectangle (1x6)'),
+                   'value': 'size-sm wide'},
                {'text': _('Medium Square (2x2)'), 'value': 'size-sm square'},
-               {'text': _('Medium Rectangle (2x4)'), 'value': 'size-sm double square'},
+               {'text': _('Medium Rectangle (2x4)'),
+                   'value': 'size-sm double square'},
                {'text': _('Large Rectangle (2x3)'), 'value': 'size-lg'},
                {'text': _('Extra Large Rectangle (2x6)'), 'value': 'size-xl'},
                {'text': _('Large Square (4x4)'), 'value': 'size-lg square'},
-               {'text': _('Medium Vertical (4x2)'), 'value': 'size-sm vertical'},
-               {'text': _('Large Vertical (4x3)'), 'value': 'size-lg vertical'}]
+               {'text': _('Medium Vertical (4x2)'),
+                   'value': 'size-sm vertical'},
+               {'text': _('Large Vertical (4x3)'),
+                   'value': 'size-lg vertical'}]
     return options
 
 
