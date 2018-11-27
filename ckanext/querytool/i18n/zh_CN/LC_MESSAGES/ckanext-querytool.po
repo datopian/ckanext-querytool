@@ -222,7 +222,7 @@ msgid "Medium Square (2x2)"
 msgstr "小型正方形 (2x2)"
 
 #: ckanext/querytool/helpers.py:265
-msgid "Horizontal Double Small Square"
+msgid "Medium Rectangle (2x4)"
 msgstr ""
 
 #: ckanext/querytool/helpers.py:267
