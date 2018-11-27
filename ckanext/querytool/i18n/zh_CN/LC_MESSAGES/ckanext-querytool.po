@@ -722,7 +722,7 @@ msgstr ""
 msgid ""
 "Load datasets In the Load datasets tab, the prepared data is uploaded "
 "through familiar menus and metadata is filled to help identify and "
-"differentiate the datasets. "
+"differentiate the datasets."
 msgstr ""
 
 #: ckanext/querytool/templates/home/vs-home-page.html:37
@@ -744,7 +744,7 @@ msgid "Step 4."
 msgstr ""
 
 #: ckanext/querytool/templates/home/vs-home-page.html:43
-msgid "Publish application The application becomes available for public use. "
+msgid "Publish application The application becomes available for public use."
 msgstr ""
 
 #: ckanext/querytool/templates/home/snippets/about_text.html:1
