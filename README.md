@@ -154,6 +154,13 @@ If you want to start everything from scratch there is a way to prune your docker
 $ docker system prune -a --volumes
 ```
 
+### Testings layouts
+
+The app allows to configure different layouts for an application's visualizations. We can test expected behavious in half-automated way using Chrome console in the brower:
+
+- Go to /querytool/public/detailed-mortality-by-cause
+- Copy-past and start in the console script from `bin/test-layouts.js`
+
 ## Classical development
 
 ### Installation
