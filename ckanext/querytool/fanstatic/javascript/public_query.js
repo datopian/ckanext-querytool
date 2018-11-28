@@ -258,6 +258,7 @@
                 }
             });
             if (valid) {
+                $("#public-filters").attr('action', '#' + $(this).data('anchor'))
                 $("#public-filters").submit();
             } else {
                 //in the future display some error
