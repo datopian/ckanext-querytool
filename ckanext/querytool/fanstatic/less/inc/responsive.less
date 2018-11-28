@@ -36,7 +36,7 @@
           }
           &.vertical {
             .c3 {
-              max-height: @visualization-grid-base-size*4 + @grid-gutter-width - @visualization-filter-height;
+              max-height: @visualization-grid-base-size*4 + @grid-gutter-width*3 - @visualization-filter-height;
             }
           }
         }
@@ -46,12 +46,12 @@
           }
           &.square {
             .c3 {
-              max-height: @visualization-grid-base-size*4 + @grid-gutter-width - @visualization-filter-height;
+              max-height: @visualization-grid-base-size*4 + @grid-gutter-width*3 - @visualization-filter-height;
             }
           }
           &.vertical {
             .c3 {
-              max-height: @visualization-grid-base-size*4 + @grid-gutter-width - @visualization-filter-height;
+              max-height: @visualization-grid-base-size*4 + @grid-gutter-width*3 - @visualization-filter-height;
             }
           }
         }
@@ -77,7 +77,7 @@
         width: calc(100% * (3/4) - @visualization-grid-gutter);
         height: @visualization-grid-base-size*2 + @grid-gutter-width;
         &.vertical {
-          height: @visualization-grid-base-size*4 + @grid-gutter-width;
+          height: @visualization-grid-base-size*4 + @grid-gutter-width*3;
         }
       }
       &.size-lg {
@@ -85,10 +85,10 @@
         height: @visualization-grid-base-size*2 + @grid-gutter-width;
         &.square {
           width: calc(100% * (3/4.5) - @visualization-grid-gutter);
-          height: @visualization-grid-base-size*4 + @grid-gutter-width;
+          height: @visualization-grid-base-size*4 + @grid-gutter-width*3;
         }
         &.vertical {
-          height: @visualization-grid-base-size*4 + @grid-gutter-width;
+          height: @visualization-grid-base-size*4 + @grid-gutter-width*3;
         }
       }
       &.size-xl {
