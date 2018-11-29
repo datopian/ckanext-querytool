@@ -3,7 +3,7 @@
 const TIMEOUT = 10000
 const ELEMENTS = {
   labelTooltipName: '.control-label[for="chart_field_tooltip_name_1"]',
-  labelYAxisTicksCount: '.control-label[for="chart_field_y_ticks_format_1"]',
+  labelYAxisTicksCount: '.control-label[for="chart_field_tick_count_1"]',
 }
 
 module.exports = {
@@ -19,11 +19,12 @@ module.exports = {
         .setValue('input#field-password', 'test1234')
         .click('button.btn-primary[type=submit]')
         .pause(TIMEOUT/10)
-        // Check sizes
+        // Check hidden elements
         .url(`${client.launch_url}/querytool/edit_visualizations/detailed-mortality-by-cause`)
         .waitForElementVisible('body', TIMEOUT)
         .assert.hidden(ELEMENTS.labelTooltipName)
         .assert.hidden(ELEMENTS.labelYAxisTicksCount)
+        .end()
     },
 
 };
