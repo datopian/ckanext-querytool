@@ -49,14 +49,11 @@
       <div class="flex filters-wrap">
         <div class="filters">
           {% if querytool.public_filters  %}
+            {% set show_arrow = False %}
             {% for filter in querytool.public_filters %}
-              {% if filter.visibility == 'public'  %}
-                {% set public_filter_id = h.querytool_get_uuid() %}
-                {% snippet 'ajax_snippets/public_filter_item.html', id=public_filter_id, q_name=querytool.name, n=filter.order, selected_filter=filter %}
-              {% else %}
-                {% set public_filter_id = h.querytool_get_uuid() %}
-                {% snippet 'ajax_snippets/public_filter_item.html', id=public_filter_id, q_name=querytool.name, n=filter.order, selected_filter=filter, class='hidden' %}
-              {% endif %}
+              {% set public_filter_id = h.querytool_get_uuid() %}
+              {% snippet 'ajax_snippets/public_filter_item.html', id=public_filter_id, q_name=querytool.name, n=filter.order, selected_filter=filter, visibility=filter.visibility, show_arrow=show_arrow %}
+              {% set show_arrow = show_arrow or filter.visibility == 'public' %}
             {% endfor %}
           {% endif %}
           <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>

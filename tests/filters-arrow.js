@@ -14,7 +14,7 @@ module.exports = {
       client
         .url(`${client.launch_url}/querytool/public/detailed-mortality-by-cause`)
         .waitForElementVisible(ELEMENTS.filters, TIMEOUT)
-        .assert.hidden(ELEMENTS.arrow)
+        .assert.elementNotPresent(ELEMENTS.arrow)
         .end();
     },
 

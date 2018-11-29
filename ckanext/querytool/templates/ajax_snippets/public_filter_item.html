@@ -10,9 +10,15 @@
   {% set fc = 'FFFFFF' %}
 {% endif %}
 
+{% if visibility == 'public' %}
+  {% set class='' %}
+{% else %}
+  {% set class='hidden' %}
+{% endif %}
+
 <div id="filter_item_{{ id }}" class="{% if class %}{{ class }}{% else %}filter-group-wrapper{% endif %}" >
   <!--don't display arrow on first filter -->
-  {% if n!=1 %}
+  {% if show_arrow %}
     <span class="fa fa-arrow-right"></span>
   {% endif %}
   <div class="filter-group" style="background: rgba{{ h.querytool_hex_to_rgba(fc, 0.7) }};">
