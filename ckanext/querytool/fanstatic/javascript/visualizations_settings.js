@@ -72,7 +72,7 @@
                     'value': '.4f'
                 },
                 {
-                    'text': _('Dolar e.g 2000$'),
+                    'text': _('Currency e.g. $2,000.00'),
                     'value': '$'
                 },
                 {

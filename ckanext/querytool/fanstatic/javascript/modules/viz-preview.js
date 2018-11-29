@@ -525,17 +525,27 @@ ckan.module('querytool-viz-preview', function() {
             }
         },
 
-        //Check data format, if % or comma round decimal numbers
+        // Format number
         sortFormatData: function(dataf, val) {
             var format = '';
+            // Comma: round decimal
             if (dataf === ',') {
                 format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
+            // Percentage: round decimal
             } else if (dataf === '.0%') {
                 format = !(val % 1) ? d3.format(dataf) : d3.format('.2%');
+            // Currency: round decimal
+            } else if (dataf === '$') {
+                format = d3.format('$,.' + this.countFormatDecimals(val) + 'f');
             } else {
                 format = d3.format(dataf);
             }
             return format(val);
+        },
+
+        // Count format decimals (limit 2)
+        countFormatDecimals: function (val) {
+          return 10*val % 1 ? 2 : val % 1 ? 1 : 0;
         }
     }
 });

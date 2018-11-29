@@ -186,7 +186,7 @@ msgstr "小数（4位，例如2.5012）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:75
 #: ckanext/querytool/helpers.py:238
-msgid "Dolar e.g 2000$"
+msgid "Currency e.g. $2,000"
 msgstr "美元（例如2000$）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:79

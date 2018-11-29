@@ -235,7 +235,7 @@ def get_charts_data_formats(num=None):
                {'text': _('Decimal (2 digit) e.g 2.50'), 'value': '.2f'},
                {'text': _('Decimal (3 digit) e.g 2.501'), 'value': '.3f'},
                {'text': _('Decimal (4 digit) e.g 2.5012'), 'value': '.4f'},
-               {'text': _('Dolar e.g 2000$'), 'value': '$'},
+               {'text': _('Currency e.g. $2,000'), 'value': '$'},
                {'text': _('Rounded e.g 2k'), 'value': 's'},
                {'text': _('Percentage (multiply by 100) e.g 200000%'),
                 'value': '.0%'},
