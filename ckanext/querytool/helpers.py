@@ -248,8 +248,7 @@ def get_charts_data_formats(num=None):
                {'text': _('Comma thousands separator (1 digit) e.g 2,512.3'),
                    'value': ',.1f'},
                {'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
-                   'value': ',.2f'},
-               {'text': _('Binary e.g 11111010000'), 'value': 'b'}]
+                   'value': ',.2f'}]
     if num:
         return options[:num]
     return options
