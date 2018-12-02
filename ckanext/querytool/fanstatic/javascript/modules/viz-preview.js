@@ -532,9 +532,6 @@ ckan.module('querytool-viz-preview', function() {
             // Comma
             if (dataf === ',') {
                 format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
-            // Percentage
-            } else if (dataf === '.0%') {
-                format = !(val % 1) ? d3.format(dataf) : d3.format('.2%');
             // Currency
             } else if (dataf === '$') {
                 // Add a coma for the thousands and limit the number of decimals to two:

@@ -197,8 +197,14 @@ msgstr "Simplificado ej. 2m"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:83
 #: ckanext/querytool/helpers.py:240
-msgid "Percentage (multiply by 100) e.g 200000%"
-msgstr "Porcentaje (multiplica el valor por 100) ej. 20%"
+msgid "Percentage (0 digit) e.g 25% for 0.25"
+msgstr "Porcentaje (0 dígitos) ej. 25% - 0.25"
+
+msgid "Percentage (1 digit) e.g 25.1% for 0.251"
+msgstr "Porcentaje (1 dígitos) ej. 25.1% - 0.251"
+
+msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
+msgstr "Porcentaje (2 dígitos) ej. 25.12% - 0.2512"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
 #: ckanext/querytool/helpers.py:242

@@ -196,8 +196,14 @@ msgstr "取整（例如2k）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:83
 #: ckanext/querytool/helpers.py:240
-msgid "Percentage (multiply by 100) e.g 200000%"
+msgid "Percentage (0 digit) e.g 25% for 0.25"
 msgstr "百分比（除以100，例如200000%）"
+
+msgid "Percentage (1 digit) e.g 25.1% for 0.251"
+msgstr ""
+
+msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
+msgstr ""
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
 #: ckanext/querytool/helpers.py:242
