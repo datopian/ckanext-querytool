@@ -527,25 +527,35 @@ ckan.module('querytool-viz-preview', function() {
 
         // Format number
         sortFormatData: function(dataf, val) {
+            var digits = 0;
             var format = '';
-            // Comma: round decimal
+            // Comma
             if (dataf === ',') {
                 format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
-            // Percentage: round decimal
+            // Percentage
             } else if (dataf === '.0%') {
                 format = !(val % 1) ? d3.format(dataf) : d3.format('.2%');
-            // Currency: round decimal
+            // Currency
             } else if (dataf === '$') {
-                format = d3.format('$,.' + this.countFormatDecimals(val) + 'f');
+                // Add a coma for the thousands and limit the number of decimals to two:
+                // $ 2,512.34 instead of $2512.3456
+                digits = this.countDecimals(val, 2);
+                format = d3.format('$,.' + digits + 'f');
+            // Rounded
+            } else if (dataf === 's') {
+                // Limit the number of decimals to one: 2.5K instead of 2.5123456K
+                val = Math.round(val*10) / 10;
+                format = d3.format(dataf);
+            // Others
             } else {
                 format = d3.format(dataf);
             }
             return format(val);
         },
 
-        // Count format decimals (limit 2)
-        countFormatDecimals: function (val) {
-          return 10*val % 1 ? 2 : val % 1 ? 1 : 0;
+        // Count format decimals limited by "max"
+        countDecimals: function (val, max) {
+          return Math.min(val*10 % 1 ? 2 : val % 1 ? 1 : 0, max);
         }
     }
 });
