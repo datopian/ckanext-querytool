@@ -207,8 +207,14 @@ msgstr ""
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
 #: ckanext/querytool/helpers.py:242
-msgid "Comma (thousands separator) e.g 2,000"
+msgid "Comma thousands separator (0 digit) e.g 2,512"
 msgstr "带分隔符的数字（每三位加逗号分隔符，例如2,000）"
+
+msgid "Comma thousands separator (1 digit) e.g 2,512.3"
+msgstr ""
+
+msgid "Comma thousands separator (2 digit) e.g 2,512.34"
+msgstr ""
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:91
 #: ckanext/querytool/helpers.py:244

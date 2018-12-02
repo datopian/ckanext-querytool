@@ -243,8 +243,12 @@ def get_charts_data_formats(num=None):
                    'value': '.1%'},
                {'text': _('Percentage (2 digit) e.g 25.12% for 0.2512'),
                    'value': '.2%'},
-               {'text': _('Comma (thousands separator) e.g 2,000'),
-                'value': ','},
+               {'text': _('Comma thousands separator (0 digit) e.g 2,512'),
+                   'value': ',.0f'},
+               {'text': _('Comma thousands separator (1 digit) e.g 2,512.3'),
+                   'value': ',.1f'},
+               {'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
+                   'value': ',.2f'},
                {'text': _('Binary e.g 11111010000'), 'value': 'b'}]
     if num:
         return options[:num]

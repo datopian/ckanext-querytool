@@ -208,8 +208,14 @@ msgstr "Porcentaje (2 dígitos) ej. 25.12% - 0.2512"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
 #: ckanext/querytool/helpers.py:242
-msgid "Comma (thousands separator) e.g 2,000"
-msgstr "Coma (separador de miles) ej. 2,000"
+msgid "Comma thousands separator (0 digit) e.g 2,512"
+msgstr "Coma separador de miles (0 dígitos) ej. 2,512"
+
+msgid "Comma thousands separator (1 digit) e.g 2,512.3"
+msgstr "Coma separador de miles (1 dígitos) ej. 2,512.3"
+
+msgid "Comma thousands separator (2 digit) e.g 2,512.34"
+msgstr "Coma separador de miles (2 dígitos) ej. 2,512.34"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:91
 #: ckanext/querytool/helpers.py:244

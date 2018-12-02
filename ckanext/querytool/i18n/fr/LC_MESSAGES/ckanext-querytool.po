@@ -208,8 +208,14 @@ msgstr "Pourcentage (2 chiffres) ex. 25.12% - 0.2512"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
 #: ckanext/querytool/helpers.py:242
-msgid "Comma (thousands separator) e.g 2,000"
-msgstr "Virgule (séparateur de milliers) ex. 2,000"
+msgid "Comma thousands separator (0 digit) e.g 2,512"
+msgstr "Virgule séparateur de milliers (0 chiffres) ex. 2,512"
+
+msgid "Comma thousands separator (1 digit) e.g 2,512.3"
+msgstr "Virgule séparateur de milliers (1 chiffres) ex. 2,512.3"
+
+msgid "Comma thousands separator (2 digit) e.g 2,512.34"
+msgstr "Virgule séparateur de milliers (2 chiffres) ex. 2,512.34"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:91
 #: ckanext/querytool/helpers.py:244

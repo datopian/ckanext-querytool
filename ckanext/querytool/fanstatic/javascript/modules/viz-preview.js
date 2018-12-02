@@ -529,11 +529,8 @@ ckan.module('querytool-viz-preview', function() {
         sortFormatData: function(dataf, val) {
             var digits = 0;
             var format = '';
-            // Comma
-            if (dataf === ',') {
-                format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
             // Currency
-            } else if (dataf === '$') {
+            if (dataf === '$') {
                 // Add a coma for the thousands and limit the number of decimals to two:
                 // $ 2,512.34 instead of $2512.3456
                 digits = this.countDecimals(val, 2);
