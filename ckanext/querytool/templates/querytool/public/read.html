@@ -41,7 +41,7 @@
   <div class="public-query">
     {% if querytools %}
       {% for querytool in querytools %}
-        {% set y_axis_columns = querytool.y_axis_columns.split(',') %}
+        {% set y_axis_columns = h.querytool_parse_y_axis_columns(querytool.y_axis_columns) %}
         {% if querytool.y_axis_column %}
           {% set y_axis_selected = querytool.y_axis_column %}
        {% endif %}
@@ -66,7 +66,7 @@
           {% else %}
             <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
             {% for y_axis in y_axis_columns %}
-              <option value="{{ y_axis }}" {{ 'selected' if y_axis == y_axis_selected }}>{{ y_axis }}</option>
+              <option value="{{ y_axis.name }}" {{ 'selected' if y_axis.name == y_axis_selected }}>{{ y_axis.alias }}</option>
             {% endfor %}
             </select>
           {% endif %}

@@ -126,7 +126,7 @@ Example usage:
             {% for column in columns %}
             {% set column_id = h.querytool_get_uuid() %}
             <li class="checkbox-marked">
-                <input name="y_axis_column_{{ column_id }}" id="y_axis_column_{{ column_id }}" type="checkbox" value="{{ column }}" {% if column in data.y_axis_columns %} checked {% endif %} />
+                <input name="y_axis_column_{{ column_id }}" id="y_axis_column_{{ column_id }}" type="checkbox" value="{{ column }}" {% if column in data.y_axis_column_names %} checked {% endif %} />
                 <label for="y_axis_column_{{ column_id }}">{{ column }}</label>
             </li>
             {% endfor %}

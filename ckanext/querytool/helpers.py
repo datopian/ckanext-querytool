@@ -557,3 +557,27 @@ def allow_nav_bar():
     '''
     isAllowed = config.get('ckanext.querytool.allow_nav_bar', default=True)
     return isAllowed
+
+
+def parse_y_axis_columns(value):
+    # The input string can be:
+    # - falsy (None/empty/etc)
+    # - modern (as JSON of list of {name,alias})
+    # - legacy (as a comma separated string of column names)
+
+    # Falsy
+    if not value:
+        return []
+
+    # Modern
+    try:
+        columns = json.loads(value)
+        if not isinstance(columns, list):
+            raise TypeError()
+        return columns
+
+    # Legacy
+    except Exception:
+        names = value.split(',')
+        columns = map(lambda name: {'name': name, 'alias': name}, names)
+        return columns
