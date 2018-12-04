@@ -121,15 +121,9 @@ Example usage:
       {% set column_id = h.querytool_get_uuid() %}
       {% set measure = h.querytool_pick_first_by_attr_value(querytool.y_axis_columns, 'name', column) %}
       <div class="control-group control-checkbox-group">
+        <input name="y_axis_name_{{ column_id }}" id="y_axis_name_{{ column_id }}" type="checkbox" value="{{ column }}" {% if measure %} checked {% endif %} />
         <label class="control-label" for="y_axis_name_{{ column_id }}">{{ column }}</label>
-        <div class="controls ">
-          <div class="input-prepend">
-            <span class="add-on">
-              <input name="y_axis_name_{{ column_id }}" id="y_axis_name_{{ column_id }}" type="checkbox" value="{{ column }}" {% if measure %} checked {% endif %} />
-            </span>
-            <input name="y_axis_alias_{{ column_id }}" id="y_axis_alias_{{ column_id }}" type="text" placeholder="Optional measure alias" value="{{ measure.alias }}">
-          </div>
-        </div>
+        <input name="y_axis_alias_{{ column_id }}" id="y_axis_alias_{{ column_id }}" type="text" placeholder="Optional alias" value="{{ measure.alias }}">
       </div>
     {% endfor %}
   </div>
