@@ -264,12 +264,12 @@ class QueryToolController(base.BaseController):
         errors = errors or {}
         error_summary = error_summary or {}
 
-        _querytool['y_axis_columns'] = helpers.parse_y_axis_columns(
-            _querytool.get('y_axis_columns'))
-
-        _querytool['y_axis_names'] = map(
-            lambda column: column['name'],
-            _querytool['y_axis_columns'])
+        if _querytool.get('y_axis_columns'):
+            _querytool['y_axis_columns'] = helpers.parse_y_axis_columns(
+                _querytool.get('y_axis_columns'))
+            _querytool['y_axis_names'] = map(
+                lambda column: column['name'],
+                _querytool['y_axis_columns'])
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary,
