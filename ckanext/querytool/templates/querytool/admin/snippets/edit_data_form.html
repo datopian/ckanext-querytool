@@ -117,15 +117,17 @@ Example usage:
   <legend>{{ _('Measure(s)') }}</legend>
   {% set columns = h.querytool_get_numeric_resource_columns(data.chart_resource) %}
   <div id="y-axis-columns-container" {% if columns | length == 0 %} style="display: none;" {% endif %}>
-    {% for column in columns %}
-      {% set column_id = h.querytool_get_uuid() %}
-      {% set measure = h.querytool_pick_first_by_attr_value(querytool.y_axis_columns, 'name', column) %}
-      <div class="control-group control-checkbox-group">
-        <input name="y_axis_name_{{ column_id }}" id="y_axis_name_{{ column_id }}" type="checkbox" value="{{ column }}" {% if measure %} checked {% endif %} />
-        <label class="control-label" for="y_axis_name_{{ column_id }}">{{ column }}</label>
-        <input name="y_axis_alias_{{ column_id }}" id="y_axis_alias_{{ column_id }}" type="text" placeholder="Optional alias" value="{{ measure.alias }}">
-      </div>
-    {% endfor %}
+    <div id="y-axis-columns-results">
+      {% for column in columns %}
+        {% set column_id = h.querytool_get_uuid() %}
+        {% set measure = h.querytool_pick_first_by_attr_value(querytool.y_axis_columns, 'name', column) %}
+        <div class="control-group control-checkbox-group">
+          <input name="y_axis_name_{{ column_id }}" id="y_axis_name_{{ column_id }}" type="checkbox" value="{{ column }}" {% if measure %} checked {% endif %} />
+          <label class="control-label" for="y_axis_name_{{ column_id }}">{{ column }}</label>
+          <input name="y_axis_alias_{{ column_id }}" id="y_axis_alias_{{ column_id }}" type="text" placeholder="Optional alias" value="{{ measure.alias }}">
+        </div>
+      {% endfor %}
+    </div>
   </div>
 
   <em class="muted"

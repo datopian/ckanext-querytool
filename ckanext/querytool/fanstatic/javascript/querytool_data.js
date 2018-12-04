@@ -380,7 +380,7 @@
                             $(e.target).closest('.filter_item').remove();
                             _handleFilterItemsOrder();
                         });
-                        
+
                         handleRenderedFilters(total_items, resource_id);
                         jscolor.installByClassName("jscolor");
 
@@ -454,10 +454,11 @@
                             response.result.forEach(function(item, i) {
                                 var columnId = _uuidv4();
                                 var element = [
-                                    '<li class="checkbox-marked">',
-                                    '<input name="y_axis_column_' + columnId + '" id="y_axis_column_' + columnId + '" type="checkbox" value="' + item + '" />',
-                                    '<label for="y_axis_column_' + columnId + '">' + item + '</label>',
-                                    '</li>'
+                                    '<div class="control-group control-checkbox-group">',
+                                      '<input name="y_axis_name_' + columnId + '" id="y_axis_name_' + columnId + '" type="checkbox" value="' + item + '" />',
+                                      '<label class="control-label" for="y_axis_name_' + columnId + '">' + item + '</label>',
+                                      '<input name="y_axis_alias_' + columnId + '" id="y_axis_alias_' + columnId + '" type="text" placeholder="Optional alias" value="">',
+                                    '</div>'
                                 ].join('');
 
                                 yAxisColumnsResults.append(element);
