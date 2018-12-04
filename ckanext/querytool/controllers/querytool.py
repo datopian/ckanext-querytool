@@ -189,11 +189,10 @@ class QueryToolController(base.BaseController):
                         data['data_filter_color_{}'.format(id)]
 
                     filters.append(filter)
-                elif k.startswith('y_axis_column_'):
-                    y_axis_columns.append({
-                        'name': v,
-                        'alias': v,
-                    })
+                elif k.startswith('y_axis_name_'):
+                    id = k.split('_')[-1]
+                    alias = data.get('y_axis_alias_%s' % id, '')
+                    y_axis_columns.append({'name': v, 'alias': alias})
 
                 elif k.startswith('related_querytool_'):
                     related_querytool = {}
@@ -223,7 +222,8 @@ class QueryToolController(base.BaseController):
             _querytool.update(data)
             _querytool['querytool'] = querytool
             _querytool['sql_string'] = sql_string
-            _querytool['y_axis_columns'] = json.dumps(y_axis_columns)
+            _querytool['y_axis_columns'] = (
+                json.dumps(y_axis_columns) if y_axis_columns else '')
 
             try:
                 junk = _get_action('querytool_update', _querytool)

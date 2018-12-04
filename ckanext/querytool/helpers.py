@@ -579,5 +579,12 @@ def parse_y_axis_columns(value):
     # Legacy
     except Exception:
         names = value.split(',')
-        columns = map(lambda name: {'name': name, 'alias': name}, names)
+        columns = map(lambda name: {'name': name, 'alias': ''}, names)
         return columns
+
+
+def pick_first_by_attr_value(items, attr, value, default=False):
+    for item in items:
+        if item.get(attr) == value:
+            return item
+    return default
