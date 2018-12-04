@@ -38,7 +38,7 @@
     {% set selected_y_axis_column = data.y_axis_column %}
   {% endif %}
   <div class="chart-global-controls">
-    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Default measure'), options=data.y_axis_columns_options, selected=selected_y_axis_column) }}
+    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Default measure'), options=data.y_axis_options, selected=selected_y_axis_column) }}
   </div>
 
   <fieldset>

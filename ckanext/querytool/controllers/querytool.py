@@ -267,7 +267,7 @@ class QueryToolController(base.BaseController):
         _querytool['y_axis_columns'] = helpers.parse_y_axis_columns(
             _querytool.get('y_axis_columns'))
 
-        _querytool['y_axis_column_names'] = map(
+        _querytool['y_axis_names'] = map(
             lambda column: column['name'],
             _querytool['y_axis_columns'])
 
@@ -570,7 +570,7 @@ class QueryToolController(base.BaseController):
         data['y_axis_columns'] = helpers.parse_y_axis_columns(
             data.get('y_axis_columns'))
 
-        data['y_axis_columns_options'] = map(
+        data['y_axis_options'] = map(
             lambda column: {'value': column['name'], 'text': column['alias']},
             data['y_axis_columns'])
 
