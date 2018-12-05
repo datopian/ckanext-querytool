@@ -145,8 +145,9 @@ ckan.module('querytool-viz-preview', function() {
             var padding_bottom = (this.options.padding_bottom === true) ? null : this.options.padding_bottom;
             var tick_count = (this.options.tick_count === true) ? '' : this.options.tick_count;
             var show_labels = this.options.show_labels;
-            var y_label = this.options.y_label;
+            var y_label = (this.options.y_label === true) ? null : this.options.y_label;
             var data_sort = this.options.data_sort;
+            var measure_label = this.options.measure_label;
             var additionalCategory = (this.options.category_name === true) ? '' : this.options.category_name;
 
             var options = {
@@ -339,7 +340,7 @@ ckan.module('querytool-viz-preview', function() {
                             bottom: parseInt(padding_bottom)
                         },
                         label: {
-                          text: y_label,
+                          text: y_label || measure_label || '',
                           position: 'outer-middle',
                         }
                     },

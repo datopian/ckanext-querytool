@@ -29,7 +29,7 @@ module.exports = {
         .assert.containsText('h1', 'Detailed Mortality by Cause')
         // Set by measure selection
         .waitForElementVisible('.chart:nth-child(1) .c3-axis-y-label', 10000)
-        .assert.containsText('.chart:nth-child(1) .c3-axis-y-label', 'Percentagem')
+        .assert.containsText('.chart:nth-child(1) .c3-axis-y-label', 'Percentagem (alias)')
         // Set in the application config
         .waitForElementVisible('.chart:nth-child(4) .c3-axis-y-label', 10000)
         .assert.containsText('.chart:nth-child(4) .c3-axis-y-label', 'Title from config')

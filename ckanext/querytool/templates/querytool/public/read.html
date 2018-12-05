@@ -106,6 +106,8 @@
     </div>
     <!-- Visualizations container -->
     <div class="visualizations">
+      {% set measure = h.querytool_pick_first_by_attr_value(h.querytool_parse_y_axis_columns(querytool.y_axis_columns), 'name', y_axis_selected, default={}) %}
+      {% set measure_label = measure.alias or measure.name %}
       {% for item in querytool.visualizations %}
         {% set chart_id = h.querytool_get_uuid() %}
       <div class="item {{ item.size }} {{ item.type }} chart-{{chart_id}} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
@@ -150,7 +152,8 @@
             filter_name = item.filter_name,
             filter_value = item.filter_value,
             category_name = item.category_name,
-            data_sort = item.sort
+            data_sort = item.sort,
+            measure_label = measure_label
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
