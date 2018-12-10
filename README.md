@@ -85,7 +85,7 @@ http://ckan-dev:5000/
 
 > To pass the end-to-end tests you have to add required applictions from the staging site to your development server. See notes for every single test
 
-We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-end tests inside the `tests` directory. Prefer to name test files after feature/bug names. To run the tests you should have the development server up and running:
+We write and store unit tests inside the `ckanext/querytool/tests` directory and end-to-end tests inside the `tests` directory. Prefer to name test files after feature/bug names. To run the tests you should have the development server up and running:
 
 ```bash
 $ make test
