@@ -55,6 +55,7 @@
         }
 
         tick_count_name.change(function(event) {
+            // TODO: what doesn this code do and when; bad duplication?
             var selectValues = [{
                     'text': _('Decimal (1 digit) e.g 2.5'),
                     'value': '.1f'
@@ -72,7 +73,7 @@
                     'value': '.4f'
                 },
                 {
-                    'text': _('Dolar e.g 2000$'),
+                    'text': _('Currency e.g. $2,000'),
                     'value': '$'
                 },
                 {
@@ -80,17 +81,29 @@
                     'value': 's'
                 },
                 {
-                    'text': _('Percentage (multiply by 100) e.g 200000%'),
-                    'value': 'p'
+                    'text': _('Percentage (0 digit) e.g 25% for 0.25'),
+                    'value': '.0%'
                 },
                 {
-                    'text': _('Comma (thousands separator) e.g 2,000'),
-                    'value': ','
+                    'text': _('Percentage (1 digit) e.g 25.1% for 0.251'),
+                    'value': '.1%'
                 },
                 {
-                    'text': _('Binary e.g 11111010000'),
-                    'value': 'b'
-                }
+                    'text': _('Percentage (2 digit) e.g 25.12% for 0.2512'),
+                    'value': '.2%'
+                },
+                {
+                    'text': _('Comma thousands separator (0 digit) e.g 2,512'),
+                    'value': ',.0f'
+                },
+                {
+                    'text': _('Comma thousands separator (1 digit) e.g 2,512.3'),
+                    'value': ',.1f'
+                },
+                {
+                    'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
+                    'value': ',.2f'
+                },
             ]
 
             var elem = $(this);

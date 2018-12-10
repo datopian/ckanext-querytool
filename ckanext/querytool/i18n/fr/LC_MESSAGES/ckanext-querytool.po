@@ -187,7 +187,7 @@ msgstr "Décimal (4 chiffres) ex. 2.5012"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:75
 #: ckanext/querytool/helpers.py:238
-msgid "Dolar e.g 2000$"
+msgid "Currency e.g. $2,000"
 msgstr "Monnaie ex. $ 2000"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:79
@@ -197,13 +197,25 @@ msgstr "Arrondi ex. 2m"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:83
 #: ckanext/querytool/helpers.py:240
-msgid "Percentage (multiply by 100) e.g 200000%"
-msgstr "Pourcentage (multipliez la valeur par 100) ex. 20%"
+msgid "Percentage (0 digit) e.g 25% for 0.25"
+msgstr "Pourcentage (0 chiffres) ex. 25% - 0.25"
+
+msgid "Percentage (1 digit) e.g 25.1% for 0.251"
+msgstr "Pourcentage (1 chiffres) ex. 25.1% - 0.251"
+
+msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
+msgstr "Pourcentage (2 chiffres) ex. 25.12% - 0.2512"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
 #: ckanext/querytool/helpers.py:242
-msgid "Comma (thousands separator) e.g 2,000"
-msgstr "Virgule (séparateur de milliers) ex. 2,000"
+msgid "Comma thousands separator (0 digit) e.g 2,512"
+msgstr "Virgule séparateur de milliers (0 chiffres) ex. 2,512"
+
+msgid "Comma thousands separator (1 digit) e.g 2,512.3"
+msgstr "Virgule séparateur de milliers (1 chiffres) ex. 2,512.3"
+
+msgid "Comma thousands separator (2 digit) e.g 2,512.34"
+msgstr "Virgule séparateur de milliers (2 chiffres) ex. 2,512.34"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:91
 #: ckanext/querytool/helpers.py:244

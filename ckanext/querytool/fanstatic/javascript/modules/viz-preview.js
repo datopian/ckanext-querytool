@@ -525,17 +525,31 @@ ckan.module('querytool-viz-preview', function() {
             }
         },
 
-        //Check data format, if % or comma round decimal numbers
+        // Format number
         sortFormatData: function(dataf, val) {
+            var digits = 0;
             var format = '';
-            if (dataf === ',') {
-                format = !(val % 1) ? d3.format(dataf) : d3.format(',.2f');
-            } else if (dataf === '.0%') {
-                format = !(val % 1) ? d3.format(dataf) : d3.format('.2%');
+            // Currency
+            if (dataf === '$') {
+                // Add a coma for the thousands and limit the number of decimals to two:
+                // $ 2,512.34 instead of $2512.3456
+                digits = this.countDecimals(val, 2);
+                format = d3.format('$,.' + digits + 'f');
+            // Rounded
+            } else if (dataf === 's') {
+                // Limit the number of decimals to one: 2.5K instead of 2.5123456K
+                val = Math.round(val*10) / 10;
+                format = d3.format(dataf);
+            // Others
             } else {
                 format = d3.format(dataf);
             }
             return format(val);
+        },
+
+        // Count format decimals limited by "max"
+        countDecimals: function (val, max) {
+          return Math.min(val*10 % 1 ? 2 : val % 1 ? 1 : 0, max);
         }
     }
 });

@@ -235,13 +235,20 @@ def get_charts_data_formats(num=None):
                {'text': _('Decimal (2 digit) e.g 2.50'), 'value': '.2f'},
                {'text': _('Decimal (3 digit) e.g 2.501'), 'value': '.3f'},
                {'text': _('Decimal (4 digit) e.g 2.5012'), 'value': '.4f'},
-               {'text': _('Dolar e.g 2000$'), 'value': '$'},
+               {'text': _('Currency e.g. $2,000'), 'value': '$'},
                {'text': _('Rounded e.g 2k'), 'value': 's'},
-               {'text': _('Percentage (multiply by 100) e.g 200000%'),
-                'value': '.0%'},
-               {'text': _('Comma (thousands separator) e.g 2,000'),
-                'value': ','},
-               {'text': _('Binary e.g 11111010000'), 'value': 'b'}]
+               {'text': _('Percentage (0 digit) e.g 25% for 0.25'),
+                   'value': '.0%'},
+               {'text': _('Percentage (1 digit) e.g 25.1% for 0.251'),
+                   'value': '.1%'},
+               {'text': _('Percentage (2 digit) e.g 25.12% for 0.2512'),
+                   'value': '.2%'},
+               {'text': _('Comma thousands separator (0 digit) e.g 2,512'),
+                   'value': ',.0f'},
+               {'text': _('Comma thousands separator (1 digit) e.g 2,512.3'),
+                   'value': ',.1f'},
+               {'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
+                   'value': ',.2f'}]
     if num:
         return options[:num]
     return options

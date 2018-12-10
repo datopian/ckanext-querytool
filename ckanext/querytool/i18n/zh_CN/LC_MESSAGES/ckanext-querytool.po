@@ -186,7 +186,7 @@ msgstr "小数（4位，例如2.5012）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:75
 #: ckanext/querytool/helpers.py:238
-msgid "Dolar e.g 2000$"
+msgid "Currency e.g. $2,000"
 msgstr "美元（例如2000$）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:79
@@ -196,13 +196,25 @@ msgstr "取整（例如2k）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:83
 #: ckanext/querytool/helpers.py:240
-msgid "Percentage (multiply by 100) e.g 200000%"
+msgid "Percentage (0 digit) e.g 25% for 0.25"
 msgstr "百分比（除以100，例如200000%）"
+
+msgid "Percentage (1 digit) e.g 25.1% for 0.251"
+msgstr ""
+
+msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
+msgstr ""
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
 #: ckanext/querytool/helpers.py:242
-msgid "Comma (thousands separator) e.g 2,000"
+msgid "Comma thousands separator (0 digit) e.g 2,512"
 msgstr "带分隔符的数字（每三位加逗号分隔符，例如2,000）"
+
+msgid "Comma thousands separator (1 digit) e.g 2,512.3"
+msgstr ""
+
+msgid "Comma thousands separator (2 digit) e.g 2,512.34"
+msgstr ""
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:91
 #: ckanext/querytool/helpers.py:244
