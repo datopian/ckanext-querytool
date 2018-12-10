@@ -167,6 +167,8 @@ ckan.module('querytool-viz-preview', function() {
             // Title
             var titleVal = (this.options.title === true) ? '' : this.options.title;
             var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
+            if (!queryFilters.length) queryFilters = (this.options.info_query_filters === true) ? [] : this.options.info_query_filters;
+            console.log(queryFilters)
             titleVal = this.renderChartTitle(titleVal, {
               filters: queryFilters,
               measure: {name: y_axis, alias: measure_label},
