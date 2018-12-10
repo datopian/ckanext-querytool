@@ -237,6 +237,10 @@
             });
 
             html2canvas(document.body, {
+              //fix images
+              ignoreElements: function(element) {
+                if (element.className == 'html2canvas-ignore') return true;
+              },
             }).then(function(canvas) {
                 Canvas2Image.saveAsPNG(canvas);
             });
