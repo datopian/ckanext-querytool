@@ -189,8 +189,10 @@ class QueryToolController(base.BaseController):
                         data['data_filter_color_{}'.format(id)]
 
                     filters.append(filter)
-                elif k.startswith('y_axis_column_'):
-                    y_axis_columns.append(v)
+                elif k.startswith('y_axis_name_'):
+                    id = k.split('_')[-1]
+                    alias = data.get('y_axis_alias_%s' % id, '')
+                    y_axis_columns.append({'name': v, 'alias': alias})
 
                 elif k.startswith('related_querytool_'):
                     related_querytool = {}
@@ -220,7 +222,8 @@ class QueryToolController(base.BaseController):
             _querytool.update(data)
             _querytool['querytool'] = querytool
             _querytool['sql_string'] = sql_string
-            _querytool['y_axis_columns'] = ','.join(y_axis_columns)
+            _querytool['y_axis_columns'] = (
+                json.dumps(y_axis_columns) if y_axis_columns else '')
 
             try:
                 junk = _get_action('querytool_update', _querytool)
@@ -262,8 +265,11 @@ class QueryToolController(base.BaseController):
         error_summary = error_summary or {}
 
         if _querytool.get('y_axis_columns'):
-            _querytool['y_axis_columns'] =\
-                _querytool.get('y_axis_columns').split(',')
+            _querytool['y_axis_columns'] = helpers.parse_y_axis_columns(
+                _querytool.get('y_axis_columns'))
+            _querytool['y_axis_names'] = map(
+                lambda column: column['name'],
+                _querytool['y_axis_columns'])
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary,
@@ -554,13 +560,6 @@ class QueryToolController(base.BaseController):
         data['y_axis_columns'] = _querytool.get('y_axis_columns')
         data['main_filters'] = _querytool.get('filters')
 
-        # We need y_axis_columns names in comma separated
-        # format because ajax snippets only support String parameters
-        # This parameter is used for removing
-        # Y axis values from the rest of the
-        #  filtering options and the X axis values in viz items
-        data['y_axis_values'] = data['y_axis_columns']
-
         # This is required in order to exclude
         # main filters in chart item filter options
         main_filters_names = []
@@ -568,12 +567,21 @@ class QueryToolController(base.BaseController):
             main_filters_names.append(filter['name'])
         data['main_filters_names'] = ','.join(main_filters_names)
 
-        data['y_axis_columns'] = data['y_axis_columns'].split(',')
+        data['y_axis_columns'] = helpers.parse_y_axis_columns(
+            data.get('y_axis_columns'))
 
-        data['y_axis_columns'] = map(lambda column: {
-            'value': column,
-            'text': column
-        }, data['y_axis_columns'])
+        data['y_axis_options'] = map(
+            lambda column: {'value': column['name'], 'text': column['alias']},
+            data['y_axis_columns'])
+
+        # We need y_axis_columns names in comma separated
+        # format because ajax snippets only support String parameters
+        # This parameter is used for removing
+        # Y axis values from the rest of the
+        #  filtering options and the X axis values in viz items
+        data['y_axis_values'] = ','.join(map(
+            lambda column: column['name'],
+            data['y_axis_columns']))
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}

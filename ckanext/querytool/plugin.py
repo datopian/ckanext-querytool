@@ -135,7 +135,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'querytool_get_public_breadcrumb_name':
                 helpers.get_public_breadcrumb_name,
             'querytool_allow_nav_bar':
-                helpers.allow_nav_bar
+                helpers.allow_nav_bar,
+            'querytool_parse_y_axis_columns':
+                helpers.parse_y_axis_columns,
+            'querytool_pick_first_by_attr_value':
+                helpers.pick_first_by_attr_value,
         }
 
     # IAuthFunctions

@@ -38,7 +38,7 @@
     {% set selected_y_axis_column = data.y_axis_column %}
   {% endif %}
   <div class="chart-global-controls">
-    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Default measure'), options=data.y_axis_columns, selected=selected_y_axis_column) }}
+    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Default measure'), options=data.y_axis_options, selected=selected_y_axis_column) }}
   </div>
 
   <fieldset>
@@ -57,6 +57,8 @@
     </div>
   </fieldset>
   <fieldset id="visualization-settings-items" class="visualizations">
+    {% set measure = h.querytool_pick_first_by_attr_value(data.y_axis_columns, 'name', data.y_axis_column, default={}) %}
+    {% set measure_label = measure.alias or measure.name %}
     {% for item in data.visualizations %}
       {% if item.type == 'chart'  %}
         {% snippet 'ajax_snippets/chart_item.html',
@@ -66,7 +68,8 @@
           map_resource = data.map_resource,
           chart_resource = data.chart_resource,
           y_axis_values = data.y_axis_values,
-          main_filters = data.main_filters_names
+          main_filters = data.main_filters_names,
+          measure_label = measure_label
         %}
       {% endif %}
       {% if item.type == 'text_box'  %}

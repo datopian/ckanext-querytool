@@ -41,7 +41,7 @@
   <div class="public-query">
     {% if querytools %}
       {% for querytool in querytools %}
-        {% set y_axis_columns = querytool.y_axis_columns.split(',') %}
+        {% set y_axis_columns = h.querytool_parse_y_axis_columns(querytool.y_axis_columns) %}
         {% if querytool.y_axis_column %}
           {% set y_axis_selected = querytool.y_axis_column %}
        {% endif %}
@@ -66,7 +66,7 @@
           {% else %}
             <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
             {% for y_axis in y_axis_columns %}
-              <option value="{{ y_axis }}" {{ 'selected' if y_axis == y_axis_selected }}>{{ y_axis }}</option>
+              <option value="{{ y_axis.name }}" {{ 'selected' if y_axis.name == y_axis_selected }}>{{ y_axis.alias or y_axis.name }}</option>
             {% endfor %}
             </select>
           {% endif %}
@@ -106,6 +106,8 @@
     </div>
     <!-- Visualizations container -->
     <div class="visualizations">
+      {% set measure = h.querytool_pick_first_by_attr_value(h.querytool_parse_y_axis_columns(querytool.y_axis_columns), 'name', y_axis_selected, default={}) %}
+      {% set measure_label = measure.alias or measure.name %}
       {% for item in querytool.visualizations %}
         {% set chart_id = h.querytool_get_uuid() %}
       <div class="item {{ item.size }} {{ item.type }} chart-{{chart_id}} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
@@ -150,7 +152,8 @@
             filter_name = item.filter_name,
             filter_value = item.filter_value,
             category_name = item.category_name,
-            data_sort = item.sort
+            data_sort = item.sort,
+            measure_label = measure_label
           %}
         {% endif %}
         {% if item.type == 'text_box' %}

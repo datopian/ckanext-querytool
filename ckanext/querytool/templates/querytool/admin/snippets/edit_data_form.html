@@ -116,21 +116,17 @@ Example usage:
 
   <legend>{{ _('Measure(s)') }}</legend>
   {% set columns = h.querytool_get_numeric_resource_columns(data.chart_resource) %}
-
-  <div class="control-group control-checkbox-group"
-       id="y-axis-columns-container"
-       {% if columns | length == 0 %} style="display: none;" {% endif %}>
-    <label class="control-label" for="y-axis-columns-results"><span title="This field is required" class="control-required">*</span>{{ _("Measure(s)") }}</label>
-    <div class="controls">
-        <ul class="inline" id="y-axis-columns-results">
-            {% for column in columns %}
-            {% set column_id = h.querytool_get_uuid() %}
-            <li class="checkbox-marked">
-                <input name="y_axis_column_{{ column_id }}" id="y_axis_column_{{ column_id }}" type="checkbox" value="{{ column }}" {% if column in data.y_axis_columns %} checked {% endif %} />
-                <label for="y_axis_column_{{ column_id }}">{{ column }}</label>
-            </li>
-            {% endfor %}
-        </ul>
+  <div id="y-axis-columns-container" {% if columns | length == 0 %} style="display: none;" {% endif %}>
+    <div id="y-axis-columns-results">
+      {% for column in columns %}
+        {% set column_id = h.querytool_get_uuid() %}
+        {% set measure = h.querytool_pick_first_by_attr_value(querytool.y_axis_columns, 'name', column) %}
+        <div class="control-group control-checkbox-group">
+          <input name="y_axis_name_{{ column_id }}" id="y_axis_name_{{ column_id }}" type="checkbox" value="{{ column }}" {% if measure %} checked {% endif %} />
+          <label class="control-label" for="y_axis_name_{{ column_id }}">{{ column }}</label>
+          <input name="y_axis_alias_{{ column_id }}" id="y_axis_alias_{{ column_id }}" type="text" placeholder="Optional alias" value="{{ measure.alias }}">
+        </div>
+      {% endfor %}
     </div>
   </div>
 

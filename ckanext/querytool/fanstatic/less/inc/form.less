@@ -59,31 +59,19 @@ input[type="color"],
 }
 
 .control-checkbox-group {
-  .inline {
-    display: flex;
-    flex: auto;
-    flex-wrap: wrap;
-    li {
-      display: flex;
-      align-items: center;
-      margin: 0 @grid-gutter-width/2 @grid-gutter-width/2;
-      padding: @grid-gutter-width/4;
-      input[type=checkbox] {
-        top: auto;
-        &:checked + label{
-          background: @color-primary;
-          color: @color-white;
-          padding: 0 @grid-gutter-width/4;
-          border-radius: 2px;
-        }
-      }
-      label{
-        margin-left: @grid-gutter-width/4;
-        margin-bottom: 0;
-        &:after{
-          content: '';
-        }
-      }
+  input[type=checkbox] {
+    top: 0;
+    &:checked + label{
+        font-weight: bold;
+        text-decoration: underline;
+    }
+  }
+  label{
+    padding: 0 @grid-gutter-width/4;
+    margin-left: @grid-gutter-width/4;
+    margin-bottom: 0;
+    &:after{
+      content: '';
     }
   }
 }
