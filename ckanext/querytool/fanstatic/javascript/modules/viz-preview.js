@@ -352,8 +352,12 @@ ckan.module('querytool-viz-preview', function() {
                             fit: true
                         }
                     },
-                    rotated: rotate
+                    rotated: rotate,
                 };
+
+                options.point = {
+                  r: 3,
+                }
             }
             var chart = c3.generate(options);
         },
