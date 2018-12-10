@@ -743,11 +743,11 @@ msgstr "Paso 2."
 msgid ""
 "Load datasets In the Load datasets tab, the prepared data is uploaded "
 "through familiar menus and metadata is filled to help identify and "
-"differentiate the datasets. "
+"differentiate the datasets."
 msgstr ""
 "En la pestaña Cargar datos, los datos preparados se cargan a través de menús "
 "familiares y los metadatos se completan para ayudar a identificar y "
-"diferenciar los conjuntos de datos. "
+"diferenciar los conjuntos de datos."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:37
 msgid "Step 3."
@@ -774,9 +774,8 @@ msgid "Step 4."
 msgstr "Paso 4."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:43
-msgid "Publish application The application becomes available for public use. "
-msgstr ""
-"Publicar aplicación. La aplicación se hace disponible para uso público. "
+msgid "Publish application The application becomes available for public use."
+msgstr "Publicar aplicación. La aplicación se hace disponible para uso público."
 
 #: ckanext/querytool/templates/home/snippets/about_text.html:1
 msgid ""

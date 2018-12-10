@@ -37,6 +37,16 @@ module.exports = {
         .end();
     },
 
+  '[fr] Tables should be in french using `fr` locale':
+    (client) => {
+      client
+        .url(`${client.launch_url}/fr/querytool/public/detailed-mortality-by-cause`)
+        // Check next button
+        .waitForElementVisible(ELEMENTS.nextButton, 10000)
+        .assert.containsText(ELEMENTS.nextButton, 'Suivant')
+        .end();
+    },
+
   '[pt_BR] Tables should be in portuguese using `pt_BR` locale':
     (client) => {
       client

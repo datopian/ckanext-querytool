@@ -14,8 +14,11 @@ docker:
 	docker-compose -f docker/docker-compose.dev.yml build
 
 i18n:
+	# docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -c 'cd /srv/app/src_extensions/ckanext-querytool && python setup.py extract_messages'
 	docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -c 'cd /srv/app/src_extensions/ckanext-querytool && python setup.py compile_catalog -l es -f' && \
-	docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -c 'cd /srv/app/src_extensions/ckanext-querytool && python setup.py extract_messages'
+	docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -c 'cd /srv/app/src_extensions/ckanext-querytool && python setup.py compile_catalog -l fr -f' && \
+	docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -c 'cd /srv/app/src_extensions/ckanext-querytool && python setup.py compile_catalog -l pt_BR -f' && \
+	docker-compose -f docker/docker-compose.dev.yml exec ckan-dev bash -c 'cd /srv/app/src_extensions/ckanext-querytool && python setup.py compile_catalog -l zh_CN -f'
 
 readme:
 	npx doctoc README.md
