@@ -211,40 +211,40 @@ msgid "Binary e.g 11111010000"
 msgstr "Binaire ex. 11111010000"
 
 #: ckanext/querytool/helpers.py:262
-msgid "Small Rectangle"
-msgstr "Petit rectangle"
+msgid "Small Rectangle (1x2)"
+msgstr "Petit rectangle (1x2)"
 
 #: ckanext/querytool/helpers.py:263
-msgid "Long Small Rectangle"
-msgstr "Long petit rectangle"
+msgid "Small Wide Rectangle (1x6)"
+msgstr "Long petit rectangle (1x6)"
 
 #: ckanext/querytool/helpers.py:264
-msgid "Small Square"
-msgstr "Petit carré"
+msgid "Medium Square (2x2)"
+msgstr "Petit carré (2x2)"
 
 #: ckanext/querytool/helpers.py:265
-msgid "Horizontal Double Small Square"
-msgstr "Double petit carré horizontal"
+msgid "Medium Rectangle (2x4)"
+msgstr "Double petit carré horizontal (2x4)"
 
 #: ckanext/querytool/helpers.py:267
-msgid "Large Rectangle"
-msgstr "Grand rectangle"
+msgid "Large Rectangle (2x3)"
+msgstr "Grand rectangle (2x3)"
 
 #: ckanext/querytool/helpers.py:268
-msgid "Extra Large Rectangle"
-msgstr "Extra grand rectangle"
+msgid "Extra Large Rectangle (2x6)"
+msgstr "Extra grand rectangle (2x6)"
 
 #: ckanext/querytool/helpers.py:269
-msgid "Large Square"
-msgstr "Grand carré"
+msgid "Large Square (4x4)"
+msgstr "Grand carré (4x4)"
 
 #: ckanext/querytool/helpers.py:270
-msgid "Vertical Double Small Square"
-msgstr "Double petit carré vertical"
+msgid "Medium Vertical (4x2)"
+msgstr "Double petit carré vertical (4x2)"
 
 #: ckanext/querytool/helpers.py:272
-msgid "Large Vertical"
-msgstr "Grande verticale"
+msgid "Large Vertical (4x3)"
+msgstr "Grande verticale (4x3)"
 
 #: ckanext/querytool/helpers.py:273
 msgid "Extra Large Vertical"

@@ -210,40 +210,40 @@ msgid "Binary e.g 11111010000"
 msgstr "二进制（例如11111010000）"
 
 #: ckanext/querytool/helpers.py:262
-msgid "Small Rectangle"
-msgstr "小型矩形"
+msgid "Small Rectangle (1x2)"
+msgstr "小型矩形 (1x2)"
 
 #: ckanext/querytool/helpers.py:263
-msgid "Long Small Rectangle"
+msgid "Small Wide Rectangle (1x6)"
 msgstr ""
 
 #: ckanext/querytool/helpers.py:264
-msgid "Small Square"
-msgstr "小型正方形"
+msgid "Medium Square (2x2)"
+msgstr "小型正方形 (2x2)"
 
 #: ckanext/querytool/helpers.py:265
-msgid "Horizontal Double Small Square"
+msgid "Medium Rectangle (2x4)"
 msgstr ""
 
 #: ckanext/querytool/helpers.py:267
-msgid "Large Rectangle"
-msgstr "大型矩形"
+msgid "Large Rectangle (2x3)"
+msgstr "大型矩形 (2x3)"
 
 #: ckanext/querytool/helpers.py:268
-msgid "Extra Large Rectangle"
+msgid "Extra Large Rectangle (2x6)"
 msgstr ""
 
 #: ckanext/querytool/helpers.py:269
-msgid "Large Square"
-msgstr "大型正方形"
+msgid "Large Square (4x4)"
+msgstr "大型正方形 (4x4)"
 
 #: ckanext/querytool/helpers.py:270
-msgid "Vertical Double Small Square"
+msgid "Medium Vertical (4x2)"
 msgstr ""
 
 #: ckanext/querytool/helpers.py:272
-msgid "Large Vertical"
-msgstr "大型垂直布局"
+msgid "Large Vertical (4x3)"
+msgstr "大型垂直布局 (4x3)"
 
 #: ckanext/querytool/helpers.py:273
 msgid "Extra Large Vertical"
