@@ -163,11 +163,14 @@ ckan.module('querytool-viz-preview', function() {
             };
 
             var values;
-            var titleVal = (this.options.title === true) ? '' : this.options.title;
 
+            // Title
+            var titleVal = (this.options.title === true) ? '' : this.options.title;
+            titleVar = this.renderChartTitle(titleVal);
             options.title = {
                 text: titleVal
             }
+
             options.legend = {
                 show: show_legend
             }
@@ -551,6 +554,14 @@ ckan.module('querytool-viz-preview', function() {
         // Count format decimals limited by "max"
         countDecimals: function (val, max) {
           return Math.min(val*10 % 1 ? 2 : val % 1 ? 1 : 0, max);
-        }
+        },
+
+        // Render dynamic chart titles
+        renderChartTitle (title) {
+          var template = new nunjucks.Template(title);
+          var rendered = template.render({});
+          return rendered;
+        },
+
     }
 });
