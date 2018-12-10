@@ -85,7 +85,7 @@ http://ckan-dev:5000/
 
 > To pass the end-to-end tests you have to add required applictions from the staging site to your development server. See notes for every single test
 
-We write and store unit tests inside the `ckanext/ed/tests` directory and end-to-end tests inside the `tests` directory. Prefer to name test files after feature/bug names. To run the tests you should have the development server up and running:
+We write and store unit tests inside the `ckanext/querytool/tests` directory and end-to-end tests inside the `tests` directory. Prefer to name test files after feature/bug names. To run the tests you should have the development server up and running:
 
 ```bash
 $ make test
@@ -97,7 +97,7 @@ See the `how to write E2E tests` guide:
 
 ### Building static assets
 
-Put your scripts/fonts/etc inside the `ckanext/querytool/fanstatic` folder and images inside the `ckanext/querytool/public` folder. It can be used as usual ckan `fanstatic` and `public` contents. At the same time, we use CSS preprocessor (LESS) to build our styles. Put your styles inside the `ckanext/ed/less` and build it:
+Put your scripts/fonts/etc inside the `ckanext/querytool/fanstatic` folder and images inside the `ckanext/querytool/public` folder. It can be used as usual ckan `fanstatic` and `public` contents. At the same time, we use CSS preprocessor (LESS) to build our styles. Put your styles inside the `ckanext/querytool/fanstatic/less` and build it:
 
 ```bash
 $ make assets
