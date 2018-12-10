@@ -45,7 +45,7 @@
         {% if querytool.y_axis_column %}
           {% set y_axis_selected = querytool.y_axis_column %}
        {% endif %}
-    <div class="controls">
+    <div class="controls" id="{{ querytool.name }}">
       <div class="flex filters-wrap">
         <div class="filters">
           {% if querytool.public_filters  %}
@@ -104,7 +104,7 @@
                   </ul>
                 </div>
           </div>
-          <button type="submit" class="btn btn-large btn-success btn-update"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
+          <button type="submit" class="btn btn-large btn-success btn-update" data-anchor="{{ querytool.name }}"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
       </div>
     </div>
     <!-- Visualizations container -->
