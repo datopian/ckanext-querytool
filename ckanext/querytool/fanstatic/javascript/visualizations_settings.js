@@ -231,12 +231,23 @@
         });
     };
 
+    function handleChartTitles () {
+      // Provide variables support for titles
+      $('.title-variables select').change(function (ev) {
+        var select = $(ev.target)
+        var textarea = select.closest('.item-wrapper').find('.control-group.title textarea')
+        textarea.val(textarea.val() + select.val())
+        select.val('')
+      })
+    };
+
     $(document).ready(function() {
         handleChartSortingField();
         handleRenderedVizFilters('chart');
         handleRenderedVizFilters('map');
         handleRenderedVizFilters('table');
         handleImageItems();
+        handleChartTitles();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
         var sqlString = vizForm.data('sqlString');
@@ -307,6 +318,7 @@
                         handleRenderedVizFilters('chart', items);
                         handleItemsOrder();
                         handleChartSortingField();
+                        handleChartTitles();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
                         handleTickFormat(items);

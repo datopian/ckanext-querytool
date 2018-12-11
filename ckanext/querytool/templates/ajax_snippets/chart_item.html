@@ -20,11 +20,24 @@
       {% if chart %}
         {% set chart_title = chart.title %}
       {% endif %}
-      <div class="control-group ">
-         <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Title') }}</label>
-         <div class="controls ">
-            <textarea class="title" id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" placeholder="{{ _('Chart title') }}" rows="5">{{ chart_title }}</textarea>
-         </div>
+      <div class="control-group title">
+        <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Title') }}</label>
+        <div class="controls ">
+          <textarea id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" placeholder="{{ _('Chart title') }}" rows="5">{{ chart_title }}</textarea>
+        </div>
+      </div>
+      <div class="control-group title-variables">
+        <div class="controls ">
+          <select required>
+            <option value="" disabled selected>Add variable to title</option>
+            <optgroup label="Default">
+              <option value="{measure}">Measure</option>
+            </optgroup>
+            <optgroup label="Lower Cased">
+              <option value="{measure|lower}">Measure</option>
+            </optgroup>
+          </select>
+        </div>
       </div>
       {% if chart %}
         {% set selected_chart_type = chart.graph %}
