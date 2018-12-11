@@ -255,6 +255,7 @@
         var map_resource = vizForm.data('mapResource');
         var yAxisValues = vizForm.data('yAxisValues');
         var mainFiltersNames = vizForm.data('mainFiltersNames');
+        var infoQueryFilters = vizForm.data('mainFilters');
 
         var chooseYAxisColumn = $('#choose_y_axis_column');
         handleTickFormat();
@@ -310,7 +311,8 @@
                         map_resource: map_resource,
                         sql_string: sqlString,
                         y_axis_values: yAxisValues,
-                        main_filters: mainFiltersNames
+                        main_filters: mainFiltersNames,
+                        info_query_filters: JSON.stringify(infoQueryFilters),
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
