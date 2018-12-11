@@ -166,7 +166,8 @@ ckan.module('querytool-viz-preview', function() {
             var titleVal = (this.options.title === true) ? '' : this.options.title;
 
             options.title = {
-                text: titleVal
+                text: titleVal,
+                position: "upper-left"
             }
             options.legend = {
                 show: show_legend
