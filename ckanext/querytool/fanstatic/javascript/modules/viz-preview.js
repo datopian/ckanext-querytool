@@ -392,7 +392,7 @@ ckan.module('querytool-viz-preview', function() {
             var axisYSelect = chartField.find('[name*=chart_field_axis_y_]');
             var axisYValue = axisYSelect.val();
 
-            var chartTitle = chartField.find('input[name*=chart_field_title_]');
+            var chartTitle = chartField.find('textarea[name*=chart_field_title_]');
             var chartTitleVal = chartTitle.val();
 
             var legend = chartField.find('input[name*=chart_field_legend_]');

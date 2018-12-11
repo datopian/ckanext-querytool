@@ -23,7 +23,7 @@
       <div class="control-group ">
          <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Title') }}</label>
          <div class="controls ">
-            <input id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" value="{{ chart_title }}" placeholder="{{ _('Chart title') }}" type="text">
+            <textarea class="title" id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" placeholder="{{ _('Chart title') }}" rows="5">{{ chart_title }}</textarea>
          </div>
       </div>
       {% if chart %}
