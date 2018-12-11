@@ -28,13 +28,26 @@
       </div>
       <div class="control-group title-variables">
         <div class="controls ">
+          {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
           <select required>
             <option value="" disabled selected>Add variable to title</option>
             <optgroup label="Default">
               <option value="{measure}">Measure</option>
+              {% for filter in filters %}
+                <option value="{{'{%s}' % filter.slug}}">{{ filter.alias }}</option>
+              {% endfor %}
             </optgroup>
-            <optgroup label="Lower Cased">
+            <optgroup label="Capitalized">
+              <option value="{measure|capitalize}">Measure</option>
+              {% for filter in filters %}
+                <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
+              {% endfor %}
+            </optgroup>
+            <optgroup label="Lowercased">
               <option value="{measure|lower}">Measure</option>
+              {% for filter in filters %}
+                <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
+              {% endfor %}
             </optgroup>
           </select>
         </div>

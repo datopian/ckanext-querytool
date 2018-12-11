@@ -593,3 +593,7 @@ def pick_first_by_attr_value(items, attr, value, default=False):
 
 def slugify(string):
     return re.sub(r'\s+', '_', string.lower().strip())
+
+
+def parse_json(string):
+    return json.loads(string)
