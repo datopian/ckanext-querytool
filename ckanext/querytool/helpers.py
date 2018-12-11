@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -
+import re
 import logging
 import json
 import uuid
@@ -588,3 +589,7 @@ def pick_first_by_attr_value(items, attr, value, default=False):
         if item.get(attr) == value:
             return item
     return default
+
+
+def slugify(string):
+    return re.sub(r'\s+', '_', string.lower().strip())
