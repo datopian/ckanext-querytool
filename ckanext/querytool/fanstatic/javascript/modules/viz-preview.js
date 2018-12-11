@@ -567,22 +567,15 @@ ckan.module('querytool-viz-preview', function() {
           // Configure nunjucks
           var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
 
-          // Prepare template
-          var template = title;
-          // To interpolate variables like "{ Causa Group }"
-          template = template.replace(/\{([^}]+?)\}/g, function (match, p1) {
-            return '{data["' + p1.trim() + '"]}';
-          });
-
           // Prepare data
           var data = {measure: options.measure.alias};
-          for (let filter of options.filters) data[filter.alias] = filter.value;
+          for (let filter of options.filters) data[filter.slug] = filter.value;
 
           // Render and return
           try {
-            return env.renderString(template, {data: data});
+            return env.renderString(title, data);
           } catch (error) {
-            return template;
+            return title;
           }
 
         },
