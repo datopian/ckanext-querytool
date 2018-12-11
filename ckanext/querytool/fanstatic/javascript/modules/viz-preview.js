@@ -565,18 +565,24 @@ ckan.module('querytool-viz-preview', function() {
         renderChartTitle (title, options) {
 
           // Configure nunjucks
-          var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}})
+          var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+
+          // Prepare template
+          var template = title;
+          // To interpolate variables like "{ Causa Group }"
+          template = template.replace(/\{([^}]+?)\}/g, function (match, p1) {
+            return '{data["' + p1.trim() + '"]}';
+          });
 
           // Prepare data
-          // TODO: fix issue with variables like "Two words"/remove "data" namespace
           var data = {measure: options.measure.alias};
           for (let filter of options.filters) data[filter.alias] = filter.value;
 
           // Render and return
           try {
-            return env.renderString(title, {data: data});
+            return env.renderString(template, {data: data});
           } catch (error) {
-            return title;
+            return template;
           }
 
         },
