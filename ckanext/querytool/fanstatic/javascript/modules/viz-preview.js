@@ -168,7 +168,6 @@ ckan.module('querytool-viz-preview', function() {
             var titleVal = (this.options.title === true) ? '' : this.options.title;
             var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
             if (!queryFilters.length) queryFilters = (this.options.info_query_filters === true) ? [] : this.options.info_query_filters;
-            console.log(queryFilters)
             titleVal = this.renderChartTitle(titleVal, {
               filters: queryFilters,
               measure: {name: y_axis, alias: measure_label},
@@ -565,16 +564,17 @@ ckan.module('querytool-viz-preview', function() {
         // Render dynamic chart titles
         renderChartTitle (title, options) {
 
+          // Configure nunjucks
+          var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}})
+
           // Prepare data
-          // TODO: simplify {{}} to {}?
           // TODO: fix issue with variables like "Two words"/remove "data" namespace
           var data = {measure: options.measure.alias};
           for (let filter of options.filters) data[filter.alias] = filter.value;
 
           // Render and return
           try {
-            var template = new nunjucks.Template(title);
-            return template.render({data: data});
+            return env.renderString(title, {data: data});
           } catch (error) {
             return title;
           }
