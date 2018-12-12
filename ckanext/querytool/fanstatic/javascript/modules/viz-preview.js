@@ -240,16 +240,16 @@ ckan.module('querytool-viz-preview', function() {
                             rotate: yrotate
                         },
                         padding: {
-                            top: parseInt(padding_top),
+                            top: 200,
                             bottom: parseInt(padding_bottom)
                         }
                     },
                     x: {
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: true
-                        },
-                        height:140
+                            multiline: true,
+                            multilineMax: 2,
+                        }
                     }
                 }
             } else {
@@ -338,7 +338,7 @@ ckan.module('querytool-viz-preview', function() {
                             rotate: yrotate
                         },
                         padding: {
-                            top: parseInt(padding_top),
+                            top: 200,
                             bottom: parseInt(padding_bottom)
                         },
                         label: {
@@ -352,7 +352,7 @@ ckan.module('querytool-viz-preview', function() {
                         tick: {
                             rotate: x_text_rotate,
                             multiline: true,
-                            fit: true
+                            multilineMax: 2
                         }
                     },
                     rotated: rotate,
