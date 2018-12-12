@@ -247,8 +247,9 @@ ckan.module('querytool-viz-preview', function() {
                     x: {
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: x_text_multiline
-                        }
+                            multiline: true
+                        },
+                        height:140
                     }
                 }
             } else {
@@ -350,7 +351,7 @@ ckan.module('querytool-viz-preview', function() {
                         categories: categories,
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: x_text_multiline,
+                            multiline: true,
                             fit: true
                         }
                     },
