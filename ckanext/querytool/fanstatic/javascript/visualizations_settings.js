@@ -237,16 +237,16 @@
         var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
         try {
           env.renderString($(ev.target).val(), {});
-          ev.target.setCustomValidity('')
+          ev.target.setCustomValidity('');
         } catch (error) {
-          ev.target.setCustomValidity('Template is invalid')
+          ev.target.setCustomValidity('Template is invalid');
         }
       });
       $('.title-vars select').change(function (ev) {
-        var select = $(ev.target)
-        var textarea = select.closest('.item-wrapper').find('.control-group.title textarea')
-        textarea.val(textarea.val() + select.val())
-        select.val('')
+        var select = $(ev.target);
+        var textarea = select.closest('.item-wrapper').find('.control-group.title textarea');
+        textarea.val(textarea.val() + select.val());
+        select.val('');
       })
     };
 
