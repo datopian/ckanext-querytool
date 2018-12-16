@@ -26,7 +26,7 @@
           <textarea id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" placeholder="{{ _('Chart title') }}" rows="5">{{ chart_title }}</textarea>
         </div>
       </div>
-      <div class="control-group title-variables">
+      <div class="control-group title-vars">
         <div class="controls ">
           {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
           {% set filters = filters|sort(attribute='order') %}
@@ -54,6 +54,12 @@
               <option value="{optional_filter|lower}">Optional Filter</option>
             </optgroup>
           </select>
+        </div>
+      </div>
+      <div class="control-group title-help">
+        <div class="controls ">
+          {% set template_tooltip = "<pre><p>Variables<br>---<br>{measure}<br>{optional_filter}<br>*use drop-down list to select variables based on application filters</p><p>Processed variables<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>etc</p></pre><p><b><a href='http://jinja.pocoo.org/docs/2.10/templates/' target='_blank'>Full templates syntax</a></b></p><p class='muted'><b>Please note:</b> Single braces '{}' are used for variables</p>" %}
+          <span class="editor-info-block">You can use <a href="#templates" title="" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference">Templates</a> here</span>
         </div>
       </div>
       {% if chart %}

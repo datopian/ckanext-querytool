@@ -233,7 +233,7 @@
 
     function handleChartTitles () {
       // Provide variables support for titles
-      $('.title-variables select').change(function (ev) {
+      $('.title-vars select').change(function (ev) {
         var select = $(ev.target)
         var textarea = select.closest('.item-wrapper').find('.control-group.title textarea')
         textarea.val(textarea.val() + select.val())

@@ -82,7 +82,10 @@
   }
 }
 
-.item-wrapper .control-group.title-variables {
+.item-wrapper .control-group.title-vars {
+  & {
+    margin-bottom: 0;
+  }
   select {
     color: gray;
   }
@@ -91,6 +94,24 @@
   }
   option {
     color: black;
+  }
+}
+
+.item-wrapper .control-group.title-help {
+  .controls {
+    padding: 4px 10px;
+    background-color: #ebebeb;
+    border: solid 1px #ccc;
+    font-size: 11px;
+  }
+  a {
+    color: #187794;
+  }
+  pre {
+    word-break: normal;
+  }
+  .popover-content {
+    word-break: normal;
   }
 }
 
