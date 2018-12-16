@@ -83,6 +83,7 @@
             var selectFilterValue = item.find('[id*=data_filter_value_]');
             var inputFilterAlias = item.find('[id*=data_filter_alias_]');
             var selectFilterVisibility = item.find('[id*=data_filter_visibility_]');
+            var inputFilterColor = item.find('[id*=data_filter_color_]');
 
             item.attr('id', 'filter_item_' + order);
 
@@ -97,6 +98,9 @@
 
             selectFilterVisibility.attr('id', 'data_filter_visibility_' + order);
             selectFilterVisibility.attr('name', 'data_filter_visibility_' + order);
+
+            inputFilterColor.attr('id', 'data_filter_color_' + order);
+            inputFilterColor.attr('name', 'data_filter_color_' + order);
 
         });
     };
