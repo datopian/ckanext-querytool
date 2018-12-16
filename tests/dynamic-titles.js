@@ -27,8 +27,8 @@ module.exports = {
         .waitForElementVisible(ELEMENTS.titleTextarea, TIMEOUT)
         .assert.containsText(ELEMENTS.titleTextarea, '{measure|capitalize} por {cause_group|lower}')
         // Check form chart value
-        // .waitForElementVisible(ELEMENTS.titleOnFormChart, TIMEOUT)
-        // .assert.containsText(ELEMENTS.titleOnFormChart, 'Taxa de mortalidade por causas externas')
+        .waitForElementVisible(ELEMENTS.titleOnFormChart, TIMEOUT)
+        .assert.containsText(ELEMENTS.titleOnFormChart, 'Taxa de mortalidade por causas externas')
         // Check app chart value
         .url(`${client.launch_url}/querytool/public/detailed-mortality-by-cause`)
         .waitForElementVisible(ELEMENTS.titleOnAppChart, TIMEOUT)

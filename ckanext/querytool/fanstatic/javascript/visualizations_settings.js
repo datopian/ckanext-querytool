@@ -236,7 +236,7 @@
       $('.title texarea').change(function (ev) {
         var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
         try {
-          env.renderString($(ev.target.).val(), {});
+          env.renderString($(ev.target).val(), {});
           ev.target.setCustomValidity('')
         } catch (error) {
           ev.target.setCustomValidity('Template is invalid')
