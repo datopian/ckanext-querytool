@@ -168,14 +168,14 @@ ckan.module('querytool-viz-preview', function() {
             var titleVal = (this.options.title === true) ? '' : this.options.title;
             var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
             if (!queryFilters.length) queryFilters = (this.options.info_query_filters === true) ? [] : this.options.info_query_filters;
-            var chartFilterName = (this.options.filter_name === true) ? '' : this.options.filter_name;
-            var chartFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
-            var chartFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
-            var chartFilter = chartFilterName ? {name: chartFilterName, slug: chartFilterSlug, value: chartFilterValue} : undefined;
+            var optionalFilterName = (this.options.filter_name === true) ? '' : this.options.filter_name;
+            var optionalFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
+            var optionalFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
+            var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
             titleVal = this.renderChartTitle(titleVal, {
               measure: {name: y_axis, alias: measure_label},
               filters: queryFilters,
-              chartFilter: chartFilter,
+              optionalFilter: optionalFilter,
             });
             options.title = {
                 text: titleVal
@@ -575,7 +575,7 @@ ckan.module('querytool-viz-preview', function() {
           // Prepare data
           var data = {measure: options.measure.alias};
           for (let filter of options.filters) data[filter.slug] = filter.value;
-          if (options.chartFilter) data[options.chartFilter.slug] = options.chartFilter.value;
+          if (options.optionalFilter) data.optional_filter = options.optionalFilter.value;
 
           // Render and return
           try {

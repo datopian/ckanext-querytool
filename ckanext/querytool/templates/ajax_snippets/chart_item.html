@@ -37,27 +37,21 @@
               {% for filter in filters %}
                 <option value="{{'{%s}' % filter.slug}}">{{ filter.alias }}</option>
               {% endfor %}
-              {% if chart.filter_name %}
-                <option value="{{'{%s}' % chart.filter_slug}}">{{ chart.filter_name }}</option>
-              {% endif %}
+              <option value="{optional_filter}">Optional Filter</option>
             </optgroup>
             <optgroup label="Capitalized">
               <option value="{measure|capitalize}">Measure</option>
               {% for filter in filters %}
                 <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
               {% endfor %}
-              {% if chart.filter_name %}
-                <option value="{{'{%s|capitalize}' % chart.filter_slug}}">{{ chart.filter_name }}</option>
-              {% endif %}
+              <option value="{optional_filter|capitalize}">Optional Filter</option>
             </optgroup>
             <optgroup label="Lowercased">
               <option value="{measure|lower}">Measure</option>
               {% for filter in filters %}
                 <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
               {% endfor %}
-              {% if chart.filter_name %}
-                <option value="{{'{%s|lower}' % chart.filter_slug}}">{{ chart.filter_name }}</option>
-              {% endif %}
+              <option value="{optional_filter|lower}">Optional Filter</option>
             </optgroup>
           </select>
         </div>
