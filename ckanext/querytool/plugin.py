@@ -140,8 +140,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.parse_y_axis_columns,
             'querytool_pick_first_by_attr_value':
                 helpers.pick_first_by_attr_value,
-            'querytool_slugify':
-                helpers.slugify,
             'querytool_parse_json':
                 helpers.parse_json,
         }
