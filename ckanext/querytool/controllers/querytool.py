@@ -550,6 +550,10 @@ class QueryToolController(base.BaseController):
         if 'visualizations' in data and len(data['visualizations']) > 0:
             data['visualizations'] = json.loads(data['visualizations'])
             data['visualizations'].sort(key=itemgetter('order'))
+            # Add slug to viz filters
+            for viz in data['visualizations']:
+                if viz.get('filter_name'):
+                    viz['filter_slug'] = helpers.slugify(viz['filter_name'])
 
         errors = errors or {}
         error_summary = error_summary or {}

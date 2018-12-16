@@ -37,18 +37,27 @@
               {% for filter in filters %}
                 <option value="{{'{%s}' % filter.slug}}">{{ filter.alias }}</option>
               {% endfor %}
+              {% if chart.filter_name %}
+                <option value="{{'{%s}' % chart.filter_slug}}">{{ chart.filter_name }}</option>
+              {% endif %}
             </optgroup>
             <optgroup label="Capitalized">
               <option value="{measure|capitalize}">Measure</option>
               {% for filter in filters %}
                 <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
               {% endfor %}
+              {% if chart.filter_name %}
+                <option value="{{'{%s|capitalize}' % chart.filter_slug}}">{{ chart.filter_name }}</option>
+              {% endif %}
             </optgroup>
             <optgroup label="Lowercased">
               <option value="{measure|lower}">Measure</option>
               {% for filter in filters %}
                 <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
               {% endfor %}
+              {% if chart.filter_name %}
+                <option value="{{'{%s|lower}' % chart.filter_slug}}">{{ chart.filter_name }}</option>
+              {% endif %}
             </optgroup>
           </select>
         </div>
@@ -313,6 +322,7 @@
           {% set show_labels = chart.show_labels %}
           {% set y_label = chart.y_label %}
           {% set filter_name = chart.filter_name %}
+          {% set filter_slug = chart.filter_slug %}
           {% set filter_value = chart.filter_value %}
           {% set category_name = chart.category_name %}
           {% set data_sort = chart.sort %}
@@ -339,6 +349,7 @@
           show_labels = show_labels,
           y_label = y_label,
           filter_name=filter_name,
+          filter_slug=filter_slug,
           filter_value=filter_value,
           category_name=category_name,
           data_sort = data_sort,
