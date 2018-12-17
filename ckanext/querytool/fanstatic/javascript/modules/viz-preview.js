@@ -333,37 +333,71 @@ ckan.module('querytool-viz-preview', function() {
                     }
                 }
 
-                options.axis = {
-                    y: {
-                        tick: {
-                            count: tick_count,
-                            format: function(value) {
-                                var dataf = this.sortFormatData(y_tick_format, value);
-                                return dataf;
-                            }.bind(this),
-                            rotate: yrotate
+                if (this.options.chart_type === 'line') {
+                    options.axis = {
+                        y: {
+                            tick: {
+                                count: tick_count,
+                                format: function(value) {
+                                    var dataf = this.sortFormatData(y_tick_format, value);
+                                    return dataf;
+                                }.bind(this),
+                                rotate: yrotate
+                            },
+                            padding: {
+                                top: 200,
+                                bottom: parseInt(padding_bottom)
+                            },
+                            label: {
+                              text: y_label || measure_label || '',
+                              position: 'outer-middle',
+                            }
                         },
-                        padding: {
-                            top: 200,
-                            bottom: parseInt(padding_bottom)
+                        x: {
+                            type: 'category',
+                            categories: categories,
+                            tick: {
+                                count:5,
+                                rotate: x_text_rotate,
+                                multiline: true,
+                                multilineMax: 2
+                            }
                         },
-                        label: {
-                          text: y_label || measure_label || '',
-                          position: 'outer-middle',
-                        }
-                    },
-                    x: {
-                        type: 'category',
-                        categories: categories,
-                        tick: {
-                            rotate: x_text_rotate,
-                            multiline: true,
-                            multilineMax: 2
-                        }
-                    },
-                    rotated: rotate,
-                };
+                        rotated: rotate,
+                    };
+                } else {
+                  options.axis = {
+                      y: {
+                          tick: {
+                              count: tick_count,
+                              format: function(value) {
+                                  var dataf = this.sortFormatData(y_tick_format, value);
+                                  return dataf;
+                              }.bind(this),
+                              rotate: yrotate
+                          },
+                          padding: {
+                              top: 200,
+                              bottom: parseInt(padding_bottom)
+                          },
+                          label: {
+                            text: y_label || measure_label || '',
+                            position: 'outer-middle',
+                          }
+                      },
+                      x: {
+                          type: 'category',
+                          categories: categories,
+                          tick: {
+                              rotate: x_text_rotate,
+                              multiline: true,
+                              multilineMax: 2
+                          }
+                      },
+                      rotated: rotate,
+                  };
 
+                }
                 options.point = {
                   r: 3,
                 }
