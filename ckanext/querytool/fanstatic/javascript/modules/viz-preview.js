@@ -167,7 +167,13 @@ ckan.module('querytool-viz-preview', function() {
 
             options.title = {
                 text: titleVal,
-                position: "upper-left"
+                position: "upper-left",
+                padding: {
+                    left: 0,
+                    right: 0,
+                    bottom: 15,
+                    top:0
+                }
             }
             options.legend = {
                 show: show_legend

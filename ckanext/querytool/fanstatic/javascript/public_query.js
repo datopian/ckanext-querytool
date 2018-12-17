@@ -277,5 +277,47 @@
             copyText.select();
             document.execCommand("Copy");
         });
+
+
     });
+
+    $(window).load(function(){
+      //Only running on mobile phones
+      if ($(window).width() <= 500) {
+          setTimeout(function() { splitTitles(); }, 1000);
+      }
+    })
+
+    function splitTitles(){
+      $(".c3-title").each(function(){
+        //Fetching the HTML
+        var text =  $(this).html().split(" ");
+
+        //Getting word length
+        var words = text.length;
+
+        var html = "";
+        var y = 10;
+        if(words>10){
+          for(var i=1;i<=words;i++){
+            //Splitting the string every 10 words and adding tspan
+            if((i%10)==0) {
+              html += "<tspan x=0 y="+y+">"+text.slice(i-10, i).join(" ") + "</tspan><tspan x=0 y="+(y+13)+">"+text.slice(i, i+10).join(" ") + "</tspan>";
+              y = y+13;
+            }
+          }
+          $(this).html(html);
+        }
+
+
+
+
+        console.log("words is: "+words)
+      });
+
+      //Custom Function to split headers
+      $(".c3-title").each(function(){
+
+      });
+    }
 })($);
