@@ -178,7 +178,14 @@ ckan.module('querytool-viz-preview', function() {
               optionalFilter: optionalFilter,
             });
             options.title = {
-                text: titleVal
+                text: titleVal,
+                position: "upper-left",
+                padding: {
+                    left: 0,
+                    right: 0,
+                    bottom: 15,
+                    top:0
+                }
             }
 
             options.legend = {
@@ -252,14 +259,15 @@ ckan.module('querytool-viz-preview', function() {
                             rotate: yrotate
                         },
                         padding: {
-                            top: parseInt(padding_top),
+                            top: 200,
                             bottom: parseInt(padding_bottom)
                         }
                     },
                     x: {
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: x_text_multiline
+                            multiline: true,
+                            multilineMax: 2,
                         }
                     }
                 }
@@ -338,37 +346,73 @@ ckan.module('querytool-viz-preview', function() {
                     }
                 }
 
-                options.axis = {
-                    y: {
-                        tick: {
-                            count: tick_count,
-                            format: function(value) {
-                                var dataf = this.sortFormatData(y_tick_format, value);
-                                return dataf;
-                            }.bind(this),
-                            rotate: yrotate
+                //Tick count on x-axis for line charts
+                if (this.options.chart_type === 'line') {
+                    options.axis = {
+                        y: {
+                            tick: {
+                                count: tick_count,
+                                format: function(value) {
+                                    var dataf = this.sortFormatData(y_tick_format, value);
+                                    return dataf;
+                                }.bind(this),
+                                rotate: yrotate
+                            },
+                            padding: {
+                                top: 200,
+                                bottom: parseInt(padding_bottom)
+                            },
+                            label: {
+                              text: y_label || measure_label || '',
+                              position: 'outer-middle',
+                            }
                         },
-                        padding: {
-                            top: parseInt(padding_top),
-                            bottom: parseInt(padding_bottom)
+                        x: {
+                            type: 'category',
+                            categories: categories,
+                            tick: {
+                                count:5,
+                                rotate: x_text_rotate,
+                                multiline: true,
+                                multilineMax: 2
+                            }
                         },
-                        label: {
-                          text: y_label || measure_label || '',
-                          position: 'outer-middle',
-                        }
-                    },
-                    x: {
-                        type: 'category',
-                        categories: categories,
-                        tick: {
-                            rotate: x_text_rotate,
-                            multiline: x_text_multiline,
-                            fit: true
-                        }
-                    },
-                    rotated: rotate,
-                };
+                        rotated: rotate,
+                    };
+                } else {
+                  //no Tick count on x-axis for bar 
+                  options.axis = {
+                      y: {
+                          tick: {
+                              count: tick_count,
+                              format: function(value) {
+                                  var dataf = this.sortFormatData(y_tick_format, value);
+                                  return dataf;
+                              }.bind(this),
+                              rotate: yrotate
+                          },
+                          padding: {
+                              top: 200,
+                              bottom: parseInt(padding_bottom)
+                          },
+                          label: {
+                            text: y_label || measure_label || '',
+                            position: 'outer-middle',
+                          }
+                      },
+                      x: {
+                          type: 'category',
+                          categories: categories,
+                          tick: {
+                              rotate: x_text_rotate,
+                              multiline: true,
+                              multilineMax: 2
+                          }
+                      },
+                      rotated: rotate,
+                  };
 
+                }
                 options.point = {
                   r: 3,
                 }
