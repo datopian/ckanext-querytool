@@ -333,6 +333,7 @@ ckan.module('querytool-viz-preview', function() {
                     }
                 }
 
+                //Tick count on x-axis for line charts
                 if (this.options.chart_type === 'line') {
                     options.axis = {
                         y: {
@@ -366,6 +367,7 @@ ckan.module('querytool-viz-preview', function() {
                         rotated: rotate,
                     };
                 } else {
+                  //no Tick count on x-axis for bar 
                   options.axis = {
                       y: {
                           tick: {
