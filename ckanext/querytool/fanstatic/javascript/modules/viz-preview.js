@@ -163,11 +163,24 @@ ckan.module('querytool-viz-preview', function() {
             };
 
             var values;
-            var titleVal = (this.options.title === true) ? '' : this.options.title;
 
+            // Title
+            var titleVal = (this.options.title === true) ? '' : this.options.title;
+            var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
+            if (!queryFilters.length) queryFilters = (this.options.info_query_filters === true) ? [] : this.options.info_query_filters;
+            var optionalFilterName = (this.options.filter_name === true) ? '' : this.options.filter_name;
+            var optionalFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
+            var optionalFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
+            var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
+            titleVal = this.renderChartTitle(titleVal, {
+              measure: {name: y_axis, alias: measure_label},
+              filters: queryFilters,
+              optionalFilter: optionalFilter,
+            });
             options.title = {
                 text: titleVal
             }
+
             options.legend = {
                 show: show_legend
             }
@@ -384,7 +397,7 @@ ckan.module('querytool-viz-preview', function() {
             var axisYSelect = chartField.find('[name*=chart_field_axis_y_]');
             var axisYValue = axisYSelect.val();
 
-            var chartTitle = chartField.find('input[name*=chart_field_title_]');
+            var chartTitle = chartField.find('textarea[name*=chart_field_title_]');
             var chartTitleVal = chartTitle.val();
 
             var legend = chartField.find('input[name*=chart_field_legend_]');
@@ -551,6 +564,27 @@ ckan.module('querytool-viz-preview', function() {
         // Count format decimals limited by "max"
         countDecimals: function (val, max) {
           return Math.min(val*10 % 1 ? 2 : val % 1 ? 1 : 0, max);
-        }
+        },
+
+        // Render dynamic chart titles
+        renderChartTitle (title, options) {
+
+          // Configure nunjucks
+          var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+
+          // Prepare data
+          var data = {measure: options.measure.alias};
+          for (let filter of options.filters) data[filter.slug] = filter.value;
+          if (options.optionalFilter) data.optional_filter = options.optionalFilter.value;
+
+          // Render and return
+          try {
+            return env.renderString(title, data);
+          } catch (error) {
+            return title;
+          }
+
+        },
+
     }
 });

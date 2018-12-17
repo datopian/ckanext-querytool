@@ -560,10 +560,17 @@ class QueryToolController(base.BaseController):
         data['y_axis_columns'] = _querytool.get('y_axis_columns')
         data['main_filters'] = _querytool.get('filters')
 
+        # Add slug to filters
+        main_filters = []
+        for filter in json.loads(data['main_filters']):
+            filter['slug'] = helpers.slugify(filter.get('alias', ''))
+            main_filters.append(filter)
+        data['main_filters'] = json.dumps(main_filters)
+
         # This is required in order to exclude
         # main filters in chart item filter options
         main_filters_names = []
-        for filter in json.loads(data['main_filters']):
+        for filter in main_filters:
             main_filters_names.append(filter['name'])
         data['main_filters_names'] = ','.join(main_filters_names)
 
@@ -706,6 +713,11 @@ class QueryToolController(base.BaseController):
                 q_item['public_filters'] = new_filters
                 q_item['public_filters'].sort(key=itemgetter('order'))
                 q_item['sql_string'] = related_sql_string
+
+                # Add slug to filters
+                for filter in new_filters:
+                    filter['slug'] = helpers.slugify(filter.get('alias', ''))
+
                 # Need this hack for chart filter
                 q_item['public_main_filters'] = json.dumps(new_filters)
 

@@ -20,11 +20,47 @@
       {% if chart %}
         {% set chart_title = chart.title %}
       {% endif %}
-      <div class="control-group ">
-         <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Title') }}</label>
-         <div class="controls ">
-            <input id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" value="{{ chart_title }}" placeholder="{{ _('Chart title') }}" type="text">
-         </div>
+      <div class="control-group title">
+        <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Title') }}</label>
+        <div class="controls ">
+          <textarea id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" placeholder="{{ _('Chart title') }}" rows="5">{{ chart_title }}</textarea>
+        </div>
+      </div>
+      <div class="control-group title-vars">
+        <div class="controls ">
+          {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
+          {% set filters = filters|sort(attribute='order') %}
+          <select>
+            <option value="" disabled selected>Add variable to title</option>
+            <optgroup label="Default">
+              <option value="{measure}">Measure</option>
+              {% for filter in filters %}
+                <option value="{{'{%s}' % filter.slug}}">{{ filter.alias }}</option>
+              {% endfor %}
+              <option value="{optional_filter}">Optional Filter</option>
+            </optgroup>
+            <optgroup label="Capitalized">
+              <option value="{measure|capitalize}">Measure</option>
+              {% for filter in filters %}
+                <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
+              {% endfor %}
+              <option value="{optional_filter|capitalize}">Optional Filter</option>
+            </optgroup>
+            <optgroup label="Lowercased">
+              <option value="{measure|lower}">Measure</option>
+              {% for filter in filters %}
+                <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
+              {% endfor %}
+              <option value="{optional_filter|lower}">Optional Filter</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <div class="control-group title-help">
+        <div class="controls ">
+          {% set template_tooltip = "<pre><p>Variables<br>---<br>{measure}<br>{optional_filter}<br>*use drop-down list to select variables based on application filters</p><p>Processed variables<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>etc</p></pre><p><b><a href='http://jinja.pocoo.org/docs/2.10/templates/' target='_blank'>Full templates syntax</a></b></p><p class='muted'><b>Please note:</b> Single braces '{}' are used for variables</p>" %}
+          <span class="editor-info-block">You can use <a href="#templates" title="" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference">Templates</a> here</span>
+        </div>
       </div>
       {% if chart %}
         {% set selected_chart_type = chart.graph %}
@@ -286,6 +322,7 @@
           {% set show_labels = chart.show_labels %}
           {% set y_label = chart.y_label %}
           {% set filter_name = chart.filter_name %}
+          {% set filter_slug = chart.filter_slug %}
           {% set filter_value = chart.filter_value %}
           {% set category_name = chart.category_name %}
           {% set data_sort = chart.sort %}
@@ -312,10 +349,12 @@
           show_labels = show_labels,
           y_label = y_label,
           filter_name=filter_name,
+          filter_slug=filter_slug,
           filter_value=filter_value,
           category_name=category_name,
           data_sort = data_sort,
-          measure_label=measure_label
+          measure_label=measure_label,
+          info_query_filters=info_query_filters
       %}
    </div>
 </div>

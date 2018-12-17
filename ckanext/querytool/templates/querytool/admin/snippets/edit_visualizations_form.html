@@ -3,6 +3,7 @@
 {% resource 'querytool/vendor/c3/c3.css' %}
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
+{% resource 'querytool/vendor/nunjucks.js' %}
 {% resource 'querytool/javascript/visualizations_settings.js' %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 {% resource 'querytool/map' %}
@@ -69,7 +70,8 @@
           chart_resource = data.chart_resource,
           y_axis_values = data.y_axis_values,
           main_filters = data.main_filters_names,
-          measure_label = measure_label
+          measure_label = measure_label,
+          info_query_filters = data.main_filters
         %}
       {% endif %}
       {% if item.type == 'text_box'  %}

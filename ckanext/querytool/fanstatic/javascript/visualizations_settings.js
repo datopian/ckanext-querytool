@@ -231,12 +231,32 @@
         });
     };
 
+    function handleChartTitles () {
+      // Provide variables support for titles
+      $('.title texarea').change(function (ev) {
+        var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+        try {
+          env.renderString($(ev.target).val(), {});
+          ev.target.setCustomValidity('');
+        } catch (error) {
+          ev.target.setCustomValidity('Template is invalid');
+        }
+      });
+      $('.title-vars select').change(function (ev) {
+        var select = $(ev.target);
+        var textarea = select.closest('.item-wrapper').find('.control-group.title textarea');
+        textarea.val(textarea.val() + select.val());
+        select.val('');
+      })
+    };
+
     $(document).ready(function() {
         handleChartSortingField();
         handleRenderedVizFilters('chart');
         handleRenderedVizFilters('map');
         handleRenderedVizFilters('table');
         handleImageItems();
+        handleChartTitles();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
         var sqlString = vizForm.data('sqlString');
@@ -244,6 +264,7 @@
         var map_resource = vizForm.data('mapResource');
         var yAxisValues = vizForm.data('yAxisValues');
         var mainFiltersNames = vizForm.data('mainFiltersNames');
+        var infoQueryFilters = vizForm.data('mainFilters');
 
         var chooseYAxisColumn = $('#choose_y_axis_column');
         handleTickFormat();
@@ -299,7 +320,8 @@
                         map_resource: map_resource,
                         sql_string: sqlString,
                         y_axis_values: yAxisValues,
-                        main_filters: mainFiltersNames
+                        main_filters: mainFiltersNames,
+                        info_query_filters: JSON.stringify(infoQueryFilters),
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -307,6 +329,7 @@
                         handleRenderedVizFilters('chart', items);
                         handleItemsOrder();
                         handleChartSortingField();
+                        handleChartTitles();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
                         handleTickFormat(items);
