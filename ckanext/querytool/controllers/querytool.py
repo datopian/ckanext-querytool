@@ -513,6 +513,12 @@ class QueryToolController(base.BaseController):
                         table_item['filter_alias'] = ''
                         table_item['filter_visibility'] = ''
 
+                    if data['table_category_name_{}'.format(id)]:
+                        table_item['category_name'] = \
+                                data['table_category_name_{}'.format(id)]
+                    else:
+                        table_item['category_name'] = ''
+
                     tables.append(table_item)
 
             vis = visualizations + text_boxes + images + maps + tables

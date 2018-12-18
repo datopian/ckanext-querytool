@@ -31,6 +31,17 @@
         </select>
       </div>
     </div>
+    <div class="control-group control-select">
+      <label class="control-label" for="table_category_name_{{ n }}">{{ _('Category') }}</label>
+      <div class="controls ">
+        <select id="table_category_name_{{ n }}" name="table_category_name_{{ n }}">
+        <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+        {% for category in columns %}
+        <option value="{{category}}"{% if table %}{{ 'selected' if category == table.category_name }}{% endif %}>{{category}}</option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
     {% for item in y_axis_values %}
       {% do main_filters.append(item) %}
     {% endfor %}
@@ -89,6 +100,7 @@
   </div>
   {% if table %}
     {% set main_value = table.main_value %}
+    {% set category_name = table.category_name %}
     {% set filter_name = table.filter_name %}
     {% set filter_value = table.filter_value %}
     {% set table_title = table.title %}
@@ -99,6 +111,7 @@
       resource_id = resource_id,
       y_axis = y_axis,
       main_value = main_value,
+      category_name = category_name,
       filter_name=filter_name,
       filter_value=filter_value,
       table_title = table_title
