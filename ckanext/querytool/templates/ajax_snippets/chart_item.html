@@ -282,7 +282,7 @@
       <div class="control-group ">
          <label class="control-label" for="chart_field_chart_padding_left_{{ n }}">{{ _('Chart Padding left') }}</label>
          <div class="controls ">
-            <input id="chart_field_chart_padding_left_{{ n }}" type="number" min="0" name="chart_field_chart_padding_left_{{ n }}" value="{{ chart_padding_left }}" placeholder="{{ _('Default') }}">
+            <input id="chart_field_chart_padding_left_{{ n }}" type="number" min="0" max="200" name="chart_field_chart_padding_left_{{ n }}" value="{{ chart_padding_left }}" placeholder="{{ _('Default') }}">
          </div>
       </div>
       {% if chart %}
