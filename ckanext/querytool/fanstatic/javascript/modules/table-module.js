@@ -339,7 +339,7 @@ ckan.module('querytool-table', function() {
         render_template: function(template, data) {
           try {
             var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
-            env.addFilter('process_table_value', this.process_table_value)
+            env.addFilter('process_table_value', this.process_table_value.bind(this))
             return env.renderString(template, data);
           } catch (error) {
             return '';
@@ -348,26 +348,38 @@ ckan.module('querytool-table', function() {
 
         //check for long decimal numbers and round to fixed 5 decimal points
         process_table_value: function(val) {
-          if (!isNaN(val)) {
-              var data = '';
-              if ((val % 1) != 0) {
-                  var places = val.toString().split(".")[1].length;
-                  if (places > 5) {
-                      var data = parseFloat(val).toFixed(5);
-                      return data;
-                  }
-                  return val;
-              } else {
-                  return val;
-              }
+          if (isNaN(val)) return val;
+          var dataf = (this.options.data_format === true) ? '' : this.options.data_format;
+          var digits = 0;
+          var format = '';
+          // Currency
+          if (dataf === '$') {
+              // Add a coma for the thousands and limit the number of decimals to two:
+              // $ 2,512.34 instead of $2512.3456
+              digits = this.countDecimals(val, 2);
+              format = d3.format('$,.' + digits + 'f');
+          // Rounded
+          } else if (dataf === 's') {
+              // Limit the number of decimals to one: 2.5K instead of 2.5123456K
+              val = Math.round(val*10) / 10;
+              format = d3.format(dataf);
+          // Others
+          } else {
+              format = d3.format(dataf);
           }
-          return val;
+          return format(val);
+        },
+
+        // count format decimals limited by "max"
+        countDecimals: function (val, max) {
+          return Math.min(val*10 % 1 ? 2 : val % 1 ? 1 : 0, max);
         },
 
         updateTable: function() {
             var yVal = $('[name=choose_y_axis_column]').val();
             var xVal = this.el.parent().parent().find('[id*=table_main_value_]').val();
             this.options.category_name = this.el.parent().parent().find('[id*=table_category_name_]').val();
+            this.options.data_format = this.el.parent().parent().find('[id*=table_data_format_]').val();
             this.options.filter_name = this.el.parent().parent().find('[id*=table_field_filter_name_]').val();
             this.options.filter_value = this.el.parent().parent().find('[id*=table_field_filter_value_]').val();
             this.options.table_title = this.el.parent().parent().find('[id*=table_field_title_]').val();
