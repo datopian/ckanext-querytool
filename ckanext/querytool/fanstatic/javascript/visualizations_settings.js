@@ -233,7 +233,7 @@
 
     function handleChartTitles () {
       // Provide variables support for titles
-      $('.title texarea').change(function (ev) {
+      $('.title textarea').change(function (ev) {
         var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
         try {
           env.renderString($(ev.target).val(), {});
