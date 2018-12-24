@@ -102,7 +102,7 @@
       <div class="controls ">
         <select id="table_data_format_{{ n }}" name="table_data_format_{{ n }}">
           {% for format in data_formats %}
-          <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == table.data_format }}{% endif %} >{{ format.text }}</option>
+          <option value="{{ format.value }}" {% if table %}{{ 'selected' if format.value == table.data_format }}{% endif %} >{{ format.text }}</option>
           {% endfor %}
         </select>
       </div>
@@ -115,6 +115,7 @@
     {% set filter_name = table.filter_name %}
     {% set filter_value = table.filter_value %}
     {% set table_title = table.title %}
+    {% set table_data_format = table.data_format %}
   {% endif %}
   <div class="preview-wrapper">
     {% snippet 'ajax_snippets/table_module.html',
@@ -125,7 +126,8 @@
       category_name = category_name,
       filter_name=filter_name,
       filter_value=filter_value,
-      table_title = table_title
+      table_title = table_title,
+      table_data_format = table_data_format
     %}
   </div>
   <ul class="inline text-right chart-actions">
