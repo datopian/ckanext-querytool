@@ -96,6 +96,17 @@
         </select>
       </div>
     </div>
+    {% set data_formats = h.queytool_get_charts_data_formats() %}
+    <div class="control-group control-select">
+      <label class="control-label" for="table_data_format_{{ n }}">{{ _('Data format') }}</label>
+      <div class="controls ">
+        <select id="table_data_format_{{ n }}" name="table_data_format_{{ n }}">
+          {% for format in data_formats %}
+          <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == table.data_format }}{% endif %} >{{ format.text }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
     <span class="grippy"></span>
   </div>
   {% if table %}
