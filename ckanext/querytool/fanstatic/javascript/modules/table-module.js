@@ -7,16 +7,119 @@ Options:
 */
 "use strict";
 ckan.module('querytool-table', function() {
+
+    // Languages for datables
+    var LANGUAGES = {
+      'es' : {
+          "sProcessing":     "Procesando...",
+          "sLengthMenu":     "Mostrar _MENU_ registros",
+          "sZeroRecords":    "No se encontraron resultados",
+          "sEmptyTable":     "Ningún dato disponible en esta tabla",
+          "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+          "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+          "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+          "sInfoPostFix":    "",
+          "sSearch":         "Buscar:",
+          "sUrl":            "",
+          "sInfoThousands":  ",",
+          "sLoadingRecords": "Cargando...",
+          "oPaginate": {
+              "sFirst":    "Primero",
+              "sLast":     "Último",
+              "sNext":     "Siguiente",
+              "sPrevious": "Anterior"
+          },
+          "oAria": {
+              "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+              "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+          }
+      },
+      'fr' : {
+        "sProcessing":     "Traitement en cours...",
+        "sSearch":         "Rechercher&nbsp;:",
+        "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+        "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "sInfoPostFix":    "",
+        "sLoadingRecords": "Chargement en cours...",
+        "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+        "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+        "oPaginate": {
+          "sFirst":      "Premier",
+          "sPrevious":   "Pr&eacute;c&eacute;dent",
+          "sNext":       "Suivant",
+          "sLast":       "Dernier"
+        },
+        "oAria": {
+          "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+          "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+        },
+        "select": {
+          "rows": {
+            _: "%d lignes séléctionnées",
+            0: "Aucune ligne séléctionnée",
+            1: "1 ligne séléctionnée"
+          }
+        }
+      },
+      'pt_BR' : {
+          "sEmptyTable": "Nenhum registro encontrado",
+          "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+          "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+          "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+          "sInfoPostFix": "",
+          "sInfoThousands": ".",
+          "sLengthMenu": "_MENU_ resultados por página",
+          "sLoadingRecords": "Carregando...",
+          "sProcessing": "Processando...",
+          "sZeroRecords": "Nenhum registro encontrado",
+          "sSearch": "Pesquisar",
+          "oPaginate": {
+              "sNext": "Próximo",
+              "sPrevious": "Anterior",
+              "sFirst": "Primeiro",
+              "sLast": "Último"
+          },
+          "oAria": {
+              "sSortAscending": ": Ordenar colunas de forma ascendente",
+              "sSortDescending": ": Ordenar colunas de forma descendente"
+          }
+      },
+      'zh_CN' : {
+        "sProcessing":   "处理中...",
+        "sLengthMenu":   "显示 _MENU_ 项结果",
+        "sZeroRecords":  "没有匹配结果",
+        "sInfo":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+        "sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
+        "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+        "sInfoPostFix":  "",
+        "sSearch":       "搜索:",
+        "sUrl":          "",
+        "sEmptyTable":     "表中数据为空",
+        "sLoadingRecords": "载入中...",
+        "sInfoThousands":  ",",
+        "oPaginate": {
+            "sFirst":    "首页",
+            "sPrevious": "上页",
+            "sNext":     "下页",
+            "sLast":     "末页"
+        },
+        "oAria": {
+            "sSortAscending":  ": 以升序排列此列",
+            "sSortDescending": ": 以降序排列此列"
+        }
+      },
+    };
+
+    // CKAN API gateway
     var api = {
-        get: function(action, params) {
-            $.ajaxSetup({
-                async: false
-            });
+        get: function(action, params, callback) {
             var api_ver = 3;
             var base_url = ckan.sandbox().client.endpoint;
             params = $.param(params);
             var url = base_url + '/api/' + api_ver + '/action/' + action + '?' + params;
-            return $.getJSON(url);
+            $.getJSON(url, callback);
         },
         post: function(action, data) {
             var api_ver = 3;
@@ -33,6 +136,7 @@ ckan.module('querytool-table', function() {
 
     };
 
+    // Create module
     return {
         initialize: function() {
 
@@ -53,211 +157,56 @@ ckan.module('querytool-table', function() {
         },
 
         createTable: function(yVal, xVal, fromUpdate) {
+            var module = this;
 
+            // Prepare settings
+            var id = this.options.table_id;
+            var locale = $('html').attr('lang');
             var resource_id = this.options.resource_id;
             var y_axis = (yVal) ? yVal : this.options.y_axis;
-            var id = this.options.table_id;
             var main_value = this.options.main_value;
-            if (main_value === true) {
-                var mainVal = $('[name*=table_main_value_]');
-                main_value = mainVal.val();
-            }
-            //check if main value is updated
-            if (fromUpdate) {
-                main_value = xVal;
-            }
-            var locale = $('html').attr('lang');
-            var languages = {
-              'es' : {
-                  "sProcessing":     "Procesando...",
-                  "sLengthMenu":     "Mostrar _MENU_ registros",
-                  "sZeroRecords":    "No se encontraron resultados",
-                  "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                  "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                  "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                  "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                  "sInfoPostFix":    "",
-                  "sSearch":         "Buscar:",
-                  "sUrl":            "",
-                  "sInfoThousands":  ",",
-                  "sLoadingRecords": "Cargando...",
-                  "oPaginate": {
-                      "sFirst":    "Primero",
-                      "sLast":     "Último",
-                      "sNext":     "Siguiente",
-                      "sPrevious": "Anterior"
-                  },
-                  "oAria": {
-                      "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                      "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                  }
-              },
-              'fr' : {
-                "sProcessing":     "Traitement en cours...",
-                "sSearch":         "Rechercher&nbsp;:",
-                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
-                "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-                "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
-                "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-                "sInfoPostFix":    "",
-                "sLoadingRecords": "Chargement en cours...",
-                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-                "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
-                "oPaginate": {
-                  "sFirst":      "Premier",
-                  "sPrevious":   "Pr&eacute;c&eacute;dent",
-                  "sNext":       "Suivant",
-                  "sLast":       "Dernier"
-                },
-                "oAria": {
-                  "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
-                  "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
-                },
-                "select": {
-                  "rows": {
-                    _: "%d lignes séléctionnées",
-                    0: "Aucune ligne séléctionnée",
-                    1: "1 ligne séléctionnée"
-                  }
-                }
-              },
-              'pt_BR' : {
-                  "sEmptyTable": "Nenhum registro encontrado",
-                  "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
-                  "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
-                  "sInfoFiltered": "(Filtrados de _MAX_ registros)",
-                  "sInfoPostFix": "",
-                  "sInfoThousands": ".",
-                  "sLengthMenu": "_MENU_ resultados por página",
-                  "sLoadingRecords": "Carregando...",
-                  "sProcessing": "Processando...",
-                  "sZeroRecords": "Nenhum registro encontrado",
-                  "sSearch": "Pesquisar",
-                  "oPaginate": {
-                      "sNext": "Próximo",
-                      "sPrevious": "Anterior",
-                      "sFirst": "Primeiro",
-                      "sLast": "Último"
-                  },
-                  "oAria": {
-                      "sSortAscending": ": Ordenar colunas de forma ascendente",
-                      "sSortDescending": ": Ordenar colunas de forma descendente"
-                  }
-              },
-              'zh_CN' : {
-                "sProcessing":   "处理中...",
-                "sLengthMenu":   "显示 _MENU_ 项结果",
-                "sZeroRecords":  "没有匹配结果",
-                "sInfo":         "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
-                "sInfoEmpty":    "显示第 0 至 0 项结果，共 0 项",
-                "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
-                "sInfoPostFix":  "",
-                "sSearch":       "搜索:",
-                "sUrl":          "",
-                "sEmptyTable":     "表中数据为空",
-                "sLoadingRecords": "载入中...",
-                "sInfoThousands":  ",",
-                "oPaginate": {
-                    "sFirst":    "首页",
-                    "sPrevious": "上页",
-                    "sNext":     "下页",
-                    "sLast":     "末页"
-                },
-                "oAria": {
-                    "sSortAscending":  ": 以升序排列此列",
-                    "sSortDescending": ": 以降序排列此列"
-                }
-              },
-            };
-            var sql_string = this.create_sql_string(main_value, y_axis);
-            var dt_buttons_className = 'btn btn-default';
+            if (main_value === true) main_value = $('[name*=table_main_value_]').val();
+            if (fromUpdate) main_value = xVal;
+            var category_name = (this.options.category_name === true) ? '' : this.options.category_name;
             var title = (this.options.table_title === true) ? '' : this.options.table_title;
-            var dom_class = '<"dt-header' + id + '">';
-            this.dataTable = $('#table-item-' + id).DataTable({
-                "language": languages[locale],
-                "processing": true,
-                "ajax": {
-                    "url": api.url('querytool_get_resource_data', 'sql_string=' + sql_string),
-                    "dataSrc": "result"
-                },
-                "columns": [{
-                        'data': main_value.toLowerCase(),
-                        'title': main_value.charAt(0).toUpperCase() + main_value.slice(1),
-                        //check for long decimal numbers and round to fixed 5 decimal points
-                        render: function(val) {
-                            if (!isNaN(val)) {
-                                var data = '';
-                                if ((val % 1) != 0) {
-                                    var places = val.toString().split(".")[1].length;
-                                    if (places > 5) {
-                                        var data = parseFloat(val).toFixed(5);
-                                        return data;
-                                    }
-                                    return val;
-                                } else {
-                                    return val;
-                                }
-                            }
-                            return val;
-                        }
-                    },
-                    {
-                        'data': y_axis.toLowerCase(),
-                        'title': y_axis.charAt(0).toUpperCase() + y_axis.slice(1),
-                        //check for long decimal numbers and round to fixed 5 decimal points
-                        render: function(val) {
-                            if (!isNaN(val)) {
-                                var data = '';
-                                if ((val % 1) != 0) {
-                                    var places = val.toString().split(".")[1].length;
-                                    if (places > 5) {
-                                        var data = parseFloat(val).toFixed(5);
-                                        return data;
-                                    }
-                                    return val;
-                                } else {
-                                    return val;
-                                }
-                            }
-                            return val;
-                        }
-                    }
-                ],
-                //download table data options
-                dom: dom_class + 'r<lf>tip<"dtf-butons"B>',
-                buttons: [{
-                        'extend': 'csv',
-                        'className': dt_buttons_className
-                    },
-                    {
-                        'extend': 'excel',
-                        'className': dt_buttons_className
-                    },
-                    {
-                        'extend': 'pdf',
-                        'className': dt_buttons_className
-                    }
-                ],
-                "destroy": true /* <---- this setting reinitialize the table */
+
+            // Get data and create table
+            var sql_string = this.create_sql_string(main_value, y_axis, category_name);
+            api.get('querytool_get_resource_data', {sql_string: sql_string}, function (response) {
+              var rows = response.result;
+
+              // Render table HTML
+              var html = !category_name
+                ? module.render_data_table(rows, main_value, y_axis)
+                : module.render_data_table_with_category(rows, category_name, main_value, y_axis)
+
+              // Enable jquery.datatable
+              var table = $('#table-item-' + id);
+              if ($.fn.DataTable.isDataTable(table)) table.DataTable().destroy();
+              table.html(html);
+              table.DataTable({
+                  "language": LANGUAGES[locale],
+                  //download table data options
+                  dom: '<"dt-header' + id + '">' + 'r<lf>tip<"dtf-butons"B>',
+                  buttons: [
+                    {'extend': 'csv', 'className': 'btn btn-default'},
+                    {'extend': 'excel', 'className': 'btn btn-default'},
+                    {'extend': 'pdf', 'className': 'btn btn-default'},
+                  ],
+                  "processing": true,
+              });
+
+              // Set title value
+              table.find("div.dt-header" + id).html(title);
+
             });
-            // Change table Title value
-            $("div.dt-header" + id).html(title);
-            //this.dataTable.buttons().container().insertAfter($('div.dataTables_paginate', this.dataTable.table().container() ));
         },
 
-        updateTable: function() {
-            var yVal = $('[name=choose_y_axis_column]').val();
-            var xVal = this.el.parent().parent().find('[id*=table_main_value_]').val();
-            this.options.filter_name = this.el.parent().parent().find('[id*=table_field_filter_name_]').val();
-            this.options.filter_value = this.el.parent().parent().find('[id*=table_field_filter_value_]').val();
-            this.options.table_title = this.el.parent().parent().find('[id*=table_field_title_]').val();
-            this.createTable(yVal, xVal, true);
-        },
+        create_sql_string: function(main_value, y_axis, category_name) {
 
-        create_sql_string: function(main_value, y_axis) {
+            // Get settings
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
-
             var filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
 
@@ -267,7 +216,162 @@ ckan.module('querytool-table', function() {
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
 
-            return 'SELECT ' + '"' + main_value + '", SUM("' + y_axis + '") as ' + '"' + y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + main_value + '"';
+            // If category is set
+            // we need the first column as a pivot column
+            // see comments inside this.render_data_table_with_category
+            if (!category_name) {
+              return 'SELECT ' + '"' + main_value + '", SUM("' + y_axis + '") as ' + '"' + y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + main_value + '"';
+            } else {
+              return 'SELECT ' + '"' + category_name + '", "' + main_value + '", SUM("' + y_axis + '") as ' + '"' + y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + category_name + '", "' + main_value + '"';
+            }
+
+        },
+
+        // default tables
+        render_data_table: function(rows, main_value, y_axis) {
+          main_value = main_value.toLowerCase();
+          y_axis = y_axis.toLowerCase();
+
+          // Prepare data
+          var data = {
+            main_value: main_value,
+            y_axis: y_axis,
+            rows: rows,
+          }
+
+          // Prepare template
+          var template = `
+          <table>
+            <thead>
+              <tr>
+                <th>{main_value|capitalize}</th>
+                <th>{y_axis|capitalize}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in rows %}
+                <tr>
+                  <td>{row[main_value]}</td>
+                  <td>{row[y_axis]|process_table_value}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          `;
+
+          // Render
+          return this.render_template(template, data);
+
+        },
+
+        // table for the two-way columns feature
+        render_data_table_with_category: function(rows, category_name, main_value, y_axis) {
+          category_name = category_name.toLowerCase();
+          main_value = main_value.toLowerCase();
+          y_axis = y_axis.toLowerCase();
+
+          // Prepare data
+          // Pivot table when category is set
+          // Source:
+          //   category_name, main_value, y_axis
+          //   cat1, string, number
+          //   cat2, string, number
+          // Target:
+          //   main_value, y_axis for cat1, y_axis for cat2
+          //   string, number, number
+          //   string, number, number
+          var rows_mapping = {};
+          var y_axis_groups = {};
+          for (let row of rows) {
+
+            // Get ma
+            if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
+            var mapping_item = rows_mapping[row[main_value]];
+
+            // Pivot table
+            mapping_item[main_value] = row[main_value];
+            mapping_item[row[category_name]] = row[y_axis];
+
+            // Sub headers
+            y_axis_groups[row[category_name]] = true;
+
+          };
+          var data = {
+            main_value: main_value,
+            y_axis: y_axis,
+            y_axis_groups: Object.keys(y_axis_groups).sort(),
+            rows: Object.values(rows_mapping),
+          };
+
+          // Prepare template
+          var template = `
+          <table>
+            <thead>
+              <tr>
+                <th rowspan="2">{main_value|capitalize}</th>
+                <th colspan="{y_axis_groups.length}">{y_axis|capitalize}</th>
+              </tr>
+              <tr>
+                {% for y_axis_group in y_axis_groups %}
+                  <th>{y_axis_group}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for row in rows %}
+                <tr>
+                  <td>{row[main_value]}</td>
+                  {% for y_axis_group in y_axis_groups %}
+                    <td>{row[y_axis_group]|process_table_value}</td>
+                  {% endfor %}
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          `;
+
+          // Render
+          return this.render_template(template, data);
+
+        },
+
+        // render template unsing nunjucks
+        render_template: function(template, data) {
+          try {
+            var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+            env.addFilter('process_table_value', this.process_table_value)
+            return env.renderString(template, data);
+          } catch (error) {
+            return '';
+          }
+        },
+
+        //check for long decimal numbers and round to fixed 5 decimal points
+        process_table_value: function(val) {
+          if (!isNaN(val)) {
+              var data = '';
+              if ((val % 1) != 0) {
+                  var places = val.toString().split(".")[1].length;
+                  if (places > 5) {
+                      var data = parseFloat(val).toFixed(5);
+                      return data;
+                  }
+                  return val;
+              } else {
+                  return val;
+              }
+          }
+          return val;
+        },
+
+        updateTable: function() {
+            var yVal = $('[name=choose_y_axis_column]').val();
+            var xVal = this.el.parent().parent().find('[id*=table_main_value_]').val();
+            this.options.category_name = this.el.parent().parent().find('[id*=table_category_name_]').val();
+            this.options.filter_name = this.el.parent().parent().find('[id*=table_field_filter_name_]').val();
+            this.options.filter_value = this.el.parent().parent().find('[id*=table_field_filter_value_]').val();
+            this.options.table_title = this.el.parent().parent().find('[id*=table_field_title_]').val();
+            this.createTable(yVal, xVal, true);
         },
 
         teardown: function() {
