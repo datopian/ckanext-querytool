@@ -294,6 +294,18 @@
             <input id="chart_field_chart_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_chart_padding_bottom_{{ n }}" value="{{ chart_padding_bottom }}" placeholder="{{ _('Default') }}">
          </div>
       </div>
+      <hr>
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_static_reference_{{ n }}">{{ _('Static Reference') }}</label>
+         <div class="controls ">
+           <select id="chart_field_static_reference_{{ n }}" name="chart_field_static_reference_{{ n }}">
+             <option value="">&mdash; {{ _('Select value column') }} &mdash;</option>
+             {% for column in chart_filters %}
+               <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.static_reference }}{% endif %}>{{column}}</option>
+             {% endfor %}
+           </select>
+         </div>
+      </div>
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
       <ul class="inline text-right chart-actions">
          <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>

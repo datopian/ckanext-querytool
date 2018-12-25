@@ -436,6 +436,7 @@
                     var selectFilterVAliasDiv = item.find('[id*=chart_div_filter_alias_]');
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
+                    var selectStaticReference = item.find('[id*=chart_field_static_reference_]');
 
                     var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
                     var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
@@ -509,6 +510,9 @@
                     selectFilterVisibility.attr('id', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
+
+                    selectStaticReference.attr('id', 'chart_field_static_reference_' + order);
+                    selectStaticReference.attr('name', 'chart_field_static_reference_' + order);
 
                     resourceId.attr('id', 'resource_id_' + order);
                     resourceId.attr('name', 'resource_id_' + order);

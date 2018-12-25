@@ -371,6 +371,8 @@ class QueryToolController(base.BaseController):
                         data['chart_field_chart_padding_left_{}'.format(id)]
                     visualization['chart_padding_bottom'] = \
                         data['chart_field_chart_padding_bottom_{}'.format(id)]
+                    visualization['static_reference'] = \
+                        data['chart_field_static_reference_{}'.format(id)]
                     visualization['sort'] = \
                         data['chart_field_sort_{}'.format(id)]
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
