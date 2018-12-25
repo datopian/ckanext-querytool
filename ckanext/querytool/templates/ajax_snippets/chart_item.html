@@ -338,6 +338,7 @@
           {% set filter_value = chart.filter_value %}
           {% set category_name = chart.category_name %}
           {% set data_sort = chart.sort %}
+          {% set static_reference = chart.static_reference %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -366,7 +367,8 @@
           category_name=category_name,
           data_sort = data_sort,
           measure_label=measure_label,
-          info_query_filters=info_query_filters
+          info_query_filters=info_query_filters,
+          static_reference=static_reference
       %}
    </div>
 </div>

@@ -72,13 +72,21 @@ ckan.module('querytool-viz-preview', function() {
             var sqlStringExceptSelect = parsedSqlString[1];
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+            var static_reference = (this.options.static_reference === true) ? '' : this.options.static_reference;
+            var category = (this.options.category_name === true) ? '' : this.options.category_name;
 
             // If additional chart filter is set extend the current sql with the new filter
             if (chart_filter_name && chart_filter_value) {
                 var filterSql = ' AND ("' + this.options.filter_name + '"' + " = '" + this.options.filter_value + "')"
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
-            var sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
+
+            var sql;
+            if (static_reference && !category) {
+              sql = 'SELECT AVG("' + static_reference + '") as static_reference, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
+            } else {
+              sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
+            }
 
             return sql;
         },
@@ -93,6 +101,7 @@ ckan.module('querytool-viz-preview', function() {
 
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+            var static_reference = (this.options.static_reference === true) ? '' : this.options.static_reference;
 
             var viz_form = $('#visualizations-form');
             var f = viz_form.data('mainFilters');
@@ -120,6 +129,16 @@ ckan.module('querytool-viz-preview', function() {
                 .done(function(data) {
                     if (data.success) {
                         this.fetched_data = data.result;
+                        if (static_reference) {
+                          var values = [];
+                          for (var row of this.fetched_data) {
+                            values.push(row[y_axis.toLowerCase()]);
+                            this.static_reference_value = row.static_reference;
+                            delete row.static_reference;
+                          }
+                          this.y_axis_min = Math.min.apply(null, values);
+                          this.y_axis_max = Math.max.apply(null, values);
+                        }
                         this.createChart(this.fetched_data);
                     } else {
                         this.el.text(this._('Chart could not be created.'));
@@ -149,7 +168,9 @@ ckan.module('querytool-viz-preview', function() {
             var data_sort = this.options.data_sort;
             var measure_label = this.options.measure_label;
             var additionalCategory = (this.options.category_name === true) ? '' : this.options.category_name;
+            var values;
 
+            // Base options
             var options = {
                 bindto: this.el[0],
                 color: {
@@ -161,8 +182,6 @@ ckan.module('querytool-viz-preview', function() {
                     bottom: parseInt(chart_padding_bottom)
                 }
             };
-
-            var values;
 
             // Title
             var titleVal = (this.options.title === true) ? '' : this.options.title;
@@ -188,21 +207,16 @@ ckan.module('querytool-viz-preview', function() {
                 }
             }
 
-            options.legend = {
-                show: show_legend
-            }
-            options.tooltip = {
-                format: {}
-            }
-
+            // Sort data
             var sBarOrder = data_sort;
-
             if((this.options.chart_type !== 'sbar' ||
-               this.options.chart_type !== 'shbar') && !additionalCategory){
-                    this.sortData(data_sort, records, y_axis, x_axis);
+              this.options.chart_type !== 'shbar') && !additionalCategory){
+              this.sortData(data_sort, records, y_axis, x_axis);
             }
 
-
+            // Legend/tooltip
+            options.legend = {show: show_legend}
+            options.tooltip = {format: {}}
             if (tooltip_name !== true && tooltip_name !== '') {
                 options.tooltip.format['title'] = function(d) {
                     if (options.data.type === 'donut' || options.data.type === 'pie') {
@@ -216,6 +230,7 @@ ckan.module('querytool-viz-preview', function() {
                 return dataf;
             }.bind(this);
 
+            // Chart types
             if (this.options.chart_type === 'donut' ||
                 this.options.chart_type === 'pie') {
                 values = records.map(function(item) {
@@ -380,7 +395,7 @@ ckan.module('querytool-viz-preview', function() {
                         rotated: rotate,
                     };
                 } else {
-                  //no Tick count on x-axis for bar 
+                  //no Tick count on x-axis for bar
                   options.axis = {
                       y: {
                           tick: {
@@ -417,7 +432,21 @@ ckan.module('querytool-viz-preview', function() {
                   r: 3,
                 }
             }
+
+            // Static reference
+            if (!['sbar', 'shbar', 'donut', 'pie'].includes(this.options.chart_type)) {
+              if (this.static_reference_value) {
+                options.grid = {y: {lines: [
+                  {value: this.static_reference_value, text: 'Static Reference'},
+                ]}}
+                options.axis.y.min = Math.min(this.static_reference_value, this.y_axis_min);
+                options.axis.y.max = Math.max(this.static_reference_value, this.y_axis_max);
+              }
+            }
+
+            // Generate chart
             var chart = c3.generate(options);
+
         },
         // Get the values from dropdowns and rerender the chart.
         updateChart: function() {
