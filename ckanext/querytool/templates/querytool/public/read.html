@@ -154,7 +154,10 @@
             filter_value = item.filter_value,
             category_name = item.category_name,
             data_sort = item.sort,
-            measure_label = measure_label
+            measure_label = measure_label,
+            static_reference_measure = item.static_reference_measure,
+            static_reference_column = item.static_reference_column,
+            static_reference_label = item.static_reference_label
           %}
         {% endif %}
         {% if item.type == 'text_box' %}

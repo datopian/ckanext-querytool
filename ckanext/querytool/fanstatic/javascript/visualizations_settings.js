@@ -436,6 +436,9 @@
                     var selectFilterVAliasDiv = item.find('[id*=chart_div_filter_alias_]');
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
+                    var selectStaticReferenceMeasure = item.find('[id*=chart_field_static_reference_measure_]');
+                    var selectStaticReferenceColumn = item.find('[id*=chart_field_static_reference_column_]');
+                    var inputStaticReferenceLabel = item.find('[id*=chart_field_static_reference_label_]');
 
                     var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
                     var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
@@ -509,6 +512,15 @@
                     selectFilterVisibility.attr('id', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
+
+                    selectStaticReferenceMeasure.attr('id', 'chart_field_static_reference_measure_' + order);
+                    selectStaticReferenceMeasure.attr('name', 'chart_field_static_reference_measure_' + order);
+
+                    selectStaticReferenceColumn.attr('id', 'chart_field_static_reference_column_' + order);
+                    selectStaticReferenceColumn.attr('name', 'chart_field_static_reference_column_' + order);
+
+                    inputStaticReferenceLabel.attr('id', 'chart_field_static_reference_label_' + order);
+                    inputStaticReferenceLabel.attr('name', 'chart_field_static_reference_label_' + order);
 
                     resourceId.attr('id', 'resource_id_' + order);
                     resourceId.attr('name', 'resource_id_' + order);

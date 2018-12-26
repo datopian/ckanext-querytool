@@ -294,6 +294,39 @@
             <input id="chart_field_chart_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_chart_padding_bottom_{{ n }}" value="{{ chart_padding_bottom }}" placeholder="{{ _('Default') }}">
          </div>
       </div>
+      <hr>
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_static_reference_measure_{{ n }}">{{ _('Static Reference Measure') }}</label>
+         <div class="controls ">
+           <select id="chart_field_static_reference_measure_{{ n }}" name="chart_field_static_reference_measure_{{ n }}">
+             <option value="">&mdash; {{ _('Select measure') }} &mdash;</option>
+             {% for measure in y_axis_values %}
+               <option value="{{measure}}"{% if chart %}{{ 'selected' if measure == chart.static_reference_measure }}{% endif %}>{{measure}}</option>
+             {% endfor %}
+           </select>
+         </div>
+      </div>
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_static_reference_column_{{ n }}">{{ _('Static Reference Column') }}</label>
+         <div class="controls ">
+           <select id="chart_field_static_reference_column_{{ n }}" name="chart_field_static_reference_column_{{ n }}">
+             <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+             {% for column in chart_filters %}
+               <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.static_reference_column }}{% endif %}>{{column}}</option>
+             {% endfor %}
+           </select>
+         </div>
+      </div>
+      {% if chart %}
+        {% set static_reference_label = chart.static_reference_label %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_static_reference_label_{{ n }}">{{ _('Static Reference Label') }}</label>
+         <div class="controls ">
+            <input id="chart_field_static_reference_label_{{ n }}" type="text" name="chart_field_static_reference_label_{{ n }}" value="{{ static_reference_label }}" placeholder="{{ _('Static Reference') }}">
+         </div>
+      </div>
+      <hr>
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
       <ul class="inline text-right chart-actions">
          <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
@@ -326,6 +359,9 @@
           {% set filter_value = chart.filter_value %}
           {% set category_name = chart.category_name %}
           {% set data_sort = chart.sort %}
+          {% set static_reference_measure = chart.static_reference_measure %}
+          {% set static_reference_column = chart.static_reference_column %}
+          {% set static_reference_label = chart.static_reference_label %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -354,7 +390,10 @@
           category_name=category_name,
           data_sort = data_sort,
           measure_label=measure_label,
-          info_query_filters=info_query_filters
+          info_query_filters=info_query_filters,
+          static_reference_measure=static_reference_measure,
+          static_reference_column=static_reference_column,
+          static_reference_label=static_reference_label
       %}
    </div>
 </div>
