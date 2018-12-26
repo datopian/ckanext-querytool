@@ -372,11 +372,11 @@ class QueryToolController(base.BaseController):
                     visualization['chart_padding_bottom'] = \
                         data['chart_field_chart_padding_bottom_{}'.format(id)]
                     visualization['static_reference_measure'] = \
-                        data['chart_field_static_reference_measure_{}'.format(id)]
+                        data['chart_field_static_reference_measure_%s' % id]
                     visualization['static_reference_column'] = \
-                        data['chart_field_static_reference_column_{}'.format(id)]
+                        data['chart_field_static_reference_column_%s' % id]
                     visualization['static_reference_label'] = \
-                        data['chart_field_static_reference_label_{}'.format(id)]
+                        data['chart_field_static_reference_label_%s' % id]
                     visualization['sort'] = \
                         data['chart_field_sort_{}'.format(id)]
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
