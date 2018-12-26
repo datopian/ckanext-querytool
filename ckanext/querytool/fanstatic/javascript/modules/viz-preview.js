@@ -73,7 +73,6 @@ ckan.module('querytool-viz-preview', function() {
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
             var y_axis = (this.options.y_axis === true) ? '' : this.options.y_axis;
-            var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
             var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
             var category = (this.options.category_name === true) ? '' : this.options.category_name;
 
@@ -84,7 +83,7 @@ ckan.module('querytool-viz-preview', function() {
             }
 
             var sql;
-            if (static_reference_measure === y_axis && static_reference_column && !category) {
+            if (static_reference_column && !category) {
               sql = 'SELECT AVG("' + static_reference_column + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
             } else {
               sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
@@ -103,9 +102,7 @@ ckan.module('querytool-viz-preview', function() {
 
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
-            var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
             var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
-            var static_reference_label = (this.options.static_reference_label === true) ? '' : this.options.static_reference_label;
 
             var viz_form = $('#visualizations-form');
             var f = viz_form.data('mainFilters');
@@ -133,14 +130,13 @@ ckan.module('querytool-viz-preview', function() {
                 .done(function(data) {
                     if (data.success) {
                         this.fetched_data = data.result;
-                        if (static_reference_measure === y_axis && static_reference_column) {
+                        if (static_reference_column) {
                           var values = [];
                           for (var row of this.fetched_data) {
                             values.push(row[y_axis.toLowerCase()]);
                             this.static_reference_value = row.static_reference_column;
                             delete row.static_reference_column;
                           }
-                          this.static_reference_text = static_reference_label;
                           this.y_axis_min = Math.min.apply(null, values);
                           this.y_axis_max = Math.max.apply(null, values);
                         }
@@ -173,6 +169,8 @@ ckan.module('querytool-viz-preview', function() {
             var data_sort = this.options.data_sort;
             var measure_label = this.options.measure_label;
             var additionalCategory = (this.options.category_name === true) ? '' : this.options.category_name;
+            var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
+            var static_reference_label = (this.options.static_reference_label === true) ? '' : this.options.static_reference_label;
             var values;
 
             // Base options
@@ -440,9 +438,9 @@ ckan.module('querytool-viz-preview', function() {
 
             // Static reference
             if (!['sbar', 'shbar', 'donut', 'pie'].includes(this.options.chart_type)) {
-              if (this.static_reference_value) {
+              if (static_reference_measure.toLowerCase() === y_axis && this.static_reference_value) {
                 options.grid = {y: {lines: [
-                  {value: this.static_reference_value, text: this.static_reference_text},
+                  {value: this.static_reference_value, text: static_reference_label},
                 ]}}
                 options.axis.y.min = Math.min(this.static_reference_value, this.y_axis_min);
                 options.axis.y.max = Math.max(this.static_reference_value, this.y_axis_max);
@@ -523,14 +521,24 @@ ckan.module('querytool-viz-preview', function() {
             var yLabbel = chartField.find('input[name*=chart_field_y_label_]');
             var yLabbelVal = yLabbel.val();
 
+            var staticReferenceMeasure = chartField.find('select[name*=chart_field_static_reference_measure_]');
+            var staticReferenceMeasureVal = staticReferenceMeasure.val();
+
+            var staticReferenceColumn = chartField.find('select[name*=chart_field_static_reference_column_]');
+            var staticReferenceColumnVal = staticReferenceColumn.val();
+
+            var staticReferenceLabel = chartField.find('input[name*=chart_field_static_reference_label_]');
+            var staticReferenceLabelVal = staticReferenceLabel.val();
+
             // If the changed values from the dropdowns are not from x_axis or y_axis
             // then just update the chart without fetching new data. This leads
             // to a better UX.
             if (this.fetched_data && (this.options.x_axis === axisXValue &&
                     this.options.y_axis === axisYValue) && (this.options.filter_name === filterNameVal &&
                     this.options.filter_value === filterValueVal) &&
-                this.options.category_name === categoryNameVal &&
-                this.options.chart_type === chartTypeValue) {
+                    this.options.category_name === categoryNameVal &&
+                    this.options.chart_type === chartTypeValue &&
+                    this.options.static_reference_column === staticReferenceColumnVal) {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
@@ -548,6 +556,9 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.y_label = yLabbelVal;
                 this.options.tick_count = tickCountVal;
                 this.options.data_sort = sortVal;
+                this.options.static_reference_measure = staticReferenceMeasureVal;
+                this.options.static_reference_column = staticReferenceColumnVal;
+                this.options.static_reference_label = staticReferenceLabelVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -575,6 +586,9 @@ ckan.module('querytool-viz-preview', function() {
             this.options.filter_value = filterValueVal;
             this.options.category_name = categoryNameVal;
             this.options.data_sort = sortVal;
+            this.options.static_reference_measure = staticReferenceMeasureVal;
+            this.options.static_reference_column = staticReferenceColumnVal;
+            this.options.static_reference_label = staticReferenceLabelVal;
             var newSql = this.create_sql();
 
             this.get_resource_datа(newSql);
