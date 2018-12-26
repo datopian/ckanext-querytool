@@ -72,7 +72,7 @@ ckan.module('querytool-viz-preview', function() {
             var sqlStringExceptSelect = parsedSqlString[1];
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
-            var static_reference = (this.options.static_reference === true) ? '' : this.options.static_reference;
+            var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
             var category = (this.options.category_name === true) ? '' : this.options.category_name;
 
             // If additional chart filter is set extend the current sql with the new filter
@@ -82,8 +82,8 @@ ckan.module('querytool-viz-preview', function() {
             }
 
             var sql;
-            if (static_reference && !category) {
-              sql = 'SELECT AVG("' + static_reference + '") as static_reference, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
+            if (static_reference_column && !category) {
+              sql = 'SELECT AVG("' + static_reference_column + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
             } else {
               sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
             }
@@ -101,7 +101,8 @@ ckan.module('querytool-viz-preview', function() {
 
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
-            var static_reference = (this.options.static_reference === true) ? '' : this.options.static_reference;
+            var static_reference_label = (this.options.static_reference_label === true) ? '' : this.options.static_reference_label;
+            var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
 
             var viz_form = $('#visualizations-form');
             var f = viz_form.data('mainFilters');
@@ -129,13 +130,14 @@ ckan.module('querytool-viz-preview', function() {
                 .done(function(data) {
                     if (data.success) {
                         this.fetched_data = data.result;
-                        if (static_reference) {
+                        if (static_reference_column) {
                           var values = [];
                           for (var row of this.fetched_data) {
                             values.push(row[y_axis.toLowerCase()]);
-                            this.static_reference_value = row.static_reference;
-                            delete row.static_reference;
+                            this.static_reference_value = row.static_reference_column;
+                            delete row.static_reference_column;
                           }
+                          this.static_reference_text = static_reference_label;
                           this.y_axis_min = Math.min.apply(null, values);
                           this.y_axis_max = Math.max.apply(null, values);
                         }
@@ -437,7 +439,7 @@ ckan.module('querytool-viz-preview', function() {
             if (!['sbar', 'shbar', 'donut', 'pie'].includes(this.options.chart_type)) {
               if (this.static_reference_value) {
                 options.grid = {y: {lines: [
-                  {value: this.static_reference_value, text: 'Static Reference'},
+                  {value: this.static_reference_value, text: this.static_reference_text},
                 ]}}
                 options.axis.y.min = Math.min(this.static_reference_value, this.y_axis_min);
                 options.axis.y.max = Math.max(this.static_reference_value, this.y_axis_max);

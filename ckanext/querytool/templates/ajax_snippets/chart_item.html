@@ -296,14 +296,23 @@
       </div>
       <hr>
       <div class="control-group ">
-         <label class="control-label" for="chart_field_static_reference_{{ n }}">{{ _('Static Reference') }}</label>
+         <label class="control-label" for="chart_field_static_reference_column_{{ n }}">{{ _('Static Reference Column') }}</label>
          <div class="controls ">
-           <select id="chart_field_static_reference_{{ n }}" name="chart_field_static_reference_{{ n }}">
-             <option value="">&mdash; {{ _('Select value column') }} &mdash;</option>
+           <select id="chart_field_static_reference_column_{{ n }}" name="chart_field_static_reference_column_{{ n }}">
+             <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
              {% for column in chart_filters %}
-               <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.static_reference }}{% endif %}>{{column}}</option>
+               <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.static_reference_column }}{% endif %}>{{column}}</option>
              {% endfor %}
            </select>
+         </div>
+      </div>
+      {% if chart %}
+        {% set static_reference_label = chart.static_reference_label %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_static_reference_label_{{ n }}">{{ _('Static Reference Label') }}</label>
+         <div class="controls ">
+            <input id="chart_field_static_reference_label_{{ n }}" type="text" name="chart_field_static_reference_label_{{ n }}" value="{{ static_reference_label }}" placeholder="{{ _('Static Reference') }}">
          </div>
       </div>
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
@@ -338,7 +347,8 @@
           {% set filter_value = chart.filter_value %}
           {% set category_name = chart.category_name %}
           {% set data_sort = chart.sort %}
-          {% set static_reference = chart.static_reference %}
+          {% set static_reference_column = chart.static_reference_column %}
+          {% set static_reference_label = chart.static_reference_label %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -368,7 +378,8 @@
           data_sort = data_sort,
           measure_label=measure_label,
           info_query_filters=info_query_filters,
-          static_reference=static_reference
+          static_reference_column=static_reference_column,
+          static_reference_label=static_reference_label
       %}
    </div>
 </div>
