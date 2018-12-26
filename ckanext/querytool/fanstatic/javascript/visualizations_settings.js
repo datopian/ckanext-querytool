@@ -439,6 +439,9 @@
                     var selectStaticReferenceMeasure = item.find('[id*=chart_field_static_reference_measure_]');
                     var selectStaticReferenceColumn = item.find('[id*=chart_field_static_reference_column_]');
                     var inputStaticReferenceLabel = item.find('[id*=chart_field_static_reference_label_]');
+                    var selectDynamicReferenceType = item.find('[id*=chart_field_dynamic_reference_type_]');
+                    var inputDynamicReferenceFactor = item.find('[id*=chart_field_dynamic_reference_factor_]');
+                    var inputDynamicReferenceLabel = item.find('[id*=chart_field_dynamic_reference_label_]');
 
                     var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
                     var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
@@ -521,6 +524,15 @@
 
                     inputStaticReferenceLabel.attr('id', 'chart_field_static_reference_label_' + order);
                     inputStaticReferenceLabel.attr('name', 'chart_field_static_reference_label_' + order);
+
+                    selectDynamicReferenceType.attr('id', 'chart_field_dynamic_reference_type_' + order);
+                    selectDynamicReferenceType.attr('name', 'chart_field_dynamic_reference_type_' + order);
+
+                    inputDynamicReferenceFactor.attr('id', 'chart_field_dynamic_reference_factor_' + order);
+                    inputDynamicReferenceFactor.attr('name', 'chart_field_dynamic_reference_factor_' + order);
+
+                    inputDynamicReferenceLabel.attr('id', 'chart_field_dynamic_reference_label_' + order);
+                    inputDynamicReferenceLabel.attr('name', 'chart_field_dynamic_reference_label_' + order);
 
                     resourceId.attr('id', 'resource_id_' + order);
                     resourceId.attr('name', 'resource_id_' + order);

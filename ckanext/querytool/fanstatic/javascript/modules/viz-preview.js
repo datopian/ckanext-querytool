@@ -534,6 +534,15 @@ ckan.module('querytool-viz-preview', function() {
             var staticReferenceLabel = chartField.find('input[name*=chart_field_static_reference_label_]');
             var staticReferenceLabelVal = staticReferenceLabel.val();
 
+            var dynamicReferenceType = chartField.find('select[name*=chart_field_dynamic_reference_type_]');
+            var dynamicReferenceTypeVal = dynamicReferenceType.val();
+
+            var dynamicReferenceFactor = chartField.find('select[name*=chart_field_dynamic_reference_factor_]');
+            var dynamicReferenceFactorVal = dynamicReferenceFactor.val();
+
+            var dynamicReferenceLabel = chartField.find('input[name*=chart_field_dynamic_reference_label_]');
+            var dynamicReferenceLabelVal = dynamicReferenceLabel.val();
+
             // If the changed values from the dropdowns are not from x_axis or y_axis
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -563,6 +572,9 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.static_reference_measure = staticReferenceMeasureVal;
                 this.options.static_reference_column = staticReferenceColumnVal;
                 this.options.static_reference_label = staticReferenceLabelVal;
+                this.options.dynamic_reference_type = dynamicReferenceTypeVal;
+                this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
+                this.options.dynamic_reference_label = dynamicReferenceLabelVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -593,6 +605,9 @@ ckan.module('querytool-viz-preview', function() {
             this.options.static_reference_measure = staticReferenceMeasureVal;
             this.options.static_reference_column = staticReferenceColumnVal;
             this.options.static_reference_label = staticReferenceLabelVal;
+            this.options.dynamic_reference_type = dynamicReferenceTypeVal;
+            this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
+            this.options.dynamic_reference_label = dynamicReferenceLabelVal;
             var newSql = this.create_sql();
 
             this.get_resource_datа(newSql);

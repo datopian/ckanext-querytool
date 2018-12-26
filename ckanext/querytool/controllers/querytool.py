@@ -377,6 +377,12 @@ class QueryToolController(base.BaseController):
                         data['chart_field_static_reference_column_%s' % id]
                     visualization['static_reference_label'] = \
                         data['chart_field_static_reference_label_%s' % id]
+                    visualization['dynamic_reference_type'] = \
+                        data['chart_field_dynamic_reference_type_%s' % id]
+                    visualization['dynamic_reference_factor'] = \
+                        data['chart_field_dynamic_reference_factor_%s' % id]
+                    visualization['dynamic_reference_label'] = \
+                        data['chart_field_dynamic_reference_label_%s' % id]
                     visualization['sort'] = \
                         data['chart_field_sort_{}'.format(id)]
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
