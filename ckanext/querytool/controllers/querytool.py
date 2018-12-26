@@ -371,6 +371,8 @@ class QueryToolController(base.BaseController):
                         data['chart_field_chart_padding_left_{}'.format(id)]
                     visualization['chart_padding_bottom'] = \
                         data['chart_field_chart_padding_bottom_{}'.format(id)]
+                    visualization['static_reference_measure'] = \
+                        data['chart_field_static_reference_measure_{}'.format(id)]
                     visualization['static_reference_column'] = \
                         data['chart_field_static_reference_column_{}'.format(id)]
                     visualization['static_reference_label'] = \

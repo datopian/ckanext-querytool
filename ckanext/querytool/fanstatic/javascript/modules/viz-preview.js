@@ -72,6 +72,8 @@ ckan.module('querytool-viz-preview', function() {
             var sqlStringExceptSelect = parsedSqlString[1];
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+            var y_axis = (this.options.y_axis === true) ? '' : this.options.y_axis;
+            var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
             var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
             var category = (this.options.category_name === true) ? '' : this.options.category_name;
 
@@ -82,7 +84,7 @@ ckan.module('querytool-viz-preview', function() {
             }
 
             var sql;
-            if (static_reference_column && !category) {
+            if (static_reference_measure === y_axis && static_reference_column && !category) {
               sql = 'SELECT AVG("' + static_reference_column + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
             } else {
               sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
@@ -101,8 +103,9 @@ ckan.module('querytool-viz-preview', function() {
 
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
-            var static_reference_label = (this.options.static_reference_label === true) ? '' : this.options.static_reference_label;
+            var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
             var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
+            var static_reference_label = (this.options.static_reference_label === true) ? '' : this.options.static_reference_label;
 
             var viz_form = $('#visualizations-form');
             var f = viz_form.data('mainFilters');
@@ -130,7 +133,7 @@ ckan.module('querytool-viz-preview', function() {
                 .done(function(data) {
                     if (data.success) {
                         this.fetched_data = data.result;
-                        if (static_reference_column) {
+                        if (static_reference_measure === y_axis && static_reference_column) {
                           var values = [];
                           for (var row of this.fetched_data) {
                             values.push(row[y_axis.toLowerCase()]);
