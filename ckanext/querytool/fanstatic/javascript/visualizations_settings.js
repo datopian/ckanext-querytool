@@ -231,12 +231,32 @@
         });
     };
 
+    function handleChartTitles () {
+      // Provide variables support for titles
+      $('.title textarea').change(function (ev) {
+        var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+        try {
+          env.renderString($(ev.target).val(), {});
+          ev.target.setCustomValidity('');
+        } catch (error) {
+          ev.target.setCustomValidity('Template is invalid');
+        }
+      });
+      $('.title-vars select').change(function (ev) {
+        var select = $(ev.target);
+        var textarea = select.closest('.item-wrapper').find('.control-group.title textarea');
+        textarea.val(textarea.val() + select.val());
+        select.val('');
+      })
+    };
+
     $(document).ready(function() {
         handleChartSortingField();
         handleRenderedVizFilters('chart');
         handleRenderedVizFilters('map');
         handleRenderedVizFilters('table');
         handleImageItems();
+        handleChartTitles();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
         var sqlString = vizForm.data('sqlString');
@@ -244,6 +264,7 @@
         var map_resource = vizForm.data('mapResource');
         var yAxisValues = vizForm.data('yAxisValues');
         var mainFiltersNames = vizForm.data('mainFiltersNames');
+        var infoQueryFilters = vizForm.data('mainFilters');
 
         var chooseYAxisColumn = $('#choose_y_axis_column');
         handleTickFormat();
@@ -299,7 +320,8 @@
                         map_resource: map_resource,
                         sql_string: sqlString,
                         y_axis_values: yAxisValues,
-                        main_filters: mainFiltersNames
+                        main_filters: mainFiltersNames,
+                        info_query_filters: JSON.stringify(infoQueryFilters),
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
@@ -307,6 +329,7 @@
                         handleRenderedVizFilters('chart', items);
                         handleItemsOrder();
                         handleChartSortingField();
+                        handleChartTitles();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
                         handleTickFormat(items);
@@ -413,6 +436,9 @@
                     var selectFilterVAliasDiv = item.find('[id*=chart_div_filter_alias_]');
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
+                    var selectStaticReferenceMeasure = item.find('[id*=chart_field_static_reference_measure_]');
+                    var selectStaticReferenceColumn = item.find('[id*=chart_field_static_reference_column_]');
+                    var inputStaticReferenceLabel = item.find('[id*=chart_field_static_reference_label_]');
 
                     var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
                     var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
@@ -486,6 +512,15 @@
                     selectFilterVisibility.attr('id', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
+
+                    selectStaticReferenceMeasure.attr('id', 'chart_field_static_reference_measure_' + order);
+                    selectStaticReferenceMeasure.attr('name', 'chart_field_static_reference_measure_' + order);
+
+                    selectStaticReferenceColumn.attr('id', 'chart_field_static_reference_column_' + order);
+                    selectStaticReferenceColumn.attr('name', 'chart_field_static_reference_column_' + order);
+
+                    inputStaticReferenceLabel.attr('id', 'chart_field_static_reference_label_' + order);
+                    inputStaticReferenceLabel.attr('name', 'chart_field_static_reference_label_' + order);
 
                     resourceId.attr('id', 'resource_id_' + order);
                     resourceId.attr('name', 'resource_id_' + order);
@@ -582,7 +617,9 @@
 
                 } else if (item.context.id.indexOf('table_item') >= 0) {
                     var table_size = item.find('[id*=table_size_]');
+                    var table_data_format = item.find('[id*=table_data_format_]');
                     var table_main_value = item.find('[id*=table_main_value_]');
+                    var table_category_name = item.find('[id*=table_category_name_]');
                     var table_title = item.find('[id*=table_field_title_]');
 
                     var selectTableFilterName = item.find('[id*=table_field_filter_name_]');
@@ -598,8 +635,14 @@
                     table_size.attr('id', 'table_size_' + order);
                     table_size.attr('name', 'table_size_' + order);
 
+                    table_data_format.attr('id', 'table_data_format_' + order);
+                    table_data_format.attr('name', 'table_data_format_' + order);
+
                     table_main_value.attr('id', 'table_main_value_' + order);
                     table_main_value.attr('name', 'table_main_value_' + order);
+
+                    table_category_name.attr('id', 'table_category_name_' + order);
+                    table_category_name.attr('name', 'table_category_name_' + order);
 
                     table_title.attr('id', 'table_field_title_' + order);
                     table_title.attr('name', 'table_field_title_' + order);

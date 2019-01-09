@@ -3,6 +3,7 @@
 {% resource 'querytool/vendor/c3/c3.js' %}
 {% resource 'querytool/vendor/canvas2image.js' %}
 {% resource 'querytool/vendor/html2canvas.js' %}
+{% resource 'querytool/vendor/nunjucks.js' %}
 {% resource "querytool/javascript/public_query.js" %}
 {% resource 'querytool/javascript/modules/viz-preview.js' %}
 
@@ -153,7 +154,10 @@
             filter_value = item.filter_value,
             category_name = item.category_name,
             data_sort = item.sort,
-            measure_label = measure_label
+            measure_label = measure_label,
+            static_reference_measure = item.static_reference_measure,
+            static_reference_column = item.static_reference_column,
+            static_reference_label = item.static_reference_label
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
@@ -217,6 +221,8 @@
             resource_id=querytool.chart_resource,
             y_axis = y_axis_selected,
             main_value = item.main_value,
+            category_name = item.category_name,
+            data_format = item.data_format,
             filter_name=item.filter_name,
             filter_value=item.filter_value,
             table_title = item.title

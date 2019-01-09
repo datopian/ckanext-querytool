@@ -371,6 +371,12 @@ class QueryToolController(base.BaseController):
                         data['chart_field_chart_padding_left_{}'.format(id)]
                     visualization['chart_padding_bottom'] = \
                         data['chart_field_chart_padding_bottom_{}'.format(id)]
+                    visualization['static_reference_measure'] = \
+                        data['chart_field_static_reference_measure_%s' % id]
+                    visualization['static_reference_column'] = \
+                        data['chart_field_static_reference_column_%s' % id]
+                    visualization['static_reference_label'] = \
+                        data['chart_field_static_reference_label_%s' % id]
                     visualization['sort'] = \
                         data['chart_field_sort_{}'.format(id)]
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
@@ -498,6 +504,8 @@ class QueryToolController(base.BaseController):
                         data['table_main_value_{}'.format(id)]
                     table_item['title'] = \
                         data['table_field_title_{}'.format(id)]
+                    table_item['data_format'] = \
+                        data['table_data_format_{}'.format(id)]
                     if data['table_field_filter_name_{}'.format(id)]:
                         table_item['filter_name'] = \
                             data['table_field_filter_name_{}'.format(id)]
@@ -512,6 +520,12 @@ class QueryToolController(base.BaseController):
                         table_item['filter_value'] = ''
                         table_item['filter_alias'] = ''
                         table_item['filter_visibility'] = ''
+
+                    if data['table_category_name_{}'.format(id)]:
+                        table_item['category_name'] = \
+                                data['table_category_name_{}'.format(id)]
+                    else:
+                        table_item['category_name'] = ''
 
                     tables.append(table_item)
 
@@ -560,10 +574,17 @@ class QueryToolController(base.BaseController):
         data['y_axis_columns'] = _querytool.get('y_axis_columns')
         data['main_filters'] = _querytool.get('filters')
 
+        # Add slug to filters
+        main_filters = []
+        for filter in json.loads(data['main_filters']):
+            filter['slug'] = helpers.slugify(filter.get('alias', ''))
+            main_filters.append(filter)
+        data['main_filters'] = json.dumps(main_filters)
+
         # This is required in order to exclude
         # main filters in chart item filter options
         main_filters_names = []
-        for filter in json.loads(data['main_filters']):
+        for filter in main_filters:
             main_filters_names.append(filter['name'])
         data['main_filters_names'] = ','.join(main_filters_names)
 
@@ -706,6 +727,11 @@ class QueryToolController(base.BaseController):
                 q_item['public_filters'] = new_filters
                 q_item['public_filters'].sort(key=itemgetter('order'))
                 q_item['sql_string'] = related_sql_string
+
+                # Add slug to filters
+                for filter in new_filters:
+                    filter['slug'] = helpers.slugify(filter.get('alias', ''))
+
                 # Need this hack for chart filter
                 q_item['public_main_filters'] = json.dumps(new_filters)
 
