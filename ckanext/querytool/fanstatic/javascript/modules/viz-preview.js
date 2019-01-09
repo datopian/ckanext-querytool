@@ -180,9 +180,7 @@ ckan.module('querytool-viz-preview', function() {
                     pattern: this.options.colors.split(',')
                 },
                 padding: {
-                    left: parseInt(chart_padding_left),
-                    right: 50,
-                    bottom: parseInt(chart_padding_bottom)
+                    right: 50
                 }
             };
 
@@ -208,6 +206,12 @@ ckan.module('querytool-viz-preview', function() {
                     bottom: 15,
                     top:0
                 }
+            }
+            options.legend = {
+                show: show_legend
+            }
+            options.tooltip = {
+                format: {}
             }
 
             // Sort data
@@ -398,7 +402,7 @@ ckan.module('querytool-viz-preview', function() {
                         rotated: rotate,
                     };
                 } else {
-                  //no Tick count on x-axis for bar
+                  //no Tick count on x-axis for bar 
                   options.axis = {
                       y: {
                           tick: {
