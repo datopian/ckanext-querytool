@@ -482,6 +482,10 @@ ckan.module('querytool-viz-preview', function() {
               if (this.static_reference_value || this.dynamic_reference_value) {
                 options.axis.y.min = Math.min.apply(null, [this.static_reference_value, this.dynamic_reference_value, this.y_axis_min].filter(function (value) {return !isNaN(value);}));
                 options.axis.y.max = Math.max.apply(null, [this.static_reference_value, this.dynamic_reference_value, this.y_axis_max].filter(function (value) {return !isNaN(value);}));
+                options.axis.y.padding = {bottom: 50, top: 50};
+                if (['bar', 'hbar'].includes(this.options.chart_type)) {
+                  options.axis.y.padding.bottom = 0;
+                }
               }
 
             }
