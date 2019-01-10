@@ -149,11 +149,14 @@ ckan.module('querytool-viz-preview', function() {
                           this.y_axis_avg = values.reduce(function (a, b) {return a+b;}, 0) / values.length;
                           this.y_axis_min = Math.min.apply(null, values);
                           if (dynamic_reference_type === 'Maximum') {
-                            this.dynamic_reference_value = this.y_axis_max * dynamic_reference_factor;
+                            this.dynamic_reference_value = this.y_axis_max;
                           } else if (dynamic_reference_type === 'Average') {
-                            this.dynamic_reference_value = this.y_axis_avg * dynamic_reference_factor;
+                            this.dynamic_reference_value = this.y_axis_avg;
                           } else if (dynamic_reference_type === 'Minimum') {
-                            this.dynamic_reference_value = this.y_axis_min * dynamic_reference_factor;
+                            this.dynamic_reference_value = this.y_axis_min;
+                          }
+                          if (dynamic_reference_factor !== '') {
+                            this.dynamic_reference_value = this.dynamic_reference_value * dynamic_reference_factor;
                           }
                         }
                         this.createChart(this.fetched_data);
@@ -419,7 +422,7 @@ ckan.module('querytool-viz-preview', function() {
                         rotated: rotate,
                     };
                 } else {
-                  //no Tick count on x-axis for bar 
+                  //no Tick count on x-axis for bar
                   options.axis = {
                       y: {
                           tick: {
