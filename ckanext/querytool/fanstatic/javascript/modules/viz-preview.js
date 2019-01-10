@@ -102,7 +102,10 @@ ckan.module('querytool-viz-preview', function() {
 
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
+            var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
             var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
+            var dynamic_reference_type = (this.options.dynamic_reference_type === true) ? '' : this.options.dynamic_reference_type;
+            var dynamic_reference_factor = (this.options.dynamic_reference_factor === true) ? '' : this.options.dynamic_reference_factor;
 
             var viz_form = $('#visualizations-form');
             var f = viz_form.data('mainFilters');
@@ -130,15 +133,28 @@ ckan.module('querytool-viz-preview', function() {
                 .done(function(data) {
                     if (data.success) {
                         this.fetched_data = data.result;
-                        if (static_reference_column) {
+                        if (!category) {
                           var values = [];
+                          this.static_reference_value = null;
+                          this.dynamic_reference_value = null;
                           for (var row of this.fetched_data) {
-                            values.push(row[y_axis.toLowerCase()]);
-                            this.static_reference_value = row.static_reference_column;
-                            delete row.static_reference_column;
+                            // Values from server are strings..
+                            values.push(+row[y_axis.toLowerCase()]);
+                            if (static_reference_measure === y_axis && static_reference_column) {
+                              this.static_reference_value = row.static_reference_column;
+                              delete row.static_reference_column;
+                            }
                           }
-                          this.y_axis_min = Math.min.apply(null, values);
                           this.y_axis_max = Math.max.apply(null, values);
+                          this.y_axis_avg = values.reduce(function (a, b) {return a+b;}, 0) / values.length;
+                          this.y_axis_min = Math.min.apply(null, values);
+                          if (dynamic_reference_type === 'Maximum') {
+                            this.dynamic_reference_value = this.y_axis_max * dynamic_reference_factor;
+                          } else if (dynamic_reference_type === 'Average') {
+                            this.dynamic_reference_value = this.y_axis_avg * dynamic_reference_factor;
+                          } else if (dynamic_reference_type === 'Minimum') {
+                            this.dynamic_reference_value = this.y_axis_min * dynamic_reference_factor;
+                          }
                         }
                         this.createChart(this.fetched_data);
                     } else {
@@ -171,6 +187,7 @@ ckan.module('querytool-viz-preview', function() {
             var additionalCategory = (this.options.category_name === true) ? '' : this.options.category_name;
             var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
             var static_reference_label = (this.options.static_reference_label === true) ? '' : this.options.static_reference_label;
+            var dynamic_reference_label = (this.options.dynamic_reference_label === true) ? '' : this.options.dynamic_reference_label;
             var values;
 
             // Base options
@@ -440,15 +457,30 @@ ckan.module('querytool-viz-preview', function() {
                 }
             }
 
-            // Static reference
+            // Reference lines
             if (!['sbar', 'shbar', 'donut', 'pie'].includes(this.options.chart_type)) {
-              if (static_reference_measure.toLowerCase() === y_axis && this.static_reference_value) {
-                options.grid = {y: {lines: [
+              options.grid = {y: {lines: []}};
+
+              // Static
+              if (this.static_reference_value) {
+                options.grid.y.lines.push(
                   {value: this.static_reference_value, text: static_reference_label},
-                ]}}
-                options.axis.y.min = Math.min(this.static_reference_value, this.y_axis_min);
-                options.axis.y.max = Math.max(this.static_reference_value, this.y_axis_max);
+                )
               }
+
+              // Dynamic
+              if (this.dynamic_reference_value) {
+                options.grid.y.lines.push(
+                  {value: this.dynamic_reference_value, text: dynamic_reference_label},
+                )
+              }
+
+              // Y axis range
+              if (this.static_reference_value || this.dynamic_reference_value) {
+                options.axis.y.min = Math.min.apply(null, [this.static_reference_value, this.dynamic_reference_value, this.y_axis_min].filter(function (value) {return !isNaN(value);}));
+                options.axis.y.max = Math.max.apply(null, [this.static_reference_value, this.dynamic_reference_value, this.y_axis_max].filter(function (value) {return !isNaN(value);}));
+              }
+
             }
 
             // Generate chart
@@ -534,6 +566,15 @@ ckan.module('querytool-viz-preview', function() {
             var staticReferenceLabel = chartField.find('input[name*=chart_field_static_reference_label_]');
             var staticReferenceLabelVal = staticReferenceLabel.val();
 
+            var dynamicReferenceType = chartField.find('select[name*=chart_field_dynamic_reference_type_]');
+            var dynamicReferenceTypeVal = dynamicReferenceType.val();
+
+            var dynamicReferenceFactor = chartField.find('input[name*=chart_field_dynamic_reference_factor_]');
+            var dynamicReferenceFactorVal = dynamicReferenceFactor.val();
+
+            var dynamicReferenceLabel = chartField.find('input[name*=chart_field_dynamic_reference_label_]');
+            var dynamicReferenceLabelVal = dynamicReferenceLabel.val();
+
             // If the changed values from the dropdowns are not from x_axis or y_axis
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -542,7 +583,10 @@ ckan.module('querytool-viz-preview', function() {
                     this.options.filter_value === filterValueVal) &&
                     this.options.category_name === categoryNameVal &&
                     this.options.chart_type === chartTypeValue &&
-                    this.options.static_reference_column === staticReferenceColumnVal) {
+                    this.options.static_reference_measure === staticReferenceMeasureVal &&
+                    this.options.static_reference_column === staticReferenceColumnVal &&
+                    this.options.dynamic_reference_type === dynamicReferenceTypeVal &&
+                    this.options.dynamic_reference_factor === dynamicReferenceFactorVal) {
                 this.options.colors = colorValue;
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
@@ -563,6 +607,9 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.static_reference_measure = staticReferenceMeasureVal;
                 this.options.static_reference_column = staticReferenceColumnVal;
                 this.options.static_reference_label = staticReferenceLabelVal;
+                this.options.dynamic_reference_type = dynamicReferenceTypeVal;
+                this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
+                this.options.dynamic_reference_label = dynamicReferenceLabelVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -593,6 +640,9 @@ ckan.module('querytool-viz-preview', function() {
             this.options.static_reference_measure = staticReferenceMeasureVal;
             this.options.static_reference_column = staticReferenceColumnVal;
             this.options.static_reference_label = staticReferenceLabelVal;
+            this.options.dynamic_reference_type = dynamicReferenceTypeVal;
+            this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
+            this.options.dynamic_reference_label = dynamicReferenceLabelVal;
             var newSql = this.create_sql();
 
             this.get_resource_datа(newSql);

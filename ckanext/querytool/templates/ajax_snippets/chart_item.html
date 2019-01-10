@@ -329,6 +329,36 @@
          </div>
       </div>
       <hr>
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_dynamic_reference_type_{{ n }}">{{ _('Dynamic Reference Type') }}</label>
+         <div class="controls ">
+           <select id="chart_field_dynamic_reference_type_{{ n }}" name="chart_field_dynamic_reference_type_{{ n }}">
+             <option value="">&mdash; {{ _('Select type') }} &mdash;</option>
+             {% for type in ['Maximum', 'Average', 'Minimum'] %}
+               <option value="{{type}}"{% if chart %}{{ 'selected' if type == chart.dynamic_reference_type }}{% endif %}>{{type}}</option>
+             {% endfor %}
+           </select>
+         </div>
+      </div>
+      {% if chart %}
+        {% set dynamic_reference_factor = chart.dynamic_reference_factor %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_dynamic_reference_factor_{{ n }}">{{ _('Dynamic Reference Factor') }}</label>
+         <div class="controls ">
+            <input id="chart_field_dynamic_reference_factor_{{ n }}" type="number" min="0" step="0.1" name="chart_field_dynamic_reference_factor_{{ n }}" value="{{ dynamic_reference_factor }}" default="1" placeholder="1">
+         </div>
+      </div>
+      {% if chart %}
+        {% set dynamic_reference_label = chart.dynamic_reference_label %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_dynamic_reference_label_{{ n }}">{{ _('Static Reference Label') }}</label>
+         <div class="controls ">
+            <input id="chart_field_dynamic_reference_label_{{ n }}" type="text" name="chart_field_dynamic_reference_label_{{ n }}" value="{{ dynamic_reference_label }}" placeholder="{{ _('Dynamic Reference') }}">
+         </div>
+      </div>
+      <hr>
       <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
       <ul class="inline text-right chart-actions">
          <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
@@ -364,6 +394,9 @@
           {% set static_reference_measure = chart.static_reference_measure %}
           {% set static_reference_column = chart.static_reference_column %}
           {% set static_reference_label = chart.static_reference_label %}
+          {% set dynamic_reference_type = chart.dynamic_reference_type %}
+          {% set dynamic_reference_factor = chart.dynamic_reference_factor %}
+          {% set dynamic_reference_label = chart.dynamic_reference_label %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -395,7 +428,10 @@
           info_query_filters=info_query_filters,
           static_reference_measure=static_reference_measure,
           static_reference_column=static_reference_column,
-          static_reference_label=static_reference_label
+          static_reference_label=static_reference_label,
+          dynamic_reference_type=dynamic_reference_type,
+          dynamic_reference_factor=dynamic_reference_factor,
+          dynamic_reference_label=dynamic_reference_label
       %}
    </div>
 </div>
