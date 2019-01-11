@@ -372,7 +372,8 @@ class QueryToolController(base.BaseController):
                     visualization['chart_padding_bottom'] = \
                         data['chart_field_chart_padding_bottom_{}'.format(id)]
                     visualization['static_reference_columns'] = \
-                        data.get('chart_field_static_reference_columns_%s' % id, [])
+                        data.get('chart_field_static_reference_columns_%s' % id,
+                            [])
                     log.debug('!!!')
                     log.debug(visualization['static_reference_columns'])
                     log.debug('!!!')
