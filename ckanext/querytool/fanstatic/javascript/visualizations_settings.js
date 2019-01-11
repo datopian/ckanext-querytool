@@ -269,6 +269,10 @@
         var chooseYAxisColumn = $('#choose_y_axis_column');
         handleTickFormat();
 
+        // $('#chart_field_static_reference_columns_1').select2({
+          // placeholder: _('Click to select one or more'),
+        // })
+
         $('#save-edit-data-btn').removeAttr('disabled');
         $('#save-visualization-btn').removeAttr('disabled');
 
@@ -438,8 +442,7 @@
                     var selectFilterVAliasDiv = item.find('[id*=chart_div_filter_alias_]');
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
-                    var selectStaticReferenceMeasure = item.find('[id*=chart_field_static_reference_measure_]');
-                    var selectStaticReferenceColumn = item.find('[id*=chart_field_static_reference_column_]');
+                    var selectStaticReferenceColumns = item.find('[id*=chart_field_static_reference_columns_]');
                     var inputStaticReferenceLabel = item.find('[id*=chart_field_static_reference_label_]');
                     var selectDynamicReferenceType = item.find('[id*=chart_field_dynamic_reference_type_]');
                     var inputDynamicReferenceFactor = item.find('[id*=chart_field_dynamic_reference_factor_]');
@@ -518,11 +521,8 @@
                     selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
 
-                    selectStaticReferenceMeasure.attr('id', 'chart_field_static_reference_measure_' + order);
-                    selectStaticReferenceMeasure.attr('name', 'chart_field_static_reference_measure_' + order);
-
-                    selectStaticReferenceColumn.attr('id', 'chart_field_static_reference_column_' + order);
-                    selectStaticReferenceColumn.attr('name', 'chart_field_static_reference_column_' + order);
+                    selectStaticReferenceColumns.attr('id', 'chart_field_static_reference_columns_' + order);
+                    selectStaticReferenceColumns.attr('name', 'chart_field_static_reference_columns_' + order);
 
                     inputStaticReferenceLabel.attr('id', 'chart_field_static_reference_label_' + order);
                     inputStaticReferenceLabel.attr('name', 'chart_field_static_reference_label_' + order);

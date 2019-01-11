@@ -371,10 +371,11 @@ class QueryToolController(base.BaseController):
                         data['chart_field_chart_padding_left_{}'.format(id)]
                     visualization['chart_padding_bottom'] = \
                         data['chart_field_chart_padding_bottom_{}'.format(id)]
-                    visualization['static_reference_measure'] = \
-                        data['chart_field_static_reference_measure_%s' % id]
-                    visualization['static_reference_column'] = \
-                        data['chart_field_static_reference_column_%s' % id]
+                    visualization['static_reference_columns'] = \
+                        data.get('chart_field_static_reference_columns_%s' % id, [])
+                    log.debug('!!!')
+                    log.debug(visualization['static_reference_columns'])
+                    log.debug('!!!')
                     visualization['static_reference_label'] = \
                         data['chart_field_static_reference_label_%s' % id]
                     visualization['dynamic_reference_type'] = \

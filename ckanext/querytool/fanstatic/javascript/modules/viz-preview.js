@@ -564,11 +564,8 @@ ckan.module('querytool-viz-preview', function() {
             var yLabbel = chartField.find('input[name*=chart_field_y_label_]');
             var yLabbelVal = yLabbel.val();
 
-            var staticReferenceMeasure = chartField.find('select[name*=chart_field_static_reference_measure_]');
-            var staticReferenceMeasureVal = staticReferenceMeasure.val();
-
-            var staticReferenceColumn = chartField.find('select[name*=chart_field_static_reference_column_]');
-            var staticReferenceColumnVal = staticReferenceColumn.val();
+            var staticReferenceColumns = chartField.find('select[name*=chart_field_static_reference_columns_]');
+            var staticReferenceColumnsVal = staticReferenceColumns.val();
 
             var staticReferenceLabel = chartField.find('input[name*=chart_field_static_reference_label_]');
             var staticReferenceLabelVal = staticReferenceLabel.val();
@@ -590,8 +587,7 @@ ckan.module('querytool-viz-preview', function() {
                     this.options.filter_value === filterValueVal) &&
                     this.options.category_name === categoryNameVal &&
                     this.options.chart_type === chartTypeValue &&
-                    this.options.static_reference_measure === staticReferenceMeasureVal &&
-                    this.options.static_reference_column === staticReferenceColumnVal &&
+                    this.options.static_reference_columns === staticReferenceColumnsVal &&
                     this.options.dynamic_reference_type === dynamicReferenceTypeVal &&
                     this.options.dynamic_reference_factor === dynamicReferenceFactorVal) {
                 this.options.colors = colorValue;
@@ -611,8 +607,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.y_label = yLabbelVal;
                 this.options.tick_count = tickCountVal;
                 this.options.data_sort = sortVal;
-                this.options.static_reference_measure = staticReferenceMeasureVal;
-                this.options.static_reference_column = staticReferenceColumnVal;
+                this.options.static_reference_columns = staticReferenceColumnsVal;
                 this.options.static_reference_label = staticReferenceLabelVal;
                 this.options.dynamic_reference_type = dynamicReferenceTypeVal;
                 this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
@@ -644,8 +639,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.filter_value = filterValueVal;
             this.options.category_name = categoryNameVal;
             this.options.data_sort = sortVal;
-            this.options.static_reference_measure = staticReferenceMeasureVal;
-            this.options.static_reference_column = staticReferenceColumnVal;
+            this.options.static_reference_columns = staticReferenceColumnsVal;
             this.options.static_reference_label = staticReferenceLabelVal;
             this.options.dynamic_reference_type = dynamicReferenceTypeVal;
             this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
