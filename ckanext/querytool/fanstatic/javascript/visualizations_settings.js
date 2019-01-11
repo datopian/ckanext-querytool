@@ -308,6 +308,7 @@
             var item = $('.item');
             var items = item.length + 1;
             var axisYValue = chooseYAxisColumn.val();
+            var measureLabel = $('#choose_y_axis_column option:selected').text();
 
             if (visualization === 'chart') {
 
@@ -322,6 +323,7 @@
                         y_axis_values: yAxisValues,
                         main_filters: mainFiltersNames,
                         info_query_filters: JSON.stringify(infoQueryFilters),
+                        measure_label: measureLabel,
                     })
                     .done(function(data) {
                         var item = visualizationItems.prepend(data);
