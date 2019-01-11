@@ -300,11 +300,12 @@
       <div class="control-group ">
          <label class="control-label" for="chart_field_static_reference_columns_{{ n }}">{{ _('Static Reference Columns') }}</label>
          <div class="controls ">
-           <select id="chart_field_static_reference_columns_{{ n }}" name="chart_field_static_reference_columns_{{ n }}" multiple="multiple" style="width: 100%">
+           <select id="chart_field_static_reference_columns_{{ n }}" name="chart_field_static_reference_columns_{{ n }}" multiple size="7">
              {% for measure in y_axis_values %}
                <optgroup label="{{ measure }}">
                  {% for column in chart_filters %}
-                   <option value="{{ [measure, column]|join('|') }}" {% if chart %}{{ 'selected' if column == chart.static_reference_columns }}{% endif %}>{{column}}</option>
+                   {% set value = [measure, column]|join('|') %}
+                   <option value="{{ value }}" {% if chart %}{{ 'selected' if value in chart.static_reference_columns }}{% endif %}>{{column}}</option>
                  {% endfor %}
                </optgroup>
              {% endfor %}

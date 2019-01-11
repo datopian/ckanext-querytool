@@ -269,10 +269,6 @@
         var chooseYAxisColumn = $('#choose_y_axis_column');
         handleTickFormat();
 
-        // $('#chart_field_static_reference_columns_1').select2({
-          // placeholder: _('Click to select one or more'),
-        // })
-
         $('#save-edit-data-btn').removeAttr('disabled');
         $('#save-visualization-btn').removeAttr('disabled');
 
