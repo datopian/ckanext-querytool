@@ -598,3 +598,7 @@ def slugify(string):
 
 def parse_json(string):
     return json.loads(string)
+
+
+def dump_json(value):
+    return json.dumps(value)

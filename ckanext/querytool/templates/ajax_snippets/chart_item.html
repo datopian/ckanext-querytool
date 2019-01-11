@@ -298,23 +298,18 @@
          <hr>
       </div>
       <div class="control-group ">
-         <label class="control-label" for="chart_field_static_reference_measure_{{ n }}">{{ _('Static Reference Measure') }}</label>
+         <label class="control-label" for="chart_field_static_reference_columns_{{ n }}">{{ _('Static Reference Columns') }}</label>
          <div class="controls ">
-           <select id="chart_field_static_reference_measure_{{ n }}" name="chart_field_static_reference_measure_{{ n }}">
-             <option value="">&mdash; {{ _('Select measure') }} &mdash;</option>
+           <select id="chart_field_static_reference_columns_{{ n }}" name="chart_field_static_reference_columns_{{ n }}" multiple style="width:100%">
              {% for measure in y_axis_values %}
-               <option value="{{measure}}"{% if chart %}{{ 'selected' if measure == chart.static_reference_measure }}{% endif %}>{{measure}}</option>
-             {% endfor %}
-           </select>
-         </div>
-      </div>
-      <div class="control-group ">
-         <label class="control-label" for="chart_field_static_reference_column_{{ n }}">{{ _('Static Reference Column') }}</label>
-         <div class="controls ">
-           <select id="chart_field_static_reference_column_{{ n }}" name="chart_field_static_reference_column_{{ n }}">
-             <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-             {% for column in chart_filters %}
-               <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.static_reference_column }}{% endif %}>{{column}}</option>
+               <optgroup label="{{ measure }}">
+                 {% for column in chart_filters %}
+                   {% set value = [measure, column]|join('|') %}
+                   <option value="{{ value }}" {% if chart %}{{ 'selected' if value in chart.static_reference_columns }}{% endif %}>
+                    {{column}} ({{measure}})
+                   </option>
+                 {% endfor %}
+               </optgroup>
              {% endfor %}
            </select>
          </div>
@@ -391,8 +386,7 @@
           {% set filter_value = chart.filter_value %}
           {% set category_name = chart.category_name %}
           {% set data_sort = chart.sort %}
-          {% set static_reference_measure = chart.static_reference_measure %}
-          {% set static_reference_column = chart.static_reference_column %}
+          {% set static_reference_columns = chart.static_reference_columns %}
           {% set static_reference_label = chart.static_reference_label %}
           {% set dynamic_reference_type = chart.dynamic_reference_type %}
           {% set dynamic_reference_factor = chart.dynamic_reference_factor %}
@@ -426,8 +420,7 @@
           data_sort = data_sort,
           measure_label=measure_label,
           info_query_filters=info_query_filters,
-          static_reference_measure=static_reference_measure,
-          static_reference_column=static_reference_column,
+          static_reference_columns=static_reference_columns,
           static_reference_label=static_reference_label,
           dynamic_reference_type=dynamic_reference_type,
           dynamic_reference_factor=dynamic_reference_factor,

@@ -239,7 +239,7 @@
           env.renderString($(ev.target).val(), {});
           ev.target.setCustomValidity('');
         } catch (error) {
-          ev.target.setCustomValidity('Template is invalid');
+          ev.target.setCustomValidity(_('Template is invalid'));
         }
       });
       $('.title-vars select').change(function (ev) {
@@ -250,6 +250,30 @@
       })
     };
 
+    function handleMultipleSelect () {
+      $('[id*=chart_field_static_reference_columns_]')
+        // Enable multiple select vidget
+        .select2({
+          placeholder: _('Click to select one or more'),
+        })
+        // Validate on changes
+        .change(function (ev) {
+          var measures = [];
+          var static_reference_columns = $(this).val();
+          for (const value of static_reference_columns || []) {
+            const measure = value.split('|')[0];
+            const column = value.split('|')[1];
+            if (measures.includes(measure)) {
+              ev.target.setCustomValidity(
+                _('Static Reference Columns: maximum one column per measure'));
+              return;
+            }
+            measures.push(measure);
+          }
+          ev.target.setCustomValidity('');
+        })
+    };
+
     $(document).ready(function() {
         handleChartSortingField();
         handleRenderedVizFilters('chart');
@@ -257,6 +281,7 @@
         handleRenderedVizFilters('table');
         handleImageItems();
         handleChartTitles();
+        handleMultipleSelect();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
         var sqlString = vizForm.data('sqlString');
@@ -332,6 +357,7 @@
                         handleItemsOrder();
                         handleChartSortingField();
                         handleChartTitles();
+                        handleMultipleSelect();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
                         handleTickFormat(items);
@@ -438,8 +464,7 @@
                     var selectFilterVAliasDiv = item.find('[id*=chart_div_filter_alias_]');
                     var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
                     var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
-                    var selectStaticReferenceMeasure = item.find('[id*=chart_field_static_reference_measure_]');
-                    var selectStaticReferenceColumn = item.find('[id*=chart_field_static_reference_column_]');
+                    var selectStaticReferenceColumns = item.find('[id*=chart_field_static_reference_columns_]');
                     var inputStaticReferenceLabel = item.find('[id*=chart_field_static_reference_label_]');
                     var selectDynamicReferenceType = item.find('[id*=chart_field_dynamic_reference_type_]');
                     var inputDynamicReferenceFactor = item.find('[id*=chart_field_dynamic_reference_factor_]');
@@ -518,11 +543,8 @@
                     selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
                     selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
 
-                    selectStaticReferenceMeasure.attr('id', 'chart_field_static_reference_measure_' + order);
-                    selectStaticReferenceMeasure.attr('name', 'chart_field_static_reference_measure_' + order);
-
-                    selectStaticReferenceColumn.attr('id', 'chart_field_static_reference_column_' + order);
-                    selectStaticReferenceColumn.attr('name', 'chart_field_static_reference_column_' + order);
+                    selectStaticReferenceColumns.attr('id', 'chart_field_static_reference_columns_' + order);
+                    selectStaticReferenceColumns.attr('name', 'chart_field_static_reference_columns_' + order);
 
                     inputStaticReferenceLabel.attr('id', 'chart_field_static_reference_label_' + order);
                     inputStaticReferenceLabel.attr('name', 'chart_field_static_reference_label_' + order);

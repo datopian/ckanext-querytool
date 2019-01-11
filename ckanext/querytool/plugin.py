@@ -142,6 +142,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.pick_first_by_attr_value,
             'querytool_parse_json':
                 helpers.parse_json,
+            'querytool_dump_json':
+                helpers.dump_json,
         }
 
     # IAuthFunctions
