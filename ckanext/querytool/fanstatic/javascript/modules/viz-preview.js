@@ -73,7 +73,8 @@ ckan.module('querytool-viz-preview', function() {
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
             var y_axis = (this.options.y_axis === true) ? '' : this.options.y_axis;
-            var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
+            var static_reference_columns = (this.options.static_reference_columns === true) ? [] : this.options.static_reference_columns;
+            var static_reference_column = this.getStaticReferenceColumn(static_reference_columns, y_axis);
             var category = (this.options.category_name === true) ? '' : this.options.category_name;
 
             // If additional chart filter is set extend the current sql with the new filter
@@ -102,8 +103,8 @@ ckan.module('querytool-viz-preview', function() {
 
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
-            var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
-            var static_reference_column = (this.options.static_reference_column === true) ? '' : this.options.static_reference_column;
+            var static_reference_columns = (this.options.static_reference_columns === true) ? [] : this.options.static_reference_columns;
+            var static_reference_column = this.getStaticReferenceColumn(static_reference_columns, y_axis);
             var dynamic_reference_type = (this.options.dynamic_reference_type === true) ? '' : this.options.dynamic_reference_type;
             var dynamic_reference_factor = (this.options.dynamic_reference_factor === true) ? '' : this.options.dynamic_reference_factor;
 
@@ -140,7 +141,7 @@ ckan.module('querytool-viz-preview', function() {
                           for (var row of this.fetched_data) {
                             // Values from server are strings..
                             values.push(+row[y_axis.toLowerCase()]);
-                            if (static_reference_measure === y_axis && static_reference_column) {
+                            if (static_reference_column) {
                               this.static_reference_value = row.static_reference_column;
                               delete row.static_reference_column;
                             }
@@ -188,7 +189,6 @@ ckan.module('querytool-viz-preview', function() {
             var data_sort = this.options.data_sort;
             var measure_label = this.options.measure_label;
             var additionalCategory = (this.options.category_name === true) ? '' : this.options.category_name;
-            var static_reference_measure = (this.options.static_reference_measure === true) ? '' : this.options.static_reference_measure;
             var static_reference_label = (this.options.static_reference_label === true) ? '' : this.options.static_reference_label;
             var dynamic_reference_label = (this.options.dynamic_reference_label === true) ? '' : this.options.dynamic_reference_label;
             var values;
@@ -714,7 +714,7 @@ ckan.module('querytool-viz-preview', function() {
         },
 
         // Render dynamic chart titles
-        renderChartTitle (title, options) {
+        renderChartTitle: function (title, options) {
 
           // Configure nunjucks
           var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
@@ -731,6 +731,14 @@ ckan.module('querytool-viz-preview', function() {
             return title;
           }
 
+        },
+
+        // Get static reference column
+        getStaticReferenceColumn: function (static_reference_columns, y_axis) {
+          for (let value of static_reference_columns) {
+            const [measure, column] = value.split('|');
+            if (measure === y_axis) return column;
+          }
         },
 
     }
