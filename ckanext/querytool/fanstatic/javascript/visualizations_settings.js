@@ -453,6 +453,7 @@
 
                     var resourceId = item.find('[id*=resource_id_]');
                     var dataSort = item.find('[id*=chart_field_sort_]');
+                    var dataSortDiv = item.find('[id*=chart_field_sort_div_]');
 
                     item.attr('id', 'chart_field_' + order);
 
@@ -543,6 +544,7 @@
 
                     dataSort.attr('id', 'chart_field_sort_' + order);
                     dataSort.attr('name', 'chart_field_sort_' + order);
+                    dataSortDiv.attr('id', 'chart_field_sort_div_' + order);
 
                     inputChartPaddingLeft.attr('id', 'chart_field_chart_padding_left_' + order);
                     inputChartPaddingLeft.attr('name', 'chart_field_chart_padding_left_' + order);

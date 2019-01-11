@@ -555,7 +555,7 @@ ckan.module('querytool-viz-preview', function() {
             var categoryName = chartField.find('[name*=chart_field_category_name_]');
             var categoryNameVal = categoryName.val();
 
-            var sortOpt = chartField.find('[name*=chart_field_sort_]');
+            var sortOpt = chartField.find('select[name*=chart_field_sort_]');
             var sortVal = sortOpt.val();
 
             var dataLabels = chartField.find('input[name*=chart_field_labels_]');
