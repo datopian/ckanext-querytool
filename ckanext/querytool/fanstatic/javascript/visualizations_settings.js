@@ -239,7 +239,7 @@
           env.renderString($(ev.target).val(), {});
           ev.target.setCustomValidity('');
         } catch (error) {
-          ev.target.setCustomValidity('Template is invalid');
+          ev.target.setCustomValidity(_('Template is invalid'));
         }
       });
       $('.title-vars select').change(function (ev) {
@@ -250,6 +250,30 @@
       })
     };
 
+    function handleMultipleSelect () {
+      $('[id*=chart_field_static_reference_columns_]')
+        // Enable multiple select vidget
+        .select2({
+          placeholder: _('Click to select one or more'),
+        })
+        // Validate on changes
+        .change(function (ev) {
+          var measures = [];
+          var static_reference_columns = $(this).val();
+          for (const value of static_reference_columns || []) {
+            const measure = value.split('|')[0];
+            const column = value.split('|')[1];
+            if (measures.includes(measure)) {
+              ev.target.setCustomValidity(
+                _('Static Reference Columns: maximum one column per measure'));
+              return;
+            }
+            measures.push(measure);
+          }
+          ev.target.setCustomValidity('');
+        })
+    };
+
     $(document).ready(function() {
         handleChartSortingField();
         handleRenderedVizFilters('chart');
@@ -257,6 +281,7 @@
         handleRenderedVizFilters('table');
         handleImageItems();
         handleChartTitles();
+        handleMultipleSelect();
         var visualizationItems = $('#visualization-settings-items');
         var vizForm = $('#visualizations-form');
         var sqlString = vizForm.data('sqlString');
@@ -332,6 +357,7 @@
                         handleItemsOrder();
                         handleChartSortingField();
                         handleChartTitles();
+                        handleMultipleSelect();
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
                         handleTickFormat(items);

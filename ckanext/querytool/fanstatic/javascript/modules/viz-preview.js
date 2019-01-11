@@ -735,8 +735,9 @@ ckan.module('querytool-viz-preview', function() {
 
         // Get static reference column
         getStaticReferenceColumn: function (static_reference_columns, y_axis) {
-          for (let value of static_reference_columns) {
-            const [measure, column] = value.split('|');
+          for (const value of static_reference_columns || []) {
+            const measure = value.split('|')[0];
+            const column = value.split('|')[1];
             if (measure === y_axis) return column;
           }
         },
