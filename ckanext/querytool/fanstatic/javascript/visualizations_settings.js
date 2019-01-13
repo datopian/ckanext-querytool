@@ -252,6 +252,9 @@
 
     function handleMultipleSelect () {
       $('[id*=chart_field_static_reference_columns_]')
+        // Skip already initialized
+        .not('.select2-container')
+        .not('.select2-offscreen')
         // Enable multiple select vidget
         .select2({
           placeholder: _('Click to select one or more'),
