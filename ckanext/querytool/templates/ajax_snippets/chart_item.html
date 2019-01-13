@@ -251,7 +251,7 @@
       {% if chart %}
         {% set ptop = chart.padding_top %}
       {% endif %}
-      <div class="control-group ">
+      <div class="control-group hidden">
          <label class="control-label" for="chart_field_padding_top_{{ n }}">{{ _('Padding top') }}</label>
          <div class="controls ">
             <input id="chart_field_padding_top_{{ n }}" type="number" min="0" name="chart_field_padding_top_{{ n }}" value="{{ ptop }}" placeholder="{{ _('Default') }}">
@@ -260,7 +260,7 @@
       {% if chart %}
         {% set pbtm = chart.padding_bottom %}
       {% endif %}
-      <div class="control-group ">
+      <div class="control-group hidden">
          <label class="control-label" for="chart_field_padding_bottom_{{ n }}">{{ _('Padding bottom') }}</label>
          <div class="controls ">
             <input id="chart_field_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_padding_bottom_{{ n }}" value="{{ pbtm }}" placeholder="{{ _('Default') }}">
@@ -276,26 +276,23 @@
          </div>
       </div>
       <hr>
-      <div style="display:none;">
-         {% if chart %}
-         {% set chart_padding_left = chart.chart_padding_left %}
-         {% endif %}
-         <div class="control-group ">
-            <label class="control-label" for="chart_field_chart_padding_left_{{ n }}">{{ _('Chart Padding left') }}</label>
-            <div class="controls ">
-               <input id="chart_field_chart_padding_left_{{ n }}" type="number" min="0" max="120" name="chart_field_chart_padding_left_{{ n }}" value="{{ chart_padding_left }}" placeholder="{{ _('Default') }}">
-            </div>
-         </div>
-         {% if chart %}
-         {% set chart_padding_bottom = chart.chart_padding_bottom %}
-         {% endif %}
-         <div class="control-group ">
-            <label class="control-label" for="chart_field_chart_padding_bottom_{{ n }}">{{ _('Chart Padding bottom') }}</label>
-            <div class="controls ">
-               <input id="chart_field_chart_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_chart_padding_bottom_{{ n }}" value="{{ chart_padding_bottom }}" placeholder="{{ _('Default') }}">
-            </div>
-         </div>
-         <hr>
+      {% if chart %}
+      {% set chart_padding_left = chart.chart_padding_left %}
+      {% endif %}
+      <div class="control-group hidden">
+        <label class="control-label" for="chart_field_chart_padding_left_{{ n }}">{{ _('Chart Padding left') }}</label>
+        <div class="controls ">
+          <input id="chart_field_chart_padding_left_{{ n }}" type="number" min="0" max="120" name="chart_field_chart_padding_left_{{ n }}" value="{{ chart_padding_left }}" placeholder="{{ _('Default') }}">
+        </div>
+      </div>
+      {% if chart %}
+      {% set chart_padding_bottom = chart.chart_padding_bottom %}
+      {% endif %}
+      <div class="control-group hidden">
+        <label class="control-label" for="chart_field_chart_padding_bottom_{{ n }}">{{ _('Chart Padding bottom') }}</label>
+        <div class="controls ">
+          <input id="chart_field_chart_padding_bottom_{{ n }}" type="number" min="0" name="chart_field_chart_padding_bottom_{{ n }}" value="{{ chart_padding_bottom }}" placeholder="{{ _('Default') }}">
+        </div>
       </div>
       <div class="control-group ">
          <label class="control-label" for="chart_field_static_reference_columns_{{ n }}">{{ _('Static Reference Columns') }}</label>
