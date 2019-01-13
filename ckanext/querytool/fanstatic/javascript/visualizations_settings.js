@@ -453,6 +453,7 @@
                     var selectDataFormat = item.find('[id*=chart_field_data_format_]');
                     var selectTickFormatAxisY = item.find('[id*=chart_field_y_ticks_format_]');
                     var inputLabelAxisY = item.find('[id*=chart_field_y_label_]');
+                    var inputYFromZero = item.find('[id*=chart_field_y_from_zero_]');
                     var inputPaddingTop = item.find('[id*=chart_field_padding_top_]');
                     var inputPaddingBottom = item.find('[id*=chart_field_padding_bottom_]');
                     var selectTickCount = item.find('[id*=chart_field_tick_count_]');
@@ -517,6 +518,9 @@
 
                     inputLabelAxisY.attr('id', 'chart_field_y_label_' + order);
                     inputLabelAxisY.attr('name', 'chart_field_y_label_' + order);
+
+                    inputYFromZero.attr('id', 'chart_field_y_from_zero_' + order);
+                    inputYFromZero.attr('name', 'chart_field_y_from_zero_' + order);
 
                     inputPaddingTop.attr('id', 'chart_field_padding_top_' + order);
                     inputPaddingTop.attr('name', 'chart_field_padding_top_' + order);

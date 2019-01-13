@@ -186,6 +186,7 @@ ckan.module('querytool-viz-preview', function() {
             var tick_count = (this.options.tick_count === true) ? '' : this.options.tick_count;
             var show_labels = this.options.show_labels;
             var y_label = (this.options.y_label === true) ? null : this.options.y_label;
+            var y_from_zero = this.options.y_from_zero;
             var data_sort = this.options.data_sort;
             var measure_label = this.options.measure_label;
             var additionalCategory = (this.options.category_name === true) ? '' : this.options.category_name;
@@ -490,6 +491,15 @@ ckan.module('querytool-viz-preview', function() {
 
             }
 
+            // Y-axis from zero
+            if (['line', 'area', 'area-spline', 'spline', 'scatter', 'bscatter'].includes(this.options.chart_type)) {
+              if (y_from_zero) {
+                options.axis.y.min = options.axis.y.min || 0;
+                options.axis.y.padding = options.axis.y.padding || {};
+                options.axis.y.padding.bottom = 0;
+              }
+            }
+
             // Generate chart
             var chart = c3.generate(options);
 
@@ -564,6 +574,9 @@ ckan.module('querytool-viz-preview', function() {
             var yLabbel = chartField.find('input[name*=chart_field_y_label_]');
             var yLabbelVal = yLabbel.val();
 
+            var yFromZero = chartField.find('input[name*=chart_field_y_from_zero_]');
+            var yFromZeroVal = yFromZero.is(':checked');
+
             var staticReferenceColumns = chartField.find('select[name*=chart_field_static_reference_columns_]');
             var staticReferenceColumnsVal = staticReferenceColumns.val();
 
@@ -605,6 +618,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.padding_bottom = paddingBottomVal;
                 this.options.show_labels = dataLabelsVal;
                 this.options.y_label = yLabbelVal;
+                this.options.y_from_zero = yFromZeroVal;
                 this.options.tick_count = tickCountVal;
                 this.options.data_sort = sortVal;
                 this.options.static_reference_columns = staticReferenceColumnsVal;
@@ -635,6 +649,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.show_labels = dataLabelsVal;
             this.options.tick_count = tickCountVal;
             this.options.y_label = yLabbelVal;
+            this.options.y_from_zero = yFromZeroVal;
             this.options.filter_name = filterNameVal;
             this.options.filter_value = filterValueVal;
             this.options.category_name = categoryNameVal;

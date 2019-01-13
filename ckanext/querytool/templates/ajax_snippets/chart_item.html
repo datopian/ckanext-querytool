@@ -249,6 +249,15 @@
          </div>
       </div>
       {% if chart %}
+        {% set y_from_zero = chart.y_from_zero %}
+      {% endif %}
+      <div class="control-group ">
+         <label class="control-label" for="chart_field_y_from_zero_{{ n }}">{{ _('Y axis from zero') }}</label>
+         <div class="controls ">
+            <input id="chart_field_y_from_zero_{{ n }}" type="checkbox" name="chart_field_y_from_zero_{{ n }}" value="{{ y_from_zero }}" {% if y_from_zero=='true' %}checked{% endif %}>
+         </div>
+      </div>
+      {% if chart %}
         {% set ptop = chart.padding_top %}
       {% endif %}
       <div class="control-group hidden">
@@ -378,6 +387,7 @@
           {% set tick_count = chart.tick_count %}
           {% set show_labels = chart.show_labels %}
           {% set y_label = chart.y_label %}
+          {% set y_from_zero = chart.y_from_zero %}
           {% set filter_name = chart.filter_name %}
           {% set filter_slug = chart.filter_slug %}
           {% set filter_value = chart.filter_value %}
@@ -410,6 +420,7 @@
           tick_count = tick_count,
           show_labels = show_labels,
           y_label = y_label,
+          y_from_zero = y_from_zero,
           filter_name=filter_name,
           filter_slug=filter_slug,
           filter_value=filter_value,
