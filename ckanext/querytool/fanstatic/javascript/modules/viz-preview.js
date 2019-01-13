@@ -301,8 +301,8 @@ ckan.module('querytool-viz-preview', function() {
                             rotate: yrotate
                         },
                         padding: {
-                            top: 200,
-                            bottom: parseInt(padding_bottom)
+                            top: 50,
+                            bottom: 50,
                         }
                     },
                     x: {
@@ -401,8 +401,8 @@ ckan.module('querytool-viz-preview', function() {
                                 rotate: yrotate
                             },
                             padding: {
-                                top: 200,
-                                bottom: parseInt(padding_bottom)
+                                top: 50,
+                                bottom: 50,
                             },
                             label: {
                               text: y_label || measure_label || '',
@@ -434,8 +434,8 @@ ckan.module('querytool-viz-preview', function() {
                               rotate: yrotate
                           },
                           padding: {
-                              top: 200,
-                              bottom: parseInt(padding_bottom)
+                              top: 50,
+                              bottom: 50,
                           },
                           label: {
                             text: y_label || measure_label || '',
