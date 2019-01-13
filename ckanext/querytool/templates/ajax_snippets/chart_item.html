@@ -78,18 +78,18 @@
             </select>
          </div>
       </div>
-       <div class="control-group control-select">
+      <div class="control-group control-select">
         <label class="control-label" for="chart_field_category_name_{{ n }}">{{ _('Category') }}</label>
         <div class="controls ">
-        <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}">
-          <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-          {% for category in columns %}
+          <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}">
+            <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+            {% for category in columns %}
             <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
-          {% endfor %}
-        </select>
+            {% endfor %}
+          </select>
         </div>
-       </div>
-       {% set sort_options = h.querytool_get_chart_sort() %}
+      </div>
+      {% set sort_options = h.querytool_get_chart_sort() %}
       <div id="chart_field_sort_div_{{ n }}" class="control-group control-select {% if chart and chart.category_name %}hidden{% endif %}">
          <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Sort data') }}</label>
          <div class="controls ">
