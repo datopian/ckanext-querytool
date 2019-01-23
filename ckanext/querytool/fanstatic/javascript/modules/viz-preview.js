@@ -201,7 +201,8 @@ ckan.module('querytool-viz-preview', function() {
                     pattern: this.options.colors.split(',')
                 },
                 padding: {
-                    right: 50
+                    right: 50,
+                    bottom:10
                 }
             };
 
