@@ -164,6 +164,7 @@ ckan.module('querytool-table', function() {
             var locale = $('html').attr('lang');
             var resource_id = this.options.resource_id;
             var y_axis = (yVal) ? yVal : this.options.y_axis;
+            var measure_label = (this.options.measure_label === true) ? '' : this.options.measure_label;
             var main_value = this.options.main_value;
             if (main_value === true) main_value = $('[name*=table_main_value_]').val();
             if (fromUpdate) main_value = xVal;
@@ -177,8 +178,8 @@ ckan.module('querytool-table', function() {
 
               // Render table HTML
               var html = !category_name
-                ? module.render_data_table(rows, main_value, y_axis)
-                : module.render_data_table_with_category(rows, category_name, main_value, y_axis)
+                ? module.render_data_table(rows, main_value, y_axis, measure_label)
+                : module.render_data_table_with_category(rows, category_name, main_value, y_axis, measure_label)
 
               // Enable jquery.datatable
               var table = $('#table-item-' + id);
@@ -228,13 +229,14 @@ ckan.module('querytool-table', function() {
         },
 
         // default tables
-        render_data_table: function(rows, main_value, y_axis) {
+        render_data_table: function(rows, main_value, y_axis, measure_label) {
           main_value = main_value.toLowerCase();
           y_axis = y_axis.toLowerCase();
 
           // Prepare data
           var data = {
             main_value: main_value,
+            measure_label: measure_label,
             y_axis: y_axis,
             rows: rows,
           }
@@ -245,7 +247,7 @@ ckan.module('querytool-table', function() {
             <thead>
               <tr>
                 <th>{main_value|capitalize}</th>
-                <th>{y_axis|capitalize}</th>
+                <th>{measure_label|capitalize}</th>
               </tr>
             </thead>
             <tbody>
@@ -265,7 +267,7 @@ ckan.module('querytool-table', function() {
         },
 
         // table for the two-way columns feature
-        render_data_table_with_category: function(rows, category_name, main_value, y_axis) {
+        render_data_table_with_category: function(rows, category_name, main_value, y_axis, measure_label) {
           category_name = category_name.toLowerCase();
           main_value = main_value.toLowerCase();
           y_axis = y_axis.toLowerCase();
@@ -298,6 +300,7 @@ ckan.module('querytool-table', function() {
           };
           var data = {
             main_value: main_value,
+            measure_label: measure_label,
             y_axis: y_axis,
             y_axis_groups: Object.keys(y_axis_groups).sort(),
             rows: Object.values(rows_mapping),
@@ -309,7 +312,7 @@ ckan.module('querytool-table', function() {
             <thead>
               <tr>
                 <th rowspan="2">{main_value|capitalize}</th>
-                <th colspan="{y_axis_groups.length}">{y_axis|capitalize}</th>
+                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>
               </tr>
               <tr>
                 {% for y_axis_group in y_axis_groups %}
