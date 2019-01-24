@@ -381,11 +381,13 @@ ckan.module('querytool-table', function() {
         updateTable: function() {
             var yVal = $('[name=choose_y_axis_column]').val();
             var xVal = this.el.parent().parent().find('[id*=table_main_value_]').val();
+            var measureLabelVal = $('#choose_y_axis_column option:selected').text();
             this.options.category_name = this.el.parent().parent().find('[id*=table_category_name_]').val();
             this.options.data_format = this.el.parent().parent().find('[id*=table_data_format_]').val();
             this.options.filter_name = this.el.parent().parent().find('[id*=table_field_filter_name_]').val();
             this.options.filter_value = this.el.parent().parent().find('[id*=table_field_filter_value_]').val();
             this.options.table_title = this.el.parent().parent().find('[id*=table_field_title_]').val();
+            this.options.measure_label = measureLabelVal;
             this.createTable(yVal, xVal, true);
         },
 

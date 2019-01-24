@@ -593,6 +593,8 @@ ckan.module('querytool-viz-preview', function() {
             var dynamicReferenceLabel = chartField.find('input[name*=chart_field_dynamic_reference_label_]');
             var dynamicReferenceLabelVal = dynamicReferenceLabel.val();
 
+            var measureLabelVal = $('#choose_y_axis_column option:selected').text();
+
             // If the changed values from the dropdowns are not from x_axis or y_axis
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -627,6 +629,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.dynamic_reference_type = dynamicReferenceTypeVal;
                 this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
                 this.options.dynamic_reference_label = dynamicReferenceLabelVal;
+                this.options.measure_label = measureLabelVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -660,6 +663,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.dynamic_reference_type = dynamicReferenceTypeVal;
             this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
             this.options.dynamic_reference_label = dynamicReferenceLabelVal;
+            this.options.measure_label = measureLabelVal;
             var newSql = this.create_sql();
 
             this.get_resource_datа(newSql);
