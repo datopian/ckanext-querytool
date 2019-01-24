@@ -186,6 +186,7 @@ ckan.module('querytool-viz-preview', function() {
             var tick_count = (this.options.tick_count === true) ? '' : this.options.tick_count;
             var show_labels = this.options.show_labels;
             var y_label = (this.options.y_label === true) ? null : this.options.y_label;
+            var y_label_hide = this.options.y_label_hide;
             var y_from_zero = this.options.y_from_zero;
             var data_sort = this.options.data_sort;
             var measure_label = this.options.measure_label;
@@ -235,6 +236,9 @@ ckan.module('querytool-viz-preview', function() {
             options.tooltip = {
                 format: {}
             }
+
+            // Y-label
+            var y_label_text = !y_label_hide ? (y_label || measure_label || '') : '';
 
             // Sort data
             var sBarOrder = data_sort;
@@ -407,7 +411,7 @@ ckan.module('querytool-viz-preview', function() {
                                 bottom: 50,
                             },
                             label: {
-                              text: y_label || measure_label || '',
+                              text: y_label_text,
                               position: 'outer-middle',
                             }
                         },
@@ -440,7 +444,7 @@ ckan.module('querytool-viz-preview', function() {
                               bottom: 50,
                           },
                           label: {
-                            text: y_label || measure_label || '',
+                            text: y_label_text,
                             position: 'outer-middle',
                           }
                       },
@@ -575,6 +579,9 @@ ckan.module('querytool-viz-preview', function() {
             var yLabbel = chartField.find('input[name*=chart_field_y_label_]');
             var yLabbelVal = yLabbel.val();
 
+            var yLabelHide = chartField.find('input[name*=chart_field_y_label_hide_]');
+            var yLabelHideVal = yLabelHide.is(':checked');
+
             var yFromZero = chartField.find('input[name*=chart_field_y_from_zero_]');
             var yFromZeroVal = yFromZero.is(':checked');
 
@@ -621,6 +628,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.padding_bottom = paddingBottomVal;
                 this.options.show_labels = dataLabelsVal;
                 this.options.y_label = yLabbelVal;
+                this.options.y_label_hide = yLabelHideVal;
                 this.options.y_from_zero = yFromZeroVal;
                 this.options.tick_count = tickCountVal;
                 this.options.data_sort = sortVal;
@@ -653,6 +661,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.show_labels = dataLabelsVal;
             this.options.tick_count = tickCountVal;
             this.options.y_label = yLabbelVal;
+            this.options.y_label_hide = yLabelHideVal;
             this.options.y_from_zero = yFromZeroVal;
             this.options.filter_name = filterNameVal;
             this.options.filter_value = filterValueVal;

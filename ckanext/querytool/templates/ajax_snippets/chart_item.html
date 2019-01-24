@@ -216,6 +216,17 @@
                </div>
             </div>
 
+            {# Y-axis title hide #}
+            {% if chart %}
+              {% set y_label_hide = chart.y_label_hide %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_y_label_hide_{{ n }}">{{ _('Y axis title hide') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_y_label_hide_{{ n }}" type="checkbox" name="chart_field_y_label_hide_{{ n }}" value="{{ y_label_hide }}" {% if y_label_hide=='true' %}checked{% endif %}>
+               </div>
+            </div>
+
             {# Y-axis from zero #}
             {% if chart %}
               {% set y_from_zero = chart.y_from_zero %}
@@ -533,6 +544,7 @@
           {% set tick_count = chart.tick_count %}
           {% set show_labels = chart.show_labels %}
           {% set y_label = chart.y_label %}
+          {% set y_label_hide = chart.y_label_hide %}
           {% set y_from_zero = chart.y_from_zero %}
           {% set filter_name = chart.filter_name %}
           {% set filter_slug = chart.filter_slug %}
@@ -566,6 +578,7 @@
           tick_count = tick_count,
           show_labels = show_labels,
           y_label = y_label,
+          y_label_hide = y_label_hide,
           y_from_zero = y_from_zero,
           filter_name=filter_name,
           filter_slug=filter_slug,

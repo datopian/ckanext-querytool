@@ -396,6 +396,10 @@ class QueryToolController(base.BaseController):
                         visualization['show_labels'] = 'true'
                     else:
                         visualization['show_labels'] = 'false'
+                    if 'chart_field_y_label_hide_{}'.format(id) in data:
+                        visualization['y_label_hide'] = 'true'
+                    else:
+                        visualization['y_label_hide'] = 'false'
                     if 'chart_field_y_from_zero_{}'.format(id) in data:
                         visualization['y_from_zero'] = 'true'
                     else:
