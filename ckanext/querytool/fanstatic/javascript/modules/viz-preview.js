@@ -315,7 +315,7 @@ ckan.module('querytool-viz-preview', function() {
                         tick: {
                             rotate: x_text_rotate,
                             multiline: true,
-                            multilineMax: 2,
+                            multilineMax: 3,
                         }
                     }
                 }
@@ -422,7 +422,7 @@ ckan.module('querytool-viz-preview', function() {
                                 count:5,
                                 rotate: x_text_rotate,
                                 multiline: true,
-                                multilineMax: 2
+                                multilineMax: 3
                             }
                         },
                         rotated: rotate,
@@ -454,7 +454,7 @@ ckan.module('querytool-viz-preview', function() {
                           tick: {
                               rotate: x_text_rotate,
                               multiline: true,
-                              multilineMax: 2
+                              multilineMax: 3
                           }
                       },
                       rotated: rotate,
