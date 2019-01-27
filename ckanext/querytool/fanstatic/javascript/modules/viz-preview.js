@@ -472,16 +472,36 @@ ckan.module('querytool-viz-preview', function() {
 
               // Static
               if (this.static_reference_value) {
-                options.grid.y.lines.push(
-                  {value: this.static_reference_value, text: static_reference_label},
-                )
+                // Base
+                options.grid.y.lines.push({
+                  value: this.static_reference_value,
+                  text: static_reference_label,
+                  class: 'base',
+                })
+                // Active (to show on hover)
+                let value = this.sortFormatData(data_format, this.static_reference_value)
+                options.grid.y.lines.push({
+                  value: this.static_reference_value,
+                  text: static_reference_label + ' (' + value + ')',
+                  class: 'active',
+                })
               }
 
               // Dynamic
               if (this.dynamic_reference_value) {
-                options.grid.y.lines.push(
-                  {value: this.dynamic_reference_value, text: dynamic_reference_label},
-                )
+                // Base
+                options.grid.y.lines.push({
+                  value: this.dynamic_reference_value,
+                  text: dynamic_reference_label,
+                  class: 'base',
+                })
+                // Active (to show on hover)
+                let value = this.sortFormatData(data_format, this.dynamic_reference_value)
+                options.grid.y.lines.push({
+                  value: this.dynamic_reference_value,
+                  text: dynamic_reference_label + ' (' + value + ')',
+                  class: 'active',
+                })
               }
 
               // Y axis range

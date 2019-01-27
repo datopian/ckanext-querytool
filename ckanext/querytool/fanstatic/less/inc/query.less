@@ -156,6 +156,29 @@ hr {
 .c3-grid text {
     fill: #000;
 }
+.c3 {
+  .c3-ygrid-line.base {
+    display: block;
+  }
+  .c3-ygrid-line.active {
+    display: none;
+  }
+}
+.c3:hover {
+  .c3-ygrid-line.base {
+    display: none;
+  }
+  .c3-ygrid-line.active {
+    display: block;
+    text {
+      font-size: 125%;
+      font-weight: bold;
+    }
+    line {
+      stroke: black;
+    }
+  }
+}
 table.dataTable thead th {
   font-size: 20px;
   background-color:#f5f5f5;
