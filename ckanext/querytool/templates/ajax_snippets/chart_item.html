@@ -167,7 +167,7 @@
             {% if chart %}
             {% set x_text_multiline = chart.x_text_multiline %}
             {% endif %}
-            <div class="control-group ">
+            <div class="control-group hidden">
               <label class="control-label" for="chart_field_x_text_multiline_{{ n }}">{{ _('X axis label multiline') }}</label>
               <div class="controls ">
                 <input id="chart_field_x_text_multiline_{{ n }}" type="checkbox" name="chart_field_x_text_multiline_{{ n }}" value="{{ x_text_multiline }}"{% if x_text_multiline=='false' %}{% else %}checked{% endif %}>
