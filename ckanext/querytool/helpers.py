@@ -602,3 +602,11 @@ def parse_json(string):
 
 def dump_json(value):
     return json.dumps(value)
+
+
+def get_dataset_url_path(url):
+    # Remove http://host:port/lang part
+    parts = url.split('/dataset')
+    if len(parts) == 1:
+        return ''
+    return '/dataset%s' % parts[1]

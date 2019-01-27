@@ -144,6 +144,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.parse_json,
             'querytool_dump_json':
                 helpers.dump_json,
+            'querytool_get_dataset_url_path':
+                helpers.get_dataset_url_path,
         }
 
     # IAuthFunctions

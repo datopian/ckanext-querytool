@@ -18,7 +18,8 @@
       <select id="map_resource_{{ n }}" name="map_resource_{{ n }}" required=required>
       <option value="">&mdash; {{ _('Select map resource') }} &mdash;</option>
       {% for resource in resources %}
-        <option value="{{ resource.value }}" {% if map %}{{ 'selected' if resource.value == map.map_resource }}{% endif %} >{{resource.text}}</option>
+        {% set isSelected = map and h.querytool_get_dataset_url_path(map.map_resource) == h.querytool_get_dataset_url_path(resource.value) %}
+        <option value="{{ resource.value }}" {% if isSelected  %}selected{% endif %} >{{resource.text}}</option>
       {% endfor %}
       </select>
     </div>
