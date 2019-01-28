@@ -207,6 +207,7 @@ ckan.module('querytool-viz-preview', function() {
                 }
             };
 
+
             // Title
             var titleVal = (this.options.title === true) ? '' : this.options.title;
             var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
@@ -314,8 +315,8 @@ ckan.module('querytool-viz-preview', function() {
                     x: {
                         tick: {
                             rotate: x_text_rotate,
-                            multiline: true,
-                            multilineMax: 2,
+                            multiline: x_text_multiline,
+                            multilineMax: 3,
                         }
                     }
                 }
@@ -328,6 +329,13 @@ ckan.module('querytool-viz-preview', function() {
                     ctype = 'bar';
                     // On horizontal bar the x axis is now actually the y axis
                     yrotate = x_text_rotate;
+
+                    //Resolving bug of bars with 2 columns
+                    if(records.length==2){
+                        options.padding = {
+                        left:110
+                      }
+                    }
                 }
                 if (this.options.chart_type === 'bscatter') {
                     //workaround for bubble charts, scale log base 10 because of large values
@@ -421,8 +429,8 @@ ckan.module('querytool-viz-preview', function() {
                             tick: {
                                 count:5,
                                 rotate: x_text_rotate,
-                                multiline: true,
-                                multilineMax: 2
+                                multiline: x_text_multiline,
+                                multilineMax: 3
                             }
                         },
                         rotated: rotate,
@@ -453,8 +461,8 @@ ckan.module('querytool-viz-preview', function() {
                           categories: categories,
                           tick: {
                               rotate: x_text_rotate,
-                              multiline: true,
-                              multilineMax: 2
+                              multiline: x_text_multiline,
+                              multilineMax: 3
                           }
                       },
                       rotated: rotate,
