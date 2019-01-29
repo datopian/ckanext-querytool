@@ -203,7 +203,7 @@ ckan.module('querytool-viz-preview', function() {
                 },
                 padding: {
                     right: 50,
-                    bottom:10
+                    bottom:12
                 }
             };
 
