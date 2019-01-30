@@ -480,16 +480,36 @@ ckan.module('querytool-viz-preview', function() {
 
               // Static
               if (this.static_reference_value) {
-                options.grid.y.lines.push(
-                  {value: this.static_reference_value, text: static_reference_label},
-                )
+                // Base
+                options.grid.y.lines.push({
+                  value: this.static_reference_value,
+                  text: static_reference_label,
+                  class: 'base',
+                })
+                // Active (to show on hover)
+                let value = this.sortFormatData(data_format, this.static_reference_value)
+                options.grid.y.lines.push({
+                  value: this.static_reference_value,
+                  text: static_reference_label + ' (' + value + ')',
+                  class: 'active',
+                })
               }
 
               // Dynamic
               if (this.dynamic_reference_value) {
-                options.grid.y.lines.push(
-                  {value: this.dynamic_reference_value, text: dynamic_reference_label},
-                )
+                // Base
+                options.grid.y.lines.push({
+                  value: this.dynamic_reference_value,
+                  text: dynamic_reference_label,
+                  class: 'base',
+                })
+                // Active (to show on hover)
+                let value = this.sortFormatData(data_format, this.dynamic_reference_value)
+                options.grid.y.lines.push({
+                  value: this.dynamic_reference_value,
+                  text: dynamic_reference_label + ' (' + value + ')',
+                  class: 'active',
+                })
               }
 
               // Y axis range
@@ -507,7 +527,7 @@ ckan.module('querytool-viz-preview', function() {
             // Y-axis from zero
             if (['line', 'area', 'area-spline', 'spline', 'scatter', 'bscatter'].includes(this.options.chart_type)) {
               if (y_from_zero) {
-                options.axis.y.min = options.axis.y.min || 0;
+                options.axis.y.min = 0;
                 options.axis.y.padding = options.axis.y.padding || {};
                 options.axis.y.padding.bottom = 0;
               }
