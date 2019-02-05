@@ -134,10 +134,13 @@ ckan.module('querytool-viz-preview', function() {
                 .done(function(data) {
                     if (data.success) {
                         this.fetched_data = data.result;
+                        this.static_reference_value = null;
+                        this.dynamic_reference_value = null;
+                        this.y_axis_max = null;
+                        this.y_axis_avg = null;
+                        this.y_axis_min = null;
                         if (!category) {
                           var values = [];
-                          this.static_reference_value = null;
-                          this.dynamic_reference_value = null;
                           for (var row of this.fetched_data) {
                             // Values from server are strings..
                             values.push(+row[y_axis.toLowerCase()]);
