@@ -201,6 +201,8 @@ def querytool_get_chart_data(context, data_dict):
     if category:
         x = []
         x.append('x')
+        values = []
+        static_reference_values = []
 
         category_values = \
             sorted(h.get_filter_values(resource_id,
@@ -222,8 +224,28 @@ def querytool_get_chart_data(context, data_dict):
             x.append(value)
 
             for record in records:
-                categories_data[record[x_axis.lower()]]\
-                    .append(record[y_axis.lower()])
+                value = record[y_axis.lower()]
+                categories_data[record[x_axis.lower()]].append(value)
+                try:
+                    value = float(value)
+                    values.append(value)
+                except Exception:
+                    pass
+                if 'static_reference_column' in record:
+                    try:
+                        sr_value = float(record['static_reference_column'])
+                        static_reference_values.append(sr_value)
+                    except Exception:
+                        pass
+
+        if values:
+            categories_data['y_axis_max'] = max(values)
+            categories_data['y_axis_avg'] = sum(values)/len(values)
+            categories_data['y_axis_min'] = min(values)
+
+        if static_reference_values:
+            categories_data['static_reference_value'] = (
+                sum(static_reference_values) / len(static_reference_values))
 
         categories_data['x'] = x
         return categories_data

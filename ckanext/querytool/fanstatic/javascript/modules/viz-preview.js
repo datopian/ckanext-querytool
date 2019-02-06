@@ -84,7 +84,7 @@ ckan.module('querytool-viz-preview', function() {
             }
 
             var sql;
-            if (static_reference_column && !category) {
+            if (static_reference_column) {
               sql = 'SELECT AVG("' + static_reference_column + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
             } else {
               sql = 'SELECT ' + '"' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as ' + '"' + this.options.y_axis + '"' + sqlStringExceptSelect + ' GROUP BY "' + this.options.x_axis + '"';
@@ -134,24 +134,51 @@ ckan.module('querytool-viz-preview', function() {
                 .done(function(data) {
                     if (data.success) {
                         this.fetched_data = data.result;
-                        this.static_reference_value = null;
-                        this.dynamic_reference_value = null;
+
+                        // Reset all metrics
                         this.y_axis_max = null;
                         this.y_axis_avg = null;
                         this.y_axis_min = null;
-                        if (!category) {
+                        this.static_reference_value = null;
+                        this.dynamic_reference_value = null;
+
+                        // Get max/avg/min
+                        if (category) {
+                          this.y_axis_max = this.fetched_data.y_axis_max;
+                          this.y_axis_avg = this.fetched_data.y_axis_avg;
+                          this.y_axis_min = this.fetched_data.y_axis_min;
+                          delete this.fetched_data.y_axis_max;
+                          delete this.fetched_data.y_axis_avg;
+                          delete this.fetched_data.y_axis_min;
+                        } else {
                           var values = [];
                           for (var row of this.fetched_data) {
                             // Values from server are strings..
                             values.push(+row[y_axis.toLowerCase()]);
-                            if (static_reference_column) {
-                              this.static_reference_value = row.static_reference_column;
-                              delete row.static_reference_column;
-                            }
                           }
                           this.y_axis_max = Math.max.apply(null, values);
                           this.y_axis_avg = values.reduce(function (a, b) {return a+b;}, 0) / values.length;
                           this.y_axis_min = Math.min.apply(null, values);
+                        }
+
+                        // Static reference
+                        if (static_reference_column) {
+                          if (category) {
+                            this.static_reference_value = this.fetched_data.static_reference_value;
+                            delete this.fetched_data.static_reference_value;
+                          } else {
+                            var static_reference_values = [];
+                            for (var row of this.fetched_data) {
+                              // Values from server are strings..
+                              static_reference_values.push(+row.static_reference_column)
+                              delete row.static_reference_column;
+                            }
+                            this.static_reference_value = static_reference_values.reduce(function (a, b) {return a+b;}, 0) / static_reference_values.length;
+                          }
+                        }
+
+                        // Dynamic reference
+                        if (dynamic_reference_type) {
                           if (dynamic_reference_type === 'Maximum') {
                             this.dynamic_reference_value = this.y_axis_max;
                           } else if (dynamic_reference_type === 'Average') {
@@ -163,9 +190,10 @@ ckan.module('querytool-viz-preview', function() {
                             this.dynamic_reference_value = this.dynamic_reference_value * dynamic_reference_factor;
                           }
                         }
+
                         this.createChart(this.fetched_data);
                     } else {
-                        this.el.text(this._('Chart could not be created.'));
+                       this.el.text(this._('Chart could not be created.'));
                     }
                 }.bind(this))
                 .error(function(error) {
