@@ -14,6 +14,8 @@ ckan.module('export-to-png', function($) {
             d3.select('.' + className).selectAll("path.domain").attr("stroke", "black");
             //fix no tick
             d3.select('.' + className).selectAll(".tick line").attr("stroke", "black");
+            //fix reference lines
+            d3.select('.' + className).selectAll(".c3-ygrid-line.active").attr("display", "none");
             var svgElement = $('.' + className).find('svg')[0];
             saveSvgAsPng(svgElement, className + '.png', {backgroundColor: 'white'});
         }
