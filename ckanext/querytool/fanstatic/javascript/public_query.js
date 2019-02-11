@@ -235,6 +235,8 @@
                 element.style.fill = "none";
                 element.style.stroke = "black";
             });
+            // fix references
+            d3.selectAll('.c3-ygrid-line.base line').attr("stroke", "grey");
 
             html2canvas(document.body, {
               //fix images

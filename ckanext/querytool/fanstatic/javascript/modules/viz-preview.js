@@ -515,7 +515,7 @@ ckan.module('querytool-viz-preview', function() {
                 options.grid.y.lines.push({
                   value: this.static_reference_value,
                   text: static_reference_label,
-                  class: 'base html2canvas-ignore',
+                  class: 'base',
                 })
                 // Active (to show on hover)
                 let value = this.sortFormatData(data_format, this.static_reference_value)
@@ -532,7 +532,7 @@ ckan.module('querytool-viz-preview', function() {
                 options.grid.y.lines.push({
                   value: this.dynamic_reference_value,
                   text: dynamic_reference_label,
-                  class: 'base html2canvas-ignore',
+                  class: 'base',
                 })
                 // Active (to show on hover)
                 let value = this.sortFormatData(data_format, this.dynamic_reference_value)
