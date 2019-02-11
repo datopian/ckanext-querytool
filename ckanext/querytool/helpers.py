@@ -5,6 +5,7 @@ import json
 import uuid
 import urllib
 import requests
+import functools32
 
 try:
     # CKAN 2.7 and later
@@ -490,6 +491,7 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
     return map_data
 
 
+@functools32.lru_cache(maxsize=128)
 def get_resource_data(sql_string):
 
     response = toolkit.get_action('datastore_search_sql')(

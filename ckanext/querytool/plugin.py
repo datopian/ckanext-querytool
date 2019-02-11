@@ -5,6 +5,7 @@ from ckan.lib.plugins import DefaultTranslation
 import ckanext.querytool.helpers as h
 from ckanext.querytool.model import setup as model_setup
 import ckanext.querytool.helpers as helpers
+from ckanext.querytool import actions
 
 
 class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
@@ -84,7 +85,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
     def get_actions(self):
         module_root = 'ckanext.querytool.logic.action'
         action_functions = h._get_functions(module_root)
-
+        action_functions['resource_delete'] = actions.resource_delete
+        action_functions['resource_patch'] = actions.resource_patch
+        action_functions['resource_update'] = actions.resource_update
         return action_functions
 
     # IConfigurable

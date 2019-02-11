@@ -1,1 +1,2 @@
 XlsxWriter==0.9.6
+functools32==3.2.3-2

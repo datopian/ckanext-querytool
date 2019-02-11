@@ -4,7 +4,6 @@ import ckan.logic as logic
 import ckan.lib.navl.dictization_functions as df
 from ckan.plugins import toolkit
 import ckan.lib.uploader as uploader
-
 from ckanext.querytool.logic import schema
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
