@@ -461,7 +461,7 @@
                                     '<div class="control-group control-checkbox-group">',
                                       '<input name="y_axis_name_' + columnId + '" id="y_axis_name_' + columnId + '" type="checkbox" value="' + item + '" />',
                                       '<label class="control-label" for="y_axis_name_' + columnId + '">' + item + '</label>',
-                                      '<input name="y_axis_alias_' + columnId + '" id="y_axis_alias_' + columnId + '" type="text" placeholder="Optional alias" value="">',
+                                      '<input name="y_axis_alias_' + columnId + '" id="y_axis_alias_' + columnId + '" type="text" placeholder="Optional label" value="">',
                                     '</div>'
                                 ].join('');
 

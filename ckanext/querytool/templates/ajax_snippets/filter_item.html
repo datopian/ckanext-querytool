@@ -34,11 +34,11 @@
     </div>
 
     <div class="control-group data_filter_alias_{{ n }} {{ class }}">
-      <label class="control-label" for="data_filter_alias_{{ n }}">{{ _('Alias') }}</label>
+      <label class="control-label" for="data_filter_alias_{{ n }}">{{ _('Label') }}</label>
       <div class="controls ">
         <input id="data_filter_alias_{{ n }}" name="data_filter_alias_{{ n }}"
              {% if selected_filter %}value="{{selected_filter.alias}}"{% else %}value=""{% endif %}
-             placeholder="{{ _('Enter filter alias') }}" type="text" required=required>
+             placeholder="{{ _('Enter filter label') }}" type="text" required=required>
       </div>
     </div>
 
