@@ -106,13 +106,6 @@
                 {% set filters = filters|sort(attribute='order') %}
                 <select>
                   <option value="" disabled selected>Add variable to title</option>
-                  <optgroup label="Default">
-                    <option value="{measure}">Measure</option>
-                    {% for filter in filters %}
-                      <option value="{{'{%s}' % filter.slug}}">{{ filter.alias }}</option>
-                    {% endfor %}
-                    <option value="{optional_filter}">Optional Filter</option>
-                  </optgroup>
                   <optgroup label="Capitalized">
                     <option value="{measure|capitalize}">Measure</option>
                     {% for filter in filters %}
@@ -120,7 +113,7 @@
                     {% endfor %}
                     <option value="{optional_filter|capitalize}">Optional Filter</option>
                   </optgroup>
-                  <optgroup label="Lowercased">
+                  <optgroup label="lowercase" class='text-lowercase'>
                     <option value="{measure|lower}">Measure</option>
                     {% for filter in filters %}
                       <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
