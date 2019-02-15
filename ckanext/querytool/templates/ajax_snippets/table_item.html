@@ -69,11 +69,11 @@
       </div>
     </div>
     <div id="table_div_filter_alias_{{ n }}" class="control-group {{ class }}">
-      <label class="control-label" for="table_field_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
+      <label class="control-label" for="table_field_filter_alias_{{ n }}">{{ _('Filter Label') }}</label>
       <div class="controls ">
         <input id="table_field_filter_alias_{{ n }}" name="table_field_filter_alias_{{ n }}"
         {% if table and table.filter_alias %}value="{{table.filter_alias}}"{% else %}value=""{% endif %}
-        placeholder="{{ _('Enter filter alias') }}" type="text">
+        placeholder="{{ _('Enter filter label') }}" type="text">
       </div>
     </div>
     <div id="table_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">

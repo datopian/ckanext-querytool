@@ -124,7 +124,7 @@ Example usage:
         <div class="control-group control-checkbox-group">
           <input name="y_axis_name_{{ column_id }}" id="y_axis_name_{{ column_id }}" type="checkbox" value="{{ column }}" {% if measure %} checked {% endif %} />
           <label class="control-label" for="y_axis_name_{{ column_id }}">{{ column }}</label>
-          <input name="y_axis_alias_{{ column_id }}" id="y_axis_alias_{{ column_id }}" type="text" placeholder="Optional alias" value="{{ measure.alias }}">
+          <input name="y_axis_alias_{{ column_id }}" id="y_axis_alias_{{ column_id }}" type="text" placeholder="Optional label" value="{{ measure.alias }}">
         </div>
       {% endfor %}
     </div>

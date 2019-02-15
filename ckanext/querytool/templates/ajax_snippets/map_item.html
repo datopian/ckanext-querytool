@@ -114,11 +114,11 @@
   </div>
 
   <div id="map_div_filter_alias_{{ n }}" class="control-group {{ class }}">
-    <label class="control-label" for="map_field_filter_alias_{{ n }}">{{ _('Filter alias') }}</label>
+    <label class="control-label" for="map_field_filter_alias_{{ n }}">{{ _('Filter Label') }}</label>
     <div class="controls ">
       <input id="map_field_filter_alias_{{ n }}" name="map_field_filter_alias_{{ n }}"
            {% if map and map.filter_alias %}value="{{map.filter_alias}}"{% else %}value=""{% endif %}
-           placeholder="{{ _('Enter filter alias') }}" type="text">
+           placeholder="{{ _('Enter filter label') }}" type="text">
     </div>
   </div>
 
