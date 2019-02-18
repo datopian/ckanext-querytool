@@ -70,6 +70,8 @@ ckan.module('querytool-viz-preview', function() {
         create_sql: function() {
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
+            // We need to encode some characters, eg, '+' sign:
+            sqlStringExceptSelect = sqlStringExceptSelect.replace('+', '%2B');
             var chart_filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var chart_filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
             var y_axis = (this.options.y_axis === true) ? '' : this.options.y_axis;
