@@ -11,6 +11,7 @@ RUN pip install ipdb ipdbplugin
 RUN echo 'Installing extensions' && \
     # geoview
     pip install -e git+https://github.com/okfn/ckanext-geoview.git@#egg=ckanext-geoview && \
+    pip install -r https://raw.githubusercontent.com/okfn/ckanext-geoview/master/pip-requirements.txt && \
     # querytool
     pip install --no-cache-dir -e git+https://github.com/ViderumGlobal/ckanext-querytool.git#egg=ckanext-querytool && \
     pip install -r https://raw.githubusercontent.com/ViderumGlobal/ckanext-querytool/master/requirements.txt
