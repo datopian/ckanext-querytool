@@ -191,7 +191,7 @@ def get_map_color_scheme():
             'text': _('Diverging Green-Purple')
         }
     ]
-    
+
     return colors
 
 
