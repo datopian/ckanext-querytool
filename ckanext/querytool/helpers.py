@@ -149,51 +149,24 @@ def get_color_scheme():
     Get color schemes for displaying the charts
     :return:
     '''
-    colors = [{'value': '#B80000, #995522, #556677, #118888, #115588, '
-              '#4C3D3D, #2B2B2B, #660000, #221100',
-               'text': _('Saturated')},
-              {'value': '#DDBBAA, #79E6F2, #88AA99, #00A864, #228899, '
-                        '#3F797F, #775555, #118855, #008751, #3D4C46',
-               'text': _('Light')},
-              {'value': '#ADC0D8, #79AFF2, #8899AA, #0EAAB2, #00A0A8, '
-                        '#776655, #118888, #885511, #3F5C7F, #225599',
-               'text': _('Pastel')},
-              {'value': '#ADB1D8, #8899AA, #7983F2, #777752, #887711, '
-                        '#0070C0, #0062A8, #3F457F, #115588, #3D464C',
-               'text': _('Pastel 2')},
-              {'value': '#AA9988, #A88600, #779922, #6C7F3F, #887711, '
-                        '#555577, #665500, #665100, #4C493D, #2B2B2V',
-               'text': _('Contrast')},
-              {'value': '#b9fff2, #6cdeff, #00a3d3, #00778d, #006351, '
-                        '#b9fff5, #6cdeff, #01a3d3, #02778d, #006389',
-               'text': _('Ocean')},
-              {'value': '#6EF752, #75F070, #8ADBC2, #85E0AD, #80E699, '
-                        '#7DE88F, #7AEB85,  #70F55C, #6BFA47, #66FF33',
-               'text': _('Limes')},
-              {'value': '#2f1313, #451611, #60191c, #6f1a31, #890a3e, '
-                        '#BD4587, #CC4C80,  #DB5478, #EB5C70, #FF6666',
-               'text': _('Dark cherry')},
-              {'value': '#eba7ff, #ff7878, #e057ff, #de47ff, #890a3e, '
-                        '#B866FF, #8F66FF,  #5C66FF, #5266FF, #3366FF',
-               'text': _('Purple')},
-              {'value': '#1f2439, #e4f714, #114ee8, #e4e4e4, #000000, '
-                        '#cc885b, #321108,  #6c3b2c, #94b0a4, #d6b5a4',
-               'text': _('Urban')},
-              {'value': '#ff3366, #00ff99, #33cccc, #ffff66, #993399, '
-                        '#f3c6f2, #efa6b6,  #bd98e0, #8d90e2, #7554ae',
-               'text': _('Candy')},
-              {'value': '#22758e, #b63b3b, #f9c414, #e3e8e6, #4c4555, '
-                        '#d53c3c, #80add3,  #97cfcc, #e4b03d, #c39de0',
-               'text': _('Orient')},
-              {'value': '#3b5998, #8b9dc3, #dfe3ee, #f7f7f7, #ffffff, '
-                        '#011f4b, #03396c, #005b96, #6497b1, #6497b1',
+    colors = [{'value': '#59a14f',
+               'text': _('Green')},
+              {'value': '#4e79a7',
                'text': _('Blue')},
-              {'value': '#ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff, '
-                        '#ee4035, #f37736, #fdf498, #7bc043, #0392cf',
-               'text': _('Rainbow')},
-              {'value': '#2e4045, #83adb5, #c7bbc9, #5e3c58, #bfb5b2, '
-                        '#a69eb0, #efeff2, #f2e2cd, #dadae3, #000000',
-               'text': _('Muted')}
+              {'value': '#499894',
+               'text': _('Teal')},
+              {'value': '#b6992d',
+               'text': _('Golden')},
+              {'value': '#ffa600',
+               'text': _('Yellow')},
+              {'value': '#d87c26',
+               'text': _('Orange')},
+              {'value': '#9d7660',
+               'text': _('Brown')},
+              {'value': '#78549a',
+               'text': _('Purple')},
+              {'value': '#b2182b',
+               'text': _('Red')}
               ]
 
     return colors
