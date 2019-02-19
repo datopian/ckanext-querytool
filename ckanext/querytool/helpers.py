@@ -179,9 +179,9 @@ def get_map_color_scheme():
     '''
     colors = [{'value': '#feedde,#fdbe85,#fd8d3c,#e6550d,#a63603',
                'text': _('Sequential')},
-              {'value': '#7b3294,#c2a5cf,#f7f7f7,#a6dba0,#008837',
+							{'value': '#7b3294,#c2a5cf,#f7f7f7,#a6dba0,#008837',
                'text': _('Diverging Green-Purple')},
-							{'value': '#d7191c,#fdae61,#ffffbf,#abdda4,#2b83ba',
+              {'value': '#d7191c,#fdae61,#ffffbf,#abdda4,#2b83ba',
                'text': _('Diverging Blue-Red')}
               ]
 
