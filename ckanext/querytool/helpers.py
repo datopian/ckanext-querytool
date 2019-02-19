@@ -182,11 +182,7 @@ def get_map_color_scheme():
               {'value': '#7b3294,#c2a5cf,#f7f7f7,#a6dba0,#008837',
                'text': _('Diverging Green-Purple')},
 							{'value': '#d7191c,#fdae61,#ffffbf,#abdda4,#2b83ba',
-               'text': _('Diverging Blue-Red')},
-							{'value': '#a6611a,#dfc27d,#f5f5f5,#80cdc1,#018571',
-               'text': _('Diverging Teal-Brown')},
-							{'value': '#e66101,#fdb863,#f7f7f7,#b2abd2,#5e3c99',
-               'text': _('Diverging Purple-Orange')}
+               'text': _('Diverging Blue-Red')}
               ]
 
     return colors
