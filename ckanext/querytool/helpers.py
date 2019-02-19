@@ -189,6 +189,14 @@ def get_map_color_scheme():
         {
             'value': '#d7191c,#fdae61,#ffffbf,#a6d96a,#1a9641',
             'text': _('Diverging Green-Purple')
+        },
+        {
+            'value': '#d7191c,#fdae61,#ffffbf,#a6d96a,#1a9641',
+            'text': _('Diverging Green-Purple')
+        },
+        {
+            'value': '#d7191c,#fdae61,#ffffbf,#a6d96a,#1a9641',
+            'text': _('Diverging Green-Purple')
         }
     ]
 
