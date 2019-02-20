@@ -160,7 +160,8 @@ ckan.module('querytool-table', function() {
         create_sql_string: function(main_value, y_axis) {
             var parsedSqlString = this.options.sql_string.split('*');
             var sqlStringExceptSelect = parsedSqlString[1];
-
+            // We need to encode some characters, eg, '+' sign:
+            sqlStringExceptSelect = sqlStringExceptSelect.replace('+', '%2B');
             var filter_name = (this.options.filter_name === true) ? '' : this.options.filter_name;
             var filter_value = (this.options.filter_value === true) ? '' : this.options.filter_value;
 
