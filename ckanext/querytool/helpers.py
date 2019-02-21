@@ -179,23 +179,28 @@ def get_map_color_scheme():
     '''
     colors = [
         {
-            'value': '#feedde,#fdbe85,#fd8d3c,#e6550d,#a63603',
+            'value': '#feedde,#fdbe85,#fd8d3c,#e6550d,#a63603,' +
+            '#BE6C47,#FED5B8,#A27955,#A2978E,#EF9265',
             'text': _('Sequential')
         },
         {
-            'value': '#7b3294,#c2a5cf,#f7f7f7,#a6dba0,#008837',
+            'value': '#7b3294,#c2a5cf,#f7f7f7,#a6dba0,#008837,' +
+            '#C6E8C2,#5CB37F,#995D41,#E8DEED,#FCFCFC',
             'text': _('Green-Purple')
         },
         {
-            'value': '#d7191c,#fdae61,#ffffbf,#abdda4,#2b83ba',
+            'value': '#d7191c,#fdae61,#ffffbf,#abdda4,#2b83ba,' +
+            '#E56C6E,#C9E9C5,#1C5477,#FEE8D3,#C5DDEC',
             'text': _('Blue-Red')
         },
         {
-            'value': '#a6611a,#dfc27d,#f5f5f5,#80cdc1,#018571',
+            'value': '#a6611a,#dfc27d,#f5f5f5,#80cdc1,#018571,' +
+            '#BE8C58,#E7D2A0,#A2DAD1,#46A697,#B79F67',
             'text': _('Teal-Brown')
         },
         {
-            'value': '#e66101,#fdb863,#f7f7f7,#b2abd2,#5e3c99',
+            'value': '#e66101,#fdb863,#f7f7f7,#b2abd2,#5e3c99,' +
+            '#EF9A5D,#9882BE,#FDD19B,#9E9E9E,#827D99',
             'text': _('Purple-Orange')
         }
     ]
