@@ -183,7 +183,6 @@ def get_map_color_scheme():
             'text': _('Sequential')
         },
         {
-<<<<<<< HEAD
             'value': '#7b3294,#c2a5cf,#f7f7f7,#a6dba0,#008837,#C6E8C2,#5CB37F,#995D41,#E8DEED,#FCFCFC',
             'text': _('Green-Purple')
         },
@@ -197,21 +196,6 @@ def get_map_color_scheme():
         },
         {
             'value': '#e66101,#fdb863,#f7f7f7,#b2abd2,#5e3c99,#EF9A5D,#9882BE,#FDD19B,#9E9E9E,#827D99',
-=======
-            'value': '#7b3294,#c2a5cf,#f7f7f7,#a6dba0,#008837',
-            'text': _('Green-Purple')
-        },
-        {
-            'value': '#d7191c,#fdae61,#ffffbf,#abdda4,#2b83ba',
-            'text': _('Blue-Red')
-        },
-        {
-            'value': '#a6611a,#dfc27d,#f5f5f5,#80cdc1,#018571',
-            'text': _('Teal-Brown')
-        },
-        {
-            'value': '#e66101,#fdb863,#f7f7f7,#b2abd2,#5e3c99',
->>>>>>> master
             'text': _('Purple-Orange')
         }
     ]
