@@ -76,9 +76,11 @@
     <label class="control-label" for="map_color_scheme_{{ n }}">{{ _('Color scheme') }}</label>
     <div class="controls ">
       <select id="map_color_scheme_{{ n }}" name="map_color_scheme_{{ n }}">
-      {% for color in color_schemes %}
-        <option value="{{ color.value }}" {% if map %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{ color.text }}</option>
-      {% endfor %}
+          <optgroup label="Diverging">
+          {% for color in color_schemes %}
+            <option value="{{ color.value }}" {% if map %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{ color.text }}</option>
+          {% endfor %}
+          </optgroup>
       </select>
     </div>
   </div>
