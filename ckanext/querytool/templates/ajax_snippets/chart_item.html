@@ -83,9 +83,20 @@
               <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color') }}</label>
               <div class="controls ">
                 <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
+
+                  <optgroup label="Single Color">
                   {% for color in color_schemes %}
                   <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{ color.text }}</option>
                   {% endfor %}
+                  </optgroup>
+                  
+                  <optgroup label="Diverging">
+                  {% set color_schemes_diverging = h.querytool_get_map_color_scheme() %}
+                  {% for color_diverging in color_schemes_diverging %}
+                    <option value="{{ color_diverging.value }}" {% if chart %}{{ 'selected' if color_diverging.value == chart.color }}{% endif %}>{{ color_diverging.text }}</option>
+                  {% endfor %}
+                  </optgroup>
+
                 </select>
               </div>
             </div>
