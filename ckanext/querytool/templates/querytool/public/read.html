@@ -86,18 +86,19 @@
                   {% set xml = '?format=xml'%}
                   {% set json = '?format=json'%}
                   {% set xlsx = '?format=xlsx'%}
+                  {% set sql_query = '&sql_string=' + querytool.sql_string | replace('+', '%2B') %}
                   <ul class="dropdown-menu">
                     <li>
-                      <a href="{{ download_url }}{{ csv }}">CSV</a>
+                      <a href="{{ download_url }}{{ csv }}{{ sql_query }}">CSV</a>
                     </li>
                     <li>
-                      <a href="{{ download_url }}{{ xml }}">XML</a>
+                      <a href="{{ download_url }}{{ xml }}{{ sql_query }}">XML</a>
                     </li>
                     <li>
-                      <a href="{{ download_url }}{{ json }}">JSON</a>
+                      <a href="{{ download_url }}{{ json }}{{ sql_query }}">JSON</a>
                     </li>
                     <li>
-                      <a href="{{ download_url }}{{ xlsx }}">Microsoft Excel (OpenXML)</a>
+                      <a href="{{ download_url }}{{ xlsx }}{{ sql_query }}">Microsoft Excel (OpenXML)</a>
                     </li>
                   </ul>
                 </div>
