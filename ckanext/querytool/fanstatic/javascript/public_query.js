@@ -284,28 +284,45 @@
     });
 
     $(window).load(function(){
-        //setTimeout(function() { splitTitles(); }, 1000);
+        if ($(window).width() >= 768){
+            setTimeout(function() { splitTitles(); }, 500);
+            setInterval(function() { splitTitles(); }, 2000);
+        }
     })
 
     function splitTitles(){
-      $(".c3-title").each(function(){
+      $(".size-sm > .c3 > svg > .c3-title").each(function(){
 
-        //Fetching the HTML
-        var text =  $(this).html();
+        var hasClass = wordInString($(this).attr('class'), "title-splitted");
+        //Split only if it hasn't been split before
+        if(hasClass==false){
+            //Fetching the HTML
+            var text =  $(this).html();
+            
+            //Getting word length
+            var len = text.length;
 
-        //Getting word length
-        var len = text.length;
+            var html = "";
+            var y = 16;
+            var noOfChars = 55;
 
-        var html = "";
-        var y = 16;
-        var maxlen = 40;
-        if(len>maxlen){
-            //Splitting the string every 10 words and adding tspan
-            html += "<tspan x=0 y="+y+">"+text.slice(0, maxlen) + "</tspan><tspan x=0 y="+(y+y)+">"+text.slice(maxlen, 1000) + "</tspan>";
-            $(this).html(html);
+            var result1 = text.substring(0,noOfChars);
+            var result2 = text.substring(noOfChars,text.length);
+            var ch=text.substring(noOfChars,noOfChars+1);
+            if(ch!=' ') result1+="-"
+
+            if(len>noOfChars){
+                //Splitting the string every 10 words and adding tspan
+                html += "<tspan x=0 y="+y+">"+result1 + "</tspan><tspan x=0 y="+(y+14)+">"+result2 + "</tspan>";
+                $(this).html(html);
+                $(this).attr("class","c3-title title-splitted");
+            }
         }
-
       });
 
+    }
+
+    function wordInString(s, word){
+        return new RegExp( '\\b' + word + '\\b', 'i').test(s);
     }
 })($);
