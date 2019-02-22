@@ -284,24 +284,32 @@
     });
 
     $(window).load(function(){
-        //setTimeout(function() { splitTitles(); }, 1000);
+        if ($(window).width() >= 768){
+            setTimeout(function() { splitTitles(); }, 500);
+        }
     })
 
     function splitTitles(){
-      $(".c3-title").each(function(){
-
+      console.log('entered fun');
+      $(".size-sm > .c3 > svg > .c3-title").each(function(){
         //Fetching the HTML
         var text =  $(this).html();
-
+        
         //Getting word length
         var len = text.length;
 
         var html = "";
         var y = 16;
-        var maxlen = 40;
-        if(len>maxlen){
+        var noOfChars = 55;
+
+        var result1 = text.substring(0,noOfChars);
+        var result2 = text.substring(noOfChars,text.length);
+        var ch=text.substring(noOfChars,noOfChars+1);
+        if(ch!=' ') result1+="-"
+
+        if(len>noOfChars){
             //Splitting the string every 10 words and adding tspan
-            html += "<tspan x=0 y="+y+">"+text.slice(0, maxlen) + "</tspan><tspan x=0 y="+(y+y)+">"+text.slice(maxlen, 1000) + "</tspan>";
+            html += "<tspan x=0 y="+y+">"+result1 + "</tspan><tspan x=0 y="+(y+14)+">"+result2 + "</tspan>";
             $(this).html(html);
         }
 
