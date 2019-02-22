@@ -236,7 +236,7 @@ ckan.module('querytool-viz-preview', function() {
                 },
                 padding: {
                     right: 50,
-                    bottom:14
+                    bottom:16
                 }
             };
 
