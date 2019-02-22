@@ -754,11 +754,11 @@ class QueryToolController(base.BaseController):
                       extra_vars={'querytools': querytools})
 
     def querytool_download_data(self, name):
-        qs = request.query_string
-        file_format = qs.split('=')[1]
+        params = request.params
+        file_format = params['format']
+        sql_string = params['sql_string']
 
         query = _get_action('querytool_get', {'name': name})
-        sql_string = query['sql_string']
 
         data_dict = {
             'sql_string': sql_string,
