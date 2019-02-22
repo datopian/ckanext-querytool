@@ -291,7 +291,7 @@
     })
 
     function splitTitles(){
-      $(".size-sm > .c3 > svg > .c3-title").each(function(){
+      $(".size-sm:not('.wide, .double') > .c3 > svg > .c3-title").each(function(){
 
         var hasClass = wordInString($(this).attr('class'), "title-splitted");
         //Split only if it hasn't been split before
