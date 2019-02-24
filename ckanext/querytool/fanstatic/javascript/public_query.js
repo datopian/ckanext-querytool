@@ -284,42 +284,45 @@
     });
 
     $(window).load(function(){
-      //Only running on mobile phones
-      if ($(window).width() <= 500) {
-          setTimeout(function() { splitTitles(); }, 1000);
-      }
+        if ($(window).width() >= 768){
+            setTimeout(function() { splitTitles(); }, 500);
+            setInterval(function() { splitTitles(); }, 2000);
+        }
     })
 
     function splitTitles(){
-      $(".c3-title").each(function(){
-        //Fetching the HTML
-        var text =  $(this).html().split(" ");
+      $(".size-sm:not('.wide, .double') > .c3 > svg > .c3-title").each(function(){
 
-        //Getting word length
-        var words = text.length;
+        var hasClass = wordInString($(this).attr('class'), "title-splitted");
+        //Split only if it hasn't been split before
+        if(hasClass==false){
+            //Fetching the HTML
+            var text =  $(this).html();
+            
+            //Getting word length
+            var len = text.length;
 
-        var html = "";
-        var y = 10;
-        if(words>10){
-          for(var i=1;i<=words;i++){
-            //Splitting the string every 10 words and adding tspan
-            if((i%10)==0) {
-              html += "<tspan x=0 y="+y+">"+text.slice(i-10, i).join(" ") + "</tspan><tspan x=0 y="+(y+13)+">"+text.slice(i, i+10).join(" ") + "</tspan>";
-              y = y+13;
+            var html = "";
+            var y = 16;
+            var noOfChars = 55;
+
+            var result1 = text.substring(0,noOfChars);
+            var result2 = text.substring(noOfChars,text.length);
+            var ch=text.substring(noOfChars,noOfChars+1);
+            if(ch!=' ') result1+="-"
+
+            if(len>noOfChars){
+                //Splitting the string every 10 words and adding tspan
+                html += "<tspan x=0 y="+y+">"+result1 + "</tspan><tspan x=0 y="+(y+14)+">"+result2 + "</tspan>";
+                $(this).html(html);
+                $(this).attr("class","c3-title title-splitted");
             }
-          }
-          $(this).html(html);
         }
-
-
-
-
-        console.log("words is: "+words)
       });
 
-      //Custom Function to split headers
-      $(".c3-title").each(function(){
+    }
 
-      });
+    function wordInString(s, word){
+        return new RegExp( '\\b' + word + '\\b', 'i').test(s);
     }
 })($);
