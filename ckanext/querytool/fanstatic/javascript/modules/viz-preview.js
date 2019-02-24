@@ -349,7 +349,6 @@ ckan.module('querytool-viz-preview', function() {
                     },
                     x: {
                         tick: {
-                            count: x_tick_count || 4,
                             rotate: x_text_rotate,
                             multiline: x_text_multiline,
                             multilineMax: 3,
@@ -496,7 +495,6 @@ ckan.module('querytool-viz-preview', function() {
                           type: 'category',
                           categories: categories,
                           tick: {
-                              count: x_tick_count || 4,
                               rotate: x_text_rotate,
                               multiline: x_text_multiline,
                               multilineMax: 3
