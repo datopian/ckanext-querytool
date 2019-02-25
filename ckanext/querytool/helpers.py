@@ -180,7 +180,7 @@ def get_map_color_scheme():
     colors = [
         {
             'value': '#feedde,#fdbe85,#fd8d3c,#e6550d,#a63603',
-            'text': _('Sequential')
+            'text': _('Sequential reds')
         },
         {
             'value': '#7b3294,#c2a5cf,#f7f7f7,#a6dba0,#008837',
