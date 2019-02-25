@@ -193,6 +193,16 @@
               </div>
             </div>
 
+            {# X-axis ticks #}
+            {% if chart.graph == 'line' %}
+            <div class="control-group">
+              <label class="control-label" for="chart_field_x_tick_count_{{ n }}">{{ _('Tick count') }}</label>
+              <div class="controls ">
+                <input id="chart_field_x_tick_count_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_count_{{ n }}" placeholder="10">
+              </div>
+            </div>
+            {% endif %}
+
           </div>
         </div>
       </div>
