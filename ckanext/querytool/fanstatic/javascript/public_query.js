@@ -295,28 +295,28 @@
 
     function splitTitles(){
       $(".size-sm:not('.wide, .double') > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),55);
+        titleSplitfn($(this),53);
       });
 
       $(".size-sm.wide > .c3 > svg > .c3-title,.size-xl > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),170);
+        titleSplitfn($(this),160);
       });
 
 
       $(".size-sm.double > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),120);
-      });
-
-      $(".size-lg.square > .c3 > svg > .c3-title").each(function(){
         titleSplitfn($(this),110);
       });
 
+      $(".size-lg.square > .c3 > svg > .c3-title").each(function(){
+        titleSplitfn($(this),100);
+      });
+
       $(".size-lg.vertical > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),90);
+        titleSplitfn($(this),80);
       });
 
       $(".size-lg:not('.vertical, .square') > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),85);
+        titleSplitfn($(this),75);
       });
     }
 
