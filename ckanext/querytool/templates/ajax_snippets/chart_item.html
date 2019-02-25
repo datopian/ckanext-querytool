@@ -13,6 +13,7 @@
     {% do main_filters.append(item) %}
 {% endfor %}
 {% set chart_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
+{% set numeric_columns = h.querytool_get_numeric_resource_columns(chart_resource) %}
 
 <div id="chart_field_{{ n }}" class="item chart_field visualization-fields-section">
   {% set chart_types = h.querytool_get_chart_types() %}
@@ -397,7 +398,7 @@
                  <select id="chart_field_static_reference_columns_{{ n }}" name="chart_field_static_reference_columns_{{ n }}" multiple style="width:100%">
                    {% for measure in y_axis_values %}
                      <optgroup label="{{ measure }}">
-                       {% for column in chart_filters %}
+                       {% for column in numeric_columns %}
                          {% set value = [measure, column]|join('|') %}
                          <option value="{{ value }}" {% if chart %}{{ 'selected' if value in chart.static_reference_columns }}{% endif %}>
                           {{column}} ({{measure}})
