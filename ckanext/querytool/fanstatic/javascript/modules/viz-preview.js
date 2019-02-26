@@ -773,14 +773,42 @@ ckan.module('querytool-viz-preview', function() {
                     var x = a[x_axis];
                     var y = b[x_axis];
                     if (!isNaN(x) && !isNaN(y)) {
-                        return Number(x) - Number(y);
+                        var difference = Number(x) - Number(y);
+                        if (difference === 0) {
+                          return 0
+                        }
+                        return difference / Math.abs(difference);
                     } else {
+                        // Check if value contains '1.' which indicates about
+                        // custom order:
+                        var match1 = x.match(/^\d{1,2}\./);
+                        var match2 = y.match(/^\d{1,2}\./);
+                        // If both values have custom order indicators, then
+                        // we want to compare two values:
+                        if (match1 && match2) {
+                            var difference = parseInt(match1[0]) - parseInt(match2[0]);
+                            if (difference === 0) {
+                              return 0
+                            }
+                            return difference / Math.abs(difference);
+                        } else if (match1 && !match2) {
+                            // if second value doesn't contain it, then it comes
+                            // after the first one:
+                            return -1
+                        } else if (!match1 && match2) {
+                            // Ditto here:
+                            return 1
+                        }
                         if (x < y) //sort string ascending
                             return -1;
                         if (x > y)
                             return 1;
                         return 0; //default return value (no sorting)
                     }
+                });
+                // Remove '1.' from the content:
+                records.forEach(function(record) {
+                  record[x_axis] = record[x_axis].replace(/^\d{1,2}\./, '');
                 });
             }
         },
