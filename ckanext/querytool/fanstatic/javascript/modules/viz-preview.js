@@ -772,7 +772,7 @@ ckan.module('querytool-viz-preview', function() {
                 records.sort(function(a, b) {
                     var x = a[x_axis];
                     var y = b[x_axis];
-                    if (!isNaN(x)) {
+                    if (!isNaN(x) && !isNaN(y)) {
                         return Number(x) - Number(y);
                     } else {
                         // This is a special case - when a value starts with `<`
