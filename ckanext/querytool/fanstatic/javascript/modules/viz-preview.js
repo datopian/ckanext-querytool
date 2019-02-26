@@ -463,7 +463,7 @@ ckan.module('querytool-viz-preview', function() {
                             categories: categories,
                             tick: {
                                 culling: {
-                                  max: x_tick_culling_max || 4
+                                  max: x_tick_culling_max || 0
                                 },
                                 rotate: x_text_rotate,
                                 multiline: x_text_multiline,
