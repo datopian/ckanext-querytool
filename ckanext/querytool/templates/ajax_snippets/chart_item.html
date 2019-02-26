@@ -195,14 +195,12 @@
             </div>
 
             {# X-axis ticks #}
-            {% if chart.graph == 'line' %}
             <div class="control-group">
-              <label class="control-label" for="chart_field_x_tick_count_{{ n }}">{{ _('Tick count') }}</label>
+              <label class="control-label" for="chart_field_x_tick_culling_max_{{ n }}">{{ _('Max number of text labels') }}</label>
               <div class="controls ">
-                <input id="chart_field_x_tick_count_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_count_{{ n }}" placeholder="10">
+                <input id="chart_field_x_tick_culling_max_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_culling_max_{{ n }}" placeholder="10">
               </div>
             </div>
-            {% endif %}
 
           </div>
         </div>

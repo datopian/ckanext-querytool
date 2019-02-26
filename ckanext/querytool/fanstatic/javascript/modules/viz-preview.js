@@ -13,7 +13,7 @@ Options:
     - show_legend ( Display or hide charts legend)
     - x_text_rotate ( Display text horizontal or vertical)
     - x_text_multiline ( Display the x axis text in one line or multiline)
-    - x_tick_count (number of ticks on x axis)
+    - x_tick_culling_max (the number of tick texts will be adjusted to less than this value)
     - tooltip_name (Title of the tooltip)
     - data_format (Charts data format e.g 2k, $2000, 2000.0, 2000.00)
     - y_tick_format (Y axis data format e.g 2k, $2000, 2000.0, 2000.00)
@@ -210,7 +210,7 @@ ckan.module('querytool-viz-preview', function() {
             var show_legend = this.options.show_legend;
             var x_text_rotate = this.options.x_text_rotate;
             var x_text_multiline = this.options.x_text_multiline;
-            var x_tick_count = this.options.x_tick_count;
+            var x_tick_culling_max = this.options.x_tick_culling_max;
             var tooltip_name = this.options.tooltip_name;
             var data_format = this.options.data_format;
             var y_tick_format = this.options.y_tick_format;
@@ -462,7 +462,9 @@ ckan.module('querytool-viz-preview', function() {
                             type: 'category',
                             categories: categories,
                             tick: {
-                                count: x_tick_count || 4,
+                                culling: {
+                                  max: x_tick_culling_max || 4
+                                },
                                 rotate: x_text_rotate,
                                 multiline: x_text_multiline,
                                 multilineMax: 3
@@ -606,8 +608,8 @@ ckan.module('querytool-viz-preview', function() {
             var xTextMultiline = chartField.find('[name*=chart_field_x_text_multiline_]');
             var xTextMultilineVal = xTextMultiline.is(':checked');
 
-            var xTickCount = chartField.find('[name*=chart_field_x_tick_count_]');
-            var xTickCountVal = xTickCount.val();
+            var xTickCullingMax = chartField.find('[name*=chart_field_x_tick_culling_max_]');
+            var xTickCullingMaxVal = xTickCullingMax.val();
 
             var tooltipName = chartField.find('input[name*=chart_field_tooltip_name_]');
             var tooltipNameVal = tooltipName.val();
@@ -685,7 +687,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.show_legend = legendVal;
                 this.options.x_text_rotate = xTextRotateVal;
                 this.options.x_text_multiline = xTextMultilineVal;
-                this.options.x_tick_count = xTickCountVal;
+                this.options.x_tick_culling_max = xTickCullingMaxVal;
                 this.options.tooltip_name = tooltipNameVal;
                 this.options.data_format = dataFormatVal;
                 this.options.y_tick_format = yTickFormatVal;
@@ -718,7 +720,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.show_legend = legendVal;
             this.options.x_text_rotate = xTextRotateVal;
             this.options.x_text_multiline = xTextMultilineVal;
-            this.options.x_tick_count = xTickCountVal;
+            this.options.x_tick_culling_max = xTickCullingMaxVal;
             this.options.tooltip_name = tooltipNameVal;
             this.options.data_format = dataFormatVal;
             this.options.y_tick_format = yTickFormatVal;
