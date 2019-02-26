@@ -775,15 +775,6 @@ ckan.module('querytool-viz-preview', function() {
                     if (!isNaN(x) && !isNaN(y)) {
                         return Number(x) - Number(y);
                     } else {
-                        // This is a special case - when a value starts with `<`
-                        // we put it first, e.g., `<15` age froup should come
-                        // before `16-19`:
-                        if (typeof a[x_axis] === 'string' && a[x_axis].startsWith('<')) {
-                          return -1;
-                        }
-                        if (typeof b[x_axis] === 'string' && b[x_axis].startsWith('<')) {
-                          return 1;
-                        }
                         if (x < y) //sort string ascending
                             return -1;
                         if (x > y)
