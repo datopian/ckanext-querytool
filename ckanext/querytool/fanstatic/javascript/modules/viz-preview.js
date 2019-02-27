@@ -562,7 +562,7 @@ ckan.module('querytool-viz-preview', function() {
             }
 
             // Y-axis from zero
-            if (['line', 'area', 'area-spline', 'spline', 'scatter', 'bscatter'].includes(this.options.chart_type)) {
+            if (['line', 'area', 'area-spline', 'spline', 'scatter', 'bscatter', 'bar', 'hbar', 'sbar', 'shbar'].includes(this.options.chart_type)) {
               if (y_from_zero) {
                 options.axis.y.min = 0;
                 options.axis.y.padding = options.axis.y.padding || {};
