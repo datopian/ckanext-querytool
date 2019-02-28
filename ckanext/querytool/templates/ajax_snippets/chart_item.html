@@ -195,10 +195,13 @@
             </div>
 
             {# X-axis ticks #}
+            {% if chart %}
+            {% set x_tick_culling_max = chart.x_tick_culling_max %}
+            {% endif %}
             <div class="control-group">
               <label class="control-label" for="chart_field_x_tick_culling_max_{{ n }}">{{ _('Max number of text labels') }}</label>
               <div class="controls ">
-                <input id="chart_field_x_tick_culling_max_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_culling_max_{{ n }}" placeholder="10">
+                <input id="chart_field_x_tick_culling_max_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_culling_max_{{ n }}" placeholder="10" value="{{ x_tick_culling_max }}">
               </div>
             </div>
 
@@ -550,6 +553,7 @@
           {% set show_legend = chart.show_legend %}
           {% set x_text_rotate = chart.x_text_rotate %}
           {% set x_text_multiline = chart.x_text_multiline %}
+          {% set x_tick_culling_max = chart.x_tick_culling_max %}
           {% set tooltip_name = chart.tooltip_name %}
           {% set data_format = chart.data_format %}
           {% set y_tick_format = chart.y_tick_format %}
@@ -584,6 +588,7 @@
           show_legend = show_legend,
           x_text_rotate= x_text_rotate,
           x_text_multiline= x_text_multiline,
+          x_tick_culling_max = x_tick_culling_max,
           tooltip_name = tooltip_name,
           data_format = data_format,
           y_tick_format = y_tick_format,

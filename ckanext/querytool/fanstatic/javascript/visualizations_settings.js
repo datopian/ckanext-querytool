@@ -478,6 +478,7 @@
                     var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
                     var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
                     var checkboxXLabelMultiline = item.find('[id*=chart_field_x_text_multiline_]');
+                    var inputXTickCullingMax = item.find('[id*=chart_field_x_tick_culling_max_]');
 
                     var selectCategoryName = item.find('[id*=chart_field_category_name_]');
 
@@ -587,6 +588,9 @@
 
                     checkboxXLabelMultiline.attr('id', 'chart_field_x_text_multiline_' + order);
                     checkboxXLabelMultiline.attr('name', 'chart_field_x_text_multiline_' + order);
+
+                    inputXTickCullingMax.attr('id', 'chart_field_x_tick_culling_max_' + order);
+                    inputXTickCullingMax.attr('name', 'chart_field_x_tick_culling_max_' + order);
 
 
                 } else if (item.context.id.indexOf('text_box') >= 0) {
