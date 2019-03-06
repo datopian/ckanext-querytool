@@ -253,7 +253,7 @@ ckan.module('querytool-table', function() {
             <tbody>
               {% for row in rows %}
                 <tr>
-                  <td>{row[main_value]}</td>
+                  <td>{row[main_value]|process_table_value}</td>
                   <td>{row[y_axis]|process_table_value}</td>
                 </tr>
               {% endfor %}
@@ -323,7 +323,7 @@ ckan.module('querytool-table', function() {
             <tbody>
               {% for row in rows %}
                 <tr>
-                  <td>{row[main_value]}</td>
+                  <td>{row[main_value]|process_table_value}</td>
                   {% for y_axis_group in y_axis_groups %}
                     <td>{row[y_axis_group]|process_table_value}</td>
                   {% endfor %}
@@ -351,7 +351,12 @@ ckan.module('querytool-table', function() {
 
         //check for long decimal numbers and round to fixed 5 decimal points
         process_table_value: function(val) {
-          if (isNaN(val)) return val;
+          if (isNaN(val)) {
+            // Check if value contains '1.' which indicates about custom order.
+            // If so, remove it:
+            val = val ? val.replace(/^\d{1,2}\./, '') : val
+            return val;
+          };
           var dataf = (this.options.data_format === true) ? '' : this.options.data_format;
           var digits = 0;
           var format = '';
