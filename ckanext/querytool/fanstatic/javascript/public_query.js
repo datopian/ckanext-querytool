@@ -284,76 +284,33 @@
     });
 
     $(window).load(function(){
-        if ($(window).width() >= 768){
-            setTimeout(function() { splitTitles(); }, 500);
-            setInterval(function() { splitTitles(); }, 2000);
-        } else if($(window).width() <=500) {
-            setTimeout(function() { splitTitlesMobile(); }, 500);
-            setInterval(function() { splitTitlesMobile(); }, 2000);
-        }
+      setTimeout(function() {
+        $("text.c3-title").each(function() {
+          useTitleAsHtml($(this));
+        })
+      }, 500);
+
+      setInterval(function() {
+        $("text.c3-title").each(function() {
+          useTitleAsHtml($(this));
+        })
+      }, 2000);
     })
 
-    function splitTitles(){
-      $(".size-sm:not('.wide, .double') > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),53);
-      });
-
-      $(".size-sm.wide > .c3 > svg > .c3-title,.size-xl > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),160);
-      });
-
-
-      $(".size-sm.double > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),110);
-      });
-
-      $(".size-lg.square > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),100);
-      });
-
-      $(".size-lg.vertical > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),80);
-      });
-
-      $(".size-lg:not('.vertical, .square') > .c3 > svg > .c3-title").each(function(){
-        titleSplitfn($(this),75);
-      });
+    function useTitleAsHtml(titleObj) {
+      if (titleObj.html() !== '') {
+        var parentSvg = titleObj.parent();
+        var ns = 'http://www.w3.org/2000/svg';
+        var foreignObject = document.createElementNS( ns, 'foreignObject');
+        foreignObject.setAttribute('height', 36);
+        foreignObject.setAttribute('width', parentSvg.width());
+        var div = document.createElement('div');
+        div.setAttribute('class', 'c3-title title-splitted');
+        div.innerHTML = titleObj.html();;
+        foreignObject.appendChild(div);
+        parentSvg.append(foreignObject);
+        titleObj.html('');
+      }
     }
 
-    function splitTitlesMobile(){
-        $(".c3 > svg > .c3-title").each(function(){
-            titleSplitfn($(this),55);
-        });
-    }
-
-    function titleSplitfn(thisObj,noOfChars){
-        var hasClass = wordInString(thisObj.attr('class'), "title-splitted");
-        //Split only if it hasn't been split before
-        if(hasClass==false){
-            //Fetching the HTML
-            var text =  thisObj.html();
-            
-            //Getting word length
-            var len = text.length;
-
-            var html = "";
-            var y = 16;
-
-            var result1 = text.substring(0,noOfChars);
-            var result2 = text.substring(noOfChars,text.length);
-            var ch=text.substring(noOfChars,noOfChars+1);
-            if(ch!=' ') result1+="-"
-
-            if(len>noOfChars){
-                //Splitting the string every 10 words and adding tspan
-                html += "<tspan x=0 y="+y+">"+result1 + "</tspan><tspan x=0 y="+(y+14)+">"+result2 + "</tspan>";
-                thisObj.html(html);
-                thisObj.attr("class","c3-title title-splitted");
-            }
-        }
-    }
-
-    function wordInString(s, word){
-        return new RegExp( '\\b' + word + '\\b', 'i').test(s);
-    }
 })($);
