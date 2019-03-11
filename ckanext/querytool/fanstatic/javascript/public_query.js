@@ -302,7 +302,11 @@
         var parentSvg = titleObj.parent();
         var ns = 'http://www.w3.org/2000/svg';
         var foreignObject = document.createElementNS( ns, 'foreignObject');
-        foreignObject.setAttribute('height', 36);
+        if ($(window).width() < 980) {
+          foreignObject.setAttribute('height', 28);
+        } else {
+          foreignObject.setAttribute('height', 36);
+        }
         foreignObject.setAttribute('width', parentSvg.width());
         var div = document.createElement('div');
         div.setAttribute('class', 'c3-title title-splitted');
