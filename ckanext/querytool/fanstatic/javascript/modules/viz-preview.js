@@ -808,7 +808,9 @@ ckan.module('querytool-viz-preview', function() {
                 });
                 // Remove '1.' from the content:
                 records.forEach(function(record) {
-                  record[x_axis] = record[x_axis].replace(/^\d{1,2}\./, '');
+                  if (isNaN(record[x_axis])) {
+                    record[x_axis] = record[x_axis].replace(/^\d{1,2}\./, '');
+                  }
                 });
             }
         },
