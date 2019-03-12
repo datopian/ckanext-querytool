@@ -138,8 +138,7 @@ def get_chart_types():
         {'text': _('Spline'), 'value': 'spline'},
         {'text': _('Donut'), 'value': 'donut'},
         {'text': _('Pie'), 'value': 'pie'},
-        {'text': _('Scatter'), 'value': 'scatter'},
-        {'text': _('Bubble'), 'value': 'bscatter'}
+        {'text': _('Scatter'), 'value': 'scatter'}
     ]
     return chart_types
 

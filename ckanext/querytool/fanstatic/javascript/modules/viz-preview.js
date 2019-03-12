@@ -372,6 +372,9 @@ ckan.module('querytool-viz-preview', function() {
                       }
                     }
                 }
+                // We're hiding bubble charts for now but leaving this workaround
+                // so that it won't be lost in the future. To put back bubble
+                // charts add an object in 'helpers.py:get_chart_types' method.
                 if (this.options.chart_type === 'bscatter') {
                     //workaround for bubble charts, scale log base 10 because of large values
                     var rs = d3.scale.log().base(10).domain([1, 1000]).range([0, 10]);
