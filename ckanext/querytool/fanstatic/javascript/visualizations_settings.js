@@ -364,6 +364,7 @@
                         var axisY = $('[name*=chart_field_axis_y_]');
                         axisY.val(axisYValue);
                         handleTickFormat(items);
+                        handleChartOptions();
                     });
             } else if (visualization === 'map') {
 
@@ -786,4 +787,23 @@ $(document).on('show','.accordion', function (e) {
 $(document).on('hide','.accordion', function (e) {
    $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
    //$('.accordion-heading i').toggleClass('fa-chevron-right fa-chevron-down');
+});
+
+// Locate all chart type select elements and add change event listener:
+function handleChartOptions() {
+  $('select[id^=chart_field_graph_]').each(function() {
+    $(this).change(function() {
+      var id = $(this).attr('id');
+      var categoryField = $('#chart_field_category_name_' + id[id.length - 1]);
+      if (['sbar', 'shbar', 'donut', 'pie'].includes($(this).val())) {
+        categoryField.prop('disabled', true);
+      } else {
+        categoryField.prop('disabled', false);
+      }
+    });
+  });
+};
+
+$(document).ready(function() {
+  handleChartOptions();
 });
