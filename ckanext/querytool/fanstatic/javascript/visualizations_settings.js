@@ -794,11 +794,20 @@ function handleChartOptions() {
   $('select[id^=chart_field_graph_]').each(function() {
     $(this).change(function() {
       var id = $(this).attr('id');
+      // Handle 'category' option:
       var categoryField = $('#chart_field_category_name_' + id[id.length - 1]);
       if (['sbar', 'shbar', 'donut', 'pie'].includes($(this).val())) {
         categoryField.prop('disabled', true);
       } else {
         categoryField.prop('disabled', false);
+      }
+
+      // Handle 'Max number of text labels' option:
+      var xTickCullingMaxField = $('#chart_field_x_tick_culling_max_' + id[id.length - 1]);
+      if (['bar', 'hbar', 'sbar', 'shbar', 'pie', 'donut'].includes($(this).val())) {
+        xTickCullingMaxField.prop('disabled', true);
+      } else {
+        xTickCullingMaxField.prop('disabled', false);
       }
     });
   });

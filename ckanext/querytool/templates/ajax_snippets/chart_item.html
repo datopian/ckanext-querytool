@@ -53,10 +53,15 @@
             </div>
 
             {# Category #}
+            {% if selected_chart_type in ['sbar', 'shbar', 'donut', 'pie'] %}
+              {% set category_option = true %}
+            {% else %}
+              {% set category_option = false %}
+            {% endif %}
             <div class="control-group control-select">
               <label class="control-label" for="chart_field_category_name_{{ n }}">{{ _('Category') }}</label>
               <div class="controls ">
-                <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}">
+                <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}" {{'disabled' if category_option else ''}}>
                   <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
                   {% for category in columns %}
                   <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
@@ -196,12 +201,17 @@
 
             {# X-axis ticks #}
             {% if chart %}
-            {% set x_tick_culling_max = chart.x_tick_culling_max %}
+              {% set x_tick_culling_max = chart.x_tick_culling_max %}
+            {% endif %}
+            {% if selected_chart_type in ['bar', 'hbar', 'sbar', 'shbar', 'pie', 'donut'] %}
+              {% set x_tick_culling_max_option = true %}
+            {% else %}
+              {% set x_tick_culling_max_option = false %}
             {% endif %}
             <div class="control-group">
               <label class="control-label" for="chart_field_x_tick_culling_max_{{ n }}">{{ _('Max number of text labels') }}</label>
               <div class="controls ">
-                <input id="chart_field_x_tick_culling_max_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_culling_max_{{ n }}" placeholder="10" value="{{ x_tick_culling_max }}">
+                <input id="chart_field_x_tick_culling_max_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_culling_max_{{ n }}" placeholder="10" value="{{ x_tick_culling_max }}" {{'disabled' if x_tick_culling_max_option else ''}}>
               </div>
             </div>
 
