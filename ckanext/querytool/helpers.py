@@ -134,7 +134,6 @@ def get_chart_types():
         {'text': _('Stacked bar'), 'value': 'sbar'},
         {'text': _('Stacked horizontal bar'), 'value': 'shbar'},
         {'text': _('Area'), 'value': 'area'},
-        {'text': _('Stacked area'), 'value': 'area-spline'},
         {'text': _('Spline'), 'value': 'spline'},
         {'text': _('Donut'), 'value': 'donut'},
         {'text': _('Pie'), 'value': 'pie'},
