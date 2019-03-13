@@ -453,6 +453,7 @@
                     var selectTextRotationAxisX = item.find('[id*=chart_field_x_text_rotate_]');
                     var checkboxShowDataLabels = item.find('[id*=chart_field_labels_]');
                     var checkboxShowLegend = item.find('[id*=chart_field_legend_]');
+                    var checkboxShowValuesAsPercentages = item.find('[id*=chart_field_show_labels_as_percentages_]');
                     var inputTooltipName = item.find('[id*=chart_field_tooltip_name_]');
                     var selectDataFormat = item.find('[id*=chart_field_data_format_]');
                     var selectTickFormatAxisY = item.find('[id*=chart_field_y_ticks_format_]');
@@ -512,6 +513,9 @@
 
                     checkboxShowLegend.attr('id', 'chart_field_legend_' + order);
                     checkboxShowLegend.attr('name', 'chart_field_legend_' + order);
+
+                    checkboxShowValuesAsPercentages.attr('id', 'chart_field_show_labels_as_percentages_' + order);
+                    checkboxShowValuesAsPercentages.attr('name', 'chart_field_show_labels_as_percentages_' + order);
 
                     inputTooltipName.attr('id', 'chart_field_tooltip_name_' + order);
                     inputTooltipName.attr('name', 'chart_field_tooltip_name_' + order);
@@ -808,6 +812,15 @@ function handleChartOptions() {
         xTickCullingMaxField.prop('disabled', true);
       } else {
         xTickCullingMaxField.prop('disabled', false);
+      }
+
+      // Handle 'Show labels as percentages' option:
+      var showLabelsAsPercentagesField = $('#chart_field_show_labels_as_percentages_' + id[id.length - 1]);
+      if (['pie', 'donut'].includes($(this).val())) {
+        showLabelsAsPercentagesField.prop('disabled', false);
+      } else {
+        showLabelsAsPercentagesField.prop('disabled', true);
+        showLabelsAsPercentagesField.prop('checked', false);
       }
     });
   });

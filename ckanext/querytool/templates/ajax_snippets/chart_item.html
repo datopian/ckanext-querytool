@@ -329,6 +329,22 @@
                </div>
             </div>
 
+            {# Show values as percentages (pie and donut charts only) #}
+            {% if chart %}
+              {% set show_labels_as_percentages = chart.show_labels_as_percentages %}
+            {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set show_labels_as_percentages_option = true %}
+            {% else %}
+              {% set show_labels_as_percentages_option = false %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_show_labels_as_percentages_{{ n }}">{{ _('Show labels as percentages') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_show_labels_as_percentages_{{ n }}" type="checkbox" name="chart_field_show_labels_as_percentages_{{ n }}" {% if show_labels_as_percentages=='true' %}checked{% endif %} {{'' if show_labels_as_percentages_option else 'disabled'}}>
+               </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -573,6 +589,7 @@
           {% set padding_top = chart.padding_top %}
           {% set tick_count = chart.tick_count %}
           {% set show_labels = chart.show_labels %}
+          {% set show_labels_as_percentages = chart.show_labels_as_percentages %}
           {% set y_label = chart.y_label %}
           {% set y_label_hide = chart.y_label_hide %}
           {% set y_from_zero = chart.y_from_zero %}
@@ -608,6 +625,7 @@
           padding_top = padding_top,
           tick_count = tick_count,
           show_labels = show_labels,
+          show_labels_as_percentages = show_labels_as_percentages,
           y_label = y_label,
           y_label_hide = y_label_hide,
           y_from_zero = y_from_zero,

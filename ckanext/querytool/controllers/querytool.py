@@ -403,6 +403,10 @@ class QueryToolController(base.BaseController):
                         visualization['y_label_hide'] = 'true'
                     else:
                         visualization['y_label_hide'] = 'false'
+                    if 'chart_field_show_labels_as_percentages_{}'.format(id) in data:
+                        visualization['show_labels_as_percentages'] = 'true'
+                    else:
+                        visualization['show_labels_as_percentages'] = 'false'
                     if 'chart_field_y_from_zero_{}'.format(id) in data:
                         visualization['y_from_zero'] = 'true'
                     else:

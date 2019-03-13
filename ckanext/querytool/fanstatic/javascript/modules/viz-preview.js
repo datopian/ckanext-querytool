@@ -27,6 +27,7 @@ Options:
     - filter_value (The value of the chart filter)
     - category_name (The value of the chart category)
     - data_sort (Sort data, asc or desc)
+    - show_labels_as_percentages (works with pie and donut charts)
 
 */
 'use strict';
@@ -229,6 +230,7 @@ ckan.module('querytool-viz-preview', function() {
             var static_reference_label = (this.options.static_reference_label === true) ? '' : this.options.static_reference_label;
             var dynamic_reference_label = (this.options.dynamic_reference_label === true) ? '' : this.options.dynamic_reference_label;
             var values;
+            var show_labels_as_percentages = this.options.show_labels_as_percentages || false;
 
             // Base options
             var options = {
@@ -309,6 +311,15 @@ ckan.module('querytool-viz-preview', function() {
                     columns: values,
                     type: this.options.chart_type
                 };
+                if (show_labels_as_percentages == false) {
+                  options[this.options.chart_type] = {
+                    label: {
+                      format: function (value, ratio, id) {
+                        return value;
+                      }
+                    }
+                  };
+                }
             } else if (this.options.chart_type === 'sbar' ||
                 this.options.chart_type === 'shbar') {
                 var horizontal = (this.options.chart_type === 'shbar') ? true : false
@@ -673,6 +684,9 @@ ckan.module('querytool-viz-preview', function() {
 
             var measureLabelVal = $('#choose_y_axis_column option:selected').text();
 
+            var showLabelsAsPercentages = chartField.find('[name*=chart_field_show_labels_as_percentages_]');
+            var showLabelsAsPercentagesVal = showLabelsAsPercentages.is(':checked');
+
             // If the changed values from the dropdowns are not from x_axis or y_axis
             // then just update the chart without fetching new data. This leads
             // to a better UX.
@@ -710,6 +724,7 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
                 this.options.dynamic_reference_label = dynamicReferenceLabelVal;
                 this.options.measure_label = measureLabelVal;
+                this.options.show_labels_as_percentages = showLabelsAsPercentagesVal;
                 this.createChart(this.fetched_data);
 
                 return;
@@ -746,6 +761,7 @@ ckan.module('querytool-viz-preview', function() {
             this.options.dynamic_reference_factor = dynamicReferenceFactorVal;
             this.options.dynamic_reference_label = dynamicReferenceLabelVal;
             this.options.measure_label = measureLabelVal;
+            this.options.show_labels_as_percentages = showLabelsAsPercentagesVal;
             var newSql = this.create_sql();
 
             this.get_resource_datа(newSql);
