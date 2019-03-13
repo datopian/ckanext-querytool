@@ -388,8 +388,9 @@ class QueryToolController(base.BaseController):
                         visualization['x_text_multiline'] = 'true'
                     else:
                         visualization['x_text_multiline'] = 'false'
-                    visualization['x_tick_culling_max'] = \
-                        data['chart_field_x_tick_culling_max_{}'.format(id)]
+                    if 'chart_field_x_tick_culling_max_{}'.format(id) in data:
+                        visualization['x_tick_culling_max'] = \
+                            data['chart_field_x_tick_culling_max_{}'.format(id)]
                     if 'chart_field_legend_{}'.format(id) in data:
                         visualization['show_legend'] = 'true'
                     else:
@@ -421,7 +422,7 @@ class QueryToolController(base.BaseController):
                         visualization['filter_alias'] = ''
                         visualization['filter_visibility'] = ''
 
-                    if data['chart_field_category_name_{}'.format(id)]:
+                    if 'chart_field_category_name_{}'.format(id) in data:
                         visualization['category_name'] = \
                                 data['chart_field_category_name_{}'.format(id)]
                     else:
