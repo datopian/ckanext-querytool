@@ -309,7 +309,8 @@ ckan.module('querytool-viz-preview', function() {
                 });
                 options.data = {
                     columns: values,
-                    type: this.options.chart_type
+                    type: this.options.chart_type,
+                    order: data_sort === 'default' ? 'desc' : data_sort
                 };
                 if (show_labels_as_percentages == false) {
                   options[this.options.chart_type] = {
