@@ -310,7 +310,8 @@
         foreignObject.setAttribute('width', parentSvg.width());
         var div = document.createElement('div');
         div.setAttribute('class', 'c3-title title-splitted');
-        div.setAttribute('title', titleObj.html());
+        var trimmedTitle = $.trim(titleObj.html().replace(/[\t\n]+/g,' '));
+        div.setAttribute('title', trimmedTitle);
         div.innerHTML = titleObj.html();
         foreignObject.appendChild(div);
         parentSvg.append(foreignObject);
