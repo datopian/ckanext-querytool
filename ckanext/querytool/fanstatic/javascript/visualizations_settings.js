@@ -823,6 +823,8 @@ function handleChartOptions() {
       var yLabelHideField = $('#chart_field_y_label_hide_' + id[id.length - 1]);
       var yFromZeroField = $('#chart_field_y_from_zero_' + id[id.length - 1]);
       var yTicksFormatField = $('#chart_field_y_ticks_format_' + id[id.length - 1]);
+      var dataFormatField = $('#chart_field_data_format_' + id[id.length - 1]);
+      var labelsField = $('#chart_field_labels_' + id[id.length - 1]);
       if (['pie', 'donut'].includes($(this).val())) {
         showLabelsAsPercentagesField.prop('disabled', false);
         xTextRotateField.prop('disabled', true);
@@ -831,6 +833,8 @@ function handleChartOptions() {
         yLabelHideField.prop('disabled', true);
         yFromZeroField.prop('disabled', true);
         yTicksFormatField.prop('disabled', true);
+        dataFormatField.prop('disabled', true);
+        labelsField.prop('disabled', true);
       } else {
         showLabelsAsPercentagesField.prop('disabled', true);
         showLabelsAsPercentagesField.prop('checked', false);
@@ -840,6 +844,8 @@ function handleChartOptions() {
         yLabelHideField.prop('disabled', false);
         yFromZeroField.prop('disabled', false);
         yTicksFormatField.prop('disabled', false);
+        dataFormatField.prop('disabled', false);
+        labelsField.prop('disabled', false);
       }
     });
   });

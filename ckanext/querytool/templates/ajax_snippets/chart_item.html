@@ -326,10 +326,15 @@
 
             {# Data format #}
             {% set data_formats = h.queytool_get_charts_data_formats() %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set data_formats_option = false %}
+            {% else %}
+              {% set data_formats_option = true %}
+            {% endif %}
             <div class="control-group control-select">
               <label class="control-label" for="chart_field_data_format_{{ n }}">{{ _('Data format') }}</label>
               <div class="controls ">
-                <select id="chart_field_data_format_{{ n }}" name="chart_field_data_format_{{ n }}">
+                <select id="chart_field_data_format_{{ n }}" name="chart_field_data_format_{{ n }}" {{'' if data_formats_option else 'disabled'}}>
                   {% for format in data_formats %}
                   <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == chart.data_format }}{% endif %} >{{ format.text }}</option>
                   {% endfor %}
@@ -341,10 +346,15 @@
             {% if chart %}
               {% set show_labels = chart.show_labels %}
             {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set show_labels_option = false %}
+            {% else %}
+              {% set show_labels_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_labels_{{ n }}">{{ _('Show data labels') }}</label>
                <div class="controls ">
-                  <input id="chart_field_labels_{{ n }}" type="checkbox" name="chart_field_labels_{{ n }}" value="{{ show_labels }}"{% if show_labels=='false' %}{% else %}checked{% endif %}>
+                  <input id="chart_field_labels_{{ n }}" type="checkbox" name="chart_field_labels_{{ n }}" value="{{ show_labels }}"{% if show_labels=='false' %}{% else %}checked{% endif %} {{'' if show_labels_option else 'disabled'}}>
                </div>
             </div>
 
