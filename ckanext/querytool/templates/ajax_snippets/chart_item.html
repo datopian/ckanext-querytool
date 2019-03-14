@@ -243,10 +243,15 @@
             {% if chart %}
               {% set y_label = chart.y_label %}
             {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set y_label_option = false %}
+            {% else %}
+              {% set y_label_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_y_label_{{ n }}">{{ _('Y axis title') }}</label>
                <div class="controls ">
-                  <input id="chart_field_y_label_{{ n }}" type="text" name="chart_field_y_label_{{ n }}" value="{{ y_label }}" placeholder="{{ _('Measure by default') }}">
+                  <input id="chart_field_y_label_{{ n }}" type="text" name="chart_field_y_label_{{ n }}" value="{{ y_label }}" placeholder="{{ _('Measure by default') }}" {{'' if y_label_option else 'disabled'}}>
                </div>
             </div>
 
@@ -254,10 +259,15 @@
             {% if chart %}
               {% set y_label_hide = chart.y_label_hide %}
             {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set y_label_hide_option = false %}
+            {% else %}
+              {% set y_label_hide_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_y_label_hide_{{ n }}">{{ _('Hide title') }}</label>
                <div class="controls ">
-                  <input id="chart_field_y_label_hide_{{ n }}" type="checkbox" name="chart_field_y_label_hide_{{ n }}" value="{{ y_label_hide }}" {% if y_label_hide=='true' %}checked{% endif %}>
+                  <input id="chart_field_y_label_hide_{{ n }}" type="checkbox" name="chart_field_y_label_hide_{{ n }}" value="{{ y_label_hide }}" {% if y_label_hide=='true' %}checked{% endif %} {{'' if y_label_hide_option else 'disabled'}}>
                </div>
             </div>
 
@@ -265,10 +275,15 @@
             {% if chart %}
               {% set y_from_zero = chart.y_from_zero %}
             {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set y_from_zero_option = false %}
+            {% else %}
+              {% set y_from_zero_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_y_from_zero_{{ n }}">{{ _('Start from zero') }}</label>
                <div class="controls ">
-                  <input id="chart_field_y_from_zero_{{ n }}" type="checkbox" name="chart_field_y_from_zero_{{ n }}" value="{{ y_from_zero }}" {% if y_from_zero=='true' %}checked{% endif %}>
+                  <input id="chart_field_y_from_zero_{{ n }}" type="checkbox" name="chart_field_y_from_zero_{{ n }}" value="{{ y_from_zero }}" {% if y_from_zero=='true' %}checked{% endif %} {{'' if y_from_zero_option else 'disabled'}}>
                </div>
             </div>
 
@@ -278,17 +293,22 @@
             {% else %}
               {% set ticks_formats = h.queytool_get_charts_data_formats() %}
             {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set ticks_formats_option = false %}
+            {% else %}
+              {% set ticks_formats_option = true %}
+            {% endif %}
             <div class="control-group control-select">
                <label class="control-label" for="chart_field_y_ticks_format_{{ n }}">{{ _('Y axis label format') }}</label>
                <div class="controls ">
-                  <select id="chart_field_y_ticks_format_{{ n }}" name="chart_field_y_ticks_format_{{ n }}">
+                  <select id="chart_field_y_ticks_format_{{ n }}" name="chart_field_y_ticks_format_{{ n }}" {{'' if ticks_formats_option else 'disabled'}}>
                   {% for tick in ticks_formats %}
                   <option value="{{ tick.value }}" {% if chart %}{{ 'selected' if tick.value == chart.y_tick_format }}{% endif %} >{{ tick.text }}</option>
                   {% endfor %}
                   </select>
                </div>
             </div>
-            
+
           </div>
         </div>
       </div>

@@ -819,15 +819,27 @@ function handleChartOptions() {
       var showLabelsAsPercentagesField = $('#chart_field_show_labels_as_percentages_' + id[id.length - 1]);
       var xTextRotateField = $('#chart_field_x_text_rotate_' + id[id.length - 1]);
       var xTextMultilineField = $('#chart_field_x_text_multiline_' + id[id.length - 1]);
+      var yLabelField = $('#chart_field_y_label_' + id[id.length - 1]);
+      var yLabelHideField = $('#chart_field_y_label_hide_' + id[id.length - 1]);
+      var yFromZeroField = $('#chart_field_y_from_zero_' + id[id.length - 1]);
+      var yTicksFormatField = $('#chart_field_y_ticks_format_' + id[id.length - 1]);
       if (['pie', 'donut'].includes($(this).val())) {
         showLabelsAsPercentagesField.prop('disabled', false);
         xTextRotateField.prop('disabled', true);
         xTextMultilineField.prop('disabled', true);
+        yLabelField.prop('disabled', true);
+        yLabelHideField.prop('disabled', true);
+        yFromZeroField.prop('disabled', true);
+        yTicksFormatField.prop('disabled', true);
       } else {
         showLabelsAsPercentagesField.prop('disabled', true);
         showLabelsAsPercentagesField.prop('checked', false);
         xTextRotateField.prop('disabled', false);
         xTextMultilineField.prop('disabled', false);
+        yLabelField.prop('disabled', false);
+        yLabelHideField.prop('disabled', false);
+        yFromZeroField.prop('disabled', false);
+        yTicksFormatField.prop('disabled', false);
       }
     });
   });
