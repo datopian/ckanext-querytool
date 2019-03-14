@@ -459,10 +459,15 @@
           <div class="accordion-inner">
 
             {# Static Reference Columns #}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set static_reference_columns_option = false %}
+            {% else %}
+              {% set static_reference_columns_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_static_reference_columns_{{ n }}">{{ _('Static Reference Columns') }}</label>
                <div class="controls ">
-                 <select id="chart_field_static_reference_columns_{{ n }}" name="chart_field_static_reference_columns_{{ n }}" multiple style="width:100%">
+                 <select id="chart_field_static_reference_columns_{{ n }}" name="chart_field_static_reference_columns_{{ n }}" multiple style="width:100%" {{'' if static_reference_columns_option else 'disabled'}}>
                    {% for measure in y_axis_values %}
                      <optgroup label="{{ measure }}">
                        {% for column in numeric_columns %}
@@ -481,10 +486,15 @@
             {% if chart %}
               {% set static_reference_label = chart.static_reference_label %}
             {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set static_reference_label_option = false %}
+            {% else %}
+              {% set static_reference_label_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_static_reference_label_{{ n }}">{{ _('Static Reference Label') }}</label>
                <div class="controls ">
-                  <input id="chart_field_static_reference_label_{{ n }}" type="text" name="chart_field_static_reference_label_{{ n }}" value="{{ static_reference_label }}" placeholder="{{ _('Static Reference') }}">
+                  <input id="chart_field_static_reference_label_{{ n }}" type="text" name="chart_field_static_reference_label_{{ n }}" value="{{ static_reference_label }}" placeholder="{{ _('Static Reference') }}" {{'' if static_reference_label_option else 'disabled'}}>
                </div>
             </div>
 
@@ -503,10 +513,15 @@
           <div class="accordion-inner">
 
             {# Dynamic Reference Type #}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set dynamic_reference_type_option = false %}
+            {% else %}
+              {% set dynamic_reference_type_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_dynamic_reference_type_{{ n }}">{{ _('Dynamic Reference Type') }}</label>
                <div class="controls ">
-                 <select id="chart_field_dynamic_reference_type_{{ n }}" name="chart_field_dynamic_reference_type_{{ n }}">
+                 <select id="chart_field_dynamic_reference_type_{{ n }}" name="chart_field_dynamic_reference_type_{{ n }}" {{'' if dynamic_reference_type_option else 'disabled'}}>
                    <option value="">&mdash; {{ _('Select type') }} &mdash;</option>
                    {% for type in ['Maximum', 'Average', 'Minimum'] %}
                      <option value="{{type}}"{% if chart %}{{ 'selected' if type == chart.dynamic_reference_type }}{% endif %}>{{type}}</option>
@@ -519,10 +534,15 @@
             {% if chart %}
               {% set dynamic_reference_factor = chart.dynamic_reference_factor %}
             {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set dynamic_reference_factor_option = false %}
+            {% else %}
+              {% set dynamic_reference_factor_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_dynamic_reference_factor_{{ n }}">{{ _('Dynamic Reference Factor') }}</label>
                <div class="controls ">
-                  <input id="chart_field_dynamic_reference_factor_{{ n }}" type="number" min="0" step="0.1" name="chart_field_dynamic_reference_factor_{{ n }}" value="{{ dynamic_reference_factor }}" default="1" placeholder="1">
+                  <input id="chart_field_dynamic_reference_factor_{{ n }}" type="number" min="0" step="0.1" name="chart_field_dynamic_reference_factor_{{ n }}" value="{{ dynamic_reference_factor }}" default="1" placeholder="1" {{'' if dynamic_reference_factor_option else 'disabled'}}>
                </div>
             </div>
 
@@ -530,10 +550,15 @@
             {% if chart %}
               {% set dynamic_reference_label = chart.dynamic_reference_label %}
             {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set dynamic_reference_label_option = false %}
+            {% else %}
+              {% set dynamic_reference_label_option = true %}
+            {% endif %}
             <div class="control-group ">
                <label class="control-label" for="chart_field_dynamic_reference_label_{{ n }}">{{ _('Dynamic Reference Label') }}</label>
                <div class="controls ">
-                  <input id="chart_field_dynamic_reference_label_{{ n }}" type="text" name="chart_field_dynamic_reference_label_{{ n }}" value="{{ dynamic_reference_label }}" placeholder="{{ _('Dynamic Reference') }}">
+                  <input id="chart_field_dynamic_reference_label_{{ n }}" type="text" name="chart_field_dynamic_reference_label_{{ n }}" value="{{ dynamic_reference_label }}" placeholder="{{ _('Dynamic Reference') }}" {{'' if dynamic_reference_label_option else 'disabled'}}>
                </div>
             </div>
 

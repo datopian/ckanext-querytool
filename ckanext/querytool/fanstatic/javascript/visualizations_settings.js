@@ -825,6 +825,11 @@ function handleChartOptions() {
       var yTicksFormatField = $('#chart_field_y_ticks_format_' + id[id.length - 1]);
       var dataFormatField = $('#chart_field_data_format_' + id[id.length - 1]);
       var labelsField = $('#chart_field_labels_' + id[id.length - 1]);
+      var staticReferenceColumnsField = $('#chart_field_static_reference_columns_' + id[id.length - 1]);
+      var staticReferenceLabelField = $('#chart_field_static_reference_label_' + id[id.length - 1]);
+      var dynamicReferenceTypeField = $('#chart_field_dynamic_reference_type_' + id[id.length - 1]);
+      var dynamicReferenceFactor = $('#chart_field_dynamic_reference_factor_' + id[id.length - 1]);
+      var dynamicReferenceLabel = $('#chart_field_dynamic_reference_label_' + id[id.length - 1]);
       if (['pie', 'donut'].includes($(this).val())) {
         showLabelsAsPercentagesField.prop('disabled', false);
         xTextRotateField.prop('disabled', true);
@@ -835,6 +840,11 @@ function handleChartOptions() {
         yTicksFormatField.prop('disabled', true);
         dataFormatField.prop('disabled', true);
         labelsField.prop('disabled', true);
+        staticReferenceColumnsField.prop('disabled', true);
+        staticReferenceLabelField.prop('disabled', true);
+        dynamicReferenceTypeField.prop('disabled', true);
+        dynamicReferenceFactor.prop('disabled', true);
+        dynamicReferenceLabel.prop('disabled', true);
       } else {
         showLabelsAsPercentagesField.prop('disabled', true);
         showLabelsAsPercentagesField.prop('checked', false);
@@ -846,6 +856,11 @@ function handleChartOptions() {
         yTicksFormatField.prop('disabled', false);
         dataFormatField.prop('disabled', false);
         labelsField.prop('disabled', false);
+        staticReferenceColumnsField.prop('disabled', false);
+        staticReferenceLabelField.prop('disabled', false);
+        dynamicReferenceTypeField.prop('disabled', false);
+        dynamicReferenceFactor.prop('disabled', false);
+        dynamicReferenceLabel.prop('disabled', false);
       }
     });
   });
