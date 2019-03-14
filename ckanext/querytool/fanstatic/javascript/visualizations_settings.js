@@ -818,13 +818,16 @@ function handleChartOptions() {
       // Handle chart options for pie and donut charts:
       var showLabelsAsPercentagesField = $('#chart_field_show_labels_as_percentages_' + id[id.length - 1]);
       var xTextRotateField = $('#chart_field_x_text_rotate_' + id[id.length - 1]);
+      var xTextMultilineField = $('#chart_field_x_text_multiline_' + id[id.length - 1]);
       if (['pie', 'donut'].includes($(this).val())) {
         showLabelsAsPercentagesField.prop('disabled', false);
         xTextRotateField.prop('disabled', true);
+        xTextMultilineField.prop('disabled', true);
       } else {
         showLabelsAsPercentagesField.prop('disabled', true);
         showLabelsAsPercentagesField.prop('checked', false);
         xTextRotateField.prop('disabled', false);
+        xTextMultilineField.prop('disabled', false);
       }
     });
   });
