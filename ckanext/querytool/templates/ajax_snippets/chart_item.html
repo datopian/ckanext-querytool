@@ -177,10 +177,15 @@
 
             {# X-axis label orientation #}
             {% set text_rotation = h.querytool_get_tick_text_rotation() %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set text_rotation_option = false %}
+            {% else %}
+              {% set text_rotation_option = true %}
+            {% endif %}
             <div class="control-group control-select">
               <label class="control-label" for="chart_field_x_text_rotate_{{ n }}">{{ _('Label orientation') }}</label>
               <div class="controls ">
-                <select id="chart_field_x_text_rotate_{{ n }}" name="chart_field_x_text_rotate_{{ n }}">
+                <select id="chart_field_x_text_rotate_{{ n }}" name="chart_field_x_text_rotate_{{ n }}" {{'' if text_rotation_option else 'disabled'}}>
                   {% for rotate in text_rotation %}
                   <option value="{{ rotate.value }}" {% if chart %}{{ 'selected' if rotate.value == chart.x_text_rotate }}{% endif %}>{{ rotate.text }}</option>
                   {% endfor %}
