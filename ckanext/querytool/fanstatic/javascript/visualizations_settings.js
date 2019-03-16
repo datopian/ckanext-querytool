@@ -801,6 +801,7 @@ function handleChartOptions() {
       // Handle 'category' option:
       var categoryField = $('#chart_field_category_name_' + id[id.length - 1]);
       if (['sbar', 'shbar', 'donut', 'pie'].includes($(this).val())) {
+        categoryField.prop('value', '');
         categoryField.prop('disabled', true);
       } else {
         categoryField.prop('disabled', false);
