@@ -340,57 +340,56 @@ class QueryToolController(base.BaseController):
                     visualization['type'] = 'chart'
                     visualization['order'] = int(id)
                     visualization['graph'] = \
-                        data['chart_field_graph_{}'.format(id)]
+                        data.get('chart_field_graph_{}'.format(id))
                     visualization['x_axis'] = \
-                        data['chart_field_axis_x_{}'.format(id)]
+                        data.get('chart_field_axis_x_{}'.format(id))
                     visualization['y_axis'] = \
-                        data['chart_field_axis_y_{}'.format(id)]
+                        data.get('chart_field_axis_y_{}'.format(id))
                     visualization['color'] = \
-                        data['chart_field_color_{}'.format(id)]
+                        data.get('chart_field_color_{}'.format(id))
                     visualization['title'] = \
-                        data['chart_field_title_{}'.format(id)]
+                        data.get('chart_field_title_{}'.format(id))
                     visualization['x_text_rotate'] = \
-                        data['chart_field_x_text_rotate_{}'.format(id)]
+                        data.get('chart_field_x_text_rotate_{}'.format(id))
                     visualization['tooltip_name'] = \
-                        data['chart_field_tooltip_name_{}'.format(id)]
+                        data.get('chart_field_tooltip_name_{}'.format(id))
                     visualization['data_format'] = \
-                        data['chart_field_data_format_{}'.format(id)]
+                        data.get('chart_field_data_format_{}'.format(id))
                     visualization['y_tick_format'] = \
-                        data['chart_field_y_ticks_format_{}'.format(id)]
+                        data.get('chart_field_y_ticks_format_{}'.format(id))
                     visualization['padding_bottom'] = \
-                        data['chart_field_padding_bottom_{}'.format(id)]
+                        data.get('chart_field_padding_bottom_{}'.format(id))
                     visualization['padding_top'] = \
-                        data['chart_field_padding_top_{}'.format(id)]
+                        data.get('chart_field_padding_top_{}'.format(id))
                     visualization['tick_count'] = \
-                        data['chart_field_tick_count_{}'.format(id)]
+                        data.get('chart_field_tick_count_{}'.format(id))
                     visualization['y_label'] = \
-                        data['chart_field_y_label_{}'.format(id)]
+                        data.get('chart_field_y_label_{}'.format(id))
                     visualization['size'] = \
-                        data['chart_field_size_{}'.format(id)]
+                        data.get('chart_field_size_{}'.format(id))
                     visualization['chart_padding_left'] = \
-                        data['chart_field_chart_padding_left_{}'.format(id)]
+                        data.get('chart_field_chart_padding_left_{}'.format(id))
                     visualization['chart_padding_bottom'] = \
-                        data['chart_field_chart_padding_bottom_{}'.format(id)]
+                        data.get('chart_field_chart_padding_bottom_{}'.format(id))
                     visualization['static_reference_columns'] = \
                         toolkit.request.POST.getall(
                             'chart_field_static_reference_columns_%s' % id)
                     visualization['static_reference_label'] = \
-                        data['chart_field_static_reference_label_%s' % id]
+                        data.get('chart_field_static_reference_label_%s' % id)
                     visualization['dynamic_reference_type'] = \
-                        data['chart_field_dynamic_reference_type_%s' % id]
+                        data.get('chart_field_dynamic_reference_type_%s' % id)
                     visualization['dynamic_reference_factor'] = \
-                        data['chart_field_dynamic_reference_factor_%s' % id]
+                        data.get('chart_field_dynamic_reference_factor_%s' % id)
                     visualization['dynamic_reference_label'] = \
-                        data['chart_field_dynamic_reference_label_%s' % id]
+                        data.get('chart_field_dynamic_reference_label_%s' % id)
                     visualization['sort'] = \
-                        data['chart_field_sort_{}'.format(id)]
+                        data.get('chart_field_sort_{}'.format(id))
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
                         visualization['x_text_multiline'] = 'true'
                     else:
                         visualization['x_text_multiline'] = 'false'
-                    if 'chart_field_x_tick_culling_max_{}'.format(id) in data:
-                        visualization['x_tick_culling_max'] = \
-                            data['chart_field_x_tick_culling_max_{}'.format(id)]
+                    visualization['x_tick_culling_max'] = \
+                        data.get('chart_field_x_tick_culling_max_{}'.format(id))
                     if 'chart_field_legend_{}'.format(id) in data:
                         visualization['show_legend'] = 'true'
                     else:
