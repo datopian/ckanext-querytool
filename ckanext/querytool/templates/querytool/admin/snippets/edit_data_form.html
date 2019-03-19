@@ -52,6 +52,18 @@ Example usage:
     </div>
   </div>
 
+  {% set organizations_available = h.organizations_available('create_dataset') %}
+  <div class="control-group">
+    <label for="field-organizations" class="control-label">{{ _('Organization') }}</label>
+    <div class="controls">
+      <select id="field-organizations" name="owner_org">
+        {% for organization in organizations_available %}
+        <option value="{{ organization.id }}">{{ organization.display_name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
   <legend>{{ _('Settings') }}</legend>
 
   <div class="control-group">
