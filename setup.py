@@ -23,11 +23,11 @@ setup(
     long_description=long_description,
 
     # The project's main homepage.
-    url='https://github.com/duskobogdanovski/ckanext-querytool',
+    url='https://github.com/ViderumGlobal/ckanext-querytool',
 
     # Author details
-    author='''Viderum''',
-    author_email='''dbogdanovski@viderum.com''',
+    author='''Datopian''',
+    author_email='''info@datopian.com''',
 
     # Choose your license
     license='AGPL',
