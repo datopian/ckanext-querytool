@@ -114,12 +114,12 @@ class QueryToolController(base.BaseController):
 
         context = _get_context()
 
+        id = querytool[1:]
+
         try:
-            check_access('querytool_delete', context)
+            check_access('querytool_delete', context, {'id': id})
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
-
-        id = querytool[1:]
 
         try:
             junk = _get_action('querytool_delete', {'id': id})
@@ -138,18 +138,19 @@ class QueryToolController(base.BaseController):
         :return: query create/edit template page
 
         '''
-        context = _get_context()
-        try:
-            check_access('querytool_update', context)
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
-
         if querytool:
             querytool = querytool[1:]
 
         data_dict = {
             'name': querytool
         }
+
+        context = _get_context()
+        try:
+            check_access('querytool_update', context, data_dict)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
+
         _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
@@ -285,19 +286,19 @@ class QueryToolController(base.BaseController):
 
         :return: query edit template page
         '''
-        context = _get_context()
-
-        try:
-            check_access('querytool_update', context)
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
-
         if querytool:
             querytool = querytool[1:]
 
         data_dict = {
             'name': querytool
         }
+
+        context = _get_context()
+
+        try:
+            check_access('querytool_update', context, data_dict)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
 
         _querytool = _get_action('querytool_get', data_dict)
 
@@ -656,11 +657,11 @@ class QueryToolController(base.BaseController):
         if not querytool:
             abort(404, _('Application not found.'))
 
-        # only sysadmins can access private querytool
+        # only sysadmins or organization members can access private querytool
         if querytool['private'] is True:
             context = _get_context()
             try:
-                check_access('querytool_show', context)
+                check_access('querytool_show', context, {'name': name})
             except NotAuthorized:
                 abort(403, _('Not authorized to see this page'))
 

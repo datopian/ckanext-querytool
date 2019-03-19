@@ -24,8 +24,6 @@ def querytool_update(context, data_dict):
     :param y_axis_columns
     '''
 
-    check_access('querytool_update', context)
-
     # we need the querytool name in the context for name validation
     context['querytool'] = data_dict['querytool']
     session = context['session']
@@ -74,8 +72,6 @@ def querytool_visualizations_update(context, data_dict):
     :param visualizations
     :param
     '''
-
-    check_access('querytool_update', context)
 
     session = context['session']
     # data, errors = df.validate(data_dict, schema.querytool_schema(),

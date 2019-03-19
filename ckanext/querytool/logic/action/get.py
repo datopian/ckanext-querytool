@@ -33,8 +33,11 @@ def querytool_list_by_group(context, data_dict):
     # check_access('',
     #            context, data_dict)
     group = data_dict.get('group')
-
-    querytools = CkanextQueryTool.search(group=group)
+    # get a user's organizations:
+    user_orgs = ch.organizations_available('read')
+    querytools = []
+    for org in user_orgs:
+        querytools += CkanextQueryTool.search(group=group, owner_org=org['id'])
 
     out = []
 
@@ -58,6 +61,7 @@ def querytool_list_other(context, data_dict):
     for querytool in querytools:
         if querytool.group not in groups:
             querytool = table_dictize(querytool, context)
+            ch.user_in_org_or_group(querytool.get('owner_org'))
             out.append(querytool)
     return out
 

@@ -29,7 +29,7 @@
               {{ h.build_nav_main(
                   ('home', _('Home'))
               )}}
-              {% if c.userobj.sysadmin %}
+              {% if h.organizations_available('read')|length > 0 %}
                   {{ h.build_nav_main(
                     ('search', _('Load Datasets')),
                     ('querytool_groups', _('Design Applications')),
