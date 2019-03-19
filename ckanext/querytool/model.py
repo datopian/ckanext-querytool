@@ -133,6 +133,9 @@ def define_query_tool_table():
                              Column('group',
                                     types.UnicodeText,
                                     nullable=False),
+                             Column('owner_org',
+                                    types.UnicodeText,
+                                    nullable=False),
                              Index('ckanext_querytool_id_idx',
                                    'id'))
 
