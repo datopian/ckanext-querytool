@@ -32,6 +32,7 @@ def setup():
         log.debug('Querytool table already exists.')
         # add `owner_org` column if not exists:
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS owner_org TEXT;')
+        Session.commit()
     inspector = Inspector.from_engine(engine)
 
     index_names =\
