@@ -36,8 +36,11 @@ def querytool_list_by_group(context, data_dict):
     # get a user's organizations:
     user_orgs = ch.organizations_available('read')
     querytools = []
-    for org in user_orgs:
-        querytools += CkanextQueryTool.search(group=group, owner_org=org['id'])
+    if c.userobj.sysadmin:
+        querytools += CkanextQueryTool.search(group=group)
+    else:
+        for org in user_orgs:
+            querytools += CkanextQueryTool.search(group=group, owner_org=org['id'])
 
     out = []
 
