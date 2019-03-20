@@ -114,15 +114,15 @@ class QueryToolController(base.BaseController):
 
         context = _get_context()
 
-        id = querytool[1:]
+        name = querytool[1:]
 
         try:
-            check_access('querytool_delete', context, {'id': id})
+            check_access('querytool_delete', context, {'name': name})
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
         try:
-            junk = _get_action('querytool_delete', {'id': id})
+            junk = _get_action('querytool_delete', {'name': name})
         except NotFound:
             abort(404, _('Application not found'))
 

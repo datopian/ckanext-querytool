@@ -12,7 +12,9 @@ def querytool_delete(context, data_dict):
     '''
     # sysadmins only
     # check if user has a delete permission for an org:
-    user_has_permission = has_user_permission_for_group_or_org(context.get('user'), 'delete_dataset')
+    querytool = CkanextQueryTool.get(name=data_dict['name'])
+    owner_org = querytool.owner_org
+    user_has_permission = has_user_permission_for_group_or_org(owner_org, context.get('user'), 'delete_dataset')
     if not user_has_permission:
         return {'success': False}
     return {'success': True}
