@@ -463,6 +463,16 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
         key = record[data_key_field.lower()]
         value = record[data_value_field.lower()]
 
+        # Make sure key is number when geojson keys are number:
+        try:
+            if isinstance(geojson_keys[0], (int, float)) and key.isdigit():
+                try:
+                    key = int(key)
+                except ValueError:
+                    key = float(key)
+        except Exception, e:
+            log.error(e)
+
         if key not in geojson_keys:
             continue
 
