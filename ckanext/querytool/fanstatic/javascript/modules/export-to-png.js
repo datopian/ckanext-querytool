@@ -26,6 +26,19 @@ ckan.module('export-to-png', function($) {
               });
             }
             var svgElement = $('.' + className).find('svg')[0];
+            var title = $('.' + className).find('svg').find('foreignObject');
+            var xforms = svgElement.children[1].getAttribute('transform');
+            var parts  = /translate\(\s*([^\s,)]+)[ ,]([^\s,)]+)/.exec(xforms);
+            var x = parts[1];
+            var y = parts[2];
+            if (title.length > 0) {
+              y = parseFloat(y) + 19;
+            }
+            if (chartType === 'hbar' || chartType === 'shbar') {
+              x = parseFloat(x) + 12;
+            }
+            var translate = 'translate(' + x + ',' + y + ')';
+            svgElement.children[1].setAttribute('transform', translate);
             saveSvgAsPng(svgElement, className + '.png', {backgroundColor: 'white'});
         }
     }
