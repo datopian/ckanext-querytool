@@ -122,20 +122,20 @@
                 {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
                 {% set filters = filters|sort(attribute='order') %}
                 <select>
-                  <option value="" disabled selected>Add variable to title</option>
-                  <optgroup label="Capitalized">
-                    <option value="{measure|capitalize}">Measure</option>
+                  <option value="" disabled selected>{{_('Add variable to title')}}</option>
+                  <optgroup label="{{_('Capitalized')}}">
+                    <option value="{measure|capitalize}">{{_('Measure')}}</option>
                     {% for filter in filters %}
                       <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
                     {% endfor %}
-                    <option value="{optional_filter|capitalize}">Optional Filter</option>
+                    <option value="{optional_filter|capitalize}">{{_('Optional Filter')}}</option>
                   </optgroup>
-                  <optgroup label="lowercase" class='text-lowercase'>
-                    <option value="{measure|lower}">Measure</option>
+                  <optgroup label="{{_('lowercase')}}" class='text-lowercase'>
+                    <option value="{measure|lower}">{{_('Measure')}}</option>
                     {% for filter in filters %}
                       <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
                     {% endfor %}
-                    <option value="{optional_filter|lower}">Optional Filter</option>
+                    <option value="{optional_filter|lower}">{{_('Optional Filter')}}</option>
                   </optgroup>
                 </select>
               </div>
@@ -143,11 +143,11 @@
             <div class="control-group title-help">
               <div class="controls ">
                 {% set template_tooltip = "<pre><p>Variables<br>---<br>{measure}<br>{optional_filter}<br>*use drop-down list to select variables based on application filters</p><p>Processed variables<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>etc</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>Full templates syntax</a></b></p><p class='muted'><b>Please note:</b> Single braces '{}' are used for variables</p>" %}
-                <span class="editor-info-block">You can use <a href="#templates" title="" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference">Templates</a> here</span>
+                <span class="editor-info-block">{% trans %}You can use <a href="#templates" title="" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference">Templates</a> here{% endtrans %}</span>
               </div>
             </div>
 
-            
+
           </div>
         </div>
       </div>
