@@ -198,7 +198,7 @@ ckan.module('querytool-table', function() {
               });
 
               // Set title value
-              table.find("div.dt-header" + id).html(title);
+              $("div.dt-header" + id).text(title);
 
             });
         },
