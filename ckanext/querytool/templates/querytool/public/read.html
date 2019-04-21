@@ -126,7 +126,7 @@
               resource_id=querytool.chart_resource
             %}
           {% endif %}
-          <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}">
+          <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}" data-module-type="{{item.graph}}">
              <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
            </a>
           {% snippet 'ajax_snippets/visualization_item.html',
