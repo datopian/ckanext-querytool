@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 1.2a62\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-04-21 14:56+0600\n"
+"POT-Creation-Date: 2019-04-21 15:00+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -995,7 +995,7 @@ msgid "eg. Some useful description about the query tool"
 msgstr ""
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
-msgid "Group"
+msgid "Public Folder"
 msgstr ""
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:57
