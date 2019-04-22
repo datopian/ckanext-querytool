@@ -175,6 +175,7 @@ ckan.module('querytool-table', function() {
             var sql_string = this.create_sql_string(main_value, y_axis, category_name);
             api.get('querytool_get_resource_data', {sql_string: sql_string}, function (response) {
               var rows = response.result;
+              module.sortData(rows, y_axis.toLowerCase(), main_value.toLowerCase());
 
               // Render table HTML
               var html = !category_name
@@ -352,9 +353,6 @@ ckan.module('querytool-table', function() {
         //check for long decimal numbers and round to fixed 5 decimal points
         process_table_value: function(val) {
           if (isNaN(val)) {
-            // Check if value contains '1.' which indicates about custom order.
-            // If so, remove it:
-            val = val ? val.replace(/^\d{1,2}\./, '') : val
             return val;
           };
           var dataf = (this.options.data_format === true) ? '' : this.options.data_format;
@@ -394,6 +392,52 @@ ckan.module('querytool-table', function() {
             this.options.table_title = this.el.parent().parent().find('[id*=table_field_title_]').val();
             this.options.measure_label = measureLabelVal;
             this.createTable(yVal, xVal, true);
+        },
+
+        sortData: function(records, y_axis, x_axis) {
+            records.sort(function(a, b) {
+                var x = a[x_axis];
+                var y = b[x_axis];
+                if (!isNaN(x) && !isNaN(y)) {
+                    var difference = Number(x) - Number(y);
+                    if (difference === 0) {
+                      return 0
+                    }
+                    return difference / Math.abs(difference);
+                } else {
+                    // Check if value contains '1.' which indicates about
+                    // custom order:
+                    var match1 = x.match(/^\d{1,2}\./);
+                    var match2 = y.match(/^\d{1,2}\./);
+                    // If both values have custom order indicators, then
+                    // we want to compare two values:
+                    if (match1 && match2) {
+                        var difference = parseInt(match1[0]) - parseInt(match2[0]);
+                        if (difference === 0) {
+                          return 0
+                        }
+                        return difference / Math.abs(difference);
+                    } else if (match1 && !match2) {
+                        // if second value doesn't contain it, then it comes
+                        // after the first one:
+                        return -1
+                    } else if (!match1 && match2) {
+                        // Ditto here:
+                        return 1
+                    }
+                    if (x < y) //sort string ascending
+                        return -1;
+                    if (x > y)
+                        return 1;
+                    return 0; //default return value (no sorting)
+                }
+            });
+            // Remove '1.' from the content:
+            records.forEach(function(record) {
+              if (isNaN(record[x_axis])) {
+                record[x_axis] = record[x_axis].replace(/^\d{1,2}\./, '');
+              }
+            });
         },
 
         teardown: function() {
