@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2018-09-25 16:30+0200\n"
-"PO-Revision-Date: 2018-09-25 18:56-0400\n"
+"POT-Creation-Date: 2019-04-21 15:00+0600\n"
+"PO-Revision-Date: 2019-04-25 10:04-0400\n"
 "Last-Translator: \n"
 "Language-Team: es <LL@li.org>\n"
 "Language: es\n"
@@ -18,404 +18,352 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.3.4\n"
-"X-Generator: Poedit 2.1\n"
+"X-Generator: Poedit 2.2\n"
 
-#: ckanext/querytool/helpers.py:129
+#: ckanext/querytool/helpers.py:131
 msgid "Line"
 msgstr "Línea"
 
-#: ckanext/querytool/helpers.py:130
+#: ckanext/querytool/helpers.py:132
 msgid "Bar"
 msgstr "Barras"
 
-#: ckanext/querytool/helpers.py:131
+#: ckanext/querytool/helpers.py:133
 msgid "Horizontal bar"
 msgstr "Barras horizontales"
 
-#: ckanext/querytool/helpers.py:132
+#: ckanext/querytool/helpers.py:134
 msgid "Stacked bar"
 msgstr "Barras apiladas"
 
-#: ckanext/querytool/helpers.py:133
+#: ckanext/querytool/helpers.py:135
 msgid "Stacked horizontal bar"
 msgstr "Barras horizontales apiladas"
 
-#: ckanext/querytool/helpers.py:134
+#: ckanext/querytool/helpers.py:136
 msgid "Area"
 msgstr "Área"
 
-#: ckanext/querytool/helpers.py:135
-msgid "Stacked area"
-msgstr "Área apilada"
-
-#: ckanext/querytool/helpers.py:136
+#: ckanext/querytool/helpers.py:137
 msgid "Spline"
 msgstr "Spline"
 
-#: ckanext/querytool/helpers.py:137
+#: ckanext/querytool/helpers.py:138
 msgid "Donut"
 msgstr "Anillos"
 
-#: ckanext/querytool/helpers.py:138
+#: ckanext/querytool/helpers.py:139
 msgid "Pie"
 msgstr "Circular"
 
-#: ckanext/querytool/helpers.py:139
+#: ckanext/querytool/helpers.py:140
 msgid "Scatter"
 msgstr "Dispersión"
 
-#: ckanext/querytool/helpers.py:140
-msgid "Bubble"
-msgstr "Burbujas"
+#: ckanext/querytool/helpers.py:151
+msgid "Green"
+msgstr "Verde"
 
-#: ckanext/querytool/helpers.py:152
-msgid "Saturated"
-msgstr "Saturado"
-
-#: ckanext/querytool/helpers.py:155
-msgid "Light"
-msgstr "Claro"
-
-#: ckanext/querytool/helpers.py:158
-msgid "Pastel"
-msgstr "Pastel"
-
-#: ckanext/querytool/helpers.py:161
-msgid "Pastel 2"
-msgstr "Pastel 2"
-
-#: ckanext/querytool/helpers.py:164
-msgid "Contrast"
-msgstr "Contraste"
-
-#: ckanext/querytool/helpers.py:167
-msgid "Ocean"
-msgstr "Océano"
-
-#: ckanext/querytool/helpers.py:170
-msgid "Limes"
-msgstr "Lima"
-
-#: ckanext/querytool/helpers.py:173
-msgid "Dark cherry"
-msgstr "Cereza oscuro"
-
-#: ckanext/querytool/helpers.py:176
-msgid "Purple"
-msgstr "Púrpura"
-
-#: ckanext/querytool/helpers.py:179
-msgid "Urban"
-msgstr "Urbano"
-
-#: ckanext/querytool/helpers.py:182
-msgid "Candy"
-msgstr "Caramelo"
-
-#: ckanext/querytool/helpers.py:185
-msgid "Orient"
-msgstr "Oriental"
-
-#: ckanext/querytool/helpers.py:188
+#: ckanext/querytool/helpers.py:153
 msgid "Blue"
 msgstr "Azul"
 
-#: ckanext/querytool/helpers.py:191
-msgid "Rainbow"
-msgstr "Arcoíris"
+#: ckanext/querytool/helpers.py:155
+msgid "Teal"
+msgstr "Verde azulado"
 
-#: ckanext/querytool/helpers.py:194
-msgid "Muted"
-msgstr "Tenue"
+#: ckanext/querytool/helpers.py:157
+msgid "Golden"
+msgstr "Dorado"
 
-#: ckanext/querytool/helpers.py:206
-msgid "Sequential"
-msgstr "Secuencial"
+#: ckanext/querytool/helpers.py:159
+msgid "Yellow"
+msgstr "Amarillo"
 
-#: ckanext/querytool/helpers.py:208
-msgid "Diverging"
-msgstr "Divergente"
+#: ckanext/querytool/helpers.py:161
+msgid "Orange"
+msgstr "Anaranjado"
 
-#: ckanext/querytool/helpers.py:219
+#: ckanext/querytool/helpers.py:163
+msgid "Brown"
+msgstr "Café"
+
+#: ckanext/querytool/helpers.py:165
+msgid "Purple"
+msgstr "Púrpura"
+
+#: ckanext/querytool/helpers.py:167
+msgid "Red"
+msgstr "Rojo"
+
+#: ckanext/querytool/helpers.py:181
+msgid "Sequential reds"
+msgstr "Rojo secuencial"
+
+#: ckanext/querytool/helpers.py:185
+msgid "Green-Purple"
+msgstr "Verde-Púrpura"
+
+#: ckanext/querytool/helpers.py:189
+msgid "Blue-Red"
+msgstr "Azul-Rojo"
+
+#: ckanext/querytool/helpers.py:193
+msgid "Teal-Brown"
+msgstr "Verde azulado-Café"
+
+#: ckanext/querytool/helpers.py:197
+msgid "Purple-Orange"
+msgstr "Púrpura-Anaranjado"
+
+#: ckanext/querytool/helpers.py:209
 msgid "Horizontal"
 msgstr "Horizontal"
 
-#: ckanext/querytool/helpers.py:220
+#: ckanext/querytool/helpers.py:210
 msgid "Diagonal"
 msgstr "Diagonal"
 
-#: ckanext/querytool/helpers.py:221
+#: ckanext/querytool/helpers.py:211
 msgid "Vertical"
 msgstr "Vertical"
 
-#: ckanext/querytool/helpers.py:222
+#: ckanext/querytool/helpers.py:212
 msgid "Reverse"
 msgstr "Invertido"
 
-#: ckanext/querytool/helpers.py:232 ckanext/querytool/helpers.py:502
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:221
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:230
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:239
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:249
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:258
+#: ckanext/querytool/helpers.py:222 ckanext/querytool/helpers.py:510
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:596
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:605
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:614
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:623
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:632
 msgid "Default"
 msgstr "Por defecto"
 
-#: ckanext/querytool/helpers.py:233
+#: ckanext/querytool/helpers.py:223
 msgid "Integer e.g 2"
 msgstr "Entero ej. 2"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:59
-#: ckanext/querytool/helpers.py:234
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:60
+#: ckanext/querytool/helpers.py:224
 msgid "Decimal (1 digit) e.g 2.5"
 msgstr "Decimal (1 dígito) ej. 2.5"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:63
-#: ckanext/querytool/helpers.py:235
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:64
+#: ckanext/querytool/helpers.py:225
 msgid "Decimal (2 digit) e.g 2.50"
 msgstr "Decimal (2 dígitos) ej. 2.50"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:67
-#: ckanext/querytool/helpers.py:236
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:68
+#: ckanext/querytool/helpers.py:226
 msgid "Decimal (3 digit) e.g 2.501"
 msgstr "Decimal (3 dígitos) ej. 2.501"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:71
-#: ckanext/querytool/helpers.py:237
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:72
+#: ckanext/querytool/helpers.py:227
 msgid "Decimal (4 digit) e.g 2.5012"
 msgstr "Decimal (4 dígitos) ej. 2.5012"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:75
-#: ckanext/querytool/helpers.py:238
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:76
+#: ckanext/querytool/helpers.py:228
 msgid "Currency e.g. $2,000"
-msgstr "Pesos ej. $2000"
+msgstr "Moneda ej. $2,000"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:79
-#: ckanext/querytool/helpers.py:239
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:80
+#: ckanext/querytool/helpers.py:229
 msgid "Rounded e.g 2k"
 msgstr "Simplificado ej. 2m"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:83
-#: ckanext/querytool/helpers.py:240
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:84
+#: ckanext/querytool/helpers.py:230
+#, python-format
 msgid "Percentage (0 digit) e.g 25% for 0.25"
-msgstr "Porcentaje (0 dígitos) ej. 25% - 0.25"
+msgstr "Porcentaje (0 dígitos) ej. 0.25 es 25%"
 
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:88
+#: ckanext/querytool/helpers.py:232
+#, python-format
 msgid "Percentage (1 digit) e.g 25.1% for 0.251"
-msgstr "Porcentaje (1 dígitos) ej. 25.1% - 0.251"
+msgstr "Porcentaje (1 dígito) ej. 0.251 es 25.1%"
 
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:92
+#: ckanext/querytool/helpers.py:234
+#, python-format
 msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
-msgstr "Porcentaje (2 dígitos) ej. 25.12% - 0.2512"
+msgstr "Porcentaje (2 dígitos) ej. 0.2512 es 25.12%"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:87
-#: ckanext/querytool/helpers.py:242
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:96
+#: ckanext/querytool/helpers.py:236
 msgid "Comma thousands separator (0 digit) e.g 2,512"
 msgstr "Coma separador de miles (0 dígitos) ej. 2,512"
 
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:100
+#: ckanext/querytool/helpers.py:238
 msgid "Comma thousands separator (1 digit) e.g 2,512.3"
-msgstr "Coma separador de miles (1 dígitos) ej. 2,512.3"
+msgstr "Coma separador de miles (1 dígito) ej. 2,512.3"
 
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:104
+#: ckanext/querytool/helpers.py:240
 msgid "Comma thousands separator (2 digit) e.g 2,512.34"
 msgstr "Coma separador de miles (2 dígitos) ej. 2,512.34"
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:91
-#: ckanext/querytool/helpers.py:244
-msgid "Binary e.g 11111010000"
-msgstr "Binario ej. 11111010000"
-
-#: ckanext/querytool/helpers.py:262
+#: ckanext/querytool/helpers.py:259
 msgid "Small Rectangle (1x2)"
 msgstr "Rectángulo pequeño (1x2)"
 
-#: ckanext/querytool/helpers.py:263
+#: ckanext/querytool/helpers.py:260
 msgid "Small Wide Rectangle (1x6)"
-msgstr "Rectángulo pequeño largo (1x6)"
+msgstr "Rectángulo ancho pequeño (1x6)"
+
+#: ckanext/querytool/helpers.py:262
+msgid "Medium Square (2x2)"
+msgstr "Cuadrado mediano (2x2)"
+
+#: ckanext/querytool/helpers.py:263
+msgid "Medium Rectangle (2x3)"
+msgstr "Rectángulo mediano (2x3)"
 
 #: ckanext/querytool/helpers.py:264
-msgid "Medium Square (2x2)"
-msgstr "Cuadrado pequeño (2x2)"
-
-#: ckanext/querytool/helpers.py:265
-msgid "Medium Rectangle (2x3)"
-msgstr "Rectángulo grande (2x3)"
-
-#: ckanext/querytool/helpers.py:267
 msgid "Large Rectangle (2x4)"
-msgstr "Doble cuadrado pequeño horizontal (2x4)"
+msgstr "Rectángulo grande (2x4)"
 
-#: ckanext/querytool/helpers.py:268
+#: ckanext/querytool/helpers.py:266
 msgid "Extra Large Rectangle (2x6)"
 msgstr "Rectángulo extra grande (2x6)"
 
-#: ckanext/querytool/helpers.py:269
+#: ckanext/querytool/helpers.py:267
 msgid "Large Square (4x4)"
 msgstr "Cuadrado grande (4x4)"
 
-#: ckanext/querytool/helpers.py:270
+#: ckanext/querytool/helpers.py:268
 msgid "Medium Vertical (4x2)"
-msgstr "Doble cuadrado pequeño vertical (4x2)"
+msgstr "Vertical mediano (4x2)"
 
-#: ckanext/querytool/helpers.py:272
+#: ckanext/querytool/helpers.py:270
 msgid "Large Vertical (4x3)"
 msgstr "Vertical grande (4x3)"
 
-#: ckanext/querytool/helpers.py:273
-msgid "Extra Large Vertical"
-msgstr "Vertical extra grande"
-
-#: ckanext/querytool/helpers.py:503
+#: ckanext/querytool/helpers.py:511
 msgid "Ascending"
 msgstr "Ascendente"
 
-#: ckanext/querytool/helpers.py:504
+#: ckanext/querytool/helpers.py:512
 msgid "Descending"
 msgstr "Descendente"
 
 #: ckanext/querytool/controllers/querytool.py:62
 #: ckanext/querytool/controllers/querytool.py:81
 #: ckanext/querytool/controllers/querytool.py:101
-#: ckanext/querytool/controllers/querytool.py:120
-#: ckanext/querytool/controllers/querytool.py:145
-#: ckanext/querytool/controllers/querytool.py:287
-#: ckanext/querytool/controllers/querytool.py:617
+#: ckanext/querytool/controllers/querytool.py:122
+#: ckanext/querytool/controllers/querytool.py:152
+#: ckanext/querytool/controllers/querytool.py:301
+#: ckanext/querytool/controllers/querytool.py:666
 msgid "Not authorized to see this page"
 msgstr "No está autorizado para ver esta página"
 
 #: ckanext/querytool/controllers/querytool.py:127
 msgid "Application not found"
-msgstr "No se encontró la Aplicación"
+msgstr "No se encontró la aplicación"
 
 #: ckanext/querytool/controllers/querytool.py:129
 msgid "Application and visualizations were removed successfully."
-msgstr "La Aplicación y las visualizaciones se eliminaron correctamente."
+msgstr "La aplicación y las visualizaciones se eliminaron correctamente."
 
 # Why does this one have a period at the end but the other one no?
-#: ckanext/querytool/controllers/querytool.py:156
-#: ckanext/querytool/controllers/querytool.py:299
-#: ckanext/querytool/controllers/querytool.py:609
+#: ckanext/querytool/controllers/querytool.py:157
+#: ckanext/querytool/controllers/querytool.py:306
+#: ckanext/querytool/controllers/querytool.py:658
 msgid "Application not found."
-msgstr "No se encontró la Aplicación."
+msgstr "No se encontró la aplicación."
 
-#: ckanext/querytool/controllers/querytool.py:167
-#: ckanext/querytool/controllers/querytool.py:307
-#: ckanext/querytool/controllers/querytool.py:625
+#: ckanext/querytool/controllers/querytool.py:168
+#: ckanext/querytool/controllers/querytool.py:314
+#: ckanext/querytool/controllers/querytool.py:674
 msgid ""
 "The data used for creating this Application has been removed by the "
 "administrator."
 msgstr ""
-"Los datos utilizados para crear esta Aplicación fueron eliminados por el "
+"Los datos utilizados para crear esta aplicación fueron eliminados por el "
 "administrador."
 
-#: ckanext/querytool/controllers/querytool.py:227
+#: ckanext/querytool/controllers/querytool.py:231
 msgid "Data Successfully updated."
 msgstr "Datos actualizados correctamente."
 
-# I think Sucessfully should not be capitalized
-#: ckanext/querytool/controllers/querytool.py:524
+# Sucessfully should not be capitalized
+#: ckanext/querytool/controllers/querytool.py:564
 msgid "Visualizations Successfully updated."
 msgstr "Visualizaciones actualizadas correctamente."
 
-#: ckanext/querytool/controllers/querytool.py:630
+#: ckanext/querytool/controllers/querytool.py:679
 msgid "Application not fully set."
-msgstr "La Aplicación está incompleta."
+msgstr "La aplicación está incompleta."
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:333
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:139
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:337
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:147
 msgid "Please choose a resource to see available numeric columns."
 msgstr "Por favor elije un recurso para ver columnas numéricas disponibles."
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:410
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:414
 msgid "Maximum number of allowed related queries reached."
 msgstr "Se ha alcanzado el máximo número de aplicaciones relacionas permitido."
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:434
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:438
 msgid "-- Choose resource --"
 msgstr "-- Elija un recurso --"
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:437
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:441
 msgid "Unnamed resource"
 msgstr "Recurso sin nombre"
 
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:467
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:472
 msgid "No columns retrieved."
 msgstr "No se recuperaron columnas."
 
 # Grammar error: "occurred"
-#: ckanext/querytool/fanstatic/javascript/querytool_data.js:471
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:476
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:481
 msgid "An error occured while getting columns."
 msgstr "Un error ocurrió al recuperar las columnas."
 
-#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:245
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:242
+msgid "Template is invalid"
+msgstr "El template es inválido"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:260
+msgid "Click to select one or more"
+msgstr "Haga clic para seleccionar uno o más"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:271
+msgid "Static Reference Columns: maximum one column per measure"
+msgstr "Columnas para la referencia estática: máximo una columna por medida"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:307
 msgid "Please create at least one visualization."
 msgstr "Por favor crea al menos una visualización."
 
-#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:125
-#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:129
+#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:200
+#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:204
 msgid "Chart could not be created."
 msgstr "No se pudo crear la gráfica."
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:25
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid " "
-msgstr " "
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:25
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid "."
-msgstr "."
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid "*"
-msgstr "*"
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid "import"
-msgstr "importar"
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid "{}"
-msgstr "{}"
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid ",\n"
-msgstr ",\n"
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid " = "
-msgstr " = "
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid "\n"
-msgstr "\n"
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid "debugger;"
-msgstr "depurador;"
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid ":"
-msgstr ":"
-
-#: ckanext/querytool/fanstatic/node_modules/ajv/dist/regenerator.min.js:26
-msgid ", "
-msgstr ", "
 
 #: ckanext/querytool/lib/file_writer_service.py:189
 #, python-format
 msgid "format: must be one of %s"
 msgstr "formato debe estar en %s"
 
-# Update original string
+# Update original string: "This application name already exists. Choose another one."
 #: ckanext/querytool/logic/validators.py:21
 msgid "This querytool name already exists. Choose another one."
-msgstr "El nombre de la Aplicación ya existe. Elija otro nombre."
+msgstr "El nombre de la aplicación ya existe. Elija otro nombre."
 
 #: ckanext/querytool/templates/footer.html:4
 msgid "About Vital Strategies"
 msgstr "Acerca de Vital Strategies"
 
 #: ckanext/querytool/templates/header.html:30
-#: ckanext/querytool/templates/querytool/public/base_main.html:13
+#: ckanext/querytool/templates/querytool/public/base_main.html:14
 msgid "Home"
 msgstr "Inicio"
 
@@ -446,183 +394,280 @@ msgstr "Grupos"
 msgid "About"
 msgstr "Acerca"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:24
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:17
-msgid "Title"
-msgstr "Título"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:28
+msgid "General"
+msgstr "General"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:26
-msgid "Chart title"
-msgstr "Título de la gráfica"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:34
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:41
 msgid "Type"
 msgstr "Tipo"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:36
-msgid "X axis dimension"
-msgstr "Dimensión del eje X"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:45
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:404
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:13
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:25
+msgid "Dimension"
+msgstr "Dimensión"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:46
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:62
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:35
 msgid "Category"
 msgstr "Categoría"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:49
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:72
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:65
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:407
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:16
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:95
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:42
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:98
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:38
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:53
 msgid "Select column"
 msgstr "Selecciona la columna"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:58
-msgid "Sort data"
-msgstr "Ordenar datos"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:69
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:92
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:39
-msgid "Optional Filter"
-msgstr "Filtro Opcional"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:80
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:104
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:50
-msgid "Default value"
-msgstr "Valor por defecto"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:83
-#: ckanext/querytool/templates/ajax_snippets/filter_item.html:28
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:107
-#: ckanext/querytool/templates/ajax_snippets/public_filter_item.html:22
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:53
-msgid "Select value"
-msgstr "Selecciona un valor"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:91
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:116
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:61
-msgid "Filter alias"
-msgstr "Alias del filtro"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:95
-#: ckanext/querytool/templates/ajax_snippets/filter_item.html:41
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:120
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:65
-msgid "Enter filter alias"
-msgstr "Introduzca el alias del filtro"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:125
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:69
-msgid "Filter visibility"
-msgstr "Visibilidad del filtro"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:102
-#: ckanext/querytool/templates/ajax_snippets/filter_item.html:49
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:128
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:72
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:71
-msgid "Public"
-msgstr "Público"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:103
-#: ckanext/querytool/templates/ajax_snippets/filter_item.html:50
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:129
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:73
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:71
-#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:21
-msgid "Private"
-msgstr "Privado"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:111
-#: ckanext/querytool/templates/ajax_snippets/filter_item.html:56
-msgid "Color"
-msgstr "Color"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:136
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:79
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:76
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:139
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:90
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
 #: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:55
 msgid "Size"
 msgstr "Tamaño"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:89
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:56
+msgid "Color"
+msgstr "Color"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:115
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:17
+msgid "Title"
+msgstr "Título"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:117
+msgid "Chart title"
+msgstr "Título de la gráfica"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:125
+msgid "Add variable to title"
+msgstr "Agregar variable al título"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:126
+msgid "Capitalized"
+msgstr "Mayúscula"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:127
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:134
-msgid "X axis label orientation"
-msgstr "Orientación de las etiquetas del eje X"
+msgid "Measure"
+msgstr "Medida"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:147
-msgid "X axis label multiline"
-msgstr "Etiquetas del eje X en varias líneas"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:131
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:138
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:396
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:95
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:50
+msgid "Optional Filter"
+msgstr "Filtro opcional"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:156
-msgid "Show data labels"
-msgstr "Mostrar etiquetas de los datos"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:133
+msgid "lowercase"
+msgstr "minúscula"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:165
-msgid "Show legend"
-msgstr "Mostrar leyenda"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:146
+#, python-format
+msgid ""
+"You can use <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
+"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
+"\"Templates quick reference\">Templates</a> here"
+msgstr ""
+"Puedes usar <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
+"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
+"\"Templates quick reference\">Templates</a> aquí"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:174
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:176
-msgid "Tooltip name"
-msgstr "Nombre en la descripción emergente"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:159
+msgid "X-axis"
+msgstr "Eje X"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:181
-msgid "Data format"
-msgstr "Formato de los datos"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
+msgid "X axis sorting"
+msgstr "Orden del eje X"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:197
-msgid "Y axis label format"
-msgstr "Formato de las etiquetas del eje Y"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
+msgid "Label orientation"
+msgstr "Orientación de las etiquetas"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:210
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:212
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:206
+msgid "Force label in multiple lines"
+msgstr "Forzar etiquetas del eje en varias líneas"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:222
+msgid "Max number of text labels"
+msgstr "Número máximo de etiquetas de texto"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:236
+msgid "Y-axis"
+msgstr "Eje Y"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:252
 msgid "Y axis title"
 msgstr "Título del eje Y"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:219
-msgid "Padding top"
-msgstr "Espaciado superior"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:254
+msgid "Measure by default"
+msgstr "Medida por defecto"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:228
-msgid "Padding bottom"
-msgstr "Espaciado inferior"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:268
+msgid "Hide title"
+msgstr "Ocultar el título"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:237
-msgid "Y axis tick count"
-msgstr "Número de marcas del eje Y"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:284
+msgid "Start from zero"
+msgstr "Iniciar desde cero"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:247
-msgid "Chart Padding left"
-msgstr "Espaciado superior de la gráfica"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:302
+msgid "Y axis label format"
+msgstr "Formato de las etiquetas del eje Y"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:256
-msgid "Chart Padding bottom"
-msgstr "Espaciado inferior de la gráfica"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:320
+msgid "Additional Options"
+msgstr "Opciones adicionales"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:263
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:335
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:101
+msgid "Data format"
+msgstr "Formato de los datos"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:355
+msgid "Show data labels"
+msgstr "Mostrar etiquetas de los datos"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:366
+msgid "Show legend"
+msgstr "Mostrar leyenda"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:382
+msgid "Show labels as percentages"
+msgstr "Mostrar las etiquetas como porcentajes"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:417
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:107
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:61
+msgid "Default value"
+msgstr "Valor por defecto"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:420
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:28
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:110
+#: ckanext/querytool/templates/ajax_snippets/public_filter_item.html:28
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:64
+msgid "Select value"
+msgstr "Selecciona un valor"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:430
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:119
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:72
+msgid "Filter Label"
+msgstr "Etiqueta del filtro"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:432
+msgid "Enter filter Label"
+msgstr "Introduzca la etiqueta del filtro"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:438
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:128
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:80
+msgid "Filter visibility"
+msgstr "Visibilidad del filtro"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:441
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:49
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:131
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:83
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:83
+msgid "Public"
+msgstr "Público"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:442
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:50
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:132
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:84
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:83
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:21
+msgid "Private"
+msgstr "Privado"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:455
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:497
+msgid "Static Reference"
+msgstr "Referencia estática"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:468
+msgid "Static Reference Columns"
+msgstr "Columnas para la referencia estática"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:495
+msgid "Static Reference Label"
+msgstr "Etiqueta de la referencia estática"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:509
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:561
+msgid "Dynamic Reference"
+msgstr "Referencia dinámica"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:522
+msgid "Dynamic Reference Type"
+msgstr "Tipo de referencia dinámica"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:525
+msgid "Select type"
+msgstr "Seleccionar tipo"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:543
+msgid "Dynamic Reference Factor"
+msgstr "Factor para la referencia dinámica"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:559
+msgid "Dynamic Reference Label"
+msgstr "Etiqueta de la referencia dinámica"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:575
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:7
 #: ckanext/querytool/templates/ajax_snippets/image_item.html:5
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:147
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:150
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:14
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:108
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:135
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:21
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
 msgid "Delete"
 msgstr "Eliminar"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:264
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:109
-#: ckanext/querytool/templates/querytool/public/read.html:109
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:576
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:136
+#: ckanext/querytool/templates/querytool/public/read.html:106
 msgid "Update"
 msgstr "Actualizar"
 
-#: ckanext/querytool/templates/ajax_snippets/filter_item.html:13
-#: ckanext/querytool/templates/ajax_snippets/table_item.html:25
-msgid "Dimension"
-msgstr "Dimensión"
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:585
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:587
+msgid "Tooltip name"
+msgstr "Nombre en la descripción emergente"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:594
+msgid "Padding top"
+msgstr "Espaciado superior"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:603
+msgid "Padding bottom"
+msgstr "Espaciado inferior"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:612
+msgid "Y axis tick count"
+msgstr "Número de marcas del eje Y"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:621
+msgid "Chart Padding left"
+msgstr "Espaciado superior de la gráfica"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:630
+msgid "Chart Padding bottom"
+msgstr "Espaciado inferior de la gráfica"
 
 # Why is one capitalzed and the other is not? I think we should be consistent.
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:25
@@ -630,11 +675,17 @@ msgid "Default Value"
 msgstr "Valor por defecto"
 
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:37
-msgid "Alias"
-msgstr "Alias"
+msgid "Label"
+msgstr "Etiqueta"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:41
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:123
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:76
+msgid "Enter filter label"
+msgstr "Introduzca la etiqueta del filtro"
 
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:46
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:68
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:80
 msgid "Visibility"
 msgstr "Visibilidad"
 
@@ -646,31 +697,31 @@ msgstr "Recurso para el mapa"
 msgid "Select map resource"
 msgstr "Selecciona el recurso para el mapa"
 
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:34
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:35
 msgid "Title field"
 msgstr "Campo para el título"
 
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:37
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:38
 msgid "Select title field"
 msgstr "Selecciona el campo para el título"
 
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:48
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:49
 msgid "Map key field"
 msgstr "Campo llave en el recurso del mapa"
 
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:51
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:52
 msgid "Select map key field"
 msgstr "Selecciona el campo llave en el recurso del mapa"
 
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:62
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:63
 msgid "Data key field"
 msgstr "Campo llave en los datos"
 
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:65
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:66
 msgid "Select data key field"
 msgstr "Selecciona el campo llave en los datos"
 
-#: ckanext/querytool/templates/ajax_snippets/map_item.html:75
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:76
 msgid "Color scheme"
 msgstr "Esquema de color"
 
@@ -734,60 +785,62 @@ msgstr ""
 "el primero se lleva a cabo fuera de la Plataforma."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:27
-msgid "Step 1."
-msgstr "Paso 1."
+msgid "Step 1 - Prepare data"
+msgstr "Paso 1 – Preparar datos"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:28
 msgid ""
-"Prepare data Before uploading the data into the Platform, it needs to be "
-"cleaned, validated and, depending on its source, transformed into a tabular "
-"dataset."
+"Before uploading the data into the Platform, it needs to be cleaned, "
+"validated and, depending on its source, transformed into a tabular dataset."
 msgstr ""
-"Preparar datos. Antes de cargar los datos en la Plataforma, es necesario "
-"limpiarlos, validarlos y, según su fuente, transformarlos en un conjunto de "
-"datos tabulares."
+"Antes de cargar los datos en la Plataforma, es necesario limpiarlos, "
+"validarlos y, según su fuente, transformarlos en un conjunto de datos "
+"tabulares."
+
+#: ckanext/querytool/templates/home/vs-home-page.html:31
+msgid "Step 2 – Load datasets"
+msgstr "Paso 2 – Cargar datos"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:32
-msgid "Step 2."
-msgstr "Paso 2."
-
-#: ckanext/querytool/templates/home/vs-home-page.html:33
 msgid ""
-"Load datasets In the Load datasets tab, the prepared data is uploaded "
-"through familiar menus and metadata is filled to help identify and "
-"differentiate the datasets."
+"In the <i>Load datasets</i> tab, the prepared data is uploaded through "
+"familiar menus and metadata is filled to help identify and differentiate the "
+"datasets."
 msgstr ""
-"En la pestaña Cargar datos, los datos preparados se cargan a través de menús "
-"familiares y los metadatos se completan para ayudar a identificar y "
+"En la pestaña <i>Cargar datos</i>, los datos preparados se cargan a través "
+"de menús familiares y los metadatos se completan para ayudar a identificar y "
 "diferenciar los conjuntos de datos."
 
-#: ckanext/querytool/templates/home/vs-home-page.html:37
-msgid "Step 3."
-msgstr "Paso 3."
+#: ckanext/querytool/templates/home/vs-home-page.html:35
+msgid "Step 3 – Design application"
+msgstr "Paso 3 – Diseñar aplicación"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:38
+#: ckanext/querytool/templates/home/vs-home-page.html:36
 msgid ""
-"Design application In Design application, drop-down menus are used to add "
-"data-driven visualizations (charts, maps and tables), support elements (text "
-"and images) and interactive elements (filters, download options, sharing "
+"In the <i>Design application</i> tab, drop-down menus are used to add data-"
+"driven visualizations (charts, maps and tables), support elements (text and "
+"images) and interactive elements (filters, download options, sharing "
 "options). These elements can be combined and arranged in different ways to "
 "provide a user-friendly experience for exploring public health data."
 msgstr ""
-"Diseñar de aplicación. En Diseñar aplicaciones, los menús desplegables se "
-"utilizan para agregar visualizaciones relacionadas a los datos (gráficos, "
-"mapas y tablas), elementos de soporte (texto e imágenes) y elementos "
-"interactivos (filtros, opciones de descarga, opciones de uso compartido). "
-"Estos elementos se pueden combinar y organizar de diferentes maneras para "
-"proporcionar una experiencia amigable para la exploración de datos de salud "
-"pública."
+"En <i>Diseñar aplicaciones</i>, los menús desplegables se utilizan para "
+"agregar visualizaciones relacionadas a los datos (gráficos, mapas y tablas), "
+"elementos de soporte (texto e imágenes) y elementos interactivos (filtros, "
+"opciones de descarga, opciones de uso compartido). Estos elementos se pueden "
+"combinar y organizar de diferentes maneras para proporcionar una experiencia "
+"amigable para la exploración de datos de salud pública."
 
-#: ckanext/querytool/templates/home/vs-home-page.html:42
-msgid "Step 4."
-msgstr "Paso 4."
+#: ckanext/querytool/templates/home/vs-home-page.html:39
+msgid "Step 4 - Publish application"
+msgstr "Paso 4 – Publicar aplicación"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:43
-msgid "Publish application The application becomes available for public use."
-msgstr "Publicar aplicación. La aplicación se hace disponible para uso público."
+#: ckanext/querytool/templates/home/vs-home-page.html:40
+msgid ""
+"The application becomes available for public use and can be embedded in a "
+"designated webpage."
+msgstr ""
+"La aplicación se hace disponible para uso público y puede ser incrustada en "
+"la página web designada."
 
 #: ckanext/querytool/templates/home/snippets/about_text.html:1
 msgid ""
@@ -858,6 +911,92 @@ msgstr ""
 "web de datos abiertos personalizado y desarrollo de extensiones de CKAN.</p> "
 "</p> "
 
+#: ckanext/querytool/templates/macros/form.html:126
+#, python-format
+msgid ""
+"You can use <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
+"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
+"\">Markdown formatting</a> here"
+msgstr ""
+"Puedes usar <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
+"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true\"> "
+"formato Markdown </a> aquí"
+
+#: ckanext/querytool/templates/macros/form.html:235
+msgid "Remove"
+msgstr "Eliminar"
+
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "This field is required"
+msgstr "Este campo es obligatorio"
+
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "Custom"
+msgstr "Personalizado"
+
+#: ckanext/querytool/templates/macros/form.html:290
+msgid "The form contains invalid entries:"
+msgstr "La forma contiene valores inválidos:"
+
+#: ckanext/querytool/templates/macros/form.html:395
+msgid "Required field"
+msgstr "Campo obligatorio"
+
+#: ckanext/querytool/templates/macros/form.html:410
+msgid "http://example.com/my-image.jpg"
+msgstr "http://ejemplo.com/mi-imagen.jpg"
+
+#: ckanext/querytool/templates/macros/form.html:411
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:33
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:47
+msgid "Image URL"
+msgstr "URL de la imagen"
+
+#: ckanext/querytool/templates/macros/form.html:412
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:31
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:39
+msgid "Image"
+msgstr "Imagen"
+
+#: ckanext/querytool/templates/macros/form.html:424
+msgid "Clear Upload"
+msgstr "Limpiar archivo cargado"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:6
+msgid "Source"
+msgstr "Fuente"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:6
+msgid "http://example.com/dataset.json"
+msgstr "http://ejemplo.com/datos.json"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:10
+msgid "Author"
+msgstr "Autor"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:10
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:16
+msgid "Joe Bloggs"
+msgstr "Juan Pérez"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:12
+msgid "Author Email"
+msgstr "Correo electrónico del autor"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:12
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:18
+msgid "joe@example.com"
+msgstr "juan@ejemplo.com"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:16
+msgid "Maintainer"
+msgstr "Mantenedor"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:18
+msgid "Maintainer Email"
+msgstr "Correo electrónico del mantenedor"
+
 #: ckanext/querytool/templates/querytool/admin/base_edit_data.html:11
 msgid "Manage application data"
 msgstr "Administrar datos de la aplicación"
@@ -867,7 +1006,7 @@ msgstr "Administrar datos de la aplicación"
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:10
 #: ckanext/querytool/templates/querytool/admin/base_list.html:8
 msgid "Application Groups"
-msgstr "Grupos de las Aplicaciones"
+msgstr "Grupos de las aplicaciones"
 
 #: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:9
 msgid "Manage Visualizations"
@@ -882,7 +1021,7 @@ msgstr "Aplicaciones"
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:18
 #: ckanext/querytool/templates/querytool/admin/base_list.html:24
 msgid "Add New Application"
-msgstr "Agregar Nueva Aplicación"
+msgstr "Agregar nueva aplicación"
 
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:40
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:41
@@ -893,12 +1032,12 @@ msgid "Other"
 msgstr "Otras"
 
 #: ckanext/querytool/templates/querytool/admin/base_list.html:30
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:61
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
 msgid "Main"
 msgstr "Principal"
 
 #: ckanext/querytool/templates/querytool/admin/base_list.html:36
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:61
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
 msgid "Related"
 msgstr "Relacionada"
 
@@ -912,7 +1051,7 @@ msgstr "Guardar como"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
 msgid "Title of the query tool"
-msgstr "Título de la Aplicación"
+msgstr "Título de la aplicación"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
 msgid "URL"
@@ -933,110 +1072,102 @@ msgid "eg. Some useful description about the query tool"
 msgstr "ej. Alguna información sobre la aplicación"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
-msgid "Group"
-msgstr "Grupo"
+msgid "Public Folder"
+msgstr "Carpeta pública"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:55
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:57
+msgid "Organization"
+msgstr "Organización"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:67
 msgid "Settings"
 msgstr "Configuración"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:58
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:70
 msgid "Application Type"
-msgstr "Tipo de Aplicación"
+msgstr "Tipo de aplicación"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:89
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:101
 msgid "Add Related Application"
-msgstr "Agregar Aplicación Relacionada"
+msgstr "Agregar aplicación relacionada"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:93
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:105
 msgid "Select dataset and resource"
 msgstr "Selecciona el conjunto de datos y el recurso"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:96
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:108
 msgid "Dataset"
 msgstr "Conjunto de datos"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:99
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:111
 msgid "Choose Dataset"
 msgstr "Elegir conjunto de datos"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:113
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:125
 msgid "Resource"
 msgstr "Recurso"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:117
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:123
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:129
 msgid "Measure(s)"
 msgstr "Medida(s)"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:142
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:150
 msgid "Filter(s)"
 msgstr "Filtro(s)"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:157
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:165
 msgid "Add Filter"
 msgstr "Agregar Filtro"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:163
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:34
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:171
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:35
 msgid "Save"
 msgstr "Guardar"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:164
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:172
 msgid "Save & Add/Edit Visualizations"
 msgstr "Guardar & Agregar/Editar Visualizaciones"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:31
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:32
 #: ckanext/querytool/templates/querytool/admin/snippets/stages.html:12
 msgid "Visualizations"
 msgstr "Visualizaciones"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:33
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:34
 msgid "Save & Edit data"
 msgstr "Guardar & Editar los datos"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:41
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:42
 msgid "Default measure"
 msgstr "Medida por defecto"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
 msgid "Visualization type"
 msgstr "Tipo de visualización"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
 msgid "— Select type —"
 msgstr "— Seleccionar tipo —"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
 msgid "Chart"
 msgstr "Gráfica"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
 msgid "Map"
 msgstr "Mapa"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
 msgid "Text box"
 msgstr "Cuadro de texto"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
-#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:31
-#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:39
-msgid "Image"
-msgstr "Imagen"
-
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:48
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
 msgid "Table"
 msgstr "Tabla"
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:51
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:52
 msgid "Add visualization"
 msgstr "Agregar visualización"
-
-#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:33
-#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:47
-msgid "Image URL"
-msgstr "URL de la imagen"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:27
 msgid "Used dataset:"
@@ -1045,7 +1176,7 @@ msgstr "Conjunto de datos usado:"
 # Why does this one has : at the end, but the other one no?
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:28
 msgid "Application Type:"
-msgstr "Tipo de Aplicación:"
+msgstr "Tipo de aplicación:"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:31
 msgid "Edit filters and data"
@@ -1062,19 +1193,19 @@ msgstr "Ver"
 # Update original string
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
 msgid "Are you sure you want to delete this Query?"
-msgstr "¿Estás seguro de que quieres eliminar esta Aplicación?"
+msgstr "¿Estás seguro de que quieres eliminar esta aplicación?"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/stages.html:9
 msgid "Application data"
-msgstr "Datos de la Aplicación"
+msgstr "Datos de la aplicación"
 
-#: ckanext/querytool/templates/querytool/public/base_main.html:31
+#: ckanext/querytool/templates/querytool/public/base_main.html:33
 msgid "Welcome"
 msgstr "Bienvenida"
 
-#: ckanext/querytool/templates/querytool/public/base_main.html:52
+#: ckanext/querytool/templates/querytool/public/base_main.html:54
 msgid "List Applications"
-msgstr "Enlistar Aplicaciones"
+msgstr "Enlistar aplicaciones"
 
 #: ckanext/querytool/templates/querytool/public/list.html:26
 msgid "There are no applications created"
@@ -1085,48 +1216,48 @@ msgstr "No se han creado aplicaciones"
 msgid "Query Tool"
 msgstr "Plataforma"
 
-#: ckanext/querytool/templates/querytool/public/read.html:68
+#: ckanext/querytool/templates/querytool/public/read.html:64
 msgid "Displayed Measure"
-msgstr "Medida Visualizada"
+msgstr "Medida visualizada"
 
-#: ckanext/querytool/templates/querytool/public/read.html:85
+#: ckanext/querytool/templates/querytool/public/read.html:81
 msgid "Download"
 msgstr "Descargar"
 
-#: ckanext/querytool/templates/querytool/public/read.html:131
-#: ckanext/querytool/templates/querytool/public/read.html:279
+#: ckanext/querytool/templates/querytool/public/read.html:130
+#: ckanext/querytool/templates/querytool/public/read.html:292
 msgid "Download image"
 msgstr "Descargar imágen"
 
-#: ckanext/querytool/templates/querytool/public/read.html:238
+#: ckanext/querytool/templates/querytool/public/read.html:251
 msgid "Share"
 msgstr "Compartir"
 
-#: ckanext/querytool/templates/querytool/public/read.html:243
+#: ckanext/querytool/templates/querytool/public/read.html:256
 msgid "Copy"
 msgstr "Copiar"
 
-#: ckanext/querytool/templates/querytool/public/read.html:255
+#: ckanext/querytool/templates/querytool/public/read.html:268
 msgid "Embed"
 msgstr "Incrustar"
 
-#: ckanext/querytool/templates/querytool/public/read.html:261
+#: ckanext/querytool/templates/querytool/public/read.html:274
 msgid "Embed query tool view"
-msgstr "Incrustar vista de la Aplicación"
+msgstr "Incrustar vista de la aplicación"
 
-#: ckanext/querytool/templates/querytool/public/read.html:264
+#: ckanext/querytool/templates/querytool/public/read.html:277
 msgid "You can copy and paste the embed code"
 msgstr "Puedes copiar y pegar el código de incrustación"
 
-#: ckanext/querytool/templates/querytool/public/read.html:267
+#: ckanext/querytool/templates/querytool/public/read.html:280
 msgid "Width"
 msgstr "Ancho"
 
-#: ckanext/querytool/templates/querytool/public/read.html:270
+#: ckanext/querytool/templates/querytool/public/read.html:283
 msgid "Height"
 msgstr "Alto"
 
-#: ckanext/querytool/templates/querytool/public/read.html:273
+#: ckanext/querytool/templates/querytool/public/read.html:286
 msgid "Code"
 msgstr "Código"
 
@@ -1138,11 +1269,131 @@ msgstr "Idioma"
 msgid "Go"
 msgstr "Ir"
 
-#~ msgid "Medium Rectangle"
-#~ msgstr "Rectángulo mediano"
+#~ msgid "Stacked area"
+#~ msgstr "Área apilada"
 
-#~ msgid "Medium Vertical"
-#~ msgstr "Vertical mediano"
+#~ msgid "Bubble"
+#~ msgstr "Burbujas"
+
+#~ msgid "Saturated"
+#~ msgstr "Saturado"
+
+#~ msgid "Light"
+#~ msgstr "Claro"
+
+#~ msgid "Pastel"
+#~ msgstr "Pastel"
+
+#~ msgid "Pastel 2"
+#~ msgstr "Pastel 2"
+
+#~ msgid "Contrast"
+#~ msgstr "Contraste"
+
+#~ msgid "Ocean"
+#~ msgstr "Océano"
+
+#~ msgid "Limes"
+#~ msgstr "Lima"
+
+#~ msgid "Dark cherry"
+#~ msgstr "Cereza oscuro"
+
+#~ msgid "Urban"
+#~ msgstr "Urbano"
+
+#~ msgid "Candy"
+#~ msgstr "Caramelo"
+
+#~ msgid "Orient"
+#~ msgstr "Oriental"
+
+#~ msgid "Rainbow"
+#~ msgstr "Arcoíris"
+
+#~ msgid "Muted"
+#~ msgstr "Tenue"
+
+#~ msgid "Diverging"
+#~ msgstr "Divergente"
+
+#~ msgid "Dolar e.g 2000$"
+#~ msgstr "Pesos ej. $2000"
+
+#~ msgid "Percentage (multiply by 100) e.g 200000%"
+#~ msgstr "Porcentaje (multiplica el valor por 100) ej. 20%"
+
+#~ msgid "Binary e.g 11111010000"
+#~ msgstr "Binario ej. 11111010000"
+
+#~ msgid "Long Small Rectangle"
+#~ msgstr "Rectángulo pequeño largo"
+
+#~ msgid "Small Square"
+#~ msgstr "Cuadrado pequeño"
+
+#~ msgid "Horizontal Double Small Square"
+#~ msgstr "Doble cuadrado pequeño horizontal"
+
+#~ msgid "Vertical Double Small Square"
+#~ msgstr "Doble cuadrado pequeño vertical"
+
+#~ msgid "Extra Large Vertical"
+#~ msgstr "Vertical extra grande"
+
+#~ msgid " "
+#~ msgstr " "
+
+#~ msgid "."
+#~ msgstr "."
+
+#~ msgid "*"
+#~ msgstr "*"
+
+#~ msgid "import"
+#~ msgstr "importar"
+
+#~ msgid "{}"
+#~ msgstr "{}"
+
+#~ msgid ",\n"
+#~ msgstr ",\n"
+
+#~ msgid " = "
+#~ msgstr " = "
+
+#~ msgid "\n"
+#~ msgstr "\n"
+
+#~ msgid "debugger;"
+#~ msgstr "depurador;"
+
+#~ msgid ":"
+#~ msgstr ":"
+
+#~ msgid ", "
+#~ msgstr ", "
+
+#~ msgid "Sort data"
+#~ msgstr "Ordenar datos"
+
+#~ msgid "Alias"
+#~ msgstr "Alias"
+
+#~ msgid "Step 1."
+#~ msgstr "Paso 1."
+
+#~ msgid "Step 2."
+#~ msgstr "Paso 2."
+
+#~ msgid "Step 3."
+#~ msgstr "Paso 3."
+
+#~ msgid "Step 4."
+#~ msgstr "Paso 4."
+
+#~ msgid "Group"
+#~ msgstr "Grupo"
 
 #~ msgid "Health Topics"
 #~ msgstr "Temas de Salud"
