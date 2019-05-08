@@ -8,16 +8,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-05-22 16:38+0000\n"
-"PO-Revision-Date: 2019-04-29 08:59-0400\n"
+"POT-Creation-Date: 2019-04-21 15:00+0600\n"
+"PO-Revision-Date: 2019-07-16 12:19+0800\n"
 "Last-Translator: \n"
-"Language: zh_Hans_CN\n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
+"Language: zh\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: ckanext/querytool/helpers.py:131
 msgid "Line"
@@ -40,8 +41,9 @@ msgid "Stacked horizontal bar"
 msgstr "水平堆叠柱状图"
 
 #: ckanext/querytool/helpers.py:136
+#, fuzzy
 msgid "Area"
-msgstr "区域"
+msgstr "阴影面积折线图"
 
 #: ckanext/querytool/helpers.py:137
 msgid "Spline"
@@ -116,16 +118,19 @@ msgid "Purple-Orange"
 msgstr "紫色-橙色渐变"
 
 #: ckanext/querytool/helpers.py:209
+#, fuzzy
 msgid "Horizontal"
-msgstr "水平的"
+msgstr "横排"
 
 #: ckanext/querytool/helpers.py:210
+#, fuzzy
 msgid "Diagonal"
-msgstr "斜线的"
+msgstr "倾斜"
 
 #: ckanext/querytool/helpers.py:211
+#, fuzzy
 msgid "Vertical"
-msgstr "垂直的"
+msgstr "竖排"
 
 #: ckanext/querytool/helpers.py:212
 msgid "Reverse"
@@ -212,8 +217,9 @@ msgid "Small Rectangle (1x2)"
 msgstr "小号长方形（1x2）"
 
 #: ckanext/querytool/helpers.py:260
+#, fuzzy
 msgid "Small Wide Rectangle (1x6)"
-msgstr "宽的小号长方形（1x6）"
+msgstr "宽屏小号长方形（1x6）"
 
 #: ckanext/querytool/helpers.py:262
 msgid "Medium Square (2x2)"
@@ -361,24 +367,28 @@ msgid "Home"
 msgstr "主页"
 
 #: ckanext/querytool/templates/header.html:34
+#, fuzzy
 msgid "Load Datasets"
-msgstr "加载数据集"
+msgstr "数据集管理"
 
 #: ckanext/querytool/templates/header.html:35
+#, fuzzy
 msgid "Design Applications"
-msgstr "设计应用"
+msgstr "应用设计"
 
 #: ckanext/querytool/templates/header.html:36
+#, fuzzy
 msgid "Use Applications"
-msgstr "使用应用"
+msgstr "应用查看"
 
 #: ckanext/querytool/templates/header.html:51
 msgid "Organizations"
 msgstr "组织"
 
 #: ckanext/querytool/templates/header.html:52
+#, fuzzy
 msgid "Groups"
-msgstr "组"
+msgstr "群组"
 
 #: ckanext/querytool/templates/header.html:53
 #: ckanext/querytool/templates/home/about.html:3
@@ -388,8 +398,9 @@ msgid "About"
 msgstr "关于"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:28
+#, fuzzy
 msgid "General"
-msgstr "概述"
+msgstr "一般设置"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:41
 msgid "Type"
@@ -399,8 +410,9 @@ msgstr "类型"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:404
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:13
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:25
+#, fuzzy
 msgid "Dimension"
-msgstr "维度"
+msgstr "变量"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:62
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:35
@@ -428,14 +440,6 @@ msgstr "尺寸"
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:56
 msgid "Color"
 msgstr "颜色"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:93
-msgid "Single color"
-msgstr "单色"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
-msgid "Diverging"
-msgstr "发散"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:115
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:17
@@ -474,21 +478,22 @@ msgstr "小写"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:146
 #, python-format
 msgid ""
-"You can use <a href=\"#templates\" title=\"\" data-target=\"popover\" "
-"data-content=\"%(template_tooltip)s\" data-html=\"true\" data-original-"
-"title=\"Templates quick reference\">Templates</a> here"
+"You can use <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
+"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
+"\"Templates quick reference\">Templates</a> here"
 msgstr ""
-"您可以在此处使用 <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
-"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-"
-"title=\"Templates quick reference\">模板</a>"
+"您可以在此处使用 <a href=\"#templates\" title=\"\" data-target=\"popover\" "
+"data-content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
+"\"Templates quick reference\">模板</a>"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:159
 msgid "X-axis"
 msgstr "X轴"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
+#, fuzzy
 msgid "X axis sorting"
-msgstr "X轴分类"
+msgstr "X轴排序"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
 msgid "Label orientation"
@@ -499,8 +504,9 @@ msgid "Force label in multiple lines"
 msgstr "强制标签内容换行"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:222
+#, fuzzy
 msgid "Max number of text labels"
-msgstr "最大文本标签数量"
+msgstr "最大标签数量"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:236
 msgid "Y-axis"
@@ -511,24 +517,27 @@ msgid "Y axis title"
 msgstr "Y轴标题"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:254
+#, fuzzy
 msgid "Measure by default"
-msgstr "默认变量"
+msgstr "默认显示指标名称"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:268
 msgid "Hide title"
 msgstr "隐藏标题"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:284
+#, fuzzy
 msgid "Start from zero"
-msgstr "从0开始"
+msgstr "坐标从0开始"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:302
 msgid "Y axis label format"
 msgstr "Y轴标签格式"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:320
+#, fuzzy
 msgid "Additional Options"
-msgstr "额外选项"
+msgstr "其它选项"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:335
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:101
@@ -544,8 +553,9 @@ msgid "Show legend"
 msgstr "显示图例"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:382
+#, fuzzy
 msgid "Show labels as percentages"
-msgstr "使用百分比的形式显示标签"
+msgstr "以百分比的形式显示标签"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:417
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:107
@@ -591,54 +601,50 @@ msgstr "公开"
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:84
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:83
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:21
+#, fuzzy
 msgid "Private"
-msgstr "仅自己"
+msgstr "非公开"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:455
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:497
+#, fuzzy
 msgid "Static Reference"
-msgstr "静态参考"
+msgstr "静态参考线"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:468
+#, fuzzy
 msgid "Static Reference Columns"
-msgstr "静态参考列"
+msgstr "静态参考线数据列"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:495
+#, fuzzy
 msgid "Static Reference Label"
-msgstr "静态参考列名称"
+msgstr "静态参考线标签"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:509
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:561
+#, fuzzy
 msgid "Dynamic Reference"
-msgstr "动态参考"
+msgstr "动态参考线"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:522
+#, fuzzy
 msgid "Dynamic Reference Type"
-msgstr "动态参考类型"
+msgstr "动态参考线类型"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:525
 msgid "Select type"
 msgstr "选择类型"
 
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
-msgid "Maximum"
-msgstr "最大值"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
-msgid "Average"
-msgstr "平均"
-
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
-msgid "Minimum"
-msgstr "最低限度"
-
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:543
+#, fuzzy
 msgid "Dynamic Reference Factor"
-msgstr "动态参考因子"
+msgstr "动态参考倍数"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:559
+#, fuzzy
 msgid "Dynamic Reference Label"
-msgstr "动态参考列名称"
+msgstr "动态参考线标签"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:575
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:7
@@ -742,16 +748,18 @@ msgid "Edit"
 msgstr "编辑"
 
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:18
+#, fuzzy
 msgid "Related Application"
-msgstr "相关的应用"
+msgstr "从属应用"
 
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:21
 msgid "Select Application"
 msgstr "选择应用"
 
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:19
+#, fuzzy
 msgid "Table title"
-msgstr "表标题"
+msgstr "表格标题"
 
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
 msgid "Content"
@@ -769,133 +777,145 @@ msgstr "数据可视化开发平台"
 msgid ""
 "The Portal Development Platform allows public health agencies to design "
 "applications that let the public explore and access a diverse range of "
-"health data sources. The Platform has a simple interface that minimizes "
-"the time dedicated to creating applications while providing the essential"
-" visual and interactive elements for public access to data. It was "
-"developed on opensource license with minimal technological requirements, "
-"minimizing the resources needed for its use and maintenance."
-msgstr "数据可视化开发平台允许公共卫生机构设计可视化应用，来让公众获取并探索各种公共卫生数据。平台简洁易用，可以最小化创建可视化应用的时间，同时提供必要的可视化和可互动的元素帮助公众探索数据。平台是基于开源的证书开发的，同时对硬件配置要求很低，可以最大程度地减少平台使用和维护所需的资源。"
+"health data sources. The Platform has a simple interface that minimizes the "
+"time dedicated to creating applications while providing the essential visual "
+"and interactive elements for public access to data. It was developed on "
+"opensource license with minimal technological requirements, minimizing the "
+"resources needed for its use and maintenance."
+msgstr ""
+"数据可视化开发平台允许公共卫生机构设计可视化应用，来让公众获取并探索各种公共"
+"卫生数据。平台简洁易用，可以最小化创建可视化应用的时间，同时提供必要的可视化"
+"和可互动的元素帮助公众探索数据。平台是基于开源的证书开发的，同时对硬件配置要"
+"求很低，可以最大程度地减少平台使用和维护所需的资源。"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:37
+#: ckanext/querytool/templates/home/vs-home-page.html:22
 msgid "How to use the Platform"
 msgstr "如何使用平台"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:40
+#: ckanext/querytool/templates/home/vs-home-page.html:24
 msgid ""
-"Four main steps are necessary to successfully design an application, with"
-" the first one taking place outside the Platform."
+"Four main steps are necessary to successfully design an application, with "
+"the first one taking place outside the Platform."
 msgstr "成功创建一个可视化应用需要四个主要步骤，其中第一个是在平台之外完成的。"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:45
+#: ckanext/querytool/templates/home/vs-home-page.html:27
 msgid "Step 1 - Prepare data"
 msgstr "第一步：准备数据"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:46
+#: ckanext/querytool/templates/home/vs-home-page.html:28
 msgid ""
 "Before uploading the data into the Platform, it needs to be cleaned, "
-"validated and, depending on its source, transformed into a tabular "
-"dataset."
-msgstr "在将数据上传到平台之前，数据需要进行清理、确认。此外，根据数据源不同，还需要设法将数据转化为表格式的数据集。"
+"validated and, depending on its source, transformed into a tabular dataset."
+msgstr ""
+"在将数据上传到平台之前，数据需要进行清理、确认。此外，根据数据源不同，还需要"
+"设法将数据转化为表格式的数据集。"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:51
+#: ckanext/querytool/templates/home/vs-home-page.html:31
 msgid "Step 2 – Load datasets"
 msgstr "第二步：上传数据集"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:52
+#: ckanext/querytool/templates/home/vs-home-page.html:32
 msgid ""
 "In the <i>Load datasets</i> tab, the prepared data is uploaded through "
-"familiar menus and metadata is filled to help identify and differentiate "
-"the datasets."
-msgstr "在<i>上传数据集</i>标签页中，准备好的数据集可通过上传菜单被上传至系统中，同时还需填写元数据来帮助识别和区分不同的数据集。"
+"familiar menus and metadata is filled to help identify and differentiate the "
+"datasets."
+msgstr ""
+"在<i>上传数据集</i>标签页中，准备好的数据集可通过上传菜单被上传至系统中，同时"
+"还需填写元数据来帮助识别和区分不同的数据集。"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:57
+#: ckanext/querytool/templates/home/vs-home-page.html:35
 msgid "Step 3 – Design application"
 msgstr "第三步：设计应用"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:58
+#: ckanext/querytool/templates/home/vs-home-page.html:36
 msgid ""
-"In the <i>Design application</i> tab, drop-down menus are used to add "
-"data-driven visualizations (charts, maps and tables), support elements "
-"(text and images) and interactive elements (filters, download options, "
-"sharing options). These elements can be combined and arranged in "
-"different ways to provide a user-friendly experience for exploring public"
-" health data."
+"In the <i>Design application</i> tab, drop-down menus are used to add data-"
+"driven visualizations (charts, maps and tables), support elements (text and "
+"images) and interactive elements (filters, download options, sharing "
+"options). These elements can be combined and arranged in different ways to "
+"provide a user-friendly experience for exploring public health data."
 msgstr ""
-"在<i>设计应用</i> "
-"标签页中，使用下拉式的菜单来添加由数据驱动的可视化视图（图表、地图及表格）、辅助元素（文字和图片）以及交互式组件（筛选器、下载选项、分享选项）。这些元素可以通过不同的方式组合及放置在一起，共同为用户提供友好的公共卫生数据探索体验。"
+"在<i>设计应用</i> 标签页中，使用下拉式的菜单来添加由数据驱动的可视化视图（图"
+"表、地图及表格）、辅助元素（文字和图片）以及交互式组件（筛选器、下载选项、分"
+"享选项）。这些元素可以通过不同的方式组合及放置在一起，共同为用户提供友好的公"
+"共卫生数据探索体验。"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:66
+#: ckanext/querytool/templates/home/vs-home-page.html:39
 msgid "Step 4 - Publish application"
 msgstr "第四步：发布应用"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:67
+#: ckanext/querytool/templates/home/vs-home-page.html:40
 msgid ""
-"The application becomes available for public use and can be embedded in a"
-" designated webpage."
+"The application becomes available for public use and can be embedded in a "
+"designated webpage."
 msgstr "可视化应用向公众开放，并且可以内嵌到指定的网站页面中。"
 
 #: ckanext/querytool/templates/home/snippets/about_text.html:1
 msgid ""
-" <p>Online access to public health data is generally limited. Most "
-"countries do not have an integrated tool for public users to access their"
-" data and although some have well-developed tools, they often have "
-"limited functionality or complicated interfaces. To make it easier for "
-"public health agencies to publish their data, Vital Strategies, as part "
-"of the Data for Health Initiative, created the Portal Development "
-"Platform. The Platform provides a straightforward process to create "
-"applications through four simple steps: prepare data, load datasets, "
-"design and publish applications.</p> <p>The Platform has features and "
-"benefits aimed at simplifying its use and minimizing the human, physical "
-"and monetary resources required for its operation. Benefits of the "
-"Platform include: Developed in opensource language which makes "
-"improvements and customizations free and easy to share. Focus placed on "
-"essential visual and interactive elements that prioritize public access "
-"to data. Ease-of-use for administrators and public users. Scalability of "
-"functions and content to support different types of data sources and "
-"audiences.</p> <p><a href=\"www.vitalstrategies.org\">Vital Strategies "
-"</a> is a global public health organization whose goal is to strengthen "
-"public health systems. Vital Strategies partners with governments to "
-"design and implement public health initiatives that bridge the gap "
-"between public health needs and solutions, especially in low- and middle-"
-" income countries. It operates in every region in the world.</p> <p><a "
-"href=\"https://www.bloomberg.org/program/public-health/data-health/\">The"
-" Data for Health Initiative</a> co-funded by Bloomberg Philanthropies and"
-" the Australian government, aims to help governments use data "
-"strategically to target resources and policies that will translate into "
-"saving lives and improved health.</p> <p> <a "
-"href=\"https://www.viderum.com\">Viderum</a> is an open data solutions "
-"provider spun off from Open Knowledge. Viderum provides services and "
-"products for governments, institutions, and local authorities to publish "
-"open data, such as: CKAN hosting, CKAN technical support, custom open "
-"data website and CKAN extension development.</p> </p> "
+" <p>Online access to public health data is generally limited. Most countries "
+"do not have an integrated tool for public users to access their data and "
+"although some have well-developed tools, they often have limited "
+"functionality or complicated interfaces. To make it easier for public health "
+"agencies to publish their data, Vital Strategies, as part of the Data for "
+"Health Initiative, created the Portal Development Platform. The Platform "
+"provides a straightforward process to create applications through four "
+"simple steps: prepare data, load datasets, design and publish applications.</"
+"p> <p>The Platform has features and benefits aimed at simplifying its use "
+"and minimizing the human, physical and monetary resources required for its "
+"operation. Benefits of the Platform include: Developed in opensource "
+"language which makes improvements and customizations free and easy to share. "
+"Focus placed on essential visual and interactive elements that prioritize "
+"public access to data. Ease-of-use for administrators and public users. "
+"Scalability of functions and content to support different types of data "
+"sources and audiences.</p> <p><a href=\"www.vitalstrategies.org\">Vital "
+"Strategies </a> is a global public health organization whose goal is to "
+"strengthen public health systems. Vital Strategies partners with governments "
+"to design and implement public health initiatives that bridge the gap "
+"between public health needs and solutions, especially in low- and middle- "
+"income countries. It operates in every region in the world.</p> <p><a href="
+"\"https://www.bloomberg.org/program/public-health/data-health/\">The Data "
+"for Health Initiative</a> co-funded by Bloomberg Philanthropies and the "
+"Australian government, aims to help governments use data strategically to "
+"target resources and policies that will translate into saving lives and "
+"improved health.</p> <p> <a href=\"https://www.viderum.com\">Viderum</a> is "
+"an open data solutions provider spun off from Open Knowledge. Viderum "
+"provides services and products for governments, institutions, and local "
+"authorities to publish open data, such as: CKAN hosting, CKAN technical "
+"support, custom open data website and CKAN extension development.</p> </p> "
 msgstr ""
-" "
-"<p>在线获取公共卫生数据通常来说都是受限制的。大多数的国家没有一种集成式的工具来让公众获取到公共卫生数据。同时，另一些国家虽然有这样的工具，但是通常仅有简单的几种功能，或者有着复杂的界面而不易使用。为了让公共卫生机构更容易地发布公共卫生数据，卫健策略（Vital"
-" Strategies）依托“数据为健康（Data for Health "
-"Initiative）”项目，创建了数据可视化开发平台。平台通过数据准备、数据上传、设计应用及发布应用四个步骤，使创建数据可视化应用的流程变得简单易操作。</p>"
-" "
-"<p>平台的设计和功能都旨在降低使用的难度，同时最小化在使用过程中所需的人力、物力和财力。平台的优点包括：使用开源程序语言开发，使后续的改进和个性化定制都是免费的而且易于分享；平台主要聚焦于必须的可视化及可交互元素，使公众可以更好地接触到数据。平台无论对于管理员来说还是公众访客来说均易于使用，同时平台的内容和功能可以扩展，来支持不同类型的数据源与受众。</p>"
-" <p><a href=\"www.vitalstrategies.org\">卫健策略（Vital Strategies） "
-"</a>是一个全球性的公共卫生组织，其目标是改善与强化公共卫生系统。卫健策略（Vital "
-"Strategies）与各国政府合作，设计并实施公共卫生项目，为公共卫生的需求提供解决方案，特别是在中低收入国家。卫健策略（Vital "
-"Strategies）的项目在全球各地区均有实施。</p> <p><a "
-"href=\"https://www.bloomberg.org/program/public-health/data-"
-"health/\">数据为健康（The Data for Health Initiative）项目</a> 由布隆博格基金会（Bloomberg "
-"Philanthropies）与澳大利亚政府联合出资，旨在帮助政府更有策略地使用数据，帮助定位资源及编制政策来拯救生命和促进公众健康。</p> "
-"<p> <a href=\"https://www.viderum.com\">Viderum</a>是由Open "
-"Knowledge公司独立出来的开源解决方案供应商。Viderum为包括政府、机构、当地机关在内的客户提供发布开放数据的产品和服务，例如CKAN部署运维、CKAN技术支持、个性化开放数据网站和CKAN扩展开发等。</p>"
-" </p> "
+" <p>在线获取公共卫生数据通常来说都是受限制的。大多数的国家没有一种集成式的工"
+"具来让公众获取到公共卫生数据。同时，另一些国家虽然有这样的工具，但是通常仅有"
+"简单的几种功能，或者有着复杂的界面而不易使用。为了让公共卫生机构更容易地发布"
+"公共卫生数据，卫健策略（Vital Strategies）依托“数据为健康（Data for Health "
+"Initiative）”项目，创建了数据可视化开发平台。平台通过数据准备、数据上传、设计"
+"应用及发布应用四个步骤，使创建数据可视化应用的流程变得简单易操作。</p> <p>平"
+"台的设计和功能都旨在降低使用的难度，同时最小化在使用过程中所需的人力、物力和"
+"财力。平台的优点包括：使用开源程序语言开发，使后续的改进和个性化定制都是免费"
+"的而且易于分享；平台主要聚焦于必须的可视化及可交互元素，使公众可以更好地接触"
+"到数据。平台无论对于管理员来说还是公众访客来说均易于使用，同时平台的内容和功"
+"能可以扩展，来支持不同类型的数据源与受众。</p> <p><a href=\"www."
+"vitalstrategies.org\">卫健策略（Vital Strategies） </a>是一个全球性的公共卫生"
+"组织，其目标是改善与强化公共卫生系统。卫健策略（Vital Strategies）与各国政府"
+"合作，设计并实施公共卫生项目，为公共卫生的需求提供解决方案，特别是在中低收入"
+"国家。卫健策略（Vital Strategies）的项目在全球各地区均有实施。</p> <p><a "
+"href=\"https://www.bloomberg.org/program/public-health/data-health/\">数据为"
+"健康（The Data for Health Initiative）项目</a> 由布隆博格基金会（Bloomberg "
+"Philanthropies）与澳大利亚政府联合出资，旨在帮助政府更有策略地使用数据，帮助"
+"定位资源及编制政策来拯救生命和促进公众健康。</p> <p> <a href=\"https://www."
+"viderum.com\">Viderum</a>是由Open Knowledge公司独立出来的开源解决方案供应商。"
+"Viderum为包括政府、机构、当地机关在内的客户提供发布开放数据的产品和服务，例如"
+"CKAN部署运维、CKAN技术支持、个性化开放数据网站和CKAN扩展开发等。</p> </p> "
 
 #: ckanext/querytool/templates/macros/form.html:126
 #, python-format
 msgid ""
-"You can use <a href=\"#markdown\" title=\"Markdown quick reference\" "
-"data-target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-"
-"html=\"true\">Markdown formatting</a> here"
+"You can use <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
+"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
+"\">Markdown formatting</a> here"
 msgstr ""
-"您可以在此处使用 <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
-"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-"
-"html=\"true\">Markdown 格式</a>"
+"您可以在此处使用 <a href=\"#markdown\" title=\"Markdown quick reference\" "
+"data-target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html="
+"\"true\">Markdown 格式</a>"
 
 #: ckanext/querytool/templates/macros/form.html:235
 msgid "Remove"
@@ -1007,13 +1027,15 @@ msgstr "其它"
 
 #: ckanext/querytool/templates/querytool/admin/base_list.html:30
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
+#, fuzzy
 msgid "Main"
-msgstr "主要"
+msgstr "主应用"
 
 #: ckanext/querytool/templates/querytool/admin/base_list.html:36
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
+#, fuzzy
 msgid "Related"
-msgstr "相关"
+msgstr "从属应用"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:31
 msgid "Basic info"
@@ -1024,8 +1046,9 @@ msgid "Save As"
 msgstr "名称"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
+#, fuzzy
 msgid "Title of the query tool"
-msgstr "查询工具标题"
+msgstr "查询工具名称"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
 msgid "URL"
@@ -1036,20 +1059,24 @@ msgid "eg. my-querytool"
 msgstr "例如：我的查询工具"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
+#, fuzzy
 msgid "Display Title and Description"
-msgstr "显示的标题和描述"
+msgstr "标题和描述"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
+#, fuzzy
 msgid "eg. Some useful description about the query tool"
-msgstr "例如：关于查询工具的一些有用描述"
+msgstr "例如：关于查询工具的一些描述"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
+#, fuzzy
 msgid "Public Folder"
-msgstr "公用文件夹"
+msgstr "应用所属分组"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:57
+#, fuzzy
 msgid "Organization"
-msgstr "组织"
+msgstr "应用所属组织"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:67
 msgid "Settings"
@@ -1060,8 +1087,9 @@ msgid "Application Type"
 msgstr "应用类型"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:101
+#, fuzzy
 msgid "Add Related Application"
-msgstr "添加相关应用"
+msgstr "添加从属应用"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:105
 msgid "Select dataset and resource"
@@ -1162,8 +1190,9 @@ msgid "View"
 msgstr "预览"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
+#, fuzzy
 msgid "Are you sure you want to delete this Query?"
-msgstr "您确定要删除这个查询工具吗？"
+msgstr "您确定要删除此查询吗？"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/stages.html:9
 msgid "Application data"
@@ -1211,12 +1240,14 @@ msgid "Embed"
 msgstr "嵌入"
 
 #: ckanext/querytool/templates/querytool/public/read.html:274
+#, fuzzy
 msgid "Embed query tool view"
-msgstr "嵌入查询工具视图"
+msgstr "在网站中嵌入可视化视图"
 
 #: ckanext/querytool/templates/querytool/public/read.html:277
+#, fuzzy
 msgid "You can copy and paste the embed code"
-msgstr "您可以复制并粘贴嵌入代码"
+msgstr "您可以复制并粘贴如下代码"
 
 #: ckanext/querytool/templates/querytool/public/read.html:280
 msgid "Width"
@@ -1235,8 +1266,17 @@ msgid "Language"
 msgstr "语言"
 
 #: ckanext/querytool/templates/snippets/language_selector.html:11
+#, fuzzy
 msgid "Go"
-msgstr "去"
+msgstr "Go"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:93
+msgid "Single color"
+msgstr "单色"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
+msgid "Diverging"
+msgstr "发散"
 
 #~ msgid "Stacked area"
 #~ msgstr "堆叠区域"
@@ -1249,7 +1289,6 @@ msgstr "去"
 
 #~ msgid "Light"
 #~ msgstr "浅色"
-
 #~ msgid "Pastel"
 #~ msgstr "淡色"
 
@@ -1282,9 +1321,6 @@ msgstr "去"
 
 #~ msgid "Muted"
 #~ msgstr "柔和"
-
-#~ msgid "Diverging"
-#~ msgstr "离散"
 
 #~ msgid "Dolar e.g 2000$"
 #~ msgstr "美元（例如2000$）"
@@ -1348,4 +1384,3 @@ msgstr "去"
 
 #~ msgid "Dataset name"
 #~ msgstr "数据集名称"
-

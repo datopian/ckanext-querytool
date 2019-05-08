@@ -6,7 +6,8 @@ list:
 
 
 assets:
-	npx gulp less
+	npx gulp less &&\
+        npm run webpack
 
 docker:
 	docker pull openknowledge/ckan-base:2.7 && \
