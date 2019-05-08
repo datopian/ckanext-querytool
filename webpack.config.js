@@ -6,7 +6,8 @@ module.exports = {
   devtool: "source-map",
   context: path.resolve(__dirname),
 	entry: {
-    public_query: `${assetPath}/public_query.js`,
+    "public_query": `${assetPath}/public_query.js`,
+    "visualizations_settings": `${assetPath}/visualizations_settings.js`,
     "modules/viz-preview": `${assetPath}/modules/viz-preview.js`,
     "modules/table-module": `${assetPath}/modules/table-module.js`
   },
