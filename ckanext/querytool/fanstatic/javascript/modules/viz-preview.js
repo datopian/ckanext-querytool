@@ -31,6 +31,7 @@ Options:
 
 */
 'use strict';
+require('@babel/polyfill');
 ckan.module('querytool-viz-preview', function() {
     var api = {
         get: function(action, params) {

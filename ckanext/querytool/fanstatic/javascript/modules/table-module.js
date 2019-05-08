@@ -6,6 +6,7 @@ Options:
 
 */
 "use strict";
+require('@babel/polyfill');
 ckan.module('querytool-table', function() {
 
     // Languages for datables

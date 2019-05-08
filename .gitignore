@@ -48,5 +48,5 @@ docs/_build/
 package-lock.json
 selenium-debug.log
 
-#Vim
+# Vim
 .*.sw*
