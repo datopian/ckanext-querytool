@@ -4,6 +4,26 @@
 
 A CKAN extension to create visualizations based on the uploaded datasets.
 
+## Javascript and Webpack
+### Webpack and Babel config
+`.babelrc` -- babel config (see https://babeljs.io/docs/en/configuration#babelrc for config options)
+`webpack.config.js` -- webpack config (see https://webpack.js.org/configuration/)
+
+### Javascript files
+Source files for the querytool live in:
+`ckanext/querytool/fanstatic/javascript`
+
+Distribution files (files served via our extension) are compiled via webpack and live in:
+`ckanext/querytool/fanstatic/javascript/dist`
+*NOTE*: Make sure to reference `/dist/` files, not the source files!
+
+Vendor files (third party libraries) live in:
+`ckanext/querytool/fanstatic/javascript`
+
+### Updating source files
+Source files can be changed as needed. After updating run:
+`npm install && npm run webpack` which will build the transpiled / minified resources and copy them to the `/dist` folder in the host machine.
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
