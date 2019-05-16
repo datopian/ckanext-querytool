@@ -50,3 +50,6 @@ selenium-debug.log
 
 # Vim
 .*.sw*
+
+## Git
+.gitattributes
