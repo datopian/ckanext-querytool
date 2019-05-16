@@ -302,7 +302,9 @@
   });
 
   function useTitleAsHtml(titleObj) {
-    try {
+		const ua = window.navigator.userAgent;
+		const isIE11 = (ua.indexOf("Trident/7.0") > -1);
+    if (!isIE11) {
       if (titleObj.html() !== '') {
         var parentSvg = titleObj.parent();
         var ns = 'http://www.w3.org/2000/svg';
@@ -322,8 +324,27 @@
         parentSvg.append(foreignObject);
         titleObj.html('');
       }
-    } catch (e) {
-      return '';
-    }
+    } else {
+      const parent = titleObj && $(titleObj).closest('div');
+      if (parent && $(parent).find('.title-splitted').length === 0) {
+        const div = document.createElement('div');
+        const title = titleObj[0].textContent;
+        const trimmedTitle = $.trim(title.replace(/[\t\n]+/g, ' '));
+  
+        if ($(window).width() < 980) {
+          div.setAttribute('height', 28);
+        } else {
+          div.setAttribute('height', 36);
+        }   
+  
+        div.setAttribute('width', $(parent).width());
+        div.setAttribute('class', 'c3-title title-splitted');
+        div.setAttribute('title', trimmedTitle);
+ div.textContent = title; //titleObj.textContent; 
+  
+        $(parent).prepend(div);
+        titleObj[0].textContent = '';
+		}	
   }
+}
 })($);
