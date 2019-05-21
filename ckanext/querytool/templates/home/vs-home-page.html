@@ -1,47 +1,75 @@
-<div role="main">
+<div role="main" id="vs-home-page">
   <div class="container">
     <div class="row row1">
       <div class="span6 col1">
-          {% block platform %}
-          <div class="box homepage-box">
-            <h1>{{ _('Portal Development Platform') }}</h1>
-            <span>
-               {{ _('The Portal Development Platform allows public health agencies to design applications that let the public explore and access a diverse range of health data sources. The Platform has a simple interface that minimizes the time dedicated to creating applications while providing the essential visual and interactive elements for public access to data. It was developed on opensource license with minimal technological requirements, minimizing the resources needed for its use and maintenance.') }}
-            </span>
-          </div>
-          {% endblock %}
+        {% block platform %}
+        <div class="box homepage-box">
+          <h1>{{ _('Portal Development Platform') }}</h1>
+          <span>
+            {{ _('The Portal Development Platform allows public health agencies
+            to design applications that let the public explore and access a
+            diverse range of health data sources. The Platform has a simple
+            interface that minimizes the time dedicated to creating applications
+            while providing the essential visual and interactive elements for
+            public access to data. It was developed on opensource license with
+            minimal technological requirements, minimizing the resources needed
+            for its use and maintenance.') }}
+          </span>
+        </div>
+        {% endblock %}
       </div>
       <div class="span6 col2">
-          {% block logos %}
-            <img src="/base/images/vs-logo-blue.jpg" alt="Vital Strategies" />
-          {% endblock %}
+        {% block logos %} {% if g.site_logo %}
+        <a class="logo" href="{{ h.url_for('home.index') }}"
+          ><img
+            src="{{ h.url_for_static_or_external(g.site_logo) }}"
+            alt="{
+                  { g.site_title }}"
+            title="{{ g.site_title }}"
+        /></a>
+        {% else %}
+        <img src="/base/images/vs-logo-blue.jpg" alt="Vital Strategies" />
+        {% endif %} {% endblock %}
       </div>
     </div>
-      {% block instructions %}
-      <div class="box homepage-box">
-          <h1>{{ _('How to use the Platform') }}</h1>
-         <div>
-               <p>{{_('Four main steps are necessary to successfully design an application, with the first one taking place outside the Platform.')}}</p>
-               <ul class="list-group how-to-use">
-                  <li class="list-group-item">
-                      <b>{{_('Step 1 - Prepare data')}}</b> <br/>
-                     {{_('Before uploading the data into the Platform, it needs to be cleaned, validated and, depending on its source, transformed into a tabular dataset.')}}
-                  </li>
-                  <li class="list-group-item">
-                      <b>{{_('Step 2 – Load datasets')}}</b> <br/>
-                      {% trans %}In the <i>Load datasets</i> tab, the prepared data is uploaded through familiar menus and metadata is filled to help identify and differentiate the datasets.{% endtrans %}
-                  </li>
-                  <li class="list-group-item">
-                      <b>{{_('Step 3 – Design application')}}</b> <br/>
-                      {% trans %}In the <i>Design application</i> tab, drop-down menus are used to add data-driven visualizations (charts, maps and tables), support elements (text and images) and interactive elements (filters, download options, sharing options). These elements can be combined and arranged in different ways to provide a user-friendly experience for exploring public health data.{% endtrans %}
-                  </li>
-                  <li class="list-group-item">
-                      <b>{{_('Step 4 - Publish application')}}</b> <br/>
-                      {{_('The application becomes available for public use and can be embedded in a designated webpage.')}}
-                  </li>
-               </ul>
-            </div>
+    {% block instructions %}
+    <div class="box homepage-box">
+      <h1>{{ _('How to use the Platform') }}</h1>
+      <div>
+        <p>
+          {{_('Four main steps are necessary to successfully design an
+          application, with the first one taking place outside the Platform.')}}
+        </p>
+        <ul class="list-group how-to-use">
+          <li class="list-group-item">
+            <b>{{_('Step 1 - Prepare data')}}</b> <br />
+            {{_('Before uploading the data into the Platform, it needs to be
+            cleaned, validated and, depending on its source, transformed into a
+            tabular dataset.')}}
+          </li>
+          <li class="list-group-item">
+            <b>{{_('Step 2 – Load datasets')}}</b> <br />
+            {% trans %}In the <i>Load datasets</i> tab, the prepared data is
+            uploaded through familiar menus and metadata is filled to help
+            identify and differentiate the datasets.{% endtrans %}
+          </li>
+          <li class="list-group-item">
+            <b>{{_('Step 3 – Design application')}}</b> <br />
+            {% trans %}In the <i>Design application</i> tab, drop-down menus are
+            used to add data-driven visualizations (charts, maps and tables),
+            support elements (text and images) and interactive elements
+            (filters, download options, sharing options). These elements can be
+            combined and arranged in different ways to provide a user-friendly
+            experience for exploring public health data.{% endtrans %}
+          </li>
+          <li class="list-group-item">
+            <b>{{_('Step 4 - Publish application')}}</b> <br />
+            {{_('The application becomes available for public use and can be
+            embedded in a designated webpage.')}}
+          </li>
+        </ul>
       </div>
-      {% endblock %}
+    </div>
+    {% endblock %}
   </div>
 </div>

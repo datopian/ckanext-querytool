@@ -9,3 +9,5 @@
 {{ super() }}
       {% resource 'querytool/css/main.css' %}
 {% endblock %}
+
+{% block bodytag %} {{ super() }} id="vs-page"{% endblock %}
