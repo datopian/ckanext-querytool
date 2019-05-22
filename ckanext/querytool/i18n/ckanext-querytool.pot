@@ -7,9 +7,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: ckanext-querytool 1.2a62\n"
+"Project-Id-Version: ckanext-querytool 1.2a64\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-04-21 15:00+0600\n"
+"POT-Creation-Date: 2019-05-22 16:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -428,6 +428,14 @@ msgstr ""
 msgid "Color"
 msgstr ""
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:93
+msgid "Single color"
+msgstr ""
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
+msgid "Diverging"
+msgstr ""
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:115
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:17
 msgid "Title"
@@ -608,6 +616,18 @@ msgstr ""
 msgid "Select type"
 msgstr ""
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
+msgid "Maximum"
+msgstr ""
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
+msgid "Average"
+msgstr ""
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
+msgid "Minimum"
+msgstr ""
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:543
 msgid "Dynamic Reference Factor"
 msgstr ""
@@ -752,42 +772,42 @@ msgid ""
 "resources needed for its use and maintenance."
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:22
+#: ckanext/querytool/templates/home/vs-home-page.html:37
 msgid "How to use the Platform"
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:24
+#: ckanext/querytool/templates/home/vs-home-page.html:40
 msgid ""
 "Four main steps are necessary to successfully design an application, with the"
 " first one taking place outside the Platform."
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:27
+#: ckanext/querytool/templates/home/vs-home-page.html:45
 msgid "Step 1 - Prepare data"
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:28
+#: ckanext/querytool/templates/home/vs-home-page.html:46
 msgid ""
 "Before uploading the data into the Platform, it needs to be cleaned, "
 "validated and, depending on its source, transformed into a tabular dataset."
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:31
+#: ckanext/querytool/templates/home/vs-home-page.html:51
 msgid "Step 2 – Load datasets"
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:32
+#: ckanext/querytool/templates/home/vs-home-page.html:52
 msgid ""
 "In the <i>Load datasets</i> tab, the prepared data is uploaded through "
 "familiar menus and metadata is filled to help identify and differentiate the "
 "datasets."
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:35
+#: ckanext/querytool/templates/home/vs-home-page.html:57
 msgid "Step 3 – Design application"
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:36
+#: ckanext/querytool/templates/home/vs-home-page.html:58
 msgid ""
 "In the <i>Design application</i> tab, drop-down menus are used to add data-"
 "driven visualizations (charts, maps and tables), support elements (text and "
@@ -796,11 +816,11 @@ msgid ""
 "provide a user-friendly experience for exploring public health data."
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:39
+#: ckanext/querytool/templates/home/vs-home-page.html:66
 msgid "Step 4 - Publish application"
 msgstr ""
 
-#: ckanext/querytool/templates/home/vs-home-page.html:40
+#: ckanext/querytool/templates/home/vs-home-page.html:67
 msgid ""
 "The application becomes available for public use and can be embedded in a "
 "designated webpage."

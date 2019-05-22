@@ -8,17 +8,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2019-04-21 15:00+0600\n"
+"POT-Creation-Date: 2019-05-22 16:38+0000\n"
 "PO-Revision-Date: 2019-04-25 10:04-0400\n"
 "Last-Translator: \n"
-"Language-Team: es <LL@li.org>\n"
 "Language: es\n"
+"Language-Team: es <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.3.4\n"
-"X-Generator: Poedit 2.2\n"
 
 #: ckanext/querytool/helpers.py:131
 msgid "Line"
@@ -270,7 +269,6 @@ msgstr "No se encontró la aplicación"
 msgid "Application and visualizations were removed successfully."
 msgstr "La aplicación y las visualizaciones se eliminaron correctamente."
 
-# Why does this one have a period at the end but the other one no?
 #: ckanext/querytool/controllers/querytool.py:157
 #: ckanext/querytool/controllers/querytool.py:306
 #: ckanext/querytool/controllers/querytool.py:658
@@ -291,7 +289,6 @@ msgstr ""
 msgid "Data Successfully updated."
 msgstr "Datos actualizados correctamente."
 
-# Sucessfully should not be capitalized
 #: ckanext/querytool/controllers/querytool.py:564
 msgid "Visualizations Successfully updated."
 msgstr "Visualizaciones actualizadas correctamente."
@@ -321,7 +318,6 @@ msgstr "Recurso sin nombre"
 msgid "No columns retrieved."
 msgstr "No se recuperaron columnas."
 
-# Grammar error: "occurred"
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:476
 #: ckanext/querytool/fanstatic/javascript/querytool_data.js:481
 msgid "An error occured while getting columns."
@@ -353,7 +349,6 @@ msgstr "No se pudo crear la gráfica."
 msgid "format: must be one of %s"
 msgstr "formato debe estar en %s"
 
-# Update original string: "This application name already exists. Choose another one."
 #: ckanext/querytool/logic/validators.py:21
 msgid "This querytool name already exists. Choose another one."
 msgstr "El nombre de la aplicación ya existe. Elija otro nombre."
@@ -436,6 +431,16 @@ msgstr "Tamaño"
 msgid "Color"
 msgstr "Color"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:93
+#, fuzzy
+#| msgid "Single Color"
+msgid "Single color"
+msgstr "Color único"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
+msgid "Diverging"
+msgstr "Divergente"
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:115
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:17
 msgid "Title"
@@ -473,13 +478,13 @@ msgstr "minúscula"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:146
 #, python-format
 msgid ""
-"You can use <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
-"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
-"\"Templates quick reference\">Templates</a> here"
+"You can use <a href=\"#templates\" title=\"\" data-target=\"popover\" "
+"data-content=\"%(template_tooltip)s\" data-html=\"true\" data-original-"
+"title=\"Templates quick reference\">Templates</a> here"
 msgstr ""
-"Puedes usar <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
-"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
-"\"Templates quick reference\">Templates</a> aquí"
+"Puedes usar <a href=\"#templates\" title=\"\" data-target=\"popover\" "
+"data-content=\"%(template_tooltip)s\" data-html=\"true\" data-original-"
+"title=\"Templates quick reference\">Templates</a> aquí"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:159
 msgid "X-axis"
@@ -619,6 +624,18 @@ msgstr "Tipo de referencia dinámica"
 msgid "Select type"
 msgstr "Seleccionar tipo"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
+msgid "Maximum"
+msgstr "Máximo"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
+msgid "Average"
+msgstr "Promedio"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:526
+msgid "Minimum"
+msgstr "Mínimo"
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:543
 msgid "Dynamic Reference Factor"
 msgstr "Factor para la referencia dinámica"
@@ -669,7 +686,6 @@ msgstr "Espaciado superior de la gráfica"
 msgid "Chart Padding bottom"
 msgstr "Espaciado inferior de la gráfica"
 
-# Why is one capitalzed and the other is not? I think we should be consistent.
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:25
 msgid "Default Value"
 msgstr "Valor por defecto"
@@ -757,170 +773,176 @@ msgstr "Plataforma para Desarrollar Portales"
 msgid ""
 "The Portal Development Platform allows public health agencies to design "
 "applications that let the public explore and access a diverse range of "
-"health data sources. The Platform has a simple interface that minimizes the "
-"time dedicated to creating applications while providing the essential visual "
-"and interactive elements for public access to data. It was developed on "
-"opensource license with minimal technological requirements, minimizing the "
-"resources needed for its use and maintenance."
+"health data sources. The Platform has a simple interface that minimizes "
+"the time dedicated to creating applications while providing the essential"
+" visual and interactive elements for public access to data. It was "
+"developed on opensource license with minimal technological requirements, "
+"minimizing the resources needed for its use and maintenance."
 msgstr ""
 "La Plataforma para Desarrollar Portales permite a las agencias de salud "
-"pública diseñar aplicaciones que permitan al público explorar y acceder a "
-"una amplia gama de fuentes de datos de salud. La plataforma tiene una "
+"pública diseñar aplicaciones que permitan al público explorar y acceder a"
+" una amplia gama de fuentes de datos de salud. La plataforma tiene una "
 "interfaz simple que minimiza el tiempo dedicado a la creación de "
-"aplicaciones mientras que proporciona los elementos visuales e interactivos "
-"esenciales para el acceso público a los datos. Fue desarrollada en licencia "
-"de código abierto con requisitos tecnológicos mínimos, minimizando los "
-"recursos necesarios para su uso y mantenimiento."
+"aplicaciones mientras que proporciona los elementos visuales e "
+"interactivos esenciales para el acceso público a los datos. Fue "
+"desarrollada en licencia de código abierto con requisitos tecnológicos "
+"mínimos, minimizando los recursos necesarios para su uso y mantenimiento."
 
-#: ckanext/querytool/templates/home/vs-home-page.html:22
+#: ckanext/querytool/templates/home/vs-home-page.html:37
 msgid "How to use the Platform"
 msgstr "Cómo usar la Plataforma"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:24
+#: ckanext/querytool/templates/home/vs-home-page.html:40
 msgid ""
-"Four main steps are necessary to successfully design an application, with "
-"the first one taking place outside the Platform."
+"Four main steps are necessary to successfully design an application, with"
+" the first one taking place outside the Platform."
 msgstr ""
-"Se necesitan cuatro pasos principales para diseñar con éxito una aplicación, "
-"el primero se lleva a cabo fuera de la Plataforma."
+"Se necesitan cuatro pasos principales para diseñar con éxito una "
+"aplicación, el primero se lleva a cabo fuera de la Plataforma."
 
-#: ckanext/querytool/templates/home/vs-home-page.html:27
+#: ckanext/querytool/templates/home/vs-home-page.html:45
 msgid "Step 1 - Prepare data"
 msgstr "Paso 1 – Preparar datos"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:28
+#: ckanext/querytool/templates/home/vs-home-page.html:46
 msgid ""
 "Before uploading the data into the Platform, it needs to be cleaned, "
-"validated and, depending on its source, transformed into a tabular dataset."
+"validated and, depending on its source, transformed into a tabular "
+"dataset."
 msgstr ""
 "Antes de cargar los datos en la Plataforma, es necesario limpiarlos, "
 "validarlos y, según su fuente, transformarlos en un conjunto de datos "
 "tabulares."
 
-#: ckanext/querytool/templates/home/vs-home-page.html:31
+#: ckanext/querytool/templates/home/vs-home-page.html:51
 msgid "Step 2 – Load datasets"
 msgstr "Paso 2 – Cargar datos"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:32
+#: ckanext/querytool/templates/home/vs-home-page.html:52
 msgid ""
 "In the <i>Load datasets</i> tab, the prepared data is uploaded through "
-"familiar menus and metadata is filled to help identify and differentiate the "
-"datasets."
+"familiar menus and metadata is filled to help identify and differentiate "
+"the datasets."
 msgstr ""
-"En la pestaña <i>Cargar datos</i>, los datos preparados se cargan a través "
-"de menús familiares y los metadatos se completan para ayudar a identificar y "
-"diferenciar los conjuntos de datos."
+"En la pestaña <i>Cargar datos</i>, los datos preparados se cargan a "
+"través de menús familiares y los metadatos se completan para ayudar a "
+"identificar y diferenciar los conjuntos de datos."
 
-#: ckanext/querytool/templates/home/vs-home-page.html:35
+#: ckanext/querytool/templates/home/vs-home-page.html:57
 msgid "Step 3 – Design application"
 msgstr "Paso 3 – Diseñar aplicación"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:36
+#: ckanext/querytool/templates/home/vs-home-page.html:58
 msgid ""
-"In the <i>Design application</i> tab, drop-down menus are used to add data-"
-"driven visualizations (charts, maps and tables), support elements (text and "
-"images) and interactive elements (filters, download options, sharing "
-"options). These elements can be combined and arranged in different ways to "
-"provide a user-friendly experience for exploring public health data."
+"In the <i>Design application</i> tab, drop-down menus are used to add "
+"data-driven visualizations (charts, maps and tables), support elements "
+"(text and images) and interactive elements (filters, download options, "
+"sharing options). These elements can be combined and arranged in "
+"different ways to provide a user-friendly experience for exploring public"
+" health data."
 msgstr ""
 "En <i>Diseñar aplicaciones</i>, los menús desplegables se utilizan para "
-"agregar visualizaciones relacionadas a los datos (gráficos, mapas y tablas), "
-"elementos de soporte (texto e imágenes) y elementos interactivos (filtros, "
-"opciones de descarga, opciones de uso compartido). Estos elementos se pueden "
-"combinar y organizar de diferentes maneras para proporcionar una experiencia "
-"amigable para la exploración de datos de salud pública."
+"agregar visualizaciones relacionadas a los datos (gráficos, mapas y "
+"tablas), elementos de soporte (texto e imágenes) y elementos interactivos"
+" (filtros, opciones de descarga, opciones de uso compartido). Estos "
+"elementos se pueden combinar y organizar de diferentes maneras para "
+"proporcionar una experiencia amigable para la exploración de datos de "
+"salud pública."
 
-#: ckanext/querytool/templates/home/vs-home-page.html:39
+#: ckanext/querytool/templates/home/vs-home-page.html:66
 msgid "Step 4 - Publish application"
 msgstr "Paso 4 – Publicar aplicación"
 
-#: ckanext/querytool/templates/home/vs-home-page.html:40
+#: ckanext/querytool/templates/home/vs-home-page.html:67
 msgid ""
-"The application becomes available for public use and can be embedded in a "
-"designated webpage."
+"The application becomes available for public use and can be embedded in a"
+" designated webpage."
 msgstr ""
-"La aplicación se hace disponible para uso público y puede ser incrustada en "
-"la página web designada."
+"La aplicación se hace disponible para uso público y puede ser incrustada "
+"en la página web designada."
 
 #: ckanext/querytool/templates/home/snippets/about_text.html:1
 msgid ""
-" <p>Online access to public health data is generally limited. Most countries "
-"do not have an integrated tool for public users to access their data and "
-"although some have well-developed tools, they often have limited "
-"functionality or complicated interfaces. To make it easier for public health "
-"agencies to publish their data, Vital Strategies, as part of the Data for "
-"Health Initiative, created the Portal Development Platform. The Platform "
-"provides a straightforward process to create applications through four "
-"simple steps: prepare data, load datasets, design and publish applications.</"
-"p> <p>The Platform has features and benefits aimed at simplifying its use "
-"and minimizing the human, physical and monetary resources required for its "
-"operation. Benefits of the Platform include: Developed in opensource "
-"language which makes improvements and customizations free and easy to share. "
-"Focus placed on essential visual and interactive elements that prioritize "
-"public access to data. Ease-of-use for administrators and public users. "
-"Scalability of functions and content to support different types of data "
-"sources and audiences.</p> <p><a href=\"www.vitalstrategies.org\">Vital "
-"Strategies </a> is a global public health organization whose goal is to "
-"strengthen public health systems. Vital Strategies partners with governments "
-"to design and implement public health initiatives that bridge the gap "
-"between public health needs and solutions, especially in low- and middle- "
-"income countries. It operates in every region in the world.</p> <p><a href="
-"\"https://www.bloomberg.org/program/public-health/data-health/\">The Data "
-"for Health Initiative</a> co-funded by Bloomberg Philanthropies and the "
-"Australian government, aims to help governments use data strategically to "
-"target resources and policies that will translate into saving lives and "
-"improved health.</p> <p> <a href=\"https://www.viderum.com\">Viderum</a> is "
-"an open data solutions provider spun off from Open Knowledge. Viderum "
-"provides services and products for governments, institutions, and local "
-"authorities to publish open data, such as: CKAN hosting, CKAN technical "
-"support, custom open data website and CKAN extension development.</p> </p> "
+" <p>Online access to public health data is generally limited. Most "
+"countries do not have an integrated tool for public users to access their"
+" data and although some have well-developed tools, they often have "
+"limited functionality or complicated interfaces. To make it easier for "
+"public health agencies to publish their data, Vital Strategies, as part "
+"of the Data for Health Initiative, created the Portal Development "
+"Platform. The Platform provides a straightforward process to create "
+"applications through four simple steps: prepare data, load datasets, "
+"design and publish applications.</p> <p>The Platform has features and "
+"benefits aimed at simplifying its use and minimizing the human, physical "
+"and monetary resources required for its operation. Benefits of the "
+"Platform include: Developed in opensource language which makes "
+"improvements and customizations free and easy to share. Focus placed on "
+"essential visual and interactive elements that prioritize public access "
+"to data. Ease-of-use for administrators and public users. Scalability of "
+"functions and content to support different types of data sources and "
+"audiences.</p> <p><a href=\"www.vitalstrategies.org\">Vital Strategies "
+"</a> is a global public health organization whose goal is to strengthen "
+"public health systems. Vital Strategies partners with governments to "
+"design and implement public health initiatives that bridge the gap "
+"between public health needs and solutions, especially in low- and middle-"
+" income countries. It operates in every region in the world.</p> <p><a "
+"href=\"https://www.bloomberg.org/program/public-health/data-health/\">The"
+" Data for Health Initiative</a> co-funded by Bloomberg Philanthropies and"
+" the Australian government, aims to help governments use data "
+"strategically to target resources and policies that will translate into "
+"saving lives and improved health.</p> <p> <a "
+"href=\"https://www.viderum.com\">Viderum</a> is an open data solutions "
+"provider spun off from Open Knowledge. Viderum provides services and "
+"products for governments, institutions, and local authorities to publish "
+"open data, such as: CKAN hosting, CKAN technical support, custom open "
+"data website and CKAN extension development.</p> </p> "
 msgstr ""
-" <p>El acceso en línea a datos de salud pública es generalmente limitado. La "
-"mayoría de los países no tienen una herramienta integrada para que los "
-"usuarios públicos accedan a sus datos y, aunque algunos tienen herramientas "
-"bien desarrolladas, a menudo tienen una funcionalidad limitada o interfaces "
-"complicadas. Para facilitar que las agencias de salud pública publiquen sus "
-"datos, Vital Strategies, como parte de la Iniciativa de Datos para la Salud, "
-"creó la Plataforma para Desarrollar Portales. La plataforma proporciona un "
-"proceso directo para crear aplicaciones a través de cuatro pasos simples: "
-"preparar datos, cargar conjuntos de datos, diseñar y publicar aplicaciones.</"
-"p> <p>La Plataforma tiene características y beneficios destinados a "
-"simplificar su uso y minimizar los recursos humanos, físicos y monetarios "
-"necesarios para su funcionamiento. Los beneficios de la Plataforma incluyen: "
-"desarrollada en lenguaje de código abierto que hace que las mejoras y "
-"personalizaciones sean gratuitas y fáciles de compartir; enfoque en los "
-"elementos visuales e interactivos esenciales que priorizan el acceso público "
-"a los datos; facilidad de uso para administradores y usuarios públicos; "
-"escalabilidad de funciones y contenido para admitir diferentes tipos de "
-"fuentes de datos y audiencias.</p> <p><a href=\"www.vitalstrategies.org"
-"\">Vital Strategies </a> es una organización mundial de salud pública cuyo "
-"objetivo es fortalecer los sistemas de salud pública. Vital Strategies se "
-"asocia con los gobiernos para diseñar e implementar iniciativas de salud "
-"pública que llenan la brecha entre las necesidades y soluciones de salud "
-"pública, especialmente en países de ingresos bajos y medianos. Opera en "
-"todas las regiones del mundo.</p> <p><a href=\"https://www.bloomberg.org/"
-"program/public-health/data-health/\">La Iniciativa Data for Health </a> "
-"cofinanciada por Bloomberg Philanthropies y el gobierno australiano, tiene "
-"como objetivo ayudar a los gobiernos a utilizar los datos estratégicamente "
-"para establecer objetivos, recursos y políticas que se traducirán en salvar "
-"vidas y mejorar la salud.</p> <p> <a href=\"https://www.viderum.com"
-"\">Viderum</a> es un proveedor de soluciones de datos abierto derivado de "
-"Open Knowledge. Viderum proporciona servicios y productos para que los "
-"gobiernos, las instituciones y las autoridades locales publiquen datos "
-"abiertos, tales como: alojamiento de CKAN, soporte técnico de CKAN, sitio "
-"web de datos abiertos personalizado y desarrollo de extensiones de CKAN.</p> "
-"</p> "
+" <p>El acceso en línea a datos de salud pública es generalmente limitado."
+" La mayoría de los países no tienen una herramienta integrada para que "
+"los usuarios públicos accedan a sus datos y, aunque algunos tienen "
+"herramientas bien desarrolladas, a menudo tienen una funcionalidad "
+"limitada o interfaces complicadas. Para facilitar que las agencias de "
+"salud pública publiquen sus datos, Vital Strategies, como parte de la "
+"Iniciativa de Datos para la Salud, creó la Plataforma para Desarrollar "
+"Portales. La plataforma proporciona un proceso directo para crear "
+"aplicaciones a través de cuatro pasos simples: preparar datos, cargar "
+"conjuntos de datos, diseñar y publicar aplicaciones.</p> <p>La Plataforma"
+" tiene características y beneficios destinados a simplificar su uso y "
+"minimizar los recursos humanos, físicos y monetarios necesarios para su "
+"funcionamiento. Los beneficios de la Plataforma incluyen: desarrollada en"
+" lenguaje de código abierto que hace que las mejoras y personalizaciones "
+"sean gratuitas y fáciles de compartir; enfoque en los elementos visuales "
+"e interactivos esenciales que priorizan el acceso público a los datos; "
+"facilidad de uso para administradores y usuarios públicos; escalabilidad "
+"de funciones y contenido para admitir diferentes tipos de fuentes de "
+"datos y audiencias.</p> <p><a href=\"www.vitalstrategies.org\">Vital "
+"Strategies </a> es una organización mundial de salud pública cuyo "
+"objetivo es fortalecer los sistemas de salud pública. Vital Strategies se"
+" asocia con los gobiernos para diseñar e implementar iniciativas de salud"
+" pública que llenan la brecha entre las necesidades y soluciones de salud"
+" pública, especialmente en países de ingresos bajos y medianos. Opera en "
+"todas las regiones del mundo.</p> <p><a "
+"href=\"https://www.bloomberg.org/program/public-health/data-health/\">La "
+"Iniciativa Data for Health </a> cofinanciada por Bloomberg Philanthropies"
+" y el gobierno australiano, tiene como objetivo ayudar a los gobiernos a "
+"utilizar los datos estratégicamente para establecer objetivos, recursos y"
+" políticas que se traducirán en salvar vidas y mejorar la salud.</p> <p> "
+"<a href=\"https://www.viderum.com\">Viderum</a> es un proveedor de "
+"soluciones de datos abierto derivado de Open Knowledge. Viderum "
+"proporciona servicios y productos para que los gobiernos, las "
+"instituciones y las autoridades locales publiquen datos abiertos, tales "
+"como: alojamiento de CKAN, soporte técnico de CKAN, sitio web de datos "
+"abiertos personalizado y desarrollo de extensiones de CKAN.</p> </p> "
 
 #: ckanext/querytool/templates/macros/form.html:126
 #, python-format
 msgid ""
-"You can use <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
-"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
-"\">Markdown formatting</a> here"
+"You can use <a href=\"#markdown\" title=\"Markdown quick reference\" "
+"data-target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-"
+"html=\"true\">Markdown formatting</a> here"
 msgstr ""
-"Puedes usar <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
-"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true\"> "
-"formato Markdown </a> aquí"
+"Puedes usar <a href=\"#markdown\" title=\"Markdown quick reference\" "
+"data-target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-"
+"html=\"true\"> formato Markdown </a> aquí"
 
 #: ckanext/querytool/templates/macros/form.html:235
 msgid "Remove"
@@ -1012,7 +1034,6 @@ msgstr "Grupos de las aplicaciones"
 msgid "Manage Visualizations"
 msgstr "Administrar visualizaciones"
 
-# Update original string
 #: ckanext/querytool/templates/querytool/admin/base_groups.html:6
 #: ckanext/querytool/templates/querytool/admin/base_list.html:4
 msgid "Queries"
@@ -1057,7 +1078,6 @@ msgstr "Título de la aplicación"
 msgid "URL"
 msgstr "URL"
 
-# Update original string
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
 msgid "eg. my-querytool"
 msgstr "ej. mi-aplicación"
@@ -1066,7 +1086,6 @@ msgstr "ej. mi-aplicación"
 msgid "Display Title and Description"
 msgstr "Título y descripción visibles"
 
-# Update original string
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
 msgid "eg. Some useful description about the query tool"
 msgstr "ej. Alguna información sobre la aplicación"
@@ -1173,7 +1192,6 @@ msgstr "Agregar visualización"
 msgid "Used dataset:"
 msgstr "Conjunto de datos usado:"
 
-# Why does this one has : at the end, but the other one no?
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:28
 msgid "Application Type:"
 msgstr "Tipo de aplicación:"
@@ -1190,7 +1208,6 @@ msgstr "Editar visualizaciones"
 msgid "View"
 msgstr "Ver"
 
-# Update original string
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
 msgid "Are you sure you want to delete this Query?"
 msgstr "¿Estás seguro de que quieres eliminar esta aplicación?"
@@ -1211,7 +1228,6 @@ msgstr "Enlistar aplicaciones"
 msgid "There are no applications created"
 msgstr "No se han creado aplicaciones"
 
-# Modify original string
 #: ckanext/querytool/templates/querytool/public/querytool_page.html:8
 msgid "Query Tool"
 msgstr "Plataforma"
@@ -1407,3 +1423,4 @@ msgstr "Ir"
 
 #~ msgid "Dataset name"
 #~ msgstr "Nombre del conjunto de datos"
+

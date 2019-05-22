@@ -90,13 +90,13 @@
               <div class="controls ">
                 <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
 
-                  <optgroup label="Single Color">
+                  <optgroup label={{ _("Single color") }}>
                   {% for color in color_schemes %}
                   <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{ color.text }}</option>
                   {% endfor %}
                   </optgroup>
                   
-                  <optgroup label="Diverging">
+                  <optgroup label={{ _("Diverging") }}>
                   {% set color_schemes_diverging = h.querytool_get_map_color_scheme() %}
                   {% for color_diverging in color_schemes_diverging %}
                     <option value="{{ color_diverging.value }}" {% if chart %}{{ 'selected' if color_diverging.value == chart.color }}{% endif %}>{{ color_diverging.text }}</option>
@@ -523,8 +523,8 @@
                <div class="controls ">
                  <select id="chart_field_dynamic_reference_type_{{ n }}" name="chart_field_dynamic_reference_type_{{ n }}" {{'' if dynamic_reference_type_option else 'disabled'}}>
                    <option value="">&mdash; {{ _('Select type') }} &mdash;</option>
-                   {% for type in ['Maximum', 'Average', 'Minimum'] %}
-                     <option value="{{type}}"{% if chart %}{{ 'selected' if type == chart.dynamic_reference_type }}{% endif %}>{{type}}</option>
+                   {% for key, val in [('Maximum',  _('Maximum')), ('Average',  _('Average')), ('Minimum', _('Minimum'))] %}
+                     <option value="{{key}}"{% if chart %}{{ 'selected' if type == chart.dynamic_reference_type }}{% endif %}>{{val}}</option>
                    {% endfor %}
                  </select>
                </div>
