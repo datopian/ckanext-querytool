@@ -1,6 +1,12 @@
 (function(_, jQuery) {
   'use strict';
 
+  var ua = window.navigator.userAgent;
+  var isIE11 = ua.indexOf('Trident/7.0') > -1;
+  console.log('isIE11', isIE11);
+  
+  if (isIE11) $('body').addClass('is-ie-11');
+  
   var api = {
     get: function(action, params, async) {
       var api_ver = 3;
@@ -302,8 +308,6 @@
   });
 
   function useTitleAsHtml(titleObj) {
-		const ua = window.navigator.userAgent;
-		const isIE11 = (ua.indexOf("Trident/7.0") > -1);
     if (!isIE11) {
       if (titleObj.html() !== '') {
         var parentSvg = titleObj.parent();
