@@ -1411,9 +1411,6 @@ msgstr "Ir"
 #~ msgid "Hover over a region"
 #~ msgstr "Passe o mouse sobre uma região"
 
-#~ msgid ""
-#~ msgstr ""
-
 #~ msgid "Health Topics"
 #~ msgstr "Tópicos de Saúde"
 
