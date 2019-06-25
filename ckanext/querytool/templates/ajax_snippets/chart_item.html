@@ -90,7 +90,7 @@
               <div class="controls ">
                 <select id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}">
 
-                  <optgroup label={{ _("Single color") }}>
+                  <optgroup label="{{ _('Single color') }}">
                   {% for color in color_schemes %}
                   <option value="{{ color.value }}" {% if chart %}{{ 'selected' if color.value == chart.color }}{% endif %}>{{ color.text }}</option>
                   {% endfor %}
