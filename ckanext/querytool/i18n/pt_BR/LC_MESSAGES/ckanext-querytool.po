@@ -1384,13 +1384,6 @@ msgstr "Ir"
 #~ msgid "Hover over a region"
 #~ msgstr "Passe o mouse sobre uma região"
 
-#~ msgid ""
-#~ "This Platform allows Ministries of Health to publish data via user "
-#~ "friendly applications, using visual and interactive elements"
-#~ msgstr ""
-#~ "Esta plataforma permite que os Ministérios da Saúde publiquem dados por "
-#~ "meio de aplicativos amigáveis, usando elementos visuais e interativos"
-
 #~ msgid "Health Topics"
 #~ msgstr "Tópicos de Saúde"
 
