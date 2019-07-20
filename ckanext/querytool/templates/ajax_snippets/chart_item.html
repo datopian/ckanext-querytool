@@ -96,7 +96,7 @@
                   {% endfor %}
                   </optgroup>
                   
-                  <optgroup label="Diverging">
+                  <optgroup label={{_('Diverging')}}>
                   {% set color_schemes_diverging = h.querytool_get_map_color_scheme() %}
                   {% for color_diverging in color_schemes_diverging %}
                     <option value="{{ color_diverging.value }}" {% if chart %}{{ 'selected' if color_diverging.value == chart.color }}{% endif %}>{{ color_diverging.text }}</option>

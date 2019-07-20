@@ -1189,3 +1189,10 @@ msgstr ""
 msgid "Go"
 msgstr ""
 
+#: Added manually
+msgid "Single color"
+msgstr ""
+
+#: Added manually
+msgid "Diverging"
+msgstr ""

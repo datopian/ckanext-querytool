@@ -1262,6 +1262,14 @@ msgstr "Langage"
 msgid "Go"
 msgstr "Aller"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:93
+msgid "Single color"
+msgstr "Couleur unique"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
+msgid "Diverging"
+msgstr "Divergent"
+
 #~ msgid "Stacked area"
 #~ msgstr "Aires empilées"
 

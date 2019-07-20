@@ -1231,6 +1231,14 @@ msgstr "语言"
 msgid "Go"
 msgstr "去"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:93
+msgid "Single color"
+msgstr "单色"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:99
+msgid "Diverging"
+msgstr "发散"
+
 #~ msgid "Stacked area"
 #~ msgstr "堆叠区域"
 
