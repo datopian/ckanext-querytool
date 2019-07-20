@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: ckanext-querytool 0.0.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2019-04-21 15:00+0600\n"
-"PO-Revision-Date: 2019-04-29 08:59-0400\n"
+"PO-Revision-Date: 2019-07-16 12:19+0800\n"
 "Last-Translator: \n"
 "Language-Team: zh_Hans_CN <LL@li.org>\n"
 "Language: zh\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.3.4\n"
-"X-Generator: Poedit 2.2\n"
+"X-Generator: Poedit 2.2.3\n"
 
 #: ckanext/querytool/helpers.py:131
 msgid "Line"
@@ -41,8 +41,9 @@ msgid "Stacked horizontal bar"
 msgstr "水平堆叠柱状图"
 
 #: ckanext/querytool/helpers.py:136
+#, fuzzy
 msgid "Area"
-msgstr "区域"
+msgstr "阴影面积折线图"
 
 #: ckanext/querytool/helpers.py:137
 msgid "Spline"
@@ -117,16 +118,19 @@ msgid "Purple-Orange"
 msgstr "紫色-橙色渐变"
 
 #: ckanext/querytool/helpers.py:209
+#, fuzzy
 msgid "Horizontal"
-msgstr "水平的"
+msgstr "横排"
 
 #: ckanext/querytool/helpers.py:210
+#, fuzzy
 msgid "Diagonal"
-msgstr "斜线的"
+msgstr "倾斜"
 
 #: ckanext/querytool/helpers.py:211
+#, fuzzy
 msgid "Vertical"
-msgstr "垂直的"
+msgstr "竖排"
 
 #: ckanext/querytool/helpers.py:212
 msgid "Reverse"
@@ -213,8 +217,9 @@ msgid "Small Rectangle (1x2)"
 msgstr "小号长方形（1x2）"
 
 #: ckanext/querytool/helpers.py:260
+#, fuzzy
 msgid "Small Wide Rectangle (1x6)"
-msgstr "宽的小号长方形（1x6）"
+msgstr "宽屏小号长方形（1x6）"
 
 #: ckanext/querytool/helpers.py:262
 msgid "Medium Square (2x2)"
@@ -362,24 +367,28 @@ msgid "Home"
 msgstr "主页"
 
 #: ckanext/querytool/templates/header.html:34
+#, fuzzy
 msgid "Load Datasets"
-msgstr "加载数据集"
+msgstr "数据集管理"
 
 #: ckanext/querytool/templates/header.html:35
+#, fuzzy
 msgid "Design Applications"
-msgstr "设计应用"
+msgstr "应用设计"
 
 #: ckanext/querytool/templates/header.html:36
+#, fuzzy
 msgid "Use Applications"
-msgstr "使用应用"
+msgstr "应用查看"
 
 #: ckanext/querytool/templates/header.html:51
 msgid "Organizations"
 msgstr "组织"
 
 #: ckanext/querytool/templates/header.html:52
+#, fuzzy
 msgid "Groups"
-msgstr "组"
+msgstr "群组"
 
 #: ckanext/querytool/templates/header.html:53
 #: ckanext/querytool/templates/home/about.html:3
@@ -389,8 +398,9 @@ msgid "About"
 msgstr "关于"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:28
+#, fuzzy
 msgid "General"
-msgstr "概述"
+msgstr "一般设置"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:41
 msgid "Type"
@@ -400,8 +410,9 @@ msgstr "类型"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:404
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:13
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:25
+#, fuzzy
 msgid "Dimension"
-msgstr "维度"
+msgstr "变量"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:62
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:35
@@ -480,8 +491,9 @@ msgid "X-axis"
 msgstr "X轴"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
+#, fuzzy
 msgid "X axis sorting"
-msgstr "X轴分类"
+msgstr "X轴排序"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
 msgid "Label orientation"
@@ -492,8 +504,9 @@ msgid "Force label in multiple lines"
 msgstr "强制标签内容换行"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:222
+#, fuzzy
 msgid "Max number of text labels"
-msgstr "最大文本标签数量"
+msgstr "最大标签数量"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:236
 msgid "Y-axis"
@@ -504,24 +517,27 @@ msgid "Y axis title"
 msgstr "Y轴标题"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:254
+#, fuzzy
 msgid "Measure by default"
-msgstr "默认变量"
+msgstr "默认显示指标名称"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:268
 msgid "Hide title"
 msgstr "隐藏标题"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:284
+#, fuzzy
 msgid "Start from zero"
-msgstr "从0开始"
+msgstr "坐标从0开始"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:302
 msgid "Y axis label format"
 msgstr "Y轴标签格式"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:320
+#, fuzzy
 msgid "Additional Options"
-msgstr "额外选项"
+msgstr "其它选项"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:335
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:101
@@ -537,8 +553,9 @@ msgid "Show legend"
 msgstr "显示图例"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:382
+#, fuzzy
 msgid "Show labels as percentages"
-msgstr "使用百分比的形式显示标签"
+msgstr "以百分比的形式显示标签"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:417
 #: ckanext/querytool/templates/ajax_snippets/map_item.html:107
@@ -584,42 +601,50 @@ msgstr "公开"
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:84
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:83
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:21
+#, fuzzy
 msgid "Private"
-msgstr "仅自己"
+msgstr "非公开"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:455
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:497
+#, fuzzy
 msgid "Static Reference"
-msgstr "静态参考"
+msgstr "静态参考线"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:468
+#, fuzzy
 msgid "Static Reference Columns"
-msgstr "静态参考列"
+msgstr "静态参考线数据列"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:495
+#, fuzzy
 msgid "Static Reference Label"
-msgstr "静态参考列名称"
+msgstr "静态参考线标签"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:509
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:561
+#, fuzzy
 msgid "Dynamic Reference"
-msgstr "动态参考"
+msgstr "动态参考线"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:522
+#, fuzzy
 msgid "Dynamic Reference Type"
-msgstr "动态参考类型"
+msgstr "动态参考线类型"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:525
 msgid "Select type"
 msgstr "选择类型"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:543
+#, fuzzy
 msgid "Dynamic Reference Factor"
-msgstr "动态参考因子"
+msgstr "动态参考倍数"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:559
+#, fuzzy
 msgid "Dynamic Reference Label"
-msgstr "动态参考列名称"
+msgstr "动态参考线标签"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:575
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:7
@@ -723,16 +748,18 @@ msgid "Edit"
 msgstr "编辑"
 
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:18
+#, fuzzy
 msgid "Related Application"
-msgstr "相关的应用"
+msgstr "从属应用"
 
 #: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:21
 msgid "Select Application"
 msgstr "选择应用"
 
 #: ckanext/querytool/templates/ajax_snippets/table_item.html:19
+#, fuzzy
 msgid "Table title"
-msgstr "表标题"
+msgstr "表格标题"
 
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
 msgid "Content"
@@ -1000,13 +1027,15 @@ msgstr "其它"
 
 #: ckanext/querytool/templates/querytool/admin/base_list.html:30
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
+#, fuzzy
 msgid "Main"
-msgstr "主要"
+msgstr "主应用"
 
 #: ckanext/querytool/templates/querytool/admin/base_list.html:36
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
+#, fuzzy
 msgid "Related"
-msgstr "相关"
+msgstr "从属应用"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:31
 msgid "Basic info"
@@ -1017,8 +1046,9 @@ msgid "Save As"
 msgstr "名称"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
+#, fuzzy
 msgid "Title of the query tool"
-msgstr "查询工具标题"
+msgstr "查询工具名称"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
 msgid "URL"
@@ -1029,20 +1059,24 @@ msgid "eg. my-querytool"
 msgstr "例如：我的查询工具"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
+#, fuzzy
 msgid "Display Title and Description"
-msgstr "显示的标题和描述"
+msgstr "标题和描述"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
+#, fuzzy
 msgid "eg. Some useful description about the query tool"
-msgstr "例如：关于查询工具的一些有用描述"
+msgstr "例如：关于查询工具的一些描述"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
+#, fuzzy
 msgid "Public Folder"
-msgstr "公用文件夹"
+msgstr "应用所属分组"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:57
+#, fuzzy
 msgid "Organization"
-msgstr "组织"
+msgstr "应用所属组织"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:67
 msgid "Settings"
@@ -1053,8 +1087,9 @@ msgid "Application Type"
 msgstr "应用类型"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:101
+#, fuzzy
 msgid "Add Related Application"
-msgstr "添加相关应用"
+msgstr "添加从属应用"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:105
 msgid "Select dataset and resource"
@@ -1155,8 +1190,9 @@ msgid "View"
 msgstr "预览"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
+#, fuzzy
 msgid "Are you sure you want to delete this Query?"
-msgstr "您确定要删除这个查询工具吗？"
+msgstr "您确定要删除此查询吗？"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/stages.html:9
 msgid "Application data"
@@ -1204,12 +1240,14 @@ msgid "Embed"
 msgstr "嵌入"
 
 #: ckanext/querytool/templates/querytool/public/read.html:274
+#, fuzzy
 msgid "Embed query tool view"
-msgstr "嵌入查询工具视图"
+msgstr "在网站中嵌入可视化视图"
 
 #: ckanext/querytool/templates/querytool/public/read.html:277
+#, fuzzy
 msgid "You can copy and paste the embed code"
-msgstr "您可以复制并粘贴嵌入代码"
+msgstr "您可以复制并粘贴如下代码"
 
 #: ckanext/querytool/templates/querytool/public/read.html:280
 msgid "Width"
@@ -1228,8 +1266,9 @@ msgid "Language"
 msgstr "语言"
 
 #: ckanext/querytool/templates/snippets/language_selector.html:11
+#, fuzzy
 msgid "Go"
-msgstr "去"
+msgstr "Go"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:93
 msgid "Single color"
@@ -1250,7 +1289,7 @@ msgstr "发散"
 
 #~ msgid "Light"
 #~ msgstr "浅色"
-
+ string
 #~ msgid "Pastel"
 #~ msgstr "淡色"
 
