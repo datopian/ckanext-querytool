@@ -58,7 +58,7 @@ Example usage:
     <div class="controls">
       <select id="field-organizations" name="owner_org">
         {% for organization in organizations_available %}
-        <option value="{{ organization.id }}">{{ organization.display_name }}</option>
+        <option value="{{ organization.id }}" {% if organization.id == data.owner_org|trim %}selected="selected"{% endif %}>{{ organization.display_name }}</option>
         {% endfor %}
       </select>
     </div>
