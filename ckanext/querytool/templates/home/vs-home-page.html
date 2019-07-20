@@ -6,14 +6,13 @@
         <div class="box homepage-box">
           <h1>{{ _('Portal Development Platform') }}</h1>
           <span>
-            {{ _('The Portal Development Platform allows public health agencies
-            to design applications that let the public explore and access a
-            diverse range of health data sources. The Platform has a simple
-            interface that minimizes the time dedicated to creating applications
-            while providing the essential visual and interactive elements for
-            public access to data. It was developed on opensource license with
-            minimal technological requirements, minimizing the resources needed
-            for its use and maintenance.') }}
+            {% trans %}The Portal Development Platform allows public health agencies to design
+            applications that let the public explore and access a diverse range of
+            health data sources. The Platform has a simple interface that minimizes the
+            time dedicated to creating applications while providing the essential visual
+            and interactive elements for public access to data. It was developed on
+            opensource license with minimal technological requirements, minimizing the
+            resources needed for its use and maintenance.{% endtrans %}
           </span>
         </div>
         {% endblock %}
@@ -37,15 +36,15 @@
       <h1>{{ _('How to use the Platform') }}</h1>
       <div>
         <p>
-          {{_('Four main steps are necessary to successfully design an
-          application, with the first one taking place outside the Platform.')}}
+          {% trans%}Four main steps are necessary to successfully design an application, with 
+          the first one taking place outside the Platform.{% endtrans %}
         </p>
         <ul class="list-group how-to-use">
           <li class="list-group-item">
             <b>{{_('Step 1 - Prepare data')}}</b> <br />
-            {{_('Before uploading the data into the Platform, it needs to be
+            {% trans %}Before uploading the data into the Platform, it needs to be
             cleaned, validated and, depending on its source, transformed into a
-            tabular dataset.')}}
+            tabular dataset.{% endtrans %}
           </li>
           <li class="list-group-item">
             <b>{{_('Step 2 – Load datasets')}}</b> <br />
