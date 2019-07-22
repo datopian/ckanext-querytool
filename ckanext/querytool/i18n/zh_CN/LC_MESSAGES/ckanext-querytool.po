@@ -1289,7 +1289,6 @@ msgstr "发散"
 
 #~ msgid "Light"
 #~ msgstr "浅色"
- string
 #~ msgid "Pastel"
 #~ msgstr "淡色"
 
@@ -1322,9 +1321,6 @@ msgstr "发散"
 
 #~ msgid "Muted"
 #~ msgstr "柔和"
-
-#~ msgid "Diverging"
-#~ msgstr "离散"
 
 #~ msgid "Dolar e.g 2000$"
 #~ msgstr "美元（例如2000$）"
