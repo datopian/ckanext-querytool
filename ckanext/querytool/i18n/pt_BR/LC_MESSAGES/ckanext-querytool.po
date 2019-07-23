@@ -1308,6 +1308,9 @@ msgstr "Divergente"
 #~ msgid "Muted"
 #~ msgstr "Ténue"
 
+#~ msgid "Diverging"
+#~ msgstr "Divergente"
+
 #~ msgid "Dolar e.g 2000$"
 #~ msgstr "Moeda ex. US $ 2000"
 
@@ -1388,6 +1391,9 @@ msgstr "Divergente"
 
 #~ msgid "Hover over a region"
 #~ msgstr "Passe o mouse sobre uma região"
+
+#~ msgid "Health Topics"
+#~ msgstr "Tópicos de Saúde"
 
 # Modify original translation
 #~ msgid "Y axis columns"

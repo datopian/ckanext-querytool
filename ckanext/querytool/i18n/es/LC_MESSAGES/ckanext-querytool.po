@@ -1321,6 +1321,9 @@ msgstr "Divergente"
 #~ msgid "Muted"
 #~ msgstr "Tenue"
 
+#~ msgid "Diverging"
+#~ msgstr "Divergente"
+
 #~ msgid "Dolar e.g 2000$"
 #~ msgstr "Pesos ej. $2000"
 
@@ -1398,6 +1401,9 @@ msgstr "Divergente"
 
 #~ msgid "Group"
 #~ msgstr "Grupo"
+
+#~ msgid "Health Topics"
+#~ msgstr "Temas de Salud"
 
 # Modify original translation
 #~ msgid "Y axis columns"
