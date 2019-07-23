@@ -1315,9 +1315,6 @@ msgstr "Divergent"
 #~ msgid "Muted"
 #~ msgstr "En sourdine"
 
-#~ msgid "Diverging"
-#~ msgstr "Divergent"
-
 #~ msgid "Dolar e.g 2000$"
 #~ msgstr "Monnaie ex. $ 2000"
 
@@ -1395,9 +1392,6 @@ msgstr "Divergent"
 
 #~ msgid "Group"
 #~ msgstr "Groupe"
-
-#~ msgid "Health Topics"
-#~ msgstr "Thèmes de Santé"
 
 # Modify original translation
 #, fuzzy
