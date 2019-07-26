@@ -1270,6 +1270,12 @@ msgstr "Couleur unique"
 msgid "Diverging"
 msgstr "Divergent"
 
+#: ckanext/querytool/templates/querytool/public/base_main.html:17
+#: ckanext/querytool/templates/querytool/public/read.html:20
+#: ckanext/querytool/templates/querytool/public/list.html:6
+msgid "Health Topics"
+msgstr "Thèmes de Santé"
+
 #~ msgid "Stacked area"
 #~ msgstr "Aires empilées"
 
@@ -1395,9 +1401,6 @@ msgstr "Divergent"
 
 #~ msgid "Group"
 #~ msgstr "Groupe"
-
-#~ msgid "Health Topics"
-#~ msgstr "Thèmes de Santé"
 
 # Modify original translation
 #, fuzzy

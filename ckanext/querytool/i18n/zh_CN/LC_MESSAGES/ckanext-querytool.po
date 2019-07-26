@@ -1278,6 +1278,12 @@ msgstr "单色"
 msgid "Diverging"
 msgstr "发散"
 
+#: ckanext/querytool/templates/querytool/public/base_main.html:17
+#: ckanext/querytool/templates/querytool/public/read.html:20
+#: ckanext/querytool/templates/querytool/public/list.html:6
+msgid "Health Topics"
+msgstr "健康主题"
+
 #~ msgid "Stacked area"
 #~ msgstr "堆叠区域"
 

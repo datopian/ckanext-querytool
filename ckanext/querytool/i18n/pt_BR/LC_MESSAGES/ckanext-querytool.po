@@ -1263,6 +1263,12 @@ msgstr "Única cor"
 msgid "Diverging"
 msgstr "Divergente"
 
+#: ckanext/querytool/templates/querytool/public/base_main.html:17
+#: ckanext/querytool/templates/querytool/public/read.html:20
+#: ckanext/querytool/templates/querytool/public/list.html:6
+msgid "Health Topics"
+msgstr "Tópicos de Saúde"
+
 #~ msgid "Stacked area"
 #~ msgstr "Área empilhada"
 
@@ -1391,9 +1397,6 @@ msgstr "Divergente"
 
 #~ msgid "Hover over a region"
 #~ msgstr "Passe o mouse sobre uma região"
-
-#~ msgid "Health Topics"
-#~ msgstr "Tópicos de Saúde"
 
 # Modify original translation
 #~ msgid "Y axis columns"
