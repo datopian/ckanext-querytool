@@ -548,7 +548,7 @@ def get_map_config():
 def get_public_breadcrumb_name():
 
     return config.get('ckanext.querytool.public_breadcrumb_name',
-                      _('Health Topics')).decode('utf-8')
+                      _('Health Topics'))
 
 
 def allow_nav_bar():
