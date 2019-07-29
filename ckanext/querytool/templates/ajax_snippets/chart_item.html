@@ -524,7 +524,13 @@
                  <select id="chart_field_dynamic_reference_type_{{ n }}" name="chart_field_dynamic_reference_type_{{ n }}" {{'' if dynamic_reference_type_option else 'disabled'}}>
                    <option value="">&mdash; {{ _('Select type') }} &mdash;</option>
                    {% for type in ['Maximum', 'Average', 'Minimum'] %}
-                     <option value="{{type}}"{% if chart %}{{ 'selected' if type == chart.dynamic_reference_type }}{% endif %}>{{type}}</option>
+                     <option value="{{type}}"
+                        {% if chart %}
+                          {{ 'selected' 
+                              if type == chart.dynamic_reference_type 
+                          }}
+                        {% endif %}>
+                      {{ _(type) }}</option>
                    {% endfor %}
                  </select>
                </div>

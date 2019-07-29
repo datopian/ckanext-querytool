@@ -1284,6 +1284,16 @@ msgstr "发散"
 msgid "Health Topics"
 msgstr "健康主题"
 
+
+msgid "Maximum"
+msgstr "最大值"
+
+msgid "Minimum"
+msgstr "最低限度"
+
+msgid "Average"
+msgstr "平均"
+
 #~ msgid "Stacked area"
 #~ msgstr "堆叠区域"
 

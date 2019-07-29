@@ -1282,6 +1282,16 @@ msgstr "Divergente"
 msgid "Health Topics"
 msgstr "Temas de Salud"
 
+
+msgid "Maximum"
+msgstr "Máximo"
+
+msgid "Minimum"
+msgstr "Mínimo"
+
+msgid "Average"
+msgstr "Promedio"
+
 #~ msgid "Stacked area"
 #~ msgstr "Área apilada"
 
