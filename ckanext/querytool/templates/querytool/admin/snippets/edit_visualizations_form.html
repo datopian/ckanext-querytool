@@ -36,8 +36,8 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
           name="save-edit-data"
           disabled="disabled"
         >
-          <span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Save &
-          Edit data') }}
+          <span class="fa fa-pencil" aria-hidden="true"></span> 
+          {{ _('Save & Edit data') }}
         </button>
       </li>
       <li>
@@ -56,8 +56,9 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
   {% if data.visualizations %} {% set selected_y_axis_column =
   data.y_axis_column %} {% endif %}
   <div class="chart-global-controls">
-    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', _('Default
-    measure'), options=data.y_axis_options, selected=selected_y_axis_column) }}
+    {{ form.select('choose_y_axis_column', 'choose_y_axis_column', 
+    _('Default measure'), options=data.y_axis_options, 
+    selected=selected_y_axis_column) }}
   </div>
 
   <fieldset>
