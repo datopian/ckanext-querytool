@@ -12,18 +12,13 @@ def querytool_update(context, data_dict):
     '''
     querytool = data_dict.get('name')
     if querytool:
-        # check if user an edit permission for given querytool:
+        # check if user has an edit permission for given querytool:
         querytool = CkanextQueryTool.get(name=querytool)
-        user_in_org = user_in_org_or_group(querytool.owner_org)
-        if user_in_org:
-            return {'success': True}
-        return {'success': False}
+        return {'success': user_in_org_or_group(querytool.owner_org)}
     # if querytool is None then we need to create one:
-    # check if user has a read permission for any org:
-    orgs = organizations_available('read')
-    if len(orgs) == 0:
-        return {'success': False}
-    return {'success': True}
+    # check if user has a edit permission for any org:
+    orgs = organizations_available()
+    return {'success': any([org['capacity'] != 'member' for org in orgs])}
 
 
 def querytool_edit(context, data_dict):
@@ -32,15 +27,10 @@ def querytool_edit(context, data_dict):
     '''
     querytool = data_dict.get('name')
     if querytool:
-        # check if user an edit permission for given querytool:
+        # check if user has an edit permission for given querytool:
         querytool = CkanextQueryTool.get(name=querytool)
-        user_in_org = user_in_org_or_group(querytool.get('owner_org'))
-        if user_in_org:
-            return {'success': True}
-        return {'success': False}
+        return {'success': user_in_org_or_group(querytool.owner_org)}
     # if querytool is None then we need to create one:
-    # check if user has a read permission for any org:
-    orgs = organizations_available('read')
-    if len(orgs) == 0:
-        return {'success': False}
-    return {'success': True}
+    # check if user has a edit permission for any org:
+    orgs = organizations_available()
+    return {'success': any([org['capacity'] != 'member' for org in orgs])}
