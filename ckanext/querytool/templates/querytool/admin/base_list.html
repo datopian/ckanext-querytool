@@ -1,11 +1,11 @@
 {% extends "querytool/admin/base.html" %}
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
-{% block subtitle %}{{ _('Queries') }}{% endblock %}
+{% block subtitle %}{{ _('Design Reports') }}{% endblock %}
 
 
 {% block breadcrumb_content %}
-  <li>{% link_for _('Application Groups'), controller=ctrl, action='groups' %}</li>
+  <li>{% link_for _('Reports Folders'), controller=ctrl, action='groups' %}</li>
 
   {% if c.group %}
     <li class="active">{% link_for c.group, controller=ctrl, action='list_by_group', group=c.group %}</li>
@@ -21,7 +21,7 @@
 
 {% block page_primary_action %}
   {% if h.check_access('querytool_update') %}
-    {% link_for _('Add New Application'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
+    {% link_for _('New Interactive Report'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
   {% endif %}
 {% endblock %}
 

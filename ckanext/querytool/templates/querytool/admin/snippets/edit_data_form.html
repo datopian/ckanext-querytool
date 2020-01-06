@@ -30,16 +30,16 @@ Example usage:
 
   <legend>{{ _('Basic info') }}</legend>
 
-  {{ form.input('title', id='field-title', label=_('Save As'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+  {{ form.input('title', id='field-title', label=_('Save As'), placeholder=_('Title of the interactive report'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
   {% set prefix = h.url_for('querytool_public_read', name= '') %}
   {% set domain = h.url_for('querytool_public_read', name= '') %}
   {% set domain = domain|replace("http://", "")|replace("https://", "") %}
   {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<application>', 'class': 'form-control input-sm'} %}
 
-  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
+  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-report'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
-  {{ form.markdown('description', id='field-description', label=_('Display Title and Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
+  {{ form.markdown('description', id='field-description', label=_('Display Title and Description'), placeholder=_('Start the first line with # to identify the publicly visible title. Add other optional text in a new line.'), value=data.description, error=errors.description) }}
 
   <div class="control-group">
     <label for="field-group" class="control-label">{{ _('Public Folder') }}</label>
@@ -67,7 +67,7 @@ Example usage:
   <legend>{{ _('Settings') }}</legend>
 
   <div class="control-group">
-    <label for="field-type" class="control-label">{{ _('Application Type') }}</label>
+    <label for="field-type" class="control-label">{{ _('Report Type') }}</label>
     <div class="controls">
       <select id="field-type" name="type">
         {% for option in [('main', _('Main')), ('related', _('Related'))] %}
@@ -98,7 +98,7 @@ Example usage:
   <div class="control-group">
     <a class="btn btn-info" id="add-related-querytool">
       <span class="fa fa-plus-square"></span>
-      <span class="fa-label">{{_('Add Related Application')}}</span>
+      <span class="fa-label">{{_('Add Related Report')}}</span>
     </a>
   </div>
 
@@ -169,6 +169,6 @@ Example usage:
 
 <div class="form-actions">
   <button type="submit" class="btn btn-success" name="save_data">{{ _('Save') }}</button>
-  <button type="submit" class="btn" name="save"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Save & Add/Edit Visualizations') }}</button>
+  <button type="submit" class="btn" name="save"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Add/Edit Visualizations') }}</button>
 </div>
 </form>

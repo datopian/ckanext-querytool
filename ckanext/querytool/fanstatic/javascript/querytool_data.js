@@ -411,7 +411,7 @@
                         handleRenderedQuerytools(total_querytools);
                     });
             } else {
-                alert(_('Maximum number of allowed related queries reached.'));
+                alert(_('Maximum number of allowed related reports reached.'));
             }
 
         });
@@ -473,12 +473,12 @@
                         }
                     } else {
                         yAxisColumnsNotice.css('display', 'block');
-                        yAxisColumnsNotice.text(_('An error occured while getting columns.'));
+                        yAxisColumnsNotice.text(_('An error occurred while getting columns.'));
                     }
                 })
                 .error(function(error) {
                     yAxisColumnsNotice.css('display', 'block');
-                    yAxisColumnsNotice.text(_('An error occured while getting columns.'));
+                    yAxisColumnsNotice.text(_('An error occurred while getting columns.'));
                 });
         }
 

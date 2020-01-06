@@ -18,5 +18,5 @@ def querytool_name_validator(key, data, errors, context):
 
     if result:
         errors[key].append(
-            p.toolkit._('This querytool name already exists. '
-                        'Choose another one.'))
+            p.toolkit._('This report name already exists. '
+                        'Choose another.'))
