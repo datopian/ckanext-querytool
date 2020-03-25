@@ -44,7 +44,7 @@
     <div class="box-items">
       <div class="row">
       {% set groups = h.querytool_get_groups() %}
-      {% for key, value in groups.iteritems() %}
+      {% for key, value in groups|dictsort(false, 'key') %}
       {% set url = h.url_for('querytool_public_list_by_group', group=key) %}
           <div class="span4">
             <a class="query-tool box" href="{{ url }}">
