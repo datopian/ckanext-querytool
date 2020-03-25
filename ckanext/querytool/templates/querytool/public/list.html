@@ -16,7 +16,7 @@
 {% block tools %}
 <div class="container">
    {% if data %}
-     {% for querytool in data | sort %}
+     {% for querytool in data | sort(attribute='title') %}
        {% if not querytool.private %}
         {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
        {% endif %}
