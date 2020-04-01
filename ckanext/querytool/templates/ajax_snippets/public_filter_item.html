@@ -27,7 +27,7 @@
     <select class="filter-item filter-item-value input-block-level {{ class }}" id="data_filter_value_{{ id }}" name="{{alias}}data_filter_value_{{ n }}" {% if class %}disabled{% endif %}>
       <option value="">&mdash;{{ _('Select value') }}&mdash;</option>
       {% if selected_filter %}
-      <option value="{{ selected_filter.value }}" selected>{{ selected_filter.value }}</option>
+      <option value="{{ selected_filter.value.replace('%26','&') }}" selected>{{ selected_filter.value.replace('%26','&') }}</option>
       {% endif %}
     </select>
   </div>
