@@ -716,6 +716,9 @@ class QueryToolController(base.BaseController):
                                     filter['value'] = \
                                         params.get('{}_data_filter_value_{}'
                                                    .format(q_name, id))
+                                # Replace & with %26 to fix the error for graphs
+                                # not being generated for values with & in them
+                                filter['value'] = filter['value'].replace('&','%26')
                     # Update charts y_axis value
                     if k.startswith('{}_y_axis_column'.format(q_name)):
                         q_item['y_axis_column'] = v
