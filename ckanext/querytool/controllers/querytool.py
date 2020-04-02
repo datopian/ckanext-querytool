@@ -183,6 +183,9 @@ class QueryToolController(base.BaseController):
                     filter['order'] = int(id)
                     filter['name'] = data['data_filter_name_{}'.format(id)]
                     filter['value'] = data['data_filter_value_{}'.format(id)]
+                    # Replace & with %26 to fix the error for graphs
+                    # not being generated for values with & in them
+                    filter['value'] = filter['value'].replace('&','%26')
                     filter['alias'] = data['data_filter_alias_{}'.format(id)]
                     filter['visibility'] = \
                         data['data_filter_visibility_{}'.format(id)]
