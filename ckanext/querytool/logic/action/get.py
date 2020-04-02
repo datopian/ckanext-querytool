@@ -184,6 +184,9 @@ def get_filter_values(context, data_dict):
 @toolkit.side_effect_free
 def querytool_get_resource_data(context, data_dict):
     sql_string = data_dict.get('sql_string')
+    # Replace %26(&) with &\'||\' to get the sql_query
+    # to work for ampersand in it 
+    sql_string = sql_string.replace('%26','&\'||\'')
     return h.get_resource_data(sql_string)
 
 
