@@ -1,10 +1,11 @@
 .account-masthead {
-  background-color: @color-primary-dark;
+  background-color: @color-primary-mid;
   .account {
     ul {
       li {
+        border-left: 1px solid #a7a7a7;
         a {
-          color: @color-masthead-links;
+          color: #2f2f2f;
           &:hover {
             color: @color-masthead-links-hover;
             background-color: @color-primary;
@@ -16,7 +17,7 @@
 }
 
 .masthead {
-  background-color: @color-primary-mid;
+  background-color: @color-light;
   height: auto;
   .navigation {
     .nav-pills {
@@ -25,14 +26,18 @@
           margin: 0;
           padding: @grid-gutter-width - 5;
           border-bottom: @nav-pills-border-size solid transparent;
+          color:@color-black;
+          font-weight: 500;
           &:hover {
             .nav-pills-hover(@nav-pills-border-size,
             fade(@color-secondary, 70%));
+            color:rgba(0,0,0,0.7);
           }
         }
         &.active {
           a {
             .nav-pills-hover;
+            color:rgba(0,0,0,0.7);
           }
         }
       }
