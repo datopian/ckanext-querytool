@@ -12,6 +12,10 @@
 @import "inc/query.less";
 @import "inc/responsive.less";
 
+body {
+    background-color: @color-primary;
+    background-image: none;
+}
 .map-info {
     padding: 6px 8px;
     font: 14px/16px Arial, Helvetica, sans-serif;
@@ -77,4 +81,8 @@
 
 .text-lowercase {
     text-transform: lowercase;
+}
+
+[role=main], .main {
+    background: @color-white;
 }
