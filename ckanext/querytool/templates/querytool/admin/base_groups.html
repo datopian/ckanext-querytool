@@ -24,13 +24,13 @@
 
   <div class="row">
     {% set tools = h.querytool_get_groups() %}
-    {% for key, value in tools.iteritems() %}
-    {% set url = h.url_for('querytool_list_by_group', group=key) %}
+    {% for group in tools %}
+    {% set url = h.url_for('querytool_list_by_group', group=group) %}
       <div class="span4 media-item admin-groups">
-        <img src="{{ h.url_for_static('/base/images/query-icon.png') }}" alt="{{ value }}" class="media-image">
-        <h3 class="media-heading">{{ value }}</h3>
-        <a href="{{ url }}" title="{{ value }}" class="media-view">
-          <span>{{ value }}</span>
+        <img src="{{group.image_display_url}}" alt="{{ value }}" class="media-image">
+        <h3 class="media-heading">{{ group.title }}</h3>
+        <a href="{{ url }}" title="{{ group.title }}" class="media-view">
+          <span>{{ group }}</span>
         </a>
       </div>
     {% endfor %}

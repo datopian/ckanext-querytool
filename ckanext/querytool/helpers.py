@@ -515,17 +515,12 @@ def get_chart_sort():
 
 def get_groups():
     '''
-    Get avaiable groups from config
-    :return: list of groups without duplicate
+    Get available Groups from the database
+    return: list of groups
     '''
-    ugroup = dict()
-    groups = config.\
-        get('ckanext.querytool.groups', 'Not set').split(',')
-    ugroups = set(groups)
-    for group in ugroups:
-        val = group.split(':')
-        ugroup.update({val[0]: val[1].decode('utf-8')})
-    return ugroup
+    groups = _get_action('group_list', {'all_fields': True})
+
+    return groups
 
 
 def get_map_config():

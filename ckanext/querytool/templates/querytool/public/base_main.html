@@ -44,13 +44,13 @@
     <div class="box-items">
       <div class="row">
       {% set groups = h.querytool_get_groups() %}
-      {% for key, value in groups|dictsort(false, 'key') %}
-      {% set url = h.url_for('querytool_public_list_by_group', group=key) %}
+      {% for group in groups %}
+      {% set url = h.url_for('querytool_public_list_by_group', group=group) %}
           <div class="span4">
             <a class="query-tool box" href="{{ url }}">
-            <img class="thumbnail" src="/base/images/query-icon.png" alt="{{ value }}">
-            <span class="tool-title">{{ value }}</span>
-            {#<span class="short-desc">Some test static description.</span>#}
+            <img class="thumbnail" src="{{group.image_display_url}}" alt="{{ value }}">
+            <span class="tool-title">{{ group.title }}</span>
+            <span class="short-desc">{{ group.description }}</span>
             <span class="btn btn-primary btn-box" role="button">{{ _('List Applications') }}</span>
             </a>
           </div>
