@@ -25,7 +25,7 @@
   <div class="row">
     {% set tools = h.querytool_get_groups() %}
     {% for group in tools %}
-    {% set url = h.url_for('querytool_list_by_group', group=group) %}
+      {% set url = h.url_for('querytool_list_by_group', group=group.name) %}
       <div class="span4 media-item admin-groups">
         <img src="{{group.image_display_url}}" alt="{{ value }}" class="media-image">
         <h3 class="media-heading">{{ group.title }}</h3>
