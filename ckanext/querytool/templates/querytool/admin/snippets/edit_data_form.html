@@ -46,7 +46,7 @@ Example usage:
     <div class="controls">
       <select id="field-group" name="group">
         {% for group in h.querytool_get_groups() %}
-        <option value="{{ group }}" {% if group == data.group|trim %}selected="selected"{% endif %}>{{ <group class="name"></group> }}</option>
+        <option value="{{ group }}" {% if group == data.group|trim %}selected="selected"{% endif %}>{{ group.name }}</option>
         {% endfor %}
       </select>
     </div>

@@ -33,6 +33,7 @@ def querytool_list_by_group(context, data_dict):
     # check_access('',
     #            context, data_dict)
     group = data_dict.get('group')
+    print group
     # get a user's organizations:
     user_orgs = ch.organizations_available('read')
     querytools = []

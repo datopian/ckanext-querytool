@@ -46,10 +46,6 @@ class QuerytoolGroupController(GroupController):
         # unicode format (decoded from utf8)
         c.q = request.params.get('q', '')
 
-        log.info('READ')
-
-        print 'WE ARE IN READ REPORT'
-
         try:
             # Do not query for the group datasets when dictizing, as they will
             # be ignored and get requested on the controller anyway
@@ -57,11 +53,9 @@ class QuerytoolGroupController(GroupController):
             c.group_dict = self._action('group_show')(context, data_dict)
             c.group = context['group']
             c.reports = toolkit.get_action('querytool_list_by_group')(context, {'group': id})
-            print c.reports
+
         except (NotFound, NotAuthorized):
             abort(404, _('Group not found'))
 
-        print 'WE ARE IN THE NEW GROUP'
-        print c.reports
         return self._render_template('group/reports.html', {'id': id})
 
