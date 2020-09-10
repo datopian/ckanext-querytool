@@ -653,9 +653,10 @@ class QueryToolController(base.BaseController):
         :return: querytool list template page
         '''
         querytools = _get_action('querytool_public_list', {'group': group})
+        group_details = _get_action('group_show', {'id': group})
 
         return render('querytool/public/list.html',
-                      extra_vars={'data': querytools})
+                      extra_vars={'data': querytools, 'group': group_details})
 
     def querytool_public_read(self, name):
         '''
