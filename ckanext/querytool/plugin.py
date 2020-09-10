@@ -6,6 +6,36 @@ import ckanext.querytool.helpers as h
 from ckanext.querytool.model import setup as model_setup
 import ckanext.querytool.helpers as helpers
 from ckanext.querytool import actions
+import ckan.logic.schema as ckan_schema
+
+from ckan.lib.navl.validators import (ignore_missing,
+                                      keep_extras,
+                                      not_empty,
+                                      empty,
+                                      ignore,
+                                      if_empty_same_as,
+                                      not_missing,
+                                      ignore_empty
+                                      )
+
+
+def group_form_schema():
+    schema = ckan_schema.default_group_schema()
+
+    schema['packages'] = {
+        "name": [not_empty, unicode],
+        "title": [ignore_missing],
+        "__extras": [ignore]
+    }
+    schema['users'] = {
+        "name": [not_empty, unicode],
+        "capacity": [ignore_missing],
+        "__extras": [ignore]
+    }
+    schema['num_followers'] = []
+    schema['package_count'] = [ignore_missing]
+
+    return schema
 
 
 class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
@@ -16,6 +46,68 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IAuthFunctions)
+    plugins.implements(plugins.IGroupForm, inherit=True)
+
+    def group_types(self):
+        return ('group', )
+
+    def is_fallback(self):
+        False
+
+    def group_form(self):
+        return 'group/snippets/group_form.html'
+
+    def group_controller(self):
+        return 'group'
+
+    def form_to_db_schema(self):
+        """
+        Returns the schema for mapping group data from a form to a format
+        suitable for the database.
+        """
+        schema = group_form_schema()
+        schema.update({'additional_description' : [toolkit.get_converter('convert_to_extras'),
+                            toolkit.get_validator('ignore_missing')]})
+        return schema
+
+    def db_to_form_schema(self):
+        """
+        Returns the schema for mapping group data from the database into a
+        format suitable for the form (optional)
+        """
+        schema = group_form_schema()
+        schema.update({'additional_description' : [toolkit.get_converter('convert_from_extras'),
+                            toolkit.get_validator('ignore_missing')]})
+        return schema
+
+
+    def group_form(group_type='group'):
+        return 'group/snippets/group_form.html'
+
+    def index_template(self):
+        return 'group/index.html'
+
+    def read_template(self):
+        return 'group/read.html'
+
+    def new_template(self):
+        return 'group/new.html'
+
+    def edit_template(self):
+        return 'group/edit.html'
+
+    def about_template(self):
+        return 'group/about.html'
+
+    def history_template(self):
+        return 'group/history.html'
+
+    def activity_template(self):
+        return 'group/activity_stream.html'
+
+    def admins_template(self):
+        return 'group/admins.html'
+
 
     # IConfigurer
 
