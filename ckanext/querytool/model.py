@@ -22,6 +22,7 @@ query_tool_visualizations_table = None
 
 
 def setup():
+    print 'ARE YOU CALLING THOS'
     # Check if query tool table exist
     if query_tool_table is None:
         define_query_tool_table()
@@ -32,6 +33,7 @@ def setup():
         log.debug('Querytool table already exists.')
         # add `owner_org` column if not exists:
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS owner_org TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS icon TEXT;')
         Session.commit()
     inspector = Inspector.from_engine(engine)
 
@@ -133,6 +135,9 @@ def define_query_tool_table():
                              Column('type',
                                     types.UnicodeText,
                                     nullable=False),
+                             Column('icon',
+                                    types.UnicodeText,
+                                    nullable=True),
                              Column('group',
                                     types.UnicodeText,
                                     nullable=False),

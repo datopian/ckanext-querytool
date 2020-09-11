@@ -32,4 +32,5 @@ def querytool_schema():
         'modified': [ignore_missing, isodate],
         'chart_resource': [not_empty, unicode],
         'y_axis_columns': [not_empty, unicode],
+        'icon': [ignore_missing, unicode]
     }

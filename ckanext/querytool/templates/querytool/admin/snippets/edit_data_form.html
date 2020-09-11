@@ -41,6 +41,8 @@ Example usage:
 
   {{ form.markdown('description', id='field-description', label=_('Display Title and Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
 
+  {{ form.input('icon', id='field-icon', label=_('Fontawsome Icon'), placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
+
   <div class="control-group">
     <label for="field-group" class="control-label">{{ _('Public Folder') }}</label>
     <div class="controls">

@@ -229,6 +229,8 @@ class QueryToolController(base.BaseController):
             _querytool['y_axis_columns'] = (
                 json.dumps(y_axis_columns) if y_axis_columns else '')
             _querytool['owner_org'] = data['owner_org']
+            _querytool['icon'] = data['icon']
+
             try:
                 junk = _get_action('querytool_update', _querytool)
                 h.flash_success(_('Data Successfully updated.'))
