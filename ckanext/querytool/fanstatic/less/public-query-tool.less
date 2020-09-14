@@ -85,7 +85,7 @@ body {
   background: transparent;
   border-bottom: none;
   padding-bottom: 0;
-  margin: @grid-gutter-width*3 0;
+  margin: 30px 0;
   text-align: left;
   h1 {
     margin-top: 0;
@@ -106,8 +106,13 @@ body {
   }
   h6,
   p {
-    font-size: @base-font-size + 2;
+    font-size: 14px;
+    color: #353535;
   }
+}
+
+.page-desc {
+  text-align:center;
 }
 
 .querytool-title {
@@ -431,7 +436,7 @@ body {
 }
 
 .content {
-  margin-top:60px;
+  margin-top:30px;
 }
 
 
@@ -451,5 +456,59 @@ body {
         color: #535353;
       }
     }
+  }
+}
+
+
+.col-sm-3 {
+  width:33.3%;
+  float:left;
+}
+
+.item_group {
+  margin-top:10px;
+  margin-bottom:40px;
+  text-align:center;
+  padding:0 10px;
+
+  .tool-title {
+    text-transform: uppercase;
+    color:@color-primary;
+
+  }
+}
+
+.btn-minimal {
+  background-color:#cfdfff;
+  border:0;
+  padding: 12px 20px;
+  color: #000;
+
+  
+}
+
+.btn-minimal:hover,.btn-minimal:active,.btn-minimal:focus {
+  background-color:#becdea;
+  color:#000;
+}
+
+.group-box {
+  width:100%;
+  padding:30px 0;
+  border-bottom:1px solid #d3d3d3;
+
+  .thumbnail {
+    width: 40px;
+    height: 40px;
+    float: left;
+    padding-right: 25px;
+  }
+
+  .box-content {
+    float:left;
+  }
+
+  .short-desc {
+    margin: -5px 0 20px;
   }
 }

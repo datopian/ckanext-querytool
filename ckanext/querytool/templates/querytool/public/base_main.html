@@ -31,7 +31,7 @@
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}<h1>{{ _('Welcome') }}</h1>{% endblock %}
-              {% block page_header_description %}<p class="desc"></p>{% endblock %}
+              {% block page_header_description %}<p class="page-desc desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
             {% endblock %}
           </div>
         </div>
@@ -41,19 +41,19 @@
   </div>
   {% block tools %}
   <div class="container content">
-    <div class="box-items">
+    <div class="group-items">
       <div class="row">
       {% set groups = h.querytool_get_groups() %}
       {% for key, value in groups|dictsort(false, 'key') %}
       {% set url = h.url_for('querytool_public_list_by_group', group=key) %}
-          <div class="span4">
-            <a class="query-tool box" href="{{ url }}">
-            <img class="thumbnail" src="/base/images/query-icon.png" alt="{{ value }}">
+        <div class="col-sm-3">
+          <div class="item_group">
+            <img class="thumbnail" src="/base/images/icon-1.svg" width=60 alt="{{ value }}">
             <span class="tool-title">{{ value }}</span>
-            {#<span class="short-desc">Some test static description.</span>#}
-            <span class="btn btn-primary btn-box" role="button">{{ _('List Applications') }}</span>
-            </a>
+            <span class="short-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum.</span>
+            <a class="query-tool" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
           </div>
+        </div>
       {% endfor %}
       </div>
     </div>

@@ -7,12 +7,11 @@
   <li class="active">{% link_for groups[c.group], controller=c.controller, action='querytool_public_list', group=c.group %}</li>
 {% endblock %}
 
-{% block page_header_icon %}<img class="thumbnail" src="/base/images/query-icon-tittle.png">{% endblock %}
+{% block page_header_icon %}<img class="thumbnail" src="/base/images/icon-1.svg" width="60">{% endblock %}
 
 {% block page_header_title %}<h1>{{ groups[c.group] }}</h1>{% endblock %}
+{% block page_header_description %}<p class="page-desc desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
 
-{% block page_header_description %}
-{% endblock %}
 {% block tools %}
 <div class="container">
    {% if data %}
