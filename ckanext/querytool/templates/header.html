@@ -33,9 +33,12 @@
                   {{ h.build_nav_main(
                     ('search', _('Load Datasets')),
                     ('querytool_groups', _('Design Applications')),
-                    ('querytool_public', _('Use Applications'))
+                    
                   )}}
               {% endif %}
+              {{ h.build_nav_main(
+                ('querytool_public', _('Use Applications'))
+              )}}
               {% endblock %}
             </ul>
         </nav>
