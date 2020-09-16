@@ -12,9 +12,11 @@
 {% block page_header_title %}<h1>{{ groups.name }}</h1>{% endblock %}
 
 {% block page_header_description %}
-    {{ groups.description }}
+    <legend>{{ _('Description') }}</legend>
+    <p>{{ group.description }}</p>
+    <legend>{{ _('Additional description') }}</legend>
+    <p>{{ group.additional_description }}</p>
 {% endblock %}
-
 
 {% block tools %}
 <div class="container">
