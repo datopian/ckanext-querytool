@@ -75,6 +75,13 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller=querytool_controller,
                     action='querytool_download_data')
 
+        group_controller = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
+
+        map.connect('group_read_report',
+                    '/group/{id}/reports',
+                    controller=group_controller,
+                    action='read_report')
+
         return map
 
     def after_map(self, map):

@@ -1,5 +1,5 @@
 {% extends "querytool/public/base_main.html" %}
-{% set groups = h.querytool_get_groups() %}
+{% set groups = h.querytool_get_groups()[0] %}
 {% set breadcrumb_name = h.querytool_get_public_breadcrumb_name() %}
 
 {% block breadcrumb_content %}
@@ -7,14 +7,18 @@
   <li class="active">{% link_for groups[c.group], controller=c.controller, action='querytool_public_list', group=c.group %}</li>
 {% endblock %}
 
-{% block page_header_icon %}<img class="thumbnail" src="/base/images/icon-1.svg" width="60">{% endblock %}
+{% block page_header_icon %}<img class="thumbnail" src="{{groups.image_display_url}}">{% endblock %}
 
-{% block page_header_title %}<h1>{{ groups[c.group] }}</h1>{% endblock %}
-{% block page_header_description %}<p class="page-desc desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
+{% block page_header_title %}<h1>{{ groups.name }}</h1>{% endblock %}
+
+{% block page_header_description %}
+    {{ groups.description }}
+{% endblock %}
+
 
 {% block tools %}
 <div class="container">
-   {% if data %}
+    {% if data %}
      {% for querytool in data | sort(attribute='title') %}
        {% if not querytool.private %}
         {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
