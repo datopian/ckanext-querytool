@@ -29,7 +29,7 @@
         <nav class="section navigation">
             <ul class="nav nav-pills">
             {% block header_site_navigation_tabs %}
-                {% if c.user %}
+                {% if c.user and h.get_user_permission(c.userobj) == True %}
                   {{ h.build_nav_main(
                       ('home', _('Home'))
                   )}}
@@ -46,7 +46,7 @@
         </nav>
         {% endblock %}
 
-        {% if c.user %}
+        {% if c.user and h.get_user_permission(c.userobj) == True %}
           {% block header_site_search %}
             {{ super() }}
           {% endblock %}
@@ -55,7 +55,7 @@
         {% block vitalst_header_site_navigation %}
         <nav class="section navigation default-menu">
             <ul class="nav nav-pills">
-                {% if c.user %}
+                {% if c.user and h.get_user_permission(c.userobj) == True %}
                   {% block header_site_navigation_ckan %}
                       {{ h.build_nav_main(
                         ('search', _('Datasets')),
