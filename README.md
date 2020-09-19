@@ -229,6 +229,7 @@ ckanext.querytool.public_breadcrumb_name = Health Topics
 ```
 ckanext.querytool.allow_nav_bar = False
 ```
+**NOTE:** The navigation bar config option is still present, but we are not using it.
 
 ### Development Installation
 
