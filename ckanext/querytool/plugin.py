@@ -174,6 +174,12 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller=group_controller,
                     action='read_report')
 
+        home_controller = 'ckanext.querytool.controllers.home:QuerytoolHomeController'
+        map.connect('index',
+                    '/',
+                    controller=home_controller,
+                    action='index')
+
         return map
 
     def after_map(self, map):
