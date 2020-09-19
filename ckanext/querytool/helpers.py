@@ -605,3 +605,13 @@ def get_dataset_url_path(url):
     if len(parts) == 1:
         return ''
     return '/dataset%s' % parts[1]
+
+
+def get_user_permission(userobj):
+    org = _get_action('organization_list_for_user', {'id': userobj.id})
+    group = _get_action('group_list_authz', {'id': userobj.id})
+
+    if len(org) == 0 and len(group) == 0:
+        return False
+    else:
+        return True
