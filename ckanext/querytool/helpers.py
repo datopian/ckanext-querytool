@@ -609,7 +609,16 @@ def get_dataset_url_path(url):
 
 def get_all_reports():
     groups = get_groups()
-
     reports = _get_action('querytool_list_other', {'groups': groups})
 
     return reports
+
+
+def get_user_permission(userobj):
+    org = _get_action('organization_list_for_user', {'id': userobj.id})
+    group = _get_action('group_list_authz', {'id': userobj.id})
+
+    if len(org) == 0 and len(group) == 0:
+        return False
+    else:
+        return True

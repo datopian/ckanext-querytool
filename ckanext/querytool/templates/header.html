@@ -1,13 +1,16 @@
 {% ckan_extends %}
 {% block header_wrapper %}
+
 {% block header_account %}
-<header class="account-masthead">
-   <div class="container-fluid">
-      {% block header_account_container_content %}
-      {{ super() }}
-      {% endblock %}
-   </div>
-</header>
+  {% if c.user %}
+    <header class="account-masthead">
+       <div class="container-fluid">
+          {% block header_account_container_content %}
+             {{ super() }}
+          {% endblock %}
+       </div>
+    </header>
+  {% endif %}
 {% endblock %}
 <header class="navbar navbar-static-top masthead">
    {% block header_debug %}
@@ -26,36 +29,42 @@
         <nav class="section navigation">
             <ul class="nav nav-pills">
             {% block header_site_navigation_tabs %}
-              {{ h.build_nav_main(
-                  ('home', _('Home'))
-              )}}
-              {% if h.organizations_available('read')|length > 0 %}
+                {% if c.user and h.get_user_permission(c.userobj) == True %}
                   {{ h.build_nav_main(
-                    ('search', _('Load Datasets')),
-                    ('querytool_groups', _('Design Applications')),
-                    
+                      ('home', _('Home'))
                   )}}
-              {% endif %}
-              {{ h.build_nav_main(
-                ('querytool_public', _('Use Applications'))
-              )}}
+                {% else %}
+                  {{ h.build_nav_main(
+                    ('home', _('Home'))
+                  )}}
+                  {{ h.build_nav_main(
+                    ('querytool_public', _('Use Applications'))
+                  )}}
+                {% endif %}
               {% endblock %}
             </ul>
         </nav>
         {% endblock %}
-        {% block header_site_search %}
-        {{ super() }}
-        {% endblock %}
+
+        {% if c.user and h.get_user_permission(c.userobj) == True %}
+          {% block header_site_search %}
+            {{ super() }}
+          {% endblock %}
+        {% endif %}
+
         {% block vitalst_header_site_navigation %}
         <nav class="section navigation default-menu">
             <ul class="nav nav-pills">
-                {% block header_site_navigation_ckan %}
-                  {{ h.build_nav_main(
-                    ('organizations_index', _('Organizations')),
-                    ('group_index', _('Groups')),
-                    ('about', _('About'))
-                  ) }}
-              {% endblock %}
+                {% if c.user and h.get_user_permission(c.userobj) == True %}
+                  {% block header_site_navigation_ckan %}
+                      {{ h.build_nav_main(
+                        ('search', _('Datasets')),
+                        ('organizations_index', _('Organizations')),
+                        ('group_index', _('Groups')),
+                        ('about', _('About'))
+                      ) }}
+                  {% endblock %}
+                {% endif %}
             </ul>
         </nav>
         {% endblock %}

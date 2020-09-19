@@ -250,6 +250,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_dataset_url_path,
             'querytool_get_all_reports':
                 helpers.get_all_reports,
+            'get_user_permission':
+                helpers.get_user_permission,
         }
 
     # IAuthFunctions
