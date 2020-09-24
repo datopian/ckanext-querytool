@@ -46,13 +46,28 @@
       {% set groups = h.querytool_get_groups() %}
       {% for group in groups %}
       {% set url = h.url_for('querytool_public_list_by_group', group=group.name) %}
-          <div class="span4">
+          <!-- <div class="span4">
             <a class="query-tool box" href="{{ url }}">
             <img class="thumbnail" src="{{group.image_display_url}}" alt="{{ value }}">
             <span class="tool-title">{{ group.title }}</span>
             <span class="short-desc">{{ group.description }}</span>
             <span class="btn btn-primary btn-box" role="button">{{ _('List Applications') }}</span>
             </a>
+          </div>
+        </div> -->
+
+        <div class="col-sm-3">
+          <div class="item_group">
+            <div id="item-image">
+              {% if group.image_display_url %}
+                <img src="{{group.image_display_url}}" width=120 height=120 alt="{{ value }}">
+              {% else %}
+                <img src="/base/images/icon-1.svg" width=60 alt="{{ value }}">
+              {% endif %}
+            </div>
+            <span class="tool-title">{{ group.title }}</span>
+            <span class="short-desc">{{ group.description }}</span>
+            <a class="query-tool" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
           </div>
         </div>
       {% endfor %}
