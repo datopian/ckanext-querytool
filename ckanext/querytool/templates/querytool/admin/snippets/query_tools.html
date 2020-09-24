@@ -14,7 +14,13 @@ Example usage:
 {% set delete_url = h.url_for('querytool_delete', querytool='/' + querytool.name) %}
 
 <div class="query-item">
+  {% if querytool.icon == None %}
   <img class="query-icon" src="/base/images/query-icon.png" alt="Query Tool">
+  {% else %}
+  <div class="query-icon">
+  <i class="fa-5x {{querytool.icon}}" aria-hidden="true">
+  </i></div>
+  {% endif %}
   <div class="query-body">
     {% if querytool.private %}
       <span class="dataset-private label label-inverse pull-right">
