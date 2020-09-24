@@ -44,7 +44,7 @@ Example usage:
   {{ form.input('icon', id='field-icon', label=_('Fontawsome Icon'), placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
 
   <div class="control-group">
-    <label for="field-group" class="control-label">{{ _('Public Folder') }}</label>
+    <label for="field-group" class="control-label">{{ _('Groups') }}</label>
     <div class="controls">
       <select id="field-group" name="group">
         {% for group in h.querytool_get_groups() %}
