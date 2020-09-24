@@ -22,7 +22,6 @@ query_tool_visualizations_table = None
 
 
 def setup():
-    print 'ARE YOU CALLING THOS'
     # Check if query tool table exist
     if query_tool_table is None:
         define_query_tool_table()

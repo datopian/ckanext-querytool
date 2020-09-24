@@ -9,6 +9,7 @@ from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
 
 check_access = logic.check_access
+_get_action = logic.get_action
 
 
 def querytool_update(context, data_dict):
@@ -62,6 +63,12 @@ def querytool_update(context, data_dict):
 
     querytool.modified = datetime.datetime.utcnow()
     querytool.save()
+
+    dataset_name = data.get('dataset_name')
+    dataset = _get_action('package_show')(context, {'id': dataset_name})
+    dataset['groups'] = [{'name': str(data.get('group'))}]
+    _get_action('package_patch')(context, dataset)
+
     session.add(querytool)
     session.commit()
 
