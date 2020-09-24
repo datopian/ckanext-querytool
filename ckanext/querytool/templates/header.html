@@ -55,9 +55,9 @@
                 {% if c.user and h.get_user_permission(c.userobj) == True %}
                   {% block header_site_navigation_ckan %}
                       {{ h.build_nav_main(
-                        ('search', _('Datasets')),
+                        ('search', _('Manage Data')),
                         ('organizations_index', _('Organizations')),
-                        ('group_index', _('Groups')),
+                        ('group_index', _('Reports')),
                         ('about', _('About'))
                       ) }}
                   {% endblock %}
