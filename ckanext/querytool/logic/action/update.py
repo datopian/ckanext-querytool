@@ -55,8 +55,7 @@ def querytool_update(context, data_dict):
     items = ['title', 'description', 'name', 'private', 'type', 'group',
              'dataset_name', 'owner_org', 'icon',
              'filters', 'sql_string', 'related_querytools',
-             'chart_resource',
-             'y_axis_columns']
+             'chart_resource', 'y_axis_columns', 'additional_description']
 
     for item in items:
         setattr(querytool, item, data.get(item))

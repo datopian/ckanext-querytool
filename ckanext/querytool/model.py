@@ -33,6 +33,7 @@ def setup():
         # add `owner_org` column if not exists:
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS owner_org TEXT;')
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS icon TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS additional_description TEXT;')
         Session.commit()
     inspector = Inspector.from_engine(engine)
 
@@ -143,6 +144,8 @@ def define_query_tool_table():
                              Column('owner_org',
                                     types.UnicodeText,
                                     nullable=False),
+                             Column('additional_description', types.UnicodeText,
+                                    default=u''),
                              Index('ckanext_querytool_id_idx',
                                    'id'))
 
