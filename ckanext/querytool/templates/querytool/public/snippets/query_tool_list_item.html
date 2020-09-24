@@ -13,10 +13,13 @@ Example usage:
 
 {% set tool = h.url_for('querytool_public_read', name=querytool.name) %}
 
-<a class="box box-full-width" href="{{ tool }}">
-  <span class="box-title">
-    <img class="thumbnail" src="/base/images/folder-icon.png" alt="">
-    <span class="tool-title">{{querytool.title}}</span>
-  </span>
-  <span class="fa fa-3x fa-angle-right"></span>
-</a>
+<div class="group-box">
+  <img class="thumbnail" src="/base/images/folder-icon-2.svg" width="70" alt="">
+  <div class="box-content">
+    <a class="query-tool" href="{{ tool }}"><span class="tool-title">{{querytool.title}}</span></a>
+    <span class="short-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum.</span>
+    
+    <a class="query-tool" href="{{ tool }}"><span class="btn btn-minimal" role="button">{{ _('View Details') }}</span></a>
+  </div>
+  <p class='clearfix'></p>
+</div>

@@ -1,0 +1,26 @@
+{% ckan_extends %}
+
+  <p>{{ c.group_dict['additional_description'] }}</p>
+
+{% block primary_content_inner %}
+  <h1>
+    {% block page_heading %}
+      {{ super() }}
+    {% endblock %}
+  </h1>
+  {% block group_description %}
+    <h3>{{ _('Group Description') }}</h3>
+      {{ super() }}
+  {% endblock %}
+
+  {% block group_additional_description %}
+    <h3>{{ _('Additional Group Description') }}</h3>
+    {% if h.get_translated(c.group_dict, 'additional_description') %}
+      {{ h.render_markdown(h.get_translated(c.group_dict, 'additional_description')) }}
+    {% endif %}
+  {% endblock %}
+
+  {% block group_extras %}
+      {{ super() }}
+  {% endblock %}
+{% endblock %}

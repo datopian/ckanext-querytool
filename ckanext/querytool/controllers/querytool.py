@@ -2,6 +2,7 @@
 import logging
 import json
 import cgi
+import ast
 from operator import itemgetter
 
 import ckan.lib.base as base
@@ -172,6 +173,11 @@ class QueryToolController(base.BaseController):
         if toolkit.request.method == 'POST' and not data:
 
             data = dict(toolkit.request.POST)
+
+            group = ast.literal_eval(data['group'])
+            data.pop('group')
+            data['group'] = group['name']
+
             filters = []
             y_axis_columns = []
             related_querytools = []
@@ -649,9 +655,10 @@ class QueryToolController(base.BaseController):
         :return: querytool list template page
         '''
         querytools = _get_action('querytool_public_list', {'group': group})
+        group_details = _get_action('group_show', {'id': group})
 
         return render('querytool/public/list.html',
-                      extra_vars={'data': querytools})
+                      extra_vars={'data': querytools, 'group': group_details})
 
     def querytool_public_read(self, name):
         '''

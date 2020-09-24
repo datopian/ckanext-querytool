@@ -515,17 +515,12 @@ def get_chart_sort():
 
 def get_groups():
     '''
-    Get avaiable groups from config
-    :return: list of groups without duplicate
+    Get available Groups from the database
+    return: list of groups
     '''
-    ugroup = dict()
-    groups = config.\
-        get('ckanext.querytool.groups', 'Not set').split(',')
-    ugroups = set(groups)
-    for group in ugroups:
-        val = group.split(':')
-        ugroup.update({val[0]: val[1].decode('utf-8')})
-    return ugroup
+    groups = _get_action('group_list', {'all_fields': True})
+
+    return groups
 
 
 def get_map_config():
@@ -610,3 +605,20 @@ def get_dataset_url_path(url):
     if len(parts) == 1:
         return ''
     return '/dataset%s' % parts[1]
+
+
+def get_all_reports():
+    groups = get_groups()
+    reports = _get_action('querytool_list_other', {'groups': groups})
+
+    return reports
+
+
+def get_user_permission(userobj):
+    org = _get_action('organization_list_for_user', {'id': userobj.id})
+    group = _get_action('group_list_authz', {'id': userobj.id})
+
+    if len(org) == 0 and len(group) == 0:
+        return False
+    else:
+        return True

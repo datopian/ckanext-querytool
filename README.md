@@ -213,27 +213,23 @@ sudo service apache2 reload
 
 These are the required configuration options used by the extension:
 
-1. Add config for application groups in a comma separated key:value pairs:
-```
-ckanext.querytool.groups = brazil:Brazil,china:营养,mexico:Mexico
-```
-
-2. Add config for map item base layer:
+1. Add config for map item base layer:
 ```
 ckanext.querytool.map_osm_url = https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{r}.png
 
 ckanext.querytool.map_osm_attribute = &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>
 ```
 
-3. Add config for the base public breadcrumb name:
+2. Add config for the base public breadcrumb name:
 ```
 ckanext.querytool.public_breadcrumb_name = Health Topics
 ```
 
-4. Add config for visibility of navigation bar in the public query tools:
+3. Add config for visibility of navigation bar in the public query tools:
 ```
 ckanext.querytool.allow_nav_bar = False
 ```
+**NOTE:** The navigation bar config option is still present, but we are not using it.
 
 ### Development Installation
 
