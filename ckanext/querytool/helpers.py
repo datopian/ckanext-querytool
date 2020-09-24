@@ -622,3 +622,13 @@ def get_user_permission(userobj):
         return False
     else:
         return True
+
+
+def get_groups_for_user(userobj, group):
+    groups = _get_action('group_list_authz', {'id': userobj.id})
+    group_names = [g['name'] for g in groups]
+
+    if len(groups) != 0 and group in group_names:
+        return True
+    else:
+        return False
