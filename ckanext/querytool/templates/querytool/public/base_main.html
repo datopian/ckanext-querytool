@@ -58,11 +58,13 @@
 
         <div class="col-sm-3">
           <div class="item_group">
-            {% if group.image_display_url %}
-              <img class="thumbnail" src="{{group.image_display_url}}" width=120 height=120 alt="{{ value }}">
-            {% else %}
-              <img class="thumbnail" src="/base/images/icon-1.svg" width=60 alt="{{ value }}">
-            {% endif %}
+            <div id="item-image">
+              {% if group.image_display_url %}
+                <img src="{{group.image_display_url}}" width=120 height=120 alt="{{ value }}">
+              {% else %}
+                <img src="/base/images/icon-1.svg" width=60 alt="{{ value }}">
+              {% endif %}
+            </div>
             <span class="tool-title">{{ group.title }}</span>
             <span class="short-desc">{{ group.description }}</span>
             <a class="query-tool" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
