@@ -58,17 +58,20 @@
 
 
         <div class="group-box">
-          {% if group.image_display_url %}
-            <img  class="thumbnail" src="{{group.image_display_url}}"  width="120" alt="" alt="{{ value }}">
-          {% else %}
-            <img class="thumbnail" src="/base/images/icon-1.svg" width="70" alt="">
-          {% endif %}
+          <div class="group-image">
+            {% if group.image_display_url %}
+              <img  src="{{group.image_display_url}}"  alt="" alt="{{ value }}">
+            {% else %}
+              <img src="/base/images/icon-1.svg" alt="">
+            {% endif %}
+          </div>
+          
           <div class="box-content">
             <a class="query-tool" href="{{ url }}"><span class="tool-title">{{group.title}}</span></a>
             <span class="short-desc">{{ group.description }}</span>
             
             <a class="query-tool" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
-          </div>
+          </div> 
           <p class='clearfix'></p>
         </div>
       {% endfor %}
