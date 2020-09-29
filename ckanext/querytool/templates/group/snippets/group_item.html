@@ -17,7 +17,7 @@ Example:
 <li style="border-bottom: 1px solid rgb(191, 191, 191); padding-bottom: 20px; padding-top: 20px;">
   {% block item_inner %}
   {% block image %}
-    <img src="{{ group.image_display_url or h.url_for_static('/base/images/icon-1.svg') }}" alt="{{ group.name }}" width=80>
+    <img src="{{ group.image_display_url or h.url_for_static('/base/images/folder-icon-2.svg') }}" alt="{{ group.name }}" width=60>
   {% endblock %}
   {% block title %}
     <h3 class="media-heading" style="margin-top:20px;">{{ h.get_translated(group, 'title') or group.display_name }}</h3>
