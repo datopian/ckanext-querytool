@@ -9,7 +9,7 @@ Example:
 
 #}
 {% block group_list %}
-<ul class="media-grid" data-module="media-grid">
+<ul class="group-list" style="margin:0;padding:0;" data-module="media-grid">
 	{% block group_list_inner %}
   {% for group in groups %}
     {% set user_permission = h.get_groups_for_user(c.userobj, group.name) %}
