@@ -31,7 +31,7 @@
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}<h1>{{ _('Welcome') }}</h1>{% endblock %}
-              {% block page_header_description %}<p class="page-desc desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
+              {% block page_header_description %}<p class="page-desc desc show-read-more">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
             {% endblock %}
           </div>
         </div>
@@ -56,19 +56,23 @@
           </div>
         </div> -->
 
-        <div class="col-sm-3">
-          <div class="item_group">
-            <div id="item-image">
-              {% if group.image_display_url %}
-                <img src="{{group.image_display_url}}" width=120 height=120 alt="{{ value }}">
-              {% else %}
-                <img src="/base/images/icon-1.svg" width=60 alt="{{ value }}">
-              {% endif %}
-            </div>
-            <span class="tool-title">{{ group.title }}</span>
-            <span class="short-desc">{{ group.description }}</span>
-            <a class="query-tool" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
+
+        <div class="group-box">
+          <div class="group-image">
+            {% if group.image_display_url %}
+              <img  src="{{group.image_display_url}}"  alt="" alt="{{ value }}">
+            {% else %}
+              <img src="/base/images/icon-1.svg" alt="">
+            {% endif %}
           </div>
+          
+          <div class="box-content">
+            <a class="query-tool" href="{{ url }}"><span class="tool-title">{{group.title}}</span></a>
+            <span class="short-desc show-read-more">{{ group.description }}</span>
+            
+            <a class="query-tool" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
+          </div> 
+          <p class='clearfix'></p>
         </div>
       {% endfor %}
       </div>

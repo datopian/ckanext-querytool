@@ -11,3 +11,8 @@
 {% endblock %}
 
 {% block bodytag %} {{ super() }} id="vs-page"{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  {% resource 'querytool/javascript/vitals.js' %}
+{% endblock %}
