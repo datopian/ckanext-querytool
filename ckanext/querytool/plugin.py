@@ -138,14 +138,14 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         map.connect('querytool_list_by_group', '/querytool/group/{group}',
                     controller=querytool_controller, action='list_by_group')
 
-        map.connect('querytool_edit', '/querytool/edit{querytool:/.*|}',
+        map.connect('querytool_edit', '/report/edit{querytool:/.*|}',
                     controller=querytool_controller, action='querytool_edit')
 
-        map.connect('querytool_delete', '/querytool/delete{querytool:/.*|}',
+        map.connect('querytool_delete', '/report/delete{querytool:/.*|}',
                     controller=querytool_controller, action='delete')
 
         map.connect('querytool_edit_visualizations',
-                    '/querytool/edit_visualizations{querytool:/.*|}',
+                    '/report/edit_visualizations{querytool:/.*|}',
                     controller=querytool_controller,
                     action='edit_visualizations')
 
