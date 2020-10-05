@@ -16,33 +16,38 @@ Example:
 {% block item %}
 <li style="border-bottom: 1px solid rgb(191, 191, 191); padding-bottom: 20px; padding-top: 20px;">
   {% block item_inner %}
-  {% block image %}
-    <img src="{{ group.image_display_url or h.url_for_static('/base/images/folder-icon-2.svg') }}" alt="{{ group.name }}" width=60>
-  {% endblock %}
-  {% block title %}
-    <h3 class="media-heading" style="margin-top:20px;">{{ h.get_translated(group, 'title') or group.display_name }}</h3>
-  {% endblock %}
-  {% block description %}
-    {% if h.get_translated(group, 'description') %}
-      <p>{{ h.markdown_extract(h.get_translated(group, 'description'), extract_length=80) }}</p>
+  <div class="group-image" style="margin-top:15px;">
+    {% block image %}
+      <img src="{{ group.image_display_url or h.url_for_static('/base/images/folder-icon-2.svg') }}" alt="{{ group.name }}" >
+    {% endblock %}
+  </div>
+  <div class="content-box" style="float:left; margin-left:10px; width:75%;">
+    {% block title %}
+      <h3 class="media-heading" style="margin-top:20px;">{{ h.get_translated(group, 'title') or group.display_name }}</h3>
+    {% endblock %}
+    {% block description %}
+      {% if h.get_translated(group, 'description') %}
+        <p>{{ h.markdown_extract(h.get_translated(group, 'description'), extract_length=80) }}</p>
+      {% endif %}
+    {% endblock %}
+    {% block datasets %}
+      {% if group.package_count %}
+        <strong class="count">{{ ungettext('{num} Dataset', '{num} Datasets', group.package_count).format(num=group.package_count) }}</strong>
+      {% elif group.package_count == 0 %}
+        <span class="count">{{ _('0 Datasets') }}</span>
+      {% endif %}
+    {% endblock %}
+    {% block link %}
+    <br/><br/>
+    <a href="{{ url }}" class="btn btn-minimal" title="{{ _('View {name}').format(name=h.get_translated(group, 'title') or group.display_name) }}">
+      <span>{{ _('View {name}').format(name=h.get_translated(group, 'title') or group.display_name) }}</span>
+    </a>
+    {% endblock %}
+    {% if group.user_member %}
+      <input name="group_remove.{{ group.id }}" value="{{ _('Remove') }}" type="submit" class="btn btn-danger btn-small media-edit" title="{{ _('Remove dataset from this group') }}"/>
     {% endif %}
-  {% endblock %}
-  {% block datasets %}
-    {% if group.package_count %}
-      <strong class="count">{{ ungettext('{num} Dataset', '{num} Datasets', group.package_count).format(num=group.package_count) }}</strong>
-    {% elif group.package_count == 0 %}
-      <span class="count">{{ _('0 Datasets') }}</span>
-    {% endif %}
-  {% endblock %}
-  {% block link %}
-  <br/><br/>
-  <a href="{{ url }}" class="btn btn-minimal" title="{{ _('View {name}').format(name=h.get_translated(group, 'title') or group.display_name) }}">
-    <span>{{ _('View {name}').format(name=h.get_translated(group, 'title') or group.display_name) }}</span>
-  </a>
-  {% endblock %}
-  {% if group.user_member %}
-    <input name="group_remove.{{ group.id }}" value="{{ _('Remove') }}" type="submit" class="btn btn-danger btn-small media-edit" title="{{ _('Remove dataset from this group') }}"/>
-  {% endif %}
+  </div>
+  <p class="clearfix"></p>
   {% endblock %}
 </li>
 {% endblock %}
