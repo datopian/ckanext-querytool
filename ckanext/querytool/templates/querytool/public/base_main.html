@@ -31,7 +31,9 @@
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}<h1>{{ _('Welcome') }}</h1>{% endblock %}
-              {% block page_header_description %}<p class="page-desc desc show-read-more">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
+              <div class="long-desc">
+                {% block page_header_description %}<p class="page-desc desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
+              </div>
             {% endblock %}
           </div>
         </div>
@@ -65,7 +67,7 @@
 
         <div class="col-sm-3">
           <div class="group-box">
-            <div class="group-image">
+            <div class="group-image-2">
               {% if group.image_display_url %}
                 <img  src="{{group.image_display_url}}"  alt="" alt="{{ value }}">
               {% else %}
@@ -76,11 +78,12 @@
             <div class="box-content">
               <a class="query-tool" href="{{ url }}"><span class="tool-title">{{group.title}}</span></a>
               
-              <article>
-                <span class="short-desc show-read-more">{{ group.description }}</span>
-              </article>
+              <div class="short-desc">
+                <p>{{ group.description }}</p>
+              </div>
+              
                 
-              <a class="query-tool" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
+              <a class="query-tool query-btn" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
             </div> 
             <p class='clearfix'></p>
           </div>
