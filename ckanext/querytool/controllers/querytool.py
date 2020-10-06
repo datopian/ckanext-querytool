@@ -649,6 +649,21 @@ class QueryToolController(base.BaseController):
         return render('querytool/public/base_main.html',
                       extra_vars={'msg': 'Groups'})
 
+
+    def querytool_public_reports(self):
+        '''
+        Lists all available groups
+        :return: base template
+        '''
+        context = _get_context()
+        groups = helpers.get_groups()
+
+        querytools = _get_action('querytool_list_other', {'groups': groups})
+
+        return render('querytool/public/reports.html',
+                      extra_vars={'data': querytools})
+
+
     def querytool_public_list(self, group):
         '''
         List all of the available query tools

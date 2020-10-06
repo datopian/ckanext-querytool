@@ -43,6 +43,9 @@
   </div>
   {% block tools %}
   <div class="container content">
+    <a class="query-tool query-btn" href="/querytool/public/reports">
+      <span class="btn btn-minimal" role="button" style="display: block">{{ _('View All Reports') }}</span>
+    </a>
     <div class="group-items">
       <div class="row">
       {% set groups = h.querytool_get_groups() %}
