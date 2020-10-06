@@ -78,8 +78,10 @@
             <div class="box-content">
               <a class="query-tool" href="{{ url }}"><span class="tool-title">{{group.title}}</span></a>
               
-              <div class="short-desc">
-                <p>{{ group.description }}</p>
+              <div style="min-height:55px;">
+                <div class="short-desc">
+                  <p>{{ group.description }}</p>
+                </div>
               </div>
               
               {% if group.description|length < 100 %}
