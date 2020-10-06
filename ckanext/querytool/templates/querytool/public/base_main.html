@@ -82,7 +82,10 @@
                 <p>{{ group.description }}</p>
               </div>
               
-                
+              {% if group.description|length < 100 %}
+                <p>&nbsp;</p>
+              {% endif %}
+
               <a class="query-tool query-btn" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
             </div> 
             <p class='clearfix'></p>

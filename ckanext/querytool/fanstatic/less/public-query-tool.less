@@ -158,7 +158,6 @@ body {
   font-size: @base-font-size + 8px;
   color:#3a7290;
   padding-top: 20px;
-  text-align: center;
   font-size: 20px;
 }
 
@@ -513,10 +512,18 @@ body {
   }
 
   .short-desc {
-    margin: -5px 0 20px;
+    margin: 0 0 5px 0;
+    min-height:60px;
   }
 }
 
 #item-image {
   height:70px;
+}
+
+
+@media screen and (max-width:768px){
+  .col-sm-3 {
+    width:100%;
+  }
 }
