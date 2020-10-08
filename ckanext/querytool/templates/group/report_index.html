@@ -1,0 +1,56 @@
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _('Groups') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('Design Reports'), controller='ckanext.querytool.controllers.group:QuerytoolGroupController', action='read_all_reports' %}</li>
+{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block page_primary_action %}
+  {% if h.check_access('group_create') %}
+    {% link_for _('Add Group'), controller='group', action='new', class_='btn btn-primary', icon='plus-square' %}
+  {% endif %}
+
+  {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
+
+  {% if h.check_access('querytool_update') %}
+    {% link_for _('Add New Application'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
+  {% endif %}
+{% endblock %}
+
+{% block primary_content_inner %}
+  <h1 class="heading">{{ _('Reports') }}</h1>
+
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="{{ h.url_for(controller='ckanext.querytool.controllers.group:QuerytoolGroupController', action='read_all_reports', ) }}">{{ _('Reports') }}</a></li>
+      <li><a href="/group">{{ _('Groups') }}</a></li>
+    </ul>
+
+ {% block reports_list %}
+    {% set reports = h.querytool_get_all_reports() %}
+    <!-- Tab panes -->
+    <div class="tab-content" style="display:block">
+      <div role="tabpanel" class="tab-pane active" id="applications">
+        <legend>{{ _('Main') }}</legend>
+        {% for querytool in reports %}
+          {% if querytool.type == 'main' %}
+            {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
+          {% endif %}
+        {% endfor%}
+
+        <legend>{{ _('Related') }}</legend>
+        {% for querytool in data %}
+          {% if querytool.type == 'related' %}
+            {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  {% endblock %}
+{% endblock %}
+
+{% block secondary_content %}
+  {% snippet "group/snippets/report_helper.html" %}
+{% endblock %}

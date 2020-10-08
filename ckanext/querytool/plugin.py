@@ -172,6 +172,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
 
         group_controller = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
 
+
+        map.connect('group_read_all_reports',
+                    '/report',
+                    controller=group_controller,
+                    action='read_all_reports')
         map.connect('group_read_report',
                     '/group/{id}/reports',
                     controller=group_controller,

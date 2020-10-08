@@ -22,61 +22,15 @@
 
 {% block primary_content_inner %}
   <h1 class="heading">{{ _('Reports') }}</h1>
+    <ul class="nav nav-tabs">
+      <li><a href="{{ h.url_for(controller='ckanext.querytool.controllers.group:QuerytoolGroupController', action='read_all_reports', ) }}">{{ _('Reports') }}</a></li>
+      <li class="active"><a href="/group">{{ _('Groups') }}</a></li>
+    </ul>
 
-   <!-- Nav tabs -->
-   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#applications" aria-controls="applications" role="tab" data-toggle="tab">Applications</a></li>
-    <li role="presentation"><a href="#groups" aria-controls="groups" role="tab" data-toggle="tab">Groups</a></li>
-  </ul>
-
- {% block reports_list %}
-    {% set reports = h.querytool_get_all_reports() %}
-    <!-- Tab panes -->
     <div class="tab-content" style="display:block">
-      <div role="tabpanel" class="tab-pane active" id="applications">
-        <legend>{{ _('Main') }}</legend>
-        {% for querytool in reports %}
-          {% if querytool.type == 'main' %}
-            {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
-          {% endif %}
-        {% endfor%}
-      </div>
-      <div role="tabpanel" class="tab-pane" id="groups">
-        <legend>{{ _('Related') }}</legend>
-        {% for querytool in data %}
-          {% if querytool.type == 'related' %}
-            {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
-          {% endif %}
-        {% endfor %}
-
-        <h1 class="hide-heading">{{ _('Groups') }}</h1>
-        {% block groups_search_form %}
-          {% snippet 'snippets/search_form.html', form_id='group-search-form', type='group', query=c.q, sorting_selected=c.sort_by_selected, count=c.page.item_count, placeholder=_('Search groups...'), show_empty=request.params, no_bottom_border=true if c.page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
-        {% endblock %}
-        {% block groups_list %}
-          {% if c.page.items or request.params %}
-            {% if c.page.items %}
-              {% snippet "group/snippets/group_list.html", groups=c.page.items %}
-            {% endif %}
-          {% else %}
-            <p class="empty">
-              {{ _('There are currently no groups for this site') }}.
-              {% if h.check_access('group_create') %}
-                {% link_for _('How about creating one?'), controller='group', action='new' %}</a>.
-              {% endif %}
-            </p>
-          {% endif %}
-        {% endblock %}
-      </div>
+      {{ super() }}
     </div>
-  {% endblock %}
 
-     
-      {% block page_pagination %}
-        {{ c.page.pager(q=c.q or '', sort=c.sort_by_selected or '') }}
-      {% endblock %}
-    {% endblock %}
+{% endblock %}
 
-    {% block secondary_content %}
-      {% snippet "group/snippets/helper.html" %}
-    {% endblock %}
+{{ super() }}
