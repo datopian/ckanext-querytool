@@ -31,7 +31,9 @@
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}<h1>{{ _('Welcome') }}</h1>{% endblock %}
-              {% block page_header_description %}<p class="page-desc desc show-read-more">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
+              <div class="long-desc">
+                {% block page_header_description %}<p class="page-desc desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
+              </div>
             {% endblock %}
           </div>
         </div>
@@ -41,9 +43,15 @@
   </div>
   {% block tools %}
   <div class="container content">
+    <a class="query-tool query-btn" href="/querytool/public/reports">
+      <span class="btn btn-minimal" role="button" style="display: block">{{ _('View All Reports') }}</span>
+    </a>
     <div class="group-items">
       <div class="row">
       {% set groups = h.querytool_get_groups() %}
+      
+      {% set count = 1 %}
+
       {% for group in groups %}
       {% set url = h.url_for('querytool_public_list_by_group', group=group.name) %}
           <!-- <div class="span4">
@@ -55,25 +63,50 @@
             </a>
           </div>
         </div> -->
+        
+        {% if count == 1 %}
+        <div class="row">
+        {% endif %}
 
-
-        <div class="group-box">
-          <div class="group-image">
-            {% if group.image_display_url %}
-              <img  src="{{group.image_display_url}}"  alt="" alt="{{ value }}">
-            {% else %}
-              <img src="/base/images/icon-1.svg" alt="">
-            {% endif %}
-          </div>
-          
-          <div class="box-content">
-            <a class="query-tool" href="{{ url }}"><span class="tool-title">{{group.title}}</span></a>
-            <span class="short-desc show-read-more">{{ group.description }}</span>
+        <div class="col-sm-3">
+          <div class="group-box-2">
+            <div class="group-image-2">
+              {% if group.image_display_url %}
+                <img  src="{{group.image_display_url}}"  alt="" alt="{{ value }}">
+              {% else %}
+                <img src="/base/images/icon-1.svg" alt="">
+              {% endif %}
+            </div>
             
-            <a class="query-tool" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
-          </div> 
-          <p class='clearfix'></p>
+            <div class="box-content">
+              <a class="query-tool" href="{{ url }}"><span class="tool-title">{{group.title}}</span></a>
+              
+              <div style="min-height:55px;">
+                <div class="short-desc">
+                  <p>{{ group.description }}</p>
+                </div>
+              </div>
+              
+              {% if group.description|length < 100 %}
+                <p>&nbsp;</p>
+              {% endif %}
+
+              <a class="query-tool query-btn" href="{{ url }}"><span class="btn btn-minimal" role="button">{{ _('List Applications') }}</span></a>
+            </div> 
+            <p class='clearfix'></p>
+          </div>
         </div>
+      
+      {% if count == 3 %}
+      </div>
+      {% endif %}
+
+      {% if count == 3 %}
+        {% set count = 1 %}
+      {% else %}
+        {% set count = count + 1 %}
+      {% endif %}
+
       {% endfor %}
       </div>
     </div>

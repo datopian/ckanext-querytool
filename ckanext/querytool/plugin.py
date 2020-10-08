@@ -152,6 +152,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         map.connect('querytool_public', '/querytool/public/groups',
                     controller=querytool_controller, action='querytool_public')
 
+        map.connect('querytool_public_reports', '/querytool/public/reports',
+                    controller=querytool_controller, action='querytool_public_reports')
+
         map.connect('querytool_public_list_by_group',
                     '/querytool/public/group/{group}',
                     controller=querytool_controller,
