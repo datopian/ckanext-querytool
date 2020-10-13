@@ -24,10 +24,16 @@
 
 {% block page_header_content %}
 
+<style>
+  .page-header h1 {
+    text-align:left;
+  }
+</style>
+
 {% if querytools[0].description %}
 <div class="container-fluid">
   <div class="row-fluid">
-    <div class="span8 offset2">
+    <div style="margin:0 20px;">
       <div class="page-header query-header">
         {{ h.render_markdown(querytools[0].description) }}
         {{ h.render_markdown(querytools[0].additional_description) }}
