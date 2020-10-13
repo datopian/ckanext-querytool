@@ -88,47 +88,44 @@
       <button type="submit" class="btn btn-update" data-anchor="{{ querytool.name }}"> {{ _('Update') }}</button>
     </div>
 
-    <div class="controls" id="{{ querytool.name }}">
-      <div class="flex filters-wrap">
-        
-      </div>
-      <div class="flex buttons">
-          <div class="btn-download">
-              <div class="btn-group dropdown">
-                  <button class="btn btn-large btn-ordinary dropdown-toggle" data-toggle="dropdown" href="#">
-                    <span class="fa fa-download"></span> {{ _('Download') }}
-                    <span class="caret"></span>
-                  </button>
-                  {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
-                  {% set csv = '?format=csv'%}
-                  {% set xml = '?format=xml'%}
-                  {% set json = '?format=json'%}
-                  {% set xlsx = '?format=xlsx'%}
-                  {% set sql_query = '&sql_string=' + querytool.sql_string | replace('+', '%2B') %}
-                  <ul class="dropdown-menu">
-                    <li>
-                      <a href="{{ download_url }}{{ csv }}{{ sql_query }}">CSV</a>
-                    </li>
-                    <li>
-                      <a href="{{ download_url }}{{ xml }}{{ sql_query }}">XML</a>
-                    </li>
-                    <li>
-                      <a href="{{ download_url }}{{ json }}{{ sql_query }}">JSON</a>
-                    </li>
-                    <li>
-                      <a href="{{ download_url }}{{ xlsx }}{{ sql_query }}">Microsoft Excel (OpenXML)</a>
-                    </li>
-                  </ul>
-                </div>
-          </div>
-          
-      </div>
+    <div class="controls" id="{{ querytool.name }}" >
+        <div class="btn-download">
+            <div class="btn-group dropdown">
+                <button class="btn btn-round dropdown-toggle" data-toggle="dropdown" href="#">
+                  {{ _('Download') }} <img src="/base/images/download.svg" width="15" /> 
+                </button>
+                {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
+                {% set csv = '?format=csv'%}
+                {% set xml = '?format=xml'%}
+                {% set json = '?format=json'%}
+                {% set xlsx = '?format=xlsx'%}
+                {% set sql_query = '&sql_string=' + querytool.sql_string | replace('+', '%2B') %}
+                <ul class="dropdown-menu">
+                  <li>
+                    <a href="{{ download_url }}{{ csv }}{{ sql_query }}">CSV</a>
+                  </li>
+                  <li>
+                    <a href="{{ download_url }}{{ xml }}{{ sql_query }}">XML</a>
+                  </li>
+                  <li>
+                    <a href="{{ download_url }}{{ json }}{{ sql_query }}">JSON</a>
+                  </li>
+                  <li>
+                    <a href="{{ download_url }}{{ xlsx }}{{ sql_query }}">Microsoft Excel (OpenXML)</a>
+                  </li>
+                </ul>
+              </div>
+              
+              <button class="btn btn-round" href="#embed-{{ querytools[0].name }}" 
+              data-module="tool-embed" 
+              data-module-id="{{ querytools[0].id }}" > Share <img src="/base/images/share.svg" width="15"/> </button>
+              
+              
+        </div>
     </div>
 
     
-    <div class="col-sm-3">
-
-    </div>
+    <p class="clearfix"></p>
 
     <!-- Visualizations container -->
     <div class="visualizations">
@@ -276,7 +273,7 @@
     <div class="row">
       <div class="span6">
         <div class="input-append">
-          <input class="span4" id="appendedInputButtons" type="text" value="">
+          <input class="span4" id="appendedInputButtonsz" type="text" value="">
           <button class="btn copyToClipboard" type="button">{{ _('Copy') }}</button>
         </div>
       </div>
@@ -308,6 +305,14 @@
                   </div>
                 </div>
                 {{ form.textarea("code", label=_("Code"), value="", classes=["pre"], rows=3) }}
+
+                <br/>
+                <div class="span6">
+                  <div class="input-append">
+                    <input class="span4" id="appendedInputButtons" type="text" value="">
+                    <button class="btn copyToClipboard" type="button">{{ _('Copy') }}</button>
+                  </div>
+                </div>
               </div>
             </div>
           </li>
