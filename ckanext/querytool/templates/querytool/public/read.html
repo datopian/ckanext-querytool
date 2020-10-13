@@ -73,11 +73,13 @@
             {% if y_axis_columns|length == 1 %}
               <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
             {% else %}
-              <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
-              {% for y_axis in y_axis_columns %}
-                <option value="{{ y_axis.name }}" {{ 'selected' if y_axis.name == y_axis_selected }}>{{ y_axis.alias or y_axis.name }}</option>
-              {% endfor %}
-              </select>
+              <div class="select-wrap">
+                <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
+                {% for y_axis in y_axis_columns %}
+                  <option value="{{ y_axis.name }}" {{ 'selected' if y_axis.name == y_axis_selected }}>{{ y_axis.alias or y_axis.name }}</option>
+                {% endfor %}
+                </select>
+              </div>
             {% endif %}
           </div>
         </div>
