@@ -557,3 +557,50 @@ body {
     width:100%;
   }
 }
+
+
+/* Filters */
+.filters-wrapper {
+  height:500px; 
+  width:20%; 
+  margin-left:40px; 
+  margin-top:80px; 
+  background-color: #fcfcfc;
+  border-radius: 7px;
+  padding: 5px; 
+  float:left; 
+  position:relative;
+  box-shadow: 1px 0px 6px #e2e2e2;
+
+  .filters {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+}
+
+.filter-group-wrapper {
+  width:100%;
+
+  .filter-item {
+    width: 100%;
+    margin: 10px 5px 5px 0;
+    display: block;
+
+    label {
+      font-weight:700;
+    }
+
+    select {
+      width:100%;
+      font-weight:600;
+    }
+  }
+}
+
+.btn-update {
+  position: absolute;
+  bottom: 35px;
+  left: 0;
+  width: 90%;
+  margin: 0 5%;
+}
