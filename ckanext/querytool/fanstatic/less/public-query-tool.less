@@ -561,20 +561,38 @@ body {
 
 /* Filters */
 .filters-wrapper {
-  height:500px; 
+  height:550px; 
   width:20%; 
   margin-left:40px; 
   margin-top:80px; 
   background-color: #fcfcfc;
   border-radius: 7px;
-  padding: 5px; 
   float:left; 
   position:relative;
   box-shadow: 1px 0px 6px #e2e2e2;
 
   .filters {
-    max-height: 400px;
+    max-height: 450px;
     overflow-y: auto;
+    padding: 20px;
+  }
+
+  .btn-update {
+    position: absolute;
+    bottom: 35px;
+    left: 0;
+    width: 90%;
+    margin: 0 5%;
+    background-color:#74b783;
+    font-weight:700;
+    color:#fff;
+    padding: 10px 20px;
+    font-size: 1.3em;
+    text-shadow: none;
+  }
+
+  .btn-update:hover {
+    background-color: #6ead7c;
   }
 }
 
@@ -592,15 +610,7 @@ body {
 
     select {
       width:100%;
-      font-weight:600;
     }
   }
 }
 
-.btn-update {
-  position: absolute;
-  bottom: 35px;
-  left: 0;
-  width: 90%;
-  margin: 0 5%;
-}
