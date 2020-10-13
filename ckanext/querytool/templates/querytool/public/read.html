@@ -53,9 +53,9 @@
         {% if querytool.y_axis_column %}
           {% set y_axis_selected = querytool.y_axis_column %}
        {% endif %}
-    <div class="controls" id="{{ querytool.name }}">
-      <div class="flex filters-wrap">
-        <div class="filters">
+
+    <div class="filters-wrapper" style="height:500px; width:20%; background-color:red; margin-left:40px; margin-top:30px; float:left; ">
+      <div class="filters">
           {% if querytool.public_filters  %}
             {% set show_arrow = False %}
             {% for filter in querytool.public_filters %}
@@ -70,7 +70,7 @@
         <div class="filter-group filter-y">
           <label for="{{querytool.name}}_y_axis_column">{{ _('Displayed Measure') }}</label>
           {% if y_axis_columns|length == 1 %}
-             <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
+            <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
           {% else %}
             <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
             {% for y_axis in y_axis_columns %}
@@ -80,6 +80,13 @@
           {% endif %}
         </div>
       </div>
+
+      <button type="submit" class="btn btn-large btn-ordinary btn-update" data-anchor="{{ querytool.name }}"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
+    </div>
+
+    <div class="controls" id="{{ querytool.name }}">
+      <div class="flex filters-wrap">
+        
       </div>
       <div class="flex buttons">
           <div class="btn-download">
@@ -110,9 +117,15 @@
                   </ul>
                 </div>
           </div>
-          <button type="submit" class="btn btn-large btn-ordinary btn-update" data-anchor="{{ querytool.name }}"><span class="fa fa-refresh"></span> {{ _('Update') }}</button>
+          
       </div>
     </div>
+
+    
+    <div class="col-sm-3">
+
+    </div>
+
     <!-- Visualizations container -->
     <div class="visualizations">
       {% set measure = h.querytool_pick_first_by_attr_value(h.querytool_parse_y_axis_columns(querytool.y_axis_columns), 'name', y_axis_selected, default={}) %}
