@@ -1,8 +1,15 @@
 import logging
 import ckan.plugins as p
+import ckan.lib.navl.dictization_functions as df
+
 from ckanext.querytool.model import CkanextQueryTool
+from ckan.common import _
 
 log = logging.getLogger(__name__)
+
+Invalid = df.Invalid
+
+DESCRIPTION_MAX_LENGTH = 300
 
 
 def querytool_name_validator(key, data, errors, context):
@@ -20,3 +27,11 @@ def querytool_name_validator(key, data, errors, context):
         errors[key].append(
             p.toolkit._('This querytool name already exists. '
                         'Choose another one.'))
+
+
+def description_length_validator(description, context):
+    if len(description) > DESCRIPTION_MAX_LENGTH:
+        raise Invalid(_('Description must be at maximum %s characters long') %
+            DESCRIPTION_MAX_LENGTH)
+
+    return description

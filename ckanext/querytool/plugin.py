@@ -1,12 +1,16 @@
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
+import ckan.logic.schema as ckan_schema
+
 from ckan.lib.plugins import DefaultTranslation
 
 import ckanext.querytool.helpers as h
-from ckanext.querytool.model import setup as model_setup
 import ckanext.querytool.helpers as helpers
+
 from ckanext.querytool import actions
-import ckan.logic.schema as ckan_schema
+from ckanext.querytool.logic import validators
+from ckanext.querytool.model import setup as model_setup
+
 
 from ckan.lib.navl.validators import (ignore_missing,
                                       keep_extras,
@@ -21,6 +25,8 @@ from ckan.lib.navl.validators import (ignore_missing,
 
 def group_form_schema():
     schema = ckan_schema.default_group_schema()
+
+    schema['description'] = [ignore_missing, unicode, validators.description_length_validator]
 
     schema['packages'] = {
         "name": [not_empty, unicode],

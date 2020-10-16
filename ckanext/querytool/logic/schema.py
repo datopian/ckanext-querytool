@@ -24,7 +24,7 @@ def querytool_schema():
         'type': [not_empty, unicode],
         'group': [not_empty, unicode],
         'owner_org': [not_empty, unicode],
-        'description': [ignore_missing, unicode],
+        'description': [ignore_missing, unicode, validators.description_length_validator],
         'filters': [not_missing, not_empty, unicode],
         'sql_string': [ignore_missing, unicode],
         'related_querytools': [ignore_missing, unicode],
