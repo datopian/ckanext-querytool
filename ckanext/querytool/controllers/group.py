@@ -32,6 +32,12 @@ parse_params = logic.parse_params
 
 
 class QuerytoolGroupController(GroupController):
+    def read_all_reports(self):
+        groups = helpers.get_groups()
+        reports = helpers._get_action('querytool_list_other', {'groups': groups})
+
+        return self._render_template('group/report_index.html', {'reports': reports})
+
 
     def read_report(self, id, limit=20):
         group_type = self._ensure_controller_matches_group_type(
