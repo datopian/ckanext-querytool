@@ -680,3 +680,33 @@ body {
 .visualizations_ {
   margin-bottom:50px;
 }
+
+/* VIZ Media Query */
+@media screen and (max-width:1200px){
+  .filters-wrapper {
+    width:25%;
+  }
+
+  .c-col-8 {
+    width:62%;
+  }
+
+  .controls-wrap {
+    width:62%; 
+  }
+}
+
+@media screen and (max-width:768px){
+
+  .filters-wrapper {
+    margin-top:0px;
+  }
+
+  .filters-wrapper,.c-col-8,.controls-wrap,.c-col-6   {
+    margin-left:0 !important;
+    margin-right:0 !important;
+    width:100%;
+    padding-left:0;
+    padding-right:0;
+  }
+}
