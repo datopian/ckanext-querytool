@@ -263,6 +263,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_user_permission,
             'get_groups_for_user':
                 helpers.get_groups_for_user,
+            'plotly_chart':
+                helpers.plotly_chart,
         }
 
     # IAuthFunctions

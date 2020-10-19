@@ -1,4 +1,7 @@
 {% import 'macros/form.html' as form %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
 {% set active_charts = chart %}
 {% set main_filters = main_filters.split(',') %}
 {% set y_axis_values = y_axis_values.split(',') %}
@@ -641,6 +644,7 @@
 
   </div>
   <div class="preview-wrapper custom-width">
+      <div id="bar"></div>
       {% if chart %}
           {% set colors = chart.color %}
           {% set x_axis = chart.x_axis %}
