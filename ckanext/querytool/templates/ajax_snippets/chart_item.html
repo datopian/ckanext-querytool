@@ -73,19 +73,6 @@
               </div>
             </div>
 
-            {# Size #}
-            {% set sizes = h.querytool_get_visualization_size() %}
-            <div class="control-group control-select">
-              <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Size') }}</label>
-              <div class="controls ">
-                <select id="chart_field_size_{{ n }}" name="chart_field_size_{{ n }}">
-                  {% for size in sizes %}
-                  <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{ size.text }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-
             {# Color #}
             {% set color_schemes = h.querytool_get_color_scheme() %}
             <div class="control-group control-select">
