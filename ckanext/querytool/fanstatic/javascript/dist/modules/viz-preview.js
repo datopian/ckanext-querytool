@@ -1745,7 +1745,7 @@
                 }
                 if (!["sbar", "shbar", "donut", "pie"].includes(this.options.chart_type)) {
                     if (O.grid = {
-                            y: {
+                                y: {
                                 lines: []
                             }
                         }, this.static_reference_value) {
@@ -1814,30 +1814,37 @@
                        color: color_val[0],
                     }
                 };
+
                 var columns = O.data['columns'];
-                console.log(O);
-                console.log('columns');
-                console.log(columns.length);
-                var tmp = 1;
 
+                var tmp;
+                var data = [];
 
-                O.data['x'] = columns[0];
-                O.data['y'] = columns[1];
+                for (tmp = 1; tmp < columns.length; tmp++) {
+                    var trace = {
+                        x: columns[0],
+                        y: columns[tmp],
+                        type: this.options.chart_type,
+                        name: columns[tmp][0],
+                        marker: {
+                           color: color_val[0],
+                        }
+                    };
+                    data.push(trace);
+                }
 
-                var x = [];
-                var y = [];
+                console.log(data);
+                console.log(_);
 
-                console.log(this.options.y_tick_format);
-                console.log(O);
                 var base_info = {
                     title: this.options.title,
   yaxis: {
-    tickformat: _ // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
+    tickformat: ".0%" // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
   }
                 }
 
 
-                Plotly.newPlot("bar", [O.data], base_info);
+                Plotly.newPlot(this.el[0], data, base_info);
 
             },
             updateChart: function() {
