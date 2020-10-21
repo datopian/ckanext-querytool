@@ -26,9 +26,17 @@ $('.long-desc').readmore({
 });
 
 $(document).ready(function(){
-    // Sample 4
+    generateColorPicker();
+
+    $("#add-visualization-btn").on('click',function(){
+        setTimeout(function() { generateColorPicker(); }, 1000);
+    })
+  });
+
+  function generateColorPicker(){
+    console.log('generate Color picker called')
     $('.colorpicker').paletteColorPicker({
-      colors: [
+        colors: [
         {"green": "green"},
         {"blue": "blue"},
         {"teal": "teal"},
@@ -51,10 +59,9 @@ $(document).ready(function(){
         {"deepskyblue": "deepskyblue"},
         {"lightgreen": "lightgreen"},
         {"mediumvioletred": "mediumvioletred"}
-      ],
-      position: 'downside',
-      clear_btn: null // default -> 'upside'
+        ],
+        position: 'downside',
+        clear_btn: null // default -> 'upside'
     });
-  
-  });
+  }
   
