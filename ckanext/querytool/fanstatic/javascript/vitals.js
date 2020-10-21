@@ -27,30 +27,30 @@ $('.long-desc').readmore({
 
 $(document).ready(function(){
     // Sample 4
-    $('#unique-id-4').paletteColorPicker({
+    $('.colorpicker').paletteColorPicker({
       colors: [
+        {"green": "green"},
         {"blue": "blue"},
+        {"teal": "teal"},
+        {"golden": "#b6992d"},
+        {"yellow": "yellow"},
+        {"orange": "orange"},
         {"brown": "brown"},
+        {"purple": "purple"},
+        {"red": "red"},
         {"burlywood": "burlywood"},
         {"cadetblue": "cadetblue"},
         {"coral": "coral"},
         {"black": "black"},
-        {"crimson": "crimson"},
         {"darkblue": "darkblue"},
-        {"darkgoldenrod": "darkgoldenrod"},
         {"darkgray": "darkgray"},
-        {"darkmagenta": "darkmagenta"},
         {"darkolivegreen": "darkolivegreen"},
-        {"darkorange": "darkorange"},
         {"darkseagreen": "darkseagreen"},
         {"darkslateblue": "darkslateblue"},
         {"darkturquoise": "darkturquoise"},
         {"deeppink": "deeppink"},
         {"deepskyblue": "deepskyblue"},
-        {"gold": "gold"},
-        {"indianred": "indianred"},
         {"lightgreen": "lightgreen"},
-        {"darkslategray": "darkslategray"},
         {"mediumvioletred": "mediumvioletred"}
       ],
       position: 'downside',
