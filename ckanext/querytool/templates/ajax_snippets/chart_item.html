@@ -642,14 +642,14 @@
     </div>
 
   </div>
-  <div style="width:1000px;height:500px;">
+  <div style="width:65%;">
       <div id="bar"></div>
       {% if chart %}
           {% set colors = chart.color %}
           {% set x_axis = chart.x_axis %}
           {% set y_axis = chart.y_axis %}
           {% set chart_type = chart.graph %}
-          {% set title = 'chart.title' %}
+          {% set title = chart.title %}
           {% set show_legend = chart.show_legend %}
           {% set x_text_rotate = chart.x_text_rotate %}
           {% set x_text_multiline = chart.x_text_multiline %}
