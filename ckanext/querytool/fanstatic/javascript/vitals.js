@@ -39,7 +39,6 @@ $(document).ready(function(){
         {"purple": "purple"},
         {"red": "red"},
         {"burlywood": "burlywood"},
-        {"cadetblue": "cadetblue"},
         {"coral": "coral"},
         {"black": "black"},
         {"darkblue": "darkblue"},
