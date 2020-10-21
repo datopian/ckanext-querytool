@@ -1431,6 +1431,9 @@
                         var G = e.find("[id*=text_box_description_]"),
                             J = e.find("[id*=text_box_size_]");
                         e.attr("id", "text_box_" + i), G.attr("id", "text_box_description_" + i), G.attr("name", "text_box_description_" + i), J.attr("id", "text_box_size_" + i), J.attr("name", "text_box_size_" + i)
+                    } else if (e.context.id.indexOf("break_line") >= 0) {
+                        var G = e.find("[id*=line_break_desc]");
+                        e.attr("id", "break_line_" + i), G.attr("id", "line_break_desc_" + i), G.attr("name", "line_break_desc_" + i)
                     } else if (e.context.id.indexOf("image_item") >= 0) {
                         var W = e.find("[name*=media_image_url_]"),
                             H = (J = e.find("[id*=image_field_size_]"), e.find("[name*=media_image_upload_]")),
@@ -1518,7 +1521,7 @@
                     e.prepend(t);
                     d(a), g()
                 }): "break-line" == t ? i.getTemplate("break_line_item.html", {
-                    number: a
+                    n: a
                 }).done(function(t) {
                     e.prepend(t);
                     g()
