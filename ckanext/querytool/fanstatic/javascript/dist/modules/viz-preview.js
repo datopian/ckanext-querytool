@@ -1569,7 +1569,6 @@
                 }, O.tooltip = {
                     format: {}
                 };
-
                 var F = d ? "" : _ || m || "",
                     M = y;
                 if ("sbar" === this.options.chart_type && "shbar" === this.options.chart_type || g || this.sortData(y, r, i, n), O.legend = {
@@ -1649,8 +1648,7 @@
                                 }
                             }
                         }
-                        }
-                    };
+                    }
                     var D = [];
                     if (g) {
                         var q = {};
@@ -1742,10 +1740,10 @@
                     }, O.point = {
                         r: 3
                     }
-
+                }
                 if (!["sbar", "shbar", "donut", "pie"].includes(this.options.chart_type)) {
                     if (O.grid = {
-                                y: {
+                            y: {
                                 lines: []
                             }
                         }, this.static_reference_value) {
@@ -1782,8 +1780,7 @@
                         top: 50
                     }, ["bar", "hbar"].includes(this.options.chart_type) && (O.axis.y.padding.bottom = 0))
                 } ["line", "area", "spline", "scatter", "bscatter", "bar", "hbar", "sbar", "shbar"].includes(this.options.chart_type) && v && (O.axis.y.min = 0, O.axis.y.padding = O.axis.y.padding || {}, O.axis.y.padding.bottom = 0);
-                ///c3.generate(O)
-
+                console.log(O);
                 console.log(O.data);
                 console.log(this.options.chart_type);
 
@@ -1798,6 +1795,8 @@
                     tickformat: ".0%" // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
                   }
                 }
+
+
 
                 for (tmp = 1; tmp < columns.length; tmp++) {
                     var trace = {
@@ -1831,11 +1830,51 @@
 
                 console.log(data);
                 console.log(_);
+                var a = 0;
+                var x = [];
+                var y = [];
+
+                if ('pie' === this.options.chart_type) {
+                    for (a=0; a < columns.length; a++){
+
+                            x.push(columns[a][0]);
+                            console.log(x);
+                            y.push(columns[a][1]);
+                    };
+
+                    var trace = {
+                        labels: x,
+                        values: y,
+                        type: 'pie',
+                    };
+                    data = [];
+                    data.push(trace);
+                }
+
+                if ( 'donut' === this.options.chart_type) {
+                                    for (a=0; a < columns.length; a++){
+
+                            x.push(columns[a][0]);
+                            console.log(x);
+                            y.push(columns[a][1]);
+                    };
+
+                    var trace = {
+                        labels: x,
+                        values: y,
+                          hole: .4,
+
+                        type: 'pie',
+                    };
+                    data = [];
+                    data.push(trace);
+                }
+                console.log(data);
 
 
-                //Plotly.newPlot("bar", data, base_info);
-                Plotly.newPlot(this.el[0], data, base_info);
 
+               Plotly.newPlot("bar", data, base_info);
+               // Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
                 var t = this.el.closest(".chart_field"),
