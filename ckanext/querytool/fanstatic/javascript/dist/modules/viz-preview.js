@@ -1871,16 +1871,12 @@
                 }
 
                 if ( 'scatter' === this.options.chart_type) {
-                     for (a=0; a < columns.length; a++){
 
-                            x.push(columns[a][0]);
-                            y.push(columns[a][1]);
-                    };
 
                     var trace = {
-                        x: ["指标", "指标", "指标", "指标"],
-                        y: [0.8137, 0.6999, 0.6131],
-                        lines: "markers",
+                        x: O.axis['x']['categories'],
+                        y: columns[0].slice(1),
+                        mode: "markers",
 
                         type: this.options.chart_type,
                     };
