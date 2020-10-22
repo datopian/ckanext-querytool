@@ -1791,9 +1791,7 @@
 
                 var base_info = {
                     title: this.options.title,
-                  yaxis: {
-                    tickformat: ".0%" // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
-                  }
+
                 }
 
 
@@ -1821,9 +1819,13 @@
 
                     }
                     else if ('area' === this.options.chart_type){
-                                            trace['type'] = "scatter";
+                         trace['type'] = "scatter";
 
+                    }
+                    else if ('scatter' === this.options.chart_type){
+                          trace['mode'] = 'markers';
                     };
+
                     console.log(trace);
                     data.push(trace);
                 }
@@ -1838,7 +1840,6 @@
                     for (a=0; a < columns.length; a++){
 
                             x.push(columns[a][0]);
-                            console.log(x);
                             y.push(columns[a][1]);
                     };
 
@@ -1855,7 +1856,6 @@
                                     for (a=0; a < columns.length; a++){
 
                             x.push(columns[a][0]);
-                            console.log(x);
                             y.push(columns[a][1]);
                     };
 
@@ -1869,6 +1869,24 @@
                     data = [];
                     data.push(trace);
                 }
+
+                if ( 'scatter' === this.options.chart_type) {
+                     for (a=0; a < columns.length; a++){
+
+                            x.push(columns[a][0]);
+                            y.push(columns[a][1]);
+                    };
+
+                    var trace = {
+                        x: ["指标", "指标", "指标", "指标"],
+                        y: [0.8137, 0.6999, 0.6131],
+                        lines: "markers",
+
+                        type: this.options.chart_type,
+                    };
+                    data = [];
+                    data.push(trace);
+                }                console.log('this is the data')
                 console.log(data);
 
 
