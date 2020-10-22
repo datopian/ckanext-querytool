@@ -1,4 +1,7 @@
 {% import 'macros/form.html' as form %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
 {% set active_charts = chart %}
 {% set main_filters = main_filters.split(',') %}
 {% set y_axis_values = y_axis_values.split(',') %}
@@ -70,19 +73,6 @@
               </div>
             </div>
 
-            {# Size #}
-            {% set sizes = h.querytool_get_visualization_size() %}
-            <div class="control-group control-select">
-              <label class="control-label" for="chart_field_size_{{ n }}">{{ _('Size') }}</label>
-              <div class="controls ">
-                <select id="chart_field_size_{{ n }}" name="chart_field_size_{{ n }}">
-                  {% for size in sizes %}
-                  <option value="{{ size.value }}" {% if chart %}{{ 'selected' if size.value == chart.size }}{% endif %} >{{ size.text }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-
             {# Color #}
             {% set color_schemes = h.querytool_get_color_scheme() %}
             <div class="control-group control-select">
@@ -101,6 +91,7 @@
                 <textarea id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" placeholder="{{ _('Chart title') }}" rows="3">{{ chart_title }}</textarea>
               </div>
             </div>
+
             <div class="control-group title-vars">
               <div class="controls ">
                 {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
@@ -122,6 +113,7 @@
                     <option value="{optional_filter|lower}">{{_('Optional Filter')}}</option>
                   </optgroup>
                 </select>
+
               </div>
             </div>
             <div class="control-group title-help">
@@ -131,6 +123,16 @@
               </div>
             </div>
 
+            {# Additional description #}
+            {% if chart %}
+              {% set additional_description = chart.additional_description %}
+            {% endif %}
+            <div class="control-group desc">
+              <label class="control-label" for="chart_field_desc_{{ n }}">{{ _('Additional Description') }}</label>
+              <div class="controls ">
+                <textarea id="chart_field_desc_{{ n }}" name="chart_field_desc_{{ n }}" placeholder="{{ _('Additional description') }}" rows="3">{{ additional_description }}</textarea>
+              </div>
+            </div>
 
           </div>
         </div>
@@ -625,6 +627,7 @@
 
   </div>
   <div class="preview-wrapper custom-width">
+      <div id="bar"></div>
       {% if chart %}
           {% set colors = chart.color %}
           {% set x_axis = chart.x_axis %}

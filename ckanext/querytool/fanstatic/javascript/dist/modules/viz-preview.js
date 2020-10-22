@@ -1569,6 +1569,7 @@
                 }, O.tooltip = {
                     format: {}
                 };
+
                 var F = d ? "" : _ || m || "",
                     M = y;
                 if ("sbar" === this.options.chart_type && "shbar" === this.options.chart_type || g || this.sortData(y, r, i, n), O.legend = {
@@ -1648,7 +1649,8 @@
                                 }
                             }
                         }
-                    }
+                        }
+                    };
                     var D = [];
                     if (g) {
                         var q = {};
@@ -1740,10 +1742,10 @@
                     }, O.point = {
                         r: 3
                     }
-                }
+
                 if (!["sbar", "shbar", "donut", "pie"].includes(this.options.chart_type)) {
                     if (O.grid = {
-                            y: {
+                                y: {
                                 lines: []
                             }
                         }, this.static_reference_value) {
@@ -1780,7 +1782,60 @@
                         top: 50
                     }, ["bar", "hbar"].includes(this.options.chart_type) && (O.axis.y.padding.bottom = 0))
                 } ["line", "area", "spline", "scatter", "bscatter", "bar", "hbar", "sbar", "shbar"].includes(this.options.chart_type) && v && (O.axis.y.min = 0, O.axis.y.padding = O.axis.y.padding || {}, O.axis.y.padding.bottom = 0);
-                c3.generate(O)
+                ///c3.generate(O)
+
+                console.log(O.data);
+                console.log(this.options.chart_type);
+
+                var color_val = O.color['pattern'];
+                var data = []
+                var columns = O.data['columns'];
+                var tmp;
+
+                var base_info = {
+                    title: this.options.title,
+                  yaxis: {
+                    tickformat: ".0%" // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
+                  }
+                }
+
+                for (tmp = 1; tmp < columns.length; tmp++) {
+                    var trace = {
+                        x: columns[0],
+                        y: columns[tmp],
+                        type: this.options.chart_type,
+                        name: columns[tmp][0],
+                        marker: {
+                           color: color_val[0],
+                        },
+                        width: 3
+                    };
+
+                    if ('hbar' === this.options.chart_type) {
+                        trace['orientation'] = "h";
+                        trace['type'] = "bar";
+                    }
+                    else if ('sbar' === this.options.chart_type) {
+                        console.log('IN sbar');
+                        trace['type'] = "bar";
+                        base_info['barmode'] = "stack";
+
+                    }
+                    else if ('area' === this.options.chart_type){
+                                            trace['type'] = "scatter";
+
+                    };
+                    console.log(trace);
+                    data.push(trace);
+                }
+
+                console.log(data);
+                console.log(_);
+
+
+                //Plotly.newPlot("bar", data, base_info);
+                Plotly.newPlot(this.el[0], data, base_info);
+
             },
             updateChart: function() {
                 var t = this.el.closest(".chart_field"),
