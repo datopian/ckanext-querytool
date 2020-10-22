@@ -1882,7 +1882,21 @@
                     };
                     data = [];
                     data.push(trace);
-                }                console.log('this is the data')
+                }
+
+                if ( 'line' === this.options.chart_type) {
+
+                    var trace = {
+                        x: O.axis['x']['categories'],
+                        y: columns[0].slice(1),
+                        name: columns[0][0],
+                        type: 'scatter',
+                    };
+                    data = [];
+                    data.push(trace);
+                }
+                console.log('this is the data')
+                console.log(columns[0][0])
                 console.log(data);
 
 
