@@ -1885,18 +1885,44 @@
                 }
 
                 if ( 'line' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
+                    console.log('categories');
+                    console.log(categories);
 
+                    if (categories === 'undefined' || categories !== ''){
+                    var x = columns[0].slice(1);
+                    console.log(x);
+                    var y = [];
+                    console.log('categorties is undefined');
+                    for (tmp = 1; tmp < columns.length; tmp++) {
+                        var values = columns[tmp][1];
+                         y.push(values);
+                         console.log(y);
+                    };
+                    var trace = {
+                        x: x,
+                        y: y,
+                        type: 'scatter',
+                        marker: {
+                           color: color_val[0],
+                        },
+                        width: 3
+                    };
+
+                    } else {
+                    console.log('We are in else')
                     var trace = {
                         x: O.axis['x']['categories'],
                         y: columns[0].slice(1),
                         name: columns[0][0],
                         type: 'scatter',
                     };
+                    };
                     data = [];
                     data.push(trace);
-                }
+                };
                 console.log('this is the data')
-                console.log(columns[0][0])
+                console.log(columns[0])
                 console.log(data);
 
 
