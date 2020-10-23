@@ -1788,47 +1788,52 @@
                 var data = []
                 var columns = O.data['columns'];
                 var tmp;
+                var format = this.options.data_format;
 
                 var base_info = {
                     title: this.options.title,
+                    xaxis: {
+                        tickformat: format,
+                    },
+                    yaxis: {
+                        tickformat: format,
+                    }
 
                 }
 
-
-
-                for (tmp = 1; tmp < columns.length; tmp++) {
-                    var trace = {
-                        x: columns[0],
-                        y: columns[tmp],
-                        type: this.options.chart_type,
-                        name: columns[tmp][0],
-                        marker: {
-                           color: color_val[0],
-                        },
-                        width: 3
-                    };
-
-                    if ('hbar' === this.options.chart_type) {
-                        trace['orientation'] = "h";
-                        trace['type'] = "bar";
-                    }
-                    else if ('sbar' === this.options.chart_type) {
-                        console.log('IN sbar');
-                        trace['type'] = "bar";
-                        base_info['barmode'] = "stack";
-
-                    }
-                    else if ('area' === this.options.chart_type){
-                         trace['type'] = "scatter";
-
-                    }
-                    else if ('scatter' === this.options.chart_type){
-                          trace['mode'] = 'markers';
-                    };
-
-                    console.log(trace);
-                    data.push(trace);
-                }
+//                for (tmp = 1; tmp < columns.length; tmp++) {
+//                    var trace = {
+//                        x: columns[0],
+//                        y: columns[tmp],
+//                        type: this.options.chart_type,
+//                        name: columns[tmp][0],
+//                        marker: {
+//                           color: color_val[0],
+//                        },
+//                        width: 3
+//                    };
+//
+//                    if ('hbar' === this.options.chart_type) {
+//                        trace['orientation'] = "h";
+//                        trace['type'] = "bar";
+//                    }
+//                    else if ('sbar' === this.options.chart_type) {
+//                        console.log('IN sbar');
+//                        trace['type'] = "bar";
+//                        base_info['barmode'] = "stack";
+//
+//                    }
+//                    else if ('area' === this.options.chart_type){
+//                         trace['type'] = "scatter";
+//
+//                    }
+//                    else if ('scatter' === this.options.chart_type){
+//                          trace['mode'] = 'markers';
+//                    };
+//
+//                    console.log(trace);
+//                    data.push(trace);
+//                }
 
                 console.log(data);
                 console.log(_);
@@ -1886,45 +1891,189 @@
 
                 if ( 'line' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
-                    console.log('categories');
-                    console.log(categories);
+                    var format = this.options.data_format;
 
-                    if (categories === 'undefined' || categories !== ''){
+                    if (categories === undefined){
                     var x = columns[0].slice(1);
-                    console.log(x);
-                    var y = [];
-                    console.log('categorties is undefined');
-                    for (tmp = 1; tmp < columns.length; tmp++) {
-                        var values = columns[tmp][1];
-                         y.push(values);
-                         console.log(y);
-                    };
+                    var tmp ;
+
+                    for (tmp=1; tmp < columns.length; tmp++){
+                    var name = columns[tmp][0];
                     var trace = {
                         x: x,
-                        y: y,
+                        y: columns[tmp].slice(1),
                         type: 'scatter',
+                        name: name,
                         marker: {
                            color: color_val[0],
                         },
                         width: 3
                     };
+                        data.push(trace);
+                    }
 
                     } else {
-                    console.log('We are in else')
                     var trace = {
-                        x: O.axis['x']['categories'],
+                        x: categories,
                         y: columns[0].slice(1),
                         name: columns[0][0],
                         type: 'scatter',
                     };
-                    };
-                    data = [];
                     data.push(trace);
+                    };
+
                 };
+if ( 'spline' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
+
+                    if (categories === undefined){
+                    var x = columns[0].slice(1);
+                    var tmp ;
+
+                    for (tmp=1; tmp < columns.length; tmp++){
+                    var name = columns[tmp][0];
+                    var trace = {
+                        x: x,
+                        y: columns[tmp].slice(1),
+                        type: 'scatter',
+                        name: name,
+                        marker: {
+                           color: color_val[0],
+                        },
+                        width: 3,
+                          line: {shape: 'spline'},
+
+                    };
+                        data.push(trace);
+                    }
+
+                    } else {
+                    var trace = {
+                        x: categories,
+                        y: columns[0].slice(1),
+                        name: columns[0][0],
+                        type: 'scatter',
+                          line: {shape: 'spline'},
+                    };
+                    data.push(trace);
+                    };
+
+                };
+
+                if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
+
+                    if (categories === undefined){
+                    var x = columns[0].slice(1);
+                    var tmp ;
+
+                    for (tmp=1; tmp < columns.length; tmp++){
+                    var name = columns[tmp][0];
+                    var trace = {
+                        x: x,
+                        y: columns[tmp].slice(1),
+                        type: 'bar',
+                        name: name,
+                        marker: {
+                           color: color_val[0],
+                        },
+                        width: 4,
+                    };
+                        data.push(trace);
+                    }
+
+                    } else {
+                    console.log ('else')
+                    var trace = {
+                        x: categories,
+                        y: columns[0].slice(1),
+                        type: 'bar',
+                        width: 0.8,
+                    };
+                    data.push(trace);
+                    };
+
+                };
+
+if ( 'hbar' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
+
+                    if (categories === undefined){
+                    var x = columns[0].slice(1);
+                    var tmp ;
+
+                    for (tmp=1; tmp < columns.length; tmp++){
+                    var name = columns[tmp][0];
+                    var trace = {
+                        x: columns[tmp],.slice(1),
+                        y: x,
+                        type: 'bar',
+                        name: name,
+                        marker: {
+                           color: color_val[0],
+                        },
+                        orientation: 'h',
+                        width: 0.8,
+                    };
+                        data.push(trace);
+                    }
+
+                    } else {
+                    console.log ('else')
+                    var trace = {
+                        x: columns[0].slice(1),
+                        y: categories,
+                        type: 'bar',
+                        orientation: 'h',
+                                                width: 0.8,
+                    };
+                    data.push(trace);
+                    };
+
+                };
+
+if ( 'area' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
+
+                    if (categories === undefined){
+                    var x = columns[0].slice(1);
+                    var tmp ;
+
+                    for (tmp=1; tmp < columns.length; tmp++){
+                    var name = columns[tmp][0];
+                    var trace = {
+                        x: x,
+                        y: columns[tmp].slice(1),
+                        type: 'scatter',
+                        name: name,
+  fill: 'tozeroy',
+
+                        marker: {
+                           color: color_val[0],
+                        },
+                        orientation: 'h'
+                    };
+                        data.push(trace);
+                    }
+
+                    } else {
+                    console.log ('else')
+                    var trace = {
+                        x: categories,
+                          fill: 'tozeroy',
+
+                        y: columns[0].slice(1),
+                        type: 'scatter',
+                    };
+                    data.push(trace);
+                    };
+
+                };
+
                 console.log('this is the data')
                 console.log(columns[0])
                 console.log(data);
-
+                console.log(this.options.data_format);
 
 
                Plotly.newPlot("bar", data, base_info);
