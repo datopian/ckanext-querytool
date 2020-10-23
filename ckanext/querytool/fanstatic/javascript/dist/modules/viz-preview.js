@@ -2005,7 +2005,7 @@ if ( 'hbar' === this.options.chart_type) {
                     for (tmp=1; tmp < columns.length; tmp++){
                     var name = columns[tmp][0];
                     var trace = {
-                        x: columns[tmp],.slice(1),
+                        x: columns[tmp].slice(1),
                         y: x,
                         type: 'bar',
                         name: name,
@@ -2076,8 +2076,8 @@ if ( 'area' === this.options.chart_type) {
                 console.log(this.options.data_format);
 
 
-               Plotly.newPlot("bar", data, base_info);
-               // Plotly.newPlot(this.el[0], data, base_info);
+               //Plotly.newPlot("bar", data, base_info);
+               Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
                 var t = this.el.closest(".chart_field"),
