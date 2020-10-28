@@ -1791,7 +1791,6 @@
                 var format = this.options.data_format;
 
                 var base_info = {
-                    title: this.options.title,
                     xaxis: {
                         tickformat: format,
                     },
