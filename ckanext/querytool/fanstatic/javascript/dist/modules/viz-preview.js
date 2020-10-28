@@ -1918,6 +1918,9 @@
                         y: columns[0].slice(1),
                         name: columns[0][0],
                         type: 'scatter',
+                        marker: {
+                          color: color_val[0],
+                        }
                     };
                     data.push(trace);
                     };
@@ -1952,8 +1955,11 @@ if ( 'spline' === this.options.chart_type) {
                         x: categories,
                         y: columns[0].slice(1),
                         name: columns[0][0],
+                        marker: {
+                           color: color_val[0],
+                        },
                         type: 'scatter',
-                          line: {shape: 'spline'},
+                        line: {shape: 'spline'},
                     };
                     data.push(trace);
                     };
@@ -1987,6 +1993,9 @@ if ( 'spline' === this.options.chart_type) {
                     var trace = {
                         x: categories,
                         y: columns[0].slice(1),
+                        marker: {
+                           color: color_val[0],
+                        },
                         type: 'bar',
                         width: 0.8,
                     };
@@ -2025,7 +2034,10 @@ if ( 'hbar' === this.options.chart_type) {
                         y: categories,
                         type: 'bar',
                         orientation: 'h',
-                                                width: 0.8,
+                        width: 0.8,
+                        marker: {
+                           color: color_val[0],
+                        },
                     };
                     data.push(trace);
                     };
@@ -2046,8 +2058,7 @@ if ( 'area' === this.options.chart_type) {
                         y: columns[tmp].slice(1),
                         type: 'scatter',
                         name: name,
-  fill: 'tozeroy',
-
+                        fill: 'tozeroy',
                         marker: {
                            color: color_val[0],
                         },
@@ -2060,8 +2071,10 @@ if ( 'area' === this.options.chart_type) {
                     console.log ('else')
                     var trace = {
                         x: categories,
-                          fill: 'tozeroy',
-
+                        fill: 'tozeroy',
+                        marker: {
+                           color: color_val[0],
+                        },
                         y: columns[0].slice(1),
                         type: 'scatter',
                     };
