@@ -2081,14 +2081,57 @@ if ( 'area' === this.options.chart_type) {
                     };
 
                 };
+               var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
+               var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
+               if (typeof(chart_plotly) != 'undefined' && chart_plotly != null){
+                 document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(data);
+                 var parent = document.getElementById("chart_field_plotly_"+item_no)
+                    var tag = document.createElement("div");
+                       var text = document.createTextNode("Tutorix is the best e-learning platform");
+                    parent.appendChild(tag);
 
-                console.log('this is the data')
-                console.log(columns[0])
-                console.log(data);
-                console.log(this.options.data_format);
+               }
 
+                var len_data = data.length;
+                var tmp ;
+                var len_count = 1;
+                var data_tmp = data;
 
-               //Plotly.newPlot("bar", data, base_info);
+                for (tmp = 0; tmp < len_data; tmp++){
+                    var color_count = 1;
+                    var d = data_tmp[tmp];
+
+                    for (color_count = 1; color_count <= len_data; color_count++){
+                    var c = "chart_field_plotly_"+ len_count +"_"+color_count
+                    var color_tmp = document.querySelectorAll('[data-target='+c+']');
+
+                    if (color_tmp.length >= 1){
+                        var color = color_tmp[0].style.cssText;
+                        var new_color = color.split(": ")[1].slice(0, -1);
+                        console.log(new_color);
+                        console.log(color_count-1);
+                        data_tmp[color_count-1]['marker'] = {'color': new_color};
+                       }
+                    }
+                    len_count = len_count + 1;
+                }
+
+               data = data_tmp;
+               console.log(item_no);
+               var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
+               var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
+               if (typeof(chart_plotly) != 'undefined' && chart_plotly != null){
+
+               console.log('plotly');
+               console.log(chart_plotly);
+               document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(data);
+                                var parent = document.getElementById("chart_field_plotly_"+item_no)
+                    var tag = document.createElement("div");
+                       var text = document.createTextNode("Tutorix is the best e-learning platform");
+                    parent.appendChild(tag);
+
+               }
+
                Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
@@ -2128,7 +2171,8 @@ if ( 'area' === this.options.chart_type) {
                 if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P) return this.options.colors = n, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, void this.createChart(this.fetched_data);
                 this.options.colors = n, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I;
                 var A = this.create_sql();
-                this.get_resource_datа(A)
+                this.get_resource_datа(A);
+
             },
             deleteChart: function() {
                 this.el.closest(".chart_field").remove()

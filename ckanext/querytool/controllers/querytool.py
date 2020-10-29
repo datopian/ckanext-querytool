@@ -304,6 +304,8 @@ class QueryToolController(base.BaseController):
             'name': querytool
         }
 
+        print data_dict
+
         context = _get_context()
 
         try:
@@ -400,6 +402,8 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_sort_{}'.format(id))
                     visualization['additional_description'] = \
                         data.get('chart_field_desc_{}'.format(id))
+                    visualization['plotly'] = \
+                        data.get('chart_field_plotly_{}'.format(id))
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
                         visualization['x_text_multiline'] = 'true'
                     else:
