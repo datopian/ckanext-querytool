@@ -159,7 +159,7 @@
           {% set sizeClass = 'c-col-6' %}
         {% endif %}
 
-      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
+      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
         <h3>{{ item. title }}</h3>
         {% if item.type == 'chart'  %}
            {% if item.filter_visibility == 'public'  %}
