@@ -84,7 +84,7 @@
               'title': key,
               'data-color': col,
               'data-name': key
-            }).css('background-color', col);
+            }).css({background:col});
 
         if ( key === current_value ) {
           $sw.addClass('active');

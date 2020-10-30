@@ -27,9 +27,10 @@ $('.long-desc').readmore({
 
 $(document).ready(function(){
     generateColorPicker();
+    generateColorPicker2();
 
     $("#add-visualization-btn").on('click',function(){
-        setTimeout(function() { generateColorPicker(); }, 1000);
+        setTimeout(function() { generateColorPicker(); generateColorPicker2(); }, 1000);
     })
   });
 
@@ -60,7 +61,18 @@ $(document).ready(function(){
         {"lightgreen": "lightgreen"},
         {"mediumvioletred": "mediumvioletred"}
         ],
-        position: 'downside',
+        clear_btn: null // default -> 'upside'
+    });
+  }
+
+  function generateColorPicker2(){
+    console.log('generate Color picker called')
+    $('.colorpicker_sequential').paletteColorPicker({
+        custom_class: 'wide',
+        colors: [
+        {"green1": "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 24%, rgba(5,105,184,1) 63%, rgba(0,212,255,1) 87%)"},
+        {"green2": "#117279"},
+        ],
         clear_btn: null // default -> 'upside'
     });
   }
