@@ -1780,9 +1780,7 @@
                         top: 50
                     }, ["bar", "hbar"].includes(this.options.chart_type) && (O.axis.y.padding.bottom = 0))
                 } ["line", "area", "spline", "scatter", "bscatter", "bar", "hbar", "sbar", "shbar"].includes(this.options.chart_type) && v && (O.axis.y.min = 0, O.axis.y.padding = O.axis.y.padding || {}, O.axis.y.padding.bottom = 0);
-                console.log(O);
-                console.log(O.data);
-                console.log(this.options.chart_type);
+
 
                 var color_val = O.color['pattern'];
                 var data = []
@@ -1834,8 +1832,6 @@
 //                    data.push(trace);
 //                }
 
-                console.log(data);
-                console.log(_);
                 var a = 0;
                 var x = [];
                 var y = [];
@@ -2112,6 +2108,21 @@ if ( 'area' === this.options.chart_type) {
                         console.log(color_count-1);
                         data_tmp[color_count-1]['marker'] = {'color': new_color};
                        }
+
+               var newcontent = document.createElement('div');
+               var html = '';
+               html += '<div class="control-group control-select">'
+               html += '<label class="control-label" for="chart_field_plotly_' + item_no + '_' + color_count +'">' + d['name'] + '</label>'
+              html += '<div class="palette-color-picker-button" data-target="chart_field_color_1" style="background: darkseagreen;"><div class="palette-color-picker-bubble downside"><span class="swatch" title="green" data-color="green" data-name="green" style="background-color: green;"></span><span class="swatch" title="blue" data-color="blue" data-name="blue" style="background-color: blue;"></span><span class="swatch" title="teal" data-color="teal" data-name="teal" style="background-color: teal;"></span><span class="swatch" title="golden" data-color="#b6992d" data-name="golden" style="background-color: rgb(182, 153, 45);"></span><span class="swatch" title="yellow" data-color="yellow" data-name="yellow" style="background-color: yellow;"></span><span class="swatch" title="orange" data-color="orange" data-name="orange" style="background-color: orange;"></span><span class="swatch" title="brown" data-color="brown" data-name="brown" style="background-color: brown;"></span><span class="swatch" title="purple" data-color="purple" data-name="purple" style="background-color: purple;"></span><span class="swatch" title="red" data-color="red" data-name="red" style="background-color: red;"></span><span class="swatch" title="burlywood" data-color="burlywood" data-name="burlywood" style="background-color: burlywood;"></span><span class="swatch" title="coral" data-color="coral" data-name="coral" style="background-color: coral;"></span><span class="swatch" title="black" data-color="black" data-name="black" style="background-color: black;"></span><span class="swatch" title="darkblue" data-color="darkblue" data-name="darkblue" style="background-color: darkblue;"></span><span class="swatch" title="darkgray" data-color="darkgray" data-name="darkgray" style="background-color: darkgray;"></span><span class="swatch" title="darkolivegreen" data-color="darkolivegreen" data-name="darkolivegreen" style="background-color: darkolivegreen;"></span><span class="swatch active" title="darkseagreen" data-color="darkseagreen" data-name="darkseagreen" style="background-color: darkseagreen;"></span><span class="swatch" title="darkslateblue" data-color="darkslateblue" data-name="darkslateblue" style="background-color: darkslateblue;"></span><span class="swatch" title="darkturquoise" data-color="darkturquoise" data-name="darkturquoise" style="background-color: darkturquoise;"></span><span class="swatch" title="deeppink" data-color="deeppink" data-name="deeppink" style="background-color: deeppink;"></span><span class="swatch" title="deepskyblue" data-color="deepskyblue" data-name="deepskyblue" style="background-color: deepskyblue;"></span><span class="swatch" title="lightgreen" data-color="lightgreen" data-name="lightgreen" style="background-color: lightgreen;"></span><span class="swatch" title="mediumvioletred" data-color="mediumvioletred" data-name="mediumvioletred" style="background-color: mediumvioletred;"></span></div></div>'
+              html += '<div class="palette-color-picker-bubble downside" style="display: none;"><span class="swatch" title="green" data-color="green" data-name="green" style="background-color: green;"></span><span class="swatch" title="blue" data-color="blue" data-name="blue" style="background-color: blue;"></span><span class="swatch" title="teal" data-color="teal" data-name="teal" style="background-color: teal;"></span><span class="swatch" title="golden" data-color="#b6992d" data-name="golden" style="background-color: rgb(182, 153, 45);"></span><span class="swatch" title="yellow" data-color="yellow" data-name="yellow" style="background-color: yellow;"></span><span class="swatch" title="orange" data-color="orange" data-name="orange" style="background-color: orange;"></span><span class="swatch" title="brown" data-color="brown" data-name="brown" style="background-color: brown;"></span><span class="swatch" title="purple" data-color="purple" data-name="purple" style="background-color: purple;"></span><span class="swatch" title="red" data-color="red" data-name="red" style="background-color: red;"></span><span class="swatch" title="burlywood" data-color="burlywood" data-name="burlywood" style="background-color: burlywood;"></span><span class="swatch" title="coral" data-color="coral" data-name="coral" style="background-color: coral;"></span><span class="swatch" title="black" data-color="black" data-name="black" style="background-color: black;"></span><span class="swatch" title="darkblue" data-color="darkblue" data-name="darkblue" style="background-color: darkblue;"></span><span class="swatch" title="darkgray" data-color="darkgray" data-name="darkgray" style="background-color: darkgray;"></span><span class="swatch" title="darkolivegreen" data-color="darkolivegreen" data-name="darkolivegreen" style="background-color: darkolivegreen;"></span><span class="swatch active" title="darkseagreen" data-color="darkseagreen" data-name="darkseagreen" style="background-color: darkseagreen;"></span><span class="swatch" title="darkslateblue" data-color="darkslateblue" data-name="darkslateblue" style="background-color: darkslateblue;"></span><span class="swatch" title="darkturquoise" data-color="darkturquoise" data-name="darkturquoise" style="background-color: darkturquoise;"></span><span class="swatch" title="deeppink" data-color="deeppink" data-name="deeppink" style="background-color: deeppink;"></span><span class="swatch" title="deepskyblue" data-color="deepskyblue" data-name="deepskyblue" style="background-color: deepskyblue;"></span><span class="swatch" title="lightgreen" data-color="lightgreen" data-name="lightgreen" style="background-color: lightgreen;"></span><span class="swatch" title="mediumvioletred" data-color="mediumvioletred" data-name="mediumvioletred" style="background-color: mediumvioletred;"></span></div>'
+              html += '<input type="text" id="chart_field_plotly_' + item_no + '_' + color_count +'" name="chart_field_plotly_' + item_no + '_' + color_count +'" class="colorpicker" value="{% if chart %}{{ color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>'
+              html += '</div>'
+              newcontent.innerHTML = html
+
+              console.log('CREATE')
+
+
+              document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
                     }
                     len_count = len_count + 1;
                 }
@@ -2122,15 +2133,20 @@ if ( 'area' === this.options.chart_type) {
                var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
                if (typeof(chart_plotly) != 'undefined' && chart_plotly != null){
 
-               console.log('plotly');
-               console.log(chart_plotly);
                document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(data);
-                                var parent = document.getElementById("chart_field_plotly_"+item_no)
-                    var tag = document.createElement("div");
-                       var text = document.createTextNode("Tutorix is the best e-learning platform");
-                    parent.appendChild(tag);
 
                }
+//                var newcontent = document.createElement('div');
+//               var html = '';
+//               html += '<div class="control-group control-select">'
+//              html += '<label class="control-label" for="chart_field_plotly_{{ n }}_{{ color_count }}">{{ name }}</label>'
+//              html += '<input type="text" id="chart_field_plotly_{{ n }}_{{ color_count }}" name="chart_field_plotly_{{ n }}_{{ color_count }}" class="colorpicker" value="" style="display:none;"/>'
+//              html += '</div>'
+//              newcontent.innerHTML = html
+//              console.log('CREATE')
+//
+//
+//              document.getElementById("chart_field_plotly_"+item_no).appendChild(newcontent);
 
                Plotly.newPlot(this.el[0], data, base_info);
             },
