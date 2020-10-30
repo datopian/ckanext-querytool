@@ -1783,40 +1783,28 @@
                     }, ["bar", "hbar"].includes(this.options.chart_type) && (O.axis.y.padding.bottom = 0))
                 } ["line", "area", "spline", "scatter", "bscatter", "bar", "hbar", "sbar", "shbar"].includes(this.options.chart_type) && v && (O.axis.y.min = 0, O.axis.y.padding = O.axis.y.padding || {}, O.axis.y.padding.bottom = 0);
 
-                console.log(O);
-                console.log(this.el[0]);
                 var color_val = O.color['pattern'];
 
                 if ('hbar' === this.options.chart_type) {
-                    console.log('This is hbar');
-                    console.log(O.data);
                     O.data['orientation'] = 'h';
-                    console.log(O.color);
                     O.data['marker'] = {
                        color: color_val[0],
                     }
                 };
 
                 if ('bar' === this.options.chart_type) {
-                    console.log('This is bar');
-                    console.log(O.data);
-                    console.log(O.color);
                     O.data['marker'] = {
                        color: color_val[0],
                     }
                 };
 
                 if ('line' === this.options.chart_type) {
-                    console.log('This is line');
-                    console.log(O.data);
-                    console.log(O.color);
                     O.data['marker'] = {
                        color: color_val[0],
                     }
                 };
 
                 var columns = O.data['columns'];
-
                 var tmp;
                 var data = [];
 
@@ -1833,16 +1821,12 @@
                     data.push(trace);
                 }
 
-                console.log(data);
-                console.log(_);
-
                 var base_info = {
                     title: this.options.title,
-  yaxis: {
-    tickformat: ".0%" // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
-  }
+                    yaxis: {
+                      tickformat: ".0%" // For more formatting types, see: https://github.com/d3/d3-format/blob/master/README.md#locale_format
+                    }
                 }
-
 
                 Plotly.newPlot(this.el[0], data, base_info);
 
