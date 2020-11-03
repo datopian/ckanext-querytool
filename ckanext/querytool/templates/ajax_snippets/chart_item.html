@@ -151,7 +151,9 @@
             <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
             {% set color_count = 1 %}
             {% for a in plotly %}
+              {% if a.marker %}
             {% set color = a.marker.color %}
+              {% endif %}
             {% set name = a.name %}
             <div class="control-group control-select">
               <label class="control-label" for="chart_field_plotly_{{ n }}_{{ color_count }}">{{ name }}</label>
