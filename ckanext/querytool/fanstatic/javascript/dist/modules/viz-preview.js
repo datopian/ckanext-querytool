@@ -2113,7 +2113,7 @@ if ( 'area' === this.options.chart_type) {
                     var html = '';
                     html += '<div class="control-group control-select">'
                     html += '<label class="control-label" for="chart_field_plotly_' + item_no + '_' + color_count +'">' + d['name'] + '</label>'
-                    html += '<input type="text" id="chart_1" name="chart_1" class="colorpicker" style="display:none;" value="darkseagreen"/> '
+                    html += '<input type="text" id="chart_field_plotly_' + item_no + '_' + color_count +'" name="chart_field_plotly_' + item_no + '_' + color_count +'" class="colorpicker" style="display:none;" value="darkseagreen"/> '
                     html += '</div>'
                     newcontent.innerHTML = html
 
