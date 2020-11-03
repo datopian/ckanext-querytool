@@ -170,6 +170,16 @@ def get_color_scheme():
     return colors
 
 
+def get_querytool_get_chart_colors(data):
+    print data
+    print 'in'
+    try:
+        data = json.loads(data)
+    except:
+        data = []
+
+    return data
+
 def get_map_color_scheme():
     '''
     Get color schemes for displaying the maps

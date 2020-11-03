@@ -61,6 +61,7 @@ $(document).ready(function(){
         {"lightgreen": "lightgreen"},
         {"mediumvioletred": "mediumvioletred"}
         ],
+        position: 'downside',
         clear_btn: null // default -> 'upside'
     });
   }
@@ -71,8 +72,10 @@ $(document).ready(function(){
         custom_class: 'wide',
         colors: [
         {"green1": "linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 24%, rgba(5,105,184,1) 63%, rgba(0,212,255,1) 87%)"},
-        {"green2": "#117279"},
+        {"green2": "linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%)"},
+        {"green3": "linear-gradient(90deg, rgba(134,18,0,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%)"},
         ],
+        position: 'downside',
         clear_btn: null // default -> 'upside'
     });
   }
