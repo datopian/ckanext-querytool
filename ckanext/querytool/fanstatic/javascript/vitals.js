@@ -34,6 +34,17 @@ $(document).ready(function(){
     })
   });
 
+  $(document).on('change', '#color_type', function() {
+    var selection = $(this).val();
+    if(selection == 1){
+        $('.diver-colors').removeClass('hidden')
+        $('.seq-colors').addClass('hidden')
+    } else {
+        $('.diver-colors').addClass('hidden')
+        $('.seq-colors').removeClass('hidden')
+    }
+  });
+
   function generateColorPicker(){
     console.log('generate Color picker called')
     $('.colorpicker').paletteColorPicker({
