@@ -2047,16 +2047,22 @@ if ( 'area' === this.options.chart_type) {
                     };
 
                 };
+                var chart_exist = this.el.closest(".chart_field").attr('id');
+
+                if (chart_exist !== undefined) {
+
                var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
-               console.log(item_no);
                var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
-               console.log('CHART plotly')
-               console.log(chart_plotly);
+               console.log('this is the chart pltoy')
+               console.log(typeof chart_plotly.value);
+               var obj = JSON.parse(chart_plotly.value);
+               var color = obj[0].marker.color
+
 
                 var len_data = data.length;
                 var tmp ;
-                var len_count = item_no;
                 var data_tmp = data;
+                var len_count = item_no;
 
                 for (tmp = 0; tmp < len_data; tmp++){
                     var color_count = 1;
@@ -2066,19 +2072,20 @@ if ( 'area' === this.options.chart_type) {
                     var c = "chart_field_plotly_"+ item_no +"_"+color_count
                     var color_tmp = document.querySelectorAll('[data-target='+c+']');
 
+
                     if (color_tmp.length >= 1){
                         var color = color_tmp[0].style.cssText;
                         console.log(color);
                         var new_color = color.split(": ")[1].slice(0, -1);
-                        console.log(new_color);
-                        console.log(color_count-1);
                         data_tmp[color_count-1]['marker'] = {'color': new_color};
                        }
 
                     var elementExists = document.getElementById(c);
                     console.log(elementExists);
 
-                    if (elementExists === null && color_tmp.length === 0) {
+                    if (elementExists === null && color_tmp.length === 0 && chart_plotly.value !== null) {
+                    alert('ADDing');
+
                     var newcontent = document.createElement('div');
                     var html = '';
                     html += '<div class="control-group control-select">'
@@ -2102,7 +2109,7 @@ if ( 'area' === this.options.chart_type) {
                if (typeof(chart_plotly) != 'undefined' && chart_plotly != null){
                    document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(data);
                }
-
+}
                Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
