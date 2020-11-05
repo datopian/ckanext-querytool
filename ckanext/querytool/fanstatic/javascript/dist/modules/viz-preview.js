@@ -1783,6 +1783,11 @@
                 var columns = O.data['columns'];
                 var tmp;
                 var format = this.options.data_format;
+                var plotly = this.options.plotly;
+
+                console.log(typeof plotly);
+                if (typeof plotly === 'boolean') {
+
 
                 var base_info = {
                     xaxis: {
@@ -2105,6 +2110,10 @@ if ( 'area' === this.options.chart_type) {
                    document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(data);
                }
             }
+            }
+            else {
+                data = plotly
+                        }
             console.log(data);
                Plotly.newPlot(this.el[0], data, base_info);
             },

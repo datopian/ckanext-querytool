@@ -95,7 +95,7 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
     'name', data.y_axis_column, default={}) %} {% set measure_label =
     measure.alias or measure.name %} {% for item in data.visualizations %} {% if
     item.type == 'chart' %} {% snippet 'ajax_snippets/chart_item.html', n =
-    item.order, chart = item, sql_string = data.sql_string, map_resource =
+    item.order, chart = item, plotly = item.plotly, sql_string = data.sql_string, map_resource =
     data.map_resource, chart_resource = data.chart_resource, y_axis_values =
     data.y_axis_values, main_filters = data.main_filters_names, measure_label =
     measure_label, info_query_filters = data.main_filters %} {% endif %} {% if

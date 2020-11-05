@@ -160,7 +160,7 @@
         {% endif %}
 
       <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
-        <h3>{{ item. title }}</h3>
+        <h3>{{ item. title }} {{item.plotly}}</h3>
         {% if item.type == 'chart'  %}
            {% if item.filter_visibility == 'public'  %}
             {% set chart_filter_id = h.querytool_get_uuid() %}
@@ -171,12 +171,13 @@
               name=item.filter_name,
               alias=item.filter_alias,
               value=item.filter_value,
-              resource_id=querytool.chart_resource
+              resource_id=querytool.chart_resource,
+              plotly=item.plotly
             %}
           {% endif %}
           <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}" data-module-type="{{item.graph}}">
             Export <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
-           </a>
+           </a> {{item.plotly}}
           {% snippet 'ajax_snippets/visualization_item.html',
             type='chart',
             colors=item.color,
@@ -211,7 +212,8 @@
             static_reference_label = item.static_reference_label,
             dynamic_reference_type = item.dynamic_reference_type,
             dynamic_reference_factor = item.dynamic_reference_factor,
-            dynamic_reference_label = item.dynamic_reference_label
+            dynamic_reference_label = item.dynamic_reference_label,
+            plotly = item.plotly
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
