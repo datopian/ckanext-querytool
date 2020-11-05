@@ -1881,6 +1881,7 @@
                 }
 
                 if ( 'line' === this.options.chart_type) {
+                    console.log(this.options.colors)
                     var categories = O.axis['x']['categories'];
                     var format = this.options.data_format;
 
@@ -2047,6 +2048,10 @@ if ( 'area' === this.options.chart_type) {
                     };
 
                 };
+
+               var item_exists = this.el.closest(".chart_field").attr('id')
+               if (typeof(item_exists) != 'undefined' && item_exists != null){
+
                var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
                console.log(item_no);
                var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
@@ -2068,10 +2073,7 @@ if ( 'area' === this.options.chart_type) {
 
                     if (color_tmp.length >= 1){
                         var color = color_tmp[0].style.cssText;
-                        console.log(color);
                         var new_color = color.split(": ")[1].slice(0, -1);
-                        console.log(new_color);
-                        console.log(color_count-1);
                         data_tmp[color_count-1]['marker'] = {'color': new_color};
                        }
 
@@ -2102,7 +2104,8 @@ if ( 'area' === this.options.chart_type) {
                if (typeof(chart_plotly) != 'undefined' && chart_plotly != null){
                    document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(data);
                }
-
+            }
+            console.log(data);
                Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
