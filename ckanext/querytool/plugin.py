@@ -155,7 +155,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller=querytool_controller,
                     action='edit_visualizations')
 
-        map.connect('querytool_public', '/querytool/public/groups',
+        map.connect('querytool_public', '/',
                     controller=querytool_controller, action='querytool_public')
 
         map.connect('querytool_public_reports', '/querytool/public/reports',

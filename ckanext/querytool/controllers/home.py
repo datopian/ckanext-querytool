@@ -64,8 +64,6 @@ class QuerytoolHomeController(HomeController):
                     % config.get('ckan.site_title')
                 h.flash_notice(msg, allow_html=True)
 
-            return base.render('home/index.html', cache_force=True)
-        else:
-            querytool_controller \
-                = 'ckanext.querytool.controllers.querytool:QueryToolController'
-            h.redirect_to(controller=querytool_controller, action='querytool_public')
+        querytool_controller \
+            = 'ckanext.querytool.controllers.querytool:QueryToolController'
+        h.redirect_to(controller=querytool_controller, action='querytool_public')
