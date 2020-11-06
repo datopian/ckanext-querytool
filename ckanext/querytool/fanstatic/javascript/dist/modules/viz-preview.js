@@ -1851,7 +1851,6 @@
                 }
 
                 if ( 'line' === this.options.chart_type) {
-                    console.log(this.options.colors)
                     var categories = O.axis['x']['categories'];
                     var format = this.options.data_format;
 
@@ -2019,31 +2018,21 @@ if ( 'area' === this.options.chart_type) {
                 };
 
                var item_exists = this.el.closest(".chart_field").attr('id');
-               console.log(item_exists)
 
                if (typeof(item_exists) != 'undefined' && item_exists != null){
 
                var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
-               console.log(item_no);
                var chart_plotly = document.getElementById("chart_field_plotly_" + item_no);
-               console.log('CHART plotly')
-               console.log(chart_plotly);
-
                 var len_data = data.length;
                 var tmp ;
                 var len_count = item_no;
                 var data_tmp = data;
 
                 for (tmp = 0; tmp < len_data; tmp++){
-                console.log('in for');
-                console.log('this is the len of the data')
-                console.log(len_data);
-
                     var color_count = 1;
                     var d = data_tmp[tmp];
 
                     for (color_count = 1; color_count <= len_data; color_count++){
-                    console.log('we are in for for color count')
 
                     var c = "chart_field_plotly_"+ item_no + "_" + color_count
                     var chart_field_plotly_value = document.getElementById("chart_field_plotly_"+item_no).value;
@@ -2054,13 +2043,11 @@ if ( 'area' === this.options.chart_type) {
                     if (color_tmp.length >= 1){
                         var color = color_tmp[0].style.cssText;
                         var new_color = color.split(": ")[1].slice(0, -1);
-                        console.log(new_color);
                         data_tmp[color_count-1]['marker'] = {'color': new_color};
                        }
                     }
 
                     var elementExists = document.getElementById(c);
-                    console.log(elementExists);
 
                     if (elementExists === null && color_tmp.length === 0) {
                     var newcontent = document.createElement('div');
@@ -2073,7 +2060,6 @@ if ( 'area' === this.options.chart_type) {
 
                     document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
                     }
-                                        console.log(color_count);
 
                 }
                     len_count = len_count + 1;
@@ -2093,7 +2079,7 @@ if ( 'area' === this.options.chart_type) {
             else {
                 data = plotly
                         }
-            console.log(data);
+
                Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
