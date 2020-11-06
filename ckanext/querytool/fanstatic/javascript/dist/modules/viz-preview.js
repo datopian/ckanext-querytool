@@ -2052,7 +2052,6 @@ if ( 'area' === this.options.chart_type) {
                     var elementExists = document.getElementById(c);
 
                     if (elementExists === null && color_tmp.length === 0 && chart_plotly.value !== null) {
-                    alert('ADDing');
 
                     var newcontent = document.createElement('div');
                     var html = '';
