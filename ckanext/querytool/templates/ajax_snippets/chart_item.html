@@ -166,9 +166,6 @@
             {% else %}
               {# Color #}
             {% set color_schemes = h.querytool_get_color_scheme() %}
-
-            {% set color = a.marker.color %} {{color}} {{color}}
-
             <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
             <div class="control-group control-select">
