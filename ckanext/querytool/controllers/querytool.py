@@ -451,6 +451,8 @@ class QueryToolController(base.BaseController):
                     else:
                         visualization['category_name'] = ''
 
+                    print data
+
                     visualizations.append(visualization)
 
                 if k.startswith('text_box_description_'):

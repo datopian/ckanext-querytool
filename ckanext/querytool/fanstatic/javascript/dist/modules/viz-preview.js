@@ -2018,12 +2018,14 @@ if ( 'area' === this.options.chart_type) {
 
                 };
 
-               var item_exists = this.el.closest(".chart_field").attr('id')
+               var item_exists = this.el.closest(".chart_field").attr('id');
+               console.log(item_exists)
+
                if (typeof(item_exists) != 'undefined' && item_exists != null){
 
                var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
                console.log(item_no);
-               var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
+               var chart_plotly = document.getElementById("chart_field_plotly_" + item_no);
                console.log('CHART plotly')
                console.log(chart_plotly);
 
@@ -2044,6 +2046,9 @@ if ( 'area' === this.options.chart_type) {
                     console.log('we are in for for color count')
 
                     var c = "chart_field_plotly_"+ item_no + "_" + color_count
+                    var chart_field_plotly_value = document.getElementById("chart_field_plotly_"+item_no).value;
+
+                    if (chart_field_plotly_value !== null) {
                     var color_tmp = document.querySelectorAll('[data-target='+c+']');
 
                     if (color_tmp.length >= 1){
@@ -2052,6 +2057,7 @@ if ( 'area' === this.options.chart_type) {
                         console.log(new_color);
                         data_tmp[color_count-1]['marker'] = {'color': new_color};
                        }
+                    }
 
                     var elementExists = document.getElementById(c);
                     console.log(elementExists);
@@ -2122,6 +2128,7 @@ if ( 'area' === this.options.chart_type) {
                     N = t.find("select[name*=chart_field_dynamic_reference_type_]").val(),
                     P = t.find("input[name*=chart_field_dynamic_reference_factor_]").val(),
                     F = t.find("input[name*=chart_field_dynamic_reference_label_]").val(),
+                    plotly = t.find("input[name*=chart_field_plotly_]").val(),
                     M = $("#choose_y_axis_column option:selected").text(),
                     I = t.find("[name*=chart_field_show_labels_as_percentages_]").is(":checked");
                 if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P) return this.options.colors = n, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, void this.createChart(this.fetched_data);
