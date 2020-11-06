@@ -1785,7 +1785,6 @@
                 var format = this.options.data_format;
                 var plotly = this.options.plotly;
 
-                console.log(typeof plotly);
                 if (typeof plotly === 'boolean') {
 
 
@@ -1798,40 +1797,6 @@
                     }
 
                 }
-
-//                for (tmp = 1; tmp < columns.length; tmp++) {
-//                    var trace = {
-//                        x: columns[0],
-//                        y: columns[tmp],
-//                        type: this.options.chart_type,
-//                        name: columns[tmp][0],
-//                        marker: {
-//                           color: color_val[0],
-//                        },
-//                        width: 3
-//                    };
-//
-//                    if ('hbar' === this.options.chart_type) {
-//                        trace['orientation'] = "h";
-//                        trace['type'] = "bar";
-//                    }
-//                    else if ('sbar' === this.options.chart_type) {
-//                        console.log('IN sbar');
-//                        trace['type'] = "bar";
-//                        base_info['barmode'] = "stack";
-//
-//                    }
-//                    else if ('area' === this.options.chart_type){
-//                         trace['type'] = "scatter";
-//
-//                    }
-//                    else if ('scatter' === this.options.chart_type){
-//                          trace['mode'] = 'markers';
-//                    };
-//
-//                    console.log(trace);
-//                    data.push(trace);
-//                }
 
                 var a = 0;
                 var x = [];
@@ -1913,7 +1878,6 @@
                         y: columns[0].slice(1),
                         name: columns[0][0],
                         type: 'scatter',
-
                     };
                     data.push(trace);
                     };
@@ -2069,16 +2033,23 @@ if ( 'area' === this.options.chart_type) {
                 var data_tmp = data;
 
                 for (tmp = 0; tmp < len_data; tmp++){
+                console.log('in for');
+                console.log('this is the len of the data')
+                console.log(len_data);
+
                     var color_count = 1;
                     var d = data_tmp[tmp];
 
                     for (color_count = 1; color_count <= len_data; color_count++){
-                    var c = "chart_field_plotly_"+ item_no +"_"+color_count
+                    console.log('we are in for for color count')
+
+                    var c = "chart_field_plotly_"+ item_no + "_" + color_count
                     var color_tmp = document.querySelectorAll('[data-target='+c+']');
 
                     if (color_tmp.length >= 1){
                         var color = color_tmp[0].style.cssText;
                         var new_color = color.split(": ")[1].slice(0, -1);
+                        console.log(new_color);
                         data_tmp[color_count-1]['marker'] = {'color': new_color};
                        }
 
@@ -2096,6 +2067,8 @@ if ( 'area' === this.options.chart_type) {
 
                     document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
                     }
+                                        console.log(color_count);
+
                 }
                     len_count = len_count + 1;
 
