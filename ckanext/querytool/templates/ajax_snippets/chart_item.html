@@ -111,7 +111,7 @@
             <div class="control-group title-help">
               <div class="controls ">
                 {% set template_tooltip = "<pre><p>Variables<br>---<br>{measure}<br>{optional_filter}<br>*use drop-down list to select variables based on application filters</p><p>Processed variables<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>etc</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>Full templates syntax</a></b></p><p class='muted'><b>Please note:</b> Single braces '{}' are used for variables</p>" %}
-                <span class="editor-info-block">{% trans %}You can use <a href="#templates" title="" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference">Templates</a> here{% endtrans %}</span>
+                <span class="editor-info-block">{% trans %}You can use <a href="#templates" title="" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference" data-container="body">Templates</a> here{% endtrans %}</span>
               </div>
             </div>
 
@@ -155,9 +155,10 @@
             {% set color = a.marker.color %}
               {% endif %}
             {% set name = a.name %}
+              sdomething {{color}}
             <div class="control-group control-select">
               <label class="control-label" for="chart_field_plotly_{{ n }}_{{ color_count }}">{{ name }}</label>
-              <input type="text" id="chart_field_plotly_{{ n }}_{{ color_count }}" name="chart_field_plotly_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
+              <input type="text" id="chart_field_plotly_{{ n }}_{{ color_count }}" name="chart_field_plotly_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if color %}{{ color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
             </div>
             {% set color_count = color_count + 1 %}
             {% endfor %}
@@ -165,11 +166,14 @@
             {% else %}
               {# Color #}
             {% set color_schemes = h.querytool_get_color_scheme() %}
-                        <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
+
+            {% set color = a.marker.color %} {{color}} {{color}}
+
+            <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
             <div class="control-group control-select">
               <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color') }}</label>
-                <input type="text" id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}" class="colorpicker" value="{% if chart %}{{ chart.color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
+                <input type="text" id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
 
             </div>
             {% endif %}

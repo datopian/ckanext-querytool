@@ -2017,6 +2017,7 @@ if ( 'area' === this.options.chart_type) {
 
                 };
 
+
                var item_exists = this.el.closest(".chart_field").attr('id');
 
                if (typeof(item_exists) != 'undefined' && item_exists != null){
@@ -2025,8 +2026,8 @@ if ( 'area' === this.options.chart_type) {
                var chart_plotly = document.getElementById("chart_field_plotly_" + item_no);
                 var len_data = data.length;
                 var tmp ;
-                var len_count = item_no;
                 var data_tmp = data;
+                var len_count = item_no;
 
                 for (tmp = 0; tmp < len_data; tmp++){
                     var color_count = 1;
@@ -2040,6 +2041,7 @@ if ( 'area' === this.options.chart_type) {
                     if (chart_field_plotly_value !== null) {
                     var color_tmp = document.querySelectorAll('[data-target='+c+']');
 
+
                     if (color_tmp.length >= 1){
                         var color = color_tmp[0].style.cssText;
                         var new_color = color.split(": ")[1].slice(0, -1);
@@ -2049,7 +2051,9 @@ if ( 'area' === this.options.chart_type) {
 
                     var elementExists = document.getElementById(c);
 
-                    if (elementExists === null && color_tmp.length === 0) {
+                    if (elementExists === null && color_tmp.length === 0 && chart_plotly.value !== null) {
+                    alert('ADDing');
+
                     var newcontent = document.createElement('div');
                     var html = '';
                     html += '<div class="control-group control-select">'
@@ -2078,7 +2082,7 @@ if ( 'area' === this.options.chart_type) {
             }
             else {
                 data = plotly
-                        }
+            }
 
                Plotly.newPlot(this.el[0], data, base_info);
             },

@@ -34,7 +34,6 @@ $(document).ready(function(){
   });
 
   function generateColorPicker(){
-    console.log('generate Color picker called')
     $('.colorpicker').paletteColorPicker({
         colors: [
         {"green": "green"},
