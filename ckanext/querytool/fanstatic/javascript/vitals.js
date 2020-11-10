@@ -39,7 +39,7 @@ $(document).ready(function(){
         {"green": "green"},
         {"blue": "blue"},
         {"teal": "teal"},
-        {"golden": "#b6992d"},
+        {"goldenrod": "goldenrod"},
         {"yellow": "yellow"},
         {"orange": "orange"},
         {"brown": "brown"},
