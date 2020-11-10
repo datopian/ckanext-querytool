@@ -1789,14 +1789,13 @@
 
 
                 var base_info = {
-                    title: this.options.title,
+                    title: w,
                     xaxis: {
                         tickformat: format,
                     },
                     yaxis: {
                         tickformat: format,
                     }
-
                 }
 
                 var a = 0;
@@ -2081,8 +2080,18 @@ if ( 'area' === this.options.chart_type) {
             }
             }
             else {
-                data = plotly
+                data = plotly;
+                var base_info = {
+                    title: w,
+                    xaxis: {
+                        tickformat: format,
+                    },
+                    yaxis: {
+                        tickformat: format,
+                    }
+                }
             }
+                console.log(base_info);
 
                Plotly.newPlot(this.el[0], data, base_info);
             },
