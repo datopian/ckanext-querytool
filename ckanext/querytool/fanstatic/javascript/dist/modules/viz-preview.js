@@ -2082,7 +2082,6 @@ if ( 'area' === this.options.chart_type) {
             else {
                 data = plotly;
                 var base_info = {
-                    title: w,
                     xaxis: {
                         tickformat: format,
                     },
@@ -2095,8 +2094,13 @@ if ( 'area' === this.options.chart_type) {
                 //console.log(this.el[0]);
 
                 var title_id = this.el.context.parentElement.children[0].id;
-
-                document.getElementById(title_id).innerHTML =  w;
+                
+                if(title_id){
+                    document.getElementById(title_id).innerHTML =  w;
+                }
+                
+                console.log(w)
+                console.log(title_id)
 
                Plotly.newPlot(this.el[0], data, base_info);
             },
