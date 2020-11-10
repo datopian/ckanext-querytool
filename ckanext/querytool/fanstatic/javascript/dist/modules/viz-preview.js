@@ -1789,6 +1789,7 @@
 
 
                 var base_info = {
+                    title: this.options.title,
                     xaxis: {
                         tickformat: format,
                     },
