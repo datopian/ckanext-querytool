@@ -2092,6 +2092,11 @@ if ( 'area' === this.options.chart_type) {
                 }
             }
                 console.log(base_info);
+                //console.log(this.el[0]);
+
+                var title_id = this.el.context.parentElement.children[0].id;
+
+                document.getElementById(title_id).innerHTML =  w;
 
                Plotly.newPlot(this.el[0], data, base_info);
             },
