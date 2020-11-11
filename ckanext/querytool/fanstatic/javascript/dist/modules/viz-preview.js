@@ -1885,7 +1885,9 @@
                         newcontent.innerHTML = html
 
                         document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
-                        document.getElementById("chart_field_plotly_label_" + item_no);
+                        // remove Color element
+                        var elem = document.querySelector('#init_color');
+                        elem.parentNode.removeChild(elem);
                         }
                         generateColorPicker();
                     }
