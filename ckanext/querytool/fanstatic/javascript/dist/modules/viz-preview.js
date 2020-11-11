@@ -1847,13 +1847,14 @@
                                     // there is a plotly value in the input field
                                     console.log('we have a plotly value for color in html');
                                     var color_tmp = document.querySelectorAll('[data-target='+c+']');
-                                    console.log(color_tmp[0].style.cssText);
 
-                                    if (color_tmp.length >= 1){
+                                    if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
                                         var new_color = color.split(": ")[1].slice(0, -1);
                                         console.log(new_color);
                                         data_tmp[color_count-1]['marker'] = {'color': new_color};
+                                    } else {
+                                        data_tmp[color_count-1]['marker'] = {'color': 'darkseagreen'};
                                     }
                                 } else {
                                     console.log('we DONT have a plotly value for color in html');
@@ -1887,7 +1888,9 @@
                         document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
                         // remove Color element
                         var elem = document.querySelector('#init_color');
-                        elem.parentNode.removeChild(elem);
+                        if (elem) {
+                            elem.parentNode.removeChild(elem);
+                        }
                         }
                         generateColorPicker();
                     }
