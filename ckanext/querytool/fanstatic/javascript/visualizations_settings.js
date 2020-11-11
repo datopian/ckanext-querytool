@@ -476,6 +476,9 @@
                     var selectDynamicReferenceType = item.find('[id*=chart_field_dynamic_reference_type_]');
                     var inputDynamicReferenceFactor = item.find('[id*=chart_field_dynamic_reference_factor_]');
                     var inputDynamicReferenceLabel = item.find('[id*=chart_field_dynamic_reference_label_]');
+                    var inputPlotly = item.find('[id*=chart_field_plotly_]');
+                    console.log(inputPlotly);
+                    console.log('oh wow')
 
                     var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
                     var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
@@ -574,6 +577,9 @@
 
                     inputDynamicReferenceLabel.attr('id', 'chart_field_dynamic_reference_label_' + order);
                     inputDynamicReferenceLabel.attr('name', 'chart_field_dynamic_reference_label_' + order);
+
+                    inputPlotly.attr('id', 'chart_field_plotly_' + order);
+                    inputPlotly.attr('name', 'chart_field_plotlyl_' + order);
 
                     resourceId.attr('id', 'resource_id_' + order);
                     resourceId.attr('name', 'resource_id_' + order);

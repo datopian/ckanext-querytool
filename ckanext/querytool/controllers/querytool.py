@@ -396,6 +396,9 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_dynamic_reference_label_%s' % id)
                     visualization['sort'] = \
                         data.get('chart_field_sort_{}'.format(id))
+                    visualization['plotly'] = \
+                        data.get('chart_field_plotly_{}'.format(id))
+
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
                         visualization['x_text_multiline'] = 'true'
                     else:

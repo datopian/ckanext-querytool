@@ -24,3 +24,42 @@ $('.long-desc').readmore({
     collapsedHeight: 120,
     lessLink: '<a href="#">Read Less</a>'
 });
+
+$(document).ready(function(){
+    generateColorPicker();
+
+    $("#add-visualization-btn").on('click',function(){
+        setTimeout(function() { generateColorPicker(); }, 1000);
+    })
+  });
+
+  function generateColorPicker(){
+    $('.colorpicker').paletteColorPicker({
+        colors: [
+        {"green": "green"},
+        {"blue": "blue"},
+        {"teal": "teal"},
+        {"goldenrod": "goldenrod"},
+        {"yellow": "yellow"},
+        {"orange": "orange"},
+        {"brown": "brown"},
+        {"purple": "purple"},
+        {"red": "red"},
+        {"burlywood": "burlywood"},
+        {"coral": "coral"},
+        {"black": "black"},
+        {"darkblue": "darkblue"},
+        {"darkgray": "darkgray"},
+        {"darkolivegreen": "darkolivegreen"},
+        {"darkseagreen": "darkseagreen"},
+        {"darkslateblue": "darkslateblue"},
+        {"darkturquoise": "darkturquoise"},
+        {"deeppink": "deeppink"},
+        {"deepskyblue": "deepskyblue"},
+        {"lightgreen": "lightgreen"},
+        {"mediumvioletred": "mediumvioletred"}
+        ],
+        position: 'downside',
+        clear_btn: null // default -> 'upside'
+    });
+  }

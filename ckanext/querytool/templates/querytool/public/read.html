@@ -7,6 +7,9 @@
 {% resource "querytool/javascript/dist/public_query.js" %}
 {% resource 'querytool/javascript/dist/modules/viz-preview.js' %}
 
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+
 {% resource 'querytool/map' %}
 {% resource 'querytool/table' %}
 {% resource 'querytool/share' %}
@@ -209,7 +212,8 @@
             static_reference_label = item.static_reference_label,
             dynamic_reference_type = item.dynamic_reference_type,
             dynamic_reference_factor = item.dynamic_reference_factor,
-            dynamic_reference_label = item.dynamic_reference_label
+            dynamic_reference_label = item.dynamic_reference_label,
+            plotly = item.plotly
           %}
         {% endif %}
         {% if item.type == 'text_box' %}

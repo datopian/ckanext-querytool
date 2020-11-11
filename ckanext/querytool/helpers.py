@@ -632,3 +632,12 @@ def get_groups_for_user(userobj, group):
         return True
     else:
         return False
+
+
+def get_querytool_get_chart_colors(data):
+    try:
+        data = json.loads(data)
+    except:
+        data = []
+
+    return data
