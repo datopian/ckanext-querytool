@@ -2047,11 +2047,15 @@
 
                                     if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
-                                        var new_color = color.split(": ")[1].slice(0, -1);
-                                        if (new_color.includes('none')){
-                                            new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                        console.log(color);
+                                        if (color !== 'undefined'){
+                                            var new_color = color.split(": ")[1].slice(0, -1);
+                                            if (new_color.includes('none')){
+                                                new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                            }
+
+                                            d['marker'] = {'color': new_color};
                                         }
-                                        d['marker'] = {'color': new_color};
                                     } else {
                                         d['marker'] = {'color': 'darkseagreen'};
                                     }
