@@ -1529,13 +1529,17 @@
                     S = this.options.show_labels_as_percentages || !1,
                     O = {
                         bindto: this.el[0],
+                        /*color: {
+                            pattern: this.options.colors.split(",")
+                        },*/
                         padding: {
                             right: 50,
                             bottom: 16
                         }
                     },
                     w = !0 === this.options.title ? "" : this.options.title,
-                    E = !0 === this.options.query_filters ? [] : this.options.query_filters;
+                    E = !0 === this.options.query_filters ? [] : this.options.query_filters,
+                    plotly = !0 === this.options.plotly ? "" : this.options.plotly;
                 E.length || (E = !0 === this.options.info_query_filters ? [] : this.options.info_query_filters);
                 var k = !0 === this.options.filter_name ? "" : this.options.filter_name,
                     j = !0 === this.options.filter_slug ? "" : this.options.filter_slug,
@@ -1778,331 +1782,378 @@
                     }, ["bar", "hbar"].includes(this.options.chart_type) && (O.axis.y.padding.bottom = 0))
                 } ["line", "area", "spline", "scatter", "bscatter", "bar", "hbar", "sbar", "shbar"].includes(this.options.chart_type) && v && (O.axis.y.min = 0, O.axis.y.padding = O.axis.y.padding || {}, O.axis.y.padding.bottom = 0);
 
+                console.log('this is plotly');
+                console.log(this.options.plotly);
+                var plotly = this.options.plotly;
+                var q = JSON.parse(JSON.stringify(plotly));
 
                 var data = []
                 var columns = O.data['columns'];
-                var tmp;
                 var format = this.options.data_format;
-                var plotly = this.options.plotly;
 
-                if (typeof plotly === 'boolean') {
+                // if typeof plotly is string -> new chart
+                // if typeof plotly is object -> existing chart (user view or admin preview)
 
+                if (typeof plotly === 'string') {
+                    if ( 'line' === this.options.chart_type) {
+                        var categories = O.axis['x']['categories'];
+                        var format = this.options.data_format;
 
-                var base_info = {
-                    title: w,
-                    xaxis: {
-                        tickformat: format,
-                    },
-                    yaxis: {
-                        tickformat: format,
+                        if (categories === undefined){
+                            var x = columns[0].slice(1);
+                            var tmp ;
+
+                            for (tmp=1; tmp < columns.length; tmp++){
+                                var name = columns[tmp][0];
+                                var trace = {
+                                    x: x,
+                                    y: columns[tmp].slice(1),
+                                    type: 'scatter',
+                                    name: name,
+                                    width: 3
+                                };
+                                data.push(trace);
+                            };
+                        } else {
+                            var trace = {
+                                x: categories,
+                                y: columns[0].slice(1),
+                                name: columns[0][0],
+                                type: 'scatter',
+                            };
+                            data.push(trace);
+                        };
+                        console.log(data);
                     }
-                }
 
-                var a = 0;
-                var x = [];
-                var y = [];
+                    if ('pie' === this.options.chart_type) {
+                        for (a=0; a < columns.length; a++){
 
-                if ('pie' === this.options.chart_type) {
-                    for (a=0; a < columns.length; a++){
-
-                            x.push(columns[a][0]);
-                            y.push(columns[a][1]);
-                    };
-
-                    var trace = {
-                        labels: x,
-                        values: y,
-                        type: 'pie',
-                    };
-                    data = [];
-                    data.push(trace);
-                }
-
-                if ( 'donut' === this.options.chart_type) {
-                                    for (a=0; a < columns.length; a++){
-
-                            x.push(columns[a][0]);
-                            y.push(columns[a][1]);
-                    };
-
-                    var trace = {
-                        labels: x,
-                        values: y,
-                          hole: .4,
-
-                        type: 'pie',
-                    };
-                    data = [];
-                    data.push(trace);
-                }
-
-                if ( 'scatter' === this.options.chart_type) {
-
-
-                    var trace = {
-                        x: O.axis['x']['categories'],
-                        y: columns[0].slice(1),
-                        mode: "markers",
-
-                        type: this.options.chart_type,
-                    };
-                    data = [];
-                    data.push(trace);
-                }
-
-                if ( 'line' === this.options.chart_type) {
-                    var categories = O.axis['x']['categories'];
-                    var format = this.options.data_format;
-
-                    if (categories === undefined){
-                    var x = columns[0].slice(1);
-                    var tmp ;
-
-                    for (tmp=1; tmp < columns.length; tmp++){
-                    var name = columns[tmp][0];
-                    var trace = {
-                        x: x,
-                        y: columns[tmp].slice(1),
-                        type: 'scatter',
-                        name: name,
-
-                        width: 3
-                    };
+                                x.push(columns[a][0]);
+                                y.push(columns[a][1]);
+                        };
+                        var trace = {
+                            labels: x,
+                            values: y,
+                            type: 'pie',
+                        };
+                        data = [];
                         data.push(trace);
                     }
 
-                    } else {
-                    var trace = {
-                        x: categories,
-                        y: columns[0].slice(1),
-                        name: columns[0][0],
-                        type: 'scatter',
-                    };
-                    data.push(trace);
-                    };
+                    if ( 'donut' === this.options.chart_type) {
+                                        for (a=0; a < columns.length; a++){
 
-                };
-if ( 'spline' === this.options.chart_type) {
-                    var categories = O.axis['x']['categories'];
+                                x.push(columns[a][0]);
+                                y.push(columns[a][1]);
+                        };
 
-                    if (categories === undefined){
-                    var x = columns[0].slice(1);
-                    var tmp ;
+                        var trace = {
+                            labels: x,
+                            values: y,
+                              hole: .4,
 
-                    for (tmp=1; tmp < columns.length; tmp++){
-                    var name = columns[tmp][0];
-                    var trace = {
-                        x: x,
-                        y: columns[tmp].slice(1),
-                        type: 'scatter',
-                        name: name,
-                        width: 3,
-                          line: {shape: 'spline'},
-
-                    };
+                            type: 'pie',
+                        };
+                        data = [];
                         data.push(trace);
                     }
 
-                    } else {
-                    var trace = {
-                        x: categories,
-                        y: columns[0].slice(1),
-                        name: columns[0][0],
-                        type: 'scatter',
-                        line: {shape: 'spline'},
-                    };
-                    data.push(trace);
-                    };
+                    if ( 'scatter' === this.options.chart_type) {
+                        var trace = {
+                            x: O.axis['x']['categories'],
+                            y: columns[0].slice(1),
+                            mode: "markers",
 
-                };
-
-                if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
-                    var categories = O.axis['x']['categories'];
-
-                    if (categories === undefined){
-                    var x = columns[0].slice(1);
-                    var tmp ;
-
-                    for (tmp=1; tmp < columns.length; tmp++){
-                    var name = columns[tmp][0];
-                    var trace = {
-                        x: x,
-                        y: columns[tmp].slice(1),
-                        type: 'bar',
-                        name: name,
-                        width: 4,
-                    };
+                            type: this.options.chart_type,
+                        };
+                        data = [];
                         data.push(trace);
                     }
 
-                    } else {
-                    console.log ('else')
-                    var trace = {
-                        x: categories,
-                        y: columns[0].slice(1),
-                        type: 'bar',
-                        width: 0.8,
+                    if ( 'spline' === this.options.chart_type) {
+                        var categories = O.axis['x']['categories'];
+
+                        if (categories === undefined){
+                            var x = columns[0].slice(1);
+                            var tmp ;
+
+                            for (tmp=1; tmp < columns.length; tmp++){
+                                var name = columns[tmp][0];
+                                var trace = {
+                                    x: x,
+                                    y: columns[tmp].slice(1),
+                                    type: 'scatter',
+                                    name: name,
+                                    width: 3,
+                                      line: {shape: 'spline'},
+
+                                };
+                                data.push(trace);
+                            }
+                        } else {
+                            var trace = {
+                                x: categories,
+                                y: columns[0].slice(1),
+                                name: columns[0][0],
+                                type: 'scatter',
+                                line: {shape: 'spline'},
+                            };
+                            data.push(trace);
+                        };
                     };
-                    data.push(trace);
+
+                    if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
+                        var categories = O.axis['x']['categories'];
+                        console.log(categories);
+
+                        if (categories === undefined){
+                            var x = columns[0].slice(1);
+                            var tmp ;
+
+                            for (tmp=1; tmp < columns.length; tmp++){
+                                var name = columns[tmp][0];
+                                var trace = {
+                                    x: x,
+                                    y: columns[tmp].slice(1),
+                                    type: 'bar',
+                                    name: name,
+                                    width: 4,
+                                };
+                                data.push(trace);
+                            }
+                        } else {
+                            var trace = {
+                                x: categories,
+                                y: columns[0].slice(1),
+                                type: 'bar',
+                                width: 0.8,
+                                name: 'Color',
+                            };
+                            data.push(trace);
+                        };
+
                     };
 
-                };
+                    if ( 'hbar' === this.options.chart_type) {
+                        var categories = O.axis['x']['categories'];
 
-if ( 'hbar' === this.options.chart_type) {
-                    var categories = O.axis['x']['categories'];
+                        if (categories === undefined){
+                            var x = columns[0].slice(1);
+                            var tmp ;
 
-                    if (categories === undefined){
-                    var x = columns[0].slice(1);
-                    var tmp ;
+                            for (tmp=1; tmp < columns.length; tmp++){
+                                var name = columns[tmp][0];
+                                var trace = {
+                                    x: columns[tmp].slice(1),
+                                    y: x,
+                                    type: 'bar',
+                                    name: name,
+                                    orientation: 'h',
+                                    width: 0.8,
+                                };
+                                data.push(trace);
+                            }
+                        } else {
+                            var trace = {
+                                x: columns[0].slice(1),
+                                y: categories,
+                                type: 'bar',
+                                orientation: 'h',
+                                width: 0.8,
+                            };
+                            data.push(trace);
+                        };
 
-                    for (tmp=1; tmp < columns.length; tmp++){
-                    var name = columns[tmp][0];
-                    var trace = {
-                        x: columns[tmp].slice(1),
-                        y: x,
-                        type: 'bar',
-                        name: name,
-                        orientation: 'h',
-                        width: 0.8,
                     };
-                        data.push(trace);
+
+                    if ( 'area' === this.options.chart_type) {
+                        var categories = O.axis['x']['categories'];
+
+                        if (categories === undefined){
+                            var x = columns[0].slice(1);
+                            var tmp ;
+
+                            for (tmp=1; tmp < columns.length; tmp++){
+                                var name = columns[tmp][0];
+                                var trace = {
+                                    x: x,
+                                    y: columns[tmp].slice(1),
+                                    type: 'scatter',
+                                    name: name,
+                                    fill: 'tozeroy',
+
+                                    orientation: 'h'
+                                };
+                                data.push(trace);
+                            }
+                        } else {
+                            console.log ('else')
+                            var trace = {
+                                x: categories,
+                                fill: 'tozeroy',
+
+                                y: columns[0].slice(1),
+                                type: 'scatter',
+                            };
+                            data.push(trace);
+                        };
+
+                    };
+
+                    var item_exists = this.el.closest(".chart_field").attr('id');
+
+                    if (typeof item_exists !== 'undefined' && item_exists !== null){
+                        var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
+                        var chart_plotly = document.getElementById("chart_field_plotly_" + item_no);
+
+                        var len_data = data.length;
+                        var tmp ;
+                        var data_tmp = data;
+                        var len_count = 1;
+
+                        for (tmp = 0; tmp < len_data; tmp++){
+                            var color_count = 1;
+                            var d = data_tmp[tmp];
+
+                                var c = "chart_field_color_"+ item_no + "_" + (tmp+1)
+                                var chart_field_plotly_value = document.getElementById("chart_field_color_"+item_no).value;
+
+                                if (chart_field_plotly_value) {
+                                    // there is a plotly value in the input field
+                                    console.log('we have a plotly value for color in html');
+                                    var color_tmp = document.querySelectorAll('[data-target='+c+']');
+
+                                    if (color_tmp['length'] >= 1){
+                                        var color = color_tmp[0].style.cssText;
+                                        var new_color = color.split(": ")[1].slice(0, -1);
+                                        if (new_color.includes('none')){
+                                            new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                        }
+                                        d['marker'] = {'color': new_color};
+                                    } else {
+                                        d['marker'] = {'color': 'darkseagreen'};
+                                    }
+                                } else {
+                                    console.log('we DONT have a plotly value for color in html');
+                                    var color_id = "chart_field_color_" + item_no
+                                    var color_tmp = document.querySelectorAll('[data-target=' + color_id + ']');
+
+                                    if (color_tmp.length >= 1){
+                                        var color = color_tmp[0].style.cssText;
+                                        var new_color = color.split(": ")[1].slice(0, -1);
+                                        if (new_color.includes('none')){
+                                            new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                        }
+                                        d['marker'] = {'color': new_color};
+                                    }
+                                }
+
+
+                        // delete elements
+                        var p = document.querySelectorAll('[id^="chart_field_color_'+item_no+'"]');
+                        var color_elements = 0;
+
+                        for (var a = 0; a < p.length; a++) {
+                            var type = p[a].tagName;
+                            if (type === 'INPUT') {
+                                color_elements = color_elements + 1;
+                            }
+                        }
+
+                        if (color_elements > data.length) {
+                            for (var a = 0; a < p.length; a++) {
+                                var type = p[a].tagName;
+                                if (type === 'INPUT') {
+                                    p[a].parentElement.remove();
+                                }
+                            }
+                        }
+
+                        // add new html element
+                        var elementExists = document.getElementById(c);
+
+                        if (elementExists) {
+                            console.log('element exists!')
+                            elementExists.parentElement.remove();
+
+                            var newcontent = document.createElement('div');
+                            var html = '';
+                            html += '<div class="control-group control-select">'
+                            html += '<label class="control-label" for="chart_field_color_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
+                            html += '<input type="text" id="chart_field_color_' + item_no + '_' + (tmp+1) +'" name="chart_field_color_' + item_no + '_' + (tmp+1) +'" class="colorpicker" style="display:none;" value="' + d['marker']['color'] + '"/> '
+                            html += '</div>'
+                            newcontent.innerHTML = html
+
+                            document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
+                            // remove Color element
+                            var elem = document.querySelector('#init_color');
+                            if (elem) {
+                                elem.parentNode.removeChild(elem);
+                            }
+
+                        } else {
+                            console.log('elem doesnt exist');
+                            console.log(d['marker']['color']);
+
+                            var newcontent = document.createElement('div');
+                            var html = '';
+                            html += '<div class="control-group control-select">'
+                            html += '<label class="control-label" for="chart_field_color_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
+                            html += '<input type="text" id="chart_field_color_' + item_no + '_' + (tmp+1) +'" name="chart_field_color_' + item_no + '_' + (tmp+1) +'" class="colorpicker" style="display:none;" value="' + d['marker']['color'] + '"/> '
+                            html += '</div>'
+                            newcontent.innerHTML = html;
+
+                            document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
+                            // remove Color element
+                            var elem = document.querySelector('#init_color');
+                            if (elem) {
+                                elem.parentNode.removeChild(elem);
+                            }
+                        }
+                        generateColorPicker();
+
                     }
 
-                    } else {
-                    console.log ('else')
-                    var trace = {
-                        x: columns[0].slice(1),
-                        y: categories,
-                        type: 'bar',
-                        orientation: 'h',
-                        width: 0.8,
-                    };
-                    data.push(trace);
-                    };
+                   data = data_tmp;
 
-                };
+                   var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
+                   var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
 
-if ( 'area' === this.options.chart_type) {
-                    var categories = O.axis['x']['categories'];
-
-                    if (categories === undefined){
-                    var x = columns[0].slice(1);
-                    var tmp ;
-
-                    for (tmp=1; tmp < columns.length; tmp++){
-                    var name = columns[tmp][0];
-                    var trace = {
-                        x: x,
-                        y: columns[tmp].slice(1),
-                        type: 'scatter',
-                        name: name,
-                        fill: 'tozeroy',
-
-                        orientation: 'h'
-                    };
-                        data.push(trace);
+                    if (typeof(chart_plotly) != 'undefined' && chart_plotly != null) {
+                       document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(data);
                     }
+                    }
+                } else {
+                    console.log('Existing chart');
+                    var item_exists = this.el.closest(".chart_field").attr('id'); //dali ni treba? DA
+                    console.log(item_exists);
 
-                    } else {
-                    console.log ('else')
-                    var trace = {
-                        x: categories,
-                        fill: 'tozeroy',
-
-                        y: columns[0].slice(1),
-                        type: 'scatter',
-                    };
-                    data.push(trace);
-                    };
-
-                };
-
-
-               var item_exists = this.el.closest(".chart_field").attr('id');
-
-               if (typeof(item_exists) != 'undefined' && item_exists != null){
-
-               var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
-               var chart_plotly = document.getElementById("chart_field_plotly_" + item_no);
-                var len_data = data.length;
-                var tmp ;
-                var data_tmp = data;
-                var len_count = item_no;
-
-                for (tmp = 0; tmp < len_data; tmp++){
-                    var color_count = 1;
-                    var d = data_tmp[tmp];
-
-                    for (color_count = 1; color_count <= len_data; color_count++){
-
-                    var c = "chart_field_plotly_"+ item_no + "_" + color_count
-                    var chart_field_plotly_value = document.getElementById("chart_field_plotly_"+item_no).value;
-
-                    if (chart_field_plotly_value !== null) {
-                    var color_tmp = document.querySelectorAll('[data-target='+c+']');
-
-
-                    if (color_tmp.length >= 1){
-                        var color = color_tmp[0].style.cssText;
-                        var new_color = color.split(": ")[1].slice(0, -1);
-                        data_tmp[color_count-1]['marker'] = {'color': new_color};
+                    if (typeof item_exists !== 'undefined' && item_exists !== null){
+                       var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
+                       var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
+                       if (typeof(chart_plotly) != 'undefined' && chart_plotly != null){
+                           document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(plotly);
                        }
-                    }
+                   }
+                    data = plotly;
 
-                    var elementExists = document.getElementById(c);
-
-                    if (elementExists === null && color_tmp.length === 0 && chart_plotly.value !== null) {
-
-                    var newcontent = document.createElement('div');
-                    var html = '';
-                    html += '<div class="control-group control-select">'
-                    html += '<label class="control-label" for="chart_field_plotly_' + item_no + '_' + color_count +'">' + d['name'] + '</label>'
-                    html += '<input type="text" id="chart_field_plotly_' + item_no + '_' + color_count +'" name="chart_field_plotly_' + item_no + '_' + color_count +'" class="colorpicker" style="display:none;" value="darkseagreen"/> '
-                    html += '</div>'
-                    newcontent.innerHTML = html
-
-                    document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
-                    }
-
-                }
-                    len_count = len_count + 1;
-
-                    generateColorPicker();
-              }
-
-               data = data_tmp;
-
-               var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
-               var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
-               if (typeof(chart_plotly) != 'undefined' && chart_plotly != null){
-                   document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(data);
-               }
-            }
-            }
-            else {
-                data = plotly;
-                var base_info = {
-                    xaxis: {
-                        tickformat: format,
-                    },
-                    yaxis: {
-                        tickformat: format,
+                    var base_info = {
+                        xaxis: {
+                            tickformat: format,
+                        },
+                        yaxis: {
+                            tickformat: format,
+                        }
                     }
                 }
-            }
-                console.log(base_info);
-                //console.log(this.el[0]);
-
                 var title_id = this.el.context.parentElement.children[0].id;
-                
+
                 if(title_id){
                     document.getElementById(title_id).innerHTML =  w;
                 }
-                
-                console.log(w)
-                console.log(title_id)
 
-               Plotly.newPlot(this.el[0], data, base_info);
+                Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
                 var t = this.el.closest(".chart_field"),
@@ -2136,13 +2187,13 @@ if ( 'area' === this.options.chart_type) {
                     N = t.find("select[name*=chart_field_dynamic_reference_type_]").val(),
                     P = t.find("input[name*=chart_field_dynamic_reference_factor_]").val(),
                     F = t.find("input[name*=chart_field_dynamic_reference_label_]").val(),
-                    plotly = t.find("input[name*=chart_field_plotly_]").val(),
                     M = $("#choose_y_axis_column option:selected").text(),
-                    I = t.find("[name*=chart_field_show_labels_as_percentages_]").is(":checked");
-                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P) return this.options.colors = n, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, void this.createChart(this.fetched_data);
-                this.options.colors = n, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I;
+                    I = t.find("[name*=chart_field_show_labels_as_percentages_]").is(":checked"),
+                    plotly = t.find("input[name*=chart_field_plotly_]").val();
+                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly) return this.options.colors = n, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, void this.createChart(this.fetched_data);
+                this.options.colors = n, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly;
                 var A = this.create_sql();
-                this.get_resource_datа(A);
+                this.get_resource_datа(A)
             },
             deleteChart: function() {
                 this.el.closest(".chart_field").remove()

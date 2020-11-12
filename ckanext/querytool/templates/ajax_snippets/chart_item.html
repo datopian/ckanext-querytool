@@ -1,4 +1,5 @@
 {% import 'macros/form.html' as form %}
+
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 
@@ -125,7 +126,6 @@
                 <textarea id="chart_field_desc_{{ n }}" name="chart_field_desc_{{ n }}" placeholder="{{ _('Additional description') }}" rows="3">{{ additional_description }}</textarea>
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -139,41 +139,40 @@
         </div>
         {% if chart %}
           {% if chart.plotly %}
-            {% set plotly = h.querytool_get_chart_colors(chart.plotly) %}
+          {% set plotly = h.querytool_get_chart_colors(chart.plotly) %}
           {% endif %}
         {% endif %}
 
+
         <div id="accordion_{{ chart_id }}_chart_plotly" class="accordion-body collapse">
           <div class="accordion-inner">
-            {% if plotly %}
-            {# more colors #}
             <div class="control-group control-select">
-            <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
+              {% if plotly %}
+              <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
+
             {% set color_count = 1 %}
             {% for a in plotly %}
-              {% if a.marker %}
             {% set color = a.marker.color %}
-              {% endif %}
             {% set name = a.name %}
-              sdomething {{color}}
             <div class="control-group control-select">
-              <label class="control-label" for="chart_field_plotly_{{ n }}_{{ color_count }}">{{ name }}</label>
-              <input type="text" id="chart_field_plotly_{{ n }}_{{ color_count }}" name="chart_field_plotly_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if color %}{{ color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
+              <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
+              <input type="text" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
             </div>
             {% set color_count = color_count + 1 %}
             {% endfor %}
-            </div>
+
             {% else %}
               {# Color #}
             {% set color_schemes = h.querytool_get_color_scheme() %}
             <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
-            <div class="control-group control-select">
+            <div class="control-group control-select" id="init_color">
               <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Color') }}</label>
                 <input type="text" id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
 
             </div>
             {% endif %}
+            </div>
           </div>
         </div>
 
@@ -667,8 +666,9 @@
     </div>
 
   </div>
-  <div style="width:65%;">
-      <div id="bar"></div>
+<!--  <div style="width:65%;">-->
+
+  <div style="width:1000px;height:500px;">
       {% if chart %}
           {% set colors = chart.color %}
           {% set x_axis = chart.x_axis %}
@@ -702,6 +702,7 @@
           {% set dynamic_reference_type = chart.dynamic_reference_type %}
           {% set dynamic_reference_factor = chart.dynamic_reference_factor %}
           {% set dynamic_reference_label = chart.dynamic_reference_label %}
+          {% set plotly = chart.plotly %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -739,7 +740,8 @@
           static_reference_label=static_reference_label,
           dynamic_reference_type=dynamic_reference_type,
           dynamic_reference_factor=dynamic_reference_factor,
-          dynamic_reference_label=dynamic_reference_label
+          dynamic_reference_label=dynamic_reference_label,
+          plotly = plotly
       %}
    </div>
 </div>

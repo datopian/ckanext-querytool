@@ -63,4 +63,3 @@ $(document).ready(function(){
         clear_btn: null // default -> 'upside'
     });
   }
-  
