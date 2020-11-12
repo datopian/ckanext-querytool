@@ -2056,7 +2056,12 @@
 
                                             d['marker'] = {'color': new_color};
                                         }  else {
-                                        d['marker'] = {'color': 'darkseagreen'};
+                                        var new_color = this.options.color;
+                                        if (new_color.length > 0){
+                                            d['marker'] = {'color': new_color};
+                                        } else {
+                                            d['marker'] = {'color': 'darkseagreen'};
+                                        }
                                     }
                                     } else {
                                         d['marker'] = {'color': 'darkseagreen'};
