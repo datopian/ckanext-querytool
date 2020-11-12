@@ -155,7 +155,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller=querytool_controller,
                     action='edit_visualizations')
 
-        map.connect('querytool_public', '/querytool/public/groups',
+        map.connect('querytool_public', '/',
                     controller=querytool_controller, action='querytool_public')
 
         map.connect('querytool_public_reports', '/querytool/public/reports',
@@ -283,3 +283,13 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         auth_functions = h._get_functions(module_root)
 
         return auth_functions
+
+    # IConfigurer
+
+    def update_config_schema(self, schema):
+        schema.update({
+            'ckan.welcome_page_title': [ignore_missing, unicode],
+            'ckan.welcome_page_description': [ignore_missing, unicode],
+        })
+
+        return schema
