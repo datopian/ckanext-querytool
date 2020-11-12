@@ -1,3 +1,5 @@
+{% resource 'querytool/css/home-page.css' %}
+
 {% extends "page.html" %}
 
 {% block subtitle %}{{ _('About') }}{% endblock %}
@@ -6,7 +8,13 @@
   <li class="active">{% link_for _('About'), controller='home', action='about' %}</li>
 {% endblock %}
 
+
 {% block primary %}
+
+  {% block primary_content %}
+      {% snippet "home/vs-home-page.html" %}
+  {% endblock %}
+
   <article class="module">
     <div class="module-content">
       {% block about %}

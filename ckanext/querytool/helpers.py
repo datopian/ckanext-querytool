@@ -170,6 +170,16 @@ def get_color_scheme():
     return colors
 
 
+def get_querytool_get_chart_colors(data):
+    print data
+    print 'in'
+    try:
+        data = json.loads(data)
+    except:
+        data = []
+
+    return data
+
 def get_map_color_scheme():
     '''
     Get color schemes for displaying the maps
@@ -632,3 +642,32 @@ def get_groups_for_user(userobj, group):
         return True
     else:
         return False
+
+
+def create_plot():
+    import plotly
+    import plotly.graph_objs as go
+
+    import pandas as pd
+    import numpy as np
+
+    N = 40
+    x = np.linspace(0, 1, N)
+    y = np.random.randn(N)
+    df = pd.DataFrame({'x': x, 'y': y}) # creating a sample dataframe
+
+
+    data = [
+        go.Bar(
+            x=df['x'], # assign x as the dataframe column 'x'
+            y=df['y']
+        )
+    ]
+
+    graphJSON = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return graphJSON
+
+def plotly_chart():
+    a = create_plot()
+    return a

@@ -155,7 +155,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     controller=querytool_controller,
                     action='edit_visualizations')
 
-        map.connect('querytool_public', '/querytool/public/groups',
+        map.connect('querytool_public', '/',
                     controller=querytool_controller, action='querytool_public')
 
         map.connect('querytool_public_reports', '/querytool/public/reports',
@@ -274,6 +274,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                 helpers.get_user_permission,
             'get_groups_for_user':
                 helpers.get_groups_for_user,
+            'plotly_chart':
+                helpers.plotly_chart,
+            'querytool_get_chart_colors':
+                helpers.get_querytool_get_chart_colors,
         }
 
     # IAuthFunctions

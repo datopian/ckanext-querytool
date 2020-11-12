@@ -194,7 +194,7 @@ ckan.module('querytool-viz-preview', function() {
                             this.dynamic_reference_value = this.dynamic_reference_value * dynamic_reference_factor;
                           }
                         }
-
+                        alert(this.fetched_data);
                         this.createChart(this.fetched_data);
                     } else {
                        this.el.text(this._('Chart could not be created.'));
@@ -586,6 +586,7 @@ ckan.module('querytool-viz-preview', function() {
             }
 
             // Generate chart
+            console.log('thj')
             var chart = c3.generate(options);
 
         },
