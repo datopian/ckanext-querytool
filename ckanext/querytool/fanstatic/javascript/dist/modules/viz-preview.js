@@ -2041,10 +2041,11 @@
                                     }
                                 } else {
                                     console.log('we DONT have a plotly value for color in html');
-                                    var color_id = "chart_field_color_" + item_no
+                                    var color_id = "chart_field_color_" + item_no;
                                     var color_tmp = document.querySelectorAll('[data-target=' + color_id + ']');
+                                    console.log(color_tmp);
 
-                                    if (color_tmp.length >= 1){
+                                    if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
                                         var new_color = color.split(": ")[1].slice(0, -1);
                                         if (new_color.includes('none')){
