@@ -383,8 +383,8 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_y_label_{}'.format(id))
                     visualization['size'] = \
                         data.get('chart_field_size_{}'.format(id))
-                    visualization['chart_padding_left'] = \
-                        data.get('chart_field_chart_padding_left_{}'.format(id))
+                    # visualization['chart_padding_left'] = \
+                    #     data.get('chart_field_chart_padding_left_{}'.format(id))
                     visualization['chart_padding_bottom'] = \
                         data.get('chart_field_chart_padding_bottom_{}'.format(id))
                     visualization['static_reference_columns'] = \
