@@ -1904,6 +1904,7 @@
 
                     if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
                         var categories = O.axis['x']['categories'];
+                        console.log(categories);
 
                         if (categories === undefined){
                             var x = columns[0].slice(1);
@@ -1926,6 +1927,7 @@
                                 y: columns[0].slice(1),
                                 type: 'bar',
                                 width: 0.8,
+                                name: 'Color',
                             };
                             data.push(trace);
                         };
