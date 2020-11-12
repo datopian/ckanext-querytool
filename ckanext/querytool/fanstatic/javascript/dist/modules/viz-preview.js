@@ -2050,6 +2050,8 @@
                                             new_color = new_color.substring(0, new_color.indexOf(" none"));
                                         }
                                         d['marker'] = {'color': new_color};
+                                    } else {
+                                        d['marker'] = {'color': 'darkseagreen'};
                                     }
                                 }
 
