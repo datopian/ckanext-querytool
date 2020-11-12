@@ -1,11 +1,16 @@
 {% resource 'querytool/vendor/c3/c3.css' %}
 {% resource 'querytool/vendor/d3/d3.js' %}
 {% resource 'querytool/vendor/c3/c3.js' %}
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 {% resource 'querytool/vendor/canvas2image.js' %}
 {% resource 'querytool/vendor/html2canvas.js' %}
 {% resource 'querytool/vendor/nunjucks.js' %}
 {% resource "querytool/javascript/dist/public_query.js" %}
 {% resource 'querytool/javascript/dist/modules/viz-preview.js' %}
+
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 
 {% resource 'querytool/map' %}
 {% resource 'querytool/table' %}
@@ -56,33 +61,33 @@
 
     <div class="filters-wrapper" >
       <div class="filters">
-          {% if querytool.public_filters  %}
-            {% set show_arrow = False %}
-            {% for filter in querytool.public_filters %}
-              {% set public_filter_id = h.querytool_get_uuid() %}
-              {% snippet 'ajax_snippets/public_filter_item.html', id=public_filter_id, q_name=querytool.name, n=filter.order, selected_filter=filter, visibility=filter.visibility, show_arrow=show_arrow %}
-              {# set show_arrow = show_arrow or filter.visibility == 'public' #} 
-            {% endfor %}
-          {% endif %}
-          <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>
-          <div type="hidden" id="{{querytool.name}}_public_filters" data-main-filters="{{ querytool.public_main_filters or [] }}"></div>
 
-        <div class="filter-group-wrapper">
+        <div class="filter-group-wrapper" style="border-bottom: 1px solid rgb(218, 218, 218);padding-bottom:10px;">
           <div class="filter-item">
             <label for="{{querytool.name}}_y_axis_column">{{ _('Displayed Measure') }}</label>
             {% if y_axis_columns|length == 1 %}
               <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
             {% else %}
-              <div class="select-wrap">
-                <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
-                {% for y_axis in y_axis_columns %}
-                  <option value="{{ y_axis.name }}" {{ 'selected' if y_axis.name == y_axis_selected }}>{{ y_axis.alias or y_axis.name }}</option>
-                {% endfor %}
-                </select>
-              </div>
+              <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
+              {% for y_axis in y_axis_columns %}
+                <option value="{{ y_axis.name }}" {{ 'selected' if y_axis.name == y_axis_selected }}>{{ y_axis.alias or y_axis.name }}</option>
+              {% endfor %}
+              </select>
             {% endif %}
           </div>
         </div>
+        
+        {% if querytool.public_filters  %}
+          {% set show_arrow = False %}
+          {% for filter in querytool.public_filters %}
+            {% set public_filter_id = h.querytool_get_uuid() %}
+            {% snippet 'ajax_snippets/public_filter_item.html', id=public_filter_id, q_name=querytool.name, n=filter.order, selected_filter=filter, visibility=filter.visibility, show_arrow=show_arrow %}
+            {# set show_arrow = show_arrow or filter.visibility == 'public' #} 
+          {% endfor %}
+        {% endif %}
+        <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>
+        <div type="hidden" id="{{querytool.name}}_public_filters" data-main-filters="{{ querytool.public_main_filters or [] }}"></div>
+
       </div>
 
       <button type="submit" class="btn btn-update" data-anchor="{{ querytool.name }}"> {{ _('Update') }}</button>
@@ -139,6 +144,11 @@
         width:45%;
         float:left;
       }
+
+      .ytick, .xtick {
+        font-weight: 700;
+      }
+
     </style>
     <!-- Visualizations container -->
     <div class="visualizations_">
@@ -157,31 +167,33 @@
           {% set sizeClass = 'c-col-6' %}
         {% endif %}
 
-      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
+      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
+        <h3 id="item-title-{{chart_id}}">{{ item.title }}</h3>
+        
         {% if item.type == 'chart'  %}
            {% if item.filter_visibility == 'public'  %}
             {% set chart_filter_id = h.querytool_get_uuid() %}
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
               id=chart_filter_id,
               q_name=querytool.name,
+              title=item.title,
               n=item.order,
               name=item.filter_name,
               alias=item.filter_alias,
               value=item.filter_value,
-              resource_id=querytool.chart_resource
+              resource_id=querytool.chart_resource,
+              plotly=item.plotly
             %}
           {% endif %}
-          <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}" data-module-type="{{item.graph}}">
-            Export <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
-           </a>
+         
           {% snippet 'ajax_snippets/visualization_item.html',
             type='chart',
             colors=item.color,
             x_axis=item.x_axis,
             y_axis=y_axis_selected,
             chart_type=item.graph,
+            title = item.title,
             sql_string=querytool.sql_string,
-            title=item.title,
             show_legend = item.show_legend,
             x_text_rotate= item.x_text_rotate,
             x_text_multiline= item.x_text_multiline,
@@ -209,7 +221,8 @@
             static_reference_label = item.static_reference_label,
             dynamic_reference_type = item.dynamic_reference_type,
             dynamic_reference_factor = item.dynamic_reference_factor,
-            dynamic_reference_label = item.dynamic_reference_label
+            dynamic_reference_label = item.dynamic_reference_label,
+            plotly = item.plotly
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
@@ -282,6 +295,11 @@
             table_title = item.title
           %}
         {% endif %}
+        <p style="float:left;width:80%;">{{ item.additional_description }}</p>
+        <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}" data-module-type="{{item.graph}}">
+          Export <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
+        </a>
+        <p class="clearfix"></p>
       </div>
       {% endfor %}
     </div>

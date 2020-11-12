@@ -572,7 +572,7 @@ body {
   box-shadow: 1px 0px 6px #e2e2e2;
 
   .filters {
-    max-height: 450px;
+    max-height: 400px;
     overflow-y: auto;
     padding: 20px;
   }
@@ -622,13 +622,21 @@ body {
 
       padding: 0;
       margin: 0;
+      border: 1px solid #e4e4e4;
+    }
+
+    input {
+      width:100%;
+      background-color:#fff;
+      padding: 0;
+      margin: 0;
+      border: 1px solid #e4e4e4;
     }
   }
 }
-
 .controls-wrap {
   width:70%; 
-  margin-left:50px !important;
+  margin-left:40px !important;
   float:left; 
   margin-top:40px !important;
   border-bottom: 1px solid #e6e6e6;
@@ -665,20 +673,61 @@ body {
 
 .c-col-8 {
   width:70%;
-  height:500px;
+  height:650px;
   float:left;
   margin-left:50px;
+  margin-top:0 !important;
+
+  .item-content {
+    height:520px;
+
+    img {
+      max-width:100%;
+      max-height: 100%;
+    }
+  }
+
+  h3 {
+    font-size: 1.35em;
+    line-height: 1.1;
+  }
+
+  h3:empty {
+    display:none;
+  }
 }
 
 .c-col-6 {
   width:45%;
-  height:500px;
+  height:680px;
   float:left;
   margin-left:50px;
+
+  .item-content {
+    height:520px;
+
+    img {
+      max-width:100%;
+      max-height: 100%;
+    }
+  }
+
+  h3 {
+    font-size: 1.35em;
+    line-height: 1.1;
+  }
+
+  h3:empty {
+    display:none;
+  }
 }
 
 .visualizations_ {
   margin-bottom:50px;
+}
+
+svg.main-svg .infolayer {
+  display: none;
 }
 
 /* VIZ Media Query */
@@ -708,5 +757,14 @@ body {
     width:100%;
     padding-left:0;
     padding-right:0;
+  }
+
+
+  .c-col-8 , .c-col-6 {
+    padding:0;
+  }
+
+  .site-footer {
+    padding:10px 20px !important;
   }
 }
