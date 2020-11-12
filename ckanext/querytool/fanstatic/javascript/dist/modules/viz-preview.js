@@ -1835,6 +1835,7 @@
                         var trace = {
                             labels: x,
                             values: y,
+                                name: 'Color',
                             type: 'pie',
                         };
                         data = [];
@@ -1852,7 +1853,7 @@
                             labels: x,
                             values: y,
                               hole: .4,
-
+                                name: 'Color',
                             type: 'pie',
                         };
                         data = [];
@@ -1897,6 +1898,7 @@
                                 y: columns[0].slice(1),
                                 name: columns[0][0],
                                 type: 'scatter',
+                                name: 'Color',
                                 line: {shape: 'spline'},
                             };
                             data.push(trace);
@@ -1959,6 +1961,7 @@
                                 x: columns[0].slice(1),
                                 y: categories,
                                 type: 'bar',
+                                name: 'Color',
                                 orientation: 'h',
                                 width: 0.8,
                             };
@@ -1992,7 +1995,7 @@
                             var trace = {
                                 x: categories,
                                 fill: 'tozeroy',
-
+                                name: 'Color',
                                 y: columns[0].slice(1),
                                 type: 'scatter',
                             };
