@@ -2048,7 +2048,7 @@
                                     if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
                                         console.log(color);
-                                        if (color !== ' '){
+                                        if (color.length > 0){
                                             var new_color = color.split(": ")[1].slice(0, -1);
                                             if (new_color.includes('none')){
                                                 new_color = new_color.substring(0, new_color.indexOf(" none"));
