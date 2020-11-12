@@ -2055,7 +2055,9 @@
                                             }
 
                                             d['marker'] = {'color': new_color};
-                                        }
+                                        }  else {
+                                        d['marker'] = {'color': 'darkseagreen'};
+                                    }
                                     } else {
                                         d['marker'] = {'color': 'darkseagreen'};
                                     }
