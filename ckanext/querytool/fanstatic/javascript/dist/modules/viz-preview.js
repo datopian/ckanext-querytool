@@ -2048,20 +2048,22 @@
                                     if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
                                         console.log(color);
-                                        if (color.length > 0){
+                                        // check type and do the conditions according to that
+
+                                        if (typeof color === 'undefined'){
+                                            var new_color = this.options.color;
+                                            if (new_color.length > 0){
+                                                d['marker'] = {'color': new_color};
+                                            } else {
+                                                d['marker'] = {'color': 'darkseagreen'};
+                                            }
+                                        }  else {
                                             var new_color = color.split(": ")[1].slice(0, -1);
                                             if (new_color.includes('none')){
                                                 new_color = new_color.substring(0, new_color.indexOf(" none"));
                                             }
 
                                             d['marker'] = {'color': new_color};
-                                        }  else {
-                                        var new_color = this.options.color;
-                                        if (new_color.length > 0){
-                                            d['marker'] = {'color': new_color};
-                                        } else {
-                                            d['marker'] = {'color': 'darkseagreen'};
-                                        }
                                     }
                                     } else {
                                         d['marker'] = {'color': 'darkseagreen'};
