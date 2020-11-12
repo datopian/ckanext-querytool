@@ -195,8 +195,6 @@ class QueryToolController(base.BaseController):
                     filter['alias'] = data['data_filter_alias_{}'.format(id)]
                     filter['visibility'] = \
                         data['data_filter_visibility_{}'.format(id)]
-                    filter['filter_color'] = \
-                        data['data_filter_color_{}'.format(id)]
 
                     filters.append(filter)
                 elif k.startswith('y_axis_name_'):
@@ -247,13 +245,15 @@ class QueryToolController(base.BaseController):
                                            errors, error_summary)
             if 'save_data' in data.keys():
                 # redirect to querytools group
-                url = h.url_for('querytool_list_by_group',
-                                group=_querytool['group'])
+                querytool_controller \
+                    = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
+                h.redirect_to(controller=querytool_controller, action='read_all_reports')
+
             else:
                 # redirect to manage visualisations
                 url = h.url_for('querytool_edit_visualizations',
                                 querytool='/' + _querytool['name'])
-            h.redirect_to(url)
+                h.redirect_to(url)
 
         if not data:
             data = _querytool
