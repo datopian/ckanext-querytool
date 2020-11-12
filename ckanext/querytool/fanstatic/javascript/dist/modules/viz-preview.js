@@ -1793,8 +1793,9 @@
 
                 // if typeof plotly is string -> new chart
                 // if typeof plotly is object -> existing chart (user view or admin preview)
+                // if plotly value is true we may have some data in the database for the chart, but plotly is set to true
 
-                if (typeof plotly === 'string') {
+                if (typeof plotly === 'string' || plotly === true) {
                     if ( 'line' === this.options.chart_type) {
                         var categories = O.axis['x']['categories'];
                         var format = this.options.data_format;
@@ -2132,7 +2133,7 @@
                     }
                 } else {
                     console.log('Existing chart');
-                    var item_exists = this.el.closest(".chart_field").attr('id'); //dali ni treba? DA
+                    var item_exists = this.el.closest(".chart_field").attr('id');
                     console.log(item_exists);
 
                     if (typeof item_exists !== 'undefined' && item_exists !== null){
