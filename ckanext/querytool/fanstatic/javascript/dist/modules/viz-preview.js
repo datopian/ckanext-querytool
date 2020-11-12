@@ -1784,6 +1784,7 @@
                 console.log('this is plotly');
                 console.log(this.options.plotly);
                 var plotly = this.options.plotly;
+                var q = JSON.parse(JSON.stringify(plotly));
 
                 var data = []
                 var columns = O.data['columns'];
@@ -1846,22 +1847,18 @@
                                     // there is a plotly value in the input field
                                     console.log('we have a plotly value for color in html');
                                     var color_tmp = document.querySelectorAll('[data-target='+c+']');
-                                    console.log(color_tmp['length']);
 
                                     if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
                                         var new_color = color.split(": ")[1].slice(0, -1);
-                                        console.log(new_color);
                                         d['marker'] = {'color': new_color};
                                     } else {
-                                        console.log('the length is 0');
                                         d['marker'] = {'color': 'darkseagreen'};
                                     }
                                 } else {
                                     console.log('we DONT have a plotly value for color in html');
                                     var color_id = "chart_field_color_" + item_no
                                     var color_tmp = document.querySelectorAll('[data-target=' + color_id + ']');
-                                    console.log(color_tmp);
 
                                     if (color_tmp.length >= 1){
                                         var color = color_tmp[0].style.cssText;
@@ -1870,11 +1867,33 @@
                                     }
                                 }
 
+
+                        // delete elements
+                        var p = document.querySelectorAll('[id^="chart_field_color_'+item_no+'"]');
+                        var color_elements = 0;
+
+                        for (var a = 0; a < p.length; a++) {
+                            var type = p[a].tagName;
+                            if (type === 'INPUT') {
+                                color_elements = color_elements + 1;
+                            }
+                        }
+
+                        if (color_elements > data.length) {
+                            for (var a = 0; a < p.length; a++) {
+                                var type = p[a].tagName;
+                                if (type === 'INPUT') {
+                                    p[a].parentElement.remove();
+                                }
+                            }
+                        }
+
                         // add new html element
                         var elementExists = document.getElementById(c);
-                        console.log(elementExists);
 
-                        if (elementExists === null && chart_plotly.value !== null) {
+                        if (elementExists) {
+                            console.log('element exists!')
+                            elementExists.parentElement.remove();
 
                             var newcontent = document.createElement('div');
                             var html = '';
@@ -1890,16 +1909,18 @@
                             if (elem) {
                                 elem.parentNode.removeChild(elem);
                             }
+
                         } else {
-                            var parent = elementExists.parentElement;
-                            parent.remove();
+                            console.log('elem doesnt exist');
+                            console.log(d['marker']['color']);
+
                             var newcontent = document.createElement('div');
                             var html = '';
                             html += '<div class="control-group control-select">'
                             html += '<label class="control-label" for="chart_field_color_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
                             html += '<input type="text" id="chart_field_color_' + item_no + '_' + (tmp+1) +'" name="chart_field_color_' + item_no + '_' + (tmp+1) +'" class="colorpicker" style="display:none;" value="' + d['marker']['color'] + '"/> '
                             html += '</div>'
-                            newcontent.innerHTML = html
+                            newcontent.innerHTML = html;
 
                             document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
                             // remove Color element
@@ -1931,7 +1952,6 @@
                        var chart_plotly = document.getElementById("chart_field_plotly_"+item_no);
                        if (typeof(chart_plotly) != 'undefined' && chart_plotly != null){
                            document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(plotly);
-
                        }
                    }
                     data = plotly;
@@ -1983,8 +2003,6 @@
                     M = $("#choose_y_axis_column option:selected").text(),
                     I = t.find("[name*=chart_field_show_labels_as_percentages_]").is(":checked"),
                     plotly = t.find("input[name*=chart_field_plotly_]").val();
-                    console.log('update')
-                    console.log(plotly);
                 if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly) return this.options.colors = n, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, void this.createChart(this.fetched_data);
                 this.options.colors = n, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly;
                 var A = this.create_sql();
