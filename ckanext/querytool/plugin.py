@@ -132,6 +132,12 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         map.redirect('/querytool', '/querytool/groups',
                      _redirect_code='301 Moved Permanently')
 
+        map.connect('querytool_groups', '/querytool/groups',
+                    controller=querytool_controller, action='groups')
+
+        map.connect('querytool_list_by_group', '/querytool/group/{group}',
+                    controller=querytool_controller, action='list_by_group')
+
         map.redirect('/querytool/public', '/querytool/public/groups',
                      _redirect_code='301 Moved Permanently')
 
