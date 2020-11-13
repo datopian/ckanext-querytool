@@ -14,10 +14,10 @@ Example usage:
 {% set tool = h.url_for('querytool_public_read', name=querytool.name) %}
 
 <div class="group-box">
-  {% if querytool.icon|length %}
-    <img class="thumbnail" src="/base/images/folder-icon-2.svg" width="70" alt="">
-  {% else %}
+  {% if querytool.icon %}
     <i class="thumbnail fa-3x {{ querytool.icon }}"></i>
+  {% else %}
+    <img class="thumbnail" src="/base/images/folder-icon-2.svg" width="70" alt="">
   {% endif %}
 
   <div class="box-content">
