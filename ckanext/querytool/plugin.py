@@ -128,15 +128,18 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         querytool_controller\
             = 'ckanext.querytool.controllers.querytool:QueryToolController'
 
+        group_controller = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
+
+
         # Query tool routes
         map.redirect('/querytool', '/querytool/groups',
                      _redirect_code='301 Moved Permanently')
 
         map.connect('querytool_groups', '/querytool/groups',
-                    controller=querytool_controller, action='groups')
+                    _redirect_code='301 Moved Permanently')
 
-        map.connect('querytool_list_by_group', '/querytool/group/{group}',
-                    controller=querytool_controller, action='list_by_group')
+        map.connect('querytool_list_by_group', '/group/{id}/reports',
+                    controller=group_controller, action='read_report')
 
         map.redirect('/querytool/public', '/querytool/public/groups',
                      _redirect_code='301 Moved Permanently')
@@ -175,9 +178,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     '/querytool/download/{name}',
                     controller=querytool_controller,
                     action='querytool_download_data')
-
-        group_controller = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
-
 
         map.connect('group_read_all_reports',
                     '/report',
