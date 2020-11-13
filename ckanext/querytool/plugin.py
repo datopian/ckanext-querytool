@@ -279,13 +279,3 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         auth_functions = h._get_functions(module_root)
 
         return auth_functions
-
-    # IConfigurer
-
-    def update_config_schema(self, schema):
-        schema.update({
-            'ckan.welcome_page_title': [ignore_missing, unicode],
-            'ckan.welcome_page_description': [ignore_missing, unicode],
-        })
-
-        return schema
