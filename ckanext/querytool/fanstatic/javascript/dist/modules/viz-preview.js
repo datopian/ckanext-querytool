@@ -2050,7 +2050,7 @@
                                         console.log(color);
                                         // check type and do the conditions according to that
 
-                                        if (typeof color === 'undefined'){
+                                        if (typeof color === 'undefined' || color === ''){
                                             var new_color = this.options.color;
                                             if (new_color.length > 0){
                                                 d['marker'] = {'color': new_color};
