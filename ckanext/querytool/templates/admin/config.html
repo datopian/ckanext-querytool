@@ -1,0 +1,24 @@
+
+{% ckan_extends %}
+
+{% import 'macros/form.html' as form %}
+
+{% block admin_form %}
+
+ {{ super() }}
+
+ {{ form.input('ckan.welcome_page_title', id='field-ckan.welcome_page_title', placeholder=g.welcome_page_title or _('Welcom Page Title'), label=_('Welcome Page Title'), value=data['ckan.welcome_page_title'], error=errors['ckan.welcome_page_title']) }}
+ {{ form.markdown('ckan.welcome_page_description', id='field-ckan.welcome_page_description', placeholder=g.welcome_page_description or _('Welcome Page Description'), label=_('Welcome Page Description'), value=data['ckan.welcome_page_description'], error=errors['ckan.welcome_page_description']) }}
+
+{% endblock %}
+
+
+{% block admin_form_help %}
+
+ {{ super() }}
+
+ <p><strong>Welcome Page Title:</strong> The title presented to users on the home page.</p>
+
+ <p><strong>Welcome Page Description:</strong> The description presented to users on the home page.</p>
+
+{% endblock %}
