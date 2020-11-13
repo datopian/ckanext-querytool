@@ -308,8 +308,6 @@ class QueryToolController(base.BaseController):
             'name': querytool
         }
 
-        print data_dict
-
         context = _get_context()
 
         try:
@@ -542,15 +540,13 @@ class QueryToolController(base.BaseController):
 
                     maps.append(map_item)
 
-                if k.startswith('table_size_'):
+                if k.startswith('table_field_'):
                     table_item = {}
                     id = k.split('_')[-1]
                     table_item['type'] = 'table'
                     table_item['order'] = int(id)
                     table_item['y_axis'] = \
                         data['choose_y_axis_column']
-                    table_item['size'] = \
-                        data['table_size_{}'.format(id)]
                     table_item['main_value'] = \
                         data['table_main_value_{}'.format(id)]
                     table_item['title'] = \
