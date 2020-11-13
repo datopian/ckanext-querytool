@@ -1516,6 +1516,7 @@
                     u = this.options.tooltip_name,
                     l = this.options.data_format,
                     f = this.options.y_tick_format,
+                    p = (!0 === this.options.chart_padding_left || this.options.chart_padding_left, !0 === this.options.chart_padding_bottom || this.options.chart_padding_bottom, !0 === this.options.padding_top || this.options.padding_top, !0 === this.options.padding_bottom || this.options.padding_bottom, !0 === this.options.tick_count ? "" : this.options.tick_count),
                     h = this.options.show_labels,
                     _ = !0 === this.options.y_label ? null : this.options.y_label,
                     d = this.options.y_label_hide,
