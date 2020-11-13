@@ -2052,12 +2052,7 @@
                                         // check type and do the conditions according to that
 
                                         if (typeof color === 'undefined' || color === ''){
-                                            var new_color = this.options.colors;
-                                            if (new_color.length > 0){
-                                                d['marker'] = {'color': new_color};
-                                            } else {
                                                 d['marker'] = {'color': 'darkseagreen'};
-                                            }
                                         }  else {
                                             var new_color = color.split(": ")[1].slice(0, -1);
                                             if (new_color.includes('none')){
