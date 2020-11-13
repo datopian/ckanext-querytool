@@ -2051,7 +2051,7 @@
                                         // check type and do the conditions according to that
 
                                         if (typeof color === 'undefined' || color === ''){
-                                            var new_color = this.options.color;
+                                            var new_color = this.options.colors;
                                             if (new_color.length > 0){
                                                 d['marker'] = {'color': new_color};
                                             } else {
