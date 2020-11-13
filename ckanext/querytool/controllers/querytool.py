@@ -462,8 +462,6 @@ class QueryToolController(base.BaseController):
                     text_box['order'] = int(id)
                     text_box['description'] = \
                         data['text_box_description_{}'.format(id)]
-                    text_box['size'] = \
-                        data['text_box_size_{}'.format(id)]
 
                     text_boxes.append(text_box)
 
