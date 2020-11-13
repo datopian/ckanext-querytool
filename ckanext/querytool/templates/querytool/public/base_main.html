@@ -80,7 +80,7 @@
               
               <div style="min-height:55px;">
                 <div class="short-desc">
-                  <p>{{ group.description }}</p>
+                  <p>{{ h.render_markdown(h.get_translated(group, 'description'), True, True) }}</p>
                 </div>
               </div>
               
