@@ -1786,6 +1786,7 @@
                 console.log(this.options.plotly);
                 var plotly = this.options.plotly;
                 var q = JSON.parse(JSON.stringify(plotly));
+                console.log(O);
 
                 var data = []
                 var columns = O.data['columns'];
@@ -2173,7 +2174,7 @@
                 if(title_id){
                     document.getElementById(title_id).innerHTML =  w;
                 }
-
+                console.log(data);
                 Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
