@@ -60,6 +60,21 @@
        {% endif %}
 
     <div class="filters-wrapper" >
+      <div class="filter-group-wrapper" style="border-bottom: 1px solid rgb(218, 218, 218);padding-bottom:10px;">
+        <div class="filter-item" style="padding: 10px 20px; padding-bottom: 5px;">
+          <label for="{{querytool.name}}_y_axis_column">{{ _('Displayed Measure') }}</label>
+          {% if y_axis_columns|length == 1 %}
+            <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
+          {% else %}
+            <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
+            {% for y_axis in y_axis_columns %}
+              <option value="{{ y_axis.name }}" {{ 'selected' if y_axis.name == y_axis_selected }}>{{ y_axis.alias or y_axis.name }}</option>
+            {% endfor %}
+            </select>
+          {% endif %}
+        </div>
+      </div>
+
       <div class="filters">
 
         {% if querytool.public_filters  %}
@@ -73,20 +88,7 @@
         <input type="hidden" class="field_resource_id" value="{{ querytool.chart_resource }}"/>
         <div type="hidden" id="{{querytool.name}}_public_filters" data-main-filters="{{ querytool.public_main_filters or [] }}"></div>
         
-        <div class="filter-group-wrapper" style="border-bottom: 1px solid rgb(218, 218, 218);padding-bottom:10px;">
-          <div class="filter-item">
-            <label for="{{querytool.name}}_y_axis_column">{{ _('Displayed Measure') }}</label>
-            {% if y_axis_columns|length == 1 %}
-              <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
-            {% else %}
-              <select id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level">
-              {% for y_axis in y_axis_columns %}
-                <option value="{{ y_axis.name }}" {{ 'selected' if y_axis.name == y_axis_selected }}>{{ y_axis.alias or y_axis.name }}</option>
-              {% endfor %}
-              </select>
-            {% endif %}
-          </div>
-        </div>
+        
 
       </div>
 
