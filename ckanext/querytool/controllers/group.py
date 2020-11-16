@@ -39,7 +39,7 @@ class QuerytoolGroupController(GroupController):
         return self._render_template('group/report_index.html', {'reports': reports})
 
 
-    def read_report(self, id, limit=20):
+    def read_report(self, id):
         group_type = self._ensure_controller_matches_group_type(
             id.split('@')[0])
 

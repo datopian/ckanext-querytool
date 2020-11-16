@@ -295,7 +295,7 @@
             table_title = item.title
           %}
         {% endif %}
-        <p style="float:left;width:80%;">{{ item.additional_description }}</p>
+        <p style="float:left;width:80%;">{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</p>
         <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}" data-module-type="{{item.graph}}">
           Export <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
         </a>

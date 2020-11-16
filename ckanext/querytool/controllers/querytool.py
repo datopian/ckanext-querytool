@@ -122,6 +122,11 @@ class QueryToolController(base.BaseController):
         except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
 
+        data_dict = {
+            'name': name
+        }
+        _querytool = _get_action('querytool_get', data_dict)
+
         try:
             junk = _get_action('querytool_delete', {'name': name})
         except NotFound:
@@ -129,7 +134,8 @@ class QueryToolController(base.BaseController):
 
         h.flash_success(_('Application and visualizations were '
                           'removed successfully.'))
-        toolkit.redirect_to(h.url_for('querytool_groups'))
+
+        toolkit.redirect_to('/group/' + _querytool['group'] + '/reports')
 
     def querytool_edit(self, querytool=None, data=None,
                        errors=None, error_summary=None):
@@ -245,9 +251,7 @@ class QueryToolController(base.BaseController):
                                            errors, error_summary)
             if 'save_data' in data.keys():
                 # redirect to querytools group
-                querytool_controller \
-                    = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
-                h.redirect_to(controller=querytool_controller, action='read_all_reports')
+                toolkit.redirect_to('/group/'+_querytool['group']+'/reports')
 
             else:
                 # redirect to manage visualisations
@@ -303,8 +307,6 @@ class QueryToolController(base.BaseController):
         data_dict = {
             'name': querytool
         }
-
-        print data_dict
 
         context = _get_context()
 
@@ -462,8 +464,6 @@ class QueryToolController(base.BaseController):
                     text_box['order'] = int(id)
                     text_box['description'] = \
                         data['text_box_description_{}'.format(id)]
-                    text_box['size'] = \
-                        data['text_box_size_{}'.format(id)]
 
                     text_boxes.append(text_box)
 
@@ -540,15 +540,13 @@ class QueryToolController(base.BaseController):
 
                     maps.append(map_item)
 
-                if k.startswith('table_size_'):
+                if k.startswith('table_field_title_'):
                     table_item = {}
                     id = k.split('_')[-1]
                     table_item['type'] = 'table'
                     table_item['order'] = int(id)
                     table_item['y_axis'] = \
                         data['choose_y_axis_column']
-                    table_item['size'] = \
-                        data['table_size_{}'.format(id)]
                     table_item['main_value'] = \
                         data['table_main_value_{}'.format(id)]
                     table_item['title'] = \
@@ -602,9 +600,7 @@ class QueryToolController(base.BaseController):
                 url = h.url_for('querytool_edit',
                                 querytool='/' + _querytool['name'])
             else:
-                # redirect to querytools group
-                url = h.url_for('querytool_list_by_group',
-                                group=_querytool['group'])
+                toolkit.redirect_to('/group/'+_querytool['group']+'/reports')
             h.redirect_to(url)
 
         if not data:
