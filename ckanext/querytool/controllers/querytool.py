@@ -540,7 +540,7 @@ class QueryToolController(base.BaseController):
 
                     maps.append(map_item)
 
-                if k.startswith('table_field_'):
+                if k.startswith('table_field_title_'):
                     table_item = {}
                     id = k.split('_')[-1]
                     table_item['type'] = 'table'
