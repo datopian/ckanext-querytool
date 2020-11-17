@@ -53,7 +53,7 @@ def querytool_update(context, data_dict):
         querytool = CkanextQueryTool()
 
     items = ['title', 'description', 'name', 'private', 'type', 'group',
-             'dataset_name', 'owner_org', 'icon',
+             'dataset_name', 'owner_org', 'icon', 'image_url',
              'filters', 'sql_string', 'related_querytools',
              'chart_resource', 'y_axis_columns', 'additional_description']
 
@@ -67,6 +67,19 @@ def querytool_update(context, data_dict):
     dataset = _get_action('package_show')(context, {'id': dataset_name})
     dataset['groups'] = [{'name': str(data.get('group'))}]
     _get_action('package_patch')(context, dataset)
+
+    image_url = data.get('image_url')
+
+    if image_url:
+        upload = uploader.get_uploader('vs', image_url)
+        new_data = {
+            'image_url': image_url,
+            'image_upload': 'true',
+            'clear_upload': 'true'
+        }
+        upload.update_data_dict(new_data, 'image_url', 'image_upload',
+                                'clear_upload')
+        upload.upload(uploader)
 
     session.add(querytool)
     session.commit()
