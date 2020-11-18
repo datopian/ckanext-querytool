@@ -2082,6 +2082,7 @@ if ( 'area' === this.options.chart_type) {
             else {
                 data = plotly;
                 var base_info = {
+                    title: w,
                     xaxis: {
                         tickformat: format,
                     },
