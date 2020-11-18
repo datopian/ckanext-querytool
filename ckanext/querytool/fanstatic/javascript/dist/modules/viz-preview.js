@@ -2158,11 +2158,11 @@
                     var base_info = {
                         xaxis: {
                             tickformat: format,
-                            automargin: True,
+                            automargin: true,
                         },
                         yaxis: {
                             tickformat: format,
-                            automargin: True
+                            automargin: true,
                         }
                     }
                 }
