@@ -2005,18 +2005,6 @@
 
                 };
 
-                var base_info = {
-                    xaxis: {
-                        tickformat: format,
-                        automargin: true,
-                    },
-                    yaxis: {
-                        tickformat: format,
-                        automargin: true,
-                    }
-                }
-
-
                 if (typeof plotly === 'string' || plotly === true) {
 
                     var item_exists = this.el.closest(".chart_field").attr('id');
@@ -2180,6 +2168,28 @@
                     for (const [key, value] of Object.entries(data)) {
                         value.marker = q[key].marker;
                     }
+                }
+
+                var base_info = {
+                    title: w,
+                    showlegend: o, //show legend value
+                    xaxis: {
+                        tickformat: format,
+                        automargin: true,
+                        title: this.options.x_axis,
+                    },
+                    yaxis: {
+                        tickformat: f,
+                        automargin: true,
+                    }
+                }
+
+                if (this.options.y_label_hide === false) {
+                    base_info.yaxis.title = _ || this.options.y_axis;
+                }
+
+                if (this.options.y_from_zero ===  true) {
+                    base_info.yaxis.rangemode = "tozero"
                 }
 
                 Plotly.newPlot(this.el[0], data, base_info);
