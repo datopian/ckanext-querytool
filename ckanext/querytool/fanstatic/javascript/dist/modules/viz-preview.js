@@ -1783,6 +1783,7 @@
                 } ["line", "area", "spline", "scatter", "bscatter", "bar", "hbar", "sbar", "shbar"].includes(this.options.chart_type) && v && (O.axis.y.min = 0, O.axis.y.padding = O.axis.y.padding || {}, O.axis.y.padding.bottom = 0);
 
                 console.log('this is plotly');
+                console.log(this.options);
                 console.log(this.options.plotly);
                 var plotly = this.options.plotly;
                 var q = JSON.parse(JSON.stringify(plotly));
@@ -1795,216 +1796,228 @@
                 // if typeof plotly is string -> new chart
                 // if typeof plotly is object -> existing chart (user view or admin preview)
                 // if plotly value is true we may have some data in the database for the chart, but plotly is set to true
+                if ( 'line' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
+                    var format = this.options.data_format;
 
-                if (typeof plotly === 'string' || plotly === true) {
-                    if ( 'line' === this.options.chart_type) {
-                        var categories = O.axis['x']['categories'];
-                        var format = this.options.data_format;
+                    if (categories === undefined){
+                        var x = columns[0].slice(1);
+                        var tmp ;
 
-                        if (categories === undefined){
-                            var x = columns[0].slice(1);
-                            var tmp ;
-
-                            for (tmp=1; tmp < columns.length; tmp++){
-                                var name = columns[tmp][0];
-                                var trace = {
-                                    x: x,
-                                    y: columns[tmp].slice(1),
-                                    type: 'scatter',
-                                    name: name,
-                                    width: 3
-                                };
-                                data.push(trace);
-                            };
-                        } else {
+                        for (tmp=1; tmp < columns.length; tmp++){
+                            var name = columns[tmp][0];
                             var trace = {
-                                x: categories,
-                                y: columns[0].slice(1),
-                                name: columns[0][0],
+                                x: x,
+                                y: columns[tmp].slice(1),
                                 type: 'scatter',
+                                name: name,
+                                width: 3
                             };
                             data.push(trace);
                         };
-                        console.log(data);
-                    }
-
-                    if ('pie' === this.options.chart_type) {
-                        for (a=0; a < columns.length; a++){
-
-                                x.push(columns[a][0]);
-                                y.push(columns[a][1]);
-                        };
+                    } else {
                         var trace = {
-                            labels: x,
-                            values: y,
-                                name: 'Color',
-                            type: 'pie',
-                        };
-                        data = [];
-                        data.push(trace);
-                    }
-
-                    if ( 'donut' === this.options.chart_type) {
-                                        for (a=0; a < columns.length; a++){
-
-                                x.push(columns[a][0]);
-                                y.push(columns[a][1]);
-                        };
-
-                        var trace = {
-                            labels: x,
-                            values: y,
-                              hole: .4,
-                                name: 'Color',
-                            type: 'pie',
-                        };
-                        data = [];
-                        data.push(trace);
-                    }
-
-                    if ( 'scatter' === this.options.chart_type) {
-                        var trace = {
-                            x: O.axis['x']['categories'],
+                            x: categories,
                             y: columns[0].slice(1),
-                            mode: "markers",
-
-                            type: this.options.chart_type,
+                            name: columns[0][0],
+                            type: 'scatter',
                         };
-                        data = [];
                         data.push(trace);
-                    }
+                    };
+                    console.log(data);
+                }
 
-                    if ( 'spline' === this.options.chart_type) {
-                        var categories = O.axis['x']['categories'];
+                if ('pie' === this.options.chart_type) {
+                    for (a=0; a < columns.length; a++){
 
-                        if (categories === undefined){
-                            var x = columns[0].slice(1);
-                            var tmp ;
+                            x.push(columns[a][0]);
+                            y.push(columns[a][1]);
+                    };
+                    var trace = {
+                        labels: x,
+                        values: y,
+                            name: 'Color',
+                        type: 'pie',
+                    };
+                    data = [];
+                    data.push(trace);
+                }
 
-                            for (tmp=1; tmp < columns.length; tmp++){
-                                var name = columns[tmp][0];
-                                var trace = {
-                                    x: x,
-                                    y: columns[tmp].slice(1),
-                                    type: 'scatter',
-                                    name: name,
-                                    width: 3,
-                                      line: {shape: 'spline'},
+                if ( 'donut' === this.options.chart_type) {
+                                    for (a=0; a < columns.length; a++){
 
-                                };
-                                data.push(trace);
-                            }
-                        } else {
+                            x.push(columns[a][0]);
+                            y.push(columns[a][1]);
+                    };
+
+                    var trace = {
+                        labels: x,
+                        values: y,
+                          hole: .4,
+                            name: 'Color',
+                        type: 'pie',
+                    };
+                    data = [];
+                    data.push(trace);
+                }
+
+                if ( 'scatter' === this.options.chart_type) {
+                    var trace = {
+                        x: O.axis['x']['categories'],
+                        y: columns[0].slice(1),
+                        mode: "markers",
+
+                        type: this.options.chart_type,
+                    };
+                    data = [];
+                    data.push(trace);
+                }
+
+                if ( 'spline' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
+
+                    if (categories === undefined){
+                        var x = columns[0].slice(1);
+                        var tmp ;
+
+                        for (tmp=1; tmp < columns.length; tmp++){
+                            var name = columns[tmp][0];
                             var trace = {
-                                x: categories,
-                                y: columns[0].slice(1),
-                                name: columns[0][0],
+                                x: x,
+                                y: columns[tmp].slice(1),
                                 type: 'scatter',
-                                name: 'Color',
-                                line: {shape: 'spline'},
+                                name: name,
+                                width: 3,
+                                  line: {shape: 'spline'},
+
                             };
                             data.push(trace);
+                        }
+                    } else {
+                        var trace = {
+                            x: categories,
+                            y: columns[0].slice(1),
+                            name: columns[0][0],
+                            type: 'scatter',
+                            name: 'Color',
+                            line: {shape: 'spline'},
                         };
+                        data.push(trace);
                     };
+                };
 
-                    if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
-                        var categories = O.axis['x']['categories'];
-                        console.log(categories);
+                if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
+                    console.log(categories);
 
-                        if (categories === undefined){
-                            var x = columns[0].slice(1);
-                            var tmp ;
+                    if (categories === undefined){
+                        var x = columns[0].slice(1);
+                        var tmp ;
 
-                            for (tmp=1; tmp < columns.length; tmp++){
-                                var name = columns[tmp][0];
-                                var trace = {
-                                    x: x,
-                                    y: columns[tmp].slice(1),
-                                    type: 'bar',
-                                    name: name,
-                                    width: 4,
-                                };
-                                data.push(trace);
-                            }
-                        } else {
+                        for (tmp=1; tmp < columns.length; tmp++){
+                            var name = columns[tmp][0];
                             var trace = {
-                                x: categories,
-                                y: columns[0].slice(1),
+                                x: x,
+                                y: columns[tmp].slice(1),
                                 type: 'bar',
-                                width: 0.8,
-                                name: 'Color',
+                                name: name,
+                                width: 4,
                             };
                             data.push(trace);
+                        }
+                    } else {
+                        var trace = {
+                            x: categories,
+                            y: columns[0].slice(1),
+                            type: 'bar',
+                            width: 0.8,
+                            name: 'Color',
                         };
-
+                        data.push(trace);
                     };
 
-                    if ( 'hbar' === this.options.chart_type) {
-                        var categories = O.axis['x']['categories'];
+                };
 
-                        if (categories === undefined){
-                            var x = columns[0].slice(1);
-                            var tmp ;
+                if ( 'hbar' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
 
-                            for (tmp=1; tmp < columns.length; tmp++){
-                                var name = columns[tmp][0];
-                                var trace = {
-                                    x: columns[tmp].slice(1),
-                                    y: x,
-                                    type: 'bar',
-                                    name: name,
-                                    orientation: 'h',
-                                    width: 0.8,
-                                };
-                                data.push(trace);
-                            }
-                        } else {
+                    if (categories === undefined){
+                        var x = columns[0].slice(1);
+                        var tmp ;
+
+                        for (tmp=1; tmp < columns.length; tmp++){
+                            var name = columns[tmp][0];
                             var trace = {
-                                x: columns[0].slice(1),
-                                y: categories,
+                                x: columns[tmp].slice(1),
+                                y: x,
                                 type: 'bar',
-                                name: 'Color',
+                                name: name,
                                 orientation: 'h',
                                 width: 0.8,
                             };
                             data.push(trace);
+                        }
+                    } else {
+                        var trace = {
+                            x: columns[0].slice(1),
+                            y: categories,
+                            type: 'bar',
+                            name: 'Color',
+                            orientation: 'h',
+                            width: 0.8,
                         };
-
+                        data.push(trace);
                     };
 
-                    if ( 'area' === this.options.chart_type) {
-                        var categories = O.axis['x']['categories'];
+                };
 
-                        if (categories === undefined){
-                            var x = columns[0].slice(1);
-                            var tmp ;
+                if ( 'area' === this.options.chart_type) {
+                    var categories = O.axis['x']['categories'];
 
-                            for (tmp=1; tmp < columns.length; tmp++){
-                                var name = columns[tmp][0];
-                                var trace = {
-                                    x: x,
-                                    y: columns[tmp].slice(1),
-                                    type: 'scatter',
-                                    name: name,
-                                    fill: 'tozeroy',
+                    if (categories === undefined){
+                        var x = columns[0].slice(1);
+                        var tmp ;
 
-                                    orientation: 'h'
-                                };
-                                data.push(trace);
-                            }
-                        } else {
-                            console.log ('else')
+                        for (tmp=1; tmp < columns.length; tmp++){
+                            var name = columns[tmp][0];
                             var trace = {
-                                x: categories,
-                                fill: 'tozeroy',
-                                name: 'Color',
-                                y: columns[0].slice(1),
+                                x: x,
+                                y: columns[tmp].slice(1),
                                 type: 'scatter',
+                                name: name,
+                                fill: 'tozeroy',
+
+                                orientation: 'h'
                             };
                             data.push(trace);
+                        }
+                    } else {
+                        console.log ('else')
+                        var trace = {
+                            x: categories,
+                            fill: 'tozeroy',
+                            name: 'Color',
+                            y: columns[0].slice(1),
+                            type: 'scatter',
                         };
-
+                        data.push(trace);
                     };
+
+                };
+
+                var base_info = {
+                    xaxis: {
+                        tickformat: format,
+                        automargin: true,
+                    },
+                    yaxis: {
+                        tickformat: format,
+                        automargin: true,
+                    }
+                }
+
+
+                if (typeof plotly === 'string' || plotly === true) {
 
                     var item_exists = this.el.closest(".chart_field").attr('id');
 
@@ -2091,7 +2104,7 @@
                         var elementExists = document.getElementById(c);
 
                         if (elementExists) {
-                            console.log('element exists!')
+                            console.log('element exists!');
                             elementExists.parentElement.remove();
 
                             var newcontent = document.createElement('div');
@@ -2153,25 +2166,22 @@
                            document.getElementById("chart_field_plotly_"+item_no).value = JSON.stringify(plotly);
                        }
                    }
-                    data = plotly;
-
-                    var base_info = {
-                        xaxis: {
-                            tickformat: format,
-                            automargin: true,
-                        },
-                        yaxis: {
-                            tickformat: format,
-                            automargin: true,
-                        }
-                    }
                 }
+
                 var title_id = this.el.context.parentElement.children[0].id;
 
                 if(title_id){
                     document.getElementById(title_id).innerHTML =  w;
                 }
-                console.log(data);
+
+                var q = JSON.parse(JSON.stringify(plotly));
+
+                if (typeof plotly === "object"){
+                    for (const [key, value] of Object.entries(data)) {
+                        value.marker = q[key].marker;
+                    }
+                }
+
                 Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
