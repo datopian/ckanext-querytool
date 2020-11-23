@@ -2179,6 +2179,13 @@
                 }
 
                 var base_info = {
+                    margin: {
+                        l: 20,
+                        r: 20,
+                        b: 20,
+                        t: 30,
+                        pad: 5
+                      },
                     title: w,
                     showlegend: o, //show legend value
                     xaxis: {
