@@ -298,7 +298,7 @@
             table_title = item.title
           %}
         {% endif %}
-        <p style="float:left;width:80%;">{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</p>
+        <div class='additional_desc'>{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</div>
         <p class="clearfix"></p>
       </div>
       {% endfor %}
