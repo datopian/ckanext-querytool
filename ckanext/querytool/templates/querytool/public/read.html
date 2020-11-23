@@ -40,6 +40,7 @@
   <div class="row-fluid">
     <div style="margin:0 20px;">
       <div class="page-header query-header">
+        <h1>{{ querytools[0].title }}</h1>
         {{ h.render_markdown(querytools[0].description) }}
         {{ h.render_markdown(querytools[0].additional_description) }}
       </div>
@@ -298,9 +299,6 @@
           %}
         {% endif %}
         <p style="float:left;width:80%;">{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</p>
-        <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}" data-module-type="{{item.graph}}">
-          Export <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
-        </a>
         <p class="clearfix"></p>
       </div>
       {% endfor %}
