@@ -2170,6 +2170,14 @@
                     }
                 }
 
+                if(this.options.x_text_rotate == 30){
+                    this.options.x_text_rotate = 45;
+                }
+
+                if(this.options.y_text_rotate == 30){
+                    this.options.y_text_rotate = 45;
+                }
+
                 var base_info = {
                     title: w,
                     showlegend: o, //show legend value
@@ -2177,10 +2185,12 @@
                         tickformat: format,
                         automargin: true,
                         title: this.options.x_axis,
+                        tickangle: this.options.x_text_rotate,
                     },
                     yaxis: {
                         tickformat: f,
                         automargin: true,
+                        tickangle: this.options.y_text_rotate,
                     }
                 }
 
