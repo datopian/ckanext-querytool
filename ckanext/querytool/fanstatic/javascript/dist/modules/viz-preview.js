@@ -980,7 +980,7 @@
         };
     t.exports = l
 }, function(t, e) {
-    t.exports = "\t\n\v\f\r   ᠎             　\u2028\u2029\ufeff"
+    t.exports = "\t\n\v\f\r   ᠎             　\u2028\u2029\ufeff"
 }, function(t, e, n) {
     "use strict";
     var i = n(1),
@@ -1786,6 +1786,7 @@
                 console.log(this.options.plotly);
                 var plotly = this.options.plotly;
                 var q = JSON.parse(JSON.stringify(plotly));
+                console.log(O);
 
                 var data = []
                 var columns = O.data['columns'];
@@ -1793,8 +1794,9 @@
 
                 // if typeof plotly is string -> new chart
                 // if typeof plotly is object -> existing chart (user view or admin preview)
+                // if plotly value is true we may have some data in the database for the chart, but plotly is set to true
 
-                if (typeof plotly === 'string') {
+                if (typeof plotly === 'string' || plotly === true) {
                     if ( 'line' === this.options.chart_type) {
                         var categories = O.axis['x']['categories'];
                         var format = this.options.data_format;
@@ -2009,6 +2011,7 @@
                     if (typeof item_exists !== 'undefined' && item_exists !== null){
                         var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
                         var chart_plotly = document.getElementById("chart_field_plotly_" + item_no);
+                        console.log(chart_plotly);
 
                         var len_data = data.length;
                         var tmp ;
@@ -2020,7 +2023,7 @@
                             var d = data_tmp[tmp];
 
                                 var c = "chart_field_color_"+ item_no + "_" + (tmp+1)
-                                var chart_field_plotly_value = document.getElementById("chart_field_color_"+item_no).value;
+                                var chart_field_plotly_value = chart_plotly.value;
 
                                 if (chart_field_plotly_value) {
                                     // there is a plotly value in the input field
@@ -2039,16 +2042,27 @@
                                     }
                                 } else {
                                     console.log('we DONT have a plotly value for color in html');
-                                    var color_id = "chart_field_color_" + item_no
+                                    var color_id = "chart_field_color_" + item_no;
                                     var color_tmp = document.querySelectorAll('[data-target=' + color_id + ']');
+                                    console.log(color_tmp);
 
-                                    if (color_tmp.length >= 1){
+                                    if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
-                                        var new_color = color.split(": ")[1].slice(0, -1);
-                                        if (new_color.includes('none')){
-                                            new_color = new_color.substring(0, new_color.indexOf(" none"));
-                                        }
-                                        d['marker'] = {'color': new_color};
+                                        console.log(color);
+                                        // check type and do the conditions according to that
+
+                                        if (typeof color === 'undefined' || color === ''){
+                                                d['marker'] = {'color': 'darkseagreen'};
+                                        }  else {
+                                            var new_color = color.split(": ")[1].slice(0, -1);
+                                            if (new_color.includes('none')){
+                                                new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                            }
+
+                                            d['marker'] = {'color': new_color};
+                                    }
+                                    } else {
+                                        d['marker'] = {'color': 'darkseagreen'};
                                     }
                                 }
 
@@ -2129,7 +2143,7 @@
                     }
                 } else {
                     console.log('Existing chart');
-                    var item_exists = this.el.closest(".chart_field").attr('id'); //dali ni treba? DA
+                    var item_exists = this.el.closest(".chart_field").attr('id');
                     console.log(item_exists);
 
                     if (typeof item_exists !== 'undefined' && item_exists !== null){
@@ -2144,9 +2158,11 @@
                     var base_info = {
                         xaxis: {
                             tickformat: format,
+                            automargin: true,
                         },
                         yaxis: {
                             tickformat: format,
+                            automargin: true,
                         }
                     }
                 }
@@ -2155,7 +2171,7 @@
                 if(title_id){
                     document.getElementById(title_id).innerHTML =  w;
                 }
-
+                console.log(data);
                 Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {

@@ -30,9 +30,13 @@
           <div class="page-header">
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
-              {% block page_header_title %}<h1>{{ _('Welcome') }}</h1>{% endblock %}
+              {% block page_header_title %}
+                <h1>{{ g.welcome_page_title or _('Welcome') }}</h1>
+              {% endblock %}
               <div class="long-desc">
-                {% block page_header_description %}<p class="page-desc desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.  </p>{% endblock %}
+                {% block page_header_description %}
+                  <p class="page-desc desc">{{ h.render_markdown(g.welcome_page_description or _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.')) }}</p>
+                {% endblock %}
               </div>
             {% endblock %}
           </div>
@@ -80,7 +84,7 @@
               
               <div style="min-height:55px;">
                 <div class="short-desc">
-                  <p>{{ group.description }}</p>
+                  <p>{{ h.render_markdown(h.get_translated(group, 'description'), True, True) }}</p>
                 </div>
               </div>
               

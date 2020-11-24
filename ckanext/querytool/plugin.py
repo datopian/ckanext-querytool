@@ -128,9 +128,18 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         querytool_controller\
             = 'ckanext.querytool.controllers.querytool:QueryToolController'
 
+        group_controller = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
+
+
         # Query tool routes
         map.redirect('/querytool', '/querytool/groups',
                      _redirect_code='301 Moved Permanently')
+
+        map.connect('querytool_groups', '/querytool/groups',
+                    _redirect_code='301 Moved Permanently')
+
+        map.connect('querytool_list_by_group', '/group/{id}/reports',
+                    controller=group_controller, action='read_report')
 
         map.redirect('/querytool/public', '/querytool/public/groups',
                      _redirect_code='301 Moved Permanently')
@@ -169,9 +178,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
                     '/querytool/download/{name}',
                     controller=querytool_controller,
                     action='querytool_download_data')
-
-        group_controller = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
-
 
         map.connect('group_read_all_reports',
                     '/report',
@@ -279,3 +285,14 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
         auth_functions = h._get_functions(module_root)
 
         return auth_functions
+
+
+    # IConfigurer
+
+    def update_config_schema(self, schema):
+        schema.update({
+            'ckan.welcome_page_title': [ignore_missing, unicode],
+            'ckan.welcome_page_description': [ignore_missing, unicode],
+        })
+
+        return schema
