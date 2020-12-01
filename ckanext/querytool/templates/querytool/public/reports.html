@@ -1,9 +1,7 @@
 {% extends "querytool/public/base_main.html" %}
 {% set groups = h.querytool_get_groups()[0] %}
-{% set breadcrumb_name = h.querytool_get_public_breadcrumb_name() %}
 
 {% block breadcrumb_content %}
-  <li>{% link_for _(breadcrumb_name), controller=c.controller, action='querytool_public' %}</li>
   {% if c.group %}
     <li class="active">{% link_for groups[c.group], controller=c.controller, action='querytool_public_list', group=c.group %}</li>
   {% endif %}
