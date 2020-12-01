@@ -40,6 +40,7 @@
   <div class="row-fluid">
     <div style="margin:0 20px;">
       <div class="page-header query-header">
+        <h1>{{ querytools[0].title }}</h1>
         {{ h.render_markdown(querytools[0].description) }}
         {{ h.render_markdown(querytools[0].additional_description) }}
       </div>
@@ -169,7 +170,7 @@
           {% set sizeClass = 'c-col-6' %}
         {% endif %}
 
-      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
+      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %} {% if item.type == 'break_line' %}break_line{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
         <h3 id="item-title-{{chart_id}}">{{ item.title }}</h3>
         
         {% if item.type == 'chart'  %}
@@ -297,10 +298,7 @@
             table_title = item.title
           %}
         {% endif %}
-        <p style="float:left;width:80%;">{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</p>
-        <a class="btn-chart-download" data-module="export-to-png" data-module-id="chart-{{chart_id}}" data-module-type="{{item.graph}}">
-          Export <i class="fa fa-download fa-lg" aria-hidden="true" title="{{ _('Download image') }}" data-name="{{ item.title }}"></i>
-        </a>
+        <div class='additional_desc'>{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</div>
         <p class="clearfix"></p>
       </div>
       {% endfor %}
