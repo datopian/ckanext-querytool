@@ -18,7 +18,7 @@ Example usage:
   {% set action_url = h.url_for('querytool_edit', querytool= '') %}
 {% endif %}
 {% set datasets = h.querytool_get_datasets() %}
-<form method="post" action="{{ action_url }}" class="form-horizontal" id="">
+<form method="post" action="{{ action_url }}" class="form-horizontal" id="" enctype="multipart/form-data">
 {% block stages %}
   {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
 {% endblock %}

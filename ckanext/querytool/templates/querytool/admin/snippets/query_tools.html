@@ -17,7 +17,7 @@ Example usage:
 
   <div class="thumb">
     {% if querytool.image_url %}
-    <img src="{{querytool.image_url}}" width="60" alt="Query Tool">
+    <img src="/uploads/querytool/{{ querytool.image_display_url }}" width="60" alt="{{ querytool.image_url }}">
     {% elif querytool.icon %}
     <i class="fa-3x {{querytool.icon}}"></i>
     {% else %}
