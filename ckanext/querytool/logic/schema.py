@@ -34,4 +34,5 @@ def querytool_schema():
         'y_axis_columns': [not_empty, unicode],
         'icon': [ignore_missing, unicode],
         'additional_description': [ignore_missing, unicode],
+        'image_url': [ignore_missing, unicode],
     }

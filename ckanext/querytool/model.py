@@ -34,6 +34,8 @@ def setup():
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS owner_org TEXT;')
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS icon TEXT;')
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS additional_description TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS image_url TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS image_display_url TEXT;')
         Session.commit()
     inspector = Inspector.from_engine(engine)
 
@@ -136,6 +138,12 @@ def define_query_tool_table():
                                     types.UnicodeText,
                                     nullable=False),
                              Column('icon',
+                                    types.UnicodeText,
+                                    nullable=True),
+                             Column('image_url',
+                                    types.UnicodeText,
+                                    nullable=True),
+                             Column('image_display_url',
                                     types.UnicodeText,
                                     nullable=True),
                              Column('group',
