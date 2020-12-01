@@ -4,7 +4,9 @@
 
 {% block breadcrumb_content %}
   <li>{% link_for _(breadcrumb_name), controller=c.controller, action='querytool_public' %}</li>
-  <li class="active">{% link_for groups[c.group], controller=c.controller, action='querytool_public_list', group=c.group %}</li>
+  {% if c.group %}
+    <li class="active">{% link_for groups[c.group], controller=c.controller, action='querytool_public_list', group=c.group %}</li>
+  {% endif %}
 {% endblock %}
 
 {% block page_header_title %}<h1>Reports</h1>{% endblock %}
