@@ -1866,7 +1866,6 @@
                         x: O.axis['x']['categories'],
                         y: columns[0].slice(1),
                         mode: "markers",
-
                         type: this.options.chart_type,
                     };
                     data = [];
@@ -1908,7 +1907,7 @@
 
                 if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
-                    console.log(categories);
+                    console.log(this.options);
 
                     if (categories === undefined){
                         var x = columns[0].slice(1);
@@ -1921,7 +1920,7 @@
                                 y: columns[tmp].slice(1),
                                 type: 'bar',
                                 name: name,
-                                width: 4,
+                                width: this.options.bar_width || 0.5,
                             };
                             data.push(trace);
                         }
@@ -1929,8 +1928,8 @@
                         var trace = {
                             x: categories,
                             y: columns[0].slice(1),
+                            width: this.options.bar_width || 0.5,
                             type: 'bar',
-                            width: 0.8,
                             name: 'Color',
                         };
                         data.push(trace);
@@ -1953,7 +1952,7 @@
                                 type: 'bar',
                                 name: name,
                                 orientation: 'h',
-                                width: 0.8,
+                                width: this.options.bar_width || 0.5,
                             };
                             data.push(trace);
                         }
@@ -1964,7 +1963,7 @@
                             type: 'bar',
                             name: 'Color',
                             orientation: 'h',
-                            width: 0.8,
+                            width: this.options.bar_width || 0.5,
                         };
                         data.push(trace);
                     };
@@ -2002,7 +2001,6 @@
                         };
                         data.push(trace);
                     };
-
                 };
 
                 if (typeof plotly === 'string' || plotly === true) {
@@ -2245,9 +2243,10 @@
                     F = t.find("input[name*=chart_field_dynamic_reference_label_]").val(),
                     M = $("#choose_y_axis_column option:selected").text(),
                     I = t.find("[name*=chart_field_show_labels_as_percentages_]").is(":checked"),
-                    plotly = t.find("input[name*=chart_field_plotly_]").val();
+                    plotly = t.find("input[name*=chart_field_plotly_]").val(),
+                    bar_width = t.find("input[name*=chart_field_bar_width_]").val();
                 if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly) return this.options.colors = n, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, void this.createChart(this.fetched_data);
-                this.options.colors = n, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly;
+                this.options.colors = n, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width;
                 var A = this.create_sql();
                 this.get_resource_datа(A)
             },

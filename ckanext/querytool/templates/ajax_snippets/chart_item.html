@@ -130,7 +130,7 @@
         </div>
       </div>
 
-      {# Chart additional setup  #}
+      {# Chart additional color setup  #}
       <div class="accordion-group">
         <div class="accordion-heading">
           <a href="#accordion_{{ chart_id }}_chart_plotly" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
@@ -347,7 +347,18 @@
         </div>
         <div id="accordion_{{ chart_id }}_graph" class="accordion-body collapse">
           <div class="accordion-inner">
-
+            {# Bar chart width #}
+            {% if chart %}
+              {% set bar_width = chart.bar_width or 0.5 %}
+            {% endif %}
+            {% if selected_chart_type in ['bar', 'hbar'] %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_bar_width_{{ n }}">{{ _('Bar width') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ bar_width }}" placeholder="{{ _('Width of bar, default 0.5') }}">
+               </div>
+            </div>
+            {% endif %}
 
             {# Data format #}
             {% set data_formats = h.queytool_get_charts_data_formats() %}
