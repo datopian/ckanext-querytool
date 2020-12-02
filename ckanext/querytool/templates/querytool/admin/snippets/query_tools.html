@@ -16,10 +16,12 @@ Example usage:
 <div class="applicaitons-box">
 
   <div class="thumb">
-    {% if querytool.icon == None %}
-    <img src="/base/images/icon-1.svg" width="60" alt="Query Tool">
-    {% else %}
+    {% if querytool.image_url %}
+    <img src="/uploads/querytool/{{ querytool.image_display_url }}" width="60" alt="{{ querytool.image_url }}">
+    {% elif querytool.icon %}
     <i class="fa-3x {{querytool.icon}}"></i>
+    {% else %}
+    <img src="/base/images/icon-1.svg" width="60" alt="Query Tool">
     {% endif %}
   </div>
 

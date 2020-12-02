@@ -1,8 +1,10 @@
 import datetime
 import json
+import cgi
 import ckan.logic as logic
 import ckan.lib.navl.dictization_functions as df
 from ckan.plugins import toolkit
+import ckan.lib.helpers as h
 import ckan.lib.uploader as uploader
 from ckanext.querytool.logic import schema
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
@@ -53,20 +55,36 @@ def querytool_update(context, data_dict):
         querytool = CkanextQueryTool()
 
     items = ['title', 'description', 'name', 'private', 'type', 'group',
-             'dataset_name', 'owner_org', 'icon',
+             'dataset_name', 'owner_org', 'icon', 'image_url', 'image_display_url',
              'filters', 'sql_string', 'related_querytools',
              'chart_resource', 'y_axis_columns', 'additional_description']
+
+    dataset_name = data.get('dataset_name')
+    dataset = _get_action('package_show')(context, {'id': dataset_name})
+    dataset['groups'] = [{'name': str(data.get('group'))}]
+    _get_action('package_patch')(context, dataset)
+
+    image_url = data_dict['image_url']
+
+    if h.uploads_enabled():
+        image_upload = data_dict['image_upload']
+        if isinstance(image_upload, cgi.FieldStorage):
+            upload = uploader.get_uploader('querytool', image_url)
+            upload.update_data_dict(data_dict,
+                                    'image_url',
+                                    'image_upload',
+                                    'clear_upload')
+            upload.upload(uploader)
+            data_dict['image_display_url'] = upload.filename
+            data['image_display_url'] = upload.filename
+        else:
+            data['image_display_url'] = querytool.image_display_url
 
     for item in items:
         setattr(querytool, item, data.get(item))
 
     querytool.modified = datetime.datetime.utcnow()
     querytool.save()
-
-    dataset_name = data.get('dataset_name')
-    dataset = _get_action('package_show')(context, {'id': dataset_name})
-    dataset['groups'] = [{'name': str(data.get('group'))}]
-    _get_action('package_patch')(context, dataset)
 
     session.add(querytool)
     session.commit()

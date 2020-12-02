@@ -475,7 +475,7 @@ class QueryToolController(base.BaseController):
 
                     break_lines.append(break_line)
 
-                if k.startswith('image_field_size_'):
+                if k.startswith('media_image_url_'):
                     image = {}
                     id = k.split('_')[-1]
                     image['type'] = 'image'
@@ -499,9 +499,6 @@ class QueryToolController(base.BaseController):
                             image_url = upload.filename
 
                         image['url'] = image_url
-
-                    image['size'] = \
-                        data['image_field_size_{}'.format(id)]
 
                     images.append(image)
 
