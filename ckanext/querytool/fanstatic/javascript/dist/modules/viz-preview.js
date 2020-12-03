@@ -1824,7 +1824,6 @@
                         };
                         data.push(trace);
                     };
-                    console.log(data);
                 }
 
                 if ('pie' === this.options.chart_type) {
@@ -1845,7 +1844,7 @@
                     data = [];
                     data.push(trace);
                 }
-                console.log( this.options);
+
                 if ( 'donut' === this.options.chart_type) {
                     var x = [];
                     var y = [];
@@ -1854,9 +1853,6 @@
                         x.push(columns[a][0]);
                         y.push(columns[a][1]);
                     };
-                    console.log('tjis is x and u')
-                    console.log(x);
-                    console.log(this.options.donut_hole);
 
                     var trace = {
                         labels: x,
@@ -1888,10 +1884,10 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
                             var trace = {
                                 x: x,
@@ -1899,7 +1895,7 @@
                                 type: 'scatter',
                                 name: name,
                                 width: 3,
-                                  line: {shape: 'spline'},
+                                line: {shape: 'spline'},
 
                             };
                             data.push(trace);
@@ -1919,14 +1915,14 @@
 
                 if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
-                    console.log(this.options);
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
@@ -2022,7 +2018,6 @@
                     if (typeof item_exists !== 'undefined' && item_exists !== null){
                         var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
                         var chart_plotly = document.getElementById("chart_field_plotly_" + item_no);
-                        console.log(chart_plotly);
 
                         var len_data = data.length;
                         var tmp ;
@@ -2038,7 +2033,6 @@
 
                                 if (chart_field_plotly_value) {
                                     // there is a plotly value in the input field
-                                    console.log('we have a plotly value for color in html');
                                     var color_tmp = document.querySelectorAll('[data-target='+c+']');
 
                                     if (color_tmp['length'] >= 1){
@@ -2052,14 +2046,11 @@
                                         d['marker'] = {'color': 'darkseagreen'};
                                     }
                                 } else {
-                                    console.log('we DONT have a plotly value for color in html');
                                     var color_id = "chart_field_color_" + item_no;
                                     var color_tmp = document.querySelectorAll('[data-target=' + color_id + ']');
-                                    console.log(color_tmp);
 
                                     if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
-                                        console.log(color);
                                         // check type and do the conditions according to that
 
                                         if (typeof color === 'undefined' || color === ''){
@@ -2102,7 +2093,6 @@
                         var elementExists = document.getElementById(c);
 
                         if (elementExists) {
-                            console.log('element exists!');
                             elementExists.parentElement.remove();
 
                             var newcontent = document.createElement('div');
@@ -2121,8 +2111,6 @@
                             }
 
                         } else {
-                            console.log('elem doesnt exist');
-                            console.log(d['marker']['color']);
 
                             var newcontent = document.createElement('div');
                             var html = '';
@@ -2153,9 +2141,7 @@
                     }
                     }
                 } else {
-                    console.log('Existing chart');
                     var item_exists = this.el.closest(".chart_field").attr('id');
-                    console.log(item_exists);
 
                     if (typeof item_exists !== 'undefined' && item_exists !== null){
                        var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
@@ -2220,6 +2206,7 @@
                 }
 
                 console.log(data);
+                console.log(O);
 
                 Plotly.newPlot(this.el[0], data, base_info);
             },
