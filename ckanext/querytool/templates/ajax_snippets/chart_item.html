@@ -34,8 +34,6 @@
         </div>
         <div id="accordion_{{ chart_id }}_general" class="accordion-body collapse in">
           <div class="accordion-inner">
-
-            
             {# Type #}
             {% if chart %}
               {% set selected_chart_type = chart.graph %}
@@ -347,19 +345,6 @@
         </div>
         <div id="accordion_{{ chart_id }}_graph" class="accordion-body collapse">
           <div class="accordion-inner">
-            {# Bar chart width #}
-            {% if chart %}
-              {% set bar_width = chart.bar_width or 0.5 %}
-            {% endif %}
-            {% if selected_chart_type in ['bar', 'hbar'] %}
-            <div class="control-group ">
-               <label class="control-label" for="chart_field_bar_width_{{ n }}">{{ _('Bar width') }}</label>
-               <div class="controls ">
-                  <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ bar_width }}" placeholder="{{ _('Width of bar, default 0.5') }}">
-               </div>
-            </div>
-            {% endif %}
-
             {# Data format #}
             {% set data_formats = h.queytool_get_charts_data_formats() %}
             {% if selected_chart_type in ['pie', 'donut'] %}
@@ -376,6 +361,40 @@
                   {% endfor %}
                 </select>
               </div>
+            </div>
+
+            {# Donut chart hole #}
+            {% if chart %}
+              {% set donut_hole = chart.donut_hole or 0.4 %}
+            {% endif %}
+            {% if selected_chart_type in ['line', 'bar', 'hbar', 'sbar', 'shbar'] %}
+              {% set donut_option = false %}
+            {% else %}
+              {% set donut_option = true %}
+            {% endif %}
+
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_donut_hole_{{ n }}">{{ _('Donut hole') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_donut_hole_{{ n }}"  type="text" name="chart_field_donut_hole_{{ n }}" value="{{ donut_hole|default (0.4) }}" placeholder="{{ _('Donut hole, default 0.4') }}" {{'' if donut_option else 'disabled'}}>
+               </div>
+            </div>
+
+            {# Bar chart width #}
+            {% if chart %}
+              {% set bar_width = chart.bar_width or 0.5 %}
+            {% endif %}
+
+            {% if selected_chart_type in ['line', 'donut', 'pie', 'sbar', 'shbar'] %}
+              {% set bar_width_option = false %}
+            {% else %}
+              {% set bar_width_option = true %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_bar_width_{{ n }}">{{ _('Bar width') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ bar_width|default (0.5)}}" placeholder="{{ _('Width of bar, default 0.5') }}" {{'' if bar_width_option else 'disabled'}}>
+               </div>
             </div>
 
             {# Show labels #}
@@ -695,6 +714,8 @@
           {% set dynamic_reference_factor = chart.dynamic_reference_factor %}
           {% set dynamic_reference_label = chart.dynamic_reference_label %}
           {% set plotly = chart.plotly %}
+          {% set bar_width = chart.bar_width %}
+          {% set donut_hole = chart.donut_hole %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -733,7 +754,9 @@
           dynamic_reference_type=dynamic_reference_type,
           dynamic_reference_factor=dynamic_reference_factor,
           dynamic_reference_label=dynamic_reference_label,
-          plotly = plotly
+          plotly = plotly,
+          bar_width = bar_width,
+          donut_hole = donut_hole
       %}
    </div>
 </div>

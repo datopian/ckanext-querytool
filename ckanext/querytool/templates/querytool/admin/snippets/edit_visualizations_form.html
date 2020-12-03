@@ -98,7 +98,8 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
     item.order, chart = item, plotly = item.plotly, sql_string = data.sql_string, map_resource =
     data.map_resource, chart_resource = data.chart_resource, y_axis_values =
     data.y_axis_values, main_filters = data.main_filters_names, measure_label =
-    measure_label, info_query_filters = data.main_filters %} {% endif %} {% if
+    measure_label, info_query_filters = data.main_filters, bar_width = data.bar_width,
+    donut_hole = data.donut_hole %} {% endif %} {% if
     item.type == 'text_box' %} {% snippet 'ajax_snippets/text_box_item.html', n
     = item.order, box = item %} {% endif %} {% if item.type == 'image' %} {%
     snippet 'ajax_snippets/image_item.html', n = item.order, data = item %} {%

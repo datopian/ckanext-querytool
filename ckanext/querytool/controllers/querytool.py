@@ -406,6 +406,10 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_desc_{}'.format(id))
                     visualization['plotly'] = \
                         data.get('chart_field_plotly_{}'.format(id))
+                    visualization['bar_width'] = \
+                        data.get('chart_field_bar_width_{}'.format(id))
+                    visualization['donut_hole'] = \
+                        data.get('chart_field_donut_hole_{}'.format(id))
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
                         visualization['x_text_multiline'] = 'true'
                     else:
