@@ -1952,7 +1952,7 @@
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length - 1; tmp++){
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
                             var trace = {
                                 x: columns[tmp].slice(1),
