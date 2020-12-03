@@ -385,7 +385,7 @@
               {% set bar_width = chart.bar_width or 0.5 %}
             {% endif %}
 
-            {% if selected_chart_type in ['line', 'donut', 'pie', 'sbar', 'shbar'] %}
+            {% if selected_chart_type in ['line', 'donut', 'pie'] %}
               {% set bar_width_option = false %}
             {% else %}
               {% set bar_width_option = true %}
