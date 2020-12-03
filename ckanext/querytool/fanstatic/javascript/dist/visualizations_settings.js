@@ -1198,7 +1198,7 @@
                 var q = $("#chart_field_donut_hole_" + t[t.length - 1]);
                 ["pie", "donut"].includes($(this).val()) ? q.prop("disabled", !1) : q.prop("disabled", !0);
                 var w = $("#chart_field_bar_width_" + t[t.length - 1]);
-                ["bar", "hbar"].includes($(this).val()) ? w.prop("disabled", !1) : w.prop("disabled", !0);
+                ["bar", "hbar", 'sbar', 'shbar'].includes($(this).val()) ? w.prop("disabled", !1) : w.prop("disabled", !0);
             })
         })
     }! function(t, e) {

@@ -1782,12 +1782,8 @@
                     }, ["bar", "hbar"].includes(this.options.chart_type) && (O.axis.y.padding.bottom = 0))
                 } ["line", "area", "spline", "scatter", "bscatter", "bar", "hbar", "sbar", "shbar"].includes(this.options.chart_type) && v && (O.axis.y.min = 0, O.axis.y.padding = O.axis.y.padding || {}, O.axis.y.padding.bottom = 0);
 
-                console.log('this is plotly');
-                console.log(this.options);
-                console.log(this.options.plotly);
                 var plotly = this.options.plotly;
                 var q = JSON.parse(JSON.stringify(plotly));
-                console.log(O);
 
                 var data = []
                 var columns = O.data['columns'];
@@ -1801,10 +1797,10 @@
                     var format = this.options.data_format;
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
                             var trace = {
                                 x: x,
@@ -1864,8 +1860,6 @@
 
                     data = [];
                     data.push(trace);
-
-                    console.log(data);
 
                 }
 
@@ -1993,13 +1987,11 @@
                                 type: 'scatter',
                                 name: name,
                                 fill: 'tozeroy',
-
                                 orientation: 'h'
                             };
                             data.push(trace);
                         }
                     } else {
-                        console.log ('else')
                         var trace = {
                             x: categories,
                             fill: 'tozeroy',
@@ -2205,8 +2197,13 @@
                     base_info.yaxis.rangemode = "tozero"
                 }
 
+//                if (this.options.chart_type === 'bar') {
+//                    base_info.barmode = 'group'
+//                }
+
                 console.log(data);
                 console.log(O);
+                console.log(base_info);
 
                 Plotly.newPlot(this.el[0], data, base_info);
             },
