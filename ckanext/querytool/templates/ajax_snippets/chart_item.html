@@ -146,7 +146,22 @@
 
         <div id="accordion_{{ chart_id }}_chart_plotly" class="accordion-body collapse">
           <div class="accordion-inner">
+
             <div class="control-group control-select">
+              <label class="control-label" >{{ _('Color Type') }}</label> &nbsp;
+              <select id="color_type">
+                <option value=1>Divergent</option>
+                <option value=2>Sequential</option>
+              </select>  
+            </div>
+
+            <div class="control-group control-select seq-colors hidden">
+              <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Sequential') }}</label>
+                <input type="text" id="chart_field_seq_color_{{ n }}" name="chart_field_seq_color_{{ n }}" class="colorpicker_sequential" value="{% if chart %}{{ chart.color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
+            </div>
+            
+            <div class="control-group control-select diver-colors">
+
               {% if plotly %}
               <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
@@ -171,6 +186,8 @@
               <input type="text" id="chart_field_color_{{ n }}" name="chart_field_color_{{ n }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
             </div>
             {% endif %}
+
+            
             </div>
           </div>
         </div>

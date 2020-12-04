@@ -27,10 +27,22 @@ $('.long-desc').readmore({
 
 $(document).ready(function(){
     generateColorPicker();
+    generateColorPicker2();
 
     $("#add-visualization-btn").on('click',function(){
-        setTimeout(function() { generateColorPicker(); }, 1000);
+        setTimeout(function() { generateColorPicker(); generateColorPicker2(); }, 1000);
     })
+  });
+
+  $(document).on('change', '#color_type', function() {
+    var selection = $(this).val();
+    if(selection == 1){
+        $('.diver-colors').removeClass('hidden')
+        $('.seq-colors').addClass('hidden')
+    } else {
+        $('.diver-colors').addClass('hidden')
+        $('.seq-colors').removeClass('hidden')
+    }
   });
 
   function generateColorPicker(){
@@ -58,6 +70,22 @@ $(document).ready(function(){
         {"deepskyblue": "deepskyblue"},
         {"lightgreen": "lightgreen"},
         {"mediumvioletred": "mediumvioletred"}
+        ],
+        position: 'downside',
+        clear_btn: null // default -> 'upside'
+    });
+  }
+
+  function generateColorPicker2(){
+    console.log('generate Color picker called')
+    $('.colorpicker_sequential').paletteColorPicker({
+        custom_class: 'wide',
+        colors: [
+        {"#feedde,#fdbe85,#fd8d3c,#e6550d,#a63603": "linear-gradient(90deg, rgba(254,237,222,1) 0%, rgba(253,190,133,1) 22%, rgba(253,141,60,1) 50%, rgba(230,85,13,1) 74%, rgba(166,54,3,1) 100%)"},
+        {"#7b3294,#c2a5cf,#EFD9CE,#a6dba0,#008837": "linear-gradient(90deg, rgba(123,50,148,1) 0%, rgba(194,165,207,1) 22%, rgba(239,217,206,1) 50%, rgba(166,219,160,1) 74%, rgba(0,136,55,1) 100%)"},
+        {"#d7191c,#fdae61,#ffffbf,#abdda4,#2b83ba": "linear-gradient(90deg, rgba(215,25,28,1) 0%, rgba(253,174,97,1) 22%, rgba(255,255,191,1) 50%, rgba(171,221,164,1) 74%, rgba(43,131,186,1) 100%)"},
+        {"#a6611a,#dfc27d,#FCD0A1,#80cdc1,#018571": "linear-gradient(90deg, rgba(166,97,26,1) 0%, rgba(223,194,125,1) 22%, rgba(252,208,161,1) 50%, rgba(128,205,193,1) 74%, rgba(1,133,113,1) 100%)"},
+        {"#e66101,#fdb863,#EFD9CE,#b2abd2,#5e3c99": "linear-gradient(90deg, rgba(230,97,1,1) 0%, rgba(253,184,99,1) 22%, rgba(239,217,206,1) 50%, rgba(178,171,210,1) 74%, rgba(94,60,153,1) 100%)"},
         ],
         position: 'downside',
         clear_btn: null // default -> 'upside'
