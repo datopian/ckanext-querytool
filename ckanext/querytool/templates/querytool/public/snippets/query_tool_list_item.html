@@ -14,14 +14,16 @@ Example usage:
 {% set tool = h.url_for('querytool_public_read', name=querytool.name) %}
 
 <div class="group-box">
-    {% if querytool.image_url %}
-      <img class="thumbnail" src="/uploads/querytool/{{ querytool.image_display_url }}" alt="{{ querytool.image_url }}">
-    {% elif querytool.icon %}
-      <i class="thumbnail fa-3x {{querytool.icon}}"></i>
-    {% else %}
-      <img class="thumbnail" src="/base/images/folder-icon-2.svg" width="70" alt="">
-    {% endif %}
-
+    <div class="group-image" style="margin-top:15px;">
+      {% if querytool.image_url %}
+        <img src="/uploads/querytool/{{ querytool.image_display_url }}" alt="{{ querytool.image_url }}">
+      {% elif querytool.icon %}
+        <i class="fa-3x {{querytool.icon}}"></i>
+      {% else %}
+        <img src="/base/images/folder-icon-2.svg" alt="">
+      {% endif %}
+    </div>
+    
   <div class="box-content">
     <a class="query-tool" href="{{ tool }}"><span class="tool-title">{{ querytool.title }}</span></a>
     <span class="short-desc">{{ h.render_markdown(h.get_translated(querytool, 'description'), True, True) }}</span>
