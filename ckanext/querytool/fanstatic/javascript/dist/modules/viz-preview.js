@@ -2203,7 +2203,22 @@
 
                 console.log(data);
                 console.log(O);
-                console.log(base_info);
+                console.log(base_info); 
+                
+
+                console.log('Row: ')
+                data.forEach(function(record) {
+                    if(record.x){
+                        var subData = record.x;
+
+                        subData.forEach(function(item){
+                            item = item.replace(/^\d{1,2}\./, '');
+                            console.log(item)
+                        });
+                    }
+                    
+                    //console.log(record.x)
+                });
 
                 Plotly.newPlot(this.el[0], data, base_info);
             },
