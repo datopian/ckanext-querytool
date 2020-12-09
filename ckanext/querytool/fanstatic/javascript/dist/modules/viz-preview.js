@@ -2256,6 +2256,11 @@
                 this.sandbox.unsubscribe("querytool:updateCharts", this.updateChart.bind(this))
             },
             sortData: function(t, e, n, i) {
+                
+                e.forEach(function(t) {
+                    isNaN(t[i]) && (t[i] = t[i].replace(/^\d{1,2}\./, ""))
+                })
+
                 "asc" === t ? e.sort(function(t, e) {
                     return t[n] - e[n]
                 }) : "desc" === t ? (e.sort(function(t, e) {
