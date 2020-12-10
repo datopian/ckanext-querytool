@@ -1572,6 +1572,9 @@
                 };
                 var F = d ? "" : _ || m || "",
                     M = y;
+
+                
+                
                 if ("sbar" === this.options.chart_type && "shbar" === this.options.chart_type || g || this.sortData(y, r, i, n), O.legend = {
                         show: o
                     }, O.tooltip = {
@@ -1788,6 +1791,7 @@
                 var data = []
                 var columns = O.data['columns'];
                 var format = this.options.data_format;
+                
 
                 // if typeof plotly is string -> new chart
                 // if typeof plotly is object -> existing chart (user view or admin preview)
@@ -2201,25 +2205,27 @@
 //                    base_info.barmode = 'group'
 //                }
 
-                console.log(data);
-                console.log(O);
-                console.log(base_info); 
-                
-
-                console.log('Row: ')
-                data.forEach(function(record) {
-                    if(record.x){
+                //Experimental: Remove Numbers from the items 1. , 2. etc
+                if(data){
+                    data.forEach(function(record) {
                         var subData = record.x;
 
-                        subData.forEach(function(item){
-                            item = item.replace(/^\d{1,2}\./, '');
-                            console.log(item)
-                        });
-                    }
-                    
-                    //console.log(record.x)
-                });
+                        if(subData.length > 0) {
+                            subData.forEach(function(item, index){
+                                item = item.replace(/^\d{1,2}\./, '');
+                                record.x[index] = item;
+                            });
+                        }
 
+                    });
+                }
+
+                //console.log(data);
+                console.log(O);
+                console.log(base_info); 
+                console.log(data)
+
+                console.log('Generate plotly')
                 Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
