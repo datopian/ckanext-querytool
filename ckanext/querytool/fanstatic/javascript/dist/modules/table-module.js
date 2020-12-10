@@ -1887,10 +1887,18 @@
                             return a && u ? (0 === (i = parseInt(a[0]) - parseInt(u[0])) ? 0 : i / Math.abs(i)) : a && !u ? -1 : !a && u ? 1 : r < o ? -1 : r > o ? 1 : 0;
                         }
                         return 0 === (i = Number(r) - Number(o)) ? 0 : i / Math.abs(i);
-                    }),
-                        t.forEach(function (t) {
-                            isNaN(t[n]) && (t[n] = t[n].replace(/^\d{1,2}\./, ""));
-                        });
+                    })
+
+                    t.forEach(function(record) {
+
+                        if (isNaN(record[n])) {
+                            //Custom Sorting Solution 
+                            record[Object.keys(record)[0]] = record[Object.keys(record)[0]].replace(/^\d{1,2}\./, '');
+                       
+                            record[n] = record[n].replace(/^\d{1,2}\./, '');
+                        }
+                    });
+                    //console.log(t)
                 },
                 teardown: function () {
                     this.sandbox.unsubscribe("querytool:updateTables", this.updateTable.bind(this));
