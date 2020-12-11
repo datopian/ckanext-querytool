@@ -2210,7 +2210,7 @@
                     data.forEach(function(record) {
                         var subData = record.x;
 
-                        if(subData.length > 0) {
+                        if(subData && subData.length > 0) {
                             subData.forEach(function(item, index){
                                 item = item.replace(/^\d{1,2}\./, '');
                                 record.x[index] = item;
