@@ -2183,7 +2183,7 @@
                     xaxis: {
                         tickformat: format,
                         automargin: true,
-                        title: this.options.x_axis,
+                        title: '',
                         tickangle: this.options.x_text_rotate,
                     },
                     yaxis: {
