@@ -63,3 +63,13 @@ $(document).ready(function(){
         clear_btn: null // default -> 'upside'
     });
   }
+
+
+  $('#chart_field_graph_1').on('change',function(){
+      var selected = $(this).val();
+      if(selected=='pie' || selected=='donut') {
+          $("#color-accordion").hide()
+      } else {
+        $("#color-accordion").show()
+      }
+  })
