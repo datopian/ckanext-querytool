@@ -2033,9 +2033,11 @@
 
                                     if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
-                                        var new_color = color.split(": ")[1].slice(0, -1);
-                                        if (new_color.includes('none')){
-                                            new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                        if (color){
+                                            var new_color = color.split(": ")[1].slice(0, -1);
+                                            if (new_color.includes('none')){
+                                                new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                            }
                                         }
                                         d['marker'] = {'color': new_color};
                                     } else {
@@ -2212,8 +2214,10 @@
 
                         if(subData && subData.length > 0) {
                             subData.forEach(function(item, index){
-                                item = item.replace(/^\d{1,2}\./, '');
-                                record.x[index] = item;
+                              if (typeof item !== 'number'){
+                                  item = item.replace(/^\d{1,2}\./, '');
+                                  record.x[index] = item;
+                              }
                             });
                         }
 
