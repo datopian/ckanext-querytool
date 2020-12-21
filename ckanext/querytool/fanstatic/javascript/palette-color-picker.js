@@ -83,8 +83,8 @@
             .attr({
               'title': key,
               'data-color': col,
-              'data-name': key
-            }).css('background-color', col);
+              'data-name': key 
+            }).css('background-color', col).css('background-image', col);
 
         if ( key === current_value ) {
           $sw.addClass('active');
