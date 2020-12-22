@@ -353,6 +353,7 @@ class QueryToolController(base.BaseController):
                 # 'images': []} for easier itteration
                 '''
                 if k.startswith('chart_field_graph_'):
+                    log.error(data.get('chart_field_color_{}'.format(id)))
                     visualization = {}
                     id = k.split('_')[-1]
                     visualization['type'] = 'chart'
@@ -365,6 +366,8 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_axis_y_{}'.format(id))
                     visualization['color'] = \
                         data.get('chart_field_color_{}'.format(id))
+                    visualization['seq_color'] = \
+                        data.get('chart_field_seq_color_{}'.format(id))
                     visualization['title'] = \
                         data.get('chart_field_title_{}'.format(id))
                     visualization['x_text_rotate'] = \
