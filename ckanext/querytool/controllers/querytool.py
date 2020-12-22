@@ -353,7 +353,6 @@ class QueryToolController(base.BaseController):
                 # 'images': []} for easier itteration
                 '''
                 if k.startswith('chart_field_graph_'):
-                    log.error(data.get('chart_field_color_{}'.format(id)))
                     visualization = {}
                     id = k.split('_')[-1]
                     visualization['type'] = 'chart'
