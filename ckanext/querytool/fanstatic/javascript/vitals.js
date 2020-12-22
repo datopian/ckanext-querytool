@@ -65,11 +65,22 @@ $(document).ready(function(){
   }
 
 
-  $('#chart_field_graph_1').on('change',function(){
-      var selected = $(this).val();
-      if(selected=='pie' || selected=='donut') {
-          $("#color-accordion").hide()
-      } else {
-        $("#color-accordion").show()
-      }
+
+
+  $(document).on('change','select',function(){
+    var selected = $(this).val()
+    var select_id = $(this).context.id
+    var id_number = select_id.split('_').slice(-1)[0]
+    console.log(id_number)
+    console.log(select_id)
+    console.log($(this))
+    console.log($(this).context)
+
+    if(selected=='pie' || selected=='donut') {
+      $("#color-accordion-" + id_number).hide()
+    } else {
+      $("#color-accordion-" + id_number).show()
+    }
   })
+
+
