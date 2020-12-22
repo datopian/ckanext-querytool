@@ -170,7 +170,9 @@
         {% endif %}
 
       <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %} {% if item.type == 'break_line' %}break_line{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
-        <h3 id="item-title-{{chart_id}}">{{ item.title }}</h3>
+        {% if item.type != 'table' %}
+          <h3 id="item-title-{{chart_id}}">{{ item.title }}</h3>
+        {% endif %}
         
         {% if item.type == 'chart'  %}
            {% if item.filter_visibility == 'public'  %}

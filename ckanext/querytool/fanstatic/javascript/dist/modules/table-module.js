@@ -1780,8 +1780,23 @@
                         c = !0 === this.options.measure_label ? "" : this.options.measure_label,
                         l = this.options.main_value;
                     !0 === l && (l = $("[name*=table_main_value_]").val()), o && (l = r);
+                    console.log("TABLE");
+                    console.log(this.options);
+
+                    var queryFilters = "";
+                    //var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
+                    //if (queryFilters.length) queryFilters = (this.options.info_query_filters === true) ? [] : this.options.info_query_filters;
+                    var optionalFilterName = (this.options.filter_name === true) ? '' : this.options.filter_name;
+                    var optionalFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
+                    var optionalFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
+                    var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
+                    
                     var f = !0 === this.options.category_name ? "" : this.options.category_name,
-                        p = !0 === this.options.table_title ? "" : this.options.table_title,
+                        p = this.renderChartTitle(this.options.table_title,{
+                            measure: {name: this.options.y_axis, alias: this.options.measure_label},
+                            filters: queryFilters,
+                            optionalFilter: optionalFilter,
+                        }),
                         d = this.create_sql_string(l, s, f);
                     e("querytool_get_resource_data", { sql_string: d }, function (e) {
                         var n = e.result;
@@ -1903,6 +1918,24 @@
                 teardown: function () {
                     this.sandbox.unsubscribe("querytool:updateTables", this.updateTable.bind(this));
                 },
+                renderChartTitle: function (title, options) {
+
+                    // Configure nunjucks
+                    var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+
+                    // Prepare data
+                    var data = {measure: options.measure.alias};
+                    for (let filter of options.filters) data[filter.slug] = filter.value;
+                    if (options.optionalFilter) data.optional_filter = options.optionalFilter.value;
+
+                    // Render and return
+                    try {
+                        return env.renderString(title, data);
+                    } catch (error) {
+                        return title;
+                    }
+          
+                }
             };
         });
     },
