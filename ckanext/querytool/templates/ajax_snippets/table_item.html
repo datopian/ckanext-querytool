@@ -13,10 +13,41 @@
      {% if table %}
         {% set table_title = table.title %}
       {% endif %}
-      <div class="control-group ">
+      <div class="control-group title">
         <label class="control-label" for="table_field_title_{{ n }}">{{ _('Title') }}</label>
         <div class="controls ">
-          <input id="table_field_title_{{ n }}" name="table_field_title_{{ n }}" value="{{ table_title }}" placeholder="{{ _('Table title') }}" type="text">
+          <textarea id="table_field_title_{{ n }}" name="table_field_title_{{ n }}" placeholder="{{ _('Table title') }}" type="text" rows="3">{{ table_title }}</textarea>
+        </div>
+      </div>
+
+      <div class="control-group title-vars">
+        <div class="controls ">
+          {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
+          {% set filters = filters|sort(attribute='order') %}
+          <select>
+            <option value="" disabled selected>{{_('Add variable to title')}}</option>
+            <optgroup label="{{_('Capitalized')}}">
+              <option value="{measure|capitalize}">{{_('Measure')}}</option>
+              {% for filter in filters %}
+                <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
+              {% endfor %}
+              <option value="{optional_filter|capitalize}">{{_('Optional Filter')}}</option>
+            </optgroup>
+            <optgroup label="{{_('lowercase')}}" class='text-lowercase'>
+              <option value="{measure|lower}">{{_('Measure')}}</option>
+              {% for filter in filters %}
+                <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
+              {% endfor %}
+              <option value="{optional_filter|lower}">{{_('Optional Filter')}}</option>
+            </optgroup>
+          </select>
+
+        </div>
+      </div>
+      <div class="control-group title-help">
+        <div class="controls" style="width: 197px;">
+          {% set template_tooltip = "<pre><p>Variables<br>---<br>{measure}<br>{optional_filter}<br>*use drop-down list to select variables based on application filters</p><p>Processed variables<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>etc</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>Full templates syntax</a></b></p><p class='muted'><b>Please note:</b> Single braces '{}' are used for variables</p>" %}
+          <span class="editor-info-block">{% trans %}You can use <a href="#templates" title="" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference" data-container="body">Templates</a> here{% endtrans %}</span>
         </div>
       </div>
 
