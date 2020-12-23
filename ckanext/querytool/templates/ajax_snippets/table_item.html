@@ -136,7 +136,7 @@
     {% set data_format = table.data_format %}
     {% set filter_name = table.filter_name %}
     {% set filter_value = table.filter_value %}
-    {% set table_title = table.title or ' ' %}
+    {% set table_title = table.title %}
   {% endif %}
   <div class="preview-wrapper">
     {% snippet 'ajax_snippets/table_module.html',
