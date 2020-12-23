@@ -64,25 +64,8 @@ $(document).ready(function(){
     });
   }
 
-
-
-
-  $(document).on('change','select',function(){
-    var selected = $(this).val()
-    var select_id = $(this).context.id
-    var id_number = select_id.split('_').slice(-1)[0]
-    console.log(id_number)
-    console.log(select_id)
-    console.log($(this))
-    console.log($(this).context)
-
-  })
-
   $('body').on('change','[id^=chart_field_graph_]',function(){
-    console.log('fired!!')
     var selected = $(this).val();
-     var select_id = $(this).context.id
-    var id_number = select_id.split('_').slice(-1)[0]
 
     if(selected=='pie' || selected=='donut') {
       $(this).closest('.accordion').find(".color-accordion").addClass('hidden')
@@ -90,5 +73,3 @@ $(document).ready(function(){
       $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
     }
   })
-
-
