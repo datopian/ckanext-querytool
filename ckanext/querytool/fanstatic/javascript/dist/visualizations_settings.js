@@ -1543,10 +1543,11 @@
                     resource_id: u,
                     y_axis: y,
                     y_axis_values: p,
-                    main_filters: h
+                    main_filters: h,
+                    info_query_filters: JSON.stringify(m)
                 }).done(function(t) {
                     var i = e.prepend(t);
-                    ckan.module.initializeElement(i.find("div[data-module=querytool-table]")[0]), o("table", a), g()
+                    ckan.module.initializeElement(i.find("div[data-module=querytool-table]")[0]), o("table", a), g(), l(), _(), c(), $("[name*=chart_field_axis_y_]").val(y), n(a), r()
                 })
             }), dragula([e[0]], {
                 moves: function(t, e, i) {
