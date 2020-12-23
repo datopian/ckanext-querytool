@@ -76,10 +76,18 @@ $(document).ready(function(){
     console.log($(this))
     console.log($(this).context)
 
+  })
+
+  $('body').on('change','[id^=chart_field_graph_]',function(){
+    console.log('fired!!')
+    var selected = $(this).val();
+     var select_id = $(this).context.id
+    var id_number = select_id.split('_').slice(-1)[0]
+
     if(selected=='pie' || selected=='donut') {
-      $("#color-accordion-" + id_number).hide()
+      $(this).closest('.accordion').find(".color-accordion").addClass('hidden')
     } else {
-      $("#color-accordion-" + id_number).show()
+      $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
     }
   })
 
