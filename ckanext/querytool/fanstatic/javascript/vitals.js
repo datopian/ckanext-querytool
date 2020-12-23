@@ -64,12 +64,12 @@ $(document).ready(function(){
     });
   }
 
+  $('body').on('change','[id^=chart_field_graph_]',function(){
+    var selected = $(this).val();
 
-  $('#chart_field_graph_1').on('change',function(){
-      var selected = $(this).val();
-      if(selected=='pie' || selected=='donut') {
-          $("#color-accordion").hide()
-      } else {
-        $("#color-accordion").show()
-      }
+    if(selected=='pie' || selected=='donut') {
+      $(this).closest('.accordion').find(".color-accordion").addClass('hidden')
+    } else {
+      $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
+    }
   })
