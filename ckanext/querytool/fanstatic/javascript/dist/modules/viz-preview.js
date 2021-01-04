@@ -2195,6 +2195,131 @@
                     }
                 }
 
+                if (!["donut", "pie"].includes(this.options.chart_type)) {
+                    if (!base_info.shapes) {
+                        base_info.shapes = []
+                    }
+                    if (!base_info.annotations) {
+                        base_info.annotations = []
+                    }
+                    var dynamic_text = this.options.dynamic_reference_label + ' (' + Math.round(this.dynamic_reference_value * 100) / 100 + ')'
+                    var static_text = this.options.static_reference_label + ' (' + Math.round(this.static_reference_value * 100) / 100 + ')'
+
+                    if (["hbar", "shbar"].includes(this.options.chart_type)) {
+                        if (this.dynamic_reference_value) {
+                            base_info.annotations.push(
+                                {
+                                  showarrow: false,
+                                  yref: 'paper',
+                                  text: 'Dynamic',
+                                  textangle: 90,
+                                  hovertext: dynamic_text,
+                                  x: this.dynamic_reference_value,
+                                  xshift: 11,
+                                  y: 0
+                                }
+                            )
+                        }
+                        if (this.static_reference_value) {
+                            base_info.annotations.push(
+                                {
+                                  showarrow: false,
+                                  yref: 'paper',
+                                  text: 'Static',
+                                  textangle: 90,
+                                  hovertext: static_text,
+                                  x: this.static_reference_value,
+                                  xshift: 11,
+                                  y: 0
+                                }
+                            )
+                        }
+                        base_info.shapes.push(
+                            {
+                                type: 'line',
+                                yref: 'paper',
+                                x0: this.dynamic_reference_value,
+                                y0: 1,
+                                x1: this.dynamic_reference_value,
+                                y1: 0,
+                                line: {
+                                    color: 'black',
+                                    width: 1
+                                }
+                            }
+                        )
+                        base_info.shapes.push(
+                            {
+                                type: 'line',
+                                yref: 'paper',
+                                x0: this.static_reference_value,
+                                y0: 1,
+                                x1: this.static_reference_value,
+                                y1: 0,
+                                line: {
+                                    color: 'black',
+                                    width: 1
+                                }
+                            }
+                        )
+                    } else {
+                        if (this.dynamic_reference_value) {
+                            base_info.annotations.push(
+                                {
+                                  showarrow: false,
+                                  xref: 'paper',
+                                  text: 'Dynamic',
+                                  hovertext: dynamic_text,
+                                  x: 0,
+                                  yanchor: 'bottom',
+                                  y: this.dynamic_reference_value
+                                }
+                            )
+                        }
+                        if (this.static_reference_value) {
+                            base_info.annotations.push(
+                                {
+                                  showarrow: false,
+                                  xref: 'paper',
+                                  text: 'Static',
+                                  hovertext: static_text,
+                                  x: 0,
+                                  yanchor: 'bottom',
+                                  y: this.static_reference_value
+                                }
+                            )
+                        }
+                        base_info.shapes.push(
+                            {
+                                type: 'line',
+                                xref: 'paper',
+                                x0: 0,
+                                y0: this.dynamic_reference_value,
+                                x1: 1,
+                                y1: this.dynamic_reference_value,
+                                line: {
+                                    color: 'black',
+                                    width: 1
+                                }
+                            }
+                        )
+                        base_info.shapes.push(
+                            {
+                                type: 'line',
+                                xref: 'paper',
+                                x0: 0,
+                                y0: this.static_reference_value,
+                                x1: 1,
+                                y1: this.static_reference_value,
+                                line: {
+                                    color: 'black',
+                                    width: 1
+                                }
+                            }
+                        )
+                    }
+                }
+
                 if (this.options.y_label_hide === false) {
                     base_info.yaxis.title = _ || this.options.y_axis;
                 }
