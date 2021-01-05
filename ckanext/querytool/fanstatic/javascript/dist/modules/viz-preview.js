@@ -2207,8 +2207,7 @@
 
                     if (["hbar", "shbar"].includes(this.options.chart_type)) {
                         if (this.dynamic_reference_value) {
-                            base_info.annotations.push(
-                                {
+                            base_info.annotations.push({
                                   showarrow: false,
                                   yref: 'paper',
                                   text: 'Dynamic',
@@ -2217,12 +2216,10 @@
                                   x: this.dynamic_reference_value,
                                   xshift: 11,
                                   y: 0
-                                }
-                            )
+                            })
                         }
                         if (this.static_reference_value) {
-                            base_info.annotations.push(
-                                {
+                            base_info.annotations.push({
                                   showarrow: false,
                                   yref: 'paper',
                                   text: 'Static',
@@ -2231,11 +2228,9 @@
                                   x: this.static_reference_value,
                                   xshift: 11,
                                   y: 0
-                                }
-                            )
+                            })
                         }
-                        base_info.shapes.push(
-                            {
+                        base_info.shapes.push({
                                 type: 'line',
                                 yref: 'paper',
                                 x0: this.dynamic_reference_value,
@@ -2246,10 +2241,8 @@
                                     color: 'black',
                                     width: 1
                                 }
-                            }
-                        )
-                        base_info.shapes.push(
-                            {
+                        })
+                        base_info.shapes.push({
                                 type: 'line',
                                 yref: 'paper',
                                 x0: this.static_reference_value,
@@ -2260,12 +2253,10 @@
                                     color: 'black',
                                     width: 1
                                 }
-                            }
-                        )
+                        })
                     } else {
                         if (this.dynamic_reference_value) {
-                            base_info.annotations.push(
-                                {
+                            base_info.annotations.push({
                                   showarrow: false,
                                   xref: 'paper',
                                   text: 'Dynamic',
@@ -2273,12 +2264,10 @@
                                   x: 0,
                                   yanchor: 'bottom',
                                   y: this.dynamic_reference_value
-                                }
-                            )
+                            })
                         }
                         if (this.static_reference_value) {
-                            base_info.annotations.push(
-                                {
+                            base_info.annotations.push({
                                   showarrow: false,
                                   xref: 'paper',
                                   text: 'Static',
@@ -2286,11 +2275,9 @@
                                   x: 0,
                                   yanchor: 'bottom',
                                   y: this.static_reference_value
-                                }
-                            )
+                            })
                         }
-                        base_info.shapes.push(
-                            {
+                        base_info.shapes.push({
                                 type: 'line',
                                 xref: 'paper',
                                 x0: 0,
@@ -2301,10 +2288,8 @@
                                     color: 'black',
                                     width: 1
                                 }
-                            }
-                        )
-                        base_info.shapes.push(
-                            {
+                        })
+                        base_info.shapes.push({
                                 type: 'line',
                                 xref: 'paper',
                                 x0: 0,
@@ -2315,8 +2300,7 @@
                                     color: 'black',
                                     width: 1
                                 }
-                            }
-                        )
+                        })
                     }
                 }
 
