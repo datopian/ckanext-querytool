@@ -2211,10 +2211,9 @@
                                   showarrow: false,
                                   yref: 'paper',
                                   text: 'Dynamic',
-                                  textangle: 90,
                                   hovertext: dynamic_text,
                                   x: this.dynamic_reference_value,
-                                  xshift: 11,
+                                  xshift: 30,
                                   y: 0
                             })
                         }
@@ -2223,10 +2222,9 @@
                                   showarrow: false,
                                   yref: 'paper',
                                   text: 'Static',
-                                  textangle: 90,
                                   hovertext: static_text,
                                   x: this.static_reference_value,
-                                  xshift: 11,
+                                  xshift: 22,
                                   y: 0
                             })
                         }
