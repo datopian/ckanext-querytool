@@ -2203,33 +2203,55 @@
                         base_info.annotations = []
                     }
 
-                    var dynamic_label = typeof this.options.dynamic_reference_label === 'boolean' ? '' : this.options.dynamic_reference_label
-                    var static_label = typeof this.options.static_reference_label === 'boolean' ? '' : this.options.static_reference_label
-                    var dynamic_hover_text = `${dynamic_label} (${Math.round(this.dynamic_reference_value * 100) / 100})`
-                    var static_hover_text = `${static_label} (${Math.round(this.static_reference_value * 100) / 100})`
+                    var dynamic_hover_text = Math.round(this.dynamic_reference_value).toLocaleString()
+                    var static_hover_text = Math.round(this.static_reference_value).toLocaleString()
+                    var dynamic_label = (typeof this.options.dynamic_reference_label === 'boolean' ? dynamic_hover_text : this.options.dynamic_reference_label)
+                    var static_label = (typeof this.options.static_reference_label === 'boolean' ? static_hover_text : this.options.static_reference_label)
 
                     if (["hbar", "shbar"].includes(this.options.chart_type)) {
                         if (this.dynamic_reference_value) {
-                            base_info.annotations.push({
-                                showarrow: false,
-                                yref: 'paper',
-                                text: 'Dynamic',
-                                hovertext: dynamic_hover_text,
-                                x: this.dynamic_reference_value,
-                                xshift: 30,
-                                y: 0
-                            })
+                            if (dynamic_label !== dynamic_hover_text) {
+                                base_info.annotations.push({
+                                    showarrow: false,
+                                    yref: 'paper',
+                                    text: dynamic_label,
+                                    hovertext: dynamic_hover_text,
+                                    x: this.dynamic_reference_value,
+                                    xanchor: 'left',
+                                    y: 0
+                                })
+                            } else {
+                                base_info.annotations.push({
+                                    showarrow: false,
+                                    yref: 'paper',
+                                    text: dynamic_hover_text,
+                                    x: this.dynamic_reference_value,
+                                    xanchor: 'left',
+                                    y: 0
+                                })
+                            }
                         }
                         if (this.static_reference_value) {
-                            base_info.annotations.push({
-                                showarrow: false,
-                                yref: 'paper',
-                                text: 'Static',
-                                hovertext: static_hover_text,
-                                x: this.static_reference_value,
-                                xshift: 22,
-                                y: 0
-                            })
+                            if (static_label !== static_hover_text) {
+                                base_info.annotations.push({
+                                    showarrow: false,
+                                    yref: 'paper',
+                                    text: static_label,
+                                    hovertext: static_hover_text,
+                                    x: this.static_reference_value,
+                                    xanchor: 'left',
+                                    y: 0
+                                })
+                            } else {
+                                base_info.annotations.push({
+                                    showarrow: false,
+                                    yref: 'paper',
+                                    text: static_hover_text,
+                                    x: this.static_reference_value,
+                                    xanchor: 'left',
+                                    y: 0
+                                })
+                            }
                         }
                         base_info.shapes.push({
                             type: 'line',
@@ -2257,26 +2279,48 @@
                         })
                     } else {
                         if (this.dynamic_reference_value) {
-                            base_info.annotations.push({
-                                showarrow: false,
-                                xref: 'paper',
-                                text: 'Dynamic',
-                                hovertext: dynamic_hover_text,
-                                x: 0,
-                                yanchor: 'bottom',
-                                y: this.dynamic_reference_value
-                            })
+                            if (dynamic_label) {
+                                base_info.annotations.push({
+                                    showarrow: false,
+                                    xref: 'paper',
+                                    text: dynamic_label,
+                                    hovertext: dynamic_hover_text,
+                                    x: 0,
+                                    yanchor: 'bottom',
+                                    y: this.dynamic_reference_value
+                                })
+                            } else {
+                                base_info.annotations.push({
+                                    showarrow: false,
+                                    xref: 'paper',
+                                    text: dynamic_hover_text,
+                                    x: 0,
+                                    yanchor: 'bottom',
+                                    y: this.dynamic_reference_value
+                                })
+                            }
                         }
                         if (this.static_reference_value) {
-                            base_info.annotations.push({
-                                showarrow: false,
-                                xref: 'paper',
-                                text: 'Static',
-                                hovertext: static_hover_text,
-                                x: 0,
-                                yanchor: 'bottom',
-                                y: this.static_reference_value
-                            })
+                            if (static_label) {
+                                base_info.annotations.push({
+                                    showarrow: false,
+                                    xref: 'paper',
+                                    text: static_label,
+                                    hovertext: static_hover_text,
+                                    x: 0,
+                                    yanchor: 'bottom',
+                                    y: this.static_reference_value
+                                })
+                            } else {
+                                base_info.annotations.push({
+                                    showarrow: false,
+                                    xref: 'paper',
+                                    text: static_hover_text,
+                                    x: 0,
+                                    yanchor: 'bottom',
+                                    y: this.static_reference_value
+                                })
+                            }
                         }
                         base_info.shapes.push({
                             type: 'line',
