@@ -2225,8 +2225,7 @@
                                 hovertext: dynamic_ref_hovertext,
                                 x: this.dynamic_reference_value,
                                 xanchor: 'left',
-                                y: 0,
-                                captureevents: true
+                                y: 0
                             })
                         }
                         if (static_ref_hovertext) {
@@ -2237,8 +2236,7 @@
                                 hovertext: static_ref_hovertext,
                                 x: this.static_reference_value,
                                 xanchor: 'left',
-                                y: 0,
-                                captureevents: true
+                                y: 0
                             })
                         }
                         base_info.shapes.push({
@@ -2274,8 +2272,7 @@
                                 hovertext: dynamic_ref_hovertext,
                                 x: 0,
                                 yanchor: 'bottom',
-                                y: this.dynamic_reference_value,
-                                captureevents: true
+                                y: this.dynamic_reference_value
                             })
                         }
                         if (static_ref_hovertext) {
@@ -2286,8 +2283,7 @@
                                 hovertext: static_ref_hovertext,
                                 x: 0,
                                 yanchor: 'bottom',
-                                y: this.static_reference_value,
-                                captureevents: true
+                                y: this.static_reference_value
                             })
                         }
                         base_info.shapes.push({
