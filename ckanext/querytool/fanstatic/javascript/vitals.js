@@ -69,7 +69,26 @@ $(document).ready(function(){
         {"deeppink": "deeppink"},
         {"deepskyblue": "deepskyblue"},
         {"lightgreen": "lightgreen"},
-        {"mediumvioletred": "mediumvioletred"}
+        {"mediumvioletred": "mediumvioletred"},
+        {"#00429d":"#00429d"},
+        {"#4771b2":"#4771b2"},
+        {"#73a2c6":"#73a2c6"},
+        {"#a5d5d8":"#a5d5d8"},
+        {"#ffffe0":"#ffffe0"},
+        {"#007386":"#007386"},
+        {"#3e98a0":"#3e98a0"},
+        {"#6dbdba":"#6dbdba"},
+        {"#a4e2d3":"#a4e2d3"},
+        {"#f46a00":"#f46a00"},
+        {"#fa8a30":"#fa8a30"},
+        {"#fea951":"#fea951"},
+        {"#ffc671":"#ffc671"},
+        {"#fee391":"#fee391"},
+        {"#c77a44":"#c77a44"},
+        {"#d59566":"#d59566"},
+        {"#e2b187":"#e2b187"},
+        {"#eccdaa":"#eccdaa"},
+        {"#f5e9ce":"#f5e9ce"}
         ],
         position: 'downside',
         clear_btn: null // default -> 'upside'
@@ -81,11 +100,10 @@ $(document).ready(function(){
     $('.colorpicker_sequential').paletteColorPicker({
       custom_class: 'wide',
       colors: [
-      {"#feedde,#fdbe85,#fd8d3c,#e6550d,#a63603": "linear-gradient(90deg, rgba(254,237,222,1) 0%, rgba(253,190,133,1) 22%, rgba(253,141,60,1) 50%, rgba(230,85,13,1) 74%, rgba(166,54,3,1) 100%)"},
-      {"#7b3294,#c2a5cf,#EFD9CE,#a6dba0,#008837": "linear-gradient(90deg, rgba(123,50,148,1) 0%, rgba(194,165,207,1) 22%, rgba(239,217,206,1) 50%, rgba(166,219,160,1) 74%, rgba(0,136,55,1) 100%)"},
-      {"#d7191c,#fdae61,#ffffbf,#abdda4,#2b83ba": "linear-gradient(90deg, rgba(215,25,28,1) 0%, rgba(253,174,97,1) 22%, rgba(255,255,191,1) 50%, rgba(171,221,164,1) 74%, rgba(43,131,186,1) 100%)"},
-      {"#a6611a,#dfc27d,#FCD0A1,#80cdc1,#018571": "linear-gradient(90deg, rgba(166,97,26,1) 0%, rgba(223,194,125,1) 22%, rgba(252,208,161,1) 50%, rgba(128,205,193,1) 74%, rgba(1,133,113,1) 100%)"},
-      {"#e66101,#fdb863,#EFD9CE,#b2abd2,#5e3c99": "linear-gradient(90deg, rgba(230,97,1,1) 0%, rgba(253,184,99,1) 22%, rgba(239,217,206,1) 50%, rgba(178,171,210,1) 74%, rgba(94,60,153,1) 100%)"},
+      {"#feedde,#fdbe85": "linear-gradient(90deg, rgba(254,237,222,1) 0%, rgba(253,190,133,1) 22%"},
+      {"#7b3294,#c2a5cf": "linear-gradient(90deg, rgba(123,50,148,1) 0%, rgba(194,165,207,1) 22%"},
+      {"#a6611a,#dfc27d": "linear-gradient(90deg, rgba(166,97,26,1) 0%, rgba(223,194,125,1) 22%"},
+      {"#e66101,#fdb863": "linear-gradient(90deg, rgba(230,97,1,1) 0%, rgba(253,184,99,1) 22%"},
       ],
       position: 'downside',
       clear_btn: null // default -> 'upside'
