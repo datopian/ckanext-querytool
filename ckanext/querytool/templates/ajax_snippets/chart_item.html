@@ -160,7 +160,7 @@
 
           <div class="control-group control-select seq-colors hidden">
             <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Sequential') }}</label>
-              <input type="text" id="chart_field_seq_color_{{ n }}" name="chart_field_seq_color_{{ n }}" class="colorpicker_sequential" value="{% if chart %}{{ chart.color }}{% else %}darkseagreen{% endif %}" style="display:none;"/>
+              <input type="text" id="chart_field_seq_color_{{ n }}" name="chart_field_seq_color_{{ n }}" class="colorpicker_sequential" value="{% if chart %}{{ chart.seq_color }}{% else %}#feedde,#fdbe85{% endif %}" style="display:none;"/>
           </div>
           
           <div class="control-group control-select diver-colors">
@@ -701,6 +701,7 @@
   <div style="width:65%;height:500px;">
       {% if chart %}
           {% set colors = chart.color %}
+          {% set seq_color = chart.seq_color %}
           {% set x_axis = chart.x_axis %}
           {% set y_axis = chart.y_axis %}
           {% set chart_type = chart.graph %}
@@ -739,6 +740,7 @@
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
           colors=colors,
+          seq_color=seq_color,
           x_axis=x_axis,
           y_axis=y_axis,
           chart_type=chart_type,
