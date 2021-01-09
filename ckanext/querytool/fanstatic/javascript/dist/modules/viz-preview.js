@@ -2240,8 +2240,6 @@
 
                 // My function to interpolate between two colors completely, returning an array
                 function interpolateColors(color1, color2, steps) {
-                    console.log(color1)
-                    console.log(color2)
                     var stepFactor = 1 / (steps - 1),
                         interpolatedColorArray = [];
 
