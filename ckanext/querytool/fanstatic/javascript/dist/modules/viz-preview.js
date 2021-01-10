@@ -2266,14 +2266,16 @@
                     return arrByte[1] + "," + arrByte[2] + "," + arrByte[3];
                 }
 
+                if (this.options.seq_color !== true && this.options.seq_color !== '') {
+                    var base_sequential_colors = this.options.seq_color.split(',')
+                    console.log(base_sequential_colors)
+                    var steps = this.fetched_data.x.length
 
-                var base_sequential_colors = this.options.seq_color.split(',')
-                console.log(base_sequential_colors)
+                    var sequential_colors = interpolateColors(hexToRgb(base_sequential_colors[0]), hexToRgb(base_sequential_colors[1]), steps);
+                    console.log(sequential_colors);
 
-                var sequential_colors = interpolateColors(hexToRgb(base_sequential_colors[0]), hexToRgb(base_sequential_colors[1]), 7);
-                console.log(sequential_colors);
-
-                data[0].marker = {'color': sequential_colors};
+                    data[0].marker = {'color': sequential_colors};
+                }
 
 
                 //console.log(data);
