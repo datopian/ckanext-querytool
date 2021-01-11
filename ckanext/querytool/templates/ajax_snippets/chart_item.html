@@ -433,12 +433,6 @@
             {% else %}
               {% set show_labels_as_percentages_option = false %}
             {% endif %}
-            <div class="control-group ">
-               <label class="control-label" for="chart_field_show_labels_as_percentages_{{ n }}">{{ _('Show labels as percentages') }}</label>
-               <div class="controls ">
-                  <input id="chart_field_show_labels_as_percentages_{{ n }}" type="checkbox" name="chart_field_show_labels_as_percentages_{{ n }}" {% if show_labels_as_percentages=='true' %}checked{% endif %} {{'' if show_labels_as_percentages_option else 'disabled'}}>
-               </div>
-            </div>
 
           </div>
         </div>
