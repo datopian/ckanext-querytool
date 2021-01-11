@@ -230,12 +230,7 @@
             {% else %}
               {% set x_text_multiline_option = true %}
             {% endif %}
-            <div class="control-group">
-              <label class="control-label" for="chart_field_x_text_multiline_{{ n }}">{{ _('Force label in multiple lines') }}</label>
-              <div class="controls ">
-                <input id="chart_field_x_text_multiline_{{ n }}" type="checkbox" name="chart_field_x_text_multiline_{{ n }}" value="{{ x_text_multiline }}"{% if x_text_multiline=='false' %}{% else %}checked{% endif %} {{'' if text_rotation_option else 'disabled'}}>
-              </div>
-            </div>
+            
 
             {# X-axis ticks #}
             {% if chart %}
