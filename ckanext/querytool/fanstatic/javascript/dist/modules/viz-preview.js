@@ -2187,6 +2187,8 @@
                         automargin: true,
                         title: '',
                         tickangle: this.options.x_text_rotate,
+                        tickmode:"auto",
+                        nticks:this.options.x_tick_culling_max
                     },
                     yaxis: {
                         tickformat: f,
