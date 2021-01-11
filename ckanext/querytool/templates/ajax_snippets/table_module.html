@@ -1,4 +1,5 @@
 {% set id = h.querytool_get_uuid() %}
+{% set test = '[{"name": "Idade", "value": "Abaixo de 5", "order": 2, "alias": "Age", "visibility": "public", "slug": "age"}, {"name": "Sexo", "value": "Ambos", "order": 1, "alias": "Sex", "visibility": "public", "slug": "sex"}]' %}
 <div data-module="querytool-table"
      data-module-sql_string="{{ sql_string }}"
      data-module-resource_id="{{ resource_id }}"
@@ -10,6 +11,8 @@
      data-module-data_format="{{ data_format }}"
      data-module-filter_name="{{ filter_name }}"
      data-module-filter_value="{{ filter_value }}"
+     data-module-query_filters="{{ query_filters }}"
+     data-module-info_query_filters="{{ test }}"
      data-module-table_title ="{{ table_title or ' ' }}"
      >
 </div>

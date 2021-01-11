@@ -1783,9 +1783,11 @@
                     console.log("TABLE");
                     console.log(this.options);
 
-                    var queryFilters = "";
-                    //var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
-                    //if (queryFilters.length) queryFilters = (this.options.info_query_filters === true) ? [] : this.options.info_query_filters;
+                    //var queryFilters = "";
+                    var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
+                    if (queryFilters.length) queryFilters = (this.options.info_query_filters === true) ? [] : this.options.info_query_filters;
+                    queryFilters = this.options.info_query_filters;
+                    console.log(queryFilters)
                     var optionalFilterName = (this.options.filter_name === true) ? '' : this.options.filter_name;
                     var optionalFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
                     var optionalFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
