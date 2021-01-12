@@ -2266,15 +2266,38 @@
                     return arrByte[1] + "," + arrByte[2] + "," + arrByte[3];
                 }
 
-                if (this.options.seq_color !== true && this.options.seq_color !== '') {
-                    var base_sequential_colors = this.options.seq_color.split(',')
-                    console.log(base_sequential_colors)
-                    var steps = this.fetched_data.x.length
+                var colorpicker_selection = document.getElementById('color_type').value;
 
-                    var sequential_colors = interpolateColors(hexToRgb(base_sequential_colors[0]), hexToRgb(base_sequential_colors[1]), steps);
-                    console.log(sequential_colors);
+                if (colorpicker_selection === '2' && !['donut', 'pie'].includes(this.options.chart_type)) {
+                    var steps = 0;
+                    var base_sequential_colors = this.options.seq_color.split(',');
 
-                    data[0].marker = {'color': sequential_colors};
+                    for (i = 0; i < data.length; i++) {
+                        if (['scatter'].includes(this.options.chart_type)) {
+                            var steps = Math.max(steps, data[i].y.length);
+                        } else {
+                            var steps = Math.max(steps, data[i].x.length);
+                        }
+                    }
+
+                    steps = steps * data.length
+
+                    for (i = 0; i < data.length; i++) {
+                        var sequential_colors = interpolateColors(hexToRgb(base_sequential_colors[0]), hexToRgb(base_sequential_colors[1]), steps);
+                        var sequential_colors_section = [];
+
+                        for (j = Math.round((sequential_colors.length / data.length) * i);
+                             j < Math.round((sequential_colors.length / data.length) * (i + 1)) && sequential_colors.length; j++) {
+                            sequential_colors_section.push(sequential_colors[j]);
+                        }
+
+                        if (!"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])) {
+                            data[i].marker = {'color': sequential_colors_section};
+                        } else {
+                            data[i].marker = {'color': interpolateColors(hexToRgb(base_sequential_colors[0]), hexToRgb(base_sequential_colors[1]), 2)};
+                        }
+
+                    }
                 }
 
 
