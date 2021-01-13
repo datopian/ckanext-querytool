@@ -406,12 +406,6 @@
             {% else %}
               {% set show_labels_option = true %}
             {% endif %}
-            <div class="control-group ">
-               <label class="control-label" for="chart_field_labels_{{ n }}">{{ _('Show data labels') }}</label>
-               <div class="controls ">
-                  <input id="chart_field_labels_{{ n }}" type="checkbox" name="chart_field_labels_{{ n }}" value="{{ show_labels }}"{% if show_labels=='false' %}{% else %}checked{% endif %} {{'' if show_labels_option else 'disabled'}}>
-               </div>
-            </div>
 
             {# Show legend #}
             {% if chart %}
