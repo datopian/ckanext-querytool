@@ -34,14 +34,28 @@ $(document).ready(function(){
     })
   });
 
-  $(document).on('change', '#color_type', function() {
+  $(document).ready(function(){
+    $('[id^=chart_field_color_type_]').serializeArray().forEach((item, i) => {
+      var color_type = item.value;
+      if([1, '1'].includes(color_type)){
+          $(`.diver-colors-${i+1}`).removeClass('hidden')
+          $(`.seq-colors-${i+1}`).addClass('hidden')
+      } else {
+          $(`.diver-colors-${i+1}`).addClass('hidden')
+          $(`.seq-colors-${i+1}`).removeClass('hidden')
+      }
+    })
+  });
+
+  $(document).on('change', '[id^=chart_field_color_type_]', function() {
     var selection = $(this).val();
+    var chart_number = this.id.split('_').slice(-1)[0];
     if(selection == 1){
-        $('.diver-colors').removeClass('hidden')
-        $('.seq-colors').addClass('hidden')
+        $(`.diver-colors-${chart_number}`).removeClass('hidden')
+        $(`.seq-colors-${chart_number}`).addClass('hidden')
     } else {
-        $('.diver-colors').addClass('hidden')
-        $('.seq-colors').removeClass('hidden')
+        $(`.diver-colors-${chart_number}`).addClass('hidden')
+        $(`.seq-colors-${chart_number}`).removeClass('hidden')
     }
   });
 
