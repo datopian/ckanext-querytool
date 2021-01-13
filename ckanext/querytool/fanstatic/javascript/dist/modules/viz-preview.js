@@ -2197,6 +2197,124 @@
                     }
                 }
 
+                if (!["donut", "pie"].includes(this.options.chart_type)) {
+                    if (!base_info.shapes) {
+                        base_info.shapes = []
+                    }
+                    if (!base_info.annotations) {
+                        base_info.annotations = []
+                    }
+
+                    var dynamic_ref_hovertext = (this.dynamic_reference_value !== null) ?
+                                                 this.dynamic_reference_value.toLocaleString() :
+                                                 this.dynamic_reference_value
+                    var static_ref_hovertext = (this.static_reference_value !== null) ?
+                                                this.static_reference_value.toLocaleString() :
+                                                this.static_reference_value
+                    var dynamic_ref_text = `<b>${(typeof this.options.dynamic_reference_label === 'boolean' ||
+                                             this.options.dynamic_reference_label.length === 0 ?
+                                             this.options.dynamic_reference_type : this.options.dynamic_reference_label)}</b>`
+                    var static_ref_text = `<b>${(typeof this.options.static_reference_label === 'boolean' ||
+                                            this.options.static_reference_label.length === 0 ?
+                                            'Reference' : this.options.static_reference_label)}</b>`
+
+                    if (["hbar", "shbar"].includes(this.options.chart_type)) {
+                        if (dynamic_ref_hovertext) {
+                            base_info.annotations.push({
+                                showarrow: false,
+                                yref: 'paper',
+                                text: dynamic_ref_text,
+                                hovertext: dynamic_ref_hovertext,
+                                x: this.dynamic_reference_value,
+                                xanchor: 'left',
+                                y: 0
+                            })
+                        }
+                        if (static_ref_hovertext) {
+                            base_info.annotations.push({
+                                showarrow: false,
+                                yref: 'paper',
+                                text: static_ref_text,
+                                hovertext: static_ref_hovertext,
+                                x: this.static_reference_value,
+                                xanchor: 'left',
+                                y: 0
+                            })
+                        }
+                        base_info.shapes.push({
+                            type: 'line',
+                            yref: 'paper',
+                            x0: this.dynamic_reference_value,
+                            y0: 1,
+                            x1: this.dynamic_reference_value,
+                            y1: 0,
+                            line: {
+                                color: 'black',
+                                width: 1
+                            }
+                        })
+                        base_info.shapes.push({
+                            type: 'line',
+                            yref: 'paper',
+                            x0: this.static_reference_value,
+                            y0: 1,
+                            x1: this.static_reference_value,
+                            y1: 0,
+                            line: {
+                                color: 'black',
+                                width: 1
+                            }
+                        })
+                    } else {
+                        if (dynamic_ref_hovertext) {
+                            base_info.annotations.push({
+                                showarrow: false,
+                                xref: 'paper',
+                                text: dynamic_ref_text,
+                                hovertext: dynamic_ref_hovertext,
+                                x: 0,
+                                yanchor: 'bottom',
+                                y: this.dynamic_reference_value
+                            })
+                        }
+                        if (static_ref_hovertext) {
+                            base_info.annotations.push({
+                                showarrow: false,
+                                xref: 'paper',
+                                text: static_ref_text,
+                                hovertext: static_ref_hovertext,
+                                x: 0,
+                                yanchor: 'bottom',
+                                y: this.static_reference_value
+                            })
+                        }
+                        base_info.shapes.push({
+                            type: 'line',
+                            xref: 'paper',
+                            x0: 0,
+                            y0: this.dynamic_reference_value,
+                            x1: 1,
+                            y1: this.dynamic_reference_value,
+                            line: {
+                                color: 'black',
+                                width: 1
+                            }
+                        })
+                        base_info.shapes.push({
+                            type: 'line',
+                            xref: 'paper',
+                            x0: 0,
+                            y0: this.static_reference_value,
+                            x1: 1,
+                            y1: this.static_reference_value,
+                            line: {
+                                color: 'black',
+                                width: 1
+                            }
+                        })
+                    }
+                }
+
                 if (this.options.y_label_hide === false) {
                     base_info.yaxis.title = _ || this.options.y_axis;
                 }
