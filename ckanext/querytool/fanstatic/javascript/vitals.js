@@ -126,10 +126,27 @@ $(document).ready(function(){
 
   $('body').on('change','[id^=chart_field_graph_]',function(){
     var selected = $(this).val();
+    var chart_number = this.id.split('_').slice(-1)[0];
 
+    //Hide color options if pie or donut
     if(selected=='pie' || selected=='donut') {
       $(this).closest('.accordion').find(".color-accordion").addClass('hidden')
     } else {
       $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
     }
+
+    //Hide seqeuntial if not bar chart
+    if(selected=='line' || selected=='area' || selected=='spline' || selected=='donut' || selected=='pie' || selected=='scatter'){
+      $(`#chart_field_color_type_${chart_number}`).val("1");
+      $(`#chart_field_color_type_${chart_number}`).change();
+
+      $(`.chart_field_color_wrap_${chart_number}`).addClass('hidden');
+      $(`.diver-colors-${chart_number}`).removeClass('hidden');
+      $(`.seq-colors-${chart_number}`).addClass('hidden');
+    } else {
+      $(`.chart_field_color_wrap_${chart_number}`).removeClass('hidden');
+      $(`.diver-colors-${chart_number}`).removeClass('hidden');
+      $(`.seq-colors-${chart_number}`).addClass('hidden');
+    }
+
   })

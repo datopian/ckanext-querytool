@@ -150,7 +150,7 @@
         <div id="accordion_{{ chart_id }}_chart_plotly" class="accordion-body collapse">
           <div class="accordion-inner">
 
-          <div class="control-group control-select">
+          <div class="control-group control-select chart_field_color_wrap_{{ n }}">
             <label class="control-label">{{ _('Color Type') }}</label> &nbsp;
             <select id="chart_field_color_type_{{ n }}" name="chart_field_color_type_{{ n }}">
               <option value=1 {% if chart %}{{ 'selected' if chart.color_type in [1, '1'] }}{% endif %}>Divergent</option>
