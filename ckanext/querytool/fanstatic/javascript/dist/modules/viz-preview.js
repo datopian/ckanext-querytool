@@ -2229,7 +2229,7 @@
                                 xanchor: 'left',
                                 y: 0
                             })
-                            addShapes()
+                            addShapes.call(this)
                         }
                         if (static_ref_hovertext) {
                             base_info.annotations.push({
@@ -2241,7 +2241,7 @@
                                 xanchor: 'left',
                                 y: 0
                             })
-                            addShapes()
+                            addShapes.call(this)
                         }
                         function addShapes () {
                             base_info.shapes.push({
@@ -2280,7 +2280,7 @@
                                 yanchor: 'bottom',
                                 y: this.dynamic_reference_value
                             })
-                            addShapes()
+                            addShapes.call(this)
                         }
                         if (static_ref_hovertext) {
                             base_info.annotations.push({
@@ -2292,7 +2292,7 @@
                                 yanchor: 'bottom',
                                 y: this.static_reference_value
                             })
-                            addShapes()
+                            addShapes.call(this)
                         }
                         function addShapes () {
                             base_info.shapes.push({
