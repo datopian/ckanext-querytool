@@ -114,10 +114,10 @@ $(document).ready(function(){
     $('.colorpicker_sequential').paletteColorPicker({
       custom_class: 'wide',
       colors: [
-      {"#feedde,#fdbe85": "linear-gradient(90deg, rgba(254,237,222,1) 0%, rgba(253,190,133,1) 22%"},
-      {"#7b3294,#c2a5cf": "linear-gradient(90deg, rgba(123,50,148,1) 0%, rgba(194,165,207,1) 22%"},
-      {"#a6611a,#dfc27d": "linear-gradient(90deg, rgba(166,97,26,1) 0%, rgba(223,194,125,1) 22%"},
-      {"#e66101,#fdb863": "linear-gradient(90deg, rgba(230,97,1,1) 0%, rgba(253,184,99,1) 22%"},
+      {"#348F50,#56B4D3": "linear-gradient(90deg, rgba(52,143,80,1) 0%, rgba(86,180,211,1) 100%"},
+      {"#ff6e7f,#bfe9ff": "linear-gradient(90deg, rgba(255,110,127,1) 0%, rgba(191,233,255,1) 100%"},
+      {"#2b5876,#4e4376": "linear-gradient(90deg, rgba(49,71,85,1) 0%, rgba(38,160,218,1) 100%"},
+      {"#e65c00,#F9D423": "linear-gradient(90deg, rgba(230,92,0,1) 0%, rgba(249,212,35,1) 100%"},
       ],
       position: 'downside',
       clear_btn: null // default -> 'upside'

@@ -149,8 +149,8 @@
 
         <div id="accordion_{{ chart_id }}_chart_plotly" class="accordion-body collapse">
           <div class="accordion-inner">
-
-          <div class="control-group control-select chart_field_color_wrap_{{ n }}">
+            
+          <div class="control-group control-select chart_field_color_wrap_{{ n }} {% if chart %}{{ 'hidden' if selected_chart_type in ['line','area','spline','donut','pie','scatter'] }}{% endif %}">
             <label class="control-label">{{ _('Color Type') }}</label> &nbsp;
             <select id="chart_field_color_type_{{ n }}" name="chart_field_color_type_{{ n }}">
               <option value=1 {% if chart %}{{ 'selected' if chart.color_type in [1, '1'] }}{% endif %}>Divergent</option>
@@ -158,12 +158,12 @@
             </select>  
           </div>
 
-          <div class="control-group control-select seq-colors-{{ n }} hidden">
+          <div class="control-group control-select seq-colors-{{ n }} {% if chart %}{{ 'hidden' if chart.color_type in [1, '1'] }}{% endif %}">
             <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Sequential') }}</label>
               <input type="text" id="chart_field_seq_color_{{ n }}" name="chart_field_seq_color_{{ n }}" class="colorpicker_sequential" value="{% if chart %}{{ chart.seq_color }}{% else %}#feedde,#fdbe85{% endif %}" style="display:none;"/>
           </div>
           
-          <div class="control-group control-select diver-colors-{{ n }}">
+          <div class="control-group control-select diver-colors-{{ n }} {% if chart %}{{ 'hidden' if chart.color_type in [2, '2'] }}{% endif %}">
               {% if plotly %}
               <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
