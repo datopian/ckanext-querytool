@@ -1887,6 +1887,7 @@
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
@@ -1935,7 +1936,7 @@
 
                                 var trace = {
                                     x: [this.options.x_axis],
-                                    y: x,
+                                    y: [parseFloat(columns[tmp][1])],
                                     type: 'bar',
                                     name: name,
                                     width: this.options.bar_width || 0.5,
@@ -1992,7 +1993,7 @@
                                 var name = columns[tmp][0];
 
                                 var trace = {
-                                    x: columns[tmp].slice(1),
+                                    x: [parseFloat(columns[tmp][1])],
                                     y: [this.options.x_axis],
                                     type: 'bar',
                                     name: name,
