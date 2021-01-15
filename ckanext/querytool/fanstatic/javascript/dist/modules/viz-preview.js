@@ -2229,6 +2229,7 @@
                                 xanchor: 'left',
                                 y: 0
                             })
+                            addShapes()
                         }
                         if (static_ref_hovertext) {
                             base_info.annotations.push({
@@ -2240,31 +2241,34 @@
                                 xanchor: 'left',
                                 y: 0
                             })
+                            addShapes()
                         }
-                        base_info.shapes.push({
-                            type: 'line',
-                            yref: 'paper',
-                            x0: this.dynamic_reference_value,
-                            y0: 1,
-                            x1: this.dynamic_reference_value,
-                            y1: 0,
-                            line: {
-                                color: 'black',
-                                width: 1
-                            }
-                        })
-                        base_info.shapes.push({
-                            type: 'line',
-                            yref: 'paper',
-                            x0: this.static_reference_value,
-                            y0: 1,
-                            x1: this.static_reference_value,
-                            y1: 0,
-                            line: {
-                                color: 'black',
-                                width: 1
-                            }
-                        })
+                        function addShapes () {
+                            base_info.shapes.push({
+                                type: 'line',
+                                yref: 'paper',
+                                x0: this.dynamic_reference_value,
+                                y0: 1,
+                                x1: this.dynamic_reference_value,
+                                y1: 0,
+                                line: {
+                                    color: 'black',
+                                    width: 1
+                                }
+                            })
+                            base_info.shapes.push({
+                                type: 'line',
+                                yref: 'paper',
+                                x0: this.static_reference_value,
+                                y0: 1,
+                                x1: this.static_reference_value,
+                                y1: 0,
+                                line: {
+                                    color: 'black',
+                                    width: 1
+                                }
+                            })
+                        }
                     } else {
                         if (dynamic_ref_hovertext) {
                             base_info.annotations.push({
@@ -2276,6 +2280,7 @@
                                 yanchor: 'bottom',
                                 y: this.dynamic_reference_value
                             })
+                            addShapes()
                         }
                         if (static_ref_hovertext) {
                             base_info.annotations.push({
@@ -2287,31 +2292,34 @@
                                 yanchor: 'bottom',
                                 y: this.static_reference_value
                             })
+                            addShapes()
                         }
-                        base_info.shapes.push({
-                            type: 'line',
-                            xref: 'paper',
-                            x0: 0,
-                            y0: this.dynamic_reference_value,
-                            x1: 1,
-                            y1: this.dynamic_reference_value,
-                            line: {
-                                color: 'black',
-                                width: 1
-                            }
-                        })
-                        base_info.shapes.push({
-                            type: 'line',
-                            xref: 'paper',
-                            x0: 0,
-                            y0: this.static_reference_value,
-                            x1: 1,
-                            y1: this.static_reference_value,
-                            line: {
-                                color: 'black',
-                                width: 1
-                            }
-                        })
+                        function addShapes () {
+                            base_info.shapes.push({
+                                type: 'line',
+                                xref: 'paper',
+                                x0: 0,
+                                y0: this.dynamic_reference_value,
+                                x1: 1,
+                                y1: this.dynamic_reference_value,
+                                line: {
+                                    color: 'black',
+                                    width: 1
+                                }
+                            })
+                            base_info.shapes.push({
+                                type: 'line',
+                                xref: 'paper',
+                                x0: 0,
+                                y0: this.static_reference_value,
+                                x1: 1,
+                                y1: this.static_reference_value,
+                                line: {
+                                    color: 'black',
+                                    width: 1
+                                }
+                            })
+                        }
                     }
                 }
 
