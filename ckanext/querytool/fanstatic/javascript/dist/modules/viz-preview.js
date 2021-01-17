@@ -2352,6 +2352,8 @@
                 this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole;
                 var A = this.create_sql();
                 this.get_resource_datа(A)
+
+                t.find("[name*=chart_field_graph_]").change();
             },
             deleteChart: function() {
                 this.el.closest(".chart_field").remove()
