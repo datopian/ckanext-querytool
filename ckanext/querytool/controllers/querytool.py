@@ -365,6 +365,10 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_axis_y_{}'.format(id))
                     visualization['color'] = \
                         data.get('chart_field_color_{}'.format(id))
+                    visualization['color_type'] = \
+                        data.get('chart_field_color_type_{}'.format(id))
+                    visualization['seq_color'] = \
+                        data.get('chart_field_seq_color_{}'.format(id))
                     visualization['title'] = \
                         data.get('chart_field_title_{}'.format(id))
                     visualization['x_text_rotate'] = \

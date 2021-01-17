@@ -27,10 +27,36 @@ $('.long-desc').readmore({
 
 $(document).ready(function(){
     generateColorPicker();
+    generateColorPicker2();
 
     $("#add-visualization-btn").on('click',function(){
-        setTimeout(function() { generateColorPicker(); }, 1000);
+        setTimeout(function() { generateColorPicker(); generateColorPicker2(); }, 1000);
     })
+  });
+
+  $(document).ready(function(){
+    $('[id^=chart_field_color_type_]').serializeArray().forEach((item, i) => {
+      var color_type = item.value;
+      if([1, '1'].includes(color_type)){
+          $(`.diver-colors-${i+1}`).removeClass('hidden')
+          $(`.seq-colors-${i+1}`).addClass('hidden')
+      } else {
+          $(`.diver-colors-${i+1}`).addClass('hidden')
+          $(`.seq-colors-${i+1}`).removeClass('hidden')
+      }
+    })
+  });
+
+  $(document).on('change', '[id^=chart_field_color_type_]', function() {
+    var selection = $(this).val();
+    var chart_number = this.id.split('_').slice(-1)[0];
+    if(selection == 1){
+        $(`.diver-colors-${chart_number}`).removeClass('hidden')
+        $(`.seq-colors-${chart_number}`).addClass('hidden')
+    } else {
+        $(`.diver-colors-${chart_number}`).addClass('hidden')
+        $(`.seq-colors-${chart_number}`).removeClass('hidden')
+    }
   });
 
   function generateColorPicker(){
@@ -57,19 +83,70 @@ $(document).ready(function(){
         {"deeppink": "deeppink"},
         {"deepskyblue": "deepskyblue"},
         {"lightgreen": "lightgreen"},
-        {"mediumvioletred": "mediumvioletred"}
+        {"mediumvioletred": "mediumvioletred"},
+        {"#00429d":"#00429d"},
+        {"#4771b2":"#4771b2"},
+        {"#73a2c6":"#73a2c6"},
+        {"#a5d5d8":"#a5d5d8"},
+        {"#ffffe0":"#ffffe0"},
+        {"#007386":"#007386"},
+        {"#3e98a0":"#3e98a0"},
+        {"#6dbdba":"#6dbdba"},
+        {"#a4e2d3":"#a4e2d3"},
+        {"#f46a00":"#f46a00"},
+        {"#fa8a30":"#fa8a30"},
+        {"#fea951":"#fea951"},
+        {"#ffc671":"#ffc671"},
+        {"#fee391":"#fee391"},
+        {"#c77a44":"#c77a44"},
+        {"#d59566":"#d59566"},
+        {"#e2b187":"#e2b187"},
+        {"#eccdaa":"#eccdaa"},
+        {"#f5e9ce":"#f5e9ce"}
         ],
         position: 'downside',
         clear_btn: null // default -> 'upside'
     });
   }
 
+  function generateColorPicker2(){
+    console.log('generate Color picker called')
+    $('.colorpicker_sequential').paletteColorPicker({
+      custom_class: 'wide',
+      colors: [
+      {"#348F50,#56B4D3": "linear-gradient(90deg, rgba(52,143,80,1) 0%, rgba(86,180,211,1) 100%"},
+      {"#ff6e7f,#bfe9ff": "linear-gradient(90deg, rgba(255,110,127,1) 0%, rgba(191,233,255,1) 100%"},
+      {"#2b5876,#4e4376": "linear-gradient(90deg, rgba(49,71,85,1) 0%, rgba(38,160,218,1) 100%"},
+      {"#e65c00,#F9D423": "linear-gradient(90deg, rgba(230,92,0,1) 0%, rgba(249,212,35,1) 100%"},
+      ],
+      position: 'downside',
+      clear_btn: null // default -> 'upside'
+    });
+  }
+
   $('body').on('change','[id^=chart_field_graph_]',function(){
     var selected = $(this).val();
+    var chart_number = this.id.split('_').slice(-1)[0];
 
+    //Hide color options if pie or donut
     if(selected=='pie' || selected=='donut') {
       $(this).closest('.accordion').find(".color-accordion").addClass('hidden')
     } else {
       $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
     }
+
+    //Hide seqeuntial if not bar chart
+    if(selected=='line' || selected=='area' || selected=='spline' || selected=='donut' || selected=='pie' || selected=='scatter'){
+      $(`#chart_field_color_type_${chart_number}`).val("1");
+      $(`#chart_field_color_type_${chart_number}`).change();
+
+      $(`.chart_field_color_wrap_${chart_number}`).addClass('hidden');
+      $(`.diver-colors-${chart_number}`).removeClass('hidden');
+      $(`.seq-colors-${chart_number}`).addClass('hidden');
+    } else {
+      $(`.chart_field_color_wrap_${chart_number}`).removeClass('hidden');
+      $(`.diver-colors-${chart_number}`).removeClass('hidden');
+      $(`.seq-colors-${chart_number}`).addClass('hidden');
+    }
+
   })
