@@ -145,8 +145,6 @@ $(document).ready(function(){
       $(`.seq-colors-${chart_number}`).addClass('hidden');
     } else {
       $(`.chart_field_color_wrap_${chart_number}`).removeClass('hidden');
-      $(`.diver-colors-${chart_number}`).removeClass('hidden');
-      $(`.seq-colors-${chart_number}`).addClass('hidden');
     }
 
   })
