@@ -1887,6 +1887,7 @@
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
@@ -1918,17 +1919,43 @@
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=0; tmp < columns.length - 1; tmp++){
-                            var name = columns[tmp][0];
+                        if (columns.length == 1) {
+                            var name = columns[0][0];
 
                             var trace = {
-                                x: x,
-                                y: columns[tmp].slice(1),
+                                x: [this.options.x_axis],
+                                y: x,
                                 type: 'bar',
                                 name: name,
                                 width: this.options.bar_width || 0.5,
                             };
                             data.push(trace);
+                        } else if ('sbar' === this.options.chart_type) {
+                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                                var name = columns[tmp][0];
+
+                                var trace = {
+                                    x: [this.options.x_axis],
+                                    y: [parseFloat(columns[tmp][1])],
+                                    type: 'bar',
+                                    name: name,
+                                    width: this.options.bar_width || 0.5,
+                                };
+                                data.push(trace);
+                            }
+                        } else {
+                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                                var name = columns[tmp][0];
+
+                                var trace = {
+                                    x: x,
+                                    y: columns[tmp].slice(1),
+                                    type: 'bar',
+                                    name: name,
+                                    width: this.options.bar_width || 0.5,
+                                };
+                                data.push(trace);
+                            }
                         }
                     } else {
                         var trace = {
@@ -1940,27 +1967,55 @@
                         };
                         data.push(trace);
                     };
-
                 };
 
-                if ( 'hbar' === this.options.chart_type) {
+                if ( 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=0; tmp < columns.length - 1; tmp++){
-                            var name = columns[tmp][0];
+                        if (columns.length == 1) {
+                            var name = columns[0][0];
+
                             var trace = {
-                                x: columns[tmp].slice(1),
-                                y: x,
+                                x: x,
+                                y: [this.options.x_axis],
                                 type: 'bar',
                                 name: name,
                                 orientation: 'h',
                                 width: this.options.bar_width || 0.5,
                             };
                             data.push(trace);
+                        } else if ('shbar' === this.options.chart_type) {
+                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                                var name = columns[tmp][0];
+
+                                var trace = {
+                                    x: [parseFloat(columns[tmp][1])],
+                                    y: [this.options.x_axis],
+                                    type: 'bar',
+                                    name: name,
+                                    orientation: 'h',
+                                    width: this.options.bar_width || 0.5,
+                                };
+                                data.push(trace);
+                            }
+                        } else {
+                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                                var name = columns[tmp][0];
+
+                                var trace = {
+                                    x: columns[tmp].slice(1),
+                                    y: x,
+                                    type: 'bar',
+                                    name: name,
+                                    orientation: 'h',
+                                    width: this.options.bar_width || 0.5,
+                                };
+                                data.push(trace);
+                            }
                         }
                     } else {
                         var trace = {
@@ -1973,7 +2028,6 @@
                         };
                         data.push(trace);
                     };
-
                 };
 
                 if ( 'area' === this.options.chart_type) {
@@ -2195,6 +2249,9 @@
                         automargin: true,
                         tickangle: this.options.y_text_rotate,
                     }
+                }
+                if (["sbar", "shbar"].includes(this.options.chart_type)) {
+                    base_info.barmode = 'stack'
                 }
 
                 if (!["donut", "pie"].includes(this.options.chart_type)) {
