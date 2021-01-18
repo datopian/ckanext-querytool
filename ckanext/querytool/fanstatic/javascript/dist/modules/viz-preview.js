@@ -2034,32 +2034,32 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
                                 name: name,
-                                fill: 'tozeroy',
-                                orientation: 'h'
+                                fill: 'tozeroy'
                             };
                             data.push(trace);
-                        }
+                        };
                     } else {
                         var trace = {
                             x: categories,
-                            fill: 'tozeroy',
-                            name: 'Color',
                             y: columns[0].slice(1),
+                            name: columns[0][0],
                             type: 'scatter',
+                            fill: 'tozeroy'
                         };
                         data.push(trace);
                     };
-                };
+                }
 
                 if (typeof plotly === 'string' || plotly === true) {
 
