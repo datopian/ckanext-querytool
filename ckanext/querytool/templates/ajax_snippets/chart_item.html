@@ -34,8 +34,6 @@
         </div>
         <div id="accordion_{{ chart_id }}_general" class="accordion-body collapse in">
           <div class="accordion-inner">
-
-            
             {# Type #}
             {% if chart %}
               {% set selected_chart_type = chart.graph %}
@@ -112,7 +110,7 @@
             <div class="control-group title-help">
               <div class="controls ">
                 {% set template_tooltip = "<pre><p>Variables<br>---<br>{measure}<br>{optional_filter}<br>*use drop-down list to select variables based on application filters</p><p>Processed variables<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>etc</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>Full templates syntax</a></b></p><p class='muted'><b>Please note:</b> Single braces '{}' are used for variables</p>" %}
-                <span class="editor-info-block">{% trans %}You can use <a href="#templates" title="" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference" data-container="body">Templates</a> here{% endtrans %}</span>
+                <span class="editor-info-block">{% trans %}You can use <a href="#templates" title="" data-trigger="focus" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference" data-container="body">Templates</a> here{% endtrans %}</span>
               </div>
             </div>
 
@@ -130,8 +128,13 @@
         </div>
       </div>
 
-      {# Chart additional setup  #}
-      <div class="accordion-group">
+      {# Chart additional color setup  #}
+      {% if selected_chart_type in ['donut', 'pie'] %}
+        {% set hide_color_picker = 'hidden' %}
+      {% else %}
+        {% set hide_color_picker = '' %}
+      {% endif %}
+      <div class="accordion-group {{ hide_color_picker }} color-accordion">
         <div class="accordion-heading">
           <a href="#accordion_{{ chart_id }}_chart_plotly" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('Color Section') }}
@@ -146,7 +149,21 @@
 
         <div id="accordion_{{ chart_id }}_chart_plotly" class="accordion-body collapse">
           <div class="accordion-inner">
-            <div class="control-group control-select">
+            
+          <div class="control-group control-select chart_field_color_wrap_{{ n }} {% if chart %}{{ 'hidden' if selected_chart_type in ['line','area','spline','donut','pie','scatter'] }}{% endif %}">
+            <label class="control-label">{{ _('Color Type') }}</label> &nbsp;
+            <select id="chart_field_color_type_{{ n }}" name="chart_field_color_type_{{ n }}">
+              <option value=1 {% if chart %}{{ 'selected' if chart.color_type in [1, '1'] }}{% endif %}>Divergent</option>
+              <option value=2 {% if chart %}{{ 'selected' if chart.color_type in [2, '2'] }}{% endif %}>Sequential</option>
+            </select>  
+          </div>
+
+          <div class="control-group control-select seq-colors-{{ n }} {% if chart %}{{ 'hidden' if chart.color_type in [1, '1'] }}{% endif %}">
+            <label class="control-label" for="chart_field_color_{{ n }}">{{ _('Sequential') }}</label>
+              <input type="text" id="chart_field_seq_color_{{ n }}" name="chart_field_seq_color_{{ n }}" class="colorpicker_sequential" value="{% if chart %}{{ chart.seq_color }}{% else %}#feedde,#fdbe85{% endif %}" style="display:none;"/>
+          </div>
+          
+          <div class="control-group control-select diver-colors-{{ n }} {% if chart %}{{ 'hidden' if chart.color_type in [2, '2'] }}{% endif %}">
               {% if plotly %}
               <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
@@ -227,12 +244,7 @@
             {% else %}
               {% set x_text_multiline_option = true %}
             {% endif %}
-            <div class="control-group">
-              <label class="control-label" for="chart_field_x_text_multiline_{{ n }}">{{ _('Force label in multiple lines') }}</label>
-              <div class="controls ">
-                <input id="chart_field_x_text_multiline_{{ n }}" type="checkbox" name="chart_field_x_text_multiline_{{ n }}" value="{{ x_text_multiline }}"{% if x_text_multiline=='false' %}{% else %}checked{% endif %} {{'' if text_rotation_option else 'disabled'}}>
-              </div>
-            </div>
+            
 
             {# X-axis ticks #}
             {% if chart %}
@@ -347,8 +359,6 @@
         </div>
         <div id="accordion_{{ chart_id }}_graph" class="accordion-body collapse">
           <div class="accordion-inner">
-
-
             {# Data format #}
             {% set data_formats = h.queytool_get_charts_data_formats() %}
             {% if selected_chart_type in ['pie', 'donut'] %}
@@ -367,6 +377,40 @@
               </div>
             </div>
 
+            {# Donut chart hole #}
+            {% if chart %}
+              {% set donut_hole = chart.donut_hole or 0.4 %}
+            {% endif %}
+            {% if selected_chart_type in ['line', 'bar', 'hbar', 'sbar', 'shbar'] %}
+              {% set donut_option = false %}
+            {% else %}
+              {% set donut_option = true %}
+            {% endif %}
+
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_donut_hole_{{ n }}">{{ _('Donut hole') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_donut_hole_{{ n }}"  type="text" name="chart_field_donut_hole_{{ n }}" value="{{ donut_hole|default (0.4) }}" placeholder="{{ _('Donut hole, default 0.4') }}" {{'' if donut_option else 'disabled'}}>
+               </div>
+            </div>
+
+            {# Bar chart width #}
+            {% if chart %}
+              {% set bar_width = chart.bar_width or 0.5 %}
+            {% endif %}
+
+            {% if selected_chart_type in ['line', 'donut', 'pie'] %}
+              {% set bar_width_option = false %}
+            {% else %}
+              {% set bar_width_option = true %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_bar_width_{{ n }}">{{ _('Bar width') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ bar_width|default (0.5)}}" placeholder="{{ _('Width of bar, default 0.5') }}" {{'' if bar_width_option else 'disabled'}}>
+               </div>
+            </div>
+
             {# Show labels #}
             {% if chart %}
               {% set show_labels = chart.show_labels %}
@@ -376,12 +420,6 @@
             {% else %}
               {% set show_labels_option = true %}
             {% endif %}
-            <div class="control-group ">
-               <label class="control-label" for="chart_field_labels_{{ n }}">{{ _('Show data labels') }}</label>
-               <div class="controls ">
-                  <input id="chart_field_labels_{{ n }}" type="checkbox" name="chart_field_labels_{{ n }}" value="{{ show_labels }}"{% if show_labels=='false' %}{% else %}checked{% endif %} {{'' if show_labels_option else 'disabled'}}>
-               </div>
-            </div>
 
             {# Show legend #}
             {% if chart %}
@@ -403,12 +441,6 @@
             {% else %}
               {% set show_labels_as_percentages_option = false %}
             {% endif %}
-            <div class="control-group ">
-               <label class="control-label" for="chart_field_show_labels_as_percentages_{{ n }}">{{ _('Show labels as percentages') }}</label>
-               <div class="controls ">
-                  <input id="chart_field_show_labels_as_percentages_{{ n }}" type="checkbox" name="chart_field_show_labels_as_percentages_{{ n }}" {% if show_labels_as_percentages=='true' %}checked{% endif %} {{'' if show_labels_as_percentages_option else 'disabled'}}>
-               </div>
-            </div>
 
           </div>
         </div>
@@ -652,6 +684,8 @@
   <div style="width:65%;height:500px;">
       {% if chart %}
           {% set colors = chart.color %}
+          {% set seq_color = chart.seq_color %}
+          {% set color_type = chart.color_type %}
           {% set x_axis = chart.x_axis %}
           {% set y_axis = chart.y_axis %}
           {% set chart_type = chart.graph %}
@@ -684,10 +718,14 @@
           {% set dynamic_reference_factor = chart.dynamic_reference_factor %}
           {% set dynamic_reference_label = chart.dynamic_reference_label %}
           {% set plotly = chart.plotly %}
+          {% set bar_width = chart.bar_width %}
+          {% set donut_hole = chart.donut_hole %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
           colors=colors,
+          seq_color=seq_color,
+          color_type=color_type,
           x_axis=x_axis,
           y_axis=y_axis,
           chart_type=chart_type,
@@ -722,7 +760,9 @@
           dynamic_reference_type=dynamic_reference_type,
           dynamic_reference_factor=dynamic_reference_factor,
           dynamic_reference_label=dynamic_reference_label,
-          plotly = plotly
+          plotly = plotly,
+          bar_width = bar_width,
+          donut_hole = donut_hole
       %}
    </div>
 </div>

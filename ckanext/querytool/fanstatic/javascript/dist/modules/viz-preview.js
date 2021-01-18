@@ -1572,6 +1572,9 @@
                 };
                 var F = d ? "" : _ || m || "",
                     M = y;
+
+                
+                
                 if ("sbar" === this.options.chart_type && "shbar" === this.options.chart_type || g || this.sortData(y, r, i, n), O.legend = {
                         show: o
                     }, O.tooltip = {
@@ -1782,16 +1785,13 @@
                     }, ["bar", "hbar"].includes(this.options.chart_type) && (O.axis.y.padding.bottom = 0))
                 } ["line", "area", "spline", "scatter", "bscatter", "bar", "hbar", "sbar", "shbar"].includes(this.options.chart_type) && v && (O.axis.y.min = 0, O.axis.y.padding = O.axis.y.padding || {}, O.axis.y.padding.bottom = 0);
 
-                console.log('this is plotly');
-                console.log(this.options);
-                console.log(this.options.plotly);
                 var plotly = this.options.plotly;
                 var q = JSON.parse(JSON.stringify(plotly));
-                console.log(O);
 
                 var data = []
                 var columns = O.data['columns'];
                 var format = this.options.data_format;
+                
 
                 // if typeof plotly is string -> new chart
                 // if typeof plotly is object -> existing chart (user view or admin preview)
@@ -1801,10 +1801,10 @@
                     var format = this.options.data_format;
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
                             var trace = {
                                 x: x,
@@ -1824,19 +1824,21 @@
                         };
                         data.push(trace);
                     };
-                    console.log(data);
                 }
 
                 if ('pie' === this.options.chart_type) {
-                    for (a=0; a < columns.length; a++){
+                    var x = [];
+                    var y = [];
 
+                    for (a=0; a < columns.length; a++){
                             x.push(columns[a][0]);
                             y.push(columns[a][1]);
                     };
+
                     var trace = {
                         labels: x,
                         values: y,
-                            name: 'Color',
+                        name: 'Color',
                         type: 'pie',
                     };
                     data = [];
@@ -1844,21 +1846,25 @@
                 }
 
                 if ( 'donut' === this.options.chart_type) {
-                                    for (a=0; a < columns.length; a++){
+                    var x = [];
+                    var y = [];
 
-                            x.push(columns[a][0]);
-                            y.push(columns[a][1]);
+                    for (a=0; a < columns.length; a++){
+                        x.push(columns[a][0]);
+                        y.push(columns[a][1]);
                     };
 
                     var trace = {
                         labels: x,
                         values: y,
-                          hole: .4,
-                            name: 'Color',
+                        hole: this.options.donut_hole || .4,
+                        name: 'Color',
                         type: 'pie',
                     };
+
                     data = [];
                     data.push(trace);
+
                 }
 
                 if ( 'scatter' === this.options.chart_type) {
@@ -1866,7 +1872,6 @@
                         x: O.axis['x']['categories'],
                         y: columns[0].slice(1),
                         mode: "markers",
-
                         type: this.options.chart_type,
                     };
                     data = [];
@@ -1877,18 +1882,19 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
                                 name: name,
                                 width: 3,
-                                  line: {shape: 'spline'},
+                                line: {shape: 'spline'},
 
                             };
                             data.push(trace);
@@ -1908,54 +1914,108 @@
 
                 if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
-                    console.log(categories);
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
-                            var name = columns[tmp][0];
+                        if (columns.length == 1) {
+                            var name = columns[0][0];
+
                             var trace = {
-                                x: x,
-                                y: columns[tmp].slice(1),
+                                x: [this.options.x_axis],
+                                y: x,
                                 type: 'bar',
                                 name: name,
-                                width: 4,
+                                width: this.options.bar_width || 0.5,
                             };
                             data.push(trace);
+                        } else if ('sbar' === this.options.chart_type) {
+                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                                var name = columns[tmp][0];
+
+                                var trace = {
+                                    x: [this.options.x_axis],
+                                    y: [parseFloat(columns[tmp][1])],
+                                    type: 'bar',
+                                    name: name,
+                                    width: this.options.bar_width || 0.5,
+                                };
+                                data.push(trace);
+                            }
+                        } else {
+                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                                var name = columns[tmp][0];
+
+                                var trace = {
+                                    x: x,
+                                    y: columns[tmp].slice(1),
+                                    type: 'bar',
+                                    name: name,
+                                    width: this.options.bar_width || 0.5,
+                                };
+                                data.push(trace);
+                            }
                         }
                     } else {
                         var trace = {
                             x: categories,
                             y: columns[0].slice(1),
+                            width: this.options.bar_width || 0.5,
                             type: 'bar',
-                            width: 0.8,
                             name: 'Color',
                         };
                         data.push(trace);
                     };
-
                 };
 
-                if ( 'hbar' === this.options.chart_type) {
+                if ( 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
-                            var name = columns[tmp][0];
+                        if (columns.length == 1) {
+                            var name = columns[0][0];
+
                             var trace = {
-                                x: columns[tmp].slice(1),
-                                y: x,
+                                x: x,
+                                y: [this.options.x_axis],
                                 type: 'bar',
                                 name: name,
                                 orientation: 'h',
-                                width: 0.8,
+                                width: this.options.bar_width || 0.5,
                             };
                             data.push(trace);
+                        } else if ('shbar' === this.options.chart_type) {
+                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                                var name = columns[tmp][0];
+
+                                var trace = {
+                                    x: [parseFloat(columns[tmp][1])],
+                                    y: [this.options.x_axis],
+                                    type: 'bar',
+                                    name: name,
+                                    orientation: 'h',
+                                    width: this.options.bar_width || 0.5,
+                                };
+                                data.push(trace);
+                            }
+                        } else {
+                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                                var name = columns[tmp][0];
+
+                                var trace = {
+                                    x: columns[tmp].slice(1),
+                                    y: x,
+                                    type: 'bar',
+                                    name: name,
+                                    orientation: 'h',
+                                    width: this.options.bar_width || 0.5,
+                                };
+                                data.push(trace);
+                            }
                         }
                     } else {
                         var trace = {
@@ -1964,46 +2024,42 @@
                             type: 'bar',
                             name: 'Color',
                             orientation: 'h',
-                            width: 0.8,
+                            width: this.options.bar_width || 0.5,
                         };
                         data.push(trace);
                     };
-
                 };
 
                 if ( 'area' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[0].slice(1);
+                        var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
-                        for (tmp=1; tmp < columns.length; tmp++){
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
                                 name: name,
-                                fill: 'tozeroy',
-
-                                orientation: 'h'
+                                fill: 'tozeroy'
                             };
                             data.push(trace);
-                        }
+                        };
                     } else {
-                        console.log ('else')
                         var trace = {
                             x: categories,
-                            fill: 'tozeroy',
-                            name: 'Color',
                             y: columns[0].slice(1),
+                            name: columns[0][0],
                             type: 'scatter',
+                            fill: 'tozeroy'
                         };
                         data.push(trace);
                     };
-
-                };
+                }
 
                 if (typeof plotly === 'string' || plotly === true) {
 
@@ -2012,7 +2068,6 @@
                     if (typeof item_exists !== 'undefined' && item_exists !== null){
                         var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
                         var chart_plotly = document.getElementById("chart_field_plotly_" + item_no);
-                        console.log(chart_plotly);
 
                         var len_data = data.length;
                         var tmp ;
@@ -2028,28 +2083,26 @@
 
                                 if (chart_field_plotly_value) {
                                     // there is a plotly value in the input field
-                                    console.log('we have a plotly value for color in html');
                                     var color_tmp = document.querySelectorAll('[data-target='+c+']');
 
                                     if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
-                                        var new_color = color.split(": ")[1].slice(0, -1);
-                                        if (new_color.includes('none')){
-                                            new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                        if (color){
+                                            var new_color = color.split(": ")[1].slice(0, -1);
+                                            if (new_color.includes('none')){
+                                                new_color = new_color.substring(0, new_color.indexOf(" none"));
+                                            }
                                         }
                                         d['marker'] = {'color': new_color};
                                     } else {
                                         d['marker'] = {'color': 'darkseagreen'};
                                     }
                                 } else {
-                                    console.log('we DONT have a plotly value for color in html');
                                     var color_id = "chart_field_color_" + item_no;
                                     var color_tmp = document.querySelectorAll('[data-target=' + color_id + ']');
-                                    console.log(color_tmp);
 
                                     if (color_tmp['length'] >= 1){
                                         var color = color_tmp[0].style.cssText;
-                                        console.log(color);
                                         // check type and do the conditions according to that
 
                                         if (typeof color === 'undefined' || color === ''){
@@ -2092,7 +2145,6 @@
                         var elementExists = document.getElementById(c);
 
                         if (elementExists) {
-                            console.log('element exists!');
                             elementExists.parentElement.remove();
 
                             var newcontent = document.createElement('div');
@@ -2111,8 +2163,6 @@
                             }
 
                         } else {
-                            console.log('elem doesnt exist');
-                            console.log(d['marker']['color']);
 
                             var newcontent = document.createElement('div');
                             var html = '';
@@ -2143,9 +2193,7 @@
                     }
                     }
                 } else {
-                    console.log('Existing chart');
                     var item_exists = this.el.closest(".chart_field").attr('id');
-                    console.log(item_exists);
 
                     if (typeof item_exists !== 'undefined' && item_exists !== null){
                        var item_no = this.el.closest(".chart_field").attr('id').split("_").pop();
@@ -2191,13 +2239,150 @@
                     xaxis: {
                         tickformat: format,
                         automargin: true,
-                        title: this.options.x_axis,
+                        title: '',
                         tickangle: this.options.x_text_rotate,
+                        tickmode:"auto",
+                        nticks:this.options.x_tick_culling_max
                     },
                     yaxis: {
                         tickformat: f,
                         automargin: true,
                         tickangle: this.options.y_text_rotate,
+                    }
+                }
+                if (["sbar", "shbar"].includes(this.options.chart_type)) {
+                    base_info.barmode = 'stack'
+                }
+
+                if (!["donut", "pie"].includes(this.options.chart_type)) {
+                    if (!base_info.shapes) {
+                        base_info.shapes = []
+                    }
+                    if (!base_info.annotations) {
+                        base_info.annotations = []
+                    }
+
+                    var dynamic_ref_hovertext = (this.dynamic_reference_value !== null) ?
+                                                 this.dynamic_reference_value.toLocaleString() :
+                                                 this.dynamic_reference_value
+                    var static_ref_hovertext = (this.static_reference_value !== null) ?
+                                                this.static_reference_value.toLocaleString() :
+                                                this.static_reference_value
+                    var dynamic_ref_text = `<b>${(typeof this.options.dynamic_reference_label === 'boolean' ||
+                                             this.options.dynamic_reference_label.length === 0 ?
+                                             this.options.dynamic_reference_type : this.options.dynamic_reference_label)}</b>`
+                    var static_ref_text = `<b>${(typeof this.options.static_reference_label === 'boolean' ||
+                                            this.options.static_reference_label.length === 0 ?
+                                            'Reference' : this.options.static_reference_label)}</b>`
+
+                    if (['hbar', 'shbar'].includes(this.options.chart_type)) {
+                        if (dynamic_ref_hovertext) {
+                            base_info.annotations.push({
+                                showarrow: false,
+                                yref: 'paper',
+                                text: dynamic_ref_text,
+                                hovertext: dynamic_ref_hovertext,
+                                x: this.dynamic_reference_value,
+                                xanchor: 'left',
+                                y: 0
+                            })
+                            addShapes.call(this, 'dynamic')
+                        }
+                        if (static_ref_hovertext) {
+                            base_info.annotations.push({
+                                showarrow: false,
+                                yref: 'paper',
+                                text: static_ref_text,
+                                hovertext: static_ref_hovertext,
+                                x: this.static_reference_value,
+                                xanchor: 'left',
+                                y: 0
+                            })
+                            addShapes.call(this, 'static')
+                        }
+                        function addShapes (reference_type) {
+                            if (reference_type === 'dynamic') {
+                                base_info.shapes.push({
+                                    type: 'line',
+                                    yref: 'paper',
+                                    x0: this.dynamic_reference_value,
+                                    y0: 1,
+                                    x1: this.dynamic_reference_value,
+                                    y1: 0,
+                                    line: {
+                                        color: 'black',
+                                        width: 1
+                                    }
+                                })
+                            } else {
+                                base_info.shapes.push({
+                                    type: 'line',
+                                    yref: 'paper',
+                                    x0: this.static_reference_value,
+                                    y0: 1,
+                                    x1: this.static_reference_value,
+                                    y1: 0,
+                                    line: {
+                                        color: 'black',
+                                        width: 1
+                                    }
+                                })
+                            }
+                        }
+                    } else {
+                        if (dynamic_ref_hovertext) {
+                            base_info.annotations.push({
+                                showarrow: false,
+                                xref: 'paper',
+                                text: dynamic_ref_text,
+                                hovertext: dynamic_ref_hovertext,
+                                x: 0,
+                                yanchor: 'bottom',
+                                y: this.dynamic_reference_value
+                            })
+                            addShapes.call(this, 'dynamic')
+                        }
+                        if (static_ref_hovertext) {
+                            base_info.annotations.push({
+                                showarrow: false,
+                                xref: 'paper',
+                                text: static_ref_text,
+                                hovertext: static_ref_hovertext,
+                                x: 0,
+                                yanchor: 'bottom',
+                                y: this.static_reference_value
+                            })
+                            addShapes.call(this, 'static')
+                        }
+                        function addShapes (reference_type) {
+                            if (reference_type === 'dynamic') {
+                                base_info.shapes.push({
+                                    type: 'line',
+                                    xref: 'paper',
+                                    x0: 0,
+                                    y0: this.dynamic_reference_value,
+                                    x1: 1,
+                                    y1: this.dynamic_reference_value,
+                                    line: {
+                                        color: 'black',
+                                        width: 1
+                                    }
+                                })
+                            } else {
+                                base_info.shapes.push({
+                                    type: 'line',
+                                    xref: 'paper',
+                                    x0: 0,
+                                    y0: this.static_reference_value,
+                                    x1: 1,
+                                    y1: this.static_reference_value,
+                                    line: {
+                                        color: 'black',
+                                        width: 1
+                                    }
+                                })
+                            }
+                        }
                     }
                 }
 
@@ -2209,12 +2394,118 @@
                     base_info.yaxis.rangemode = "tozero"
                 }
 
+//                if (this.options.chart_type === 'bar') {
+//                    base_info.barmode = 'group'
+//                }
+
+                //Experimental: Remove Numbers from the items 1. , 2. etc
+                if(data){
+                    data.forEach(function(record) {
+                        var subData = record.x;
+
+                        if(subData && subData.length > 0) {
+                            subData.forEach(function(item, index){
+                              if (typeof item !== 'number'){
+                                  item = item.replace(/^\d{1,2}\./, '');
+                                  record.x[index] = item;
+                              }
+                            });
+                        }
+
+                    });
+                }
+
+                
+                /**** Sequential Colors ******/
+                // Returns a single rgb color interpolation between given rgb color
+                function interpolateColor(color1, color2, factor) {
+                    if (arguments.length < 3) { 
+                        factor = 0.5; 
+                    }
+                    var result = color1.slice();
+                    for (var i = 0; i < 3; i++) {
+                        result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
+                    }
+                    return result;
+                };
+
+                // My function to interpolate between two colors completely, returning an array
+                function interpolateColors(color1, color2, steps) {
+                    var stepFactor = 1 / (steps - 1),
+                        interpolatedColorArray = [];
+
+                    color1 = color1.match(/\d+/g).map(Number);
+                    color2 = color2.match(/\d+/g).map(Number);
+
+                    for(var i = 0; i < steps; i++) {
+                        var color_ = interpolateColor(color1, color2, stepFactor * i);
+
+                        var new_color_ = "rgba("+color_[0]+","+color_[1]+","+color_[2]+",1)";
+                        interpolatedColorArray.push(new_color_);
+                    }
+
+                    return interpolatedColorArray;
+                }
+
+                function hexToRgb(hex) {
+                    var arrBuff = new ArrayBuffer(4);
+                    var vw = new DataView(arrBuff);
+                    hex = hex.replace(/[^0-9A-F]/gi, '');
+                    vw.setUint32(0,parseInt(hex, 16),false);
+                    var arrByte = new Uint8Array(arrBuff);
+
+                    return arrByte[1] + "," + arrByte[2] + "," + arrByte[3];
+                }
+
+                var colorpicker_selection = document.getElementById('color_type');
+
+                if (this.options.color_type == 2 || (colorpicker_selection !== null && [null, '2'].includes(colorpicker_selection.value)) && !['donut', 'pie'].includes(this.options.chart_type)) {
+                    var steps = 0;
+                    var base_sequential_colors = this.options.seq_color.split(',');
+
+                    for (i = 0; i < data.length; i++) {
+                        if (['scatter'].includes(this.options.chart_type)) {
+                            var steps = Math.max(steps, data[i].y.length);
+                        } else {
+                            var steps = Math.max(steps, data[i].x.length);
+                        }
+                    }
+
+                    steps = steps * data.length
+
+                    for (i = 0; i < data.length; i++) {
+                        var sequential_colors = interpolateColors(hexToRgb(base_sequential_colors[0]), hexToRgb(base_sequential_colors[1]), steps);
+                        var sequential_colors_section = [];
+
+                        for (j = Math.round((sequential_colors.length / data.length) * i);
+                             j < Math.round((sequential_colors.length / data.length) * (i + 1)) && sequential_colors.length; j++) {
+                            sequential_colors_section.push(sequential_colors[j]);
+                        }
+
+                        if (!"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])) {
+                            data[i].marker = {'color': sequential_colors_section};
+                        } else {
+                            data[i].marker = {'color': interpolateColors(hexToRgb(base_sequential_colors[0]), hexToRgb(base_sequential_colors[1]), 2)};
+                        }
+
+                    }
+                }
+
+
+                //console.log(data);
+                console.log(O);
+                console.log(base_info); 
+                console.log(data)
+
+                console.log('Generate plotly')
                 Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
                 var t = this.el.closest(".chart_field"),
                     e = t.find("[name*=chart_field_graph_]").val(),
                     n = t.find("[name*=chart_field_color_]").val(),
+                    nn = t.find("[name*=chart_field_seq_color_]").val(),
+                    nnn = t.find("[name*=chart_field_color_type_]").val(),
                     i = t.find("input[name*=chart_field_chart_padding_left_]").val(),
                     r = t.find("input[name*=chart_field_chart_padding_bottom_]").val(),
                     o = t.find("[name*=chart_field_axis_x_]").val(),
@@ -2245,11 +2536,15 @@
                     F = t.find("input[name*=chart_field_dynamic_reference_label_]").val(),
                     M = $("#choose_y_axis_column option:selected").text(),
                     I = t.find("[name*=chart_field_show_labels_as_percentages_]").is(":checked"),
-                    plotly = t.find("input[name*=chart_field_plotly_]").val();
-                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly) return this.options.colors = n, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, void this.createChart(this.fetched_data);
-                this.options.colors = n, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly;
+                    plotly = t.find("input[name*=chart_field_plotly_]").val(),
+                    bar_width = t.find("input[name*=chart_field_bar_width_]").val(),
+                    donut_hole = t.find("input[name*=chart_field_donut_hole_]").val();
+                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, void this.createChart(this.fetched_data);
+                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole;
                 var A = this.create_sql();
                 this.get_resource_datа(A)
+
+                t.find("[name*=chart_field_graph_]").change();
             },
             deleteChart: function() {
                 this.el.closest(".chart_field").remove()
@@ -2258,6 +2553,11 @@
                 this.sandbox.unsubscribe("querytool:updateCharts", this.updateChart.bind(this))
             },
             sortData: function(t, e, n, i) {
+                
+                e.forEach(function(t) {
+                    isNaN(t[i]) && (t[i] = t[i].replace(/^\d{1,2}\./, ""))
+                })
+
                 "asc" === t ? e.sort(function(t, e) {
                     return t[n] - e[n]
                 }) : "desc" === t ? (e.sort(function(t, e) {

@@ -365,6 +365,10 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_axis_y_{}'.format(id))
                     visualization['color'] = \
                         data.get('chart_field_color_{}'.format(id))
+                    visualization['color_type'] = \
+                        data.get('chart_field_color_type_{}'.format(id))
+                    visualization['seq_color'] = \
+                        data.get('chart_field_seq_color_{}'.format(id))
                     visualization['title'] = \
                         data.get('chart_field_title_{}'.format(id))
                     visualization['x_text_rotate'] = \
@@ -406,6 +410,10 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_desc_{}'.format(id))
                     visualization['plotly'] = \
                         data.get('chart_field_plotly_{}'.format(id))
+                    visualization['bar_width'] = \
+                        data.get('chart_field_bar_width_{}'.format(id))
+                    visualization['donut_hole'] = \
+                        data.get('chart_field_donut_hole_{}'.format(id))
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
                         visualization['x_text_multiline'] = 'true'
                     else:
