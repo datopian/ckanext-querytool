@@ -1931,7 +1931,7 @@
                             };
                             data.push(trace);
                         } else if ('sbar' === this.options.chart_type) {
-                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                            for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
                                 var trace = {
@@ -1989,7 +1989,7 @@
                             };
                             data.push(trace);
                         } else if ('shbar' === this.options.chart_type) {
-                            for (tmp=0; tmp < columns.length - 1; tmp++){
+                            for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
                                 var trace = {
