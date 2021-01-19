@@ -2247,6 +2247,7 @@
                     yaxis: {
                         tickformat: f,
                         automargin: true,
+                        hoverformat: format,
                         tickangle: this.options.y_text_rotate,
                     }
                 }
@@ -2255,6 +2256,8 @@
                 }
 
                 if (!["donut", "pie"].includes(this.options.chart_type)) {
+                    const formatter = d3.format(format)
+
                     if (!base_info.shapes) {
                         base_info.shapes = []
                     }
@@ -2262,12 +2265,8 @@
                         base_info.annotations = []
                     }
 
-                    var dynamic_ref_hovertext = (this.dynamic_reference_value !== null) ?
-                                                 this.dynamic_reference_value.toLocaleString() :
-                                                 this.dynamic_reference_value
-                    var static_ref_hovertext = (this.static_reference_value !== null) ?
-                                                this.static_reference_value.toLocaleString() :
-                                                this.static_reference_value
+                    var dynamic_ref_hovertext = (this.dynamic_reference_value !== null) ? formatter(this.dynamic_reference_value) : this.dynamic_reference_value
+                    var static_ref_hovertext = (this.static_reference_value !== null) ? formatter(this.static_reference_value) : this.static_reference_value
                     var dynamic_ref_text = `<b>${(typeof this.options.dynamic_reference_label === 'boolean' ||
                                              this.options.dynamic_reference_label.length === 0 ?
                                              this.options.dynamic_reference_type : this.options.dynamic_reference_label)}</b>`
@@ -2282,6 +2281,7 @@
                                 yref: 'paper',
                                 text: dynamic_ref_text,
                                 hovertext: dynamic_ref_hovertext,
+                                bgcolor: "rgb(255,255,255)",
                                 x: this.dynamic_reference_value,
                                 xanchor: 'left',
                                 y: 0
@@ -2294,6 +2294,7 @@
                                 yref: 'paper',
                                 text: static_ref_text,
                                 hovertext: static_ref_hovertext,
+                                bgcolor: "rgb(255,255,255)",
                                 x: this.static_reference_value,
                                 xanchor: 'left',
                                 y: 0
@@ -2336,6 +2337,7 @@
                                 xref: 'paper',
                                 text: dynamic_ref_text,
                                 hovertext: dynamic_ref_hovertext,
+                                bgcolor: "rgb(255,255,255)",
                                 x: 0,
                                 yanchor: 'bottom',
                                 y: this.dynamic_reference_value
@@ -2348,6 +2350,7 @@
                                 xref: 'paper',
                                 text: static_ref_text,
                                 hovertext: static_ref_hovertext,
+                                bgcolor: "rgb(255,255,255)",
                                 x: 0,
                                 yanchor: 'bottom',
                                 y: this.static_reference_value
@@ -2498,7 +2501,7 @@
                 console.log(data)
 
                 console.log('Generate plotly')
-                Plotly.newPlot(this.el[0], data, base_info);
+                Plotly.newPlot(this.el[0], data, base_info, {editable: true});
             },
             updateChart: function() {
                 var t = this.el.closest(".chart_field"),
