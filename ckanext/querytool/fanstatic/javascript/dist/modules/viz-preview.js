@@ -2501,7 +2501,7 @@
                 console.log(data)
 
                 console.log('Generate plotly')
-                Plotly.newPlot(this.el[0], data, base_info, {editable: true});
+                Plotly.newPlot(this.el[0], data, base_info);
             },
             updateChart: function() {
                 var t = this.el.closest(".chart_field"),
