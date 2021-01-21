@@ -299,8 +299,10 @@
             data_format = item.data_format,
             filter_name=item.filter_name,
             filter_value=item.filter_value,
-            table_title = item.title
+            table_title = item.title,
+            info_query_filters =  querytool.public_main_filters
           %}
+
         {% endif %}
         <div class='additional_desc'>{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</div>
         <p class="clearfix"></p>
