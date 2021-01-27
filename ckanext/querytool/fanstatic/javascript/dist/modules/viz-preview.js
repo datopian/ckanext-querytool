@@ -1811,7 +1811,7 @@
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
                                 name: name,
-                                width: 3
+                                line: {width: 4}
                             };
                             data.push(trace);
                         };
@@ -1821,6 +1821,7 @@
                             y: columns[0].slice(1),
                             name: columns[0][0],
                             type: 'scatter',
+                            line: {width: 4}
                         };
                         data.push(trace);
                     };
@@ -1894,7 +1895,10 @@
                                 type: 'scatter',
                                 name: name,
                                 width: 3,
-                                line: {shape: 'spline'},
+                                line: {
+                                  shape: 'spline',
+                                  width: 4
+                                }
 
                             };
                             data.push(trace);
@@ -1906,7 +1910,10 @@
                             name: columns[0][0],
                             type: 'scatter',
                             name: 'Color',
-                            line: {shape: 'spline'},
+                            line: {
+                              shape: 'spline',
+                              width: 4
+                            }
                         };
                         data.push(trace);
                     };
@@ -2242,15 +2249,22 @@
                         title: '',
                         tickangle: this.options.x_text_rotate,
                         tickmode:"auto",
-                        nticks:this.options.x_tick_culling_max
+                        nticks:this.options.x_tick_culling_max,
+                        tickfont: {
+                            size: 14,
+                        }
                     },
                     yaxis: {
                         tickformat: f,
                         automargin: true,
                         hoverformat: format,
                         tickangle: this.options.y_text_rotate,
+                        tickfont: {
+                            size: 14,
+                        }
                     }
                 }
+
                 if (["sbar", "shbar"].includes(this.options.chart_type)) {
                     base_info.barmode = 'stack'
                 }
