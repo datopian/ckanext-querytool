@@ -1811,7 +1811,7 @@
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
                                 name: name,
-                                width: 3
+                                line: {"width":4}
                             };
                             data.push(trace);
                         };
@@ -1821,6 +1821,7 @@
                             y: columns[0].slice(1),
                             name: columns[0][0],
                             type: 'scatter',
+                            line: {"width":4}
                         };
                         data.push(trace);
                     };
@@ -2256,11 +2257,6 @@
                             size: 14,
                         }
                     }
-                }
-
-                if("line" === this.options.chart_type) {
-                    data[0]["line"] = 4
-                    data[0].line = {"width":4};
                 }
 
                 if (["sbar", "shbar"].includes(this.options.chart_type)) {
