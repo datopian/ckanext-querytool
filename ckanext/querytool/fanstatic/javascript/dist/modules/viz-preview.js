@@ -1811,7 +1811,7 @@
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
                                 name: name,
-                                line: {"width":4}
+                                line: {width: 4}
                             };
                             data.push(trace);
                         };
@@ -1821,7 +1821,7 @@
                             y: columns[0].slice(1),
                             name: columns[0][0],
                             type: 'scatter',
-                            line: {"width":4}
+                            line: {width: 4}
                         };
                         data.push(trace);
                     };
@@ -1895,7 +1895,10 @@
                                 type: 'scatter',
                                 name: name,
                                 width: 3,
-                                line: {shape: 'spline'},
+                                line: {
+                                  shape: 'spline',
+                                  width: 4
+                                }
 
                             };
                             data.push(trace);
@@ -1907,7 +1910,10 @@
                             name: columns[0][0],
                             type: 'scatter',
                             name: 'Color',
-                            line: {shape: 'spline'},
+                            line: {
+                              shape: 'spline',
+                              width: 4
+                            }
                         };
                         data.push(trace);
                     };
