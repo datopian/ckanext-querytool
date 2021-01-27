@@ -2242,15 +2242,27 @@
                         title: '',
                         tickangle: this.options.x_text_rotate,
                         tickmode:"auto",
-                        nticks:this.options.x_tick_culling_max
+                        nticks:this.options.x_tick_culling_max,
+                        tickfont: {
+                            size: 14,
+                        }
                     },
                     yaxis: {
                         tickformat: f,
                         automargin: true,
                         hoverformat: format,
                         tickangle: this.options.y_text_rotate,
+                        tickfont: {
+                            size: 14,
+                        }
                     }
                 }
+
+                if("line" === this.options.chart_type) {
+                    data[0]["line"] = 4
+                    data[0].line = {"width":4};
+                }
+
                 if (["sbar", "shbar"].includes(this.options.chart_type)) {
                     base_info.barmode = 'stack'
                 }
