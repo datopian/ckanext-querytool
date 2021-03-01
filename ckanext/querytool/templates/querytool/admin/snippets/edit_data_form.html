@@ -30,7 +30,7 @@ Example usage:
 
   <legend>{{ _('Basic info') }}</legend>
 
-  {{ form.input('title', id='field-title', label=_('Save As'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of the query tool'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
 
   {% set prefix = h.url_for('querytool_public_read', name= '') %}
   {% set domain = h.url_for('querytool_public_read', name= '') %}
@@ -39,14 +39,14 @@ Example usage:
 
   {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-querytool'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
 
-  {{ form.markdown('description', id='field-description', label=_('Display Title and Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
+  {{ form.markdown('description', id='field-description', label=_('Main Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
   {{ form.markdown('additional_description', label=_('Additional Description'), id='field-additional_description', placeholder=_('Additional description for the report...'), value=data.additional_description, error=errors.additional_description) }}
 
   {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
   {% set is_url = data.image_url and data.image_url.startswith('http') %}
 
   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload) }}
-  {{ form.input('icon', id='field-icon', label=_('Fontawsome Icon'), placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
+  {{ form.input('icon', id='field-icon', classes=['hidden'], label=_('Fontawsome Icon'), placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
 
   <div class="control-group">
     <label for="field-group" class="control-label">{{ _('Group') }}</label>
@@ -71,10 +71,8 @@ Example usage:
     </div>
   </div>
 
-  <legend>{{ _('Settings') }}</legend>
-
   <div class="control-group">
-    <label for="field-type" class="control-label">{{ _('Application Type') }}</label>
+    <label for="field-type" class="control-label">{{ _('Type') }}</label>
     <div class="controls">
       <select id="field-type" name="type">
         {% for option in [('main', _('Main')), ('related', _('Related'))] %}
