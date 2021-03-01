@@ -1547,7 +1547,7 @@
                     P = k ? {
                         name: k,
                         slug: j,
-                        value: N
+                        value: N.toString()
                     } : void 0;
                 w = this.renderChartTitle(w, {
                     measure: {
