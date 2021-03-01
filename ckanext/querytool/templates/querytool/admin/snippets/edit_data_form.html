@@ -135,6 +135,9 @@ Example usage:
   {% set columns = h.querytool_get_numeric_resource_columns(data.chart_resource) %}
   <div id="y-axis-columns-container" {% if columns | length == 0 %} style="display: none;" {% endif %}>
     <div id="y-axis-columns-results">
+
+      {{ form.input('selection_label', id='field-selection-label', label=_('Selection Label'), placeholder=data.selection_label or _('Displayed Measure'), value=data.selection_label, error=errors.selection_label) }}
+
       {% for column in columns %}
         {% set column_id = h.querytool_get_uuid() %}
         {% set measure = h.querytool_pick_first_by_attr_value(querytool.y_axis_columns, 'name', column) %}

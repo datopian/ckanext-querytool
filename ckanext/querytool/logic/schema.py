@@ -35,4 +35,5 @@ def querytool_schema():
         'icon': [ignore_missing, unicode],
         'additional_description': [ignore_missing, unicode],
         'image_url': [ignore_missing, unicode],
+        'selection_label': [ignore_missing, unicode],
     }

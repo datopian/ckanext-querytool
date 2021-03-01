@@ -240,6 +240,7 @@ class QueryToolController(base.BaseController):
                 json.dumps(y_axis_columns) if y_axis_columns else '')
             _querytool['owner_org'] = data['owner_org']
             _querytool['icon'] = data['icon']
+            _querytool['selection_label'] = data['selection_label']
 
             try:
                 junk = _get_action('querytool_update', _querytool)
