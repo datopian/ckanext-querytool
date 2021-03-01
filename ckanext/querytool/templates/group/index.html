@@ -16,7 +16,7 @@
   {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
   {% if h.check_access('querytool_update') %}
-    {% link_for _('Add New Application'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
+    {% link_for _('New Report'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
   {% endif %}
 {% endblock %}
 
