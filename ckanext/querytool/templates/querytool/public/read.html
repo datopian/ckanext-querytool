@@ -79,7 +79,7 @@
 
       <div class="filter-group-wrapper" style="border-top: 1px solid rgb(218, 218, 218);margin-top:10px;">
         <div class="filter-item" style="padding: 10px 20px; padding-bottom: 5px;">
-          <label for="{{querytool.name}}_y_axis_column">{{ _('Displayed Measure') }}</label>
+          <label for="{{querytool.name}}_y_axis_column">{{ querytool.selection_label or _('Displayed Measure') }}</label>
           {% if y_axis_columns|length == 1 %}
             <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
           {% else %}

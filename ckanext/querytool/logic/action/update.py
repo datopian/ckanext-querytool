@@ -25,6 +25,7 @@ def querytool_update(context, data_dict):
     :param map_resource
     :param chart_resource
     :param y_axis_columns
+    :param selection_label
     '''
 
     # we need the querytool name in the context for name validation
@@ -57,7 +58,7 @@ def querytool_update(context, data_dict):
     items = ['title', 'description', 'name', 'private', 'type', 'group',
              'dataset_name', 'owner_org', 'icon', 'image_url', 'image_display_url',
              'filters', 'sql_string', 'related_querytools',
-             'chart_resource', 'y_axis_columns', 'additional_description']
+             'chart_resource', 'y_axis_columns', 'additional_description', 'selection_label']
 
     dataset_name = data.get('dataset_name')
     dataset = _get_action('package_show')(context, {'id': dataset_name})
