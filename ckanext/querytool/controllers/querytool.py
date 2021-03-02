@@ -461,6 +461,8 @@ class QueryToolController(base.BaseController):
                                 data['chart_field_category_name_{}'.format(id)]
                     else:
                         visualization['category_name'] = ''
+                    visualization['column_width'] = \
+                        data.get('chart_field_column_width_{}'.format(id))
 
                     print data
 

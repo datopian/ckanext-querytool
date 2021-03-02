@@ -359,6 +359,15 @@
         </div>
         <div id="accordion_{{ chart_id }}_graph" class="accordion-body collapse">
           <div class="accordion-inner">
+            {{ chart }}
+
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_column_width_{{ n }}">{{ _('Column width') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_column_width_{{ n }}" type="text" name="chart_field_column_width_{{ n }}" value="{{ chart.column_width or '400' }}" placeholder="{{ chart.column_width }}">
+               </div>
+            </div>
+
             {# Data format #}
             {% set data_formats = h.queytool_get_charts_data_formats() %}
             {% if selected_chart_type in ['pie', 'donut'] %}
@@ -683,6 +692,7 @@
 
   <div style="width:65%;height:500px;">
       {% if chart %}
+          {{ chart }}
           {% set colors = chart.color %}
           {% set seq_color = chart.seq_color %}
           {% set color_type = chart.color_type %}
@@ -717,6 +727,7 @@
           {% set dynamic_reference_type = chart.dynamic_reference_type %}
           {% set dynamic_reference_factor = chart.dynamic_reference_factor %}
           {% set dynamic_reference_label = chart.dynamic_reference_label %}
+          {% set column_width = chart.column_width %}
           {% set plotly = chart.plotly %}
           {% set bar_width = chart.bar_width %}
           {% set donut_hole = chart.donut_hole %}
@@ -760,6 +771,7 @@
           dynamic_reference_type=dynamic_reference_type,
           dynamic_reference_factor=dynamic_reference_factor,
           dynamic_reference_label=dynamic_reference_label,
+          column_width = column_width,
           plotly = plotly,
           bar_width = bar_width,
           donut_hole = donut_hole
