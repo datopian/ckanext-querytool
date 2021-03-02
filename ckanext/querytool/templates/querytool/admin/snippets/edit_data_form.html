@@ -136,7 +136,9 @@ Example usage:
   <div id="y-axis-columns-container" {% if columns | length == 0 %} style="display: none;" {% endif %}>
     <div id="y-axis-columns-results">
 
-      {{ form.input('selection_label', id='field-selection-label', label=_('Selection Label'), placeholder=data.selection_label or _('Displayed Measure'), value=data.selection_label, error=errors.selection_label) }}
+      <div class="selection_label" style='margin-left:22px;'>
+        {{ form.input('selection_label', id='field-selection-label', label=_('Selection Label'), placeholder=data.selection_label or _('Displayed Measure'), value=data.selection_label, error=errors.selection_label) }}
+      </div>  
 
       {% for column in columns %}
         {% set column_id = h.querytool_get_uuid() %}
