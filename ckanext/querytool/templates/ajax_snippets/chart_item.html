@@ -359,8 +359,6 @@
         </div>
         <div id="accordion_{{ chart_id }}_graph" class="accordion-body collapse">
           <div class="accordion-inner">
-            {{ chart }}
-
             <div class="control-group ">
                <label class="control-label" for="chart_field_column_width_{{ n }}">{{ _('Column width') }}</label>
                <div class="controls ">
@@ -692,7 +690,6 @@
 
   <div style="width:65%;height:500px;">
       {% if chart %}
-          {{ chart }}
           {% set colors = chart.color %}
           {% set seq_color = chart.seq_color %}
           {% set color_type = chart.color_type %}
