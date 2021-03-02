@@ -2510,7 +2510,6 @@
 
 
                 //console.log(data);
-                console.log(this.options.column_width)
                 console.log(O);
                 console.log(base_info); 
                 console.log(data)
