@@ -359,12 +359,7 @@
         </div>
         <div id="accordion_{{ chart_id }}_graph" class="accordion-body collapse">
           <div class="accordion-inner">
-            <div class="control-group ">
-               <label class="control-label" for="chart_field_column_width_{{ n }}">{{ _('Column width') }}</label>
-               <div class="controls ">
-                  <input id="chart_field_column_width_{{ n }}" type="text" name="chart_field_column_width_{{ n }}" value="{{ chart.column_width or '400' }}" placeholder="{{ chart.column_width }}">
-               </div>
-            </div>
+            
 
             {# Data format #}
             {% set data_formats = h.queytool_get_charts_data_formats() %}

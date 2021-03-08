@@ -6,6 +6,16 @@
     <div class="item-wrapper">
       {{ form.markdown('text_box_description_' ~ n, id='text_box_description_' ~ n, label=_('Content'), placeholder=_('Description'), value=text_description) }}
 
+      <div class="control-group ">
+          <label class="control-label" for="chart_field_column_width_{{ n }}">{{ _('Column Width') }}</label>
+          <div class="controls ">
+            <select>
+              <option>Half</option>
+              <option>Full</option>
+            </select>
+          </div>
+      </div>
+
       <ul class="inline text-right chart-actions">
         <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
       </ul>
