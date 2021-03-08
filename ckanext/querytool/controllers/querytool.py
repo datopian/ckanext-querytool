@@ -527,9 +527,9 @@ class QueryToolController(base.BaseController):
                     map_item['map_color_scheme'] = \
                         data['map_color_scheme_{}'.format(id)]
                     map_item['size'] = \
-                        data['map_size_{}'.format(id)]
+                        data.get('map_size_{}'.format(id))
 
-                    if data['map_field_filter_name_{}'.format(id)]:
+                    if data.get('map_field_filter_name_{}'.format(id)):
                         map_item['filter_name'] = \
                             data['map_field_filter_name_{}'.format(id)]
                         map_item['filter_value'] = \
