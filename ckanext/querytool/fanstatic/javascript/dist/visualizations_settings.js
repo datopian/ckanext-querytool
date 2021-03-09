@@ -1451,8 +1451,9 @@
                         
                     } else if (e.context.id.indexOf("text_box") >= 0) {
                         var G = e.find("[id*=text_box_description_]"),
-                            J = e.find("[id*=text_box_size_]");
-                        e.attr("id", "text_box_" + i), G.attr("id", "text_box_description_" + i), G.attr("name", "text_box_description_" + i), J.attr("id", "text_box_size_" + i), J.attr("name", "text_box_size_" + i)
+                            J = e.find("[id*=text_box_size_]"),
+                            cw = e.find("[id*=text_box_column_width_]");
+                        e.attr("id", "text_box_" + i), G.attr("id", "text_box_description_" + i), G.attr("name", "text_box_description_" + i), J.attr("id", "text_box_size_" + i), J.attr("name", "text_box_size_" + i), cw.attr("id", "text_box_column_width_" + i), cw.attr("name", "text_box_column_width_" + i)
                     } else if (e.context.id.indexOf("break_line") >= 0) {
                         var G = e.find("[id*=line_break_desc]");
                         e.attr("id", "break_line_" + i), G.attr("id", "line_break_desc_" + i), G.attr("name", "line_break_desc_" + i)

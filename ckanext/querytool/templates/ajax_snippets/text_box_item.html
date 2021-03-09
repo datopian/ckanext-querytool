@@ -1,10 +1,13 @@
  {% import 'macros/form.html' as form %}
   {% if box %}
      {% set text_description = box.description %}
+     {% set column_width = box.column_width %}
   {% endif %}
   <div id="text_box_{{ n }}" class="item text-boxs-section text_box visualization-fields-section">
     <div class="item-wrapper">
+
       {{ form.markdown('text_box_description_' ~ n, id='text_box_description_' ~ n, label=_('Content'), placeholder=_('Description'), value=text_description) }}
+      {{ form.select('text_box_column_width_' ~ n, id='text_box_column_width_' ~ n, label=_('Column Width'), options=[{'name':'Half', 'value': 'Half'},{'name': 'Full', 'value': 'Full'}], selected=column_width) }}
 
       <ul class="inline text-right chart-actions">
         <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>

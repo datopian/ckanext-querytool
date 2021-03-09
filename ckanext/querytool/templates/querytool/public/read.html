@@ -158,6 +158,8 @@
       {% set measure_label = measure.alias or measure.name %}
       {% set count = 1 %}
       {% set sizeClass = "c-col-8" %}
+
+      <!-- Width of chart text -->
       
       {% for item in querytool.visualizations %}
         {% set chart_id = h.querytool_get_uuid() %}
@@ -165,6 +167,8 @@
         {% if count == 1 %}
           {% set sizeClass = 'c-col-8' %}
           {% set count = count + 1 %}
+        {% elif item.type == 'text_box' and item.column_width == 'Full' %}
+          {% set sizeClass = 'c-col-12' %}
         {% else %}
           {% set sizeClass = 'c-col-6' %}
         {% endif %}
@@ -228,6 +232,7 @@
             dynamic_reference_type = item.dynamic_reference_type,
             dynamic_reference_factor = item.dynamic_reference_factor,
             dynamic_reference_label = item.dynamic_reference_label,
+            column_width = item.column_width,
             plotly = item.plotly,
             bar_width = item.bar_width
           %}

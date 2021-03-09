@@ -473,6 +473,8 @@ class QueryToolController(base.BaseController):
                     text_box['order'] = int(id)
                     text_box['description'] = \
                         data['text_box_description_{}'.format(id)]
+                    text_box['column_width'] = \
+                        data.get('text_box_column_width_{}'.format(id), 'Half')
 
                     text_boxes.append(text_box)
 
