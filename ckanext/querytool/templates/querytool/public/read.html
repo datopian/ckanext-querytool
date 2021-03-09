@@ -160,7 +160,6 @@
       {% set sizeClass = "c-col-8" %}
 
       <!-- Width of chart text -->
-      {% set chart_width = 'full' %}
       
       {% for item in querytool.visualizations %}
         {% set chart_id = h.querytool_get_uuid() %}
@@ -168,7 +167,7 @@
         {% if count == 1 %}
           {% set sizeClass = 'c-col-8' %}
           {% set count = count + 1 %}
-        {% elif item.type == 'text_box' and chart_width == 'full' %}
+        {% elif item.type == 'text_box' and item.column_width == 'Full' %}
           {% set sizeClass = 'c-col-12' %}
         {% else %}
           {% set sizeClass = 'c-col-6' %}
