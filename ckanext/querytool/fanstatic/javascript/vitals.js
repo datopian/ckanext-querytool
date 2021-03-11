@@ -298,6 +298,14 @@ $(document).ready(function(){
     $("#add-visualization-btn").on('click',function(){
         setTimeout(function() { generateColorPicker(); generateColorPicker2(); }, 1000);
     })
+
+    //Scroll btn
+    $("#scrollBtn").click(function() {
+        $('html, body').animate({
+            scrollTop: $("#chart_2").offset().top
+        }, 1000);
+        $(this).hide()
+    });
   });
 
   $(document).ready(function(){

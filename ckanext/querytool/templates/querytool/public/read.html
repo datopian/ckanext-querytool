@@ -154,10 +154,13 @@
     </style>
     <!-- Visualizations container -->
     <div class="visualizations_">
+      <button type="button" id="scrollBtn">View more</button>
+
       {% set measure = h.querytool_pick_first_by_attr_value(h.querytool_parse_y_axis_columns(querytool.y_axis_columns), 'name', y_axis_selected, default={}) %}
       {% set measure_label = measure.alias or measure.name %}
       {% set count = 1 %}
       {% set sizeClass = "c-col-8" %}
+      {% set secondViz = "" %}
 
       <!-- Width of chart text -->
       
@@ -166,14 +169,21 @@
         
         {% if count == 1 %}
           {% set sizeClass = 'c-col-8' %}
-          {% set count = count + 1 %}
         {% elif item.type == 'text_box' and item.column_width == 'Full' %}
           {% set sizeClass = 'c-col-12' %}
         {% else %}
           {% set sizeClass = 'c-col-6' %}
         {% endif %}
 
-      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %} {% if item.type == 'break_line' %}break_line{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}">
+        {% if count == 2 %}
+          {% set secondViz = "chart_2" %}
+        {% else %}
+          {% set secondViz = "" %}
+        {% endif %}
+
+        {% set count = count + 1 %}
+
+      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %} {% if item.type == 'break_line' %}break_line{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}" id="{{ secondViz }}">
         {% if item.type != 'table' %}
           <h3 id="item-title-{{chart_id}}">{{ item.title }}</h3>
         {% endif %}
