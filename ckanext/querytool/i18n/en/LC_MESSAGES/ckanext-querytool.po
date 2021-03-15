@@ -780,6 +780,14 @@ msgstr ""
 "open data, such as: CKAN hosting, CKAN technical support, custom open "
 "data website and CKAN extension development.</p> </p> "
 
+#: ckanext/querytool/templates/group/index.html:24
+#: ckanext/querytool/templates/group/index.html:27
+#: ckanext/querytool/templates/group/read_base.html:6
+#: ckanext/querytool/templates/group/report_index.html:24
+#: ckanext/querytool/templates/group/report_index.html:28
+msgid "Reports"
+msgstr "Reports"
+
 #: ckanext/querytool/templates/macros/form.html:126
 #, python-format
 msgid ""

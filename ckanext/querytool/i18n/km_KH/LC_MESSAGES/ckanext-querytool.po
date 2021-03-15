@@ -778,6 +778,14 @@ msgstr ""
 "ដើម្បីផ្សព្វផ្សាយទិន្នន័យបើកចំហរដូចជាការបង្ហោះ CKAN ការគាំទ្របច្ចេកទេស CKAN "
 "គេហទំព័រទិន្នន័យបើកចំហរផ្ទាល់ខ្លួន និង ការអភិវឌ្ឍextension សម្រាប់ CKAN។ </p> </p> "
 
+#: ckanext/querytool/templates/group/index.html:24
+#: ckanext/querytool/templates/group/index.html:27
+#: ckanext/querytool/templates/group/read_base.html:6
+#: ckanext/querytool/templates/group/report_index.html:24
+#: ckanext/querytool/templates/group/report_index.html:28
+msgid "Reports"
+msgstr "របាយការណ៍"
+
 #: ckanext/querytool/templates/macros/form.html:126
 #, python-format
 msgid ""

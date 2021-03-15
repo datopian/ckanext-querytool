@@ -758,6 +758,14 @@ msgstr ""
 "发布开放数据提供服务和产品，例如：CKAN托管，CKAN技术支持，自定义开放数据网站"
 "和CKAN扩展开发。</p> </p> "
 
+#: ckanext/querytool/templates/group/index.html:24
+#: ckanext/querytool/templates/group/index.html:27
+#: ckanext/querytool/templates/group/read_base.html:6
+#: ckanext/querytool/templates/group/report_index.html:24
+#: ckanext/querytool/templates/group/report_index.html:28
+msgid "Reports"
+msgstr "报告书"
+
 #: ckanext/querytool/templates/macros/form.html:126
 #, python-format
 msgid ""
