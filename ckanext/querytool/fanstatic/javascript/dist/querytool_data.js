@@ -1028,9 +1028,9 @@
                             }),
                             r = ['<div class="control-group control-checkbox-group">', '<input name="y_axis_name_' + e + '" id="y_axis_name_' + e + '" type="checkbox" value="' + t + '" />', '<label class="control-label" for="y_axis_name_' + e + '">' + t + "</label>", '<input name="y_axis_alias_' + e + '" id="y_axis_alias_' + e + '" type="text" placeholder="Optional label" value="">', "</div>"].join("");
                         f.append(r)
-                    })) : (l.css("display", "block"), l.text(t("No columns retrieved."))) : (l.css("display", "block"), l.text(t("An error occured while getting columns.")))
+                    })) : (l.css("display", "block"), l.text(t("No columns retrieved."))) : (l.css("display", "block"), l.text(t("An error occurred while getting columns.")))
                 }).error(function(n) {
-                    l.css("display", "block"), l.text(t("An error occured while getting columns."))
+                    l.css("display", "block"), l.text(t("An error occurred while getting columns."))
                 })
             });
             var v = $("#add-filter-button");
@@ -1082,7 +1082,7 @@
                     }).done(function(t) {
                         $("#related_querytools").append(t), o(i)
                     })
-                } else alert(t("Maximum number of allowed related queries reached."))
+                } else alert(t("Maximum number of allowed related reports reached."))
             })
         })
     }(ckan.i18n.ngettext, $)

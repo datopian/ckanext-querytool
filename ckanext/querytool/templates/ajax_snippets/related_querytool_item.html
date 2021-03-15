@@ -15,10 +15,10 @@
           </a>
         </li>
       </ul>
-    <label for="field-related-querytool_{{ n }}" class="control-label">{{ _('Related Application')  }}</label>
+    <label for="field-related-querytool_{{ n }}" class="control-label">{{ _('Related Report')  }}</label>
     <div class="controls">
       <select id="field-related-querytool_{{ n }}" name="related_querytool_{{ n }}" required="required">
-          <option value="">&mdash; {{ _('Select Application') }} &mdash;</option>
+          <option value="">&mdash; {{ _('Select Report') }} &mdash;</option>
           {% if querytool_name %}
             <option value="{{ querytool_name }}" selected>{{ querytool_name }}</option>
           {% endif %}
