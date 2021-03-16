@@ -1080,6 +1080,10 @@ msgstr "សូមស្វាគមន៍"
 msgid "See tools"
 msgstr "មើលឧបករណ៍"
 
+#: ckanext/querytool/templates/querytool/public/base_main.html:91
+msgid "See Tools"
+msgstr "មើលឧបករណ៍"
+
 #: ckanext/querytool/templates/querytool/public/base_main.html:112
 msgid "See all tools"
 msgstr "មើលឧបករណ៍ទាំងអស់"

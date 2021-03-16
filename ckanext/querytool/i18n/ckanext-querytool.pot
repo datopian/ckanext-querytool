@@ -1029,6 +1029,10 @@ msgstr ""
 msgid "See tools"
 msgstr ""
 
+#: ckanext/querytool/templates/querytool/public/base_main.html:91
+msgid "See Tools"
+msgstr ""
+
 #: ckanext/querytool/templates/querytool/public/base_main.html:112
 msgid "See all tools"
 msgstr ""

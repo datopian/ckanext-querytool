@@ -1060,6 +1060,10 @@ msgstr "欢迎"
 msgid "See tools"
 msgstr "查看工具"
 
+#: ckanext/querytool/templates/querytool/public/base_main.html:91
+msgid "See Tools"
+msgstr "查看工具"
+
 #: ckanext/querytool/templates/querytool/public/base_main.html:112
 msgid "See all tools"
 msgstr "查看所有工具"

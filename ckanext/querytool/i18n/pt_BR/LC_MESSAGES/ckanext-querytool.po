@@ -1083,6 +1083,10 @@ msgstr "Bem vindo"
 msgid "See tools"
 msgstr "Ver ferramentas"
 
+#: ckanext/querytool/templates/querytool/public/base_main.html:91
+msgid "See Tools"
+msgstr "Ver ferramentas"
+
 #: ckanext/querytool/templates/querytool/public/base_main.html:112
 msgid "See all tools"
 msgstr "Ver todas as ferramentas"
