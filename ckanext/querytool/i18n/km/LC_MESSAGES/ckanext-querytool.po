@@ -337,6 +337,18 @@ msgstr "ជ្រើសរើសគូឡោន"
 msgid "Size"
 msgstr "ទំហំ"
 
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Column Width"
+msgstr "ទទឹងជួរឈរ"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Half"
+msgstr "ពាក់កណ្តាល"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Full"
+msgstr "ពេញ"
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:89
 #: ckanext/querytool/templates/ajax_snippets/filter_item.html:56
 msgid "Color"
@@ -353,8 +365,11 @@ msgid "Chart title"
 msgstr "ចំណងជើងតារាង"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:124
 msgid "Additional Description"
+msgstr "ការពិពណ៌នាបន្ថែម"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:124
+msgid "Additional description"
 msgstr "ការពិពណ៌នាបន្ថែម"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:125
@@ -673,7 +688,7 @@ msgstr ""
 "វាត្រូវបានបង្កើតឡើងដោយប្រើប្រាស់អាជ្ញាប័ណ្ណប្រភពបើកចំហរ ជាមួយនឹងតម្រូវការបច្ចេកវិទ្យាតិចតួចបំផុត។"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:22
-msgid "Using the platform"
+msgid "Using the Platform"
 msgstr "ការប្រើប្រាស់វេទិកា"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:24
@@ -785,6 +800,10 @@ msgstr ""
 #: ckanext/querytool/templates/group/report_index.html:28
 msgid "Reports"
 msgstr "របាយការណ៍"
+
+#: ckanext/querytool/templates/group/snippets/group_form.html:21
+msgid "Additional description of the group..."
+msgstr "ការពិពណ៌នាបន្ថែមនៃក្រុម"
 
 #: ckanext/querytool/templates/macros/form.html:126
 #, python-format
@@ -941,6 +960,10 @@ msgid ""
 "Start the first line with # to identify the publicly visible title. Add "
 "other optional text in a new line."
 msgstr "ប្រើពាក្យបញ្ជា markdown ដើម្បីកែសម្រួលអត្ថបទ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:43
+msgid "Additional description for the report..."
+msgstr "ការពិពណ៌នាបន្ថែមសម្រាប់របាយការណ៍"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Public Folder"
@@ -1100,6 +1123,10 @@ msgstr "រង្វាស់ដែលបង្ហាញឱ្យឃើញ"
 msgid "Download"
 msgstr "ទាញយក"
 
+#: ckanext/querytool/templates/querytool/public/read.html:157
+msgid "View more"
+msgstr "មើល​ច្រើន​ទៀត"
+
 #: ckanext/querytool/templates/querytool/public/read.html:130
 #: ckanext/querytool/templates/querytool/public/read.html:292
 msgid "Download image"
@@ -1156,3 +1183,388 @@ msgstr "ពណ៌តែមួយ"
 #: Added manually
 msgid "Diverging"
 msgstr "ការបង្វែរ"
+
+#: ckan/templates/admin/config.html:33
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This"
+" is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>About:</strong> This text will appear on this CKAN"
+" instances <a href=\"%(about_url)s\">about page</a>.</p> <p><strong>Intro "
+"Text:</strong> This text will appear on this CKAN instances <a "
+"href=\"%(home_url)s\">home page</a> as a welcome to visitors.</p> "
+"<p><strong>Custom CSS:</strong> This is a block of CSS that appears in "
+"<code>&lt;head&gt;</code> tag of every page. If you wish to customize the "
+"templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+"<p><strong>Homepage:</strong> This is for choosing a predefined layout for "
+"the modules that appear on your homepage.</p> "
+msgstr ""
+
+#: ckanext/querytool/templates/admin/config.html:9
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "Welcome Page Title"
+msgstr ""
+"ចំណងជើងទំព័រសូមស្វា "
+"គមន៍"
+
+#: ckanext/querytool/templates/admin/config.html:10
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "Welcome Page Description"
+msgstr ""
+
+###
+### CKAN core strings missing translation
+###
+
+#: ckan/templates/group/index.html:20 ckan/templates/group/read.html:16
+#: ckan/templates/organization/bulk_process.html:97
+#: ckan/templates/organization/index.html:20
+#: ckan/templates/organization/read.html:20
+#: ckan/templates/package/search.html:30
+#: ckan/templates/snippets/search_form.html:4
+#: ckan/templates/snippets/simple_search.html:10
+#: ckan/templates/snippets/sort_by.html:15
+#: ckanext/example_idatasetform/templates/package/search.html:13
+msgid "Name Ascending"
+msgstr "ឈ្មោះឡើង"
+
+#: ckan/templates/group/index.html:20 ckan/templates/group/read.html:17
+#: ckan/templates/organization/bulk_process.html:98
+#: ckan/templates/organization/index.html:20
+#: ckan/templates/organization/read.html:21
+#: ckan/templates/package/search.html:31
+#: ckan/templates/snippets/search_form.html:4
+#: ckan/templates/snippets/simple_search.html:10
+#: ckan/templates/snippets/sort_by.html:16
+#: ckanext/example_idatasetform/templates/package/search.html:14
+msgid "Name Descending"
+msgstr "ឈ្មោះចុះះ"
+
+#: ckan/templates/group/snippets/helper.html:4
+msgid "What are Groups?"
+msgstr "តើក្រុមជាអ្វី?"
+
+#: ckan/templates/group/snippets/helper.html:8
+msgid ""
+" You can use CKAN Groups to create and manage collections of datasets. This "
+"could be to catalogue datasets for a particular project or team, or on a "
+"particular theme, or as a very simple way to help people find and search "
+"your own published datasets. "
+msgstr ""
+" អ្នកអាចប្រើ CKAN "
+"ក្រុមដើម្បីបង្កើតនិងគ្រប់់ "
+"គ្រងការប្រមូលទិន្នន័យ។ "
+"នេះអាចជាការធ្វើតារាងទិ "
+"ន្នន័យសម្រាប់គម្រោងឬ "
+"ក្រុមជាក់លាក់មួយឬលើ "
+"ប្រធានបទជាក់លាក់មួយ "
+"ឬជាមធ្យោបាយសាមញ្ "
+"មួយដើម្បីជួយមនុស្សឱ្យ "
+"ស្វែងរកនិងស្វែងរកសំណុំ "
+"ទិន្នន័យដែលបានផ្សព្ "
+"ផ្សាយដោយខ្លួនឯង។ "
+
+#: ckan/templates/group/index.html:20
+msgid "Search groups..."
+msgstr "ស្វែងរកក្រុម"
+
+#: ckan/templates/header.html:117 ckan/templates/home/snippets/search.html:11
+#: ckan/templates/snippets/simple_search.html:5
+#: ckan/templates/user/snippets/user_search.html:6
+msgid "Search"
+msgstr "ស្វែងរក"
+
+#: ckan/templates/group/snippets/group_item.html:38
+#: ckan/templates/group/snippets/group_item.html:39
+msgid "View {name}"
+msgstr "មើល {name}"
+
+#: ckan/templates/group/snippets/group_item.html:32
+#: ckan/templates/organization/snippets/organization_item.html:31
+#: ckanext/example_theme_docs/v10_custom_snippet/templates/snippets/example_theme_most_popular_groups.html:23
+#: ckanext/example_theme_docs/v11_HTML_and_CSS/templates/snippets/example_theme_most_popular_groups.html:22
+msgid "{num} Dataset"
+msgid_plural "{num} Datasets"
+msgstr[0] "{num} សំណុំទិន្នន័យ"
+msgstr[1] "{num} សំណុំទិន្នន័យ"
+
+#: ckan/templates/group/snippets/group_item.html:34
+#: ckan/templates/organization/snippets/organization_item.html:33
+#: ckanext/example_theme_docs/v10_custom_snippet/templates/snippets/example_theme_most_popular_groups.html:25
+#: ckanext/example_theme_docs/v11_HTML_and_CSS/templates/snippets/example_theme_most_popular_groups.html:24
+msgid "0 Datasets"
+msgstr "0 សំណុំទិន្នន័យ"
+
+#: ckan/templates/package/snippets/resources_list.html:30
+msgid "This dataset has no data"
+msgstr "សំណុំទិន្នន័យនេះមិនមានទិន្នន័យទេ"
+
+#: ckan/templates/snippets/package_item.html:57
+msgid "This dataset has no description"
+msgstr "សំណុំទិន្នន័យនេះមិនមានការពិពណ៌នាទេ"
+
+#: ckan/templates/package/search.html:60
+#, python-format
+msgid ""
+" You can also access this registry using the %(api_link)s (see "
+"%(api_doc_link)s). "
+msgstr " អ្នកក៏អាចចូលប្រើបញ្ជីឈ្មោះនេះដោយប្រើ %(api_link)s (សូមមើល %(api_doc_link)s)"
+
+#: ckan/templates/footer.html:16
+msgid "CKAN Association"
+msgstr "សមាគម CKAN"
+
+#: ckan/templates/footer.html:24
+msgid ""
+"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" "
+"href=\"http://ckan.org\">CKAN</a>"
+msgstr ""
+"<strong>ឧបត្ថម្ភដោយ</strong> <a class=\"hide-text ckan-footer-logo\" "
+"href=\"http://ckan.org\">CKAN</a>"
+
+#: ckan/templates/footer.html:9
+msgid "About {0}"
+msgstr "អំពី {0}"
+
+#: ckan/templates/package/snippets/resource_item.html:23
+msgid "Explore"
+msgstr "រុករក"
+
+#: ckan/templates/group/edit.html:7 ckan/templates/group/edit_base.html:4
+#: ckan/templates/group/edit_base.html:13
+#: ckan/templates/group/read_base.html:12
+#: ckan/templates/organization/edit_base.html:11
+#: ckan/templates/organization/read_base.html:12
+#: ckan/templates/package/read_base.html:14
+#: ckan/templates/package/resource_read.html:31
+#: ckan/templates/user/edit.html:8 ckan/templates/user/edit_base.html:3
+#: ckan/templates/user/read_base.html:14
+msgid "Manage"
+msgstr "គ្រប់គ្រង"
+
+#: ckan/templates/group/activity_stream.html:3
+#: ckan/templates/group/activity_stream.html:6
+#: ckan/templates/group/read_base.html:18
+#: ckan/templates/organization/activity_stream.html:3
+#: ckan/templates/organization/activity_stream.html:6
+#: ckan/templates/organization/read_base.html:18
+#: ckan/templates/package/activity.html:3
+#: ckan/templates/package/activity.html:6
+#: ckan/templates/package/read_base.html:21
+#: ckan/templates/user/activity_stream.html:3
+#: ckan/templates/user/activity_stream.html:6
+#: ckan/templates/user/read_base.html:20
+msgid "Activity Stream"
+msgstr "សកម្មភាពស្ទ្រីម"
+
+#: ckan/templates/package/snippets/additional_info.html:2
+#: ckan/templates/snippets/additional_info.html:7
+msgid "Additional Info"
+msgstr "ព័ត៌មាន​បន្ថែម"
+
+#: ckan/templates/package/resource_read.html:144
+msgid "Additional Information"
+msgstr "ព័​ត៍​មាន​បន្ថែម"
+
+#: ckan/templates/package/resource_read.html:148
+#: ckan/templates/package/snippets/additional_info.html:6
+#: ckan/templates/revision/diff.html:43
+#: ckan/templates/snippets/additional_info.html:11
+msgid "Field"
+msgstr "វាល"
+
+#: ckan/templates/package/resource_read.html:149
+#: ckan/templates/package/snippets/additional_info.html:7
+#: ckan/templates/snippets/additional_info.html:12
+msgid "Value"
+msgstr "តម្លៃ"
+
+#: ckan/templates/package/resource_read.html:154
+msgid "Data last updated"
+msgstr "ទិន្នន័យបានធ្វើបច្ចុប្បន្នភាពចុងក្រោយ"
+
+#: ckan/templates/package/resource_read.html:155
+#: ckan/templates/package/resource_read.html:159
+#: ckan/templates/package/resource_read.html:163
+#: ckan/templates/package/resource_read.html:167
+msgid "unknown"
+msgstr "មិនស្គាល់"
+
+#: ckan/templates/package/resource_read.html:158
+msgid "Metadata last updated"
+msgstr "ទិន្នន័យចុងក្រោយត្រូវបានធ្វើបច្ចុប្បន្នភាព"
+
+#: ckan/templates/package/resource_read.html:162
+#: ckan/templates/package/snippets/additional_info.html:70
+msgid "Created"
+msgstr "បានបង្កើត"
+
+#: ckan/templates/package/resource_read.html:166
+#: ckan/templates/package/snippets/resource_form.html:37
+#: ckan/templates/package/snippets/resource_info.html:16
+msgid "Format"
+msgstr "ទ្រង់ទ្រាយ"
+
+#: ckan/templates/package/snippets/additional_info.html:56
+#: ckan/templates/package/snippets/package_basic_fields.html:108
+#: ckan/templates/user/read_base.html:91
+msgid "State"
+msgstr "ស្ថានភាពបច្ចុប្បន្ន"
+
+#: ckan/templates/package/snippets/additional_info.html:62
+msgid "Last Updated"
+msgstr "ធ្វើ​ឱ្យ​ទាន់សម័យ​ចុងក្រោយ"
+
+#: ckan/public/base/javascript/modules/follow.js:69
+#: ckan/templates/snippets/follow_button.html:9
+msgid "Unfollow"
+msgstr "មិនធ្វើតាម"
+
+#: ckan/public/base/javascript/modules/follow.js:72
+#: ckan/templates/snippets/follow_button.html:14
+msgid "Follow"
+msgstr "ធ្វើតាម"
+
+#: ckan/public/base/javascript/modules/image-upload.js:60
+msgid "Link"
+msgstr "តំណ"
+
+#: ckan/public/base/javascript/modules/image-upload.js:61
+msgid "Link to a URL on the internet (you can also link to an API)"
+msgstr ""
+"ភ្ជាប់ទៅ URL នៅលើអ៊ីនធឺណិត "
+"(អ្នកក៏អាចភ្ជាប់ទៅនឹង API)"
+
+#: ckan/public/base/javascript/modules/image-upload.js:68
+msgid "Upload"
+msgstr "ផ្ទុកឡើង"
+
+#: ckan/public/base/javascript/modules/image-upload.js:72
+#: ckan/templates/group/snippets/group_item.html:43
+#: ckan/templates/macros/form.html:235
+#: ckan/templates/snippets/search_form.html:68
+msgid "Remove"
+msgstr "យកចេញ"
+
+#: ckan/public/base/javascript/modules/image-upload.js:87
+msgid "Upload a file on your computer"
+msgstr "ផ្ទុកឯកសារឡើងលើកុំព្យូទ័ររបស់អ្នក"
+
+#: ckan/templates/snippets/organization.html:48
+msgid "There is no description for this organization"
+msgstr ""
+"មិនមានការពិពណ៌នាសេ "
+"ម្រាប់អង្គការនេះទេ"
+
+#: ckan/templates/group/followers.html:3 ckan/templates/group/followers.html:6
+#: ckan/templates/group/snippets/info.html:32
+#: ckan/templates/package/followers.html:3
+#: ckan/templates/package/followers.html:6
+#: ckan/templates/package/snippets/info.html:23
+#: ckan/templates/snippets/context/group.html:13
+#: ckan/templates/snippets/context/user.html:15
+#: ckan/templates/snippets/organization.html:55
+#: ckan/templates/user/followers.html:3 ckan/templates/user/followers.html:7
+#: ckan/templates/user/read_base.html:49
+#: ckanext/example_theme_docs/v18_snippet_api/templates/ajax_snippets/example_theme_popover.html:12
+msgid "Followers"
+msgstr "អ្នកតាម"
+
+#: ckan/templates/admin/index.html:20
+#, python-format
+msgid ""
+" <p>As a sysadmin user you have full control over this CKAN instance. "
+"Proceed with care!</p> <p>For guidance on using sysadmin features, see the "
+"CKAN <a href=\"%(docs_url)s\" target=\"_blank\">sysadmin guide</a></p> "
+msgstr ""
+"<p>ក្នុងនាមជាអ្នកគ្រប់គ្រងប្រ "
+"ព័ន្ធអ្នកមានការគ្រប់គ្រង "
+"ពេញលេញលើឧទាហរ "
+"ណ៍ខេខេននេះ។ "
+"បន្តដោយយកចិត្តទុកដាក់!</p>"
+"<p>សម្រាប់ការណែនាំអំពីកា "
+"រប្រើប្រាស់លក្ខណៈពិសេ "
+"ស sysadmin "
+"សូមមើលការណែនាំ "
+"<a href=\"%(docs_url)s\" target=\"_blank\">sysadmin ។</a></p> "
+
+#: ckan/templates/admin/index.html:15
+msgid "Administer CKAN"
+msgstr "គ្រប់គ្រង CKAN"
+
+#: ckan/templates/page.html:6
+msgid "Skip to content"
+msgstr "រំលងទៅមាតិកា"
+
+#: ckan/templates/activity_streams/activity_stream_items.html:9
+msgid "Load less"
+msgstr "ផ្ទុកតិច"
+
+#: ckan/templates/activity_streams/activity_stream_items.html:17
+msgid "Load more"
+msgstr "ផ្ទុក​បន្ថែម"
+
+#: ckan/templates/activity_streams/activity_stream_items.html:23
+msgid "No activities are within this activity stream"
+msgstr ""
+"មិនមានសកម្មភាពនៅក្នុង "
+"ចរន្តសកម្មភាពនេះទេ"
+
+#: ckan/templates/admin/base.html:3
+msgid "Administration"
+msgstr "រដ្ឋបាល"
+
+#: ckan/templates/admin/base.html:8
+msgid "Sysadmins"
+msgstr "សុតសាមីន"
+
+#: ckan/templates/admin/base.html:9
+msgid "Config"
+msgstr "កំណត់រចនាសម្ព័ន្ធ"
+
+#: ckan/templates/admin/base.html:10 ckan/templates/admin/trash.html:29
+msgid "Trash"
+msgstr "សំរាម"
+
+#: ckan/templates/admin/config.html:16
+#: ckan/templates/admin/confirm_reset.html:7
+msgid "Are you sure you want to reset the config?"
+msgstr ""
+"តើអ្នកពិតជាចង់កំណត់រ "
+"ចនាសម្ព័ន្ធការកំណត់ឡើ "
+"ងវិញឬ?"
+
+#: ckan/templates/admin/config.html:16
+msgid "Reset"
+msgstr "កំណត់ឡើងវិញ"
+
+#: ckan/templates/admin/config.html:17
+msgid "Update Config"
+msgstr ""
+"កំណត់រចនាសម្ព័ន្ធបច្ចុប្ "
+"ន្នភាព"
+
+#: ckan/templates/admin/config.html:26
+msgid "CKAN config options"
+msgstr ""
+"ជម្រើសកំណត់រចនាសម្ព័ន្ CKAN"
+
+#: ckan/templates/admin/confirm_reset.html:3
+#: ckan/templates/admin/confirm_reset.html:10
+msgid "Confirm Reset"
+msgstr "បញ្ជាក់ការកំណត់ឡើងវិញ"
+
+#: ckan/templates/admin/trash.html:20
+msgid "Purge"
+msgstr "លុបបំបាត់ចោល"
+
+#: ckan/templates/admin/trash.html:32
+msgid " <p>Purge deleted datasets forever and irreversibly.</p> "
+msgstr ""
+"<p>លុបចោលទិន្នន័យបានលុ "
+"បជារៀងរហូតនិងមិនអា "
+"ចត្រឡប់វិញបាន។"

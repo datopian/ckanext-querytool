@@ -353,8 +353,11 @@ msgid "Chart title"
 msgstr "图表标题"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:124
 msgid "Additional Description"
+msgstr "附加说明"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:124
+msgid "Additional description"
 msgstr "附加说明"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:125
@@ -670,7 +673,7 @@ msgstr ""
 "开发的，具有最低的技术要求。"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:22
-msgid "Using the platform"
+msgid "Using the Platform"
 msgstr "使用平台"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:24
@@ -765,6 +768,10 @@ msgstr ""
 #: ckanext/querytool/templates/group/report_index.html:28
 msgid "Reports"
 msgstr "报告书"
+
+#: ckanext/querytool/templates/group/snippets/group_form.html:21
+msgid "Additional description of the group..."
+msgstr "群组的其他说明"
 
 #: ckanext/querytool/templates/macros/form.html:126
 #, python-format
@@ -921,6 +928,10 @@ msgid ""
 "Start the first line with # to identify the publicly visible title. Add "
 "other optional text in a new line."
 msgstr "第一行以＃开头，以标注公开可见的标题。您可以使用markdown命令编辑文本。"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:43
+msgid "Additional description for the report..."
+msgstr "报告的附加说明"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Public Folder"
@@ -1079,6 +1090,10 @@ msgstr "显示统计指标"
 #: ckanext/querytool/templates/querytool/public/read.html:81
 msgid "Download"
 msgstr "下载"
+
+#: ckanext/querytool/templates/querytool/public/read.html:157
+msgid "View more"
+msgstr "查看更多"
 
 #: ckanext/querytool/templates/querytool/public/read.html:130
 #: ckanext/querytool/templates/querytool/public/read.html:292

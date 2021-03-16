@@ -356,9 +356,12 @@ msgid "Chart title"
 msgstr "Titre du graphique"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
-#: ckanext/querytool/templates/ajax_snippets/chart_item.html:124
 msgid "Additional Description"
 msgstr "Description Supplémentaire"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:124
+msgid "Additional description"
+msgstr "Description supplémentaire"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:125
 msgid "Add variable to title"
@@ -677,7 +680,7 @@ msgstr ""
 "minimales."
 
 #: ckanext/querytool/templates/home/vs-home-page.html:22
-msgid "Using the platform"
+msgid "Using the Platform"
 msgstr "Utiliser la Plate-forme"
 
 #: ckanext/querytool/templates/home/vs-home-page.html:24
@@ -794,6 +797,10 @@ msgstr ""
 #: ckanext/querytool/templates/group/report_index.html:28
 msgid "Reports"
 msgstr "Rapports"
+
+#: ckanext/querytool/templates/group/snippets/group_form.html:21
+msgid "Additional description of the group..."
+msgstr "Description supplémentaire du groupe..."
 
 #: ckanext/querytool/templates/macros/form.html:126
 #, python-format
@@ -950,6 +957,10 @@ msgid ""
 "Start the first line with # to identify the publicly visible title. Add "
 "other optional text in a new line."
 msgstr "Utiliser le markup pour modifier le texte."
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:43
+msgid "Additional description for the report..."
+msgstr "Description supplémentaire du rapport..."
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Public Folder"
@@ -1108,6 +1119,10 @@ msgstr "Unité de mesure visualisée"
 #: ckanext/querytool/templates/querytool/public/read.html:81
 msgid "Download"
 msgstr "Télécharger"
+
+#: ckanext/querytool/templates/querytool/public/read.html:157
+msgid "View more"
+msgstr "Voir plus"
 
 #: ckanext/querytool/templates/querytool/public/read.html:130
 #: ckanext/querytool/templates/querytool/public/read.html:292
