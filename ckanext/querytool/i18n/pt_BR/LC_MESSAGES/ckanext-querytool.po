@@ -1174,3 +1174,97 @@ msgstr "Uma cor"
 #: Added manually
 msgid "Diverging"
 msgstr "Divergente"
+
+#: Added manually
+msgid "What are Reports?"
+msgstr "Quais são os relatórios?"
+
+#: Added manually
+msgid ""
+"Interactive data access reports make it easier for public users "
+"to find a fact and visualize data. They are ideal to present "
+"information from large data sources but can be developed with "
+"any type of data."
+msgstr ""
+"Os relatórios interativos de acesso a dados tornam mais fácil para "
+"os usuários públicos encontrar um fato e visualizar os dados. Eles "
+"são ideais para apresentar informações de grandes fontes de dados, "
+"mas podem ser desenvolvidos com qualquer tipo de dados."
+
+#: Added manually
+msgid "Variables"
+msgstr "Variáveis"
+
+#: Added manually
+msgid "use drop-down list to select variables based on application filters"
+msgstr "use a lista suspensa para selecionar variáveis ​​com base em filtros de aplicativo"
+
+#: Added manually
+msgid "etc"
+msgstr "etc"
+
+#: Added manually
+msgid "Processed variables"
+msgstr "Variáveis ​​processadas"
+
+#: Added manually
+msgid "Full templates syntax"
+msgstr "Sintaxe de templates completos"
+
+#: Added manually
+msgid "Please note:"
+msgstr "Observe:"
+
+#: Added manually
+msgid "Single braces '{}' are used for variables"
+msgstr "Chaves simples '{}' são usadas para variáveis"
+
+#: Added manually
+msgid "Templates quick reference"
+msgstr "Referência rápida de templates"
+
+#: Added manually
+msgid "You can use"
+msgstr "Você pode usar o"
+
+#: Added manually
+msgid "Templates"
+msgstr "Templates"
+
+#: Added manually
+msgid "here"
+msgstr "aqui"
+
+#: ckanext/querytool/templates/admin/config.html:9
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "Welcome Page Title"
+msgstr "Título da página inicial"
+
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "The title presented to users on the home page."
+msgstr "O título apresentado aos usuários na página inicial."
+
+#: ckanext/querytool/templates/admin/config.html:10
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "Welcome Page Description"
+msgstr "Descrição da página inicial"
+
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "The description presented to users on the home page."
+msgstr "A descrição apresentada aos usuários na página inicial."
+
+#: ckan/controllers/admin.py:58
+msgid "Homepage"
+msgstr "Pagina inicial"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Half"
+msgstr "Metade"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Full"
+msgstr "Completo"
+
+#: ckan/templates/macros/autoform.html:62
+msgid "Site logo"
+msgstr "Logo do site"

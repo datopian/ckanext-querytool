@@ -252,7 +252,7 @@ class QueryToolController(base.BaseController):
                                            errors, error_summary)
             if 'save_data' in data.keys():
                 # redirect to querytools group
-                toolkit.redirect_to('/group/'+_querytool['group']+'/reports')
+                toolkit.redirect_to('/'+h.lang()+'/group/'+_querytool['group']+'/reports')
 
             else:
                 # redirect to manage visualisations
@@ -608,7 +608,7 @@ class QueryToolController(base.BaseController):
                 url = h.url_for('querytool_edit',
                                 querytool='/' + _querytool['name'])
             else:
-                toolkit.redirect_to('/group/'+_querytool['group']+'/reports')
+                h.redirect_to('/'+h.lang()+'/group/'+_querytool['group']+'/reports')
             h.redirect_to(url)
 
         if not data:

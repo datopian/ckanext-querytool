@@ -1151,3 +1151,168 @@ msgstr "单色"
 #: Added manually
 msgid "Diverging"
 msgstr "发散"
+
+#: Added manually
+msgid "What are Reports?"
+msgstr "有什么报告？"
+
+#: Added manually
+msgid ""
+"Interactive data access reports make it easier for public users "
+"to find a fact and visualize data. They are ideal to present "
+"information from large data sources but can be developed with "
+"any type of data."
+msgstr ""
+"交互式数据访问报告使公共用户可以轻松找到事实并可视化数据。 "
+"它们是呈现大型数据源信息的理想选择，但可以使用任何类型的数据进行开发。"
+
+#: Added manually
+msgid "Variables"
+msgstr "变数"
+
+#: Added manually
+msgid "use drop-down list to select variables based on application filters"
+msgstr "使用下拉列表根据应用程序过滤器选择变量"
+
+#: Added manually
+msgid "etc"
+msgstr "etc"
+
+#: Added manually
+msgid "Processed variables"
+msgstr "处理变量"
+
+#: Added manually
+msgid "Full templates syntax"
+msgstr "完整的 templates 语法"
+
+#: Added manually
+msgid "Please note:"
+msgstr "请注意："
+
+#: Added manually
+msgid "Single braces '{}' are used for variables"
+msgstr "单括号 '{}' 用于变量"
+
+#: Added manually
+msgid "Templates quick reference"
+msgstr "Templates 快速参考"
+
+#: Added manually
+msgid "You can use"
+msgstr "您可以在这里使用"
+
+#: Added manually
+msgid "Templates"
+msgstr "Templates"
+
+#: Added manually
+msgid "here"
+msgstr " "
+
+#: Added manually
+msgid "Markdown quick reference"
+msgstr "Markdown 快速参考"
+
+#: Added manually
+msgid "Markdown formatting"
+msgstr "Markdown 格式"
+
+#: Added manually
+msgid "Full markdown syntax"
+msgstr "完整的 markdown 语法"
+
+#: Added manually
+msgid "Bold text"
+msgstr "粗体文字"
+
+#: Added manually
+msgid "italic text"
+msgstr "斜体文字"
+
+#: Added manually
+msgid "or"
+msgstr "或者"
+
+#: Added manually
+msgid "HTML tags are stripped out for security reasons"
+msgstr "出于安全原因，HTML标记被剥离"
+
+#: ckan/templates/user/edit_user_form.html:29
+msgid "Sysadmin Password"
+msgstr "系统管理员密码"
+
+#: ckan/templates/user/dashboard.html:19 ckan/templates/user/dashboard.html:37
+msgid "News feed"
+msgstr "新闻提要"
+
+#: ckan/templates/user/snippets/followee_dropdown.html:14
+#: ckan/templates/user/snippets/followee_dropdown.html:15
+msgid "Activity from:"
+msgstr "活动来自："
+
+#: ckanext/querytool/templates/admin/config.html:9
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "Welcome Page Title"
+msgstr "主页页面标题"
+
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "The title presented to users on the home page."
+msgstr "在首页上向用户显示的标题。"
+
+#: ckanext/querytool/templates/admin/config.html:10
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "Welcome Page Description"
+msgstr "主页说明"
+
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "The description presented to users on the home page."
+msgstr "在主页上向用户显示的描述。"
+
+#: ckan/controllers/admin.py:58
+msgid "Homepage"
+msgstr "主页"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Half"
+msgstr "一半"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Full"
+msgstr "满的"
+
+#: ckan/templates/macros/autoform.html:62
+msgid "Site logo"
+msgstr "网站徽标"
+
+#: ckan/templates/admin/config.html:33
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This"
+" is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>About:</strong> This text will appear on this CKAN"
+" instances <a href=\"%(about_url)s\">about page</a>.</p> <p><strong>Intro "
+"Text:</strong> This text will appear on this CKAN instances <a "
+"href=\"%(home_url)s\">home page</a> as a welcome to visitors.</p> "
+"<p><strong>Custom CSS:</strong> This is a block of CSS that appears in "
+"<code>&lt;head&gt;</code> tag of every page. If you wish to customize the "
+"templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+"<p><strong>Homepage:</strong> This is for choosing a predefined layout for "
+"the modules that appear on your homepage.</p> "
+msgstr ""
+" <p><strong>网站标题：</strong>这是此CKAN实例的标题。 "
+"它出现在整个CKAN的各个地方。</p> <p><strong>风格：</strong>"
+"从主要配色方案的简单变化列表中进行选择，即可快速完成自定义主题的工作。</p> <p>"
+"<strong>网站标记徽标：</strong>这是出现在所有CKAN实例模板标题中的徽标。"
+"</p> <p><strong>关于：</strong>该文本将显示在此CKAN实例"
+"<a href=\"%(about_url)s\">关于页面</a>上。</p> <p>"
+"<strong>文字介绍：</strong>这段文字将在此CKAN实例<a "
+"href=\"%(home_url)s\">首页</a>上显示，以欢迎访问者。</p> "
+"<p><strong>自定义CSS：</strong>这是CSS块，显示在每个页面的"
+"<code>&lt;head&gt;</code>标记中。如果您希望更全面地自定义模板，我们建议"
+ <a href=\"%(docs_url)s\" target=\"_blank\">阅读文档</a>。"
+"</p> <p><strong>主页：</strong>这是为您的主页上显示的模块选择预定义的布局。</p>"
