@@ -1195,8 +1195,8 @@ msgstr ""
 "Les rapports d'accès aux données interactifs permettent aux "
 "utilisateurs publics de trouver facilement un fait et de "
 "visualiser les données. Ils sont idéaux pour présenter des "
-informations provenant de sources de données volumineuses, "
-mais peuvent être développés avec tout type de données."
+"informations provenant de sources de données volumineuses, "
+"mais peuvent être développés avec tout type de données."
 
 #: Added manually
 msgid "Variables"
