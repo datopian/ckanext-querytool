@@ -241,6 +241,7 @@ class QueryToolController(base.BaseController):
             _querytool['owner_org'] = data['owner_org']
             _querytool['icon'] = data['icon']
             _querytool['selection_label'] = data.get('selection_label')
+            _querytool['report_caption'] = data.get('report_caption')
 
             try:
                 junk = _get_action('querytool_update', _querytool)

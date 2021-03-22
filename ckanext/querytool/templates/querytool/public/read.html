@@ -321,9 +321,20 @@
           %}
 
         {% endif %}
-        <div class="report_caption">Openly acquired data 2020 - 2022</div>
-        <div class='additional_desc'>{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</div>
-        <p class="clearfix"></p>
+        {% if item.type != 'text_box' %}
+          {% set caption = querytool.report_caption %}
+
+          {% if caption %}
+            <div class="report_caption">{{ caption }}</div>
+          {% endif %}
+
+          {% set additional_description = h.render_markdown(h.get_translated(item, 'additional_description'), True, True) %}
+
+          {% if additional_description != "<p>None</p>" %}
+            <div class='additional_desc'>{{ additional_description }}</div>
+          {% endif %}
+          <p class="clearfix"></p>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

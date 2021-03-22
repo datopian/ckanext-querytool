@@ -275,7 +275,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin, DefaultTranslation):
             'get_groups_for_user':
                 helpers.get_groups_for_user,
             'querytool_get_chart_colors':
-                helpers.get_querytool_get_chart_colors,
+                helpers.get_querytool_get_chart_colors
         }
 
     # IAuthFunctions
