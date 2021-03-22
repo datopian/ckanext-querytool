@@ -246,7 +246,8 @@
             dynamic_reference_label = item.dynamic_reference_label,
             column_width = item.column_width,
             plotly = item.plotly,
-            bar_width = item.bar_width
+            bar_width = item.bar_width,
+            chart_id = chart_id
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
@@ -321,6 +322,7 @@
           %}
 
         {% endif %}
+        <div class="report_caption">Openly acquired data 2020 - 2022</div>
         <div class='additional_desc'>{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</div>
         <p class="clearfix"></p>
       </div>

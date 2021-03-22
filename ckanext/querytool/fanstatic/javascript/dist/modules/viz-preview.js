@@ -2515,7 +2515,47 @@
                 console.log(data)
 
                 console.log('Generate plotly')
-                Plotly.newPlot(this.el[0], data, base_info);
+                function saveAs(uri, filename) {
+                    var link = document.createElement('a');
+                    if (typeof link.download === 'string') {
+                        link.href = uri;
+                        link.download = filename;
+                        //Firefox requires the link to be in the body
+                        document.body.appendChild(link);
+                        //simulate click
+                        link.click();
+                        //remove the link when done
+                        document.body.removeChild(link);
+                    } else {
+                        window.open(uri);
+                    }
+                }
+                
+                //Custom Modebar buttons
+                var config = {
+                modeBarButtonsToAdd: [
+                    {
+                    name: 'button1',
+                    icon: Plotly.Icons.pencil,
+                    direction: 'up',
+                    id:'chart-'+this.options.chart_id,
+                    click: function(gd) { 
+                        //var xid = this.closest(".item")
+                        console.log(this.id);
+                        var chartId = "."+this.id;
+                        //console.log('hi'); console.log(gd); alert('button1')
+                        setTimeout(function(){ 
+                            html2canvas(document.querySelector(chartId)).then(function(canvas) {
+                                saveAs(canvas.toDataURL(), 'report.png');
+                            });
+                        }, 100);
+                    
+                    }
+                    }],
+                    modeBarButtonsToRemove: ['toImage']
+                }
+
+                Plotly.newPlot(this.el[0], data, base_info, config);
             },
             updateChart: function() {
                 var t = this.el.closest(".chart_field"),

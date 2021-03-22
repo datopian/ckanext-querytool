@@ -324,9 +324,10 @@ $(document).ready(function(){
       }
     }
 
+
+    //Take screenshot
     $(".scrBtn").click(function(){ 
       var chartId= $(this).attr("data-chartId")
-      //Take screenshot
       setTimeout(function(){ 
         html2canvas(document.querySelector(chartId)).then(function(canvas) {
           saveAs(canvas.toDataURL(), 'report.png');
