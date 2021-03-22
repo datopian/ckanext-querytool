@@ -324,17 +324,17 @@ $(document).ready(function(){
       }
     }
 
-    //Take screenshot
-    setTimeout(function(){ 
-      /*html2canvas(document.body).then(function(canvas) {
-        document.body.appendChild(canvas);
-      });*/
+    $(".scrBtn").click(function(){ 
+      var chartId= $(this).attr("data-chartId")
+      //Take screenshot
+      setTimeout(function(){ 
+        html2canvas(document.querySelector(chartId)).then(function(canvas) {
+          saveAs(canvas.toDataURL(), 'report.png');
+        });
+      }, 100);
 
-      html2canvas(document.body).then(function(canvas) {
-        saveAs(canvas.toDataURL(), 'file-name.png');
-      });
-
-    }, 5000);
+    });
+    
 
     
 });
