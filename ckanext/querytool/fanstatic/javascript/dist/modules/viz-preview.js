@@ -2535,8 +2535,8 @@
                 var config = {
                 modeBarButtonsToAdd: [
                     {
-                    name: 'button1',
-                    icon: Plotly.Icons.pencil,
+                    name: 'Screenshot',
+                    icon: Plotly.Icons.camera,
                     direction: 'up',
                     id:'chart-'+this.options.chart_id,
                     click: function(gd) { 
