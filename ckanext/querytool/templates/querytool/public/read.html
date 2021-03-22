@@ -11,6 +11,7 @@
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 {% resource 'querytool/map' %}
 {% resource 'querytool/table' %}
@@ -189,6 +190,7 @@
         {% endif %}
         
         {% if item.type == 'chart'  %}
+          <button>Screenshot</button>
            {% if item.filter_visibility == 'public'  %}
             {% set chart_filter_id = h.querytool_get_uuid() %}
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
