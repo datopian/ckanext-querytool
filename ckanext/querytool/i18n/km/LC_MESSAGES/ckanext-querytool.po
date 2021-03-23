@@ -1646,9 +1646,9 @@ msgid ""
 "particular theme, or as a very simple way to help people find and search "
 "your own published datasets. "
 msgstr ""
-" អ្នកអាចប្រើក្រុម CKAN ដើម្បីបង្កើត និងគ្រប់គ្រងការប្រមូលកម្រងទិន្នន័យ។ "
-"នេះអាចជាការធ្វើតារាងទិន្នន័យសម្រាប់គម្រោង ឬ ក្រុមការងារជាក់លាក់មួយ ឬលើប្រធានបទជាក់លាក់មួយ ឬ "
-"ជាមធ្យោបាយសាមញ្ញមួយដើម្បីជួយដល់មនុស្សក្នុងការរក និង ស្វែងរកកម្រងទិន្នន័យដែលបានផ្សព្វផ្សាយ។ "
+" អ្នកអាចប្រើក្រុម CKAN ដើម្បីបង្កើត និងគ្រប់គ្រងការប្រមូល កម្រងទិន្នន័យ។ "
+"នេះអាចជាការធ្វើតារាងទិន្នន័យ សម្រាប់គម្រោង ឬ ក្រុមការងារជាក់លាក់មួយ ឬលើប្រធានបទជាក់លាក់មួយ ឬ "
+"ជាមធ្យោបាយសាមញ្ញមួយដើម្បី ជួយដល់មនុស្សក្នុងការរក និង ស្វែងរកកម្រងទិន្នន័យ ដែលបានផ្សព្វផ្សាយ។ "
 
 #: ckan/templates/group/index.html:20
 msgid "Search groups..."
@@ -1660,11 +1660,15 @@ msgstr "ស្វែងរកក្រុម ..."
 msgid "Search"
 msgstr "ស្វែងរក"
 
+#: Added
+msgid "Order by"
+msgstr "បញ្ជាទិញតាម"
+
 #: ckan/templates/group/snippets/group_item.html:38
 #: ckan/templates/group/snippets/group_item.html:39
 #, fuzzy
 msgid "View {name}"
-msgstr "មើល {ឈ្មោះ}"
+msgstr "មើល {name}"
 
 #: ckan/templates/group/snippets/group_item.html:32
 #: ckan/templates/organization/snippets/organization_item.html:31
@@ -1674,7 +1678,7 @@ msgstr "មើល {ឈ្មោះ}"
 msgid "{num} Dataset"
 msgid_plural "{num} Datasets"
 msgstr[0] ""
-"{num} កម្រងទិន្នន័យ\n"
+"{num} កម្រងទិន្នន័យ"
 "{num} កម្រងទិន្នន័យ"
 
 #: ckan/templates/group/snippets/group_item.html:34
