@@ -17,6 +17,7 @@ import ckan.model as m
 from ckan.common import c
 from ckan.plugins import toolkit
 from ckan.plugins.toolkit import _
+import ckan.lib.helpers as h
 
 log = logging.getLogger(__name__)
 

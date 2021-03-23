@@ -578,11 +578,11 @@ body {
   }
 
   .btn-update {
-    position: absolute;
-    bottom: 35px;
+    position: relative;
+    top: 10px;
     left: 0;
-    width: 90%;
-    margin: 0 5%;
+    width: 85%;
+    margin: 0 7%;
     background-color:#74b783;
     font-weight:700;
     color:#fff;
@@ -827,8 +827,27 @@ div[class^="dt-header"] {
   color: #fff; 
   font-weight: 500;
   box-shadow: 0px 2px 8px #7b7b7b;
+  display:none;
 }
 
 #scrollBtn:hover {
   background-color: #3ab7b1;
+}
+
+.report_caption {
+  font-size: 0.9em;
+  color: #696969;
+}
+
+.additional_desc {
+  font-weight: 600;
+  font-size: 1em;
+  padding-top: 5px;
+  padding-bottom:10px;
+}
+
+@media screen and (max-width:1023px){
+  #scrollBtn { 
+    display:none !important;
+  }
 }

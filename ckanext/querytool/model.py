@@ -37,6 +37,7 @@ def setup():
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS image_url TEXT;')
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS image_display_url TEXT;')
         Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS selection_label TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS report_caption TEXT;')
         Session.commit()
     inspector = Inspector.from_engine(engine)
 
@@ -156,6 +157,8 @@ def define_query_tool_table():
                              Column('additional_description', types.UnicodeText,
                                     default=u''),
                              Column('selection_label', types.UnicodeText,
+                                    default=u''),
+                             Column('report_caption', types.UnicodeText,
                                     default=u''),
                              Index('ckanext_querytool_id_idx',
                                    'id'))
