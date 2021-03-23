@@ -299,6 +299,20 @@ $(document).ready(function(){
         setTimeout(function() { generateColorPicker(); generateColorPicker2(); }, 1000);
     })
 
+    //get page height and display scroll button
+    var pgHeight = document.body.scrollHeight;
+    if(pgHeight >= 1450) {
+      $("#scrollBtn").show();
+    }
+    
+    $(window).scroll(function () { 
+      var scrollPos = $(window).scrollTop();
+      //You've scrolled this much:
+        if(scrollPos >= 520) {
+          $("#scrollBtn").hide();
+        }
+    });
+
     //Scroll btn
     $("#scrollBtn").click(function() {
         $('html, body').animate({
@@ -306,7 +320,40 @@ $(document).ready(function(){
         }, 1000);
         $(this).hide()
     });
-  });
+
+
+    function saveAs(uri, filename) {
+      var link = document.createElement('a');
+      if (typeof link.download === 'string') {
+          link.href = uri;
+          link.download = filename;
+          //Firefox requires the link to be in the body
+          document.body.appendChild(link);
+          //simulate click
+          link.click();
+          //remove the link when done
+          document.body.removeChild(link);
+      } else {
+          window.open(uri);
+      }
+    }
+
+
+    //Take screenshot
+    $(".scrBtn").click(function(){ 
+      var chartId= $(this).attr("data-chartId")
+      setTimeout(function(){ 
+        html2canvas(document.querySelector(chartId)).then(function(canvas) {
+          saveAs(canvas.toDataURL(), 'report.png');
+        });
+      }, 100);
+
+    });
+    
+
+    
+});
+
 
   $(document).ready(function(){
     $('[id^=chart_field_color_type_]').serializeArray().forEach((item, i) => {

@@ -11,6 +11,7 @@
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 {% resource 'querytool/map' %}
 {% resource 'querytool/table' %}
@@ -77,8 +78,8 @@
         
       </div>
 
-      <div class="filter-group-wrapper" style="border-top: 1px solid rgb(218, 218, 218);margin-top:10px;">
-        <div class="filter-item" style="padding: 10px 20px; padding-bottom: 5px;">
+      <div class="filter-group-wrapper" style="border-top: 1px solid rgb(218, 218, 218);margin-top:10px; flex-direction:column;">
+        <div class="filter-item" style="padding: 10px 20px; padding-bottom: 5px; width:85%; ">
           <label for="{{querytool.name}}_y_axis_column">{{ querytool.selection_label or _('Displayed Measure') }}</label>
           {% if y_axis_columns|length == 1 %}
             <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
@@ -90,9 +91,12 @@
             </select>
           {% endif %}
         </div>
+
+        <div class="filter-item">
+          <button type="submit" class="btn btn-update" data-anchor="{{ querytool.name }}"> {{ _('Update') }}</button>
+        </div>
       </div>
 
-      <button type="submit" class="btn btn-update" data-anchor="{{ querytool.name }}"> {{ _('Update') }}</button>
     </div>
 
     <div class="controls-wrap" id="{{ querytool.name }}" >
@@ -244,7 +248,8 @@
             dynamic_reference_label = item.dynamic_reference_label,
             column_width = item.column_width,
             plotly = item.plotly,
-            bar_width = item.bar_width
+            bar_width = item.bar_width,
+            chart_id = chart_id
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
@@ -319,8 +324,18 @@
           %}
 
         {% endif %}
-        <div class='additional_desc'>{{ h.render_markdown(h.get_translated(item, 'additional_description'), True, True) }}</div>
-        <p class="clearfix"></p>
+        {% if item.type != 'text_box' %}
+          {% set caption = querytool.report_caption %}
+
+          <div class="report_caption">{{ caption or '' }}</div>
+
+          {% set additional_description = h.render_markdown(h.get_translated(item, 'additional_description'), True, True) %}
+
+          {% if additional_description != "<p>None</p>" %}
+            <div class='additional_desc'>{{ additional_description }}</div>
+          {% endif %}
+          <p class="clearfix"></p>
+        {% endif %}
       </div>
       {% endfor %}
     </div>

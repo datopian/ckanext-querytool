@@ -41,6 +41,7 @@ Example usage:
 
   {{ form.markdown('description', id='field-description', label=_('Main Description'), placeholder=_('eg. Some useful description about the query tool'), value=data.description, error=errors.description) }}
   {{ form.markdown('additional_description', label=_('Additional Description'), id='field-additional_description', placeholder=_('Additional description for the report...'), value=data.additional_description, error=errors.additional_description) }}
+  {{ form.input('report_caption', id='field-report-caption', label=_('Report Caption'), placeholder=_('Caption for reports'), value=data.report_caption, error=errors.report_caption) }}
 
   {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
   {% set is_url = data.image_url and data.image_url.startswith('http') %}
