@@ -299,6 +299,20 @@ $(document).ready(function(){
         setTimeout(function() { generateColorPicker(); generateColorPicker2(); }, 1000);
     })
 
+    //get page height and display scroll button
+    var pgHeight = document.body.scrollHeight;
+    if(pgHeight >= 1450) {
+      $("#scrollBtn").show();
+    }
+    
+    $(window).scroll(function () { 
+      var scrollPos = $(window).scrollTop();
+      //You've scrolled this much:
+        if(scrollPos >= 520) {
+          $("#scrollBtn").hide();
+        }
+    });
+
     //Scroll btn
     $("#scrollBtn").click(function() {
         $('html, body').animate({

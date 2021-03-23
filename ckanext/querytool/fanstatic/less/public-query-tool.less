@@ -827,6 +827,7 @@ div[class^="dt-header"] {
   color: #fff; 
   font-weight: 500;
   box-shadow: 0px 2px 8px #7b7b7b;
+  display:none;
 }
 
 #scrollBtn:hover {
@@ -845,3 +846,8 @@ div[class^="dt-header"] {
   padding-bottom:10px;
 }
 
+@media screen and (max-width:1023px){
+  #scrollBtn { 
+    display:none !important;
+  }
+}
