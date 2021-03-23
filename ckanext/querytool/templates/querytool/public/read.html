@@ -78,8 +78,8 @@
         
       </div>
 
-      <div class="filter-group-wrapper" style="border-top: 1px solid rgb(218, 218, 218);margin-top:10px;">
-        <div class="filter-item" style="padding: 10px 20px; padding-bottom: 5px;">
+      <div class="filter-group-wrapper" style="border-top: 1px solid rgb(218, 218, 218);margin-top:10px; flex-direction:column;">
+        <div class="filter-item" style="padding: 10px 20px; padding-bottom: 5px; width:85%; ">
           <label for="{{querytool.name}}_y_axis_column">{{ querytool.selection_label or _('Displayed Measure') }}</label>
           {% if y_axis_columns|length == 1 %}
             <input id="{{querytool.name}}_y_axis_column" name="{{querytool.name}}_y_axis_column" class="filter-item filter-item-column input-block-level" value="{{ y_axis_selected }}" disabled/>
@@ -91,9 +91,12 @@
             </select>
           {% endif %}
         </div>
+
+        <div class="filter-item">
+          <button type="submit" class="btn btn-update" data-anchor="{{ querytool.name }}"> {{ _('Update') }}</button>
+        </div>
       </div>
 
-      <button type="submit" class="btn btn-update" data-anchor="{{ querytool.name }}"> {{ _('Update') }}</button>
     </div>
 
     <div class="controls-wrap" id="{{ querytool.name }}" >
