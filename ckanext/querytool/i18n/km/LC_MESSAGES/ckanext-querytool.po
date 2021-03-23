@@ -122,19 +122,19 @@ msgstr "បង្គត់ ឧ. ២ពាន់"
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:84
 #: ckanext/querytool/helpers.py:230
 #, python-format
-msgid "Percentage (0 digit) e.g 25% for 0.25"
+msgid "Percentage (0 digit) e.g 25%% for 0.25"
 msgstr "ភាគរយ (០ ខ្ទង់) ឧ. ២៥% សម្រាប់ ០,២៥"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:88
 #: ckanext/querytool/helpers.py:232
 #, python-format
-msgid "Percentage (1 digit) e.g 25.1% for 0.251"
+msgid "Percentage (1 digit) e.g 25.1%% for 0.251"
 msgstr "ភាគរយ (១ ខ្ទង់) ឧ។ ២៥.១% សម្រាប់ ០.២៥១"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:92
 #: ckanext/querytool/helpers.py:234
 #, python-format
-msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
+msgid "Percentage (2 digit) e.g 25.12%% for 0.2512"
 msgstr "ភាគរយ (២ ខ្ទង់) ឧ។ ២៥.១២% សម្រាប់ ០.២៥១២"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:96
@@ -1268,8 +1268,47 @@ msgstr "ស្លាក HTML ត្រូវបានដកចេញដោយហ
 #: ckan/templates/snippets/search_result_text.html:17
 msgid "{number} dataset found"
 msgid_plural "{number} datasets found"
-msgstr[0] "រកឃើញការប្រមូលទិន្នន័យ {number}"
-msgstr[1] "ការប្រមូលទិន្នន័យចំនួន {number} ត្រូវបានរកឃើញ"
+msgstr[0] "បានរកឃើញសំណុំទិន្នន័យចំនួន {number}"
+
+#: ckan/templates/snippets/search_result_text.html:15
+msgid "{number} dataset found for \"{query}\""
+msgid_plural "{number} datasets found for \"{query}\""
+msgstr[0] "បានរកឃើញសំណុំទិន្នន័យចំនួន {number} សម្រាប់លោក \"{query}\""
+
+#: ckan/templates/snippets/search_result_text.html:16
+msgid "No datasets found for \"{query}\""
+msgstr "រកមិនឃើញសំណុំទិន្នន័យសម្រាប់ \"{query}\""
+
+#: ckan/templates/snippets/search_result_text.html:18
+msgid "No datasets found"
+msgstr "រកមិនឃើញសំណុំទិន្នន័យ"
+
+#: ckan/templates/snippets/search_result_text.html:21
+msgid "{number} group found for \"{query}\""
+msgid_plural "{number} groups found for \"{query}\""
+msgstr[0] "រកឃើញក្រុមចំនួន {number} សម្រាប់លោក \"{query}\""
+
+#: ckan/templates/snippets/search_result_text.html:22
+msgid "No groups found for \"{query}\""
+msgstr "រកមិនឃើញក្រុមសម្រាប់ \"{query}\""
+
+#: ckan/templates/snippets/search_result_text.html:23
+msgid "{number} group found"
+msgid_plural "{number} groups found"
+msgstr[0] "រកឃើញ {number} ក្រុម"
+
+#: ckan/templates/snippets/search_result_text.html:24
+msgid "No groups found"
+msgstr "រកមិនឃើញក្រុម"
+
+#: ckan/templates/snippets/search_result_text.html:27
+msgid "{number} organization found for \"{query}\""
+msgid_plural "{number} organizations found for \"{query}\""
+msgstr[0] "រកឃើញអង្គការចំនួន {number} សម្រាប់លោក \"{query}\""
+
+#: ckan/templates/snippets/search_result_text.html:28
+msgid "No organizations found for \"{query}\""
+msgstr "រកមិនឃើញអង្គការសម្រាប់ \"{query}\""
 
 #: ckan/templates/group/read.html:21 ckan/templates/organization/read.html:25
 #: ckan/templates/snippets/search_form.html:3
@@ -1333,7 +1372,7 @@ msgstr "{actor} បានលុបក្រុម {group}"
 
 #: ckan/lib/activity_streams.py:84
 msgid "{actor} deleted the organization {organization}"
-msgstr "{actor} deleted the organization {organization}"
+msgstr "លោក {actor} បានលុបអង្គការ {organization}"
 
 #: ckan/lib/activity_streams.py:87
 msgid "{actor} deleted the dataset {dataset}"
@@ -1391,25 +1430,21 @@ msgstr "{actor} ចាប់ផ្តើមដើរតាម {group}"
 msgid "{mins} minute ago"
 msgid_plural "{mins} minutes ago"
 msgstr[0] "{mins} នាទីមុន"
-msgstr[1] "{mins} នាទីមុន"
 
 #: ckan/lib/formatters.py:119
 msgid "{hours} hour ago"
 msgid_plural "{hours} hours ago"
 msgstr[0] "{hours} ម៉ោងមុន"
-msgstr[1] "{hours} ម៉ោងមុន"
 
 #: ckan/lib/formatters.py:128
 msgid "{months} month ago"
 msgid_plural "{months} months ago"
-msgstr[0] "{months} ខែ​កន្លងទៅ"
-msgstr[1] "{months} ខែមុន"
+msgstr[0] "{months} ខែមុន"
 
 #: ckan/lib/formatters.py:130
 msgid "over {years} year ago"
 msgid_plural "over {years} years ago"
-msgstr[0] "ជាង {years} ឆ្នាំហើយ"
-msgstr[1] "ជាង {years} ឆ្នាំមកហើយ"
+msgstr[0] "ជាង {years} ឆ្នាំមកហើយ"
 
 #: ckan/templates/snippets/context/user.html:23
 #: ckan/templates/user/read_base.html:57
@@ -1477,7 +1512,7 @@ msgstr ""
 " ពត៌មានផ្ទាល់ខ្លួនរបស់អ្ន "
 "កអាចអោយអ្នកប្រើប្រាស់់ CKAN "
 "ផ្សេងទៀតដឹងថាអ្នកជាន "
-"រណានិងអ្នកធ្វើអ្វី។"
+"រណានិងអ្នកធ្វើអ្វី។ "
 
 #: ckan/templates/user/edit_user_form.html:7
 msgid "Change details"
@@ -1531,7 +1566,6 @@ msgstr "បោះបង់"
 msgid "Dashboard (%(num)d new item)"
 msgid_plural "Dashboard (%(num)d new items)"
 msgstr[0] "ផ្ទាំងគ្រប់គ្រង (ធាតុថ្ %(num)d)"
-msgstr[1] "ផ្ទាំងគ្រប់គ្រង (របស់ថ្ %(num)d)"
 
 #: ckan/templates/header.html:43 ckan/templates/header.html:45
 msgid "Log out"
@@ -1553,21 +1587,10 @@ msgstr "មើលប្រវត្តិរូប"
 msgid "Dashboard"
 msgstr "ផ្ទាំងគ្រប់គ្រង"
 
-#: ckan/templates/snippets/search_result_text.html:23
-msgid "{number} group found"
-msgid_plural "{number} groups found"
-msgstr[0] "រកឃើញក្រុម {number}"
-msgstr[1] "{number} ក្រុមបានរកឃើញ"
-
-#: ckan/templates/snippets/search_result_text.html:24
-msgid "No groups found"
-msgstr "រកមិនឃើញក្រុម"
-
 #: ckan/templates/snippets/search_result_text.html:29
 msgid "{number} organization found"
 msgid_plural "{number} organizations found"
 msgstr[0] "រកឃើញអង្គការ {number}"
-msgstr[1] "បានរកឃើញអង្គការចំនួន {number}"
 
 #: ckan/templates/snippets/search_result_text.html:30
 msgid "No organizations found"
@@ -1685,9 +1708,7 @@ msgstr "មើល {name}"
 #, fuzzy
 msgid "{num} Dataset"
 msgid_plural "{num} Datasets"
-msgstr[0] ""
-"{num} កម្រងទិន្នន័យ"
-"{num} កម្រងទិន្នន័យ"
+msgstr[0] "{num} កម្រងទិន្នន័យ"
 
 #: ckan/templates/group/snippets/group_item.html:34
 #: ckan/templates/organization/snippets/organization_item.html:33

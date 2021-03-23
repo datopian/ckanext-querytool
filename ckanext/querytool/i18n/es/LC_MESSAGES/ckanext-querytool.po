@@ -122,19 +122,19 @@ msgstr "Simplificado ej. 2m"
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:84
 #: ckanext/querytool/helpers.py:230
 #, python-format
-msgid "Percentage (0 digit) e.g 25% for 0.25"
+msgid "Percentage (0 digit) e.g 25%% for 0.25"
 msgstr "Porcentaje (0 dígitos) ej. 0.25 es 25%"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:88
 #: ckanext/querytool/helpers.py:232
 #, python-format
-msgid "Percentage (1 digit) e.g 25.1% for 0.251"
+msgid "Percentage (1 digit) e.g 25.1%% for 0.251"
 msgstr "Porcentaje (1 dígito) ej. 0.251 es 25.1%"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:92
 #: ckanext/querytool/helpers.py:234
 #, python-format
-msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
+msgid "Percentage (2 digit) e.g 25.12%% for 0.2512"
 msgstr "Porcentaje (2 dígitos) ej. 0.2512 es 25.12%"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:96

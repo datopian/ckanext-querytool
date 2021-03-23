@@ -263,7 +263,7 @@ msgstr "This report name already exists. Choose another."
 
 #: ckanext/querytool/templates/footer.html:4
 msgid "About Vital Strategies"
-msgstr ""
+msgstr "About Vital Strategies"
 
 #: ckanext/querytool/templates/header.html:30
 #: ckanext/querytool/templates/querytool/public/base_main.html:14

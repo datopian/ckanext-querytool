@@ -122,19 +122,19 @@ msgstr "取整（例如2k）"
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:84
 #: ckanext/querytool/helpers.py:230
 #, python-format
-msgid "Percentage (0 digit) e.g 25% for 0.25"
+msgid "Percentage (0 digit) e.g 25%% for 0.25"
 msgstr "百分比（整数，例如25%代表0.25）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:88
 #: ckanext/querytool/helpers.py:232
 #, python-format
-msgid "Percentage (1 digit) e.g 25.1% for 0.251"
+msgid "Percentage (1 digit) e.g 25.1%% for 0.251"
 msgstr "百分比（一位小数，例如25.1%代表0.251）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:92
 #: ckanext/querytool/helpers.py:234
 #, python-format
-msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
+msgid "Percentage (2 digit) e.g 25.12%% for 0.2512"
 msgstr "百分比（两位小数，例如25.12%代表0.2512）"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:96
