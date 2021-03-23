@@ -132,7 +132,7 @@
 
               <button class="btn btn-round" href="#embed-{{ querytools[0].name }}" 
               data-module="tool-embed" 
-              data-module-id="{{ querytools[0].id }}" > Share <img src="/base/images/share.svg" width="15"/> </button>
+              data-module-id="{{ querytools[0].id }}" >{{ _('Share') }} <img src="/base/images/share.svg" width="15"/> </button>
              
         </div>
     </div>
@@ -158,7 +158,7 @@
     </style>
     <!-- Visualizations container -->
     <div class="visualizations_">
-      <button type="button" id="scrollBtn">View more</button>
+      <button type="button" id="scrollBtn">{{ _('View more') }}</button>
 
       {% set measure = h.querytool_pick_first_by_attr_value(h.querytool_parse_y_axis_columns(querytool.y_axis_columns), 'name', y_axis_selected, default={}) %}
       {% set measure_label = measure.alias or measure.name %}
@@ -350,7 +350,7 @@
 <div id="embed-{{ querytools[0].id }}" class="modal tool-embed hide">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal">&times;</button>
-    <h3><b>{{ _('Embed query tool view') }}</b></h3>
+    <h3><b>{{ _('Embed report view') }}</b></h3>
   </div>
   <div class="modal-body">
     <p class="embed-content">{{ _('You can copy and paste the embed code') }}</p>

@@ -7,10 +7,10 @@
   {% endif %}
 {% endblock %}
 
-{% block page_header_title %}<h1>Reports</h1>{% endblock %}
+{% block page_header_title %}<h1>{{ _('Reports') }}</h1>{% endblock %}
 
 {% block page_header_description %}
-    <p>List of all reports</p>
+    <p>{{ _('List of all reports') }}</p>
 {% endblock %}
 
 {% block tools %}
@@ -23,7 +23,7 @@
      {% endfor%}
    {% else %}
    <div class="alert alert-danger">
-      <strong>{{ _('There are no applications created') }}</strong>
+      <strong>{{ _('Reports are not published yet in this group') }}</strong>
    </div>
    {% endif %}
 </div>

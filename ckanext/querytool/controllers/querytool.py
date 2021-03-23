@@ -130,9 +130,9 @@ class QueryToolController(base.BaseController):
         try:
             junk = _get_action('querytool_delete', {'name': name})
         except NotFound:
-            abort(404, _('Application not found'))
+            abort(404, _('Report not found'))
 
-        h.flash_success(_('Application and visualizations were '
+        h.flash_success(_('Report and visualizations were '
                           'removed successfully.'))
 
         toolkit.redirect_to('/group/' + _querytool['group'] + '/reports')
@@ -161,7 +161,7 @@ class QueryToolController(base.BaseController):
         _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
-            abort(404, _('Application not found.'))
+            abort(404, _('Report not found.'))
 
         if _querytool is None:
             _querytool = {}
@@ -173,7 +173,7 @@ class QueryToolController(base.BaseController):
                             {'id': _querytool['dataset_name']})
             except NotFound:
                 abort(404, _('The data used for creating this '
-                             'Application has been removed '
+                             'report has been removed '
                              'by the administrator.'))
 
         if toolkit.request.method == 'POST' and not data:
@@ -253,7 +253,7 @@ class QueryToolController(base.BaseController):
                                            errors, error_summary)
             if 'save_data' in data.keys():
                 # redirect to querytools group
-                toolkit.redirect_to('/group/'+_querytool['group']+'/reports')
+                toolkit.redirect_to('/'+h.lang()+'/group/'+_querytool['group']+'/reports')
 
             else:
                 # redirect to manage visualisations
@@ -320,7 +320,7 @@ class QueryToolController(base.BaseController):
         _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
-            abort(404, _('Application not found.'))
+            abort(404, _('Report not found.'))
 
         # Check if the data for this querytool still exists
         if _querytool['dataset_name']:
@@ -329,7 +329,7 @@ class QueryToolController(base.BaseController):
                             {'id': _querytool['dataset_name']})
             except NotFound:
                 abort(404, _('The data used for creating this '
-                             'Application has been removed by '
+                             'report has been removed by '
                              'the administrator.'))
 
         _visualization_items = \
@@ -609,7 +609,7 @@ class QueryToolController(base.BaseController):
                 url = h.url_for('querytool_edit',
                                 querytool='/' + _querytool['name'])
             else:
-                toolkit.redirect_to('/group/'+_querytool['group']+'/reports')
+                h.redirect_to('/'+h.lang()+'/group/'+_querytool['group']+'/reports')
             h.redirect_to(url)
 
         if not data:
@@ -705,7 +705,7 @@ class QueryToolController(base.BaseController):
         querytool = _get_action('querytool_public_read', {'name': name})
 
         if not querytool:
-            abort(404, _('Application not found.'))
+            abort(404, _('Report not found.'))
 
         # only sysadmins or organization members can access private querytool
         if querytool['private'] is True:
@@ -722,11 +722,11 @@ class QueryToolController(base.BaseController):
                             {'id': querytool['dataset_name']})
             except NotFound:
                 abort(404, _('The data used for creating this '
-                             'Application has been removed '
+                             'report has been removed '
                              'by the administrator.'))
 
         if not querytool['visualizations']:
-            abort(404, _('Application not fully set.'))
+            abort(404, _('Report not fully set.'))
 
         params = toolkit.request.params
 

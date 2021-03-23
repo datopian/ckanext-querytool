@@ -4,17 +4,15 @@
       <div class="span6 col1">
         {% block platform %}
         <div class="homepage-box">
-          <h1>{{ _('Portal Development Platform') }}</h1>
+          <h1>{{ _('VIA Data') }}</h1>
           <span>
-            {% trans %}The Portal Development Platform allows public health
-            agencies to design applications that let the public explore and
-            access a diverse range of health data sources.
-            The Platform has a simple interface that minimizes the
-            time dedicated to creating applications while providing
-            the essential visual and interactive elements for public access 
+            {% trans %}VIA Data is a platform that allows Ministries of Health and other public
+            health organizations to publish visual, interactive and accessible data
+            reports from a wide range of health topics. VIA Data has a simple
+            interface that minimizes the time dedicated to creating reports while
+            providing the essential visual and interactive elements for public access
             to data. It was developed on opensource license with minimal
-            technological requirements, minimizing the resources needed for
-            its use and maintenance.{% endtrans %}
+            technological requirements.{% endtrans %}
           </span>
         </div>
         {% endblock %}
@@ -35,25 +33,23 @@
     </div>
     {% block instructions %}
     <div class="homepage-box">
-      <h1>{{ _('How to use the Platform') }}</h1>
+      <h1>{{ _('Using the Platform') }}</h1>
       <div>
         <p>
-          {% trans%}Four main steps are necessary to successfully design an
-          application, with the first one taking place outside the 
-          Platform.{% endtrans %}
+          {% trans%}Internal and public users of the platform have access to different levels
+           of tool functionality.{% endtrans %}
         </p>
         <ul class="list-group how-to-use">
           <li class="list-group-item">
-            <b>{{_('Step 1 - Prepare data')}}</b> <br />
-            {% trans %}Before uploading the data into the Platform, it needs
-            to be cleaned, validated and, depending on its source, transformed
-            into a tabular dataset.{% endtrans %}
+            <b>{{_('Internal users')}}</b> <br />
+            {% trans %}Internal users of the platform, once logged in, can upload and manage new
+            datasets in the <i>Manage Data</i> tab; and create and edit interactive
+            reports in the <i>Design Reports</i> tab.{% endtrans %}
           </li>
           <li class="list-group-item">
-            <b>{{_('Step 2 – Load datasets')}}</b> <br />
-            {% trans %}In the <i>Load datasets</i> tab, the prepared data is
-            uploaded through familiar menus and metadata is filled to help
-            identify and differentiate the datasets.{% endtrans %}
+            <b>{{_('Public users')}}</b> <br />
+            {% trans %}Public users can visualize and interact with published interactive
+            reports accessible via the <i>View Reports</i> tab.{% endtrans %}
           </li>
         </ul>
       </div>

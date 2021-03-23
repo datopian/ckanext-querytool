@@ -1,0 +1,2037 @@
+# Translations template for ckanext-querytool.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the ckanext-querytool
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-querytool 1.2a62\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-04-21 15:00+0600\n"
+"PO-Revision-Date: 2021-03-08 15:35-0500\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: km_KH\n"
+
+#: ckanext/querytool/helpers.py:131
+msgid "Line"
+msgstr "បន្ទាត់ត្រង់"
+
+#: ckanext/querytool/helpers.py:132
+msgid "Bar"
+msgstr "របារ"
+
+#: ckanext/querytool/helpers.py:133
+msgid "Horizontal bar"
+msgstr "របារផ្តេក"
+
+#: ckanext/querytool/helpers.py:134
+msgid "Stacked bar"
+msgstr "របារជង់"
+
+#: ckanext/querytool/helpers.py:135
+msgid "Stacked horizontal bar"
+msgstr "របារផ្ដេកជាជង់"
+
+#: ckanext/querytool/helpers.py:136
+msgid "Area"
+msgstr "វិស័យ"
+
+#: ckanext/querytool/helpers.py:137
+msgid "Spline"
+msgstr "បន្ទាត់កោង"
+
+#: ckanext/querytool/helpers.py:138
+msgid "Donut"
+msgstr "ដូណាត់"
+
+#: ckanext/querytool/helpers.py:139
+msgid "Pie"
+msgstr "ផាយ"
+
+#: ckanext/querytool/helpers.py:140
+msgid "Scatter"
+msgstr "ខ្ចាត់ខ្ចាយ"
+
+#: ckanext/querytool/helpers.py:209
+msgid "Horizontal"
+msgstr "ផ្ដេក"
+
+#: ckanext/querytool/helpers.py:210
+msgid "Diagonal"
+msgstr "អង្កត់ទ្រូង"
+
+#: ckanext/querytool/helpers.py:211
+msgid "Vertical"
+msgstr "បញ្ឈរ"
+
+#: ckanext/querytool/helpers.py:212
+msgid "Reverse"
+msgstr "បញ្ច្រាស"
+
+#: ckanext/querytool/helpers.py:222 ckanext/querytool/helpers.py:510
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:596
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:605
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:614
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:623
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:632
+msgid "Default"
+msgstr "លំនាំដើម"
+
+#: ckanext/querytool/helpers.py:223
+msgid "Integer e.g 2"
+msgstr "ចំនួនគត់ ឧ. ២"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:60
+#: ckanext/querytool/helpers.py:224
+msgid "Decimal (1 digit) e.g 2.5"
+msgstr "ទស្សភាគ (១ ខ្ទង់) ឧ. ២,៥"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:64
+#: ckanext/querytool/helpers.py:225
+msgid "Decimal (2 digit) e.g 2.50"
+msgstr "ទស្សភាគ (២ ខ្ទង់) ឧ. ២,៥០"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:68
+#: ckanext/querytool/helpers.py:226
+msgid "Decimal (3 digit) e.g 2.501"
+msgstr "ទស្សភាគ (៣ ខ្ទង់) ឧ. ២,៥០១"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:72
+#: ckanext/querytool/helpers.py:227
+msgid "Decimal (4 digit) e.g 2.5012"
+msgstr "ទស្សភាគ (៤ ខ្ទង់) ឧ. ២,៥០១២"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:76
+#: ckanext/querytool/helpers.py:228
+msgid "Currency e.g. $2,000"
+msgstr "រូបិយប័ណ្ណ ឧ. ២.០០០ ដុល្លារ"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:80
+#: ckanext/querytool/helpers.py:229
+msgid "Rounded e.g 2k"
+msgstr "បង្គត់ ឧ. ២ពាន់"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:84
+#: ckanext/querytool/helpers.py:230
+#, python-format
+msgid "Percentage (0 digit) e.g 25% for 0.25"
+msgstr "ភាគរយ (០ ខ្ទង់) ឧ. ២៥% សម្រាប់ ០,២៥"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:88
+#: ckanext/querytool/helpers.py:232
+#, python-format
+msgid "Percentage (1 digit) e.g 25.1% for 0.251"
+msgstr "ភាគរយ (១ ខ្ទង់) ឧ។ ២៥.១% សម្រាប់ ០.២៥១"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:92
+#: ckanext/querytool/helpers.py:234
+#, python-format
+msgid "Percentage (2 digit) e.g 25.12% for 0.2512"
+msgstr "ភាគរយ (២ ខ្ទង់) ឧ។ ២៥.១២% សម្រាប់ ០.២៥១២"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:96
+#: ckanext/querytool/helpers.py:236
+msgid "Comma thousands separator (0 digit) e.g 2,512"
+msgstr "សញ្ញាក្បៀសបំបែកចំនួនពាន់ (០ ខ្ទង់) ឧ. ២.៥១២"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:100
+#: ckanext/querytool/helpers.py:238
+msgid "Comma thousands separator (1 digit) e.g 2,512.3"
+msgstr "សញ្ញាក្បៀសបំបែកចំនួនពាន់ (១ ខ្ទង់) ឧ. ២.៥១២,៣"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:104
+#: ckanext/querytool/helpers.py:240
+msgid "Comma thousands separator (2 digit) e.g 2,512.34"
+msgstr "សញ្ញាក្បៀសបំបែកចំនួនពាន់ (២ ខ្ទង់) ឧ. ២.៥១២,៣៤"
+
+#: ckanext/querytool/helpers.py:511
+msgid "Ascending"
+msgstr "ឡើង"
+
+#: ckanext/querytool/helpers.py:512
+msgid "Descending"
+msgstr "ចុះ"
+
+#: ckanext/querytool/controllers/querytool.py:62
+#: ckanext/querytool/controllers/querytool.py:81
+#: ckanext/querytool/controllers/querytool.py:101
+#: ckanext/querytool/controllers/querytool.py:122
+#: ckanext/querytool/controllers/querytool.py:152
+#: ckanext/querytool/controllers/querytool.py:301
+#: ckanext/querytool/controllers/querytool.py:666
+msgid "Not authorized to see this page"
+msgstr "មិនត្រូវបានអនុញ្ញាតឱ្យមើលទំព័រនេះទេ"
+
+#: ckanext/querytool/controllers/querytool.py:127
+msgid "Report not found"
+msgstr "រកមិនឃើញរបាយការណ៍"
+
+#: ckanext/querytool/controllers/querytool.py:129
+msgid "Report and visualizations were removed successfully."
+msgstr "របាយការណ៍ និងរូបភាព ត្រូវបានដកចេញដោយជោគជ័យ។"
+
+#: ckanext/querytool/controllers/querytool.py:157
+#: ckanext/querytool/controllers/querytool.py:306
+#: ckanext/querytool/controllers/querytool.py:658
+msgid "Report not found."
+msgstr "រកមិនឃើញរបាយការណ៍។"
+
+#: ckanext/querytool/controllers/querytool.py:168
+#: ckanext/querytool/controllers/querytool.py:314
+#: ckanext/querytool/controllers/querytool.py:674
+msgid ""
+"The data used for creating this report has been removed by the administrator."
+msgstr "ទិន្នន័យដែលត្រូវបានប្រើសម្រាប់បង្កើតរបាយការណ៍នេះ ត្រូវបានអ្នកគ្រប់គ្រងដកចេញ។"
+
+#: ckanext/querytool/controllers/querytool.py:231
+msgid "Data Successfully updated."
+msgstr "ទិន្នន័យត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។"
+
+#: ckanext/querytool/controllers/querytool.py:564
+msgid "Visualizations Successfully updated."
+msgstr "រូបភាពត្រូវបានធ្វើបច្ចុប្បន្នភាពដោយជោគជ័យ។"
+
+#: ckanext/querytool/controllers/querytool.py:679
+msgid "Report not fully set."
+msgstr "របាយការណ៍មិនទាន់ត្រូវបានកំណត់ពេញលេញទេ។"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:337
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:147
+msgid "Please choose a resource to see available numeric columns."
+msgstr "សូមជ្រើសរើសយកធនធានដើម្បីមើលគូឡោនលេខនព្វន្តដែលមាន។"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:414
+msgid "Maximum number of allowed related reports reached."
+msgstr "បានឈានដល់ចំនួនអនុញ្ញាតអតិបរមានៃរបាយការណ៍ដែលពាក់ព័ន្ធ។"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:438
+msgid "-- Choose resource --"
+msgstr "-- ជ្រើសរើសធនធាន --"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:441
+msgid "Unnamed resource"
+msgstr "ធនធានគ្មានឈ្មោះ"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:472
+msgid "No columns retrieved."
+msgstr "គ្មានគូឡោនដែលទទួលបានមកវិញទេ។"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:476
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:481
+msgid "An error occurred while getting columns."
+msgstr "កំហុសមួយបានកើតឡើង ខណៈពេលកំពុងទាញយកគូឡោន។"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:242
+msgid "Template is invalid"
+msgstr "គំរូមិនត្រឹមត្រូវ"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:260
+msgid "Click to select one or more"
+msgstr "ចុចដើម្បីជ្រើសរើសមួយឬច្រើន"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:271
+msgid "Static Reference Columns: maximum one column per measure"
+msgstr "គូឡោនយោងមិនប្រែប្រួល៖ គូឡោនច្រើនបំផុតចំនួន១ ក្នុងមួយរង្វាស់"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:307
+msgid "Please create at least one visualization."
+msgstr "សូមបង្កើតរូបភាពយ៉ាងហោចណាស់ចំនួនមួយ។"
+
+#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:200
+#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:204
+msgid "Chart could not be created."
+msgstr "មិនអាចបង្កើតតារាងបានទេ។"
+
+#: ckanext/querytool/lib/file_writer_service.py:189
+#, python-format
+msgid "format: must be one of %s"
+msgstr "ទម្រង់៖ ត្រូវតែជាផ្នែកមួយនៃ % s"
+
+#: ckanext/querytool/logic/validators.py:21
+msgid "This report name already exists. Choose another."
+msgstr "ឈ្មោះរបាយការណ៍នេះមានរួចហើយ។ សូមជ្រើសរើសឈ្មោះផ្សេង។"
+
+#: ckanext/querytool/templates/footer.html:4
+msgid "About Vital Strategies"
+msgstr "អំពីអង្គការ Vital Strategies"
+
+#: ckanext/querytool/templates/header.html:30
+#: ckanext/querytool/templates/querytool/public/base_main.html:14
+msgid "Home"
+msgstr "ទំព័រដើម"
+
+#: ckanext/querytool/templates/header.html:34
+msgid "Manage Data"
+msgstr "គ្រប់គ្រងទិន្នន័យ"
+
+#: ckanext/querytool/templates/header.html:35
+msgid "Design Reports"
+msgstr "របាយការណ៍រចនា"
+
+#: ckanext/querytool/templates/header.html:36
+#: ckanext/querytool/templates/querytool/public/querytool_page.html:8
+msgid "View Reports"
+msgstr "មើលរបាយការណ៍"
+
+#: ckanext/querytool/templates/header.html:51
+msgid "Organizations"
+msgstr "អង្គការ"
+
+#: ckanext/querytool/templates/header.html:52
+msgid "Groups"
+msgstr "ក្រុម"
+
+#: ckanext/querytool/templates/header.html:53
+#: ckanext/querytool/templates/home/about.html:3
+#: ckanext/querytool/templates/home/about.html:6
+#: ckanext/querytool/templates/home/about.html:16
+msgid "About"
+msgstr "អំពី"
+
+#: ckanext/querytool/templates/ajax_snippets/break_line_item.html:5
+msgid "Break line"
+msgstr "បន្ទាត់ដាច់ៗ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:28
+msgid "General"
+msgstr "ទូទៅ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:41
+msgid "Type"
+msgstr "ប្រភេទ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:45
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:404
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:13
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:25
+msgid "Dimension"
+msgstr "វិមាត្រ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:62
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:35
+msgid "Category"
+msgstr "ប្រភេទ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:65
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:407
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:16
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:98
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:38
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:53
+msgid "Select column"
+msgstr "ជ្រើសរើសគូឡោន"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:76
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:139
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:90
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:55
+msgid "Size"
+msgstr "ទំហំ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:89
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:56
+msgid "Color"
+msgstr "ពណ៌"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:115
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:17
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
+msgid "Title"
+msgstr "ចំណងជើង"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:117
+msgid "Chart title"
+msgstr "ចំណងជើងតារាង"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
+msgid "Additional Description"
+msgstr "ការពិពណ៌នាបន្ថែម"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:124
+msgid "Additional description"
+msgstr "ការពិពណ៌នាបន្ថែម"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:125
+msgid "Add variable to title"
+msgstr "បន្ថែមអថេរទៅលើចំណងជើង"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:126
+msgid "Capitalized"
+msgstr "អក្សរធំ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:127
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:134
+msgid "Measure"
+msgstr "រង្វាស់"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:131
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:138
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:396
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:95
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:50
+msgid "Optional Filter"
+msgstr "ប្រអប់ជាជម្រើស"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:133
+msgid "lowercase"
+msgstr "អក្សរតូច"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:140
+msgid "Color Section"
+msgstr "ផ្នែកដែលមានពណ៌"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:146
+#, python-format
+msgid ""
+"You can use <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
+"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
+"\"Templates quick reference\">Templates</a> here"
+msgstr ""
+"អ្នកអាចប្រើ <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
+"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
+"\"Templates quick reference\">Templates</a> នៅត្រង់នេះ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:154
+msgid "Color Type"
+msgstr "ប្រភេទពណ៌"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:159
+msgid "X-axis"
+msgstr "អ័ក្ស X"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
+msgid "X axis sorting"
+msgstr "ការបែងចែកអ័ក្ស X"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
+msgid "Label orientation"
+msgstr "ការតំរង់ទិសសញ្ញា"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:206
+msgid "Force label in multiple lines"
+msgstr "បង្ខំសញ្ញាទៅក្នុងជួរជាច្រើន"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:222
+msgid "Max number of text labels"
+msgstr "ចំនួនអតិបរមានៃសញ្ញាអត្ថបទ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:236
+msgid "Y-axis"
+msgstr "អ័ក្ស Y"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:252
+msgid "Y axis title"
+msgstr "ចំណងជើងអ័ក្ស Y"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:254
+msgid "Measure by default"
+msgstr "វាស់តាមលំនាំដើម"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:268
+msgid "Hide title"
+msgstr "លាក់ចំណងជើង"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:284
+msgid "Start from zero"
+msgstr "ចាប់ផ្តើមពីសូន្យ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:302
+msgid "Y axis label format"
+msgstr "ទម្រង់សញ្ញាអ័ក្ស Y"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:320
+msgid "Additional Options"
+msgstr "ជម្រើសបន្ថែម"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:335
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:101
+msgid "Data format"
+msgstr "ទម្រង់ទិន្នន័យ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:355
+msgid "Show data labels"
+msgstr "បង្ហាញសញ្ញាទិន្នន័យ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:366
+msgid "Show legend"
+msgstr "បង្ហាញនិមិត្តសញ្ញា"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:382
+msgid "Show labels as percentages"
+msgstr "បង្ហាញសញ្ញាជាភាគរយ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:398
+msgid "Donut hole"
+msgstr "រន្ធដូណាត់"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:415
+msgid "Bar width"
+msgstr "ទទឹងរបារ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:417
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:107
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:61
+msgid "Default value"
+msgstr "តម្លៃលំនាំដើម"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:420
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:28
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:110
+#: ckanext/querytool/templates/ajax_snippets/public_filter_item.html:28
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:64
+msgid "Select value"
+msgstr "ជ្រើសរើសតម្លៃ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:430
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:119
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:72
+msgid "Filter Label"
+msgstr "សញ្ញាច្រោះ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:432
+msgid "Enter filter Label"
+msgstr "បញ្ចូលសញ្ញាច្រោះ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:438
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:128
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:80
+msgid "Filter visibility"
+msgstr "ការមើលឃើញមុខងារច្រោះ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:441
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:49
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:131
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:83
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:83
+msgid "Public"
+msgstr "សាធារណៈ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:442
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:50
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:132
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:84
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:83
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:21
+msgid "Private"
+msgstr "ឯកជន"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:455
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:497
+msgid "Static Reference"
+msgstr "សេចក្តីយោងមិនប្រែប្រួល"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:468
+msgid "Static Reference Columns"
+msgstr "គូឡោនយោងមិនប្រែប្រួល"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:495
+msgid "Static Reference Label"
+msgstr "សញ្ញាយោងមិនប្រែប្រួល"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:509
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:561
+msgid "Dynamic Reference"
+msgstr "សេចក្តីយោងថាមវ័ន្ត"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:522
+msgid "Dynamic Reference Type"
+msgstr "ប្រភេទឯកសារយោងថាមវ័ន្ត"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:525
+msgid "Select type"
+msgstr "ជ្រើសរើសប្រភេទ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:543
+msgid "Dynamic Reference Factor"
+msgstr "មេគុណយោងថាមវ័ន្ត"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:559
+msgid "Dynamic Reference Label"
+msgstr "សញ្ញាយោងថាមវ័ន្ត"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:575
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:7
+#: ckanext/querytool/templates/ajax_snippets/image_item.html:5
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:150
+#: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:14
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:135
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:21
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
+msgid "Delete"
+msgstr "លុប"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:576
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:136
+#: ckanext/querytool/templates/querytool/public/read.html:106
+msgid "Update"
+msgstr "ធ្វើបច្ចុប្បន្នភាព"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:25
+msgid "Default Value"
+msgstr "តម្លៃលំនាំដើម"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:37
+msgid "Label"
+msgstr "សញ្ញា"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:41
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:123
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:76
+msgid "Enter filter label"
+msgstr "បញ្ចូលសញ្ញាច្រោះ"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:46
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:80
+msgid "Visibility"
+msgstr "ការមើលឃើញ"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:16
+msgid "Map resource"
+msgstr "ធនធានផែនទី"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:19
+msgid "Select map resource"
+msgstr "ជ្រើសរើសធនធានផែនទី"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:35
+msgid "Title field"
+msgstr "ប្រអប់ចំណងជើង"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:38
+msgid "Select title field"
+msgstr "ជ្រើសប្រអប់ចំណងជើង"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:49
+msgid "Map key field"
+msgstr "ប្រអប់សំខាន់ៗរបស់ផែនទី"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:52
+msgid "Select map key field"
+msgstr "ជ្រើសរើសប្រអប់សំខាន់ៗរបស់ផែនទី"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:63
+msgid "Data key field"
+msgstr "ប្រអប់ទិន្នន័យសំខាន់ៗ"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:66
+msgid "Select data key field"
+msgstr "ជ្រើសរើសប្រអប់ទិន្នន័យសំខាន់ៗ"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:76
+msgid "Color scheme"
+msgstr "គម្រោងកំណត់ពណ៌"
+
+#: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:8
+msgid "Edit"
+msgstr "កែសម្រួល"
+
+#: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:18
+msgid "Related Report"
+msgstr "របាយការណ៍ពាក់ព័ន្ធ"
+
+#: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:21
+msgid "Select Report"
+msgstr "ជ្រើសរើសរបាយការណ៍"
+
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:19
+msgid "Table title"
+msgstr "ចំណងជើងតារាង"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
+msgid "Content"
+msgstr "ខ្លឹមសារ"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
+msgid "Description"
+msgstr "ការពិពណ៌នា"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:7
+msgid "VIA Data"
+msgstr "VIA Data"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:9
+msgid ""
+"VIA Data is a platform that allows Ministries of Health and other public "
+"health organizations to publish visual, interactive and accessible data "
+"reports from a wide range of health topics. VIA Data has a simple interface "
+"that minimizes the time dedicated to creating reports while providing the "
+"essential visual and interactive elements for public access to data. It was "
+"developed on opensource license with minimal technological requirements."
+msgstr ""
+"VIA Data គឺជាវេទិកាមួយដែលអនុញ្ញាតឱ្យក្រសួងសុខាភិបាល និងអង្គការសុខភាពសាធារណៈដទៃទៀត "
+"បោះពុម្ពផ្សាយរបាយការណ៍ទិន្នន័យដែលមានរូបភាពបង្ហាញ របាយការណ៍ទិន្នន័យអន្តរកម្ម និងរបាយការណ៍ទិន្នន័យ "
+"ដែលអាចចូលមើលបាន អំពីប្រធានបទសុខភាពជាច្រើនផ្សេងៗគ្នា។ VIA Data មាន អ៊ីនធឺហ្វេសមួយដ៏សាមញ្ញ "
+"ដែលកាត់បន្ថយពេលវេលាក្នុងការបង្កើតរបាយការណ៍ និង "
+"ស្របពេលជាមួយគ្នានោះក៏ផ្តល់ផងដែរនូវធាតុដែលមានរូបភាពបង្ហាញ និងមានអន្តរកម្ម "
+"ដែលចាំបាច់សម្រាប់សាធារណជនទទួលបានទិន្នន័យ។ "
+"វាត្រូវបានបង្កើតឡើងដោយប្រើប្រាស់អាជ្ញាប័ណ្ណប្រភពបើកចំហរ ជាមួយនឹងតម្រូវការបច្ចេកវិទ្យាតិចតួចបំផុត។"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:22
+msgid "Using the Platform"
+msgstr "ការប្រើប្រាស់វេទិកា"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:24
+msgid ""
+"Internal and public users of the platform have access to different levels of "
+"tool functionality."
+msgstr ""
+"អ្នកប្រើខាងក្នុង និងអ្នកប្រើប្រាស់សាធារណៈនៃវេទិកានេះ "
+"មានលទ្ធភាពចូលប្រើមុខងាររបស់ឧបករណ៍ក្នុងកម្រិតផ្សេងៗគ្នា។"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:27
+msgid "Internal users"
+msgstr "អ្នកប្រើប្រាស់ខាងក្នុង"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:28
+msgid ""
+"Internal users of the platform, once logged in, can upload and manage new "
+"datasets in the <i>Manage Data</i> tab; and create and edit interactive "
+"reports in the <i>Design Reports</i> tab."
+msgstr ""
+"អ្នកប្រើប្រាស់ផ្ទៃក្នុងនៃវេទិកាដែលបានចូលរួចហើយអាចបង្ហោះ និងគ្រប់គ្រងកម្រងទិន្នន័យថ្មីនៅក្នុងផ្ទាំង "
+"<i>គ្រប់គ្រងទិន្នន័យ</i> ព្រមទាំងបង្កើត និងកែសម្រួលរបាយការណ៍ដែលមានលក្ខណៈអន្តរកម្ម នៅក្នុងផ្ទាំង "
+"<i>របាយការណ៍រចនា</i>។"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:31
+msgid "Public users"
+msgstr "អ្នកប្រើប្រាស់សាធារណៈ"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:32
+msgid ""
+"Public users can visualize and interact with published interactive reports "
+"accessible via the <i>View Reports</i> tab."
+msgstr ""
+"អ្នកប្រើប្រាស់សាធារណៈអាចមើល និងធ្វើអន្តរកម្មជាមួយរបាយការណ៍អន្តរកម្មដែលបានផ្សព្វផ្សាយ "
+"ដោយអាចចូលមើលបានតាមរយៈផ្ទាំង <i>ទំព័រដើម</i>។"
+
+#: ckanext/querytool/templates/home/snippets/about_text.html:1
+msgid ""
+"<p>Online access to public health data is generally limited. Most countries "
+"do not have an integrated tool for public users to access their data and "
+"although some have well-developed tools, they often have limited "
+"functionality or complicated interfaces. To make it easier for public health "
+"agencies to publish their data, Vital Strategies, as part of the Data for "
+"Health Initiative, created VIA Data. VIA Data is a platform to create "
+"visual, interactive and accessible data reports with easy-to-use tools for "
+"(1) uploading and managing data and (2) designing visually attractive "
+"reports with such data. </p> <p>VIA Data has features and benefits aimed at "
+"simplifying its use and minimizing the human, physical and monetary "
+"resources required for its operation. Benefits of the platform include: "
+"developed in opensource language which makes improvements and customizations "
+"free and easy to share; focus placed on essential visual and interactive "
+"elements that prioritize public access to data; ease-of-use for "
+"administrators and public users; and scalability of functions and content to "
+"support different types of data sources and audiences.</p> <p><a href="
+"\"https://www.vitalstrategies.org\">Vital Strategies </a> is a global public "
+"health organization whose goal is to strengthen public health systems. Vital "
+"Strategies partners with governments to design and implement public health "
+"initiatives that bridge the gap between public health needs and solutions, "
+"especially in low- and middle- income countries. It operates in every region "
+"in the world.</p> <p><a href=\"https://www.bloomberg.org/program/public-"
+"health/data-health/\">The Data for Health Initiative</a> co-funded by "
+"Bloomberg Philanthropies and the Australian government, aims to help "
+"governments use data strategically to target resources and policies that "
+"will translate into saving lives and improved health.</p> <p> <a href="
+"\"https://www.datopian.com\">Datopian</a> is an open data solutions provider "
+"spun off from Open Knowledge. Datopian provides services and products for "
+"governments, institutions, and local authorities to publish open data, such "
+"as: CKAN hosting, CKAN technical support, custom open data website and CKAN "
+"extension development.</p> </p> "
+msgstr ""
+"<p> ជាទូទៅ ការចូលប្រើប្រាស់ទិន្នន័យសុខភាព     សាធារណៈតាមអនឡាញ តែងមានកម្រិត។ "
+"ប្រទេសភាគច្រើន គ្មានឧបករណ៍រួមបញ្ចូលគ្នាសម្រាប់អ្នកប្រើប្រាស់សាធារណៈចូលប្រើទិន្នន័យរបស់ពួកគេទេ "
+"ហើយទោះបីជាប្រទេសមួយចំនួន មានឧបករណ៍ដែលត្រូវបានអភិវឌ្ឍន៍ល្អក៏ដោយ "
+"ឧបករណ៍ទាំងនោះតែងមានមុខងារមានកម្រិត ឬ មានអ៊ីនធឺហ្វេសស្មុគស្មាញ។ "
+"ដើម្បីផ្តល់ភាពងាយស្រួលដល់ភ្នាក់ងារសុខាភិបាល    សាធារណៈក្នុងការបោះពុម្ពផ្សាយទិន្នន័យរបស់ពួកគេ "
+"អង្គការ Vital Strategies បានបង្កើតទិន្នន័យ VIA "
+"ក្នុងលក្ខណៈជាផ្នែកមួយនៃទិន្នន័យសម្រាប់គំនិតផ្តួចផ្តើម សុខភាព (Data for Health Initiative)។ "
+"VIA Data គឺជាវេទិកាមួយ ដើម្បីបង្កើតរបាយការណ៍ទិន្នន័យដែលមានរូបភាពបង្ហាញ មានលក្ខណៈអន្តរកម្ម "
+"និងអាចចូលមើលបាន ជាមួយនឹងឧបករណ៍ងាយប្រើប្រាស់សម្រាប់ (១) បង្ហោះ និងគ្រប់គ្រងទិន្នន័យ និង (២) "
+"រចនារបាយការណ៍ដែលមានរូបភាពបង្ហាញប្រកបដោយភាពទាក់ទាញ ដោយប្រើប្រាស់ទិន្នន័យបែបនេះ។ </p> <p> "
+"VIA Data មានលក្ខណៈពិសេស និងគុណប្រយោជន៍ ដើម្បីសម្រួលដល់ការប្រើប្រាស់ និងកាត់បន្ថយធនធានមនុស្ស "
+"ធនធានរូបវ័ន្ត និងធនធានហិរញ្ញវត្ថុដែលត្រូវការដើម្បីធ្វើប្រតិបត្តិការ។ អត្ថប្រយោជន៍នៃវេទិកានេះ "
+"រួមមាន៖ ត្រូវបានអភិវឌ្ឍឡើងដោយប្រើភាសានៅក្នុងកម្មវិធីប្រភពបើកចំហរ ដែលនាំឱ្យការកែលម្អ "
+"និងការកែសម្រួលទៅតាមការចង់បាន អាចធ្វើឡើងដោយឥតគិតថ្លៃ និងងាយស្រួលចែករំលែក, "
+"ផ្តោតលើធាតុសំខាន់ៗដែលមានរូបភាពបង្ហាញ និង មានលក្ខណៈអន្តរកម្ម "
+"ដែលផ្តល់អាទិភាពជូនសាធារណជនអាចចូលចូលប្រើទិន្នន័យបាន, "
+"ភាពងាយស្រួលនៃការប្រើប្រាស់សម្រាប់អ្នកគ្រប់គ្រង និងអ្នកប្រើប្រាស់       សាធារណៈ "
+"ព្រមទាំងលទ្ធភាពក្នុងការពង្រីកមុខងារនិងមាតិកាដើម្បីគាំទ្រដល់ប្រភពទិន្នន័យ "
+"និងទស្សនិកជនប្រភេទផ្សេងៗគ្នា។ </p> <p> <a  href=\"https://www.vitalstrategies.org"
+"\">  អង្គការ Vital Strategies </a> គឺជាអង្គការសុខភាព         សាធារណៈសកលមួយ "
+"ដែលមានគោលដៅពង្រឹងប្រព័ន្ធសុខភាពសាធារណៈ។ អង្គការ Vital Strategies "
+"ចាប់ដៃគូជាមួយរដ្ឋាភិបាលដើម្បីរចនា និងអនុវត្តគំនិតផ្តួចផ្តើមសុខភាពសាធារណៈ ដែលភ្ជិត        "
+"គម្លាតរវាងតម្រូវការសុខភាពសាធារណៈនិងដំណោះស្រាយ ជាពិសេសនៅបណ្តាប្រទេសដែលមានចំណូលទាប និងមធ្យម។ "
+"អង្គការនេះមានប្រតិបត្តិការនៅគ្រប់តំបន់ទាំងអស់ក្នុងពិភពលោក។ </p> <p> <a href=\"https://www."
+"bloomberg.org/program/public-health/data-health/\">  "
+"គំនិតផ្តួចផ្តើមទិន្នន័យសម្រាប់សុខភាព </a> សហហិរញ្ញប្បទានដោយ Bloomberg Philanthropies "
+"និងរដ្ឋាភិបាលអូស្រ្តាលីមានគោលបំណងជួយដល់រដ្ឋាភិបាលក្នុងការប្រើប្រាស់ទិន្នន័យក្នុងលក្ខណៈជាយុទ្ធសាស្ត្រ "
+"ដើម្បីតម្រង់      ទិសដៅធនធាន និងគោលនយោបាយដែលនឹងប្រែក្លាយទៅជាការជួយសង្គ្រោះជីវិត "
+"និងកែលម្អសុខភាព។ </p> <p> <a href=\"https://www.datopian.com\">Datopian</a> "
+"គឺជាអ្នកផ្តល់បច្ចេកវិទ្យាទិន្នន័យប្រភពបើកចំហរ ដែលបំបែកចេញពីចំណេះដឹងបើកចំហរ។ Datopian "
+"ផ្តល់សេវាកម្ម និងផលិតផលសម្រាប់រដ្ឋាភិបាល ស្ថាប័ន និងអាជ្ញាធរមូលដ្ឋាន "
+"ដើម្បីផ្សព្វផ្សាយទិន្នន័យបើកចំហរដូចជាការបង្ហោះ CKAN ការគាំទ្របច្ចេកទេស CKAN "
+"គេហទំព័រទិន្នន័យបើកចំហរផ្ទាល់ខ្លួន និង ការអភិវឌ្ឍextension សម្រាប់ CKAN។ </p> </p> "
+
+#: ckanext/querytool/templates/group/index.html:24
+#: ckanext/querytool/templates/group/index.html:27
+#: ckanext/querytool/templates/group/read_base.html:6
+#: ckanext/querytool/templates/group/report_index.html:24
+#: ckanext/querytool/templates/group/report_index.html:28
+msgid "Reports"
+msgstr "របាយការណ៍"
+
+#: ckanext/querytool/templates/group/snippets/group_form.html:21
+msgid "Additional description of the group..."
+msgstr "ការពិពណ៌នាបន្ថែមនៃក្រុម"
+
+#: ckanext/querytool/templates/macros/form.html:126
+#, python-format
+msgid ""
+"You can use <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
+"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
+"\">Markdown formatting</a> here"
+msgstr ""
+"អ្នកអាចប្រើ <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
+"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
+"\">Markdown formatting</a> នៅត្រង់នេះ"
+
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "This field is required"
+msgstr "ចន្លោះនេះត្រូវតែបំពេញ"
+
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "Custom"
+msgstr "ផ្ទាល់ខ្លួន"
+
+#: ckanext/querytool/templates/macros/form.html:290
+msgid "The form contains invalid entries:"
+msgstr "ទម្រង់នេះមានចន្លោះមិនត្រឹមត្រូវសម្រាប់បញ្ចូលព័ត៌មាន៖"
+
+#: ckanext/querytool/templates/macros/form.html:395
+msgid "Required field"
+msgstr "ចន្លោះដែលត្រូវបំពេញ"
+
+#: ckanext/querytool/templates/macros/form.html:410
+msgid "http://example.com/my-image.jpg"
+msgstr "http://example.com/my-image.jpg"
+
+#: ckanext/querytool/templates/macros/form.html:411
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:33
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:47
+msgid "Report Icon"
+msgstr "រូបតំណាង របាយការណ៍"
+
+#: ckanext/querytool/templates/macros/form.html:412
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:31
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:39
+msgid "Image"
+msgstr "រូបភាព"
+
+#: ckanext/querytool/templates/macros/form.html:424
+msgid "Clear Upload"
+msgstr "សម្អាតការបង្ហោះ"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:6
+msgid "Source"
+msgstr "ប្រភព"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:6
+msgid "http://example.com/dataset.json"
+msgstr "http://example.com/dataset.json"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:10
+msgid "Author"
+msgstr "អ្នកនិពន្ធ"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:10
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:16
+msgid "Joe Bloggs"
+msgstr "Joe Bloggs"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:12
+msgid "Author Email"
+msgstr "អ្នកសរសេរអ៊ីមែល"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:12
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:18
+msgid "joe@example.com"
+msgstr "joe@example.com"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:16
+msgid "Maintainer"
+msgstr "អ្នករក្សា"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:18
+msgid "Maintainer Email"
+msgstr "អ្នករក្សាអ៊ីម៉ែល"
+
+#: ckanext/querytool/templates/querytool/admin/base_edit_data.html:11
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:34
+msgid "Edit data"
+msgstr "កែទិន្នន័យ"
+
+#: ckanext/querytool/templates/querytool/admin/base_edit_data.html:14
+#: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:12
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:10
+#: ckanext/querytool/templates/querytool/admin/base_list.html:8
+msgid "Reports Folders"
+msgstr "ហ្វូលឌ័ររបាយការណ៍"
+
+#: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:9
+msgid "Manage Visualizations"
+msgstr "គ្រប់គ្រងរូបភាពបង្ហាញ"
+
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:6
+#: ckanext/querytool/templates/querytool/admin/base_list.html:4
+msgid "New Interactive Report"
+msgstr "របាយការណ៍អន្តរកម្មថ្មី"
+
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:18
+#: ckanext/querytool/templates/querytool/admin/base_list.html:24
+msgid "New Report"
+msgstr "របាយការណ៍ថ្មី"
+
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:40
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:41
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:42
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:43
+#: ckanext/querytool/templates/querytool/admin/base_list.html:13
+msgid "Other"
+msgstr "ផ្សេងៗ"
+
+#: ckanext/querytool/templates/querytool/admin/base_list.html:30
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
+msgid "Main"
+msgstr "មេ"
+
+#: ckanext/querytool/templates/querytool/admin/base_list.html:36
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
+msgid "Related"
+msgstr "ពាក់ព័ន្ធ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:31
+msgid "Basic info"
+msgstr "ព័ត៌មានមូលដ្ឋាន"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
+msgid "Title of the interactive report"
+msgstr "ចំណងជើងរបាយការណ៍អន្តរកម្ម"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
+msgid "URL"
+msgstr "URL"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
+msgid "eg. my-report"
+msgstr "ឧ. របាយការណ៍របស់ខ្ញុំ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
+msgid "Main Description"
+msgstr "ការពិពណ៌នាចម្បង"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
+msgid ""
+"Start the first line with # to identify the publicly visible title. Add "
+"other optional text in a new line."
+msgstr "ប្រើពាក្យបញ្ជា markdown ដើម្បីកែសម្រួលអត្ថបទ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:43
+msgid "Additional description for the report..."
+msgstr "ការពិពណ៌នាបន្ថែមសម្រាប់របាយការណ៍"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Report Caption"
+msgstr "រាយការណ៍ ចំណងជើងរង"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Caption for reports"
+msgstr "ចំណងជើងសម្រាប់របាយការណ៍"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
+msgid "Public Folder"
+msgstr "ហ្វូលឌ័រឯកសារសាធារណៈ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:57
+msgid "Organization"
+msgstr "អង្គការ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:67
+msgid "Settings"
+msgstr "ការកំណត់"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:70
+msgid "Report Type"
+msgstr "ប្រភេទរបាយការណ៍"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:101
+msgid "Add Related Report"
+msgstr "បន្ថែមរបាយការណ៍ពាក់ព័ន្ធ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:105
+msgid "Select dataset and resource"
+msgstr "ជ្រើសរើសកម្រងទិន្នន័យ និងធនធាន"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:108
+msgid "Dataset"
+msgstr "កម្រងទិន្នន័យ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:111
+msgid "Choose Dataset"
+msgstr "ជ្រើសរើសកម្រងទិន្នន័យ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:125
+msgid "Resource"
+msgstr "ធនធាន"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:129
+msgid "Measure(s)"
+msgstr "រង្វាស់"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:140
+msgid "Selection Label"
+msgstr "សញ្ញាជ្រើសរើស"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:149
+msgid "Optional label"
+msgstr "សញ្ញាជម្រើស"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:150
+msgid "Filter(s)"
+msgstr "ការច្រោះ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:165
+msgid "Add Filter"
+msgstr "បន្ថែមការច្រោះ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:171
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:35
+msgid "Save"
+msgstr "រក្សាទុក"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:172
+msgid "Add/Edit Visualizations"
+msgstr "បន្ថែម / កែសម្រួលរូបភាពបង្ហាញ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:32
+#: ckanext/querytool/templates/querytool/admin/snippets/stages.html:12
+msgid "Visualizations"
+msgstr "រូបភាពបង្ហាញ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:42
+msgid "Default measure"
+msgstr "រង្វាស់លំនាំដើម"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Visualization type"
+msgstr "ប្រភេទរូបភាពបង្ហាញ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "— Select type —"
+msgstr "- ជ្រើសរើសប្រភេទ -"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Chart"
+msgstr "តារាង"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Map"
+msgstr "ផែនទី"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Text box"
+msgstr "ប្រអប់អត្ថបទ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Table"
+msgstr "តារាង"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:52
+msgid "Add visualization"
+msgstr "បន្ថែមរូបភាពបង្ហាញ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:27
+msgid "Used dataset:"
+msgstr "កម្រងទិន្នន័យដែលបានប្រើ៖"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:28
+msgid "Type:"
+msgstr "ប្រភេទ៖"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:31
+msgid "Edit filters and data"
+msgstr "កែសម្រួលការច្រោះ និងទិន្នន័យ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:32
+msgid "Edit visualizations"
+msgstr "កែសម្រួលរូបភាពបង្ហាញ"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:33
+msgid "View"
+msgstr "មើល"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
+msgid "Are you sure you want to delete this Report?"
+msgstr "តើអ្នកពិតជាចង់លុបរបាយការណ៍នេះ មែនទេ?"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/stages.html:9
+msgid "Report data"
+msgstr "ទិន្នន័យរបាយការណ៍"
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:33
+msgid "Welcome"
+msgstr "សូមស្វាគមន៍"
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:54
+msgid "See tools"
+msgstr "មើលឧបករណ៍"
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:91
+msgid "See Tools"
+msgstr "មើលឧបករណ៍"
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:112
+msgid "See all tools"
+msgstr "មើលឧបករណ៍ទាំងអស់"
+
+#: ckanext/querytool/templates/querytool/public/list.html:26
+msgid "Reports are not published yet in this group"
+msgstr "របាយការណ៍មិនទាន់ត្រូវបានផ្សព្វផ្សាយនៅក្នុងក្រុមនេះនៅឡើយ"
+
+#: ckanext/querytool/templates/querytool/public/read.html:64
+msgid "Displayed Measure"
+msgstr "រង្វាស់ដែលបង្ហាញឱ្យឃើញ"
+
+#: ckanext/querytool/templates/querytool/public/read.html:81
+msgid "Download"
+msgstr "ទាញយក"
+
+#: ckanext/querytool/templates/querytool/public/read.html:157
+msgid "View more"
+msgstr "មើល​ច្រើន​ទៀត"
+
+#: ckanext/querytool/templates/querytool/public/read.html:130
+#: ckanext/querytool/templates/querytool/public/read.html:292
+msgid "Download image"
+msgstr "ទាញយករូបភាព"
+
+#: ckanext/querytool/templates/querytool/public/read.html:251
+msgid "Share"
+msgstr "ចែករំលែក"
+
+#: ckanext/querytool/templates/querytool/public/read.html:256
+msgid "Copy"
+msgstr "ចម្លង"
+
+#: ckanext/querytool/templates/querytool/public/read.html:268
+msgid "Embed"
+msgstr "បង្កប់"
+
+#: ckanext/querytool/templates/querytool/public/read.html:274
+msgid "Embed report view"
+msgstr "បង្កប់ការមើលរបាយការណ៍"
+
+#: ckanext/querytool/templates/querytool/public/read.html:277
+msgid "You can copy and paste the embed code"
+msgstr "អ្នកអាចចម្លងកូដបង្កប់ទៅដាក់កន្លែងផ្សេងបាន"
+
+#: ckanext/querytool/templates/querytool/public/read.html:280
+msgid "Width"
+msgstr "ទទឹង"
+
+#: ckanext/querytool/templates/querytool/public/read.html:283
+msgid "Height"
+msgstr "កម្ពស់"
+
+#: ckanext/querytool/templates/querytool/public/read.html:286
+msgid "Code"
+msgstr "លេខកូដ"
+
+#: ckanext/querytool/templates/querytool/public/snippets/query_tool_list_item.html:29
+msgid "Go to tool"
+msgstr "ទៅឧបករណ៍"
+
+#: ckanext/querytool/templates/snippets/language_selector.html:3
+msgid "Language"
+msgstr "ភាសា"
+
+#: ckanext/querytool/templates/snippets/language_selector.html:11
+msgid "Go"
+msgstr "ទៅ"
+
+#: Added manually
+msgid "Single color"
+msgstr "ពណ៌តែមួយ"
+
+#: Added manually
+msgid "Diverging"
+msgstr "ការបង្វែរ"
+
+#: Added manually
+msgid "What are Reports?"
+msgstr "ក្រុមបានរកឃើញ"
+
+#: Added manually
+msgid "Interactive data access reports make it easier for public users to find a fact and visualize data. They are ideal to present information from large data sources but can be developed with any type of data."
+msgstr ""
+"របាយការណ៍ចូលប្រើទិន្នន័យ "
+"អន្តរកម្មធ្វើឱ្យងាយស្រួលសម្រា "
+"ប់អ្នកប្រើប្រាស់សាធារណៈក្នុង "
+"ការស្វែងរកការពិតនិងអាចមើ "
+"លឃើញទិន្នន័យ។ "
+"ពួកវាល្អសម្រាប់ការបង្ហាញព័ត៌ "
+"មានពីប្រភពទិន្នន័យធំ ៗ "
+"ប៉ុន្តែអាចត្រូវបានអភិវឌ្ឍជាមួ "
+"យប្រភេទទិន្នន័យណាមួយ។"
+
+#: Added manually
+msgid "Variables"
+msgstr "អថេរ"
+
+#: Added manually
+msgid "use drop-down list to select variables based on application filters"
+msgstr "ប្រើបញ្ជីទម្លាក់ចុះដើម្បីជ្រើសអថេរផ្អែកលើតម្រងកម្មវិធី"
+
+#: Added manually
+msgid "etc"
+msgstr ""
+
+#: Added manually
+msgid "Processed variables"
+msgstr "អថេរដំណើរការ"
+
+#: Added manually
+msgid "Full templates syntax"
+msgstr "វាក្យសម្ព័ន្ធ templates ពេញ"
+
+#: Added manually
+msgid "Please note:"
+msgstr "សូម​ចំណាំ:"
+
+#: Added manually
+msgid "Single braces '{}' are used for variables"
+msgstr "ដង្កៀបទោល '{}' ត្រូវបានប្រើសម្រាប់អថេរ"
+
+#: Added manually
+msgid "Templates quick reference"
+msgstr "Templates ឯកសារយោងរហ័ស"
+
+#: Added manually
+msgid "You can use"
+msgstr "អ្នកអាចប្រើ"
+
+#: Added manually
+msgid "Templates"
+msgstr "Templates"
+
+#: Added manually
+msgid "here"
+msgstr "នៅទីនេះះ"
+
+#: Added manually
+msgid "Markdown quick reference"
+msgstr "Markdown ឯកសារយោងរហ័ស"
+
+#: Added manually
+msgid "Markdown formatting"
+msgstr "Markdown ការធ្វើទ្រង់ទ្រាយ"
+
+#: Added manually
+msgid "Full markdown syntax"
+msgstr "សញ្ញា markdown វាក្យសម្ព័ន្"
+
+#: Added manually
+msgid "Bold text"
+msgstr "អត្ថបទដិត"
+
+#: Added manually
+msgid "italic text"
+msgstr "អត្ថបទទ្រេត"
+
+#: Added manually
+msgid "or"
+msgstr "ឬ"
+
+#: Added manually
+msgid "HTML tags are stripped out for security reasons"
+msgstr "ស្លាក HTML ត្រូវបានដកចេញដោយហេតុផលសុវត្ថិភាព"
+
+#: ckan/templates/snippets/search_result_text.html:17
+msgid "{number} dataset found"
+msgid_plural "{number} datasets found"
+msgstr[0] "រកឃើញការប្រមូលទិន្នន័យ {number}"
+msgstr[1] "ការប្រមូលទិន្នន័យចំនួន {number} ត្រូវបានរកឃើញ"
+
+#: ckan/templates/group/read.html:21 ckan/templates/organization/read.html:25
+#: ckan/templates/snippets/search_form.html:3
+msgid "Search datasets..."
+msgstr "ស្វែងរកបណ្តុំទិន្នន័យ"
+
+#: ckan/templates/organization/read.html:5
+#: ckan/templates/package/search.html:16
+#: ckan/templates/user/dashboard_datasets.html:7
+msgid "Add Dataset"
+msgstr "បន្ថែមការប្រមូលទិន្នន័យ"
+
+#: ckan/templates/group/read.html:15 ckan/templates/organization/read.html:19
+#: ckan/templates/package/search.html:29
+#: ckan/templates/snippets/sort_by.html:14
+#: ckanext/example_idatasetform/templates/package/search.html:12
+msgid "Relevance"
+msgstr "ភាពពាក់ព័ន្"
+
+#: ckan/templates/group/read.html:18
+#: ckan/templates/organization/bulk_process.html:99
+#: ckan/templates/organization/read.html:22
+#: ckan/templates/package/search.html:32
+#: ckan/templates/package/snippets/resource_form.html:51
+#: ckan/templates/snippets/sort_by.html:17
+#: ckanext/example_idatasetform/templates/package/search.html:15
+msgid "Last Modified"
+msgstr "បានកែប្រែចុងក្រោយ"
+
+#: ckan/lib/activity_streams.py:60
+msgid "{actor} added the tag {tag} to the dataset {dataset}"
+msgstr "{actor} បានបន្ថែមស្លាក {tag} ទៅសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:63
+msgid "{actor} updated the group {group}"
+msgstr "{actor} បានធ្វើបច្ចុប្បន្នភាពក្រុម {group}"
+
+#: ckan/lib/activity_streams.py:66
+msgid "{actor} updated the organization {organization}"
+msgstr "{actor} បានធ្វើឱ្យទាន់សម័យអង្គការ {organization}"
+
+#: ckan/lib/activity_streams.py:69
+msgid "{actor} updated the dataset {dataset}"
+msgstr "{actor} បានធ្វើបច្ចុប្បន្នភាពសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:72
+msgid "{actor} changed the extra {extra} of the dataset {dataset}"
+msgstr "{actor} បានផ្លាស់ប្តូរបន្ថែម {extra} នៃសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:75
+msgid "{actor} updated the resource {resource} in the dataset {dataset}"
+msgstr "{actor} បានធ្វើបច្ចុប្បន្នភាពធនធាន {resource} នៅក្នុងសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:78
+msgid "{actor} updated their profile"
+msgstr "{actor} បានបន្ទាន់សម័យរូបភាពព័ត៌មានផ្ទាល់ខ្លួនរបស់ពួកគេ"
+
+#: ckan/lib/activity_streams.py:81
+msgid "{actor} deleted the group {group}"
+msgstr "{actor} បានលុបក្រុម {group}"
+
+#: ckan/lib/activity_streams.py:84
+msgid "{actor} deleted the organization {organization}"
+msgstr "{actor} deleted the organization {organization}"
+
+#: ckan/lib/activity_streams.py:87
+msgid "{actor} deleted the dataset {dataset}"
+msgstr "បានលុបអង្គការ"
+
+#: ckan/lib/activity_streams.py:90
+msgid "{actor} deleted the extra {extra} from the dataset {dataset}"
+msgstr "{actor} បានលុប {extra} ពីសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:93
+msgid "{actor} deleted the resource {resource} from the dataset {dataset}"
+msgstr "{actor} បានលុបធនធាន {resource} ពីសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:97
+msgid "{actor} created the group {group}"
+msgstr "{actor} បង្កើតក្រុម {group}"
+
+#: ckan/lib/activity_streams.py:100
+msgid "{actor} created the organization {organization}"
+msgstr "{actor} បានបង្កើតអង្គការ {organization}"
+
+#: ckan/lib/activity_streams.py:103
+msgid "{actor} created the dataset {dataset}"
+msgstr "{actor} បានបង្កើតសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:106
+msgid "{actor} added the extra {extra} to the dataset {dataset}"
+msgstr "{actor} បានបន្ថែម {extra} ទៅក្នុងសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:109
+msgid "{actor} added the resource {resource} to the dataset {dataset}"
+msgstr "{actor} បានបន្ថែមធនធាន {resource} ទៅក្នុងសំណុំទិន្នន័យ {dataset}"
+
+#: ckan/lib/activity_streams.py:112
+msgid "{actor} signed up"
+msgstr "{actor} បានចុះឈ្មោះ"
+
+#: ckan/lib/activity_streams.py:115
+msgid "{actor} removed the tag {tag} from the dataset {dataset}"
+msgstr "{actor} បានដកស្លាក {tag} បានដកស្លាក {dataset}"
+
+#: ckan/lib/activity_streams.py:118
+msgid "{actor} started following {dataset}"
+msgstr "{actor} បានចាប់ផ្តើមធ្វើតាម {dataset}"
+
+#: ckan/lib/activity_streams.py:121
+msgid "{actor} started following {user}"
+msgstr "{actor} បានចាប់ផ្តើមធ្វើតាម {user}"
+
+#: ckan/lib/activity_streams.py:124
+msgid "{actor} started following {group}"
+msgstr "{actor} ចាប់ផ្តើមដើរតាម {group}"
+
+#: ckan/lib/formatters.py:116
+msgid "{mins} minute ago"
+msgid_plural "{mins} minutes ago"
+msgstr[0] "{mins} នាទីមុន"
+msgstr[1] "{mins} នាទីមុន"
+
+#: ckan/lib/formatters.py:119
+msgid "{hours} hour ago"
+msgid_plural "{hours} hours ago"
+msgstr[0] "{hours} ម៉ោងមុន"
+msgstr[1] "{hours} ម៉ោងមុន"
+
+#: ckan/lib/formatters.py:128
+msgid "{months} month ago"
+msgid_plural "{months} months ago"
+msgstr[0] "{months} ខែ​កន្លងទៅ"
+msgstr[1] "{months} ខែមុន"
+
+#: ckan/lib/formatters.py:130
+msgid "over {years} year ago"
+msgid_plural "over {years} years ago"
+msgstr[0] "ជាង {years} ឆ្នាំហើយ"
+msgstr[1] "ជាង {years} ឆ្នាំមកហើយ"
+
+#: ckan/templates/snippets/context/user.html:23
+#: ckan/templates/user/read_base.html:57
+msgid "Edits"
+msgstr "ការកែប្រែ"
+
+#: ckan/templates/user/dashboard.html:19 ckan/templates/user/dashboard.html:37
+msgid "News feed"
+msgstr "មតិព័ត៌មាន"
+
+#: ckan/templates/user/dashboard.html:20
+#: ckan/templates/user/dashboard_datasets.html:12
+msgid "My Datasets"
+msgstr "សំណុំទិន្នន័យរបស់ខ្"
+
+#: ckan/templates/user/dashboard.html:21
+#: ckan/templates/user/dashboard_organizations.html:12
+msgid "My Organizations"
+msgstr "អង្គការរបស់ខ្"
+
+#: ckan/templates/user/dashboard.html:22
+#: ckan/templates/user/dashboard_groups.html:12
+msgid "My Groups"
+msgstr "ក្រុមរបស់ខ្"
+
+#: ckan/templates/user/dashboard.html:39
+msgid "Activity from items that I'm following"
+msgstr "សកម្មភាពពីធាតុដែលខ្ញុំកំពុងតាមដាន"
+
+#: ckan/templates/user/dashboard_datasets.html:17
+#: ckan/templates/user/read.html:14
+msgid "You haven't created any datasets."
+msgstr "អ្នកមិនបានបង្កើតសំណុំទិន្នន័យណាមួយទេ។"
+
+#: ckan/templates/user/dashboard_datasets.html:19
+#: ckan/templates/user/dashboard_groups.html:22
+#: ckan/templates/user/dashboard_organizations.html:23
+#: ckan/templates/user/read.html:16
+msgid "Create one now?"
+msgstr "បង្កើតមួយឥឡូវនេះ?"
+
+#: ckan/templates/user/dashboard_groups.html:20
+msgid "You are not a member of any groups."
+msgstr "អ្នកមិនមែនជាសមាជិកនៃក្រុមណាមួយទេ។"
+
+#: ckan/templates/user/dashboard_organizations.html:21
+msgid "You are not a member of any organizations."
+msgstr "អ្នកមិនមែនជាសមាជិកនៃអង្គការណាមួយទេ។"
+
+#: ckan/templates/user/edit.html:6 ckan/templates/user/edit_base.html:3
+#: ckan/templates/user/list.html:6 ckan/templates/user/list.html:13
+#: ckan/templates/user/read_base.html:5 ckan/templates/user/read_base.html:8
+#: ckan/templates/user/snippets/user_search.html:2
+msgid "Users"
+msgstr "អ្នកប្រើប្រាស់"
+
+#: ckan/templates/user/edit.html:17
+msgid "Account Info"
+msgstr "ព័ត៌មាន​គណនី"
+
+#: ckan/templates/user/edit.html:19
+msgid ""
+" Your profile lets other CKAN users know about who you are and what you do. "
+msgstr ""
+" ពត៌មានផ្ទាល់ខ្លួនរបស់អ្ន "
+"កអាចអោយអ្នកប្រើប្រាស់់ CKAN "
+"ផ្សេងទៀតដឹងថាអ្នកជាន "
+"រណានិងអ្នកធ្វើអ្វី។"
+
+#: ckan/templates/user/edit_user_form.html:7
+msgid "Change details"
+msgstr "ផ្លាស់ប្តូរព័ត៌មានលម្អិត"
+
+#: ckan/templates/user/edit_user_form.html:14
+msgid "A little information about yourself"
+msgstr "ព័ត៌មានតិចតួចអំពីខ្លួនអ្នក"
+
+#: ckan/templates/user/edit_user_form.html:29
+msgid "Sysadmin Password"
+msgstr "ពាក្យសម្ងាត់"
+
+#: ckan/templates/user/edit_user_form.html:45
+msgid "Are you sure you want to delete this User?"
+msgstr "តើអ្នកប្រាកដជាចង់លុបអ្នកប្រើនេះឬ?"
+
+#: ckan/templates/user/edit_user_form.html:50
+msgid "Are you sure you want to regenerate the API key?"
+msgstr "តើអ្នកពិតជាចង់បង្កើតលេខកូដ API ឡើងវិញឬ?"
+
+#: ckan/templates/user/edit_user_form.html:50
+msgid "Regenerate API Key"
+msgstr "បង្កើតលេខកូដ API ឡើងវិញ"
+
+#: ckan/templates/user/edit_user_form.html:54
+msgid "Update Profile"
+msgstr "ព័ត៌មានថ្មីៗ"
+
+#: ckan/public/base/javascript/modules/confirm-action.js:102
+#: ckan/templates/user/new_user_form.html:9
+#: ckan/templates/user/perform_reset.html:21
+msgid "Confirm"
+msgstr "បញ្ជាក់"
+
+#: ckan/public/base/javascript/modules/confirm-action.js:103
+#: ckan/public/base/javascript/modules/resource-reorder.js:59
+#: ckan/public/base/javascript/modules/resource-view-reorder.js:53
+#: ckan/templates/admin/confirm_reset.html:9
+#: ckan/templates/group/confirm_delete.html:14
+#: ckan/templates/group/confirm_delete_member.html:15
+#: ckan/templates/organization/confirm_delete.html:14
+#: ckan/templates/organization/confirm_delete_member.html:15
+#: ckan/templates/package/confirm_delete.html:15
+#: ckan/templates/package/confirm_delete_resource.html:14
+msgid "Cancel"
+msgstr "បោះបង់"
+
+#: ckan/templates/header.html:26
+#, python-format
+msgid "Dashboard (%(num)d new item)"
+msgid_plural "Dashboard (%(num)d new items)"
+msgstr[0] "ផ្ទាំងគ្រប់គ្រង (ធាតុថ្ %(num)d)"
+msgstr[1] "ផ្ទាំងគ្រប់គ្រង (របស់ថ្ %(num)d)"
+
+#: ckan/templates/header.html:43 ckan/templates/header.html:45
+msgid "Log out"
+msgstr "ចាកចេញ"
+
+#: ckan/templates/header.html:56 ckan/templates/user/logout_first.html:15
+msgid "Log in"
+msgstr "ចូល"
+
+#: ckan/templates/header.html:12
+msgid "Sysadmin settings"
+msgstr "ការកំណត់អ្នកគ្រប់គ្រង"
+
+#: ckan/templates/header.html:19
+msgid "View profile"
+msgstr "មើលប្រវត្តិរូប"
+
+#: ckan/templates/header.html:29 ckan/templates/user/dashboard.html:6
+msgid "Dashboard"
+msgstr "ផ្ទាំងគ្រប់គ្រង"
+
+#: ckan/templates/snippets/search_result_text.html:23
+msgid "{number} group found"
+msgid_plural "{number} groups found"
+msgstr[0] "រកឃើញក្រុម {number}"
+msgstr[1] "{number} ក្រុមបានរកឃើញ"
+
+#: ckan/templates/snippets/search_result_text.html:24
+msgid "No groups found"
+msgstr "រកមិនឃើញក្រុម"
+
+#: ckan/templates/snippets/search_result_text.html:29
+msgid "{number} organization found"
+msgid_plural "{number} organizations found"
+msgstr[0] "រកឃើញអង្គការ {number}"
+msgstr[1] "បានរកឃើញអង្គការចំនួន {number}"
+
+#: ckan/templates/snippets/search_result_text.html:30
+msgid "No organizations found"
+msgstr "រកមិនឃើញអង្គការ"
+
+#: ckan/templates/snippets/social.html:5
+msgid "Social"
+msgstr "សង្គម"
+
+#: ckan/templates/snippets/subscribe.html:2
+msgid "Subscribe"
+msgstr "ជាវ"
+
+#: ckanext/querytool/templates/admin/config.html:9
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "Welcome Page Title"
+msgstr "ចំណងជើងនៃទំព័រស្វាគមន៍"
+
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "The title presented to users on the home page."
+msgstr "ចំណងជើងដែលបង្ហាញដល់អ្នកប្រើប្រាស់នៅលើទំព័រដើម។"
+
+#: ckanext/querytool/templates/admin/config.html:10
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "Welcome Page Description"
+msgstr "ការពិពណ៌នាអំពីទំព័រស្វាគមន៍"
+
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "The description presented to users on the home page."
+msgstr "ការពិពណ៌នាដែលបង្ហាញដល់អ្នកប្រើប្រាស់នៅលើទំព័រដើម។"
+
+#: ckan/controllers/admin.py:58
+msgid "Homepage"
+msgstr "ទំព័រដើម"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Column Width"
+msgstr "ទំហំទទឹងគូឡោន"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Half"
+msgstr "ពាក់កណ្តាល"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Full"
+msgstr "ពេញ"
+
+#: ckan/templates/macros/autoform.html:62
+msgid "Site logo"
+msgstr "រូបសញ្ញាគេហទំព័រ"
+
+#: ckan/templates/group/index.html:20 ckan/templates/group/read.html:16
+#: ckan/templates/organization/bulk_process.html:97
+#: ckan/templates/organization/index.html:20
+#: ckan/templates/organization/read.html:20
+#: ckan/templates/package/search.html:30
+#: ckan/templates/snippets/search_form.html:4
+#: ckan/templates/snippets/simple_search.html:10
+#: ckan/templates/snippets/sort_by.html:15
+#: ckanext/example_idatasetform/templates/package/search.html:13
+msgid "Name Ascending"
+msgstr "ឈ្មោះឡើង"
+
+#: ckan/templates/group/index.html:20 ckan/templates/group/read.html:17
+#: ckan/templates/organization/bulk_process.html:98
+#: ckan/templates/organization/index.html:20
+#: ckan/templates/organization/read.html:21
+#: ckan/templates/package/search.html:31
+#: ckan/templates/snippets/search_form.html:4
+#: ckan/templates/snippets/simple_search.html:10
+#: ckan/templates/snippets/sort_by.html:16
+#: ckanext/example_idatasetform/templates/package/search.html:14
+msgid "Name Descending"
+msgstr "ឈ្មោះចុះ"
+
+#: ckan/templates/group/snippets/helper.html:4
+msgid "What are Groups?"
+msgstr "តើក្រុមជាអ្វី?"
+
+#: ckan/templates/group/snippets/helper.html:8
+msgid ""
+" You can use CKAN Groups to create and manage collections of datasets. This "
+"could be to catalogue datasets for a particular project or team, or on a "
+"particular theme, or as a very simple way to help people find and search "
+"your own published datasets. "
+msgstr ""
+" អ្នកអាចប្រើក្រុម CKAN ដើម្បីបង្កើត និងគ្រប់គ្រងការប្រមូល កម្រងទិន្នន័យ។ "
+"នេះអាចជាការធ្វើតារាងទិន្នន័យ សម្រាប់គម្រោង ឬ ក្រុមការងារជាក់លាក់មួយ ឬលើប្រធានបទជាក់លាក់មួយ ឬ "
+"ជាមធ្យោបាយសាមញ្ញមួយដើម្បី ជួយដល់មនុស្សក្នុងការរក និង ស្វែងរកកម្រងទិន្នន័យ ដែលបានផ្សព្វផ្សាយ។ "
+
+#: ckan/templates/group/index.html:20
+msgid "Search groups..."
+msgstr "ស្វែងរកក្រុម ..."
+
+#: ckan/templates/header.html:117 ckan/templates/home/snippets/search.html:11
+#: ckan/templates/snippets/simple_search.html:5
+#: ckan/templates/user/snippets/user_search.html:6
+msgid "Search"
+msgstr "ស្វែងរក"
+
+#: Added
+msgid "Order by"
+msgstr "បញ្ជាទិញតាម"
+
+#: ckan/templates/group/snippets/group_item.html:38
+#: ckan/templates/group/snippets/group_item.html:39
+#, fuzzy
+msgid "View {name}"
+msgstr "មើល {name}"
+
+#: ckan/templates/group/snippets/group_item.html:32
+#: ckan/templates/organization/snippets/organization_item.html:31
+#: ckanext/example_theme_docs/v10_custom_snippet/templates/snippets/example_theme_most_popular_groups.html:23
+#: ckanext/example_theme_docs/v11_HTML_and_CSS/templates/snippets/example_theme_most_popular_groups.html:22
+#, fuzzy
+msgid "{num} Dataset"
+msgid_plural "{num} Datasets"
+msgstr[0] ""
+"{num} កម្រងទិន្នន័យ"
+"{num} កម្រងទិន្នន័យ"
+
+#: ckan/templates/group/snippets/group_item.html:34
+#: ckan/templates/organization/snippets/organization_item.html:33
+#: ckanext/example_theme_docs/v10_custom_snippet/templates/snippets/example_theme_most_popular_groups.html:25
+#: ckanext/example_theme_docs/v11_HTML_and_CSS/templates/snippets/example_theme_most_popular_groups.html:24
+msgid "0 Datasets"
+msgstr "0 កម្រងទិន្នន័យ"
+
+#: ckan/templates/package/snippets/resources_list.html:30
+msgid "This dataset has no data"
+msgstr "កម្រងទិន្នន័យនេះមិនមានទិន្នន័យទេ"
+
+#: ckan/templates/snippets/package_item.html:57
+msgid "This dataset has no description"
+msgstr "កម្រងទិន្នន័យនេះមិនមានការពិពណ៌នាទេ"
+
+#: ckan/templates/package/search.html:60
+#, python-format
+msgid ""
+" You can also access this registry using the %(api_link)s (see "
+"%(api_doc_link)s). "
+msgstr ""
+" អ្នកក៏អាចចូលប្រើបញ្ជីនេះបានដែរ ដោយប្រើ %(api_link)s (សូមមើល %(api_doc_link) s)។ "
+
+#: ckan/templates/footer.html:16
+msgid "CKAN Association"
+msgstr "សមាគម CKAN"
+
+#: ckan/templates/footer.html:24
+msgid ""
+"<strong>Powered by</strong> <a class=\"hide-text ckan-footer-logo\" href="
+"\"http://ckan.org\">CKAN</a>"
+msgstr ""
+"<strong> គាំទ្រដោយ </strong> <a class=\"hide-text ckan-footer-logo\" href="
+"\"http://ckan.org\"> CKAN </a>"
+
+#: ckan/templates/footer.html:9
+msgid "About {0}"
+msgstr "អំពី {0}"
+
+#: ckan/templates/package/snippets/resource_item.html:23
+msgid "Explore"
+msgstr "រុករក"
+
+#: ckan/templates/group/edit.html:7 ckan/templates/group/edit_base.html:4
+#: ckan/templates/group/edit_base.html:13
+#: ckan/templates/group/read_base.html:12
+#: ckan/templates/organization/edit_base.html:11
+#: ckan/templates/organization/read_base.html:12
+#: ckan/templates/package/read_base.html:14
+#: ckan/templates/package/resource_read.html:31 ckan/templates/user/edit.html:8
+#: ckan/templates/user/edit_base.html:3 ckan/templates/user/read_base.html:14
+msgid "Manage"
+msgstr "គ្រប់គ្រង"
+
+#: ckan/templates/group/activity_stream.html:3
+#: ckan/templates/group/activity_stream.html:6
+#: ckan/templates/group/read_base.html:18
+#: ckan/templates/organization/activity_stream.html:3
+#: ckan/templates/organization/activity_stream.html:6
+#: ckan/templates/organization/read_base.html:18
+#: ckan/templates/package/activity.html:3
+#: ckan/templates/package/activity.html:6
+#: ckan/templates/package/read_base.html:21
+#: ckan/templates/user/activity_stream.html:3
+#: ckan/templates/user/activity_stream.html:6
+#: ckan/templates/user/read_base.html:20
+msgid "Activity Stream"
+msgstr "ចរន្តសកម្មភាព"
+
+#: ckan/templates/package/snippets/additional_info.html:2
+#: ckan/templates/snippets/additional_info.html:7
+msgid "Additional Info"
+msgstr "ព័ត៌មានបន្ថែម"
+
+#: ckan/templates/package/resource_read.html:144
+msgid "Additional Information"
+msgstr "ព័ត៌មានបន្ថែម"
+
+#: ckan/templates/package/resource_read.html:148
+#: ckan/templates/package/snippets/additional_info.html:6
+#: ckan/templates/revision/diff.html:43
+#: ckan/templates/snippets/additional_info.html:11
+msgid "Field"
+msgstr "ចន្លោះ"
+
+#: ckan/templates/package/resource_read.html:149
+#: ckan/templates/package/snippets/additional_info.html:7
+#: ckan/templates/snippets/additional_info.html:12
+msgid "Value"
+msgstr "តម្លៃ"
+
+#: ckan/templates/package/resource_read.html:154
+msgid "Data last updated"
+msgstr "ទិន្នន័យបានធ្វើបច្ចុប្បន្នភាពចុងក្រោយ"
+
+#: ckan/templates/package/resource_read.html:155
+#: ckan/templates/package/resource_read.html:159
+#: ckan/templates/package/resource_read.html:163
+#: ckan/templates/package/resource_read.html:167
+msgid "unknown"
+msgstr "មិនស្គាល់"
+
+#: ckan/templates/package/resource_read.html:158
+msgid "Metadata last updated"
+msgstr "ទិន្នន័យមេតាដែតា ត្រូវបានធ្វើបច្ចុប្បន្នភាពចុងក្រោយ"
+
+#: ckan/templates/package/resource_read.html:162
+#: ckan/templates/package/snippets/additional_info.html:70
+msgid "Created"
+msgstr "បានបង្កើត"
+
+#: ckan/templates/package/resource_read.html:166
+#: ckan/templates/package/snippets/resource_form.html:37
+#: ckan/templates/package/snippets/resource_info.html:16
+msgid "Format"
+msgstr "ទម្រង់"
+
+#: ckan/templates/package/snippets/additional_info.html:56
+#: ckan/templates/package/snippets/package_basic_fields.html:108
+#: ckan/templates/user/read_base.html:91
+msgid "State"
+msgstr "រដ្ឋ"
+
+#: ckan/templates/package/snippets/additional_info.html:62
+msgid "Last Updated"
+msgstr "ធ្វើបច្ចុប្បន្នភាពចុងក្រោយ"
+
+#: ckan/public/base/javascript/modules/follow.js:69
+#: ckan/templates/snippets/follow_button.html:9
+msgid "Unfollow"
+msgstr "មិនតាមដាន"
+
+#: ckan/public/base/javascript/modules/follow.js:72
+#: ckan/templates/snippets/follow_button.html:14
+msgid "Follow"
+msgstr "តាមដាន"
+
+#: ckan/public/base/javascript/modules/image-upload.js:60
+msgid "Link"
+msgstr "តំណភ្ជាប់"
+
+#: ckan/public/base/javascript/modules/image-upload.js:61
+msgid "Link to a URL on the internet (you can also link to an API)"
+msgstr "ភ្ជាប់ទៅ URL នៅលើអ៊ីនធឺណិត (អ្នកក៏អាចភ្ជាប់ទៅ API ផងដែរ)"
+
+#: ckan/public/base/javascript/modules/image-upload.js:68
+msgid "Upload"
+msgstr "ផ្ទុក"
+
+#: ckan/public/base/javascript/modules/image-upload.js:72
+#: ckan/templates/group/snippets/group_item.html:43
+#: ckan/templates/macros/form.html:235
+#: ckan/templates/snippets/search_form.html:68
+msgid "Remove"
+msgstr "យកចេញ"
+
+#: ckan/public/base/javascript/modules/image-upload.js:87
+msgid "Upload a file on your computer"
+msgstr "ផ្ទុកឯកសារទៅក្នុងកុំព្យូទ័ររបស់អ្នក"
+
+#: ckan/templates/snippets/organization.html:48
+msgid "There is no description for this organization"
+msgstr "មិនមានការពិពណ៌នាសម្រាប់ស្ថាប័ននេះទេ"
+
+#: ckan/templates/group/followers.html:3 ckan/templates/group/followers.html:6
+#: ckan/templates/group/snippets/info.html:32
+#: ckan/templates/package/followers.html:3
+#: ckan/templates/package/followers.html:6
+#: ckan/templates/package/snippets/info.html:23
+#: ckan/templates/snippets/context/group.html:13
+#: ckan/templates/snippets/context/user.html:15
+#: ckan/templates/snippets/organization.html:55
+#: ckan/templates/user/followers.html:3 ckan/templates/user/followers.html:7
+#: ckan/templates/user/read_base.html:49
+#: ckanext/example_theme_docs/v18_snippet_api/templates/ajax_snippets/example_theme_popover.html:12
+msgid "Followers"
+msgstr "អ្នកតាមដាន"
+
+#: ckan/templates/admin/config.html:33
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This "
+"is the logo that appears in the header of all the CKAN instance templates.</"
+"p> <p><strong>About:</strong> This text will appear on this CKAN instances "
+"<a href=\"%(about_url)s\">about page</a>.</p> <p><strong>Intro Text:</"
+"strong> This text will appear on this CKAN instances <a href=\"%(home_url)s"
+"\">home page</a> as a welcome to visitors.</p> <p><strong>Custom CSS:</"
+"strong> This is a block of CSS that appears in <code>&lt;head&gt;</code> tag "
+"of every page. If you wish to customize the templates more fully we "
+"recommend <a href=\"%(docs_url)s\" target=\"_blank\">reading the "
+"documentation</a>.</p> <p><strong>Homepage:</strong> This is for choosing a "
+"predefined layout for the modules that appear on your homepage.</p> "
+msgstr ""
+" <p> <strong> ចំណងជើងគេហទំព័រ៖ </strong> នេះជាចំណងជើង នៃទម្រង CKAN នេះ "
+"វាបង្ហាញឱ្យឃើញ នៅកន្លែងផ្សេងៗគ្នា នៅទូទាំង "
+" CKAN។ </p> <p> <strong> រចនាបទ៖ </strong> "
+"ជ្រើសរើសពីបញ្ជី បំរែបំរួលសាមញ្ញនៃ ប្រភពពណ៌ចម្បង "
+"ដើម្បីធ្វើឱ្យធីមផ្ទាល់ ខ្លួនមានដំណើរការ ឆាប់រហ័ស។ </p> <p> <strong> "
+"រូបសញ្ញាស្លាក គេហទំព័រ៖ </strong> នេះគឺជារូបសញ្ញា "
+"ដែលបង្ហាញនៅផ្នែក ក្បាលនៃទម្រង់ CKAN ទាំងអស់។ </p> "
+"<p> <strong> អំពី៖ </strong> អត្ថបទនេះនឹងបង្ហា ញនៅលើទម្រង់ "
+"CKAN នេះ <a href=\"%(about_url)s\"> អំពីទំព័រ </"
+"a>.</p> <p> <strong> អត្ថបទផ្តើម៖ </strong> អត្ថបទនេះនឹងបង្ "
+"ហាញនៅលើទម្រង់ CKAN នេះ <a href=\"%(home_url)s\"> "
+"ទំព័រដើម </a> ជាការស្វាគមន៍ចំពោះ អ្នកទស្សនា។ </p> <p> <"
+"strong> CSS ផ្ទាល់ខ្លួន៖ </strong> នេះជាបណ្តុំនៃ CSS ដែលមាននៅក្នុង "
+"<code>&lt;head&gt;</code> ស្លាកនៃទំព័រនីមួយៗ។ "
+"ប្រសិនបើអ្នកចង់ប្ តូរទម្រង់ឱ្យបាន ពេញលេញជាងនេះ យើងសូមណែនាំ "
+"<a href=\"%(docs_url)s\" target=\"_blank\"> អានឯកសារ "
+"</a>.</p> <p> <strong> គេហទំព័រ៖ </strong> "
+"នេះគឺដើម្បីជ្រើសរើស ប្លង់ដែលបាន កំណត់ជាមុនសម្រាប់ ម៉ូឌុលដែលបង្ហាញ "
+"លើទំព័រដើមរបស់អ្នក។ </p> "
+
+#: ckan/templates/admin/index.html:20
+#, python-format
+msgid ""
+" <p>As a sysadmin user you have full control over this CKAN instance. "
+"Proceed with care!</p> <p>For guidance on using sysadmin features, see the "
+"CKAN <a href=\"%(docs_url)s\" target=\"_blank\">sysadmin guide</a></p> "
+msgstr ""
+" <p>ក្នុងនាមជាអ្នកប្រើ ប្រាស់ក្រោមសមាសភាព ជាអ្នកគ្រប់គ្រងប្រព័ន្ធ អ្នកអាចគ្រប់គ្រងលើ វត្ថុទម្រង់ CKAN "
+"នេះបាន។ សូមបន្តប្រើដោយ យកចិត្តទុកដាក់! </p> <p> "
+"សម្រាប់ការណែនាំអំពី ការប្រើប្រាស់លក្ខណៈ ពិសេសរបស់ អ្នកគ្រប់គ្រងប្រព័ន្ធ សូមមើល CKAN <a href="
+"\"%(docs_url)s\" target=\"_blank\">មគ្គុទ្ទេសក៍ណែនាំ សម្រាប់អ្នកគ្រប់គ្រង ប្រព័ន្ធ </a> </p> "
+
+#: ckan/templates/admin/index.html:15
+msgid "Administer CKAN"
+msgstr "គ្រប់គ្រង CKAN"
+
+#: ckan/templates/page.html:6
+msgid "Skip to content"
+msgstr "រំលងទៅមាតិកា"
+
+#: ckan/templates/activity_streams/activity_stream_items.html:9
+msgid "Load less"
+msgstr "ផ្ទុកតិច"
+
+#: ckan/templates/activity_streams/activity_stream_items.html:17
+msgid "Load more"
+msgstr "ផ្ទុកបន្ថែម"
+
+#: ckan/templates/activity_streams/activity_stream_items.html:23
+msgid "No activities are within this activity stream"
+msgstr "មិនមានសកម្មភាពនៅក្នុងចរន្តសកម្មភាពនេះទេ"
+
+#: ckan/templates/admin/base.html:3
+msgid "Administration"
+msgstr "រដ្ឋបាល"
+
+#: ckan/templates/admin/base.html:8
+msgid "Sysadmins"
+msgstr "អ្នកគ្រប់គ្រងប្រព័ន្ធ"
+
+#: ckan/templates/admin/base.html:9
+msgid "Config"
+msgstr "កំណត់រចនាសម្ព័ន្ធ"
+
+#: ckan/templates/admin/base.html:10 ckan/templates/admin/trash.html:29
+msgid "Trash"
+msgstr "សំរាម"
+
+#: ckan/templates/admin/config.html:16
+#: ckan/templates/admin/confirm_reset.html:7
+msgid "Are you sure you want to reset the config?"
+msgstr "តើអ្នកពិតជាចង់កែប្រែរចនាសម្ព័ន្ធសម្រាប់ការកំណត់ឡើងវិញឬ?"
+
+#: ckan/templates/admin/config.html:16
+msgid "Reset"
+msgstr "កំណត់ឡើងវិញ"
+
+#: ckan/templates/admin/config.html:17
+msgid "Update Config"
+msgstr "ធ្វើបច្ចុប្បន្នភាពទៅលើការកំណត់រចនាសម្ព័ន្ធ"
+
+#: ckan/templates/admin/config.html:26
+msgid "CKAN config options"
+msgstr "ជម្រើសសម្រាប់កំណត់រចនាសម្ព័ន្ធ CKAN"
+
+#: ckan/templates/admin/confirm_reset.html:3
+#: ckan/templates/admin/confirm_reset.html:10
+msgid "Confirm Reset"
+msgstr "បញ្ជាក់អំពីការកំណត់ឡើងវិញ"
+
+#: ckan/templates/admin/trash.html:20
+msgid "Purge"
+msgstr "បំបាត់"
+
+#: ckan/templates/admin/trash.html:32
+msgid " <p>Purge deleted datasets forever and irreversibly.</p> "
+msgstr " <p> បំបាត់ទិន្នន័យដែលបានលុបចោលជារៀងរហូតនិងមិនអាចត្រឡប់វិញបាន. </p> "
+
+#: ckan/templates/user/read_base.html:82 ckan/templates/user/read_base.html:96
+msgid "This means only you can see this"
+msgstr "នេះមានន័យថា មានតែអ្នកប៉ុណ្ណោះដែលអាចមើលឃើញ"
+
+#: ckan/templates/user/read_base.html:87
+msgid "Member Since"
+msgstr "សមាជិកតាំងពី"
+
+#: ckan/templates/user/read_base.html:96
+msgid "API Key"
+msgstr "គន្លឹះ API"
+
+#: ckan/templates/user/snippets/followee_dropdown.html:14
+#: ckan/templates/user/snippets/followee_dropdown.html:15
+msgid "Activity from:"
+msgstr "សកម្មភាពពី៖"
+
+#: ckan/templates/user/snippets/followee_dropdown.html:23
+msgid "Search list..."
+msgstr "បញ្ជីស្វែងរក ..."
+
+#: ckan/templates/user/snippets/followee_dropdown.html:44
+msgid "You are not following anything"
+msgstr "អ្នកពុំមានតាមដានអ្វីទាំងអស់"
+
+#: ckan/templates/user/snippets/followers.html:9
+msgid "No followers"
+msgstr "គ្មានអ្នកតាមដាន"
+
+#: ckan/templates/user/snippets/user_search.html:5
+msgid "Search Users"
+msgstr "ស្វែងរកអ្នកប្រើប្រាស់"
+
+#: ckan/templates/user/request_reset.html:6
+msgid "Password reset"
+msgstr "កំណត់ពាក្យសម្ងាត់ឡើងវិញ"
+
+#: ckan/templates/user/request_reset.html:19
+msgid "Request reset"
+msgstr "ស្នើសុំកំណត់ឡើងវិញ"
+
+#: ckan/templates/user/read.html:21
+msgid "User hasn't created any datasets."
+msgstr "អ្នកប្រើប្រាស់មិនបានបង្កើតកម្រងទិន្នន័យណាមួយទេ។"
+
+#: ckan/templates/user/read_base.html:39
+msgid "You have not provided a biography."
+msgstr "អ្នកមិនបានផ្តល់ជីវប្រវត្តិទេ។"
+
+#: ckan/templates/user/read_base.html:41
+msgid "This user has no biography."
+msgstr "អ្នកប្រើប្រាស់នេះមិនមានជីវប្រវត្តិទេ។"
