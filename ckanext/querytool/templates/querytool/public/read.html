@@ -324,7 +324,7 @@
         {% if item.type != 'text_box' %}
           {% set caption = querytool.report_caption %}
 
-          <div class="report_caption">{{ caption or h.full_current_url() }}</div>
+          <div class="report_caption">{{ caption or '' }}</div>
 
           {% set additional_description = h.render_markdown(h.get_translated(item, 'additional_description'), True, True) %}
 
