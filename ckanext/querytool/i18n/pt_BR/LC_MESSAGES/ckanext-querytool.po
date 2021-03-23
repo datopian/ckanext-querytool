@@ -956,6 +956,14 @@ msgstr "Use a markdown para editar o texto."
 msgid "Additional description for the report..."
 msgstr "Descrição adicional para o relatório..."
 
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Report Caption"
+msgstr "Legenda para relatórios"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Caption for reports"
+msgstr "Legenda para relatórios"
+
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Public Folder"
 msgstr "Pasta pública"

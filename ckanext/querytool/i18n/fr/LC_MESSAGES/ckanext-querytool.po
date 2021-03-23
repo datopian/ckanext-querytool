@@ -962,6 +962,14 @@ msgstr "Utiliser le markup pour modifier le texte."
 msgid "Additional description for the report..."
 msgstr "Description supplémentaire du rapport..."
 
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Report Caption"
+msgstr "Légende du rapport"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Caption for reports"
+msgstr "Légende des rapports"
+
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Public Folder"
 msgstr "Dossier Public"

@@ -828,7 +828,7 @@ msgstr "http://example.com/my-image.jpg"
 #: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:33
 #: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:47
 msgid "Report Icon"
-msgstr "រូបតំណាងរបាយការណ៍"
+msgstr "រូបតំណាង របាយការណ៍"
 
 #: ckanext/querytool/templates/macros/form.html:412
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
@@ -948,6 +948,14 @@ msgstr "ប្រើពាក្យបញ្ជា markdown ដើម្បី�
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:43
 msgid "Additional description for the report..."
 msgstr "ការពិពណ៌នាបន្ថែមសម្រាប់របាយការណ៍"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Report Caption"
+msgstr "រាយការណ៍ ចំណងជើងរង"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Caption for reports"
+msgstr "ចំណងជើងសម្រាប់របាយការណ៍"
 
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Public Folder"

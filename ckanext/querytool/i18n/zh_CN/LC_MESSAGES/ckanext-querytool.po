@@ -933,6 +933,14 @@ msgstr "第一行以＃开头，以标注公开可见的标题。您可以使用
 msgid "Additional description for the report..."
 msgstr "报告的附加说明"
 
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Report Caption"
+msgstr "报告标题"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Caption for reports"
+msgstr "报告标题"
+
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Public Folder"
 msgstr "公用文件夹"

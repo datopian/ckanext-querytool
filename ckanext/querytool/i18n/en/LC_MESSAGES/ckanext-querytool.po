@@ -960,6 +960,14 @@ msgstr ""
 msgid "Additional description for the report..."
 msgstr "Additional description for the report..."
 
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Report Caption"
+msgstr "Report Caption"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Caption for reports"
+msgstr "Caption for reports"
+
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
 msgid "Public Folder"
 msgstr "Public Folder"

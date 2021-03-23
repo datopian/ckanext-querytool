@@ -46,7 +46,7 @@ Example usage:
   {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
   {% set is_url = data.image_url and data.image_url.startswith('http') %}
 
-  {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload, upload_label='Report Icon', url_label='Report Icon URL') }}
+  {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload, upload_label=_('Report Icon'), url_label=_('Report Icon URL')) }}
   {{ form.input('icon', id='field-icon', classes=['hidden'], label=_('Fontawsome Icon'), placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
 
   <div class="control-group">
