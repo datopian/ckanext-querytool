@@ -434,6 +434,17 @@
                </div>
             </div>
 
+            {# Show annotations #}
+            {% if chart %}
+              {% set show_annotations = chart.show_annotations %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_show_annotations_{{ n }}">{{ _('Show annotations') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_show_annotations_{{ n }}" type="checkbox" name="chart_field_show_annotations_{{ n }}" value="{{ show_annotations }}"{% if show_annotations=='false' %}{% else %}checked{% endif %}>
+               </div>
+            </div>
+
             {# Show values as percentages (pie and donut charts only) #}
             {% if chart %}
               {% set show_labels_as_percentages = chart.show_labels_as_percentages %}
