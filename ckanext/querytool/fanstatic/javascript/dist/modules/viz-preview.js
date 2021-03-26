@@ -1516,11 +1516,15 @@
                     u = this.options.tooltip_name,
                     l = this.options.data_format,
                     f = this.options.y_tick_format,
+                    xf = this.options.x_tick_format,
                     p = (!0 === this.options.chart_padding_left || this.options.chart_padding_left, !0 === this.options.chart_padding_bottom || this.options.chart_padding_bottom, !0 === this.options.padding_top || this.options.padding_top, !0 === this.options.padding_bottom || this.options.padding_bottom, !0 === this.options.tick_count ? "" : this.options.tick_count),
                     h = this.options.show_labels,
                     _ = !0 === this.options.y_label ? null : this.options.y_label,
+                    xl = !0 === this.options.x_label ? null : this.options.x_label,
                     d = this.options.y_label_hide,
+                    xlh = this.options.x_label_hide,
                     v = this.options.y_from_zero,
+                    xfz = this.options.x_from_zero,
                     y = this.options.data_sort,
                     m = this.options.measure_label,
                     g = !0 === this.options.category_name ? "" : this.options.category_name,
@@ -2233,6 +2237,7 @@
                     this.options.y_text_rotate = 45;
                 }
 
+
                 var base_info = {
                     margin: {
                         l: 20,
@@ -2244,7 +2249,7 @@
                     title: w,
                     showlegend: o, //show legend value
                     xaxis: {
-                        tickformat: format,
+                        tickformat: xf,
                         automargin: true,
                         title: '',
                         tickangle: this.options.x_text_rotate,
@@ -2407,8 +2412,16 @@
                     base_info.yaxis.title = _ || this.options.y_axis;
                 }
 
+                if (this.options.x_label_hide === false) {
+                    base_info.xaxis.title = xl || this.options.x_axis;
+                }
+
                 if (this.options.y_from_zero ===  true) {
                     base_info.yaxis.rangemode = "tozero"
+                }
+
+                if (this.options.x_from_zero ===  true) {
+                    base_info.xaxis.rangemode = "tozero"
                 }
 
 //                if (this.options.chart_type === 'bar') {
@@ -2575,6 +2588,7 @@
                     p = t.find("input[name*=chart_field_tooltip_name_]").val(),
                     h = t.find("[name*=chart_field_data_format_]").val(),
                     _ = t.find("[name*=chart_field_y_ticks_format_]").val(),
+                    xf = t.find("[name*=chart_field_x_ticks_format_]").val(),
                     d = t.find("input[name*=chart_field_padding_top_]").val(),
                     v = t.find("input[name*=chart_field_padding_bottom_]").val(),
                     y = t.find("input[name*=chart_field_tick_count_]").val(),
@@ -2585,7 +2599,10 @@
                     S = t.find("input[name*=chart_field_labels_]").is(":checked"),
                     O = t.find("input[name*=chart_field_y_label_]").val(),
                     w = t.find("input[name*=chart_field_y_label_hide_]").is(":checked"),
+                    xl = t.find("input[name*=chart_field_x_label_]").val(),
+                    xlh = t.find("input[name*=chart_field_x_label_hide_]").is(":checked"),
                     E = t.find("input[name*=chart_field_y_from_zero_]").is(":checked"),
+                    xfz = t.find("input[name*=chart_field_x_from_zero_]").is(":checked"),
                     k = t.find("select[name*=chart_field_static_reference_columns_]").val(),
                     j = t.find("input[name*=chart_field_static_reference_label_]").val(),
                     N = t.find("select[name*=chart_field_dynamic_reference_type_]").val(),
@@ -2596,8 +2613,8 @@
                     plotly = t.find("input[name*=chart_field_plotly_]").val(),
                     bar_width = t.find("input[name*=chart_field_bar_width_]").val(),
                     donut_hole = t.find("input[name*=chart_field_donut_hole_]").val();
-                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, void this.createChart(this.fetched_data);
-                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.y_from_zero = E, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole;
+                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, void this.createChart(this.fetched_data);
+                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole;
                 var A = this.create_sql();
                 this.get_resource_datа(A)
 
