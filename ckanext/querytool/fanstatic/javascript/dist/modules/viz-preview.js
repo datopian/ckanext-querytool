@@ -1810,6 +1810,9 @@
                                 x: x,
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
+                                mode:'lines+markers+text',
+                                text: columns[0].slice(1),
+                                textposition: 'bottom',
                                 name: name,
                                 line: {width: 4}
                             };
@@ -1821,6 +1824,9 @@
                             y: columns[0].slice(1),
                             name: columns[0][0],
                             type: 'scatter',
+                            mode:'lines+markers+text',
+                            text: columns[0].slice(1),
+                            textposition: 'bottom',
                             line: {width: 4}
                         };
                         data.push(trace);
