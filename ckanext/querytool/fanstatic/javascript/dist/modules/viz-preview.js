@@ -1795,7 +1795,7 @@
                 
 
                 // check if annotations are turned on or off
-                var sa = true;
+                console.log(sa)
                 if(sa==true){
                     var labelsMode = 'lines+markers+text';
                 } else {
