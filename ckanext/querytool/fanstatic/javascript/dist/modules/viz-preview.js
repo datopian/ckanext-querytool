@@ -1939,7 +1939,7 @@
                         data.push(trace);
                     };
                 };
-
+                
                 if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
@@ -2529,6 +2529,24 @@
                     }
                 }
 
+
+                //Showing Annotations on bars
+                if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
+                    if(sa==true){ 
+                        for(var i = 0; i < data[0].x.length; i++){
+                            var anoData = {
+                                x:data[0].x[i],
+                                y:data[0].y[i],
+                                text: data[0].x[i],
+                                xanchor: 'center',
+                                yanchor: 'bottom',
+                                showarrow: false
+                            };
+            
+                            base_info.annotations.push(anoData);
+                        }
+                    }
+                }
 
                 //console.log(data);
                 console.log(O);
