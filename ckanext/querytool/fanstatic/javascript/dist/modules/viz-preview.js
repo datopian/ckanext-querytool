@@ -1794,6 +1794,14 @@
                 var format = this.options.data_format;
                 
 
+                // check if annotations are turned on or off
+                var sa = true;
+                if(sa==true){
+                    var labelsMode = 'lines+markers+text';
+                } else {
+                    var labelsMode = 'lines+markers';
+                }
+
                 // if typeof plotly is string -> new chart
                 // if typeof plotly is object -> existing chart (user view or admin preview)
                 // if plotly value is true we may have some data in the database for the chart, but plotly is set to true
@@ -1811,6 +1819,13 @@
                                 x: x,
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
+                                mode:labelsMode,
+                                text: columns[tmp].slice(1),
+                                textposition: 'top right',
+                                textfont: {
+                                    size: 14,
+                                    color: '#1f77b4'
+                                },
                                 name: name,
                                 line: {width: 4}
                             };
@@ -1821,6 +1836,13 @@
                             x: categories,
                             y: columns[0].slice(1),
                             name: columns[0][0],
+                            mode:labelsMode,
+                            text: columns[0].slice(1),
+                            textposition: 'top right',
+                            textfont: {
+                                size: 14,
+                                color: '#1f77b4'
+                            },
                             type: 'scatter',
                             line: {width: 4}
                         };
@@ -2516,6 +2538,8 @@
                 console.log(data)
 
                 console.log('Generate plotly')
+
+
                 function saveAs(uri, filename) {
                     var link = document.createElement('a');
                     if (typeof link.download === 'string') {
