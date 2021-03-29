@@ -1824,7 +1824,6 @@
                                 textposition: 'top right',
                                 textfont: {
                                     size: 14,
-                                    color: '#1f77b4'
                                 },
                                 name: name,
                                 line: {width: 4}
@@ -1841,7 +1840,6 @@
                             textposition: 'top right',
                             textfont: {
                                 size: 14,
-                                color: '#1f77b4'
                             },
                             type: 'scatter',
                             line: {width: 4}
