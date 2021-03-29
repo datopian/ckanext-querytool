@@ -434,6 +434,17 @@
                </div>
             </div>
 
+            {# Show annotations #}
+            {% if chart %}
+              {% set show_annotations = chart.show_annotations %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_show_annotations_{{ n }}">{{ _('Show annotations') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_show_annotations_{{ n }}" type="checkbox" name="chart_field_show_annotations_{{ n }}" value="{{ show_annotations }}"{% if show_annotations=='false' %}{% else %}checked{% endif %}>
+               </div>
+            </div>
+
             {# Show values as percentages (pie and donut charts only) #}
             {% if chart %}
               {% set show_labels_as_percentages = chart.show_labels_as_percentages %}
@@ -693,6 +704,7 @@
           {% set chart_type = chart.graph %}
           {% set title = chart.title %}
           {% set show_legend = chart.show_legend %}
+          {% set show_annotations = chart.show_annotations %}
           {% set x_text_rotate = chart.x_text_rotate %}
           {% set x_text_multiline = chart.x_text_multiline %}
           {% set x_tick_culling_max = chart.x_tick_culling_max %}
@@ -734,6 +746,7 @@
           sql_string=sql_string,
           title= title,
           show_legend = show_legend,
+          show_annotations = show_annotations,
           x_text_rotate= x_text_rotate,
           x_text_multiline= x_text_multiline,
           x_tick_culling_max = x_tick_culling_max,
