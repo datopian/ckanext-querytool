@@ -21,14 +21,20 @@
 {% extends "querytool/public/base_main.html" %}
 {% set groups = h.querytool_get_groups() %}
 
-{% block breadcrumb_content %}
-  <li>{% link_for groups[querytools[0].group], controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
-  <li>{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list_by_group', group=querytools[0].group %}</li>
-  <li>{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
-  <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
-{% endblock %}
+
 
 {% block page_header_content %}
+
+{% block breadcrumb_custom %}
+<div class="toolbar">
+  <ol class="breadcrumb">
+    <li><a href="/"><i class="fa fa-home"></i></a></li>
+    <!--<li>{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list_by_group', group=querytools[0].group %}</li> -->
+    <li>{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
+    <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
+  </ol>
+</div>
+{% endblock %}
 
 <style>
   .page-header h1 {
@@ -51,6 +57,9 @@
 {% endif %}
 {% endblock %}
 {% block tools %}
+
+
+
 <form id="public-filters" class="public-filters" method="GET">
   <!-- Filtering container -->
   <div class="public-query">
