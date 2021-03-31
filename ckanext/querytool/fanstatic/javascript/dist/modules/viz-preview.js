@@ -1796,6 +1796,8 @@
                 var data = []
                 var columns = O.data['columns'];
                 var format = this.options.data_format;
+                const YFormatter = d3.format(this.options.y_tick_format)
+                const XFormatter = d3.format(this.options.x_tick_format)
                 
 
                 // check if annotations are turned on or off
@@ -1818,12 +1820,19 @@
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+                            var textTitles = columns[tmp].slice(1);
+                            var convertedTextTitles = [];
+
+                            for(i = 0; i < textTitles.length; i++){
+                                convertedTextTitles.push(YFormatter(textTitles[i]));
+                            }
+
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
                                 mode:labelsMode,
-                                text: columns[tmp].slice(1),
+                                text: convertedTextTitles,
                                 textposition: 'top right',
                                 textfont: {
                                     size: 14,
@@ -1834,12 +1843,19 @@
                             data.push(trace);
                         };
                     } else {
+                        var textTitles = columns[0].slice(1);
+                        var convertedTextTitles = [];
+
+                        for(i = 0; i < textTitles.length; i++){
+                            convertedTextTitles.push(YFormatter(textTitles[i]));
+                        }
+
                         var trace = {
                             x: categories,
                             y: columns[0].slice(1),
                             name: columns[0][0],
                             mode:labelsMode,
-                            text: columns[0].slice(1),
+                            text: convertedTextTitles,
                             textposition: 'top right',
                             textfont: {
                                 size: 14,
@@ -2544,18 +2560,56 @@
 
                 //Showing Annotations on bars
                 if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
-                    if(sa==true){ 
-                        for(var i = 0; i < data[0].x.length; i++){
-                            var anoData = {
-                                x:data[0].x[i],
-                                y:data[0].y[i],
-                                text: data[0].x[i],
-                                xanchor: 'center',
-                                yanchor: 'bottom',
-                                showarrow: false
-                            };
-            
-                            base_info.annotations.push(anoData);
+                    if(sa==true){
+                        var stacked_total = 0
+
+                        for(var i = 0; i < data.length; i++){
+                            for(var j = 0; j < data[i].x.length; j++){
+                                if('sbar' === this.options.chart_type){
+                                    stacked_total = stacked_total + data[i].y[j]
+                                }else{
+                                    stacked_total = data[i].y[j]
+                                }
+
+                                var anoData = {
+                                    x:data[i].x[j],
+                                    y:stacked_total,
+                                    text: YFormatter(data[i].y[j]),
+                                    textangle: this.options.y_text_rotate,
+                                    xanchor: 'center',
+                                    yanchor: 'bottom',
+                                    showarrow: false
+                                };
+
+                                base_info.annotations.push(anoData);
+                            }
+                        }
+                    }
+                }
+                if('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
+                    if(sa==true){
+                        var stacked_total = 0
+
+                        for(var i = 0; i < data.length; i++){
+                            for(var j = 0; j < data[i].x.length; j++){
+                                if('shbar' === this.options.chart_type){
+                                    stacked_total = stacked_total + data[i].x[j]
+                                }else{
+                                    stacked_total = data[i].x[j]
+                                }
+
+                                var anoData = {
+                                    x:stacked_total,
+                                    y:data[i].y[j],
+                                    text: XFormatter(data[i].x[j]),
+                                    textangle: this.options.x_text_rotate,
+                                    xanchor: 'left',
+                                    yanchor: 'center',
+                                    showarrow: false
+                                };
+
+                                base_info.annotations.push(anoData);
+                            }
                         }
                     }
                 }
