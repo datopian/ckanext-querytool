@@ -1796,15 +1796,25 @@
                 var data = []
                 var columns = O.data['columns'];
                 var format = this.options.data_format;
-                const YFormatter = d3.format(this.options.y_tick_format)
-                const XFormatter = d3.format(this.options.x_tick_format)
+                const dataLabelFormatter = d3.format(format);
                 
 
                 // check if annotations are turned on or off
                 if(sa==true){
                     var labelsMode = 'lines+markers+text';
+                    var scatterLabelsMode = 'markers+text';
                 } else {
                     var labelsMode = 'lines+markers';
+                    var scatterLabelsMode = 'markers';
+                }
+
+                function convertTextTitles(textTitles){
+                  var convertedTextTitles = [];
+
+                  for(i = 0; i < textTitles.length; i++){
+                      convertedTextTitles.push(dataLabelFormatter(textTitles[i]));
+                  }
+                  return convertedTextTitles;
                 }
 
                 // if typeof plotly is string -> new chart
@@ -1812,7 +1822,6 @@
                 // if plotly value is true we may have some data in the database for the chart, but plotly is set to true
                 if ( 'line' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
-                    var format = this.options.data_format;
 
                     if (categories === undefined){
                         var x = columns[columns.length - 1].slice(1);
@@ -1821,11 +1830,7 @@
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
                             var textTitles = columns[tmp].slice(1);
-                            var convertedTextTitles = [];
-
-                            for(i = 0; i < textTitles.length; i++){
-                                convertedTextTitles.push(YFormatter(textTitles[i]));
-                            }
+                            var convertedTextTitles = convertTextTitles(textTitles);
 
                             var trace = {
                                 x: x,
@@ -1844,11 +1849,7 @@
                         };
                     } else {
                         var textTitles = columns[0].slice(1);
-                        var convertedTextTitles = [];
-
-                        for(i = 0; i < textTitles.length; i++){
-                            convertedTextTitles.push(YFormatter(textTitles[i]));
-                        }
+                        var convertedTextTitles = convertTextTitles(textTitles);
 
                         var trace = {
                             x: categories,
@@ -1909,10 +1910,18 @@
                 }
 
                 if ( 'scatter' === this.options.chart_type) {
+                    var textTitles = columns[0].slice(1);
+                    var convertedTextTitles = convertTextTitles(textTitles);
+
                     var trace = {
                         x: O.axis['x']['categories'],
                         y: columns[0].slice(1),
-                        mode: "markers",
+                        mode: scatterLabelsMode,
+                        text: convertedTextTitles,
+                        textposition: 'top right',
+                        textfont: {
+                            size: 14,
+                        },
                         type: this.options.chart_type,
                     };
                     data = [];
@@ -1928,11 +1937,19 @@
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+                            var textTitles = columns[tmp].slice(1);
+                            var convertedTextTitles = convertTextTitles(textTitles);
 
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
                                 type: 'scatter',
+                                mode: labelsMode,
+                                text: convertedTextTitles,
+                                textposition: 'top right',
+                                textfont: {
+                                    size: 14,
+                                },
                                 name: name,
                                 width: 3,
                                 line: {
@@ -1944,10 +1961,19 @@
                             data.push(trace);
                         }
                     } else {
+                        var textTitles = columns[0].slice(1);
+                        var convertedTextTitles = convertTextTitles(textTitles);
+
                         var trace = {
                             x: categories,
                             y: columns[0].slice(1),
                             name: columns[0][0],
+                            mode: labelsMode,
+                            text: convertedTextTitles,
+                            textposition: 'top right',
+                            textfont: {
+                                size: 14,
+                            },
                             type: 'scatter',
                             name: 'Color',
                             line: {
@@ -2086,10 +2112,18 @@
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
+                            var textTitles = columns[tmp].slice(1);
+                            var convertedTextTitles = convertTextTitles(textTitles);
 
                             var trace = {
                                 x: x,
                                 y: columns[tmp].slice(1),
+                                mode: labelsMode,
+                                text: convertedTextTitles,
+                                textposition: 'top right',
+                                textfont: {
+                                    size: 14,
+                                },
                                 type: 'scatter',
                                 name: name,
                                 fill: 'tozeroy'
@@ -2097,9 +2131,18 @@
                             data.push(trace);
                         };
                     } else {
+                        var textTitles = columns[0].slice(1);
+                        var convertedTextTitles = convertTextTitles(textTitles);
+
                         var trace = {
                             x: categories,
                             y: columns[0].slice(1),
+                            mode: labelsMode,
+                            text: convertedTextTitles,
+                            textposition: 'top right',
+                            textfont: {
+                                size: 14,
+                            },
                             name: columns[0][0],
                             type: 'scatter',
                             fill: 'tozeroy'
@@ -2574,7 +2617,7 @@
                                 var anoData = {
                                     x:data[i].x[j],
                                     y:stacked_total,
-                                    text: YFormatter(data[i].y[j]),
+                                    text: dataLabelFormatter(data[i].y[j]),
                                     textangle: this.options.y_text_rotate,
                                     xanchor: 'center',
                                     yanchor: 'bottom',
@@ -2601,7 +2644,7 @@
                                 var anoData = {
                                     x:stacked_total,
                                     y:data[i].y[j],
-                                    text: XFormatter(data[i].x[j]),
+                                    text: dataLabelFormatter(data[i].x[j]),
                                     textangle: this.options.x_text_rotate,
                                     xanchor: 'left',
                                     yanchor: 'center',
