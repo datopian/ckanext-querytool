@@ -216,7 +216,7 @@
             <div class="control-group ">
                <label class="control-label" for="chart_field_x_label_{{ n }}">{{ _('X axis title') }}</label>
                <div class="controls ">
-                  <input id="chart_field_x_label_{{ n }}" type="text" name="chart_field_x_label_{{ n }}" value="{{ x_label }}" placeholder="{{ _('Dimension by default') }}" {{'' if x_label_option else 'disabled'}}>
+                  <input id="chart_field_x_label_{{ n }}" type="text" name="chart_field_x_label_{{ n }}" value="{{ x_label }}" placeholder="{{ _('Dimension by default') }}" >
                </div>
             </div>
 
@@ -232,7 +232,7 @@
             <div class="control-group ">
                <label class="control-label" for="chart_field_x_label_hide_{{ n }}">{{ _('Hide title') }}</label>
                <div class="controls ">
-                  <input id="chart_field_x_label_hide_{{ n }}" type="checkbox" name="chart_field_x_label_hide_{{ n }}" value="{{ x_label_hide }}" {% if x_label_hide=='true' %}checked{% endif %} {{'' if x_label_hide_option else 'disabled'}}>
+                  <input id="chart_field_x_label_hide_{{ n }}" type="checkbox" name="chart_field_x_label_hide_{{ n }}" value="{{ x_label_hide }}" {% if x_label_hide=='true' %}checked{% endif %} >
                </div>
             </div>
 
@@ -257,7 +257,7 @@
             <div id="chart_field_sort_div_{{ n }}" class="control-group control-select {% if chart and chart.category_name %}hidden{% endif %}">
               <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('X axis sorting') }}</label>
               <div class="controls ">
-                <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}" {{'' if selected_chart_type not in ['pie', 'donut'] else 'disabled'}}>
+                <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}" >
                   {% for sort in sort_options %}
                   <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{ sort.text }}</option>
                   {% endfor %}
@@ -324,7 +324,7 @@
             <div class="control-group control-select">
                <label class="control-label" for="chart_field_x_ticks_format_{{ n }}">{{ _('X axis label format') }}</label>
                <div class="controls ">
-                  <select id="chart_field_x_ticks_format_{{ n }}" name="chart_field_x_ticks_format_{{ n }}" {{'' if ticks_formats_option else 'disabled'}}>
+                  <select id="chart_field_x_ticks_format_{{ n }}" name="chart_field_x_ticks_format_{{ n }}" >
                   {% for tick in ticks_formats %}
                   <option value="{{ tick.value }}" {% if chart %}{{ 'selected' if tick.value == chart.x_tick_format }}{% endif %} >{{ tick.text }}</option>
                   {% endfor %}
