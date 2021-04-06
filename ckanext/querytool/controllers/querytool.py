@@ -381,6 +381,8 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_data_format_{}'.format(id))
                     visualization['y_tick_format'] = \
                         data.get('chart_field_y_ticks_format_{}'.format(id))
+                    visualization['x_tick_format'] = \
+                        data.get('chart_field_x_ticks_format_{}'.format(id))
                     visualization['padding_bottom'] = \
                         data.get('chart_field_padding_bottom_{}'.format(id))
                     visualization['padding_top'] = \
@@ -389,6 +391,8 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_tick_count_{}'.format(id))
                     visualization['y_label'] = \
                         data.get('chart_field_y_label_{}'.format(id))
+                    visualization['x_label'] = \
+                        data.get('chart_field_x_label_{}'.format(id))
                     visualization['size'] = \
                         data.get('chart_field_size_{}'.format(id))
                     # visualization['chart_padding_left'] = \
@@ -438,6 +442,10 @@ class QueryToolController(base.BaseController):
                         visualization['y_label_hide'] = 'true'
                     else:
                         visualization['y_label_hide'] = 'false'
+                    if 'chart_field_x_label_hide_{}'.format(id) in data:
+                        visualization['x_label_hide'] = 'true'
+                    else:
+                        visualization['x_label_hide'] = 'false'
                     if 'chart_field_show_labels_as_percentages_{}'.format(id) in data:
                         visualization['show_labels_as_percentages'] = 'true'
                     else:
@@ -446,6 +454,10 @@ class QueryToolController(base.BaseController):
                         visualization['y_from_zero'] = 'true'
                     else:
                         visualization['y_from_zero'] = 'false'
+                    if 'chart_field_x_from_zero_{}'.format(id) in data:
+                        visualization['x_from_zero'] = 'true'
+                    else:
+                        visualization['x_from_zero'] = 'false'
                     if data['chart_field_filter_name_{}'.format(id)]:
                         visualization['filter_name'] = \
                             data['chart_field_filter_name_{}'.format(id)]

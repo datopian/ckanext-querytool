@@ -204,12 +204,60 @@
         <div id="accordion_{{ chart_id }}_x_axis" class="accordion-body collapse">
           <div class="accordion-inner">
 
+            {# X-axis title #}
+            {% if chart %}
+              {% set x_label = chart.x_label %}
+            {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set x_label_option = false %}
+            {% else %}
+              {% set x_label_option = true %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_x_label_{{ n }}">{{ _('X axis title') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_x_label_{{ n }}" type="text" name="chart_field_x_label_{{ n }}" value="{{ x_label }}" placeholder="{{ _('Dimension by default') }}" >
+               </div>
+            </div>
+
+            {# X-axis title hide #}
+            {% if chart %}
+              {% set x_label_hide = chart.x_label_hide %}
+            {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set x_label_hide_option = false %}
+            {% else %}
+              {% set x_label_hide_option = true %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_x_label_hide_{{ n }}">{{ _('Hide title') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_x_label_hide_{{ n }}" type="checkbox" name="chart_field_x_label_hide_{{ n }}" value="{{ x_label_hide }}" {% if x_label_hide=='true' %}checked{% endif %} >
+               </div>
+            </div>
+
+            {# X-axis from zero #}
+            {% if chart %}
+              {% set x_from_zero = chart.x_from_zero %}
+            {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set x_from_zero_option = false %}
+            {% else %}
+              {% set x_from_zero_option = true %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_x_from_zero_{{ n }}">{{ _('Start from zero') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_x_from_zero_{{ n }}" type="checkbox" name="chart_field_x_from_zero_{{ n }}" value="{{ x_from_zero }}" {% if x_from_zero=='true' %}checked{% endif %} {{'' if x_from_zero_option else 'disabled'}}>
+               </div>
+            </div>
+
             {# X sorting #}
             {% set sort_options = h.querytool_get_chart_sort() %}
             <div id="chart_field_sort_div_{{ n }}" class="control-group control-select {% if chart and chart.category_name %}hidden{% endif %}">
               <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('X axis sorting') }}</label>
               <div class="controls ">
-                <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}">
+                <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}" >
                   {% for sort in sort_options %}
                   <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{ sort.text }}</option>
                   {% endfor %}
@@ -260,6 +308,28 @@
               <div class="controls ">
                 <input id="chart_field_x_tick_culling_max_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_culling_max_{{ n }}" placeholder="10" value="{{ x_tick_culling_max }}" {{'disabled' if x_tick_culling_max_option else ''}}>
               </div>
+            </div>
+
+            {# X-axis label format #}
+            {% if chart and chart.tick_count%}
+              {% set ticks_formats = h.queytool_get_charts_data_formats(5) %}
+            {% else %}
+              {% set ticks_formats = h.queytool_get_charts_data_formats() %}
+            {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set ticks_formats_option = false %}
+            {% else %}
+              {% set ticks_formats_option = true %}
+            {% endif %}
+            <div class="control-group control-select">
+               <label class="control-label" for="chart_field_x_ticks_format_{{ n }}">{{ _('X axis label format') }}</label>
+               <div class="controls ">
+                  <select id="chart_field_x_ticks_format_{{ n }}" name="chart_field_x_ticks_format_{{ n }}" >
+                  {% for tick in ticks_formats %}
+                  <option value="{{ tick.value }}" {% if chart %}{{ 'selected' if tick.value == chart.x_tick_format }}{% endif %} >{{ tick.text }}</option>
+                  {% endfor %}
+                  </select>
+               </div>
             </div>
 
           </div>
@@ -711,6 +781,7 @@
           {% set tooltip_name = chart.tooltip_name %}
           {% set data_format = chart.data_format %}
           {% set y_tick_format = chart.y_tick_format %}
+          {% set x_tick_format = chart.x_tick_format %}
           {% set chart_padding_left = chart.chart_padding_left %}
           {% set chart_padding_bottom = chart.chart_padding_bottom %}
           {% set padding_bottom = chart.padding_bottom %}
@@ -720,7 +791,10 @@
           {% set show_labels_as_percentages = chart.show_labels_as_percentages %}
           {% set y_label = chart.y_label %}
           {% set y_label_hide = chart.y_label_hide %}
+          {% set x_label = chart.x_label %}
+          {% set x_label_hide = chart.x_label_hide %}
           {% set y_from_zero = chart.y_from_zero %}
+          {% set x_from_zero = chart.x_from_zero %}
           {% set filter_name = chart.filter_name %}
           {% set filter_slug = chart.filter_slug %}
           {% set filter_value = chart.filter_value %}
@@ -753,6 +827,7 @@
           tooltip_name = tooltip_name,
           data_format = data_format,
           y_tick_format = y_tick_format,
+          x_tick_format = x_tick_format,
           chart_padding_left = chart_padding_left,
           chart_padding_bottom = chart_padding_bottom,
           padding_bottom = padding_bottom,
@@ -762,7 +837,10 @@
           show_labels_as_percentages = show_labels_as_percentages,
           y_label = y_label,
           y_label_hide = y_label_hide,
+          x_label = x_label,
+          x_label_hide = x_label_hide,
           y_from_zero = y_from_zero,
+          x_from_zero = x_from_zero,
           filter_name=filter_name,
           filter_slug=filter_slug,
           filter_value=filter_value,
