@@ -20,7 +20,7 @@
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
 {% set groups = h.querytool_get_groups() %}
-{% set group_ = h.querytool_get_groups()[0] %}
+{% set group_title = h.querytool_get_group_title(querytools[0].group) %}
 
 
 {% block page_header_content %}
@@ -30,7 +30,9 @@
   <ol class="breadcrumb new_breadcrumb">
     <li><a href="/"><i class="fa fa-home"></i></a></li>
     <!--<li>{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list_by_group', group=querytools[0].group %}</li> -->
-    <li>{% link_for group_.title, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
+    {% if group_title %}
+      <li>{% link_for group_title, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
+    {% endif %}
     <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
   </ol>
 </div>

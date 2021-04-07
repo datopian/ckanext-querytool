@@ -534,6 +534,17 @@ def get_groups():
     return groups
 
 
+def get_group_title(group_name):
+    groups = get_groups()
+    group_title = None
+
+    for group in groups:
+        if group.get('name') == group_name:
+            group_title = group.get('title')
+
+    return group_title
+
+
 def get_map_config():
 
     map_config = {

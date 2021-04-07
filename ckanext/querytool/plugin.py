@@ -284,6 +284,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.get_chart_sort,
             'querytool_get_groups':
                 helpers.get_groups,
+            'querytool_get_group_title':
+                helpers.get_group_title,
             'querytool_get_map_config':
                 helpers.get_map_config,
             'querytool_hex_to_rgba':
