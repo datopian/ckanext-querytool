@@ -2618,7 +2618,6 @@
                                     x:data[i].x[j],
                                     y:stacked_total,
                                     text: dataLabelFormatter(data[i].y[j]),
-                                    textangle: this.options.y_text_rotate,
                                     xanchor: 'center',
                                     yanchor: 'bottom',
                                     showarrow: false
@@ -2645,7 +2644,6 @@
                                     x:stacked_total,
                                     y:data[i].y[j],
                                     text: dataLabelFormatter(data[i].x[j]),
-                                    textangle: this.options.x_text_rotate,
                                     xanchor: 'left',
                                     yanchor: 'center',
                                     showarrow: false
