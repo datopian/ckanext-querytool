@@ -1843,7 +1843,8 @@
                                     size: 14,
                                 },
                                 name: name,
-                                line: {width: 4}
+                                line: {width: 4},
+                                hovertemplate: '%{y}<extra></extra>',
                             };
                             data.push(trace);
                         };
@@ -1857,6 +1858,7 @@
                             name: columns[0][0],
                             mode:labelsMode,
                             text: convertedTextTitles,
+                            hovertemplate: '%{y}<extra></extra>',
                             textposition: 'top right',
                             textfont: {
                                 size: 14,
@@ -1923,6 +1925,7 @@
                             size: 14,
                         },
                         type: this.options.chart_type,
+                        hovertemplate: '%{y}<extra></extra>',
                     };
                     data = [];
                     data.push(trace);
@@ -1947,6 +1950,7 @@
                                 mode: labelsMode,
                                 text: convertedTextTitles,
                                 textposition: 'top right',
+                                hovertemplate: '%{y}<extra></extra>',
                                 textfont: {
                                     size: 14,
                                 },
@@ -1971,6 +1975,7 @@
                             mode: labelsMode,
                             text: convertedTextTitles,
                             textposition: 'top right',
+                            hovertemplate: '%{y}<extra></extra>',
                             textfont: {
                                 size: 14,
                             },
@@ -2121,6 +2126,7 @@
                                 mode: labelsMode,
                                 text: convertedTextTitles,
                                 textposition: 'top right',
+                                hovertemplate: '%{y}<extra></extra>',
                                 textfont: {
                                     size: 14,
                                 },
@@ -2140,6 +2146,7 @@
                             mode: labelsMode,
                             text: convertedTextTitles,
                             textposition: 'top right',
+                            hovertemplate: '%{y}<extra></extra>',
                             textfont: {
                                 size: 14,
                             },
@@ -2618,6 +2625,7 @@
                                     x:data[i].x[j],
                                     y:stacked_total,
                                     text: dataLabelFormatter(data[i].y[j]),
+                                    hovertemplate: '%{y}<extra></extra>',
                                     xanchor: 'center',
                                     yanchor: 'bottom',
                                     showarrow: false
@@ -2644,6 +2652,7 @@
                                     x:stacked_total,
                                     y:data[i].y[j],
                                     text: dataLabelFormatter(data[i].x[j]),
+                                    hovertemplate: '%{y}<extra></extra>',
                                     xanchor: 'left',
                                     yanchor: 'center',
                                     showarrow: false
