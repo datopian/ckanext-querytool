@@ -1858,6 +1858,7 @@
                             name: columns[0][0],
                             mode:labelsMode,
                             text: convertedTextTitles,
+                            hovertemplate: '%{y}<extra></extra>',
                             textposition: 'top right',
                             textfont: {
                                 size: 14,
@@ -2651,6 +2652,7 @@
                                     x:stacked_total,
                                     y:data[i].y[j],
                                     text: dataLabelFormatter(data[i].x[j]),
+                                    hovertemplate: '%{y}<extra></extra>',
                                     xanchor: 'left',
                                     yanchor: 'center',
                                     showarrow: false
