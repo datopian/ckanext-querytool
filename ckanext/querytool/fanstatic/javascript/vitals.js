@@ -503,6 +503,8 @@ function hideAnnotationCheckbox(selected,chart_number){
   if(selected=='bar' && category.length != 0) {
     $(`#chart_field_show_annotations_${chart_number}`).attr('checked', false);
     $(`#chart_field_show_annotations_${chart_number}`).attr('disabled', 'true');
+  } else {
+    $(`#chart_field_show_annotations_${chart_number}`).removeAttr('disabled');
   }
 
 }; 
