@@ -2610,6 +2610,11 @@
 
                 //Showing Annotations on bars
                 if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
+                    
+                    //Temporarily disabling annotations on bars with categories
+                    if(data.length > 1) {
+                        sa = false;
+                    }
                     if(sa==true){
                         var stacked_total = 0
 

@@ -482,3 +482,29 @@ $(document).ready(function(){
       $(`#chart_field_x_ticks_format_${chart_number}`).removeAttr('disabled');
     }
   })
+
+
+// Hide annotation on bars with categories
+$('body').on('change','[id^=chart_field_graph_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+  hideAnnotationCheckbox(selected,chart_number);
+});
+
+$('body').on('change','[id^=chart_field_category_name_]',function(){
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_graph_${chart_number}`).val();
+  hideAnnotationCheckbox(selected,chart_number);
+});
+
+function hideAnnotationCheckbox(selected,chart_number){
+  
+  var category = $(`#chart_field_category_name_${chart_number}`).val();
+  if(selected=='bar' && category.length != 0) {
+    $(`#chart_field_show_annotations_${chart_number}`).attr('checked', false);
+    $(`#chart_field_show_annotations_${chart_number}`).attr('disabled', 'true');
+  } else {
+    $(`#chart_field_show_annotations_${chart_number}`).removeAttr('disabled');
+  }
+
+}; 
