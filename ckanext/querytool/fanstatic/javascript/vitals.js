@@ -500,7 +500,7 @@ $('body').on('change','[id^=chart_field_category_name_]',function(){
 function hideAnnotationCheckbox(selected,chart_number){
   
   var category = $(`#chart_field_category_name_${chart_number}`).val();
-  if(selected=='bar' && category.length != 0) {
+  if((selected=='bar' || selected=='hbar') && category.length != 0) {
     $(`#chart_field_show_annotations_${chart_number}`).attr('checked', false);
     $(`#chart_field_show_annotations_${chart_number}`).attr('disabled', 'true');
   } else {
