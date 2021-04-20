@@ -2642,6 +2642,10 @@
                     }
                 }
                 if('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
+                     //Temporarily disabling annotations on bars with categories
+                     if(data.length > 1) {
+                        sa = false;
+                    }
                     if(sa==true){
                         var stacked_total = 0
 
