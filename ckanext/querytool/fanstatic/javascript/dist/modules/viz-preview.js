@@ -2353,7 +2353,8 @@
                         tickfont: {
                             size: 14,
                         }
-                    }
+                    },
+                    hovermode: 'closest'
                 }
 
                 if (["sbar", "shbar"].includes(this.options.chart_type)) {
@@ -2516,6 +2517,21 @@
 
                 //Experimental: Remove Numbers from the items 1. , 2. etc
                 if(data){
+                  if('hbar' === this.options.chart_type){
+                    data.forEach(function(record) {
+                        var subData = record.y;
+
+                        if(subData && subData.length > 0) {
+                            subData.forEach(function(item, index){
+                              if (typeof item !== 'number'){
+                                  item = item.replace(/^\d{1,2}\./, '');
+                                  record.y[index] = item;
+                              }
+                            });
+                        }
+
+                    });
+                  }else{
                     data.forEach(function(record) {
                         var subData = record.x;
 
@@ -2529,6 +2545,7 @@
                         }
 
                     });
+                  }
                 }
 
                 
