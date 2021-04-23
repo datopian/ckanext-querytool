@@ -1828,6 +1828,10 @@
                                     { extend: "pdf", className: "btn btn-default" },
                                 ],
                                 processing: !0,
+                                rowsGroup: [
+                                    1,
+                                    2
+                                ]
                             }),
                             $("div.dt-header" + a).text(p);
                     });
