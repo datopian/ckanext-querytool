@@ -1906,6 +1906,7 @@
                         (this.options.filter_name = this.el.parent().parent().find("[id*=table_field_filter_name_]").val()),
                         (this.options.filter_value = this.el.parent().parent().find("[id*=table_field_filter_value_]").val()),
                         (this.options.table_title = this.el.parent().parent().find("[id*=table_field_title_]").val()),
+                        (this.options.table_group_by = this.el.parent().parent().find("[id*=table_group_by_]").val()),
                         (this.options.measure_label = n),
                         this.createTable(t, e, !0);
                 },
