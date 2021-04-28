@@ -1338,6 +1338,27 @@
                     i = e.closest(".item-wrapper").find(".control-group.title textarea");
                 i.val(i.val() + e.val()), e.val("")
             })
+
+            
+            //Descriptions
+            $(".desc textarea").change(function(e) {
+                var i = nunjucks.configure({
+                    tags: {
+                        variableStart: "{",
+                        variableEnd: "}"
+                    }
+                });
+                try {
+                    i.renderString($(e.target).val(), {}), e.target.setCustomValidity("")
+                } catch (i) {
+                    e.target.setCustomValidity(t("Template is invalid"))
+                }
+            }), $(".desc-vars select").change(function(t) {
+                var e = $(t.target),
+                    i = e.closest(".item-wrapper").find(".control-group.desc textarea");
+                i.val(i.val() + e.val()), e.val("")
+            })
+
         }
 
         function c() {
