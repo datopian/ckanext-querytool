@@ -3,8 +3,11 @@ import logging
 
 from ckan.lib.cli import CkanCommand
 import ckan.model as model
+import ckan.logic as logic
+from ckan.plugins import toolkit
 from sqlalchemy.sql import select, func
-from sqlalchemy import MetaData
+import os
+from sqlalchemy import MetaData, text, exc
 
 log = logging.getLogger(__name__)
 
@@ -20,23 +23,46 @@ class SeedData(CkanCommand):
 
     def command(self):
         self._load_config()
+        get_admin = raw_input('\nPlease enter the sysadmin login name: ')
+
+        try:
+            admin = toolkit.get_action('user_show')({}, {'id': get_admin})
+        except logic.NotFound:
+            print('\nERROR: "{}" is not a valid name. Try again.\n'
+                  .format(get_admin))
+            quit()
+
+        admin_id = str(admin.get('id'))
+        user_ids_to_replace = [
+            'ac134bd9-4a29-46a4-a51e-32758fbe7270',
+            'e13b0500-9a8e-4adf-9cb1-db33668f040f',
+            'd0145af1-98e5-49ae-8a6d-44296facb4eb',
+            '923edf48-4d96-443f-be39-ad67719e52a3'
+        ]
 
         connection = model.Session.connection()
+        current_path = os.path.dirname(__file__)
+        seed_path = os.path.join(current_path, '..', 'seed', 'dump.sql')
 
-        sql = """
-        INSERT INTO public."group" (
-            id, name, title, description, created, state, revision_id, type,
-            approval_status, image_url, is_organization) VALUES (
-                'e279a8e7-f0ec-4b0e-989b-4bb72fa69e03', 'steps-survey-1',
-                'STEPS Survey', 'WHO STEPwise approach to noncommunicable disease (NCD) risk factor surveillance.',
-                '2020-11-18 15:40:12.377591', 'active', 'a2ba7ae8-d636-46b7-8e2b-f6c831bc00de',
-                'organization', 'approved', '2020-11-18-184305.396820STEPS.png', true);
-        """
-        connection.execute(sql)
+        sql = ""
+
+        with open(seed_path, 'r') as f:
+            sql = f.read()
+
+        for id in user_ids_to_replace:
+            sql = sql.replace(id, admin_id)
+
+        try:
+            connection.execute(sql)
+        except exc.IntegrityError:
+            print('\nERROR: The DB has existing data that\'s conflicting with '
+                  'this tool. This command must be run on a fresh DB.\n')
+            quit()
+
         model.Session.commit()
 
-        log.error('Seeded portal with test data')
-        print('SEEDED')
+        log.info('Successfully seeded the portal with test data!')
+        print('\nSuccessfully seeded the portal with test data!\n')
 
     def get_table(name):
         meta = MetaData()
