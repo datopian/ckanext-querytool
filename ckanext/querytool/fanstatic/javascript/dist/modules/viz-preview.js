@@ -1532,6 +1532,7 @@
                     x = !0 === this.options.static_reference_label ? "" : this.options.static_reference_label,
                     b = !0 === this.options.dynamic_reference_label ? "" : this.options.dynamic_reference_label,
                     S = this.options.show_labels_as_percentages || !1,
+                    desc = !0 === this.options.description ? "" : this.options.description,
                     O = {
                         bindto: this.el[0],
                         /*color: {
@@ -1554,6 +1555,15 @@
                         slug: j,
                         value: N.toString()
                     } : void 0;
+                desc = this.renderChartTitle(desc, {
+                    measure: {
+                        name: i,
+                        alias: m
+                    },
+                    filters: E,
+                    optionalFilter: P
+                });
+                console.log(desc)
                 w = this.renderChartTitle(w, {
                     measure: {
                         name: i,
@@ -2694,6 +2704,7 @@
                 console.log(O);
                 console.log(base_info); 
                 console.log(data)
+                console.log(this.options)
 
                 console.log('Generate plotly')
 
