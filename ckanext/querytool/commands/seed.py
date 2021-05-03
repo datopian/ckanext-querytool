@@ -33,12 +33,6 @@ class SeedData(CkanCommand):
             quit()
 
         admin_id = str(admin.get('id'))
-        user_ids_to_replace = [
-            'ac134bd9-4a29-46a4-a51e-32758fbe7270',
-            'e13b0500-9a8e-4adf-9cb1-db33668f040f',
-            'd0145af1-98e5-49ae-8a6d-44296facb4eb',
-            '923edf48-4d96-443f-be39-ad67719e52a3'
-        ]
 
         connection = model.Session.connection()
         current_path = os.path.dirname(__file__)
@@ -49,8 +43,8 @@ class SeedData(CkanCommand):
         with open(seed_path, 'r') as f:
             sql = f.read()
 
-        for id in user_ids_to_replace:
-            sql = sql.replace(id, admin_id)
+        sql = sql.replace('CKAN_ADMIN_ID', admin_id)
+        sql = sql.replace('CKAN_ADMIN_NAME', get_admin)
 
         try:
             connection.execute(sql)
