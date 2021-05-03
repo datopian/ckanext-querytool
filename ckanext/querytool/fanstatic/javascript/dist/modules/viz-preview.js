@@ -2312,9 +2312,14 @@
                 }
 
                 var title_id = this.el.context.parentElement.children[0].id;
+                var desc_id = this.el.context.parentElement.querySelector(".additional_desc").id;
 
                 if(title_id){
                     document.getElementById(title_id).innerHTML =  w;
+                }   
+
+                if(desc_id){
+                    document.getElementById(desc_id).innerHTML =  desc;
                 }
 
                 var q = JSON.parse(JSON.stringify(plotly));
@@ -2701,10 +2706,10 @@
                 }
 
                 //console.log(data);
-                console.log(O);
-                console.log(base_info); 
-                console.log(data)
-                console.log(this.options)
+                //console.log(O);
+                //console.log(base_info); 
+                //console.log(data)
+                //console.log(this.options)
 
                 console.log('Generate plotly')
 
