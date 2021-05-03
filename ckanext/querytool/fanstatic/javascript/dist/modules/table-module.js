@@ -1829,7 +1829,7 @@
                                 ],
                                 processing: !0,
                                 rowsGroup: [
-                                    0
+                                    1
                                 ]
                             }),
                             $("div.dt-header" + a).text(p);
