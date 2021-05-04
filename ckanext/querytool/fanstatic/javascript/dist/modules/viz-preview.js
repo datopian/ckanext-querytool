@@ -2312,15 +2312,20 @@
                 }
 
                 var title_id = this.el.context.parentElement.children[0].id;
-                var desc_id = this.el.context.parentElement.querySelector(".additional_desc").id;
+
+                if(this.el.context.parentElement.querySelector(".additional_desc")) {
+                    var desc_id = this.el.context.parentElement.querySelector(".additional_desc").id;
+                    if(desc_id){
+                        document.getElementById(desc_id).innerHTML =  desc;
+                    }
+                }
+                
 
                 if(title_id){
                     document.getElementById(title_id).innerHTML =  w;
                 }   
 
-                if(desc_id){
-                    document.getElementById(desc_id).innerHTML =  desc;
-                }
+                
 
                 var q = JSON.parse(JSON.stringify(plotly));
 
