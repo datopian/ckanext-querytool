@@ -1,8 +1,10 @@
 from __future__ import print_function
 import logging
 import requests
+import time
 
 from ckan.lib.cli import CkanCommand
+from ckan.lib.search import rebuild
 import ckan.model as model
 import ckan.logic as logic
 from ckan.plugins import toolkit
@@ -46,7 +48,7 @@ class SeedData(CkanCommand):
     def command(self):
         self._load_config()
         get_admin = raw_input('\nEnter the sysadmin login name: ')
-        get_admin_api_key = raw_input('\nEnter the sysadmin API key: ')
+        #get_admin_api_key = raw_input('\nEnter the sysadmin API key: ')
 
         try:
             admin = toolkit.get_action('user_show')({}, {'id': get_admin})
@@ -73,25 +75,38 @@ class SeedData(CkanCommand):
         try:
             connection.execute(sql)
         except exc.IntegrityError:
+            log.error('ERROR: The DB has existing data that\'s conflicting with '
+                      'this tool. This command must be run on a fresh DB.')
             print('\nERROR: The DB has existing data that\'s conflicting with '
                   'this tool. This command must be run on a fresh DB.\n')
             quit()
 
         model.Session.commit()
 
-        print('\nPlease wait while the resources upload...')
+        log.info('Uploading resources...')
+        print('\nUploading resources...\n')
 
         for id, resource in RESOURCES.items():
             try:
+                print('Uploading resource: {}'.format(resource))
                 requests.post(
                     'http://0.0.0.0:5000/api/action/resource_update',
                     data={"id": id},
-                    headers={"X-CKAN-API-Key": get_admin_api_key},
+                    #headers={"X-CKAN-API-Key": get_admin_api_key},
                     files=[('upload', file(
                            os.path.join(seed_resource_dir, resource)))])
             except Exception as e:
                 log.info('Error uploading {}: {}'.format(resource, e))
-                print('Error uploading {}: {}'.format(resource, e))
+                print('\nError uploading {}: {}'.format(resource, e))
+
+        # BY default we don't commit after each request to Solr, as it is
+        # a really heavy operation and slows things a lot
+
+        log.info('Rebuilding search index...')
+        print('\nRebuilding search index...\n')
+
+        rebuild()
+        print('\n')
 
         log.info('Successfully seeded the portal with test data!')
-        print('\nSuccessfully seeded the portal with test data!\n')
+        print('Successfully seeded the portal with test data!\n')
