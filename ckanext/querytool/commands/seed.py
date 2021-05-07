@@ -1,7 +1,6 @@
 from __future__ import print_function
 import logging
 import requests
-import time
 
 from ckan.lib.cli import CkanCommand
 from ckan.lib.search import rebuild
@@ -48,7 +47,7 @@ class SeedData(CkanCommand):
     def command(self):
         self._load_config()
         get_admin = raw_input('\nEnter the sysadmin login name: ')
-        #get_admin_api_key = raw_input('\nEnter the sysadmin API key: ')
+        get_admin_api_key = raw_input('\nEnter the sysadmin API key: ')
 
         try:
             admin = toolkit.get_action('user_show')({}, {'id': get_admin})
@@ -92,7 +91,7 @@ class SeedData(CkanCommand):
                 requests.post(
                     'http://0.0.0.0:5000/api/action/resource_update',
                     data={"id": id},
-                    #headers={"X-CKAN-API-Key": get_admin_api_key},
+                    headers={"X-CKAN-API-Key": get_admin_api_key},
                     files=[('upload', file(
                            os.path.join(seed_resource_dir, resource)))])
             except Exception as e:
