@@ -12,7 +12,7 @@ Before creating a new release, see the next section, [Test data seed command](#t
 
 On a freshly installed portal, with nothing but an admin user, you can run a `paster` command to populate the portal with test data found on the [STEPS Data](https://vital-stepsdata.org/) site. This includes the STEPS Survey organization, 9 datasets with 2 resources each, and 9 reports with multiple visualizations.
 
-Before creating a new release, this command should be run to verify that there are no compatibility issues. This could be especially critical if there any changes to the DB tables or structure.
+Before creating a new release, this command should be run to verify that there are no compatibility issues. This could be especially critical if there are any changes to the DB tables or structure.
 
 To populate the portal, run:
 
