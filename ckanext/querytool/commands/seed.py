@@ -46,8 +46,8 @@ class SeedData(CkanCommand):
 
     def command(self):
         self._load_config()
-        get_admin = raw_input('\nEnter the sysadmin login name: ')
-        get_admin_api_key = raw_input('\nEnter the sysadmin API key: ')
+        get_admin = raw_input('\nEnter the admin login name: ')
+        get_admin_api_key = raw_input('\nEnter the admin API key: ')
 
         try:
             admin = toolkit.get_action('user_show')({}, {'id': get_admin})
