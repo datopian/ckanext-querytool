@@ -264,6 +264,8 @@ paster --plugin=ckan db init -c /path/to/.ini
 
 After you've recreated the admin user, run the `seed_portal` command again, with this admin user name and _new_ API key.
 
+**TODO**: _Possibly_ add a `make` command to the [ckan-cloud-docker](https://github.com/datopian/ckan-cloud-docker) `Makefile`.
+
 ### Development Installation
 
 To install ckanext-querytool for development, activate your CKAN virtualenv
