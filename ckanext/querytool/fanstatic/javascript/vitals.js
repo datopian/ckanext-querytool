@@ -236,35 +236,41 @@
     },
   };
   
-  
-  $.fn.dataTable.RowsGroup = RowsGroup;
-  $.fn.DataTable.RowsGroup = RowsGroup;
-  
-  // Automatic initialisation listener
-  $(document).on( 'init.dt', function ( e, settings ) {
-    if ( e.namespace !== 'dt' ) {
-      return;
+  try {
+    $.fn.dataTable.RowsGroup = RowsGroup;
+    $.fn.DataTable.RowsGroup = RowsGroup;
+
+    // Automatic initialisation listener
+    $(document).on( 'init.dt', function ( e, settings ) {
+      if ( e.namespace !== 'dt' ) {
+        return;
+      }
+
+      var api = new $.fn.dataTable.Api( settings );
+
+      if ( settings.oInit.rowsGroup ||
+         $.fn.dataTable.defaults.rowsGroup )
+      {
+        options = settings.oInit.rowsGroup?
+          settings.oInit.rowsGroup:
+          $.fn.dataTable.defaults.rowsGroup;
+        var rowsGroup = new RowsGroup( api, options );
+        $.fn.dataTable.Api.register( 'rowsgroup.update()', function () {
+          rowsGroup.mergeCells();
+          return this;
+        } );
+        $.fn.dataTable.Api.register( 'rowsgroup.updateNextDraw()', function () {
+          rowsGroup.setMergeCells();
+          return this;
+        } );
+      }
+    } );
+  } catch (error) {
+    // This is catching '$.fn.dataTable is undefined' on pages that don't use visualizations (i.e. the home page)
+    if (error.message != '$.fn.dataTable is undefined') {
+      console.error(error)
     }
-  
-    var api = new $.fn.dataTable.Api( settings );
-    
-    if ( settings.oInit.rowsGroup ||
-       $.fn.dataTable.defaults.rowsGroup )
-    {
-      options = settings.oInit.rowsGroup?
-        settings.oInit.rowsGroup:
-        $.fn.dataTable.defaults.rowsGroup;
-      var rowsGroup = new RowsGroup( api, options );
-      $.fn.dataTable.Api.register( 'rowsgroup.update()', function () {
-        rowsGroup.mergeCells();
-        return this;
-      } );
-      $.fn.dataTable.Api.register( 'rowsgroup.updateNextDraw()', function () {
-        rowsGroup.setMergeCells();
-        return this;
-      } );
-    }
-  } );
+  }
   
   }(jQuery));
   
