@@ -248,6 +248,24 @@
         textarea.val(textarea.val() + select.val());
         select.val('');
       })
+
+
+      // Provide variables support for descriptions
+      $('.desc textarea').change(function (ev) {
+        var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+        try {
+          env.renderString($(ev.target).val(), {});
+          ev.target.setCustomValidity('');
+        } catch (error) {
+          ev.target.setCustomValidity(_('Template is invalid'));
+        }
+      });
+      $('.desc-vars select').change(function (ev) {
+        var select = $(ev.target);
+        var textarea = select.closest('.item-wrapper').find('.control-group.desc textarea');
+        textarea.val(textarea.val() + select.val());
+        select.val('');
+      })
     };
 
     function handleMultipleSelect () {

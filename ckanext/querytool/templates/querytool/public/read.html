@@ -265,7 +265,8 @@
             column_width = item.column_width,
             plotly = item.plotly,
             bar_width = item.bar_width,
-            chart_id = chart_id
+            chart_id = chart_id,
+            description = item.additional_description
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
@@ -348,7 +349,7 @@
           {% set additional_description = h.render_markdown(h.get_translated(item, 'additional_description'), True, True) %}
 
           {% if additional_description != "<p>None</p>" %}
-            <div class='additional_desc'>{{ additional_description }}</div>
+            <div class='additional_desc' id='item-desc-{{chart_id}}'>{{ additional_description }}</div>
           {% endif %}
           <p class="clearfix"></p>
         {% endif %}
