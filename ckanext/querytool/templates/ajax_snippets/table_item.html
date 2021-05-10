@@ -62,6 +62,17 @@
         </select>
       </div>
     </div>
+
+    <div class="control-group control-select">
+      <label class="control-label" for="table_second_value_{{ n }}">{{ _('Sub-dimension') }}</label>
+      <div class="controls ">
+        <select id="table_second_value_{{ n }}" name="table_second_value_{{ n }}">
+        {% for column in columns %}
+        <option value="{{column}}"{% if table %}{{ 'selected' if column == table.second_value }}{% endif %}>{{column}}</option>
+        {% endfor %}
+        </select>
+      </div>
+    </div>
     <div class="control-group control-select">
       <label class="control-label" for="table_category_name_{{ n }}">{{ _('Category') }}</label>
       <div class="controls ">
@@ -132,6 +143,7 @@
   </div>
   {% if table %}
     {% set main_value = table.main_value %}
+    {% set second_value = table.second_value %}
     {% set category_name = table.category_name %}
     {% set data_format = table.data_format %}
     {% set filter_name = table.filter_name %}
@@ -144,7 +156,7 @@
       resource_id = resource_id,
       y_axis = y_axis,
       measure_label = measure_label,
-      main_value = main_value,
+      second_value = second_value,
       category_name = category_name,
       data_format = data_format,
       filter_name=filter_name,
