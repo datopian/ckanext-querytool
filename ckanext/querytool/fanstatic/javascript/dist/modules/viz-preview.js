@@ -1855,6 +1855,8 @@
                                 name: name,
                                 line: {width: 4},
                                 hovertemplate: '%{y}<extra></extra>',
+                                error_y: {},
+                                error_x: {}
                             };
                             data.push(trace);
                         };
@@ -1874,7 +1876,9 @@
                                 size: 14,
                             },
                             type: 'scatter',
-                            line: {width: 4}
+                            line: {width: 4},
+                            error_y: {},
+                            error_x: {}
                         };
                         data.push(trace);
                     };
@@ -2719,23 +2723,33 @@
                     }
                 }
 
+                var arrayplus = [1, 3, 4, 0.5];
+                var arrayminus = [3, 1, 1.2, 0.5];
 
-                if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type || 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type){
-
-
-                    var array = [400000, 8000000, 2, 9999999];
-                    var arrayminus = [1200000, 2000000, 1, 20000];
+                if('line' === this.options.chart_type){
+                    
+                    //Add Error Intervals
+                    var error = {
+                        type: 'data',
+                        symmetric: false,
+                        array: arrayplus,
+                        arrayminus: arrayminus
+                    }
+                        
+                    
+                    data[0].error_y = error;
+                }
+                if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type || 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type ){
+                    
 
                     //Add Error Intervals
                     for(var i = 0; i < data.length; i++){ 
                         var error = {
                             type: 'data',
                             symmetric: false,
-                            array: [array[i]],
+                            array: [arrayplus[i]],
                             arrayminus: [arrayminus[i]]
                         }
-                        
-
                         if(this.options.chart_type === 'hbar' || this.options.chart_type === 'shbar') {
                             data[i].error_x = error;
                         } else {
