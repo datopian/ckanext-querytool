@@ -62,11 +62,11 @@
         </select>
       </div>
     </div>
-
     <div class="control-group control-select">
       <label class="control-label" for="table_second_value_{{ n }}">{{ _('Sub-dimension') }}</label>
       <div class="controls ">
         <select id="table_second_value_{{ n }}" name="table_second_value_{{ n }}">
+        <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
         {% for column in columns %}
         <option value="{{column}}"{% if table %}{{ 'selected' if column == table.second_value }}{% endif %}>{{column}}</option>
         {% endfor %}
