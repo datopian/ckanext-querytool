@@ -2016,6 +2016,8 @@
                                 type: 'bar',
                                 name: name,
                                 width: this.options.bar_width || 0.5,
+                                error_y: {},
+                                error_x: {}
                             };
                             data.push(trace);
                         } else if ('sbar' === this.options.chart_type) {
@@ -2028,6 +2030,8 @@
                                     type: 'bar',
                                     name: name,
                                     width: this.options.bar_width || 0.5,
+                                    error_y: {},
+                                    error_x: {}
                                 };
                                 data.push(trace);
                             }
@@ -2041,6 +2045,8 @@
                                     type: 'bar',
                                     name: name,
                                     width: this.options.bar_width || 0.5,
+                                    error_y: {},
+                                    error_x: {}
                                 };
                                 data.push(trace);
                             }
@@ -2052,6 +2058,8 @@
                             width: this.options.bar_width || 0.5,
                             type: 'bar',
                             name: 'Color',
+                            error_y: {},
+                            error_x: {}
                         };
                         data.push(trace);
                     };
@@ -2677,6 +2685,7 @@
                             }
                         }
                     }
+
                 }
                 if('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
                      //Temporarily disabling annotations on bars with categories
@@ -2710,7 +2719,32 @@
                     }
                 }
 
-                //console.log(data);
+
+                if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type || 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type){
+
+
+                    var array = [400000, 8000000, 2, 9999999];
+                    var arrayminus = [1200000, 2000000, 1, 20000];
+
+                    //Add Error Intervals
+                    for(var i = 0; i < data.length; i++){ 
+                        var error = {
+                            type: 'data',
+                            symmetric: false,
+                            array: [array[i]],
+                            arrayminus: [arrayminus[i]]
+                        }
+                        
+
+                        if(this.options.chart_type === 'hbar' || this.options.chart_type === 'shbar') {
+                            data[i].error_x = error;
+                        } else {
+                            data[i].error_y = error;
+                        }
+                    }
+                }
+
+                console.log(data);
                 //console.log(O);
                 //console.log(base_info); 
                 //console.log(data)
