@@ -2723,8 +2723,8 @@
                     }
                 }
 
-                var arrayplus = [1, 3, 4, 0.5];
-                var arrayminus = [3, 1, 1.2, 0.5];
+                var arrayplus = [400000, 8000000, 2, 9999999];
+                var arrayminus = [12000000, 2000000, 1, 20000];
 
                 if('line' === this.options.chart_type){
                     

@@ -1811,9 +1811,14 @@
                             filters: queryFilters,
                             optionalFilter: optionalFilter,
                         }),
-                        d = this.create_sql_string(l, s, f);
+                        //SELECT "Causa", SUM("Ano") as "Ano" FROM "5b242e49-dd6b-4107-beb5-f40296ad6485" WHERE ("Causa" = 'Afogamento') GROUP BY "Causa"
+                        column2 = "Ano",
+                        d = this.create_sql_string(l, s, f, column2);
                     e("querytool_get_resource_data", { sql_string: d }, function (e) {
                         var n = e.result;
+
+                        //Get a result here
+                        console.log(n)
                         i.sortData(n, s.toLowerCase(), l.toLowerCase());
                         var r = f ? i.render_data_table_with_category(n, f, l, s, c) : i.render_data_table(n, l, s, c),
                             o = $("#table-item-" + a);
@@ -1832,12 +1837,23 @@
                             $("div.dt-header" + a).text(p);
                     });
                 },
-                create_sql_string: function (t, e, n) {
+                create_sql_string: function (t, e, n, col2) {
                     var r = this.options.sql_string.split("*")[1],
                         o = !0 === this.options.filter_name ? "" : this.options.filter_name,
                         i = !0 === this.options.filter_value ? "" : this.options.filter_value;
                     o && i && (r += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
-                    return n ? 'SELECT "' + n + '", "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"' : 'SELECT "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"';
+
+                    var sql;
+                    if(n){
+                        //SELECT "Causa", SUM("Ano") as "Ano" FROM "5b242e49-dd6b-4107-beb5-f40296ad6485" WHERE ("Causa" = 'Afogamento') GROUP BY "Causa"
+                        sql = 'SELECT "' + n + '", "' + t + '", "'+ col2 +' as maxValue", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'
+                    } else {
+                        //SELECT "Causa", AVG("Ano") as "avgVal", SUM("Ano") as "Ano" FROM "5b242e49-dd6b-4107-beb5-f40296ad6485" WHERE ("Causa" = 'Afogamento') GROUP BY "Causa"
+                        //sql = 'SELECT "' + t + '", "'+ col2 +'" as "avgVal", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"'
+                        sql = 'SELECT "Causa", "Sexo", SUM("Ano") as "Ano" FROM "5b242e49-dd6b-4107-beb5-f40296ad6485" WHERE ("Causa" = \'Afogamento\') GROUP BY "Causa","Sexo"'
+                    }
+                    alert(sql)
+                    return sql
                 },
                 render_data_table: function (t, e, n, r) {
                     var o = { main_value: (e = e.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
