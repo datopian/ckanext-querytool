@@ -2726,7 +2726,7 @@
                 var arrayplus = [1, 3, 4, 0.5];
                 var arrayminus = [3, 1, 1.2, 0.5];
 
-                if('line' === this.options.chart_type){
+                if('line' === this.options.chart_type || 'spline' === this.options.chart_type){
                     
                     //Add Error Intervals
                     var error = {
