@@ -2725,8 +2725,9 @@
 
                 var arrayplus = [1, 3, 4, 0.5];
                 var arrayminus = [3, 1, 1.2, 0.5];
+                var isErrorIntervals =  true
 
-                if('line' === this.options.chart_type || 'spline' === this.options.chart_type){
+                if(isErrorIntervals =  true && ('line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type || 'scatter' === this.options.chart_type)){
                     
                     //Add Error Intervals
                     var error = {
@@ -2739,7 +2740,7 @@
                     
                     data[0].error_y = error;
                 }
-                if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type || 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type ){
+                if(isErrorIntervals =  true && ('bar' === this.options.chart_type || 'sbar' === this.options.chart_type || 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type )){
                     
 
                     //Add Error Intervals
