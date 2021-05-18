@@ -1839,25 +1839,48 @@
                 create_sql_string: function (t, sv, e, n) {
                     var r = this.options.sql_string.split("*")[1],
                         o = !0 === this.options.filter_name ? "" : this.options.filter_name,
-                        i = !0 === this.options.filter_value ? "" : this.options.filter_value;
+                        i = !0 === this.options.filter_value ? "" : this.options.filter_value,
+                        sql = '';
                     o && i && (r += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
                     if (sv !== '') {
                       var second_value_sql = `, "${sv}"`
                     } else {
                       var second_value_sql = ""
                     }
-                    console.log(n ? 'SELECT "' + n + '", "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'+ second_value_sql +'' : 'SELECT "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"'+ second_value_sql +'')
-                    return n ? 'SELECT "' + n + '", "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'+ second_value_sql +'' : 'SELECT "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"'+ second_value_sql +'';
+                    if (n) {
+                      if (sv != '') {
+                        sql = 'SELECT "' + n + '", "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'+ second_value_sql +'';
+                      } else {
+                        sql = 'SELECT "' + n + '", "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'
+                      }
+                    } else {
+                      if (sv != '') {
+                        sql = 'SELECT "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"'+ second_value_sql +'';
+                      } else {
+                        sql = 'SELECT "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"';
+                      }
+                    }
+                    return sql;
+
                 },
                 render_data_table: function (t, e, sv, n, r) {
+                    
                     var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
-                    return this.render_template(
-                        "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ",
-                        o
-                    );
+                    alert(sv)
+                    if (sv != '') {
+                      return this.render_template(
+                          "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
+                          o
+                      );
+                    } else {
+                      return this.render_template(
+                          "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
+                          o
+                      );
+                  }
                 },
                 render_data_table_with_category: function (t, e, n, sv, r, o) {
-                    (e = e.toLowerCase()), (n = n.toLowerCase()), (r = r.toLowerCase());
+                    (e = e.toLowerCase()), (n = n.toLowerCase()), (sv = sv.toLowerCase()),(r = r.toLowerCase());
                     var i = {},
                         a = {},
                         u = !0,
@@ -1880,11 +1903,18 @@
                         }
                     }
                     var v = { main_value: n, second_value: sv, measure_label: o, y_axis: r, y_axis_groups: Object.keys(a).sort(), rows: Object.values(i) };
-                    console.log(v)
-                    return this.render_template(
-                        '\n          <table>\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
-                        v
-                    );
+
+                    if (sv != '') {
+                      return this.render_template(
+                          '\n          <table>\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th rowspan="2">{second_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
+                          v
+                      );
+                    } else {
+                      return this.render_template(
+                          '\n          <table>\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
+                          v
+                      );                      
+                    }
                 },
                 render_template: function (t, e) {
                     try {
