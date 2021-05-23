@@ -1420,7 +1420,23 @@
                     o = this.getStaticReferenceColumn(r, i);
                 !0 === this.options.category_name || this.options.category_name;
                 e && n && (t += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
-                return o ? 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"' : 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"'
+                var sql,
+                    ub = this.options.upper_bounds,
+                    lb = this.options.lower_bounds;
+                if (o) {
+                  if (typeof ub !== 'boolean' && typeof lb !== 'boolean') {
+                    sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", "' + ub + '", "' + lb + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '", "' + ub + '", "' + lb + '"';
+                  } else {
+                    sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
+                  }
+                } else {
+                  if (typeof ub !== 'boolean' && typeof lb !== 'boolean') {
+                    sql = 'SELECT "' + this.options.x_axis + '", "' + ub + '", "' + lb + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '", "' + ub + '", "' + lb + '"';
+                  } else {
+                    sql = 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
+                  }
+                }
+                return sql
             },
             "get_resource_datа": function(e) {
                 var n = !0 === this.options.category_name ? "" : this.options.category_name,
@@ -1528,6 +1544,8 @@
                     xfz = this.options.x_from_zero,
                     y = this.options.data_sort,
                     m = this.options.measure_label,
+                    ub = this.options.upper_bounds,
+                    lb = this.options.lower_bounds,
                     g = !0 === this.options.category_name ? "" : this.options.category_name,
                     x = !0 === this.options.static_reference_label ? "" : this.options.static_reference_label,
                     b = !0 === this.options.dynamic_reference_label ? "" : this.options.dynamic_reference_label,
@@ -2759,6 +2777,7 @@
                     }
                 }
 
+
                 console.log(data);
                 //console.log(O);
                 //console.log(base_info); 
@@ -2846,6 +2865,8 @@
                     xfz = t.find("input[name*=chart_field_x_from_zero_]").is(":checked"),
                     k = t.find("select[name*=chart_field_static_reference_columns_]").val(),
                     j = t.find("input[name*=chart_field_static_reference_label_]").val(),
+                    ub = t.find("[name*=chart_field_upper_bounds_]").val(),
+                    lb = t.find("[name*=chart_field_lower_bounds_]").val(),
                     N = t.find("select[name*=chart_field_dynamic_reference_type_]").val(),
                     P = t.find("input[name*=chart_field_dynamic_reference_factor_]").val(),
                     F = t.find("input[name*=chart_field_dynamic_reference_label_]").val(),
@@ -2854,8 +2875,8 @@
                     plotly = t.find("input[name*=chart_field_plotly_]").val(),
                     bar_width = t.find("input[name*=chart_field_bar_width_]").val(),
                     donut_hole = t.find("input[name*=chart_field_donut_hole_]").val();
-                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, void this.createChart(this.fetched_data);
-                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole;
+                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, void this.createChart(this.fetched_data);
+                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole;
                 var A = this.create_sql();
                 this.get_resource_datа(A)
 
