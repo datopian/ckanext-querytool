@@ -562,7 +562,7 @@
               <div class="controls ">
                 <select id="chart_field_lower_bounds_{{ n }}" name="chart_field_lower_bounds_{{ n }}">
                 <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-                  {% for column in columns %}
+                  {% for column in numeric_columns %}
                   <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.lower_bounds }}{% endif %}>{{column}}</option>
                   {% endfor %}
                 </select>
@@ -575,7 +575,7 @@
               <div class="controls ">
                 <select id="chart_field_upper_bounds_{{ n }}" name="chart_field_upper_bounds_{{ n }}">
                 <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
-                  {% for column in columns %}
+                  {% for column in numeric_columns %}
                   <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.upper_bounds }}{% endif %}>{{column}}</option>
                   {% endfor %}
                 </select>
