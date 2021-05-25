@@ -801,3 +801,35 @@ function hideAnnotationCheckbox(selected,chart_number){
   }
 
 }; 
+
+
+// On Tables, category and subcategory must not be same 
+$('body').on('change','[id^=table_main_value_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  checkTableCat(selected,chart_number)
+});
+
+$('body').on('focus','[id^=table_main_value_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  checkTableCat(selected,chart_number)
+});
+
+
+function checkTableCat(selected,chart_number){ 
+
+  $(`#table_second_value_${chart_number} option[value='`+ selected +`']`).attr('disabled','disabled').siblings().removeAttr('disabled');
+  $(`#table_category_name_${chart_number} option[value='`+ selected +`']`).attr('disabled','disabled').siblings().removeAttr('disabled');
+
+  if($(`#table_second_value_${chart_number} option`).filter(":selected").val() == selected){
+    $($(`#table_second_value_${chart_number}`)).val("")
+  } 
+
+  if($(`#table_category_name_${chart_number} option`).filter(":selected").val() == selected){
+    $($(`#table_category_name_${chart_number}`)).val("")
+  }
+
+}
