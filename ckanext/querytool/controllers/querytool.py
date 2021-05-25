@@ -424,6 +424,10 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_upper_bounds_{}'.format(id))
                     visualization['lower_bounds'] = \
                         data.get('chart_field_lower_bounds_{}'.format(id))
+                    if 'chart_field_show_bounds_{}'.format(id) in data:
+                        visualization['show_bounds'] = 'true'
+                    else:
+                        visualization['show_bounds'] = 'false'
                     if 'chart_field_x_text_multiline_{}'.format(id) in data:
                         visualization['x_text_multiline'] = 'true'
                     else:

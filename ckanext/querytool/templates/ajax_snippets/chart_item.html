@@ -556,6 +556,19 @@
             {% endif %}
 
             {% if selected_chart_type in ['bar', 'hbar', 'line', 'spline', 'area', 'scatter'] %}
+
+            {# Show bounds #}
+            {% if chart %}
+              {% set show_bounds = chart.show_bounds %}
+            {% endif %}
+            {{show_bounds}}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_show_bounds_{{ n }}">{{ _('Show bounds') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_show_bounds_{{ n }}" type="checkbox" name="chart_field_show_bounds_{{ n }}" value="{{ show_bounds }}"{% if show_bounds=='false' %}{% else %}checked{% endif %}>
+               </div>
+            </div>
+
             {# Upper bounds #}
             <div class="control-group control-select">
               <label class="control-label" for="chart_field_lower_bounds_{{ n }}">{{ _('Lower bounds') }}</label>
@@ -868,6 +881,7 @@
           {% set donut_hole = chart.donut_hole %}
           {% set upper_bounds = chart.upper_bounds %}
           {% set lower_bounds = chart.lower_bounds %}
+          {% set show_bounds = chart.show_bounds %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -917,7 +931,8 @@
           bar_width = bar_width,
           donut_hole = donut_hole,
           upper_bounds = upper_bounds,
-          lower_bounds = lower_bounds
+          lower_bounds = lower_bounds,
+          show_bounds = show_bounds
       %}
    </div>
 </div>
