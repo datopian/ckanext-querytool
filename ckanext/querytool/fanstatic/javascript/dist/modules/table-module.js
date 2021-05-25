@@ -1782,7 +1782,7 @@
                         sv = !0 === this.options.second_value ? "" : this.options.second_value;
                     !0 === l && (l = $("[name*=table_main_value_]").val()), o && (l = r);
                     console.log("TABLE");
-                    console.log(this.options);
+                    //console.log(this.options);
 
                     //var queryFilters = "";
                     //var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
@@ -1861,14 +1861,14 @@
                       }
                     }
 
-                    console.log(sql)
+                    //console.log(sql)
                     return sql;
 
                 },
                 render_data_table: function (t, e, sv, n, r) {
                     
                     var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
-                    console.log(t)
+                    //console.log(t)
                     if (sv != '') {
                       return this.render_template(
                           "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
@@ -1956,7 +1956,7 @@
                             var i = []
                             for(var x= 0; x<t.length; x++) {
                                 var opt1 = t[x][e]
-                                console.log(opt1)
+                                //console.log(opt1)
 
                                 var opt2 = t[x][r]
 
