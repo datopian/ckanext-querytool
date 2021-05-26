@@ -507,4 +507,34 @@ function hideAnnotationCheckbox(selected,chart_number){
     $(`#chart_field_show_annotations_${chart_number}`).removeAttr('disabled');
   }
 
-}; 
+};
+
+$('body').on('change','[id^=chart_field_graph_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  hideBounds(selected,chart_number);
+});
+
+$(document).ready(function(){
+  $('[id^=chart_field_graph_]').serializeArray().forEach((item, i) => {
+    var selected = item.value;
+    var chart_number = i + 1;
+
+    hideBounds(selected,chart_number);
+  })
+});
+
+function hideBounds(selected,chart_number) {
+  if(['line', 'spline', 'area', 'scatter', 'bar', 'hbar', 'sbar', 'shbar'].includes(selected)){
+    //$(`#chart_field_show_bounds_${chart_number}`).attr('checked', true);
+    $(`#chart_field_show_bounds_${chart_number}`).attr('disabled', false);
+    $(`#chart_field_upper_bounds_${chart_number}`).attr('disabled', false);
+    $(`#chart_field_lower_bounds_${chart_number}`).attr('disabled', false);
+  } else {
+    //$(`#chart_field_show_bounds_${chart_number}`).attr('checked', false);
+    $(`#chart_field_show_bounds_${chart_number}`).attr('disabled', true);
+    $(`#chart_field_upper_bounds_${chart_number}`).attr('disabled', true);
+    $(`#chart_field_lower_bounds_${chart_number}`).attr('disabled', true);
+  }
+};

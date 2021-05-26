@@ -1401,7 +1401,11 @@
         return {
             initialize: function() {
                 var t = this.create_sql();
-                this.get_resource_datа(t);
+
+                if (typeof this.options.x_axis !== 'boolean') {
+                  this.get_resource_datа(t);
+                }
+
                 var e = this.el.closest(".chart_field");
                 if (e.length > 0) {
                     var n = e.find(".update-chart-btn"),
@@ -1424,15 +1428,14 @@
                     ub = this.options.upper_bounds,
                     lb = this.options.lower_bounds;
                 if (o) {
-                  if (typeof ub !== 'boolean' && typeof lb !== 'boolean' && ub !== '' && lb !== '') {
+                  if ((!['undefined', 'None', ''].includes(ub) && !['undefined', 'None', ''].includes(lb)) && (typeof ub !== 'boolean' && typeof lb !== 'boolean')) {
                     sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + ub + '") as "upper bound", SUM("' + lb + '") as "lower bound", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   } else {
                     sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   }
                 } else {
-                  if (typeof ub !== 'boolean' && typeof lb !== 'boolean' && ub !== '' && lb !== '') {
+                  if ((!['undefined', 'None', ''].includes(ub) && !['undefined', 'None', ''].includes(lb)) && (typeof ub !== 'boolean' && typeof lb !== 'boolean')) {
                     sql = 'SELECT "' + this.options.x_axis + '", SUM("' + ub + '") as "upper bound", SUM("' + lb + '") as "lower bound", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
-                    //sql = 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   } else {
                     sql = 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   }
@@ -2769,7 +2772,7 @@
                 var isErrorIntervals = bnds
 
                 if (isErrorIntervals === true && typeof ub !== 'boolean' && typeof lb !== 'boolean' && ub !== '' && lb !== '') {
-                  if (O.axis['x']['categories']) {
+                  if (O.axis && O.axis['x']['categories']) {
                     const lower = t.map(x => {
                       return Math.round(Math.abs(x[this.options.y_axis.toLowerCase()] - x[lb]));
                     });
@@ -2810,24 +2813,19 @@
                       }
                     }
 
-                  } else {
+                  }
+                  if (O.axis && !O.axis['x']['categories']) {
                     for (var i = 0; i < data.length; i++) {
-                      var category_keys = [];
-                      var upper = [];
-                      var lower = [];
+                      if ('sbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
+                        const lower = t.map(x => {
+                          return Math.round(Math.abs(x[this.options.y_axis.toLowerCase()] - x[lb]));
+                        });
+                        const upper = t.map(x => {
+                          return Math.round(Math.abs(x[this.options.y_axis.toLowerCase()] - x[ub]));
+                        });
 
-                      category_keys.push(data[i].name)
-                      upper.push(t[ub][data[i].name])
-                      lower.push(t[lb][data[i].name])
-
-                      //for (const [key, value] of Object.entries(t)) {
-                      //  console.log(`${key}: ${value}`);
-                      //}
-
-                      var arrayplus = upper;
-                      var arrayminus = lower;
-
-                      if('line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type || 'scatter' === this.options.chart_type){
+                        var arrayplus = upper;
+                        var arrayminus = lower;
 
                         //Add Error Intervals
                         var error = {
@@ -2837,23 +2835,51 @@
                             arrayminus: arrayminus
                         }
 
-                        data[i].error_y = error;
-                      }
+                        data[0].error_y = error;
+                      } else {
+                        var category_keys = [];
+                        var upper = [];
+                        var lower = [];
 
-                      if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type || 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type ){
+                        category_keys.push(data[i].name)
+                        upper.push(t[ub][data[i].name])
+                        lower.push(t[lb][data[i].name])
 
-                        //Add Error Intervals
-                        var error = {
-                            type: 'data',
-                            symmetric: false,
-                            array: arrayplus,
-                            arrayminus: arrayminus
+                        //for (const [key, value] of Object.entries(t)) {
+                        //  console.log(`${key}: ${value}`);
+                        //}
+
+                        var arrayplus = upper;
+                        var arrayminus = lower;
+
+                        if('line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type || 'scatter' === this.options.chart_type){
+
+                          //Add Error Intervals
+                          var error = {
+                              type: 'data',
+                              symmetric: false,
+                              array: arrayplus,
+                              arrayminus: arrayminus
+                          }
+
+                          data[i].error_y = error;
                         }
 
-                        if ('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
-                          data[0].error_x = error;
-                        } else {
-                          data[0].error_y = error;
+                        if('bar' === this.options.chart_type || 'hbar' === this.options.chart_type){
+
+                          //Add Error Intervals
+                          var error = {
+                              type: 'data',
+                              symmetric: false,
+                              array: arrayplus,
+                              arrayminus: arrayminus
+                          }
+
+                          if ('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
+                            data[0].error_x = error;
+                          } else {
+                            data[0].error_y = error;
+                          }
                         }
                       }
                     }

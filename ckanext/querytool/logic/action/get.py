@@ -279,7 +279,6 @@ def querytool_get_chart_data(context, data_dict):
                 sum(static_reference_values) / len(static_reference_values))
 
         categories_data['x'] = x
-        log.error(categories_data)
         return categories_data
     else:
         return h.get_resource_data(sql_string)
