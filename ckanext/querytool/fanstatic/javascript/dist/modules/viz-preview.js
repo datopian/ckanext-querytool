@@ -2785,15 +2785,16 @@
 
                     if('line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type || 'scatter' === this.options.chart_type){
 
-                        //Add Error Intervals
-                        var error = {
-                            type: 'data',
-                            symmetric: false,
-                            array: arrayplus,
-                            arrayminus: arrayminus
-                        }
+                      //Add Error Intervals
+                      var error = {
+                          type: 'data',
+                          symmetric: false,
+                          array: arrayplus,
+                          arrayminus: arrayminus,
+                          color: '#000000'
+                      }
 
-                        data[0].error_y = error;
+                      data[0].error_y = error;
                     }
 
                     if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type || 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type ){
@@ -2803,7 +2804,8 @@
                           type: 'data',
                           symmetric: false,
                           array: arrayplus,
-                          arrayminus: arrayminus
+                          arrayminus: arrayminus,
+                          color: '#000000'
                       }
 
                       if ('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
@@ -2832,7 +2834,8 @@
                             type: 'data',
                             symmetric: false,
                             array: arrayplus,
-                            arrayminus: arrayminus
+                            arrayminus: arrayminus,
+                            color: '#000000'
                         }
 
                         data[0].error_y = error;
@@ -2859,7 +2862,8 @@
                               type: 'data',
                               symmetric: false,
                               array: arrayplus,
-                              arrayminus: arrayminus
+                              arrayminus: arrayminus,
+                              color: '#000000'
                           }
 
                           data[i].error_y = error;
@@ -2872,7 +2876,8 @@
                               type: 'data',
                               symmetric: false,
                               array: arrayplus,
-                              arrayminus: arrayminus
+                              arrayminus: arrayminus,
+                              color: '#000000'
                           }
 
                           if ('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {

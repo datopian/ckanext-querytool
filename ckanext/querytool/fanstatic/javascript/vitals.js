@@ -509,6 +509,8 @@ function hideAnnotationCheckbox(selected,chart_number){
 
 };
 
+// Upper/lower bounds functions
+
 $('body').on('change','[id^=chart_field_graph_]',function(){
   var selected = $(this).val();
   var chart_number = this.id.split('_').slice(-1)[0];
@@ -538,3 +540,70 @@ function hideBounds(selected,chart_number) {
     $(`#chart_field_lower_bounds_${chart_number}`).attr('disabled', true);
   }
 };
+
+$('body').on('change','[id^=chart_field_upper_bounds_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  disableBounds('lower', selected, chart_number);
+});
+
+$('body').on('change','[id^=chart_field_lower_bounds_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  disableBounds('upper', selected, chart_number);
+});
+
+$('body').on('load','[id^=chart_field_upper_bounds_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  disableBounds('lower', selected, chart_number);
+})
+
+$('body').on('load','[id^=chart_field_upper_bounds_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  disableBounds('lower', selected, chart_number);
+})
+
+function disableBounds(bound, selected, chart_number){
+  var options = $(`#chart_field_${bound}_bounds_${chart_number}`)[0].options;
+
+  var disabledOption;
+
+  for (let i = 0; i < options.length; i++) {
+    var disabled = options[i].disabled
+
+    if (disabled) {
+      disabledOption = options[i].value
+    }
+  }
+
+  if (selected !== '') {
+    $(`#chart_field_${bound}_bounds_${chart_number} option[value='${disabledOption}']`).removeAttr('disabled')
+    $(`#chart_field_${bound}_bounds_${chart_number} option[value='${selected}']`).attr('disabled', 'disabled')
+  } else {
+    $(`#chart_field_${bound}_bounds_${chart_number} option[value='${disabledOption}']`).removeAttr('disabled')
+  }
+};
+
+$(document).ready(function(){
+  $('[id^=chart_field_lower_bounds_]').serializeArray().forEach((item, i) => {
+    var selected = item.value;
+    var chart_number = i + 1;
+
+    disableBounds('upper', selected, chart_number);
+  })
+});
+
+$(document).ready(function(){
+  $('[id^=chart_field_upper_bounds_]').serializeArray().forEach((item, i) => {
+    var selected = item.value;
+    var chart_number = i + 1;
+
+    disableBounds('lower', selected, chart_number);
+  })
+});
