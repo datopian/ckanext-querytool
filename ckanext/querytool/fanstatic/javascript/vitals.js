@@ -508,3 +508,50 @@ function hideAnnotationCheckbox(selected,chart_number){
   }
 
 }; 
+
+
+//Fix colors 
+$(document).ready(function(){
+  $(".diver-colors-1").children(".control-select").each(function(){
+    var picker = $(this).find('.palette-color-picker-button')
+    var pickerInput = picker.siblings('input').val()
+    console.log(pickerInput)
+  })
+})
+
+function loadColors() {
+  alert();
+}
+
+/*
+$(document).ready(function(){
+  setTimeout(function(){
+    //let color = $(".palette-color-picker-button").closest('input').find("#chart_field_color_1_1").val()
+    let color = $("#chart_field_color_1_1").val()
+    color = rgb2hex(color)
+    $(".palette-color-picker-button").css("background",color)
+    console.log(color)
+  },1000)
+
+  $("body").on('click', '.update-chart-btn', function(){
+    setTimeout(function(){
+      //let color = $(".palette-color-picker-button").closest('input').find("#chart_field_color_1_1").val()
+      let color = $("#chart_field_color_1_1").val()
+      color = rgb2hex(color)
+      $(".palette-color-picker-button").css("background",color)
+      console.log(color)
+    },1000)
+  })
+})
+
+var hexDigits =["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"]; 
+var hex= function(x) {
+  return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
+}
+//Function to convert rgb color to hex format
+function rgb2hex(rgb) {
+ rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
+ return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
+}
+
+*/
