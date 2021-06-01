@@ -405,25 +405,23 @@ $(document).ready(function(){
         {"deepskyblue": "deepskyblue"},
         {"lightgreen": "lightgreen"},
         {"mediumvioletred": "mediumvioletred"},
-        {"#00429d":"#00429d"},
-        {"#4771b2":"#4771b2"},
-        {"#73a2c6":"#73a2c6"},
-        {"#a5d5d8":"#a5d5d8"},
-        {"#ffffe0":"#ffffe0"},
-        {"#007386":"#007386"},
-        {"#3e98a0":"#3e98a0"},
-        {"#6dbdba":"#6dbdba"},
-        {"#a4e2d3":"#a4e2d3"},
-        {"#f46a00":"#f46a00"},
-        {"#fa8a30":"#fa8a30"},
-        {"#fea951":"#fea951"},
-        {"#ffc671":"#ffc671"},
-        {"#fee391":"#fee391"},
-        {"#c77a44":"#c77a44"},
-        {"#d59566":"#d59566"},
-        {"#e2b187":"#e2b187"},
-        {"#eccdaa":"#eccdaa"},
-        {"#f5e9ce":"#f5e9ce"}
+        {"midnightblue":"midnightblue"},
+        {"lightsteelblue":"lightsteelblue"},
+        {"powderblue":"powderblue"},
+        {"lightyellow":"lightyellow"},
+        {"teal":"teal"},
+        {"darkcyan":"darkcyan"},
+        {"cadetblue":"cadetblue"},
+        {"mediumaquamarine":"mediumaquamarine"},
+        {"coral":"coral"},
+        {"darkorange":"darkorange"},
+        {"sandybrown":"sandybrown"},
+        {"navajowhite":"navajowhite"},
+        {"peru":"peru"},
+        {"burlywood":"burlywood"},
+        {"tan":"tan"},
+        {"wheat":"wheat"},
+        {"papayawhip":"papayawhip"}
         ],
         position: 'downside',
         clear_btn: null // default -> 'upside'
@@ -508,50 +506,3 @@ function hideAnnotationCheckbox(selected,chart_number){
   }
 
 }; 
-
-
-//Fix colors 
-$(document).ready(function(){
-  $(".diver-colors-1").children(".control-select").each(function(){
-    var picker = $(this).find('.palette-color-picker-button')
-    var pickerInput = picker.siblings('input').val()
-    console.log(pickerInput)
-  })
-})
-
-function loadColors() {
-  alert();
-}
-
-/*
-$(document).ready(function(){
-  setTimeout(function(){
-    //let color = $(".palette-color-picker-button").closest('input').find("#chart_field_color_1_1").val()
-    let color = $("#chart_field_color_1_1").val()
-    color = rgb2hex(color)
-    $(".palette-color-picker-button").css("background",color)
-    console.log(color)
-  },1000)
-
-  $("body").on('click', '.update-chart-btn', function(){
-    setTimeout(function(){
-      //let color = $(".palette-color-picker-button").closest('input').find("#chart_field_color_1_1").val()
-      let color = $("#chart_field_color_1_1").val()
-      color = rgb2hex(color)
-      $(".palette-color-picker-button").css("background",color)
-      console.log(color)
-    },1000)
-  })
-})
-
-var hexDigits =["0","1","2","3","4","5","6","7","8","9","a","b","c","d","e","f"]; 
-var hex= function(x) {
-  return isNaN(x) ? "00" : hexDigits[(x - x % 16) / 16] + hexDigits[x % 16];
-}
-//Function to convert rgb color to hex format
-function rgb2hex(rgb) {
- rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
- return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-}
-
-*/
