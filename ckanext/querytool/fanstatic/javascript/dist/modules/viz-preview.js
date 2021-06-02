@@ -2816,37 +2816,18 @@
                     }
 
                   }
-                  if (O.axis && !O.axis['x']['categories']) {
+                  if (O.axis && !O.axis['x']['categories'] && t[ub] && t[lb]) {
                     for (var i = 0; i < data.length; i++) {
-                      if ('sbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
-                        const lower = t.map(x => {
-                          return Math.round(Math.abs(x[this.options.y_axis.toLowerCase()] - x[lb]));
-                        });
-                        const upper = t.map(x => {
-                          return Math.round(Math.abs(x[this.options.y_axis.toLowerCase()] - x[ub]));
-                        });
-
-                        var arrayplus = upper;
-                        var arrayminus = lower;
-
-                        //Add Error Intervals
-                        var error = {
-                            type: 'data',
-                            symmetric: false,
-                            array: arrayplus,
-                            arrayminus: arrayminus,
-                            color: '#000000'
-                        }
-
-                        data[0].error_y = error;
-                      } else {
                         var category_keys = [];
                         var upper = [];
                         var lower = [];
 
+                        for (var j = 1; j < t[data[i].name].length; j++) {
+                          upper.push(Math.round(Math.abs(t[data[i].name][j] - t[ub][data[i].name][j - 1])))
+                          lower.push(Math.round(Math.abs(t[data[i].name][j] - t[lb][data[i].name][j - 1])))
+                        }
+
                         category_keys.push(data[i].name)
-                        upper.push(t[ub][data[i].name])
-                        lower.push(t[lb][data[i].name])
 
                         //for (const [key, value] of Object.entries(t)) {
                         //  console.log(`${key}: ${value}`);
@@ -2863,7 +2844,8 @@
                               symmetric: false,
                               array: arrayplus,
                               arrayminus: arrayminus,
-                              color: '#000000'
+                              color: '#000000',
+                              visible: true
                           }
 
                           data[i].error_y = error;
@@ -2877,16 +2859,16 @@
                               symmetric: false,
                               array: arrayplus,
                               arrayminus: arrayminus,
-                              color: '#000000'
+                              color: '#000000',
+                              visible: true
                           }
 
-                          if ('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
-                            data[0].error_x = error;
+                          if ('hbar' === this.options.chart_type) {
+                            data[i].error_x = error;
                           } else {
-                            data[0].error_y = error;
+                            data[i].error_y = error;
                           }
                         }
-                      }
                     }
                   }
                 }

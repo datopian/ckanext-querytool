@@ -242,7 +242,9 @@ def querytool_get_chart_data(context, data_dict):
             x.append(value)
 
             for record in records:
-                if upper_bounds and lower_bounds:
+                if upper_bounds and lower_bounds and \
+                   record.get(upper_bounds.lower()) and \
+                   record.get(upper_bounds.lower()):
                     upper_bound_value = record[upper_bounds.lower()]
 
                     categories_data.setdefault(

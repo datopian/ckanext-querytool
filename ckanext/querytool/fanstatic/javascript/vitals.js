@@ -927,23 +927,27 @@ $('body').on('load','[id^=chart_field_upper_bounds_]',function(){
 })
 
 function disableBounds(bound, selected, chart_number){
-  var options = $(`#chart_field_${bound}_bounds_${chart_number}`)[0].options;
+  try {
+    var options = $(`#chart_field_${bound}_bounds_${chart_number}`)[0].options;
 
-  var disabledOption;
+    var disabledOption;
 
-  for (let i = 0; i < options.length; i++) {
-    var disabled = options[i].disabled
+    for (let i = 0; i < options.length; i++) {
+      var disabled = options[i].disabled
 
-    if (disabled) {
-      disabledOption = options[i].value
+      if (disabled) {
+        disabledOption = options[i].value
+      }
     }
-  }
 
-  if (selected !== '') {
-    $(`#chart_field_${bound}_bounds_${chart_number} option[value='${disabledOption}']`).removeAttr('disabled')
-    $(`#chart_field_${bound}_bounds_${chart_number} option[value='${selected}']`).attr('disabled', 'disabled')
-  } else {
-    $(`#chart_field_${bound}_bounds_${chart_number} option[value='${disabledOption}']`).removeAttr('disabled')
+    if (selected !== '') {
+      $(`#chart_field_${bound}_bounds_${chart_number} option[value='${disabledOption}']`).removeAttr('disabled')
+      $(`#chart_field_${bound}_bounds_${chart_number} option[value='${selected}']`).attr('disabled', 'disabled')
+    } else {
+      $(`#chart_field_${bound}_bounds_${chart_number} option[value='${disabledOption}']`).removeAttr('disabled')
+    }
+  } catch(error) {
+    return null;
   }
 };
 
