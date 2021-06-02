@@ -1773,15 +1773,21 @@
                     t.length > 0 && t.find(".update-table-btn").click(this.updateTable.bind(this));
                     this.sandbox.subscribe("querytool:updateTables", this.updateTable.bind(this));
                 },
-                createTable: function (n, r, o, isUpdated = false) {
+                createTable: function (n, r, o, sv_= "", isUpdated = false) {
                     var i = this,
                         a = this.options.table_id,
                         u = $("html").attr("lang"),
                         s = (this.options.resource_id, n || this.options.y_axis),
                         c = !0 === this.options.measure_label ? "" : this.options.measure_label,
-                        l = this.options.main_value,
-                        sv = !0 === this.options.second_value ? "" : this.options.second_value;
+                        l = this.options.main_value;
                     !0 === l && (l = $("[name*=table_main_value_]").val()), o && (l = r);
+
+                    alert
+                    if(sv_ !== "") {
+                        var sv = sv_
+                    } else {
+                        var sv = !0 === this.options.second_value ? "" : this.options.second_value
+                    }
                     console.log("TABLE");
                     //console.log(this.options);
 
@@ -2052,7 +2058,7 @@
                         (this.options.filter_value = this.el.parent().parent().find("[id*=table_field_filter_value_]").val()),
                         (this.options.table_title = this.el.parent().parent().find("[id*=table_field_title_]").val()),
                         (this.options.measure_label = n),
-                        this.createTable(t, e, sv, true);
+                        this.createTable(t, e, !0, sv, true);
                 },
                 sortData: function (t, e, n) {
                     t.sort(function (t, e) {
