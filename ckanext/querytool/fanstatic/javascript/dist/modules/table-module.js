@@ -1765,6 +1765,7 @@
                     var r = ckan.sandbox().client.endpoint + "/api/3/action/" + t + "?" + (e = $.param(e));
                     $.getJSON(r, n);
                 };
+                var updateCount = 0;
             return {
                 initialize: function () {
                     this.createTable();
@@ -1772,7 +1773,7 @@
                     t.length > 0 && t.find(".update-table-btn").click(this.updateTable.bind(this));
                     this.sandbox.subscribe("querytool:updateTables", this.updateTable.bind(this));
                 },
-                createTable: function (n, r, o) {
+                createTable: function (n, r, o, sv_= "", isUpdated = false) {
                     var i = this,
                         a = this.options.table_id,
                         u = $("html").attr("lang"),
@@ -1780,8 +1781,15 @@
                         c = !0 === this.options.measure_label ? "" : this.options.measure_label,
                         l = this.options.main_value;
                     !0 === l && (l = $("[name*=table_main_value_]").val()), o && (l = r);
+
+                    alert
+                    if(sv_ !== "") {
+                        var sv = sv_
+                    } else {
+                        var sv = !0 === this.options.second_value ? "" : this.options.second_value
+                    }
                     console.log("TABLE");
-                    console.log(this.options);
+                    //console.log(this.options);
 
                     //var queryFilters = "";
                     //var queryFilters = (this.options.query_filters === true) ? [] : this.options.query_filters;
@@ -1811,55 +1819,190 @@
                             filters: queryFilters,
                             optionalFilter: optionalFilter,
                         }),
-                        d = this.create_sql_string(l, s, f);
+                        d = this.create_sql_string(l, sv, s, f);
                     e("querytool_get_resource_data", { sql_string: d }, function (e) {
                         var n = e.result;
                         i.sortData(n, s.toLowerCase(), l.toLowerCase());
-                        var r = f ? i.render_data_table_with_category(n, f, l, s, c) : i.render_data_table(n, l, s, c),
+                        var r = f ? i.render_data_table_with_category(n, f, l, sv, s, c) : i.render_data_table(n, l, sv, s, c),
                             o = $("#table-item-" + a);
-                        $.fn.DataTable.isDataTable(o) && o.DataTable().destroy(),
-                            o.html(r),
-                            o.DataTable({
-                                language: t[u],
-                                dom: '<"dt-header' + a + '">r<lf>tip<"dtf-butons"B>',
-                                buttons: [
-                                    { extend: "csv", className: "btn btn-default" },
-                                    { extend: "excel", className: "btn btn-default" },
-                                    { extend: "pdf", className: "btn btn-default" },
-                                ],
-                                processing: !0,
-                            }),
+                        
+                        var dtConfig = {
+                            language: t[u],
+                            dom: '<"dt-header' + a + '">r<lf>tip<"dtf-butons"B>',
+                            buttons: [
+                                { extend: "csv", className: "btn btn-default" },
+                                { extend: "excel", className: "btn btn-default" },
+                                { extend: "pdf", className: "btn btn-default" },
+                            ],
+                            processing: !0,
+                            rowsGroup: [
+                                0
+                            ]
+                        }
+                        
+                        //Initialise Datatable if its not update
+                        if(!isUpdated) {
+                            o.html(r)
+                            o.DataTable(dtConfig)
                             $("div.dt-header" + a).text(p);
+                        } else {
+
+                            //Hide the previous DT
+                            $("#table-item-"+a+"_wrapper").parents('.preview-wrapper').hide()
+                            if(updateCount >= 1) {
+                                $('#new-table-'+updateCount+' table').parents('.preview-wrapper').hide()
+                            }
+
+                            updateCount = updateCount + 1
+                            $("<div class='preview-wrapper' id='new-table-"+updateCount+"'>"+r+"</div>").insertAfter( $("#table-item-"+ a +"_wrapper").closest('.preview-wrapper'));
+                            $('#new-table-'+updateCount+' table').addClass('row-border table-bordered')
+                            $('#new-table-'+updateCount+' table').DataTable(dtConfig)
+                            $("div.dt-header" + a).text(p);
+                        }
+
+                        
                     });
                 },
-                create_sql_string: function (t, e, n) {
+                create_sql_string: function (t, sv, e, n) {
                     var r = this.options.sql_string.split("*")[1],
                         o = !0 === this.options.filter_name ? "" : this.options.filter_name,
-                        i = !0 === this.options.filter_value ? "" : this.options.filter_value;
+                        i = !0 === this.options.filter_value ? "" : this.options.filter_value,
+                        sql = '';
                     o && i && (r += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
-                    return n ? 'SELECT "' + n + '", "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"' : 'SELECT "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"';
+                    if (sv !== '') {
+                      var second_value_sql = `, "${sv}"`
+                    } else {
+                      var second_value_sql = ""
+                    }
+                    if (n) {
+                      if (sv != '') {
+                        sql = 'SELECT "' + n + '", "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'+ second_value_sql +'';
+                      } else {
+                        sql = 'SELECT "' + n + '", "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'
+                      }
+                    } else {
+                      if (sv != '') {
+                        sql = 'SELECT "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"'+ second_value_sql +'';
+                      } else {
+                        sql = 'SELECT "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"';
+                      }
+                    }
+
+                    //console.log(sql)
+                    return sql;
+
                 },
-                render_data_table: function (t, e, n, r) {
-                    var o = { main_value: (e = e.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
-                    return this.render_template(
-                        "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ",
-                        o
-                    );
+                render_data_table: function (t, e, sv, n, r) {
+                    
+                    var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
+                    //console.log(t)
+                    if (sv != '') {
+                      return this.render_template(
+                          "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
+                          o
+                      );
+                    } else {
+                      return this.render_template(
+                          "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
+                          o
+                      );
+                  }
                 },
-                render_data_table_with_category: function (t, e, n, r, o) {
-                    (e = e.toLowerCase()), (n = n.toLowerCase()), (r = r.toLowerCase());
+                render_data_table_with_category: function (t, e, n, sv, r, o) {
+                    (e = e.toLowerCase()), (n = n.toLowerCase()), (sv = sv.toLowerCase()),(r = r.toLowerCase());
                     var i = {},
                         a = {},
                         u = !0,
                         s = !1,
                         c = void 0;
+
+                    var x = {};
                     try {
+                        // console.log("--- T ---")
+                        // console.log(t)
+
                         for (var l, f = t[Symbol.iterator](); !(u = (l = f.next()).done); u = !0) {
+                            
                             var p = l.value;
+                            // console.log("--- I --- ")
+                            // console.log(i)
+
+                            // console.log("--- Ip[N] --- ")
+                            // console.log(i[p[n]])
+
                             i[p[n]] || (i[p[n]] = {});
+
+                            //console.log("--- P --- ")
+                            //console.log(p)
+
                             var d = i[p[n]];
+
+                            // if (sv != '') {
+                            //     (d[sv] = p[sv]);
+                            // }
+                            
                             (d[n] = p[n]), (d[p[e]] = p[r]), (a[p[e]] = !0);
+
+                            //console.log("--- N --- ")
+                            //console.log(n)
+                            //console.log("--- D --- ")
+                            //console.log(d)
                         }
+
+                        // var new_i = [
+                        //     {
+                        //         "unidade de federação": "Pará",
+                        //         "causa classificada": "006 Afogamento",
+                        //         "Masculino": "2012"
+                        //     },
+                        //     {
+                        //         "unidade de federação": "Santa Catarina",
+                        //         "causa classificada": "009 Afogamento",
+                        //         "Masculino": "2005"
+                        //     },
+                        //     {
+                        //         "unidade de federação": "Tocantins",
+                        //         "causa classificada": "011 Afogamento",
+                        //         "Ambos": "1998",
+                        //         "Feminino": "2006"
+                        //     },
+                        //     {
+                        //         "unidade de federação": "Rio Grande do Norte",
+                        //         "causa classificada": "014 Afogamento",
+                        //         "Ambos": "2002"
+                        //     },
+                        //     {
+                        //         "unidade de federação": "Testing Values",
+                        //         "causa classificada": "014 Afogamento",
+                        //         "Feminino": "2999"
+                        //     }
+                        // ]
+
+                        //Creating new i
+                        if(sv && sv !== '') {
+                            var i = []
+                            for(var x= 0; x<t.length; x++) {
+                                var opt1 = t[x][e]
+                                //console.log(opt1)
+
+                                var opt2 = t[x][r]
+
+                                i.push(t[x])
+                                i[x][opt1] = opt2
+                            }
+                        }
+
+                        // console.log("New I")
+                        // console.log(new_i)
+
+                        
+                        // console.log(e)
+                        // console.log(n)
+                        // console.log(sv)
+                        // console.log(r)
+                        // console.log(o)
+
+                        // console.log(i)
                     } catch (t) {
                         (s = !0), (c = t);
                     } finally {
@@ -1869,11 +2012,22 @@
                             if (s) throw c;
                         }
                     }
-                    var v = { main_value: n, measure_label: o, y_axis: r, y_axis_groups: Object.keys(a).sort(), rows: Object.values(i) };
-                    return this.render_template(
-                        '\n          <table>\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
-                        v
-                    );
+
+
+                    
+                    var v = { main_value: n, second_value: sv, measure_label: o, y_axis: r, y_axis_groups: Object.keys(a).sort(), rows: Object.values(i) };
+
+                    if (sv != '') {
+                      return this.render_template(
+                          '\n          <table  class="stripe">\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th rowspan="2">{second_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
+                          v
+                      );
+                    } else {
+                      return this.render_template(
+                          '\n          <table class="stripe">\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
+                          v
+                      );                      
+                    }
                 },
                 render_template: function (t, e) {
                     try {
@@ -1896,6 +2050,7 @@
                 updateTable: function () {
                     var t = $("[name=choose_y_axis_column]").val(),
                         e = this.el.parent().parent().find("[id*=table_main_value_]").val(),
+                        sv = this.el.parent().parent().find("[id*=table_second_value_]").val(),
                         n = $("#choose_y_axis_column option:selected").text();
                     (this.options.category_name = this.el.parent().parent().find("[id*=table_category_name_]").val()),
                         (this.options.data_format = this.el.parent().parent().find("[id*=table_data_format_]").val()),
@@ -1903,7 +2058,7 @@
                         (this.options.filter_value = this.el.parent().parent().find("[id*=table_field_filter_value_]").val()),
                         (this.options.table_title = this.el.parent().parent().find("[id*=table_field_title_]").val()),
                         (this.options.measure_label = n),
-                        this.createTable(t, e, !0);
+                        this.createTable(t, e, !0, sv, true);
                 },
                 sortData: function (t, e, n) {
                     t.sort(function (t, e) {
