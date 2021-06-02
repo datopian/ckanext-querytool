@@ -1563,7 +1563,7 @@
                     filters: E,
                     optionalFilter: P
                 });
-                console.log(desc)
+                //console.log(desc)
                 w = this.renderChartTitle(w, {
                     measure: {
                         name: i,
@@ -2745,7 +2745,7 @@
                     id:'chart-'+this.options.chart_id,
                     click: function(gd) { 
                         //var xid = this.closest(".item")
-                        console.log(this.id);
+                        //console.log(this.id);
                         var chartId = "."+this.id;
                         //console.log('hi'); console.log(gd); alert('button1')
                         setTimeout(function(){ 
