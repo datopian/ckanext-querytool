@@ -866,8 +866,6 @@ $('body').on('change','[id^=table_category_name_]',function(e){
   }
 });
 
-};
-
 // Upper/lower bounds functions
 
 $('body').on('change','[id^=chart_field_graph_]',function(){
