@@ -1765,6 +1765,7 @@
                     var r = ckan.sandbox().client.endpoint + "/api/3/action/" + t + "?" + (e = $.param(e));
                     $.getJSON(r, n);
                 };
+                var updateCount = 0;
             return {
                 initialize: function () {
                     this.createTable();
@@ -1772,7 +1773,7 @@
                     t.length > 0 && t.find(".update-table-btn").click(this.updateTable.bind(this));
                     this.sandbox.subscribe("querytool:updateTables", this.updateTable.bind(this));
                 },
-                createTable: function (n, r, o) {
+                createTable: function (n, r, o, isUpdated = false) {
                     var i = this,
                         a = this.options.table_id,
                         u = $("html").attr("lang"),
@@ -1818,22 +1819,42 @@
                         i.sortData(n, s.toLowerCase(), l.toLowerCase());
                         var r = f ? i.render_data_table_with_category(n, f, l, sv, s, c) : i.render_data_table(n, l, sv, s, c),
                             o = $("#table-item-" + a);
-                        $.fn.DataTable.isDataTable(o) && o.DataTable().destroy(),
-                            o.html(r),
-                            o.DataTable({
-                                language: t[u],
-                                dom: '<"dt-header' + a + '">r<lf>tip<"dtf-butons"B>',
-                                buttons: [
-                                    { extend: "csv", className: "btn btn-default" },
-                                    { extend: "excel", className: "btn btn-default" },
-                                    { extend: "pdf", className: "btn btn-default" },
-                                ],
-                                processing: !0,
-                                rowsGroup: [
-                                    0
-                                ]
-                            }),
+                        
+                        var dtConfig = {
+                            language: t[u],
+                            dom: '<"dt-header' + a + '">r<lf>tip<"dtf-butons"B>',
+                            buttons: [
+                                { extend: "csv", className: "btn btn-default" },
+                                { extend: "excel", className: "btn btn-default" },
+                                { extend: "pdf", className: "btn btn-default" },
+                            ],
+                            processing: !0,
+                            rowsGroup: [
+                                0
+                            ]
+                        }
+                        
+                        //Initialise Datatable if its not update
+                        if(!isUpdated) {
+                            o.html(r)
+                            o.DataTable(dtConfig)
                             $("div.dt-header" + a).text(p);
+                        } else {
+
+                            //Hide the previous DT
+                            $("#table-item-"+a+"_wrapper").parents('.preview-wrapper').hide()
+                            if(updateCount >= 1) {
+                                $('#new-table-'+updateCount+' table').parents('.preview-wrapper').hide()
+                            }
+
+                            updateCount = updateCount + 1
+                            $("<div class='preview-wrapper' id='new-table-"+updateCount+"'>"+r+"</div>").insertAfter( $("#table-item-"+ a +"_wrapper").closest('.preview-wrapper'));
+                            $('#new-table-'+updateCount+' table').addClass('row-border table-bordered')
+                            $('#new-table-'+updateCount+' table').DataTable(dtConfig)
+                            $("div.dt-header" + a).text(p);
+                        }
+
+                        
                     });
                 },
                 create_sql_string: function (t, sv, e, n) {
@@ -2031,7 +2052,7 @@
                         (this.options.filter_value = this.el.parent().parent().find("[id*=table_field_filter_value_]").val()),
                         (this.options.table_title = this.el.parent().parent().find("[id*=table_field_title_]").val()),
                         (this.options.measure_label = n),
-                        this.createTable(t, e, sv, !0);
+                        this.createTable(t, e, sv, true);
                 },
                 sortData: function (t, e, n) {
                     t.sort(function (t, e) {
