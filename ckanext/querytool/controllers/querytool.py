@@ -574,6 +574,8 @@ class QueryToolController(base.BaseController):
                         data['choose_y_axis_column']
                     table_item['main_value'] = \
                         data['table_main_value_{}'.format(id)]
+                    table_item['second_value'] = \
+                        data['table_second_value_{}'.format(id)]
                     table_item['title'] = \
                         data['table_field_title_{}'.format(id)]
                     table_item['data_format'] = \
