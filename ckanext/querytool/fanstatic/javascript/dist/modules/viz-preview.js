@@ -1867,7 +1867,7 @@
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
-                            if (name !== undefined) {
+                            if (name !== undefined && Array.isArray(columns[tmp])) {
                               var textTitles = columns[tmp].slice(1);
                               var convertedTextTitles = convertTextTitles(textTitles);
 
@@ -1985,7 +1985,7 @@
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
-                            if (name !== undefined) {
+                            if (name !== undefined && Array.isArray(columns[tmp])) {
                               var textTitles = columns[tmp].slice(1);
                               var convertedTextTitles = convertTextTitles(textTitles);
 
@@ -2061,7 +2061,7 @@
                             for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
-                                if (name !== undefined) {
+                                if (name !== undefined && Array.isArray(columns[tmp])) {
                                   var trace = {
                                       x: [this.options.x_axis],
                                       y: [parseFloat(columns[tmp][1])],
@@ -2078,7 +2078,7 @@
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
 
-                                if (name !== undefined) {
+                                if (name !== undefined && Array.isArray(columns[tmp])) {
                                   var trace = {
                                       x: x,
                                       y: columns[tmp].slice(1),
@@ -2181,7 +2181,7 @@
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
-                            if (name !== undefined) {
+                            if (name !== undefined && Array.isArray(columns[tmp])) {
                               var textTitles = columns[tmp].slice(1);
                               var convertedTextTitles = convertTextTitles(textTitles);
 
