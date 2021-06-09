@@ -883,7 +883,7 @@ $(document).ready(function(){
 });
 
 function hideBounds(selected,chart_number) {
-  if(['line', 'spline', 'area', 'scatter', 'bar', 'hbar'].includes(selected)){
+  if(['line', 'spline', 'area', 'bar', 'hbar'].includes(selected)){
     //$(`#chart_field_show_bounds_${chart_number}`).attr('checked', true);
     $(`#chart_field_show_bounds_${chart_number}`).attr('disabled', false);
     $(`#chart_field_upper_bounds_${chart_number}`).attr('disabled', false);
