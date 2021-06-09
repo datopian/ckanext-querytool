@@ -1429,13 +1429,13 @@
                     lb = this.options.lower_bounds;
                 if (o) {
                   if ((!['undefined', 'None', ''].includes(ub) && !['undefined', 'None', ''].includes(lb)) && (typeof ub !== 'boolean' && typeof lb !== 'boolean')) {
-                    sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + ub + '") as "upper bound", SUM("' + lb + '") as "lower bound", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
+                    sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + ub + '") as "' + ub + '", SUM("' + lb + '") as "' + lb + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   } else {
                     sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   }
                 } else {
                   if ((!['undefined', 'None', ''].includes(ub) && !['undefined', 'None', ''].includes(lb)) && (typeof ub !== 'boolean' && typeof lb !== 'boolean')) {
-                    sql = 'SELECT "' + this.options.x_axis + '", SUM("' + ub + '") as "upper bound", SUM("' + lb + '") as "lower bound", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
+                    sql = 'SELECT "' + this.options.x_axis + '", SUM("' + ub + '") as "' + ub + '", SUM("' + lb + '") as "' + lb + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   } else {
                     sql = 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   }
