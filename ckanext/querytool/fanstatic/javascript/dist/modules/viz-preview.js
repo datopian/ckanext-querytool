@@ -2787,7 +2787,7 @@
                     var arrayplus = upper;
                     var arrayminus = lower;
 
-                    if('line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type){
+                    if('scatter' === this.options.chart_type || 'line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type){
 
                       //Add Error Intervals
                       var error = {
@@ -2840,7 +2840,7 @@
                         var arrayplus = upper;
                         var arrayminus = lower;
 
-                        if('line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type){
+                        if('scatter' === this.options.chart_type || 'line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type){
 
                           //Add Error Intervals
                           var error = {
