@@ -2391,9 +2391,7 @@
 
                 if (typeof plotly === "object"){
                     for (const [key, value] of Object.entries(data)) {
-                      if (key.length > 0 && value.length > 0) {
                         value.marker = q[key].marker;
-                      }
                     }
                 }
 
