@@ -35,14 +35,14 @@
       <div role="tabpanel" class="tab-pane active" id="applications">
         <legend>{{ _('Main') }}</legend>
         {% for querytool in reports %}
-          {% if querytool.type == 'main' %}
+          {% if querytool.type == 'main' and h.get_groups_for_user(c.userobj, querytool.group) %}
             {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
           {% endif %}
         {% endfor%}
 
         <legend>{{ _('Related') }}</legend>
         {% for querytool in data %}
-          {% if querytool.type == 'related' %}
+          {% if querytool.type == 'related' and h.get_groups_for_user(c.userobj, querytool.group) %}
             {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
           {% endif %}
         {% endfor %}

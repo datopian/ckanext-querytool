@@ -647,7 +647,14 @@ def get_user_permission(userobj):
 
 
 def get_groups_for_user(userobj, group):
-    groups = _get_action('group_list_authz', {'id': userobj.id})
+    all_groups = _get_action('group_list_authz', {'id': userobj.id})
+    groups = []
+
+    for g in all_groups:
+        for k in toolkit.get_action('member_list')({}, g):
+            if c.userobj.id in k:
+                groups.append(g)
+
     group_names = [g['name'] for g in groups]
 
     if len(groups) != 0 and group in group_names:
