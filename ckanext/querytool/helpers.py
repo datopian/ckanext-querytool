@@ -656,6 +656,15 @@ def get_groups_for_user(userobj, group):
         return False
 
 
+def get_user_has_groups(userobj):
+    groups = _get_action('group_list_authz', {'id': userobj.id})
+
+    if len(groups) != 0:
+        return True
+    else:
+        return False
+
+
 def get_querytool_get_chart_colors(data):
     try:
         data = json.loads(data)

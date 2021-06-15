@@ -50,9 +50,9 @@ Example usage:
   {{ form.input('icon', id='field-icon', classes=['hidden'], label=_('Fontawsome Icon'), placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
 
   {% set user_groups = [] %}
-  {% for group in h.querytool_get_groups() %}
-    {% if h.get_groups_for_user(c.userobj, group) %}
-      {{ user_groups.append(group) }}
+  {% for group in h.get_groups() %}
+    {% if h.get_groups_for_user(c.userobj, group['name']) %}
+      {{ user_groups.append(group) or '' }}
     {% endif %}
   {% endfor %}
   <div class="control-group">
