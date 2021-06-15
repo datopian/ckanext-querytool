@@ -866,24 +866,34 @@ $('body').on('change','[id^=table_category_name_]',function(e){
 
 // Upper/lower bounds functions
 
+$('body').on('change','[id^=chart_field_category_name_]',function(){
+  var categories = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_graph_${chart_number}`).val();
+
+  hideBounds(selected,chart_number,categories);
+});
+
 $('body').on('change','[id^=chart_field_graph_]',function(){
   var selected = $(this).val();
   var chart_number = this.id.split('_').slice(-1)[0];
+  var categories = $(`#chart_field_category_name_${chart_number}`).val();
 
-  hideBounds(selected,chart_number);
+  hideBounds(selected,chart_number,categories);
 });
 
 $(document).ready(function(){
   $('[id^=chart_field_graph_]').serializeArray().forEach((item, i) => {
     var selected = item.value;
     var chart_number = i + 1;
+    var categories = $(`#chart_field_category_name_${chart_number}`).val();
 
-    hideBounds(selected,chart_number);
+    hideBounds(selected,chart_number,categories);
   })
 });
 
-function hideBounds(selected,chart_number) {
-  if(['line', 'spline', 'area', 'bar', 'hbar', 'scatter'].includes(selected)){
+function hideBounds(selected,chart_number,categories) {
+  if(['line', 'spline', 'area', 'bar', 'hbar'].includes(selected) || (selected == 'scatter' && ['', undefined].includes(categories)) == true){
     //$(`#chart_field_show_bounds_${chart_number}`).attr('checked', true);
     $(`#chart_field_show_bounds_${chart_number}`).attr('disabled', false);
     $(`#chart_field_upper_bounds_${chart_number}`).attr('disabled', false);
