@@ -656,6 +656,30 @@ def get_groups_for_user(userobj, group):
         return False
 
 
+def get_edit_permission_for_user(userobj, group):
+    member_list = toolkit.get_action('member_list')({}, {'id': group})
+
+    if c.userobj.id in member_list:
+        return True
+    return False
+
+
+def get_user_permission_type(userobj, group):
+    member_list = toolkit.get_action('member_list')({}, {'id': group})
+    log.error(member_list)
+    log.error(userobj.id)
+    log.error('IN PERM TYPE')
+
+    for m in member_list:
+        if userobj.id in m:
+            if 'Admin' in m:
+                return 'admin'
+            if 'Member' in m:
+                return 'member'
+            if 'Editor' in m:
+                return 'editor'
+
+
 def get_querytool_get_chart_colors(data):
     try:
         data = json.loads(data)

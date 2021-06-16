@@ -311,7 +311,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'get_groups_for_user':
                 helpers.get_groups_for_user,
             'querytool_get_chart_colors':
-                helpers.get_querytool_get_chart_colors
+                helpers.get_querytool_get_chart_colors,
+            'get_edit_permission_for_user':
+                helpers.get_edit_permission_for_user,
+            'get_user_permission_type':
+                helpers.get_user_permission_type
         }
 
     # IAuthFunctions

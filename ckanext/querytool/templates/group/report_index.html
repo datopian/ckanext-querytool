@@ -35,7 +35,7 @@
       <div role="tabpanel" class="tab-pane active" id="applications">
         <legend>{{ _('Main') }}</legend>
         {% for querytool in reports %}
-          {% if querytool.type == 'main' %}
+          {% if querytool.type == 'main' and h.get_groups_for_user(c.userobj, querytool.group) and (h.get_user_permission_type(c.userobj, querytool.group) == 'member' and querytool.private != True) %}
             {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
           {% endif %}
         {% endfor%}
