@@ -1960,23 +1960,78 @@
                 }
 
                 if ( 'scatter' === this.options.chart_type) {
-                    var textTitles = columns[0].slice(1);
-                    var convertedTextTitles = convertTextTitles(textTitles);
+                    // var textTitles = columns[0].slice(1);
+                    // var convertedTextTitles = convertTextTitles(textTitles);
 
-                    var trace = {
-                        x: O.axis['x']['categories'],
-                        y: columns[0].slice(1),
-                        mode: scatterLabelsMode,
-                        text: convertedTextTitles,
-                        textposition: 'top right',
-                        textfont: {
-                            size: 14,
-                        },
-                        type: this.options.chart_type,
-                        hovertemplate: '%{y}<extra></extra>',
+                    // var trace = {
+                    //     x: O.axis['x']['categories'],
+                    //     y: columns[0].slice(1),
+                    //     mode: scatterLabelsMode,
+                    //     text: convertedTextTitles,
+                    //     textposition: 'top right',
+                    //     textfont: {
+                    //         size: 14,
+                    //     },
+                    //     type: this.options.chart_type,
+                    //     hovertemplate: '%{y}<extra></extra>',
+                    // };
+                    // data = [];
+                    // data.push(trace);
+
+                    var categories = O.axis['x']['categories'];
+
+                    if (categories === undefined){
+                        var x = columns[columns.length - 1].slice(1);
+                        var tmp ;
+
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
+                            var name = columns[tmp][0];
+
+                            if (name !== undefined && Array.isArray(columns[tmp])) {
+                              var textTitles = columns[tmp].slice(1);
+                              var convertedTextTitles = convertTextTitles(textTitles);
+
+                              var trace = {
+                                  x: x,
+                                  y: columns[tmp].slice(1),
+                                  type: this.options.chart_type,
+                                  mode: scatterLabelsMode,
+                                  text: convertedTextTitles,
+                                  textposition: 'top right',
+                                  textfont: {
+                                      size: 14,
+                                  },
+                                  name: name,
+                                  line: {width: 4},
+                                  hovertemplate: '%{y}<extra></extra>',
+                                  error_y: {},
+                                  error_x: {}
+                              };
+                              data.push(trace);
+                            }
+                        };
+                    } else {
+                        var textTitles = columns[0].slice(1);
+                        var convertedTextTitles = convertTextTitles(textTitles);
+
+                        var trace = {
+                            x: categories,
+                            y: columns[0].slice(1),
+                            name: columns[0][0],
+                            mode:scatterLabelsMode,
+                            text: convertedTextTitles,
+                            hovertemplate: '%{y}<extra></extra>',
+                            textposition: 'top right',
+                            textfont: {
+                                size: 14,
+                            },
+                            type: this.options.chart_type,
+                            line: {width: 4},
+                            error_y: {},
+                            error_x: {}
+                        };
+                        data.push(trace);
                     };
-                    data = [];
-                    data.push(trace);
                 }
 
                 if ( 'spline' === this.options.chart_type) {
@@ -2824,6 +2879,9 @@
                         var upper = [];
                         var lower = [];
 
+                        console.log(data)
+                        console.log(t)
+                        console.log(t[data[i].name])
                         for (var j = 1; j < t[data[i].name].length; j++) {
                           upper.push(Math.round(Math.abs(t[data[i].name][j] - t[ub][data[i].name][j - 1])))
                           lower.push(Math.round(Math.abs(t[data[i].name][j] - t[lb][data[i].name][j - 1])))
