@@ -153,16 +153,17 @@ class QueryToolController(base.BaseController):
         }
 
         context = _get_context()
-        try:
-            check_access('querytool_update', context, data_dict)
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
 
         _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool and helpers.get_user_permission_type(c.userobj, _querytool['group']) \
            in ['member', None] and c.userobj.sysadmin is False:
             abort(403, _('Not authorized to see this page'))
+        else:
+            try:
+                check_access('querytool_update', context, data_dict)
+            except NotAuthorized:
+                abort(403, _('Not authorized to see this page'))
 
         if _querytool is None and len(querytool) > 0:
             abort(404, _('Report not found.'))
@@ -316,16 +317,16 @@ class QueryToolController(base.BaseController):
 
         context = _get_context()
 
-        try:
-            check_access('querytool_update', context, data_dict)
-        except NotAuthorized:
-            abort(403, _('Not authorized to see this page'))
-
         _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool and helpers.get_user_permission_type(c.userobj, _querytool['group']) \
            in ['member', None] and c.userobj.sysadmin is False:
             abort(403, _('Not authorized to see this page'))
+        else:
+            try:
+                check_access('querytool_update', context, data_dict)
+            except NotAuthorized:
+                abort(403, _('Not authorized to see this page'))
 
         if _querytool is None and len(querytool) > 0:
             abort(404, _('Report not found.'))
