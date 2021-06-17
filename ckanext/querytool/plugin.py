@@ -315,7 +315,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'get_edit_permission_for_user':
                 helpers.get_edit_permission_for_user,
             'get_user_permission_type':
-                helpers.get_user_permission_type
+                helpers.get_user_permission_type,
+            'get_is_admin_or_editor_of_any_group':
+                helpers.get_is_admin_or_editor_of_any_group
         }
 
     # IAuthFunctions

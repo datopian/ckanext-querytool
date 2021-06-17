@@ -18,7 +18,6 @@ def querytool_update(context, data_dict):
     # if querytool is None then we need to create one:
     # check if user has a edit permission for any org:
     orgs = organizations_available()
-    log.error(any([org['capacity'] != 'member' for org in orgs]))
     return {'success': any([org['capacity'] != 'member' for org in orgs])}
 
 

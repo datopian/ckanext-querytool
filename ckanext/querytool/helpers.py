@@ -656,6 +656,16 @@ def get_groups_for_user(userobj, group):
         return False
 
 
+def get_is_admin_or_editor_of_any_group(userobj):
+    groups = _get_action('group_list_authz', {'id': userobj.id})
+    is_admin_or_editor = [get_user_permission_type(userobj, group['id']) for group in groups]
+
+    if len(groups) != 0 and any(t in ['admin', 'editor'] for t in is_admin_or_editor):
+        return True
+    else:
+        return False
+
+
 def get_edit_permission_for_user(userobj, group):
     member_list = toolkit.get_action('member_list')({}, {'id': group})
 
@@ -666,9 +676,6 @@ def get_edit_permission_for_user(userobj, group):
 
 def get_user_permission_type(userobj, group):
     member_list = toolkit.get_action('member_list')({}, {'id': group})
-    log.error(member_list)
-    log.error(userobj.id)
-    log.error('IN PERM TYPE')
 
     for m in member_list:
         if userobj.id in m:

@@ -3,7 +3,7 @@
 {% block primary_content_inner %}
   {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
-  {% if h.check_access('querytool_update') %}
+  {% if h.check_access('querytool_update') and h.get_is_admin_or_editor_of_any_group(c.userobj) %}
     {% link_for _('New Report'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
   {% endif %}
 
@@ -43,7 +43,7 @@
         
             <ul class="buttons-group">
               {% set user_permission = h.get_groups_for_user(c.userobj, querytool.group) %}
-              {% if user_permission == True %}
+              {% if user_permission == True and h.get_user_permission_type(c.userobj, querytool.group) in ['admin', 'editor'] %}
               <li><a class="btn btn-minimal" role="button" href="{{ edit_data_url}}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit filters and data') }}</a></li>
               <li><a class="btn btn-minimal" role="button" href="{{ edit_visualizations_url}}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit visualizations') }}</a></li>
               <li><a class="btn btn-minimal" role="button" href="{{ h.url_for('querytool_public_read', name=querytool.name) }}" type="submit" name="view"><span class="fa fa-eye" aria-hidden="true"></span> {{ _('View') }}</a></li>
