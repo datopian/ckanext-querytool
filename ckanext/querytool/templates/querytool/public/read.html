@@ -231,6 +231,7 @@
             sql_string=querytool.sql_string,
             show_legend = item.show_legend,
             show_annotations = item.show_annotations,
+            show_bounds = item.show_bounds,
             x_text_rotate= item.x_text_rotate,
             x_text_multiline= item.x_text_multiline,
             x_tick_culling_max = item.x_tick_culling_max,
@@ -266,7 +267,10 @@
             plotly = item.plotly,
             bar_width = item.bar_width,
             chart_id = chart_id,
-            description = item.additional_description
+            description = item.additional_description,
+            upper_bounds = item.upper_bounds,
+            lower_bounds = item.lower_bounds,
+            show_bounds = item.show_bounds
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
