@@ -502,9 +502,13 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
 
 @functools32.lru_cache(maxsize=128)
 def get_resource_data(sql_string):
+    context = {}
+
+    if h.get_is_admin_or_editor_of_any_group(c.userobj):
+        context['ignore_auth'] = True
 
     response = toolkit.get_action('datastore_search_sql')(
-        {}, {'sql': sql_string}
+        context, {'sql': sql_string}
     )
     records_to_lower = []
     for record in response['records']:
@@ -644,6 +648,23 @@ def get_user_permission(userobj):
         return False
     else:
         return True
+
+
+def get_orgs_for_user(userobj, org):
+    orgs = _get_action('organization_list_for_user', {'id': userobj.id})
+    org_names = [o['name'] for o in orgs]
+
+    if org in org_names:
+        return True
+    else:
+        return False
+
+
+def get_organization(org_id):
+    return _get_action('organization_show', {'id': org_id}) if org_id else []
+
+
+#def get_report_orgs(orgs_available, current_org):
 
 
 def get_groups_for_user(userobj, group):
