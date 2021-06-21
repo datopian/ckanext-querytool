@@ -863,3 +863,116 @@ $('body').on('change','[id^=table_category_name_]',function(e){
     alert('Value cannot be same as sub dimension')
   }
 });
+
+// Upper/lower bounds functions
+
+$('body').on('change','[id^=chart_field_category_name_]',function(){
+  var categories = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_graph_${chart_number}`).val();
+
+  hideBounds(selected,chart_number,categories);
+});
+
+$('body').on('change','[id^=chart_field_graph_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var categories = $(`#chart_field_category_name_${chart_number}`).val();
+
+  hideBounds(selected,chart_number,categories);
+});
+
+$(document).ready(function(){
+  $('[id^=chart_field_graph_]').serializeArray().forEach((item, i) => {
+    var selected = item.value;
+    var chart_number = i + 1;
+    var categories = $(`#chart_field_category_name_${chart_number}`).val();
+
+    hideBounds(selected,chart_number,categories);
+  })
+});
+
+function hideBounds(selected,chart_number,categories) {
+  if(['line', 'spline', 'area', 'bar', 'hbar', 'scatter'].includes(selected)){
+    //$(`#chart_field_show_bounds_${chart_number}`).attr('checked', true);
+    $(`#chart_field_show_bounds_${chart_number}`).attr('disabled', false);
+    $(`#chart_field_upper_bounds_${chart_number}`).attr('disabled', false);
+    $(`#chart_field_lower_bounds_${chart_number}`).attr('disabled', false);
+  } else {
+    $(`#chart_field_show_bounds_${chart_number}`).attr('checked', false);
+    $(`#chart_field_show_bounds_${chart_number}`).attr('disabled', true);
+    $(`#chart_field_upper_bounds_${chart_number}`).attr('disabled', true);
+    $(`#chart_field_lower_bounds_${chart_number}`).attr('disabled', true);
+  }
+};
+
+$('body').on('change','[id^=chart_field_upper_bounds_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  disableBounds('lower', selected, chart_number);
+});
+
+$('body').on('change','[id^=chart_field_lower_bounds_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  disableBounds('upper', selected, chart_number);
+});
+
+$('body').on('load','[id^=chart_field_upper_bounds_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  disableBounds('lower', selected, chart_number);
+})
+
+$('body').on('load','[id^=chart_field_upper_bounds_]',function(){
+  var selected = $(this).val();
+  var chart_number = this.id.split('_').slice(-1)[0];
+
+  disableBounds('lower', selected, chart_number);
+})
+
+function disableBounds(bound, selected, chart_number){
+  try {
+    var options = $(`#chart_field_${bound}_bounds_${chart_number}`)[0].options;
+
+    var disabledOption;
+
+    for (let i = 0; i < options.length; i++) {
+      var disabled = options[i].disabled
+
+      if (disabled) {
+        disabledOption = options[i].value
+      }
+    }
+
+    if (selected !== '') {
+      $(`#chart_field_${bound}_bounds_${chart_number} option[value='${disabledOption}']`).removeAttr('disabled')
+      $(`#chart_field_${bound}_bounds_${chart_number} option[value='${selected}']`).attr('disabled', 'disabled')
+    } else {
+      $(`#chart_field_${bound}_bounds_${chart_number} option[value='${disabledOption}']`).removeAttr('disabled')
+    }
+  } catch(error) {
+    return null;
+  }
+};
+
+$(document).ready(function(){
+  $('[id^=chart_field_lower_bounds_]').serializeArray().forEach((item, i) => {
+    var selected = item.value;
+    var chart_number = i + 1;
+
+    disableBounds('upper', selected, chart_number);
+  })
+});
+
+$(document).ready(function(){
+  $('[id^=chart_field_upper_bounds_]').serializeArray().forEach((item, i) => {
+    var selected = item.value;
+    var chart_number = i + 1;
+
+    disableBounds('lower', selected, chart_number);
+  })
+});

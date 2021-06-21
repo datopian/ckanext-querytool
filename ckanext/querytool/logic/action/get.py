@@ -202,6 +202,8 @@ def querytool_get_chart_data(context, data_dict):
     sql_string = data_dict.get('sql_string')
     x_axis = data_dict.get('x_axis')
     y_axis = data_dict.get('y_axis')
+    upper_bounds = data_dict.get('upper_bounds')
+    lower_bounds = data_dict.get('lower_bounds')
     chart_type = data_dict.get('chart_type')
     previous_filters = json.loads(data_dict.pop('previous_filters'))
     chart_filter = json.loads(data_dict.get('chart_filter'))
@@ -235,10 +237,26 @@ def querytool_get_chart_data(context, data_dict):
             category_value_sql = sql_without_group + u'AND ("' + \
                                  category + u'" = ' + u"'" + value + \
                                  u"'" + u') ' + u'GROUP BY' + sql_group
+
             records = h.get_resource_data(category_value_sql)
             x.append(value)
 
             for record in records:
+                if upper_bounds and lower_bounds and \
+                   record.get(upper_bounds.lower()) and \
+                   record.get(upper_bounds.lower()):
+                    upper_bound_value = record[upper_bounds.lower()]
+
+                    categories_data.setdefault(
+                        upper_bounds.lower(), {}).setdefault(
+                        record[x_axis.lower()], []).append(upper_bound_value)
+
+                    lower_bound_value = record[lower_bounds.lower()]
+
+                    categories_data.setdefault(
+                        lower_bounds.lower(), {}).setdefault(
+                        record[x_axis.lower()], []).append(lower_bound_value)
+
                 value = record[y_axis.lower()]
                 categories_data[record[x_axis.lower()]].append(value)
                 try:
