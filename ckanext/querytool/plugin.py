@@ -324,7 +324,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'get_orgs_for_user':
                 helpers.get_orgs_for_user,
             'get_organization':
-                helpers.get_organization
+                helpers.get_organization,
+            'get_datasets_for_user':
+                helpers.get_datasets_for_user
         }
 
     # IAuthFunctions

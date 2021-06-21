@@ -504,7 +504,7 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
 def get_resource_data(sql_string):
     context = {}
 
-    if h.get_is_admin_or_editor_of_any_group(c.userobj):
+    if get_is_admin_or_editor_of_any_group(c.userobj):
         context['ignore_auth'] = True
 
     response = toolkit.get_action('datastore_search_sql')(
@@ -664,7 +664,17 @@ def get_organization(org_id):
     return _get_action('organization_show', {'id': org_id}) if org_id else []
 
 
-#def get_report_orgs(orgs_available, current_org):
+def get_datasets_for_user(userobj, package_name):
+    package = _get_action('package_show', {'name_or_id': package_name})
+    org_access = get_orgs_for_user(userobj, package['organization']['name'])
+
+    for group in package.get('groups'):
+        group_access = get_groups_for_user(userobj, group['name'])
+
+        if group_access or org_access:
+            return True
+
+    return False
 
 
 def get_groups_for_user(userobj, group):
