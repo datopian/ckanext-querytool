@@ -12,7 +12,9 @@ Example usage:
 {% set edit_data_url = h.url_for('querytool_edit', querytool='/' + querytool.name) %}
 {% set edit_visualizations_url = h.url_for('querytool_edit_visualizations', querytool= '/' + querytool.name) %}
 {% set delete_url = h.url_for('querytool_delete', querytool='/' + querytool.name) %}
+{% set user_type = h.get_user_permission_type(c.userobj, querytool.group) %}
 
+{% if h.get_groups_for_user(c.userobj, querytool.group) and ((user_type == 'member' and querytool.private != True) or user_type == 'admin') %}
 <div class="applicaitons-box">
 
   <div class="thumb">
@@ -40,7 +42,8 @@ Example usage:
 
     <ul class="buttons-group">
       {% set user_permission = h.get_groups_for_user(c.userobj, querytool.group) %}
-      {% if user_permission == True %}
+
+      {% if user_type in ['admin', 'editor'] or user_permission and user_type != 'member' %}
       <li><a class="btn btn-minimal" role="button" href="{{ edit_data_url}}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit filters and data') }}</a></li>
       <li><a class="btn btn-minimal" role="button" href="{{ edit_visualizations_url}}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit visualizations') }}</a></li>
       <li><a class="btn btn-minimal" role="button" href="{{ h.url_for('querytool_public_read', name=querytool.name) }}" type="submit" name="view"><span class="fa fa-eye" aria-hidden="true"></span> {{ _('View') }}</a></li>
@@ -53,3 +56,4 @@ Example usage:
   <p class="clearfix"></p>
   
 </div>
+{% endif %}

@@ -502,9 +502,13 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
 
 @functools32.lru_cache(maxsize=128)
 def get_resource_data(sql_string):
+    context = {}
+
+    if get_is_admin_or_editor_of_any_group(c.userobj):
+        context['ignore_auth'] = True
 
     response = toolkit.get_action('datastore_search_sql')(
-        {}, {'sql': sql_string}
+        context, {'sql': sql_string}
     )
     records_to_lower = []
     for record in response['records']:
@@ -646,6 +650,40 @@ def get_user_permission(userobj):
         return True
 
 
+def get_orgs_for_user(userobj, org):
+    orgs = _get_action('organization_list_for_user', {'id': userobj.id})
+    org_names = [o['name'] for o in orgs]
+
+    if org in org_names:
+        return True
+    else:
+        return False
+
+
+def get_all_orgs_for_user(userobj):
+    orgs = _get_action('organization_list_for_user', {'id': userobj.id})
+
+    if orgs:
+        return orgs
+
+
+def get_organization(org_id):
+    return _get_action('organization_show', {'id': org_id}) if org_id else []
+
+
+def get_datasets_for_user(userobj, package_name):
+    package = _get_action('package_show', {'name_or_id': package_name})
+    org_access = get_orgs_for_user(userobj, package['organization']['name'])
+
+    for group in package.get('groups'):
+        group_access = get_groups_for_user(userobj, group['name'])
+
+        if group_access or org_access:
+            return True
+
+    return False
+
+
 def get_groups_for_user(userobj, group):
     groups = _get_action('group_list_authz', {'id': userobj.id})
     group_names = [g['name'] for g in groups]
@@ -654,6 +692,37 @@ def get_groups_for_user(userobj, group):
         return True
     else:
         return False
+
+
+def get_is_admin_or_editor_of_any_group(userobj):
+    groups = _get_action('group_list_authz', {'id': userobj.id})
+    is_admin_or_editor = [get_user_permission_type(userobj, group['id']) for group in groups]
+
+    if len(groups) != 0 and any(t in ['admin', 'editor'] for t in is_admin_or_editor):
+        return True
+    else:
+        return False
+
+
+def get_edit_permission_for_user(userobj, group):
+    member_list = toolkit.get_action('member_list')({}, {'id': group})
+
+    if c.userobj.id in member_list:
+        return True
+    return False
+
+
+def get_user_permission_type(userobj, group):
+    member_list = toolkit.get_action('member_list')({}, {'id': group})
+
+    for m in member_list:
+        if userobj.id in m:
+            if 'Admin' in m:
+                return 'admin'
+            if 'Member' in m:
+                return 'member'
+            if 'Editor' in m:
+                return 'editor'
 
 
 def get_querytool_get_chart_colors(data):
