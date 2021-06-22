@@ -62,7 +62,7 @@ Example usage:
     </div>
   </div>
 
-  {% set organizations_available = h.organizations_available('create_dataset') %}
+  {% set organizations_available = h.organizations_available('create_dataset') or h.get_all_orgs_for_user(c.userobj) %}
   {% set current_organization = h.get_organization(data.get('owner_org')) %}
   {% set org_ids = [] %}
 

@@ -157,10 +157,10 @@ class QueryToolController(base.BaseController):
         _querytool = _get_action('querytool_get', data_dict)
         user_type = helpers.get_user_permission_type(c.userobj, _querytool.get('group')) if _querytool else []
 
-        if _querytool and user_type in ['member', None] and c.userobj.sysadmin is False:
+        if _querytool and user_type in ['member', None] and c.userobj.sysadmin is False and data_dict.get('name') != '':
             abort(403, _('Not authorized to see this page'))
         else:
-            if user_type not in ['admin', 'editor']:
+            if user_type not in ['admin', 'editor'] and data_dict.get('name') != '':
                 try:
                     check_access('querytool_update', context, data_dict)
                 except NotAuthorized:
