@@ -1864,7 +1864,7 @@
                 if ( 'line' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
-                    if (categories === undefined){
+                    if (categories === undefined && typeof columns[columns.length - 1] == 'array'){
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
@@ -1980,7 +1980,7 @@
 
                     var categories = O.axis['x']['categories'];
 
-                    if (categories === undefined){
+                    if (categories === undefined && typeof columns[columns.length - 1] == 'array'){
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
@@ -2037,7 +2037,7 @@
                 if ( 'spline' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
-                    if (categories === undefined){
+                    if (categories === undefined && typeof columns[columns.length - 1] == 'array'){
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
@@ -2099,7 +2099,7 @@
                 if ( 'bar' === this.options.chart_type || 'sbar' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
-                    if (categories === undefined){
+                    if (categories === undefined && typeof columns[columns.length - 1] == 'array'){
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
@@ -2168,7 +2168,7 @@
                 if ( 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
-                    if (categories === undefined){
+                    if (categories === undefined && typeof columns[columns.length - 1] == 'array'){
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
@@ -2233,7 +2233,7 @@
                 if ( 'area' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
-                    if (categories === undefined){
+                    if (categories === undefined && typeof columns[columns.length - 1] == 'array'){
                         var x = columns[columns.length - 1].slice(1);
                         var tmp ;
 
