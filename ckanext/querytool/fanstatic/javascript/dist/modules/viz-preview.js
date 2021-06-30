@@ -1985,7 +1985,7 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        if (typeof columns[columns.length - 1] == 'array' && O.axis['x']){
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
                           var x = columns[columns.length - 1].slice(1);
                         }else{
                           var x = columns[columns.length - 2].slice(1)
@@ -2046,7 +2046,7 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        if (typeof columns[columns.length - 1] == 'array' && O.axis['x']){
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
                           var x = columns[columns.length - 1].slice(1);
                         }else{
                           var x = columns[columns.length - 2].slice(1)
@@ -2112,7 +2112,7 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        if (typeof columns[columns.length - 1] == 'array' && O.axis['x'] || 'sbar' === this.options.chart_type){
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x'] || 'sbar' === this.options.chart_type){
                           var x = columns[columns.length - 1].slice(1);
                         }else{
                           var x = columns[columns.length - 2].slice(1)
@@ -2187,7 +2187,7 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        if ((typeof columns[columns.length - 1] == 'array' && O.axis['x']) || 'shbar' === this.options.chart_type){
+                        if ((Array.isArray(columns[columns.length - 1]) && O.axis['x']) || 'shbar' === this.options.chart_type){
                           var x = columns[columns.length - 1].slice(1);
                         }else{
                           var x = columns[columns.length - 2].slice(1)
@@ -2258,7 +2258,7 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        if (typeof columns[columns.length - 1] == 'array' && O.axis['x']){
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
                           var x = columns[columns.length - 1].slice(1);
                         }else{
                           var x = columns[columns.length - 2].slice(1)
@@ -2688,7 +2688,7 @@
 
                         if(subData && subData.length > 0) {
                             subData.forEach(function(item, index){
-                              if (typeof item !== 'number'){
+                              if (typeof item !== 'number' && item !== null){
                                   item = item.replace(/^\d{1,2}\./, '');
                                   record.y[index] = item;
                               }
@@ -2702,7 +2702,7 @@
 
                         if(subData && subData.length > 0) {
                             subData.forEach(function(item, index){
-                              if (typeof item !== 'number'){
+                              if (typeof item !== 'number' && item !== null){
                                   item = item.replace(/^\d{1,2}\./, '');
                                   record.x[index] = item;
                               }
