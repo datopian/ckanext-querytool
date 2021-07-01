@@ -1908,42 +1908,110 @@
                       );
                   }
                 },
-                render_data_table_with_category: function (t, e, n, sv, r, o) {
-                    console.log(t);
-                    (e = e.toLowerCase()), (n = n.toLowerCase()), (r = r.toLowerCase());
-                    var i = {},
-                        a = {},
-                        u = !0,
-                        s = !1,
-                        c = void 0;
-                    try {
-                        for (var l, f = t[Symbol.iterator](); !(u = (l = f.next()).done); u = !0) {
-                            var p = l.value;
-                            i[p[n]] || (i[p[n]] = {});
-                            var d = i[p[n]];
-                            (d[n] = p[n]), (d[p[e]] = p[r]), (a[p[e]] = !0);
-                        }
-                    } catch (t) {
-                        (s = !0), (c = t);
-                    } finally {
-                        try {
-                            u || null == f.return || f.return();
-                        } finally {
-                            if (s) throw c;
-                        }
-                    }
-                    var v = { main_value: n, second_value: sv, measure_label: o, y_axis: r, y_axis_groups: Object.keys(a).sort(), rows: Object.values(i) };
-                    if (sv != '') {
-                      return this.render_template(
-                          '\n          <table  class="stripe">\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th rowspan="2">{second_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
-                          v
-                      );
+                render_data_table_with_category: function (rows, category_name, main_value, second_value, y_axis, measure_label) {
+                    category_name = category_name.toLowerCase();
+                    main_value = main_value.toLowerCase();
+                    y_axis = y_axis.toLowerCase();
+                    console.log(rows)
+
+                    // Prepare data
+                    // Pivot table when category is set
+                    // Source:
+                    //   category_name, main_value, y_axis
+                    //   cat1, string, number
+                    //   cat2, string, number
+                    // Target:
+                    //   main_value, y_axis for cat1, y_axis for cat2
+                    //   string, number, number
+                    //   string, number, number
+                    var rows_mapping = {};
+                    var y_axis_groups = {};
+                    for (let row of rows) {
+
+                        // Get ma
+                        if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
+                        var mapping_item = rows_mapping[row[main_value]];
+
+                        // Pivot table
+                        mapping_item[main_value] = row[main_value];
+                        mapping_item[second_value] = row[second_value];
+                        mapping_item[row[category_name]] = row[y_axis];
+
+                        // Sub headers
+                        y_axis_groups[row[category_name]] = true;
+
+                    };
+
+                    console.log(rows_mapping)
+                    var data = {
+                        main_value: main_value,
+                        second_value: second_value,
+                        measure_label: measure_label,
+                        y_axis: y_axis,
+                        y_axis_groups: Object.keys(y_axis_groups).sort(),
+                        rows: Object.values(rows_mapping),
+                    };
+
+                    // Prepare template
+                    var template = '';
+                    if(second_value) {
+                        template = `
+                        <table>
+                            <thead>
+                            <tr>
+                                <th rowspan="2">{main_value|capitalize}</th>
+                                <th rowspan="2">{second_value|capitalize}</th>
+                                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>
+                            </tr>
+                            <tr>
+                                {% for y_axis_group in y_axis_groups %}
+                                <th>{y_axis_group}</th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                <td>{row[main_value]|process_table_value}</td>
+                                <td>{row[second_value]|process_table_value}</td>
+                                {% for y_axis_group in y_axis_groups %}
+                                    <td>{row[y_axis_group]|process_table_value}</td>
+                                {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        `;
                     } else {
-                      return this.render_template(
-                          '\n          <table class="stripe">\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
-                          v
-                      );                      
+                            template = `
+                        <table>
+                            <thead>
+                            <tr>
+                                <th rowspan="2">{main_value|capitalize}</th>
+                                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>
+                            </tr>
+                            <tr>
+                                {% for y_axis_group in y_axis_groups %}
+                                <th>{y_axis_group}</th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                <td>{row[main_value]|process_table_value}</td>
+                                {% for y_axis_group in y_axis_groups %}
+                                    <td>{row[y_axis_group]|process_table_value}</td>
+                                {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        `;
                     }
+                    
+                    // Render
+                    return this.render_template(template, data);
                 },
                 render_template: function (t, e) {
                     try {
