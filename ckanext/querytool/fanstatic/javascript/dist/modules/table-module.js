@@ -1909,100 +1909,20 @@
                   }
                 },
                 render_data_table_with_category: function (t, e, n, sv, r, o) {
-                    (e = e.toLowerCase()), (n = n.toLowerCase()), (sv = sv.toLowerCase()),(r = r.toLowerCase());
+                    console.log(t);
+                    (e = e.toLowerCase()), (n = n.toLowerCase()), (r = r.toLowerCase());
                     var i = {},
                         a = {},
                         u = !0,
                         s = !1,
                         c = void 0;
-
-                    var x = {};
                     try {
-                        // console.log("--- T ---")
-                        // console.log(t)
-
                         for (var l, f = t[Symbol.iterator](); !(u = (l = f.next()).done); u = !0) {
-                            
                             var p = l.value;
-                            // console.log("--- I --- ")
-                            // console.log(i)
-
-                            // console.log("--- Ip[N] --- ")
-                            // console.log(i[p[n]])
-
                             i[p[n]] || (i[p[n]] = {});
-
-                            //console.log("--- P --- ")
-                            //console.log(p)
-
                             var d = i[p[n]];
-
-                            // if (sv != '') {
-                            //     (d[sv] = p[sv]);
-                            // }
-                            
                             (d[n] = p[n]), (d[p[e]] = p[r]), (a[p[e]] = !0);
-
-                            //console.log("--- N --- ")
-                            //console.log(n)
-                            //console.log("--- D --- ")
-                            //console.log(d)
                         }
-
-                        // var new_i = [
-                        //     {
-                        //         "unidade de federação": "Pará",
-                        //         "causa classificada": "006 Afogamento",
-                        //         "Masculino": "2012"
-                        //     },
-                        //     {
-                        //         "unidade de federação": "Santa Catarina",
-                        //         "causa classificada": "009 Afogamento",
-                        //         "Masculino": "2005"
-                        //     },
-                        //     {
-                        //         "unidade de federação": "Tocantins",
-                        //         "causa classificada": "011 Afogamento",
-                        //         "Ambos": "1998",
-                        //         "Feminino": "2006"
-                        //     },
-                        //     {
-                        //         "unidade de federação": "Rio Grande do Norte",
-                        //         "causa classificada": "014 Afogamento",
-                        //         "Ambos": "2002"
-                        //     },
-                        //     {
-                        //         "unidade de federação": "Testing Values",
-                        //         "causa classificada": "014 Afogamento",
-                        //         "Feminino": "2999"
-                        //     }
-                        // ]
-
-                        //Creating new i
-                        if(sv && sv !== '') {
-                            var i = []
-                            for(var x= 0; x<t.length; x++) {
-                                var opt1 = t[x][e]
-                                //console.log(opt1)
-
-                                var opt2 = t[x][r]
-
-                                i.push(t[x])
-                                i[x][opt1] = opt2
-                            }
-                        }
-
-                        // console.log("New I")
-                        // console.log(new_i)
-
-                        
-                        // console.log(e)
-                        // console.log(n)
-                        // console.log(sv)
-                        // console.log(r)
-                        // console.log(o)
-
-                        // console.log(i)
                     } catch (t) {
                         (s = !0), (c = t);
                     } finally {
@@ -2012,11 +1932,7 @@
                             if (s) throw c;
                         }
                     }
-
-
-                    
                     var v = { main_value: n, second_value: sv, measure_label: o, y_axis: r, y_axis_groups: Object.keys(a).sort(), rows: Object.values(i) };
-
                     if (sv != '') {
                       return this.render_template(
                           '\n          <table  class="stripe">\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th rowspan="2">{second_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
