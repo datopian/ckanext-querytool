@@ -1911,6 +1911,7 @@
                 render_data_table_with_category: function (rows, category_name, main_value, second_value, y_axis, measure_label) {
                     category_name = category_name.toLowerCase();
                     main_value = main_value.toLowerCase();
+                    second_value = second_value.toLowerCase();
                     y_axis = y_axis.toLowerCase();
                     console.log(rows)
 
