@@ -1782,12 +1782,20 @@
                         l = this.options.main_value;
                     !0 === l && (l = $("[name*=table_main_value_]").val()), o && (l = r);
 
-                    alert
+
                     if(sv_ !== "") {
                         var sv = sv_
                     } else {
                         var sv = !0 === this.options.second_value ? "" : this.options.second_value
                     }
+
+
+                    if(sv_ == "empty") {
+                        var sv = ""
+                    }
+
+                    console.log(sv_)
+                    console.log(sv)
                     console.log("TABLE");
                     //console.log(this.options);
 
@@ -2037,6 +2045,10 @@
                         e = this.el.parent().parent().find("[id*=table_main_value_]").val(),
                         sv = this.el.parent().parent().find("[id*=table_second_value_]").val(),
                         n = $("#choose_y_axis_column option:selected").text();
+
+                        if(sv.length==0) {
+                            sv="empty"
+                        }
                     (this.options.category_name = this.el.parent().parent().find("[id*=table_category_name_]").val()),
                         (this.options.data_format = this.el.parent().parent().find("[id*=table_data_format_]").val()),
                         (this.options.filter_name = this.el.parent().parent().find("[id*=table_field_filter_name_]").val()),
