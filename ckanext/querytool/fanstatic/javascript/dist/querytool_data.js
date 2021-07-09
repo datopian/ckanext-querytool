@@ -1069,7 +1069,7 @@
                     }).done(function(t) {
                         $("#main-filters").append(t), $(".remove-filter-item-btn").on("click", function(t) {
                             $(t.target).closest(".filter_item").remove(), r()
-                        }), i(u, n), jscolor.installByClassName("jscolor")
+                        }), i(u, n)
                     })
                 })
             }), $("#add-related-querytool").click(function(n) {
