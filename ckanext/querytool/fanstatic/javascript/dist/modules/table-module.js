@@ -1794,9 +1794,6 @@
                         var sv = ""
                     }
 
-                    console.log(sv_)
-                    console.log(sv)
-                    console.log("TABLE");
                     //console.log(this.options);
 
                     //var queryFilters = "";
@@ -1901,6 +1898,7 @@
 
                 },
                 render_data_table: function (t, e, sv, n, r) {
+                    console.log(t)
                     
                     var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
                     //console.log(t)
@@ -1917,11 +1915,11 @@
                   }
                 },
                 render_data_table_with_category: function (rows, category_name, main_value, second_value, y_axis, measure_label) {
+                    console.log(rows)
                     category_name = category_name.toLowerCase();
                     main_value = main_value.toLowerCase();
                     second_value = second_value.toLowerCase();
                     y_axis = y_axis.toLowerCase();
-                    console.log(rows)
 
                     // Prepare data
                     // Pivot table when category is set
@@ -1951,7 +1949,6 @@
 
                     };
 
-                    console.log(rows_mapping)
                     var data = {
                         main_value: main_value,
                         second_value: second_value,
