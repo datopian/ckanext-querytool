@@ -555,6 +555,47 @@
               {% set show_labels_as_percentages_option = false %}
             {% endif %}
 
+            {# Show bounds #}
+            {% if chart %}
+              {% set show_bounds = chart.show_bounds %}
+            {% endif %}
+
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_show_bounds_{{ n }}">{{ _('Show bounds') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_show_bounds_{{ n }}" type="checkbox" name="chart_field_show_bounds_{{ n }}" value="{{ show_bounds }}"{% if show_bounds=='false' %}{% else %}checked{% endif %}>
+               </div>
+            </div>
+
+            {# {% if selected_chart_type in ['bar', 'hbar', 'sbar', 'shbar', 'line', 'spline', 'area', 'scatter'] %} #}
+
+            {# Upper bounds #}
+            <div class="control-group control-select">
+              <label class="control-label" for="chart_field_lower_bounds_{{ n }}">{{ _('Lower bounds') }}</label>
+              <div class="controls ">
+                <select id="chart_field_lower_bounds_{{ n }}" name="chart_field_lower_bounds_{{ n }}">
+                <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+                  {% for column in numeric_columns %}
+                  <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.lower_bounds }}{% endif %}>{{column}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+
+            {# Lower bounds #}
+            <div class="control-group control-select">
+              <label class="control-label" for="chart_field_upper_bounds_{{ n }}">{{ _('Upper bounds') }}</label>
+              <div class="controls ">
+                <select id="chart_field_upper_bounds_{{ n }}" name="chart_field_upper_bounds_{{ n }}">
+                <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+                  {% for column in numeric_columns %}
+                  <option value="{{column}}"{% if chart %}{{ 'selected' if column == chart.upper_bounds }}{% endif %}>{{column}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            {# {% endif %} #}
+
           </div>
         </div>
       </div>
@@ -838,6 +879,9 @@
           {% set plotly = chart.plotly %}
           {% set bar_width = chart.bar_width %}
           {% set donut_hole = chart.donut_hole %}
+          {% set upper_bounds = chart.upper_bounds %}
+          {% set lower_bounds = chart.lower_bounds %}
+          {% set show_bounds = chart.show_bounds %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -885,7 +929,10 @@
           dynamic_reference_label=dynamic_reference_label,
           plotly = plotly,
           bar_width = bar_width,
-          donut_hole = donut_hole
+          donut_hole = donut_hole,
+          upper_bounds = upper_bounds,
+          lower_bounds = lower_bounds,
+          show_bounds = show_bounds
       %}
    </div>
 </div>

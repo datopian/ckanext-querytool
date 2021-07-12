@@ -1401,7 +1401,11 @@
         return {
             initialize: function() {
                 var t = this.create_sql();
-                this.get_resource_datа(t);
+
+                if (typeof this.options.x_axis !== 'boolean') {
+                  this.get_resource_datа(t);
+                }
+
                 var e = this.el.closest(".chart_field");
                 if (e.length > 0) {
                     var n = e.find(".update-chart-btn"),
@@ -1420,12 +1424,34 @@
                     o = this.getStaticReferenceColumn(r, i);
                 !0 === this.options.category_name || this.options.category_name;
                 e && n && (t += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
-                return o ? 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"' : 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"'
+                var sql,
+                    ub = this.options.upper_bounds,
+                    lb = this.options.lower_bounds;
+                if ([ub, lb].includes(i)) {
+                  ub = ''
+                  lb = ''
+                }
+                if (o) {
+                  if ((!['undefined', 'None', ''].includes(ub) && !['undefined', 'None', ''].includes(lb)) && (typeof ub !== 'boolean' && typeof lb !== 'boolean')) {
+                    sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + ub + '") as "' + ub.toLowerCase() + '", SUM("' + lb + '") as "' + lb.toLowerCase() + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
+                  } else {
+                    sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
+                  }
+                } else {
+                  if ((!['undefined', 'None', ''].includes(ub) && !['undefined', 'None', ''].includes(lb)) && (typeof ub !== 'boolean' && typeof lb !== 'boolean')) {
+                    sql = 'SELECT "' + this.options.x_axis + '", SUM("' + ub + '") as "' + ub.toLowerCase() + '", SUM("' + lb + '") as "' + lb.toLowerCase() + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
+                  } else {
+                    sql = 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
+                  }
+                }
+                return sql
             },
             "get_resource_datа": function(e) {
                 var n = !0 === this.options.category_name ? "" : this.options.category_name,
                     i = !0 === this.options.x_axis ? "" : this.options.x_axis,
                     r = !0 === this.options.y_axis ? "" : this.options.y_axis,
+                    ub = !0 === this.options.upper_bounds ? "" : this.options.upper_bounds,
+                    lb = !0 === this.options.lower_bounds ? "" : this.options.lower_bounds,
                     o = e.split("FROM")[1].split("WHERE")[0].split('"')[1],
                     a = this.options.chart_type,
                     s = !0 === this.options.filter_name ? "" : this.options.filter_name,
@@ -1446,6 +1472,8 @@
                     resource_id: o,
                     x_axis: i,
                     y_axis: r,
+                    upper_bounds: ub,
+                    lower_bounds: lb,
                     chart_type: a,
                     previous_filters: JSON.stringify(_),
                     chart_filter: JSON.stringify(d)
@@ -1528,6 +1556,9 @@
                     xfz = this.options.x_from_zero,
                     y = this.options.data_sort,
                     m = this.options.measure_label,
+                    ub = !0 === this.options.upper_bounds ? "" : this.options.upper_bounds.toLowerCase(),
+                    lb = !0 === this.options.lower_bounds ? "" : this.options.lower_bounds.toLowerCase(),
+                    bnds = this.options.show_bounds,
                     g = !0 === this.options.category_name ? "" : this.options.category_name,
                     x = !0 === this.options.static_reference_label ? "" : this.options.static_reference_label,
                     b = !0 === this.options.dynamic_reference_label ? "" : this.options.dynamic_reference_label,
@@ -1834,29 +1865,38 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (typeof columns[columns.length - 1] == 'array' && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
-                            var textTitles = columns[tmp].slice(1);
-                            var convertedTextTitles = convertTextTitles(textTitles);
 
-                            var trace = {
-                                x: x,
-                                y: columns[tmp].slice(1),
-                                type: 'scatter',
-                                mode:labelsMode,
-                                text: convertedTextTitles,
-                                textposition: 'top right',
-                                textfont: {
-                                    size: 14,
-                                },
-                                name: name,
-                                line: {width: 4},
-                                hovertemplate: '%{y}<extra></extra>',
-                            };
-                            data.push(trace);
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                              var textTitles = columns[tmp].slice(1);
+                              var convertedTextTitles = convertTextTitles(textTitles);
+
+                              var trace = {
+                                  x: x,
+                                  y: columns[tmp].slice(1),
+                                  type: 'scatter',
+                                  mode:labelsMode,
+                                  text: convertedTextTitles,
+                                  textposition: 'top right',
+                                  textfont: {
+                                      size: 14,
+                                  },
+                                  name: name,
+                                  line: {width: 4},
+                                  hovertemplate: '%{y}<extra></extra>',
+                                  error_y: {},
+                                  error_x: {}
+                              };
+                              data.push(trace);
+                            }
                         };
                     } else {
                         var textTitles = columns[0].slice(1);
@@ -1874,7 +1914,9 @@
                                 size: 14,
                             },
                             type: 'scatter',
-                            line: {width: 4}
+                            line: {width: 4},
+                            error_y: {},
+                            error_x: {}
                         };
                         data.push(trace);
                     };
@@ -1922,57 +1964,123 @@
                 }
 
                 if ( 'scatter' === this.options.chart_type) {
-                    var textTitles = columns[0].slice(1);
-                    var convertedTextTitles = convertTextTitles(textTitles);
+                    // var textTitles = columns[0].slice(1);
+                    // var convertedTextTitles = convertTextTitles(textTitles);
 
-                    var trace = {
-                        x: O.axis['x']['categories'],
-                        y: columns[0].slice(1),
-                        mode: scatterLabelsMode,
-                        text: convertedTextTitles,
-                        textposition: 'top right',
-                        textfont: {
-                            size: 14,
-                        },
-                        type: this.options.chart_type,
-                        hovertemplate: '%{y}<extra></extra>',
+                    // var trace = {
+                    //     x: O.axis['x']['categories'],
+                    //     y: columns[0].slice(1),
+                    //     mode: scatterLabelsMode,
+                    //     text: convertedTextTitles,
+                    //     textposition: 'top right',
+                    //     textfont: {
+                    //         size: 14,
+                    //     },
+                    //     type: this.options.chart_type,
+                    //     hovertemplate: '%{y}<extra></extra>',
+                    // };
+                    // data = [];
+                    // data.push(trace);
+
+                    var categories = O.axis['x']['categories'];
+
+                    if (categories === undefined){
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
+                        var tmp ;
+
+                        for (tmp=0; tmp < columns.length - 1; tmp++){
+                            var name = columns[tmp][0];
+
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                              var textTitles = columns[tmp].slice(1);
+                              var convertedTextTitles = convertTextTitles(textTitles);
+
+                              var trace = {
+                                  x: x,
+                                  y: columns[tmp].slice(1),
+                                  type: this.options.chart_type,
+                                  mode: scatterLabelsMode,
+                                  text: convertedTextTitles,
+                                  textposition: 'top right',
+                                  textfont: {
+                                      size: 14,
+                                  },
+                                  name: name,
+                                  line: {width: 4},
+                                  hovertemplate: '%{y}<extra></extra>',
+                                  error_y: {},
+                                  error_x: {}
+                              };
+                              data.push(trace);
+                            }
+                        };
+                    } else {
+                        var textTitles = columns[0].slice(1);
+                        var convertedTextTitles = convertTextTitles(textTitles);
+
+                        var trace = {
+                            x: categories,
+                            y: columns[0].slice(1),
+                            name: columns[0][0],
+                            mode:scatterLabelsMode,
+                            text: convertedTextTitles,
+                            hovertemplate: '%{y}<extra></extra>',
+                            textposition: 'top right',
+                            textfont: {
+                                size: 14,
+                            },
+                            type: this.options.chart_type,
+                            line: {width: 4},
+                            error_y: {},
+                            error_x: {}
+                        };
+                        data.push(trace);
                     };
-                    data = [];
-                    data.push(trace);
                 }
 
                 if ( 'spline' === this.options.chart_type) {
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
-                            var textTitles = columns[tmp].slice(1);
-                            var convertedTextTitles = convertTextTitles(textTitles);
 
-                            var trace = {
-                                x: x,
-                                y: columns[tmp].slice(1),
-                                type: 'scatter',
-                                mode: labelsMode,
-                                text: convertedTextTitles,
-                                textposition: 'top right',
-                                hovertemplate: '%{y}<extra></extra>',
-                                textfont: {
-                                    size: 14,
-                                },
-                                name: name,
-                                width: 3,
-                                line: {
-                                  shape: 'spline',
-                                  width: 4
-                                }
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                              var textTitles = columns[tmp].slice(1);
+                              var convertedTextTitles = convertTextTitles(textTitles);
 
-                            };
-                            data.push(trace);
+                              var trace = {
+                                  x: x,
+                                  y: columns[tmp].slice(1),
+                                  type: 'scatter',
+                                  mode: labelsMode,
+                                  text: convertedTextTitles,
+                                  textposition: 'top right',
+                                  hovertemplate: '%{y}<extra></extra>',
+                                  textfont: {
+                                      size: 14,
+                                  },
+                                  name: name,
+                                  width: 3,
+                                  line: {
+                                    shape: 'spline',
+                                    width: 4
+                                  }
+
+                              };
+                              data.push(trace);
+                            }
                         }
                     } else {
                         var textTitles = columns[0].slice(1);
@@ -2004,45 +2112,61 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x'] || 'sbar' === this.options.chart_type){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         if (columns.length == 1) {
                             var name = columns[0][0];
 
-                            var trace = {
-                                x: [this.options.x_axis],
-                                y: x,
-                                type: 'bar',
-                                name: name,
-                                width: this.options.bar_width || 0.5,
-                            };
-                            data.push(trace);
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[0])){
+                              var trace = {
+                                  x: [this.options.x_axis],
+                                  y: x,
+                                  type: 'bar',
+                                  name: name,
+                                  width: this.options.bar_width || 0.5,
+                                  error_y: {},
+                                  error_x: {}
+                              };
+                              data.push(trace);
+                            }
                         } else if ('sbar' === this.options.chart_type) {
                             for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
-                                var trace = {
-                                    x: [this.options.x_axis],
-                                    y: [parseFloat(columns[tmp][1])],
-                                    type: 'bar',
-                                    name: name,
-                                    width: this.options.bar_width || 0.5,
-                                };
-                                data.push(trace);
+                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                                  var trace = {
+                                      x: [this.options.x_axis],
+                                      y: [parseFloat(columns[tmp][1])],
+                                      type: 'bar',
+                                      name: name,
+                                      width: this.options.bar_width || 0.5,
+                                      error_y: {},
+                                      error_x: {}
+                                  };
+                                  data.push(trace);
+                                }
                             }
                         } else {
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
 
-                                var trace = {
-                                    x: x,
-                                    y: columns[tmp].slice(1),
-                                    type: 'bar',
-                                    name: name,
-                                    width: this.options.bar_width || 0.5,
-                                };
-                                data.push(trace);
+                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                                  var trace = {
+                                      x: x,
+                                      y: columns[tmp].slice(1),
+                                      type: 'bar',
+                                      name: name,
+                                      width: this.options.bar_width || 0.5,
+                                      error_y: {},
+                                      error_x: {}
+                                  };
+                                  data.push(trace);
+                                }
                             }
                         }
                     } else {
@@ -2052,6 +2176,8 @@
                             width: this.options.bar_width || 0.5,
                             type: 'bar',
                             name: 'Color',
+                            error_y: {},
+                            error_x: {}
                         };
                         data.push(trace);
                     };
@@ -2061,48 +2187,58 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if ((Array.isArray(columns[columns.length - 1]) && O.axis['x']) || 'shbar' === this.options.chart_type){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         if (columns.length == 1) {
                             var name = columns[0][0];
 
-                            var trace = {
-                                x: x,
-                                y: [this.options.x_axis],
-                                type: 'bar',
-                                name: name,
-                                orientation: 'h',
-                                width: this.options.bar_width || 0.5,
-                            };
-                            data.push(trace);
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[0])){
+                              var trace = {
+                                  x: x,
+                                  y: [this.options.x_axis],
+                                  type: 'bar',
+                                  name: name,
+                                  orientation: 'h',
+                                  width: this.options.bar_width || 0.5,
+                              };
+                              data.push(trace);
+                            }
                         } else if ('shbar' === this.options.chart_type) {
                             for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
-                                var trace = {
-                                    x: [parseFloat(columns[tmp][1])],
-                                    y: [this.options.x_axis],
-                                    type: 'bar',
-                                    name: name,
-                                    orientation: 'h',
-                                    width: this.options.bar_width || 0.5,
-                                };
-                                data.push(trace);
+                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                                  var trace = {
+                                      x: [parseFloat(columns[tmp][1])],
+                                      y: [this.options.x_axis],
+                                      type: 'bar',
+                                      name: name,
+                                      orientation: 'h',
+                                      width: this.options.bar_width || 0.5,
+                                  };
+                                  data.push(trace);
+                                }
                             }
                         } else {
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
 
-                                var trace = {
-                                    x: columns[tmp].slice(1),
-                                    y: x,
-                                    type: 'bar',
-                                    name: name,
-                                    orientation: 'h',
-                                    width: this.options.bar_width || 0.5,
-                                };
-                                data.push(trace);
+                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                                  var trace = {
+                                      x: columns[tmp].slice(1),
+                                      y: x,
+                                      type: 'bar',
+                                      name: name,
+                                      orientation: 'h',
+                                      width: this.options.bar_width || 0.5,
+                                  };
+                                  data.push(trace);
+                                }
                             }
                         }
                     } else {
@@ -2122,29 +2258,36 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
-                            var textTitles = columns[tmp].slice(1);
-                            var convertedTextTitles = convertTextTitles(textTitles);
 
-                            var trace = {
-                                x: x,
-                                y: columns[tmp].slice(1),
-                                mode: labelsMode,
-                                text: convertedTextTitles,
-                                textposition: 'top right',
-                                hovertemplate: '%{y}<extra></extra>',
-                                textfont: {
-                                    size: 14,
-                                },
-                                type: 'scatter',
-                                name: name,
-                                fill: 'tozeroy'
-                            };
-                            data.push(trace);
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                              var textTitles = columns[tmp].slice(1);
+                              var convertedTextTitles = convertTextTitles(textTitles);
+
+                              var trace = {
+                                  x: x,
+                                  y: columns[tmp].slice(1),
+                                  mode: labelsMode,
+                                  text: convertedTextTitles,
+                                  textposition: 'top right',
+                                  hovertemplate: '%{y}<extra></extra>',
+                                  textfont: {
+                                      size: 14,
+                                  },
+                                  type: 'scatter',
+                                  name: name,
+                                  fill: 'tozeroy'
+                              };
+                              data.push(trace);
+                            }
                         };
                     } else {
                         var textTitles = columns[0].slice(1);
@@ -2331,7 +2474,9 @@
 
                 if (typeof plotly === "object"){
                     for (const [key, value] of Object.entries(data)) {
+                      if (q[key]){
                         value.marker = q[key].marker;
+                      }
                     }
                 }
 
@@ -2543,7 +2688,7 @@
 
                         if(subData && subData.length > 0) {
                             subData.forEach(function(item, index){
-                              if (typeof item !== 'number'){
+                              if (typeof item !== 'number' && item !== null){
                                   item = item.replace(/^\d{1,2}\./, '');
                                   record.y[index] = item;
                               }
@@ -2557,7 +2702,7 @@
 
                         if(subData && subData.length > 0) {
                             subData.forEach(function(item, index){
-                              if (typeof item !== 'number'){
+                              if (typeof item !== 'number' && item !== null){
                                   item = item.replace(/^\d{1,2}\./, '');
                                   record.x[index] = item;
                               }
@@ -2677,6 +2822,7 @@
                             }
                         }
                     }
+
                 }
                 if('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
                      //Temporarily disabling annotations on bars with categories
@@ -2710,7 +2856,119 @@
                     }
                 }
 
-                //console.log(data);
+                var isErrorIntervals = bnds
+
+                if (isErrorIntervals === true && typeof ub !== 'boolean' && typeof lb !== 'boolean' && ub !== '' && lb !== '') {
+                  if (O.axis && O.axis['x']['categories']) {
+                    const lower = t.map(x => {
+                      return Math.round(Math.abs(x[this.options.y_axis.toLowerCase()] - x[lb]));
+                    });
+                    const upper = t.map(x => {
+                      return Math.round(Math.abs(x[this.options.y_axis.toLowerCase()] - x[ub]));
+                    });
+
+                    var arrayplus = upper;
+                    var arrayminus = lower;
+
+                    if('scatter' === this.options.chart_type || 'line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type){
+
+                      //Add Error Intervals
+                      var error = {
+                          type: 'data',
+                          symmetric: false,
+                          array: arrayplus,
+                          arrayminus: arrayminus,
+                          color: '#000000'
+                      }
+
+                      data[0].error_y = error;
+                    }
+
+                    if('bar' === this.options.chart_type || 'sbar' === this.options.chart_type || 'hbar' === this.options.chart_type || 'shbar' === this.options.chart_type ){
+
+                      //Add Error Intervals
+                      var error = {
+                          type: 'data',
+                          symmetric: false,
+                          array: arrayplus,
+                          arrayminus: arrayminus,
+                          color: '#000000'
+                      }
+
+                      if ('hbar' === this.options.chart_type || 'shbar' === this.options.chart_type) {
+                        data[0].error_x = error;
+                      } else {
+                        data[0].error_y = error;
+                      }
+                    }
+
+                  }
+                  if (O.axis && !O.axis['x']['categories'] && t[ub] && t[lb]) {
+                    console.log(t[ub])
+                    console.log(typeof t[ub])
+                    for (var i = 0; i < data.length; i++) {
+                      if (t[ub][data[i].name] !== undefined){
+                        var category_keys = [];
+                        var upper = [];
+                        var lower = [];
+
+                        console.log(data)
+                        console.log(t)
+                        console.log(t[data[i].name])
+                        for (var j = 1; j < t[data[i].name].length; j++) {
+                          upper.push(Math.round(Math.abs(t[data[i].name][j] - t[ub][data[i].name][j - 1])))
+                          lower.push(Math.round(Math.abs(t[data[i].name][j] - t[lb][data[i].name][j - 1])))
+                        }
+
+                        category_keys.push(data[i].name)
+
+                        //for (const [key, value] of Object.entries(t)) {
+                        //  console.log(`${key}: ${value}`);
+                        //}
+
+                        var arrayplus = upper;
+                        var arrayminus = lower;
+
+                        if('scatter' === this.options.chart_type || 'line' === this.options.chart_type || 'spline' === this.options.chart_type || 'area' === this.options.chart_type){
+
+                          //Add Error Intervals
+                          var error = {
+                              type: 'data',
+                              symmetric: false,
+                              array: arrayplus,
+                              arrayminus: arrayminus,
+                              color: '#000000',
+                              visible: true
+                          }
+
+                          data[i].error_y = error;
+                        }
+
+                        if('bar' === this.options.chart_type || 'hbar' === this.options.chart_type){
+
+                          //Add Error Intervals
+                          var error = {
+                              type: 'data',
+                              symmetric: false,
+                              array: arrayplus,
+                              arrayminus: arrayminus,
+                              color: '#000000',
+                              visible: true
+                          }
+
+                          if ('hbar' === this.options.chart_type) {
+                            data[i].error_x = error;
+                          } else {
+                            data[i].error_y = error;
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+
+
+                console.log(data);
                 //console.log(O);
                 //console.log(base_info); 
                 //console.log(data)
@@ -2797,6 +3055,9 @@
                     xfz = t.find("input[name*=chart_field_x_from_zero_]").is(":checked"),
                     k = t.find("select[name*=chart_field_static_reference_columns_]").val(),
                     j = t.find("input[name*=chart_field_static_reference_label_]").val(),
+                    ub = t.find("[name*=chart_field_upper_bounds_]").val(),
+                    lb = t.find("[name*=chart_field_lower_bounds_]").val(),
+                    bnds = t.find("input[name*=chart_field_show_bounds_]").is(":checked"),
                     N = t.find("select[name*=chart_field_dynamic_reference_type_]").val(),
                     P = t.find("input[name*=chart_field_dynamic_reference_factor_]").val(),
                     F = t.find("input[name*=chart_field_dynamic_reference_label_]").val(),
@@ -2805,8 +3066,8 @@
                     plotly = t.find("input[name*=chart_field_plotly_]").val(),
                     bar_width = t.find("input[name*=chart_field_bar_width_]").val(),
                     donut_hole = t.find("input[name*=chart_field_donut_hole_]").val();
-                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, void this.createChart(this.fetched_data);
-                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole;
+                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, void this.createChart(this.fetched_data);
+                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole;
                 var A = this.create_sql();
                 this.get_resource_datа(A)
 
