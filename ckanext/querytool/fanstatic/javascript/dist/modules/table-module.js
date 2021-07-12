@@ -1935,23 +1935,40 @@
                     //   string, number, number
                     var rows_mapping = {};
                     var y_axis_groups = {};
+                    var sub_dimen_map = [];
+                    var i = 0;
                     for (let row of rows) {
 
-                        // Get ma
-                        if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
-                        var mapping_item = rows_mapping[row[main_value]];
+                        //sub_dimen_map[i] = row;
+                        
+                        //Preparing Keys
+                        var obj = {};
+                        obj[main_value] = row[main_value];
+                        obj[second_value] = row[second_value];
+                        obj[row[category_name]] = row[y_axis];
+                        
+                        //Preparing values 
+                        sub_dimen_map.push(obj);
+                        i++;
+                        // // Get ma
+                        // if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
+                        // var mapping_item = rows_mapping[row[main_value]];
 
-                        // Pivot table
-                        mapping_item[main_value] = row[main_value];
-                        mapping_item[second_value] = row[second_value];
-                        mapping_item[row[category_name]] = row[y_axis];
+                        // // Pivot table
+                        // mapping_item[main_value] = row[main_value];
+                        // mapping_item[second_value] = row[second_value];
+                        // mapping_item[row[category_name]] = row[y_axis];
 
-                        // Sub headers
+                        // console.log(mapping_item);
+                        // console.log(rows_mapping);
+
+                        // // Sub headers
                         y_axis_groups[row[category_name]] = true;
 
                     };
 
-                    console.log(rows_mapping)
+                    console.log(sub_dimen_map)
+                    rows_mapping = sub_dimen_map;
                     var data = {
                         main_value: main_value,
                         second_value: second_value,
