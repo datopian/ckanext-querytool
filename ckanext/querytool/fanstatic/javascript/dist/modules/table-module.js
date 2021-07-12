@@ -1937,43 +1937,49 @@
                     var y_axis_groups = {};
                     var sub_dimen_map = [];
                     var i = 0;
-                    for (let row of rows) {
 
-                        //sub_dimen_map[i] = row;
-                        
-                        //Preparing Keys
-                        var obj = {};
-                        obj[main_value] = row[main_value];
-                        obj[second_value] = row[second_value];
-                        obj[row[category_name]] = row[y_axis];
+                    if(second_value.length > 0) {
+                        for (let row of rows) {
+                            var index = sub_dimen_map.findIndex(function(item, index) {
+                                return (item[main_value] === row[main_value]) && (item[second_value] === row[second_value]) ? true : false;
+                            });
+                            console.log('index is: ' + index);
 
-                        //Preparing values 
-                        sub_dimen_map.push(obj);
-                        i++;
-                        // // Get ma
-                        // if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
-                        // var mapping_item = rows_mapping[row[main_value]];
+                            if(index !== -1) {
+                                sub_dimen_map[index][row[category_name]] = row[y_axis];
+                            } else {
+                                //Preparing Keys
+                                var obj = {};
+                                obj[main_value] = row[main_value];
+                                obj[second_value] = row[second_value];
+                                obj[row[category_name]] = row[y_axis];
 
-                        // // Pivot table
-                        // mapping_item[main_value] = row[main_value];
-                        // mapping_item[second_value] = row[second_value];
-                        // mapping_item[row[category_name]] = row[y_axis];
+                                //Preparing values 
+                                sub_dimen_map.push(obj);
+                            }
+                            
+                            i++;
+                            y_axis_groups[row[category_name]] = true;
+                        };
+                        rows_mapping = sub_dimen_map;
+                    } else {
+                        for (let row of rows) {
+                            // Get ma
+                            if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
+                            var mapping_item = rows_mapping[row[main_value]];
 
-                        // console.log(mapping_item);
-                        // console.log(rows_mapping);
+                            // Pivot table
+                            mapping_item[main_value] = row[main_value];
+                            mapping_item[second_value] = row[second_value];
+                            mapping_item[row[category_name]] = row[y_axis];
 
-                        // // Sub headers
-                        y_axis_groups[row[category_name]] = true;
-
-                    };
+                            // Sub headers
+                            y_axis_groups[row[category_name]] = true;
+                        };
+                    }
                     
-                    var index = sub_dimen_map.findIndex(function(item, index) {
-                        return (item[main_value] === "Masculino") && (item[second_value] === "Pará") ? true : false;
-                    });
-                    console.log('index is: ' + index);
 
-                    console.log(sub_dimen_map)
-                    rows_mapping = sub_dimen_map;
+
                     var data = {
                         main_value: main_value,
                         second_value: second_value,
