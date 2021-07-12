@@ -14,7 +14,7 @@ Example usage:
 {% set delete_url = h.url_for('querytool_delete', querytool='/' + querytool.name) %}
 {% set user_type = h.get_user_permission_type(c.userobj, querytool.group) %}
 
-{% if h.get_groups_for_user(c.userobj, querytool.group) and ((user_type == 'member' and querytool.private != True) or user_type == 'admin') or c.userobj.sysadmin %}
+{% if h.get_groups_for_user(c.userobj, querytool.group) and (user_type == 'member' or user_type == 'admin' or c.userobj.sysadmin) %}
 <div class="applicaitons-box">
 
   <div class="thumb">
