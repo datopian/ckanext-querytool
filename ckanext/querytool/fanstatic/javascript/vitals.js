@@ -822,11 +822,11 @@ function checkTableCat(selected,chart_number){
   $(`#table_second_value_${chart_number} option[value='`+ selected +`']`).attr('disabled','disabled').siblings().removeAttr('disabled');
   $(`#table_category_name_${chart_number} option[value='`+ selected +`']`).attr('disabled','disabled').siblings().removeAttr('disabled');
 
-  if($(`#table_second_value_${chart_number} option`).filter(":selected").val() == selected){
+  if($(`#table_second_value_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
     $($(`#table_second_value_${chart_number}`)).val("")
   } 
 
-  if($(`#table_category_name_${chart_number} option`).filter(":selected").val() == selected){
+  if($(`#table_category_name_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
     $($(`#table_category_name_${chart_number}`)).val("")
   }
 
@@ -837,12 +837,12 @@ $('body').on('change','[id^=table_second_value_]',function(e){
   var selected = $(this).val();
   var chart_number = this.id.split('_').slice(-1)[0];
 
-  if($(`#table_main_value_${chart_number} option`).filter(":selected").val() == selected){
+  if($(`#table_main_value_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
     $($(`#table_second_value_${chart_number}`)).val("")
     alert('Value cannot be same as main dimension')
   } 
 
-  if($(`#table_category_name_${chart_number} option`).filter(":selected").val() == selected){
+  if($(`#table_category_name_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
     $($(`#table_second_value_${chart_number}`)).val("")
     alert('Value cannot be same as category')
   }
@@ -853,12 +853,12 @@ $('body').on('change','[id^=table_category_name_]',function(e){
   var selected = $(this).val();
   var chart_number = this.id.split('_').slice(-1)[0];
 
-  if($(`#table_main_value_${chart_number} option`).filter(":selected").val() == selected){
+  if($(`#table_main_value_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
     $($(`#table_category_name_${chart_number}`)).val("")
     alert('Value cannot be same as main dimension')
   } 
 
-  if($(`#table_second_value_${chart_number} option`).filter(":selected").val() == selected){
+  if($(`#table_second_value_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
     $($(`#table_category_name_${chart_number}`)).val("")
     alert('Value cannot be same as sub dimension')
   }

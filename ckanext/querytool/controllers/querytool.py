@@ -153,18 +153,12 @@ class QueryToolController(base.BaseController):
         }
 
         context = _get_context()
+        try:
+            check_access('querytool_update', context, data_dict)
+        except NotAuthorized:
+            abort(403, _('Not authorized to see this page'))
 
         _querytool = _get_action('querytool_get', data_dict)
-        user_type = helpers.get_user_permission_type(c.userobj, _querytool.get('group')) if _querytool else []
-
-        if _querytool and user_type in ['member', None] and c.userobj.sysadmin is False and data_dict.get('name') != '':
-            abort(403, _('Not authorized to see this page'))
-        else:
-            if user_type not in ['admin', 'editor'] and data_dict.get('name') != '':
-                try:
-                    check_access('querytool_update', context, data_dict)
-                except NotAuthorized:
-                    abort(403, _('Not authorized to see this page'))
 
         if _querytool is None and len(querytool) > 0:
             abort(404, _('Report not found.'))
@@ -318,17 +312,12 @@ class QueryToolController(base.BaseController):
 
         context = _get_context()
 
-        _querytool = _get_action('querytool_get', data_dict)
-        user_type = helpers.get_user_permission_type(c.userobj, _querytool.get('group')) if _querytool else []
-
-        if _querytool and user_type in ['member', None] and c.userobj.sysadmin is False:
+        try:
+            check_access('querytool_update', context, data_dict)
+        except NotAuthorized:
             abort(403, _('Not authorized to see this page'))
-        else:
-            if user_type not in ['admin', 'editor']:
-                try:
-                    check_access('querytool_update', context, data_dict)
-                except NotAuthorized:
-                    abort(403, _('Not authorized to see this page'))
+
+        _querytool = _get_action('querytool_get', data_dict)
 
         if _querytool is None and len(querytool) > 0:
             abort(404, _('Report not found.'))
