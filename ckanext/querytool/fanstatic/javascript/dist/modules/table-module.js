@@ -1946,7 +1946,7 @@
                         obj[main_value] = row[main_value];
                         obj[second_value] = row[second_value];
                         obj[row[category_name]] = row[y_axis];
-                        
+
                         //Preparing values 
                         sub_dimen_map.push(obj);
                         i++;
@@ -1966,6 +1966,11 @@
                         y_axis_groups[row[category_name]] = true;
 
                     };
+                    
+                    var index = sub_dimen_map.findIndex(function(item, index) {
+                        return (item[main_value] === "Masculino") && (item[second_value] === "Pará") ? true : false;
+                    });
+                    console.log('index is: ' + index);
 
                     console.log(sub_dimen_map)
                     rows_mapping = sub_dimen_map;
