@@ -12,6 +12,7 @@ Example usage:
 {% set edit_data_url = h.url_for('querytool_edit', querytool='/' + querytool.name) %}
 {% set edit_visualizations_url = h.url_for('querytool_edit_visualizations', querytool= '/' + querytool.name) %}
 {% set delete_url = h.url_for('querytool_delete', querytool='/' + querytool.name) %}
+{% set user_type = h.get_user_permission_type(c.userobj, querytool.group) %}
 
 {% if h.get_groups_for_user(c.userobj, querytool.group) and ((user_type == 'member' and querytool.private != True) or user_type == 'admin') or c.userobj.sysadmin %}
 <div class="applicaitons-box">
@@ -55,3 +56,4 @@ Example usage:
   <p class="clearfix"></p>
   
 </div>
+{% endif %}
