@@ -65,6 +65,7 @@ def querytool_update(context, data_dict):
     dataset_name = data.get('dataset_name')
     dataset = _get_action('package_show')(context, {'id': dataset_name})
     dataset['groups'] = [{'name': str(data.get('group'))}]
+    context['ignore_auth'] = True
     _get_action('package_patch')(context, dataset)
 
     image_url = data_dict['image_url']

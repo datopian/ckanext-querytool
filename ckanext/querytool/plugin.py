@@ -9,7 +9,6 @@ import ckanext.querytool.helpers as helpers
 
 from ckanext.querytool import actions
 from ckanext.querytool.logic import validators
-#from ckanext.querytool.logic.action import patch, update
 from ckanext.querytool.model import setup as model_setup
 import os
 import sys
@@ -242,8 +241,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         action_functions['resource_delete'] = actions.resource_delete
         action_functions['resource_patch'] = actions.resource_patch
         action_functions['resource_update'] = actions.resource_update
-        #action_functions['package_patch'] = patch.package_patch
-        #action_functions['package_update'] = update.package_update
         return action_functions
 
     # IConfigurable
