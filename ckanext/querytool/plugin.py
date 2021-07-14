@@ -311,7 +311,23 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'get_groups_for_user':
                 helpers.get_groups_for_user,
             'querytool_get_chart_colors':
-                helpers.get_querytool_get_chart_colors
+                helpers.get_querytool_get_chart_colors,
+            'get_edit_permission_for_user':
+                helpers.get_edit_permission_for_user,
+            'get_user_permission_type':
+                helpers.get_user_permission_type,
+            'get_is_admin_or_editor_of_any_group':
+                helpers.get_is_admin_or_editor_of_any_group,
+            'get_orgs_for_user':
+                helpers.get_orgs_for_user,
+            'get_organization':
+                helpers.get_organization,
+            'get_datasets_for_user':
+                helpers.get_datasets_for_user,
+            'get_all_orgs_for_user':
+                helpers.get_all_orgs_for_user,
+            'get_all_org_permissions':
+                helpers.get_all_org_permissions
         }
 
     # IAuthFunctions

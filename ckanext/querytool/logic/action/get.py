@@ -211,7 +211,6 @@ def querytool_get_chart_data(context, data_dict):
     sql_without_group = sql_string.split('GROUP BY')[0]
     sql_group = sql_string.split('GROUP BY')[1]
     categories_data = {}
-    #log.error(data_dict)
 
     if chart_filter:
         previous_filters.append(chart_filter)
@@ -243,7 +242,6 @@ def querytool_get_chart_data(context, data_dict):
             x.append(value)
 
             for record in records:
-                #log.error(record)
                 if upper_bounds and lower_bounds and \
                    record.get(upper_bounds.lower()) and \
                    record.get(upper_bounds.lower()):

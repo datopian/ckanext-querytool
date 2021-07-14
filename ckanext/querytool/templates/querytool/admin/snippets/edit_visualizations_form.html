@@ -32,6 +32,7 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
   <legend class="sticky-title">
     {{ _('Visualizations') }}
     <ul class="inline pull-right">
+      {% if h.get_user_permission_type(c.userobj, data.owner_org) in ['admin', 'editor'] %}
       <li>
         <button
           class="btn save-visualization-btn"
@@ -44,6 +45,7 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
           {{ _('Edit data') }}
         </button>
       </li>
+      {% endif %}
       <li>
         <button
           id="save-visualization-btn"
