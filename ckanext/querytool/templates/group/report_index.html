@@ -15,7 +15,7 @@
 
   {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
-  {% if h.get_is_admin_or_editor_of_any_group(c.userobj) or h.check_access('querytool_update') %}
+  {% if (h.get_is_admin_or_editor_of_any_group(c.userobj) or h.check_access('querytool_update')) and h.get_all_org_permissions(c.userobj) %}
     {% link_for _('New Report'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
   {% endif %}
 {% endblock %}

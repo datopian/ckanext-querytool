@@ -715,6 +715,9 @@ def get_edit_permission_for_user(userobj, group):
 def get_user_permission_type(userobj, group):
     member_list = toolkit.get_action('member_list')({}, {'id': group})
 
+    if c.userobj.sysadmin:
+        return 'admin'
+
     for m in member_list:
         if userobj.id in m:
             if 'Admin' in m:
@@ -723,6 +726,13 @@ def get_user_permission_type(userobj, group):
                 return 'member'
             if 'Editor' in m:
                 return 'editor'
+
+
+def get_all_org_permissions(userobj):
+    orgs = get_all_orgs_for_user(userobj)
+    permissions = [
+        get_user_permission_type(userobj, org.get('id')) for org in orgs]
+    return any(p in ['admin', 'editor'] for p in permissions)
 
 
 def get_querytool_get_chart_colors(data):

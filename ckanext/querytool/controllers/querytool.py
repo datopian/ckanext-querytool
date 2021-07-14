@@ -694,6 +694,7 @@ class QueryToolController(base.BaseController):
         data['y_axis_values'] = ','.join(map(
             lambda column: column['name'],
             data['y_axis_columns']))
+        data['owner_org'] = _querytool.get('owner_org')
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary}
