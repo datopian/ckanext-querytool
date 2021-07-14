@@ -1782,12 +1782,20 @@
                         l = this.options.main_value;
                     !0 === l && (l = $("[name*=table_main_value_]").val()), o && (l = r);
 
-                    alert
+
                     if(sv_ !== "") {
                         var sv = sv_
                     } else {
                         var sv = !0 === this.options.second_value ? "" : this.options.second_value
                     }
+
+
+                    if(sv_ == "empty") {
+                        var sv = ""
+                    }
+
+                    console.log(sv_)
+                    console.log(sv)
                     console.log("TABLE");
                     //console.log(this.options);
 
@@ -1908,13 +1916,12 @@
                       );
                   }
                 },
-                render_data_table_with_category: function (t, e, n, sv, r, o) {
-                    (e = e.toLowerCase()), (n = n.toLowerCase()), (sv = sv.toLowerCase()),(r = r.toLowerCase());
-                    var i = {},
-                        a = {},
-                        u = !0,
-                        s = !1,
-                        c = void 0;
+                render_data_table_with_category: function (rows, category_name, main_value, second_value, y_axis, measure_label) {
+                    category_name = category_name.toLowerCase();
+                    main_value = main_value.toLowerCase();
+                    second_value = second_value.toLowerCase();
+                    y_axis = y_axis.toLowerCase();
+                    console.log(rows)
 
                     // Prepare data
                     // Pivot table when category is set
@@ -1928,51 +1935,23 @@
                     //   string, number, number
                     var rows_mapping = {};
                     var y_axis_groups = {};
-                    var sub_dimen_map = [];
-                    var i = 0;
+                    for (let row of rows) {
 
-                    if(second_value.length > 0) {
-                        for (let row of rows) {
-                            var index = sub_dimen_map.findIndex(function(item, index) {
-                                return (item[main_value] === row[main_value]) && (item[second_value] === row[second_value]) ? true : false;
-                            });
-                            console.log('index is: ' + index);
+                        // Get ma
+                        if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
+                        var mapping_item = rows_mapping[row[main_value]];
 
-                            if(index !== -1) {
-                                sub_dimen_map[index][row[category_name]] = row[y_axis];
-                            } else {
-                                //Preparing Keys
-                                var obj = {};
-                                obj[main_value] = row[main_value];
-                                obj[second_value] = row[second_value];
-                                obj[row[category_name]] = row[y_axis];
+                        // Pivot table
+                        mapping_item[main_value] = row[main_value];
+                        mapping_item[second_value] = row[second_value];
+                        mapping_item[row[category_name]] = row[y_axis];
 
-                                //Preparing values 
-                                sub_dimen_map.push(obj);
-                            }
-                            
-                            i++;
-                            y_axis_groups[row[category_name]] = true;
-                        };
-                        rows_mapping = sub_dimen_map;
-                    } else {
-                        for (let row of rows) {
-                            // Get ma
-                            if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
-                            var mapping_item = rows_mapping[row[main_value]];
+                        // Sub headers
+                        y_axis_groups[row[category_name]] = true;
 
-                            // Pivot table
-                            mapping_item[main_value] = row[main_value];
-                            mapping_item[second_value] = row[second_value];
-                            mapping_item[row[category_name]] = row[y_axis];
+                    };
 
-                            // Sub headers
-                            y_axis_groups[row[category_name]] = true;
-                        };
-                    }
-                    
-
-
+                    console.log(rows_mapping)
                     var data = {
                         main_value: main_value,
                         second_value: second_value,
@@ -1982,97 +1961,66 @@
                         rows: Object.values(rows_mapping),
                     };
 
-                            // if (sv != '') {
-                            //     (d[sv] = p[sv]);
-                            // }
-                            
-                            (d[n] = p[n]), (d[p[e]] = p[r]), (a[p[e]] = !0);
-
-                            //console.log("--- N --- ")
-                            //console.log(n)
-                            //console.log("--- D --- ")
-                            //console.log(d)
-                        }
-
-                        // var new_i = [
-                        //     {
-                        //         "unidade de federação": "Pará",
-                        //         "causa classificada": "006 Afogamento",
-                        //         "Masculino": "2012"
-                        //     },
-                        //     {
-                        //         "unidade de federação": "Santa Catarina",
-                        //         "causa classificada": "009 Afogamento",
-                        //         "Masculino": "2005"
-                        //     },
-                        //     {
-                        //         "unidade de federação": "Tocantins",
-                        //         "causa classificada": "011 Afogamento",
-                        //         "Ambos": "1998",
-                        //         "Feminino": "2006"
-                        //     },
-                        //     {
-                        //         "unidade de federação": "Rio Grande do Norte",
-                        //         "causa classificada": "014 Afogamento",
-                        //         "Ambos": "2002"
-                        //     },
-                        //     {
-                        //         "unidade de federação": "Testing Values",
-                        //         "causa classificada": "014 Afogamento",
-                        //         "Feminino": "2999"
-                        //     }
-                        // ]
-
-                        //Creating new i
-                        if(sv && sv !== '') {
-                            var i = []
-                            for(var x= 0; x<t.length; x++) {
-                                var opt1 = t[x][e]
-                                //console.log(opt1)
-
-                                var opt2 = t[x][r]
-
-                                i.push(t[x])
-                                i[x][opt1] = opt2
-                            }
-                        }
-
-                        // console.log("New I")
-                        // console.log(new_i)
-
-                        
-                        // console.log(e)
-                        // console.log(n)
-                        // console.log(sv)
-                        // console.log(r)
-                        // console.log(o)
-
-                        // console.log(i)
-                    } catch (t) {
-                        (s = !0), (c = t);
-                    } finally {
-                        try {
-                            u || null == f.return || f.return();
-                        } finally {
-                            if (s) throw c;
-                        }
-                    }
-
-
-                    
-                    var v = { main_value: n, second_value: sv, measure_label: o, y_axis: r, y_axis_groups: Object.keys(a).sort(), rows: Object.values(i) };
-
-                    if (sv != '') {
-                      return this.render_template(
-                          '\n          <table  class="stripe">\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th rowspan="2">{second_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
-                          v
-                      );
+                    // Prepare template
+                    var template = '';
+                    if(second_value) {
+                        template = `
+                        <table>
+                            <thead>
+                            <tr>
+                                <th rowspan="2">{main_value|capitalize}</th>
+                                <th rowspan="2">{second_value|capitalize}</th>
+                                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>
+                            </tr>
+                            <tr>
+                                {% for y_axis_group in y_axis_groups %}
+                                <th>{y_axis_group}</th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                <td>{row[main_value]|process_table_value}</td>
+                                <td>{row[second_value]|process_table_value}</td>
+                                {% for y_axis_group in y_axis_groups %}
+                                    <td>{row[y_axis_group]|process_table_value}</td>
+                                {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        `;
                     } else {
-                      return this.render_template(
-                          '\n          <table class="stripe">\n            <thead>\n              <tr>\n                <th rowspan="2">{main_value|capitalize}</th>\n                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>\n              </tr>\n              <tr>\n                {% for y_axis_group in y_axis_groups %}\n                  <th>{y_axis_group}</th>\n                {% endfor %}\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  {% for y_axis_group in y_axis_groups %}\n                    <td>{row[y_axis_group]|process_table_value}</td>\n                  {% endfor %}\n                </tr>\n              {% endfor %}\n            </tbody>\n          </table>\n          ',
-                          v
-                      );                      
+                            template = `
+                        <table>
+                            <thead>
+                            <tr>
+                                <th rowspan="2">{main_value|capitalize}</th>
+                                <th colspan="{y_axis_groups.length}">{measure_label|capitalize}</th>
+                            </tr>
+                            <tr>
+                                {% for y_axis_group in y_axis_groups %}
+                                <th>{y_axis_group}</th>
+                                {% endfor %}
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for row in rows %}
+                                <tr>
+                                <td>{row[main_value]|process_table_value}</td>
+                                {% for y_axis_group in y_axis_groups %}
+                                    <td>{row[y_axis_group]|process_table_value}</td>
+                                {% endfor %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                        `;
                     }
+                    
+                    // Render
+                    return this.render_template(template, data);
                 },
                 render_template: function (t, e) {
                     try {
@@ -2097,6 +2045,10 @@
                         e = this.el.parent().parent().find("[id*=table_main_value_]").val(),
                         sv = this.el.parent().parent().find("[id*=table_second_value_]").val(),
                         n = $("#choose_y_axis_column option:selected").text();
+
+                        if(sv.length==0) {
+                            sv="empty"
+                        }
                     (this.options.category_name = this.el.parent().parent().find("[id*=table_category_name_]").val()),
                         (this.options.data_format = this.el.parent().parent().find("[id*=table_data_format_]").val()),
                         (this.options.filter_name = this.el.parent().parent().find("[id*=table_field_filter_name_]").val()),

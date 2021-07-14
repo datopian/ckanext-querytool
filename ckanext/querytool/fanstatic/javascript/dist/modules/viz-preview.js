@@ -1865,13 +1865,17 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (typeof columns[columns.length - 1] == 'array' && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
-                            if (name !== undefined && Array.isArray(columns[tmp])) {
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                               var textTitles = columns[tmp].slice(1);
                               var convertedTextTitles = convertTextTitles(textTitles);
 
@@ -1981,13 +1985,17 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
-                            if (name !== undefined && Array.isArray(columns[tmp])) {
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                               var textTitles = columns[tmp].slice(1);
                               var convertedTextTitles = convertTextTitles(textTitles);
 
@@ -2038,13 +2046,17 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
-                            if (name !== undefined && Array.isArray(columns[tmp])) {
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                               var textTitles = columns[tmp].slice(1);
                               var convertedTextTitles = convertTextTitles(textTitles);
 
@@ -2100,27 +2112,33 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x'] || 'sbar' === this.options.chart_type){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         if (columns.length == 1) {
                             var name = columns[0][0];
 
-                            var trace = {
-                                x: [this.options.x_axis],
-                                y: x,
-                                type: 'bar',
-                                name: name,
-                                width: this.options.bar_width || 0.5,
-                                error_y: {},
-                                error_x: {}
-                            };
-                            data.push(trace);
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[0])){
+                              var trace = {
+                                  x: [this.options.x_axis],
+                                  y: x,
+                                  type: 'bar',
+                                  name: name,
+                                  width: this.options.bar_width || 0.5,
+                                  error_y: {},
+                                  error_x: {}
+                              };
+                              data.push(trace);
+                            }
                         } else if ('sbar' === this.options.chart_type) {
                             for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
-                                if (name !== undefined && Array.isArray(columns[tmp])) {
+                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                                   var trace = {
                                       x: [this.options.x_axis],
                                       y: [parseFloat(columns[tmp][1])],
@@ -2137,7 +2155,7 @@
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
 
-                                if (name !== undefined && Array.isArray(columns[tmp])) {
+                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                                   var trace = {
                                       x: x,
                                       y: columns[tmp].slice(1),
@@ -2169,26 +2187,32 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if ((Array.isArray(columns[columns.length - 1]) && O.axis['x']) || 'shbar' === this.options.chart_type){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         if (columns.length == 1) {
                             var name = columns[0][0];
 
-                            var trace = {
-                                x: x,
-                                y: [this.options.x_axis],
-                                type: 'bar',
-                                name: name,
-                                orientation: 'h',
-                                width: this.options.bar_width || 0.5,
-                            };
-                            data.push(trace);
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[0])){
+                              var trace = {
+                                  x: x,
+                                  y: [this.options.x_axis],
+                                  type: 'bar',
+                                  name: name,
+                                  orientation: 'h',
+                                  width: this.options.bar_width || 0.5,
+                              };
+                              data.push(trace);
+                            }
                         } else if ('shbar' === this.options.chart_type) {
                             for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
-                                if (name !== undefined) {
+                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                                   var trace = {
                                       x: [parseFloat(columns[tmp][1])],
                                       y: [this.options.x_axis],
@@ -2204,7 +2228,7 @@
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
 
-                                if (name !== undefined) {
+                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                                   var trace = {
                                       x: columns[tmp].slice(1),
                                       y: x,
@@ -2234,13 +2258,17 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        var x = columns[columns.length - 1].slice(1);
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
-                            if (name !== undefined && Array.isArray(columns[tmp])) {
+                            if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                               var textTitles = columns[tmp].slice(1);
                               var convertedTextTitles = convertTextTitles(textTitles);
 
@@ -2446,7 +2474,9 @@
 
                 if (typeof plotly === "object"){
                     for (const [key, value] of Object.entries(data)) {
+                      if (q[key]){
                         value.marker = q[key].marker;
+                      }
                     }
                 }
 
@@ -2658,7 +2688,7 @@
 
                         if(subData && subData.length > 0) {
                             subData.forEach(function(item, index){
-                              if (typeof item !== 'number'){
+                              if (typeof item !== 'number' && item !== null){
                                   item = item.replace(/^\d{1,2}\./, '');
                                   record.y[index] = item;
                               }
@@ -2672,7 +2702,7 @@
 
                         if(subData && subData.length > 0) {
                             subData.forEach(function(item, index){
-                              if (typeof item !== 'number'){
+                              if (typeof item !== 'number' && item !== null){
                                   item = item.replace(/^\d{1,2}\./, '');
                                   record.x[index] = item;
                               }
@@ -2874,7 +2904,10 @@
 
                   }
                   if (O.axis && !O.axis['x']['categories'] && t[ub] && t[lb]) {
+                    console.log(t[ub])
+                    console.log(typeof t[ub])
                     for (var i = 0; i < data.length; i++) {
+                      if (t[ub][data[i].name] !== undefined){
                         var category_keys = [];
                         var upper = [];
                         var lower = [];
@@ -2929,6 +2962,7 @@
                             data[i].error_y = error;
                           }
                         }
+                      }
                     }
                   }
                 }
