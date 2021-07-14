@@ -1916,26 +1916,71 @@
                         s = !1,
                         c = void 0;
 
-                    var x = {};
-                    try {
-                        // console.log("--- T ---")
-                        // console.log(t)
+                    // Prepare data
+                    // Pivot table when category is set
+                    // Source:
+                    //   category_name, main_value, y_axis
+                    //   cat1, string, number
+                    //   cat2, string, number
+                    // Target:
+                    //   main_value, y_axis for cat1, y_axis for cat2
+                    //   string, number, number
+                    //   string, number, number
+                    var rows_mapping = {};
+                    var y_axis_groups = {};
+                    var sub_dimen_map = [];
+                    var i = 0;
 
-                        for (var l, f = t[Symbol.iterator](); !(u = (l = f.next()).done); u = !0) {
+                    if(second_value.length > 0) {
+                        for (let row of rows) {
+                            var index = sub_dimen_map.findIndex(function(item, index) {
+                                return (item[main_value] === row[main_value]) && (item[second_value] === row[second_value]) ? true : false;
+                            });
+                            console.log('index is: ' + index);
+
+                            if(index !== -1) {
+                                sub_dimen_map[index][row[category_name]] = row[y_axis];
+                            } else {
+                                //Preparing Keys
+                                var obj = {};
+                                obj[main_value] = row[main_value];
+                                obj[second_value] = row[second_value];
+                                obj[row[category_name]] = row[y_axis];
+
+                                //Preparing values 
+                                sub_dimen_map.push(obj);
+                            }
                             
-                            var p = l.value;
-                            // console.log("--- I --- ")
-                            // console.log(i)
+                            i++;
+                            y_axis_groups[row[category_name]] = true;
+                        };
+                        rows_mapping = sub_dimen_map;
+                    } else {
+                        for (let row of rows) {
+                            // Get ma
+                            if (!rows_mapping[row[main_value]]) rows_mapping[row[main_value]] = {};
+                            var mapping_item = rows_mapping[row[main_value]];
 
-                            // console.log("--- Ip[N] --- ")
-                            // console.log(i[p[n]])
+                            // Pivot table
+                            mapping_item[main_value] = row[main_value];
+                            mapping_item[second_value] = row[second_value];
+                            mapping_item[row[category_name]] = row[y_axis];
 
-                            i[p[n]] || (i[p[n]] = {});
+                            // Sub headers
+                            y_axis_groups[row[category_name]] = true;
+                        };
+                    }
+                    
 
-                            //console.log("--- P --- ")
-                            //console.log(p)
 
-                            var d = i[p[n]];
+                    var data = {
+                        main_value: main_value,
+                        second_value: second_value,
+                        measure_label: measure_label,
+                        y_axis: y_axis,
+                        y_axis_groups: Object.keys(y_axis_groups).sort(),
+                        rows: Object.values(rows_mapping),
+                    };
 
                             // if (sv != '') {
                             //     (d[sv] = p[sv]);
