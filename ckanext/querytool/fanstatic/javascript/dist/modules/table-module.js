@@ -1845,7 +1845,8 @@
                             processing: !0,
                             rowsGroup: [
                                 0
-                            ]
+                            ],
+                            order: [[ 1, 'asc' ], [ 0, 'asc' ]]
                         }
                         
                         //Initialise Datatable if its not update
