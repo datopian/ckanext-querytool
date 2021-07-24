@@ -1864,7 +1864,7 @@
 
                             updateCount = updateCount + 1
                             $("<div class='preview-wrapper' id='new-table-"+updateCount+"'>"+r+"</div>").insertAfter( $("#table-item-"+ a +"_wrapper").closest('.preview-wrapper'));
-                            $('#new-table-'+updateCount+' table').addClass('row-border table-bordered')
+                            $('#new-table-'+updateCount+' table').addClass('row-border table-bordered stripe')
                             $('#new-table-'+updateCount+' table').DataTable(dtConfig)
                             $("div.dt-header" + a).text(p);
                         }
