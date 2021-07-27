@@ -742,3 +742,10 @@ def get_querytool_get_chart_colors(data):
         data = []
 
     return data
+
+
+def convert_bar_width(bar_width, convert=True):
+    if convert:
+        return str(round(float(bar_width) * 10, 2))
+    else:
+        return str(round(float(bar_width) / 10, 2))

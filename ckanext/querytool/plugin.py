@@ -327,7 +327,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'get_all_orgs_for_user':
                 helpers.get_all_orgs_for_user,
             'get_all_org_permissions':
-                helpers.get_all_org_permissions
+                helpers.get_all_org_permissions,
+            'convert_bar_width':
+                helpers.convert_bar_width
         }
 
     # IAuthFunctions
