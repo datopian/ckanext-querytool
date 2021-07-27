@@ -509,7 +509,8 @@
             <div class="control-group ">
                <label class="control-label" for="chart_field_bar_width_{{ n }}">{{ _('Bar width') }}</label>
                <div class="controls ">
-                  <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ h.convert_bar_width(bar_width, True)|default (5)}}" placeholder="{{ _('Width of bar, default 5') }}" {{'' if bar_width_option else 'disabled'}}>
+                  <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ h.convert_bar_width(bar_width, True)|default (5.0)}}" placeholder="{{ _('Width of bar, default 5.0') }}" {{'' if bar_width_option else 'disabled'}}>
+                  {{ form.info(_('An integer or decimal between 1-10.')) }}
                </div>
             </div>
 
