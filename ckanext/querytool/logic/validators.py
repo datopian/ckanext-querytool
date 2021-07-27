@@ -9,7 +9,7 @@ log = logging.getLogger(__name__)
 
 Invalid = df.Invalid
 
-DESCRIPTION_MAX_LENGTH = 300
+DESCRIPTION_MAX_LENGTH = 500
 
 
 def querytool_name_validator(key, data, errors, context):
