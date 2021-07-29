@@ -675,10 +675,13 @@ def get_datasets_for_user(userobj, package_name):
     package = _get_action('package_show', {'name_or_id': package_name})
     org_access = get_orgs_for_user(userobj, package['organization']['name'])
 
+    if org_access or userobj.sysadmin:
+        return True
+
     for group in package.get('groups'):
         group_access = get_groups_for_user(userobj, group['name'])
 
-        if group_access or org_access:
+        if group_access:
             return True
 
     return False
