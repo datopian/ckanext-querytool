@@ -3074,7 +3074,6 @@
                 }
 
                 if (donut_hole != ''){
-                  console.log(donut_hole)
                   this.options.donut_hole = parseFloat(donut_hole) / 10
                 }
 
