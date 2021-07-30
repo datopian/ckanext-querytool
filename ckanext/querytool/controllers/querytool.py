@@ -441,6 +441,18 @@ class QueryToolController(base.BaseController):
 
                     visualization['donut_hole'] = \
                         data.get('chart_field_donut_hole_{}'.format(id))
+
+                    donut_hole = data.get('chart_field_donut_hole_{}'.format(id))
+
+                    if not donut_hole:
+                        visualization['donut_hole'] = \
+                            data.get('chart_field_donut_hole_{}'.format(id))
+                    else:
+                        visualization['donut_hole'] = \
+                            str(round(float(data.get(
+                                'chart_field_donut_hole_{}'.format(id))) / 10, 2
+                            ))
+
                     visualization['upper_bounds'] = \
                         data.get('chart_field_upper_bounds_{}'.format(id))
                     visualization['lower_bounds'] = \

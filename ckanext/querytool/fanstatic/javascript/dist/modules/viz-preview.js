@@ -3073,6 +3073,11 @@
                   this.options.bar_width = parseFloat(bar_width) / 10
                 }
 
+                if (donut_hole != ''){
+                  console.log(donut_hole)
+                  this.options.donut_hole = parseFloat(donut_hole) / 10
+                }
+
                 var A = this.create_sql();
                 this.get_resource_datа(A)
 
