@@ -781,6 +781,20 @@ $(document).ready(function(){
       $(`#max_labels__${chart_number}`).addClass("hidden");
     }
 
+
+    //Hide bar width 
+    if(selected=='line' || selected=='spline' || selected=='area' || selected=='pie' || selected=='donut') {
+      $(`#chart_bar_width_${chart_number}`).addClass("hidden");
+    } else {
+      $(`#chart_bar_width_${chart_number}`).removeClass("hidden");
+    }
+
+    if(selected=='pie' || selected=='donut') {
+      $(`#donut_hole_${chart_number}`).removeClass("hidden");
+    } else {
+      $(`#donut_hole_${chart_number}`).addClass("hidden");
+    }
+
   })
 
 
