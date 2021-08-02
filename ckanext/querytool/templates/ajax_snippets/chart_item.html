@@ -575,8 +575,13 @@
 
             {# {% if selected_chart_type in ['bar', 'hbar', 'sbar', 'shbar', 'line', 'spline', 'area', 'scatter'] %} #}
 
+            {% if show_bounds == false %} 
+              {% set hide_bounds = 'hidden' %}
+            {% else %}
+              {% set hide_bounds = '' %}
+            {% endif %}
             {# Upper bounds #}
-            <div class="control-group control-select">
+            <div class="control-group control-select {{hide_bounds}}" id="lower_bounds_{{n}}">
               <label class="control-label" for="chart_field_lower_bounds_{{ n }}">{{ _('Lower bounds') }}</label>
               <div class="controls ">
                 <select id="chart_field_lower_bounds_{{ n }}" name="chart_field_lower_bounds_{{ n }}">
@@ -589,7 +594,7 @@
             </div>
 
             {# Lower bounds #}
-            <div class="control-group control-select">
+            <div class="control-group control-select {{hide_bounds}}" id="upper_bounds_{{n}}">
               <label class="control-label" for="chart_field_upper_bounds_{{ n }}">{{ _('Upper bounds') }}</label>
               <div class="controls ">
                 <select id="chart_field_upper_bounds_{{ n }}" name="chart_field_upper_bounds_{{ n }}">

@@ -784,6 +784,19 @@ $(document).ready(function(){
   })
 
 
+// Hide upper and lower bound 
+$('body').on('change','[id^=chart_field_show_bounds_]',function(){
+    var chart_number = this.id.split('_').slice(-1)[0];
+
+    if ($(this).is(":checked")) {
+      $(`#lower_bounds_${chart_number}`).removeClass("hidden");
+      $(`#upper_bounds_${chart_number}`).removeClass("hidden");
+    } else {
+      $(`#lower_bounds_${chart_number}`).addClass("hidden");
+      $(`#upper_bounds_${chart_number}`).addClass("hidden");
+    }
+});
+
 // Hide annotation on bars with categories
 $('body').on('change','[id^=chart_field_graph_]',function(){
   var selected = $(this).val();
