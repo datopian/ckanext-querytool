@@ -772,6 +772,15 @@ $(document).ready(function(){
       $(`#chart_field_sort_${chart_number}`).removeAttr('disabled');
       $(`#chart_field_x_ticks_format_${chart_number}`).removeAttr('disabled');
     }
+
+
+    //Hide Max number of text labels
+    if(selected=='line' || selected=='spline' || selected=='area' || selected=='scatter') {
+      $(`#max_labels__${chart_number}`).removeClass("hidden");
+    } else {
+      $(`#max_labels__${chart_number}`).addClass("hidden");
+    }
+
   })
 
 

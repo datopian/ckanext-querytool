@@ -333,7 +333,13 @@
             {% else %}
               {% set x_tick_culling_max_option = false %}
             {% endif %}
-            <div class="control-group">
+
+            {% if selected_chart_type in ['line', 'spline', 'area', 'scatter'] %}
+              {% set x_tick_culling_max_option_hide = '' %}
+            {% else %}
+              {% set x_tick_culling_max_option_hide = 'hidden' %}
+            {% endif %}
+            <div class="control-group {{x_tick_culling_max_option_hide}}" id="max_labels__{{ n }}">
               <label class="control-label" for="chart_field_x_tick_culling_max_{{ n }}">{{ _('Max number of text labels') }}</label>
               <div class="controls ">
                 <input id="chart_field_x_tick_culling_max_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_culling_max_{{ n }}" placeholder="10" value="{{ x_tick_culling_max }}" {{'disabled' if x_tick_culling_max_option else ''}}>
