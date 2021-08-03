@@ -450,6 +450,14 @@ msgstr "Comece do zero"
 msgid "Y axis label format"
 msgstr "Formato dos rótulos do eixo Y"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:247
+msgid "X axis title"
+msgstr "Título do eixo X"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:355
+msgid "X axis label format"
+msgstr "Formato dos rótulos do eixo X"
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:320
 msgid "Additional Options"
 msgstr "Opções adicionais"
@@ -1276,3 +1284,27 @@ msgstr "Completo"
 #: ckan/templates/macros/autoform.html:62
 msgid "Site logo"
 msgstr "Logo do site"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:542
+msgid "Show annotations"
+msgstr "Mostrar anotações"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:564
+msgid "Show bounds"
+msgstr "Mostrar limites"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:574
+msgid "Lower bounds"
+msgstr "Limite inferior"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:587
+msgid "Upper bounds"
+msgstr "Limite superior"
+
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:66
+msgid "Sub-dimension"
+msgstr "Subdimensão"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Column Width"
+msgstr "Largura da coluna"
