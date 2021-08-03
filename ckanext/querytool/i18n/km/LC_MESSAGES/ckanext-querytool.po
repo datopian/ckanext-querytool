@@ -448,6 +448,14 @@ msgstr "ចាប់ផ្តើមពីសូន្យ"
 msgid "Y axis label format"
 msgstr "ទម្រង់សញ្ញាអ័ក្ស Y"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:247
+msgid "X axis title"
+msgstr "ចំណងជើងអ័ក្ស X"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:355
+msgid "X axis label format"
+msgstr "ទម្រង់សញ្ញាអ័ក្ស X"
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:320
 msgid "Additional Options"
 msgstr "ជម្រើសបន្ថែម"
@@ -2056,3 +2064,27 @@ msgstr "អ្នកមិនបានផ្តល់ជីវប្រវត្
 #: ckan/templates/user/read_base.html:41
 msgid "This user has no biography."
 msgstr "អ្នកប្រើប្រាស់នេះមិនមានជីវប្រវត្តិទេ។"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:542
+msgid "Show annotations"
+msgstr "បង្ហាញចំណារពន្យល់"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:564
+msgid "Show bounds"
+msgstr "បង្ហាញព្រំដែន"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:574
+msgid "Lower bounds"
+msgstr "ព្រំដែនខាងក្រោម"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:587
+msgid "Upper bounds"
+msgstr "ព្រំដែនខាងលើ"
+
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:66
+msgid "Sub-dimension"
+msgstr "វិមាត្ររង"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Column Width"
+msgstr "ទទឹងជួរឈរ"

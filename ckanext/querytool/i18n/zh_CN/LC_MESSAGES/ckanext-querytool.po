@@ -448,6 +448,14 @@ msgstr "从0开始"
 msgid "Y axis label format"
 msgstr "Y轴标签格式"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:247
+msgid "X axis title"
+msgstr "X轴标题"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:355
+msgid "X axis label format"
+msgstr "X轴标签格式"
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:320
 msgid "Additional Options"
 msgstr "额外选项"
@@ -1324,3 +1332,27 @@ msgstr ""
 "<code>&lt;head&gt;</code>标记中。如果您希望更全面地自定义模板，我们建议"
 "<a href=\"%(docs_url)s\" target=\"_blank\">阅读文档</a>。"
 "</p> <p><strong>主页：</strong>这是为您的主页上显示的模块选择预定义的布局。</p>"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:542
+msgid "Show annotations"
+msgstr "显示注释"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:564
+msgid "Show bounds"
+msgstr "显示边界"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:574
+msgid "Lower bounds"
+msgstr "下限"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:587
+msgid "Upper bounds"
+msgstr "上限"
+
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:66
+msgid "Sub-dimension"
+msgstr "子维度"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Column Width"
+msgstr "列宽"
