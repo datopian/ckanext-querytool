@@ -1360,3 +1360,8 @@ msgstr "子维度"
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
 msgid "Column Width"
 msgstr "列宽"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:496
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
+msgid "An integer or decimal between 0.1-10."
+msgstr "0.1-10 之间的整数或小数。"

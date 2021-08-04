@@ -2092,3 +2092,8 @@ msgstr "វិមាត្ររង"
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
 msgid "Column Width"
 msgstr "ទទឹងជួរឈរ"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:496
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
+msgid "An integer or decimal between 0.1-10."
+msgstr "ចំនួនគត់ឬទសភាគរវាង ០.១-១០ ។"

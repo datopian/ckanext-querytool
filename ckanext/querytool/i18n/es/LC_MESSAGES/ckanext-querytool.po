@@ -1314,3 +1314,8 @@ msgstr "Sub-dimensión"
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
 msgid "Column Width"
 msgstr "Ancho de columna"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:496
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
+msgid "An integer or decimal between 0.1-10."
+msgstr "Un número entero o decimal entre 0,1 y 10."

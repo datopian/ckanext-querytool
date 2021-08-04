@@ -1312,3 +1312,8 @@ msgstr "Subdimensão"
 #: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
 msgid "Column Width"
 msgstr "Largura da coluna"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:496
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
+msgid "An integer or decimal between 0.1-10."
+msgstr "Um número inteiro ou decimal entre 0,1-10."
