@@ -364,6 +364,10 @@ msgstr "ការពិពណ៌នាបន្ថែម"
 msgid "Add variable to title"
 msgstr "បន្ថែមអថេរទៅលើចំណងជើង"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:132
+msgid "Add variable to description"
+msgstr "បន្ថែមអថេរទៅការពិពណ៌នា"
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:126
 msgid "Capitalized"
 msgstr "អក្សរធំ"

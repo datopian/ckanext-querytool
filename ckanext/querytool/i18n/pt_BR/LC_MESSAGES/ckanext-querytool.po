@@ -366,6 +366,10 @@ msgstr "Descrição suplementar"
 msgid "Add variable to title"
 msgstr "Adicionar variável ao título"
 
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:132
+msgid "Add variable to description"
+msgstr "Adicionar variável ao descrição"
+
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:126
 msgid "Capitalized"
 msgstr "Maiúscula"
