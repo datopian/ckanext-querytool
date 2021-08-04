@@ -427,10 +427,32 @@ class QueryToolController(base.BaseController):
                         data.get('chart_field_desc_{}'.format(id))
                     visualization['plotly'] = \
                         data.get('chart_field_plotly_{}'.format(id))
-                    visualization['bar_width'] = \
-                        data.get('chart_field_bar_width_{}'.format(id))
+
+                    bar_width = data.get('chart_field_bar_width_{}'.format(id))
+
+                    if not bar_width:
+                        visualization['bar_width'] = \
+                            data.get('chart_field_bar_width_{}'.format(id))
+                    else:
+                        visualization['bar_width'] = \
+                            str(round(float(data.get(
+                                'chart_field_bar_width_{}'.format(id))) / 10, 2
+                            ))
+
                     visualization['donut_hole'] = \
                         data.get('chart_field_donut_hole_{}'.format(id))
+
+                    donut_hole = data.get('chart_field_donut_hole_{}'.format(id))
+
+                    if not donut_hole:
+                        visualization['donut_hole'] = \
+                            data.get('chart_field_donut_hole_{}'.format(id))
+                    else:
+                        visualization['donut_hole'] = \
+                            str(round(float(data.get(
+                                'chart_field_donut_hole_{}'.format(id))) / 10, 2
+                            ))
+
                     visualization['upper_bounds'] = \
                         data.get('chart_field_upper_bounds_{}'.format(id))
                     visualization['lower_bounds'] = \
