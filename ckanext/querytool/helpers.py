@@ -727,7 +727,7 @@ def get_user_permission_type(userobj, group):
         return 'admin'
 
     try:
-        member_list = toolkit.get_action('member_list')({}, {'id': 'hats'})
+        member_list = toolkit.get_action('member_list')({}, {'id': group})
 
         for m in member_list:
             if userobj.id in m:
