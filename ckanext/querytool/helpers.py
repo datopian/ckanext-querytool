@@ -662,7 +662,10 @@ def get_orgs_for_user(userobj, org):
 
 
 def get_all_orgs_for_user(userobj):
-    orgs = _get_action('organization_list_for_user', {'id': userobj.id})
+    if not userobj:
+        orgs = get_organizations()
+    else:
+        orgs = _get_action('organization_list_for_user', {'id': userobj.id})
 
     if orgs:
         return orgs
