@@ -772,8 +772,44 @@ $(document).ready(function(){
       $(`#chart_field_sort_${chart_number}`).removeAttr('disabled');
       $(`#chart_field_x_ticks_format_${chart_number}`).removeAttr('disabled');
     }
+
+
+    //Hide Max number of text labels
+    if(selected=='line' || selected=='spline' || selected=='area' || selected=='scatter') {
+      $(`#max_labels__${chart_number}`).removeClass("hidden");
+    } else {
+      $(`#max_labels__${chart_number}`).addClass("hidden");
+    }
+
+
+    //Hide bar width 
+    if(selected=='line' || selected=='spline' || selected=='area' || selected=='pie' || selected=='donut') {
+      $(`#chart_bar_width_${chart_number}`).addClass("hidden");
+    } else {
+      $(`#chart_bar_width_${chart_number}`).removeClass("hidden");
+    }
+
+    if(selected=='pie' || selected=='donut') {
+      $(`#donut_hole_${chart_number}`).removeClass("hidden");
+    } else {
+      $(`#donut_hole_${chart_number}`).addClass("hidden");
+    }
+
   })
 
+
+// Hide upper and lower bound 
+$('body').on('change','[id^=chart_field_show_bounds_]',function(){
+    var chart_number = this.id.split('_').slice(-1)[0];
+
+    if ($(this).is(":checked")) {
+      $(`#lower_bounds_${chart_number}`).removeClass("hidden");
+      $(`#upper_bounds_${chart_number}`).removeClass("hidden");
+    } else {
+      $(`#lower_bounds_${chart_number}`).addClass("hidden");
+      $(`#upper_bounds_${chart_number}`).addClass("hidden");
+    }
+});
 
 // Hide annotation on bars with categories
 $('body').on('change','[id^=chart_field_graph_]',function(){
