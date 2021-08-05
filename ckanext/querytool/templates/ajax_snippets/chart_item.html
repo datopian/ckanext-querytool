@@ -482,6 +482,11 @@
             {# Donut chart hole #}
             {% if chart %}
               {% set donut_hole = chart.donut_hole or 0.4 %}
+
+              {% if donut_hole == 'None' %}
+                {% set donut_hole = 0.4 %}
+              {% endif %}
+
             {% endif %}
             {% if selected_chart_type in ['line', 'bar', 'hbar', 'sbar', 'shbar'] %}
               {% set donut_option = false %}
@@ -500,6 +505,11 @@
             {# Bar chart width #}
             {% if chart %}
               {% set bar_width = chart.bar_width or 0.5 %}
+
+              {% if bar_width == 'None' %}
+                {% set bar_width = 0.5 %}
+              {% endif %}
+
             {% endif %}
 
             {% if selected_chart_type in ['line', 'donut', 'pie'] %}

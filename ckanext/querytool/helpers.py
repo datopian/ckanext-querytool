@@ -758,7 +758,7 @@ def get_querytool_get_chart_colors(data):
 
 
 def convert_bar_width(bar_width, convert=True):
-    if not bar_width:
+    if not bar_width or bar_width == 'None':
         return
 
     if convert:
