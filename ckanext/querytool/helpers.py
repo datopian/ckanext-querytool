@@ -18,6 +18,7 @@ from ckan.common import c
 from ckan.plugins import toolkit
 from ckan.plugins.toolkit import _
 import ckan.lib.helpers as h
+from ckan import logic
 
 log = logging.getLogger(__name__)
 
@@ -729,19 +730,34 @@ def get_is_admin_or_editor_of_any_group(userobj):
 
 
 def get_edit_permission_for_user(userobj, group):
-    member_list = toolkit.get_action('member_list')({}, {'id': group})
-
-    if c.userobj.id in member_list:
+    if c.userobj.sysadmin:
         return True
-    return False
 
+    try:
+        member_list = toolkit.get_action('member_list')({}, {'id': group})
 
+        if c.userobj.id in member_list:
+            return True
+        return False
+    except logic.NotFound:
+        return False
+
+<<<<<<< HEAD
 def get_user_permission_type(userobj, group):
     if userobj:
         member_list = toolkit.get_action('member_list')({}, {'id': group})
 
         if userobj.sysadmin:
             return 'admin'
+=======
+
+def get_user_permission_type(userobj, group):
+    if c.userobj.sysadmin:
+        return 'admin'
+
+    try:
+        member_list = toolkit.get_action('member_list')({}, {'id': group})
+>>>>>>> 1ed6a3f37427fe177d605e88443f08d39646f982
 
         for m in member_list:
             if userobj.id in m:
@@ -751,6 +767,11 @@ def get_user_permission_type(userobj, group):
                     return 'member'
                 if 'Editor' in m:
                     return 'editor'
+<<<<<<< HEAD
+=======
+    except logic.NotFound:
+        return
+>>>>>>> 1ed6a3f37427fe177d605e88443f08d39646f982
 
 
 def get_all_org_permissions(userobj):
