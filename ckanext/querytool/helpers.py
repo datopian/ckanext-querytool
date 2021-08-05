@@ -742,36 +742,26 @@ def get_edit_permission_for_user(userobj, group):
     except logic.NotFound:
         return False
 
-<<<<<<< HEAD
+
 def get_user_permission_type(userobj, group):
     if userobj:
-        member_list = toolkit.get_action('member_list')({}, {'id': group})
-
-        if userobj.sysadmin:
+        if c.userobj.sysadmin:
             return 'admin'
-=======
 
-def get_user_permission_type(userobj, group):
-    if c.userobj.sysadmin:
-        return 'admin'
+        try:
+            member_list = toolkit.get_action('member_list')({}, {'id': group})
 
-    try:
-        member_list = toolkit.get_action('member_list')({}, {'id': group})
->>>>>>> 1ed6a3f37427fe177d605e88443f08d39646f982
+            for m in member_list:
+                if userobj.id in m:
+                    if 'Admin' in m:
+                        return 'admin'
+                    if 'Member' in m:
+                        return 'member'
+                    if 'Editor' in m:
+                        return 'editor'
 
-        for m in member_list:
-            if userobj.id in m:
-                if 'Admin' in m:
-                    return 'admin'
-                if 'Member' in m:
-                    return 'member'
-                if 'Editor' in m:
-                    return 'editor'
-<<<<<<< HEAD
-=======
-    except logic.NotFound:
-        return
->>>>>>> 1ed6a3f37427fe177d605e88443f08d39646f982
+        except logic.NotFound:
+            return
 
 
 def get_all_org_permissions(userobj):
