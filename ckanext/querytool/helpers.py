@@ -676,7 +676,6 @@ def get_orgs_for_user(userobj, org):
 
 
 def get_all_orgs_for_user(userobj):
-    log.error(userobj)
     if not userobj:
         orgs = get_organizations()
     else:
