@@ -538,6 +538,16 @@ def get_groups():
     return groups
 
 
+def get_organizations():
+    '''
+    Get available Organization from the database
+    return: list of organizations
+    '''
+    groups = _get_action('organization_list', {'all_fields': True})
+
+    return groups
+
+
 def get_group_title(group_name):
     groups = get_groups()
     group_title = None
@@ -651,7 +661,11 @@ def get_user_permission(userobj):
 
 
 def get_orgs_for_user(userobj, org):
-    orgs = _get_action('organization_list_for_user', {'id': userobj.id})
+    if not userobj:
+        orgs = get_organizations()
+    else:
+        orgs = _get_action('organization_list_for_user', {'id': userobj.id})
+
     org_names = [o['name'] for o in orgs]
 
     if org in org_names:
@@ -663,7 +677,7 @@ def get_orgs_for_user(userobj, org):
 def get_all_orgs_for_user(userobj):
     log.error(userobj)
     if not userobj:
-        orgs = _get_action('organization_list_for_user', {})
+        orgs = get_organizations()
     else:
         orgs = _get_action('organization_list_for_user', {'id': userobj.id})
 
