@@ -504,7 +504,7 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
 def get_resource_data(sql_string):
     context = {}
 
-    if get_is_admin_or_editor_of_any_group(c.userobj):
+    if not c.userobj or get_is_admin_or_editor_of_any_group(c.userobj):
         context['ignore_auth'] = True
 
     response = toolkit.get_action('datastore_search_sql')(
@@ -661,7 +661,11 @@ def get_orgs_for_user(userobj, org):
 
 
 def get_all_orgs_for_user(userobj):
-    orgs = _get_action('organization_list_for_user', {'id': userobj.id})
+    log.error(userobj)
+    if not userobj:
+        orgs = _get_action('organization_list_for_user', {})
+    else:
+        orgs = _get_action('organization_list_for_user', {'id': userobj.id})
 
     if orgs:
         return orgs
@@ -688,6 +692,9 @@ def get_datasets_for_user(userobj, package_name):
 
 
 def get_groups_for_user(userobj, group):
+    if not userobj:
+        return False
+
     groups = _get_action('group_list_authz', {'id': userobj.id})
     group_names = [g['name'] for g in groups]
 
@@ -716,19 +723,20 @@ def get_edit_permission_for_user(userobj, group):
 
 
 def get_user_permission_type(userobj, group):
-    member_list = toolkit.get_action('member_list')({}, {'id': group})
+    if userobj:
+        member_list = toolkit.get_action('member_list')({}, {'id': group})
 
-    if c.userobj.sysadmin:
-        return 'admin'
+        if userobj.sysadmin:
+            return 'admin'
 
-    for m in member_list:
-        if userobj.id in m:
-            if 'Admin' in m:
-                return 'admin'
-            if 'Member' in m:
-                return 'member'
-            if 'Editor' in m:
-                return 'editor'
+        for m in member_list:
+            if userobj.id in m:
+                if 'Admin' in m:
+                    return 'admin'
+                if 'Member' in m:
+                    return 'member'
+                if 'Editor' in m:
+                    return 'editor'
 
 
 def get_all_org_permissions(userobj):
