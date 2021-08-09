@@ -333,13 +333,7 @@
             {% else %}
               {% set x_tick_culling_max_option = false %}
             {% endif %}
-
-            {% if selected_chart_type in ['line', 'spline', 'area', 'scatter'] %}
-              {% set x_tick_culling_max_option_hide = '' %}
-            {% else %}
-              {% set x_tick_culling_max_option_hide = 'hidden' %}
-            {% endif %}
-            <div class="control-group {{x_tick_culling_max_option_hide}}" id="max_labels__{{ n }}">
+            <div class="control-group">
               <label class="control-label" for="chart_field_x_tick_culling_max_{{ n }}">{{ _('Max number of text labels') }}</label>
               <div class="controls ">
                 <input id="chart_field_x_tick_culling_max_{{ n }}" type="number" min="0" step="1" name="chart_field_x_tick_culling_max_{{ n }}" placeholder="10" value="{{ x_tick_culling_max }}" {{'disabled' if x_tick_culling_max_option else ''}}>
@@ -491,13 +485,11 @@
             {% endif %}
             {% if selected_chart_type in ['line', 'bar', 'hbar', 'sbar', 'shbar'] %}
               {% set donut_option = false %}
-              {% set hide_donut = 'hidden' %}
             {% else %}
               {% set donut_option = true %}
-              {% set hide_donut = '' %}
             {% endif %}
 
-            <div class="control-group {{hide_donut}}" id="donut_hole_{{n}}">
+            <div class="control-group ">
                <label class="control-label" for="chart_field_donut_hole_{{ n }}">{{ _('Donut hole') }}</label>
                <div class="controls ">
                   <input id="chart_field_donut_hole_{{ n }}"  type="text" name="chart_field_donut_hole_{{ n }}" value="{{ h.convert_bar_width(donut_hole, True)|default (4.0) }}" placeholder="{{ _('Donut hole, default 4.0') }}" {{'' if donut_option else 'disabled'}}>
@@ -512,13 +504,10 @@
 
             {% if selected_chart_type in ['line', 'donut', 'pie'] %}
               {% set bar_width_option = false %}
-              {% set hide_bar_width = 'hidden' %}
             {% else %}
               {% set bar_width_option = true %}
-              {% set hide_bar_width = ''  %}
             {% endif %}
-
-            <div class="control-group {{ hide_bar_width }}" id="chart_bar_width_{{n}}">
+            <div class="control-group ">
                <label class="control-label" for="chart_field_bar_width_{{ n }}">{{ _('Bar width') }}</label>
                <div class="controls ">
                   <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ h.convert_bar_width(bar_width, True)|default (5.0)}}" placeholder="{{ _('Width of bar, default 5.0') }}" {{'' if bar_width_option else 'disabled'}}>
@@ -582,13 +571,8 @@
 
             {# {% if selected_chart_type in ['bar', 'hbar', 'sbar', 'shbar', 'line', 'spline', 'area', 'scatter'] %} #}
 
-            {% if show_bounds == false %} 
-              {% set hide_bounds = 'hidden' %}
-            {% else %}
-              {% set hide_bounds = '' %}
-            {% endif %}
             {# Upper bounds #}
-            <div class="control-group control-select {{hide_bounds}}" id="lower_bounds_{{n}}">
+            <div class="control-group control-select">
               <label class="control-label" for="chart_field_lower_bounds_{{ n }}">{{ _('Lower bounds') }}</label>
               <div class="controls ">
                 <select id="chart_field_lower_bounds_{{ n }}" name="chart_field_lower_bounds_{{ n }}">
@@ -601,7 +585,7 @@
             </div>
 
             {# Lower bounds #}
-            <div class="control-group control-select {{hide_bounds}}" id="upper_bounds_{{n}}">
+            <div class="control-group control-select">
               <label class="control-label" for="chart_field_upper_bounds_{{ n }}">{{ _('Upper bounds') }}</label>
               <div class="controls ">
                 <select id="chart_field_upper_bounds_{{ n }}" name="chart_field_upper_bounds_{{ n }}">
