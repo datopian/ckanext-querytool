@@ -430,7 +430,7 @@ class QueryToolController(base.BaseController):
 
                     bar_width = data.get('chart_field_bar_width_{}'.format(id))
 
-                    if not bar_width:
+                    if not bar_width or bar_width == 'None':
                         visualization['bar_width'] = \
                             data.get('chart_field_bar_width_{}'.format(id))
                     else:
@@ -439,12 +439,9 @@ class QueryToolController(base.BaseController):
                                 'chart_field_bar_width_{}'.format(id))) / 10, 2
                             ))
 
-                    visualization['donut_hole'] = \
-                        data.get('chart_field_donut_hole_{}'.format(id))
-
                     donut_hole = data.get('chart_field_donut_hole_{}'.format(id))
 
-                    if not donut_hole:
+                    if not donut_hole or donut_hole == 'None':
                         visualization['donut_hole'] = \
                             data.get('chart_field_donut_hole_{}'.format(id))
                     else:
