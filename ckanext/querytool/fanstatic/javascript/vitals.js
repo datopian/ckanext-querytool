@@ -766,11 +766,19 @@ $(document).ready(function(){
       $(`#chart_field_x_label_hide_${chart_number}`).attr("disabled");
       $(`#chart_field_sort_${chart_number}`).attr('disabled', 'true');
       $(`#chart_field_x_ticks_format_${chart_number}`).attr('disabled', 'true');
+
+      $(`#show_bounds_checkbox_${chart_number}`).addClass("hidden");
+      $(`#lower_bounds_${chart_number}`).addClass("hidden");
+      $(`#upper_bounds_${chart_number}`).addClass("hidden");
     } else {
       $(`#chart_field_x_label_${chart_number}`).removeAttr("disabled");
       $(`#chart_field_x_label_hide_${chart_number}`).removeAttr("disabled");
       $(`#chart_field_sort_${chart_number}`).removeAttr('disabled');
       $(`#chart_field_x_ticks_format_${chart_number}`).removeAttr('disabled');
+
+      $(`#show_bounds_checkbox_${chart_number}`).removeClass("hidden");
+      $(`#lower_bounds_${chart_number}`).addClass("hidden");
+      $(`#upper_bounds_${chart_number}`).addClass("hidden");
     }
 
 

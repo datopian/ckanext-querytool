@@ -571,7 +571,15 @@
               {% set show_bounds = chart.show_bounds %}
             {% endif %}
 
-            <div class="control-group ">
+
+            {% if selected_chart_type in ['bar', 'hbar', 'sbar', 'shbar', 'line', 'spline', 'area', 'scatter'] %} 
+              {% set hide_bounds = '' %}
+            {% else %}
+              {% set hide_bounds = 'hidden' %}
+            {% endif %}
+            {# Upper bounds #}
+
+            <div class="control-group {{hide_bounds}}" id="show_bounds_checkbox_{{n}}">
                <label class="control-label" for="chart_field_show_bounds_{{ n }}">{{ _('Show bounds') }}</label>
                <div class="controls ">
                   <input id="chart_field_show_bounds_{{ n }}" type="checkbox" name="chart_field_show_bounds_{{ n }}" value="{{ show_bounds }}"{% if show_bounds=='false' %}{% else %}checked{% endif %}>
@@ -580,12 +588,6 @@
 
             {# {% if selected_chart_type in ['bar', 'hbar', 'sbar', 'shbar', 'line', 'spline', 'area', 'scatter'] %} #}
 
-            {% if show_bounds == false %} 
-              {% set hide_bounds = 'hidden' %}
-            {% else %}
-              {% set hide_bounds = '' %}
-            {% endif %}
-            {# Upper bounds #}
             <div class="control-group control-select {{hide_bounds}}" id="lower_bounds_{{n}}">
               <label class="control-label" for="chart_field_lower_bounds_{{ n }}">{{ _('Lower bounds') }}</label>
               <div class="controls ">
