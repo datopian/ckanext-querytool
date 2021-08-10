@@ -586,7 +586,9 @@
                </div>
             </div>
 
-            {# {% if selected_chart_type in ['bar', 'hbar', 'sbar', 'shbar', 'line', 'spline', 'area', 'scatter'] %} #}
+            {% if selected_chart_type in ['bar', 'hbar', 'sbar', 'shbar', 'line', 'spline', 'area', 'scatter'] and show_bounds=='false' %}
+              {% set hide_bounds = 'hidden' %}
+            {% endif %}
 
             <div class="control-group control-select {{hide_bounds}}" id="lower_bounds_{{n}}">
               <label class="control-label" for="chart_field_lower_bounds_{{ n }}">{{ _('Lower bounds') }}</label>

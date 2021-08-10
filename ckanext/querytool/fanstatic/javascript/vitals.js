@@ -767,20 +767,31 @@ $(document).ready(function(){
       $(`#chart_field_sort_${chart_number}`).attr('disabled', 'true');
       $(`#chart_field_x_ticks_format_${chart_number}`).attr('disabled', 'true');
 
-      $(`#show_bounds_checkbox_${chart_number}`).addClass("hidden");
-      $(`#lower_bounds_${chart_number}`).addClass("hidden");
-      $(`#upper_bounds_${chart_number}`).addClass("hidden");
     } else {
       $(`#chart_field_x_label_${chart_number}`).removeAttr("disabled");
       $(`#chart_field_x_label_hide_${chart_number}`).removeAttr("disabled");
       $(`#chart_field_sort_${chart_number}`).removeAttr('disabled');
       $(`#chart_field_x_ticks_format_${chart_number}`).removeAttr('disabled');
 
+      
+    }
+
+    //Hide bounds on Pie and Donut
+    if(selected =='bar' || selected=='hbar' || selected=='sbar' || selected=='shbar' || selected == 'line' || selected == 'spline' || selected == 'area' || selected == 'scatter') {
       $(`#show_bounds_checkbox_${chart_number}`).removeClass("hidden");
+      if($(`#chart_field_show_bounds_${chart_number}`).is(":checked")) {
+        $(`#lower_bounds_${chart_number}`).removeClass("hidden");
+        $(`#upper_bounds_${chart_number}`).removeClass("hidden");
+      } else {
+        $(`#show_bounds_checkbox_${chart_number}`).removeClass("hidden");
+        $(`#lower_bounds_${chart_number}`).addClass("hidden");
+        $(`#upper_bounds_${chart_number}`).addClass("hidden");
+      }
+    } else {
+      $(`#show_bounds_checkbox_${chart_number}`).addClass("hidden");
       $(`#lower_bounds_${chart_number}`).addClass("hidden");
       $(`#upper_bounds_${chart_number}`).addClass("hidden");
     }
-
 
     //Hide Max number of text labels
     if(selected=='line' || selected=='spline' || selected=='area' || selected=='scatter') {
