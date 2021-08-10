@@ -90,7 +90,7 @@
             <p class="muted">{{ h.markdown_extract(querytool.description, extract_length=150) }}</p>
             <p>{{_('Used dataset:')}} <a href="{{ h.url_for(controller='package', action='read', id=querytool.dataset_name) }}">{{ querytool.dataset_name }}</a></p>
             <p>{{_('Type:')}} <span class="text-primary">{{ querytool.type|capitalize }}</span></p>
-          </div>
+          
           <ul class="inline query-actions">
             {% set user_permission = h.get_groups_for_user(c.userobj, querytool.group) %}
             {% set user_type = h.get_user_permission_type(c.userobj, querytool.group) %}
@@ -107,6 +107,7 @@
               <li><a class="btn" href="{{ h.url_for('querytool_public_read', name=querytool.name) }}" type="submit" name="view"><span class="fa fa-eye" aria-hidden="true"></span> {{ _('View') }}</a></li>
             {% endif %}
           </ul>
+          </div>
         </div>
       {% endif %}
     {% endfor %}
