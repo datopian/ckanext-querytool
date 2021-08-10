@@ -652,6 +652,9 @@ def get_all_reports():
 
 
 def get_user_permission(userobj):
+    if not userobj:
+        return True
+
     org = _get_action('organization_list_for_user', {'id': userobj.id})
     group = _get_action('group_list_authz', {'id': userobj.id})
 
@@ -693,7 +696,7 @@ def get_datasets_for_user(userobj, package_name):
     package = _get_action('package_show', {'name_or_id': package_name})
     org_access = get_orgs_for_user(userobj, package['organization']['name'])
 
-    if org_access or userobj.sysadmin:
+    if org_access or (userobj and userobj.sysadmin):
         return True
 
     for group in package.get('groups'):
@@ -729,8 +732,9 @@ def get_is_admin_or_editor_of_any_group(userobj):
 
 
 def get_edit_permission_for_user(userobj, group):
-    if c.userobj.sysadmin:
-        return True
+    if c.userobj:
+        if c.userobj.sysadmin:
+            return True
 
     try:
         member_list = toolkit.get_action('member_list')({}, {'id': group})
@@ -743,7 +747,7 @@ def get_edit_permission_for_user(userobj, group):
 
 
 def get_user_permission_type(userobj, group):
-    if userobj:
+    if c.userobj:
         if c.userobj.sysadmin:
             return 'admin'
 
@@ -751,7 +755,7 @@ def get_user_permission_type(userobj, group):
             member_list = toolkit.get_action('member_list')({}, {'id': group})
 
             for m in member_list:
-                if userobj.id in m:
+                if c.userobj.id in m:
                     if 'Admin' in m:
                         return 'admin'
                     if 'Member' in m:
