@@ -501,7 +501,7 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
     return map_data
 
 
-@functools32.lru_cache(maxsize=128)
+# @functools32.lru_cache(maxsize=128)
 def get_resource_data(sql_string):
     context = {}
 

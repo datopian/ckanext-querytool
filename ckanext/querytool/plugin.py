@@ -236,11 +236,12 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     # IActions
 
     def get_actions(self):
+        # Disable lru_cache
         module_root = 'ckanext.querytool.logic.action'
         action_functions = h._get_functions(module_root)
-        action_functions['resource_delete'] = actions.resource_delete
-        action_functions['resource_patch'] = actions.resource_patch
-        action_functions['resource_update'] = actions.resource_update
+        # action_functions['resource_delete'] = actions.resource_delete
+        # action_functions['resource_patch'] = actions.resource_patch
+        # action_functions['resource_update'] = actions.resource_update
         return action_functions
 
     # IConfigurable
