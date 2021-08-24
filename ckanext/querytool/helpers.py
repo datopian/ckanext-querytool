@@ -694,7 +694,10 @@ def get_organization(org_id):
 
 def get_datasets_for_user(userobj, package_name):
     package = _get_action('package_show', {'name_or_id': package_name})
-    org_access = get_orgs_for_user(userobj, package['organization']['name'])
+    org_access = None
+
+    if package.get('organization'):
+        org_access = get_orgs_for_user(userobj, package['organization']['name'])
 
     if org_access or (userobj and userobj.sysadmin):
         return True
