@@ -66,6 +66,7 @@ Example usage:
   {% set current_organization = h.get_organization(data.get('owner_org')) %}
   {% set org_ids = [] %}
 
+  {{c.userobj}}
   {% for org in organizations_available %}
     {{ org_ids.append(org['id']) or '' }}
   {% endfor %}

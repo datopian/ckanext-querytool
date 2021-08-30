@@ -11,6 +11,18 @@
 
 <div id="map_item_{{ n }}" class="item map visualization-fields-section">
 <div class="item-wrapper">
+
+  {# Title #}
+  {% if map %}
+    {% set map_title = map.get(map_custom_title) %}
+  {% endif %}
+  <div class="control-group title">
+    <label class="control-label" for="map_custom_title_{{ n }}">{{ _('Title') }}</label>
+    <div class="controls ">
+      <textarea id="map_custom_title_{{ n }}" name="map_custom_title_{{ n }}" placeholder="{{ _('Map title') }}" rows="3">{{ map_title }}</textarea>
+    </div>
+  </div>
+
   {% set resources = h.querytool_get_geojson_resources() %}
   <div class="control-group control-select">
     <label class="control-label" for="map_resource_{{ n }}">{{ _('Map resource') }}</label>

@@ -577,6 +577,8 @@ class QueryToolController(base.BaseController):
                         data['map_resource_{}'.format(id)]
                     map_item['map_title_field'] = \
                         data['map_title_field_{}'.format(id)]
+                    map_item['map_custom_title_field'] = \
+                        data.get('map_custom_title_field_{}'.format(id))
                     map_item['map_key_field'] = \
                         data['map_key_field_{}'.format(id)]
                     map_item['data_key_field'] = \
