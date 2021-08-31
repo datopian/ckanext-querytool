@@ -14,12 +14,43 @@
 
   {# Title #}
   {% if map %}
-    {% set map_title = map.get(map_custom_title) %}
+    {% set map_custom_title = map.map_custom_title_field %}
   {% endif %}
   <div class="control-group title">
-    <label class="control-label" for="map_custom_title_{{ n }}">{{ _('Title') }}</label>
+    <label class="control-label" for="map_custom_title_field_{{ n }}">{{ _('Title') }}</label>
     <div class="controls ">
-      <textarea id="map_custom_title_{{ n }}" name="map_custom_title_{{ n }}" placeholder="{{ _('Map title') }}" rows="3">{{ map_title }}</textarea>
+      <textarea id="map_custom_title_field_{{ n }}" name="map_custom_title_field_{{ n }}" placeholder="{{ _('Map title') }}" rows="3">{{ map_custom_title }}</textarea>
+    </div>
+  </div>
+
+  <div class="control-group title-vars">
+    <div class="controls ">
+      {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
+      {% set filters = filters|sort(attribute='order') %}
+      <select>
+        <option value="" disabled selected>{{_('Add variable to title')}}</option>
+        <optgroup label="{{_('Capitalized')}}">
+          <option value="{measure|capitalize}">{{_('Measure')}}</option>
+          {% for filter in filters %}
+            <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
+          {% endfor %}
+          <option value="{optional_filter|capitalize}">{{_('Optional Filter')}}</option>
+        </optgroup>
+        <optgroup label="{{_('lowercase')}}" class='text-lowercase'>
+          <option value="{measure|lower}">{{_('Measure')}}</option>
+          {% for filter in filters %}
+            <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
+          {% endfor %}
+          <option value="{optional_filter|lower}">{{_('Optional Filter')}}</option>
+        </optgroup>
+      </select>
+
+    </div>
+  </div>
+  <div class="control-group title-help">
+    <div class="controls ">
+      {% set template_tooltip = "<pre><p>" + _('Variables') + "<br>---<br>{measure}<br>{optional_filter}<br>*" + _('use drop-down list to select variables based on application filters') + "</p><p>" + _('Processed variables') + "<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>" + _('etc') + "</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>" + _('Full templates syntax') + "</a></b></p><p class='muted'><b>" + _('Please note:') + " " + "</b>" + _('Single braces \'{}\' are used for variables') + "</p>" %}
+      <span class="editor-info-block">{{_('You can use')}} <a href="#templates" title="" data-trigger="focus" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="{{_('Templates quick reference')}}" data-container="body">{{_('Templates')}}</a> {{_('here')}}</span>
     </div>
   </div>
 
@@ -156,6 +187,7 @@
   {% if map %}
     {% set map_resource=map.map_resource %}
     {% set map_title_field=map.map_title_field %}
+    {% set map_custom_title_field=map.map_custom_title_field %}
     {% set map_key_field=map.map_key_field %}
     {% set data_key_field=map.data_key_field %}
     {% set map_color_scheme=map.map_color_scheme %}
@@ -169,6 +201,7 @@
     measure_label = measure_label,
     map_resource=map_resource,
     map_title_field=map_title_field,
+    map_custom_title_field=map_custom_title_field,
     map_key_field=map_key_field,
     data_key_field=data_key_field,
     sql_string=sql_string,
