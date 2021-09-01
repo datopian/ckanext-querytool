@@ -199,8 +199,11 @@
         {% set count = count + 1 %}
 
       <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %} {% if item.type == 'break_line' %}break_line{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}" id="{{ secondViz }}">
-        {% if item.type != 'table' %}
+        {% if (item.type != 'table') and (item.type !='map') %}
           <h3 id="item-title-{{chart_id}}">{{ item.title }}</h3>
+        {% endif %}
+        {% if item.type == 'map' %}
+          <h3 id="item-title-{{chart_id}}">{{ item.map_custom_title_field }}</h3>
         {% endif %}
         
         {% if item.type == 'chart'  %}

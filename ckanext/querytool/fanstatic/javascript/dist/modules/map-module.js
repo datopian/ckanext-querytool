@@ -1409,6 +1409,34 @@
             this.info.addTo(this.map);
         },
         initializeMarkers: function (t) {
+          //Custom solution 
+          var queryFilters = [];
+          if (this.options.info_query_filters) {
+              if(this.options.info_query_filters === true) {
+                  queryFilters = [];
+              } else {
+                  queryFilters = this.options.info_query_filters;
+              }
+          }
+
+          var optionalFilterName = (this.options.filter_name === true) ? '' : this.options.filter_name;
+          var optionalFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
+          var optionalFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
+          var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
+          
+
+          //var dynamicTitle = this.options.map_custom_title_field;
+          var dynamicTitle = this.renderChartTitle(this.options.map_custom_title_field,{
+            measure: {name: this.options.y_axis, alias: this.options.measure_label},
+            filters: queryFilters,
+            optionalFilter: optionalFilter,
+          })
+          console.log(dynamicTitle);
+          var title_id = this.el.context.parentElement.children[0].id;
+          if(title_id){
+            document.getElementById(title_id).innerHTML =  dynamicTitle;
+          }
+
           var e = L.icon({
               iconUrl: "/base/images/marker-icon.png",
               shadowUrl: "/base/images/marker-shadow.png",
@@ -1481,6 +1509,23 @@
         teardown: function () {
           this.sandbox.unsubscribe("querytool:updateMaps", this.onPropertyChange.bind(this));
         },
+        renderChartTitle: function (title, options) {
+
+          // Configure nunjucks
+          var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+
+          // Prepare data
+          var data = {measure: options.measure.alias};
+          for (let filter of options.filters) data[filter.slug] = filter.value;
+          if (options.optionalFilter) data.optional_filter = options.optionalFilter.value;
+
+          // Render and return
+          try {
+              return env.renderString(title, data);
+          } catch (error) {
+              return title;
+          }
+        }
       };
     });
   },
