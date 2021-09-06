@@ -631,9 +631,10 @@ $(document).ready(function(){
       }
     }
 
-
+    
     //Take screenshot
-    $(".scrBtn").click(function(){ 
+    $(".scrBtn").click(function(event){ 
+      event.preventDefault();
       var chartId= $(this).attr("data-chartId")
       setTimeout(function(){ 
         html2canvas(document.querySelector(chartId)).then(function(canvas) {
@@ -642,10 +643,7 @@ $(document).ready(function(){
       }, 100);
 
     });
-    
-
-    
-});
+  });
 
 
   $(document).ready(function(){
@@ -1031,3 +1029,9 @@ $(document).ready(function(){
     disableBounds('lower', selected, chart_number);
   })
 });
+
+//Hide config inputs
+$("#field-ckan-homepage-style").closest('.control-group').hide();
+$("#field-ckan-site-intro-text").closest('.control-group').hide();
+$("#field-ckan-site-about").closest('.control-group').hide();
+
