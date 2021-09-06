@@ -205,6 +205,7 @@
         {% if item.type == 'map' %}
           <h3 id="item-title-{{chart_id}}">{{ item.map_custom_title_field }}</h3>
         {% endif %}
+
         
         {% if item.type == 'chart'  %}
            {% if item.filter_visibility == 'public'  %}
@@ -320,6 +321,8 @@
             filter_value=item.filter_value
           %}
         {% endif %}
+        <button class="btn btn-round imgBtn scrBtn" data-chartId=".chart-{{chart_id}}">Export <img src="/base/images/share.svg" width="15"> </button>
+
         {% if item.type == 'table'  %}
          {% if item.filter_visibility == 'public'  %}
             {% set table_filter_id = h.querytool_get_uuid() %}

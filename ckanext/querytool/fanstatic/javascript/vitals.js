@@ -631,9 +631,10 @@ $(document).ready(function(){
       }
     }
 
-
+    
     //Take screenshot
-    $(".scrBtn").click(function(){ 
+    $(".scrBtn").click(function(event){ 
+      event.preventDefault();
       var chartId= $(this).attr("data-chartId")
       setTimeout(function(){ 
         html2canvas(document.querySelector(chartId)).then(function(canvas) {
@@ -642,10 +643,7 @@ $(document).ready(function(){
       }, 100);
 
     });
-    
-
-    
-});
+  });
 
 
   $(document).ready(function(){
