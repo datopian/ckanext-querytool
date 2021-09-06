@@ -552,7 +552,7 @@
             <div class="control-group ">
                <label class="control-label" for="chart_field_show_annotations_{{ n }}">{{ _('Show annotations') }}</label>
                <div class="controls ">
-                  <input id="chart_field_show_annotations_{{ n }}" type="checkbox" name="chart_field_show_annotations_{{ n }}" value="{{ show_annotations }}"{% if show_annotations=='false' %}{% else %}checked{% endif %}>
+                  <input id="chart_field_show_annotations_{{ n }}" type="checkbox" name="chart_field_show_annotations_{{ n }}" value="{{ show_annotations }}" {% if show_annotations=='true' %}checked{% endif %}>
                </div>
             </div>
 
@@ -582,7 +582,7 @@
             <div class="control-group {{hide_bounds}}" id="show_bounds_checkbox_{{n}}">
                <label class="control-label" for="chart_field_show_bounds_{{ n }}">{{ _('Show bounds') }}</label>
                <div class="controls ">
-                  <input id="chart_field_show_bounds_{{ n }}" type="checkbox" name="chart_field_show_bounds_{{ n }}" value="{{ show_bounds }}"{% if show_bounds=='false' %}{% else %}checked{% endif %}>
+                  <input id="chart_field_show_bounds_{{ n }}" type="checkbox" name="chart_field_show_bounds_{{ n }}" value="{{ show_bounds }}" {% if show_bounds=='true' %}checked{% endif %}>
                </div>
             </div>
 
