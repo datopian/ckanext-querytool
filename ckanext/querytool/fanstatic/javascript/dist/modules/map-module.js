@@ -1424,6 +1424,7 @@
           var optionalFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
           var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
           
+          console.log(optionalFilter)
 
           //var dynamicTitle = this.options.map_custom_title_field;
           var dynamicTitle = this.renderChartTitle(this.options.map_custom_title_field,{
@@ -1431,9 +1432,8 @@
             filters: queryFilters,
             optionalFilter: optionalFilter,
           })
-          console.log(dynamicTitle);
           var title_id = this.el.context.parentElement.children[0].id;
-          if(title_id){
+          if(title_id && dynamicTitle != true){
             document.getElementById(title_id).innerHTML =  dynamicTitle;
           }
 
@@ -1517,7 +1517,7 @@
           // Prepare data
           var data = {measure: options.measure.alias};
           for (let filter of options.filters) data[filter.slug] = filter.value;
-          if (options.optionalFilter) data.optional_filter = options.optionalFilter.value;
+          if (options.optionalFilter) data.optional_filter = options.optionalFilter.value.toString();
 
           // Render and return
           try {
