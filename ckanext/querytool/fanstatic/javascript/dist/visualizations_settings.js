@@ -1342,7 +1342,12 @@
             $('body').on('change',".title-vars select", function(t){
                 var e = $(t.target),
                     i = e.closest(".item-wrapper").find(".control-group.title textarea");
-                i.val(i.val() + e.val()), e.val("")
+
+                    if(e.val() != null) {
+                        i.val(i.val() + e.val()), e.val("")
+                    } else {
+                        i.val(i.val()), e.val("")
+                    }
             })
 
             

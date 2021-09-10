@@ -413,7 +413,7 @@ ckan.module('querytool-map', function($) {
         // Prepare data
         var data = {measure: options.measure.alias};
         for (let filter of options.filters) data[filter.slug] = filter.value;
-        if (options.optionalFilter) data.optional_filter = options.optionalFilter.value;
+        if (options.optionalFilter) data.optional_filter = options.optionalFilter.value.toString();
     
         // Render and return
         try {
