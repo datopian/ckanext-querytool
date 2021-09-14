@@ -1040,13 +1040,14 @@ $("#field-ckan-site-about").closest('.control-group').hide();
 $(document).ready(function(){
   $('.textbox').each(function(){
     var content = $(this).html();
+    var measure = $(this).attr("data-measure");
     var queryFilters = [];
     var optionalFilter = undefined;
     
     
     //var dynamicTitle = this.options.map_custom_title_field;
     var dynamicTitle = renderChartTitle(content,{
-      measure: {name: "Metric", alias: "Metric"},
+      measure: {name: measure, alias: measure},
       filters: queryFilters,
       optionalFilter: optionalFilter,
     })

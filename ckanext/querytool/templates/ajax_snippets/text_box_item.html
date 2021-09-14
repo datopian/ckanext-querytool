@@ -13,6 +13,7 @@
         <textarea id="text_box_description_{{ n }}" name="text_box_description_{{ n }}" cols="20" rows="5" placeholder="Description">{{ text_description }}</textarea>
         <div class="control-group title-vars">
           <div class=" ">
+            {{public_main_filters}}
             {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
             {% set filters = filters|sort(attribute='order') %}
             <select>
