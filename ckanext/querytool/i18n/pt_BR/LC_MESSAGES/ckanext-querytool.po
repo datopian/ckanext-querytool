@@ -415,8 +415,8 @@ msgid "X-axis"
 msgstr "Eixo X"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
-msgid "X axis sorting"
-msgstr "Classificação do eixo X"
+msgid "Data sorting"
+msgstr "Classificação de dados"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
 msgid "Label orientation"

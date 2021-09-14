@@ -413,8 +413,8 @@ msgid "X-axis"
 msgstr "X轴"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
-msgid "X axis sorting"
-msgstr "X轴分类"
+msgid "Data sorting"
+msgstr "数据排序"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
 msgid "Label orientation"
