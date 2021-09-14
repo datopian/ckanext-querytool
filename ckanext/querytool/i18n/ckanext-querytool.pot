@@ -403,7 +403,7 @@ msgid "X-axis"
 msgstr ""
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
-msgid "X axis sorting"
+msgid "Data sorting"
 msgstr ""
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
