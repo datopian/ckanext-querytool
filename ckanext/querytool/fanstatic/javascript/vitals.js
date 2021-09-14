@@ -1052,7 +1052,7 @@ $(document).ready(function(){
       measure: {name: measure, alias: measure},
       filters: queryFilters,
       optionalFilter: optionalFilter,
-    })
+    });
     $(this).html(dynamicTitle);
   })
  });
