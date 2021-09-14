@@ -279,7 +279,7 @@
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
-          <div class="item-content"  id="textboxone">
+          <div class="item-content textbox"  id="textbox-{{chart_id}}">
             {{ h.render_markdown(h.get_translated(item, 'description'), True, True) }}
           </div>
         {% endif %}
