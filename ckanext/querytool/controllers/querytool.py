@@ -492,10 +492,10 @@ class QueryToolController(base.BaseController):
                         visualization['y_from_zero'] = 'true'
                     else:
                         visualization['y_from_zero'] = 'false'
-                    if 'chart_field_y_percentages_{}'.format(id) in data:
-                        visualization['y_percentages'] = 'true'
+                    if 'chart_field_axis_percentages_{}'.format(id) in data:
+                        visualization['axis_percentages'] = 'true'
                     else:
-                        visualization['y_percentages'] = 'false'
+                        visualization['axis_percentages'] = 'false'
                     if 'chart_field_x_from_zero_{}'.format(id) in data:
                         visualization['x_from_zero'] = 'true'
                     else:

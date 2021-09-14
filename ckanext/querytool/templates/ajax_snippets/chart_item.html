@@ -418,22 +418,6 @@
                </div>
             </div>
 
-            {# Y-axis percentages #}
-            {% if chart %}
-              {% set y_percentages = chart.y_percentages %}
-            {% endif %}
-            {% if selected_chart_type in ['pie', 'donut', 'sbar', 'shbar'] %}
-              {% set show_y_percentages = false %}
-            {% else %}
-              {% set show_y_percentages = true %}
-            {% endif %}
-            <div class="control-group ">
-               <label class="control-label" for="chart_field_y_percentages_{{ n }}">{{ _('Use percentage range (0-100)') }}</label>
-               <div class="controls ">
-                  <input id="chart_field_y_percentages_{{ n }}" type="checkbox" name="chart_field_y_percentages_{{ n }}" value="{{ y_percentages }}" {% if y_percentages=='true' %}checked{% endif %}>
-               </div>
-            </div>
-
             {# Y-axis label format #}
             {% if chart and chart.tick_count%}
               {% set ticks_formats = h.queytool_get_charts_data_formats(5) %}
@@ -572,6 +556,7 @@
                </div>
             </div>
 
+
             {# Show values as percentages (pie and donut charts only) #}
             {% if chart %}
               {% set show_labels_as_percentages = chart.show_labels_as_percentages %}
@@ -632,6 +617,21 @@
             </div>
             {# {% endif %} #}
 
+            {# Axis percentages #}
+            {% if chart %}
+              {% set axis_percentages = chart.axis_percentages %}
+            {% endif %}
+            {% if selected_chart_type in ['pie', 'donut', 'sbar', 'shbar'] %}
+              {% set show_axis_percentages = false %}
+            {% else %}
+              {% set show_axis_percentages = true %}
+            {% endif %}
+            <div class="control-group ">
+               <label class="control-label" for="chart_field_axis_percentages_{{ n }}">{{ _('Use percentage range (0-100)') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_axis_percentages_{{ n }}" type="checkbox" name="chart_field_axis_percentages_{{ n }}" value="{{ axis_percentages }}" {% if axis_percentages=='true' %}checked{% endif %}>
+               </div>
+            </div>
 
             {# X sorting #}
             {% set sort_options = h.querytool_get_chart_sort() %}
@@ -964,7 +964,7 @@
           x_label = x_label,
           x_label_hide = x_label_hide,
           y_from_zero = y_from_zero,
-          y_percentages = y_percentages,
+          axis_percentages = axis_percentages,
           x_from_zero = x_from_zero,
           filter_name=filter_name,
           filter_slug=filter_slug,
