@@ -1839,7 +1839,6 @@
                 var columns = O.data['columns'];
                 var format = this.options.data_format;
                 const dataLabelFormatter = d3.format(format);
-                console.log()
                 
 
                 // check if annotations are turned on or off
