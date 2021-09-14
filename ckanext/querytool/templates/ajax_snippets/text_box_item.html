@@ -15,7 +15,7 @@
         <div class="control-group title-vars">
           <div class=" ">
             {{main_filters}}
-            {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
+            {% set filters = h.querytool_parse_json(info_query_filters or main_filters or '[]') %}
             {% set filters = filters|sort(attribute='order') %}
             <select>
               <option value="" disabled selected>{{_('Add variable to title')}}</option>
