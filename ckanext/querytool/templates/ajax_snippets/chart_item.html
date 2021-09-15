@@ -620,7 +620,7 @@
             {# X sorting #}
             {% set sort_options = h.querytool_get_chart_sort() %}
             <div id="chart_field_sort_div_{{ n }}" class="control-group control-select {% if chart and chart.category_name %}hidden{% endif %}">
-              <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('X axis sorting') }}</label>
+              <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Data sorting') }}</label>
               <div class="controls ">
                 <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}" >
                   {% for sort in sort_options %}
