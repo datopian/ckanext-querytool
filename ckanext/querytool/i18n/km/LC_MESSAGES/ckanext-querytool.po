@@ -413,8 +413,8 @@ msgid "X-axis"
 msgstr "អ័ក្ស X"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
-msgid "X axis sorting"
-msgstr "ការបែងចែកអ័ក្ស X"
+msgid "Data sorting"
+msgstr "ការតម្រៀបទិន្នន័យ"
 
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
 msgid "Label orientation"
