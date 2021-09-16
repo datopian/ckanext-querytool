@@ -1035,3 +1035,17 @@ $("#field-ckan-homepage-style").closest('.control-group').hide();
 $("#field-ckan-site-intro-text").closest('.control-group').hide();
 $("#field-ckan-site-about").closest('.control-group').hide();
 
+$('body').on('click','[id^=data_filter_value_]',function(){
+  var values = []
+  var options = $(this)[0]
+
+  for (let entry in options) {
+    if (!isNaN(parseInt(entry))) {
+      if (values.includes(options[entry].value)) {
+        options[entry].remove()
+      } else {
+        values.push(options[entry].value)
+      }
+    }
+  }
+});
