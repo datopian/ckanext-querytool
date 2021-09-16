@@ -1039,13 +1039,7 @@ $('body').on('click','[id^=data_filter_value_]',function(){
   var values = []
   var options = $(this)[0]
 
-  for (let entry in options) {
-    if (!isNaN(parseInt(entry))) {
-      if (values.includes(options[entry].value)) {
-        options[entry].remove()
-      } else {
-        values.push(options[entry].value)
-      }
-    }
+  if (options[1] !== undefined && options[1].value == options[2].value) {
+    options[2].remove()
   }
 });
