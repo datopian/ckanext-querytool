@@ -1034,3 +1034,4 @@ $(document).ready(function(){
 $("#field-ckan-homepage-style").closest('.control-group').hide();
 $("#field-ckan-site-intro-text").closest('.control-group').hide();
 $("#field-ckan-site-about").closest('.control-group').hide();
+
