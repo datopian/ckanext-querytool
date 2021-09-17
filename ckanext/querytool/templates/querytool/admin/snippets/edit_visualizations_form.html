@@ -103,7 +103,8 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
     measure_label, info_query_filters = data.main_filters, bar_width = data.bar_width,
     donut_hole = data.donut_hole %} {% endif %} {% if
     item.type == 'text_box' %} {% snippet 'ajax_snippets/text_box_item.html', n
-    = item.order, box = item %} {% endif %} {% if item.type == 'image' %} {%
+    = item.order, box = item, main_filters =
+    data.main_filters %} {% endif %} {% if item.type == 'image' %} {%
     snippet 'ajax_snippets/image_item.html', n = item.order, data = item %} {%
     endif %} {% if item.type == 'map' %} {% snippet
     'ajax_snippets/map_item.html', n = item.order, map = item, sql_string =

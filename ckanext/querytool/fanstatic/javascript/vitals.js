@@ -1035,3 +1035,44 @@ $("#field-ckan-homepage-style").closest('.control-group').hide();
 $("#field-ckan-site-intro-text").closest('.control-group').hide();
 $("#field-ckan-site-about").closest('.control-group').hide();
 
+
+//Render chart title for textbox
+$(document).ready(function(){
+  $('.textbox').each(function(){
+    var content = $(this).html();
+    var measure = $(this).attr("data-measure");
+    var queryFilters = $(this).attr("data-filters");
+    queryFilters = JSON.parse(queryFilters);
+    var optionalFilter = undefined;
+    
+    console.log(queryFilters);
+
+    //var dynamicTitle = this.options.map_custom_title_field;
+    var dynamicTitle = renderChartTitle(content,{
+      measure: {name: measure, alias: measure},
+      filters: queryFilters,
+      optionalFilter: optionalFilter,
+    });
+    $(this).html(dynamicTitle);
+  })
+ });
+
+
+function renderChartTitle (title, options) {
+
+  // Configure nunjucks
+  var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+
+  // Prepare data
+  var data = {measure: options.measure.alias};
+  for (let filter of options.filters) data[filter.slug] = filter.value;
+  console.log(options);
+  if (options.optionalFilter) data.optional_filter = options.optionalFilter.value.toString();
+
+  // Render and return
+  try {
+      return env.renderString(title, data);
+  } catch (error) {
+      return title;
+  }
+}
