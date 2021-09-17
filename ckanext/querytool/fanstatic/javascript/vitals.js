@@ -1034,12 +1034,3 @@ $(document).ready(function(){
 $("#field-ckan-homepage-style").closest('.control-group').hide();
 $("#field-ckan-site-intro-text").closest('.control-group').hide();
 $("#field-ckan-site-about").closest('.control-group').hide();
-
-$('body').on('click','[id^=data_filter_value_]',function(){
-  var values = []
-  var options = $(this)[0]
-
-  if (options[1] !== undefined && options[1].value == options[2].value) {
-    options[2].remove()
-  }
-});
