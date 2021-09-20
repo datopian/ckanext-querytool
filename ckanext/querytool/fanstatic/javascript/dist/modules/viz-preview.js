@@ -3091,6 +3091,7 @@
             },
             sortData: function(t, e, n, i) {
                 /*
+                Disable sorting for data with numbers like 1.A 2.B
                 e.forEach(function(t) {
                     isNaN(t[i]) && (t[i] = t[i].replace(/^\d{1,2}\./, ""))
                 })*/
