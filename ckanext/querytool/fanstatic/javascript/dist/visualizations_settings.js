@@ -1188,7 +1188,7 @@
                     xl = $("#chart_field_x_label_" + t[t.length - 1]),
                     xlh = $("#chart_field_x_label_hide_" + t[t.length - 1]),
                     _ = $("#chart_field_y_from_zero_" + t[t.length - 1]),
-                    yp = $("#chart_field_axis_percentages_" + t[t.length - 1]),
+                    yp = $("#chart_field_axis_range_" + t[t.length - 1]),
                     xfz = $("#chart_field_x_from_zero_" + t[t.length - 1]),
                     c = $("#chart_field_y_ticks_format_" + t[t.length - 1]),
                     xf = $("#chart_field_x_ticks_format_" + t[t.length - 1]),

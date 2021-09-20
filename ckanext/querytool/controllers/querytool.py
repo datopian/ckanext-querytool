@@ -492,10 +492,14 @@ class QueryToolController(base.BaseController):
                         visualization['y_from_zero'] = 'true'
                     else:
                         visualization['y_from_zero'] = 'false'
-                    if 'chart_field_axis_percentages_{}'.format(id) in data:
-                        visualization['axis_percentages'] = 'true'
+                    visualization['axis_max'] = \
+                        data.get('chart_field_axis_max_{}'.format(id))
+                    visualization['axis_min'] = \
+                        data.get('chart_field_axis_min_{}'.format(id))
+                    if 'chart_field_axis_range_{}'.format(id) in data:
+                        visualization['axis_range'] = 'true'
                     else:
-                        visualization['axis_percentages'] = 'false'
+                        visualization['axis_range'] = 'false'
                     if 'chart_field_x_from_zero_{}'.format(id) in data:
                         visualization['x_from_zero'] = 'true'
                     else:

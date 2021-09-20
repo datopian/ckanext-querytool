@@ -1037,24 +1037,59 @@ $("#field-ckan-site-about").closest('.control-group').hide();
 
 // Hide axis percentages for unsupported types
 $('body').on('change','[id^=chart_field_graph_]',function(){
-  var selected = $(this).val();
-  var chart_number = this.id.split('_').slice(-1)[0];
-  hideAnnotationCheckbox(selected,chart_number);
-});
-
-$('body').on('change','[id^=chart_field_graph_]',function(){
   var chart_number = this.id.split('_').slice(-1)[0];
   var selected = $(`#chart_field_graph_${chart_number}`).val();
+
   hideAxisPercentagesCheckbox(selected,chart_number);
+  hideAxisMinMax(selected,chart_number);
 });
+
+$('body').on('change','[id^=chart_field_axis_range_]',function(){
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_graph_${chart_number}`).val();
+  var rangeEnabled = this.checked;
+
+  hideAxisMinMax(selected,chart_number,rangeEnabled);
+});
+
+
+//$(document).ready(function(){
+//  $('[id^=chart_field_graph_]').serializeArray().forEach((item, i) => {
+//    var selected = item.value;
+//    var chart_number = i + 1;
+//    var currentChartAxisRangeExists = $(`#chart_field_axis_range_${chart_number}`)
+//
+//    if(!['undefined', undefined].includes(currentChartAxisRangeExists)){
+//      var rangeEnabled = $(`#chart_field_axis_range_${chart_number}`)[0].checked;
+//    } else {
+//      var rangeEnabled = false
+//    }
+//
+//    hideAxisMinMax(selected,chart_number,rangeEnabled)
+//  })
+//});
 
 function hideAxisPercentagesCheckbox(selected,chart_number){
   if(['shbar', 'sbar', 'pie', 'donut'].includes(selected)) {
-    $(`#chart_field_axis_percentages_${chart_number}`).attr('checked', false);
-    $(`#chart_field_axis_percentages_${chart_number}`).hide();
-    $(`label[for=chart_field_axis_percentages_${chart_number}], #chart_field_axis_percentages_${chart_number}`).hide();
+    $(`#chart_field_axis_range_${chart_number}`).attr('checked', false);
+    $(`#chart_field_axis_range_${chart_number}`).hide();
+    $(`label[for=chart_field_axis_range_${chart_number}], #chart_field_axis_range_${chart_number}`).hide();
   } else {
-    $(`#chart_field_axis_percentages_${chart_number}`).show();
-    $(`label[for=chart_field_axis_percentages_${chart_number}], #chart_field_axis_percentages_${chart_number}`).show();
+    $(`#chart_field_axis_range_${chart_number}`).show();
+    $(`label[for=chart_field_axis_range_${chart_number}], #chart_field_axis_range_${chart_number}`).show();
+  }
+};
+
+function hideAxisMinMax(selected,chart_number,rangeEnabled){
+  if(['shbar', 'sbar', 'pie', 'donut'].includes(selected) || rangeEnabled == false) {
+    $(`#chart_field_axis_min_${chart_number}`).hide();
+    $(`label[for=chart_field_axis_min_${chart_number}], #chart_field_axis_min_${chart_number}`).hide();
+    $(`#chart_field_axis_max_${chart_number}`).hide();
+    $(`label[for=chart_field_axis_max_${chart_number}], #chart_field_axis_max_${chart_number}`).hide();
+  } else {
+    $(`#chart_field_axis_min_${chart_number}`).show();
+    $(`label[for=chart_field_axis_min_${chart_number}], #chart_field_axis_min_${chart_number}`).show();
+    $(`#chart_field_axis_max_${chart_number}`).show();
+    $(`label[for=chart_field_axis_max_${chart_number}], #chart_field_axis_max_${chart_number}`).show();
   }
 };
