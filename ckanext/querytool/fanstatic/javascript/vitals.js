@@ -1051,10 +1051,10 @@ $('body').on('change','[id^=chart_field_graph_]',function(){
 function hideAxisPercentagesCheckbox(selected,chart_number){
   if(['shbar', 'sbar', 'pie', 'donut'].includes(selected)) {
     $(`#chart_field_axis_percentages_${chart_number}`).attr('checked', false);
-    $(`#chart_field_axis_percentages_${chart_number}`).attr('disabled', 'true');
+    $(`#chart_field_axis_percentages_${chart_number}`).hide();
     $(`label[for=chart_field_axis_percentages_${chart_number}], #chart_field_axis_percentages_${chart_number}`).hide();
   } else {
-    $(`#chart_field_axis_percentages_${chart_number}`).removeAttr('disabled');
+    $(`#chart_field_axis_percentages_${chart_number}`).show();
     $(`label[for=chart_field_axis_percentages_${chart_number}], #chart_field_axis_percentages_${chart_number}`).show();
   }
 };
