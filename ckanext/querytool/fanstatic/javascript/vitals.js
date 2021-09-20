@@ -1035,7 +1035,7 @@ $("#field-ckan-homepage-style").closest('.control-group').hide();
 $("#field-ckan-site-intro-text").closest('.control-group').hide();
 $("#field-ckan-site-about").closest('.control-group').hide();
 
-// Hide axis percentages for unsupported types
+// Hide axis range for unsupported types
 $('body').on('change','[id^=chart_field_graph_]',function(){
   var chart_number = this.id.split('_').slice(-1)[0];
   var selected = $(`#chart_field_graph_${chart_number}`).val();
