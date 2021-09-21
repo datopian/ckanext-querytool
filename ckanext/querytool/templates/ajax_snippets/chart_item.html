@@ -619,15 +619,11 @@
 
             {# Axis percentages #}
             {% if chart %}
-              {% set show_axis_range = chart.axis_range %}
+              {% set axis_range = chart.axis_range %}
               {% set axis_min = chart.axis_min %}
               {% set axis_max = chart.axis_max %}
             {% endif %}
-            {% if selected_chart_type in ['pie', 'donut', 'sbar', 'shbar'] %}
-              {% set show_axis_range = false %}
-            {% else %}
-              {% set show_axis_range = true %}
-            {% endif %}
+
             <div class="control-group ">
                <label class="control-label" for="chart_field_axis_range_{{ n }}">{{ _('Set axis range') }}</label>
                <div class="controls ">
@@ -635,7 +631,7 @@
                </div>
             </div>
 
-            {% if axis_range %}
+            {% if axis_range=='true' and selected_chart_type not in ['pie', 'donut', 'sbar', 'shbar'] %}
               {% set show_range = '' %}
             {% else %}
               {% set show_range = 'hidden' %}
