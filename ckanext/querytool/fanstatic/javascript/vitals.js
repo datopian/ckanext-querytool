@@ -1052,23 +1052,6 @@ $('body').on('change','[id^=chart_field_axis_range_]',function(){
   hideAxisMinMax(selected,chart_number,rangeEnabled);
 });
 
-
-//$(document).ready(function(){
-//  $('[id^=chart_field_graph_]').serializeArray().forEach((item, i) => {
-//    var selected = item.value;
-//    var chart_number = i + 1;
-//    var currentChartAxisRangeExists = $(`#chart_field_axis_range_${chart_number}`)
-//
-//    if(!['undefined', undefined].includes(currentChartAxisRangeExists)){
-//      var rangeEnabled = $(`#chart_field_axis_range_${chart_number}`)[0].checked;
-//    } else {
-//      var rangeEnabled = false
-//    }
-//
-//    hideAxisMinMax(selected,chart_number,rangeEnabled)
-//  })
-//});
-
 function hideAxisPercentagesCheckbox(selected,chart_number){
   if(['shbar', 'sbar', 'pie', 'donut'].includes(selected)) {
     $(`#chart_field_axis_range_${chart_number}`).attr('checked', false);
@@ -1081,7 +1064,7 @@ function hideAxisPercentagesCheckbox(selected,chart_number){
 };
 
 function hideAxisMinMax(selected,chart_number,rangeEnabled){
-  if(['shbar', 'sbar', 'pie', 'donut'].includes(selected) || rangeEnabled == false) {
+  if(['shbar', 'sbar', 'pie', 'donut'].includes(selected) || [false, undefined].includes(rangeEnabled)) {
     $(`.axis_range_min_${chart_number}`).addClass('hidden');
     $(`.axis_range_max_${chart_number}`).addClass('hidden');
   } else {
