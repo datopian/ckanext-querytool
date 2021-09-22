@@ -1039,9 +1039,10 @@ $("#field-ckan-site-about").closest('.control-group').hide();
 $('body').on('change','[id^=chart_field_graph_]',function(){
   var chart_number = this.id.split('_').slice(-1)[0];
   var selected = $(`#chart_field_graph_${chart_number}`).val();
+  var rangeEnabled = $(`#chart_field_axis_range_${chart_number}`)[0].checked;
 
   hideAxisPercentagesCheckbox(selected,chart_number);
-  hideAxisMinMax(selected,chart_number);
+  hideAxisMinMax(selected,chart_number,rangeEnabled);
 });
 
 $('body').on('change','[id^=chart_field_axis_range_]',function(){
