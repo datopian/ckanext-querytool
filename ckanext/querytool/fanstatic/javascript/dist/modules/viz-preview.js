@@ -3093,7 +3093,6 @@
                 /*
                 Disable sorting for data with numbers like 1.A 2.B*/
                 if(t !== "default") {
-                    console.log(t);
                     e.forEach(function(t) {
                         isNaN(t[i]) && (t[i] = t[i].replace(/^\d{1,2}\./, ""))
                     })
