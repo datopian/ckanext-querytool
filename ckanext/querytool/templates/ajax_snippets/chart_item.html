@@ -282,7 +282,6 @@
                </div>
             </div>
 
-
             {# X-axis label orientation #}
             {% set text_rotation = h.querytool_get_tick_text_rotation() %}
             {% if selected_chart_type in ['pie', 'donut'] %}
@@ -300,6 +299,8 @@
                 </select>
               </div>
             </div>
+
+            
 
             {# X-axis label multiline #}
             {% if chart %}
@@ -369,6 +370,7 @@
         </div>
         <div id="accordion_{{ chart_id }}_y_axis" class="accordion-body collapse">
           <div class="accordion-inner">
+
 
             {# Y-axis title #}
             {% if chart %}
@@ -454,6 +456,18 @@
         <div id="accordion_{{ chart_id }}_graph" class="accordion-body collapse">
           <div class="accordion-inner">
             
+            {# X sorting #}
+            {% set sort_options = h.querytool_get_chart_sort() %}
+            <div id="chart_field_sort_div_{{ n }}" class="control-group control-select {% if chart and chart.category_name %}hidden{% endif %}">
+              <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Data sorting') }}</label>
+              <div class="controls ">
+                <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}" >
+                  {% for sort in sort_options %}
+                  <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{ sort.text }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
 
             {# Data format #}
             {% set data_formats = h.queytool_get_charts_data_formats() %}
@@ -468,19 +482,6 @@
                 <select id="chart_field_data_format_{{ n }}" name="chart_field_data_format_{{ n }}" {{'' if data_formats_option else 'disabled'}}>
                   {% for format in data_formats %}
                   <option value="{{ format.value }}" {% if chart %}{{ 'selected' if format.value == chart.data_format }}{% endif %} >{{ format.text }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
-
-            {# X sorting #}
-            {% set sort_options = h.querytool_get_chart_sort() %}
-            <div id="chart_field_sort_div_{{ n }}" class="control-group control-select {% if chart and chart.category_name %}hidden{% endif %}">
-              <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Data sorting') }}</label>
-              <div class="controls ">
-                <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}" >
-                  {% for sort in sort_options %}
-                  <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{ sort.text }}</option>
                   {% endfor %}
                 </select>
               </div>
@@ -629,18 +630,6 @@
             </div>
             {# {% endif %} #}
 
-            {# X sorting #}
-            {% set sort_options = h.querytool_get_chart_sort() %}
-            <div id="chart_field_sort_div_{{ n }}" class="control-group control-select {% if chart and chart.category_name %}hidden{% endif %}">
-              <label class="control-label" for="chart_field_sort_{{ n }}">{{ _('Data sorting') }}</label>
-              <div class="controls ">
-                <select id="chart_field_sort_{{ n }}" name="chart_field_sort_{{ n }}" >
-                  {% for sort in sort_options %}
-                  <option value="{{ sort.value }}" {% if chart %}{{ 'selected' if sort.value == chart.sort }}{% endif %} >{{ sort.text }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            </div>
 
           </div>
         </div>
