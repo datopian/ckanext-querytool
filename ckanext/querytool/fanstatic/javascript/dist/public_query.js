@@ -967,6 +967,16 @@
                     $.each(t.result, function(t, n) {
                         a != n && $("#" + c).append(new Option(n, n))
                     })
+
+                    // Fix duplicate values when deselecting single options
+                    var firstOption = $("#" + c)[0][1]
+                    var secondOption = $("#" + c)[0][2]
+
+                    if (![firstOption, secondOption].includes(undefined)) {
+                      if (firstOption.value == secondOption.value) {
+                        $("#" + c).find('option:last').remove()
+                      }
+                    }
                 })
             }), n.change(function(t) {
                 var n, e = $(this).attr("id").replace("data_filter_value", "filter_item");

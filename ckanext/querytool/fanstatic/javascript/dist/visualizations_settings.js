@@ -1579,7 +1579,8 @@
                     var i = e.prepend(t);
                     ckan.module.initializeElement(i.find("div[data-module=querytool-map]")[0]), o("map", a), g()
                 }) : "text-box" == t ? i.getTemplate("text_box_item.html", {
-                    number: a
+                    number: a,
+                    main_filters: JSON.stringify(m)
                 }).done(function(t) {
                     e.prepend(t);
                     g()

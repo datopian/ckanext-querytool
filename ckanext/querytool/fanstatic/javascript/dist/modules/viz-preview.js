@@ -2171,6 +2171,7 @@
                             }
                         }
                     } else {
+                        //console.log(categories)
                         var trace = {
                             x: categories,
                             y: columns[0].slice(1),
@@ -2985,7 +2986,7 @@
                 }
 
 
-                console.log(data);
+                //console.log(data);
                 //console.log(O);
                 //console.log(base_info); 
                 //console.log(data)
@@ -3109,11 +3110,14 @@
                 this.sandbox.unsubscribe("querytool:updateCharts", this.updateChart.bind(this))
             },
             sortData: function(t, e, n, i) {
+                /*
+                Disable sorting for data with numbers like 1.A 2.B*/
+                if(t !== "default") {
+                    e.forEach(function(t) {
+                        isNaN(t[i]) && (t[i] = t[i].replace(/^\d{1,2}\./, ""))
+                    })
+                }
                 
-                e.forEach(function(t) {
-                    isNaN(t[i]) && (t[i] = t[i].replace(/^\d{1,2}\./, ""))
-                })
-
                 "asc" === t ? e.sort(function(t, e) {
                     return t[n] - e[n]
                 }) : "desc" === t ? (e.sort(function(t, e) {
@@ -3135,6 +3139,7 @@
                 var n = 0,
                     i = "";
                 return "$" === t ? (n = this.countDecimals(e, 2), i = d3.format("$,." + n + "f")) : "s" === t ? (e = Math.round(10 * e) / 10, i = d3.format(t)) : i = d3.format(t), i(e)
+                
             },
             countDecimals: function(t, e) {
                 return Math.min(10 * t % 1 ? 2 : t % 1 ? 1 : 0, e)
