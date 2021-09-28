@@ -570,6 +570,7 @@
                </div>
             </div>
 
+
             {# Show values as percentages (pie and donut charts only) #}
             {% if chart %}
               {% set show_labels_as_percentages = chart.show_labels_as_percentages %}
@@ -630,6 +631,42 @@
             </div>
             {# {% endif %} #}
 
+            {# Axis percentages #}
+            {% if chart %}
+              {% set axis_range = chart.axis_range %}
+              {% set axis_min = chart.axis_min %}
+              {% set axis_max = chart.axis_max %}
+            {% endif %}
+
+            {% if axis_range=='true' and selected_chart_type not in ['pie', 'donut', 'sbar', 'shbar'] %}
+              {% set show_range = '' %}
+            {% else %}
+              {% set show_range = 'hidden' %}
+            {% endif %}
+
+            <div class="control-group show_axis_range_{{ n }} {{show_range}}">
+               <label class="control-label" for="chart_field_axis_range_{{ n }}">{{ _('Set axis range') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_axis_range_{{ n }}" type="checkbox" name="chart_field_axis_range_{{ n }}" value="{{ axis_range }}" {% if axis_range=='true' %}checked{% endif %}>
+               </div>
+            </div>
+
+            {# Axis range min #}
+            <div class="control-group axis_range_min_{{n}} {{ show_range }}">
+               <label class="control-label" for="chart_field_axis_min_{{ n }}">{{ _('Axis range minimum') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_axis_min_{{ n }}" type="text" name="chart_field_axis_min_{{ n }}" value="{{ axis_min }}" placeholder="{{ _('Axis minimum') }}">
+               </div>
+            </div>
+
+            {# Axis range max #}
+            <div class="control-group axis_range_max_{{n}} {{ show_range }}">
+               <label class="control-label" for="chart_field_axis_max_{{ n }}">{{ _('Axis range maximum') }}</label>
+               <div class="controls ">
+                  <input id="chart_field_axis_max_{{ n }}" type="text" name="chart_field_axis_max_{{ n }}" value="{{ axis_max }}" placeholder="{{ _('Axis maximum') }}">
+               </div>
+            </div>
+            {# {% endif %} #}
 
           </div>
         </div>
@@ -917,6 +954,8 @@
           {% set upper_bounds = chart.upper_bounds %}
           {% set lower_bounds = chart.lower_bounds %}
           {% set show_bounds = chart.show_bounds %}
+          {% set axis_min = chart.axis_min %}
+          {% set axis_max = chart.axis_max %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -967,7 +1006,10 @@
           donut_hole = donut_hole,
           upper_bounds = upper_bounds,
           lower_bounds = lower_bounds,
-          show_bounds = show_bounds
+          show_bounds = show_bounds,
+          axis_range = axis_range,
+          axis_min = axis_min,
+          axis_max = axis_max
       %}
    </div>
 </div>

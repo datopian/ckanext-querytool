@@ -1188,6 +1188,7 @@
                     xl = $("#chart_field_x_label_" + t[t.length - 1]),
                     xlh = $("#chart_field_x_label_hide_" + t[t.length - 1]),
                     _ = $("#chart_field_y_from_zero_" + t[t.length - 1]),
+                    yp = $("#chart_field_axis_range_" + t[t.length - 1]),
                     xfz = $("#chart_field_x_from_zero_" + t[t.length - 1]),
                     c = $("#chart_field_y_ticks_format_" + t[t.length - 1]),
                     xf = $("#chart_field_x_ticks_format_" + t[t.length - 1]),
@@ -1198,7 +1199,7 @@
                     p = $("#chart_field_dynamic_reference_type_" + t[t.length - 1]),
                     h = $("#chart_field_dynamic_reference_factor_" + t[t.length - 1]),
                     m = $("#chart_field_dynamic_reference_label_" + t[t.length - 1]);
-                ["pie", "donut"].includes($(this).val()) ? (r.prop("disabled", !1), n.prop("disabled", !0), a.prop("disabled", !0), o.prop("disabled", !0), l.prop("disabled", !0), xl.prop("disabled", !0), xlh.prop("disabled", !0), _.prop("disabled", !0), xfz.prop("disabled", !0), c.prop("disabled", !0), d.prop("disabled", !0), f.prop("disabled", !0), u.prop("disabled", !0), s.prop("disabled", !0), p.prop("disabled", !0), h.prop("disabled", !0), m.prop("disabled", !0)) : (r.prop("disabled", !0), r.prop("checked", !1), n.prop("disabled", !1), a.prop("disabled", !1), o.prop("disabled", !1), l.prop("disabled", !1), _.prop("disabled", !1), xfz.prop("disabled", !1), c.prop("disabled", !1), xf.prop("disabled", !1), d.prop("disabled", !1), f.prop("disabled", !1), u.prop("disabled", !1), s.prop("disabled", !1), p.prop("disabled", !1), h.prop("disabled", !1), m.prop("disabled", !1))
+                ["pie", "donut"].includes($(this).val()) ? (r.prop("disabled", !1), n.prop("disabled", !0), a.prop("disabled", !0), o.prop("disabled", !0), l.prop("disabled", !0), xl.prop("disabled", !0), xlh.prop("disabled", !0), _.prop("disabled", !0), yp.prop("disabled", !0), xfz.prop("disabled", !0), c.prop("disabled", !0), d.prop("disabled", !0), f.prop("disabled", !0), u.prop("disabled", !0), s.prop("disabled", !0), p.prop("disabled", !0), h.prop("disabled", !0), m.prop("disabled", !0)) : (r.prop("disabled", !0), r.prop("checked", !1), n.prop("disabled", !1), a.prop("disabled", !1), o.prop("disabled", !1), l.prop("disabled", !1), _.prop("disabled", !1), yp.prop("disabled", !1), xfz.prop("disabled", !1), c.prop("disabled", !1), xf.prop("disabled", !1), d.prop("disabled", !1), f.prop("disabled", !1), u.prop("disabled", !1), s.prop("disabled", !1), p.prop("disabled", !1), h.prop("disabled", !1), m.prop("disabled", !1))
                 var q = $("#chart_field_donut_hole_" + t[t.length - 1]);
                 ["pie", "donut"].includes($(this).val()) ? q.prop("disabled", !1) : q.prop("disabled", !0);
                 var w = $("#chart_field_bar_width_" + t[t.length - 1]);
