@@ -3091,11 +3091,13 @@
             },
             sortData: function(t, e, n, i) {
                 /*
-                Disable sorting for data with numbers like 1.A 2.B
-                e.forEach(function(t) {
-                    isNaN(t[i]) && (t[i] = t[i].replace(/^\d{1,2}\./, ""))
-                })*/
-
+                Disable sorting for data with numbers like 1.A 2.B*/
+                if(t !== "default") {
+                    e.forEach(function(t) {
+                        isNaN(t[i]) && (t[i] = t[i].replace(/^\d{1,2}\./, ""))
+                    })
+                }
+                
                 "asc" === t ? e.sort(function(t, e) {
                     return t[n] - e[n]
                 }) : "desc" === t ? (e.sort(function(t, e) {
