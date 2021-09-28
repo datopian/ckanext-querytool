@@ -1423,7 +1423,7 @@
                     r = !0 === this.options.static_reference_columns ? [] : this.options.static_reference_columns,
                     o = this.getStaticReferenceColumn(r, i);
                 !0 === this.options.category_name || this.options.category_name;
-                e && n && (t += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
+                e && n && (t += ' AND ("' + this.options.filter_name.replaceAll('\'', '\'\'') + "\" = '" + this.options.filter_value.replaceAll('\'', '\'\'') + "')");
                 var sql,
                     ub = this.options.upper_bounds,
                     lb = this.options.lower_bounds;
