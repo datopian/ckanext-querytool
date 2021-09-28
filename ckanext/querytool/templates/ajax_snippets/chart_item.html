@@ -638,18 +638,19 @@
               {% set axis_max = chart.axis_max %}
             {% endif %}
 
-            <div class="control-group ">
+            {% if axis_range=='true' and selected_chart_type not in ['pie', 'donut', 'sbar', 'shbar'] %}
+              {% set show_range = '' %}
+            {% else %}
+              {% set show_range = 'hidden' %}
+            {% endif %}
+
+            <div class="control-group show_axis_range_{{ n }} {{show_range}}">
                <label class="control-label" for="chart_field_axis_range_{{ n }}">{{ _('Set axis range') }}</label>
                <div class="controls ">
                   <input id="chart_field_axis_range_{{ n }}" type="checkbox" name="chart_field_axis_range_{{ n }}" value="{{ axis_range }}" {% if axis_range=='true' %}checked{% endif %}>
                </div>
             </div>
 
-            {% if axis_range=='true' and selected_chart_type not in ['pie', 'donut', 'sbar', 'shbar'] %}
-              {% set show_range = '' %}
-            {% else %}
-              {% set show_range = 'hidden' %}
-            {% endif %}
             {# Axis range min #}
             <div class="control-group axis_range_min_{{n}} {{ show_range }}">
                <label class="control-label" for="chart_field_axis_min_{{ n }}">{{ _('Axis range minimum') }}</label>
