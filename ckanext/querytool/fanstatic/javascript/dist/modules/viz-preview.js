@@ -1424,8 +1424,8 @@
                     o = this.getStaticReferenceColumn(r, i);
                 !0 === this.options.category_name || this.options.category_name;
 
-                var tmp_filter_value = this.options.filter_value;
-                var tmp_filter_name = this.options.filter_name;
+                var tmp_filter_value = n;
+                var tmp_filter_name = e;
 
                 if (tmp_filter_value.includes('\'')) {
                   tmp_filter_value = tmp_filter_value.replaceAll('\'', '\'\'')
