@@ -1474,7 +1474,7 @@
                     p = !0 === this.options.dynamic_reference_factor ? "" : this.options.dynamic_reference_factor,
                     h = $("#visualizations-form").data("mainFilters"),
                     _ = !0 === this.options.query_filters ? h : this.options.query_filters,
-                    d = {}
+                    d = {};
                 s && c && (d = {
                     name: s,
                     value: c.replaceAll('&', '\\0026')
