@@ -508,9 +508,14 @@ def get_resource_data(sql_string):
     if not c.userobj or get_is_admin_or_editor_of_any_group(c.userobj):
         context['ignore_auth'] = True
 
+    # We need to un-escape the "&" replacement or else charts won't render
+    if '\\0026' in sql_string:
+        sql_string = sql_string.replace('\\0026', '&')
+
     response = toolkit.get_action('datastore_search_sql')(
         {}, {'sql': sql_string}
     )
+
     records_to_lower = []
     for record in response['records']:
         records_to_lower.append({k.lower(): v for k, v in record.items()})

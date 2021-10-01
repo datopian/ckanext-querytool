@@ -1423,7 +1423,19 @@
                     r = !0 === this.options.static_reference_columns ? [] : this.options.static_reference_columns,
                     o = this.getStaticReferenceColumn(r, i);
                 !0 === this.options.category_name || this.options.category_name;
-                e && n && (t += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
+
+                var tmp_filter_value = n;
+                var tmp_filter_name = e;
+
+                if (tmp_filter_value.includes('\'')) {
+                  tmp_filter_value = tmp_filter_value.replaceAll('\'', '\'\'')
+                }
+
+                if (tmp_filter_value.includes('&')) {
+                  tmp_filter_value = tmp_filter_value.replaceAll('&', '\\0026')
+                }
+
+                e && n && (t += ' AND ("' + tmp_filter_name + "\" = '" + tmp_filter_value + "')");
                 var sql,
                     ub = this.options.upper_bounds,
                     lb = this.options.lower_bounds;
@@ -1465,7 +1477,7 @@
                     d = {};
                 s && c && (d = {
                     name: s,
-                    value: c
+                    value: c.replaceAll('&', '\\0026')
                 }), t("querytool_get_chart_data", {
                     category: n,
                     sql_string: e,
