@@ -1425,16 +1425,17 @@
                 !0 === this.options.category_name || this.options.category_name;
 
                 var tmp_filter_value = this.options.filter_value;
+                var tmp_filter_name = this.options.filter_name;
 
                 if (tmp_filter_value.includes('\'')) {
                   tmp_filter_value = tmp_filter_value.replaceAll('\'', '\'\'')
                 }
 
                 if (tmp_filter_value.includes('&')) {
-                  tmp_filter_value = tmp_filter_value
+                  tmp_filter_value = tmp_filter_value.replaceAll('&', '\\0026')
                 }
 
-                e && n && (t += ' AND ("' + this.options.filter_name + "\" = '" + tmp_filter_value + "')");
+                e && n && (t += ' AND ("' + tmp_filter_name + "\" = '" + tmp_filter_value + "')");
                 var sql,
                     ub = this.options.upper_bounds,
                     lb = this.options.lower_bounds;
@@ -1473,10 +1474,11 @@
                     p = !0 === this.options.dynamic_reference_factor ? "" : this.options.dynamic_reference_factor,
                     h = $("#visualizations-form").data("mainFilters"),
                     _ = !0 === this.options.query_filters ? h : this.options.query_filters,
-                    d = {};
+                    d = {}
+                console.log(e)
                 s && c && (d = {
                     name: s,
-                    value: c
+                    value: c.replaceAll('&', '\\0026')
                 }), t("querytool_get_chart_data", {
                     category: n,
                     sql_string: e,
@@ -1489,6 +1491,7 @@
                     previous_filters: JSON.stringify(_),
                     chart_filter: JSON.stringify(d)
                 }).done(function(t) {
+                    console.log(t)
                     if (t.success) {
                         if (this.fetched_data = t.result, this.y_axis_max = null, this.y_axis_avg = null, this.y_axis_min = null, this.static_reference_value = null, this.dynamic_reference_value = null, n) this.y_axis_max = this.fetched_data.y_axis_max, this.y_axis_avg = this.fetched_data.y_axis_avg, this.y_axis_min = this.fetched_data.y_axis_min, delete this.fetched_data.y_axis_max, delete this.fetched_data.y_axis_avg, delete this.fetched_data.y_axis_min;
                         else {
