@@ -638,10 +638,16 @@
               {% set axis_max = chart.axis_max %}
             {% endif %}
 
-            {% if axis_range=='true' and selected_chart_type not in ['pie', 'donut', 'sbar', 'shbar'] %}
+            {% if selected_chart_type not in ['pie', 'donut', 'sbar', 'shbar'] %}
               {% set show_range = '' %}
             {% else %}
               {% set show_range = 'hidden' %}
+            {% endif %}
+
+            {% if axis_range=='true' and selected_chart_type not in ['pie', 'donut', 'sbar', 'shbar'] %}
+              {% set show_range_options = '' %}
+            {% else %}
+              {% set show_range_options = 'hidden' %}
             {% endif %}
 
             <div class="control-group show_axis_range_{{ n }} {{show_range}}">
@@ -652,7 +658,7 @@
             </div>
 
             {# Axis range min #}
-            <div class="control-group axis_range_min_{{n}} {{ show_range }}">
+            <div class="control-group axis_range_min_{{n}} {{ show_range_options }}">
                <label class="control-label" for="chart_field_axis_min_{{ n }}">{{ _('Axis range minimum') }}</label>
                <div class="controls ">
                   <input id="chart_field_axis_min_{{ n }}" type="text" name="chart_field_axis_min_{{ n }}" value="{{ axis_min }}" placeholder="{{ _('Axis minimum') }}">
@@ -660,7 +666,7 @@
             </div>
 
             {# Axis range max #}
-            <div class="control-group axis_range_max_{{n}} {{ show_range }}">
+            <div class="control-group axis_range_max_{{n}} {{ show_range_options }}">
                <label class="control-label" for="chart_field_axis_max_{{ n }}">{{ _('Axis range maximum') }}</label>
                <div class="controls ">
                   <input id="chart_field_axis_max_{{ n }}" type="text" name="chart_field_axis_max_{{ n }}" value="{{ axis_max }}" placeholder="{{ _('Axis maximum') }}">
