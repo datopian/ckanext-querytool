@@ -71,34 +71,83 @@
 
 
 <style>
+  .popup h2 {
+    font-size:2em;
+  }
+
   .popup {
     background-color:#fff;
-    padding:20px;
+    padding:50px 20px;
     border-radius:4px;
     position:fixed;
     top:20%;
-    min-width:40%;
+    min-width:50%;
     left:50%;
     text-align:center;
     transform: translate(-50%,0);
     z-index:30000;
-    display:none;
   }
   
   .shadow{
     width:100%;
     height:100vh;
-    background-color:rgba(0,0,0,.5);
+    background-color:rgba(161,161,161,.5);
     position:fixed;
     left:0;
     top:0;
     z-index:2000;
-    display:none;
+  }
+
+  .browsers {
+    width:100%;
+  }
+
+  .browser {
+    margin-top:20px;
+    padding:10px;
+    float:left;
+    width:22%;
+  }
+
+  .browser img {
+    width:120px;
+    margin-bottom:20px;
+  }
+
+  .clearfix {
+    clear:both;
   }
 </style>
 <div class="popup" id="iepopup">
-  <h2>Browser not supported</h2>
-  <p>Your browser is outdated. <br/> Please switch to Chrome / Edge / Safari / Firefox.</p>
+  <h2>Unsupported Browser</h2>
+  <br/> 
+  <p>You are using a web browser that is not compatible with certain features in this website. </p>
+  <p>For a full experience it is recommended you upgrade to the latest version of:</p>
+  <br/>
+
+  <div class="browsers">
+    <div class="browser">
+      <img src="/base/images/chrome.png" >
+      <br/>
+      <a href="https://www.google.com/intl/en_ca/chrome/" target="_blank">Chrome</a>
+    </div>
+    <div class="browser">
+      <img src="/base/images/firefox.png" >
+      <br/>
+      <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank">Firefox</a>
+    </div>
+    <div class="browser">
+      <img src="/base/images/safari.png" >
+      <br/>
+      <a href="https://support.apple.com/downloads/safari" target="_blank">Safari</a>
+    </div>
+    <div class="browser">
+      <img src="/base/images/edge.png" >
+      <br/>
+      <a href="https://www.microsoft.com/en-us/edge" target="_blank">Edge</a>
+    </div>
+    <p class="clearfix"></p>
+  </div>
   <br/>
   <button class="btn btn-primary" id="close_popup" onClick="close_popup()">Close</button>
   <br/>
