@@ -112,7 +112,10 @@
 
     <div class="controls-wrap" id="{{ querytool.name }}" >
         <div class="btn-download">
-            <div class="btn-group dropdown">
+
+              {% set show_download = false %}
+              {% if show_download == true %}
+              <div class="btn-group dropdown">
                 <button class="btn btn-round dropdown-toggle" data-toggle="dropdown" href="#">
                   {{ _('Download') }} <img src="/base/images/download.svg" width="15" /> 
                 </button>
@@ -140,7 +143,8 @@
                   </li>
                 </ul>
               </div>
-
+              {% endif %}
+              
               <button class="btn btn-round" href="#embed-{{ querytools[0].name }}" 
               data-module="tool-embed" 
               data-module-id="{{ querytools[0].id }}" >{{ _('Share') }} <img src="/base/images/share.svg" width="15"/> </button>
