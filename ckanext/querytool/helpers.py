@@ -448,7 +448,7 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
 
     geojson_keys = []
     # response = urllib.urlopen(geojson_url)
-    resp = requests.get(geojson_url)
+    resp = requests.get(geojson_url, verify=False)
     # geojson_data = json.loads(response.read())
     geojson_data = resp.json()
 
