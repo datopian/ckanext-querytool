@@ -113,7 +113,7 @@
     <div class="controls-wrap" id="{{ querytool.name }}" >
         <div class="btn-download">
 
-              {% set show_download = false %}
+              {% set show_download = querytool.download_options %}
               {% if show_download == true %}
               <div class="btn-group dropdown">
                 <button class="btn btn-round dropdown-toggle" data-toggle="dropdown" href="#">
