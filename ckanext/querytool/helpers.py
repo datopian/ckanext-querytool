@@ -422,7 +422,7 @@ def get_geojson_resources():
 
 def get_geojson_properties(url):
     # TODO handle if no url
-    resp = requests.get(url)
+    resp = requests.get(url, verify=False)
     geojson = resp.json()
 
     result = []
