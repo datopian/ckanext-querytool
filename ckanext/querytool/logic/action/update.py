@@ -27,6 +27,7 @@ def querytool_update(context, data_dict):
     :param y_axis_columns
     :param selection_label
     :param report_caption
+    :param download_options
     '''
 
     # we need the querytool name in the context for name validation
@@ -60,7 +61,7 @@ def querytool_update(context, data_dict):
              'dataset_name', 'owner_org', 'icon', 'image_url', 'image_display_url',
              'filters', 'sql_string', 'related_querytools',
              'chart_resource', 'y_axis_columns', 'additional_description', 'selection_label',
-             'report_caption']
+             'report_caption', 'download_options']
 
     dataset_name = data.get('dataset_name')
     dataset = _get_action('package_show')(context, {'id': dataset_name})

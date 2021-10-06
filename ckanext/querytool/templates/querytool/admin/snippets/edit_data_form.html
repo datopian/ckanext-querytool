@@ -107,6 +107,17 @@ Example usage:
       </select>
     </div>
   </div>
+
+  <div class="control-group">
+    <label for="field-download" class="control-label">{{ _('Download Options') }}</label>
+    <div class="controls">
+      <select id="field-download" name="download_options">
+        {% for option in [(True, _('Enabled')), (False, _('Disabled'))] %}
+        <option value="{{ option[0] }}" {% if option[0] == data.download_options %}selected="selected"{% endif %}>{{ option[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
   <hr>
   <fieldset id="related_querytools">
     {% if data.related_querytools  %}
