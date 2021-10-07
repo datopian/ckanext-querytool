@@ -294,7 +294,7 @@ def _create_where_clause(filters):
             for idx, _ in enumerate(filters):
                 op = u'='
                 name = _['name']
-                value = _['value']
+                value = _['value'].replace('\'', '\'\'')
 
                 if idx == 0:
                     where_clause = u'WHERE ("{0}" {1} \'{2}\')'.format(
