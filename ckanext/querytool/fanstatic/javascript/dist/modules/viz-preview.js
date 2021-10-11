@@ -2480,6 +2480,7 @@
 
                 if(title_id){
                     document.getElementById(title_id).innerHTML =  w;
+                    document.getElementById(title_id).style.display = "block";
                 }   
 
                 
