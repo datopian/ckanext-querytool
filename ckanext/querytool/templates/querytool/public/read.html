@@ -207,7 +207,7 @@
           <h3 id="item-title-{{chart_id}}" style="display:none">{{ item.title }}</h3>
         {% endif %}
         {% if item.type == 'map' %}
-          <h3 id="item-title-{{chart_id}}">{{ item.map_custom_title_field }}</h3>
+          <h3 id="item-title-{{chart_id}}" style="display:none">{{ item.map_custom_title_field }}</h3>
         {% endif %}
 
         
@@ -369,7 +369,7 @@
           {% set additional_description = h.render_markdown(h.get_translated(item, 'additional_description'), True, True) %}
 
           {% if additional_description != "<p>None</p>" %}
-            <div class='additional_desc' id='item-desc-{{chart_id}}'>{{ additional_description }}</div>
+            <div class='additional_desc' id='item-desc-{{chart_id}}' style="display:none;">{{ additional_description }}</div>
           {% endif %}
           <p class="clearfix"></p>
         {% endif %}
