@@ -2474,6 +2474,7 @@
                     var desc_id = this.el.context.parentElement.querySelector(".additional_desc").id;
                     if(desc_id){
                         document.getElementById(desc_id).innerHTML =  desc;
+                        document.getElementById(desc_id).style.display = "block";
                     }
                 }
                 
