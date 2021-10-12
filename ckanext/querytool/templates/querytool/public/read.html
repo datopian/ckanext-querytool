@@ -286,7 +286,7 @@
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
-          <div class="item-content textbox" data-filters="{{ querytool.public_main_filters }}" data-measure="{{ measure_label }}"  id="textbox-{{chart_id}}">
+          <div class="item-content textbox" style="display:none;" data-filters="{{ querytool.public_main_filters }}" data-measure="{{ measure_label }}"  id="textbox-{{chart_id}}">
             {{ h.render_markdown(h.get_translated(item, 'description'), True, True) }}
           </div>
         {% endif %}

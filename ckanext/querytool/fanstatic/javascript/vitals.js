@@ -1055,6 +1055,7 @@ $(document).ready(function(){
       optionalFilter: optionalFilter,
     });
     $(this).html(dynamicTitle);
+    $(this).css("display","block");
   })
  });
 
