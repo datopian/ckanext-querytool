@@ -3,6 +3,23 @@
 {% block meta %}
   {{ super() }}
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <script>
+    function checkIE() {
+      if (window.document.documentMode) {
+        // Do IE stuff
+        document.getElementById("iepopup").style.display = "block";
+        document.getElementById("ieshadow").style.display = "block"
+      }
+    }
+
+    function close_popup() {
+        document.getElementById("iepopup").style.display = "none";
+        document.getElementById("ieshadow").style.display = "none"
+    }
+
+    window.onload = checkIE;
+  </script>
 {% endblock %}
 
 {% block styles %}
