@@ -1125,7 +1125,7 @@ function hideAxisMinMax(selected,chart_number,rangeEnabled){
 var HtmlSanitizer = new (function () {
 
 	var tagWhitelist_ = {
-		'A': true, 'ABBR': true, 'B': true, 'BLOCKQUOTE': true, 'BODY': true, 'BR': true, 'CENTER': true, 'CODE': true, 'DIV': true, 'EM': true, 'FONT': true,
+		'A': false, 'ABBR': true, 'B': true, 'BLOCKQUOTE': true, 'BODY': true, 'BR': true, 'CENTER': true, 'CODE': true, 'DIV': true, 'EM': true, 'FONT': true,
 		'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HR': true, 'I': true, 'IMG': true, 'LABEL': true, 'LI': true, 'OL': true, 'P': true, 'PRE': true,
 		'SMALL': true, 'SOURCE': true, 'SPAN': true, 'STRONG': true, 'TABLE': true, 'TBODY': true, 'TR': true, 'TD': true, 'TH': true, 'THEAD': true, 'UL': true, 'U': true, 'VIDEO': true
 	};
@@ -1226,8 +1226,10 @@ var HtmlSanitizer = new (function () {
 	this.AllowedSchemas = schemaWhiteList_;
 });
 
-$(document).ready(function(){
-  /* HTML Sanitizer */
-  var html = HtmlSanitizer.SanitizeHtml("<div> hey how are youuuuu <script> Alert('xss!'); </sc" + "ript> </div>");
+
+$("body").on('change', '.textbox_desc', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
   console.log(html);
-})
+});
