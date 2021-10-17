@@ -1227,9 +1227,50 @@ var HtmlSanitizer = new (function () {
 });
 
 
+/* Sanitize HTML */
 $("body").on('change', '.textbox_desc', function(){
   var content = $(this).val();
   var html = HtmlSanitizer.SanitizeHtml(content);
   $(this).val(html);
-  console.log(html);
 });
+
+
+$("body").on('change', '[id^=table_field_title_]', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
+});
+
+$("body").on('change', '[id^=chart_field_title_]', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
+});
+
+$("body").on('change', '[id^=chart_field_desc_]', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
+});
+
+$("body").on('change', '[id^=map_custom_title_field_]', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
+});
+
+$("body").on('change', '[id^=field-description]', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
+});
+
+$("body").on('change', '[id^=field-additional_description]', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
+});
+
+
+
+
