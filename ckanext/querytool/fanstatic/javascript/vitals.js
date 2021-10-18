@@ -1125,7 +1125,7 @@ function hideAxisMinMax(selected,chart_number,rangeEnabled){
 var HtmlSanitizer = new (function () {
 
 	var tagWhitelist_ = {
-		'A': false, 'ABBR': false, 'B': true, 'BLOCKQUOTE': true, 'BODY': false, 'BR': true, 'CENTER': true, 'CODE': false, 'DIV': false, 'EM': false, 'FONT': false,
+		'A': false, 'ABBR': true, 'B': true, 'BLOCKQUOTE': true, 'BODY': true, 'BR': true, 'CENTER': false, 'CODE': false, 'DIV': false, 'EM': true, 'FONT': false,
 		'H1': true, 'H2': true, 'H3': true, 'H4': true, 'H5': true, 'H6': true, 'HR': true, 'I': true, 'IMG': false, 'LABEL': true, 'LI': true, 'OL': true, 'P': true, 'PRE': false,
 		'SMALL': true, 'SOURCE': false, 'SPAN': true, 'STRONG': true, 'TABLE': false, 'TBODY': false, 'TR': false, 'TD': false, 'TH': false, 'THEAD': false, 'UL': true, 'U': true, 'VIDEO': false
 	};
