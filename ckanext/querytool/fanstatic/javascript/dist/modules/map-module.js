@@ -273,7 +273,6 @@ ckan.module('querytool-map', function($) {
         var title_id = this.el.context.parentElement.children[0].id;
         if(title_id && dynamicTitle != true){
           document.getElementById(title_id).innerHTML =  dynamicTitle;
-          document.getElementById(title_id).style.display = "block";
         }
 
           var smallIcon = L.icon({
