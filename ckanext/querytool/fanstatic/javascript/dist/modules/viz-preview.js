@@ -1443,6 +1443,11 @@
                   ub = ''
                   lb = ''
                 }
+                console.log(`ub: ${ub}`)
+                console.log(`lb: ${lb}`)
+                console.log(`e: ${e}`)
+                console.log(`n: ${n}`)
+                console.log(`i: ${i}`)
                 if (o) {
                   if ((!['undefined', 'None', ''].includes(ub) && !['undefined', 'None', ''].includes(lb)) && (typeof ub !== 'boolean' && typeof lb !== 'boolean')) {
                     sql = 'SELECT AVG("' + o + '") as static_reference_column, "' + this.options.x_axis + '", SUM("' + ub + '") as "' + ub.toLowerCase() + '", SUM("' + lb + '") as "' + lb.toLowerCase() + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
@@ -1456,6 +1461,7 @@
                     sql = 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   }
                 }
+                console.log(`sql: ${sql}`)
                 return sql
             },
             "get_resource_datа": function(e) {
