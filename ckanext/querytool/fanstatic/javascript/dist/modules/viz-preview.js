@@ -2474,12 +2474,14 @@
                     var desc_id = this.el.context.parentElement.querySelector(".additional_desc").id;
                     if(desc_id){
                         document.getElementById(desc_id).innerHTML =  desc;
+                        document.getElementById(desc_id).style.display = "block";
                     }
                 }
                 
 
                 if(title_id){
                     document.getElementById(title_id).innerHTML =  w;
+                    document.getElementById(title_id).style.display = "block";
                 }   
 
                 
