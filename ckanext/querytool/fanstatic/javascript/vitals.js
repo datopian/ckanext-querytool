@@ -1117,3 +1117,10 @@ function hideAxisMinMax(selected,chart_number,rangeEnabled){
     $(`.axis_range_max_${chart_number}`).removeClass('hidden');
   }
 };
+
+
+$('body').on('change','.filter-item-value', function(){
+  $(this).tooltip({
+      title: $(".filter-item-value option:selected").val()
+  });
+});
