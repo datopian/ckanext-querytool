@@ -1273,5 +1273,10 @@ $("body").on('change', '[id^=field-additional_description]', function(){
 });
 
 
+$('body').on('change','.filter-item-value', function(){
+  $(this).tooltip({
+      title: $(".filter-item-value option:selected").val()
+  });
+});
 
 
