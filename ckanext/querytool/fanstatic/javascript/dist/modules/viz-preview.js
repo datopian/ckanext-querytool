@@ -1467,7 +1467,7 @@
             "get_resource_datа": function(e) {
                 var n = !0 === this.options.category_name ? "" : this.options.category_name,
                     i = !0 === this.options.x_axis ? "" : this.options.x_axis,
-                    r = !0 === this.options.y_axis ? "" : this.options.y_axis,
+                    r = !0 === this.options.y_axis ? true : this.options.y_axis,
                     ub = !0 === this.options.upper_bounds ? "" : this.options.upper_bounds,
                     lb = !0 === this.options.lower_bounds ? "" : this.options.lower_bounds,
                     o = e.split("FROM")[1].split("WHERE")[0].split('"')[1],
