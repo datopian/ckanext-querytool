@@ -1437,8 +1437,8 @@
 
                 e && n && (t += ' AND ("' + tmp_filter_name + "\" = '" + tmp_filter_value + "')");
                 var sql,
-                    ub = this.options.upper_bounds,
-                    lb = this.options.lower_bounds;
+                    ub = this.options.upper_bounds ? true : this.options.upper_bounds,
+                    lb = this.options.lower_bounds ? true this.options.lower_bounds;
                 if ([ub, lb].includes(i)) {
                   ub = 'true'
                   lb = 'true'
