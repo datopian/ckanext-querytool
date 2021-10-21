@@ -1440,8 +1440,8 @@
                     ub = this.options.upper_bounds,
                     lb = this.options.lower_bounds;
                 if ([ub, lb].includes(i)) {
-                  ub = ''
-                  lb = ''
+                  ub = 'true'
+                  lb = 'true'
                 }
                 console.log(`ub: ${ub}`)
                 console.log(`lb: ${lb}`)
@@ -1468,8 +1468,8 @@
                 var n = !0 === this.options.category_name ? "" : this.options.category_name,
                     i = !0 === this.options.x_axis ? "" : this.options.x_axis,
                     r = !0 === this.options.y_axis ? "" : this.options.y_axis,
-                    ub = !0 === this.options.upper_bounds ? "" : this.options.upper_bounds,
-                    lb = !0 === this.options.lower_bounds ? "" : this.options.lower_bounds,
+                    ub = !0 === this.options.upper_bounds ? "true" : this.options.upper_bounds,
+                    lb = !0 === this.options.lower_bounds ? "true" : this.options.lower_bounds,
                     o = e.split("FROM")[1].split("WHERE")[0].split('"')[1],
                     a = this.options.chart_type,
                     s = !0 === this.options.filter_name ? "" : this.options.filter_name,
