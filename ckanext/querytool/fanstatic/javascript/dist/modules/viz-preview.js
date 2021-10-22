@@ -1461,6 +1461,7 @@
                     sql = 'SELECT "' + this.options.x_axis + '", SUM("' + this.options.y_axis + '") as "' + this.options.y_axis + '"' + t + ' GROUP BY "' + this.options.x_axis + '"';
                   }
                 }
+                console.log(sql)
                 return sql
             },
             "get_resource_datа": function(e) {
@@ -1495,6 +1496,9 @@
                     previous_filters: JSON.stringify(_),
                     chart_filter: JSON.stringify(d)
                 }).done(function(t) {
+                    console.log(`t: ${t}`)
+                    console.log(`t.result: ${t.result}`)
+                    console.log(`SQL_STRING: ${e}`)
                     if (t.success) {
                         if (this.fetched_data = t.result, this.y_axis_max = null, this.y_axis_avg = null, this.y_axis_min = null, this.static_reference_value = null, this.dynamic_reference_value = null, n) this.y_axis_max = this.fetched_data.y_axis_max, this.y_axis_avg = this.fetched_data.y_axis_avg, this.y_axis_min = this.fetched_data.y_axis_min, delete this.fetched_data.y_axis_max, delete this.fetched_data.y_axis_avg, delete this.fetched_data.y_axis_min;
                         else {
