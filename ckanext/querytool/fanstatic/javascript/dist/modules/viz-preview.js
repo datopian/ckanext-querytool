@@ -2701,21 +2701,21 @@
                     base_info.xaxis.rangemode = "tozero"
                 }
 
-                //if (this.options.axis_range ===  true && !['sbar', 'shbar', 'pie', 'donut'].includes(this.options.chart_type)) {
-                //  if ('hbar' == this.options.chart_type) {
-                //    if (['.0%', '.1%', '.2%'].includes(this.options.x_tick_format)) {
-                //      base_info.xaxis.range = [this.options.axis_min / 100, this.options.axis_max / 100]
-                //    } else {
-                //      base_info.xaxis.range = [this.options.axis_min, this.options.axis_max]
-                //    }
-                //  } else {
-                //    if (['.0%', '.1%', '.2%'].includes(this.options.y_tick_format)) {
-                //      base_info.yaxis.range = [this.options.axis_min / 100, this.options.axis_max / 100]
-                //    } else {
-                //      base_info.yaxis.range = [this.options.axis_min, this.options.axis_max]
-                //    }
-                //  }
-                //}
+                if (this.options.axis_range ===  true && !['sbar', 'shbar', 'pie', 'donut'].includes(this.options.chart_type)) {
+                  if ('hbar' == this.options.chart_type) {
+                    if (['.0%', '.1%', '.2%'].includes(this.options.x_tick_format)) {
+                      base_info.xaxis.range = [this.options.axis_min / 100, this.options.axis_max / 100]
+                    } else {
+                      base_info.xaxis.range = [this.options.axis_min, this.options.axis_max]
+                    }
+                  } else {
+                    if (['.0%', '.1%', '.2%'].includes(this.options.y_tick_format)) {
+                      base_info.yaxis.range = [this.options.axis_min / 100, this.options.axis_max / 100]
+                    } else {
+                      base_info.yaxis.range = [this.options.axis_min, this.options.axis_max]
+                    }
+                  }
+                }
 
 //                if (this.options.chart_type === 'bar') {
 //                    base_info.barmode = 'group'
