@@ -1429,7 +1429,7 @@
                 var t = $(".item");
                 $.each(t, function(t, e) {
                     var i = t + 1;
-                    if ((e = $(e)).context.id.indexOf("chart_field") >= 0) {
+                    if ((e = $(e)).context.id.indexOf("chart_field") >= 0) { 
                         var r = e.find("[id*=chart_field_graph_]"),
                             n = e.find("[id*=chart_field_color_]"),
                             dr = e.find("[data-target*=chart_field_color_]"),
@@ -1490,6 +1490,10 @@
                         plotly.attr("id", "chart_field_plotly_" + i), plotly.attr("name", "chart_field_plotly_" + i), plotly_label.attr("id", "chart_field_plotly_label_" + i), plotly_label.attr("name", "chart_field_plotly_label_" + i), donut_hole.attr("id", "chart_field_donut_hole_" + i), donut_hole.attr("name", "chart_field_donut_hole_" + i),
                         bar_width.attr("id", "chart_field_bar_width_" + i), bar_width.attr("name", "chart_field_bar_width_" + i)
                         
+
+                        desc.attr('id', 'chart_field_desc_' + i);
+                        desc.attr('name', 'chart_field_desc_' + i);
+
                         e.find("[id*=chart_field_graph_]").change();
                         
                     } else if (e.context.id.indexOf("text_box") >= 0) {
