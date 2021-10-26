@@ -1482,6 +1482,12 @@
                             D = e.find("[id*=chart_field_sort_]"),
                             V = e.find("[id*=chart_field_sort_div_]"),
                             desc = e.find("[id*=chart_field_desc_]"),
+                            show_bounds = e.find("[id*=chart_field_show_bounds_]"),
+                            lb =  e.find("[id*=lower_bounds_]"),
+                            ub = e.find("[id*=upper_bounds_]"),
+                            lower_bounds = e.find("[id*=chart_field_lower_bounds_]"),
+                            upper_bounds = e.find("[id*=chart_field_upper_bounds_]"),
+                            axis_range = e.find("[id*=chart_field_axis_range_]"),
                             plotly = e.find("[id*=chart_field_plotly_]"),
                             plotly_label = e.find("[id*=chart_field_plotly_label_]"),
                             donut_hole = e.find("[id*=chart_field_donut_hole_]"),
@@ -1493,6 +1499,21 @@
 
                         desc.attr('id', 'chart_field_desc_' + i);
                         desc.attr('name', 'chart_field_desc_' + i);
+
+                        show_bounds.attr('id', 'chart_field_show_bounds_' + i);
+                        show_bounds.attr('name', 'chart_field_show_bounds_' + i);
+
+                        lb.attr('id', 'lower_bounds_' + i);
+                        ub.attr('id', 'upper_bounds_' + i);
+
+                        lower_bounds.attr('id', 'chart_field_lower_bounds_' + i);
+                        lower_bounds.attr('name', 'chart_field_lower_bounds_' + i);
+
+                        upper_bounds.attr('id', 'chart_field_upper_bounds_' + i);
+                        upper_bounds.attr('name', 'chart_field_upper_bounds_' + i);
+
+                        axis_range.attr('id', 'chart_field_axis_range_' + i);
+                        axis_range.attr('name', 'chart_field_axis_range_' + i);
 
                         e.find("[id*=chart_field_graph_]").change();
                         
