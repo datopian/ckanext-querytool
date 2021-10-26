@@ -1273,5 +1273,21 @@ $("body").on('change', '[id^=field-additional_description]', function(){
 });
 
 
+/* Dropdown Filters */
+$(".filter-item-value").hover(function(event) {
+  $.each($(this).find('option'), function(key, value) {
+    $(value).removeClass('active');
+  })
+  $('option:selected').addClass('active');
 
+});
+
+$(".filter-item-value").tooltip({
+  placement: 'right',
+  trigger: 'hover',
+  container: 'body',
+  title: function(e) {
+    return $(this).find('.active').attr('value');
+  }
+});
 
