@@ -1483,11 +1483,17 @@
                             V = e.find("[id*=chart_field_sort_div_]"),
                             desc = e.find("[id*=chart_field_desc_]"),
                             show_bounds = e.find("[id*=chart_field_show_bounds_]"),
+                            show_bounds_label = e.find("label[for*=chart_field_show_bounds_]"),
+                            show_bounds_checkbox = e.find("[id*=show_bounds_checkbox_]"),
                             lb =  e.find("[id*=lower_bounds_]"),
                             ub = e.find("[id*=upper_bounds_]"),
                             lower_bounds = e.find("[id*=chart_field_lower_bounds_]"),
                             upper_bounds = e.find("[id*=chart_field_upper_bounds_]"),
                             axis_range = e.find("[id*=chart_field_axis_range_]"),
+                            show_axis_range = e.find("[id*=show_axis_range_]"),
+                            axis_range_min_id = e.find("[id*=axis_range_min_]"),
+                            axis_range_max_id = e.find("[id*=axis_range_max_]"),
+                            axis_range_label = e.find("label[for*=chart_field_axis_range_]"),
                             plotly = e.find("[id*=chart_field_plotly_]"),
                             plotly_label = e.find("[id*=chart_field_plotly_label_]"),
                             donut_hole = e.find("[id*=chart_field_donut_hole_]"),
@@ -1502,6 +1508,8 @@
 
                         show_bounds.attr('id', 'chart_field_show_bounds_' + i);
                         show_bounds.attr('name', 'chart_field_show_bounds_' + i);
+                        show_bounds_label.attr('for', 'chart_field_show_bounds_' + i);
+                        show_bounds_checkbox.attr('id', 'show_bounds_checkbox_' + i);
 
                         lb.attr('id', 'lower_bounds_' + i);
                         ub.attr('id', 'upper_bounds_' + i);
@@ -1514,6 +1522,10 @@
 
                         axis_range.attr('id', 'chart_field_axis_range_' + i);
                         axis_range.attr('name', 'chart_field_axis_range_' + i);
+                        show_axis_range.attr('id', 'show_axis_range_' + i);
+                        axis_range_label.attr('for', 'chart_field_axis_range_' + i);
+                        axis_range_min_id.attr('id', 'axis_range_min_' + i);
+                        axis_range_max_id.attr('id', 'axis_range_max_' + i);
 
                         e.find("[id*=chart_field_graph_]").change();
                         
