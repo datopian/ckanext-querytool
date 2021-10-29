@@ -1878,11 +1878,11 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                      if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
-                        var x = columns[columns.length - 1].slice(1);
-                      }else{
-                        var x = columns[columns.length - 2].slice(1)
-                      }
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
+                          var x = columns[columns.length - 1].slice(1);
+                        }else{
+                          var x = columns[columns.length - 2].slice(1)
+                        }
                         var tmp ;
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
