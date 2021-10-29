@@ -1878,7 +1878,7 @@
                     var categories = O.axis['x']['categories'];
 
                     if (categories === undefined){
-                        if (typeof columns[columns.length - 1] == 'array' && O.axis['x']){
+                        if (Array.isArray(columns[columns.length - 1]) && O.axis['x']){
                           var x = columns[columns.length - 1].slice(1);
                         }else{
                           var x = columns[columns.length - 2].slice(1)

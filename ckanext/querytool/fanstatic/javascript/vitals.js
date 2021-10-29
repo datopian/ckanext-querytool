@@ -1111,11 +1111,11 @@ function hideAxisPercentagesCheckbox(selected,chart_number){
 
 function hideAxisMinMax(selected,chart_number,rangeEnabled){
   if(['shbar', 'sbar', 'pie', 'donut'].includes(selected) || [false, undefined].includes(rangeEnabled)) {
-    $(`.axis_range_min_${chart_number}`).addClass('hidden');
-    $(`.axis_range_max_${chart_number}`).addClass('hidden');
+    $(`#axis_range_min_${chart_number}`).addClass('hidden');
+    $(`#axis_range_max_${chart_number}`).addClass('hidden');
   } else {
-    $(`.axis_range_min_${chart_number}`).removeClass('hidden');
-    $(`.axis_range_max_${chart_number}`).removeClass('hidden');
+    $(`#axis_range_min_${chart_number}`).removeClass('hidden');
+    $(`#axis_range_max_${chart_number}`).removeClass('hidden');
   }
 };
 
