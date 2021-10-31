@@ -212,6 +212,8 @@
 
         
         {% if item.type == 'chart'  %}
+
+          <p id="loading-{{chart_id}}">Loading...</p>
            {% if item.filter_visibility == 'public'  %}
             {% set chart_filter_id = h.querytool_get_uuid() %}
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
