@@ -2484,7 +2484,12 @@
                     document.getElementById(title_id).style.display = "block";
                 }   
 
-                document.getElementById("loading-"+this.options.chart_id).style.display = "none";
+
+                //Hide loading text
+                if(document.getElementById("loading-"+this.options.chart_id)){
+                    document.getElementById("loading-"+this.options.chart_id).style.display = "none";
+                }
+                
 
                 var q = JSON.parse(JSON.stringify(plotly));
 
