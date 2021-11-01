@@ -1502,7 +1502,15 @@
                         plotly.attr("id", "chart_field_plotly_" + i), plotly.attr("name", "chart_field_plotly_" + i), plotly_label.attr("id", "chart_field_plotly_label_" + i), plotly_label.attr("name", "chart_field_plotly_label_" + i), donut_hole.attr("id", "chart_field_donut_hole_" + i), donut_hole.attr("name", "chart_field_donut_hole_" + i),
                         bar_width.attr("id", "chart_field_bar_width_" + i), bar_width.attr("name", "chart_field_bar_width_" + i)
                         
-
+                        if(nnn[0].value == "2"){
+                            dv[0].classList.add("hidden");
+                            sq[0].classList.remove("hidden");
+                            //alert('seq');
+                        } else {
+                            //alert('diver');
+                            dv[0].classList.remove("hidden");
+                            sq[0].classList.add("hidden");
+                        }
                         desc.attr('id', 'chart_field_desc_' + i);
                         desc.attr('name', 'chart_field_desc_' + i);
 
