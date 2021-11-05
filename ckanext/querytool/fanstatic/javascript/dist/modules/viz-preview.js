@@ -1426,16 +1426,14 @@
 
                 var tmp_filter_value = n;
                 var tmp_filter_name = e;
-                console.log(tmp_filter_name)
-                console.log(tmp_filter_value)
 
-                if (tmp_filter_value) {
+                if (tmp_filter_value && typeof tmp_filter_value == 'string') {
                   if (tmp_filter_value.includes('\'')) {
                     tmp_filter_value = tmp_filter_value.replaceAll('\'', '\'\'')
                   }
                 }
 
-                if (tmp_filter_name) {
+                if (tmp_filter_name && typeof tmp_filter_name == 'string') {
                   if (tmp_filter_value.includes('&')) {
                     tmp_filter_value = tmp_filter_value.replaceAll('&', '\\0026')
                   }
