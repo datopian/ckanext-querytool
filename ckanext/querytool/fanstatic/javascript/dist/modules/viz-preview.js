@@ -1426,13 +1426,19 @@
 
                 var tmp_filter_value = n;
                 var tmp_filter_name = e;
+                console.log(tmp_filter_name)
+                console.log(tmp_filter_value)
 
-                if (tmp_filter_value.includes('\'')) {
-                  tmp_filter_value = tmp_filter_value.replaceAll('\'', '\'\'')
+                if (tmp_filter_value) {
+                  if (tmp_filter_value.includes('\'')) {
+                    tmp_filter_value = tmp_filter_value.replaceAll('\'', '\'\'')
+                  }
                 }
 
-                if (tmp_filter_value.includes('&')) {
-                  tmp_filter_value = tmp_filter_value.replaceAll('&', '\\0026')
+                if (tmp_filter_name) {
+                  if (tmp_filter_value.includes('&')) {
+                    tmp_filter_value = tmp_filter_value.replaceAll('&', '\\0026')
+                  }
                 }
 
                 e && n && (t += ' AND ("' + tmp_filter_name + "\" = '" + tmp_filter_value + "')");
@@ -2484,11 +2490,6 @@
                     document.getElementById(title_id).style.display = "block";
                 }   
 
-
-                //Hide loading text
-                if(document.getElementById("loading-"+this.options.chart_id)){
-                    document.getElementById("loading-"+this.options.chart_id).style.display = "none";
-                }
                 
 
                 var q = JSON.parse(JSON.stringify(plotly));
