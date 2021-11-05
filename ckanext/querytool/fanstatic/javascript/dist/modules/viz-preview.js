@@ -1431,9 +1431,6 @@
                   if (tmp_filter_value.includes('\'')) {
                     tmp_filter_value = tmp_filter_value.replaceAll('\'', '\'\'')
                   }
-                }
-
-                if (tmp_filter_name && typeof tmp_filter_name == 'string') {
                   if (tmp_filter_value.includes('&')) {
                     tmp_filter_value = tmp_filter_value.replaceAll('&', '\\0026')
                   }
