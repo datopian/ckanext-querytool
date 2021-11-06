@@ -2937,17 +2937,17 @@
 
                   }
                   if (O.axis && !O.axis['x']['categories'] && t[ub] && t[lb]) {
-                    console.log(t[ub])
-                    console.log(typeof t[ub])
+                    //console.log(t[ub])
+                    //console.log(typeof t[ub])
                     for (var i = 0; i < data.length; i++) {
                       if (t[ub][data[i].name] !== undefined){
                         var category_keys = [];
                         var upper = [];
                         var lower = [];
 
-                        console.log(data)
-                        console.log(t)
-                        console.log(t[data[i].name])
+                        //console.log(data)
+                        //console.log(t)
+                        //console.log(t[data[i].name])
                         for (var j = 1; j < t[data[i].name].length; j++) {
                           upper.push(Math.round(Math.abs(t[data[i].name][j] - t[ub][data[i].name][j - 1])))
                           lower.push(Math.round(Math.abs(t[data[i].name][j] - t[lb][data[i].name][j - 1])))
