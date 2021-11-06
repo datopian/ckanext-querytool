@@ -1478,7 +1478,7 @@
                     d = {};
                 s && c && (d = {
                     name: s,
-                    value: c.replaceAll('&', '\\0026')
+                    value: typeof c === 'string' ? c.replaceAll('&', '\\0026') : c
                 }), t("querytool_get_chart_data", {
                     category: n,
                     sql_string: e,
