@@ -1500,15 +1500,16 @@
                             bar_width = e.find("[id*=chart_field_bar_width_]");
                         
 
-                        console.log(dr);
+                        //console.log(dr);
+                        console.log(n);
                         if(dr['length'] > 1) {
                             for(var x = 1; x <= dr['length'] ; x++){
                                 //console.log(x);
                                 //console.log(dr[0])
                                 dr[x-1].setAttribute("data-target", "chart_field_color_" + i+"_"+x)
-                                n[x-1].setAttribute("for", "chart_field_color_" + i+"_"+x)
-                                n[x-1].setAttribute("id", "chart_field_color_" + i+"_"+x)
-                                n[x-1].setAttribute("name", "chart_field_color_" + i+"_"+x)
+                                n[x].setAttribute("for", "chart_field_color_" + i+"_"+x)
+                                n[x].setAttribute("id", "chart_field_color_" + i+"_"+x)
+                                n[x].setAttribute("name", "chart_field_color_" + i+"_"+x)
                             }
                         } else {
                             dr.attr("data-target", "chart_field_color_" + i+"_1")
