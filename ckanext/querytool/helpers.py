@@ -294,7 +294,11 @@ def _create_where_clause(filters):
             for idx, _ in enumerate(filters):
                 op = u'='
                 name = _['name']
-                value = _['value'].replace('\'', '\'\'')
+
+                if isinstant(_['value'], str):
+                    value = _['value'].replace('\'', '\'\'')
+                else:
+                    value = _['value']
 
                 if idx == 0:
                     where_clause = u'WHERE ("{0}" {1} \'{2}\')'.format(
@@ -307,7 +311,12 @@ def _create_where_clause(filters):
             _ = filters[0]
             op = u'='
             name = _['name']
-            value = _['value']
+
+            if isinstant(_['value'], str):
+                value = _['value'].replace('\'', '\'\'')
+            else:
+                value = _['value']
+
             where_clause = \
                 u'WHERE ("{0}" {1} \'{2}\')'.format(
                     name,
