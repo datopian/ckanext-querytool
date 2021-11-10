@@ -2490,7 +2490,7 @@
                 if(document.getElementById("loading-"+this.options.chart_id)){
                     document.getElementById("loading-"+this.options.chart_id).style.display = "none";
                 }
-
+                
 
                 var q = JSON.parse(JSON.stringify(plotly));
 
