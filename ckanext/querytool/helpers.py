@@ -295,7 +295,7 @@ def _create_where_clause(filters):
                 op = u'='
                 name = _['name']
 
-                if isinstant(_['value'], str):
+                if isinstance(_['value'], str):
                     value = _['value'].replace('\'', '\'\'')
                 else:
                     value = _['value']
@@ -312,7 +312,7 @@ def _create_where_clause(filters):
             op = u'='
             name = _['name']
 
-            if isinstant(_['value'], str):
+            if isinstance(_['value'], str):
                 value = _['value'].replace('\'', '\'\'')
             else:
                 value = _['value']
