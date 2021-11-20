@@ -1635,7 +1635,7 @@
 
                 
                 
-                if ("sbar" === this.options.chart_type && "shbar" === this.options.chart_type || g || this.sortData(y, r, i, n), O.legend = {
+                if (("sbar" === this.options.chart_type || "shbar" === this.options.chart_type) && !this.options.category_name || g || this.sortData(y, r, i, n), O.legend = {
                         show: o
                     }, O.tooltip = {
                         format: {}
@@ -1656,7 +1656,7 @@
                         }
                     }
                 });
-                else if ("sbar" === this.options.chart_type || "shbar" === this.options.chart_type) {
+                else if (("sbar" === this.options.chart_type || "shbar" === this.options.chart_type) && !this.options.category_name) {
                     var I = "shbar" === this.options.chart_type,
                         A = 0;
                     I && (A = a), e = r.map(function(t) {
@@ -2148,23 +2148,23 @@
                               };
                               data.push(trace);
                             }
-                        } else if ('sbar' === this.options.chart_type) {
-                            for (tmp=0; tmp < columns.length; tmp++){
-                                var name = columns[tmp][0];
+                        //} else if ('sbar' === this.options.chart_type) {
+                        //    for (tmp=0; tmp < columns.length; tmp++){
+                        //        var name = columns[tmp][0];
 
-                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
-                                  var trace = {
-                                      x: [this.options.x_axis],
-                                      y: [parseFloat(columns[tmp][1])],
-                                      type: 'bar',
-                                      name: name,
-                                      width: this.options.bar_width || 0.5,
-                                      error_y: {},
-                                      error_x: {}
-                                  };
-                                  data.push(trace);
-                                }
-                            }
+                        //        if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                        //          var trace = {
+                        //              x: [this.options.x_axis],
+                        //              y: [parseFloat(columns[tmp][1])],
+                        //              type: 'bar',
+                        //              name: name,
+                        //              width: this.options.bar_width || 0.5,
+                        //              error_y: {},
+                        //              error_x: {}
+                        //          };
+                        //          data.push(trace);
+                        //        }
+                        //    }
                         } else {
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
@@ -2185,6 +2185,7 @@
                         }
                     } else {
                         //console.log(categories)
+
                         var trace = {
                             x: categories,
                             y: columns[0].slice(1),
@@ -2223,22 +2224,22 @@
                               };
                               data.push(trace);
                             }
-                        } else if ('shbar' === this.options.chart_type) {
-                            for (tmp=0; tmp < columns.length; tmp++){
-                                var name = columns[tmp][0];
+                        //} else if ('shbar' === this.options.chart_type) {
+                        //    for (tmp=0; tmp < columns.length; tmp++){
+                        //        var name = columns[tmp][0];
 
-                                if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
-                                  var trace = {
-                                      x: [parseFloat(columns[tmp][1])],
-                                      y: [this.options.x_axis],
-                                      type: 'bar',
-                                      name: name,
-                                      orientation: 'h',
-                                      width: this.options.bar_width || 0.5,
-                                  };
-                                  data.push(trace);
-                                }
-                            }
+                        //        if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
+                        //          var trace = {
+                        //              x: [parseFloat(columns[tmp][1])],
+                        //              y: [this.options.x_axis],
+                        //              type: 'bar',
+                        //              name: name,
+                        //              orientation: 'h',
+                        //              width: this.options.bar_width || 0.5,
+                        //          };
+                        //          data.push(trace);
+                        //        }
+                        //    }
                         } else {
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
