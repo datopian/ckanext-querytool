@@ -2251,7 +2251,7 @@
 
                                 if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                                   var trace = {
-                                      x: x_values, //columns[tmp].slice(1),
+                                      x: x_values,
                                       y: x,
                                       type: 'bar',
                                       name: name,
