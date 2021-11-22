@@ -2243,10 +2243,15 @@
                         } else {
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
+                                var x_values = [];
+
+                                for (i=0; i < columns[tmp].length - 1; i++){
+                                  x_values.push(parseFloat(columns[tmp][i+1]));
+                                }
 
                                 if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                                   var trace = {
-                                      x: columns[tmp].slice(1),
+                                      x: x_values, //columns[tmp].slice(1),
                                       y: x,
                                       type: 'bar',
                                       name: name,
