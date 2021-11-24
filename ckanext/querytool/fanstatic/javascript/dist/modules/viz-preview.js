@@ -1635,7 +1635,7 @@
 
                 
                 
-                if ("sbar" === this.options.chart_type && "shbar" === this.options.chart_type || g || this.sortData(y, r, i, n), O.legend = {
+                if (("sbar" === this.options.chart_type || "shbar" === this.options.chart_type) && !this.options.category_name || g || this.sortData(y, r, i, n), O.legend = {
                         show: o
                     }, O.tooltip = {
                         format: {}
@@ -1656,7 +1656,7 @@
                         }
                     }
                 });
-                else if ("sbar" === this.options.chart_type || "shbar" === this.options.chart_type) {
+                else if (("sbar" === this.options.chart_type || "shbar" === this.options.chart_type) && !this.options.category_name) {
                     var I = "shbar" === this.options.chart_type,
                         A = 0;
                     I && (A = a), e = r.map(function(t) {
@@ -2148,7 +2148,7 @@
                               };
                               data.push(trace);
                             }
-                        } else if ('sbar' === this.options.chart_type) {
+                        } else if ('sbar' === this.options.chart_type && this.options.category_name === '') {
                             for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
@@ -2185,6 +2185,7 @@
                         }
                     } else {
                         //console.log(categories)
+
                         var trace = {
                             x: categories,
                             y: columns[0].slice(1),
@@ -2223,7 +2224,7 @@
                               };
                               data.push(trace);
                             }
-                        } else if ('shbar' === this.options.chart_type) {
+                        } else if ('shbar' === this.options.chart_type && this.options.category_name === '') {
                             for (tmp=0; tmp < columns.length; tmp++){
                                 var name = columns[tmp][0];
 
@@ -2242,10 +2243,15 @@
                         } else {
                             for (tmp=0; tmp < columns.length - 1; tmp++){
                                 var name = columns[tmp][0];
+                                var x_values = [];
+
+                                for (i=0; i < columns[tmp].length - 1; i++){
+                                  x_values.push(parseFloat(columns[tmp][i+1]));
+                                }
 
                                 if (name !== undefined && name !== 'x' && Array.isArray(columns[tmp])) {
                                   var trace = {
-                                      x: columns[tmp].slice(1),
+                                      x: x_values,
                                       y: x,
                                       type: 'bar',
                                       name: name,

@@ -1176,7 +1176,7 @@
             $(this).change(function() {
                 var t = $(this).attr("id"),
                     e = $("#chart_field_category_name_" + t[t.length - 1]);
-                ["sbar", "shbar", "donut", "pie"].includes($(this).val()) ? (e.prop("value", ""), e.prop("disabled", !0)) : e.prop("disabled", !1);
+                ["donut", "pie"].includes($(this).val()) ? (e.prop("value", ""), e.prop("disabled", !0)) : e.prop("disabled", !1);
                 var i = $("#chart_field_x_tick_culling_max_" + t[t.length - 1]);
                 ["bar", "hbar", "sbar", "shbar", "pie", "donut"].includes($(this).val()) ? i.prop("disabled", !0) : i.prop("disabled", !1);
 
