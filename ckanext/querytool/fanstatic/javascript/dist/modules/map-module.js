@@ -251,15 +251,11 @@ ckan.module('querytool-map', function($) {
         var queryFilters = [];
         if (this.options.info_query_filters) {
             if(this.options.info_query_filters === true) {
-                queryFilters = ['yo'];
+                queryFilters = [];
             } else {
                 queryFilters = this.options.info_query_filters;
             }
         }
-
-
-        console.log('hi');
-        console.log(queryFilters);
 
         var optionalFilterName = (this.options.filter_name === true) ? '' : this.options.filter_name;
         var optionalFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
