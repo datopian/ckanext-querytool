@@ -111,7 +111,7 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
     data.sql_string, chart_resource = data.chart_resource, y_axis_column =
     data.y_axis_column, measure_label = measure_label, map_color_scheme =
     data.map_color_scheme, y_axis_values = data.y_axis_values, main_filters =
-    data.main_filters_names %} {% endif %} {% if item.type == 'table' %} {%
+    data.main_filters_names, info_query_filters = data.main_filters %} {% endif %} {% if item.type == 'table' %} {%
     snippet 'ajax_snippets/table_item.html', n = item.order, table = item,
     sql_string = data.sql_string, resource_id = data.chart_resource, y_axis =
     data.y_axis_column, y_axis_values = data.y_axis_values, measure_label =
