@@ -327,7 +327,8 @@
             y_axis_column=y_axis_selected,
             measure_label = measure_label,
             filter_name=item.filter_name,
-            filter_value=item.filter_value
+            filter_value=item.filter_value,
+            info_query_filters =  querytool.public_main_filters
           %}
         <button class="btn btn-round imgBtn scrBtn" data-chartId=".chart-{{chart_id}}">Download <img src="/base/images/download.svg" width="15"> </button>
         {% endif %}

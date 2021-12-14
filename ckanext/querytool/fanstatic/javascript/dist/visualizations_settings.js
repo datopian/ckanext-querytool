@@ -1643,7 +1643,8 @@
                     sql_string: f,
                     y_axis_column: y,
                     y_axis_values: p,
-                    main_filters: h
+                    main_filters: h,
+                    info_query_filters: JSON.stringify(m)
                 }).done(function(t) {
                     var i = e.prepend(t);
                     ckan.module.initializeElement(i.find("div[data-module=querytool-map]")[0]), o("map", a), g()
