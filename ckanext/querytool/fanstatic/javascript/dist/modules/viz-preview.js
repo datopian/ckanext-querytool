@@ -1904,7 +1904,7 @@
                                       size: 14,
                                   },
                                   name: name,
-                                  line: {width: 4},
+                                  line: {width: 4, dash: 'dashdot'},
                                   hovertemplate: '%{y}<extra></extra>',
                                   error_y: {},
                                   error_x: {}
@@ -1928,7 +1928,7 @@
                                 size: 14,
                             },
                             type: 'scatter',
-                            line: {width: 4},
+                            line: {width: 4, dash: 'dashdot'},
                             error_y: {},
                             error_x: {}
                         };
