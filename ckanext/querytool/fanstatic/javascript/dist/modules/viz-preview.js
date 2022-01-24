@@ -1887,7 +1887,7 @@
                         var tmp ;
 
                         //type of line
-                        var lineType = ['solid','dashdot','dot','dot','dashdot','solid','dashdot','dot','dot','dashdot','solid','dashdot','dot']
+                        var lineType = ['solid','dash','dot','dot','dashdot','solid','dashdot','dot','dot','dashdot','solid','dashdot','dot']
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
