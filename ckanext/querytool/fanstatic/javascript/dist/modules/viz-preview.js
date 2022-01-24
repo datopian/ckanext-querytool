@@ -1886,6 +1886,8 @@
                         }
                         var tmp ;
 
+                        //type of line
+                        var lineType = ['solid','dashdot','dot','dot','dashdot','solid','dashdot','dot','dot','dashdot','solid','dashdot','dot']
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
 
@@ -1904,7 +1906,7 @@
                                       size: 14,
                                   },
                                   name: name,
-                                  line: {width: 4, dash: 'dashdot'},
+                                  line: {width: 4, dash: lineType[tmp]},
                                   hovertemplate: '%{y}<extra></extra>',
                                   error_y: {},
                                   error_x: {}

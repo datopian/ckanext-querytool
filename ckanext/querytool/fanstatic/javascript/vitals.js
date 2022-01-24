@@ -746,6 +746,12 @@ $(document).ready(function(){
       $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
     }
 
+    if(selected=='line') {
+      $(this).closest('.accordion').find(".line-accordion").removeClass('hidden')
+    } else {
+      $(this).closest('.accordion').find(".line-accordion").addClass('hidden')
+    }
+
     //Hide seqeuntial if not bar chart
     if(selected=='line' || selected=='area' || selected=='spline' || selected=='donut' || selected=='pie' || selected=='scatter'){
       $(`#chart_field_color_type_${chart_number}`).val("1");

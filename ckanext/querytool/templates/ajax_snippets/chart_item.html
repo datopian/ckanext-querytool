@@ -158,6 +158,34 @@
         </div>
       </div>
 
+      {# Line Chart additional setup  #}
+      {% if selected_chart_type in ['line'] %}
+        {% set hide_line_options = '' %}
+      {% else %}
+        {% set hide_line_options = 'hidden' %}
+      {% endif %}
+      <div class="accordion-group {{ hide_line_options }} line-accordion">
+        <div class="accordion-heading">
+          <a href="#accordion_{{ chart_id }}_line_plotly" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+            {{ _('Line Options') }}
+          </a>
+        </div>
+        {% if chart %}
+          {% if chart.plotly %}
+          {% set plotly = h.querytool_get_chart_colors(chart.plotly) %}
+          {% endif %}
+        {% endif %}
+
+
+        <div id="accordion_{{ chart_id }}_line_plotly" class="accordion-body collapse">
+          <div class="accordion-inner">
+            
+          aaaa
+          </div>
+        </div>
+
+      </div>
+
       {# Chart additional color setup  #}
       {% if selected_chart_type in ['donut', 'pie'] %}
         {% set hide_color_picker = 'hidden' %}
