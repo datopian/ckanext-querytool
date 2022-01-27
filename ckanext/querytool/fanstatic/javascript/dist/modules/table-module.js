@@ -1830,6 +1830,7 @@
                         d = this.create_sql_string(l, sv, s, f);
                     e("querytool_get_resource_data", { sql_string: d }, function (e) {
                         var n = e.result;
+                        console.log(e.result);
                         i.sortData(n, s.toLowerCase(), l.toLowerCase());
                         var r = f ? i.render_data_table_with_category(n, f, l, sv, s, c) : i.render_data_table(n, l, sv, s, c),
                             o = $("#table-item-" + a);
@@ -1893,11 +1894,11 @@
                       if (sv != '') {
                         sql = 'SELECT "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"'+ second_value_sql +'';
                       } else {
-                        sql = 'SELECT "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"';
+                        sql = 'SELECT "' + t + '", SUM("' + e + '") as "' + e + ' "' + r + ' GROUP BY "' + t + '"';
                       }
                     }
 
-                    //console.log(sql)
+                    console.log(sql)
                     return sql;
 
                 },
