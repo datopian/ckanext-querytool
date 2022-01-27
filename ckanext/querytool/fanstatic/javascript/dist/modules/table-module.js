@@ -1894,7 +1894,7 @@
                       if (sv != '') {
                         sql = 'SELECT "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"'+ second_value_sql +'';
                       } else {
-                        sql = 'SELECT "' + t + '", SUM("' + e + '") as "' + e + ' "' + r + ' GROUP BY "' + t + '"';
+                        sql = 'SELECT "' + t + '", SUM("' + e + '") as "' + e + '_"' + r + ' GROUP BY "' + t + '"';
                       }
                     }
 
@@ -1904,8 +1904,8 @@
                 },
                 render_data_table: function (t, e, sv, n, r) {
                     
-                    var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
-                    //console.log(t)
+                    var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()+"_"), rows: t };
+                    console.log(t)
                     if (sv != '') {
                       return this.render_template(
                           "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
