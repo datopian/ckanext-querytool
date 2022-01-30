@@ -1296,4 +1296,3 @@ $(".filter-item-value").tooltip({
     return $(this).find('.active').attr('value');
   }
 });
-

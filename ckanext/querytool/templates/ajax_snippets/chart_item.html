@@ -159,7 +159,7 @@
       </div>
 
       {# Line Chart additional setup  #}
-      {% if selected_chart_type in ['line'] %}
+      {% if selected_chart_type in ['line', 'spline', 'area'] %}
         {% set hide_line_options = '' %}
       {% else %}
         {% set hide_line_options = 'hidden' %}
@@ -177,37 +177,38 @@
         {% endif %}
 
 
+
         <div id="accordion_{{ chart_id }}_line_plotly" class="accordion-body collapse">
           <div class="accordion-inner">
-            
-            <div class="line-row">
-              <p>1. Age </p>
-              <select>
-                <option value="solid">Solid</option>
-                <option value="dashdot">Dashed</option>
-                <option value="dot">Dotted</option>
-              </select>
-            </div>
 
-            <div class="line-row">
-              <p>2. Area </p>
-              <select>
-                <option value="solid">Solid</option>
-                <option value="dashdot">Dashed</option>
-                <option value="dot">Dotted</option>
-              </select>
-            </div>
+            {% if chart and chart.line_types %}
+              {% set line_types = chart.line_types %}
+              {% set line_types_selection = chart.line_types.split(',') %}
+            {% else %}
+              {% set line_types = '' %}
+              {% set line_types_selection = [] %}
+            {% endif %}
 
-            <div class="line-row">
-              <p>3. Age by Area </p>
-              <select>
-                <option value="solid">Solid</option>
-                <option value="dashdot">Dashed</option>
-                <option value="dot">Dotted</option>
-              </select>
-            </div>
+            {% set line_count = 1 %}
 
+            {% for line in plotly %}
+              {% if line['x'] %}
+                {% set line_type_title = line['x'][line_count - 1] %}
+              {% else %}
+                {% set line_type_title = 'Line Type' %}
+              {% endif %}
 
+              <div class="control-group control-select">
+                <label class="control-label" for="chart_field_line_type_{{ n }}_{{ line_count }}">{{ line_type_title }}</label>
+                <select id='chart_field_line_type_{{ n }}_{{ line_count }}' name='chart_field_line_type_{{ n }}_{{ line_count }}'>
+                  <option value="solid" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'solid' }}{{ else }}{{ 'selected' }}{% endif %}>Solid</option>
+                  <option value="dashdot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dashdot' }}{% endif %}>Dashed</option>
+                  <option value="dot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dot' }}{% endif %}>Dotted</option>
+                </select>
+              </div>
+
+              {% set line_count = line_count + 1 %}
+            {% endfor %}
             
           </div>
         </div>
@@ -1018,6 +1019,7 @@
           {% set show_bounds = chart.show_bounds %}
           {% set axis_min = chart.axis_min %}
           {% set axis_max = chart.axis_max %}
+          {% set line_types = chart.line_types %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -1071,7 +1073,8 @@
           show_bounds = show_bounds,
           axis_range = axis_range,
           axis_min = axis_min,
-          axis_max = axis_max
+          axis_max = axis_max,
+          line_types = line_types
       %}
    </div>
 </div>
