@@ -1832,6 +1832,10 @@
                         var n = e.result;
                         console.log(e.result);
                         i.sortData(n, s.toLowerCase(), l.toLowerCase());
+
+                        if(sv == ''){
+                            s = s+"_";
+                        }
                         var r = f ? i.render_data_table_with_category(n, f, l, sv, s, c) : i.render_data_table(n, l, sv, s, c),
                             o = $("#table-item-" + a);
                         
@@ -1888,7 +1892,7 @@
                       if (sv != '') {
                         sql = 'SELECT "' + n + '", "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'+ second_value_sql +'';
                       } else {
-                        sql = 'SELECT "' + n + '", "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'
+                        sql = 'SELECT "' + n + '", "' + t + '", SUM("' + e + '") as "' + e + '_"' + r + ' GROUP BY "' + n + '", "' + t + '"'
                       }
                     } else {
                       if (sv != '') {
@@ -1904,7 +1908,7 @@
                 },
                 render_data_table: function (t, e, sv, n, r) {
                     
-                    var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()+"_"), rows: t };
+                    var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
                     console.log(t)
                     if (sv != '') {
                       return this.render_template(
