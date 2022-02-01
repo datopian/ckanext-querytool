@@ -2032,7 +2032,6 @@
                             
                             var elementExists = document.getElementById(c);
                             if (elementExists) {
-                                console.log('hey')
                                 elementExists.parentElement.remove();
 
                                 var newcontent = document.createElement('div');
@@ -3261,6 +3260,7 @@
                     M = $("#choose_y_axis_column option:selected").text(),
                     I = t.find("[name*=chart_field_show_labels_as_percentages_]").is(":checked"),
                     plotly = t.find("input[name*=chart_field_plotly_]").val(),
+                    lplotly = t.find("input[name*=chart_field_plotly_line_]").val(),
                     bar_width = t.find("input[name*=chart_field_bar_width_]").val(),
                     donut_hole = t.find("input[name*=chart_field_donut_hole_]").val(),
                     ltypes_list = t.find(`[name*=chart_field_line_type_]`),
@@ -3281,6 +3281,10 @@
                   this.options.donut_hole = parseFloat(donut_hole) / 10
                 }
 
+                if (this.options.lplotly){
+                    this.options.lplotly = lplotly
+                }
+                
                 var A = this.create_sql();
                 this.get_resource_datа(A)
 
