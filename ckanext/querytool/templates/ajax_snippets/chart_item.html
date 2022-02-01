@@ -181,13 +181,16 @@
         <div id="accordion_{{ chart_id }}_line_plotly" class="accordion-body collapse">
           <div class="accordion-inner">
 
-            {% if chart and chart.line_types %}
-              {% set line_types = chart.line_types %}
-              {% set line_types_selection = chart.line_types.split(',') %}
+            {% set line_types = '' %}
+            {% set line_types_selection = [] %}
+
+            {% if chart %}
+              {% if chart.line_types %}
+                {% set line_types = chart.line_types %}
+                {% set line_types_selection = chart.line_types.split(',') %}
+              {% endif %}
             {% else %}
               <p id="line_type_empty_text">Select and update data to list lines.</p>
-              {% set line_types = '' %}
-              {% set line_types_selection = [] %}
             {% endif %}
 
             {% set line_count = 1 %}
