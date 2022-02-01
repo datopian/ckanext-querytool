@@ -1958,7 +1958,7 @@
                         var len_count = 1;
                         console.log(data);
 
-                        for (tmp = 0; tmp < len_data; tmp++){
+                        for (tmp = len_data - 1; tmp >= 0; tmp--){
                             var color_count = 1;
                             var d = data_tmp[tmp];
                             //console.log(d);
@@ -2029,6 +2029,12 @@
 
 
                             // add new html element
+
+                            if (d.line && d.line.dash) {
+                              var html_line_type = d.line.dash
+                            } else {
+                              var html_line_type = 'solid'
+                            }
                             
                             var elementExists = document.getElementById(c);
                             if (elementExists) {
@@ -2039,9 +2045,25 @@
                                 html += '<div class="control-group control-select">'
                                 html += '<label class="control-label" for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
                                 html += '<select id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" >';
-                                html += '<option value="solid">Solid</option>';
-                                html += '<option value="dashdot">Dashed</option>';
-                                html += '<option value="dot">Dotted</option>';
+
+                                if (html_line_type == 'solid') {
+                                    html += '<option value="solid" selected>Solid</option>';
+                                } else {
+                                    html += '<option value="solid">Solid</option>';
+                                }
+
+                                if (html_line_type == 'dashdot') {
+                                    html += '<option value="dashdot" selected>Dashed</option>';
+                                } else {
+                                    html += '<option value="dashdot">Dashed</option>';
+                                }
+
+                                if (html_line_type == 'dot') {
+                                    html += '<option value="dot" selected>Dotted</option>';
+                                } else {
+                                    html += '<option value="dot">Dotted</option>';
+                                }
+
                                 html += '</select>';
                                 html += '</div>'
                                 newcontent.innerHTML = html
@@ -2057,11 +2079,27 @@
                                 var newcontent = document.createElement('div');
                                 var html = '';
                                 html += '<div class="control-group control-select">'
-                                html += '<label class="control-label" for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
+                                html += '<label class="control-label for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
                                 html += '<select id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" >';
-                                html += '<option value="solid">Solid</option>';
-                                html += '<option value="dashdot">Dashed</option>';
-                                html += '<option value="dot">Dotted</option>';
+
+                                if (html_line_type == 'solid') {
+                                    html += '<option value="solid" selected>Solid</option>';
+                                } else {
+                                    html += '<option value="solid">Solid</option>';
+                                }
+
+                                if (html_line_type == 'dashdot') {
+                                    html += '<option value="dashdot" selected>Dashed</option>';
+                                } else {
+                                    html += '<option value="dashdot">Dashed</option>';
+                                }
+
+                                if (html_line_type == 'dot') {
+                                    html += '<option value="dot" selected>Dotted</option>';
+                                } else {
+                                    html += '<option value="dot">Dotted</option>';
+                                }
+
                                 html += '</select>';
                                 html += '</div>'
                                 newcontent.innerHTML = html;
@@ -3268,6 +3306,17 @@
 
                 for (let i = 0; i < ltypes_list.length; i++) {
                   ltypes.push(t.find(`[name=${ltypes_list[i].id}]`).val())
+                }
+
+                try {
+                  var empty_text = document.querySelector("#line_type_empty_text")
+
+                  if (empty_text !== null) {
+                    empty_text.remove()
+                  }
+
+                } catch (error) {
+                  console.error(error)
                 }
 
                 if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, this.options.line_types = ltypes.join(), void this.createChart(this.fetched_data);

@@ -185,6 +185,7 @@
               {% set line_types = chart.line_types %}
               {% set line_types_selection = chart.line_types.split(',') %}
             {% else %}
+              <p id="line_type_empty_text">Select and update data to list lines.</p>
               {% set line_types = '' %}
               {% set line_types_selection = [] %}
             {% endif %}

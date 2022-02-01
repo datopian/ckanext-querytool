@@ -1500,7 +1500,8 @@
                             donut_hole = e.find("[id*=chart_field_donut_hole_]"),
                             bar_width = e.find("[id*=chart_field_bar_width_]"),
                             ltypetarget = e.find("[data-target*=chart_field_line_type_]"),
-                            ltypes = e.find("[id*=chart_field_line_type_]");
+                            ltypes = e.find("[id*=chart_field_line_type_]"),
+                            ltypes_label = e.find("label[for*=chart_field_line_type_]");
 
 
                         console.log('IN VIZ SETTINGS')
@@ -1519,16 +1520,17 @@
                             n.attr("name", "chart_field_color_" + i+"_1")
                         }
 
-                        if(ltypetarget['length'] > 1) {
-                            for(var x = 1; x <= ltypetarget['length'] ; x++){
-                                ltypetarget[x-1].setAttribute("data-target", "chart_field_line_type_" + i+"_"+x)
-                                ltypes[x].attr("for", "chart_field_line_type_" + i+"_"+x)
-                                ltypes[x].setAttribute("id", "chart_field_line_type_" + i+"_"+x)
-                                ltypes[x].setAttribute("name", "chart_field_line_type_" + i+"_"+x)
+
+                        if(ltypes['length'] > 1) {
+                            for(var x = 0; x < ltypes['length']; x++){
+                                //ltypetarget[x].setAttribute("data-target", "chart_field_line_type_" + i+"_"+x + 1)
+                                ltypes_label[x].setAttribute("for", "chart_field_line_type_" + i+"_"+(x + 1))
+                                ltypes[x].setAttribute("id", "chart_field_line_type_" + i+"_"+(x + 1))
+                                ltypes[x].setAttribute("name", "chart_field_line_type_" + i+"_"+(x + 1))
                             }
                         } else {
-                            ltypetarget.attr("data-target", "chart_field_line_type_" + i+"_1")
-                            ltypes.attr("for", "chart_field_line_type_" + i+"_1")
+                            //ltypetarget.attr("data-target", "chart_field_line_type_" + i+"_1")
+                            ltypes_label.attr("for", "chart_field_line_type_" + i+"_1")
                             ltypes.attr("id", "chart_field_line_type_" + i+"_1")
                             ltypes.attr("name", "chart_field_line_type_" + i+"_1")
                         }
