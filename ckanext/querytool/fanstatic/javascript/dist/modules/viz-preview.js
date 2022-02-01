@@ -1956,6 +1956,7 @@
                         var tmp ;
                         var data_tmp = data;
                         var len_count = 1;
+                        console.log(data);
 
                         for (tmp = 0; tmp < len_data; tmp++){
                             var color_count = 1;
@@ -2028,20 +2029,25 @@
 
 
                             // add new html element
-                            /*
+                            
                             var elementExists = document.getElementById(c);
                             if (elementExists) {
+                                console.log('hey')
                                 elementExists.parentElement.remove();
 
                                 var newcontent = document.createElement('div');
                                 var html = '';
                                 html += '<div class="control-group control-select">'
                                 html += '<label class="control-label" for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
-                                html += '<input type="text" id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" value="dd"/> '
+                                html += '<select id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" >';
+                                html += '<option value="solid">Solid</option>';
+                                html += '<option value="dashdot">Dashed</option>';
+                                html += '<option value="dot">Dotted</option>';
+                                html += '</select>';
                                 html += '</div>'
                                 newcontent.innerHTML = html
 
-                                document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
+                                document.getElementById("chart_field_plotly_line_"+item_no).insertAdjacentHTML('afterend', html);
                                 // remove Color element
                                 //var elem = document.querySelector('#init_color');
                                 //if (elem) {
@@ -2049,22 +2055,25 @@
                                 //}
 
                             } else {
-
                                 var newcontent = document.createElement('div');
                                 var html = '';
-                                tml += '<div class="control-group control-select">'
+                                html += '<div class="control-group control-select">'
                                 html += '<label class="control-label" for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
-                                html += '<input type="text" id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" value="d"/> '
+                                html += '<select id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" >';
+                                html += '<option value="solid">Solid</option>';
+                                html += '<option value="dashdot">Dashed</option>';
+                                html += '<option value="dot">Dotted</option>';
+                                html += '</select>';
                                 html += '</div>'
                                 newcontent.innerHTML = html;
 
-                                document.getElementById("chart_field_plotly_"+item_no).insertAdjacentHTML('afterend', html);
+                                document.getElementById("chart_field_plotly_line_"+item_no).insertAdjacentHTML('afterend', html);
                                 // remove Color element
                                 //var elem = document.querySelector('#init_color');
                                 //if (elem) {
                                 //    elem.parentNode.removeChild(elem);
                                 //}
-                            } */
+                            } 
                         }
                     }
                 }

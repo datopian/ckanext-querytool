@@ -190,7 +190,7 @@
             {% endif %}
 
             {% set line_count = 1 %}
-
+            <input type="hidden" id="chart_field_plotly_line_{{ n }}" name="chart_field_plotly_line_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
             {% for line in plotly %}
               {% if line['x'] %}
                 {% set line_type_title = line['x'][line_count - 1] %}
