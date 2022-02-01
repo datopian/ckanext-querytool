@@ -113,7 +113,7 @@ def querytool_get(context, data_dict):
     # check_access('',
     #            context, data_dict)
 
-    log.info('Querytool : %r', data_dict)
+    #log.info('Querytool : %r', data_dict)
     name = data_dict['name']
 
     querytool = CkanextQueryTool.get(name=name)
@@ -133,7 +133,7 @@ def querytool_get_visualizations(context, data_dict):
     # check_access('',
     #            context, data_dict)
 
-    log.info('Querytool visualizations: %r', data_dict)
+    #log.info('Querytool visualizations: %r', data_dict)
     name = data_dict['name']
     visualizations = CkanextQueryToolVisualizations.get(name=name)
     if visualizations:
