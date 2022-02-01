@@ -1876,7 +1876,7 @@
 
                 //type of line
                 var lineTypes = this.options.line_types
-                if (lineTypes != '') {
+                if (lineTypes.length > 0) {
                   var lineTypesList = this.options.line_types.split(',')
                 } else {
                   var lineTypesList = this.options.line_types
