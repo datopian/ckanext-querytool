@@ -746,6 +746,12 @@ $(document).ready(function(){
       $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
     }
 
+    if(['line', 'area', 'spline'].includes(selected)) {
+      $(this).closest('.accordion').find(".line-accordion").removeClass('hidden')
+    } else {
+      $(this).closest('.accordion').find(".line-accordion").addClass('hidden')
+    }
+
     //Hide seqeuntial if not bar chart
     if(selected=='line' || selected=='area' || selected=='spline' || selected=='donut' || selected=='pie' || selected=='scatter'){
       $(`#chart_field_color_type_${chart_number}`).val("1");
@@ -1290,4 +1296,3 @@ $(".filter-item-value").tooltip({
     return $(this).find('.active').attr('value');
   }
 });
-

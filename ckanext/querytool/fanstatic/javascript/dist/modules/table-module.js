@@ -1830,7 +1830,12 @@
                         d = this.create_sql_string(l, sv, s, f);
                     e("querytool_get_resource_data", { sql_string: d }, function (e) {
                         var n = e.result;
+                        console.log(e.result);
                         i.sortData(n, s.toLowerCase(), l.toLowerCase());
+
+                        if(sv == ''){
+                            s = s+"_";
+                        }
                         var r = f ? i.render_data_table_with_category(n, f, l, sv, s, c) : i.render_data_table(n, l, sv, s, c),
                             o = $("#table-item-" + a);
                         
@@ -1887,24 +1892,24 @@
                       if (sv != '') {
                         sql = 'SELECT "' + n + '", "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'+ second_value_sql +'';
                       } else {
-                        sql = 'SELECT "' + n + '", "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + n + '", "' + t + '"'
+                        sql = 'SELECT "' + n + '", "' + t + '", SUM("' + e + '") as "' + e + '_"' + r + ' GROUP BY "' + n + '", "' + t + '"'
                       }
                     } else {
                       if (sv != '') {
                         sql = 'SELECT "' + t + '"'+ second_value_sql +', SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"'+ second_value_sql +'';
                       } else {
-                        sql = 'SELECT "' + t + '", SUM("' + e + '") as "' + e + '"' + r + ' GROUP BY "' + t + '"';
+                        sql = 'SELECT "' + t + '", SUM("' + e + '") as "' + e + '_"' + r + ' GROUP BY "' + t + '"';
                       }
                     }
 
-                    //console.log(sql)
+                    console.log(sql)
                     return sql;
 
                 },
                 render_data_table: function (t, e, sv, n, r) {
                     
                     var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
-                    //console.log(t)
+                    console.log(t)
                     if (sv != '') {
                       return this.render_template(
                           "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
