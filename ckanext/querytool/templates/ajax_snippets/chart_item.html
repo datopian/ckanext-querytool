@@ -208,6 +208,7 @@
                   <option value="solid" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'solid' }}{{ else }}{{ 'selected' }}{% endif %}>Solid</option>
                   <option value="dashdot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dashdot' }}{% endif %}>Dashed</option>
                   <option value="dot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dot' }}{% endif %}>Dotted</option>
+                  <option value="dash" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dash' }}{% endif %}>Dashed</option>
                 </select>
               </div>
 
