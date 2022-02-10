@@ -2456,10 +2456,16 @@
                                 html += '<option value="solid">Solid</option>';
                             }
 
-                            if (html_line_type == 'dashdot') {
-                                html += '<option value="dashdot" selected>Dashed</option>';
+                            if (html_line_type == 'dash') {
+                                html += '<option value="dash" selected>Dashed</option>';
                             } else {
-                                html += '<option value="dashdot">Dashed</option>';
+                                html += '<option value="dash">Dashed</option>';
+                            }
+
+                            if (html_line_type == 'dashdot') {
+                                html += '<option value="dashdot" selected>Dash Dot</option>';
+                            } else {
+                                html += '<option value="dashdot">Dash Dot</option>';
                             }
 
                             if (html_line_type == 'dot') {
@@ -2492,10 +2498,16 @@
                                 html += '<option value="solid">Solid</option>';
                             }
 
-                            if (html_line_type == 'dashdot') {
-                                html += '<option value="dashdot" selected>Dashed</option>';
+                            if (html_line_type == 'dash') {
+                                html += '<option value="dash" selected>Dashed</option>';
                             } else {
-                                html += '<option value="dashdot">Dashed</option>';
+                                html += '<option value="dash">Dashed</option>';
+                            }
+
+                            if (html_line_type == 'dashdot') {
+                                html += '<option value="dashdot" selected>Dash Dot</option>';
+                            } else {
+                                html += '<option value="dashdot">Dash Dot</option>';
                             }
 
                             if (html_line_type == 'dot') {
