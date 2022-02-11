@@ -206,7 +206,8 @@
                 <label class="control-label" for="chart_field_line_type_{{ n }}_{{ line_count }}">{{ line_type_title }}</label>
                 <select id='chart_field_line_type_{{ n }}_{{ line_count }}' name='chart_field_line_type_{{ n }}_{{ line_count }}'>
                   <option value="solid" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'solid' }}{{ else }}{{ 'selected' }}{% endif %}>Solid</option>
-                  <option value="dashdot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dashdot' }}{% endif %}>Dashed</option>
+                  <option value="dash" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dash' }}{% endif %}>Dashed</option>
+                  <option value="dashdot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dashdot' }}{% endif %}>Dash Dot</option>
                   <option value="dot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dot' }}{% endif %}>Dotted</option>
                 </select>
               </div>
