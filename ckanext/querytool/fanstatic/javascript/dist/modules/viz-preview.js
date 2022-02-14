@@ -2447,8 +2447,8 @@
                             var newcontent = document.createElement('div');
                             var html = '';
                             html += '<div class="control-group control-select">'
-                            html += '<label class="control-label" for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
-                            html += '<select id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" >';
+                            html += '<label class="control-label" for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>&nbsp;'
+                            html += '<select class="custom_chart_select" id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" >';
 
                             if (html_line_type == 'solid') {
                                 html += '<option value="solid" selected>Solid</option>';
@@ -2475,6 +2475,13 @@
                             }
 
                             html += '</select>';
+                            
+                            //Line width
+                            html += '<select class="custom_chart_select" id="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" >';
+                            html += '<option value="1">Width: 1</option>';
+                            html += '<option value="2">Width: 2</option>';
+                            html += '</select>';
+
                             html += '</div>'
                             newcontent.innerHTML = html
 
