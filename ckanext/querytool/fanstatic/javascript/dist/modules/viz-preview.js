@@ -1876,11 +1876,15 @@
 
                 //type of line
                 var lineTypes = this.options.line_types
+                
                 if (lineTypes.length > 0) {
                   var lineTypesList = this.options.line_types.split(',')
                 } else {
                   var lineTypesList = this.options.line_types
                 }
+
+
+                var widthList = [2,4,6,6,6,6,6];
 
                 // if typeof plotly is string -> new chart
                 // if typeof plotly is object -> existing chart (user view or admin preview)
@@ -1895,6 +1899,7 @@
                           var x = columns[columns.length - 2].slice(1)
                         }
                         var tmp ;
+
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
@@ -1914,7 +1919,7 @@
                                       size: 14,
                                   },
                                   name: name,
-                                  line: {width: 4, dash: lineTypesList[tmp]},
+                                  line: {width: widthList[tmp], dash: lineTypesList[tmp]},
                                   hovertemplate: '%{y}<extra></extra>',
                                   error_y: {},
                                   error_x: {}
@@ -1938,7 +1943,7 @@
                                 size: 14,
                             },
                             type: 'scatter',
-                            line: {width: 4, dash: lineTypes},
+                            line: {width: widthList[0], dash: lineTypes},
                             error_y: {},
                             error_x: {}
                         };
@@ -2478,8 +2483,9 @@
                             
                             //Line width
                             html += '<select class="custom_chart_select" id="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" >';
-                            html += '<option value="1">Width: 1</option>';
-                            html += '<option value="2">Width: 2</option>';
+                            html += '<option value="2">Width: Slim</option>';
+                            html += '<option value="4">Width: Regular</option>';
+                            html += '<option value="6">Width: Wide</option>';
                             html += '</select>';
 
                             html += '</div>'
@@ -2524,6 +2530,14 @@
                             }
 
                             html += '</select>';
+
+                            //Line width
+                            html += '<select class="custom_chart_select" id="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" >';
+                            html += '<option value="2">Width: Slim</option>';
+                            html += '<option value="4">Width: Regular</option>';
+                            html += '<option value="6">Width: Wide</option>';
+                            html += '</select>';
+
                             html += '</div>'
                             newcontent.innerHTML = html;
 
