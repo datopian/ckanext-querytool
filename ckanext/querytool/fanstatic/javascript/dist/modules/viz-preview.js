@@ -2483,9 +2483,9 @@
                             
                             //Line width
                             html += '<select class="custom_chart_select" id="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" >';
-                            html += '<option value="2">Width: Slim</option>';
-                            html += '<option value="4">Width: Regular</option>';
-                            html += '<option value="6">Width: Wide</option>';
+                            html += '<option value="2">Slim</option>';
+                            html += '<option value="4">Regular</option>';
+                            html += '<option value="6">Wide</option>';
                             html += '</select>';
 
                             html += '</div>'
