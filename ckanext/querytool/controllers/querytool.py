@@ -429,23 +429,24 @@ class QueryToolController(base.BaseController):
                     visualization['plotly'] = \
                         data.get('chart_field_plotly_{}'.format(id))
 
-                    def line_type_search(data, id):
-                        base_id = 'chart_field_line_type_{}_'.format(id)
+                    def line_attr_search(data, id, line_attr):
+                        base_id = 'chart_field_{}_{}_'.format(line_attr, id)
                         line_count = len([
                             True for key, value in data.items()
                             if base_id in key
                         ])
-                        line_types = []
+                        line_attrs = []
 
                         for i in range(1, line_count + 1):
-                            line_type_id = base_id + str(i)
+                            line_attr_id = base_id + str(i)
 
-                            if line_type_id in data:
-                                line_types.append(data[line_type_id])
+                            if line_attr_id in data:
+                                line_attrs.append(data[line_attr_id])
 
-                        return ','.join(line_types)
+                        return ','.join(line_attrs)
 
-                    visualization['line_types'] = line_type_search(data, id)
+                    visualization['line_types'] = line_attr_search(data, id, 'line_type')
+                    visualization['line_widths'] = line_attr_search(data, id, 'line_width')
 
                     bar_width = data.get('chart_field_bar_width_{}'.format(id))
 
