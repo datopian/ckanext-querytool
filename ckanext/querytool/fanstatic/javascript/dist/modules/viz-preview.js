@@ -1895,6 +1895,14 @@
                   lineWidths = String(lineWidths)
                 }
 
+                function setDefaultWidth(width) {
+                  if ([undefined, '0', ''].includes(width)) {
+                    return '4'
+                  } else {
+                    return width
+                  }
+                }
+
                 // if typeof plotly is string -> new chart
                 // if typeof plotly is object -> existing chart (user view or admin preview)
                 // if plotly value is true we may have some data in the database for the chart, but plotly is set to true
@@ -1928,7 +1936,7 @@
                                       size: 14,
                                   },
                                   name: name,
-                                  line: {width: lineWidthsList[tmp], dash: lineTypesList[tmp]},
+                                  line: {width: setDefaultWidth(lineWidthsList[tmp]), dash: lineTypesList[tmp]},
                                   hovertemplate: '%{y}<extra></extra>',
                                   error_y: {},
                                   error_x: {}
@@ -1952,7 +1960,7 @@
                                 size: 14,
                             },
                             type: 'scatter',
-                            line: {width: lineWidths, dash: lineTypes},
+                            line: {width: setDefaultWidth(lineWidths), dash: lineTypes},
                             error_y: {},
                             error_x: {}
                         };
@@ -2113,7 +2121,7 @@
                                   width: 3,
                                   line: {
                                     shape: 'spline',
-                                    width: 4,
+                                    width: setDefaultWidth(lineWidthsList[tmp]),
                                     dash: lineTypesList[tmp]
                                   }
 
@@ -2140,7 +2148,7 @@
                             name: 'Color',
                             line: {
                               shape: 'spline',
-                              width: 4,
+                              width: setDefaultWidth(lineWidths),
                               dash: lineTypes
                             }
                         };
@@ -2330,7 +2338,8 @@
                                       size: 14,
                                   },
                                   line: {
-                                    dash: lineTypesList[tmp]
+                                    dash: lineTypesList[tmp],
+                                    width: setDefaultWidth(lineWidthsList[tmp])
                                   },
                                   type: 'scatter',
                                   name: name,
@@ -2354,7 +2363,8 @@
                                 size: 14,
                             },
                             line: {
-                              dash: lineTypes
+                              dash: lineTypes,
+                              width: setDefaultWidth(lineWidths)
                             },
                             name: columns[0][0],
                             type: 'scatter',
@@ -2516,19 +2526,19 @@
                             //Line width
                             html += '<select class="custom_chart_select" id="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" >';
 
-                            if (['2', 2].includes(html_line_width)) {
+                            if (html_line_width == '2') {
                                 html += '<option value="2" selected>Slim</option>';
                             } else {
                                 html += '<option value="2">Slim</option>';
                             }
 
-                            if (['4', 4].includes(html_line_width)) {
+                            if (html_line_width == '4' || !['2', '6'].includes(html_line_width)) {
                                 html += '<option value="4" selected>Regular</option>';
                             } else {
                                 html += '<option value="4">Regular</option>';
                             }
 
-                            if (['6', 6].includes(html_line_width)) {
+                            if (html_line_width == '6') {
                                 html += '<option value="6" selected>Wide</option>';
                             } else {
                                 html += '<option value="6">Wide</option>';
@@ -2582,19 +2592,19 @@
                             //Line width
                             html += '<select class="custom_chart_select" id="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" >';
 
-                            if (['2', 2].includes(html_line_width)) {
+                            if (html_line_width == '2') {
                                 html += '<option value="2" selected>Slim</option>';
                             } else {
                                 html += '<option value="2">Slim</option>';
                             }
 
-                            if (['4', 4].includes(html_line_width)) {
+                            if (html_line_width == '4' || !['2', '6'].includes(html_line_width)) {
                                 html += '<option value="4" selected>Regular</option>';
                             } else {
                                 html += '<option value="4">Regular</option>';
                             }
 
-                            if (['6', 6].includes(html_line_width)) {
+                            if (html_line_width == '6') {
                                 html += '<option value="6" selected>Wide</option>';
                             } else {
                                 html += '<option value="6">Wide</option>';

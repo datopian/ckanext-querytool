@@ -224,7 +224,7 @@
 
                 <select class="custom_chart_select" id='chart_field_line_width_{{ n }}_{{ line_count }}' name='chart_field_line_width_{{ n }}_{{ line_count }}'>
                   <option value="2" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '2' }}{% endif %}>Slim</option>
-                  <option value="4" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '4' }}{% endif %}>Regular</option>
+                  <option value="4" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '4' or line_widths_selection[line_count - 1] not in ['2', '6'] }}{% endif %}>Regular</option>
                   <option value="6" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '6' }}{% endif %}>Wide</option>
                 </select>
               </div>
