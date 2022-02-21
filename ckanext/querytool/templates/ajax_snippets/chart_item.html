@@ -214,15 +214,15 @@
               {% endif %}
 
               <div class="control-group control-select">
-                <label class="control-label" for="chart_field_line_type_{{ n }}_{{ line_count }}">{{ line_type_title }} </label>
-                <select  class="custom_chart_select" id='chart_field_line_type_{{ n }}_{{ line_count }}' name='chart_field_line_type_{{ n }}_{{ line_count }}'>
+                <label class="control-label line_type_label" for="chart_field_line_type_{{ n }}_{{ line_count }}">{{ line_type_title }} </label>
+                <select  class="custom_chart_select" id='chart_field_line_type_{{ n }}_{{ line_count }}' name='chart_field_line_type_{{ n }}_{{ line_count }}' style='width:120px'>
                   <option value="solid" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'solid' }}{% endif %}>Solid</option>
                   <option value="dash" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dash' }}{% endif %}>Dashed</option>
                   <option value="dashdot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dashdot' }}{% endif %}>Dash Dot</option>
                   <option value="dot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dot' }}{% endif %}>Dotted</option>
                 </select>
 
-                <select class="custom_chart_select" id='chart_field_line_width_{{ n }}_{{ line_count }}' name='chart_field_line_width_{{ n }}_{{ line_count }}'>
+                <select class="custom_chart_select" id='chart_field_line_width_{{ n }}_{{ line_count }}' name='chart_field_line_width_{{ n }}_{{ line_count }}' style='width:120px'>
                   <option value="2" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '2' }}{% endif %}>Slim</option>
                   <option value="4" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '4' or line_widths_selection[line_count - 1] not in ['2', '6'] }}{% endif %}>Regular</option>
                   <option value="6" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '6' }}{% endif %}>Wide</option>
