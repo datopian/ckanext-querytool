@@ -179,7 +179,7 @@
 
 
         <div id="accordion_{{ chart_id }}_line_plotly" class="accordion-body collapse">
-          <div class="accordion-inner">
+          <div class="accordion-inner line-width-type">
 
             <div class="header-labels">
               <label id="lbl-1">Type</label>
@@ -213,7 +213,7 @@
                 {% set line_type_title = 'Line Type' %}
               {% endif %}
 
-              <div class="control-group control-select">
+              <div class="control-group control-select ">
                 <label class="control-label line_type_label" for="chart_field_line_type_{{ n }}_{{ line_count }}">{{ line_type_title }} </label>
                 <select  class="custom_chart_select" id='chart_field_line_type_{{ n }}_{{ line_count }}' name='chart_field_line_type_{{ n }}_{{ line_count }}' style='width:120px'>
                   <option value="solid" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'solid' }}{% endif %}>Solid</option>
