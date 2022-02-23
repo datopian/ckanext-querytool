@@ -746,7 +746,7 @@ $(document).ready(function(){
       $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
     }
 
-    if(['line', 'area', 'spline'].includes(selected)) {
+    if(['line', 'spline'].includes(selected)) {
       $(this).closest('.accordion').find(".line-accordion").removeClass('hidden')
     } else {
       $(this).closest('.accordion').find(".line-accordion").addClass('hidden')

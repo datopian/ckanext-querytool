@@ -2338,8 +2338,7 @@
                                       size: 14,
                                   },
                                   line: {
-                                    dash: lineTypesList[tmp],
-                                    width: setDefaultWidth(lineWidthsList[tmp])
+                                    width: 4
                                   },
                                   type: 'scatter',
                                   name: name,
@@ -2363,8 +2362,7 @@
                                 size: 14,
                             },
                             line: {
-                              dash: lineTypes,
-                              width: setDefaultWidth(lineWidths)
+                              width: 4
                             },
                             name: columns[0][0],
                             type: 'scatter',
