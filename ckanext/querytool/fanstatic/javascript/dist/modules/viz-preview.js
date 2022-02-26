@@ -1579,6 +1579,7 @@
                     S = this.options.show_labels_as_percentages || !1,
                     desc = !0 === this.options.description ? "" : this.options.description,
                     line_types = this.options.line_types,
+                    line_widths = this.options.line_widths,
                     O = {
                         bindto: this.el[0],
                         /*color: {
@@ -1876,10 +1877,30 @@
 
                 //type of line
                 var lineTypes = this.options.line_types
+                var lineWidths = this.options.line_widths
+                
                 if (lineTypes.length > 0) {
                   var lineTypesList = this.options.line_types.split(',')
                 } else {
                   var lineTypesList = this.options.line_types
+                }
+
+                if (lineWidths.length > 0) {
+                  var lineWidthsList = this.options.line_widths.split(',')
+                } else {
+                  var lineWidthsList = String(this.options.line_widths)
+                }
+
+                if (typeof lineWidths == 'number') {
+                  lineWidths = String(lineWidths)
+                }
+
+                function setDefaultWidth(width) {
+                  if ([undefined, '0', ''].includes(width)) {
+                    return '4'
+                  } else {
+                    return width
+                  }
                 }
 
                 // if typeof plotly is string -> new chart
@@ -1895,6 +1916,7 @@
                           var x = columns[columns.length - 2].slice(1)
                         }
                         var tmp ;
+
 
                         for (tmp=0; tmp < columns.length - 1; tmp++){
                             var name = columns[tmp][0];
@@ -1914,7 +1936,7 @@
                                       size: 14,
                                   },
                                   name: name,
-                                  line: {width: 4, dash: lineTypesList[tmp]},
+                                  line: {width: setDefaultWidth(lineWidthsList[tmp]), dash: lineTypesList[tmp]},
                                   hovertemplate: '%{y}<extra></extra>',
                                   error_y: {},
                                   error_x: {}
@@ -1938,7 +1960,7 @@
                                 size: 14,
                             },
                             type: 'scatter',
-                            line: {width: 4, dash: lineTypes},
+                            line: {width: setDefaultWidth(lineWidths), dash: lineTypes},
                             error_y: {},
                             error_x: {}
                         };
@@ -2099,7 +2121,7 @@
                                   width: 3,
                                   line: {
                                     shape: 'spline',
-                                    width: 4,
+                                    width: setDefaultWidth(lineWidthsList[tmp]),
                                     dash: lineTypesList[tmp]
                                   }
 
@@ -2126,7 +2148,7 @@
                             name: 'Color',
                             line: {
                               shape: 'spline',
-                              width: 4,
+                              width: setDefaultWidth(lineWidths),
                               dash: lineTypes
                             }
                         };
@@ -2316,7 +2338,7 @@
                                       size: 14,
                                   },
                                   line: {
-                                    dash: lineTypesList[tmp]
+                                    width: 4
                                   },
                                   type: 'scatter',
                                   name: name,
@@ -2340,7 +2362,7 @@
                                 size: 14,
                             },
                             line: {
-                              dash: lineTypes
+                              width: 4
                             },
                             name: columns[0][0],
                             type: 'scatter',
@@ -2368,6 +2390,7 @@
                         //console.log(d);
 
                         var c = "chart_field_line_type_"+ item_no + "_" + (tmp+1)
+                        var lw = "chart_field_line_width_"+ item_no + "_" + (tmp+1)
                         var chart_field_plotly_value = chart_plotly.value;
 
                         /*
@@ -2413,7 +2436,9 @@
 
                         // delete elements
                         var p = document.querySelectorAll('[id^="chart_field_line_type_'+item_no+'"]');
+                        var lwSel = document.querySelectorAll('[id^="chart_field_line_width_'+item_no+'"]');
                         var ltype_elements = 0;
+                        var lwidth_elements = 0;
 
                         for (var a = 0; a < p.length; a++) {
                             var type = p[a].tagName;
@@ -2431,13 +2456,33 @@
                             }
                         }
 
+                        for (var a = 0; a < lwSel.length; a++) {
+                            var type = lwSel[a].tagName;
+                            if (type === 'SELECT') {
+                                lwidth_elements = lwidth_elements + 1;
+                            }
+                        }
+
+                        if (lwidth_elements > data.length) {
+                            for (var a = 0; a < lwSel.length; a++) {
+                                var type = lwSel[a].tagName;
+                                if (type === 'SELECT') {
+                                    lwSel[a].parentElement.remove();
+                                }
+                            }
+                        }
 
                         // add new html element
+                        var html_line_type = 'solid'
+                        var html_line_width = '4'
 
-                        if (d.line && d.line.dash) {
-                          var html_line_type = d.line.dash
-                        } else {
-                          var html_line_type = 'solid'
+                        if (d.line) {
+                          if (d.line.dash) {
+                            html_line_type = d.line.dash
+                          }
+                          if (d.line.width) {
+                            html_line_width = String(d.line.width)
+                          }
                         }
                         
                         var elementExists = document.getElementById(c);
@@ -2447,8 +2492,8 @@
                             var newcontent = document.createElement('div');
                             var html = '';
                             html += '<div class="control-group control-select">'
-                            html += '<label class="control-label" for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>'
-                            html += '<select id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" >';
+                            html += '<label class="control-label line_type_label" for="chart_field_line_type_' + item_no + '_' + (tmp+1) +'">' + d['name'] + '</label>&nbsp;'
+                            html += '<select class="custom_chart_select" style="width:120px;" id="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_type_' + item_no + '_' + (tmp+1) +'" >';
 
                             if (html_line_type == 'solid') {
                                 html += '<option value="solid" selected>Solid</option>';
@@ -2475,6 +2520,30 @@
                             }
 
                             html += '</select>';
+                            
+                            //Line width
+                            html += '<select class="custom_chart_select" style="width:120px;" id="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" >';
+
+                            if (html_line_width == '2') {
+                                html += '<option value="2" selected>Slim</option>';
+                            } else {
+                                html += '<option value="2">Slim</option>';
+                            }
+
+                            if (html_line_width == '4' || !['2', '6'].includes(html_line_width)) {
+                                html += '<option value="4" selected>Regular</option>';
+                            } else {
+                                html += '<option value="4">Regular</option>';
+                            }
+
+                            if (html_line_width == '6') {
+                                html += '<option value="6" selected>Wide</option>';
+                            } else {
+                                html += '<option value="6">Wide</option>';
+                            }
+
+                            html += '</select>';
+
                             html += '</div>'
                             newcontent.innerHTML = html
 
@@ -2517,6 +2586,30 @@
                             }
 
                             html += '</select>';
+
+                            //Line width
+                            html += '<select class="custom_chart_select" id="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" name="chart_field_line_width_' + item_no + '_' + (tmp+1) +'" >';
+
+                            if (html_line_width == '2') {
+                                html += '<option value="2" selected>Slim</option>';
+                            } else {
+                                html += '<option value="2">Slim</option>';
+                            }
+
+                            if (html_line_width == '4' || !['2', '6'].includes(html_line_width)) {
+                                html += '<option value="4" selected>Regular</option>';
+                            } else {
+                                html += '<option value="4">Regular</option>';
+                            }
+
+                            if (html_line_width == '6') {
+                                html += '<option value="6" selected>Wide</option>';
+                            } else {
+                                html += '<option value="6">Wide</option>';
+                            }
+
+                            html += '</select>';
+
                             html += '</div>'
                             newcontent.innerHTML = html;
 
@@ -3313,6 +3406,8 @@
                     bar_width = t.find("input[name*=chart_field_bar_width_]").val(),
                     donut_hole = t.find("input[name*=chart_field_donut_hole_]").val(),
                     ltypes_list = t.find(`[name*=chart_field_line_type_]`),
+                    lwidths_list = t.find(`[name*=chart_field_line_width_]`),
+                    lwidths = [],
                     ltypes = [];
 
                 for (let i = 0; i < ltypes_list.length; i++) {
@@ -3330,8 +3425,12 @@
                   console.error(error)
                 }
 
-                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, this.options.line_types = ltypes.join(), void this.createChart(this.fetched_data);
-                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, this.options.line_types = ltypes.join();
+                for (let i = 0; i < lwidths_list.length; i++) {
+                  lwidths.push(String(t.find(`[name=${lwidths_list[i].id}]`).val()))
+                }
+
+                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, this.options.line_types = ltypes.join(), this.options.line_widths = lwidths.join(), void this.createChart(this.fetched_data);
+                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, this.options.line_types = ltypes.join(), this.options.line_widths = lwidths.join();
 
                 if (bar_width != ''){
                   this.options.bar_width = parseFloat(bar_width) / 10

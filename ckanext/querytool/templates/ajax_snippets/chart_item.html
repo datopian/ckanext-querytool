@@ -159,7 +159,7 @@
       </div>
 
       {# Line Chart additional setup  #}
-      {% if selected_chart_type in ['line', 'spline', 'area'] %}
+      {% if selected_chart_type in ['line', 'spline'] %}
         {% set hide_line_options = '' %}
       {% else %}
         {% set hide_line_options = 'hidden' %}
@@ -179,15 +179,26 @@
 
 
         <div id="accordion_{{ chart_id }}_line_plotly" class="accordion-body collapse">
-          <div class="accordion-inner">
+          <div class="accordion-inner line-width-type">
+
+            <div class="header-labels">
+              <label id="lbl-1">Type</label>
+              <label id="lbl-2">Width</label>
+            </div>
 
             {% set line_types = '' %}
             {% set line_types_selection = [] %}
+            {% set line_widths = '' %}
+            {% set line_widths_selection = [] %}
 
             {% if chart %}
               {% if chart.line_types %}
                 {% set line_types = chart.line_types %}
                 {% set line_types_selection = chart.line_types.split(',') %}
+              {% endif %}
+              {% if chart.line_widths %}
+                {% set line_widths = chart.line_widths %}
+                {% set line_widths_selection = chart.line_widths.split(',') %}
               {% endif %}
             {% else %}
               <p id="line_type_empty_text">Select and update data to list lines.</p>
@@ -202,13 +213,19 @@
                 {% set line_type_title = 'Line Type' %}
               {% endif %}
 
-              <div class="control-group control-select">
-                <label class="control-label" for="chart_field_line_type_{{ n }}_{{ line_count }}">{{ line_type_title }}</label>
-                <select id='chart_field_line_type_{{ n }}_{{ line_count }}' name='chart_field_line_type_{{ n }}_{{ line_count }}'>
-                  <option value="solid" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'solid' }}{{ else }}{{ 'selected' }}{% endif %}>Solid</option>
+              <div class="control-group control-select ">
+                <label class="control-label line_type_label" for="chart_field_line_type_{{ n }}_{{ line_count }}">{{ line_type_title }} </label>
+                <select  class="custom_chart_select" id='chart_field_line_type_{{ n }}_{{ line_count }}' name='chart_field_line_type_{{ n }}_{{ line_count }}' style='width:120px'>
+                  <option value="solid" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'solid' }}{% endif %}>Solid</option>
                   <option value="dash" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dash' }}{% endif %}>Dashed</option>
                   <option value="dashdot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dashdot' }}{% endif %}>Dash Dot</option>
                   <option value="dot" {% if line_types %}{{ 'selected' if plotly|length >= line_count and line_types_selection[line_count - 1] == 'dot' }}{% endif %}>Dotted</option>
+                </select>
+
+                <select class="custom_chart_select" id='chart_field_line_width_{{ n }}_{{ line_count }}' name='chart_field_line_width_{{ n }}_{{ line_count }}' style='width:120px'>
+                  <option value="2" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '2' }}{% endif %}>Slim</option>
+                  <option value="4" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '4' or line_widths_selection[line_count - 1] not in ['2', '6'] }}{% endif %}>Regular</option>
+                  <option value="6" {% if line_widths %}{{ 'selected' if plotly|length >= line_count and line_widths_selection[line_count - 1] == '6' }}{% endif %}>Wide</option>
                 </select>
               </div>
 
@@ -1025,6 +1042,7 @@
           {% set axis_min = chart.axis_min %}
           {% set axis_max = chart.axis_max %}
           {% set line_types = chart.line_types %}
+          {% set line_widths = chart.line_widths %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -1079,7 +1097,8 @@
           axis_range = axis_range,
           axis_min = axis_min,
           axis_max = axis_max,
-          line_types = line_types
+          line_types = line_types,
+          line_widths = line_widths
       %}
    </div>
 </div>
