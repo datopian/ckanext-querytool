@@ -1822,12 +1822,13 @@
                     var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
                     
                     var f = !0 === this.options.category_name ? "" : this.options.category_name,
-                        p = this.renderChartTitle(this.options.table_title.toString(),{
+                        p = this.renderChartTitle(this.options.table_title,{
                             measure: {name: this.options.y_axis, alias: this.options.measure_label},
                             filters: queryFilters,
                             optionalFilter: optionalFilter,
                         }),
                         d = this.create_sql_string(l, sv, s, f);
+                    p = p.replaceAll('&#39;', '\'')
                     e("querytool_get_resource_data", { sql_string: d }, function (e) {
                         var n = e.result;
                         console.log(e.result);
@@ -1882,6 +1883,9 @@
                         o = !0 === this.options.filter_name ? "" : this.options.filter_name,
                         i = !0 === this.options.filter_value ? "" : this.options.filter_value,
                         sql = '';
+                    if (i.includes('\'')) {
+                      this.options.filter_value = this.options.filter_value.replaceAll('\'', '\'\'')
+                    }
                     o && i && (r += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
                     if (sv !== '') {
                       var second_value_sql = `, "${sv}"`
@@ -1902,14 +1906,12 @@
                       }
                     }
 
-                    console.log(sql)
                     return sql;
 
                 },
                 render_data_table: function (t, e, sv, n, r) {
                     
                     var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
-                    console.log(t)
                     if (sv != '') {
                       return this.render_template(
                           "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
@@ -1927,7 +1929,6 @@
                     main_value = main_value.toLowerCase();
                     second_value = second_value.toLowerCase();
                     y_axis = y_axis.toLowerCase();
-                    console.log(rows)
 
                     // Prepare data
                     // Pivot table when category is set
@@ -1949,7 +1950,6 @@
                             var index = sub_dimen_map.findIndex(function(item, index) {
                                 return (item[main_value] === row[main_value]) && (item[second_value] === row[second_value]) ? true : false;
                             });
-                            console.log('index is: ' + index);
 
                             if(index !== -1) {
                                 sub_dimen_map[index][row[category_name]] = row[y_axis];
