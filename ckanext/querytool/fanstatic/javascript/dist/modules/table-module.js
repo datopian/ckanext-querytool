@@ -1822,7 +1822,7 @@
                     var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
                     
                     var f = !0 === this.options.category_name ? "" : this.options.category_name,
-                        p = this.renderChartTitle(this.options.table_title,{
+                        p = this.renderChartTitle(this.options.table_title.toString(),{
                             measure: {name: this.options.y_axis, alias: this.options.measure_label},
                             filters: queryFilters,
                             optionalFilter: optionalFilter,
