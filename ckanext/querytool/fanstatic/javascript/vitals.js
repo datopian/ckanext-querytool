@@ -814,9 +814,11 @@ $(document).ready(function(){
     }
 
     if(selected=='pie' || selected=='donut') {
-      $(`#donut_hole_${chart_number}`).removeClass("hidden");
+      $(`#chart_donut_hole_${chart_number}`).removeClass("hidden");
+      $(`#chart_field_donut_hole_${chart_number}`).removeProp("disabled");
     } else {
-      $(`#donut_hole_${chart_number}`).addClass("hidden");
+      $(`#chart_donut_hole_${chart_number}`).addClass("hidden");
+      $(`#chart_field_donut_hole_${chart_number}`).prop("disabled", true);
     }
 
   })
