@@ -583,10 +583,10 @@
               {% set hide_donut = '' %}
             {% endif %}
 
-            <div class="control-group {{hide_donut}}" id="donut_hole_{{n}}">
+            <div class="control-group {{hide_donut}}" id="chart_donut_hole_{{n}}">
                <label class="control-label" for="chart_field_donut_hole_{{ n }}">{{ _('Donut hole') }}</label>
                <div class="controls ">
-                  <input id="chart_field_donut_hole_{{ n }}"  type="text" name="chart_field_donut_hole_{{ n }}" value="{{ h.convert_bar_width(donut_hole, True)|default (4.0) }}" placeholder="{{ _('Donut hole, default 4.0') }}" {{'' if donut_option else 'disabled'}}>
+                  <input id="chart_field_donut_hole_{{ n }}"  type="text" name="chart_field_donut_hole_{{ n }}" value="{{ h.convert_bar_width(donut_hole, True, 'donut')|default (4.0) }}" placeholder="{{ _('Donut hole, default 4.0') }}">
                   {{ form.info(_('An integer or decimal between 0.1-10.')) }}
                </div>
             </div>
@@ -612,7 +612,7 @@
             <div class="control-group {{ hide_bar_width }}" id="chart_bar_width_{{n}}">
                <label class="control-label" for="chart_field_bar_width_{{ n }}">{{ _('Bar width') }}</label>
                <div class="controls ">
-                  <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ h.convert_bar_width(bar_width, True)|default (5.0)}}" placeholder="{{ _('Width of bar, default 5.0') }}" {{'' if bar_width_option else 'disabled'}}>
+                  <input id="chart_field_bar_width_{{ n }}" type="text" name="chart_field_bar_width_{{ n }}" value="{{ h.convert_bar_width(bar_width, True)|default (5.0)}}" placeholder="{{ _('Width of bar, default 5.0') }}">
                   {{ form.info(_('An integer or decimal between 0.1-10.')) }}
                </div>
             </div>

@@ -800,9 +800,12 @@ def get_querytool_get_chart_colors(data):
     return data
 
 
-def convert_bar_width(bar_width, convert=True):
+def convert_bar_width(bar_width, convert=True, type='bar'):
     if not bar_width or bar_width == 'None':
-        return
+        if type == 'donut':
+            return 4.0
+        else:
+            return 5.0
 
     if convert:
         return str(round(float(bar_width) * 10, 2))

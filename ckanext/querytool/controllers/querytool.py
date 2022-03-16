@@ -880,10 +880,28 @@ class QueryToolController(base.BaseController):
                             image['url'] = '{0}/uploads/vs/{1}'.format(
                                 toolkit.request.host_url, image['url'])
 
+                # Default to first new filter after updating visualizations
+                for vis in q_item.get('visualizations', []):
+                    resource_id = q_item.get('chart_resource')
+                    filter_name = vis.get('filter_name')
+                    visibility = vis.get('filter_visibility')
+                    filter_value = vis.get('filter_value')
+
+                    if resource_id and filter_name and \
+                       visibility == 'public':
+                        updated_filters = helpers.get_filter_values(
+                            resource_id, filter_name, new_filters
+                        )
+
+                        if filter_value and filter_value not in \
+                           updated_filters and len(updated_filters) > 0:
+                            vis['filter_value'] = updated_filters[0]
+
                 related_sql_string = helpers.create_query_str(
                     q_item.get('chart_resource'),
                     new_filters
                 )
+
                 q_item['public_filters'] = new_filters
                 q_item['public_filters'].sort(key=itemgetter('order'))
                 q_item['sql_string'] = related_sql_string
