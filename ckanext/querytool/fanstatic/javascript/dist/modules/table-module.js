@@ -1852,6 +1852,7 @@
                             rowsGroup: [
                                 0
                             ],
+                            "pageLength": 25,
                             order: [[ 1, 'asc' ], [ 0, 'asc' ]]
                         }
                         
