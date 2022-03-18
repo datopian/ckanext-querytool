@@ -1855,7 +1855,22 @@
                 var columns = O.data['columns'];
                 var format = this.options.data_format;
                 const dataLabelFormatter = d3.format(format);
-                
+
+                function reorderColumns(columns) {
+                  if (columns.length > 0) {
+                    if (columns[0][0] === 'x') {
+                      columns = columns.reverse()
+                    }
+                    for (i = 0; i < columns.length - 1; i++) {
+                      if (columns[i][0] === 'x') {
+                        columns.push(columns.splice(i, 1)[0]);
+                      }
+                    }
+                  }
+                  return columns
+                }
+
+                columns = reorderColumns(columns)
 
                 // check if annotations are turned on or off
                 if(sa==true){
