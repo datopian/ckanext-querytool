@@ -1280,7 +1280,7 @@ $("body").on('change', '[id^=field-additional_description]', function(){
   $(this).val(html);
 });
 
-$("body").on('change','.filter-item-value', function() {
+$("body").on('change','.has-filter .filter-item-value', function() {
   $('.btn-update').trigger("click");
 })
 
