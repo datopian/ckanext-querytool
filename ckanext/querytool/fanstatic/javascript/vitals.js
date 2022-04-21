@@ -1280,6 +1280,10 @@ $("body").on('change', '[id^=field-additional_description]', function(){
   $(this).val(html);
 });
 
+$("body").on('change','.has-filter .filter-item-value', function() {
+  $('.btn-update').trigger("click");
+})
+
 
 /* Dropdown Filters */
 $(".filter-item-value").hover(function(event) {
