@@ -121,6 +121,17 @@
                 $('#' + filter_value_select_id).append(new Option(elem, elem));
               }
             });
+
+            // Fix duplicate values when deselecting single options
+            var firstOption = $("#" + filter_value_select_id)[0][1]
+            var secondOption = $("#" + filter_value_select_id)[0][2]
+
+            if (![firstOption, secondOption].includes(undefined)) {
+              if (firstOption.value == secondOption.value) {
+                $("#" + filter_value_select_id).find('option:last').remove()
+              }
+            }
+
           });
       }
     });

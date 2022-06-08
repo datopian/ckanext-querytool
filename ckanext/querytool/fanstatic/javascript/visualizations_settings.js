@@ -1,896 +1,557 @@
 (function(_, jQuery) {
     'use strict';
 
-    var api = {
-        get: function(action, params, async) {
-            var api_ver = 3;
-            var base_url = ckan.sandbox().client.endpoint;
-            params = $.param(params);
-            var url = base_url + '/api/' + api_ver + '/action/' + action + '?' + params;
-            if (!async) {
-                $.ajaxSetup({
-                    async: false
-                });
-            }
-            return $.getJSON(url);
-        },
-        post: function(action, data, async) {
-            var api_ver = 3;
-            var base_url = ckan.sandbox().client.endpoint;
-            var url = base_url + '/api/' + api_ver + '/action/' + action;
-            if (!async) {
-                $.ajaxSetup({
-                    async: false
-                });
-            }
-            return $.post(url, JSON.stringify(data), 'json');
-        },
-        getTemplate: function(filename, params, success, error) {
+    function r() {
+        $("select[id^=chart_field_graph_]").each(function() {
+            $(this).change(function() {
+                var t = $(this).attr("id"),
+                    e = $("#chart_field_category_name_" + t[t.length - 1]);
+                ["donut", "pie"].includes($(this).val()) ? (e.prop("value", ""), e.prop("disabled", !0)) : e.prop("disabled", !1);
+                var i = $("#chart_field_x_tick_culling_max_" + t[t.length - 1]);
+                ["bar", "hbar", "sbar", "shbar", "pie", "donut"].includes($(this).val()) ? i.prop("disabled", !0) : i.prop("disabled", !1);
 
-            var locale = $('html').attr('lang');
-            var url = ckan.url(locale + '/api/1/util/snippet/' + encodeURIComponent(filename));
-
-            // Allow function to be called without params argument.
-            if (typeof params === 'function') {
-                error = success;
-                success = params;
-                params = {};
-            }
-
-            return $.get(url, params || {}).then(success, error);
-        }
-    };
-
-    function handleTickFormat(item_id) {
-
-        var tick_count_name;
-        var tick_format_name;
-
-        if (item_id) {
-            tick_count_name = $('[id=chart_field_tick_count_' + item_id + ']');
-            tick_format_name = $('[id=chart_field_y_ticks_format_' + item_id + ']');
-        } else {
-            tick_count_name = $('[id*=chart_field_tick_count_]');
-            tick_format_name = $('[id*=chart_field_y_ticks_format_]');
-        }
-
-        tick_count_name.change(function(event) {
-            // TODO: what doesn this code do and when; bad duplication?
-            var selectValues = [{
-                    'text': _('Decimal (1 digit) e.g 2.5'),
-                    'value': '.1f'
-                },
-                {
-                    'text': _('Decimal (2 digit) e.g 2.50'),
-                    'value': '.2f'
-                },
-                {
-                    'text': _('Decimal (3 digit) e.g 2.501'),
-                    'value': '.3f'
-                },
-                {
-                    'text': _('Decimal (4 digit) e.g 2.5012'),
-                    'value': '.4f'
-                },
-                {
-                    'text': _('Currency e.g. $2,000'),
-                    'value': '$'
-                },
-                {
-                    'text': _('Rounded e.g 2k'),
-                    'value': 's'
-                },
-                {
-                    'text': _('Percentage (0 digit) e.g 25% for 0.25'),
-                    'value': '.0%'
-                },
-                {
-                    'text': _('Percentage (1 digit) e.g 25.1% for 0.251'),
-                    'value': '.1%'
-                },
-                {
-                    'text': _('Percentage (2 digit) e.g 25.12% for 0.2512'),
-                    'value': '.2%'
-                },
-                {
-                    'text': _('Comma thousands separator (0 digit) e.g 2,512'),
-                    'value': ',.0f'
-                },
-                {
-                    'text': _('Comma thousands separator (1 digit) e.g 2,512.3'),
-                    'value': ',.1f'
-                },
-                {
-                    'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
-                    'value': ',.2f'
-                },
-            ]
-
-            var elem = $(this);
-
-            if (elem.val() !== '') {
-                populateOptionValues(tick_format_name, selectValues.slice(0, 3));
-            } else {
-                populateOptionValues(tick_format_name, selectValues);
-            }
+                var r = $("#chart_field_show_labels_as_percentages_" + t[t.length - 1]),
+                    n = $("#chart_field_x_text_rotate_" + t[t.length - 1]),
+                    a = $("#chart_field_x_text_multiline_" + t[t.length - 1]),
+                    o = $("#chart_field_y_label_" + t[t.length - 1]),
+                    l = $("#chart_field_y_label_hide_" + t[t.length - 1]),
+                    xl = $("#chart_field_x_label_" + t[t.length - 1]),
+                    xlh = $("#chart_field_x_label_hide_" + t[t.length - 1]),
+                    _ = $("#chart_field_y_from_zero_" + t[t.length - 1]),
+                    yp = $("#chart_field_axis_range_" + t[t.length - 1]),
+                    xfz = $("#chart_field_x_from_zero_" + t[t.length - 1]),
+                    c = $("#chart_field_y_ticks_format_" + t[t.length - 1]),
+                    xf = $("#chart_field_x_ticks_format_" + t[t.length - 1]),
+                    d = $("#chart_field_data_format_" + t[t.length - 1]),
+                    f = $("#chart_field_labels_" + t[t.length - 1]),
+                    u = $("#chart_field_static_reference_columns_" + t[t.length - 1]),
+                    s = $("#chart_field_static_reference_label_" + t[t.length - 1]),
+                    p = $("#chart_field_dynamic_reference_type_" + t[t.length - 1]),
+                    h = $("#chart_field_dynamic_reference_factor_" + t[t.length - 1]),
+                    m = $("#chart_field_dynamic_reference_label_" + t[t.length - 1]);
+                ["pie", "donut"].includes($(this).val()) ? (r.prop("disabled", !1), n.prop("disabled", !0), a.prop("disabled", !0), o.prop("disabled", !0), l.prop("disabled", !0), xl.prop("disabled", !0), xlh.prop("disabled", !0), _.prop("disabled", !0), yp.prop("disabled", !0), xfz.prop("disabled", !0), c.prop("disabled", !0), d.prop("disabled", !0), f.prop("disabled", !0), u.prop("disabled", !0), s.prop("disabled", !0), p.prop("disabled", !0), h.prop("disabled", !0), m.prop("disabled", !0)) : (r.prop("disabled", !0), r.prop("checked", !1), n.prop("disabled", !1), a.prop("disabled", !1), o.prop("disabled", !1), l.prop("disabled", !1), _.prop("disabled", !1), yp.prop("disabled", !1), xfz.prop("disabled", !1), c.prop("disabled", !1), xf.prop("disabled", !1), d.prop("disabled", !1), f.prop("disabled", !1), u.prop("disabled", !1), s.prop("disabled", !1), p.prop("disabled", !1), h.prop("disabled", !1), m.prop("disabled", !1))
+                var q = $("#chart_field_donut_hole_" + t[t.length - 1]);
+                ["pie", "donut"].includes($(this).val()) ? q.prop("disabled", !1) : q.prop("disabled", !0);
+                var w = $("#chart_field_bar_width_" + t[t.length - 1]);
+                ["bar", "hbar", 'sbar', 'shbar'].includes($(this).val()) ? w.prop("disabled", !1) : w.prop("disabled", !0);
+            })
         })
-    }
+    }! function(t, e) {
+        var i = {
+            get: function(t, e, i) {
+                var r = ckan.sandbox().client.endpoint + "/api/3/action/" + t + "?" + (e = $.param(e));
+                return i || $.ajaxSetup({
+                    async: !1
+                }), $.getJSON(r)
+            },
+            post: function(t, e, i) {
+                var r = ckan.sandbox().client.endpoint + "/api/3/action/" + t;
+                return i || $.ajaxSetup({
+                    async: !1
+                }), $.post(r, JSON.stringify(e), "json")
+            },
+            getTemplate: function(t, e, i, r) {
+                var n = $("html").attr("lang"),
+                    a = ckan.url(n + "/api/1/util/snippet/" + encodeURIComponent(t));
+                return "function" == typeof e && (r = i, i = e, e = {}), $.get(a, e || {}).then(i, r)
+            }
+        };
 
-    function populateOptionValues(elem, values) {
-        elem.children('option:not(:first)').remove();
-
-        $.each(values, function(key, v) {
-            elem
-                .append($("<option></option>")
-                    .attr("value", v.value)
-                    .text(v.text));
-        });
-    }
-
-    function handleRenderedVizFilters(type, item_id) {
-
-        var filter_name_select;
-        var filter_value_select;
-
-        if (item_id) {
-            filter_name_select = $('[id=' + type + '_field_filter_name_' + item_id + ']');
-        } else {
-            filter_name_select = $('[id*=' + type + '_field_filter_name_]');
+        function n(e) {
+            var i, r, xf;
+            e ? (i = $("[id=chart_field_tick_count_" + e + "]"), r = $("[id=chart_field_y_ticks_format_" + e + "]"), xf = $("[id=chart_field_x_ticks_format_" + e + "]")) : (i = $("[id*=chart_field_tick_count_]"), r = $("[id*=chart_field_y_ticks_format_]"), xf = $("[id*=chart_field_x_ticks_format_]")), i.change(function(e) {
+                var i = [{
+                    text: t("Decimal (1 digit) e.g 2.5"),
+                    value: ".1f"
+                }, {
+                    text: t("Decimal (2 digit) e.g 2.50"),
+                    value: ".2f"
+                }, {
+                    text: t("Decimal (3 digit) e.g 2.501"),
+                    value: ".3f"
+                }, {
+                    text: t("Decimal (4 digit) e.g 2.5012"),
+                    value: ".4f"
+                }, {
+                    text: t("Currency e.g. $2,000"),
+                    value: "$"
+                }, {
+                    text: t("Rounded e.g 2k"),
+                    value: "s"
+                }, {
+                    text: t("Percentage (0 digit) e.g 25% for 0.25"),
+                    value: ".0%"
+                }, {
+                    text: t("Percentage (1 digit) e.g 25.1% for 0.251"),
+                    value: ".1%"
+                }, {
+                    text: t("Percentage (2 digit) e.g 25.12% for 0.2512"),
+                    value: ".2%"
+                }, {
+                    text: t("Comma thousands separator (0 digit) e.g 2,512"),
+                    value: ",.0f"
+                }, {
+                    text: t("Comma thousands separator (1 digit) e.g 2,512.3"),
+                    value: ",.1f"
+                }, {
+                    text: t("Comma thousands separator (2 digit) e.g 2,512.34"),
+                    value: ",.2f"
+                }];
+                "" !== $(this).val() ? a(r, i.slice(0, 3)) : a(r, i);
+                "" !== $(this).val() ? a(xf, i.slice(0, 3)) : a(xf, i);
+            })
         }
 
-        if (item_id) {
-            filter_value_select = $('[id=' + type + '_field_filter_value_' + item_id + ']');
-        } else {
-            filter_value_select = $('[id*=' + type + '_field_filter_value_]');
+        function a(t, e) {
+            t.children("option:not(:first)").remove(), $.each(e, function(e, i) {
+                t.append($("<option></option>").attr("value", i.value).text(i.text))
+            })
         }
 
-        filter_name_select.change(function(event) {
-            var elem = $(this);
-            var filter_name = elem.find(":selected").val();
-            var filter_name_select_id = elem.attr('id');
+        function o(t, e) {
+            var r, n;
+            r = e ? $("[id=" + t + "_field_filter_name_" + e + "]") : $("[id*=" + t + "_field_filter_name_]"), n = e ? $("[id=" + t + "_field_filter_value_" + e + "]") : $("[id*=" + t + "_field_filter_value_]"), r.change(function(t) {
+                var e = $(this),
+                    i = e.find(":selected").val(),
+                    r = e.attr("id"),
+                    n = r.replace("name", "value"),
+                    a = r.replace("name", "alias"),
+                    o = n.replace("value", "visibility"),
+                    l = n.replace("field", "div"),
+                    _ = a.replace("field", "div"),
+                    c = o.replace("field", "div");
+                $("#" + n + " option").length > 0 && $("#" + n).find("option").not(":first").remove(), "" === i ? ($("#" + n).prop("required", !1), $("#" + a).prop("required", !1), $("#" + l).addClass("hidden"), $("#" + _).addClass("hidden"), $("#" + c).addClass("hidden")) : ($("#" + n).prop("required", !0), $("#" + a).prop("required", !0), $("#" + l).removeClass("hidden"), $("#" + _).removeClass("hidden"), $("#" + c).removeClass("hidden"))
+            }), n.mousedown(function(t) {
+                var e = $(this),
+                    r = e.attr("id"),
+                    n = e.find(":selected").val(),
+                    a = r.replace("value", "name"),
+                    o = $("#" + a).find(":selected").val(),
+                    l = $("#visualizations-form").data("chartResource"),
+                    _ = $(this).find("option").size(),
+                    c = $("#visualizations-form").data("mainFilters");
+                _ <= 2 && i.get("get_filter_values", {
+                    resource_id: l,
+                    filter_name: o,
+                    previous_filters: JSON.stringify(c)
+                }, !1).done(function(t) {
+                    $.each(t.result, function(t, e) {
+                        n != e && $("#" + r).append(new Option(e, e))
+                    })
+                })
+            })
+        }
 
-            var filter_value_select_id = filter_name_select_id.replace('name', 'value');
-            var filter_alias_input_id = filter_name_select_id.replace('name', 'alias');
-            var filter_visibility_id = filter_value_select_id.replace('value', 'visibility');
+        function l() {
+            $("[id*=chart_field_category_name_]").change(function(t) {
+                var e = $(this),
+                    i = e.find(":selected").val(),
+                    r = e.attr("id").replace("category_name", "sort_div");
+                "" === i ? $("#" + r).removeClass("hidden") : $("#" + r).addClass("hidden")
+            })
+        }
 
-            var filter_value_div_id = filter_value_select_id.replace('field', 'div');
-            var filter_alias_div_id = filter_alias_input_id.replace('field', 'div');
-            var filter_visibility_div_id = filter_visibility_id.replace('field', 'div');
-
-            // Empty filter value select
-            if ($('#' + filter_value_select_id + ' option').length > 0) {
-                $('#' + filter_value_select_id).find('option').not(':first').remove();
-            }
-
-            if (filter_name === '') {
-                $('#' + filter_value_select_id).prop('required', false);
-                $('#' + filter_alias_input_id).prop('required', false);
-                $('#' + filter_value_div_id).addClass('hidden');
-                $('#' + filter_alias_div_id).addClass('hidden');
-                $('#' + filter_visibility_div_id).addClass('hidden');
-            } else {
-                $('#' + filter_value_select_id).prop('required', true);
-                $('#' + filter_alias_input_id).prop('required', true);
-                $('#' + filter_value_div_id).removeClass('hidden');
-                $('#' + filter_alias_div_id).removeClass('hidden');
-                $('#' + filter_visibility_div_id).removeClass('hidden');
-            }
-        });
-
-        filter_value_select.mousedown(function(event) {
-
-            var elem = $(this);
-            var filter_value_select_id = elem.attr('id');
-            var filter_value = elem.find(":selected").val();
-            var filter_name_select_id = filter_value_select_id.replace('value', 'name');
-            var filter_name = $('#' + filter_name_select_id).find(":selected").val();
-            var vizForm = $('#visualizations-form');
-            var resource_id = vizForm.data('chartResource');
-            var select_size = $(this).find("option").size();
-            var vizForm = $('#visualizations-form');
-            var mainFilters = vizForm.data('mainFilters');
-
-            if (select_size <= 2) {
-
-                api.get('get_filter_values', {
-                    'resource_id': resource_id,
-                    'filter_name': filter_name,
-                    'previous_filters': JSON.stringify(mainFilters)
-                }, false).done(function(data) {
-
-                    $.each(data.result, function(idx, elem) {
-
-                        if (filter_value != elem) {
-                            $('#' + filter_value_select_id).append(new Option(elem, elem));
-                        }
-                    });
+        function _() {
+            $(".title textarea").change(function(e) {
+                var i = nunjucks.configure({
+                    tags: {
+                        variableStart: "{",
+                        variableEnd: "}"
+                    }
                 });
-            }
-
-        });
-
-    };
-
-    function handleChartSortingField () {
-
-        var category_name_select = $('[id*=chart_field_category_name_]');
-
-        category_name_select.change(function(event) {
-            var elem = $(this);
-            var category_name = elem.find(":selected").val();
-            var category_name_select_id = elem.attr('id');
-
-            var sorting_select_div_id = category_name_select_id.replace('category_name', 'sort_div');
-
-            if (category_name === '') {
-                $('#' + sorting_select_div_id).removeClass('hidden');
-            } else {
-                $('#' + sorting_select_div_id).addClass('hidden');
-            }
-
-        });
-    };
-
-    function handleChartTitles () {
-      // Provide variables support for titles
-      $('.title textarea').change(function (ev) {
-        var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
-        try {
-          env.renderString($(ev.target).val(), {});
-          ev.target.setCustomValidity('');
-        } catch (error) {
-          ev.target.setCustomValidity(_('Template is invalid'));
-        }
-      });
-      $('.title-vars select').change(function (ev) {
-        var select = $(ev.target);
-        var textarea = select.closest('.item-wrapper').find('.control-group.title textarea');
-        textarea.val(textarea.val() + select.val());
-        select.val('');
-      })
-
-
-      // Provide variables support for descriptions
-      $('.desc textarea').change(function (ev) {
-        var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
-        try {
-          env.renderString($(ev.target).val(), {});
-          ev.target.setCustomValidity('');
-        } catch (error) {
-          ev.target.setCustomValidity(_('Template is invalid'));
-        }
-      });
-      $('.desc-vars select').change(function (ev) {
-        var select = $(ev.target);
-        var textarea = select.closest('.item-wrapper').find('.control-group.desc textarea');
-        textarea.val(textarea.val() + select.val());
-        select.val('');
-      })
-    };
-
-    function handleMultipleSelect () {
-      $('[id*=chart_field_static_reference_columns_]')
-        // Skip already initialized
-        .not('.select2-container')
-        .not('.select2-offscreen')
-        // Enable multiple select vidget
-        .select2({
-          placeholder: _('Click to select one or more'),
-        })
-        // Validate on changes
-        .change(function (ev) {
-          var measures = [];
-          var static_reference_columns = $(this).val();
-          for (const value of static_reference_columns || []) {
-            const measure = value.split('|')[0];
-            const column = value.split('|')[1];
-            if (measures.includes(measure)) {
-              ev.target.setCustomValidity(
-                _('Static Reference Columns: maximum one column per measure'));
-              return;
-            }
-            measures.push(measure);
-          }
-          ev.target.setCustomValidity('');
-        })
-    };
-
-    $(document).ready(function() {
-        handleChartSortingField();
-        handleRenderedVizFilters('chart');
-        handleRenderedVizFilters('map');
-        handleRenderedVizFilters('table');
-        handleImageItems();
-        handleChartTitles();
-        handleMultipleSelect();
-        var visualizationItems = $('#visualization-settings-items');
-        var vizForm = $('#visualizations-form');
-        var sqlString = vizForm.data('sqlString');
-        var chart_resource = vizForm.data('chartResource');
-        var map_resource = vizForm.data('mapResource');
-        var yAxisValues = vizForm.data('yAxisValues');
-        var mainFiltersNames = vizForm.data('mainFiltersNames');
-        var infoQueryFilters = vizForm.data('mainFilters');
-
-        var chooseYAxisColumn = $('#choose_y_axis_column');
-        handleTickFormat();
-
-        $('#save-edit-data-btn').removeAttr('disabled');
-        $('#save-visualization-btn').removeAttr('disabled');
-
-        $('.save-visualization-btn').click(function(e) {
-            var viz_items = $('.item');
-            if (viz_items.length === 0) {
-                e.preventDefault();
-                alert(_('Please create at least one visualization.'));
-            }
-        });
-
-        chooseYAxisColumn.change(function(event) {
-            // Update the hidden inputs for the y axis
-            var axisY = $('[name*=chart_field_axis_y_]');
-            axisY.val(event.target.value);
-
-            // Send a message to update charts,tables and maps when a new column is selected.
-            // The JavaScript modules "querytool-viz-preview","table-module" and "map-module" subscribes to this
-            // event to update the visualizations.
-            ckan.sandbox().publish('querytool:updateCharts');
-            ckan.sandbox().publish('querytool:updateMaps');
-            ckan.sandbox().publish('querytool:updateTables');
-
-        });
-
-        //delete dynamicly created textbox section
-        $(document).on('click', '.delete-item-btn', function(el) {
-            el.target.closest('.item').remove();
-            handleItemsOrder();
-        });
-
-        var createVisualization = $('#add-visualization-btn');
-        createVisualization.on('click', function() {
-            $.proxyAll(this, /_on/);
-
-            var visualization = $('#item_type').val();
-            var item = $('.item');
-            var items = item.length + 1;
-            var axisYValue = chooseYAxisColumn.val();
-            var measureLabel = $('#choose_y_axis_column option:selected').text();
-
-            if (visualization === 'chart') {
-
-                //TODO: parse query params simple
-                var querytool = window.location.href.substr(window.location.href.lastIndexOf('/') + 1).split("?")[0];
-                api.getTemplate('chart_item.html', {
-                        n: items,
-                        querytool: querytool,
-                        chart_resource: chart_resource,
-                        map_resource: map_resource,
-                        sql_string: sqlString,
-                        y_axis_values: yAxisValues,
-                        main_filters: mainFiltersNames,
-                        info_query_filters: JSON.stringify(infoQueryFilters),
-                        measure_label: measureLabel,
-                    })
-                    .done(function(data) {
-                        var item = visualizationItems.prepend(data);
-                        ckan.module.initializeElement(item.find('div[data-module=querytool-viz-preview]')[0]);
-                        handleRenderedVizFilters('chart', items);
-                        handleItemsOrder();
-                        handleChartSortingField();
-                        handleChartTitles();
-                        handleMultipleSelect();
-                        var axisY = $('[name*=chart_field_axis_y_]');
-                        axisY.val(axisYValue);
-                        handleTickFormat(items);
-                        handleChartOptions();
-                    });
-            } else if (visualization === 'map') {
-
-                api.getTemplate('map_item.html', {
-                        n: items,
-                        chart_resource: chart_resource,
-                        sql_string: sqlString,
-                        y_axis_column: axisYValue,
-                        y_axis_values: yAxisValues,
-                        main_filters: mainFiltersNames
-                    })
-                    .done(function(data) {
-                        var item = visualizationItems.prepend(data);
-                        ckan.module.initializeElement(item.find('div[data-module=querytool-map]')[0]);
-                        handleRenderedVizFilters('map', items);
-                        handleItemsOrder();
-                    });
-            } else if (visualization == 'text-box') {
-                api.getTemplate('text_box_item.html', {
-                        number: items
-                    })
-                    .done(function(data) {
-                        var item = visualizationItems.prepend(data);
-                        handleItemsOrder();
-                    });
-            } else if (visualization === 'image') {
-                api.getTemplate('image_item.html', {
-                        n: items
-                    })
-                    .done(function(data) {
-                        var item = visualizationItems.prepend(data);
-                        handleImageItems(items);
-                        handleItemsOrder();
-                    });
-            } else if (visualization === 'table') {
-
-                api.getTemplate('table_item.html', {
-                        n: items,
-                        sql_string: sqlString,
-                        resource_id: chart_resource,
-                        y_axis: axisYValue,
-                        y_axis_values: yAxisValues,
-                        main_filters: mainFiltersNames
-
-                    })
-                    .done(function(data) {
-                        var item = visualizationItems.prepend(data);
-                        ckan.module.initializeElement(item.find('div[data-module=querytool-table]')[0]);
-                        handleRenderedVizFilters('table', items);
-                        handleItemsOrder();
-                    });
-            }
-
-        });
-
-        // Initialize drag and drop functionality for visualization items
-        dragula([visualizationItems[0]], {
-            moves: function(el, container, handle) {
-                return handle.classList.contains('grippy');
-            }
-        }).on('drag', function(el, container, handle) {
-            el.querySelector('.grippy').classList.add('cursor-grabbing');
-        }).on('dragend', function(el) {
-            el.querySelector('.grippy').classList.remove('cursor-grabbing');
-
-            handleItemsOrder();
-            window.location.hash = el.id;
-            window.scrollTo(0, el.offsetTop);
-        });
-
-        // This function updates the order numbers for the form elements.
-        function handleItemsOrder() {
-            // var items = $('.chart_field');
-            var items = $('.item');
-            $.each(items, function(i, item) {
-
-                item = $(item);
-                var order = i + 1;
-                if (item.context.id.indexOf('chart_field') >= 0) {
-                    var dropdownGraphType = item.find('[id*=chart_field_graph_]');
-                    var dropdownColorScheme = item.find('[id*=chart_field_color_]');
-                    var dropdownAxisY = item.find('[id*=chart_field_axis_y_]');
-                    var dropdownAxisX = item.find('[id*=chart_field_axis_x_]');
-
-                    var inputGraphTitle = item.find('[id*=chart_field_title_]');
-                    var selectTextRotationAxisX = item.find('[id*=chart_field_x_text_rotate_]');
-                    var checkboxShowDataLabels = item.find('[id*=chart_field_labels_]');
-                    var checkboxShowLegend = item.find('[id*=chart_field_legend_]');
-                    var checkboxShowValuesAsPercentages = item.find('[id*=chart_field_show_labels_as_percentages_]');
-                    var inputTooltipName = item.find('[id*=chart_field_tooltip_name_]');
-                    var selectDataFormat = item.find('[id*=chart_field_data_format_]');
-                    var selectTickFormatAxisY = item.find('[id*=chart_field_y_ticks_format_]');
-                    var inputLabelAxisY = item.find('[id*=chart_field_y_label_]');
-                    var inputYLabelHide = item.find('[id*=chart_field_y_label_hide_]');
-                    var inputYFromZero = item.find('[id*=chart_field_y_from_zero_]');
-                    var inputPaddingTop = item.find('[id*=chart_field_padding_top_]');
-                    var inputPaddingBottom = item.find('[id*=chart_field_padding_bottom_]');
-                    var selectTickCount = item.find('[id*=chart_field_tick_count_]');
-                    var inputChartSize = item.find('[id*=chart_field_size_]');
-                    var selectFilterName = item.find('[id*=chart_field_filter_name_]');
-                    var selectFilterValue = item.find('[id*=chart_field_filter_value_]');
-                    var selectFilterValueDiv = item.find('[id*=chart_div_filter_value_]');
-                    var selectFilterAlias = item.find('[id*=chart_field_filter_alias_]');
-                    var selectFilterVAliasDiv = item.find('[id*=chart_div_filter_alias_]');
-                    var selectFilterVisibility = item.find('[id*=chart_field_filter_visibility_]');
-                    var selectFilterVisibilityDiv = item.find('[id*=chart_div_filter_visibility_]');
-                    var selectStaticReferenceColumns = item.find('[id*=chart_field_static_reference_columns_]');
-                    var inputStaticReferenceLabel = item.find('[id*=chart_field_static_reference_label_]');
-                    var selectDynamicReferenceType = item.find('[id*=chart_field_dynamic_reference_type_]');
-                    var inputDynamicReferenceFactor = item.find('[id*=chart_field_dynamic_reference_factor_]');
-                    var inputDynamicReferenceLabel = item.find('[id*=chart_field_dynamic_reference_label_]');
-                    var inputPlotly = item.find('[id*=chart_field_plotly_]');
-                    console.log(inputPlotly);
-                    console.log('oh wow')
-
-                    var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
-                    var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
-                    var checkboxXLabelMultiline = item.find('[id*=chart_field_x_text_multiline_]');
-                    var inputXTickCullingMax = item.find('[id*=chart_field_x_tick_culling_max_]');
-
-                    var selectCategoryName = item.find('[id*=chart_field_category_name_]');
-
-                    var resourceId = item.find('[id*=resource_id_]');
-                    var dataSort = item.find('[id*=chart_field_sort_]');
-                    var dataSortDiv = item.find('[id*=chart_field_sort_div_]');
-
-                    item.attr('id', 'chart_field_' + order);
-
-                    dropdownGraphType.attr('id', 'chart_field_graph_' + order);
-                    dropdownGraphType.attr('name', 'chart_field_graph_' + order);
-
-                    dropdownColorScheme.attr('id', 'chart_field_color_' + order);
-                    dropdownColorScheme.attr('name', 'chart_field_color_' + order);
-
-                    dropdownAxisY.attr('id', 'chart_field_axis_y_' + order);
-                    dropdownAxisY.attr('name', 'chart_field_axis_y_' + order);
-
-                    dropdownAxisX.attr('id', 'chart_field_axis_x_' + order);
-                    dropdownAxisX.attr('name', 'chart_field_axis_x_' + order);
-
-                    inputGraphTitle.attr('id', 'chart_field_title_' + order);
-                    inputGraphTitle.attr('name', 'chart_field_title_' + order);
-
-                    selectTextRotationAxisX.attr('id', 'chart_field_x_text_rotate_' + order);
-                    selectTextRotationAxisX.attr('name', 'chart_field_x_text_rotate_' + order);
-
-                    checkboxShowDataLabels.attr('id', 'chart_field_labels_' + order);
-                    checkboxShowDataLabels.attr('name', 'chart_field_labels_' + order);
-
-                    checkboxShowLegend.attr('id', 'chart_field_legend_' + order);
-                    checkboxShowLegend.attr('name', 'chart_field_legend_' + order);
-
-                    checkboxShowValuesAsPercentages.attr('id', 'chart_field_show_labels_as_percentages_' + order);
-                    checkboxShowValuesAsPercentages.attr('name', 'chart_field_show_labels_as_percentages_' + order);
-
-                    inputTooltipName.attr('id', 'chart_field_tooltip_name_' + order);
-                    inputTooltipName.attr('name', 'chart_field_tooltip_name_' + order);
-
-                    selectDataFormat.attr('id', 'chart_field_data_format_' + order);
-                    selectDataFormat.attr('name', 'chart_field_data_format_' + order);
-
-                    selectTickFormatAxisY.attr('id', 'chart_field_y_ticks_format_' + order);
-                    selectTickFormatAxisY.attr('name', 'chart_field_y_ticks_format_' + order);
-
-                    inputLabelAxisY.attr('id', 'chart_field_y_label_' + order);
-                    inputLabelAxisY.attr('name', 'chart_field_y_label_' + order);
-
-                    inputYLabelHide.attr('id', 'chart_field_y_label_hide_' + order);
-                    inputYLabelHide.attr('name', 'chart_field_y_label_hide_' + order);
-
-                    inputYFromZero.attr('id', 'chart_field_y_from_zero_' + order);
-                    inputYFromZero.attr('name', 'chart_field_y_from_zero_' + order);
-
-                    inputPaddingTop.attr('id', 'chart_field_padding_top_' + order);
-                    inputPaddingTop.attr('name', 'chart_field_padding_top_' + order);
-
-                    inputPaddingBottom.attr('id', 'chart_field_padding_bottom_' + order);
-                    inputPaddingBottom.attr('name', 'chart_field_padding_bottom_' + order);
-
-                    inputChartSize.attr('id', 'chart_field_size_' + order);
-                    inputChartSize.attr('name', 'chart_field_size_' + order);
-
-                    selectFilterName.attr('id', 'chart_field_filter_name_' + order);
-                    selectFilterName.attr('name', 'chart_field_filter_name_' + order);
-
-                    selectTickCount.attr('id', 'chart_field_tick_count_' + order);
-                    selectTickCount.attr('name', 'chart_field_tick_count_' + order);
-
-                    selectFilterValue.attr('id', 'chart_field_filter_value_' + order);
-                    selectFilterValue.attr('name', 'chart_field_filter_value_' + order);
-                    selectFilterValueDiv.attr('id', 'chart_div_filter_value_' + order);
-                    selectFilterAlias.attr('id', 'chart_field_filter_alias_' + order);
-                    selectFilterAlias.attr('name', 'chart_field_filter_alias_' + order);
-                    selectFilterVAliasDiv.attr('id', 'chart_div_filter_alias_' + order);
-                    selectFilterVisibility.attr('id', 'chart_field_filter_visibility_' + order);
-                    selectFilterVisibility.attr('name', 'chart_field_filter_visibility_' + order);
-                    selectFilterVisibilityDiv.attr('id', 'chart_div_filter_visibility_' + order);
-
-                    selectStaticReferenceColumns.attr('id', 'chart_field_static_reference_columns_' + order);
-                    selectStaticReferenceColumns.attr('name', 'chart_field_static_reference_columns_' + order);
-
-                    inputStaticReferenceLabel.attr('id', 'chart_field_static_reference_label_' + order);
-                    inputStaticReferenceLabel.attr('name', 'chart_field_static_reference_label_' + order);
-
-                    selectDynamicReferenceType.attr('id', 'chart_field_dynamic_reference_type_' + order);
-                    selectDynamicReferenceType.attr('name', 'chart_field_dynamic_reference_type_' + order);
-
-                    inputDynamicReferenceFactor.attr('id', 'chart_field_dynamic_reference_factor_' + order);
-                    inputDynamicReferenceFactor.attr('name', 'chart_field_dynamic_reference_factor_' + order);
-
-                    inputDynamicReferenceLabel.attr('id', 'chart_field_dynamic_reference_label_' + order);
-                    inputDynamicReferenceLabel.attr('name', 'chart_field_dynamic_reference_label_' + order);
-
-                    inputPlotly.attr('id', 'chart_field_plotly_' + order);
-                    inputPlotly.attr('name', 'chart_field_plotlyl_' + order);
-
-                    resourceId.attr('id', 'resource_id_' + order);
-                    resourceId.attr('name', 'resource_id_' + order);
-
-                    selectCategoryName.attr('id', 'chart_field_category_name_' + order);
-                    selectCategoryName.attr('name', 'chart_field_category_name_' + order);
-
-                    dataSort.attr('id', 'chart_field_sort_' + order);
-                    dataSort.attr('name', 'chart_field_sort_' + order);
-                    dataSortDiv.attr('id', 'chart_field_sort_div_' + order);
-
-                    inputChartPaddingLeft.attr('id', 'chart_field_chart_padding_left_' + order);
-                    inputChartPaddingLeft.attr('name', 'chart_field_chart_padding_left_' + order);
-
-                    inputChartPaddingBottom.attr('id', 'chart_field_chart_padding_bottom_' + order);
-                    inputChartPaddingBottom.attr('name', 'chart_field_chart_padding_bottom_' + order);
-
-                    checkboxXLabelMultiline.attr('id', 'chart_field_x_text_multiline_' + order);
-                    checkboxXLabelMultiline.attr('name', 'chart_field_x_text_multiline_' + order);
-
-                    inputXTickCullingMax.attr('id', 'chart_field_x_tick_culling_max_' + order);
-                    inputXTickCullingMax.attr('name', 'chart_field_x_tick_culling_max_' + order);
-
-
-                } else if (item.context.id.indexOf('text_box') >= 0) {
-
-                    var description = item.find('[id*=text_box_description_]');
-                    var size = item.find('[id*=text_box_size_]');
-
-                    item.attr('id', 'text_box_' + order);
-
-                    description.attr('id', 'text_box_description_' + order);
-                    description.attr('name', 'text_box_description_' + order);
-
-                    size.attr('id', 'text_box_size_' + order);
-                    size.attr('name', 'text_box_size_' + order);
-
-                } else if (item.context.id.indexOf('image_item') >= 0) {
-                    var url = item.find('[name*=media_image_url_]');
-                    var size = item.find('[id*=image_field_size_]');
-                    var upload = item.find('[name*=media_image_upload_]');
-                    var clear = item.find('[name*=media_clear_upload_]');
-
-                    item.attr('id', 'image_item_' + order);
-                    url.attr('name', 'media_image_url_' + order);
-                    size.attr('id', 'image_field_size_' + order);
-                    size.attr('name', 'image_field_size_' + order);
-                    upload.attr('name', 'media_image_upload_' + order);
-                    clear.attr('name', 'media_clear_upload_' + order);
-
-                } else if (item.context.id.indexOf('map_item') >= 0) {
-                    var map_resource_url = item.find('[id*=map_resource_]');
-                    var map_title_field = item.find('[id*=map_title_field_]');
-                    var map_key_field = item.find('[id*=map_key_field_]');
-                    var data_key_field = item.find('[id*=map_data_key_field_]');
-                    var map_color_scheme = item.find('[id*=map_color_scheme_]');
-                    var map_size = item.find('[id*=map_size_]');
-                    var map_module = item.find('[id*=map_module_]');
-
-                    var selectMapFilterName = item.find('[id*=map_field_filter_name_]');
-                    var selectMapFilterValue = item.find('[id*=map_field_filter_value_]');
-                    var selectMapFilterValueDiv = item.find('[id*=map_div_filter_value_]');
-                    var selectMapFilterAlias = item.find('[id*=map_field_filter_alias_]');
-                    var selectMapFilterVAliasDiv = item.find('[id*=map_div_filter_alias_]');
-                    var selectMapFilterVisibility = item.find('[id*=map_field_filter_visibility_]');
-                    var selectMapFilterVisibilityDiv = item.find('[id*=map_div_filter_visibility_]');
-
-                    item.attr('id', 'map_item_' + order);
-                    map_resource_url.attr('id', 'map_resource_' + order);
-                    map_resource_url.attr('name', 'map_resource_' + order);
-                    map_title_field.attr('id', 'map_title_field_' + order);
-                    map_title_field.attr('name', 'map_title_field_' + order);
-                    map_key_field.attr('id', 'map_key_field_' + order);
-                    map_key_field.attr('name', 'map_key_field_' + order);
-                    data_key_field.attr('id', 'map_data_key_field_' + order);
-                    data_key_field.attr('name', 'map_data_key_field_' + order);
-                    map_color_scheme.attr('id', 'map_color_scheme_' + order);
-                    map_color_scheme.attr('name', 'map_color_scheme_' + order);
-                    map_size.attr('id', 'map_size_' + order);
-                    map_size.attr('name', 'map_size_' + order);
-                    map_module.attr('id', 'map_module_' + order);
-
-                    selectMapFilterName.attr('id', 'map_field_filter_name_' + order);
-                    selectMapFilterName.attr('name', 'map_field_filter_name_' + order);
-
-                    selectMapFilterValue.attr('id', 'map_field_filter_value_' + order);
-                    selectMapFilterValue.attr('name', 'map_field_filter_value_' + order);
-                    selectMapFilterValueDiv.attr('id', 'map_div_filter_value_' + order);
-
-                    selectMapFilterAlias.attr('id', 'map_field_filter_alias_' + order);
-                    selectMapFilterAlias.attr('name', 'map_field_filter_alias_' + order);
-                    selectMapFilterVAliasDiv.attr('id', 'map_div_filter_alias_' + order);
-
-                    selectMapFilterVisibility.attr('id', 'map_field_filter_visibility_' + order);
-                    selectMapFilterVisibility.attr('name', 'map_field_filter_visibility_' + order);
-                    selectMapFilterVisibilityDiv.attr('id', 'map_div_filter_visibility_' + order);
-
-                } else if (item.context.id.indexOf('table_item') >= 0) {
-                    var table_size = item.find('[id*=table_size_]');
-                    var table_data_format = item.find('[id*=table_data_format_]');
-                    var table_main_value = item.find('[id*=table_main_value_]');
-                    var table_category_name = item.find('[id*=table_category_name_]');
-                    var table_title = item.find('[id*=table_field_title_]');
-
-                    var selectTableFilterName = item.find('[id*=table_field_filter_name_]');
-                    var selectTableFilterValue = item.find('[id*=table_field_filter_value_]');
-                    var selectTableFilterValueDiv = item.find('[id*=table_div_filter_value_]');
-                    var selectTableFilterAlias = item.find('[id*=table_field_filter_alias_]');
-                    var selectTableFilterVAliasDiv = item.find('[id*=table_div_filter_alias_]');
-                    var selectTableFilterVisibility = item.find('[id*=table_field_filter_visibility_]');
-                    var selectTableFilterVisibilityDiv = item.find('[id*=table_div_filter_visibility_]');
-
-                    item.attr('id', 'table_item_' + order);
-
-                    table_size.attr('id', 'table_size_' + order);
-                    table_size.attr('name', 'table_size_' + order);
-
-                    table_data_format.attr('id', 'table_data_format_' + order);
-                    table_data_format.attr('name', 'table_data_format_' + order);
-
-                    table_main_value.attr('id', 'table_main_value_' + order);
-                    table_main_value.attr('name', 'table_main_value_' + order);
-
-                    table_category_name.attr('id', 'table_category_name_' + order);
-                    table_category_name.attr('name', 'table_category_name_' + order);
-
-                    table_title.attr('id', 'table_field_title_' + order);
-                    table_title.attr('name', 'table_field_title_' + order);
-
-                    selectTableFilterName.attr('id', 'table_field_filter_name_' + order);
-                    selectTableFilterName.attr('name', 'table_field_filter_name_' + order);
-
-                    selectTableFilterValue.attr('id', 'table_field_filter_value_' + order);
-                    selectTableFilterValue.attr('name', 'table_field_filter_value_' + order);
-                    selectTableFilterValueDiv.attr('id', 'table_div_filter_value_' + order);
-
-                    selectTableFilterAlias.attr('id', 'table_field_filter_alias_' + order);
-                    selectTableFilterAlias.attr('name', 'table_field_filter_alias_' + order);
-                    selectTableFilterVAliasDiv.attr('id', 'table_div_filter_alias_' + order);
-
-                    selectTableFilterVisibility.attr('id', 'table_field_filter_visibility_' + order);
-                    selectTableFilterVisibility.attr('name', 'table_field_filter_visibility_' + order);
-                    selectTableFilterVisibilityDiv.attr('id', 'table_div_filter_visibility_' + order);
+                try {
+                    i.renderString($(e.target).val(), {}), e.target.setCustomValidity("")
+                } catch (i) {
+                    e.target.setCustomValidity(t("Template is invalid"))
                 }
-            });
+            })/*, $(".title-vars select").change(function(t) {
+                var e = $(t.target),
+                    i = e.closest(".item-wrapper").find(".control-group.title textarea");
+                i.val(i.val() + e.val()), e.val("")
+            })*/
+
+            $('body').on('change',".title-vars select", function(t){
+                var e = $(t.target),
+                    i = e.closest(".item-wrapper").find(".control-group.title textarea");
+
+                    if(e.val() != null) {
+                        i.val(i.val() + e.val()), e.val("")
+                    } else {
+                        i.val(i.val()), e.val("")
+                    }
+            })
+
+            
+            //Descriptions
+            $(".desc textarea").change(function(e) {
+                var i = nunjucks.configure({
+                    tags: {
+                        variableStart: "{",
+                        variableEnd: "}"
+                    }
+                });
+                try {
+                    i.renderString($(e.target).val(), {}), e.target.setCustomValidity("")
+                } catch (i) {
+                    e.target.setCustomValidity(t("Template is invalid"))
+                }
+            }), $(".desc-vars select").change(function(t) {
+                var e = $(t.target),
+                    i = e.closest(".item-wrapper").find(".control-group.desc textarea");
+                i.val(i.val() + e.val()), e.val("")
+            })
+
         }
 
-        // Expose this function on window to be accessible in other files
-        window.handleItemsOrder = handleItemsOrder;
-    });
+        function c() {
+            $("[id*=chart_field_static_reference_columns_]").not(".select2-container").not(".select2-offscreen").select2({
+                placeholder: t("Click to select one or more")
+            }).change(function(e) {
+                var i = [],
+                    r = $(this).val(),
+                    n = !0,
+                    a = !1,
+                    o = void 0;
+                try {
+                    for (var l, _ = (r || [])[Symbol.iterator](); !(n = (l = _.next()).done); n = !0) {
+                        var c = l.value,
+                            d = c.split("|")[0];
+                        c.split("|")[1];
+                        if (i.includes(d)) return void e.target.setCustomValidity(t("Static Reference Columns: maximum one column per measure"));
+                        i.push(d)
+                    }
+                } catch (t) {
+                    a = !0, o = t
+                } finally {
+                    try {
+                        n || null == _.return || _.return()
+                    } finally {
+                        if (a) throw o
+                    }
+                }
+                e.target.setCustomValidity("")
+            })
+        }
 
-    function handleImageItems(item_id) {
-        var contentContainer = $('#content-settings-items');
-        var contentContainerChildren = contentContainer.children();
-        //TODO:set uploadsEnabled from helper
-        var uploadsEnabled = 'True';
-        var fieldImageUrl;
-        var fieldImageUpload;
-        var imageUploadModule;
-        var mediaImage;
-        var mediaUpload;
-        var image_url_inputs;
-        var image_upload_inputs;
-        var item = $('.image_item');
+        function d(t) {
+            $("#content-settings-items").children();
+            var e, i, r, n, a, o, l = $(".image_item");
+            t && (n = l.find("#field-image-url"), a = l.find("#field-image-upload"), e = "media_image_url_" + t, i = "media_image_upload_" + t, (r = l.find('[data-module="custom-image-upload"]')).attr("data-module", "image-upload"), r.attr("data-module-field_upload", i), r.attr("data-module-field_url", e), a.attr("name", i), n.attr("name", e), ckan.module.initializeElement(r[0])), t ? ($("[name*=media_image_url_" + t + "]"), o = $("[name*=media_image_upload_" + t + "]")) : ($("[name*=media_image_url_]"), o = $("[name*=media_image_upload_]")), o.on("change", function() {
+                var t = $(this),
+                    e = t.attr("name"),
+                    i = e.substr(e.lastIndexOf("_") + 1);
+                $("#image_upload_" + i).val(t.val())
+            })
+        }
+        $(document).ready(function() {
+            l(), o("chart"), o("map"), o("table"), d(), _(), c();
+            var e = $("#visualization-settings-items"),
+                a = $("#visualizations-form"),
+                f = a.data("sqlString"),
+                u = a.data("chartResource"),
+                s = a.data("mapResource"),
+                p = a.data("yAxisValues"),
+                h = a.data("mainFiltersNames"),
+                m = a.data("mainFilters"),
+                v = $("#choose_y_axis_column");
 
-        if (item_id) {
-            mediaImage = item.find('#field-image-url');
-            mediaUpload = item.find('#field-image-upload');
-            fieldImageUrl = 'media_image_url_' + item_id;
-            fieldImageUpload = 'media_image_upload_' + item_id;
+            function g() {
+                var t = $(".item");
+                $.each(t, function(t, e) {
+                    var i = t + 1;
+                    if ((e = $(e)).context.id.indexOf("chart_field") >= 0) { 
+                        var r = e.find("[id*=chart_field_graph_]"),
+                            n = e.find("[id*=chart_field_color_]"),
+                            dr = e.find("[data-target*=chart_field_color_]"),
+                            dtr = e.find("[data-target*=chart_field_seq_color_]"),
+                            nn = e.find("[id*=chart_field_seq_color_]"),
+                            nnn = e.find("[id*=chart_field_color_type_]"),
+                            nnnn = e.find("[class*=chart_field_color_wrap_]"),
+                            sq = e.find("[class*=seq-colors-]"),
+                            dv = e.find("[class*=diver-colors-]"),
+                            sa = e.find("[id*=chart_field_show_annotations_]"),
+                            a = e.find("[id*=chart_field_axis_y_]"),
+                            o = e.find("[id*=chart_field_axis_x_]"),
+                            l = e.find("[id*=chart_field_title_]"),
+                            _ = e.find("[id*=chart_field_x_text_rotate_]"),
+                            c = e.find("[id*=chart_field_labels_]"),
+                            d = e.find("[id*=chart_field_legend_]"),
+                            f = e.find("[id*=chart_field_show_labels_as_percentages_]"),
+                            u = e.find("[id*=chart_field_tooltip_name_]"),
+                            s = e.find("[id*=chart_field_data_format_]"),
+                            p = e.find("[id*=chart_field_y_ticks_format_]"),
+                            xf = e.find("[id*=chart_field_x_ticks_format_]"),
+                            h = e.find("[id*=chart_field_y_label_]"),
+                            m = e.find("[id*=chart_field_y_label_hide_]"),
+                            xl = e.find("[id*=chart_field_x_label_]"),
+                            xlh = e.find("[id*=chart_field_x_label_hide_]"),
+                            v = e.find("[id*=chart_field_y_from_zero_]"),
+                            xfz = e.find("[id*=chart_field_x_from_zero_]"),
+                            g = e.find("[id*=chart_field_padding_top_]"),
+                            y = e.find("[id*=chart_field_padding_bottom_]"),
+                            b = e.find("[id*=chart_field_tick_count_]"),
+                            xx = e.find("[id*=chart_field_size_]"),
+                            S = e.find("[id*=chart_field_filter_name_]"),
+                            O = e.find("[id*=chart_field_filter_value_]"),
+                            w = e.find("[id*=chart_div_filter_value_]"),
+                            k = e.find("[id*=chart_field_filter_alias_]"),
+                            j = e.find("[id*=chart_div_filter_alias_]"),
+                            E = e.find("[id*=chart_field_filter_visibility_]"),
+                            P = e.find("[id*=chart_div_filter_visibility_]"),
+                            T = e.find("[id*=chart_field_static_reference_columns_]"),
+                            C = e.find("[id*=chart_field_static_reference_label_]"),
+                            z = e.find("[id*=chart_field_dynamic_reference_type_]"),
+                            A = e.find("[id*=chart_field_dynamic_reference_factor_]"),
+                            I = e.find("[id*=chart_field_dynamic_reference_label_]"),
+                            M = e.find("[id*=chart_field_chart_padding_left_]"),
+                            L = e.find("[id*=chart_field_chart_padding_bottom_]"),
+                            R = e.find("[id*=chart_field_x_text_multiline_]"),
+                            F = e.find("[id*=chart_field_x_tick_culling_max_]"),
+                            N = e.find("[id*=chart_field_category_name_]"),
+                            q = e.find("[id*=resource_id_]"),
+                            D = e.find("[id*=chart_field_sort_]"),
+                            V = e.find("[id*=chart_field_sort_div_]"),
+                            desc = e.find("[id*=chart_field_desc_]"),
+                            show_bounds = e.find("[id*=chart_field_show_bounds_]"),
+                            show_bounds_label = e.find("label[for*=chart_field_show_bounds_]"),
+                            show_bounds_checkbox = e.find("[id*=show_bounds_checkbox_]"),
+                            lb =  e.find("[id*=lower_bounds_]"),
+                            ub = e.find("[id*=upper_bounds_]"),
+                            lower_bounds = e.find("[id*=chart_field_lower_bounds_]"),
+                            upper_bounds = e.find("[id*=chart_field_upper_bounds_]"),
+                            axis_range = e.find("[id*=chart_field_axis_range_]"),
+                            show_axis_range = e.find("[id*=show_axis_range_]"),
+                            axis_range_min_id = e.find("[id*=axis_range_min_]"),
+                            axis_range_max_id = e.find("[id*=axis_range_max_]"),
+                            axis_range_label = e.find("label[for*=chart_field_axis_range_]"),
+                            plotly = e.find("[id*=chart_field_plotly_]"),
+                            lplotly = e.find("[id*=chart_field_plotly_line_]"),
+                            plotly_label = e.find("[id*=chart_field_plotly_label_]"),
+                            donut_hole_c = e.find("[id*=chart_donut_hole_]"),
+                            donut_hole_l = e.find("label[for*=chart_field_donut_hole_]"),
+                            donut_hole = e.find("input[id*=chart_field_donut_hole_]"),
+                            bar_width_c = e.find("[id*=chart_bar_width_]"),
+                            bar_width_l = e.find("label[for*=chart_field_bar_width_]"),
+                            bar_width = e.find("[id*=chart_field_bar_width_]"),
+                            ltypetarget = e.find("[data-target*=chart_field_line_type_]"),
+                            ltypes = e.find("[id*=chart_field_line_type_]"),
+                            ltypes_label = e.find("label[for*=chart_field_line_type_]"),
+                            lwidthtarget = e.find("[data-target*=chart_field_line_width_]"),
+                            lwidths = e.find("[id*=chart_field_line_width_]");
 
 
-            if (uploadsEnabled == 'True') {
 
-                imageUploadModule = item.find('[data-module="custom-image-upload"]');
-                imageUploadModule.attr('data-module', 'image-upload');
-                imageUploadModule.attr('data-module-field_upload', fieldImageUpload);
-                imageUploadModule.attr('data-module-field_url', fieldImageUrl);
+                        console.log('IN VIZ SETTINGS')
 
-                mediaUpload.attr('name', fieldImageUpload);
+                        if(dr['length'] > 1) {
+                            for(var x = 1; x <= dr['length'] ; x++){
+                                dr[x-1].setAttribute("data-target", "chart_field_color_" + i+"_"+x)
+                                n[x].setAttribute("for", "chart_field_color_" + i+"_"+x)
+                                n[x].setAttribute("id", "chart_field_color_" + i+"_"+x)
+                                n[x].setAttribute("name", "chart_field_color_" + i+"_"+x)
+                            }
+                        } else {
+                            dr.attr("data-target", "chart_field_color_" + i+"_1")
+                            n.attr("for", "chart_field_color_" + i+"_1")
+                            n.attr("id", "chart_field_color_" + i+"_1")
+                            n.attr("name", "chart_field_color_" + i+"_1")
+                        }
+
+
+                        if(ltypes['length'] > 1) {
+                            for(var x = 0; x < ltypes['length']; x++){
+                                //ltypetarget[x].setAttribute("data-target", "chart_field_line_type_" + i+"_"+x + 1)
+                                ltypes_label[x].setAttribute("for", "chart_field_line_type_" + i+"_"+(x + 1))
+                                ltypes[x].setAttribute("id", "chart_field_line_type_" + i+"_"+(x + 1))
+                                ltypes[x].setAttribute("name", "chart_field_line_type_" + i+"_"+(x + 1))
+                            }
+                        } else {
+                            //ltypetarget.attr("data-target", "chart_field_line_type_" + i+"_1")
+                            ltypes_label.attr("for", "chart_field_line_type_" + i+"_1")
+                            ltypes.attr("id", "chart_field_line_type_" + i+"_1")
+                            ltypes.attr("name", "chart_field_line_type_" + i+"_1")
+                        }
+
+                        if(lwidths['length'] > 1) {
+                            for(var x = 0; x < lwidths['length']; x++){
+                                lwidths[x].setAttribute("id", "chart_field_line_width_" + i+"_"+(x + 1))
+                                lwidths[x].setAttribute("name", "chart_field_line_width_" + i+"_"+(x + 1))
+                            }
+                        } else {
+                            lwidths.attr("id", "chart_field_line_width_" + i+"_1")
+                            lwidths.attr("name", "chart_field_line_width_" + i+"_1")
+                        }
+
+                        e.attr("id", "chart_field_" + i), r.attr("id", "chart_field_graph_" + i), r.attr("name", "chart_field_graph_" + i), nn.attr("id", "chart_field_seq_color_" + i), nn.attr("name", "chart_field_seq_color_" + i), dtr.attr("data-target", "chart_field_seq_color_" + i), nn.attr("for", "chart_field_seq_color_" + i), nnn.attr("id", "chart_field_color_type_" + i), nnn.attr("name", "chart_field_color_type_" + i), nnnn.attr("class", "chart_field_color_wrap_" + i), sq.attr("class", "seq-colors-" + i), dv.attr("class", "diver-colors-" + i), sa.attr("id", "chart_field_show_annotations_" + i), sa.attr("name", "chart_field_show_annotations_" + i), a.attr("id", "chart_field_axis_y_" + i), a.attr("name", "chart_field_axis_y_" + i), o.attr("id", "chart_field_axis_x_" + i), o.attr("name", "chart_field_axis_x_" + i), l.attr("id", "chart_field_title_" + i), l.attr("name", "chart_field_title_" + i), _.attr("id", "chart_field_x_text_rotate_" + i), _.attr("name", "chart_field_x_text_rotate_" + i), c.attr("id", "chart_field_labels_" + i), c.attr("name", "chart_field_labels_" + i), d.attr("id", "chart_field_legend_" + i), d.attr("name", "chart_field_legend_" + i), f.attr("id", "chart_field_show_labels_as_percentages_" + i), f.attr("name", "chart_field_show_labels_as_percentages_" + i), u.attr("id", "chart_field_tooltip_name_" + i), u.attr("name", "chart_field_tooltip_name_" + i), s.attr("id", "chart_field_data_format_" + i), s.attr("name", "chart_field_data_format_" + i), p.attr("id", "chart_field_y_ticks_format_" + i), p.attr("name", "chart_field_y_ticks_format_" + i), xf.attr("id", "chart_field_x_ticks_format_" + i), xf.attr("name", "chart_field_x_ticks_format_" + i), h.attr("id", "chart_field_y_label_" + i), h.attr("name", "chart_field_y_label_" + i), m.attr("id", "chart_field_y_label_hide_" + i), m.attr("name", "chart_field_y_label_hide_" + i), xl.attr("id", "chart_field_x_label_" + i), xl.attr("name", "chart_field_x_label_" + i), xlh.attr("id", "chart_field_x_label_hide_" + i), xlh.attr("name", "chart_field_x_label_hide_" + i), v.attr("id", "chart_field_y_from_zero_" + i), v.attr("name", "chart_field_y_from_zero_" + i), xfz.attr("id", "chart_field_x_from_zero_" + i), xfz.attr("name", "chart_field_x_from_zero_" + i), g.attr("id", "chart_field_padding_top_" + i), g.attr("name", "chart_field_padding_top_" + i), y.attr("id", "chart_field_padding_bottom_" + i), y.attr("name", "chart_field_padding_bottom_" + i), xx.attr("id", "chart_field_size_" + i), xx.attr("name", "chart_field_size_" + i), S.attr("id", "chart_field_filter_name_" + i), S.attr("name", "chart_field_filter_name_" + i), b.attr("id", "chart_field_tick_count_" + i), b.attr("name", "chart_field_tick_count_" + i), O.attr("id", "chart_field_filter_value_" + i), O.attr("name", "chart_field_filter_value_" + i), w.attr("id", "chart_div_filter_value_" + i), k.attr("id", "chart_field_filter_alias_" + i), k.attr("name", "chart_field_filter_alias_" + i), j.attr("id", "chart_div_filter_alias_" + i), E.attr("id", "chart_field_filter_visibility_" + i), E.attr("name", "chart_field_filter_visibility_" + i), P.attr("id", "chart_div_filter_visibility_" + i), T.attr("id", "chart_field_static_reference_columns_" + i), T.attr("name", "chart_field_static_reference_columns_" + i), C.attr("id", "chart_field_static_reference_label_" + i), C.attr("name", "chart_field_static_reference_label_" + i), z.attr("id", "chart_field_dynamic_reference_type_" + i), z.attr("name", "chart_field_dynamic_reference_type_" + i), A.attr("id", "chart_field_dynamic_reference_factor_" + i), A.attr("name", "chart_field_dynamic_reference_factor_" + i), I.attr("id", "chart_field_dynamic_reference_label_" + i), I.attr("name", "chart_field_dynamic_reference_label_" + i), q.attr("id", "resource_id_" + i), q.attr("name", "resource_id_" + i), N.attr("id", "chart_field_category_name_" + i), N.attr("name", "chart_field_category_name_" + i), D.attr("id", "chart_field_sort_" + i), D.attr("name", "chart_field_sort_" + i), V.attr("id", "chart_field_sort_div_" + i), M.attr("id", "chart_field_chart_padding_left_" + i), M.attr("name", "chart_field_chart_padding_left_" + i), L.attr("id", "chart_field_chart_padding_bottom_" + i), L.attr("name", "chart_field_chart_padding_bottom_" + i), R.attr("id", "chart_field_x_text_multiline_" + i), R.attr("name", "chart_field_x_text_multiline_" + i), F.attr("id", "chart_field_x_tick_culling_max_" + i), F.attr("name", "chart_field_x_tick_culling_max_" + i),
+                        plotly.attr("id", "chart_field_plotly_" + i), plotly.attr("name", "chart_field_plotly_" + i), lplotly.attr("id", "chart_field_plotly_line_" + i), lplotly.attr("name", "chart_field_plotly_line_" + i), plotly_label.attr("id", "chart_field_plotly_label_" + i), plotly_label.attr("name", "chart_field_plotly_label_" + i), donut_hole.attr("id", "chart_field_donut_hole_" + i), donut_hole.attr("name", "chart_field_donut_hole_" + i), donut_hole_c.attr("id", "chart_donut_hole_" + i), donut_hole_l.attr("for", "chart_field_donut_hole_" + i), bar_width.attr("id", "chart_field_bar_width_" + i), bar_width.attr("name", "chart_field_bar_width_" + i), bar_width_c.attr("id", "chart_bar_width_" + i), bar_width_l.attr("for", "chart_field_bar_width_" + i);
+                        
+
+                        if(nnn[0].value == "2"){
+                            dv[0].classList.add("hidden");
+                            sq[0].classList.remove("hidden");
+                            //alert('seq');
+                        } else {
+                            //alert('diver');
+                            dv[0].classList.remove("hidden");
+                            sq[0].classList.add("hidden");
+                        }
+                        desc.attr('id', 'chart_field_desc_' + i);
+                        desc.attr('name', 'chart_field_desc_' + i);
+
+                        show_bounds.attr('id', 'chart_field_show_bounds_' + i);
+                        show_bounds.attr('name', 'chart_field_show_bounds_' + i);
+                        show_bounds_label.attr('for', 'chart_field_show_bounds_' + i);
+                        show_bounds_checkbox.attr('id', 'show_bounds_checkbox_' + i);
+
+                        lb.attr('id', 'lower_bounds_' + i);
+                        ub.attr('id', 'upper_bounds_' + i);
+
+                        lower_bounds.attr('id', 'chart_field_lower_bounds_' + i);
+                        lower_bounds.attr('name', 'chart_field_lower_bounds_' + i);
+
+                        upper_bounds.attr('id', 'chart_field_upper_bounds_' + i);
+                        upper_bounds.attr('name', 'chart_field_upper_bounds_' + i);
+
+                        axis_range.attr('id', 'chart_field_axis_range_' + i);
+                        axis_range.attr('name', 'chart_field_axis_range_' + i);
+                        show_axis_range.attr('id', 'show_axis_range_' + i);
+                        axis_range_label.attr('for', 'chart_field_axis_range_' + i);
+                        axis_range_min_id.attr('id', 'axis_range_min_' + i);
+                        axis_range_max_id.attr('id', 'axis_range_max_' + i);
+
+                        e.find("[id*=chart_field_graph_]").change();
+                        
+                    } else if (e.context.id.indexOf("text_box") >= 0) {
+                        var G = e.find("[id*=text_box_description_]"),
+                            J = e.find("[id*=text_box_size_]"),
+                            cw = e.find("[id*=text_box_column_width_]");
+                        e.attr("id", "text_box_" + i), G.attr("id", "text_box_description_" + i), G.attr("name", "text_box_description_" + i), J.attr("id", "text_box_size_" + i), J.attr("name", "text_box_size_" + i), cw.attr("id", "text_box_column_width_" + i), cw.attr("name", "text_box_column_width_" + i)
+                    } else if (e.context.id.indexOf("break_line") >= 0) {
+                        var G = e.find("[id*=line_break_desc]");
+                        e.attr("id", "break_line_" + i), G.attr("id", "line_break_desc_" + i), G.attr("name", "line_break_desc_" + i)
+                    } else if (e.context.id.indexOf("image_item") >= 0) {
+                        var W = e.find("[name*=media_image_url_]"),
+                            H = (J = e.find("[id*=image_field_size_]"), e.find("[name*=media_image_upload_]")),
+                            U = e.find("[name*=media_clear_upload_]");
+                        e.attr("id", "image_item_" + i), W.attr("name", "media_image_url_" + i), J.attr("id", "image_field_size_" + i), J.attr("name", "image_field_size_" + i), H.attr("name", "media_image_upload_" + i), U.attr("name", "media_clear_upload_" + i)
+                    } else if (e.context.id.indexOf("map_item") >= 0) {
+                        var B = e.find("[id*=map_resource_]"),
+                            K = e.find("[id*=map_title_field_]"),
+                            MT = e.find("[id*=map_custom_title_field_]"),
+                            Y = e.find("[id*=map_key_field_]"),
+                            Q = e.find("[id*=map_data_key_field_]"),
+                            X = e.find("[id*=map_color_scheme_]"),
+                            Z = e.find("[id*=map_size_]"),
+                            tt = e.find("[id*=map_module_]"),
+                            et = e.find("[id*=map_field_filter_name_]"),
+                            it = e.find("[id*=map_field_filter_value_]"),
+                            rt = e.find("[id*=map_div_filter_value_]"),
+                            nt = e.find("[id*=map_field_filter_alias_]"),
+                            at = e.find("[id*=map_div_filter_alias_]"),
+                            ot = e.find("[id*=map_field_filter_visibility_]"),
+                            lt = e.find("[id*=map_div_filter_visibility_]");
+                        e.attr("id", "map_item_" + i), B.attr("id", "map_resource_" + i), B.attr("name", "map_resource_" + i), K.attr("id", "map_title_field_" + i), K.attr("name", "map_title_field_" + i), MT.attr("id", "map_custom_title_field_" + i), MT.attr("name", "map_custom_title_field_" + i), Y.attr("id", "map_key_field_" + i), Y.attr("name", "map_key_field_" + i), Q.attr("id", "map_data_key_field_" + i), Q.attr("name", "map_data_key_field_" + i), X.attr("id", "map_color_scheme_" + i), X.attr("name", "map_color_scheme_" + i), Z.attr("id", "map_size_" + i), Z.attr("name", "map_size_" + i), tt.attr("id", "map_module_" + i), et.attr("id", "map_field_filter_name_" + i), et.attr("name", "map_field_filter_name_" + i), it.attr("id", "map_field_filter_value_" + i), it.attr("name", "map_field_filter_value_" + i), rt.attr("id", "map_div_filter_value_" + i), nt.attr("id", "map_field_filter_alias_" + i), nt.attr("name", "map_field_filter_alias_" + i), at.attr("id", "map_div_filter_alias_" + i), ot.attr("id", "map_field_filter_visibility_" + i), ot.attr("name", "map_field_filter_visibility_" + i), lt.attr("id", "map_div_filter_visibility_" + i)
+                    } else if (e.context.id.indexOf("table_item") >= 0) {
+                        var _t = e.find("[id*=table_size_]"),
+                            ct = e.find("[id*=table_data_format_]"),
+                            dt = e.find("[id*=table_main_value_]"),
+                            dts = e.find("[id*=table_second_value_]"),
+                            ft = e.find("[id*=table_category_name_]"),
+                            ut = e.find("[id*=table_field_title_]"),
+                            st = e.find("[id*=table_field_filter_name_]"),
+                            pt = e.find("[id*=table_field_filter_value_]"),
+                            ht = e.find("[id*=table_div_filter_value_]"),
+                            mt = e.find("[id*=table_field_filter_alias_]"),
+                            vt = e.find("[id*=table_div_filter_alias_]"),
+                            gt = e.find("[id*=table_field_filter_visibility_]"),
+                            yt = e.find("[id*=table_div_filter_visibility_]");
+                        e.attr("id", "table_item_" + i), _t.attr("id", "table_size_" + i), _t.attr("name", "table_size_" + i), ct.attr("id", "table_data_format_" + i), ct.attr("name", "table_data_format_" + i), dt.attr("id", "table_main_value_" + i), dt.attr("name", "table_main_value_" + i), dts.attr("id", "table_second_value_" + i), dts.attr("name", "table_second_value_" + i), ft.attr("id", "table_category_name_" + i), ft.attr("name", "table_category_name_" + i), ut.attr("id", "table_field_title_" + i), ut.attr("name", "table_field_title_" + i), st.attr("id", "table_field_filter_name_" + i), st.attr("name", "table_field_filter_name_" + i), pt.attr("id", "table_field_filter_value_" + i), pt.attr("name", "table_field_filter_value_" + i), ht.attr("id", "table_div_filter_value_" + i), mt.attr("id", "table_field_filter_alias_" + i), mt.attr("name", "table_field_filter_alias_" + i), vt.attr("id", "table_div_filter_alias_" + i), gt.attr("id", "table_field_filter_visibility_" + i), gt.attr("name", "table_field_filter_visibility_" + i), yt.attr("id", "table_div_filter_visibility_" + i)
+                    }
+                })
             }
-
-            mediaImage.attr('name', fieldImageUrl);
-
-            ckan.module.initializeElement(imageUploadModule[0]);
-        }
-
-        if (item_id) {
-            image_url_inputs = $('[name*=media_image_url_' + item_id + ']');
-            image_upload_inputs = $('[name*=media_image_upload_' + item_id + ']');
-        } else {
-            image_url_inputs = $('[name*=media_image_url_]');
-            image_upload_inputs = $('[name*=media_image_upload_]');
-        }
-
-
-        image_upload_inputs.on('change', function onMediaImageChange() {
-            var elem = $(this);
-            var image_upload_id = elem.attr('name');
-            var image_id = image_upload_id.substr(image_upload_id.lastIndexOf('_') + 1);
-            var imageUpload = $('#image_upload_' + image_id);
-
-            imageUpload.val(elem.val());
-        });
-
-    }
-
-})(ckan.i18n.ngettext, $);
-
-$(document).on('show','.accordion', function (e) {
-    //$('.accordion-heading i').toggleClass(' ');
-    $(e.target).prev('.accordion-heading').addClass('accordion-opened');
-});
-
-$(document).on('hide','.accordion', function (e) {
-   $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
-   //$('.accordion-heading i').toggleClass('fa-chevron-right fa-chevron-down');
-});
-
-// Locate all chart type select elements and add change event listener:
-function handleChartOptions() {
-  $('select[id^=chart_field_graph_]').each(function() {
-    $(this).change(function() {
-      var id = $(this).attr('id');
-      // Handle 'category' option:
-      var categoryField = $('#chart_field_category_name_' + id[id.length - 1]);
-      if (['sbar', 'shbar', 'donut', 'pie'].includes($(this).val())) {
-        categoryField.prop('value', '');
-        categoryField.prop('disabled', true);
-      } else {
-        categoryField.prop('disabled', false);
-      }
-
-      // Handle 'Max number of text labels' option:
-      var xTickCullingMaxField = $('#chart_field_x_tick_culling_max_' + id[id.length - 1]);
-      if (['bar', 'hbar', 'sbar', 'shbar', 'pie', 'donut'].includes($(this).val())) {
-        xTickCullingMaxField.prop('disabled', true);
-      } else {
-        xTickCullingMaxField.prop('disabled', false);
-      }
-
-      // Handle 'Show labels as percentages' option:
-      // Handle chart options for pie and donut charts:
-      var showLabelsAsPercentagesField = $('#chart_field_show_labels_as_percentages_' + id[id.length - 1]);
-      var xTextRotateField = $('#chart_field_x_text_rotate_' + id[id.length - 1]);
-      var xTextMultilineField = $('#chart_field_x_text_multiline_' + id[id.length - 1]);
-      var yLabelField = $('#chart_field_y_label_' + id[id.length - 1]);
-      var yLabelHideField = $('#chart_field_y_label_hide_' + id[id.length - 1]);
-      var yFromZeroField = $('#chart_field_y_from_zero_' + id[id.length - 1]);
-      var yTicksFormatField = $('#chart_field_y_ticks_format_' + id[id.length - 1]);
-      var dataFormatField = $('#chart_field_data_format_' + id[id.length - 1]);
-      var labelsField = $('#chart_field_labels_' + id[id.length - 1]);
-      var staticReferenceColumnsField = $('#chart_field_static_reference_columns_' + id[id.length - 1]);
-      var staticReferenceLabelField = $('#chart_field_static_reference_label_' + id[id.length - 1]);
-      var dynamicReferenceTypeField = $('#chart_field_dynamic_reference_type_' + id[id.length - 1]);
-      var dynamicReferenceFactor = $('#chart_field_dynamic_reference_factor_' + id[id.length - 1]);
-      var dynamicReferenceLabel = $('#chart_field_dynamic_reference_label_' + id[id.length - 1]);
-      if (['pie', 'donut'].includes($(this).val())) {
-        showLabelsAsPercentagesField.prop('disabled', false);
-        xTextRotateField.prop('disabled', true);
-        xTextMultilineField.prop('disabled', true);
-        yLabelField.prop('disabled', true);
-        yLabelHideField.prop('disabled', true);
-        yFromZeroField.prop('disabled', true);
-        yTicksFormatField.prop('disabled', true);
-        dataFormatField.prop('disabled', true);
-        labelsField.prop('disabled', true);
-        staticReferenceColumnsField.prop('disabled', true);
-        staticReferenceLabelField.prop('disabled', true);
-        dynamicReferenceTypeField.prop('disabled', true);
-        dynamicReferenceFactor.prop('disabled', true);
-        dynamicReferenceLabel.prop('disabled', true);
-      } else {
-        showLabelsAsPercentagesField.prop('disabled', true);
-        showLabelsAsPercentagesField.prop('checked', false);
-        xTextRotateField.prop('disabled', false);
-        xTextMultilineField.prop('disabled', false);
-        yLabelField.prop('disabled', false);
-        yLabelHideField.prop('disabled', false);
-        yFromZeroField.prop('disabled', false);
-        yTicksFormatField.prop('disabled', false);
-        dataFormatField.prop('disabled', false);
-        labelsField.prop('disabled', false);
-        staticReferenceColumnsField.prop('disabled', false);
-        staticReferenceLabelField.prop('disabled', false);
-        dynamicReferenceTypeField.prop('disabled', false);
-        dynamicReferenceFactor.prop('disabled', false);
-        dynamicReferenceLabel.prop('disabled', false);
-      }
-    });
-  });
-};
-
-$(document).ready(function() {
-  handleChartOptions();
+            console.log('IN VISUALIZATION SETTINGS!');
+            n(), $("#save-edit-data-btn").removeAttr("disabled"), $("#save-visualization-btn").removeAttr("disabled"), $(".save-visualization-btn").click(function(e) {
+                0 === $(".item").length && (e.preventDefault(), alert(t("Please create at least one visualization.")))
+            }), v.change(function(t) {
+                $("[name*=chart_field_axis_y_]").val(t.target.value), ckan.sandbox().publish("querytool:updateCharts"), ckan.sandbox().publish("querytool:updateMaps"), ckan.sandbox().publish("querytool:updateTables")
+            }), $(document).on("click", ".delete-item-btn", function(t) {
+                t.target.closest(".item").remove(), g()
+            }), $("#add-visualization-btn").on("click", function() {
+                $.proxyAll(this, /_on/);
+                var t = $("#item_type").val(),
+                    a = $(".item").length + 1,
+                    y = v.val(),
+                    b = $("#choose_y_axis_column option:selected").text();
+                if ("chart" === t) {
+                    var x = window.location.href.substr(window.location.href.lastIndexOf("/") + 1).split("?")[0];
+                    i.getTemplate("chart_item.html", {
+                        n: a,
+                        querytool: x,
+                        chart_resource: u,
+                        map_resource: s,
+                        sql_string: f,
+                        y_axis_values: p,
+                        main_filters: h,
+                        info_query_filters: JSON.stringify(m),
+                        measure_label: b
+                    }).done(function(t) {
+                        var i = e.prepend(t);
+                        ckan.module.initializeElement(i.find("div[data-module=querytool-viz-preview]")[0]), o("chart", a), g(), l(), _(), c(), $("[name*=chart_field_axis_y_]").val(y), n(a), r()
+                    })
+                } else "map" === t ? i.getTemplate("map_item.html", {
+                    n: a,
+                    chart_resource: u,
+                    sql_string: f,
+                    y_axis_column: y,
+                    y_axis_values: p,
+                    main_filters: h,
+                    info_query_filters: JSON.stringify(m)
+                }).done(function(t) {
+                    var i = e.prepend(t);
+                    ckan.module.initializeElement(i.find("div[data-module=querytool-map]")[0]), o("map", a), g()
+                }) : "text-box" == t ? i.getTemplate("text_box_item.html", {
+                    number: a,
+                    main_filters: JSON.stringify(m)
+                }).done(function(t) {
+                    e.prepend(t);
+                    g()
+                }) : "image" === t ? i.getTemplate("image_item.html", {
+                    n: a
+                }).done(function(t) {
+                    e.prepend(t);
+                    d(a), g()
+                }): "break-line" == t ? i.getTemplate("break_line_item.html", {
+                    n: a
+                }).done(function(t) {
+                    e.prepend(t);
+                    g()
+                }) : "table" === t && i.getTemplate("table_item.html", {
+                    n: a,
+                    sql_string: f,
+                    resource_id: u,
+                    y_axis: y,
+                    y_axis_values: p,
+                    main_filters: h,
+                    info_query_filters: JSON.stringify(m)
+                }).done(function(t) {
+                    var i = e.prepend(t);
+                    ckan.module.initializeElement(i.find("div[data-module=querytool-table]")[0]), o("table", a), g(), l(), _(), c(), $("[name*=chart_field_axis_y_]").val(y), n(a), r()
+                })
+            }), dragula([e[0]], {
+                moves: function(t, e, i) {
+                    return i.classList.contains("grippy")
+                }
+            }).on("drag", function(t, e, i) {
+                t.querySelector(".grippy").classList.add("cursor-grabbing")
+            }).on("dragend", function(t) {
+                t.querySelector(".grippy").classList.remove("cursor-grabbing"), g(), window.location.hash = t.id, window.scrollTo(0, t.offsetTop)
+            }), window.handleItemsOrder = g
+        })
+    }(ckan.i18n.ngettext, $), $(document).on("show", ".accordion", function(t) {
+        $(t.target).prev(".accordion-heading").addClass("accordion-opened")
+    }), $(document).on("hide", ".accordion", function(t) {
+        $(this).find(".accordion-heading").not($(t.target)).removeClass("accordion-opened")
+    }), $(document).ready(function() {
+        r()
+    })
 });
