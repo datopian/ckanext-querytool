@@ -2844,7 +2844,9 @@
                         nticks:this.options.x_tick_culling_max,
                         tickfont: {
                             size: 14,
-                        }
+                        },
+                        categoryorder: "array",
+                        categoryarray: ["Age","Area","Age by Area","Sex","Sex by Age","Sex by Area","Total"]
                     },
                     yaxis: {
                         tickformat: f,
@@ -3320,11 +3322,11 @@
                 }
 
 
-                //console.log(data);
+                console.log(data);
                 //console.log(O);
                 //console.log(base_info); 
                 //console.log(data)
-                //console.log(this.options)
+                console.log(this.options)
 
                 console.log('Generate plotly')
 
