@@ -1507,7 +1507,10 @@
                             ltypes = e.find("[id*=chart_field_line_type_]"),
                             ltypes_label = e.find("label[for*=chart_field_line_type_]"),
                             lwidthtarget = e.find("[data-target*=chart_field_line_width_]"),
-                            lwidths = e.find("[id*=chart_field_line_width_]");
+                            lwidths = e.find("[id*=chart_field_line_width_]"),
+                            x_sort_labels_id = e.find("[id*=chart_field_x_sort_labels_]"),
+                            x_sort_labels_label = e.find("label[for*=chart_field_x_sort_labels_]"),
+                            x_sort_labels_name = e.find("[name*=chart_field_x_sort_labels_]");
 
 
 
@@ -1588,6 +1591,9 @@
                         axis_range_label.attr('for', 'chart_field_axis_range_' + i);
                         axis_range_min_id.attr('id', 'axis_range_min_' + i);
                         axis_range_max_id.attr('id', 'axis_range_max_' + i);
+                        x_sort_labels_id.attr('id', 'x_sort_labels_' + i);
+                        x_sort_labels_name.attr('name', 'x_sort_labels_' + i);
+                        x_sort_labels_label.attr('for', 'x_sort_labels_' + i);
 
                         e.find("[id*=chart_field_graph_]").change();
                         
