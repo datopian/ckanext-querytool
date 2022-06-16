@@ -2828,6 +2828,46 @@
                 //console.log(data);
                 const sortX = true;
                 let sortedArr = [];
+
+                /* 
+                const arr0 = [88,3,5,82,1]
+                arr0.sort(function (a, b) {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                console.log(arr0);
+
+                const arr = ['a','e','i','b','r']
+                arr.sort(function (a, b) {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                console.log(arr)
+
+
+                var arr2 = ['2020-12-01', '2018-12-15','2020-12-12']
+                const sorted = arr2.sort(
+                function (a, b) {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                console.log(sorted);
+                */
                 if(sortX === true) {
                     //Date format '2020-12-01'  YYYY-MM-DD
                     sortedArr = data[0].x.slice(0).sort(function (a, b) {
