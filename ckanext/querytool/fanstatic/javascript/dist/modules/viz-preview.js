@@ -2824,6 +2824,23 @@
                     this.options.y_text_rotate = 45;
                 }
 
+                //Sort x-axis asc 
+                //console.log(data);
+                const sortX = true;
+                let sortedArr = [];
+                if(sortX === true) {
+                    //Date format '2020-12-01'  YYYY-MM-DD
+                    sortedArr = data[0].x.slice(0).sort(function (a, b) {
+                        if (a > b) {
+                            return 1;
+                        }
+                        if (a < b) {
+                            return -1;
+                        }
+                        return 0;
+                    });
+                }
+                //console.log(sortedArr);
 
                 var base_info = {
                     margin: {
@@ -2846,7 +2863,7 @@
                             size: 14,
                         },
                         categoryorder: "array",
-                        categoryarray: ["Age","Area","Age by Area","Sex","Sex by Age","Sex by Area","Total"]
+                        categoryarray: sortedArr
                     },
                     yaxis: {
                         tickformat: f,
@@ -3322,11 +3339,11 @@
                 }
 
 
-                console.log(data);
+                //console.log(data);
                 //console.log(O);
                 //console.log(base_info); 
                 //console.log(data)
-                console.log(this.options)
+                //console.log(this.options)
 
                 console.log('Generate plotly')
 
