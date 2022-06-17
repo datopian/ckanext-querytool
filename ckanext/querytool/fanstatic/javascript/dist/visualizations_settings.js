@@ -1429,6 +1429,13 @@
                 var t = $(".item");
                 $.each(t, function(t, e) {
                     var i = t + 1;
+                    function incrementCopyButton() {
+                        var copyButtonId = e.find("[id*=copy-viz-btn_]"),
+                            copyButtonName = e.find("[name*=copy-viz-btn_]");
+
+                        copyButtonId.attr("id", "copy-viz-btn_" + i), copyButtonName.attr("name", "copy-viz-btn_" + i);
+                    }
+
                     if ((e = $(e)).context.id.indexOf("chart_field") >= 0) { 
                         var r = e.find("[id*=chart_field_graph_]"),
                             n = e.find("[id*=chart_field_color_]"),
@@ -1590,19 +1597,24 @@
                         axis_range_max_id.attr('id', 'axis_range_max_' + i);
 
                         e.find("[id*=chart_field_graph_]").change();
+                        incrementCopyButton();
                         
                     } else if (e.context.id.indexOf("text_box") >= 0) {
                         var G = e.find("[id*=text_box_description_]"),
                             J = e.find("[id*=text_box_size_]"),
-                            cw = e.find("[id*=text_box_column_width_]");
-                        e.attr("id", "text_box_" + i), G.attr("id", "text_box_description_" + i), G.attr("name", "text_box_description_" + i), J.attr("id", "text_box_size_" + i), J.attr("name", "text_box_size_" + i), cw.attr("id", "text_box_column_width_" + i), cw.attr("name", "text_box_column_width_" + i)
+                            cw = e.find("[id*=text_box_column_width_]"),
+                            tbd = e.find("label[for*=text_box_description_]");
+                        incrementCopyButton();
+                        e.attr("id", "text_box_" + i), G.attr("id", "text_box_description_" + i), G.attr("name", "text_box_description_" + i), J.attr("id", "text_box_size_" + i), J.attr("name", "text_box_size_" + i), cw.attr("id", "text_box_column_width_" + i), cw.attr("name", "text_box_column_width_" + i), tbd.attr("for", "text_box_description_" + i)
                     } else if (e.context.id.indexOf("break_line") >= 0) {
                         var G = e.find("[id*=line_break_desc]");
+                        incrementCopyButton();
                         e.attr("id", "break_line_" + i), G.attr("id", "line_break_desc_" + i), G.attr("name", "line_break_desc_" + i)
                     } else if (e.context.id.indexOf("image_item") >= 0) {
                         var W = e.find("[name*=media_image_url_]"),
                             H = (J = e.find("[id*=image_field_size_]"), e.find("[name*=media_image_upload_]")),
                             U = e.find("[name*=media_clear_upload_]");
+                        incrementCopyButton();
                         e.attr("id", "image_item_" + i), W.attr("name", "media_image_url_" + i), J.attr("id", "image_field_size_" + i), J.attr("name", "image_field_size_" + i), H.attr("name", "media_image_upload_" + i), U.attr("name", "media_clear_upload_" + i)
                     } else if (e.context.id.indexOf("map_item") >= 0) {
                         var B = e.find("[id*=map_resource_]"),
@@ -1620,6 +1632,7 @@
                             at = e.find("[id*=map_div_filter_alias_]"),
                             ot = e.find("[id*=map_field_filter_visibility_]"),
                             lt = e.find("[id*=map_div_filter_visibility_]");
+                        incrementCopyButton();
                         e.attr("id", "map_item_" + i), B.attr("id", "map_resource_" + i), B.attr("name", "map_resource_" + i), K.attr("id", "map_title_field_" + i), K.attr("name", "map_title_field_" + i), MT.attr("id", "map_custom_title_field_" + i), MT.attr("name", "map_custom_title_field_" + i), Y.attr("id", "map_key_field_" + i), Y.attr("name", "map_key_field_" + i), Q.attr("id", "map_data_key_field_" + i), Q.attr("name", "map_data_key_field_" + i), X.attr("id", "map_color_scheme_" + i), X.attr("name", "map_color_scheme_" + i), Z.attr("id", "map_size_" + i), Z.attr("name", "map_size_" + i), tt.attr("id", "map_module_" + i), et.attr("id", "map_field_filter_name_" + i), et.attr("name", "map_field_filter_name_" + i), it.attr("id", "map_field_filter_value_" + i), it.attr("name", "map_field_filter_value_" + i), rt.attr("id", "map_div_filter_value_" + i), nt.attr("id", "map_field_filter_alias_" + i), nt.attr("name", "map_field_filter_alias_" + i), at.attr("id", "map_div_filter_alias_" + i), ot.attr("id", "map_field_filter_visibility_" + i), ot.attr("name", "map_field_filter_visibility_" + i), lt.attr("id", "map_div_filter_visibility_" + i)
                     } else if (e.context.id.indexOf("table_item") >= 0) {
                         var _t = e.find("[id*=table_size_]"),
@@ -1635,6 +1648,7 @@
                             vt = e.find("[id*=table_div_filter_alias_]"),
                             gt = e.find("[id*=table_field_filter_visibility_]"),
                             yt = e.find("[id*=table_div_filter_visibility_]");
+                        incrementCopyButton();
                         e.attr("id", "table_item_" + i), _t.attr("id", "table_size_" + i), _t.attr("name", "table_size_" + i), ct.attr("id", "table_data_format_" + i), ct.attr("name", "table_data_format_" + i), dt.attr("id", "table_main_value_" + i), dt.attr("name", "table_main_value_" + i), dts.attr("id", "table_second_value_" + i), dts.attr("name", "table_second_value_" + i), ft.attr("id", "table_category_name_" + i), ft.attr("name", "table_category_name_" + i), ut.attr("id", "table_field_title_" + i), ut.attr("name", "table_field_title_" + i), st.attr("id", "table_field_filter_name_" + i), st.attr("name", "table_field_filter_name_" + i), pt.attr("id", "table_field_filter_value_" + i), pt.attr("name", "table_field_filter_value_" + i), ht.attr("id", "table_div_filter_value_" + i), mt.attr("id", "table_field_filter_alias_" + i), mt.attr("name", "table_field_filter_alias_" + i), vt.attr("id", "table_div_filter_alias_" + i), gt.attr("id", "table_field_filter_visibility_" + i), gt.attr("name", "table_field_filter_visibility_" + i), yt.attr("id", "table_div_filter_visibility_" + i)
                     }
                 })
