@@ -554,4 +554,4 @@
     }), $(document).ready(function() {
         r()
     })
-});
+})();
