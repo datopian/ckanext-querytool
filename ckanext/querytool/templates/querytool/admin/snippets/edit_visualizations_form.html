@@ -12,7 +12,7 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 
-
+<div id="submit-overlay"></div>
 <form
   method="post"
   action="{{ action_url }}"
@@ -124,3 +124,4 @@ action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)
 
   {% endblock %}
 </form>
+</div>
