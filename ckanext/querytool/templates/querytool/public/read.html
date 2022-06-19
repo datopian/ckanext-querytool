@@ -286,7 +286,8 @@
             axis_min = item.axis_min,
             axis_max = item.axis_max,
             line_types = item.line_types,
-            line_widths = item.line_widths
+            line_widths = item.line_widths,
+            x_sort_labels = item.x_sort_labels
           %}
         {% endif %}
         {% if item.type == 'text_box' %}
@@ -374,7 +375,7 @@
           {% set additional_description = h.render_markdown(item.additional_description) %}
 
           {% if additional_description != "<p>None</p>" %}
-            {{ additional_description }}
+            <div class='additional_desc' id='item-desc-{{chart_id}}' style="display:none;">{{ additional_description }}</div>
           {% endif %}
           <p class="clearfix"></p>
         {% endif %}

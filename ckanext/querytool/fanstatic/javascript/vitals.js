@@ -771,13 +771,14 @@ $(document).ready(function(){
       $(`#chart_field_x_label_hide_${chart_number}`).attr("disabled");
       $(`#chart_field_sort_${chart_number}`).attr('disabled', 'true');
       $(`#chart_field_x_ticks_format_${chart_number}`).attr('disabled', 'true');
+      $(`#chart_field_x_sort_labels_${chart_number}`).attr('disabled', 'true');
 
     } else {
       $(`#chart_field_x_label_${chart_number}`).removeAttr("disabled");
       $(`#chart_field_x_label_hide_${chart_number}`).removeAttr("disabled");
       $(`#chart_field_sort_${chart_number}`).removeAttr('disabled');
       $(`#chart_field_x_ticks_format_${chart_number}`).removeAttr('disabled');
-
+      $(`#chart_field_x_sort_labels_${chart_number}`).removeAttr('disabled');
       
     }
 

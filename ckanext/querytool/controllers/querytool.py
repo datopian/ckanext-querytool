@@ -597,6 +597,11 @@ class QueryToolController(base.BaseController):
                     else:
                         visualization['category_name'] = ''
 
+                    if 'chart_field_x_sort_labels_{}'.format(id) in data:
+                        visualization['x_sort_labels'] = 'true'
+                    else:
+                        visualization['x_sort_labels'] = 'false'
+
                     #print data
 
                     visualizations.append(visualization)

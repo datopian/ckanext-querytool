@@ -436,6 +436,23 @@
                </div>
             </div>
 
+            {# X-axis sort labels #}
+            {% if chart %}
+              {% set x_sort_labels = chart.x_sort_labels %}
+            {% endif %}
+            {% if selected_chart_type in ['pie', 'donut'] %}
+              {% set x_sort_labels_disable = 'disabled' %}
+            {% else %}
+              {% set x_sort_labels_disable = '' %}
+            {% endif %}
+
+            <div class="control-group {{x_sort_labels_disable}}">
+              <label class="control-label" for="chart_field_x_sort_labels_{{ n }}">{{ _('Sort x axis labels') }}</label>
+              <div class="controls ">
+                 <input id="chart_field_x_sort_labels_{{ n }}" type="checkbox" name="chart_field_x_sort_labels_{{ n }}" value="{{ x_sort_labels }}" {% if x_sort_labels=='true' %}checked{% endif %}>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
@@ -1044,6 +1061,7 @@
           {% set axis_max = chart.axis_max %}
           {% set line_types = chart.line_types %}
           {% set line_widths = chart.line_widths %}
+          {% set x_sort_labels = chart.x_sort_labels %}
       {% endif %}
       {% snippet 'ajax_snippets/visualization_item.html',
           type='chart',
@@ -1099,7 +1117,8 @@
           axis_min = axis_min,
           axis_max = axis_max,
           line_types = line_types,
-          line_widths = line_widths
+          line_widths = line_widths,
+          x_sort_labels = x_sort_labels
       %}
    </div>
 </div>

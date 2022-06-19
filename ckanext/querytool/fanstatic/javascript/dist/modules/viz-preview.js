@@ -1576,6 +1576,7 @@
                     g = !0 === this.options.category_name ? "" : this.options.category_name,
                     x = !0 === this.options.static_reference_label ? "" : this.options.static_reference_label,
                     b = !0 === this.options.dynamic_reference_label ? "" : this.options.dynamic_reference_label,
+                    x_sort_labels = this.options.x_sort_labels,
                     S = this.options.show_labels_as_percentages || !1,
                     desc = !0 === this.options.description ? "" : this.options.description,
                     line_types = this.options.line_types,
@@ -2786,7 +2787,9 @@
                 if(this.el.context.parentElement.querySelector(".additional_desc")) {
                     var desc_id = this.el.context.parentElement.querySelector(".additional_desc").id;
                     if(desc_id){
-                        document.getElementById(desc_id).innerHTML =  desc;
+                        var converter = new showdown.Converter();
+                        var convertedDesc = converter.makeHtml(desc);
+                        document.getElementById(desc_id).innerHTML = convertedDesc;
                         document.getElementById(desc_id).style.display = "block";
                     }
                 }
@@ -2822,6 +2825,81 @@
                     this.options.y_text_rotate = 45;
                 }
 
+                //Sort x-axis asc 
+                //console.log(data);
+                const sortX = x_sort_labels;
+                let sortedArr = [];
+
+                /* 
+                const arr0 = [88,3,5,82,1]
+                arr0.sort(function (a, b) {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                console.log(arr0);
+
+                const arr = ['a','e','i','b','r']
+                arr.sort(function (a, b) {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                console.log(arr)
+
+
+                var arr2 = ['2020-12-01', '2018-12-15','2020-12-12']
+                const sorted = arr2.sort(
+                function (a, b) {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                });
+                console.log(sorted);
+                */
+                if(x_sort_labels === true) {
+                    //Date format '2020-12-01'  YYYY-MM-DD
+                    //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
+
+                    function dateComparison(a, b) {
+                        const date1 = new Date(a)
+                        const date2 = new Date(b)
+                        
+                        return date1 - date2;
+                    }
+
+                    function stringComparison(a, b) {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                    }
+
+                    if (isNaN(Date.parse(data[0].x[0])) == true) {
+                        sortedArr = data[0].x.slice(0).sort(stringComparison);
+                    } else {
+                        sortedArr = data[0].x.slice(0).sort(dateComparison);
+                    }
+
+                } else {
+                    sortedArr = data[0].x
+                }
+                //console.log(sortedArr);
 
                 var base_info = {
                     margin: {
@@ -2842,7 +2920,9 @@
                         nticks:this.options.x_tick_culling_max,
                         tickfont: {
                             size: 14,
-                        }
+                        },
+                        categoryorder: "array",
+                        categoryarray: sortedArr
                     },
                     yaxis: {
                         tickformat: f,
@@ -3414,6 +3494,7 @@
                     N = t.find("select[name*=chart_field_dynamic_reference_type_]").val(),
                     P = t.find("input[name*=chart_field_dynamic_reference_factor_]").val(),
                     F = t.find("input[name*=chart_field_dynamic_reference_label_]").val(),
+                    x_sort_labels = t.find("input[name*=chart_field_x_sort_labels_]").is(":checked"),
                     M = $("#choose_y_axis_column option:selected").text(),
                     I = t.find("[name*=chart_field_show_labels_as_percentages_]").is(":checked"),
                     plotly = t.find("input[name*=chart_field_plotly_]").val(),
@@ -3444,8 +3525,8 @@
                   lwidths.push(String(t.find(`[name=${lwidths_list[i].id}]`).val()))
                 }
 
-                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, this.options.line_types = ltypes.join(), this.options.line_widths = lwidths.join(), void this.createChart(this.fetched_data);
-                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, this.options.line_types = ltypes.join(), this.options.line_widths = lwidths.join();
+                if (this.fetched_data && this.options.x_axis === o && this.options.y_axis === a && this.options.filter_name === m && this.options.filter_value === g && this.options.category_name === x && this.options.chart_type === e && this.options.static_reference_columns === k && this.options.dynamic_reference_type === N && this.options.dynamic_reference_factor === P && this.options.plotly === plotly && this.options.bar_width === bar_width && this.options.donut_hole === donut_hole) return this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.tick_count = y, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.x_sort_labels = x_sort_labels, this.options.donut_hole = donut_hole, this.options.line_types = ltypes.join(), this.options.line_widths = lwidths.join(), void this.createChart(this.fetched_data);
+                this.options.colors = n, this.options.seq_color = nn, this.options.color_type = nnn, this.options.chart_type = e, this.options.x_axis = o, this.options.y_axis = a, this.options.title = s, this.options.show_legend = c, this.options.show_annotations = sa, this.options.show_bounds = bnds, this.options.x_text_rotate = u, this.options.x_text_multiline = l, this.options.x_tick_culling_max = f, this.options.tooltip_name = p, this.options.data_format = h, this.options.y_tick_format = _, this.options.x_tick_format = xf, this.options.chart_padding_left = i, this.options.chart_padding_bottom = r, this.options.padding_top = d, this.options.padding_bottom = v, this.options.show_labels = S, this.options.tick_count = y, this.options.y_label = O, this.options.y_label_hide = w, this.options.x_label = xl, this.options.x_label_hide = xlh, this.options.y_from_zero = E, this.options.axis_range = yp, this.options.x_from_zero, this.options.filter_name = m, this.options.filter_value = g, this.options.category_name = x, this.options.data_sort = b, this.options.upper_bounds = ub, this.options.lower_bounds = lb, this.options.axis_min = amin, this.options.axis_max = amax, this.options.static_reference_columns = k, this.options.static_reference_label = j, this.options.dynamic_reference_type = N, this.options.dynamic_reference_factor = P, this.options.dynamic_reference_label = F, this.options.measure_label = M, this.options.show_labels_as_percentages = I, this.options.plotly = plotly, this.options.bar_width = bar_width, this.options.donut_hole = donut_hole, this.options.x_sort_labels = x_sort_labels, this.options.line_types = ltypes.join(), this.options.line_widths = lwidths.join();
 
                 if (bar_width != ''){
                   this.options.bar_width = parseFloat(bar_width) / 10
