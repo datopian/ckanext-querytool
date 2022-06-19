@@ -2896,6 +2896,8 @@
                         sortedArr = data[0].x.slice(0).sort(dateComparison);
                     }
 
+                } else {
+                    sortedArr = data[0].x
                 }
                 //console.log(sortedArr);
 
