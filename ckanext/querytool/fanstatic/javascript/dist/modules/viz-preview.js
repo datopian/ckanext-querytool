@@ -2871,15 +2871,31 @@
                 */
                 if(x_sort_labels === true) {
                     //Date format '2020-12-01'  YYYY-MM-DD
-                    sortedArr = data[0].x.slice(0).sort(function (a, b) {
-                        if (a > b) {
-                            return 1;
-                        }
-                        if (a < b) {
-                            return -1;
-                        }
-                        return 0;
-                    });
+                    //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
+
+                    function dateComparison(a, b) {
+                        const date1 = new Date(a)
+                        const date2 = new Date(b)
+                        
+                        return date1 - date2;
+                    }
+
+                    function stringComparison(a, b) {
+                    if (a > b) {
+                        return 1;
+                    }
+                    if (a < b) {
+                        return -1;
+                    }
+                    return 0;
+                    }
+
+                    if (isNaN(Date.parse(data[0].x[0])) == true) {
+                        sortedArr = data[0].x.slice(0).sort(stringComparison);
+                    } else {
+                        sortedArr = data[0].x.slice(0).sort(dateComparison);
+                    }
+
                 }
                 //console.log(sortedArr);
 
