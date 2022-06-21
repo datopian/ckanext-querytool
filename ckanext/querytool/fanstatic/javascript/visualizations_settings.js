@@ -493,6 +493,14 @@
 
                 item = $(item);
                 var order = i + 1;
+
+                function incrementCopyButton() {
+                    var copyButtonId = item.find("[id*=copy-viz-btn_]"),
+                        copyButtonName = item.find("[name*=copy-viz-btn_]");
+
+                    copyButtonId.attr("id", "copy-viz-btn_" + order), copyButtonName.attr("name", "copy-viz-btn_" + order);
+                }
+
                 if (item.context.id.indexOf('chart_field') >= 0) {
                     //  NOTE: the "mapped to" comments are here to help  
                     //  with the reverse mapping of variables that  are
@@ -896,17 +904,21 @@
                     x_sort_labels_label.attr('for', 'x_sort_labels_' + order);
 
                     item.find("[id*=chart_field_graph_]").change();
+                    incrementCopyButton();
 
                 } else if (item.context.id.indexOf('text_box') >= 0) {
 
                     var description = item.find('[id*=text_box_description_]');
                     var size = item.find('[id*=text_box_size_]');
-                    var column_width = item.find('[id*=text_box_column_width_]');    //  NOTE: mapped to cw
+                    var column_width = item.find('[id*=text_box_column_width_]');
+                    var description_label = item.find("label[for*=text_box_description_]");    //  NOTE: mapped to cw
+                    incrementCopyButton();
 
                     item.attr('id', 'text_box_' + order);
 
                     description.attr('id', 'text_box_description_' + order);
                     description.attr('name', 'text_box_description_' + order);
+                    description_label.attr('for', 'text_box_description_' + order);
 
                     size.attr('id', 'text_box_size_' + order);
                     size.attr('name', 'text_box_size_' + order);
@@ -917,6 +929,8 @@
                 } else if (item.context.id.indexOf("break_line") >= 0) {
 
                     var line_break_desc = item.find("[id*=line_break_desc]");
+
+                    incrementCopyButton();
                     
                     item.attr("id","break_line_" + order),
                       
@@ -929,6 +943,8 @@
                     var size = item.find('[id*=image_field_size_]');
                     var upload = item.find('[name*=media_image_upload_]');
                     var clear = item.find('[name*=media_clear_upload_]');
+
+                    incrementCopyButton();
 
                     item.attr('id', 'image_item_' + order);
                     url.attr('name', 'media_image_url_' + order);
@@ -954,6 +970,8 @@
                     var selectMapFilterVAliasDiv = item.find('[id*=map_div_filter_alias_]');
                     var selectMapFilterVisibility = item.find('[id*=map_field_filter_visibility_]');
                     var selectMapFilterVisibilityDiv = item.find('[id*=map_div_filter_visibility_]');
+
+                    incrementCopyButton();
 
                     item.attr('id', 'map_item_' + order);
                     map_resource_url.attr('id', 'map_resource_' + order);
@@ -1002,6 +1020,8 @@
                     var selectTableFilterVAliasDiv = item.find('[id*=table_div_filter_alias_]');
                     var selectTableFilterVisibility = item.find('[id*=table_field_filter_visibility_]');
                     var selectTableFilterVisibilityDiv = item.find('[id*=table_div_filter_visibility_]');
+
+                    incrementCopyButton();
 
                     item.attr('id', 'table_item_' + order);
 

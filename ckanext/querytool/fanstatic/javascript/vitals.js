@@ -1303,3 +1303,9 @@ $(".filter-item-value").tooltip({
     return $(this).find('.active').attr('value');
   }
 });
+
+$('body').on('click', '[id^=copy-viz-btn_]', function () {
+  document.getElementById("submit-overlay").style.display = "block";
+  document.getElementById("submit-overlay").style.pointerEvents = "none";
+  $(this).text('Copying...');
+});

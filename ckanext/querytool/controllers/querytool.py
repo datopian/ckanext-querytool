@@ -304,7 +304,8 @@ class QueryToolController(base.BaseController):
                       extra_vars=vars)
 
     def edit_visualizations(self, querytool=None, data=None,
-                            errors=None, error_summary=None):
+                            errors=None, error_summary=None,
+                            is_copy=False):
         '''
             Create or edit visualizations for the querytool
 
@@ -354,6 +355,57 @@ class QueryToolController(base.BaseController):
 
         if toolkit.request.method == 'POST' and not data:
             data = dict(toolkit.request.POST)
+
+            is_copy = False
+            copy_id = [k for k in data.keys() if k.startswith('copy-viz-btn_')]
+
+            if len(copy_id) == 1:
+                is_copy = True
+                copy_id = copy_id[0].split('_')[-1]
+            else:
+                copy_id = None
+
+            new_visualizations = {}
+            existing_visualizations = {}
+
+            if copy_id is not None:
+                for key, value in data.items():
+                    if key == 'save':
+                        continue
+
+                    key_list = key.split('_')
+
+                    if any(key.startswith(label) for label in [
+                       'chart_field_color_',
+                       'chart_field_line_width_',
+                       'chart_field_line_type_'
+                       ]) and key_list[-1].isdigit() and key_list[-2].isdigit():
+                        current_visualization = key_list[-2]
+
+                        if copy_id == current_visualization:
+                            new_key_list = list(key_list)
+                            new_key_list[-2] = '1'
+                            new_visualizations['_'.join(new_key_list)] = value
+
+                        key_list[-2] = str(int(key_list[-2]) + 1)
+
+                    elif key_list[-1].isdigit():
+                        current_visualization = key_list[-1]
+
+                        if copy_id == current_visualization:
+                            new_key_list = list(key_list)
+                            new_key_list[-1] = '1'
+                            new_visualizations['_'.join(new_key_list)] = value
+
+                        key_list[-1] = str(int(key_list[-1]) + 1)
+
+                    existing_visualizations['_'.join(key_list)] = value
+
+                new_visualizations.update(existing_visualizations)
+
+                if len(new_visualizations) > 0:
+                    data = new_visualizations
+
             visualizations = []
             text_boxes = []
             images = []
@@ -524,7 +576,7 @@ class QueryToolController(base.BaseController):
                         visualization['x_from_zero'] = 'true'
                     else:
                         visualization['x_from_zero'] = 'false'
-                    if data['chart_field_filter_name_{}'.format(id)]:
+                    if data.get('chart_field_filter_name_{}'.format(id)):
                         visualization['filter_name'] = \
                             data['chart_field_filter_name_{}'.format(id)]
                         visualization['filter_value'] = \
@@ -653,7 +705,7 @@ class QueryToolController(base.BaseController):
                         data['table_field_title_{}'.format(id)]
                     table_item['data_format'] = \
                         data['table_data_format_{}'.format(id)]
-                    if data['table_field_filter_name_{}'.format(id)]:
+                    if data.get('table_field_filter_name_{}'.format(id)):
                         table_item['filter_name'] = \
                             data['table_field_filter_name_{}'.format(id)]
                         table_item['filter_value'] = \
@@ -668,7 +720,7 @@ class QueryToolController(base.BaseController):
                         table_item['filter_alias'] = ''
                         table_item['filter_visibility'] = ''
 
-                    if data['table_category_name_{}'.format(id)]:
+                    if data.get('table_category_name_{}'.format(id)):
                         table_item['category_name'] = \
                                 data['table_category_name_{}'.format(id)]
                     else:
@@ -688,7 +740,10 @@ class QueryToolController(base.BaseController):
             try:
                 junk = _get_action('querytool_visualizations_update',
                                    _visualization_items)
-                h.flash_success(_('Visualizations Successfully updated.'))
+                if is_copy:
+                    h.flash_success(_('Visualization Successfully copied'))
+                else:
+                    h.flash_success(_('Visualizations Successfully updated.'))
             except ValidationError, e:
                 errors = e.error_dict
                 error_summary = e.error_summary
@@ -699,8 +754,15 @@ class QueryToolController(base.BaseController):
                 # redirect to edit data
                 url = h.url_for('querytool_edit',
                                 querytool='/' + _querytool['name'])
+            elif is_copy is True:
+                # reload page with new visualization
+                url = h.url_for(
+                    'querytool_edit_visualizations',
+                    querytool= '/' + _querytool['name']
+                )
             else:
                 h.redirect_to('/'+h.lang()+'/group/'+_querytool['group']+'/reports')
+
             h.redirect_to(url)
 
         if not data:
