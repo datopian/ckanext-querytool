@@ -635,6 +635,9 @@
                     var ltypes_label = item.find("label[for*=chart_field_line_type_]");
                     var lwidthtarget = item.find("[data-target*=chart_field_line_width_]");
                     var lwidths = item.find("[id*=chart_field_line_width_]");
+                    var x_sort_labels_id = item.find("[id*=chart_field_x_sort_labels_]");
+                    var x_sort_labels_label = item.find("label[for*=chart_field_x_sort_labels_]");
+                    var x_sort_labels_name = item.find("[name*=chart_field_x_sort_labels_]");
 
                     if (ltypes["length"] > 1) {
                         let idx;
@@ -887,6 +890,10 @@
                     axis_range_label.attr("for", "chart_field_axis_range_" + order);
                     axis_range_min_id.attr("id", "axis_range_min_" + order);
                     axis_range_max_id.attr("id", "axis_range_max_" + order);
+
+                    x_sort_labels_id.attr('id', 'x_sort_labels_' + order);
+                    x_sort_labels_name.attr('name', 'x_sort_labels_' + order);
+                    x_sort_labels_label.attr('for', 'x_sort_labels_' + order);
 
                     item.find("[id*=chart_field_graph_]").change();
 
