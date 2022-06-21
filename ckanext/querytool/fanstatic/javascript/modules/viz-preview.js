@@ -1425,7 +1425,9 @@ ckan.module("querytool-viz-preview", function() {
              if(this.el.context.parentElement.querySelector(".additional_desc")) {
                  var desc_id = this.el.context.parentElement.querySelector(".additional_desc").id;
                  if(desc_id){
-                     document.getElementById(desc_id).innerHTML =  desc;
+                     var converter = new showdown.Converter();
+                     var convertedDesc = converter.makeHtml(desc);
+                     document.getElementById(desc_id).innerHTML = convertedDesc;
                      document.getElementById(desc_id).style.display = "block";
                  }
              }
