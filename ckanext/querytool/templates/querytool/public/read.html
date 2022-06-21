@@ -372,7 +372,7 @@
 
           <div class="report_caption">{{ caption or '' }}</div>
 
-          {% set additional_description = h.render_markdown(h.get_translated(item, 'additional_description'), True, True) %}
+          {% set additional_description = h.render_markdown(item.additional_description) %}
 
           {% if additional_description != "<p>None</p>" %}
             <div class='additional_desc' id='item-desc-{{chart_id}}' style="display:none;">{{ additional_description }}</div>
