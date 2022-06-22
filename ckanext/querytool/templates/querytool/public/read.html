@@ -374,7 +374,7 @@
           {% set additional_description = h.render_markdown(item.additional_description) %}
 
           {% if additional_description != "<p>None</p>" %}
-            {{ additional_description }}
+            <div class='additional_desc' id='item-desc-{{chart_id}}' style="display:none;">{{ additional_description }}</div>
           {% endif %}
           <p class="clearfix"></p>
         {% endif %}
