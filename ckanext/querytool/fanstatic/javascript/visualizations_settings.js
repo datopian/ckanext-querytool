@@ -867,12 +867,12 @@
                     bar_width_c.attr("id", "chart_bar_width_" + order);
                     bar_width_l.attr("for", "chart_field_bar_width_" + order);
 
-                    if (nnn[0].value == "2") {
-                        dv[0].classList.add("hidden");
-                        sq[0].classList.remove("hidden");
+                    if (dropdownSecColorSchemeType[0].value == "2") {
+                        dropdownDiverColors[0].classList.add("hidden");
+                        dropdownSecColors[0].classList.remove("hidden");
                     } else {
-                        dv[0].classList.remove("hidden");
-                        sq[0].classList.add("hidden");
+                        dropdownDiverColors[0].classList.remove("hidden");
+                        dropdownSecColors[0].classList.add("hidden");
                     }
                       
                     desc.attr("id", "chart_field_desc_" + order);

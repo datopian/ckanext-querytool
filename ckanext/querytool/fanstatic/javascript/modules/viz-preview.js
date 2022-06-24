@@ -1469,7 +1469,7 @@ ckan.module('querytool-viz-preview', function() {
                   var html = "";
                   html += '<div class="control-group control-select">';
                   html +=
-                    '<label class="control-label for="chart_field_line_type_' +
+                    '<label class="control-label" for=chart_field_line_type_' +
                     item_no +
                     "_" +
                     (tmp + 1) +
