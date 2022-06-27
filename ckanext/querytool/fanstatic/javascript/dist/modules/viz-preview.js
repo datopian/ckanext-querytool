@@ -2869,6 +2869,7 @@
                 });
                 console.log(sorted);
                 */
+                console.log(data)
                 if(x_sort_labels === true) {
                     //Date format '2020-12-01'  YYYY-MM-DD
                     //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
@@ -2890,6 +2891,8 @@
 
                     let sorted_labels = sorted_labeled_data.map(val => val.label);
                     let sorted_data = sorted_labeled_data.map(val => val.value);    //  Unused so far
+
+                    data[0].y = sorted_data;
 
                     sortedArr = sorted_labels;
 
