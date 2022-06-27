@@ -2882,12 +2882,12 @@
                         value: data[0].y[idx] 
                     }));
 
-                    let dateSortFn = (a, b) => new Date(a.value) - new Date(b.value);
-                    let stringSortFn = (a, b) => a.value.localeCompare(b.value);    //  TODO: check if the logic is not inverted
+                    let dateSortFn = (a, b) => new Date(a.label) - new Date(b.label);
+                    let stringSortFn = (a, b) => a.label.localeCompare(b.label);    //  TODO: check if the logic is not inverted
 
                     let sortFn = isNaN(Date.parse(data[0].x[0])) ? stringSortFn : dateSortFn;
-
                     let sorted_labeled_data = labeled_data.sort(sortFn)
+
                     let sorted_labels = sorted_labeled_data.map(val => val.label);
                     let sorted_data = sorted_labeled_data.map(val => val.value);    //  Unused so far
 
