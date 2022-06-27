@@ -1266,6 +1266,18 @@
                 }, {
                     text: t("Comma thousands separator (2 digit) e.g 2,512.34"),
                     value: ",.2f"
+                }, {
+                    text: t("Date e.g. DD-MM-YYYY"),
+                    value: "%d-%b-%Y"
+                }, {
+                    text: t('Date e.g. YYYY-MM-DD'),
+                    value: "%Y-%b-%d"
+                }, {
+                    text: t('Date e.g. YYYY-MM'),
+                    value: "%Y-%b"
+                }, {
+                    text: t('Date e.g. MM-YYYY'),
+                    value: "%b-%Y"
                 }];
                 "" !== $(this).val() ? a(r, i.slice(0, 3)) : a(r, i);
                 "" !== $(this).val() ? a(xf, i.slice(0, 3)) : a(xf, i);

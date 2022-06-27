@@ -250,7 +250,11 @@ def get_charts_data_formats(num=None):
                {'text': _('Comma thousands separator (1 digit) e.g 2,512.3'),
                    'value': ',.1f'},
                {'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
-                   'value': ',.2f'}]
+                   'value': ',.2f'},
+               {'text': _('Date e.g. DD-MM-YYYY'), 'value': '%d-%b-%Y'},
+               {'text': _('Date e.g. YYYY-MM-DD'), 'value': '%Y-%b-%d'},
+               {'text': _('Date e.g. YYYY-MM'), 'value': '%Y-%b'},
+               {'text': _('Date e.g. MM-YYYY'), 'value': '%b-%Y'}]
     if num:
         return options[:num]
     return options
