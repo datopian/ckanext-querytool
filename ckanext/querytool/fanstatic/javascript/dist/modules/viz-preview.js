@@ -2873,28 +2873,32 @@
                     //Date format '2020-12-01'  YYYY-MM-DD
                     //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
 
-                    function dateComparison(a, b) {
-                        const date1 = new Date(a)
-                        const date2 = new Date(b)
-                        
-                        return date1 - date2;
-                    }
+                    let labeled_data = [];
+                    //  TODO: check if length is always the same for x and  y
+                    //  Populates `labeled_data`  array  with  the  x/y  data
+                    //  as key pairs in an object
+                    data[0].x.forEach((label, idx) => labeled_data.push({ 
+                        label: label, 
+                        value: data[0].y[idx] 
+                    }));
 
-                    function stringComparison(a, b) {
-                    if (a > b) {
-                        return 1;
-                    }
-                    if (a < b) {
-                        return -1;
-                    }
-                    return 0;
-                    }
+                    let dateSortFn = (a, b) => new Date(a.value) - new Date(b.value);
+                    let stringSortFn = (a, b) => a.value.localeCompare(b.value);    //  TODO: check if the logic is not inverted
 
-                    if (isNaN(Date.parse(data[0].x[0])) == true) {
-                        sortedArr = data[0].x.slice(0).sort(stringComparison);
-                    } else {
-                        sortedArr = data[0].x.slice(0).sort(dateComparison);
-                    }
+                    let sortFn = isNaN(Date.parse(data[0].x[0])) ? stringSortFn : dateSortFn;
+
+                    let sorted_labeled_data = labeled_data.sort(sortFn)
+                    let sorted_labels = sorted_labeled_data.map(val => val.label);
+                    let sorted_data = sorted_labeled_data.map(val => val.value);    //  Unused so far
+
+                    sortedArr = sorted_labels;
+
+                    //  TODO: remove these prints, only for development
+                    //  console.log('####   Sorting tests')
+                    //  console.log('Original data:')
+                    //  data[0].x.map((el, idx) => console.log(`${el} is ${data[0].y[idx]}`))
+                    //  console.log('Sorted data:')
+                    //  sorted_labels.map((el, idx) => console.log(`${el} is ${sorted_data[idx]}`))
 
                 } else {
                     sortedArr = data[0].x
