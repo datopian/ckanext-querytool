@@ -2870,38 +2870,57 @@
                 console.log(sorted);
                 */
                 console.log(data)
-                if(x_sort_labels === true) {
+                if(
+                    x_sort_labels === true 
+                    //  Does not work for `donut` and `pie`
+                    //  charts
+                    && !['donut', 'pie'].includes(this.options.chart_type)
+                ) {
                     //Date format '2020-12-01'  YYYY-MM-DD
                     //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
 
-                    let labeled_data = [];
-                    //  TODO: check if length is always the same for x and  y
-                    //  Populates `labeled_data`  array  with  the  x/y  data
-                    //  as key pairs in an object
-                    data[0].x.forEach((label, idx) => labeled_data.push({ 
-                        label: label, 
-                        value: data[0].y[idx] 
-                    }));
+                    let dateSortFn = (a, b) => 
+                        new Date(a.label.slice(2)) - new Date(b.label.slice(2));
 
-                    let dateSortFn = (a, b) => new Date(a.label) - new Date(b.label);
-                    let stringSortFn = (a, b) => a.label.localeCompare(b.label);    //  TODO: check if the logic is not inverted
+                    let stringSortFn = (a, b) => 
+                        a.label.slice(2).localeCompare(b.label.slice(2));
 
-                    let sortFn = isNaN(Date.parse(data[0].x[0])) ? stringSortFn : dateSortFn;
-                    let sorted_labeled_data = labeled_data.sort(sortFn)
+                    //  Must sort for all data entries, otherwise
+                    //  line charts with multiple lines  won't be
+                    //  correctly sorted
+                    data.forEach((data_el, idx) => {
+                        //  x and y are switched for horizontal bar
+                        //  and stacked horizontal bar
+                        let labeled_data = [];
+                        let tmp_x = data[idx].x;
+                        let tmp_y = data[idx].y;
 
-                    let sorted_labels = sorted_labeled_data.map(val => val.label);
-                    let sorted_data = sorted_labeled_data.map(val => val.value);    //  Unused so far
+                        //  Populates `labeled_data`
+                        data[idx].x.forEach((_, i) => {
+                            labeled_data.push({
+                                //  Slice to get rid of the index at the 
+                                //  start of the string
+                                label: tmp_x[i], 
+                                value: tmp_y[i]
+                            })
+                        })
 
-                    data[0].y = sorted_data;
+                        let sortFn = isNaN(Date.parse(data[idx].x[0])) ? stringSortFn : dateSortFn;
+                        labeled_data.sort(sortFn)
 
-                    sortedArr = sorted_labels;
+                        let sorted_labels = labeled_data.map(val => val.label);
+                        let sorted_data = labeled_data.map(val => val.value);
 
-                    //  TODO: remove these prints, only for development
-                    //  console.log('####   Sorting tests')
-                    //  console.log('Original data:')
-                    //  data[0].x.map((el, idx) => console.log(`${el} is ${data[0].y[idx]}`))
-                    //  console.log('Sorted data:')
-                    //  sorted_labels.map((el, idx) => console.log(`${el} is ${sorted_data[idx]}`))
+                    
+                        sortedArr = sorted_labels;
+                        
+                        data[idx].x = sorted_labels;
+                        data[idx].y = sorted_data;
+
+                        //  TODO: check what to do with
+                        //  the horizontal bar charts
+
+                    })
 
                 } else {
                     sortedArr = data[0].x
