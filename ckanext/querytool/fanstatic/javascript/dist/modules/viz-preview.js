@@ -2879,11 +2879,27 @@
                     //Date format '2020-12-01'  YYYY-MM-DD
                     //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
 
-                    let dateSortFn = (a, b) => 
-                        new Date(a.label.slice(2)) - new Date(b.label.slice(2));
+                    //  If an index is found at the start
+                    //  of the string, replace it.
+                    let sliceIfIndex = (label) => {
+                        return label.replace(/^\d+\./, '');
+                    }
 
-                    let stringSortFn = (a, b) => 
-                        a.label.slice(2).localeCompare(b.label.slice(2));
+                    let dateSortFn = (a, b) => {
+                        //  Not sure if it should slice
+                        //  dates too
+                        a = sliceIfIndex(a.label);
+                        b = sliceIfIndex(b.label);
+
+                        return new Date(a) - new Date(b);
+                    }
+
+                    let stringSortFn = (a, b) => { 
+                        a = sliceIfIndex(a.label);
+                        b = sliceIfIndex(b.label);
+
+                        return a.localeCompare(b);
+                    }
 
                     //  Must sort for all data entries, otherwise
                     //  line charts with multiple lines  won't be
