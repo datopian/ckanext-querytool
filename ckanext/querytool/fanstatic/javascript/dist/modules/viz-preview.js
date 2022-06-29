@@ -2873,7 +2873,6 @@
                 //  Total
                 //  tal
 
-                console.log(data)
                 if(
                     x_sort_labels === true 
                     //  Does not work for `donut` and `pie`
@@ -2884,18 +2883,24 @@
                     //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
 
 
+                     //  If an index is found at the start
+                    //  of the string, replace it.
+                    let sliceIfIndex = (label) => {                        
+                        return label.replace(/^\d+\./, '');
+                    }
+
                     let dateSortFn = (a, b) => {
                         //  Not sure if it should slice
                         //  dates too
-                        a = a.label;
-                        b = b.label;
+                        a = sliceIfIndex(a.label);
+                        b = sliceIfIndex(b.label);
 
                         return new Date(a) - new Date(b);
                     }
 
                     let stringSortFn = (a, b) => { 
-                        a = a.label;
-                        b = b.label;
+                        a = sliceIfIndex(a.label);
+                        b = sliceIfIndex(b.label);
 
                         return a.localeCompare(b);
                     }
@@ -2907,8 +2912,16 @@
                         //  x and y are switched for horizontal bar
                         //  and stacked horizontal bar
                         let labeled_data = [];
-                        let tmp_x = data[idx].x;
-                        let tmp_y = data[idx].y;
+
+                        let tmp_x, tmp_y;
+
+                        if(!['hbar', 'shbar'].includes((this.options.chart_type))) {
+                            tmp_x = data[idx].x;
+                            tmp_y = data[idx].y;
+                        } else {
+                            tmp_x = data[idx].y;
+                            tmp_y = data[idx].x;
+                        }
 
                         //  Populates `labeled_data`
                         data[idx].x.forEach((_, i) => {
@@ -2929,8 +2942,14 @@
                     
                         sortedArr = sorted_labels;
                         
-                        data[idx].x = sorted_labels;
-                        data[idx].y = sorted_data;
+                        if(!['hbar', 'shbar'].includes((this.options.chart_type))) {
+                            data[idx].x = sorted_labels;
+                            data[idx].y = sorted_data;
+                        }
+                        else {
+                            data[idx].y = sorted_labels;
+                            data[idx].x = sorted_data;
+                        }
 
                         //  TODO: check what to do with
                         //  the horizontal bar charts
@@ -2940,7 +2959,6 @@
                 } else {
                     sortedArr = data[0].x
                 }
-                //console.log(sortedArr);
 
                 var base_info = {
                     margin: {
