@@ -2869,6 +2869,10 @@
                 });
                 console.log(sorted);
                 */
+                //  1., 2.
+                //  Total
+                //  tal
+
                 console.log(data)
                 if(
                     x_sort_labels === true 
@@ -2879,24 +2883,19 @@
                     //Date format '2020-12-01'  YYYY-MM-DD
                     //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
 
-                    //  If an index is found at the start
-                    //  of the string, replace it.
-                    let sliceIfIndex = (label) => {
-                        return label.replace(/^\d+\./, '');
-                    }
 
                     let dateSortFn = (a, b) => {
                         //  Not sure if it should slice
                         //  dates too
-                        a = sliceIfIndex(a.label);
-                        b = sliceIfIndex(b.label);
+                        a = a.label;
+                        b = b.label;
 
                         return new Date(a) - new Date(b);
                     }
 
                     let stringSortFn = (a, b) => { 
-                        a = sliceIfIndex(a.label);
-                        b = sliceIfIndex(b.label);
+                        a = a.label;
+                        b = b.label;
 
                         return a.localeCompare(b);
                     }
