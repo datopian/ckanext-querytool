@@ -1884,8 +1884,10 @@
                         o = !0 === this.options.filter_name ? "" : this.options.filter_name,
                         i = !0 === this.options.filter_value ? "" : this.options.filter_value,
                         sql = '';
-                    if (i.includes('\'')) {
-                      this.options.filter_value = this.options.filter_value.replaceAll('\'', '\'\'')
+                    if (typeof i === 'string') {
+                        if (i.includes('\'')) {
+                            this.options.filter_value = this.options.filter_value.replaceAll('\'', '\'\'')
+                        }
                     }
                     o && i && (r += ' AND ("' + this.options.filter_name + "\" = '" + this.options.filter_value + "')");
                     if (sv !== '') {
