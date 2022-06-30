@@ -1932,7 +1932,7 @@ ckan.module('querytool-viz-preview', function() {
               },
               title: titleVal,
               showlegend: show_legend, //show legend value
-              legend: {x: 0.35, y: 5, orientation: 'h'},
+              legend: {xanchor: 'center', x: 0.5, y: 1.2, orientation: 'h'},
               xaxis: {
                 tickformat: x_tick_format,
                 automargin: true,
