@@ -1829,37 +1829,90 @@ ckan.module('querytool-viz-preview', function() {
             const sortX = x_sort_labels;
             let sortedArr = [];
 
-            if(x_sort_labels === true) {
+            if(
+                x_sort_labels === true 
+                //  Does not work for `donut` and `pie`
+                //  charts
+                && !['donut', 'pie'].includes(this.options.chart_type)
+            ) {
                 //Date format '2020-12-01'  YYYY-MM-DD
                 //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
 
-                function dateComparison(a, b) {
-                    const date1 = new Date(a)
-                    const date2 = new Date(b)
 
-                    return date1 - date2;
+                //  If an index is found at the start
+                //  of the string, replace it.
+                let sliceIfIndex = (label) => {
+                    return label.replace(/^\d+\./, '');
                 }
 
-                function stringComparison(a, b) {
-                    if (a > b) {
-                        return 1;
-                    }
-                    if (a < b) {
-                        return -1;
-                    }
-                    return 0;
-                 }
+                let dateSortFn = (a, b) => {
+                    //  Not sure if it should slice
+                    //  dates too
+                    a = sliceIfIndex(a.label);
+                    b = sliceIfIndex(b.label);
 
-                 if (isNaN(Date.parse(data[0].x[0])) == true) {
-                     sortedArr = data[0].x.slice(0).sort(stringComparison);
-                 } else {
-                     sortedArr = data[0].x.slice(0).sort(dateComparison);
-                 }
+                    return new Date(a) - new Date(b);
+                }
+
+                let stringSortFn = (a, b) => {
+                    a = sliceIfIndex(a.label);
+                    b = sliceIfIndex(b.label);
+
+                    return a.localeCompare(b);
+                }
+
+                //  Must sort for all data entries, otherwise
+                //  line charts with multiple lines  won't be
+                //  correctly sorted
+                data.forEach((data_el, idx) => {
+                    //  x and y are switched for horizontal bar
+                    //  and stacked horizontal bar
+                    let labeled_data = [];
+
+                    let tmp_x, tmp_y;
+
+                    if(!['hbar', 'shbar'].includes((this.options.chart_type))) {
+                        tmp_x = data[idx].x;
+                        tmp_y = data[idx].y;
+                    } else {
+                        tmp_x = data[idx].y;
+                        tmp_y = data[idx].x;
+                    }
+
+                    //  Populates `labeled_data`
+                    data[idx].x.forEach((_, i) => {
+                        labeled_data.push({
+                            //  Slice to get rid of the index at the
+                            //  start of the string
+                            label: tmp_x[i],
+                            value: tmp_y[i]
+                        })
+                    })
+
+                    let sortFn = isNaN(Date.parse(data[idx].x[0])) ? stringSortFn : dateSortFn;
+                    labeled_data.sort(sortFn)
+
+                    let sorted_labels = labeled_data.map(val => val.label);
+                    let sorted_data = labeled_data.map(val => val.value);
+
+
+                    sortedArr = sorted_labels;
+
+                    if(!['hbar', 'shbar'].includes((this.options.chart_type))) {
+                        data[idx].x = sorted_labels;
+                        data[idx].y = sorted_data;
+                    }
+                    else {
+                        data[idx].y = sorted_labels;
+                        data[idx].x = sorted_data;
+                    }
+
+                })
 
             } else {
-                 sortedArr = data[0].x
+                sortedArr = data[0].x
             }
-            
+
   
             var base_info = {
               margin: {

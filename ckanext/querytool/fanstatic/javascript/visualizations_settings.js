@@ -106,8 +106,20 @@
                 {
                     'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
                     'value': ',.2f'
-                },
-            ]
+                }, {
+                    'text': _('Date e.g. DD-MM-YYYY'),
+                    'value': '%d-%b-%Y'
+                }, {
+                    'text': _('Date e.g. YYYY-MM-DD'),
+                    'value': '%Y-%b-%d'
+                }, {
+                    'text': _('Date e.g. YYYY-MM'),
+                    'value': '%Y-%b'
+                }, {
+                    'text': _('Date e.g. MM-YYYY'),
+                    'value': '%b-%Y'
+                }
+            ];
 
             var elem = $(this);
 
