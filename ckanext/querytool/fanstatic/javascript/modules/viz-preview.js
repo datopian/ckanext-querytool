@@ -1027,6 +1027,14 @@ ckan.module('querytool-viz-preview', function() {
               }
             }
   
+            function dateWidthConvert(xValues, barWidth) {
+              if (Array.from(xValues).every(i => (new Date(i) !== "Invalid Date") && !isNaN(new Date(i)))) {
+                  // date bar widths must be in milliseconds
+                  barWidth = (((barWidth || 0.5)*1000)*1000*3600*24);
+              }
+              return barWidth;
+            }
+
             if (
               "bar" === this.options.chart_type ||
               "sbar" === this.options.chart_type
@@ -1057,7 +1065,7 @@ ckan.module('querytool-viz-preview', function() {
                       y: x,
                       type: "bar",
                       name: name,
-                      width: this.options.bar_width || 0.5,
+                      width: dateWidthConvert([this.options.x_axis], this.options.bar_width),
                       error_y: {},
                       error_x: {},
                     };
@@ -1080,7 +1088,7 @@ ckan.module('querytool-viz-preview', function() {
                         y: [parseFloat(columns[tmp][1])],
                         type: "bar",
                         name: name,
-                        width: this.options.bar_width || 0.5,
+                        width: dateWidthConvert([this.options.x_axis], this.options.bar_width),
                         error_y: {},
                         error_x: {},
                       };
@@ -1101,7 +1109,7 @@ ckan.module('querytool-viz-preview', function() {
                         y: columns[tmp].slice(1),
                         type: "bar",
                         name: name,
-                        width: this.options.bar_width || 0.5,
+                        width: dateWidthConvert(x, this.options.bar_width),
                         error_y: {},
                         error_x: {},
                       };
@@ -1115,7 +1123,7 @@ ckan.module('querytool-viz-preview', function() {
                 var trace = {
                   x: categories,
                   y: columns[0].slice(1),
-                  width: this.options.bar_width || 0.5,
+                  width: dateWidthConvert(categories, this.options.bar_width),
                   type: "bar",
                   name: "Color",
                   error_y: {},
@@ -1156,7 +1164,7 @@ ckan.module('querytool-viz-preview', function() {
                       type: "bar",
                       name: name,
                       orientation: "h",
-                      width: this.options.bar_width || 0.5,
+                      width: dateWidthConvert([this.options.x_axis], this.options.bar_width),
                     };
                     data.push(trace);
                   }
@@ -1178,7 +1186,7 @@ ckan.module('querytool-viz-preview', function() {
                         type: "bar",
                         name: name,
                         orientation: "h",
-                        width: this.options.bar_width || 0.5,
+                        width: dateWidthConvert([this.options.x_axis], this.options.bar_width),
                       };
                       data.push(trace);
                     }
@@ -1203,7 +1211,7 @@ ckan.module('querytool-viz-preview', function() {
                         type: "bar",
                         name: name,
                         orientation: "h",
-                        width: this.options.bar_width || 0.5,
+                        width: dateWidthConvert(x, this.options.bar_width),
                       };
                       data.push(trace);
                     }
@@ -1216,7 +1224,7 @@ ckan.module('querytool-viz-preview', function() {
                   type: "bar",
                   name: "Color",
                   orientation: "h",
-                  width: this.options.bar_width || 0.5,
+                  width: dateWidthConvert(categories, this.options.bar_width),
                 };
                 data.push(trace);
               }
