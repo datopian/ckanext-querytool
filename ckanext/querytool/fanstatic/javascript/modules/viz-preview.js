@@ -2499,6 +2499,7 @@ ckan.module('querytool-viz-preview', function() {
             }
   
             console.log("Generate plotly");
+            console.log(data)
   
             function saveAs(uri, filename) {
               var link = document.createElement("a");

@@ -107,17 +107,32 @@
                     'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
                     'value': ',.2f'
                 }, {
-                    'text': _('Date e.g. DD-MM-YYYY'),
-                    'value': '%d-%b-%Y'
+                    'text': _('Date DD/MM/YYYY .e.g. 01/01/2014'),
+                    'value': '%d/%m/%Y'
                 }, {
-                    'text': _('Date e.g. YYYY-MM-DD'),
-                    'value': '%Y-%b-%d'
+                    'text': _('Date YYYY/MM/DD .e.g. 2014/01/01'),
+                    'value': '%Y/%m/%d'
                 }, {
-                    'text': _('Date e.g. YYYY-MM'),
-                    'value': '%Y-%b'
+                    'text': _('Date YYYY/MM .e.g. 2014/01'),
+                    'value': '%Y/%m'
                 }, {
-                    'text': _('Date e.g. MM-YYYY'),
-                    'value': '%b-%Y'
+                    'text': _('Date MM/YYYY .e.g. 01/2014'),
+                    'value': '%m/%Y'
+                }, {
+                    'text': _('Date DD/MM .e.g. 01/01'),
+                    'value': '%d/%m'
+                }, {
+                    'text': _('Date MM/YY .e.g. 01/2014'),
+                    'value': '%m/%y'
+                }, {
+                    'text': _('Date YYYY .e.g. 2014'),
+                    'value': '%Y'
+                }, {
+                    'text': _('Date MMM DD, YYYY .e.g. Jan 01, 2014'),
+                    'value': '%b %d, %Y'
+                }, {
+                    'text': _('Date MMM DD .e.g. Jan 01'),
+                    'value': '%b %d'
                 }
             ];
 
