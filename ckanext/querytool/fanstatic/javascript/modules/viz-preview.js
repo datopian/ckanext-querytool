@@ -1932,7 +1932,20 @@ ckan.module('querytool-viz-preview', function() {
               },
               title: titleVal,
               showlegend: show_legend, //show legend value
-              legend: {xanchor: 'left', x: -0.020, y: -0.27 , orientation: 'h'},
+              legend: { 
+                xanchor: "left", 
+                x: -0.02, 
+                y: -0.27, 
+                orientation: "h", 
+                title: { 
+                  text: "I'm just a test", 
+                  side: "top", 
+                  //  Reference: https://plotly.com/javascript/reference/layout/#layout-legend
+                  font: {
+                    size: 15
+                  }
+                } 
+              },
               xaxis: {
                 tickformat: x_tick_format,
                 automargin: true,
