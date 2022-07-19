@@ -1924,7 +1924,7 @@ ckan.module('querytool-viz-preview', function() {
             }
 
             let legend_title_text = '';
-            if(show_legend_title) {
+            if(show_legend_title && show_legend) {
               let default_title = this.options.x_axis;
               legend_title_text = custom_legend_title != '' ? custom_legend_title : default_title;
             }
@@ -2598,7 +2598,7 @@ ckan.module('querytool-viz-preview', function() {
             var legend = chartField.find('input[name*=chart_field_legend_]');
             var legendVal = legend.is(':checked');
 
-            var legendTitleCkb = chartField.find('input[name*=chart_field_legend_title_]');
+            var legendTitleCkb = chartField.find('input[name*=chart_field_leg_title_]');
             var legendTitleCkbVal = legendTitleCkb.is(':checked');
 
             var legendTitle = chartField.find('input[name*=custom_legend_title_]');

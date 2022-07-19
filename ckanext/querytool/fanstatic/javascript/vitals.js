@@ -852,16 +852,16 @@ $('body').on('change','[id^=chart_field_legend_]',function(){
   var chart_number = this.id.split('_').slice(-1)[0];
   if(!checked) {
     $(`#custom_legend_title_${chart_number}`).attr('disabled', 'disabled');
-    $(`#chart_field_legend_title_${chart_number}`).attr('disabled', 'disabled');
+    $(`#chart_field_leg_title_${chart_number}`).attr('disabled', 'disabled');
   } else {
     $(`#custom_legend_title_${chart_number}`).removeAttr('disabled');
-    $(`#chart_field_legend_title_${chart_number}`).removeAttr('disabled');
+    $(`#chart_field_leg_title_${chart_number}`).removeAttr('disabled');
   }
 
 });
 
 
-$('body').on('change','[id^=chart_field_legend_title_]',function(){
+$('body').on('change','[id^=chart_field_leg_title_]',function(){
   var checked = $(this).is(':checked');
   var chart_number = this.id.split('_').slice(-1)[0];
   if(!checked)
