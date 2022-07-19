@@ -846,9 +846,24 @@ $('body').on('change','[id^=chart_field_graph_]',function(){
 });
 
 $('body').on('change','[id^=chart_field_legend_]',function(){
+  if($(this).attr('id').includes('title'))
+    return;
   var checked = $(this).is(':checked');
   var chart_number = this.id.split('_').slice(-1)[0];
-  console.log($(`#custom_legend_title_${chart_number}`))
+  if(!checked) {
+    $(`#custom_legend_title_${chart_number}`).attr('disabled', 'disabled');
+    $(`#chart_field_legend_title_${chart_number}`).attr('disabled', 'disabled');
+  } else {
+    $(`#custom_legend_title_${chart_number}`).removeAttr('disabled');
+    $(`#chart_field_legend_title_${chart_number}`).removeAttr('disabled');
+  }
+
+});
+
+
+$('body').on('change','[id^=chart_field_legend_title_]',function(){
+  var checked = $(this).is(':checked');
+  var chart_number = this.id.split('_').slice(-1)[0];
   if(!checked)
     $(`#custom_legend_title_${chart_number}`).attr('disabled', 'disabled');
   else
