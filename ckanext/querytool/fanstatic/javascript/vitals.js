@@ -845,17 +845,6 @@ $('body').on('change','[id^=chart_field_graph_]',function(){
   hideAnnotationCheckbox(selected,chart_number);
 });
 
-$('body').on('change','[id^=chart_field_legend_]',function(){
-  var checked = $(this).is(':checked');
-  var chart_number = this.id.split('_').slice(-1)[0];
-  console.log($(`#custom_legend_title_${chart_number}`))
-  if(!checked)
-    $(`#custom_legend_title_${chart_number}`).attr('disabled', 'disabled');
-  else
-    $(`#custom_legend_title_${chart_number}`).removeAttr('disabled');
-
-});
-
 $('body').on('change','[id^=chart_field_category_name_]',function(){
   var chart_number = this.id.split('_').slice(-1)[0];
   var selected = $(`#chart_field_graph_${chart_number}`).val();

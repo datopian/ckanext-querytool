@@ -281,8 +281,6 @@ ckan.module('querytool-viz-preview', function() {
             var y_axis = this.options.y_axis.toLowerCase(); //  NOTE: mapped to i
             var records = data;
             var show_legend = this.options.show_legend; //  NOTE: mapped to o
-            var show_legend_title = this.options.show_legend_title;
-            var custom_legend_title = this.options.custom_legend_title;
             var show_annotations = this.options.show_annotations;   //  NOTE: mapped to sa
             var x_text_rotate = this.options.x_text_rotate;
             var x_text_multiline = this.options.x_text_multiline;
@@ -1923,12 +1921,7 @@ ckan.module('querytool-viz-preview', function() {
                 sortedArr = data[0].x
             }
 
-            let legend_title_text = '';
-            if(show_legend_title) {
-              let default_title = this.options.x_axis;
-              legend_title_text = custom_legend_title != '' ? custom_legend_title : default_title;
-            }
-
+  
             var base_info = {
               margin: {
                 l: 20,
@@ -1939,20 +1932,7 @@ ckan.module('querytool-viz-preview', function() {
               },
               title: titleVal,
               showlegend: show_legend, //show legend value
-              legend: { 
-                xanchor: "left", 
-                x: -0.02, 
-                y: -0.27, 
-                orientation: "h", 
-                title: { 
-                  text: legend_title_text, 
-                  side: "top", 
-                  //  Reference: https://plotly.com/javascript/reference/layout/#layout-legend
-                  font: {
-                    size: 15
-                  }
-                } 
-              },
+              legend: {x: 0.35, y: 5, orientation: 'h'},
               xaxis: {
                 tickformat: x_tick_format,
                 automargin: true,
@@ -2598,12 +2578,6 @@ ckan.module('querytool-viz-preview', function() {
             var legend = chartField.find('input[name*=chart_field_legend_]');
             var legendVal = legend.is(':checked');
 
-            var legendTitleCkb = chartField.find('input[name*=chart_field_legend_title_]');
-            var legendTitleCkbVal = legendTitleCkb.is(':checked');
-
-            var legendTitle = chartField.find('input[name*=custom_legend_title_]');
-            var legendTitleVal = legendTitle.val();
-
             var xTextRotate = chartField.find('[name*=chart_field_x_text_rotate_]');
             var xTextRotateVal = xTextRotate.val();
 
@@ -2767,8 +2741,6 @@ ckan.module('querytool-viz-preview', function() {
                 this.options.chart_type = chartTypeValue;
                 this.options.title = chartTitleVal;
                 this.options.show_legend = legendVal;
-                this.options.show_legend_title = legendTitleCkbVal;
-                this.options.custom_legend_title = legendTitleVal;
                 this.options.x_text_rotate = xTextRotateVal;
                 this.options.x_text_multiline = xTextMultilineVal;
                 this.options.x_tick_culling_max = xTickCullingMaxVal;
@@ -2822,8 +2794,6 @@ ckan.module('querytool-viz-preview', function() {
             this.options.y_axis = axisYValue;
             this.options.title = chartTitleVal;
             this.options.show_legend = legendVal;
-            this.options.show_legend_title = legendTitleCkbVal;
-            this.options.custom_legend_title = legendTitleVal;
             this.options.x_text_rotate = xTextRotateVal;
             this.options.x_text_multiline = xTextMultilineVal;
             this.options.x_tick_culling_max = xTickCullingMaxVal;

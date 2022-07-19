@@ -357,8 +357,8 @@
             <div class="control-group ">
                <label class="control-label" for="chart_field_x_from_zero_{{ n }}">{{ _('Start from zero') }}</label>
                <div class="controls ">
-                  <input id="chart_field_x_from_zero_{{ n }}" type="checkbox" name="chart_field_x_from_zero_{{ n }}" value="{{ x_from_zero }}" {% if x_from_zero=='true' %}checked{% endif %} {{''if x_from_zero_option else 'disabled'}}>
-               </div> 
+                  <input id="chart_field_x_from_zero_{{ n }}" type="checkbox" name="chart_field_x_from_zero_{{ n }}" value="{{ x_from_zero }}" {% if x_from_zero=='true' %}checked{% endif %} {{'' if x_from_zero_option else 'disabled'}}>
+               </div>
             </div>
 
             {# X-axis label orientation #}
@@ -446,7 +446,7 @@
               {% set x_sort_labels_disable = '' %}
             {% endif %}
 
-            <div class="control-group disabled {{x_sort_labels_disable}}">
+            <div class="control-group {{x_sort_labels_disable}}">
               <label class="control-label" for="chart_field_x_sort_labels_{{ n }}">{{ _('Sort x axis labels') }}</label>
               <div class="controls ">
                  <input id="chart_field_x_sort_labels_{{ n }}" type="checkbox" name="chart_field_x_sort_labels_{{ n }}" value="{{ x_sort_labels }}" {% if x_sort_labels=='true' %}checked{% endif %}>
@@ -654,33 +654,6 @@
                   <input id="chart_field_legend_{{ n }}" type="checkbox" name="chart_field_legend_{{ n }}" value="{{ show_legend }}"{% if show_legend=='false' %}{% else %}checked{% endif %}>
                </div>
             </div>
-
-            {# Show legend title #}
-            {% if chart %}
-              {% set show_legend_title = chart.show_legend_title %}
-            {% endif %}
-            <div class="control-group">
-               <label class="control-label" for="chart_field_legend_{{ n }}">{{ _('Show legend title') }}</label>
-               <div class="controls ">
-                  <input id="chart_field_legend_title_{{ n }}" type="checkbox" name="chart_field_legend_title_{{ n }}" value="{{ show_legend_title }}"{% if show_legend_title=='false' %}{% else %}checked{% endif %}>
-               </div>
-            </div>
-
-            {# Custom legend title #}
-            {% if chart %}
-              {% set custom_legend_title = chart.custom_legend_title %}
-            {% endif %}
-            {% if show_legend_title %}
-              {% set custom_legend_title_disable = '' %}
-            {% else %}
-              {% set custom_legend_title_disable = 'disabled' %}
-            {% endif %}
-            <div class="control-group {{custom_legend_title_disable}}">
-              <label class="control-label" for="custom_legend_title_{{ n }}">{{ _('Custom legend title') }}</label>
-              <div class="controls "> 
-                 <input id="custom_legend_title_{{ n }}" type="text" name="custom_legend_title_{{ n }}" value="{{ custom_legend_title|default ('Legend Title')}}" placeholder="{{ _('Dimension by default') }}">
-              </div>
-           </div>
 
             {# Show annotations #}
             {% if chart %}
@@ -1047,8 +1020,6 @@
           {% set chart_type = chart.graph %}
           {% set title = chart.title %}
           {% set show_legend = chart.show_legend %}
-          {% set show_legend_title = chart.show_legend_title %}
-          {% set custom_legend_title = chart.custom_legend_title %}
           {% set show_annotations = chart.show_annotations %}
           {% set x_text_rotate = chart.x_text_rotate %}
           {% set x_text_multiline = chart.x_text_multiline %}
@@ -1103,8 +1074,6 @@
           sql_string=sql_string,
           title= title,
           show_legend = show_legend,
-          show_legend_title = show_legend_title,
-          custom_legend_title = custom_legend_title,
           show_annotations = show_annotations,
           x_text_rotate= x_text_rotate,
           x_text_multiline= x_text_multiline,
