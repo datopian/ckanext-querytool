@@ -1832,9 +1832,6 @@ ckan.module('querytool-viz-preview', function() {
               this.options.y_text_rotate = 45;
             }
 
-            //Sort x-axis asc 
-            //console.log(data);
-            const sortX = x_sort_labels;
             let sortedArr = [];
 
             if(
@@ -1843,10 +1840,6 @@ ckan.module('querytool-viz-preview', function() {
                 //  charts
                 && !['donut', 'pie'].includes(this.options.chart_type)
             ) {
-                //Date format '2020-12-01'  YYYY-MM-DD
-                //var arr2 = ["01/22/2021", "16 March 2017", "2000-12-31"]
-
-
                 //  If an index is found at the start
                 //  of the string, replace it.
                 let sliceIfIndex = (label) => {
@@ -1856,15 +1849,15 @@ ckan.module('querytool-viz-preview', function() {
                 let dateSortFn = (a, b) => {
                     //  Not sure if it should slice
                     //  dates too
-                    a = sliceIfIndex(a.label);
-                    b = sliceIfIndex(b.label);
+                    a = sliceIfIndex(a.label).trim();
+                    b = sliceIfIndex(b.label).trim();
 
                     return new Date(a) - new Date(b);
                 }
 
                 let stringSortFn = (a, b) => {
-                    a = sliceIfIndex(a.label);
-                    b = sliceIfIndex(b.label);
+                    a = sliceIfIndex(a.label).trim();
+                    b = sliceIfIndex(b.label).trim();
 
                     return a.localeCompare(b);
                 }
