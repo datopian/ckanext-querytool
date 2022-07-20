@@ -660,7 +660,7 @@
               {% set show_legend_title = chart.show_legend_title %}
             {% endif %}
             <div class="control-group">
-               <label class="control-label" for="chart_field_legend_{{ n }}">{{ _('Show legend title') }}</label>
+               <label class="control-label" for="chart_field_leg_title_{{ n }}">{{ _('Show legend title') }}</label>
                <div class="controls ">
                   <input id="chart_field_leg_title_{{ n }}" type="checkbox" name="chart_field_leg_title_{{ n }}" value="{{ show_legend_title }}"{% if show_legend_title=='false' %}{% else %}checked{% endif %}>
                </div>
@@ -678,7 +678,7 @@
             <div class="control-group {{custom_legend_title_disable}}">
               <label class="control-label" for="custom_legend_title_{{ n }}">{{ _('Custom legend title') }}</label>
               <div class="controls "> 
-                 <input id="custom_legend_title_{{ n }}" type="text" name="custom_legend_title_{{ n }}" value="{{ custom_legend_title|default ('Legend Title')}}" placeholder="{{ _('Dimension by default') }}">
+                 <input id="custom_legend_title_{{ n }}" type="text" name="custom_legend_title_{{ n }}" value="{{ custom_legend_title }}" placeholder="{{ _('Dimension by default') }}">
               </div>
            </div>
 

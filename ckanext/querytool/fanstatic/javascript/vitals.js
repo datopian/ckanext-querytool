@@ -854,7 +854,10 @@ $('body').on('change','[id^=chart_field_legend_]',function(){
     $(`#custom_legend_title_${chart_number}`).attr('disabled', 'disabled');
     $(`#chart_field_leg_title_${chart_number}`).attr('disabled', 'disabled');
   } else {
-    $(`#custom_legend_title_${chart_number}`).removeAttr('disabled');
+    //  Should not reenable the field if custom_legend_title
+    //  is off
+    if($(`#chart_field_leg_title_${chart_number}`).is(':checked'))
+      $(`#custom_legend_title_${chart_number}`).removeAttr('disabled');
     $(`#chart_field_leg_title_${chart_number}`).removeAttr('disabled');
   }
 
