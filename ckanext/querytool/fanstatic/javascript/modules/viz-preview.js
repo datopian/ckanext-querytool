@@ -346,6 +346,22 @@ ckan.module('querytool-viz-preview', function() {
                 } 
                 : 
                 undefined;
+
+            if (y_label !== '') {
+              y_label = this.renderChartTitle(y_label, {
+                measure: {name: y_axis, alias: measure_label},
+                filters: queryFilters,
+                optionalFilter: optionalFilter,
+              });
+            }
+
+            if (x_label !== '') {
+              x_label = this.renderChartTitle(x_label, {
+                measure: {name: x_axis, alias: measure_label},
+                filters: queryFilters,
+                optionalFilter: optionalFilter,
+              });
+            }
             
             desc = this.renderChartTitle(
                 desc,
@@ -2617,13 +2633,13 @@ ckan.module('querytool-viz-preview', function() {
             var dataLabels = chartField.find('input[name*=chart_field_labels_]');
             var dataLabelsVal = dataLabels.is(':checked');
 
-            var yLabbel = chartField.find('input[name*=chart_field_y_label_]');
+            var yLabbel = chartField.find('textarea[name*=chart_field_y_label_]');
             var yLabbelVal = yLabbel.val();
 
             var yLabelHide = chartField.find('input[name*=chart_field_y_label_hide_]');
             var yLabelHideVal = yLabelHide.is(':checked');
 
-            var xLabelVal = chartField.find("input[name*=chart_field_x_label_]").val(); //  NOTE: mapped to xl
+            var xLabelVal = chartField.find("textarea[name*=chart_field_x_label_]").val(); //  NOTE: mapped to xl
             var xLabelHideVal = chartField.find("input[name*=chart_field_x_label_hide_]").is(":checked");  //  NOTE: mapped to xlh
 
             var yFromZero = chartField.find('input[name*=chart_field_y_from_zero_]');
