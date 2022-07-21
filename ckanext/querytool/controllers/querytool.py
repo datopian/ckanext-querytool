@@ -540,6 +540,13 @@ class QueryToolController(base.BaseController):
                         visualization['show_legend'] = 'true'
                     else:
                         visualization['show_legend'] = 'false'
+                    if 'chart_field_leg_title_{}'.format(id) in data:
+                        visualization['show_legend_title'] = 'true'
+                    else:
+                        visualization['show_legend_title'] = 'false'
+                    if 'custom_legend_title_{}'.format(id) in data:
+                        visualization['custom_legend_title'] = \
+                            data.get('custom_legend_title_{}'.format(id))
                     if 'chart_field_show_annotations_{}'.format(id) in data:
                         visualization['show_annotations'] = 'true'
                     else:

@@ -670,15 +670,16 @@
             {% if chart %}
               {% set custom_legend_title = chart.custom_legend_title %}
             {% endif %}
-            {% if show_legend_title %}
+            {% if show_legend_title == 'true' %}
               {% set custom_legend_title_disable = '' %}
             {% else %}
               {% set custom_legend_title_disable = 'disabled' %}
             {% endif %}
-            <div class="control-group {{custom_legend_title_disable}}">
+
+            <div class="control-group">
               <label class="control-label" for="custom_legend_title_{{ n }}">{{ _('Custom legend title') }}</label>
               <div class="controls "> 
-                 <input id="custom_legend_title_{{ n }}" type="text" name="custom_legend_title_{{ n }}" value="{{ custom_legend_title }}" placeholder="{{ _('Dimension by default') }}">
+                 <input id="custom_legend_title_{{ n }}" type="text" name="custom_legend_title_{{ n }}" value="{{ custom_legend_title }}" placeholder="{{ _('Dimension by default') }}" {{custom_legend_title_disable}}>
               </div>
            </div>
 

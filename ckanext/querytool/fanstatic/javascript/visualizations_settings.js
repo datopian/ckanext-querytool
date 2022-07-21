@@ -601,6 +601,8 @@
                     var selectTextRotationAxisX = item.find('[id*=chart_field_x_text_rotate_]');
                     var checkboxShowDataLabels = item.find('[id*=chart_field_labels_]');
                     var checkboxShowLegend = item.find('[id*=chart_field_legend_]');
+                    var checkboxShowLegendTitle = item.find('[id*=chart_field_leg_title_]');
+                    var customLegendTitle = item.find('[id*=custom_legend_title_]');
                     var checkboxShowValuesAsPercentages = item.find('[id*=chart_field_show_labels_as_percentages_]');
                     var inputTooltipName = item.find('[id*=chart_field_tooltip_name_]');
                     var selectDataFormat = item.find('[id*=chart_field_data_format_]');
@@ -629,8 +631,8 @@
                     var inputDynamicReferenceFactor = item.find('[id*=chart_field_dynamic_reference_factor_]');
                     var inputDynamicReferenceLabel = item.find('[id*=chart_field_dynamic_reference_label_]');
                     var inputPlotly = item.find('[id*=chart_field_plotly_]');
-                    console.log(inputPlotly);
-                    console.log('oh wow')
+                    //console.log(inputPlotly);
+                    //console.log('oh wow')
 
                     var inputChartPaddingLeft = item.find('[id*=chart_field_chart_padding_left_]');
                     var inputChartPaddingBottom = item.find('[id*=chart_field_chart_padding_bottom_]');
@@ -774,6 +776,14 @@
 
                     checkboxShowLegend.attr('id', 'chart_field_legend_' + order);
                     checkboxShowLegend.attr('name', 'chart_field_legend_' + order);
+
+                    checkboxShowLegendTitle.attr('id', 'chart_field_leg_title_' + order);
+                    checkboxShowLegendTitle.attr('name', 'chart_field_leg_title_' + order);
+                    checkboxShowLegendTitle.attr('for', 'chart_field_leg_title_' + order);
+
+                    customLegendTitle.attr('id', 'custom_legend_title_' + order);
+                    customLegendTitle.attr('name', 'custom_legend_title_' + order);
+                    customLegendTitle.attr('for', 'custom_legend_title_' + order);
 
                     checkboxShowValuesAsPercentages.attr('id', 'chart_field_show_labels_as_percentages_' + order);
                     checkboxShowValuesAsPercentages.attr('name', 'chart_field_show_labels_as_percentages_' + order);
