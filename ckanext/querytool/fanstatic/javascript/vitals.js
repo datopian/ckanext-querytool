@@ -845,6 +845,37 @@ $('body').on('change','[id^=chart_field_graph_]',function(){
   hideAnnotationCheckbox(selected,chart_number);
 });
 
+$('body').on('change','[id^=chart_field_legend_]',function(){
+  if($(this).attr('id').includes('title')) {
+    return;
+  }
+  var checked = $(this).is(':checked');
+  var chart_number = this.id.split('_').slice(-1)[0];
+  if(!checked) {
+    $(`#custom_legend_title_${chart_number}`).attr('disabled', 'disabled');
+    $(`#chart_field_leg_title_${chart_number}`).attr('disabled', 'disabled');
+  } else {
+    //  Should not reenable the field if custom_legend_title
+    //  is off
+    if($(`#chart_field_leg_title_${chart_number}`).is(':checked'))
+      $(`#custom_legend_title_${chart_number}`).removeAttr('disabled');
+    $(`#chart_field_leg_title_${chart_number}`).removeAttr('disabled');
+  }
+
+});
+
+
+$('body').on('change','[id^=chart_field_leg_title_]',function(){
+  var checked = $(this).is(':checked');
+  var chart_number = this.id.split('_').slice(-1)[0];
+  if(!checked) {
+    $(`#custom_legend_title_${chart_number}`).attr('disabled', 'disabled');
+  } else {
+    $(`#custom_legend_title_${chart_number}`).removeAttr('disabled');
+  }
+
+});
+
 $('body').on('change','[id^=chart_field_category_name_]',function(){
   var chart_number = this.id.split('_').slice(-1)[0];
   var selected = $(`#chart_field_graph_${chart_number}`).val();
