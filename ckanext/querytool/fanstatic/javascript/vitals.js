@@ -1288,6 +1288,18 @@ $("body").on('change', '[id^=chart_field_title_]', function(){
   $(this).val(html);
 });
 
+$("body").on('change', '[id^=chart_field_x_label_]', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
+});
+
+$("body").on('change', '[id^=chart_field_y_label_]', function(){
+  var content = $(this).val();
+  var html = HtmlSanitizer.SanitizeHtml(content);
+  $(this).val(html);
+});
+
 $("body").on('change', '[id^=chart_field_desc_]', function(){
   var content = $(this).val();
   var html = HtmlSanitizer.SanitizeHtml(content);

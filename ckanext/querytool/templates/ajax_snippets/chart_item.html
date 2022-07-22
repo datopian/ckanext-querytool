@@ -322,11 +322,42 @@
             {% else %}
               {% set x_label_option = true %}
             {% endif %}
-            <div class="control-group ">
+            <div class="control-group x-title">
                <label class="control-label" for="chart_field_x_label_{{ n }}">{{ _('X axis title') }}</label>
                <div class="controls ">
-                  <input id="chart_field_x_label_{{ n }}" type="text" name="chart_field_x_label_{{ n }}" value="{{ x_label }}" placeholder="{{ _('Dimension by default') }}" >
+                  <textarea id="chart_field_x_label_{{ n }}" name="chart_field_x_label_{{ n }}" placeholder="{{ _('Dimension by default') }}" rows="3">{{ x_label }}</textarea>
                </div>
+            </div>
+
+            <div class="control-group x-title-vars">
+              <div class="controls ">
+                {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
+                {% set filters = filters|sort(attribute='order') %}
+                <select>
+                  <option value="" disabled selected>{{_('Add variable to title')}}</option>
+                  <optgroup label="{{_('Capitalized')}}">
+                    <option value="{measure|capitalize}">{{_('Measure')}}</option>
+                    {% for filter in filters %}
+                      <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
+                    {% endfor %}
+                    <option value="{optional_filter|capitalize}">{{_('Optional Filter')}}</option>
+                  </optgroup>
+                  <optgroup label="{{_('lowercase')}}" class='text-lowercase'>
+                    <option value="{measure|lower}">{{_('Measure')}}</option>
+                    {% for filter in filters %}
+                      <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
+                    {% endfor %}
+                    <option value="{optional_filter|lower}">{{_('Optional Filter')}}</option>
+                  </optgroup>
+                </select>
+
+              </div>
+            </div>
+            <div class="control-group x-title-help">
+              <div class="controls ">
+                {% set template_tooltip = "<pre><p>" + _('Variables') + "<br>---<br>{measure}<br>{optional_filter}<br>*" + _('use drop-down list to select variables based on application filters') + "</p><p>" + _('Processed variables') + "<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>" + _('etc') + "</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>" + _('Full templates syntax') + "</a></b></p><p class='muted'><b>" + _('Please note:') + " " + "</b>" + _('Single braces \'{}\' are used for variables') + "</p>" %}
+                <span class="editor-info-block">{{_('You can use')}} <a href="#templates" title="" data-trigger="focus" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="{{_('Templates quick reference')}}" data-container="body">{{_('Templates')}}</a> {{_('here')}}</span>
+              </div>
             </div>
 
             {# X-axis title hide #}
@@ -477,11 +508,42 @@
             {% else %}
               {% set y_label_option = true %}
             {% endif %}
-            <div class="control-group ">
+            <div class="control-group y-title">
                <label class="control-label" for="chart_field_y_label_{{ n }}">{{ _('Y axis title') }}</label>
                <div class="controls ">
-                  <input id="chart_field_y_label_{{ n }}" type="text" name="chart_field_y_label_{{ n }}" value="{{ y_label }}" placeholder="{{ _('Measure by default') }}" {{'' if y_label_option else 'disabled'}}>
+                  <textarea id="chart_field_y_label_{{ n }}" name="chart_field_y_label_{{ n }}" placeholder="{{ _('Measure by default') }}" {{'' if y_label_option else 'disabled'}} rows="3">{{ y_label }}</textarea>
                </div>
+            </div>
+
+            <div class="control-group y-title-vars">
+              <div class="controls ">
+                {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
+                {% set filters = filters|sort(attribute='order') %}
+                <select>
+                  <option value="" disabled selected>{{_('Add variable to title')}}</option>
+                  <optgroup label="{{_('Capitalized')}}">
+                    <option value="{measure|capitalize}">{{_('Measure')}}</option>
+                    {% for filter in filters %}
+                      <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
+                    {% endfor %}
+                    <option value="{optional_filter|capitalize}">{{_('Optional Filter')}}</option>
+                  </optgroup>
+                  <optgroup label="{{_('lowercase')}}" class='text-lowercase'>
+                    <option value="{measure|lower}">{{_('Measure')}}</option>
+                    {% for filter in filters %}
+                      <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
+                    {% endfor %}
+                    <option value="{optional_filter|lower}">{{_('Optional Filter')}}</option>
+                  </optgroup>
+                </select>
+
+              </div>
+            </div>
+            <div class="control-group y-title-help">
+              <div class="controls ">
+                {% set template_tooltip = "<pre><p>" + _('Variables') + "<br>---<br>{measure}<br>{optional_filter}<br>*" + _('use drop-down list to select variables based on application filters') + "</p><p>" + _('Processed variables') + "<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>" + _('etc') + "</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>" + _('Full templates syntax') + "</a></b></p><p class='muted'><b>" + _('Please note:') + " " + "</b>" + _('Single braces \'{}\' are used for variables') + "</p>" %}
+                <span class="editor-info-block">{{_('You can use')}} <a href="#templates" title="" data-trigger="focus" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="{{_('Templates quick reference')}}" data-container="body">{{_('Templates')}}</a> {{_('here')}}</span>
+              </div>
             </div>
 
             {# Y-axis title hide #}
