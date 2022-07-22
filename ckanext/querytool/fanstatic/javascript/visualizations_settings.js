@@ -309,6 +309,40 @@
         textarea.val(textarea.val() + select.val());
         select.val('');
       })
+
+      // Provide variables support for x-axis labels
+      $('.x-title textarea').change(function (ev) {
+        var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+        try {
+          env.renderString($(ev.target).val(), {});
+          ev.target.setCustomValidity('');
+        } catch (error) {
+          ev.target.setCustomValidity(_('Template is invalid'));
+        }
+      });
+      $('.x-title-vars select').change(function (ev) {
+        var select = $(ev.target);
+        var textarea = select.closest('.item-wrapper').find('.control-group.x-title textarea');
+        textarea.val(textarea.val() + select.val());
+        select.val('');
+      })
+
+      // Provide variables support for y-axis labels
+      $('.y-title textarea').change(function (ev) {
+        var env = nunjucks.configure({tags: {variableStart: '{', variableEnd: '}'}});
+        try {
+          env.renderString($(ev.target).val(), {});
+          ev.target.setCustomValidity('');
+        } catch (error) {
+          ev.target.setCustomValidity(_('Template is invalid'));
+        }
+      });
+      $('.y-title-vars select').change(function (ev) {
+        var select = $(ev.target);
+        var textarea = select.closest('.item-wrapper').find('.control-group.y-title textarea');
+        textarea.val(textarea.val() + select.val());
+        select.val('');
+      })
     };
 
     function handleMultipleSelect () {
