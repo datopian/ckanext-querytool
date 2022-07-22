@@ -721,10 +721,16 @@
             {% if chart %}
               {% set show_legend_title = chart.show_legend_title %}
             {% endif %}
+            {% if show_legend == 'false' %}
+              {% set show_legend_title_disable = 'disabled' %}
+            {% else %}
+              {% set show_legend_title_disable = '' %}
+            {% endif %}
+
             <div class="control-group">
                <label class="control-label" for="chart_field_leg_title_{{ n }}">{{ _('Show legend title') }}</label>
                <div class="controls ">
-                  <input id="chart_field_leg_title_{{ n }}" type="checkbox" name="chart_field_leg_title_{{ n }}" value="{{ show_legend_title }}"{% if show_legend_title=='false' %}{% else %}checked{% endif %}>
+                  <input id="chart_field_leg_title_{{ n }}" type="checkbox" name="chart_field_leg_title_{{ n }}" value="{{ show_legend_title }}"{% if show_legend_title=='false' %}{% else %}checked{% endif %} {{show_legend_title_disable}}>
                </div>
             </div>
 
@@ -732,7 +738,7 @@
             {% if chart %}
               {% set custom_legend_title = chart.custom_legend_title %}
             {% endif %}
-            {% if show_legend_title in ['false', ''] %}
+            {% if show_legend_title == 'false' %}
               {% set custom_legend_title_disable = 'disabled' %}
             {% else %}
               {% set custom_legend_title_disable = '' %}
