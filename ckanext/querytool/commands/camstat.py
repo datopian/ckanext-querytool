@@ -1,23 +1,37 @@
+# -*- coding: utf-8 -*-
+
 from __future__ import print_function
-import logging
 import requests
+import csv
+import datetime
+import sys
+from cgi import FieldStorage
+import tempfile
+import hashlib
+from sqlalchemy import Table, Column
+from sqlalchemy import types
 
 from ckan.lib.cli import CkanCommand
-from ckan.lib.search import rebuild
+from ckan.lib.munge import munge_name
 from ckan.plugins import toolkit
-from csv import reader
-import os
-import datetime
+from ckan.logic import NotFound
+from ckan.model.meta import metadata
+from ckan.model.types import make_uuid
+from ckan import model
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
 
-log = logging.getLogger(__name__)
+DATASETS_URL = 'https://sdmx-faceted-search-camstat-live.officialstatistics.org/api/search'
 
 
 class UpdateCamstat(CkanCommand):
-    """
-    Retrieves datasets and topics from the Camstat website and creates
-    their counterparts in CKAN (datasets = datasets, topics = groups).
-    """
+    '''
+    Retrieves data from the Camstat website, cleans it, and creates 
+    datasets and resources in CKAN if they don't exist. If they do 
+    exist, it compares the new checksum with a stored checksum and 
+    updates them if there are changes.
+    '''
 
     summary = __doc__.split('\n')[0]
     usage = __doc__
@@ -26,131 +40,714 @@ class UpdateCamstat(CkanCommand):
 
     def command(self):
         self._load_config()
-        self.dataset_name = None
-        self.datasets_url = 'https://sdmx-faceted-search-camstat-live.officialstatistics.org/api/search'
-        self.request_payload = {
-            "lang": "en",
-            "search": "",
-            "facets": {
-                "6nQpoAP":["0|Education#EDU#"],
-                "datasourceId":["CamStat-stable"]
+        self.owner_org = 'camstat'
+        self.languages = ['en', 'km']
+
+        print('\n  ======================================\n')
+
+        # The following functions can be
+        # used for testing and debugging
+        #
+        # purge_datasets(self.owner_org)
+        # purge_organization(self.owner_org)
+        # drop_table()
+
+        if not model.Session.bind.has_table('camstat_hashes'):
+            self.setup_tables()
+
+            print('> HASH TABLE CREATED SUCCESSFULLY.')
+
+        else:
+            print('> HASH TABLE ALREADY EXISTS.')
+
+        print('\n  ======================================\n')
+
+        update_camstat(self.owner_org, self.languages)
+
+    def setup_tables(self):
+        model.Session.remove()
+        model.Session.configure(bind=model.meta.engine)
+
+        Table(
+            'camstat_hashes',
+            metadata,
+            Column(
+                'package_id',
+                types.UnicodeText,
+                primary_key=True,
+                default=make_uuid
+            ),
+            Column(
+                'name',
+                types.UnicodeText,
+                nullable=False
+            ),
+            Column(
+                'resource_id',
+                types.UnicodeText,
+                nullable=False
+            ),
+            Column(
+                'hash',
+                types.UnicodeText,
+                nullable=False
+            ),
+            Column(
+                'last_updated',
+                types.DateTime,
+                nullable=False
+            ))
+
+        print('> CREATING HASH TABLE...')
+
+        metadata.create_all(model.meta.engine)
+
+
+def purge_datasets(owner_org):
+    print(
+        '> PURGING ALL DATASETS FOR ORGANIZATION: {}\n'
+        .format(owner_org)
+    )
+
+    datasets = toolkit.get_action('package_search')({}, {'rows': 1000})
+    i = 0
+
+    for dataset in datasets['results']:
+        if dataset['organization']['name'] == owner_org:
+            print('  + Purging dataset: {}'.format(dataset['name']))
+
+            i += 1
+
+            toolkit.get_action('dataset_purge')({}, dataset)
+
+    print('\n> PURGED {} DATASETS.'.format(i))
+    print('\n  ======================================\n')
+
+
+def drop_table():
+    print('> DROPPING HASH TABLE...')
+
+    connection = model.Session.connection()
+
+    sql = 'DROP TABLE "camstat_hashes"'
+
+    connection.execute(sql)
+    model.Session.commit()
+
+    print('> HASH TABLE DROPPED SUCCESSFULLY.')
+    print('\n  ======================================\n')
+
+
+def purge_organization(owner_org):
+    print('> PURGING ORGANIZATION: {}'.format(owner_org))
+
+    try:
+        toolkit.get_action('organization_purge')({}, {'id': owner_org})
+
+        print('> ORGANIZATION PURGED.\n')
+
+    except NotFound:
+        print('> ORGANIZATION NOT FOUND. SKIPPING\n')
+
+    print('  ======================================\n')
+
+
+def utf_8_encoder(unicode_csv_data):
+    for line in unicode_csv_data:
+        yield line.encode('utf-8')
+
+
+def clean_csv(data, id_removal, dataflow_agency,
+              dataflow_id, dataflow_version, language):
+    print('  + Cleaning {} CSV data for: {}'.format(language, dataflow_id))
+
+    cleaned = 0
+
+    for i in range(len(data)):
+        if i <= len(id_removal):
+            for j in range(len(data[i])):
+                to_be_removed = id_removal[i][j] + ': '
+
+                if '{}:{}'.format(dataflow_agency, dataflow_id) in data[i][j]:
+                    data[i][j] = '{} ({})'.format(
+                        dataflow_id,
+                        dataflow_version
+                    )
+                    cleaned += 1
+
+                if to_be_removed in data[i][j]:
+                    data[i][j] = data[i][j].replace(
+                        to_be_removed, ''
+                    )
+                    cleaned += 1
+
+                if data[i][j] == 'NA':
+                    data[i][j] = ''
+                    cleaned += 1
+                    continue
+
+                if ',' in data[i][j]:
+                    data[i][j] = '"{}"'.format(data[i][j])
+                    cleaned += 1
+
+    if cleaned > 0:
+        print('  + Successfully cleaned {} items.\n'.format(cleaned))
+
+    else:
+        print('  + Done. {} items to clean.\n'.format(cleaned))
+
+    return data
+
+
+def compare_hashes(existing_hash, new_hash):
+    print('  + Comparing hashes...')
+    print('  + Existing hash: {}'.format(existing_hash))
+    print('  + New hash: {}'.format(new_hash))
+
+    if existing_hash == new_hash:
+        print('  + Hashes match. No updates required.\n')
+
+        return False
+
+    else:
+        print('  + Hashes do not match. Update required.\n')
+
+        return True
+
+
+def upload_resource(dataflow_name_munged, dataflow_title, resource):
+    print('  + Uploading resource to dataset: {}'.format(dataflow_title))
+
+    try:
+        resource['package_id'] = dataflow_name_munged
+        resource['name'] = dataflow_title
+        resource_dict = toolkit.get_action('resource_create')(
+            {},
+            resource
+        )
+
+        print('  + Resource uploaded successfully.')
+
+        return resource_dict
+
+    except Exception as e:
+        print('\n! Error uploading resource: {}'.format(e))
+
+    print('  + Resource uploaded successfully.')
+
+
+def patch_resource(dataflow_name_munged, dataflow_title, resource, resource_id):
+    print('  + Updating resource: {}'.format(dataflow_title))
+
+    try:
+        resource['id'] = resource_id
+        resource['package_id'] = dataflow_name_munged
+        resource['name'] = dataflow_title
+        resource_dict = toolkit.get_action('resource_patch')(
+            {},
+            resource
+        )
+
+        print('  + Resource updated successfully.')
+
+        return resource_dict
+
+    except Exception as e:
+        print('\n! Error updating resource: {}'.format(e))
+
+        return {}
+
+
+def create_dataset(dataflow_name_munged, owner_org,
+                   dataflow_title, dataflow_description):
+    print('  + Creating dataset: {}'.format(dataflow_name_munged))
+
+    try:
+        toolkit.get_action('package_show')({}, {'id': dataflow_name_munged})
+        print('  + Dataset exists...')
+
+    except NotFound:
+        dataset_dict = toolkit.get_action('package_create')(
+            {},
+            {
+                'title': dataflow_title,
+                'owner_org': owner_org,
+                'name': dataflow_name_munged,
+                'notes': dataflow_description
+            }
+        )
+
+        print('  + Dataset created successfully: {}\n'.format(
+            dataflow_name_munged
+        ))
+
+        return dataset_dict
+
+    except Exception as e:
+        print('\n! Error creating dataset: {}\n'.format(e))
+
+        return {}
+
+
+def patch_dataset(dataflow_name_munged, owner_org,
+                   dataflow_title, dataflow_description):
+    print('  + Updating dataset: {}'.format(dataflow_name_munged))
+
+    try:
+        toolkit.get_action('package_patch')(
+            {},
+            {
+                'id': dataflow_name_munged,
+                'notes': dataflow_description
+            }
+        )
+
+    except NotFound:
+        print('  + Dataset does not exist...')
+
+        create_dataset(dataflow_name_munged, owner_org,
+                       dataflow_title, dataflow_description)
+
+    except Exception as e:
+        print('\n! Error updating dataset: {}\n'.format(e))
+
+
+def verify_organization_exists(owner_org):
+    print('> VERIFYING ORGANIZATION {} EXISTS...'.format(owner_org))
+
+    try:
+        toolkit.get_action('organization_show')({}, {'id': owner_org})
+
+        print('> ORGANIZATION EXISTS.')
+
+    except NotFound:
+        print('> ORGANIZATION DOESN\'T EXIST...')
+        print('> CREATING ORGANIZATION...'.format(owner_org))
+
+        toolkit.get_action('organization_create')(
+            {},
+            {
+                'name': owner_org,
+                'title': owner_org.title()
+            }
+        )
+
+        print('> ORGANIZATION CREATED.')
+
+
+def prepare_dataflow_description(dataflow_description, dataflow_id,
+                                 dataflow_last_extracted):
+    print('\n  + Preparing description...')
+
+    if dataflow_description:
+        dataflow_description = \
+            ('{}\n\n\n**Extracted from**: _{}_\n\n\n**Last extracted**: _{}_'
+             .format(dataflow_description,
+                     dataflow_id,
+                     dataflow_last_extracted
+                     )
+             )
+
+    else:
+        dataflow_description = \
+            '**Extracted from**: _{}_\n\n\n**Last extracted**: {}'.format(
+                dataflow_id, dataflow_last_extracted
+            )
+
+    print('  + Description prepared successfully.\n')
+
+    return dataflow_description
+
+
+def get_data(dataflow_agency, dataflow_id, dataflow_version,
+             language, data_type):
+    if data_type == 'both':
+        print('  + Retrieving raw data...')
+
+    else:
+        print('  + Retrieving values to be cleaned...')
+
+    data = []
+
+    data_url = \
+        (
+            'https://nsiws-stable-camstat-live.officialstatistics'
+            '.org/rest/data/{},{},{}/all?dimensionAtObservation='
+            'AllDimensions').format(
+                dataflow_agency,
+                dataflow_id,
+                dataflow_version
+        )
+
+    data_headers = {
+        'Accept': 'application/vnd.sdmx.data+csv;file=true;labels={}'.format(
+            data_type
+        ),
+        'Accept-Language': language
+    }
+
+    try:
+        data_req = requests.get(data_url, headers=data_headers)
+
+        for line in csv.reader(data_req.text.splitlines(),
+                               delimiter=',', quotechar='"'):
+            data.append(line)
+
+        if data_type == 'both':
+            print('  + Raw data retrieved successfully.\n')
+
+        else:
+            print('  + Values to be cleaned retrieved successfully.\n')
+
+    except Exception as e:
+        print('\n! Error retrieving raw data: {}\n'.format(e))
+
+    return data
+
+
+def write_csv(data, csv_filename):
+    print('  + Writing CSV data to temporary file...')
+
+    tmp_file = tempfile.NamedTemporaryFile('w+b')
+
+    with open(tmp_file.name, 'w+b') as f:
+        writer = csv.writer(f)
+
+        for row in data:
+            writer.writerow(row)
+
+    tmp_file.seek(0)
+
+    file_obj = FieldStorage()
+    file_obj.file = tmp_file
+    file_obj.filename = csv_filename
+
+    resource = {
+        'url_type': None,
+        'url': '',
+        'upload': file_obj,
+        'file': tmp_file
+    }
+
+    print('  + CSV data written to temporary file successfully.\n')
+
+    return resource
+
+
+def get_dataflows(language):
+    print(
+        '\n  ======================================\n\n'
+        '> RETRIEVING DATAFLOWS...'
+    )
+
+    datasets_url = DATASETS_URL
+
+    if language == 'en':
+        request_payload = {
+            'lang': 'en',
+            'search': '',
+            'facets': {
+                '6nQpoAP': [
+                    '0|Health and Nutrition#HEALTH_NUT#'
+                ],
+                'datasourceId': [
+                    'CamStat-stable'
+                ]
             },
-            "rows":100,
-            "start":0
+            'rows': 100,
+            'start': 0
         }
 
-        self.datasets_page = requests.post(self.datasets_url, json=self.request_payload)
-        self.datasets_dataflows = self.datasets_page.json()
+    if language == 'km':
+        request_payload = {
+            'lang': 'km',
+            'search': '',
+            'facets': {
+                '2qVbh9uoTLZhK4lguOs1eeVX6FY2aYnOp': [
+                    '0|សុខាភិបាលនិងអាហារូបត្ថម្#HEALTH_NUT#'
+                ],
+                'datasourceId': [
+                    'CamStat-stable'
+                ]
+            },
+            'rows': 100,
+            'start': 0
+        }
 
-        for dataflow in self.datasets_dataflows['dataflows']:
-            self.dataflow_id = dataflow['dataflowId']
-            self.dataflow_name = dataflow['name']
-            self.dataflow_description = dataflow.get('description')
-            self.dataflow_version = dataflow.get('version', '1.0')
+    try:
+        datasets_page = requests.post(datasets_url, json=request_payload)
+        dataflows = datasets_page.json()
 
-            for key, value in dataflow.items():
-                print('{} : {}'.format(key, value))
+        print('> DATAFLOWS RETRIEVED SUCCESSFULLY.\n\n'
+              '  ======================================\n'
+        )
 
-            self.id_url = 'https://nsiws-stable-camstat-live.officialstatistics.org/rest/data/KH_NIS,{},{}/all?dimensionAtObservation=AllDimensions'.format(self.dataflow_id, self.dataflow_version)
-            self.id_headers = {'Accept': 'application/vnd.sdmx.data+csv;file=true;labels=id'}
-            self.id_req = requests.get(self.id_url, headers=self.id_headers)
-            self.id_removal = []
+        return dataflows['dataflows']
 
-            for line in reader(self.id_req.text.splitlines(),
-                               delimiter=',', quotechar='"'):
-                self.id_removal.append(line)
+    except Exception as e:
+        print('\n! Unable to retrieve dataflows: {}\n'.format(e))
 
-            self.data_url = 'https://nsiws-stable-camstat-live.officialstatistics.org/rest/data/KH_NIS,{},{}/all?dimensionAtObservation=AllDimensions'.format(self.dataflow_id, self.dataflow_version)
-            self.data_headers = {'Accept': 'application/vnd.sdmx.data+csv;file=true;labels=both'}
-            self.data_req = requests.get(self.data_url, headers=self.data_headers)
-            self.data = []
-
-            for line in reader(self.data_req.text.splitlines(),
-                               delimiter=',', quotechar='"'):
-                self.data.append(line)
-
-            for i in range(len(self.data)):
-                if i <= len(self.id_removal):
-                    for j in range(len(self.data[i])):
-                        to_be_removed = self.id_removal[i][j] + ': '
-
-                        if 'KH_NIS:{}'.format(self.dataflow_id) in self.data[i][j]:
-                            self.data[i][j] = '{} ({})'.format(
-                                self.dataflow_id,
-                                self.dataflow_version
-                            )
-
-                        if to_be_removed in self.data[i][j]:
-                            self.data[i][j] = self.data[i][j].replace(
-                                to_be_removed, ''
-                            )
-
-                        if self.data[i][j] == 'NA':
-                            self.data[i][j] = ''
-                            continue
-
-                        if ',' in self.data[i][j]:
-                            self.data[i][j] = '"{}"'.format(self.data[i][j])
+        return []
 
 
-            self.current_path = os.path.dirname(__file__)
-            self.csv_path = os.path.join(self.current_path, '{}.csv'.format(self.dataflow_id))
+def get_combined_data(data_en, data_km):
+    print('  + Merging data...')
 
-            with open(self.csv_path, 'w') as f:
-                for line in self.data:
-                    f.write(','.join(line) + '\n')
+    if len(data_en) == len(data_km):
+        for i in range(len(data_en) - 1):
+            for j in range(len(data_en[i]) - 1):
+                field_en = data_en[i][j]
+                field_km = data_km[i][j]
 
-            self.owner_org = 'camstat'
-            self.api_key = 'f151d186-2215-4b7d-be41-237c986e0c1e'
-            self.dataflow_title = self.dataflow_name.title()
-            self.dataflow_name_munged = (self.dataflow_name.replace(
-                ' ',
-                '-'
-            )).lower()
-            #  + '-' + self.dataflow_id.replace('_', '-')
-            self.dataflow_last_extracted = datetime.datetime.utcnow().strftime(
-                '%Y-%m-%d %I:%M %p (UTC)'
+                if field_km == '' and field_en != '':
+                    data_km[i][j] = data_en[i][j]
+
+    print('  + Data merged successfully.\n')
+
+    return data_km
+
+def get_new_hash(data):
+    print('  + Generating new hash...')
+
+    new_hash = hashlib.sha256(str(data).encode('utf-8')).hexdigest()
+
+    print('  + New hash generated successfully: {}\n'.format(new_hash))
+
+    return new_hash
+
+
+def get_existing_hash(dataflow_id):
+    print('  + Retrieving existing hash for: {}'.format(dataflow_id))
+
+    connection = model.Session.connection()
+
+    sql = """
+        SELECT * FROM "camstat_hashes"
+        WHERE "package_id" = '{}'
+    """.format(dataflow_id)
+
+    hash_row = connection.execute(sql)
+
+    try:
+        row = hash_row.fetchone().items()
+        existing_hash = row[3][1]
+        resource_id = row[2][1]
+
+        print('  + Hash retrieved successfully: {}\n'.format(existing_hash))
+
+    except Exception as e:
+        print('  + Hash doesn\'t exist in DB yet...\n')
+
+        existing_hash = None
+        resource_id = None
+
+    return existing_hash, resource_id
+
+
+def update_hash(dataflow_id, dataflow_name_munged, resource_id,
+                new_hash, dataflow_last_updated, existing_hash):
+    print('  + Updating hashes...')
+
+    connection = model.Session.connection()
+
+    if existing_hash is None:
+        sql = """
+            INSERT INTO "camstat_hashes"
+            ("package_id", "name", "resource_id", "hash", "last_updated")
+            VALUES ('{}', '{}', '{}', '{}', '{}')
+        """.format(
+            dataflow_id, dataflow_name_munged,
+            resource_id, new_hash, dataflow_last_updated
+        )
+
+    else:
+        sql = """
+            UPDATE "camstat_hashes"
+            SET "hash" = '{}', "last_updated" = '{}'
+            WHERE "package_id" = '{}' AND "resource_id" = '{}'
+        """.format(
+            new_hash, dataflow_last_updated,
+            dataflow_name_munged, resource_id
+        )
+
+    connection.execute(sql)
+    model.Session.commit()
+
+    print('  + Hashes updated successfully.\n')
+
+
+def update_camstat(owner_org, languages):
+    verify_organization_exists(owner_org)
+
+    languages = ['km', 'en']
+    lang_km = languages[0]
+    lang_en = languages[1]
+    dataflows = get_dataflows(lang_km)
+
+    i = 0
+
+    for dataflow in dataflows:
+        dataflow_id = dataflow['dataflowId']
+        dataflow_name = dataflow['name']
+        dataflow_title = dataflow_name.title()
+        dataflow_agency = dataflow['agencyId']
+        dataflow_description = dataflow.get('description')
+        dataflow_last_updated = datetime.datetime.utcnow()
+        dataflow_last_extracted = dataflow_last_updated.strftime(
+            '%Y-%m-%d %I:%M %p (UTC)'
+        )
+
+        print('> BEGINNING EXTRACTION FOR: {}\n'.format(dataflow_title))
+        print('  + Extraction timestamp: {}\n'.format(dataflow_last_extracted))
+
+        for key, value in dataflow.items():
+            print('  | {}: {}'.format(key, value))
+
+        dataflow_description_updated = prepare_dataflow_description(
+            dataflow_description,
+            dataflow_id,
+            dataflow_last_extracted
+        )
+        dataflow_version = dataflow.get('version', '1.0')
+        dataflow_dataset_name = '{}-{}'.format(
+            dataflow_agency,
+            dataflow_id.replace('DF_', '')
+        ).replace('_', '-')
+        dataflow_name_munged = munge_name(dataflow_dataset_name)
+        csv_filename = '{}_{}_{}.csv'.format(dataflow_agency, dataflow_id, lang_km)
+
+        id_removal_en = get_data(
+            dataflow_agency,
+            dataflow_id,
+            dataflow_version,
+            lang_en,
+            'id'
+        )
+        raw_data_en = get_data(
+            dataflow_agency,
+            dataflow_id,
+            dataflow_version,
+            lang_en,
+            'both'
+        )
+        id_removal_km = get_data(
+            dataflow_agency,
+            dataflow_id,
+            dataflow_version,
+            lang_km,
+            'id'
+        )
+        raw_data_km = get_data(
+            dataflow_agency,
+            dataflow_id,
+            dataflow_version,
+            lang_km,
+            'both'
+        )
+        data_en = clean_csv(
+            raw_data_en,
+            id_removal_en,
+            dataflow_agency,
+            dataflow_id,
+            dataflow_version,
+            'English'
+        )
+        data_km = clean_csv(
+            raw_data_km,
+            id_removal_km,
+            dataflow_agency,
+            dataflow_id,
+            dataflow_version,
+            'Khmer'
+        )
+
+        combined_data = get_combined_data(data_en, data_km)
+
+        # To test hash checking and updating, the easiest way is to
+        # add test data to 'combined_data'. For example, to add a new
+        # row to 'combined_data', you can uncomment the following
+        # or do something similar:
+        #
+        # combined_data = combined_data + [[
+        #     "KH_NIS:DF_NUTRITION(1.0)",
+        #     "TEST INDICATOR",
+        #     "TEST REF AREA",
+        #     "TEST SEX",
+        #     "TEST LOCATION",
+        #     "TEST AGE GROUP",
+        #     "TEST VACCINE",
+        #     "TEST HEALTH CARE PROVIDER",
+        #     "TEST CONTRACEPTION",
+        #     "TEST WEALTH QUINTILE",
+        #     "TEST NUMBER OF VISITS",
+        #     "TEST UNIT OF MEASURE",
+        #     "TEST FREQUENCY",
+        #     2001,
+        #     999.9,
+        #     "TEST UNITS",
+        #     "TEST RESPONSIBLE AGENCY",
+        #     "TEST DATA SOURCE"
+        # ]]
+        #
+        # This will add a new row at the end of the CSV.
+
+        resource = write_csv(
+            combined_data,
+            csv_filename
+        )
+
+        new_hash = get_new_hash(combined_data + [dataflow_description])
+        existing_hash, resource_id = get_existing_hash(dataflow_id)
+        update_required = False
+
+        if existing_hash:
+            update_required = compare_hashes(existing_hash, new_hash)
+
+        if existing_hash and update_required and resource_id:
+            patch_resource(
+                dataflow_name_munged,
+                dataflow_title,
+                resource,
+                resource_id
+            )
+            patch_dataset(
+                dataflow_name_munged,
+                owner_org,
+                dataflow_title,
+                dataflow_description_updated
             )
 
-            if self.dataflow_description:
-                self.dataflow_description = \
-                    '{}\n\n\n**Extracted from**: _{}_\n\n\n**Last extracted**: _{}_'.format(
-                        self.dataflow_description, self.dataflow_id, self.dataflow_last_extracted
-                    )
-            else:
-                self.dataflow_description = \
-                    '**Extracted from**: _{}_\n\n\n**Last extracted**: {}'.format(
-                    self.dataflow_id, self.dataflow_last_extracted
-                )
-
-            try:
-                toolkit.get_action('package_show')({}, {'id': self.dataflow_name_munged})
-                toolkit.get_action('dataset_purge')({}, {'id': self.dataflow_name_munged})
-            except Exception as e:
-                print(e)
-
-            print('\nPackage doesn\'t exist. Creating it now...\n')
-
-            toolkit.get_action('package_create')(
-                {},
-                {
-                    'title': self.dataflow_title,
-                    'owner_org': self.owner_org,
-                    'name': self.dataflow_name_munged,
-                    'notes': self.dataflow_description
-                }
+        elif existing_hash is None:
+            create_dataset(
+                dataflow_name_munged,
+                owner_org,
+                dataflow_title,
+                dataflow_description_updated
             )
+            resource_dict = upload_resource(
+                dataflow_name_munged,
+                dataflow_title,
+                resource
+            )
+            resource_id = resource_dict.get('id')
 
-            print('\nUploading resources...\n')
+        else:
+            print('  + Data for {} is already up-to-date.\n'.format(dataflow_title))
 
-            try:
-                print('Uploading CSV')
-                requests.post(
-                    "http://0.0.0.0:5000/api/action/resource_create",
-                    data={'package_id': self.dataflow_name_munged, 'name': self.dataflow_title + ' CSV'},
-                    headers={'X-CKAN-API-Key': self.api_key},
-                    files=[("upload", file(self.csv_path))]
-                )
-            except Exception as e:
-                log.info('Error uploading {}: {}'.format(e))
-                print('\nError uploading {}: {}'.format(e))
+        update_hash(
+            dataflow_id,
+            dataflow_name_munged,
+            resource_id,
+            new_hash,
+            dataflow_last_updated,
+            existing_hash
+        )
+
+        print(
+            '\n> SUCCESSFULLY EXTRACTED AND PROCESSED: {}\n\n'
+            '  =======================================\n'.format(dataflow_title)
+        )
+
+        i += 1
+
+    print('> DONE. {} DATAFLOWS EXTRACTED AND PROCESSED.\n'.format(i))
