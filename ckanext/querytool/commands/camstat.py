@@ -27,9 +27,9 @@ DATASETS_URL = 'https://sdmx-faceted-search-camstat-live.officialstatistics.org/
 
 class UpdateCamstat(CkanCommand):
     '''
-    Retrieves data from the Camstat website, cleans it, and creates 
-    datasets and resources in CKAN if they don't exist. If they do 
-    exist, it compares the new checksum with a stored checksum and 
+    Retrieves data from the Camstat website topic "Health and Nutrition",
+    cleans it, and creates datasets and resources in CKAN if they don't exist.
+    If they do exist, it compares the new checksum with a stored checksum and
     updates them if there are changes.
     '''
 
@@ -158,8 +158,8 @@ def utf_8_encoder(unicode_csv_data):
 
 
 def clean_csv(data, id_removal, dataflow_agency,
-              dataflow_id, dataflow_version, language):
-    print('  + Cleaning {} CSV data for: {}'.format(language, dataflow_id))
+              dataflow_id, dataflow_version):
+    print('  + Cleaning CSV data for: {}'.format(dataflow_id))
 
     cleaned = 0
 
@@ -188,6 +188,14 @@ def clean_csv(data, id_removal, dataflow_agency,
 
                 if ',' in data[i][j]:
                     data[i][j] = '"{}"'.format(data[i][j])
+                    cleaned += 1
+
+                if data[i][j] == 'DATAFLOW':
+                    data[i][j] = data[i][j].title()
+                    cleaned += 1
+
+                if data[i][j] == 'OBS_VALUE':
+                    data[i][j] = 'Observation value'
                     cleaned += 1
 
     if cleaned > 0:
@@ -290,7 +298,7 @@ def create_dataset(dataflow_name_munged, owner_org,
 
 
 def patch_dataset(dataflow_name_munged, owner_org,
-                   dataflow_title, dataflow_description):
+                  dataflow_title, dataflow_description):
     print('  + Updating dataset: {}'.format(dataflow_name_munged))
 
     try:
@@ -359,8 +367,8 @@ def prepare_dataflow_description(dataflow_description, dataflow_id,
     return dataflow_description
 
 
-def get_data(dataflow_agency, dataflow_id, dataflow_version,
-             language, data_type):
+def get_data(dataflow_agency, dataflow_id,
+             dataflow_version, data_type):
     if data_type == 'both':
         print('  + Retrieving raw data...')
 
@@ -382,8 +390,7 @@ def get_data(dataflow_agency, dataflow_id, dataflow_version,
     data_headers = {
         'Accept': 'application/vnd.sdmx.data+csv;file=true;labels={}'.format(
             data_type
-        ),
-        'Accept-Language': language
+        )
     }
 
     try:
@@ -417,7 +424,6 @@ def write_csv(data, csv_filename):
             writer.writerow(row)
 
     tmp_file.seek(0)
-
     file_obj = FieldStorage()
     file_obj.file = tmp_file
     file_obj.filename = csv_filename
@@ -434,7 +440,7 @@ def write_csv(data, csv_filename):
     return resource
 
 
-def get_dataflows(language):
+def get_dataflows():
     print(
         '\n  ======================================\n\n'
         '> RETRIEVING DATAFLOWS...'
@@ -442,37 +448,36 @@ def get_dataflows(language):
 
     datasets_url = DATASETS_URL
 
-    if language == 'en':
-        request_payload = {
-            'lang': 'en',
-            'search': '',
-            'facets': {
-                '6nQpoAP': [
-                    '0|Health and Nutrition#HEALTH_NUT#'
-                ],
-                'datasourceId': [
-                    'CamStat-stable'
-                ]
-            },
-            'rows': 100,
-            'start': 0
-        }
+    request_payload = {
+        'lang': 'en',
+        'search': '',
+        'facets': {
+            '6nQpoAP': [
+                '0|Health and Nutrition#HEALTH_NUT#'
+            ],
+            'datasourceId': [
+                'CamStat-stable'
+            ]
+        },
+        'rows': 100,
+        'start': 0
+    }
 
-    if language == 'km':
-        request_payload = {
-            'lang': 'km',
-            'search': '',
-            'facets': {
-                '2qVbh9uoTLZhK4lguOs1eeVX6FY2aYnOp': [
-                    '0|សុខាភិបាលនិងអាហារូបត្ថម្#HEALTH_NUT#'
-                ],
-                'datasourceId': [
-                    'CamStat-stable'
-                ]
-            },
-            'rows': 100,
-            'start': 0
-        }
+    # if language == 'km':
+    #     request_payload = {
+    #         'lang': 'km',
+    #         'search': '',
+    #         'facets': {
+    #             '2qVbh9uoTLZhK4lguOs1eeVX6FY2aYnOp': [
+    #                 '0|សុខាភិបាលនិងអាហារូបត្ថម្#HEALTH_NUT#'
+    #             ],
+    #             'datasourceId': [
+    #                 'CamStat-stable'
+    #             ]
+    #         },
+    #         'rows': 100,
+    #         'start': 0
+    #     }
 
     try:
         datasets_page = requests.post(datasets_url, json=request_payload)
@@ -490,21 +495,22 @@ def get_dataflows(language):
         return []
 
 
-def get_combined_data(data_en, data_km):
-    print('  + Merging data...')
+# def get_combined_data(data_en, data_km):
+#     print('  + Merging data...')
+# 
+#     if len(data_en) == len(data_km):
+#         for i in range(len(data_en) - 1):
+#             for j in range(len(data_en[i]) - 1):
+#                 field_en = data_en[i][j]
+#                 field_km = data_km[i][j]
+# 
+#                 if field_km == '' and field_en != '':
+#                     data_km[i][j] = data_en[i][j]
+# 
+#     print('  + Data merged successfully.\n')
+# 
+#     return data_km
 
-    if len(data_en) == len(data_km):
-        for i in range(len(data_en) - 1):
-            for j in range(len(data_en[i]) - 1):
-                field_en = data_en[i][j]
-                field_km = data_km[i][j]
-
-                if field_km == '' and field_en != '':
-                    data_km[i][j] = data_en[i][j]
-
-    print('  + Data merged successfully.\n')
-
-    return data_km
 
 def get_new_hash(data):
     print('  + Generating new hash...')
@@ -567,7 +573,7 @@ def update_hash(dataflow_id, dataflow_name_munged, resource_id,
             WHERE "package_id" = '{}' AND "resource_id" = '{}'
         """.format(
             new_hash, dataflow_last_updated,
-            dataflow_name_munged, resource_id
+            dataflow_id, resource_id
         )
 
     connection.execute(sql)
@@ -579,10 +585,10 @@ def update_hash(dataflow_id, dataflow_name_munged, resource_id,
 def update_camstat(owner_org, languages):
     verify_organization_exists(owner_org)
 
-    languages = ['km', 'en']
-    lang_km = languages[0]
+    # languages = ['km', 'en']
+    # lang_km = languages[0]
     lang_en = languages[1]
-    dataflows = get_dataflows(lang_km)
+    dataflows = get_dataflows()
 
     i = 0
 
@@ -614,61 +620,63 @@ def update_camstat(owner_org, languages):
             dataflow_id.replace('DF_', '')
         ).replace('_', '-')
         dataflow_name_munged = munge_name(dataflow_dataset_name)
-        csv_filename = '{}_{}_{}.csv'.format(dataflow_agency, dataflow_id, lang_km)
+        csv_filename = '{}_{}_{}.csv'.format(
+            dataflow_agency, dataflow_id, lang_en
+        )
 
         id_removal_en = get_data(
             dataflow_agency,
             dataflow_id,
             dataflow_version,
-            lang_en,
             'id'
         )
         raw_data_en = get_data(
             dataflow_agency,
             dataflow_id,
             dataflow_version,
-            lang_en,
             'both'
         )
-        id_removal_km = get_data(
-            dataflow_agency,
-            dataflow_id,
-            dataflow_version,
-            lang_km,
-            'id'
-        )
-        raw_data_km = get_data(
-            dataflow_agency,
-            dataflow_id,
-            dataflow_version,
-            lang_km,
-            'both'
-        )
+
+        # id_removal_km = get_data(
+        #     dataflow_agency,
+        #     dataflow_id,
+        #     dataflow_version,
+        #     lang_km,
+        #     'id'
+        # )
+        # raw_data_km = get_data(
+        #     dataflow_agency,
+        #     dataflow_id,
+        #     dataflow_version,
+        #     lang_km,
+        #     'both'
+        # )
+
         data_en = clean_csv(
             raw_data_en,
             id_removal_en,
             dataflow_agency,
             dataflow_id,
-            dataflow_version,
-            'English'
-        )
-        data_km = clean_csv(
-            raw_data_km,
-            id_removal_km,
-            dataflow_agency,
-            dataflow_id,
-            dataflow_version,
-            'Khmer'
+            dataflow_version
         )
 
-        combined_data = get_combined_data(data_en, data_km)
+        # data_km = clean_csv(
+        #     raw_data_km,
+        #     id_removal_km,
+        #     dataflow_agency,
+        #     dataflow_id,
+        #     dataflow_version,
+        #     'Khmer'
+        # )
+
+        # combined_data = get_combined_data(data_en, data_km)
 
         # To test hash checking and updating, the easiest way is to
         # add test data to 'combined_data'. For example, to add a new
         # row to 'combined_data', you can uncomment the following
         # or do something similar:
         #
-        # combined_data = combined_data + [[
+        # data_en = [data_en[0]] + [[
         #     "KH_NIS:DF_NUTRITION(1.0)",
         #     "TEST INDICATOR",
         #     "TEST REF AREA",
@@ -687,20 +695,21 @@ def update_camstat(owner_org, languages):
         #     "TEST UNITS",
         #     "TEST RESPONSIBLE AGENCY",
         #     "TEST DATA SOURCE"
-        # ]]
+        # ]] + data_en[1:]
         #
         # This will add a new row at the end of the CSV.
 
         resource = write_csv(
-            combined_data,
+            data_en,
             csv_filename
         )
 
-        new_hash = get_new_hash(combined_data + [dataflow_description])
+        new_hash = get_new_hash(data_en + [dataflow_description])
         existing_hash, resource_id = get_existing_hash(dataflow_id)
         update_required = False
+        update_hash_required = False
 
-        if existing_hash:
+        if existing_hash is not None:
             update_required = compare_hashes(existing_hash, new_hash)
 
         if existing_hash and update_required and resource_id:
@@ -716,6 +725,7 @@ def update_camstat(owner_org, languages):
                 dataflow_title,
                 dataflow_description_updated
             )
+            update_hash_required = True
 
         elif existing_hash is None:
             create_dataset(
@@ -730,22 +740,28 @@ def update_camstat(owner_org, languages):
                 resource
             )
             resource_id = resource_dict.get('id')
+            update_hash_required = True
 
         else:
-            print('  + Data for {} is already up-to-date.\n'.format(dataflow_title))
+            print('  + Data for {} is already up-to-date.\n'.format(
+                dataflow_title
+            ))
 
-        update_hash(
-            dataflow_id,
-            dataflow_name_munged,
-            resource_id,
-            new_hash,
-            dataflow_last_updated,
-            existing_hash
-        )
+        if update_hash_required:
+            update_hash(
+                dataflow_id,
+                dataflow_name_munged,
+                resource_id,
+                new_hash,
+                dataflow_last_updated,
+                existing_hash
+            )
 
         print(
             '\n> SUCCESSFULLY EXTRACTED AND PROCESSED: {}\n\n'
-            '  =======================================\n'.format(dataflow_title)
+            '  =======================================\n'.format(
+                dataflow_title
+            )
         )
 
         i += 1
