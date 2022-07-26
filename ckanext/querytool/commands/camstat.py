@@ -739,14 +739,18 @@ def update_camstat(owner_org, languages):
                 )
 
         if not update_required:
-            deleted_dataset = toolkit.get_action('package_show')(
-                {},
-                {
-                    'id': dataflow_name_munged
-                }
-            )
+            deleted_dataset = None
+            try:
+                deleted_dataset = toolkit.get_action('package_show')(
+                    {},
+                    {
+                        'id': dataflow_name_munged
+                    }
+                )
+            except Exception as e:
+                print(e)
 
-            if deleted_dataset.get('state') == 'deleted':
+            if deleted_dataset is not None and deleted_dataset.get('state') == 'deleted':
                 was_deleted = True
                 toolkit.get_action('dataset_purge')(
                     {},
