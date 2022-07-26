@@ -551,7 +551,7 @@ def get_existing_hash(dataflow_id):
 
 
 def update_hash(dataflow_id, dataflow_name_munged, resource_id,
-                new_hash, dataflow_last_updated, existing_hash):
+                new_hash, dataflow_last_updated, existing_hash, was_deleted):
     print('  + Updating hashes...')
 
     connection = model.Session.connection()
@@ -564,6 +564,17 @@ def update_hash(dataflow_id, dataflow_name_munged, resource_id,
         """.format(
             dataflow_id, dataflow_name_munged,
             resource_id, new_hash, dataflow_last_updated
+        )
+
+    elif was_deleted:
+        sql = """
+            UPDATE "camstat_hashes"
+            SET "hash" = '{}', "last_updated" = '{}',
+            "resource_id" = '{}'
+            WHERE "package_id" = '{}' AND "hash" = '{}'
+        """.format(
+            new_hash, dataflow_last_updated, resource_id,
+            dataflow_id, existing_hash
         )
 
     else:
@@ -604,7 +615,9 @@ def update_camstat(owner_org, languages):
         )
 
         print('> BEGINNING EXTRACTION FOR: {}\n'.format(dataflow_title))
-        print('  + Extraction timestamp: {}\n'.format(dataflow_last_extracted))
+        print('  + Extraction timestamp: {}\n'.format(
+            dataflow_last_extracted
+        ))
 
         for key, value in dataflow.items():
             print('  | {}: {}'.format(key, value))
@@ -708,11 +721,49 @@ def update_camstat(owner_org, languages):
         existing_hash, resource_id = get_existing_hash(dataflow_id)
         update_required = False
         update_hash_required = False
+        was_deleted = False
 
-        if existing_hash is not None:
+        if resource_id:
+            try:
+                toolkit.get_action('resource_show')(
+                    {},
+                    {
+                        'id': resource_id
+                    }
+                )
+            except Exception:
+                was_deleted = True
+
+                print('  + This resource was previously deleted.'
+                      ' It will be uploaded again...\n'
+                )
+
+        if not update_required:
+            deleted_dataset = toolkit.get_action('package_show')(
+                {},
+                {
+                    'id': dataflow_name_munged
+                }
+            )
+
+            if deleted_dataset.get('state') == 'deleted':
+                was_deleted = True
+                toolkit.get_action('dataset_purge')(
+                    {},
+                    {
+                        'id': dataflow_name_munged
+                    }
+                )
+
+                print('  + This dataset was previously deleted.'
+                      ' It will be uploaded again...\n'
+                )
+
+        if existing_hash is not None and not was_deleted:
             update_required = compare_hashes(existing_hash, new_hash)
 
-        if existing_hash and update_required and resource_id:
+        if existing_hash and update_required \
+           and resource_id and not was_deleted:
             patch_resource(
                 dataflow_name_munged,
                 dataflow_title,
@@ -727,7 +778,7 @@ def update_camstat(owner_org, languages):
             )
             update_hash_required = True
 
-        elif existing_hash is None:
+        elif existing_hash is None or was_deleted:
             create_dataset(
                 dataflow_name_munged,
                 owner_org,
@@ -754,7 +805,8 @@ def update_camstat(owner_org, languages):
                 resource_id,
                 new_hash,
                 dataflow_last_updated,
-                existing_hash
+                existing_hash,
+                was_deleted
             )
 
         print(
