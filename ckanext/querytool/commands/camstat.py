@@ -431,8 +431,7 @@ def write_csv(data, csv_filename):
     resource = {
         'url_type': None,
         'url': '',
-        'upload': file_obj,
-        'file': tmp_file
+        'upload': file_obj
     }
 
     print('  + CSV data written to temporary file successfully.\n')
