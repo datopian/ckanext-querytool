@@ -722,6 +722,7 @@ def update_camstat(owner_org, languages):
         update_required = False
         update_hash_required = False
         was_deleted = False
+        deleted_dataset = None
 
         if resource_id:
             try:
@@ -738,30 +739,30 @@ def update_camstat(owner_org, languages):
                       ' It will be uploaded again...\n'
                 )
 
-        if not update_required:
-            deleted_dataset = None
-            try:
-                deleted_dataset = toolkit.get_action('package_show')(
-                    {},
-                    {
-                        'id': dataflow_name_munged
-                    }
-                )
-            except Exception as e:
-                print(e)
+        try:
+            deleted_dataset = toolkit.get_action('package_show')(
+                {},
+                {
+                    'id': dataflow_name_munged
+                }
+            )
 
-            if deleted_dataset is not None and deleted_dataset.get('state') == 'deleted':
-                was_deleted = True
-                toolkit.get_action('dataset_purge')(
-                    {},
-                    {
-                        'id': dataflow_name_munged
-                    }
-                )
+        except Exception:
+            pass
 
-                print('  + This dataset was previously deleted.'
-                      ' It will be uploaded again...\n'
-                )
+        if deleted_dataset is not None \
+           and deleted_dataset.get('state') == 'deleted':
+            was_deleted = True
+            toolkit.get_action('dataset_purge')(
+                {},
+                {
+                    'id': dataflow_name_munged
+                }
+            )
+
+            print('  + This dataset was previously deleted.'
+                  ' It will be uploaded again...\n'
+            )
 
         if existing_hash is not None and not was_deleted:
             update_required = compare_hashes(existing_hash, new_hash)
