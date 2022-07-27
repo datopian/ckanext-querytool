@@ -56,14 +56,14 @@
 
             {# Category #}
             {% if selected_chart_type in ['donut', 'pie'] %}
-              {% set category_option = true %}
+              {% set category_option = 'True' %}
             {% else %}
-              {% set category_option = false %}
+              {% set category_option = 'False' %}
             {% endif %}
             <div class="control-group control-select">
               <label class="control-label" for="chart_field_category_name_{{ n }}">{{ _('Category') }}</label>
               <div class="controls ">
-                <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}" {{'disabled' if category_option else ''}}>
+                <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}" {{'disabled' if category_option == 'True' else ''}}>
                   <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
                   {% for category in columns %}
                   <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
