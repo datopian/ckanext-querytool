@@ -66,7 +66,7 @@
                 <select id="chart_field_category_name_{{ n }}" name="chart_field_category_name_{{ n }}" {{'disabled' if category_option == 'True' else ''}}>
                   <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
                   {% for category in columns %}
-                  <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{% endif %}>{{ category }}</option>
+                  <option value="{{ category }}"{% if chart %}{{ 'selected' if category == chart.category_name }}{{ 'disabled' if category == chart.x_axis }}{% endif %}>{{ category }}</option>
                   {% endfor %}
                 </select>
               </div>

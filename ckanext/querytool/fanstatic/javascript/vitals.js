@@ -1352,3 +1352,10 @@ $('body').on('click', '[id^=copy-viz-btn_]', function () {
   document.getElementById("submit-overlay").style.pointerEvents = "none";
   $(this).text('Copying...');
 });
+
+$('body').on('change', '[id^=chart_field_axis_x_]', function () {
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_axis_x_${chart_number}`).val();
+  $(`#chart_field_category_name_${chart_number} option`).prop('disabled', false);
+  $(`#chart_field_category_name_${chart_number} option[value="${selected}"]`).prop('disabled', true);
+})
