@@ -1356,6 +1356,15 @@ $('body').on('click', '[id^=copy-viz-btn_]', function () {
 $('body').on('change', '[id^=chart_field_axis_x_]', function () {
   var chart_number = this.id.split('_').slice(-1)[0];
   var selected = $(`#chart_field_axis_x_${chart_number}`).val();
+
+  //  Enables all categories
   $(`#chart_field_category_name_${chart_number} option`).prop('disabled', false);
-  $(`#chart_field_category_name_${chart_number} option[value="${selected}"]`).prop('disabled', true);
+  
+  //  Disables the category that has the same value as 
+  //  the dimension
+  if(selected)
+    $(`#chart_field_category_name_${chart_number} option[value="${selected}"]`).prop('disabled', true);
+
+  //  Unsets the category when a dimension is selected
+  $(`#chart_field_category_name_${chart_number}`).val('');
 })
