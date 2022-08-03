@@ -894,69 +894,47 @@ function hideAnnotationCheckbox(selected,chart_number){
 
 }; 
 
-
-// On Tables, category and subcategory must not be same 
-$('body').on('change','[id^=table_main_value_]',function(){
+//  When the dimension changes
+$('body').on('change', '[id^=table_main_value_]', function(e) {
   var selected = $(this).val();
   var chart_number = this.id.split('_').slice(-1)[0];
 
-  checkTableCat(selected,chart_number)
+  //  Reenables all the options for sub dimension and category
+  $(`#table_second_value_${chart_number} option`).prop('disabled', false);
+  $(`#table_category_name_${chart_number} option`).prop('disabled', false);
+
+  //  Disables only the options that have the same  value as
+  //  the dimension field
+  $(`#table_second_value_${chart_number} option[value="${selected}"]`).prop('disabled', true);
+  $(`#table_category_name_${chart_number} option[value="${selected}"]`).prop('disabled', true);
+
+  //  Unsets the sub dimension and category values
+  $(`#table_second_value_${chart_number}`).val('');
+  $(`#table_category_name_${chart_number}`).val('');
+
 });
 
-$('body').on('focus','[id^=table_main_value_]',function(){
+//  When the sub dimension changes
+$('body').on('change', '[id^=table_second_value_]', function(e) {
   var selected = $(this).val();
   var chart_number = this.id.split('_').slice(-1)[0];
 
-  checkTableCat(selected,chart_number)
-});
+  var current_dimension = $(`#table_main_value_${chart_number}`).val();
 
+  //  Reenables all the options for category
+  $(`#table_category_name_${chart_number} option`).prop('disabled', false);
 
-function checkTableCat(selected,chart_number){ 
+  //  Disables only the options that have the same value as
+  //  the  sub  dimension  field  or  the same value as the 
+  //  dimension field
+  $(`
+    #table_category_name_${chart_number} option[value="${selected}"], 
+    #table_category_name_${chart_number} option[value="${current_dimension}"]
+  `).prop('disabled', true);
 
-  $(`#table_second_value_${chart_number} option[value='`+ selected +`']`).attr('disabled','disabled').siblings().removeAttr('disabled');
-  $(`#table_category_name_${chart_number} option[value='`+ selected +`']`).attr('disabled','disabled').siblings().removeAttr('disabled');
+  $(`#table_category_name_${chart_number}`).val('');
 
-  if($(`#table_second_value_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
-    $($(`#table_second_value_${chart_number}`)).val("")
-  } 
-
-  if($(`#table_category_name_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
-    $($(`#table_category_name_${chart_number}`)).val("")
-  }
-
-}
-
-
-$('body').on('change','[id^=table_second_value_]',function(e){
-  var selected = $(this).val();
-  var chart_number = this.id.split('_').slice(-1)[0];
-
-  if($(`#table_main_value_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
-    $($(`#table_second_value_${chart_number}`)).val("")
-    alert('Value cannot be same as main dimension')
-  } 
-
-  if($(`#table_category_name_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
-    $($(`#table_second_value_${chart_number}`)).val("")
-    alert('Value cannot be same as category')
-  }
-});
-
-
-$('body').on('change','[id^=table_category_name_]',function(e){
-  var selected = $(this).val();
-  var chart_number = this.id.split('_').slice(-1)[0];
-
-  if($(`#table_main_value_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
-    $($(`#table_category_name_${chart_number}`)).val("")
-    alert('Value cannot be same as main dimension')
-  } 
-
-  if($(`#table_second_value_${chart_number} option`).filter(":selected").val() == selected && selected != ''){
-    $($(`#table_category_name_${chart_number}`)).val("")
-    alert('Value cannot be same as sub dimension')
-  }
-});
+})
 
 // Upper/lower bounds functions
 
@@ -1352,3 +1330,19 @@ $('body').on('click', '[id^=copy-viz-btn_]', function () {
   document.getElementById("submit-overlay").style.pointerEvents = "none";
   $(this).text('Copying...');
 });
+
+$('body').on('change', '[id^=chart_field_axis_x_]', function () {
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_axis_x_${chart_number}`).val();
+
+  //  Enables all categories
+  $(`#chart_field_category_name_${chart_number} option`).prop('disabled', false);
+  
+  //  Disables the category that has the same value as 
+  //  the dimension
+  if(selected)
+    $(`#chart_field_category_name_${chart_number} option[value="${selected}"]`).prop('disabled', true);
+
+  //  Unsets the category when a dimension is selected
+  $(`#chart_field_category_name_${chart_number}`).val('');
+})

@@ -455,7 +455,7 @@ ckan.module('querytool-viz-preview', function() {
                 }
             } else if (
                 (this.options.chart_type === 'sbar' || this.options.chart_type === 'shbar')
-                && !this.options.category_name
+                && (this.options.category_name === '' || typeof this.options.category_name === 'boolean') 
             ) {
                 var horizontal = (this.options.chart_type === 'shbar') ? true : false
 
@@ -1090,8 +1090,8 @@ ckan.module('querytool-viz-preview', function() {
                     data.push(trace);
                   }
                 } else if (
-                  "sbar" === this.options.chart_type &&
-                  this.options.category_name === ""
+                  "sbar" === this.options.chart_type
+                  && (this.options.category_name === '' || typeof this.options.category_name === 'boolean') 
                 ) {
                   for (tmp = 0; tmp < columns.length; tmp++) {
                     var name = columns[tmp][0];
