@@ -120,8 +120,9 @@ def querytool_visualizations_update(context, data_dict):
                 images.append(image)
 
     new_items = json.loads(data_dict['visualizations'])
+    new_images = []
+
     if new_items:
-        new_images = []
         for new in new_items:
             if new['type'] == 'image':
                 new_images.append(new['url'])

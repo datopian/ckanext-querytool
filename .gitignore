@@ -53,3 +53,6 @@ selenium-debug.log
 
 ## Git
 .gitattributes
+
+# VS Code
+.vscode/

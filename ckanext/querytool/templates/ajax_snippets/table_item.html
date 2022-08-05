@@ -62,24 +62,51 @@
         </select>
       </div>
     </div>
+
+    {% if table and table.main_value %}
+      {% set dimension_to_disable = table.main_value %}
+    {% else %}
+      {% set dimension_to_disable = columns[0] %}
+    {% endif %}
     <div class="control-group control-select">
       <label class="control-label" for="table_second_value_{{ n }}">{{ _('Sub-dimension') }}</label>
       <div class="controls ">
         <select id="table_second_value_{{ n }}" name="table_second_value_{{ n }}">
         <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
         {% for column in columns %}
-        <option value="{{column}}"{% if table %}{{ 'selected' if column == table.second_value }}{% endif %}>{{column}}</option>
+          <option 
+            value="{{column}}"
+            {% if table %}
+              {{ 'selected' if column == table.second_value }}
+            {% endif %} 
+            {{ 'disabled' if column == dimension_to_disable }}
+          >
+            {{column}}
+          </option>
         {% endfor %}
         </select>
       </div>
     </div>
+    {% if table and table.second_value %}
+      {% set sub_dimension_to_disable = table.second_value %}
+    {% else %}
+      {% set sub_dimension_to_disable = None %}
+    {% endif %}
     <div class="control-group control-select">
       <label class="control-label" for="table_category_name_{{ n }}">{{ _('Category') }}</label>
       <div class="controls ">
         <select id="table_category_name_{{ n }}" name="table_category_name_{{ n }}">
         <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
         {% for category in columns %}
-        <option value="{{category}}"{% if table %}{{ 'selected' if category == table.category_name }}{% endif %}>{{category}}</option>
+          <option 
+            value="{{category}}"
+            {% if table %}
+              {{ 'selected' if category == table.category_name }}
+            {% endif %} 
+            {{ 'disabled' if category == dimension_to_disable or category == sub_dimension_to_disable }}
+          >
+            {{category}}
+          </option>
         {% endfor %}
         </select>
       </div>
@@ -167,6 +194,7 @@
   </div>
   <ul class="inline text-right chart-actions">
     <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+    <li><button class="btn copy-chart-btn" type="submit" id="copy-viz-btn_{{ n }}" name="copy-viz-btn_{{ n }}"><span class="fa fa-copy" aria-hidden="true"></span> {{ _('Copy') }}</button></li>
     <li><a class="btn update-table-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
   </ul>
 </div>

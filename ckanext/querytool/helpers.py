@@ -250,7 +250,25 @@ def get_charts_data_formats(num=None):
                {'text': _('Comma thousands separator (1 digit) e.g 2,512.3'),
                    'value': ',.1f'},
                {'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
-                   'value': ',.2f'}]
+                   'value': ',.2f'},
+               {'text': _('Date DD/MM/YYYY .e.g. 01/01/2014'),
+                   'value': '%d/%m/%Y'},
+               {'text': _('Date YYYY/MM/DD .e.g. 2014/01/01'),
+                   'value': '%Y/%m/%d'},
+               {'text': _('Date YYYY/MM .e.g. 2014/01'),
+                   'value': '%Y/%m'},
+               {'text': _('Date MM/YYYY .e.g. 01/2014'),
+                   'value': '%m/%Y'},
+               {'text': _('Date DD/MM .e.g. 01/01'),
+                   'value': '%d/%m'},
+               {'text': _('Date MM/YY .e.g. 01/2014'),
+                   'value': '%m/%y'},
+               {'text': _('Date YYYY .e.g. 2014'),
+                   'value': '%Y'},
+               {'text': _('Date MMM DD, YYYY .e.g. Jan 01, 2014'),
+                   'value': '%b %d, %Y'},
+               {'text': _('Date MMM DD .e.g. Jan 01'),
+                   'value': '%b %d'}]
     if num:
         return options[:num]
     return options
