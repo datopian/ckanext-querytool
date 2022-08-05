@@ -88,6 +88,7 @@ setup(
 
         [paste.paster_command]
         seed_portal=ckanext.querytool.commands.seed:SeedData
+        update_camstat=ckanext.querytool.commands.camstat:UpdateCamstat
 
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
