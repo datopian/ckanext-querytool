@@ -2201,3 +2201,31 @@ msgstr "កាលបរិច្ឆេទ MMM DD, YYYY អតីត។ ថ្ង
 # added manually
 msgid "Date MMM DD .e.g. Jan 01"
 msgstr "កាលបរិច្ឆេទ MMM DD ex. ០១ មករា"
+
+# added manually
+msgid "Dimension by default"
+msgstr "ទំហំលំនាំដើម"
+
+# added manually
+msgid "Measure by default"
+msgstr "ការការិយាល័យលំនាំដើម"
+
+# added manually
+msgid "Enabled"
+msgstr "បានបើក"
+
+# added manually
+msgid "Disabled"
+msgstr "បានបិទ"
+
+# added manually
+msgid "Sequential"
+msgstr "ដំបូង"
+
+# added manually
+msgid "Divergent"
+msgstr "បានបង្កើត"
+
+# added manually
+msgid "Color"
+msgstr "ពណ៌"

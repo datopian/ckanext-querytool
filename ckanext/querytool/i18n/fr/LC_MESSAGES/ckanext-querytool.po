@@ -1428,3 +1428,31 @@ msgstr "Date MMM JJ, AAAA ex. Jan 01, 2014"
 # added manually
 msgid "Date MMM DD .e.g. Jan 01"
 msgstr "Date MMM JJ ex. Jan 01"
+
+# added manually
+msgid "Dimension by default"
+msgstr "Dimension par défaut"
+
+# added manually
+msgid "Measure by default"
+msgstr "Mesure par défaut"
+
+# added manually
+msgid "Enabled"
+msgstr "Activé"
+
+# added manually
+msgid "Disabled"
+msgstr "Désactivé"
+
+# added manually
+msgid "Sequential"
+msgstr "Séquentiel"
+
+# added manually
+msgid "Divergent"
+msgstr "Divergent"
+
+# added manually
+msgid "Color"
+msgstr "Couleur"

@@ -1367,3 +1367,31 @@ msgstr ""
 # added manually
 msgid "Date MMM DD .e.g. Jan 01"
 msgstr ""
+
+# added manually
+msgid "Dimension by default"
+msgstr ""
+
+# added manually
+msgid "Measure by default"
+msgstr ""
+
+# added manually
+msgid "Enabled"
+msgstr ""
+
+# added manually
+msgid "Disabled"
+msgstr ""
+
+# added manually
+msgid "Sequential"
+msgstr ""
+
+# added manually
+msgid "Divergent"
+msgstr ""
+
+# added manually
+msgid "Color"
+msgstr ""

@@ -1469,3 +1469,31 @@ msgstr "日期 MMM DD、YYYY ex。 2014 年 1 月 1 日"
 # added manually
 msgid "Date MMM DD .e.g. Jan 01"
 msgstr "日期 MMM DD ex。 1 月 1 日"
+
+# added manually
+msgid "Dimension by default"
+msgstr "默认维度"
+
+# added manually
+msgid "Measure by default"
+msgstr "默认指标"
+
+# added manually
+msgid "Enabled"
+msgstr "启用"
+
+# added manually
+msgid "Disabled"
+msgstr "禁用"
+
+# added manually
+msgid "Sequential"
+msgstr "顺序的"
+
+# added manually
+msgid "Divergent"
+msgstr "分歧的"
+
+# added manually
+msgid "Color"
+msgstr "颜色"
