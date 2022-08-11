@@ -1263,3 +1263,107 @@ msgstr ""
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
 msgid "An integer or decimal between 0.1-10."
 msgstr ""
+
+# added manually
+msgid "Line Options"
+msgstr ""
+
+# added manually
+msgid "Solid"
+msgstr ""
+
+# added manually
+msgid "Dashed"
+msgstr ""
+
+# added manually
+msgid "Dash Dot"
+msgstr ""
+
+# added manually
+msgid "Dotted"
+msgstr ""
+
+# added manually
+msgid "Slim"
+msgstr ""
+
+# added manually
+msgid "Regular"
+msgstr ""
+
+# added manually
+msgid "Wide"
+msgstr ""
+
+# added manually
+msgid "Set axis range"
+msgstr ""
+
+# added manually
+msgid "Axis range minimum"
+msgstr ""
+
+# added manually
+msgid "Axis minimum"
+msgstr ""
+
+# added manually
+msgid "Axis range maximum"
+msgstr ""
+
+# added manually
+msgid "Axis maximum"
+msgstr ""
+
+# added manually
+msgid "Show legend title"
+msgstr ""
+
+# added manually
+msgid "Custom legend title"
+msgstr ""
+
+# added manually
+msgid "Width of bar, default 5.0"
+msgstr ""
+
+# added manually
+msgid "Sort x axis labels"
+msgstr ""
+
+# added manually
+msgid "Date DD/MM/YYYY .e.g. 01/01/2014"
+msgstr ""
+
+# added manually
+msgid "Date YYYY/MM/DD .e.g. 2014/01/01"
+msgstr ""
+
+# added manually
+msgid "Date YYYY/MM .e.g. 2014/01"
+msgstr ""
+
+# added manually
+msgid "Date MM/YYYY .e.g. 01/2014"
+msgstr ""
+
+# added manually
+msgid "Date DD/MM .e.g. 01/01"
+msgstr ""
+
+# added manually
+msgid "Date MM/YY .e.g. 01/14"
+msgstr ""
+
+# added manually
+msgid "Date YYYY .e.g. 2014"
+msgstr ""
+
+# added manually
+msgid "Date MMM DD, YYYY .e.g. Jan 01, 2014"
+msgstr ""
+
+# added manually
+msgid "Date MMM DD .e.g. Jan 01"
+msgstr ""

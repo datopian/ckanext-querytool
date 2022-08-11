@@ -1324,3 +1324,107 @@ msgstr "Largeur de colonne"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
 msgid "An integer or decimal between 0.1-10."
 msgstr "Un nombre entier ou décimal compris entre 0,1 et 10."
+
+# added manually
+msgid "Line Options"
+msgstr "Options de ligne"
+
+# added manually
+msgid "Solid"
+msgstr "Solide"
+
+# added manually
+msgid "Dashed"
+msgstr "Trait"
+
+# added manually
+msgid "Dash Dot"
+msgstr "Trait et point"
+
+# added manually
+msgid "Dotted"
+msgstr "Pointé"
+
+# added manually
+msgid "Slim"
+msgstr "Mince"
+
+# added manually
+msgid "Regular"
+msgstr "Réguliere"
+
+# added manually
+msgid "Wide"
+msgstr "Large"
+
+# added manually
+msgid "Set axis range"
+msgstr "Définir la plage d'axes"
+
+# added manually
+msgid "Axis range minimum"
+msgstr "Plage minimale"
+
+# added manually
+msgid "Axis minimum"
+msgstr "Minimum d'axe"
+
+# added manually
+msgid "Axis range maximum"
+msgstr "Plage maximale"
+
+# added manually
+msgid "Axis maximum"
+msgstr "Maximum d´axe"
+
+# added manually
+msgid "Show legend title"
+msgstr "Afficher le titre de la légende"
+
+# added manually
+msgid "Custom legend title"
+msgstr "Titre de légende personnalisé"
+
+# added manually
+msgid "Width of bar, default 5.0"
+msgstr "Largeur de la barre, par défaut 5.0"
+
+# added manually
+msgid "Sort x axis labels"
+msgstr "Commander des étiquettes sur l'axe des x"
+
+# added manually
+msgid "Date DD/MM/YYYY .e.g. 01/01/2014"
+msgstr "Date JJ/MM/AAAA ex. 01/01/2014"
+
+# added manually
+msgid "Date YYYY/MM/DD .e.g. 2014/01/01"
+msgstr "Date AAAA/MM/JJ ex. 01/01/2014"
+
+# added manually
+msgid "Date YYYY/MM .e.g. 2014/01"
+msgstr "Date AAAA/MM ex. 2014/01"
+
+# added manually
+msgid "Date MM/YYYY .e.g. 01/2014"
+msgstr "Date MM/AAAA ex. 01/2014"
+
+# added manually
+msgid "Date DD/MM .e.g. 01/01"
+msgstr "Date JJ/MM ex. 01/01"
+
+# added manually
+msgid "Date MM/YY .e.g. 01/14"
+msgstr "Date MM/AA ex. 01/14"
+
+# added manually
+msgid "Date YYYY .e.g. 2014"
+msgstr "Date AAAA ex. 2014"
+
+# added manually
+msgid "Date MMM DD, YYYY .e.g. Jan 01, 2014"
+msgstr "Date MMM JJ, AAAA ex. Jan 01, 2014"
+
+# added manually
+msgid "Date MMM DD .e.g. Jan 01"
+msgstr "Date MMM JJ ex. Jan 01"

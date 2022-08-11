@@ -2097,3 +2097,107 @@ msgstr "ទទឹងជួរឈរ"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
 msgid "An integer or decimal between 0.1-10."
 msgstr "ចំនួនគត់ឬទសភាគរវាង ០.១-១០ ។"
+
+# added manually
+msgid "Line Options"
+msgstr "ជម្រើសបន្ទាត់"
+
+# added manually
+msgid "Solid"
+msgstr "រឹង"
+
+# added manually
+msgid "Dashed"
+msgstr "ដាច់ៗ"
+
+# added manually
+msgid "Dash Dot"
+msgstr "ដាច់ៗ ចំនុច"
+
+# added manually
+msgid "Dotted"
+msgstr "ចំនុច"
+
+# added manually
+msgid "Slim"
+msgstr "ស្ដើង"
+
+# added manually
+msgid "Regular"
+msgstr "ទៀង​ទា​ត"
+
+# added manually
+msgid "Wide"
+msgstr "ធំទូលាយ"
+
+# added manually
+msgid "Set axis range"
+msgstr "កំណត់ជួរអ័ក្ស"
+
+# added manually
+msgid "Axis range minimum"
+msgstr "ជួរអ័ក្សអប្បបរមា"
+
+# added manually
+msgid "Axis minimum"
+msgstr "អ័ក្សអប្បបរមា"
+
+# added manually
+msgid "Axis range maximum"
+msgstr "ជួរអ័ក្សអតិបរមា"
+
+# added manually
+msgid "Axis maximum"
+msgstr "អ័ក្សអតិបរមា"
+
+# added manually
+msgid "Show legend title"
+msgstr "បង្ហាញចំណងជើងរឿងព្រេង"
+
+# added manually
+msgid "Custom legend title"
+msgstr "ចំណងជើងរឿងព្រេងផ្ទាល់ខ្លួន"
+
+# added manually
+msgid "Width of bar, default 5.0"
+msgstr "ទទឹងរបារ លំនាំដើម 5.0"
+
+# added manually
+msgid "Sort x axis labels"
+msgstr "បញ្ជាទិញស្លាកអ័ក្ស x"
+
+# added manually
+msgid "Date DD/MM/YYYY .e.g. 01/01/2014"
+msgstr "កាលបរិច្ឆេទ DD/MM/YYYY ឧ។ ០១/០១/២០១៤"
+
+# added manually
+msgid "Date YYYY/MM/DD .e.g. 2014/01/01"
+msgstr "កាលបរិច្ឆេទ YYYY/MM/DD ex. ០១/០១/២០១៤"
+
+# added manually
+msgid "Date YYYY/MM .e.g. 2014/01"
+msgstr "កាលបរិច្ឆេទ YYYY/MM អតីត ២០១៤/០១"
+
+# added manually
+msgid "Date MM/YYYY .e.g. 01/2014"
+msgstr "កាលបរិច្ឆេទ MM/YYYY អតីត។ ០១/២០១៤"
+
+# added manually
+msgid "Date DD/MM .e.g. 01/01"
+msgstr "កាលបរិច្ឆេទ DD/MM ឧ។ ០១/០១"
+
+# added manually
+msgid "Date MM/YY .e.g. 01/14"
+msgstr "កាលបរិច្ឆេទ MM/YY ឧ។ ០១/១៤"
+
+# added manually
+msgid "Date YYYY .e.g. 2014"
+msgstr "កាលបរិច្ឆេទ YYYY អតីត ឆ្នាំ ២០១៤"
+
+# added manually
+msgid "Date MMM DD, YYYY .e.g. Jan 01, 2014"
+msgstr "កាលបរិច្ឆេទ MMM DD, YYYY អតីត។ ថ្ងៃទី ០១ ខែ មករា ឆ្នាំ ២០១៤"
+
+# added manually
+msgid "Date MMM DD .e.g. Jan 01"
+msgstr "កាលបរិច្ឆេទ MMM DD ex. ០១ មករា"
