@@ -330,7 +330,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'get_all_org_permissions':
                 helpers.get_all_org_permissions,
             'convert_bar_width':
-                helpers.convert_bar_width
+                helpers.convert_bar_width,
+            'get_cookie_control_config': 
+                helpers.get_cookie_control_config,
         }
 
     # IAuthFunctions
