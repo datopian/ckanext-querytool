@@ -1329,3 +1329,136 @@ msgstr "Column Width"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
 msgid "An integer or decimal between 0.1-10."
 msgstr "An integer or decimal between 0.1-10."
+
+# added manually
+msgid "Line Options"
+msgstr "Line Options"
+
+# added manually
+msgid "Solid"
+msgstr "Solid"
+
+# added manually
+msgid "Dashed"
+msgstr "Dashed"
+
+# added manually
+msgid "Dash Dot"
+msgstr "Dash Dot"
+
+# added manually
+msgid "Dotted"
+msgstr "Dotted"
+
+# added manually
+msgid "Slim"
+msgstr "Slim"
+
+# added manually
+msgid "Regular"
+msgstr "Regular"
+
+# added manually
+msgid "Wide"
+msgstr "Wide"
+
+# added manually
+msgid "Set axis range"
+msgstr "Set axis range"
+
+# added manually
+msgid "Axis range minimum"
+msgstr "Axis range minimum"
+
+# added manually
+msgid "Axis minimum"
+msgstr "Axis minimum"
+
+# added manually
+msgid "Axis range maximum"
+msgstr "Axis range maximum"
+
+# added manually
+msgid "Axis maximum"
+msgstr "Axis maximum"
+
+# added manually
+msgid "Show legend title"
+msgstr "Show legend title"
+
+# added manually
+msgid "Custom legend title"
+msgstr "Custom legend title"
+
+# added manually
+msgid "Width of bar, default 5.0"
+msgstr "Width of bar, default 5.0"
+
+# added manually
+msgid "Sort x axis labels"
+msgstr "Sort x axis labels"
+
+# added manually
+msgid "Date DD/MM/YYYY .e.g. 01/01/2014"
+msgstr "Date DD/MM/YYYY .e.g. 01/01/2014"
+
+# added manually
+msgid "Date YYYY/MM/DD .e.g. 2014/01/01"
+msgstr "Date YYYY/MM/DD .e.g. 2014/01/01"
+
+# added manually
+msgid "Date YYYY/MM .e.g. 2014/01"
+msgstr "Date YYYY/MM .e.g. 2014/01"
+
+# added manually
+msgid "Date MM/YYYY .e.g. 01/2014"
+msgstr "Date MM/YYYY .e.g. 01/2014"
+
+# added manually
+msgid "Date DD/MM .e.g. 01/01"
+msgstr "Date DD/MM .e.g. 01/01"
+
+# added manually
+msgid "Date MM/YY .e.g. 01/14"
+msgstr "Date MM/YY .e.g. 01/14"
+
+# added manually
+msgid "Date YYYY .e.g. 2014"
+msgstr "Date YYYY .e.g. 2014"
+
+# added manually
+msgid "Date MMM DD, YYYY .e.g. Jan 01, 2014"
+msgstr "Date MMM DD, YYYY .e.g. Jan 01, 2014"
+
+# added manually
+msgid "Date MMM DD .e.g. Jan 01"
+msgstr "Date MMM DD .e.g. Jan 01"
+
+# added manually
+msgid "Dimension by default"
+msgstr "Dimension by default"
+
+# added manually
+msgid "Measure by default"
+msgstr "Measure by default"
+
+# added manually
+msgid "Enabled"
+msgstr "Enabled"
+
+# added manually
+msgid "Disabled"
+msgstr "Disabled"
+
+# added manually
+msgid "Sequential"
+msgstr "Sequential"
+
+# added manually
+msgid "Divergent"
+msgstr "Divergent"
+
+# added manually
+msgid "Color"
+msgstr "Color"
+
