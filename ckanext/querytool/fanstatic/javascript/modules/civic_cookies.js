@@ -5,7 +5,7 @@ ckan.module("civic_cookies", function (jQuery) {
     initialize: function () {
       ckan_sandbox = this.sandbox;
 
-      if (this.options.api_key) {
+      if (this.options.api_key && this.options.enabled) {
 
         //  To make sure the type of the config
         //  is string, otherwise return empty

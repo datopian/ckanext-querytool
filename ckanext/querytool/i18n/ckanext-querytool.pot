@@ -1303,6 +1303,7 @@ msgstr ""
 #: ckanext/querytool/fanstatic/javascript/civic_cookies.js
 msgid "Off"
 msgstr ""
+
 # added manually
 msgid "Line Options"
 msgstr ""

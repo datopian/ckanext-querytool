@@ -833,6 +833,11 @@ def convert_bar_width(bar_width, convert=True, type='bar'):
 def get_cookie_control_config():
         cookie_control_config = {}
 
+        enabled = config.get(
+            'ckanext.querytool.cc.enabled', 'false').lower()
+        enabled = enabled if enabled in ['true', 'false'] else 'false'
+        cookie_control_config['enabled'] = enabled
+
         api_key = config.get(
             'ckanext.querytool.cc.api_key', '')
         cookie_control_config['api_key'] = api_key
