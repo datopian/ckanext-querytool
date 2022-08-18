@@ -261,7 +261,7 @@ def get_charts_data_formats(num=None):
                    'value': '%m/%Y'},
                {'text': _('Date DD/MM .e.g. 01/01'),
                    'value': '%d/%m'},
-               {'text': _('Date MM/YY .e.g. 01/2014'),
+               {'text': _('Date MM/YY .e.g. 01/14'),
                    'value': '%m/%y'},
                {'text': _('Date YYYY .e.g. 2014'),
                    'value': '%Y'},
