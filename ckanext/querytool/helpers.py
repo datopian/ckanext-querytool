@@ -853,4 +853,18 @@ def get_cookie_control_config():
             'ckanext.querytool.cc.initial_state', '')
         cookie_control_config['initial_state'] = initial_state
 
+        text = json.dumps({
+            "title": config.get('ckanext.querytool.cc.text.title', ''),
+            "intro": config.get('ckanext.querytool.cc.text.intro', ''),
+            "accept": config.get('ckanext.querytool.cc.text.accept', ''),
+            "reject": config.get('ckanext.querytool.cc.text.reject', ''),
+            "on": config.get('ckanext.querytool.cc.text.on', ''),
+            "off": config.get('ckanext.querytool.cc.text.off', ''),
+            "necessary_title": config.get('ckanext.querytool.cc.text.necessary_title', ''),
+            "necessary_description": config.get('ckanext.querytool.cc.text.necessary_description', ''),
+            "analytical_title": config.get('ckanext.querytool.cc.text.analytical_title', ''),
+            "analytical_description": config.get('ckanext.querytool.cc.text.analytical_description', '')
+        })
+        cookie_control_config['text'] = text
+
         return cookie_control_config
