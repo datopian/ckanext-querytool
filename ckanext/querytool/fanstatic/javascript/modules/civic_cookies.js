@@ -38,7 +38,7 @@ ckan.module("civic_cookies", function (jQuery) {
           text: {
             title: text.title || _("This site uses cookies."),
             intro: text.intro ||
-              _("Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used. \n \n For more information on the cookies we use, please check our Cookies Page."),
+              _("Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used."),
             necessaryTitle: text.necessary_title || _("Necessary cookies"),
             accept: text.accept || _("I Accept Cookies"),
             acceptSettings: text.accept || _("I Accept Cookies"),

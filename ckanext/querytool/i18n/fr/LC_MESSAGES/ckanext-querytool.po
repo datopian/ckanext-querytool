@@ -1330,8 +1330,8 @@ msgid "This site uses cookies."
 msgstr "Ce site utilise des cookies."
 
 #: ckanext/querytool/fanstatic/javascript/civic_cookies.js
-msgid "Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used. \n \n For more information on the cookies we use, please check our Cookies Page."
-msgstr "Certains de ces cookies sont essentiels, tandis que d'autres nous aident à améliorer votre expérience en fournissant des informations sur la manière dont le site est utilisé. \n \n Pour plus d'informations sur les cookies que nous utilisons, veuillez consulter notre page Cookies."
+msgid "Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used."
+msgstr "Certains de ces cookies sont essentiels, tandis que d'autres nous aident à améliorer votre expérience en fournissant des informations sur la manière dont le site est utilisé."
 
 #: ckanext/querytool/fanstatic/javascript/civic_cookies.js
 msgid "Necessary cookies"
