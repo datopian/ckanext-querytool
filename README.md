@@ -80,7 +80,7 @@ After you've recreated the admin user, run the `seed_portal` command again, with
     ```
     solr_url = http://127.0.0.1:8986/solr/ckan
     ```
-4. Clone and install DataPusher following the steps found in the [documentation](https://github.com/ckan/datapusher). You can clone this in the same parent directory where you cloned CKAN and Solr, using the same Python virtual environment from step 1.
+4. Clone and install DataPusher following the steps found in the [documentation](https://github.com/ckan/datapusher) (in the same parent directory where you cloned CKAN and Solr, using the same Python virtual environment from step 1):
 5. Update `ckan.datapusher.url` in your `.ini` file (from step 1) if it differs from this:
     ```
     ckan.datapusher.url = http://127.0.0.1:8800/
@@ -89,7 +89,7 @@ After you've recreated the admin user, run the `seed_portal` command again, with
     ```
     ckan.plugins = querytool datastore datapusher EXTENSION_4 ...
     ```
-7. Clone and install **this repo** (`ckanext-querytool`) in the `src` directory of the same parent directory as CKAN and Solr, using the same Python virtual environment from step 1:
+7. Clone and install **this repo** (`ckanext-querytool`) (in the `src` directory of the same parent directory as CKAN and Solr, using the same Python virtual environment from step 1):
     ```
     # Installation (inside the CKAN virtual environment)
     cd ckanext-querytool
