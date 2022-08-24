@@ -70,36 +70,62 @@ After you've recreated the admin user, run the `seed_portal` command again, with
 
 ### Environment installation
 
-**NOTE:** There's not a current full Docker environment for this project. The following steps are for setting up a source install of CKAN, but using a Docker image for Solr.
+**NOTE:** There's not a current full Docker environment for this project. The following steps are for setting up a source install of CKAN, but using a Docker image for Solr (See point 2 for using the Docker image for Solr).
 
-1. Install CKAN 2.7.3 from source by following the steps found in the [CKAN install documentation](https://docs.ckan.org/en/2.7/maintaining/installing/install-from-source.html).
+1. Install CKAN 2.7.3 from source by following the steps found in the [CKAN install documentation](https://docs.ckan.org/en/2.7/maintaining/installing/install-from-source.html) (Before proceeding, read through the following points).
     - Make sure to install the tag `ckan-2.7.3`. So, replace `pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.7.12#egg=ckan'` from [part c. in the docs](https://docs.ckan.org/en/2.7/maintaining/installing/install-from-source.html#install-ckan-into-a-python-virtual-environment) with `pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.7.3#egg=ckan'`.
+    - Apply this patch to CKAN (fixes errors with datastore):
+        ```
+        diff --git a/ckanext/datastore/helpers.py b/ckanext/datastore/helpers.py
+        index b616f0f94..b58cb1a76 100644
+        --- a/ckanext/datastore/helpers.py
+        +++ b/ckanext/datastore/helpers.py
+        @@ -105,7 +105,12 @@ def get_table_names_from_sql(context, sql):
+             table_names = []
+         
+             try:
+        -        query_plan = json.loads(result['QUERY PLAN'])
+        +        if isinstance(result['QUERY PLAN'], list):
+        +            result_query_plan = json.dumps(result['QUERY PLAN'])
+        +            query_plan = json.loads(result_query_plan)
+        +        else:
+        +            query_plan = json.loads(result['QUERY PLAN'])
+        +
+                 plan = query_plan[0]['Plan']
+         
+                 table_names.extend(_get_table_names_from_plan(plan))
+        
+        ```
+    - Update `psycopg2` in the CKAN `requirements.txt` file to this version before installing:
+        ```
+        psycopg2==2.7.3.2
+        ```
     - For the best compatibility, install PostgreSQL 12, if possible.
 2. Clone and use [this Solr docker-compose setup](https://github.com/datopian/docker-ckan-solr) instead of a local Solr install (you can clone this in the same parent directory where you cloned CKAN. Using this option for Solr requires installing `docker` and `docker-compose` on your OS).
-3. Update `solr_url` in your `.ini` file (from step 1) if it differs from this:
-    ```
-    solr_url = http://127.0.0.1:8986/solr/ckan
-    ```
-4. Clone and install DataPusher following the steps found in the [documentation](https://github.com/ckan/datapusher) (in the same parent directory where you cloned CKAN and Solr, using the same Python virtual environment from step 1):
-5. Update `ckan.datapusher.url` in your `.ini` file (from step 1) if it differs from this:
-    ```
-    ckan.datapusher.url = http://127.0.0.1:8800/
-    ```
-6. Add `datastore` and `datapusher` to `ckan.plugins` in your `.ini` or `.env` file (in case you missed this step in the CKAN and DataPusher docs):
-    ```
-    ckan.plugins = querytool datastore datapusher EXTENSION_4 ...
-    ```
-7. Clone and install **this repo** (`ckanext-querytool`) (in the `src` directory of the same parent directory as CKAN and Solr, using the same Python virtual environment from step 1):
+    - Update `solr_url` in your `.ini` file (from step 1) if it differs from this:
+        ```
+        solr_url = http://127.0.0.1:8986/solr/ckan
+        ```
+3. Clone and install DataPusher following the steps found in the [documentation](https://github.com/ckan/datapusher) (you can clone this in the same parent directory where you cloned CKAN and Solr, but install it in **a new virtual environment** to avoid potential `SQLAlchemy` version conflicts with CKAN):
+    - Update `ckan.datapusher.url` in your `.ini` file (from step 1) if it differs from this:
+        ```
+        ckan.datapusher.url = http://127.0.0.1:8800/
+        ```
+    - Add `datastore` and `datapusher` to `ckan.plugins` in your `.ini` or `.env` file (in case you missed this step in the CKAN and DataPusher docs):
+        ```
+        ckan.plugins = querytool datastore datapusher EXTENSION_4 ...
+        ```
+4. Clone and install **this repo** (`ckanext-querytool`) (in the `src` directory of the same parent directory as CKAN and Solr, using the same Python virtual environment from step 1):
     ```
     # Installation (inside the CKAN virtual environment)
     cd ckanext-querytool
     python setup.py develop
     pip install -r requirements.txt
     ```
-8. Add `querytool` to your `plugins` in your `.ini` or `.env` file.
-    ```
-    ckan.plugins = querytool EXTENSION_2 EXTENSION_3 ...
-    ```
+    - Add `querytool` to your `plugins` in your `.ini` or `.env` file.
+        ```
+        ckan.plugins = querytool EXTENSION_2 EXTENSION_3 ...
+        ```
 
 ### Running the development environment
 
