@@ -70,7 +70,7 @@ After you've recreated the admin user, run the `seed_portal` command again, with
 
 ### Environment installation
 
-**NOTE:** There's not a current full Docker environment for this project. The following steps are for setting up a source install of CKAN, but using a Docker image for Solr (See point 2 for using the Docker image for Solr).
+**NOTE:** There's not a current full Docker environment for this project. The following steps are for setting up a source install of CKAN, but using a Docker image for Solr (See point 2 for using the Docker image for Solr) instead of a local install.
 
 1. Install CKAN 2.7.3 from source by following the steps found in the [CKAN install documentation](https://docs.ckan.org/en/2.7/maintaining/installing/install-from-source.html) (Before proceeding, read through the following points).
     - Make sure to install the tag `ckan-2.7.3`. So, replace `pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.7.12#egg=ckan'` from [part c. in the docs](https://docs.ckan.org/en/2.7/maintaining/installing/install-from-source.html#install-ckan-into-a-python-virtual-environment) with `pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.7.3#egg=ckan'`.
@@ -100,7 +100,7 @@ After you've recreated the admin user, run the `seed_portal` command again, with
         ```
         psycopg2==2.7.3.2
         ```
-    - For the best compatibility, install PostgreSQL 12, if possible.
+    - For the best compatibility, install PostgreSQL 12 if possible.
 2. Clone and use [this Solr docker-compose setup](https://github.com/datopian/docker-ckan-solr) instead of a local Solr install (you can clone this in the same parent directory where you cloned CKAN. Using this option for Solr requires installing `docker` and `docker-compose` on your OS).
     - Update `solr_url` in your `.ini` file (from step 1) if it differs from this:
         ```
