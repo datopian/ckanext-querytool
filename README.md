@@ -4,6 +4,29 @@
 
 A CKAN extension to create visualizations based on the uploaded datasets.
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Creating new releases](#creating-new-releases)
+  - [Test data seed command](#test-data-seed-command)
+- [Development](#development)
+  - [Environment installation](#environment-installation)
+  - [Running the development environment](#running-the-development-environment)
+  - [Asset building requirements](#asset-building-requirements)
+  - [Building static assets](#building-static-assets)
+  - [Javascript and Webpack](#javascript-and-webpack)
+    - [Webpack and Babel config](#webpack-and-babel-config)
+    - [Javascript files](#javascript-files)
+    - [Updating source files](#updating-source-files)
+  - [Working with i18n](#working-with-i18n)
+  - [Updating readme](#updating-readme)
+  - [Testings layouts](#testings-layouts)
+  - [Config Settings](#config-settings)
+  - [Modify CSS](#modify-css)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Creating new releases
 
 Before creating a new release, see the next section, [Test data seed command](#test-data-seed-command)
@@ -43,116 +66,96 @@ After you've recreated the admin user, run the `seed_portal` command again, with
 
 **TODO**: _Possibly_ add a `make` command to the [ckan-cloud-docker](https://github.com/datopian/ckan-cloud-docker) `Makefile`.
 
-## Javascript and Webpack
-### Webpack and Babel config
-`.babelrc` -- babel config (see https://babeljs.io/docs/en/configuration#babelrc for config options)
-`webpack.config.js` -- webpack config (see https://webpack.js.org/configuration/)
+## Development
 
-### Javascript files
-Source files for the querytool live in:
-`ckanext/querytool/fanstatic/javascript`
+### Environment installation
 
-Distribution files (files served via our extension) are compiled via webpack and live in:
-`ckanext/querytool/fanstatic/javascript/dist`
-*NOTE*: Make sure to reference `/dist/` files, not the source files!
+**NOTE:** There's not a current full Docker environment for this project. The following steps are for setting up a source install of CKAN, but using a Docker image for Solr (See point 2 for using the Docker image for Solr) instead of a local install.
 
-Vendor files (third party libraries) live in:
-`ckanext/querytool/fanstatic/javascript`
+1. Install CKAN 2.7.3 from source by following the steps found in the [CKAN install documentation](https://docs.ckan.org/en/2.7/maintaining/installing/install-from-source.html) (Before proceeding, read through the following points).
+    - Make sure to install the tag `ckan-2.7.3`. So, replace `pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.7.12#egg=ckan'` from [part c. in the docs](https://docs.ckan.org/en/2.7/maintaining/installing/install-from-source.html#install-ckan-into-a-python-virtual-environment) with `pip install -e 'git+https://github.com/ckan/ckan.git@ckan-2.7.3#egg=ckan'`.
+    - Apply this patch to CKAN (fixes errors with datastore):
+        ```
+        diff --git a/ckanext/datastore/helpers.py b/ckanext/datastore/helpers.py
+        index b616f0f94..b58cb1a76 100644
+        --- a/ckanext/datastore/helpers.py
+        +++ b/ckanext/datastore/helpers.py
+        @@ -105,7 +105,12 @@ def get_table_names_from_sql(context, sql):
+             table_names = []
+         
+             try:
+        -        query_plan = json.loads(result['QUERY PLAN'])
+        +        if isinstance(result['QUERY PLAN'], list):
+        +            result_query_plan = json.dumps(result['QUERY PLAN'])
+        +            query_plan = json.loads(result_query_plan)
+        +        else:
+        +            query_plan = json.loads(result['QUERY PLAN'])
+        +
+                 plan = query_plan[0]['Plan']
+         
+                 table_names.extend(_get_table_names_from_plan(plan))
+        
+        ```
+    - Update `psycopg2` in the CKAN `requirements.txt` file to this version before installing:
+        ```
+        psycopg2==2.7.3.2
+        ```
+    - For the best compatibility, install PostgreSQL 12 if possible.
+2. Clone and use [this Solr docker-compose setup](https://github.com/datopian/docker-ckan-solr) instead of a local Solr install (you can clone this in the same parent directory where you cloned CKAN. Using this option for Solr requires installing `docker` and `docker-compose` on your OS).
+    - Update `solr_url` in your `.ini` file (from step 1) if it differs from this:
+        ```
+        solr_url = http://127.0.0.1:8986/solr/ckan
+        ```
+3. Clone and install DataPusher following the steps found in the [documentation](https://github.com/ckan/datapusher) (you can clone this in the same parent directory where you cloned CKAN and Solr, but install it in **a new virtual environment** to avoid potential `SQLAlchemy` version conflicts with CKAN):
+    - Update `ckan.datapusher.url` in your `.ini` file (from step 1) if it differs from this:
+        ```
+        ckan.datapusher.url = http://127.0.0.1:8800/
+        ```
+    - Add `datastore` and `datapusher` to `ckan.plugins` in your `.ini` or `.env` file (in case you missed this step in the CKAN and DataPusher docs):
+        ```
+        ckan.plugins = querytool datastore datapusher EXTENSION_4 ...
+        ```
+4. Clone and install **this repo** (`ckanext-querytool`) (in the `src` directory of the same parent directory as CKAN and Solr, using the same Python virtual environment from step 1):
+    ```
+    # Installation (inside the CKAN virtual environment)
+    cd ckanext-querytool
+    python setup.py develop
+    pip install -r requirements.txt
+    ```
+    - Add `querytool` to your `plugins` in your `.ini` or `.env` file.
+        ```
+        ckan.plugins = querytool EXTENSION_2 EXTENSION_3 ...
+        ```
 
-### Updating source files
-Source files can be changed as needed. After updating run:
-`npm install && npm run webpack` which will build the transpiled / minified resources and copy them to the `/dist` folder in the host machine.
+### Running the development environment
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+Once you've followed the above steps and everything is installed and ready, you can start the environment. This requires running a few commands, each in their own terminal.
 
+1. Start Solr:
+    ```
+    # Running Solr (from the parent directory)
+    docker-compose -f docker-ckan-solr/docker-compose.yml up
+    ```
+2. Start DataPusher:
+    ```
+    # Running DataPusher (from the parent directory, inside the CKAN virtual environment)
+    python datapusher/datapusher/main.py datapusher/deployment/datapusher_settings.py
+    ```
+3. Start CKAN (depending on how/where you set CKAN up, you might not need to use `sudo`):
+    ```
+    # Running CKAN (from the parent directory, inside the CKAN virtual environment)
+    sudo paster --plugin=ckan serve /PATH/TO/YOUR/INI_FILE
+    ```
 
-- [Docker-based development](#docker-based-development)
-  - [Requirements](#requirements)
-  - [Setting up environment](#setting-up-environment)
-  - [Working with docker](#working-with-docker)
-  - [Starting development server](#starting-development-server)
-  - [Running project tests](#running-project-tests)
-  - [Building static assets](#building-static-assets)
-  - [Working with i18n](#working-with-i18n)
-  - [Loging into container](#loging-into-container)
-  - [Updating readme](#updating-readme)
-  - [Reseting docker](#reseting-docker)
-- [Classical development](#classical-development)
-  - [Installation](#installation)
-  - [Config Settings](#config-settings)
-  - [Development Installation](#development-installation)
-  - [Modify CSS](#modify-css)
-  - [Running the Tests](#running-the-tests)
+### Asset building requirements
 
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
-## Docker-based development
-
-### Requirements
-
-Please follow installation instructions of the software below if needed. Also, take a look inside the `Makefile` to understand what's going on under the hood:
-- `docker`
-- `docker-compose`
-- `/etc/hosts` contains the `127.0.0.1 ckan-dev` line
-
-For building static assets and running end-to-end tests Node.js is required and can be installed with these commands:
+For building static assets, Node.js is required and can be installed with these commands:
 
 ```bash
 $ nvm install 10
 $ nvm use 10
 $ npm install
 ```
-
-### Setting up environment
-
-Clone the `ckanext-querytool` repository (assuming that we're inside the `projects` directory):
-
-```bash
-$ git clone git@github.com:ViderumGlobal/ckanext-querytool.git
-$ cd ckanext-querytool
-```
-
-This is a CKAN extension and docker compose setup for local development. It's designed to support live development of extensions. The only one requirement is that the folder with the project should be named `ckanext-querytool`.
-
-### Working with docker
-
-The whole docker setup is inside the `docker` directory. You can tweak any CKAN instance's aspects there (e.g. patches/cron/etc). To add other CKAN extensions to the work - add its folders to `docker/docker-compose.dev.yml` (see `ckan-dev` volumes).
-
-Pull the latest `ckan-base/dev` images and build the project's images:
-
-```
-$ make docker
-```
-
-### Starting development server
-
-Let's start the development server. It's recommended to run this command in an additional terminal window because you neede it running during the work. All changes to connected extensions will trigger live-reloading of the server:
-
-```bash
-$ make start
-# see CKAN logs here
-```
-
-Now we can visit our local ckan instance at (you can login using `ckan_admin@test1234`):
-
-```
-http://ckan-dev:5000/
-```
-
-### Running project tests
-
-> To pass the end-to-end tests you have to add required applictions from the staging site to your development server. See notes for every single test
-
-We write and store unit tests inside the `ckanext/querytool/tests` directory and end-to-end tests inside the `tests` directory. Prefer to name test files after feature/bug names. To run the tests you should have the development server up and running:
-
-```bash
-$ make test
-$ npx nightwatch tests/<testname>.js # for a single test
-```
-
-See the `how to write E2E tests` guide:
-- http://nightwatchjs.org/guide
 
 ### Building static assets
 
@@ -164,6 +167,30 @@ $ make assets
 
 Processed styles will be put to the `ckanext/querytool/fanstatic/css` folder.
 
+### Javascript and Webpack
+
+#### Webpack and Babel config
+
+`.babelrc` -- babel config (see https://babeljs.io/docs/en/configuration#babelrc for config options)
+`webpack.config.js` -- webpack config (see https://webpack.js.org/configuration/)
+
+#### Javascript files
+
+Source files for the querytool live in:
+`ckanext/querytool/fanstatic/javascript`
+
+Distribution files (files served via our extension) are compiled via webpack and live in:
+`ckanext/querytool/fanstatic/javascript/dist`
+*NOTE*: Make sure to reference `/dist/` files, not the source files!
+
+Vendor files (third party libraries) live in:
+`ckanext/querytool/fanstatic/javascript`
+
+#### Updating source files
+
+Source files can be changed as needed. After updating run:
+`npm install && npm run webpack` which will build the transpiled / minified resources and copy them to the `/dist` folder in the host machine.
+
 ### Working with i18n
 
 To extract i18n messages and compile the catalog we have to have our development server running. In another terminal window run a command:
@@ -174,16 +201,6 @@ $ make i18n
 
 See CKAN documentation for more on i18n management.
 
-### Loging into container
-
-To issue commands inside a running container:
-
-```
-$ make shell
-```
-
-Now you can tweak the running `ckan-dev` docker container from inside. Please take into account that all changes will be lost after the next container restart.
-
 ### Updating readme
 
 To update this readme's table of contents run:
@@ -192,26 +209,19 @@ To update this readme's table of contents run:
 $ make readme
 ```
 
-### Managing docker
-
-There are a few useful docker commands:
-
-```bash
-$ docker ps -aq # list all containers
-$ docker stop $(docker ps -aq) # stop all containers
-$ docker rm $(docker ps -aq) # remove all containers
-$ docker rmi $(docker images -q) # remove all images
+### Optional Config Settings
+The extension supports some optional configurations:
+- Cookie Control  
+The [Cookie Control](https://www.civicuk.com/cookie-control/) panel can be configured using the following options:
 ```
-
-### Reseting docker
-
-> It will destroy all your projects inside docker!!!
-
-If you want to start everything from scratch there is a way to prune your docker environment:
-
+ckanext.querytool.cc.enabled = True
+ckanext.querytool.cc.api_key = your_api_key
+ckanext.querytool.cc.license_type = COMMUNITY
+ckanext.querytool.cc.popup_position = LEFT # Or RIGHT
+ckanext.querytool.cc.theme_color = DARK    # Or LIGHT
+ckanext.querytool.cc.initial_state = OPEN  # Or CLOSED
 ```
-$ docker system prune -a --volumes
-```
+By default, if `enabled` is true, only `api_key` is required for the Cookie Control to work. Currently, it considers `auth_tkt` as a core cookie and Google Analytics Cookies as optionals. An API key can be generated by [registering here](https://www.civicuk.com/cookie-control/).
 
 ### Testings layouts
 
@@ -219,34 +229,6 @@ The app allows to configure different layouts for an application's visualization
 
 - Go to /querytool/public/detailed-mortality-by-cause
 - Copy-past and start in the console script from `bin/test-layouts.js`
-
-## Classical development
-
-### Installation
-
-To install ckanext-querytool:
-
-1. Activate your CKAN virtual environment, for example:
-
-```
-. /usr/lib/ckan/default/bin/activate
-```
-
-2. Install the ckanext-querytool Python package into your virtual environment:
-
-```
-pip install ckanext-querytool
-```
-
-3. Add ``querytool`` to the ``ckan.plugins`` setting in your CKAN
-   config file (by default the config file is located at
-   ``/etc/ckan/default/production.ini``).
-
-4. Restart CKAN. For example if you've deployed CKAN with Apache on Ubuntu:
-
-```
-sudo service apache2 reload
-```
 
 ### Config Settings
 
@@ -270,49 +252,6 @@ ckanext.querytool.allow_nav_bar = False
 ```
 **NOTE:** The navigation bar config option is still present, but we are not using it.
 
-### Optional Config Settings
-The extension supports some optional configurations:
-- Cookie Control  
-The [Cookie Control](https://www.civicuk.com/cookie-control/) panel can be configured using the following options:
-```
-ckanext.querytool.cc.enabled = True
-ckanext.querytool.cc.api_key = your_api_key
-ckanext.querytool.cc.license_type = COMMUNITY
-ckanext.querytool.cc.popup_position = LEFT # Or RIGHT
-ckanext.querytool.cc.theme_color = DARK    # Or LIGHT
-ckanext.querytool.cc.initial_state = OPEN  # Or CLOSED
-```
-By default, if `enabled` is true, only `api_key` is required for the Cookie Control to work. Currently, it considers `auth_tkt` as a core cookie and Google Analytics Cookies as optionals. An API key can be generated by [registering here](https://www.civicuk.com/cookie-control/).
-
-### Development Installation
-
-To install ckanext-querytool for development, activate your CKAN virtualenv
-and do:
-
-```
-git clone https://github.com/ViderumGlobal/ckanext-querytool.git
-cd ckanext-querytool
-python setup.py develop
-pip install -r dev-requirements.txt
-```
-All code MUST follow [PEP8 Style Guide](https://www.python.org/dev/peps/pep-0008/). Most editors have plugins or integrations and automatic checking for PEP8 compliance so make sure you use them.
-
-You should add a pre-commit hook that will
-check for PEP8 errors. Follow the next steps to enable this check.
-
-1. Make sure you have installed the PEP8 style checker:
-```
-$ pip install pycodestyle
-```
-2. In the `.git/hooks` folder which is located inside the project's root
-directory, create a file named `pre-commit` and inside put [this code](https://github.com/keitaroinc/pep8-git-hook/blob/master/pre-commit).
-3. Make `pre-commit` executable by running this command:
-```
-$ chmod +x ckanext-querytool/.git/hooks/pre-commit
-```
-Now, every time you commit code, the pre-commit hook will run and check for
-PEP8 errors.
-
 ### Modify CSS
 
 This extension uses LESS for styles. All changes must be made in one of the LESS
@@ -321,24 +260,3 @@ files located in the `ckanext-querytool/ckanext/querytool/fanstatic/less` folder
 Gulp.js is used for building CSS assets.
 
 In order to build all CSS assets **run `node_modules/gulp/bin/gulp.js` once**. Gulp.js is watching for changes in the source LESS assets and will rebuild CSS on each change. If you have gulp.js installed globally on the system, you can just type `gulp` to run it.
-
-### Running the Tests
-
-To run the tests, first make sure that you have installed the required
-development dependencies in CKAN, which can be done by running the following
-command in the CKAN's `src` directory:
-
-```
-pip install -r dev-requirements.txt
-```
-
-After that just type this command to actually run the tests in the extension.
-
-```
-nosetests --ckan --with-pylons=test.ini
-```
-To run the tests and produce a coverage report, first make sure you have coverage installed in your virtualenv (pip install coverage) then run:
-
-```
-nosetests --nologcapture --with-pylons=test.ini --with-coverage --cover-package=ckanext.querytool --cover-inclusive --cover-erase --cover-tests
-```
