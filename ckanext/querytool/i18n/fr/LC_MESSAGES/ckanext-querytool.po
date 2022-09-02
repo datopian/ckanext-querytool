@@ -1325,6 +1325,45 @@ msgstr "Largeur de colonne"
 msgid "An integer or decimal between 0.1-10."
 msgstr "Un nombre entier ou décimal compris entre 0,1 et 10."
 
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "This site uses cookies."
+msgstr "Ce site utilise des cookies."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used."
+msgstr "Certains de ces cookies sont essentiels, tandis que d'autres nous aident à améliorer votre expérience en fournissant des informations sur la manière dont le site est utilisé."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Necessary cookies"
+msgstr "Cookies nécessaires"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Necessary cookies enable core functionality such as security, network management, and accessibility. You may disable these by changing your browser settings, but this may affect how the website functions."
+msgstr "Les cookies nécessaires activent les fonctionnalités de base telles que la sécurité, la gestion du réseau et l'accessibilité. Vous pouvez les désactiver en modifiant les paramètres de votre navigateur, mais cela peut affecter le fonctionnement du site Web."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Analytical Cookies"
+msgstr "Cookies analytiques"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Analytics cookies help us to improve our website by collecting and reporting information on how you use it. The cookies collect information in a way that does not directly identify anyone."
+msgstr "Les cookies d'analyse nous aident à améliorer notre site Web en collectant et en communiquant des informations sur la façon dont vous l'utilisez. Les cookies collectent des informations d'une manière qui n'identifie personne directement."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "I Accept Cookies"
+msgstr "J'accepte les cookies"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "I Do Not Accept Cookies"
+msgstr "Je n'accepte pas les cookies"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "On"
+msgstr "Activé"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Off"
+msgstr "Handicapé"
 # added manually
 msgid "Line Options"
 msgstr "Options de ligne"

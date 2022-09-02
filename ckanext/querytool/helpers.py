@@ -829,3 +829,47 @@ def convert_bar_width(bar_width, convert=True, type='bar'):
         return str(round(float(bar_width) * 10, 2))
     else:
         return str(round(float(bar_width) / 10, 2))
+
+def get_cookie_control_config():
+        cookie_control_config = {}
+
+        enabled = config.get(
+            'ckanext.querytool.cc.enabled', 'false').lower()
+        enabled = enabled if enabled in ['true', 'false'] else 'false'
+        cookie_control_config['enabled'] = enabled
+
+        api_key = config.get(
+            'ckanext.querytool.cc.api_key', '')
+        cookie_control_config['api_key'] = api_key
+
+        license_type = config.get(
+            'ckanext.querytool.cc.license_type', '')
+        cookie_control_config['license_type'] = license_type
+
+        popup_position = config.get(
+            'ckanext.querytool.cc.popup_position', '')
+        cookie_control_config['popup_position'] = popup_position
+
+        theme_color = config.get(
+            'ckanext.querytool.cc.theme_color', '')
+        cookie_control_config['theme_color'] = theme_color
+
+        initial_state = config.get(
+            'ckanext.querytool.cc.initial_state', '')
+        cookie_control_config['initial_state'] = initial_state
+
+        text = json.dumps({
+            "title": config.get('ckanext.querytool.cc.text.title', ''),
+            "intro": config.get('ckanext.querytool.cc.text.intro', ''),
+            "accept": config.get('ckanext.querytool.cc.text.accept', ''),
+            "reject": config.get('ckanext.querytool.cc.text.reject', ''),
+            "on": config.get('ckanext.querytool.cc.text.on', ''),
+            "off": config.get('ckanext.querytool.cc.text.off', ''),
+            "necessary_title": config.get('ckanext.querytool.cc.text.necessary_title', ''),
+            "necessary_description": config.get('ckanext.querytool.cc.text.necessary_description', ''),
+            "analytical_title": config.get('ckanext.querytool.cc.text.analytical_title', ''),
+            "analytical_description": config.get('ckanext.querytool.cc.text.analytical_description', '')
+        })
+        cookie_control_config['text'] = text
+
+        return cookie_control_config
