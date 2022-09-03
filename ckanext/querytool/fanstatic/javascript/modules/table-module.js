@@ -372,15 +372,48 @@ ckan.module("querytool-table", function () {
               var n = nunjucks.configure({ tags: { variableStart: "{", variableEnd: "}" } });
               return n.addFilter("process_table_value", this.process_table_value.bind(this)), n.renderString(t, e);
           } catch (t) {
+              console.log(t)
               return "";
           }
       },
       process_table_value: function (t) {
-          if (isNaN(t)) return t;
-          var e = !0 === this.options.data_format ? "" : this.options.data_format,
-              n = 0,
-              r = "";
-          return "$" === e ? ((n = this.countDecimals(t, 2)), (r = d3.format("$,." + n + "f"))) : "s" === e ? ((t = Math.round(10 * t) / 10), (r = d3.format(e))) : (r = d3.format(e)), r(t);
+          // If not a number, just return the value  
+          if (isNaN(t)) 
+            return t;
+
+          var e = this.options.data_format === true ? "" : this.options.data_format;
+          var n = 0;
+          var r = "";
+
+          if(e === "$") {
+            n = this.countDecimals(t, 2);
+            r = d3.format("$,." + n + "f");
+          } else if (e === "s") {
+            t = Math.round(10 * t) / 10; 
+            r = d3.format(e);
+          } else {
+            //  We might be doing it wrong currenly:
+            //  1. Maybe for date formats we should parse dates before formatting
+            //  2. Doesn't seem right that the same format is being applied to all numeric columns
+            //  3. We should use `d3.time.format` for formatting dates
+            if(
+              !isNaN(t) 
+              && t >= 999 && t <= 9999
+              && !t.includes('.') 
+              && e == '%Y') {
+              //  Picking day 10 to prevent timezone issues
+              //  E.g.: 
+              //  This:
+              //    new Date('2000-01-01')  
+              //  Becomes:
+              //    Date Fri Dec 31 1999 22:00:00 GMT-0200 (Horário de Verão de Brasília)
+              t = new Date(`${t}-01-10`);
+              r = d3.time.format(e);
+            } else {
+              r = d3.format(e)
+            }
+          }
+          return r(t);
       },
       countDecimals: function (t, e) {
           return Math.min((10 * t) % 1 ? 2 : t % 1 ? 1 : 0, e);

@@ -1940,6 +1940,29 @@ ckan.module('querytool-viz-preview', function() {
                 legend_title_text = default_title;
             }
 
+            const chartType = this.options.chart_type;
+            if(!['donut', 'pie'].includes(chartType)) {
+              if(x_tick_format.toUpperCase() == '%Y') {
+                //  If horizontal chart, swap axis
+                //  TODO: check if this makes sense
+                let tmpData = !['hbar', 'shbar'].includes(chartType) ? data[0].x : data[0].y;
+                let sample = tmpData[0];
+
+                const is4DigitN = (val) => {
+                  return typeof val === 'number' 
+                    && val >= 1000 
+                    && val <= 9999;
+                }
+
+                //  In case the data is being passed
+                //  as `yyyy`, which means it's just
+                //  the same as an 4 digit integer
+                if(is4DigitN(sample) || is4DigitN(parseInt(sample))) {
+                  tmpData.forEach((val, i) => tmpData[i] = `${val}-01-01`);
+                }
+              }
+            }
+
             var base_info = {
               margin: {
                 l: 20,
