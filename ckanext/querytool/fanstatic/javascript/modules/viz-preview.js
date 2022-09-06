@@ -1942,7 +1942,10 @@ ckan.module('querytool-viz-preview', function() {
 
             const chartType = this.options.chart_type;
             if(!['donut', 'pie'].includes(chartType)) {
-              if(x_tick_format.toUpperCase() == '%Y') {
+              const dateSymbols = ['%Y', '%d', '%m', '%y', '%b', '%d'];
+
+              //  Check if format is a date
+              if(dateSymbols.some(f => x_tick_format.includes(f))) {
                 //  If horizontal chart, swap axis
                 //  TODO: check if this makes sense
                 let tmpData = !['hbar', 'shbar'].includes(chartType) ? data[0].x : data[0].y;
