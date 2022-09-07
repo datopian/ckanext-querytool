@@ -396,19 +396,14 @@ ckan.module("querytool-table", function () {
             //  1. Maybe for date formats we should parse dates before formatting
             //  2. Doesn't seem right that the same format is being applied to all numeric columns
             //  3. We should use `d3.time.format` for formatting dates
+            const dateSymbols = ['%Y', '%d', '%m', '%y', '%b', '%d'];
             if(
               !isNaN(t) 
               && t >= 999 && t <= 9999
               && !t.includes('.') 
-              && e == '%Y') {
-              //  Picking day 10 to prevent timezone issues
-              //  E.g.: 
-              //  This:
-              //    new Date('2000-01-01')  
-              //  Becomes:
-              //    Date Fri Dec 31 1999 22:00:00 GMT-0200 (Horário de Verão de Brasília)
-              t = new Date(`${t}-01-10`);
-              r = d3.time.format(e);
+              && dateSymbols.some(f => e.includes(f))) {
+              t = new Date(`${t}`);
+              r = d3.time.format.utc(e);
             } else {
               r = d3.format(e)
             }

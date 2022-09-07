@@ -1961,7 +1961,13 @@ ckan.module('querytool-viz-preview', function() {
                 //  as `yyyy`, which means it's just
                 //  the same as an 4 digit integer
                 if(is4DigitN(sample) || is4DigitN(parseInt(sample))) {
-                  tmpData.forEach((val, i) => tmpData[i] = `${val}-01-01`);
+                  //  Transforms string to Date and then back to
+                  //  `yyyy-mm-dd` date string
+                  const strToDateStr = (str) => {
+                    return new Date(`${str}`).toISOString().split('T')[0];
+                  }
+
+                  tmpData.forEach((val, i) => tmpData[i] = strToDateStr(val));
                 }
               }
             }
