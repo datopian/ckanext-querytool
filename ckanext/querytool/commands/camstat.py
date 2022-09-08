@@ -162,12 +162,23 @@ def clean_csv(data, id_removal, dataflow_agency,
     print('  + Cleaning CSV data for: {}'.format(dataflow_id))
 
     cleaned = 0
+    ref_area = {}
+    ref_area_index = None
 
     for i in range(len(data)):
         if i <= len(id_removal):
             for j in range(len(data[i])):
                 to_be_removed = id_removal[i][j] + ': '
 
+                # Add REF_AREA value to dictionary
+                if j == ref_area_index:
+                    ref_area[i] = id_removal[i][j]
+
+                # Set index of REF_AREA column
+                if id_removal[i][j] == 'REF_AREA':
+                    ref_area_index = j
+
+                # Reformat dataflow ID
                 if '{}:{}'.format(dataflow_agency, dataflow_id) in data[i][j]:
                     data[i][j] = '{} ({})'.format(
                         dataflow_id,
@@ -175,21 +186,25 @@ def clean_csv(data, id_removal, dataflow_agency,
                     )
                     cleaned += 1
 
+                # Remove ID
                 if to_be_removed in data[i][j]:
                     data[i][j] = data[i][j].replace(
                         to_be_removed, ''
                     )
                     cleaned += 1
 
+                # Clean up NA values
                 if data[i][j] == 'NA':
                     data[i][j] = ''
                     cleaned += 1
                     continue
 
+                # Wrap strings with commas in quotes
                 if ',' in data[i][j]:
                     data[i][j] = '"{}"'.format(data[i][j])
                     cleaned += 1
 
+                # Convert headers to title case
                 if data[i][j] == 'DATAFLOW':
                     data[i][j] = data[i][j].title()
                     cleaned += 1
@@ -197,6 +212,23 @@ def clean_csv(data, id_removal, dataflow_agency,
                 if data[i][j] == 'OBS_VALUE':
                     data[i][j] = 'Observation value'
                     cleaned += 1
+
+    # Remove empty columns
+    for i in range(len(data[0]) -1, -1, -1):
+        if all(row[i] == '' for row in data[1:]):
+            print('  + Removing empty column: {}'.format(data[0][i]))
+
+            for j in range(len(data)):
+                data[j].pop(i)
+
+            cleaned += 1
+
+    # Add REF_AREA column back into cleaned data
+    data[0].append('REF_AREA')
+
+    for key, value in ref_area.items():
+        data[key].append(value)
+        cleaned += 1
 
     if cleaned > 0:
         print('  + Successfully cleaned {} items.\n'.format(cleaned))
