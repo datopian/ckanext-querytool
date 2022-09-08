@@ -226,13 +226,15 @@ ckan.module("querytool-table", function () {
           
           var o = { main_value: (e = e.toLowerCase()), second_value: (sv = sv.toLowerCase()), measure_label: r, y_axis: (n = n.toLowerCase()), rows: t };
           if (sv != '') {
+            //  First table case - Dimension and Sub-dimension are set
             return this.render_template(
-                "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[second_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
+                "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]}</td>\n                  <td>{row[second_value]}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
                 o
             );
           } else {
+            //  First table case - Dimension is set
             return this.render_template(
-                "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]|process_table_value}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
+                "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
                 o
             );
         }
@@ -309,6 +311,7 @@ ckan.module("querytool-table", function () {
           // Prepare template
           var template = '';
           if(second_value) {
+              //    Third table case - Dimension, Sub-dimension and Category are set
               template = `
               <table>
                   <thead>
@@ -326,8 +329,8 @@ ckan.module("querytool-table", function () {
                   <tbody>
                   {% for row in rows %}
                       <tr>
-                      <td>{row[main_value]|process_table_value}</td>
-                      <td>{row[second_value]|process_table_value}</td>
+                      <td>{row[main_value]}</td>
+                      <td>{row[second_value]}</td>
                       {% for y_axis_group in y_axis_groups %}
                           <td>{row[y_axis_group]|process_table_value}</td>
                       {% endfor %}
@@ -337,7 +340,8 @@ ckan.module("querytool-table", function () {
               </table>
               `;
           } else {
-                  template = `
+              //    Fourth table case - Dimension and Category are set
+              template = `
               <table>
                   <thead>
                   <tr>
@@ -353,7 +357,7 @@ ckan.module("querytool-table", function () {
                   <tbody>
                   {% for row in rows %}
                       <tr>
-                      <td>{row[main_value]|process_table_value}</td>
+                      <td>{row[main_value]}</td>
                       {% for y_axis_group in y_axis_groups %}
                           <td>{row[y_axis_group]|process_table_value}</td>
                       {% endfor %}
