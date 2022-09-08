@@ -1,10 +1,8 @@
-const _ = ckan.i18n.ngettext;
-
-ckan.module("civic_cookies", function (jQuery) {
+ckan.module("civic_cookies", function ($) {
   return {
     initialize: function () {
       ckan_sandbox = this.sandbox;
-
+      
       if (this.options.api_key && this.options.enabled) {
 
         //  To make sure the type of the config
@@ -36,18 +34,18 @@ ckan.module("civic_cookies", function (jQuery) {
           notifyOnce: true,
           rejectButton: true,
           text: {
-            title: text.title || _("This site uses cookies."),
+            title: text.title || this._("This site uses cookies."),
             intro: text.intro ||
-              _("Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used."),
-            necessaryTitle: text.necessary_title || _("Necessary cookies"),
-            accept: text.accept || _("I Accept Cookies"),
-            acceptSettings: text.accept || _("I Accept Cookies"),
-            reject: text.reject || _("I Do Not Accept Cookies"), 
-            rejectSettings: text.reject || _("I Do Not Accept Cookies"), 
+              this._("Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used."),
+            necessaryTitle: text.necessary_title || this._("Necessary cookies"),
+            accept: text.accept || this._("I Accept Cookies"),
+            acceptSettings: text.accept || this._("I Accept Cookies"),
+            reject: text.reject || this._("I Do Not Accept Cookies"), 
+            rejectSettings: text.reject || this._("I Do Not Accept Cookies"), 
             necessaryDescription: text.necessary_description ||
-              _("Necessary cookies enable core functionality such as security, network management, and accessibility. You may disable these by changing your browser settings, but this may affect how the website functions."),
-            on: text.on || _("On"),
-            off: text.off || _("Off"),
+              this._("Necessary cookies enable core functionality such as security, network management, and accessibility. You may disable these by changing your browser settings, but this may affect how the website functions."),
+            on: text.on || this._("On"),
+            off: text.off || this._("Off"),
           
           },
           accessibility: {
@@ -57,9 +55,9 @@ ckan.module("civic_cookies", function (jQuery) {
           optionalCookies: [
             {
               name: "analytics",
-              label: text.analytical_title || _("Analytical Cookies"),
+              label: text.analytical_title || this._("Analytical Cookies"),
               description: text.analytical_description || 
-                _("Analytics cookies help us to improve our website by collecting and reporting information on how you use it. The cookies collect information in a way that does not directly identify anyone."),
+                this._("Analytics cookies help us to improve our website by collecting and reporting information on how you use it. The cookies collect information in a way that does not directly identify anyone."),
               cookies: [
                 "_ga",
                 "_gid",
