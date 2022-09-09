@@ -11,6 +11,7 @@ module.exports = {
     "querytool_data": `${assetPath}/querytool_data.js`,
     "querytool_list": `${assetPath}/querytool_list.js`,
     "modules/viz-preview": `${assetPath}/modules/viz-preview.js`,
+    "modules/civic_cookies": `${assetPath}/modules/civic_cookies.js`,
     "modules/table-module": `${assetPath}/modules/table-module.js`,
     "modules/map-module": `${assetPath}/modules/map-module.js`,
     "modules/tool-embed": `${assetPath}/modules/tool-embed.js`,
