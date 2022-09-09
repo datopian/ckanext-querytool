@@ -79,7 +79,8 @@ ckan.module("civic_cookies", function ($) {
           ],
         };
 
-        CookieControl.load(config);
+        if(window.self === window.top)
+          CookieControl.load(config);
       }
     },
   };
