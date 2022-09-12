@@ -1,7 +1,10 @@
 {% extends "querytool/public/querytool_page.html" %}
-{% set nav_bar = h.querytool_allow_nav_bar() %}
-{% block content %}
 
+{% set nav_bar = h.querytool_allow_nav_bar() %}
+{% set header_image = 'https://data.gov.sg/images/header-home.jpg' or '' %}
+{% set header_text_color = '#ffffff' or '#353535' %}
+
+{% block content %}
 <div class="container-wrapper">
   {% if nav_bar == 'True' %}
     {% block toolbar %}
@@ -18,14 +21,13 @@
       </div>
     {% endblock %}
   {% endif %}
-  <div class="public-header query-header">
+  <div class="public-header query-header" style="background-image: url('{{ header_image }}'); ">
   {% block page_header_content %}
-  
     {% block breadcrumb_custom %} {% endblock %}
     <div class="container">
       <div class="row">
         <div class="span10 offset1">
-          <div class="page-header">
+          <div class="page-header" style="color: {{ header_text_color }} !important;">
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}
