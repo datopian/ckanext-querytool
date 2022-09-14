@@ -430,7 +430,6 @@ body {
 
 /* NEW UI */
 .query-header {
-  padding: 100px 0;
   background-color: #f9f9f9;
   background-position: center;
   background-repeat: no-repeat;
@@ -858,4 +857,60 @@ div[class^="dt-header"] {
   #scrollBtn { 
     display:none !important;
   }
+}
+
+// Custom footer
+.custom-footer {
+  color: white;
+  background-color: #232323;
+  padding: 10px 0;
+}
+
+.custom-footer .container-fluid {
+  display: flex !important;
+  justify-content: space-between;
+}
+
+.custom-footer p {
+  margin: 0;
+}
+
+.custom-footer .logo-text img {
+  display: inline-block;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.custom-footer .logo-text {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .custom-footer {
+    // This fixes the width of the footer
+    // for small devices
+    width: 100vw;
+    margin-left: -20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .custom-footer .container-fluid {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 30px;
+  }
+
+  .custom-footer .logo-text {
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+
+//  Custom language select
+.custom-lang-select .masthead .navigation .nav-pills li a {
+  padding: 0 15px;
 }

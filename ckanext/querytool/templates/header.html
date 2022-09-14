@@ -62,6 +62,9 @@
                       ) }}
                   {% endblock %}
                 {% endif %}
+                  {% block footer_lang %}
+                    {% snippet "snippets/language_selector_with_flags.html" %}
+                  {% endblock %}
             </ul>
         </nav>
         {% endblock %}

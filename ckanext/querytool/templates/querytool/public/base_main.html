@@ -1,14 +1,18 @@
 {% extends "querytool/public/querytool_page.html" %}
 
+<!-- Variables -->
 {% set nav_bar = h.querytool_allow_nav_bar() %}
 {% set header_image = 'https://data.gov.sg/images/header-home.jpg' or '' %}
-{% set header_text_color = '#ffffff' or '#353535' %}
+{% set header_text_color = '#ffffff' or '' %}
+{% set footer_image = 'https://config-camstat-live.officialstatistics.org/assets/default/webapp/images/cambodia-data-explorer-logo.png' or '' %}
+{% set footer_text = '© 2022 Lorem ipsum dolor sit amet' or '' %}
+<!-- Variables -->
 
 {% block content %}
 <div class="container-wrapper">
   {% if nav_bar == 'True' %}
     {% block toolbar %}
-      <div class="toolbar">
+      <div class="toolbar"  >
         {% block breadcrumb %}
           {% if self.breadcrumb_content() | trim %}
             <ul class="breadcrumb">
@@ -21,13 +25,18 @@
       </div>
     {% endblock %}
   {% endif %}
-  <div class="public-header query-header" style="background-image: url('{{ header_image }}'); ">
+  <div class="public-header query-header" style="
+    background-image: url('{{ header_image }}'); 
+    {{ 'padding: 100px 0;' if header_image else '' }}
+  ">
   {% block page_header_content %}
     {% block breadcrumb_custom %} {% endblock %}
     <div class="container">
       <div class="row">
         <div class="span10 offset1">
-          <div class="page-header" style="color: {{ header_text_color }} !important;">
+          <div class="page-header" style="
+            color: {{ header_text_color if header_text_color else '#353535' }} !important;
+          ">
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}
@@ -73,7 +82,7 @@
           <div class="group-box-2">
             <div class="group-image-2">
               {% if group.image_display_url %}
-                <img  src="{{group.image_display_url}}"  alt="" alt="{{ value }}">
+                <img  src="{{group.image_display_url}}" alt="{{ value }}">
               {% else %}
                 <img src="/base/images/icon-1.svg" alt="">
               {% endif %}
@@ -118,5 +127,28 @@
     <br/><br/><br/><br/>
   </div>
   {% endblock %}
+
 </div>
+{% endblock %}
+{% block footer %}
+  {% if not footer_text %}
+    {{ super() }}
+  {% else %}
+    <footer class="custom-footer">
+      <div class="container-fluid">
+        <div class="logo-text">
+          <img src="{{ footer_image }}" />
+          <p>{{ footer_text }}</p>
+        </div>
+        <div class="attribution">
+          <p>
+            <strong>Powered by</strong> 
+            <a class="hide-text ckan-footer-logo" href="http://ckan.org">
+              CKAN
+            </a>
+          </p>
+        </div>
+      </div>
+    </footer>
+  {% endif %}
 {% endblock %}
