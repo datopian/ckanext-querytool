@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,400&display=swap');
 
+//  Reference: https://flagicons.lipis.dev/
+@import "https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css";
+
 @import "inc/variables.less";
 @import "inc/mixins.less";
 @import "inc/toolbar.less";
@@ -350,3 +353,86 @@ body {
         margin-bottom:12px !important;
     }
   }
+
+// Custom footer
+.custom-footer {
+    color: white;
+    background-color: #232323;
+    padding: 10px 100px;
+    display: flex !important;
+    justify-content: space-between;
+}
+
+.custom-footer p {
+margin: 0;
+}
+
+.custom-footer .logo-text img {
+display: inline-block;
+height: 50px;
+margin-right: 10px;
+}
+
+.custom-footer .logo-text {
+align-items: center;
+}
+
+@media (max-width: 767px) {
+    .custom-footer {
+        // This fixes the width of the footer
+        // for small devices
+        width: 100vw;
+        margin-left: -20px;
+        padding: 10px 0px;
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+    .custom-footer .logo-text {
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+}
+
+//  Custom language select
+form.custom-lang-select {
+    width: 200px;
+    float: right;
+    margin: 4px 4px 20px 30px;
+}
+  
+.custom-lang-select .select2-container {
+    width: 200px;
+    height: 30px;
+}
+
+.mobile form.custom-lang-select {
+    float: left;
+    margin: 15px 0px 0px 5px;
+
+}
+
+@media (min-width: 990px) {
+    .mobile {
+        display: none;
+    }
+    
+    .screen {
+        display: block;
+    }
+}
+
+@media (max-width: 989px) {
+    .mobile {
+        display: block;
+    }
+    
+    .screen {
+        display: none;
+    }
+}
+
+
+

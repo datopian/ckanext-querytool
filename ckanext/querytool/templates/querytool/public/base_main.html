@@ -12,7 +12,7 @@
 <div class="container-wrapper">
   {% if nav_bar == 'True' %}
     {% block toolbar %}
-      <div class="toolbar"  >
+      <div class="toolbar">
         {% block breadcrumb %}
           {% if self.breadcrumb_content() | trim %}
             <ul class="breadcrumb">
@@ -27,7 +27,7 @@
   {% endif %}
   <div class="public-header query-header" style="
     background-image: url('{{ header_image }}'); 
-    {{ 'padding: 100px 0;' if header_image else '' }}
+    {{ 'padding: 0 0 200px 0;' if header_image else '' }}
   ">
   {% block page_header_content %}
     {% block breadcrumb_custom %} {% endblock %}
@@ -36,6 +36,7 @@
         <div class="span10 offset1">
           <div class="page-header" style="
             color: {{ header_text_color if header_text_color else '#353535' }} !important;
+            {{ 'margin-top: 50px;' if header_image else '' }}
           ">
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
@@ -135,19 +136,17 @@
     {{ super() }}
   {% else %}
     <footer class="custom-footer">
-      <div class="container-fluid">
-        <div class="logo-text">
-          <img src="{{ footer_image }}" />
-          <p>{{ footer_text }}</p>
-        </div>
-        <div class="attribution">
-          <p>
-            <strong>Powered by</strong> 
-            <a class="hide-text ckan-footer-logo" href="http://ckan.org">
-              CKAN
-            </a>
-          </p>
-        </div>
+      <div class="logo-text">
+        <img src="{{ footer_image }}" />
+        <p>{{ footer_text }}</p>
+      </div>
+      <div class="attribution">
+        <p>
+          <strong>Powered by</strong> 
+          <a class="hide-text ckan-footer-logo" href="http://ckan.org">
+            CKAN
+          </a>
+        </p>
       </div>
     </footer>
   {% endif %}
