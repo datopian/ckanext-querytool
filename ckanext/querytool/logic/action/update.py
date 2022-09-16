@@ -1,17 +1,30 @@
 import datetime
 import json
 import cgi
+import time
+import logging as log
+
+from ckan.common import config
 import ckan.logic as logic
+import ckan.logic.schema as schema_
 import ckan.lib.navl.dictization_functions as df
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 import ckan.lib.uploader as uploader
+import ckan.lib.app_globals as app_globals
+
+
 from ckanext.querytool.logic import schema
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
 
 check_access = logic.check_access
 _get_action = logic.get_action
+ValidationError = logic.ValidationError
+_validate = df.validate
+
+
+log = log.getLogger(__name__)
 
 
 def querytool_update(context, data_dict):
@@ -151,3 +164,117 @@ def querytool_visualizations_update(context, data_dict):
     visualizations.save()
     session.add(visualizations)
     session.commit()
+
+
+def config_option_update(context, data_dict):
+    '''
+
+    .. versionadded:: 2.4
+
+    Allows to modify some CKAN runtime-editable config options
+
+    It takes arbitrary key, value pairs and checks the keys against the
+    config options update schema. If some of the provided keys are not present
+    in the schema a :py:class:`~ckan.plugins.logic.ValidationError` is raised.
+    The values are then validated against the schema, and if validation is
+    passed, for each key, value config option:
+
+    * It is stored on the ``system_info`` database table
+    * The Pylons ``config`` object is updated.
+    * The ``app_globals`` (``g``) object is updated (this only happens for
+      options explicitly defined in the ``app_globals`` module.
+
+    The following lists a ``key`` parameter, but this should be replaced by
+    whichever config options want to be updated, eg::
+
+        get_action('config_option_update)({}, {
+            'ckan.site_title': 'My Open Data site',
+            'ckan.homepage_layout': 2,
+        })
+
+    :param key: a configuration option key (eg ``ckan.site_title``). It must
+        be present on the ``update_configuration_schema``
+    :type key: string
+
+    :returns: a dictionary with the options set
+    :rtype: dictionary
+
+    .. note:: You can see all available runtime-editable configuration options
+        calling
+        the :py:func:`~ckan.logic.action.get.config_option_list` action
+
+    .. note:: Extensions can modify which configuration options are
+        runtime-editable.
+        For details, check :doc:`/extensions/remote-config-update`.
+
+    .. warning:: You should only add config options that you are comfortable
+        they can be edited during runtime, such as ones you've added in your
+        own extension, or have reviewed the use of in core CKAN.
+
+    '''
+    model = context['model']
+
+    check_access('config_option_update', context, data_dict)
+
+    schema = schema_.update_configuration_schema()
+
+    available_options = schema.keys()
+
+    provided_options = data_dict.keys()
+
+    unsupported_options = set(provided_options) - set(available_options)
+
+    if unsupported_options:
+        msg = 'Configuration option(s) \'{0}\' can not be updated'.format(
+              ' '.join(list(unsupported_options)))
+
+        raise ValidationError(msg, error_summary={'message': msg})
+
+    upload = uploader.get_uploader('admin')
+    upload.update_data_dict(data_dict, 'ckan.site_logo',
+                            'logo_upload', 'clear_logo_upload')
+    upload.upload(uploader.get_max_image_size())
+
+    # Upload header image for custom theme
+    upload.update_data_dict(data_dict, 'header_image_url',
+                            'header_image_upload', 'header_clear_upload')
+    upload.upload(uploader.get_max_image_size())
+
+    data, errors = _validate(data_dict, schema, context)
+
+    # Remove leftover header_image_upload
+    if data.get('header_image_upload'):
+        data['header_image_upload'] = ''
+
+    if errors:
+        model.Session.rollback()
+        raise ValidationError(errors)
+
+    for key, value in data.iteritems():
+
+        # Set full Logo url
+        if key =='ckan.site_logo' and value and not value.startswith('http'):
+            value = h.url_for_static('uploads/admin/{0}'.format(value))
+
+        # Set full Header image url
+        if key =='header_image_url' and value and not value.startswith('http'):
+            value = h.url_for_static('uploads/admin/{0}'.format(value))
+
+        # Save value in database
+        model.set_system_info(key, value)
+
+        # Update CKAN's `config` object
+        config[key] = value
+
+        # Only add it to the app_globals (`g`) object if explicitly defined
+        # there
+        globals_keys = app_globals.app_globals_from_config_details.keys()
+        if key in globals_keys:
+            app_globals.set_app_global(key, value)
+
+    # Update the config update timestamp
+    model.set_system_info('ckan.config_update', str(time.time()))
+
+    log.info('Updated config options: {0}'.format(data))
+
+    return data

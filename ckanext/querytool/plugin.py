@@ -350,6 +350,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         schema.update({
             'ckan.welcome_page_title': [ignore_missing, unicode],
             'ckan.welcome_page_description': [ignore_missing, unicode],
+            'header_image_url': [ignore_missing, unicode],
+            'header_image_upload': [ignore_missing, unicode],
+            'header_clear_upload': [ignore_missing, unicode],
+            'header_text_color': [ignore_missing, unicode]
         })
 
         return schema

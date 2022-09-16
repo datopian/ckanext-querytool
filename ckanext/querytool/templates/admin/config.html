@@ -9,6 +9,26 @@
  {{ form.input('ckan.welcome_page_title', id='field-ckan.welcome_page_title', placeholder=g.welcome_page_title or _('Welcome Page Title'), label=_('Welcome Page Title'), value=data['ckan.welcome_page_title'], error=errors['ckan.welcome_page_title']) }}
  {{ form.markdown('ckan.welcome_page_description', id='field-ckan.welcome_page_description', placeholder=g.welcome_page_description or _('Welcome Page Description'), label=_('Welcome Page Description'), value=data['ckan.welcome_page_description'], error=errors['ckan.welcome_page_description']) }}
 
+ {% if True %}
+   {% set is_upload = data.header_image_url and not data.header_image_url.startswith('http') %}
+   {% set is_url = data.header_image_url and data.header_image_url.startswith('http') %}
+
+   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload, url_label=_('Header banner'), upload_label=_('Header banner'), field_name='header_image_url', field_url='header_image_url', field_upload='header_image_upload', field_clear='header_clear_upload') }}
+
+   {% if not data.header_text_color %}
+     {% set header_text_color = '#000000' %}
+   {% else %}
+     {% set header_text_color = data.header_text_color %}
+   {% endif %}
+
+   <div>
+     <label for="header_text_color" class="control-label">{{ _('Header text color') }}</label>
+     <input type="color" id="header_text_color" name="header_text_color" value="{{ header_text_color }}" style="margin-left: 10px !important; height: 30px !important; width: 60px !important; padding: 0 0 0 0 !important;">
+   </div>
+
+ {% endif %}
+
+
 {% endblock %}
 
 
