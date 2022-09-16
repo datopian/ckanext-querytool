@@ -4,8 +4,6 @@
 {% set nav_bar = h.querytool_allow_nav_bar() %}
 {% set header_image = 'https://data.gov.sg/images/header-home.jpg' or '' %}
 {% set header_text_color = '#ffffff' or '' %}
-{% set footer_image = 'https://config-camstat-live.officialstatistics.org/assets/default/webapp/images/cambodia-data-explorer-logo.png' or '' %}
-{% set footer_text = '© 2022 Lorem ipsum dolor sit amet' or '' %}
 <!-- Variables -->
 
 {% block content %}
@@ -25,27 +23,37 @@
       </div>
     {% endblock %}
   {% endif %}
-  <div class="public-header query-header" style="
-    background-image: url('{{ header_image }}'); 
-    {{ 'padding: 0 0 200px 0;' if header_image else '' }}
-  ">
+
+  {# Made it a block so that it's easier to override on files that extend this file #}
+  {# as we don't want pages besides the home to have the custom background #}
+  {% block page_header_bg %}
+      <style>
+        #header-wrapper {
+          background-image: url('{{ header_image }}'); 
+          {{ 'padding: 0 0 125px 0;' if header_image else '' }}
+        }
+
+        #header-text {
+          color: {{ header_text_color if header_text_color else '#353535' }} !important;
+        }
+      </style>
+  {% endblock %}
+
+  <div class="public-header query-header" id="header-wrapper">
   {% block page_header_content %}
     {% block breadcrumb_custom %} {% endblock %}
     <div class="container">
       <div class="row">
         <div class="span10 offset1">
-          <div class="page-header" style="
-            color: {{ header_text_color if header_text_color else '#353535' }} !important;
-            {{ 'margin-top: 50px;' if header_image else '' }}
-          ">
+          <div class="page-header" id="header-text">
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}
-                <h1>{{ g.welcome_page_title or _('Welcome') }}</h1>
+                <h1 style="{{ 'padding-top: 100px;' if header_image else '' }}">{{ g.welcome_page_title or _('Welcome') }}</h1>
               {% endblock %}
               <div class="long-desc">
                 {% block page_header_description %}
-                  <p class="page-desc desc">{{ h.render_markdown(g.welcome_page_description or _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.')) }}</p>
+            <p class="page-desc desc">{{ h.render_markdown(g.welcome_page_description or _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.')) }}</p>
                 {% endblock %}
               </div>
             {% endblock %}
@@ -130,24 +138,4 @@
   {% endblock %}
 
 </div>
-{% endblock %}
-{% block footer %}
-  {% if not footer_text %}
-    {{ super() }}
-  {% else %}
-    <footer class="custom-footer">
-      <div class="logo-text">
-        <img src="{{ footer_image }}" />
-        <p>{{ footer_text }}</p>
-      </div>
-      <div class="attribution">
-        <p>
-          <strong>Powered by</strong> 
-          <a class="hide-text ckan-footer-logo" href="http://ckan.org">
-            CKAN
-          </a>
-        </p>
-      </div>
-    </footer>
-  {% endif %}
 {% endblock %}

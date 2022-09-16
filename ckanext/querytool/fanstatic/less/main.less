@@ -357,7 +357,6 @@ body {
 // Custom footer
 .custom-footer {
     color: white;
-    background-color: #232323;
     padding: 10px 100px;
     display: flex !important;
     justify-content: space-between;
@@ -378,11 +377,14 @@ align-items: center;
 }
 
 @media (max-width: 767px) {
-    .custom-footer {
+    footer.site-footer {
         // This fixes the width of the footer
         // for small devices
         width: 100vw;
         margin-left: -20px;
+        padding: 0 !important;
+    }
+    .custom-footer {
         padding: 10px 0px;
         flex-wrap: wrap;
         flex-direction: column;
