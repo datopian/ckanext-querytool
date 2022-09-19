@@ -357,44 +357,91 @@ body {
 // Custom footer
 .custom-footer {
     color: white;
-    padding: 10px 100px;
-    display: flex !important;
+    padding: 10px 40px;
+    display: grid !important;
     justify-content: space-between;
+    flex-wrap: wrap;
+    flex-direction: row;
+    grid-template-rows: auto auto;
+    grid-auto-flow: column;
+    column-gap: 50px;
+    row-gap: 20px;
+}
+
+.custom-footer > div:nth-child(n+3) {
+    text-align: right;
 }
 
 .custom-footer p {
-margin: 0;
+    margin: 0;
 }
 
-.custom-footer .logo-text img {
-display: inline-block;
-height: 50px;
-margin-right: 10px;
+.custom-footer img {
+    display: inline-block;
+    height: 50px;
 }
 
-.custom-footer .logo-text {
-align-items: center;
+.custom-footer .social-media img {
+    height: 25px;
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.custom-footer .supporters {
+    display: flex;
+    margin-left: auto;
+}
+
+.custom-footer .supporters .attribution {
+    margin-left: 20px;
+    margin-right: 0px;
+}
+
+.custom-footer .supporters .logo {
+    height: 30px;
+}
+
+.custom-footer .footer-markdown h1 {
+    margin: 0;
+    font-size: 15px;
+}
+
+footer .copyright {
+    text-align: center;
+    margin: 0 60px;
 }
 
 @media (max-width: 767px) {
-    footer.site-footer {
+    footer {
         // This fixes the width of the footer
         // for small devices
         width: 100vw;
         margin-left: -20px;
         padding: 0 !important;
     }
+
     .custom-footer {
-        padding: 10px 0px;
-        flex-wrap: wrap;
-        flex-direction: column;
-        align-items: center;
+        grid-auto-flow: row;
+        grid-template-rows: auto;
+        padding: 10px 20px;
     }
-    .custom-footer .logo-text {
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
-        margin-bottom: 20px;
+
+    .custom-footer > div:nth-child(n+3) {
+        text-align: left;
+    }
+
+    .custom-footer .supporters {
+        margin-left: 0;
+    }
+
+    .custom-footer .supporters .attribution {
+        margin-left: 0;
+        margin-right: 20px;
+    }
+
+    .custom-footer .social-media img {
+        margin-left: 0;
+        margin-right: 10px;
     }
 }
 

@@ -201,6 +201,20 @@ $ make i18n
 
 See CKAN documentation for more on i18n management.
 
+#### Language selector
+For the country flags to appear in the language selector it's needed to make sure there's an associated flag for each one of the configured languages. This must be done by further expanding the `/ckanext-querytool/ckanext/querytool/public/base/resources/lang-flags.json` file. Here's an example of how this file looks like:
+```
+{
+    "en": "gb",
+    "pt_BR": "br",
+    "es": "es",
+    "fr": "fr",
+    "km": "kh",
+    "zh_CN": "cn"
+}
+```
+The property name is always the language value. The value is always the ISO 3166-1-alpha-2 code of the country.
+
 ### Updating readme
 
 To update this readme's table of contents run:
