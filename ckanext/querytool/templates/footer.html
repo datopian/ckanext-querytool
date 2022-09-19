@@ -1,13 +1,24 @@
 {% ckan_extends %}
 
 <!-- Variables -->
-{% set footer_image = 'https://config-camstat-live.officialstatistics.org/assets/default/webapp/images/cambodia-data-explorer-logo.png' or '' %}
-{% set footer_text = '© 2022 Lorem ipsum dolor sit amet' or '' %}
+{% set section_1__title = 'National Institute of Statistics, Ministry of Planning' %}
+{% set section_1__address = 'Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia' %}
+{% set section_1__email = 'info@nis.gov.kh' %}
+
+{% set section_2__text = 'Collaborate with Ministry of Health' %}
+{% set section_2__image = 'https://upload.wikimedia.org/wikipedia/en/3/30/MOH_logo.png' %}
+
+{% set section_3__text = 'Subscribe and follow us' %}
+{% set section_3__youtube = 'http://youtube.com' %}
+{% set section_3__facebook = 'http://facebook.com' %}
+{% set section_3__telegram = 'http://telegram.com' %}
+
+{% set copyright_text = '© 2022 National Institute of Statistics, Ministry of Planning. All rights reserved.' %}
 <!-- Variables -->
 
 {% block footer_content %}
   {# If not text is set, uses default footer #}
-  {% if not footer_text %}
+  {% if not copyright_text %}
     {{ super() }}
   {% else %}
     <style>
@@ -17,18 +28,66 @@
             width: auto;
         }
     </style>
-    <footer class="custom-footer">
-      <div class="logo-text">
-        <img src="{{ footer_image }}" />
-        <p>{{ footer_text }}</p>
+    <footer>
+      <div class="custom-footer">
+        {% if section_1__title %}
+          <div>
+            <p><strong>{{ section_1__title }}</strong></p>
+            {% if section_1__address %}
+              <p>{{ section_1__address }}</p>
+            {% endif %}
+            {% if section_1__address %}
+              <p>{{ section_1__email }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if section_2__text %}
+          <div>
+            <p><strong>{{ section_2__text }}</strong></p>
+            {% if section_2__image %}
+              <img src="{{ section_2__image }}">
+            {% endif %}
+          </div>
+        {% endif %}
+        {% if section_3__text %}
+          <div>
+            <p><strong>{{ section_3__text }}</strong></p>
+            <span class="social-media">
+              {% if section_3__youtube %}
+                <a href="{{ section_2__youtube }}"><img src="/base/images/social/youtube.png"></a>
+              {% endif %}
+
+              {% if section_3__facebook %}
+                <a href="{{ section_2__facebook }}"><img src="/base/images/social/facebook.png"></a>
+              {% endif %}
+              
+              {% if section_3__telegram %}
+                <a href="{{ section_2__telegram }}"><img src="/base/images/social/telegram.png"></a>
+              {% endif %}
+            </span>
+          </div>
+        {% endif %}
+        <div class="supporters">
+          <div class="attribution">
+            <p>
+              <strong>Powered by</strong> 
+              <a class="hide-text ckan-footer-logo logo" href="http://ckan.org">
+                CKAN
+              </a>
+            </p>
+          </div>
+          <div class="attribution">
+            <p>
+              <strong>Supported by</strong><br>
+              <a class="hide-text" href="http://ckan.org">
+                <img src="/base/images/logos/vital-strategies.svg" class="logo">
+              </a>
+            </p>
+          </div>
+        </div>
       </div>
-      <div class="attribution">
-        <p>
-          <strong>Powered by</strong> 
-          <a class="hide-text ckan-footer-logo" href="http://ckan.org">
-            CKAN
-          </a>
-        </p>
+      <div class="copyright">
+        <p>{{ copyright_text }}</p>
       </div>
     </footer>
   {% endif %}
