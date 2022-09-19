@@ -1,11 +1,18 @@
 {% ckan_extends %}
 
 <!-- Variables -->
-{% set section_1__title = 'National Institute of Statistics, Ministry of Planning' %}
-{% set section_1__address = 'Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia' %}
-{% set section_1__email = 'info@nis.gov.kh' %}
+{% set theme = 'custom' %}
 
-{% set section_2__text = 'Collaborate with Ministry of Health' %}
+{% set section_1__text = '
+  # National Institute of Statistics, Ministry of Planning  
+  Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia
+' %}
+{% set section_2__text = '
+  # National Institute of Statistics, Ministry of Planning  
+  Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia
+' %}
+
+{% set section_1__image = 'https://upload.wikimedia.org/wikipedia/en/3/30/MOH_logo.png' %}
 {% set section_2__image = 'https://upload.wikimedia.org/wikipedia/en/3/30/MOH_logo.png' %}
 
 {% set section_3__text = 'Subscribe and follow us' %}
@@ -18,7 +25,7 @@
 
 {% block footer_content %}
   {# If not text is set, uses default footer #}
-  {% if not copyright_text %}
+  {% if theme == 'default' %}
     {{ super() }}
   {% else %}
     <style>
@@ -30,23 +37,16 @@
     </style>
     <footer>
       <div class="custom-footer">
-        {% if section_1__title %}
-          <div>
-            <p><strong>{{ section_1__title }}</strong></p>
-            {% if section_1__address %}
-              <p>{{ section_1__address }}</p>
-            {% endif %}
-            {% if section_1__address %}
-              <p>{{ section_1__email }}</p>
-            {% endif %}
+        {% if section_1__text %}
+          <div class="footer-markdown">
+            <img src="{{ section_1__image }}" style="float: left; margin-right: 10px;">
+            {{ h.render_markdown(section_1__text) }}
           </div>
         {% endif %}
         {% if section_2__text %}
-          <div>
-            <p><strong>{{ section_2__text }}</strong></p>
-            {% if section_2__image %}
-              <img src="{{ section_2__image }}">
-            {% endif %}
+          <div class="footer-markdown">
+            <img src="{{ section_2__image }}" style="float: left; margin-right: 10px;">
+            {{ h.render_markdown(section_2__text) }}
           </div>
         {% endif %}
         {% if section_3__text %}
