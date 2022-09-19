@@ -2,8 +2,8 @@
 
 <!-- Variables -->
 {% set nav_bar = h.querytool_allow_nav_bar() %}
-{% set header_image = 'https://data.gov.sg/images/header-home.jpg' or '' %}
-{% set header_text_color = '#ffffff' or '' %}
+{% set header_image = g.header_image_url or 'https://data.gov.sg/images/header-home.jpg' %}
+{% set header_text_color = g.header_text_color or '#ffffff' %}
 <!-- Variables -->
 
 {% block content %}

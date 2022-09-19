@@ -9,11 +9,15 @@
  {{ form.input('ckan.welcome_page_title', id='field-ckan.welcome_page_title', placeholder=g.welcome_page_title or _('Welcome Page Title'), label=_('Welcome Page Title'), value=data['ckan.welcome_page_title'], error=errors['ckan.welcome_page_title']) }}
  {{ form.markdown('ckan.welcome_page_description', id='field-ckan.welcome_page_description', placeholder=g.welcome_page_description or _('Welcome Page Description'), label=_('Welcome Page Description'), value=data['ckan.welcome_page_description'], error=errors['ckan.welcome_page_description']) }}
 
- {% if True %}
-   {% set is_upload = data.header_image_url and not data.header_image_url.startswith('http') %}
-   {% set is_url = data.header_image_url and data.header_image_url.startswith('http') %}
+ {{ form.select('theme', label=_('Theme'), options=[{'name': 'Default', 'value': 'Default'},{'name': 'Custom', 'value': 'Custom'}], selected=data.theme, error=errors.theme) }}
 
-   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload, url_label=_('Header banner'), upload_label=_('Header banner'), field_name='header_image_url', field_url='header_image_url', field_upload='header_image_upload', field_clear='header_clear_upload') }}
+ {% set theme = data.theme %}
+
+ {% if theme == 'Custom' %}
+   {% set header_is_upload = data.header_image_url and not data.header_image_url.startswith('http') %}
+   {% set header_is_url = data.header_image_url and data.header_image_url.startswith('http') %}
+
+   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=header_is_url, is_upload=header_is_upload, url_label=_('Header banner'), upload_label=_('Header banner'), field_name='header_image_url', field_url='header_image_url', field_upload='header_image_upload', field_clear='header_clear_upload') }}
 
    {% if not data.header_text_color %}
      {% set header_text_color = '#000000' %}
@@ -24,7 +28,23 @@
    <div>
      <label for="header_text_color" class="control-label">{{ _('Header text color') }}</label>
      <input type="color" id="header_text_color" name="header_text_color" value="{{ header_text_color }}" style="margin-left: 10px !important; height: 30px !important; width: 60px !important; padding: 0 0 0 0 !important;">
-   </div>
+   </div></br>
+
+   {% set footer_logo_is_upload = data.footer_logo_image_url and not data.footer_logo_image_url.startswith('http') %}
+   {% set footer_logo_is_url = data.footer_logo_image_url and data.footer_logo_image_url.startswith('http') %}
+
+   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=footer_logo_is_url, is_upload=footer_logo_is_upload, url_label=_('Footer logo 1'), upload_label=_('Footer logo 1'), field_name='footer_logo_image_url', field_url='footer_logo_image_url', field_upload='footer_logo_image_upload', field_clear='footer_logo_clear_upload') }}
+
+   {{ form.markdown('footer_logo_text', id='field-footer-logo-text', label=_('Footer logo 1 text'), value=data.footer_logo_text, error=errors.footer_logo_text) }}
+
+   {% set footer_logo2_is_upload = data.footer_logo2_image_url and not data.footer_logo2_image_url.startswith('http') %}
+   {% set footer_logo2_is_url = data.footer_logo2_image_url and data.footer_logo2_image_url.startswith('http') %}
+
+   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=footer_logo2_is_url, is_upload=footer_logo2_is_upload, url_label=_('Footer logo 2'), upload_label=_('Footer logo 2'), field_name='footer_logo2_image_url', field_url='footer_logo2_image_url', field_upload='footer_logo2_image_upload', field_clear='footer_logo2_clear_upload') }}
+
+   {{ form.markdown('footer_logo2_text', id='field-footer-logo2-text', label=_('Footer logo 2 text'), value=data.footer_logo2_text, error=errors.footer_logo2_text) }}
+
+   {{ form.input('copyright_text', id='field-copyright_text', placeholder=g.copyright_text or _('Copyright text'), label=_('Copyright text'), value=data.copyright_text, error=errors.copyright_text) }}
 
  {% endif %}
 

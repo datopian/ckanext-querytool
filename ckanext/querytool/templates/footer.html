@@ -1,31 +1,25 @@
 {% ckan_extends %}
 
 <!-- Variables -->
-{% set theme = 'custom' %}
+{% set theme = g.theme or 'Default' %}
 
-{% set section_1__text = '
-  # National Institute of Statistics, Ministry of Planning  
-  Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia
-' %}
-{% set section_2__text = '
-  # National Institute of Statistics, Ministry of Planning  
-  Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia
-' %}
+{% set section_1__text = g.footer_logo_text or ' ' %}
+{% set section_2__text = g.footer_logo2_text or ' ' %}
 
-{% set section_1__image = 'https://upload.wikimedia.org/wikipedia/en/3/30/MOH_logo.png' %}
-{% set section_2__image = 'https://upload.wikimedia.org/wikipedia/en/3/30/MOH_logo.png' %}
+{% set section_1__image = g.footer_logo_image_url or ' ' %}
+{% set section_2__image = g.footer_logo2_image_url or ' ' %}
 
 {% set section_3__text = 'Subscribe and follow us' %}
 {% set section_3__youtube = 'http://youtube.com' %}
 {% set section_3__facebook = 'http://facebook.com' %}
 {% set section_3__telegram = 'http://telegram.com' %}
 
-{% set copyright_text = '© 2022 National Institute of Statistics, Ministry of Planning. All rights reserved.' %}
+{% set copyright_text = g.copyright_text or ' ' %}
 <!-- Variables -->
 
 {% block footer_content %}
   {# If not text is set, uses default footer #}
-  {% if theme == 'default' %}
+  {% if theme == 'Default' %}
     {{ super() }}
   {% else %}
     <style>
