@@ -1324,3 +1324,174 @@ msgstr "Largeur de colonne"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
 msgid "An integer or decimal between 0.1-10."
 msgstr "Un nombre entier ou décimal compris entre 0,1 et 10."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "This site uses cookies."
+msgstr "Ce site utilise des cookies."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Some of these cookies are essential, while others help us to improve your experience by providing insights into how the site is being used."
+msgstr "Certains de ces cookies sont essentiels, tandis que d'autres nous aident à améliorer votre expérience en fournissant des informations sur la manière dont le site est utilisé."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Necessary cookies"
+msgstr "Cookies nécessaires"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Necessary cookies enable core functionality such as security, network management, and accessibility. You may disable these by changing your browser settings, but this may affect how the website functions."
+msgstr "Les cookies nécessaires activent les fonctionnalités de base telles que la sécurité, la gestion du réseau et l'accessibilité. Vous pouvez les désactiver en modifiant les paramètres de votre navigateur, mais cela peut affecter le fonctionnement du site Web."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Analytical Cookies"
+msgstr "Cookies analytiques"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Analytics cookies help us to improve our website by collecting and reporting information on how you use it. The cookies collect information in a way that does not directly identify anyone."
+msgstr "Les cookies d'analyse nous aident à améliorer notre site Web en collectant et en communiquant des informations sur la façon dont vous l'utilisez. Les cookies collectent des informations d'une manière qui n'identifie personne directement."
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "I Accept Cookies"
+msgstr "J'accepte les cookies"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "I Do Not Accept Cookies"
+msgstr "Je n'accepte pas les cookies"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "On"
+msgstr "Activé"
+
+#: ckanext/querytool/fanstatic/javascript/civic_cookies.js
+msgid "Off"
+msgstr "Handicapé"
+# added manually
+msgid "Line Options"
+msgstr "Options de ligne"
+
+# added manually
+msgid "Solid"
+msgstr "Solide"
+
+# added manually
+msgid "Dashed"
+msgstr "Trait"
+
+# added manually
+msgid "Dash Dot"
+msgstr "Trait et point"
+
+# added manually
+msgid "Dotted"
+msgstr "Pointé"
+
+# added manually
+msgid "Slim"
+msgstr "Mince"
+
+# added manually
+msgid "Regular"
+msgstr "Réguliere"
+
+# added manually
+msgid "Wide"
+msgstr "Large"
+
+# added manually
+msgid "Set axis range"
+msgstr "Définir la plage d'axes"
+
+# added manually
+msgid "Axis range minimum"
+msgstr "Plage minimale"
+
+# added manually
+msgid "Axis minimum"
+msgstr "Minimum d'axe"
+
+# added manually
+msgid "Axis range maximum"
+msgstr "Plage maximale"
+
+# added manually
+msgid "Axis maximum"
+msgstr "Maximum d´axe"
+
+# added manually
+msgid "Show legend title"
+msgstr "Afficher le titre de la légende"
+
+# added manually
+msgid "Custom legend title"
+msgstr "Titre de légende personnalisé"
+
+# added manually
+msgid "Width of bar, default 5.0"
+msgstr "Largeur de la barre, par défaut 5.0"
+
+# added manually
+msgid "Sort x axis labels"
+msgstr "Commander des étiquettes sur l'axe des x"
+
+# added manually
+msgid "Date DD/MM/YYYY .e.g. 01/01/2014"
+msgstr "Date JJ/MM/AAAA ex. 01/01/2014"
+
+# added manually
+msgid "Date YYYY/MM/DD .e.g. 2014/01/01"
+msgstr "Date AAAA/MM/JJ ex. 01/01/2014"
+
+# added manually
+msgid "Date YYYY/MM .e.g. 2014/01"
+msgstr "Date AAAA/MM ex. 2014/01"
+
+# added manually
+msgid "Date MM/YYYY .e.g. 01/2014"
+msgstr "Date MM/AAAA ex. 01/2014"
+
+# added manually
+msgid "Date DD/MM .e.g. 01/01"
+msgstr "Date JJ/MM ex. 01/01"
+
+# added manually
+msgid "Date MM/YY .e.g. 01/14"
+msgstr "Date MM/AA ex. 01/14"
+
+# added manually
+msgid "Date YYYY .e.g. 2014"
+msgstr "Date AAAA ex. 2014"
+
+# added manually
+msgid "Date MMM DD, YYYY .e.g. Jan 01, 2014"
+msgstr "Date MMM JJ, AAAA ex. Jan 01, 2014"
+
+# added manually
+msgid "Date MMM DD .e.g. Jan 01"
+msgstr "Date MMM JJ ex. Jan 01"
+
+# added manually
+msgid "Dimension by default"
+msgstr "Dimension par défaut"
+
+# added manually
+msgid "Measure by default"
+msgstr "Mesure par défaut"
+
+# added manually
+msgid "Enabled"
+msgstr "Activé"
+
+# added manually
+msgid "Disabled"
+msgstr "Désactivé"
+
+# added manually
+msgid "Sequential"
+msgstr "Séquentiel"
+
+# added manually
+msgid "Divergent"
+msgstr "Divergent"
+
+# added manually
+msgid "Color"
+msgstr "Couleur"

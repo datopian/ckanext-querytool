@@ -262,8 +262,8 @@
           <div class="control-group control-select chart_field_color_wrap_{{ n }} {% if chart %}{{ 'hidden' if selected_chart_type in ['line','area','spline','donut','pie','scatter'] }}{% endif %}">
             <label class="control-label">{{ _('Color Type') }}</label> &nbsp;
             <select id="chart_field_color_type_{{ n }}" name="chart_field_color_type_{{ n }}">
-              <option value=1 {% if chart %}{{ 'selected' if chart.color_type in [1, '1'] }}{% endif %}>Divergent</option>
-              <option value=2 {% if chart %}{{ 'selected' if chart.color_type in [2, '2'] }}{% endif %}>Sequential</option>
+              <option value=1 {% if chart %}{{ 'selected' if chart.color_type in [1, '1'] }}{% endif %}>{{ _('Divergent') }}</option>
+              <option value=2 {% if chart %}{{ 'selected' if chart.color_type in [2, '2'] }}{% endif %}>{{ _('Sequential') }}</option>
             </select>  
           </div>
 
