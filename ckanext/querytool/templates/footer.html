@@ -6,9 +6,6 @@
 {% set section_1__text = '
   # National Institute of Statistics, Ministry of Planning  
   Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia  
-  Testing line break  
-  This is a large text  
-  This is a large text  
 ' %}
 {% set section_2__text = '
   # National Institute of Statistics, Ministry of Planning  
@@ -19,9 +16,14 @@
 {% set section_2__image = 'https://upload.wikimedia.org/wikipedia/en/3/30/MOH_logo.png' %}
 
 {% set section_3__text = 'Subscribe and follow us' %}
-{% set section_3__youtube = 'http://youtube.com' %}
-{% set section_3__facebook = 'http://facebook.com' %}
-{% set section_3__telegram = 'http://telegram.com' %}
+
+{% set social_media_links = [
+  { "type": "tiktok", "link": "tiktok.com" },
+  { "type": "whatsapp", "link": "whatsapp.com" },
+  { "type": "linkedin", "link": "linkedin.com" },
+  { "type": "instagram", "link": "instagram.com" },
+  { "type": "twitter", "link": "twitter.com" }
+]%}
 
 {% set copyright_text = '© 2022 National Institute of Statistics, Ministry of Planning. All rights reserved.' %}
 <!-- Variables -->
@@ -60,17 +62,11 @@
           <div>
             <p><strong>{{ section_3__text }}</strong></p>
             <span class="social-media">
-              {% if section_3__youtube %}
-                <a href="{{ section_2__youtube }}"><img src="/base/images/social/youtube.png"></a>
-              {% endif %}
-
-              {% if section_3__facebook %}
-                <a href="{{ section_2__facebook }}"><img src="/base/images/social/facebook.png"></a>
-              {% endif %}
-              
-              {% if section_3__telegram %}
-                <a href="{{ section_2__telegram }}"><img src="/base/images/social/telegram.png"></a>
-              {% endif %}
+                {% for social_media in social_media_links %}
+                  <a href="{{ social_media.link }}">
+                    <img alt="{{ social_media.type }}" src="/base/images/social/{{ social_media.type }}.png">
+                  </a>
+                {% endfor %}
             </span>
           </div>
         {% endif %}
