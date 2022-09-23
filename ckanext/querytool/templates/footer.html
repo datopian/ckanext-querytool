@@ -10,9 +10,14 @@
 {% set section_2__image = g.footer_logo2_image_url or ' ' %}
 
 {% set section_3__text = 'Subscribe and follow us' %}
-{% set section_3__youtube = 'http://youtube.com' %}
-{% set section_3__facebook = 'http://facebook.com' %}
-{% set section_3__telegram = 'http://telegram.com' %}
+
+{% set social_media_links = [
+  { "type": "tiktok", "link": "tiktok.com" },
+  { "type": "whatsapp", "link": "whatsapp.com" },
+  { "type": "linkedin", "link": "linkedin.com" },
+  { "type": "instagram", "link": "instagram.com" },
+  { "type": "twitter", "link": "twitter.com" }
+]%}
 
 {% set copyright_text = g.copyright_text or ' ' %}
 <!-- Variables -->
@@ -32,32 +37,30 @@
     <footer>
       <div class="custom-footer">
         {% if section_1__text %}
-          <div class="footer-markdown">
-            <img src="{{ section_1__image }}" style="float: left; margin-right: 10px;">
-            {{ h.render_markdown(section_1__text) }}
+          <div class="footer-markdown logo-item">
+            <img src="{{ section_1__image }}" style="margin-right: 10px;">
+            <div>
+              {{ h.render_markdown(section_1__text) }}
+            </div>
           </div>
         {% endif %}
         {% if section_2__text %}
-          <div class="footer-markdown">
-            <img src="{{ section_2__image }}" style="float: left; margin-right: 10px;">
-            {{ h.render_markdown(section_2__text) }}
+          <div class="footer-markdown logo-item">
+            <img src="{{ section_2__image }}" style="margin-right: 10px;">
+            <div>
+              {{ h.render_markdown(section_2__text) }}
+            </div>
           </div>
         {% endif %}
         {% if section_3__text %}
           <div>
             <p><strong>{{ section_3__text }}</strong></p>
             <span class="social-media">
-              {% if section_3__youtube %}
-                <a href="{{ section_2__youtube }}"><img src="/base/images/social/youtube.png"></a>
-              {% endif %}
-
-              {% if section_3__facebook %}
-                <a href="{{ section_2__facebook }}"><img src="/base/images/social/facebook.png"></a>
-              {% endif %}
-              
-              {% if section_3__telegram %}
-                <a href="{{ section_2__telegram }}"><img src="/base/images/social/telegram.png"></a>
-              {% endif %}
+                {% for social_media in social_media_links %}
+                  <a href="{{ social_media.link }}">
+                    <img alt="{{ social_media.type }}" src="/base/images/social/{{ social_media.type }}.png">
+                  </a>
+                {% endfor %}
             </span>
           </div>
         {% endif %}
@@ -73,7 +76,7 @@
           <div class="attribution">
             <p>
               <strong>Supported by</strong><br>
-              <a class="hide-text" href="http://ckan.org">
+              <a class="hide-text" href="https://www.vitalstrategies.org">
                 <img src="/base/images/logos/vital-strategies.svg" class="logo">
               </a>
             </p>
