@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="copyright">
-        <p>{{ copyright_text }}</p>
+        {{ h.render_markdown(copyright_text) }}
       </div>
     </footer>
   {% endif %}
