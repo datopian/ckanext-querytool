@@ -235,33 +235,32 @@ def config_option_update(context, data_dict):
                             'logo_upload', 'clear_logo_upload')
     upload.upload(uploader.get_max_image_size())
 
-    if data_dict.get('theme') == 'Custom':
-        # Upload header image for custom theme
-        upload.update_data_dict(data_dict, 'header_image_url',
-                                'header_image_upload', 'header_clear_upload')
-        upload.upload(uploader.get_max_image_size())
+    # Upload header image for custom theme
+    upload.update_data_dict(data_dict, 'header_image_url',
+                            'header_image_upload', 'header_clear_upload')
+    upload.upload(uploader.get_max_image_size())
 
-        # Upload footer logo 1 for custom theme
-        upload.update_data_dict(data_dict, 'footer_logo_image_url',
-                                'footer_logo_image_upload', 'footer_logo_clear_upload')
-        upload.upload(uploader.get_max_image_size())
+    # Upload footer logo 1 for custom theme
+    upload.update_data_dict(data_dict, 'footer_logo_image_url',
+                            'footer_logo_image_upload', 'footer_logo_clear_upload')
+    upload.upload(uploader.get_max_image_size())
 
-        # Upload footer logo 2 for custom theme
-        upload.update_data_dict(data_dict, 'footer_logo2_image_url',
-                                'footer_logo2_image_upload', 'footer_logo2_clear_upload')
-        upload.upload(uploader.get_max_image_size())
+    # Upload footer logo 2 for custom theme
+    upload.update_data_dict(data_dict, 'footer_logo2_image_url',
+                            'footer_logo2_image_upload', 'footer_logo2_clear_upload')
+    upload.upload(uploader.get_max_image_size())
 
-        # Remove leftover header_image_upload
-        if data.get('header_image_upload'):
-            data['header_image_upload'] = ''
+    # Remove leftover header_image_upload
+    if data_dict.get('header_image_upload'):
+        data_dict['header_image_upload'] = ''
 
-        # Remove leftover footer_logo_image_upload
-        if data.get('footer_logo_image_upload'):
-            data['footer_logo_image_upload'] = ''
+    # Remove leftover footer_logo_image_upload
+    if data_dict.get('footer_logo_image_upload'):
+        data_dict['footer_logo_image_upload'] = ''
 
-        # Remove leftover footer_logo2_image_upload
-        if data.get('footer_logo2_image_upload'):
-            data['footer_logo2_image_upload'] = ''
+    # Remove leftover footer_logo2_image_upload
+    if data_dict.get('footer_logo2_image_upload'):
+        data_dict['footer_logo2_image_upload'] = ''
 
     data, errors = _validate(data_dict, schema, context)
 
@@ -275,18 +274,17 @@ def config_option_update(context, data_dict):
         if key =='ckan.site_logo' and value and not value.startswith('http'):
             value = h.url_for_static('uploads/admin/{0}'.format(value))
 
-        if data_dict.get('theme') == 'Custom':
-            # Set full Header image url
-            if key =='header_image_url' and value and not value.startswith('http'):
-                value = h.url_for_static('uploads/admin/{0}'.format(value))
+        # Set full Header image url
+        if key =='header_image_url' and value and not value.startswith('http'):
+            value = h.url_for_static('uploads/admin/{0}'.format(value))
 
-            # Set full Footer logo 1 image url
-            if key =='footer_logo_image_url' and value and not value.startswith('http'):
-                value = h.url_for_static('uploads/admin/{0}'.format(value))
+        # Set full Footer logo 1 image url
+        if key =='footer_logo_image_url' and value and not value.startswith('http'):
+            value = h.url_for_static('uploads/admin/{0}'.format(value))
 
-            # Set full Footer logo 2 image url
-            if key =='footer_logo2_image_url' and value and not value.startswith('http'):
-                value = h.url_for_static('uploads/admin/{0}'.format(value))
+        # Set full Footer logo 2 image url
+        if key =='footer_logo2_image_url' and value and not value.startswith('http'):
+            value = h.url_for_static('uploads/admin/{0}'.format(value))
 
         # Save value in database
         model.set_system_info(key, value)

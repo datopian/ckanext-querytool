@@ -11,13 +11,7 @@
 
 {% set section_3__text = 'Subscribe and follow us' %}
 
-{% set social_media_links = [
-  { "type": "tiktok", "link": "tiktok.com" },
-  { "type": "whatsapp", "link": "whatsapp.com" },
-  { "type": "linkedin", "link": "linkedin.com" },
-  { "type": "instagram", "link": "instagram.com" },
-  { "type": "twitter", "link": "twitter.com" }
-]%}
+{% set social_media_links = h.get_social_media_links(g.social_order, g) %}
 
 {% set copyright_text = g.copyright_text or ' ' %}
 <!-- Variables -->
@@ -52,7 +46,7 @@
             </div>
           </div>
         {% endif %}
-        {% if section_3__text %}
+        {% if section_3__text and social_media_links %}
           <div>
             <p><strong>{{ section_3__text }}</strong></p>
             <span class="social-media">
