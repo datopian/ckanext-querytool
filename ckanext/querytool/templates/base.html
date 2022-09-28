@@ -38,7 +38,7 @@
   {% resource 'querytool/javascript/vitals.js' %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
 
-  {% if h.get_cookie_control_config().get('api_key') %}
+  {% if h.get_cookie_control_config().get('api_key') and h.get_cookie_control_config().get('enabled') %}
     {% block cookie_control %}  
       {% resource 'querytool/javascript/modules/civic_cookies.js' %}
       <script src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js" type="text/javascript"></script>
