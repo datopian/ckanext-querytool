@@ -2,8 +2,8 @@
 
 <!-- Variables -->
 {% set nav_bar = h.querytool_allow_nav_bar() %}
-{% set header_image = 'https://data.gov.sg/images/header-home.jpg' or '' %}
-{% set header_text_color = '#ffffff' or '' %}
+{% set header_image = g.header_image_url or '' %}
+{% set header_text_color = g.header_text_color or '#ffffff' %}
 <!-- Variables -->
 
 {% block content %}
@@ -26,6 +26,7 @@
 
   {# Made it a block so that it's easier to override on files that extend this file #}
   {# as we don't want pages besides the home to have the custom background #}
+  {% if g.theme == 'Custom' %}
   {% block page_header_bg %}
       <style>
         #header-wrapper {
@@ -38,6 +39,7 @@
         }
       </style>
   {% endblock %}
+  {% endif %}
 
   <div class="public-header query-header" id="header-wrapper">
   {% block page_header_content %}

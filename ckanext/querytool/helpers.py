@@ -873,3 +873,22 @@ def get_cookie_control_config():
         cookie_control_config['text'] = text
 
         return cookie_control_config
+
+def get_social_media_links(social_order, admin_dict):
+    social_order = social_order.split(',')
+
+    social_media_links = []
+
+    for sm in social_order:
+        try:
+            sm_link = getattr(admin_dict, '{}_url'.format(sm))
+        except:
+            log.warning('Social media link not found for {}'.format(sm))
+            continue
+        if sm_link:
+            social_media_links.append({
+                'type': sm,
+                'link': sm_link
+            })
+
+    return social_media_links

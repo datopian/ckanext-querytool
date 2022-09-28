@@ -1,36 +1,24 @@
 {% ckan_extends %}
 
 <!-- Variables -->
-{% set theme = 'custom' %}
+{% set theme = g.theme or 'Default' %}
 
-{% set section_1__text = '
-  # National Institute of Statistics, Ministry of Planning  
-  Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia  
-' %}
-{% set section_2__text = '
-  # National Institute of Statistics, Ministry of Planning  
-  Street 360, Sangkat Boeng Keng Kang 1, Khan Chamkarmon, Phnom Penh, Cambodia
-' %}
+{% set section_1__text = g.footer_logo_text or ' ' %}
+{% set section_2__text = g.footer_logo2_text or ' ' %}
 
-{% set section_1__image = 'https://upload.wikimedia.org/wikipedia/en/3/30/MOH_logo.png' %}
-{% set section_2__image = 'https://upload.wikimedia.org/wikipedia/en/3/30/MOH_logo.png' %}
+{% set section_1__image = g.footer_logo_image_url or ' ' %}
+{% set section_2__image = g.footer_logo2_image_url or ' ' %}
 
 {% set section_3__text = 'Subscribe and follow us' %}
 
-{% set social_media_links = [
-  { "type": "tiktok", "link": "tiktok.com" },
-  { "type": "whatsapp", "link": "whatsapp.com" },
-  { "type": "linkedin", "link": "linkedin.com" },
-  { "type": "instagram", "link": "instagram.com" },
-  { "type": "twitter", "link": "twitter.com" }
-]%}
+{% set social_media_links = h.get_social_media_links(g.social_order, g) %}
 
-{% set copyright_text = '© 2022 National Institute of Statistics, Ministry of Planning. All rights reserved.' %}
+{% set copyright_text = g.copyright_text or ' ' %}
 <!-- Variables -->
 
 {% block footer_content %}
   {# If not text is set, uses default footer #}
-  {% if theme == 'default' %}
+  {% if theme == 'Default' %}
     {{ super() }}
   {% else %}
     <style>
@@ -58,7 +46,7 @@
             </div>
           </div>
         {% endif %}
-        {% if section_3__text %}
+        {% if section_3__text and social_media_links %}
           <div>
             <p><strong>{{ section_3__text }}</strong></p>
             <span class="social-media">
@@ -90,7 +78,7 @@
         </div>
       </div>
       <div class="copyright">
-        <p>{{ copyright_text }}</p>
+        {{ h.render_markdown(copyright_text) }}
       </div>
     </footer>
   {% endif %}
