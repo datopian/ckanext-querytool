@@ -10,6 +10,7 @@ import tempfile
 import hashlib
 from sqlalchemy import Table, Column
 from sqlalchemy import types
+import pandas as pd
 
 from ckan.lib.cli import CkanCommand
 from ckan.lib.munge import munge_name
@@ -113,7 +114,7 @@ def purge_datasets(owner_org):
     i = 0
 
     for dataset in datasets['results']:
-        if dataset['organization']['name'] == owner_org:
+        if dataset.get('organization', {}).get('name') == owner_org:
             print('  + Purging dataset: {}'.format(dataset['name']))
 
             i += 1
@@ -236,7 +237,29 @@ def clean_csv(data, id_removal, dataflow_agency,
     else:
         print('  + Done. {} items to clean.\n'.format(cleaned))
 
+    data = pivot_data(data)
+
     return data
+
+def pivot_data(data):
+    print('  + Pivoting data...')
+
+    df = pd.DataFrame(data)
+    header_row = df.iloc[0]
+    df = df[1:]
+    df.columns = header_row
+
+    df_melted = df.melt(id_vars=[u'Dataflow', u'Indicator', u'Reference area', u'Sex',
+       u'Age group', u'Unit of measure', u'Frequency', u'Time period', u'Observation value', u'Unit multiplier',
+       u'Responsible agency', u'Data source', u'REF_AREA'], var_name='Category', value_name='Group')
+
+    columns = df_melted.columns.tolist()
+    columns = columns[:2] + columns[-2:] + columns[2:-2]
+    df_melted = df_melted[columns]
+
+    print('  + Done.\n')
+
+    return [df_melted.columns.values.tolist()] + df_melted.values.tolist()
 
 
 def compare_hashes(existing_hash, new_hash):
