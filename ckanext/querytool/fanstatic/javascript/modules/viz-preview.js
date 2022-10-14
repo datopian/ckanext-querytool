@@ -290,7 +290,9 @@ ckan.module('querytool-viz-preview', function() {
             var tooltip_name = this.options.tooltip_name;
             var data_format = this.options.data_format;
             var y_tick_format = this.options.y_tick_format;
+            y_tick_format = typeof y_tick_format == 'string' ? y_tick_format : ''
             var x_tick_format = this.options.x_tick_format;   //   NOTE: mapped to xf
+            x_tick_format = typeof x_tick_format == 'string' ? x_tick_format : ''
             var chart_padding_left = (this.options.chart_padding_left === true) ? null : this.options.chart_padding_left;
             var chart_padding_bottom = (this.options.chart_padding_bottom === true) ? null : this.options.chart_padding_bottom;
             var padding_top = (this.options.padding_top === true) ? null : this.options.padding_top;
