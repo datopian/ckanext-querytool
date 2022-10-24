@@ -24,6 +24,14 @@
       {# Don't show default logo. #}
       {% endblock %}
 
+      {% if g.theme == 'Custom' %}
+      {% block lang_select_mobile %}
+      <div class="mobile">
+        {% snippet "snippets/language_selector_with_flags.html", id="mobile" %}
+      </div>
+    {% endblock %}
+    {% endif %}
+
       <div class="nav-collapse collapse">
         {% block header_site_navigation %}
         <nav class="section navigation">
@@ -42,6 +50,14 @@
             </ul>
         </nav>
         {% endblock %}
+
+        {% if g.theme == 'Custom' %}
+        {% block lang_select_screen %}
+          <div class="screen">
+            {% snippet "snippets/language_selector_with_flags.html", id="screen" %}
+          </div>
+        {% endblock %}
+        {% endif %}
 
         {% if c.user and h.get_user_permission(c.userobj) == True %}
           {% block header_site_search %}

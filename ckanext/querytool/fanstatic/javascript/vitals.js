@@ -1,4 +1,3 @@
-
 /*! RowsGroup for DataTables v2.0.0
  * 2015-2016 Alexey Shildyakov ashl1future@gmail.com
  * 2016 Tibor Wekerle
@@ -268,7 +267,7 @@
     } );
   } catch (error) {
     // This is catching '$.fn.dataTable is undefined' on pages that don't use visualizations (i.e. the home page)
-    if (error.message != '$.fn.dataTable is undefined') {
+    if (error.message != '$.fn.dataTable is undefined' && !error.message.includes('Cannot set properties of undefined')) {
       console.error(error)
     }
   }
@@ -1346,3 +1345,84 @@ $('body').on('change', '[id^=chart_field_axis_x_]', function () {
   //  Unsets the category when a dimension is selected
   $(`#chart_field_category_name_${chart_number}`).val('');
 })
+
+$('body').on('change', '#theme', function () {
+  var theme = $(this).val();
+
+  if(theme == 'Default') {
+    $('#custom-theme').hide();
+    $('#custom-theme-help').hide();
+  } else {
+    $('#custom-theme').show();
+    $('#custom-theme-help').show();
+  }
+});
+
+$(document).ready(function(){
+  var theme = $('#theme').val();
+
+  if(theme == 'Default') {
+    $('#custom-theme').hide();
+    $('#custom-theme-help').hide();
+  } else {
+    $('#custom-theme').show();
+    $('#custom-theme-help').show();
+  }
+});
+
+const optionsColumn = document.querySelector('#column-social-options');
+const selectedColumn = document.querySelector('#column-social-selected');
+
+if (optionsColumn) {
+
+  new Sortable(selectedColumn, {
+    group: {
+      name: 'shared',
+      put: function (to) {
+        return to.el.children.length < 5;
+      }
+    },
+    animation: 150,
+    onEnd: function (evt) {
+      updateSocialOrder();
+    },
+    onAdd: function (evt) {
+      var itemEl = evt.item;
+      var currentEl = $(`#control-group-${itemEl.id}-url`)
+      updateSocialOrder()
+      currentEl.show()
+    },
+    onUpdate: function (evt) {
+      updateSocialOrder();
+    },
+    onRemove: function (evt) {
+      var itemEl = evt.item;
+      var currentEl = $(`#control-group-${itemEl.id}-url`)
+      updateSocialOrder()
+      currentEl.hide()
+    }
+  });
+
+  new Sortable(optionsColumn, {
+      group: "shared",
+      animation: 150
+  });
+
+}
+
+function updateSocialOrder() {
+  const selectedColumn = document.querySelector('#column-social-selected')
+  var socialOrder = ''
+
+  if (selectedColumn.children.length > 1) {
+    for (var i = 1; i < selectedColumn.children.length; i++) {
+      if (socialOrder == '') {
+        socialOrder = selectedColumn.children[i].id
+      } else {
+        socialOrder = socialOrder + ',' + selectedColumn.children[i].id
+      }
+    }
+  }
+
+  $('#social-order').val(socialOrder)
+}

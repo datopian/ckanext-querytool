@@ -3,6 +3,7 @@ import ckan.plugins.toolkit as toolkit
 import ckan.logic.schema as ckan_schema
 
 from ckan.lib.plugins import DefaultTranslation
+import ckan.logic as logic
 
 import ckanext.querytool.helpers as h
 import ckanext.querytool.helpers as helpers
@@ -333,6 +334,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.convert_bar_width,
             'get_cookie_control_config': 
                 helpers.get_cookie_control_config,
+            'get_social_media_links':
+                helpers.get_social_media_links
         }
 
     # IAuthFunctions
@@ -350,6 +353,29 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         schema.update({
             'ckan.welcome_page_title': [ignore_missing, unicode],
             'ckan.welcome_page_description': [ignore_missing, unicode],
+            'theme': [ignore_missing, unicode],
+            'header_image_url': [ignore_missing, unicode],
+            'header_image_upload': [ignore_missing, unicode],
+            'header_clear_upload': [ignore_missing, unicode],
+            'header_text_color': [ignore_missing, unicode],
+            'footer_logo_image_url': [ignore_missing, unicode],
+            'footer_logo_image_upload': [ignore_missing, unicode],
+            'footer_logo_clear_upload': [ignore_missing, unicode],
+            'footer_logo_text': [ignore_missing, unicode],
+            'footer_logo2_image_url': [ignore_missing, unicode],
+            'footer_logo2_image_upload': [ignore_missing, unicode],
+            'footer_logo2_clear_upload': [ignore_missing, unicode],
+            'footer_logo2_text': [ignore_missing, unicode],
+            'copyright_text': [ignore_missing, unicode],
+            'social_order': [ignore_missing, unicode],
+            'facebook_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'instagram_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'linkedin_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'telegram_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'tiktok_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'twitter_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'whatsapp_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'youtube_url': [ignore_missing, unicode, logic.validators.url_validator]
         })
 
         return schema

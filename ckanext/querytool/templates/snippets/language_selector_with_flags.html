@@ -1,0 +1,49 @@
+{% set current_lang = request.environ.CKAN_LANG %}
+<form class="form-inline form-select custom-lang-select" action="{% url_for controller='util', action='redirect' %}" data-module="select-switch" method="POST">
+  <select id="field-lang-select-flags-{{id}}" name="url">
+    {% for locale in h.get_available_locales() %}
+      <option value="{% url_for h.current_url(), locale=locale.short_name %}" {% if locale.short_name == current_lang %}selected="selected"{% endif %}>
+        <span class="fi fi-kh"> </span>
+        {{ locale.display_name or locale.english_name }}
+      </option>
+    {% endfor %}
+  </select>
+  <button class="btn js-hide" type="submit" style="display: none;">{{ _('Go') }}</button>
+</form>
+
+<script>
+  //  'window' must be loaded to use jQuery
+  window.addEventListener('load', async (event) => {
+    let getFlag;
+
+    //  Most flag libs  use ISO 3166-2 code to
+    //  index the flags instead of lang codes,
+    //  for many countries may speak  the same
+    //  language natively. To get around  this
+    //  there's this json file that associates
+    //  lang codes to country codes  and  that
+    //  can be extended as needed.
+    await $.getJSON(`/base/resources/lang-flags.json`, (data) => {
+      getFlag = (code) => data[code];
+    });
+
+    //  select2 sanitizes the it's innerHTML
+    //  by default. To get  around this it's
+    //  needed to reformat the options... 
+    const format = (lang) => {
+      if (!lang.id) { return lang.text; }
+      //  Value always comes as '/en/...''
+      const value = lang.element[0].value.split('/')[1];
+
+      return `<span class="fi fi-${getFlag(value)}"> </span> ${lang.text}`;
+    } 
+
+    //  Initiliazing the select with the
+    //  proper options
+    $("#field-lang-select-flags-{{id}}").select2({
+      formatResult: format,
+      formatSelection: format,
+      escapeMarkup: function(m) { return m; }
+    })
+  });
+</script>

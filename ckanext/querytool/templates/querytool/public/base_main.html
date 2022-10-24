@@ -1,7 +1,12 @@
 {% extends "querytool/public/querytool_page.html" %}
-{% set nav_bar = h.querytool_allow_nav_bar() %}
-{% block content %}
 
+<!-- Variables -->
+{% set nav_bar = h.querytool_allow_nav_bar() %}
+{% set header_image = g.header_image_url or '' %}
+{% set header_text_color = g.header_text_color or '#ffffff' %}
+<!-- Variables -->
+
+{% block content %}
 <div class="container-wrapper">
   {% if nav_bar == 'True' %}
     {% block toolbar %}
@@ -18,22 +23,39 @@
       </div>
     {% endblock %}
   {% endif %}
-  <div class="public-header query-header">
+
+  {# Made it a block so that it's easier to override on files that extend this file #}
+  {# as we don't want pages besides the home to have the custom background #}
+  {% if g.theme == 'Custom' %}
+  {% block page_header_bg %}
+      <style>
+        #header-wrapper {
+          background-image: url('{{ header_image }}'); 
+          {{ 'padding: 0 0 125px 0;' if header_image else '' }}
+        }
+
+        #header-text {
+          color: {{ header_text_color if header_text_color else '#353535' }} !important;
+        }
+      </style>
+  {% endblock %}
+  {% endif %}
+
+  <div class="public-header query-header" id="header-wrapper">
   {% block page_header_content %}
-  
     {% block breadcrumb_custom %} {% endblock %}
     <div class="container">
       <div class="row">
         <div class="span10 offset1">
-          <div class="page-header">
+          <div class="page-header" id="header-text">
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}
-                <h1>{{ g.welcome_page_title or _('Welcome') }}</h1>
+                <h1 style="{{ 'padding-top: 100px;' if header_image else '' }}">{{ g.welcome_page_title or _('Welcome') }}</h1>
               {% endblock %}
               <div class="long-desc">
                 {% block page_header_description %}
-                  <p class="page-desc desc">{{ h.render_markdown(g.welcome_page_description or _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.')) }}</p>
+            <p class="page-desc desc">{{ h.render_markdown(g.welcome_page_description or _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.')) }}</p>
                 {% endblock %}
               </div>
             {% endblock %}
@@ -71,7 +93,7 @@
           <div class="group-box-2">
             <div class="group-image-2">
               {% if group.image_display_url %}
-                <img  src="{{group.image_display_url}}"  alt="" alt="{{ value }}">
+                <img  src="{{group.image_display_url}}" alt="{{ value }}">
               {% else %}
                 <img src="/base/images/icon-1.svg" alt="">
               {% endif %}
@@ -116,5 +138,6 @@
     <br/><br/><br/><br/>
   </div>
   {% endblock %}
+
 </div>
 {% endblock %}
