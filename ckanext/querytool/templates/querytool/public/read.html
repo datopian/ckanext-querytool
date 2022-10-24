@@ -71,6 +71,8 @@
 
 
 <form id="public-filters" class="public-filters" method="GET">
+  <input type="hidden" name="embed" value="{{ 'true' if embed else 'false' }}"/>
+
   <!-- Filtering container -->
   <div class="public-query">
     {% if querytools %}
