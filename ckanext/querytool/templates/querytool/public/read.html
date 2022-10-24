@@ -23,6 +23,12 @@
 {% set group_title = h.querytool_get_group_title(querytools[0].group) %}
 
 
+{% block header %}
+  {% if not embed %}
+    {{ super() }}
+  {% endif %}
+{% endblock %}
+
 {% block page_header_content %}
 
 {% block page_header_bg %}{% endblock %}
@@ -305,7 +311,7 @@
           </div>
         {% endif %}
         {% if item.type == 'map'  %}
-         {% if item.filter_visibility == 'public'  %}
+        {% if item.filter_visibility == 'public'  %}
             {% set map_filter_id = h.querytool_get_uuid() %}
           <div class="map-filter">
             {% snippet 'querytool/public/snippets/public_viz_filter.html',
@@ -420,5 +426,7 @@
     </div>
   </div>
 </div>
-{{ super() }}
+  {% if not embed %}
+    {{ super() }}
+  {% endif %}
 {% endblock %}

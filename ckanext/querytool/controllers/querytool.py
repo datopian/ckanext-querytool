@@ -989,8 +989,10 @@ class QueryToolController(base.BaseController):
 
                 querytools.append(q_item)
 
+        embed = True if 'embed' in params and params['embed'] == 'true' else False
+
         return render('querytool/public/read.html',
-                      extra_vars={'querytools': querytools})
+                      extra_vars={'querytools': querytools, 'embed': embed})
 
     def querytool_download_data(self, name):
         params = request.params
