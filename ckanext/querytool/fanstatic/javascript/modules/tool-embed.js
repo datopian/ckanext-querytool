@@ -50,13 +50,18 @@ ckan.module("tool-embed", function($) {
     }
 
     function _embedCode() {
+        var url = new URL(window.location.href);
+        var searchParams = url.searchParams;
+        searchParams.append('embed', 'true');
+        url.search = searchParams.toString();
+
         return (
             '<iframe width="' +
             self.options.width +
             '" height="' +
             self.options.height +
             '" src="' +
-            window.location.href +
+            url.toString() +
             '" frameBorder="0"></iframe>'
         );
     }
