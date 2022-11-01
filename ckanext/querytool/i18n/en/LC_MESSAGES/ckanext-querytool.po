@@ -1502,3 +1502,179 @@ msgstr "Divergent"
 msgid "Color"
 msgstr "Color"
 
+#: ckanext/querytool/templates/admin/config.html:213
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance. It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This "
+"is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>Custom CSS:</strong> This is a block of CSS that "
+"appears in <code>&lt;head&gt;</code> tag of every page. If you wish to "
+"customize the templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+msgstr ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance. It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This "
+"is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>Custom CSS:</strong> This is a block of CSS that "
+"appears in <code>&lt;head&gt;</code> tag of every page. If you wish to "
+"customize the templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/admin/config.html:230
+msgid "Theme"
+msgstr "Theme"
+
+#: ckanext/querytool/templates/admin/config.html:230
+msgid ""
+"This toggles between the CKAN default theme and the custom theme. The custom "
+"theme adds additional configuration options to this page."
+msgstr ""
+"This toggles between the CKAN default theme and the custom theme. The custom "
+"theme adds additional configuration options to this page."
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Header Banner"
+msgstr "Header Banner"
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Upload an image to set the home page banner."
+msgstr "Upload an image to set the home page banner."
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "Header Text Color"
+msgstr "Header Text Color"
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "This changes the text color of Welcome Page Description."
+msgstr "This changes the text color of Welcome Page Description."
+
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Footer Logo 1"
+msgstr "Footer Logo 1"
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Upload an image to display as a logo on the left side of the footer."
+msgstr "Upload an image to display as a logo on the left side of the footer."
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "Footer Logo 1 Text"
+msgstr "Footer Logo 1 Text"
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "This text will be displayed to the right of the logo."
+msgstr "This text will be displayed to the right of the logo."
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Footer Logo 2"
+msgstr "Footer Logo 2"
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Upload an image to display as a second logo on the left side of the footer."
+msgstr "Upload an image to display as a second logo on the left side of the footer."
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "Footer Logo 2 Text"
+msgstr "Footer Logo 2 Text"
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "This text will be displayed to the right of the second logo."
+msgstr "This text will be displayed to the right of the second logo."
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "Footer Copyright Text"
+msgstr "Footer Copyright Text"
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "This text will be displayed on the bottom center of the footer."
+msgstr "This text will be displayed on the bottom center of the footer."
+
+#: ckanext/querytool/templates/admin/config.html:68
+#: ckanext/querytool/templates/admin/config.html:247
+msgid "Footer Social Media Links"
+msgstr "Footer Social Media Links"
+
+#: ckanext/querytool/templates/admin/config.html:247
+msgid ""
+"This allows you to select up to 4 social media links to display on the right "
+"side of the footer. Dragging an option to \"Selected\" will add its URL field"
+" to this page."
+msgstr ""
+"This allows you to select up to 4 social media links to display on the right "
+"side of the footer. Dragging an option to \"Selected\" will add its URL field"
+" to this page."
+
+#: ckanext/querytool/templates/admin/config.html:22
+msgid "Header banner"
+msgstr "Header banner"
+
+#: ckanext/querytool/templates/admin/config.html:31
+msgid "Header text color"
+msgstr "Header text color"
+
+#: ckanext/querytool/templates/admin/config.html:38
+msgid "Footer logo 1"
+msgstr "Footer logo 1"
+
+#: ckanext/querytool/templates/admin/config.html:40
+msgid "Footer logo 1 text"
+msgstr "Footer logo 1 text"
+
+#: ckanext/querytool/templates/admin/config.html:45
+msgid "Footer logo 2"
+msgstr "Footer logo 2"
+
+#: ckanext/querytool/templates/admin/config.html:47
+msgid "Footer logo 2 text"
+msgstr "Footer logo 2 text"
+
+#: ckanext/querytool/templates/admin/config.html:49
+msgid "Copyright text"
+msgstr "Copyright text"
+
+#: ckanext/querytool/templates/admin/config.html:72
+msgid ""
+"Select up to 4. These will appear in the footer in the order (left to right) "
+"of \"Selected\""
+msgstr ""
+"Select up to 4. These will appear in the footer in the order (left to right) "
+"of \"Selected\""
+
+#: ckanext/querytool/templates/admin/config.html:77
+msgid "Options"
+msgstr "Options"
+
+#: ckanext/querytool/templates/admin/config.html:105
+msgid "Selected"
+msgstr "Selected"
+
+#: ckanext/querytool/templates/footer.html:64
+msgid "Powered by"
+msgstr "Powered by"
+
+#: ckanext/querytool/templates/footer.html:72
+msgid "Supported by"
+msgstr "Supported by"
+
+#: ckanext/querytool/templates/footer.html:49
+msgid "Subscribe and follow us"
+msgstr "Subscribe and follow us"
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "Custom"
+msgstr "Custom"
+
+#: ckanext/querytool/helpers.py:234 ckanext/querytool/helpers.py:558
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1084
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1093
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
+msgid "Default"
+msgstr "Default"

@@ -2229,3 +2229,171 @@ msgstr "បានបង្កើត"
 # added manually
 msgid "Color"
 msgstr "ពណ៌"
+
+#: ckanext/querytool/templates/admin/config.html:213
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance. It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This "
+"is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>Custom CSS:</strong> This is a block of CSS that "
+"appears in <code>&lt;head&gt;</code> tag of every page. If you wish to "
+"customize the templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+msgstr ""
+" <p><strong>ចំណងជើងគេហទំព័រ:</strong> នេះគឺជាចំណងជើងនៃឧទាហរណ៍ CKAN នេះ វាលេចឡើងនៅកន្លែងផ្សេងៗនៅទូទាំង CKAN ។ "
+"</p> <p><strong>រចនាប័ទ្ម:</strong> ជ្រើសរើសពីបញ្ជីនៃបំរែបំរួលសាមញ្ញនៃពណ៌ចម្រុះសំខាន់ៗ ដើម្បីទទួលបានរូបរាងផ្ទាល់ខ្លួនរហ័សទាន់ចិត្ត។ "
+"</p> <p><strong>ស្លាកសញ្ញាគេហទំព័រ:</strong> នេះគឺជានិមិត្តសញ្ញាដែលបង្ហាញនៅក្នុងបឋមកថានៃគំរូគំរូ CKAN ទាំងអស់។ "
+"</p> <p><strong>CSS ផ្ទាល់ខ្លួន:</strong> នេះគឺជាប្លុកនៃ CSS ដែលបង្ហាញនៅក្នុងស្លាក <code>&lt;head&gt;</code> នៃទំព័រនីមួយៗ។ ប្រសិនបើអ្នកចង់ប្ដូរគំរូតាមបំណងឱ្យបានពេញលេញ "
+"<a href=\"%(docs_url)s\" target=\"_blank\">យើងសូមណែនាំឱ្យអានឯកសារ។</a>.</p> "
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/admin/config.html:230
+msgid "Theme"
+msgstr "ស្បែក"
+
+#: ckanext/querytool/templates/admin/config.html:230
+msgid ""
+"This toggles between the CKAN default theme and the custom theme. The custom "
+"theme adds additional configuration options to this page."
+msgstr ""
+"វាបិទបើករវាងស្បែកលំនាំដើម CKAN និងស្បែកផ្ទាល់ខ្លួន។ ស្បែកផ្ទាល់ខ្លួនបន្ថែមជម្រើសកំណត់រចនាសម្ព័ន្ធបន្ថែមទៅទំព័រនេះ។ "
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Header Banner"
+msgstr "បដាបឋមកថា"
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Upload an image to set the home page banner."
+msgstr "បង្ហោះរូបភាពដើម្បីកំណត់ផ្ទាំងបដាទំព័រដើម។"
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "Header Text Color"
+msgstr "ពណ៌អត្ថបទបឋមកថា"
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "This changes the text color of Welcome Page Description."
+msgstr "វាផ្លាស់ប្តូរពណ៌អត្ថបទនៃការពិពណ៌នាទំព័រស្វាគមន៍។"
+
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Footer Logo 1"
+msgstr "និមិត្តសញ្ញាបាតកថា 1"
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Upload an image to display as a logo on the left side of the footer."
+msgstr "បង្ហោះរូបភាពដើម្បីបង្ហាញជាឡូហ្គោនៅផ្នែកខាងឆ្វេងនៃបាតកថា។"
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "Footer Logo 1 Text"
+msgstr "និមិត្តសញ្ញាបាតកថា 1 អត្ថបទ"
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "This text will be displayed to the right of the logo."
+msgstr "អត្ថបទនេះនឹងត្រូវបានបង្ហាញនៅខាងស្តាំនៃនិមិត្តសញ្ញា។"
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Footer Logo 2"
+msgstr "និមិត្តសញ្ញាបាតកថា 2"
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Upload an image to display as a second logo on the left side of the footer."
+msgstr "បង្ហោះរូបភាពដើម្បីបង្ហាញជាឡូហ្គោទីពីរនៅផ្នែកខាងឆ្វេងនៃបាតកថា។"
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "Footer Logo 2 Text"
+msgstr "និមិត្តសញ្ញាបាតកថា 2 អត្ថបទ"
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "This text will be displayed to the right of the second logo."
+msgstr "អត្ថបទនេះនឹងត្រូវបានបង្ហាញនៅខាងស្តាំនៃនិមិត្តសញ្ញាទីពីរ។"
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "Footer Copyright Text"
+msgstr "បាតកថាអត្ថបទរក្សាសិទ្ធិ"
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "This text will be displayed on the bottom center of the footer."
+msgstr "អត្ថបទនេះនឹងត្រូវបានបង្ហាញនៅកណ្តាលខាងក្រោមនៃបាតកថា។"
+
+#: ckanext/querytool/templates/admin/config.html:68
+#: ckanext/querytool/templates/admin/config.html:247
+msgid "Footer Social Media Links"
+msgstr "បាតកថាតំណភ្ជាប់ប្រព័ន្ធផ្សព្វផ្សាយសង្គម"
+
+#: ckanext/querytool/templates/admin/config.html:247
+msgid ""
+"This allows you to select up to 4 social media links to display on the right "
+"side of the footer. Dragging an option to \"Selected\" will add its URL field"
+" to this page."
+msgstr ""
+"នេះអនុញ្ញាតឱ្យអ្នកជ្រើសរើសតំណភ្ជាប់ប្រព័ន្ធផ្សព្វផ្សាយសង្គមរហូតដល់ 4 ដើម្បីបង្ហាញនៅផ្នែកខាងស្តាំនៃបាតកថា។ ការអូសជម្រើសមួយទៅ \"បានជ្រើសរើស\" នឹងបន្ថែមវាល URL របស់វាទៅទំព័រនេះ។"
+
+#: ckanext/querytool/templates/admin/config.html:22
+msgid "Header banner"
+msgstr "ក្បាលបដា"
+
+#: ckanext/querytool/templates/admin/config.html:31
+msgid "Header text color"
+msgstr "ពណ៌​អត្ថបទ​បឋមកថា"
+
+#: ckanext/querytool/templates/admin/config.html:38
+msgid "Footer logo 1"
+msgstr "ស្លាកសញ្ញាបាតកថា ១"
+
+#: ckanext/querytool/templates/admin/config.html:40
+msgid "Footer logo 1 text"
+msgstr "និមិត្តសញ្ញាបាតកថា 1 អត្ថបទ"
+
+#: ckanext/querytool/templates/admin/config.html:45
+msgid "Footer logo 2"
+msgstr "ស្លាកសញ្ញាបាតកថា ២"
+
+#: ckanext/querytool/templates/admin/config.html:47
+msgid "Footer logo 2 text"
+msgstr "និមិត្តសញ្ញាបាតកថា 2 អត្ថបទ"
+
+#: ckanext/querytool/templates/admin/config.html:49
+msgid "Copyright text"
+msgstr "អត្ថបទរក្សាសិទ្ធិ"
+
+#: ckanext/querytool/templates/admin/config.html:72
+msgid ""
+"Select up to 4. These will appear in the footer in the order (left to right) "
+"of \"Selected\""
+msgstr "ជ្រើសរើសរហូតដល់ 4 ។ ទាំងនេះនឹងបង្ហាញនៅក្នុងបាតកថាក្នុងលំដាប់ (ពីឆ្វេងទៅស្តាំ) នៃ \"បានជ្រើសរើស\""
+
+#: ckanext/querytool/templates/admin/config.html:77
+msgid "Options"
+msgstr "ជម្រើស"
+
+#: ckanext/querytool/templates/admin/config.html:105
+msgid "Selected"
+msgstr "បានជ្រើសរើស"
+
+#: ckanext/querytool/templates/footer.html:64
+msgid "Powered by"
+msgstr "អាស្រ័យ​លើ"
+
+#: ckanext/querytool/templates/footer.html:72
+msgid "Supported by"
+msgstr "គាំទ្រដោយ"
+
+#: ckanext/querytool/templates/footer.html:49
+msgid "Subscribe and follow us"
+msgstr "ជាវនិងតាមដានពួកយើង"
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "Custom"
+msgstr "ផ្ទាល់ខ្លួន"
+
+#: ckanext/querytool/helpers.py:234 ckanext/querytool/helpers.py:558
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1084
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1093
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
+msgid "Default"
+msgstr "លំនាំដើម"
