@@ -1497,3 +1497,169 @@ msgstr "分歧的"
 # added manually
 msgid "Color"
 msgstr "颜色"
+
+#: ckanext/querytool/templates/admin/config.html:213
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance. It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This "
+"is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>Custom CSS:</strong> This is a block of CSS that "
+"appears in <code>&lt;head&gt;</code> tag of every page. If you wish to "
+"customize the templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+msgstr ""
+" <p><strong>站点标题：</strong> 这是这个 CKAN 实例的标题它出现在整个 CKAN 的各个地方。"
+"</p> <p><strong>风格：</strong> 从主要配色方案的简单变体列表中进行选择，以获得非常快速的自定义主题。"
+"</p> <p><strong>站点标签徽标：</strong> 这是出现在所有 CKAN 实例模板标题中的徽标。"
+"</p> <p><strong>自定义 CSS：</strong> 这是出现在每个页面的 <code>&lt;head&gt;</code> 标记中的 CSS 块。"
+"如果您希望更全面地自定义模板，我们建议您<a href=\"%(docs_url)s\" target=\"_blank\">阅读文档。</a></p> "
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/admin/config.html:230
+msgid "Theme"
+msgstr "主题"
+
+#: ckanext/querytool/templates/admin/config.html:230
+msgid ""
+"This toggles between the CKAN default theme and the custom theme. The custom "
+"theme adds additional configuration options to this page."
+msgstr "在 CKAN 默认主题和自定义主题之间切换。自定义主题为此页面添加了额外的配置选项。"
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Header Banner"
+msgstr "页眉横幅"
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Upload an image to set the home page banner."
+msgstr "上传图片设置首页横幅。"
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "Header Text Color"
+msgstr "标题文本颜色"
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "This changes the text color of Welcome Page Description."
+msgstr "这会更改欢迎页面描述的文本颜色。"
+
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Footer Logo 1"
+msgstr "页脚徽标 1"
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Upload an image to display as a logo on the left side of the footer."
+msgstr "上传图像以在页脚左侧显示为徽标。"
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "Footer Logo 1 Text"
+msgstr "页脚徽标 1 文本"
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "This text will be displayed to the right of the logo."
+msgstr "此文本将显示在徽标的右侧。"
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Footer Logo 2"
+msgstr "页脚徽标 2"
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Upload an image to display as a second logo on the left side of the footer."
+msgstr "上传图像以在页脚左侧显示为第二个徽标。"
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "Footer Logo 2 Text"
+msgstr "页脚徽标 2 文本"
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "This text will be displayed to the right of the second logo."
+msgstr "此文本将显示在第二个徽标的右侧。"
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "Footer Copyright Text"
+msgstr "页脚版权文本"
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "This text will be displayed on the bottom center of the footer."
+msgstr "此文本将显示在页脚的底部中心。"
+
+#: ckanext/querytool/templates/admin/config.html:68
+#: ckanext/querytool/templates/admin/config.html:247
+msgid "Footer Social Media Links"
+msgstr "页脚社交媒体链接"
+
+#: ckanext/querytool/templates/admin/config.html:247
+msgid ""
+"This allows you to select up to 4 social media links to display on the right "
+"side of the footer. Dragging an option to \"Selected\" will add its URL field"
+" to this page."
+msgstr "这允许您选择最多 4 个社交媒体链接显示在页脚的右侧。将选项拖动到“已选择”会将其 URL 字段添加到此页面。"
+
+#: ckanext/querytool/templates/admin/config.html:22
+msgid "Header banner"
+msgstr "标题横幅"
+
+#: ckanext/querytool/templates/admin/config.html:31
+msgid "Header text color"
+msgstr "标题文字颜色"
+
+#: ckanext/querytool/templates/admin/config.html:38
+msgid "Footer logo 1"
+msgstr "页脚标志 1"
+
+#: ckanext/querytool/templates/admin/config.html:40
+msgid "Footer logo 1 text"
+msgstr "页脚徽标 1 文本"
+
+#: ckanext/querytool/templates/admin/config.html:45
+msgid "Footer logo 2"
+msgstr "页脚标志 2"
+
+#: ckanext/querytool/templates/admin/config.html:47
+msgid "Footer logo 2 text"
+msgstr "页脚标志 2 文本"
+
+#: ckanext/querytool/templates/admin/config.html:49
+msgid "Copyright text"
+msgstr "版权文本"
+
+#: ckanext/querytool/templates/admin/config.html:72
+msgid ""
+"Select up to 4. These will appear in the footer in the order (left to right) "
+"of \"Selected\""
+msgstr "最多选择 4 个。这些将按照“已选择”的顺序（从左到右）出现在页脚中"
+
+#: ckanext/querytool/templates/admin/config.html:77
+msgid "Options"
+msgstr "选项"
+
+#: ckanext/querytool/templates/admin/config.html:105
+msgid "Selected"
+msgstr "已选中"
+
+#: ckanext/querytool/templates/footer.html:64
+msgid "Powered by"
+msgstr "基于"
+
+#: ckanext/querytool/templates/footer.html:72
+msgid "Supported by"
+msgstr "支持者"
+
+#: ckanext/querytool/templates/footer.html:49
+msgid "Subscribe and follow us"
+msgstr "订阅并关注我们"
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "Custom"
+msgstr "风俗"
+
+#: ckanext/querytool/helpers.py:234 ckanext/querytool/helpers.py:558
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1084
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1093
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
+msgid "Default"
+msgstr "默认"

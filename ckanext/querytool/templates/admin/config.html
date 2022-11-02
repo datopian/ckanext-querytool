@@ -65,16 +65,16 @@
     {% set whatsapp = 'whatsapp' in social_order %}
     {% set youtube = 'youtube' in social_order %}
 
-    <p class="social-text">Footer Social Media Links:</p>
+    <p class="social-text">{{ _('Footer Social Media Links') }}:</p>
 
     <div class="info-block-social">
       <i class="fa fa-info-circle"></i>
-      {{ 'Select up to 4. These will appear in the footer in the order (left to right) of "Selected"' }}
+      {{ _('Select up to 4. These will appear in the footer in the order (left to right) of "Selected"') }}
     </div></br>
 
     <div class="container-admin-social">
       <div class="column-social" id="column-social-options">
-        <p class="social-options-text"><b>Options</b></label>
+        <p class="social-options-text"><b>{{ _('Options') }}</b></label>
         {% if not facebook %}
           <div class="list-group-item" draggable="true" id="facebook"><img class="list-group-img" alt="facebook" src="/base/images/social/facebook.png" style="height: 20px;"> Facebook</div>
         {% endif %}
@@ -102,7 +102,7 @@
       </div>
       <span class="social-arrow"><b>&#8594;</b></span>
       <div class="column-social" id="column-social-selected">
-        <p class="social-selected-text"><b>Selected</b></label>
+        <p class="social-selected-text"><b>{{ _('Selected') }}</b></label>
 
         {% set social_media_list = ['facebook', 'instagram', 'linkedin', 'telegram', 'tiktok', 'twitter', 'whatsapp', 'youtube'] %}
 
@@ -211,7 +211,7 @@
     {% set home_url = h.url_for(controller='home', action='index') %}
     {% set docs_url = "http://docs.ckan.org/en/{0}/theming".format(g.ckan_doc_version) %}
     {% trans %}
-    <p><strong>Site Title:</strong> This is the title of this CKAN instance
+    <p><strong>Site Title:</strong> This is the title of this CKAN instance.
         It appears in various places throughout CKAN.</p>
     <p><strong>Style:</strong> Choose from a list of simple variations of
         the main colour scheme to get a very quick custom theme working.</p>
@@ -227,25 +227,24 @@
 
     <p><strong>{{ _('Welcome Page Description') }}:</strong> {{ _('The description presented to users on the home page.') }}</p>
 
-    <p><strong>{{ _('Theme') }}:</strong> This toggles between the CKAN default theme and the custom theme. 
-      The custom theme adds additional configuration options to this page.</p>
+    <p><strong>{{ _('Theme') }}:</strong> {{ _('This toggles between the CKAN default theme and the custom theme. The custom theme adds additional configuration options to this page.') }}</p>
 
     <div id="custom-theme-help">
-    <p><strong>Header Banner:</strong> Upload an image to set the home page banner.</p>
+    <p><strong>{{ _('Header Banner') }}:</strong> {{ _('Upload an image to set the home page banner.') }}</p>
 
-    <p><strong>Header Text Color:</strong> This changes the text color of Welcome Page Description.</p>
+    <p><strong>{{ _('Header Text Color') }}:</strong> {{ _('This changes the text color of Welcome Page Description.') }}</p>
 
-    <p><strong>Footer Logo 1:</strong> Upload an image to display as a logo on the left side of the footer.</p>
+    <p><strong>{{ _('Footer Logo 1') }}:</strong> {{ _('Upload an image to display as a logo on the left side of the footer.') }}</p>
 
-    <p><strong>Footer Logo 1 Text:</strong> This text will be displayed to the right of the logo.</p>
+    <p><strong>{{ _('Footer Logo 1 Text') }}:</strong> {{ _('This text will be displayed to the right of the logo.') }}</p>
 
-    <p><strong>Footer Logo 2:</strong> Upload an image to display as a second logo on the left side of the footer.</p>
+    <p><strong>{{ _('Footer Logo 2') }}:</strong> {{ _('Upload an image to display as a second logo on the left side of the footer.') }}</p>
 
-    <p><strong>Footer Logo 2 Text:</strong> This text will be displayed to the right of the second logo.</p>
+    <p><strong>{{ _('Footer Logo 2 Text') }}:</strong> {{ _('This text will be displayed to the right of the second logo.') }}</p>
 
-    <p><strong>Footer Copyright Text:</strong> This text will be displayed on the bottom center of the footer.</p>
+    <p><strong>{{ _('Footer Copyright Text') }}:</strong> {{ _('This text will be displayed on the bottom center of the footer.') }}</p>
 
-    <p><strong>Footer Social Media Links:</strong> This allows you to select up to 4 social media links to display on the right side of the footer. Dragging an option to "Selected" will add its URL field to this page.</p>
+    <p><strong>{{ _('Footer Social Media Links') }}:</strong> {{ _('This allows you to select up to 4 social media links to display on the right side of the footer. Dragging an option to "Selected" will add its URL field to this page.') }}</p>
     </div>
 
 {% endblock %}

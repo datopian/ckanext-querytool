@@ -9,8 +9,6 @@
 {% set section_1__image = g.footer_logo_image_url or ' ' %}
 {% set section_2__image = g.footer_logo2_image_url or ' ' %}
 
-{% set section_3__text = 'Subscribe and follow us' %}
-
 {% set social_media_links = h.get_social_media_links(g.social_order, g) %}
 
 {% set copyright_text = g.copyright_text or ' ' %}
@@ -46,9 +44,9 @@
             </div>
           </div>
         {% endif %}
-        {% if section_3__text and social_media_links %}
+        {% if social_media_links %}
           <div>
-            <p><strong>{{ section_3__text }}</strong></p>
+            <p><strong>{{ _('Subscribe and follow us') }}</strong></p>
             <span class="social-media">
                 {% for social_media in social_media_links %}
                   <a href="{{ social_media.link }}">
@@ -61,7 +59,7 @@
         <div class="supporters">
           <div class="attribution">
             <p>
-              <strong>Powered by</strong> 
+              <strong>{{ _('Powered by') }}</strong>
               <a class="hide-text ckan-footer-logo logo" href="http://ckan.org">
                 CKAN
               </a>
@@ -69,7 +67,7 @@
           </div>
           <div class="attribution">
             <p>
-              <strong>Supported by</strong><br>
+              <strong>{{ _('Supported by') }}</strong><br>
               <a class="hide-text" href="https://www.vitalstrategies.org">
                 <img src="/base/images/logos/vital-strategies.svg" class="logo">
               </a>

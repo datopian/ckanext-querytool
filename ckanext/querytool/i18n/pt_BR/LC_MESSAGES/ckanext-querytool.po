@@ -1449,3 +1449,177 @@ msgstr "Divergente"
 # added manually
 msgid "Color"
 msgstr "Cor"
+
+#: ckanext/querytool/templates/admin/config.html:213
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance. It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This "
+"is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>Custom CSS:</strong> This is a block of CSS that "
+"appears in <code>&lt;head&gt;</code> tag of every page. If you wish to "
+"customize the templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+msgstr ""
+" <p><strong>Título do Site:</strong> Este é o título desta instância do CKAN. "
+"Ele aparece em vários lugares em todo o CKAN.</p> <p><strong>Estilo:</strong> "
+"Escolha a partir de uma lista de variações simples do esquema de cores principal "
+"para obter um trabalho de tema personalizado muito rápido.</p> <p><strong>"
+"Logotipo do site:</strong> Este é o logotipo que aparece no cabeçalho de todos os "
+"modelos desta instância do CKAN.</p> <p><strong>CSS personalizado:</strong> "
+"Este é um bloco de CSS que aparece na tag <code>&lt;head&gt;</code> de cada página. "
+"Se você deseja personalizar os modelos de forma mais completa, recomendamos <a href=\"%(docs_url)s\" "
+"target=\"_blank\">a leitura da documentação</a>.</p> "
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/admin/config.html:230
+msgid "Theme"
+msgstr "Tema"
+
+#: ckanext/querytool/templates/admin/config.html:230
+msgid ""
+"This toggles between the CKAN default theme and the custom theme. The custom "
+"theme adds additional configuration options to this page."
+msgstr ""
+"Isso alterna entre o tema padrão do CKAN e o tema personalizado. "
+"O tema personalizado adiciona opções de configuração adicionais a esta página."
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Header Banner"
+msgstr "Banner do cabeçalho"
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Upload an image to set the home page banner."
+msgstr "Faça upload de uma imagem para definir o banner da página inicial."
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "Header Text Color"
+msgstr "Cor do texto do cabeçalho"
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "This changes the text color of Welcome Page Description."
+msgstr "altera a cor do texto da descrição da página de boas-vindas."
+
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Footer Logo 1"
+msgstr "Logotipo do rodapé 1"
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Upload an image to display as a logo on the left side of the footer."
+msgstr "Carregue uma imagem para exibir como logotipo no lado esquerdo do rodapé."
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "Footer Logo 1 Text"
+msgstr "Texto do logotipo 1 do rodapé"
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "This text will be displayed to the right of the logo."
+msgstr "Este texto será exibido à direita do logotipo."
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Footer Logo 2"
+msgstr "Logotipo do rodapé 2"
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Upload an image to display as a second logo on the left side of the footer."
+msgstr "Carregue uma imagem para exibir como um segundo logotipo no lado esquerdo do rodapé."
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "Footer Logo 2 Text"
+msgstr "Texto do logotipo 2 do rodapé"
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "This text will be displayed to the right of the second logo."
+msgstr "Este texto será exibido à direita do segundo logotipo."
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "Footer Copyright Text"
+msgstr "Texto de Copyright do Rodapé"
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "This text will be displayed on the bottom center of the footer."
+msgstr "Este texto será exibido na parte inferior central do rodapé."
+
+#: ckanext/querytool/templates/admin/config.html:68
+#: ckanext/querytool/templates/admin/config.html:247
+msgid "Footer Social Media Links"
+msgstr "Links de mídia social do rodapé"
+
+#: ckanext/querytool/templates/admin/config.html:247
+msgid ""
+"This allows you to select up to 4 social media links to display on the right "
+"side of the footer. Dragging an option to \"Selected\" will add its URL field"
+" to this page."
+msgstr ""
+"Isso permite que você selecione até 4 links de mídia social para exibir no lado direito do rodapé."
+" Arrastar uma opção para \"Selecionado\" adicionará seu campo de URL a esta página."
+
+#: ckanext/querytool/templates/admin/config.html:22
+msgid "Header banner"
+msgstr "Faixa de cabeçalho"
+
+#: ckanext/querytool/templates/admin/config.html:31
+msgid "Header text color"
+msgstr "Cor do texto do cabeçalho"
+
+#: ckanext/querytool/templates/admin/config.html:38
+msgid "Footer logo 1"
+msgstr "Logotipo do rodapé 1"
+
+#: ckanext/querytool/templates/admin/config.html:40
+msgid "Footer logo 1 text"
+msgstr "Texto do logotipo 1 do rodapé"
+
+#: ckanext/querytool/templates/admin/config.html:45
+msgid "Footer logo 2"
+msgstr "Logotipo do rodapé 2"
+
+#: ckanext/querytool/templates/admin/config.html:47
+msgid "Footer logo 2 text"
+msgstr "Texto do logotipo 2 do rodapé"
+
+#: ckanext/querytool/templates/admin/config.html:49
+msgid "Copyright text"
+msgstr "Texto de direitos autorais"
+
+#: ckanext/querytool/templates/admin/config.html:72
+msgid ""
+"Select up to 4. These will appear in the footer in the order (left to right) "
+"of \"Selected\""
+msgstr "Selecione até 4. Eles aparecerão no rodapé na ordem (da esquerda para a direita) de \"Selecionado\""
+
+#: ckanext/querytool/templates/admin/config.html:77
+msgid "Options"
+msgstr "Opções"
+
+#: ckanext/querytool/templates/admin/config.html:105
+msgid "Selected"
+msgstr "Selecionado"
+
+#: ckanext/querytool/templates/footer.html:64
+msgid "Powered by"
+msgstr "Baseado em"
+
+#: ckanext/querytool/templates/footer.html:72
+msgid "Supported by"
+msgstr "Apoiado por"
+
+#: ckanext/querytool/templates/footer.html:49
+msgid "Subscribe and follow us"
+msgstr "Inscreva-se e siga-nos"
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "Custom"
+msgstr "Personalizado"
+
+#: ckanext/querytool/helpers.py:234 ckanext/querytool/helpers.py:558
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1084
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1093
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
+msgid "Default"
+msgstr "Predefinição"
