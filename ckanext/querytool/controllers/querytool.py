@@ -871,7 +871,9 @@ class QueryToolController(base.BaseController):
         q = toolkit.request.params.get('report_q', '')
 
         if q:
-            querytool_search_results = helpers.querytool_search(query_string=q, group=group)
+            querytool_search_results = helpers.querytool_search(
+                query_string=q, query_group=group
+            )
             querytool_search_results_names = [
                 querytool.name for querytool in querytool_search_results
             ]

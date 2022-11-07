@@ -907,4 +907,6 @@ def get_social_media_links(social_order, admin_dict):
 
 def querytool_search(query_string=None, query_group=None):
     querytool = CkanextQueryTool()
-    return list(set(querytool.search(query_string=query_string, query_group=query_group)))
+    return list(set(querytool.search(
+        query_string=query_string, query_group=query_group
+    )))
