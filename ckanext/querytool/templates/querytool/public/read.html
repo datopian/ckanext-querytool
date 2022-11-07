@@ -187,15 +187,19 @@
 
       {% set measure = h.querytool_pick_first_by_attr_value(h.querytool_parse_y_axis_columns(querytool.y_axis_columns), 'name', y_axis_selected, default={}) %}
       {% set measure_label = measure.alias or measure.name %}
-      {% set count = 1 %}
+      <!-- Starts count from 2 to not mess up with old logic -->
+      {% set count = 2 %}
       {% set sizeClass = "c-col-8" %}
       {% set secondViz = "" %}
 
       <!-- Width of chart text -->
       
-      {% for item in querytool.visualizations %}
-        {% set chart_id = h.querytool_get_uuid() %}
-        
+      {% for item in querytool.visualizations[0:1] %}
+        {% include 'querytool/public/visualization.html' %}
+      {% endfor %}
+
+      <div class="viz-container">
+        {% for item in querytool.visualizations[1:] %}
         {% if count == 1 %}
           {% set sizeClass = 'c-col-8' %}
         {% elif item.type == 'text_box' and item.column_width == 'Full' %}
@@ -211,188 +215,9 @@
         {% endif %}
 
         {% set count = count + 1 %}
-
-      <div class="item {{ sizeClass }} chart-{{chart_id}} {% if item.type == 'text_box' %}text-box{% endif %} {% if item.type == 'break_line' %}break_line{% endif %}  {% if item.filter_visibility == 'public'  %}has-filter{% endif %}" id="{{ secondViz }}">
-        {% if (item.type != 'table') and (item.type !='map') %}
-          <h3 id="item-title-{{chart_id}}" style="display:none">{{ item.title }}</h3>
-        {% endif %}
-        {% if item.type == 'map' %}
-          <h3 id="item-title-{{chart_id}}" style="display:none">{{ item.map_custom_title_field }}</h3>
-        {% endif %}
-
-        
-        {% if item.type == 'chart'  %}
-
-          <p id="loading-{{chart_id}}">Loading...</p>
-           {% if item.filter_visibility == 'public'  %}
-            {% set chart_filter_id = h.querytool_get_uuid() %}
-            {% snippet 'querytool/public/snippets/public_viz_filter.html',
-              id=chart_filter_id,
-              q_name=querytool.name,
-              title=item.title,
-              n=item.order,
-              name=item.filter_name,
-              alias=item.filter_alias,
-              value=item.filter_value,
-              resource_id=querytool.chart_resource,
-              plotly=item.plotly
-            %}
-          {% endif %}
-         
-          {% snippet 'ajax_snippets/visualization_item.html',
-            type='chart',
-            colors=item.color,
-            seq_color=item.seq_color,
-            color_type=item.color_type,
-            x_axis=item.x_axis,
-            y_axis=y_axis_selected,
-            chart_type=item.graph,
-            title = item.title,
-            sql_string=querytool.sql_string,
-            show_legend = item.show_legend,
-            show_legend_title = item.show_legend_title,
-            custom_legend_title = item.custom_legend_title,
-            show_annotations = item.show_annotations,
-            show_bounds = item.show_bounds,
-            x_text_rotate= item.x_text_rotate,
-            x_text_multiline= item.x_text_multiline,
-            x_tick_culling_max = item.x_tick_culling_max,
-            tooltip_name = item.tooltip_name,
-            data_format = item.data_format,
-            y_tick_format = item.y_tick_format,
-            x_tick_format = item.x_tick_format,
-            chart_padding_left = item.chart_padding_left,
-            chart_padding_bottom = item.chart_padding_bottom,
-            padding_bottom = item.padding_bottom,
-            padding_top = item.padding_top,
-            tick_count = item.tick_count,
-            show_labels = item.show_labels,
-            show_labels_as_percentages = item.show_labels_as_percentages,
-            y_label = item.y_label,
-            y_label_hide = item.y_label_hide,
-            x_label = item.x_label,
-            x_label_hide = item.x_label_hide,
-            y_from_zero = item.y_from_zero,
-            x_from_zero = item.x_from_zero,
-            query_filters = querytool.public_main_filters,
-            filter_name = item.filter_name,
-            filter_value = item.filter_value,
-            category_name = item.category_name,
-            data_sort = item.sort,
-            measure_label = measure_label,
-            static_reference_columns = item.static_reference_columns,
-            static_reference_label = item.static_reference_label,
-            dynamic_reference_type = item.dynamic_reference_type,
-            dynamic_reference_factor = item.dynamic_reference_factor,
-            dynamic_reference_label = item.dynamic_reference_label,
-            column_width = item.column_width,
-            plotly = item.plotly,
-            bar_width = item.bar_width,
-            donut_hole = item.donut_hole,
-            chart_id = chart_id,
-            description = item.additional_description,
-            upper_bounds = item.upper_bounds,
-            lower_bounds = item.lower_bounds,
-            show_bounds = item.show_bounds,
-            axis_range = item.axis_range,
-            axis_min = item.axis_min,
-            axis_max = item.axis_max,
-            line_types = item.line_types,
-            line_widths = item.line_widths,
-            x_sort_labels = item.x_sort_labels
-          %}
-        {% endif %}
-        {% if item.type == 'text_box' %}
-          <div class="item-content textbox" style="display:none;" data-filters="{{ querytool.public_main_filters }}" data-measure="{{ measure_label }}"  id="textbox-{{chart_id}}">
-            {{ h.render_markdown(h.get_translated(item, 'description'), True, True) }}
-          </div>
-        {% endif %}
-        {% if item.type == 'image' %}
-          <div class="item-content" >
-            <img src="{{ item.url }}" class="html2canvas-ignore">
-          </div>
-        {% endif %}
-        {% if item.type == 'map'  %}
-        {% if item.filter_visibility == 'public'  %}
-            {% set map_filter_id = h.querytool_get_uuid() %}
-          <div class="map-filter">
-            {% snippet 'querytool/public/snippets/public_viz_filter.html',
-              id=map_filter_id,
-              q_name=querytool.name,
-              n=item.order,
-              name=item.filter_name,
-              alias=item.filter_alias,
-              value=item.filter_value,
-              resource_id=querytool.chart_resource
-            %}
-          </div>
-          {% endif %}
-          {% set map_id = h.querytool_get_uuid() %}
-          {% set map_config = h.querytool_get_map_config() %}
-          {% snippet 'ajax_snippets/map_module.html',
-            map_config=map_config,
-            n=map_id,
-            map_resource=item.map_resource,
-            map_title_field=item.map_title_field,
-            map_custom_title_field=item.map_custom_title_field,
-            map_key_field=item.map_key_field,
-            data_key_field=item.data_key_field,
-            map_color_scheme=item.map_color_scheme,
-            sql_string=querytool.sql_string,
-            y_axis_column=y_axis_selected,
-            measure_label = measure_label,
-            filter_name=item.filter_name,
-            filter_value=item.filter_value,
-            info_query_filters =  querytool.public_main_filters
-          %}
-        <button class="btn btn-round imgBtn scrBtn" data-chartId=".chart-{{chart_id}}">Download <img src="/base/images/download.svg" width="15"> </button>
-        {% endif %}
-        
-        {% if item.type == 'table'  %}
-         {% if item.filter_visibility == 'public'  %}
-            {% set table_filter_id = h.querytool_get_uuid() %}
-         <div class="table-filter">
-            {% snippet 'querytool/public/snippets/public_viz_filter.html',
-              id=table_filter_id,
-              q_name=querytool.name,
-              n=item.order,
-              name=item.filter_name,
-              alias=item.filter_alias,
-              value=item.filter_value,
-              resource_id=querytool.chart_resource
-            %}
-         </div>
-          {% endif %}
-          {% snippet 'ajax_snippets/table_module.html',
-            sql_string = querytool.sql_string,
-            resource_id=querytool.chart_resource,
-            y_axis = y_axis_selected,
-            measure_label = measure_label,
-            main_value = item.main_value,
-            second_value = item.second_value,
-            category_name = item.category_name,
-            data_format = item.data_format,
-            filter_name=item.filter_name,
-            filter_value=item.filter_value,
-            table_title = item.title,
-            info_query_filters =  querytool.public_main_filters
-          %}
-
-        {% endif %}
-        {% if item.type != 'text_box' %}
-          {% set caption = querytool.report_caption %}
-
-          <div class="report_caption">{{ caption or '' }}</div>
-
-          {% set additional_description = h.render_markdown(item.additional_description) %}
-
-          {% if additional_description != "<p>None</p>" %}
-            <div class='additional_desc' id='item-desc-{{chart_id}}' style="display:none;">{{ additional_description }}</div>
-          {% endif %}
-          <p class="clearfix"></p>
-        {% endif %}
+          {% include 'querytool/public/visualization.html' %}
+        {% endfor %}
       </div>
-      {% endfor %}
     </div>
     <p class="clearfix"></p>
     <br/><br/>
