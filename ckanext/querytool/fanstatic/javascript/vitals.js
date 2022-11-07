@@ -1426,3 +1426,15 @@ function updateSocialOrder() {
 
   $('#social-order').val(socialOrder)
 }
+
+$('.report-search-sort').on('change', function() {
+  var sort = $(this).val();
+  var url = new URL(window.location.href);
+  var searchParams = new URLSearchParams(url.search);
+
+  searchParams.set('sort', sort);
+
+  url.search = searchParams.toString();
+  var newUrl = url.toString();
+  window.location.href = newUrl;
+});

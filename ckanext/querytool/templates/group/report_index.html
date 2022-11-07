@@ -29,11 +29,43 @@
     </ul>
 
  {% block reports_list %}
-    {% set reports = h.querytool_get_all_reports() %}
+    {% set q = request.params.get('report_q') %}
+    {% set reports = h.querytool_get_all_reports(q) %}
+    {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
+    {% set sorting_selected = request.params.get('sort', 'name asc') %}
+
+    <form class="search-form no-bottom-border">
+      <div class="search-input control-reports search-giant">
+        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search Reports') }}" style="padding: 15px; width: 100%; height: auto;" />
+        <button type="submit"><i class="fa fa-search"></i></button>
+      </div>
+
+      <div class="form-select control-group control-order-by">
+        <label for="field-order-by">{{ _('Order by') }}</label>
+        <select class="report-search-sort" id="field-order-by" name="sort">
+          {% for label, value in sorting %}
+            {% if label and value %}
+              <option value="{{ value }}"{% if sorting_selected == value %} selected="selected"{% endif %}>{{ label }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <h2>
+      {% snippet "snippets/reports_search_result_text.html", count=(reports | length), query=q %}
+      </h2>
+    </form>
+
     <!-- Tab panes -->
     <div class="tab-content" style="display:block">
       <div role="tabpanel" class="tab-pane active" id="applications">
         <legend>{{ _('Main') }}</legend>
+
+        {% if sorting_selected == 'name asc' %}
+          {% set reports = reports | sort(attribute='title') %}
+        {% elif sorting_selected == 'name desc' %}
+          {% set reports = reports | sort(attribute='title', reverse=true) %}
+        {% endif %}
+
         {% for querytool in reports %}
           {% if querytool.type == 'main' %}
             {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}

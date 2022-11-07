@@ -25,12 +25,43 @@
 
 {% block tools %}
 <div class="container">
+    {% set q = request.params.get('report_q') %}
+    {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
+    {% set sorting_selected = request.params.get('sort', 'name asc') %}
+
+    <form class="search-form no-bottom-border">
+      <div class="search-input control-reports search-giant" style="margin: auto; margin-top: 20px !important; margin-bottom: 20px !important;">
+        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search Reports') }}" />
+        <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+
+      <div class="form-select control-group control-order-by">
+        <label for="field-order-by">{{ _('Order by') }}</label>
+        <select class="report-search-sort" id="field-order-by" name="sort">
+          {% for label, value in sorting %}
+            {% if label and value %}
+              <option value="{{ value }}"{% if sorting_selected == value %} selected="selected"{% endif %}>{{ label }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <h2>
+      {% snippet "snippets/reports_search_result_text.html", count=(data | length), query=q %}
+      </h2>
+    </form>
     {% if data %}
-     {% for querytool in data | sort(attribute='title') %}
-       {% if not querytool.private %}
-        {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
-       {% endif %}
-     {% endfor%}
+
+      {% if sorting_selected == 'name asc' %}
+        {% set data = data | sort(attribute='title') %}
+      {% elif sorting_selected == 'name desc' %}
+        {% set data = data | sort(attribute='title', reverse=true) %}
+      {% endif %}
+
+      {% for querytool in data %}
+        {% if not querytool.private %}
+         {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
+        {% endif %}
+      {% endfor%}
    {% else %}
    <div class="alert alert-danger">
       <strong>{{ _('Reports are not published yet in this group') }}</strong>
