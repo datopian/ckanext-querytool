@@ -33,6 +33,7 @@
     {% set reports = h.querytool_get_all_reports(q) %}
     {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
     {% set sorting_selected = request.params.get('sort', 'name asc') %}
+    {% set report_count = h.report_search_count(reports) %}
 
     <form class="search-form no-bottom-border">
       <div class="search-input control-reports search-giant">
@@ -51,7 +52,7 @@
         </select>
       </div>
       <h2>
-      {% snippet "snippets/reports_search_result_text.html", count=(reports | length), query=q %}
+      {% snippet "snippets/reports_search_result_text.html", count=report_count, query=q %}
       </h2>
     </form>
 
@@ -73,7 +74,7 @@
         {% endfor%}
 
         <legend>{{ _('Related') }}</legend>
-        {% for querytool in data %}
+        {% for querytool in reports %}
           {% if querytool.type == 'related' %}
             {% snippet 'querytool/admin/snippets/query_tools.html', querytool=querytool %}
           {% endif %}

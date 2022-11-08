@@ -910,3 +910,14 @@ def querytool_search(query_string=None, query_group=None):
     return list(set(querytool.search(
         query_string=query_string, query_group=query_group
     )))
+
+def report_search_count(reports, remove_private=False):
+    if remove_private is False:
+        report_count = len(reports)
+    else:
+        report_count = len([
+            r for r in reports if r.get('private') is False
+            and r.get('type') == 'main'
+        ])
+
+    return report_count
