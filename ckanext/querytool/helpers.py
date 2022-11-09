@@ -20,6 +20,8 @@ from ckan.plugins.toolkit import _
 import ckan.lib.helpers as h
 from ckan import logic
 
+from ckanext.querytool.model import CkanextQueryTool
+
 log = logging.getLogger(__name__)
 
 
@@ -676,9 +678,19 @@ def get_dataset_url_path(url):
     return '/dataset%s' % parts[1]
 
 
-def get_all_reports():
+def get_all_reports(q=None):
     groups = get_groups()
     reports = _get_action('querytool_list_other', {'groups': groups})
+
+    if q:
+        querytool_search_results = querytool_search(query_string=q)
+        querytool_search_results_names = [
+            querytool.name for querytool in querytool_search_results
+        ]
+        reports = [
+            querytool for querytool in reports if
+            querytool['name'] in querytool_search_results_names
+        ]
 
     return reports
 
@@ -892,3 +904,20 @@ def get_social_media_links(social_order, admin_dict):
             })
 
     return social_media_links
+
+def querytool_search(query_string=None, query_group=None):
+    querytool = CkanextQueryTool()
+    return list(set(querytool.search(
+        query_string=query_string, query_group=query_group
+    )))
+
+def report_search_count(reports, remove_private=False):
+    if remove_private is False:
+        report_count = len(reports)
+    else:
+        report_count = len([
+            r for r in reports if r.get('private') is False
+            and r.get('type') == 'main'
+        ])
+
+    return report_count

@@ -36,6 +36,18 @@ class QuerytoolGroupController(GroupController):
         groups = helpers.get_groups()
         reports = helpers._get_action('querytool_list_other', {'groups': groups})
 
+        q = toolkit.request.params.get('report_q', '')
+
+        if q:
+            querytool_search_results = helpers.querytool_search(query_string=q)
+            querytool_search_results_names = [
+                querytool.name for querytool in querytool_search_results
+            ]
+            reports = [
+                querytool for querytool in reports if
+                querytool['name'] in querytool_search_results_names
+            ]
+
         return self._render_template('group/report_index.html', {'reports': reports})
 
 

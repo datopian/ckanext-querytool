@@ -335,7 +335,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'get_cookie_control_config': 
                 helpers.get_cookie_control_config,
             'get_social_media_links':
-                helpers.get_social_media_links
+                helpers.get_social_media_links,
+            'querytool_search':
+                helpers.querytool_search,
+            'report_search_count':
+                helpers.report_search_count
         }
 
     # IAuthFunctions

@@ -82,16 +82,36 @@ class CkanextQueryTool(DomainObject):
         return query
 
     @classmethod
-    def search(self, **kwds):
+    def search(self, query_string=None, query_group=None, **kwds):
         '''Finds entities in the table that satisfy certain criteria.
         :param order: Order rows by specified column.
         :type order: string
         '''
 
         query = Session.query(self).autoflush(False)
-        query = query.filter_by(**kwds)
 
-        return query.all()
+        if query_string:
+            columns = [c.name for c in class_mapper(self).columns]
+
+            # These cause errors and aren't needed for search
+            columns.remove('created')
+            columns.remove('modified')
+            columns.remove('id')
+            columns.remove('owner_org')
+            columns.remove('icon')
+            columns.remove('private')
+            columns.remove('download_options')
+
+            query = [query.filter(getattr(self, column).ilike('%' + query_string + '%')).all() for column in columns]
+            query = [item for sublist in query for item in sublist]
+
+            if query_group:
+                query = [item for item in query if item.group == query_group]
+
+        else:
+            query = query.filter_by(**kwds).all()
+
+        return query
 
     @classmethod
     def delete(cls, id):

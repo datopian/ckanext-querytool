@@ -844,6 +844,18 @@ class QueryToolController(base.BaseController):
 
         querytools = _get_action('querytool_list_other', {'groups': groups})
 
+        q = toolkit.request.params.get('report_q', '')
+
+        if q:
+            querytool_search_results = helpers.querytool_search(query_string=q)
+            querytool_search_results_names = [
+                querytool.name for querytool in querytool_search_results
+            ]
+            querytools = [
+                querytool for querytool in querytools if
+                querytool['name'] in querytool_search_results_names
+            ]
+
         return render('querytool/public/reports.html',
                       extra_vars={'data': querytools})
 
@@ -855,6 +867,20 @@ class QueryToolController(base.BaseController):
         '''
         querytools = _get_action('querytool_public_list', {'group': group})
         group_details = _get_action('group_show', {'id': group})
+
+        q = toolkit.request.params.get('report_q', '')
+
+        if q:
+            querytool_search_results = helpers.querytool_search(
+                query_string=q, query_group=group
+            )
+            querytool_search_results_names = [
+                querytool.name for querytool in querytool_search_results
+            ]
+            querytools = [
+                querytool for querytool in querytools if
+                querytool['name'] in querytool_search_results_names
+            ]
 
         return render('querytool/public/list.html',
                       extra_vars={'data': querytools, 'group': group_details})
