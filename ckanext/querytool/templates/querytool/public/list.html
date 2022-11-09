@@ -63,10 +63,12 @@
          {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
         {% endif %}
       {% endfor%}
-   {% else %}
-   <div class="alert alert-danger">
-      <strong>{{ _('Reports are not published yet in this group') }}</strong>
-   </div>
-   {% endif %}
+    {% else %}
+      {% if not q %}
+        <div class="alert alert-danger">
+          <strong>{{ _('Reports are not published yet in this group') }}</strong>
+        </div>
+      {% endif %}
+    {% endif %}
 </div>
 {% endblock %}

@@ -57,11 +57,11 @@
     {% endfor%}
 
   {% else %}
-  {% if not q %}
-  <div class="alert alert-danger">
-    <strong>{{ _('Reports are not published yet in this group') }}</strong>
-  </div>
-  {% endif %}
+    {% if not q %}
+      <div class="alert alert-danger">
+        <strong>{{ _('Reports are not published yet in this group') }}</strong>
+      </div>
+    {% endif %}
   {% endif %}
 </div>
 {% endblock %}
