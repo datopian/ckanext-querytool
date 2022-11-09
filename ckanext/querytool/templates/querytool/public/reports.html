@@ -24,7 +24,7 @@
 
   <form class="search-form no-bottom-border">
     <div class="search-input control-reports search-giant" style="margin: auto; margin-top: 20px !important; margin-bottom: 20px !important;">
-      <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" />
+      <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" {% if q %} value="{{ q }}" {% endif %} />
       <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
     </div>
 
@@ -57,9 +57,11 @@
     {% endfor%}
 
   {% else %}
+  {% if not q %}
   <div class="alert alert-danger">
     <strong>{{ _('Reports are not published yet in this group') }}</strong>
   </div>
+  {% endif %}
   {% endif %}
 </div>
 {% endblock %}
