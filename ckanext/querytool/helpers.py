@@ -821,7 +821,8 @@ def get_user_permission_type(userobj, group):
 
 
 def get_all_org_permissions(userobj):
-    orgs = get_all_orgs_for_user(userobj)
+    orgs = get_all_orgs_for_user(userobj) or []
+
     permissions = [
         get_user_permission_type(userobj, org.get('id')) for org in orgs]
     return any(p in ['admin', 'editor'] for p in permissions)
