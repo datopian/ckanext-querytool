@@ -755,12 +755,15 @@ def get_datasets_for_user(userobj, package_name):
     return False
 
 
-def get_groups_for_user(userobj, group):
+def get_groups_for_user(userobj, group=None):
     if not userobj:
         return False
 
     groups = _get_action('group_list_authz', {'id': userobj.id})
     group_names = [g['name'] for g in groups]
+
+    if group is None:
+        return group_names
 
     if len(groups) != 0 and group in group_names:
         return True
@@ -769,6 +772,9 @@ def get_groups_for_user(userobj, group):
 
 
 def get_is_admin_or_editor_of_any_group(userobj):
+    if userobj is None:
+        return False
+
     groups = _get_action('group_list_authz', {'id': userobj.id})
     is_admin_or_editor = [get_user_permission_type(userobj, group['id']) for group in groups]
 
@@ -815,7 +821,8 @@ def get_user_permission_type(userobj, group):
 
 
 def get_all_org_permissions(userobj):
-    orgs = get_all_orgs_for_user(userobj)
+    orgs = get_all_orgs_for_user(userobj) or []
+
     permissions = [
         get_user_permission_type(userobj, org.get('id')) for org in orgs]
     return any(p in ['admin', 'editor'] for p in permissions)
@@ -921,3 +928,37 @@ def report_search_count(reports, remove_private=False):
         ])
 
     return report_count
+
+def filter_reports_by_permissions(reports, for_groups=False):
+    user = c.userobj
+
+    if user is None:
+        return []
+
+    if user:
+        if user.sysadmin:
+            return reports
+
+    user_groups = get_groups_for_user(user)
+
+    if for_groups is False:
+        filtered_reports = [
+            report for report in reports if
+            report['group'] in user_groups
+        ]
+    else:
+        filtered_reports = [
+            report for report in reports if
+            report['name'] in user_groups
+        ]
+
+    return filtered_reports
+
+def group_count_design_reports(current_c):
+    reports = filter_reports_by_permissions(
+        current_c.page.items, for_groups=True
+    )
+
+    current_c.page.item_count = len(reports)
+
+    return current_c

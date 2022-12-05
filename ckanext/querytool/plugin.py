@@ -339,7 +339,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'querytool_search':
                 helpers.querytool_search,
             'report_search_count':
-                helpers.report_search_count
+                helpers.report_search_count,
+            'filter_reports_by_permissions':
+                helpers.filter_reports_by_permissions,
+            'filter_groups_by_permissions':
+                helpers.group_count_design_reports
         }
 
     # IAuthFunctions
