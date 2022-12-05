@@ -30,7 +30,8 @@ Example usage:
 
   <legend>{{ _('Basic info') }}</legend>
 
-  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of the interactive report'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}) }}
+  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of the interactive report'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}, is_required=true) }}
+
 
   {% set prefix = h.url_for('querytool_public_read', name= '') %}
   {% set domain = h.url_for('querytool_public_read', name= '') %}
