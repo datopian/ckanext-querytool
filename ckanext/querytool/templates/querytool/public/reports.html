@@ -7,6 +7,15 @@
   {% endif %}
 {% endblock %}
 
+{% block breadcrumb_custom %}
+  <div class="toolbar new_toolbar embed-show">
+    <ol class="breadcrumb new_breadcrumb">
+      <li><a href="/"><i class="fa fa-home"></i></a></li>
+      <li class="active">{% link_for _('All reports'), controller=c.controller, action='querytool_public_reports' %}</li>
+    </ol>
+  </div>
+{% endblock %}
+
 {% block page_header_bg %}{% endblock %}
 
 {% block page_header_title %}<h1>{{ _('Reports') }}</h1>{% endblock %}
