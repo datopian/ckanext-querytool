@@ -8,8 +8,16 @@
 (function (_, jQuery) {
   "use strict";
 
+  const detectEmbedding = () => {
+    try {
+      return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+  }
+
   $(document).ready(function () {
-    const isEmbeded = true;
+    const isEmbeded = detectEmbedding();
 
     if (!isEmbeded) {
       const els = [ ...document.getElementsByClassName("embed-hide")];
