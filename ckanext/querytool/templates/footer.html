@@ -1,5 +1,3 @@
-{% ckan_extends %}
-
 <!-- Variables -->
 {% set theme = g.theme or 'Default' %}
 
@@ -14,19 +12,19 @@
 {% set copyright_text = g.copyright_text or ' ' %}
 <!-- Variables -->
 
-{% block footer_content %}
-  {# If not text is set, uses default footer #}
-  {% if theme == 'Default' %}
-    {{ super() }}
-  {% else %}
-    <style>
-        .site-footer .container {
-            padding-bottom: 0;
-            padding-top: 0;
-            width: auto;
-        }
-    </style>
-    <footer>
+<footer class="site-footer embed-hide">
+  <div class="container">
+    {# If not text is set, uses default footer #}
+    {% if theme == 'Default' %}
+      {% snippet "snippets/default_footer.html" %}
+    {% else %}
+      <style>
+          .site-footer .container {
+              padding-bottom: 0;
+              padding-top: 0;
+              width: auto;
+          }
+      </style>
       <div class="custom-footer">
         {% if section_1__text %}
           <div class="footer-markdown logo-item">
@@ -78,6 +76,6 @@
       <div class="copyright">
         {{ h.render_markdown(copyright_text) }}
       </div>
-    </footer>
-  {% endif %}
-{% endblock %}
+    {% endif %}
+  </div>
+</footer>
