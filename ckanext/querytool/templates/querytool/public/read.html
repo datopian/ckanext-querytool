@@ -43,6 +43,9 @@
     {% endif %}
     <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
   </ol>
+  <div class="embed-show search-reports">
+    {% snippet 'snippets/search_reports_input.html' %}
+  </div>
 </div>
 {% endblock %}
 
