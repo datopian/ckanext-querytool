@@ -47,7 +47,17 @@
 
   <div class="public-header query-header embed-style" id="header-wrapper">
   {% block page_header_content %}
-    {% block breadcrumb_custom %} {% endblock %}
+    {% block breadcrumb_custom %}
+      <div class="toolbar new_toolbar embed-show">
+        <ol class="breadcrumb new_breadcrumb">
+          <li><a href="/"><i class="fa fa-home active"></i></a></li>
+        </ol>
+        <div class="embed-show search-reports">
+          {% snippet 'snippets/search_reports_input.html' %}
+        </div>
+      </div>
+    {% endblock %}
+    
     <div class="container">
       <div class="row">
         <div class="span10 offset1">
