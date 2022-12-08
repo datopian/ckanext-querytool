@@ -3,7 +3,7 @@
 
 {% block header_account %}
   {% if c.user %}
-    <header class="account-masthead">
+    <header class="account-masthead embed-hide">
        <div class="container-fluid">
           {% block header_account_container_content %}
              {{ super() }}
@@ -12,7 +12,7 @@
     </header>
   {% endif %}
 {% endblock %}
-<header class="navbar navbar-static-top masthead">
+<header class="navbar navbar-static-top masthead embed-hide">
    {% block header_debug %}
    {{ super() }}
    {% endblock %}
