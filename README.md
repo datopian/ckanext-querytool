@@ -7,7 +7,6 @@ A CKAN extension to create visualizations based on the uploaded datasets.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Creating new releases](#creating-new-releases)
   - [Test data seed command](#test-data-seed-command)
 - [Development](#development)
@@ -20,11 +19,14 @@ A CKAN extension to create visualizations based on the uploaded datasets.
     - [Javascript files](#javascript-files)
     - [Updating source files](#updating-source-files)
   - [Working with i18n](#working-with-i18n)
+    - [Language selector](#language-selector)
   - [Updating readme](#updating-readme)
   - [Testings layouts](#testings-layouts)
   - [Config Settings](#config-settings)
+    - [Optional Map Config Settings](#optional-map-config-settings)
     - [Optional Cookie Control Config Settings](#optional-cookie-control-config-settings)
   - [Modify CSS](#modify-css)
+- [Google Analytics (GA4)](#google-analytics-ga4)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -182,7 +184,7 @@ Source files for the querytool live in:
 
 Distribution files (files served via our extension) are compiled via webpack and live in:
 `ckanext/querytool/fanstatic/javascript/dist`
-*NOTE*: Make sure to reference `/dist/` files, not the source files!
+**NOTE:** Make sure to reference `/dist/` files, not the source files!
 
 Vendor files (third party libraries) live in:
 `ckanext/querytool/fanstatic/javascript`
@@ -203,6 +205,7 @@ $ make i18n
 See CKAN documentation for more on i18n management.
 
 #### Language selector
+
 For the country flags to appear in the language selector it's needed to make sure there's an associated flag for each one of the configured languages. This must be done by further expanding the `/ckanext-querytool/ckanext/querytool/public/base/resources/lang-flags.json` file. Here's an example of how this file looks like:
 ```
 {
@@ -233,30 +236,36 @@ The app allows to configure different layouts for an application's visualization
 
 ### Config Settings
 
-These are the required configuration options used by the extension:
+The extension supports some optional configurations:
 
-1. Add config for map item base layer:
+- CartoDB (maps)
+- Cookie Control
+
+#### Optional Map Config Settings
+
+The example values below are the defaults. To override them, add the following to your `.ini` or `.env` file and change the values as needed:
+
 ```
 ckanext.querytool.map_osm_url = https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_nolabels/{z}/{x}/{y}{r}.png
-
 ckanext.querytool.map_osm_attribute = &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>
 ```
 
-2. Add config for the base public breadcrumb name:
+For example, if you want to use a dark map instead of the default light map, you can use the following:
+
 ```
-ckanext.querytool.public_breadcrumb_name = Health Topics
+ckanext.querytool.map_osm_url = https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}{r}.png
 ```
 
-3. Add config for visibility of navigation bar in the public query tools:
+The second variable is used for the attribution/copyright text. For example, if you decide to use OpenStreetMap without CartoDB, you could set the variables to the following:
+
 ```
-ckanext.querytool.allow_nav_bar = False
+ckanext.querytool.map_osm_url = https://tile.openstreetmap.org/{z}/{x}/{y}.png
+ckanext.querytool.map_osm_attribute = &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
 ```
-**NOTE:** The navigation bar config option is still present, but we are not using it.
+
+**NOTE:** Though changing the map URL to a _different provider_ (a provider other than CartoDB) is possible, it is not recommended. The extension code is designed to work with CartoDB basemaps, and changing to a different provider may cause errors/issues if it's not a drop-in replacement.
 
 #### Optional Cookie Control Config Settings
-
-The extension supports some optional configurations:
-- Cookie Control
 
 The [Cookie Control](https://www.civicuk.com/cookie-control/) panel can be configured using the following options:
 
