@@ -238,7 +238,7 @@ The app allows to configure different layouts for an application's visualization
 
 The extension supports some optional configurations:
 
-- CartoDB (maps)
+- OpenStreetMaps
 - Cookie Control
 
 #### Optional Map Config Settings
@@ -250,20 +250,20 @@ ckanext.querytool.map_osm_url = https://cartodb-basemaps-{s}.global.ssl.fastly.n
 ckanext.querytool.map_osm_attribute = &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>
 ```
 
-For example, if you want to use a dark map instead of the default light map, you can use the following:
+For example, if you want to use a dark CartoDB basemap instead of the default light map, you can set the variables to the following:
 
 ```
 ckanext.querytool.map_osm_url = https://cartodb-basemaps-{s}.global.ssl.fastly.net/dark_nolabels/{z}/{x}/{y}{r}.png
 ```
 
-The second variable is used for the attribution/copyright text. For example, if you decide to use OpenStreetMap without CartoDB, you could set the variables to the following:
+The second variable is used for the attribution/copyright text. For example, if you decide to use OpenStreetMap without CartoDB, you can set the variables to the following:
 
 ```
 ckanext.querytool.map_osm_url = https://tile.openstreetmap.org/{z}/{x}/{y}.png
 ckanext.querytool.map_osm_attribute = &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>
 ```
 
-**NOTE:** Though changing the map URL to a _different provider_ (a provider other than CartoDB) is possible, it is not recommended. The extension code is designed to work with CartoDB basemaps, and changing to a different provider may cause errors/issues if it's not a drop-in replacement.
+**NOTE:** Changing the map provider, though possible, is not recommended. If the alternative isn't a complete and identical drop-in replacement, the map will most likely **not** work as expected, and you will need to make changes to the code to accommodate the new map provider.
 
 #### Optional Cookie Control Config Settings
 
