@@ -279,3 +279,11 @@ files located in the `ckanext-querytool/ckanext/querytool/fanstatic/less` folder
 Gulp.js is used for building CSS assets.
 
 In order to build all CSS assets **run `node_modules/gulp/bin/gulp.js` once**. Gulp.js is watching for changes in the source LESS assets and will rebuild CSS on each change. If you have gulp.js installed globally on the system, you can just type `gulp` to run it.
+
+## Google Analytics (GA4)
+
+To setup Google Analytics using GA4, you need to install a specific branch (`ed-dev-ga4`) of the Datopian Google Analytics extension:
+
+[`ckanext-googleanalytics` with GA4 support](https://github.com/datopian/ckanext-googleanalytics/tree/ed-dev-ga4)
+
+Then follow the instructions in the ["Setup" section of the README](https://github.com/datopian/ckanext-googleanalytics/tree/ed-dev-ga4#setup).
