@@ -611,21 +611,6 @@ def get_map_config():
     return json.dumps(map_config)
 
 
-def get_public_breadcrumb_name():
-
-    return config.get('ckanext.querytool.public_breadcrumb_name',
-                      _('Health Topics'))
-
-
-def allow_nav_bar():
-    '''
-    Get config var to enable or disable navigation bar on public query page
-    :return: True or False
-    '''
-    isAllowed = config.get('ckanext.querytool.allow_nav_bar', default=True)
-    return isAllowed
-
-
 def parse_y_axis_columns(value):
     # The input string can be:
     # - falsy (None/empty/etc)
