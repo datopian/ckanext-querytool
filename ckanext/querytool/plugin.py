@@ -292,10 +292,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.get_map_config,
             'querytool_hex_to_rgba':
                 helpers.hex_to_rgba,
-            'querytool_get_public_breadcrumb_name':
-                helpers.get_public_breadcrumb_name,
-            'querytool_allow_nav_bar':
-                helpers.allow_nav_bar,
             'querytool_parse_y_axis_columns':
                 helpers.parse_y_axis_columns,
             'querytool_pick_first_by_attr_value':
@@ -339,7 +335,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'querytool_search':
                 helpers.querytool_search,
             'report_search_count':
-                helpers.report_search_count
+                helpers.report_search_count,
+            'filter_reports_by_permissions':
+                helpers.filter_reports_by_permissions,
+            'filter_groups_by_permissions':
+                helpers.group_count_design_reports
         }
 
     # IAuthFunctions

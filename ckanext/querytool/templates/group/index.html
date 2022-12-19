@@ -21,6 +21,8 @@
 {% endblock %}
 
 {% block primary_content_inner %}
+  {% set c = h.filter_groups_by_permissions(c) %}
+
   <h1 class="heading">{{ _('Reports') }}</h1>
     <ul class="nav nav-tabs">
       <li class="active"><a href="/group">{{ _('Groups') }}</a></li>

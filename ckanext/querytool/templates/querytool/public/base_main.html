@@ -1,57 +1,55 @@
 {% extends "querytool/public/querytool_page.html" %}
 
 <!-- Variables -->
-{% set nav_bar = h.querytool_allow_nav_bar() %}
 {% set header_image = g.header_image_url or '' %}
 {% set header_text_color = g.header_text_color or '#ffffff' %}
 <!-- Variables -->
 
 {% block content %}
 <div class="container-wrapper">
-  {% if nav_bar == 'True' %}
-    {% block toolbar %}
-      <div class="toolbar">
-        {% block breadcrumb %}
-          {% if self.breadcrumb_content() | trim %}
-            <ul class="breadcrumb">
-              {% if h.check_access('querytool_update') %}
-                <li class="home"><a href="/"><i class="fa fa-home"></i><span> {{ _('Home') }}</span></a></li>
-              {% endif %}
-            </ul>
-          {% endif %}
-        {% endblock %}
-      </div>
-    {% endblock %}
-  {% endif %}
 
   {# Made it a block so that it's easier to override on files that extend this file #}
   {# as we don't want pages besides the home to have the custom background #}
   {% if g.theme == 'Custom' %}
   {% block page_header_bg %}
       <style>
-        #header-wrapper {
+        .custom-theme#header-wrapper {
           background-image: url('{{ header_image }}'); 
           {{ 'padding: 0 0 125px 0;' if header_image else '' }}
         }
 
-        #header-text {
+        .custom-theme#header-text {
           color: {{ header_text_color if header_text_color else '#353535' }} !important;
+        }
+
+        .custom-theme#header-title {
+          {{ 'padding-top: 100px;' if header_image else '' }}
         }
       </style>
   {% endblock %}
   {% endif %}
 
-  <div class="public-header query-header" id="header-wrapper">
+  <div class="public-header query-header embed-style" id="header-wrapper">
   {% block page_header_content %}
-    {% block breadcrumb_custom %} {% endblock %}
+    {% block breadcrumb_custom %}
+      <div class="toolbar new_toolbar embed-show">
+        <ol class="breadcrumb new_breadcrumb">
+          <li><a href="/"><i class="fa fa-home active"></i></a></li>
+        </ol>
+        <div class="embed-show search-reports">
+          {% snippet 'snippets/search_reports_input.html' %}
+        </div>
+      </div>
+    {% endblock %}
+    
     <div class="container">
       <div class="row">
         <div class="span10 offset1">
-          <div class="page-header" id="header-text">
+          <div class="page-header embed-style" id="header-text">
             {% block page_header_inner_content %}
               {% block page_header_icon %}{% endblock %}
               {% block page_header_title %}
-                <h1 style="{{ 'padding-top: 100px;' if header_image else '' }}">{{ g.welcome_page_title or _('Welcome') }}</h1>
+                <h1 class="embed-style" id="header-title">{{ g.welcome_page_title or _('Welcome') }}</h1>
               {% endblock %}
               <div class="long-desc">
                 {% block page_header_description %}

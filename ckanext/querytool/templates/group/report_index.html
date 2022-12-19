@@ -30,14 +30,15 @@
 
  {% block reports_list %}
     {% set q = request.params.get('report_q') %}
-    {% set reports = h.querytool_get_all_reports(q) %}
+    {% set all_reports = h.querytool_get_all_reports(q) %}
+    {% set reports = h.filter_reports_by_permissions(all_reports) %}
     {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
     {% set sorting_selected = request.params.get('sort', 'name asc') %}
     {% set report_count = h.report_search_count(reports) %}
 
     <form class="search-form no-bottom-border">
       <div class="search-input control-reports search-giant">
-        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search rjjjeports...') }}" {% if q %} value="{{ q }}" {% endif %} />
+        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" {% if q %} value="{{ q }}" {% endif %} />
         <button type="submit"><i class="fa fa-search"></i></button>
       </div>
 

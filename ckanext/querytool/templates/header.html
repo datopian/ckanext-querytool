@@ -3,7 +3,7 @@
 
 {% block header_account %}
   {% if c.user %}
-    <header class="account-masthead">
+    <header class="account-masthead embed-hide">
        <div class="container-fluid">
           {% block header_account_container_content %}
              {{ super() }}
@@ -12,7 +12,7 @@
     </header>
   {% endif %}
 {% endblock %}
-<header class="navbar navbar-static-top masthead">
+<header class="navbar navbar-static-top masthead embed-hide">
    {% block header_debug %}
    {{ super() }}
    {% endblock %}
@@ -39,11 +39,13 @@
             {% block header_site_navigation_tabs %}
                 {% if c.user and h.get_user_permission(c.userobj) == True %}
                   {{ h.build_nav_main(
-                      ('home', _('Home'))
+                      ('home', _('Home')),
+                      ('querytool_public_reports', _('Reports'))
                   )}}
                 {% else %}
                   {{ h.build_nav_main(
-                    ('querytool_public', _('Home'))
+                    ('querytool_public', _('Home')),
+                    ('querytool_public_reports', _('Reports'))
                   )}}
                 {% endif %}
               {% endblock %}
@@ -59,11 +61,21 @@
         {% endblock %}
         {% endif %}
 
+        <!-- Search groups -->
         {% if c.user and h.get_user_permission(c.userobj) == True %}
           {% block header_site_search %}
-            {{ super() }}
+            <form class="section site-search simple-input search-input-right" action="{% url_for controller='package', action='search' %}" method="get">
+              <div class="field">
+                <label for="field-sitewide-search">{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}</label>
+                <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search datasets') }}" />
+                <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+              </div>
+            </form>
           {% endblock %}
         {% endif %}
+
+        <!-- Search reports -->
+        {% snippet "snippets/search_reports_input.html" %}
 
         {% block vitalst_header_site_navigation %}
         <nav class="section navigation default-menu">

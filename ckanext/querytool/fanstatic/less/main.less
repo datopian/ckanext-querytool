@@ -11,6 +11,7 @@
 @import "inc/form.less";
 @import "inc/query.less";
 @import "inc/responsive.less";
+@import "inc/responsive-767px-max.less";
 
 body {
     background-image: none;
@@ -417,7 +418,6 @@ footer .copyright {
     footer {
         // This fixes the width of the footer
         // for small devices
-        width: 100vw;
         margin-left: -20px;
         padding: 0 !important;
     }
@@ -547,4 +547,13 @@ form.custom-lang-select {
     margin: auto;
     margin-top: 20px !important;
     margin-bottom: 20px !important;
+}
+
+// Adaptive design
+.embed-hide {
+    display: none;
+}
+
+.embed-show {
+    display: none;
 }

@@ -43,6 +43,9 @@
     {% endif %}
     <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
   </ol>
+  <div class="embed-show search-reports">
+    {% snippet 'snippets/search_reports_input.html' %}
+  </div>
 </div>
 {% endblock %}
 
@@ -52,19 +55,21 @@
   }
 </style>
 
-{% if querytools[0].description %}
 <div class="container-fluid">
   <div class="row-fluid">
     <div style="margin:0 20px;">
       <div class="page-header query-header">
         <h1>{{ querytools[0].title }}</h1>
-        {{ h.render_markdown(querytools[0].description) }}
-        {{ h.render_markdown(querytools[0].additional_description) }}
+        {% if querytools[0].description %}
+          {{ h.render_markdown(querytools[0].description) }}
+        {% endif %}
+        {% if querytools[0].additional_description %}
+          {{ h.render_markdown(querytools[0].additional_description) }}
+        {% endif %}
       </div>
     </div>
   </div>
 </div>
-{% endif %}
 {% endblock %}
 {% block tools %}
 
