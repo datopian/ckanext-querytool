@@ -7,6 +7,7 @@ A CKAN extension to create visualizations based on the uploaded datasets.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Creating new releases](#creating-new-releases)
   - [Test data seed command](#test-data-seed-command)
 - [Development](#development)
@@ -26,6 +27,17 @@ A CKAN extension to create visualizations based on the uploaded datasets.
     - [Optional Map Config Settings](#optional-map-config-settings)
     - [Optional Cookie Control Config Settings](#optional-cookie-control-config-settings)
   - [Modify CSS](#modify-css)
+- [Custom Development Within the ckanext-querytool Extension](#custom-development-within-the-ckanext-querytool-extension)
+  - [Frontend](#frontend)
+    - [Plotly](#plotly)
+    - [DataTables](#datatables)
+    - [Leaflet](#leaflet)
+    - [General](#general)
+    - [UI Options for Charts and Tables](#ui-options-for-charts-and-tables)
+    - [HTML/Jinja2 Templates](#htmljinja2-templates)
+  - [Backend](#backend)
+    - [API/Actions](#apiactions)
+    - [Helpers](#helpers)
 - [Google Analytics (GA4)](#google-analytics-ga4)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -329,19 +341,19 @@ var base_info = {
   },
   title: titleVal,
   showlegend: show_legend, //show legend value
-  legend: { 
-    xanchor: "left", 
-    x: -0.02, 
-    y: -0.27, 
-    orientation: "h", 
-    title: { 
-      text: legend_title_text, 
-      side: "top", 
+  legend: {
+    xanchor: "left",
+    x: -0.02,
+    y: -0.27,
+    orientation: "h",
+    title: {
+      text: legend_title_text,
+      side: "top",
       //  Reference: https://plotly.com/javascript/reference/layout/#layout-legend
       font: {
         size: 15
       }
-    } 
+    }
   },
   xaxis: {
     tickformat: x_tick_format,
