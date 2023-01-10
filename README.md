@@ -38,6 +38,7 @@ A CKAN extension to create visualizations based on the uploaded datasets.
   - [Backend](#backend)
     - [API/Actions](#apiactions)
     - [Helpers](#helpers)
+    - [Visualizations Object](#visualizations-object)
 - [Google Analytics (GA4)](#google-analytics-ga4)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -317,7 +318,7 @@ These are used on top of:
 - [Bootstrap](https://getbootstrap.com/)
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-If any changes are made to the JavaScript files, you must be rebuild using [webpack](https://webpack.js.org/) (see the [Updating source files](#updating-source-files) section above).
+If any changes are made to the JavaScript files, you must rebuild using [webpack](https://webpack.js.org/) (see the [Updating source files](#updating-source-files) section above).
 
 For more information on CKAN core architecture as a whole, see [CKAN code architecture](https://docs.ckan.org/en/2.7/contributing/architecture.html?highlight=helpers). For anything not covered here, see the [CKAN 2.7 core documentation](https://docs.ckan.org/en/2.7/).
 
@@ -329,7 +330,7 @@ This extension uses [plotly.js](https://plotly.com/javascript/) for charts (bar,
 
 Most changes and customizations of plotly.js are done in the `ckanext-querytool/ckanext/querytool/fanstatic/javascript/modules/viz-preview.js` file.
 
-The main settings object can be found on [line 1977 of the `viz-preview.js` file](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/modules/viz-preview.js#L1977), and it's called `base_info`. It contains the following properties:
+The main settings object can be found in the [`viz-preview.js` file](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/modules/viz-preview.js), and it's called `base_info`. It contains the following properties:
 ```
 var base_info = {
   margin: {
@@ -381,7 +382,7 @@ var base_info = {
 };
 ```
 
-Any of these properties can be modified to change the default behavior of the chart. For example, if you want to change the default font size of the chart, you can change the `size` property of the `tickfont` object. Additionally, each chart type has its own set of properties that can be modified by looking for the respective `trace` object. For example, each line chart type has the following properties in their [`trace` objects](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/modules/viz-preview.js#L819):
+Any of these properties can be modified to change the default behavior of the chart. For example, if you want to change the default font size of the chart, you can change the `size` property of the `tickfont` object. Additionally, each chart type has its own set of properties that can be modified by looking for the respective `trace` object. For example, each line chart type has the following properties in their `trace` objects:
 ```
 var trace = {
   x: x,
@@ -404,7 +405,7 @@ var trace = {
 };
 ```
 
-**NOTE:** Though all of the properties are customizable, it's recommended to only change them if they're absolutely necessary, as any changes can have unintended consequences.
+**NOTE:** Though all of the properties are customizable, it's recommended to only change them if absolutely necessary, as any changes can have unintended consequences.
 
 For more information on how to customize plotly.js, see the [plotly.js documentation](https://plotly.com/javascript/).
 
@@ -414,7 +415,7 @@ This extension uses [DataTables](https://datatables.net/) for table charts/visua
 
 Changes and customizations of DataTables can generally be handled in `ckanext-querytool/ckanext/querytool/fanstatic/javascript/vitals.js` or `ckanext-querytool/ckanext/querytool/fanstatic/javascript/modules/table-module.js`.
 
-An example of custom changes can be found at the very top of [`vitals.js`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/vitals.js#L1-L273), where a feature plugin (`RowsGroup`) is used to automatically merge columns cells based on their values eqaulity.
+An example of custom changes can be found at the very top of [`vitals.js`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/vitals.js), where a feature plugin (`RowsGroup`) is used to automatically merge columns cells based on their values eqaulity.
 
 For more information on how to customize DataTables, see the [DataTables documentation](https://datatables.net/manual/).
 
@@ -426,7 +427,7 @@ Changes and customizations of Leaflet can generally be handled in `ckanext-query
 
 #### General
 
-Most general jQuery and JavaScript customizations/overrides can be handled in `ckanext-querytool/ckanext/querytool/fanstatic/javascript/vitals.js`. Here's a small example where we watch for changes in the filter dropdowns and trigger a click on the "Update" button when a change is detected (code can be found [here](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/vitals.js#L1304-L1306)):
+Most general jQuery and JavaScript customizations/overrides can be handled in `ckanext-querytool/ckanext/querytool/fanstatic/javascript/vitals.js`. Here's a small example where we watch for changes in the filter dropdowns and trigger a click on the "Update" button when a change is detected:
 ```
 $("body").on('change','.has-filter .filter-item-value', function() {
   $('.btn-update').trigger("click");
@@ -444,7 +445,7 @@ For most changes to the options found in the UI (for charts and tables, e.g. htt
 
 #### HTML/Jinja2 Templates
 
-CKAN (and this extension) use [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/) for templating. The templates for this extension can be found in [`ckanext-querytool/ckanext/querytool/templates`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/templates). Any changes in these HTML files should be reflected immediately in the UI immediately, but if you're not seeing them, you may need to restart CKAN. 
+CKAN (and this extension) uses [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/) for templating. The templates for this extension can be found in [`ckanext-querytool/ckanext/querytool/templates`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/templates). Any changes in these HTML files should be reflected immediately in the UI immediately, but if you're not seeing them, you may need to restart CKAN. 
 
 Additionally, if you need to override a template found in CKAN core, you can simply copy the file found in CKAN core into the `ckanext-querytool/ckanext/querytool/templates` directory and make your changes there. You must make sure that it's placed in the same directory structure as the original file, e.g. if you want to override the `package/read.html` template, you would copy the file from `ckan/templates/package/read.html` to `ckanext-querytool/ckanext/querytool/templates/package/read.html`.
 
@@ -508,6 +509,10 @@ As a basic example, let's say we want to create a new helper that simply returns
 Now, you should see the text "This is our new helper!" in the template wherever you called it (or you can add a log in the backend function you called it from to see the output in the logs).
 
 For a better idea of what helpers can be used for, you can take a look at the helpers in [`ckanext-querytool/ckanext/querytool/helpers.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/helpers.py) and [CKAN core helpers](https://github.com/ckan/ckan/blob/ckan-2.7.12/ckan/lib/helpers.py).
+
+#### Visualizations Object
+
+If you need to intercept or add new keys/values to the backend visualizations or reports objects, you can find much of the code in [`/ckanext/querytool/controllers/querytool.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/controllers/querytool.py) (for example, `edit_visualizations` retrieves the saved values from the DB and returns them to the template) and [`/ckanext/querytool/model.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/model.py) (this is where new DB columns are added).
 
 ## Google Analytics (GA4)
 
