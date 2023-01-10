@@ -7,6 +7,7 @@ A CKAN extension to create visualizations based on the uploaded datasets.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+
 - [Creating new releases](#creating-new-releases)
   - [Test data seed command](#test-data-seed-command)
 - [Development](#development)
@@ -26,6 +27,18 @@ A CKAN extension to create visualizations based on the uploaded datasets.
     - [Optional Map Config Settings](#optional-map-config-settings)
     - [Optional Cookie Control Config Settings](#optional-cookie-control-config-settings)
   - [Modify CSS](#modify-css)
+- [Custom Development Within the ckanext-querytool Extension](#custom-development-within-the-ckanext-querytool-extension)
+  - [Frontend](#frontend)
+    - [Plotly](#plotly)
+    - [DataTables](#datatables)
+    - [Leaflet](#leaflet)
+    - [General](#general)
+    - [UI Options for Charts and Tables](#ui-options-for-charts-and-tables)
+    - [HTML/Jinja2 Templates](#htmljinja2-templates)
+  - [Backend](#backend)
+    - [API/Actions](#apiactions)
+    - [Helpers](#helpers)
+    - [Visualizations Object](#visualizations-object)
 - [Google Analytics (GA4)](#google-analytics-ga4)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -288,6 +301,218 @@ files located in the `ckanext-querytool/ckanext/querytool/fanstatic/less` folder
 Gulp.js is used for building CSS assets.
 
 In order to build all CSS assets **run `node_modules/gulp/bin/gulp.js` once**. Gulp.js is watching for changes in the source LESS assets and will rebuild CSS on each change. If you have gulp.js installed globally on the system, you can just type `gulp` to run it.
+
+## Custom Development Within the ckanext-querytool Extension
+
+This extension diverges from CKAN core in a number of ways. The following sections cover the major areas of divergence and areas most commonly customized, along with high-level descriptions and links to the relevant code and external documentation.
+
+The frontend libraries and frameworks used by this extension for charts and tables are:
+
+- [Plotly](https://plotly.com/javascript/) for charts (bar, line, pie, etc.)
+- [DataTables](https://datatables.net/) for tables
+- [Leaflet](https://leafletjs.com/) for maps
+
+These are used on top of:
+
+- [jQuery](https://jquery.com/)
+- [Bootstrap](https://getbootstrap.com/)
+- [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+
+If any changes are made to the JavaScript files, you must rebuild using [webpack](https://webpack.js.org/) (see the [Updating source files](#updating-source-files) section above).
+
+For more information on CKAN core architecture as a whole, see [CKAN code architecture](https://docs.ckan.org/en/2.7/contributing/architecture.html?highlight=helpers). For anything not covered here, see the [CKAN 2.7 core documentation](https://docs.ckan.org/en/2.7/).
+
+### Frontend
+
+#### Plotly
+
+This extension uses [plotly.js](https://plotly.com/javascript/) for charts (bar, line, pie, etc.). It's a JavaScript library for creating interactive charts and graphs, built on top of [d3.js](https://d3js.org/) and [stack.gl](https://github.com/stackgl).
+
+Most changes and customizations of plotly.js are done in the `ckanext-querytool/ckanext/querytool/fanstatic/javascript/modules/viz-preview.js` file.
+
+The main settings object can be found in the [`viz-preview.js` file](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/modules/viz-preview.js), and it's called `base_info`. It contains the following properties:
+```
+var base_info = {
+  margin: {
+    l: 20,
+    r: 20,
+    b: 20,
+    t: 30,
+    pad: 5,
+  },
+  title: titleVal,
+  showlegend: show_legend, //show legend value
+  legend: {
+    xanchor: "left",
+    x: -0.02,
+    y: -0.27,
+    orientation: "h",
+    title: {
+      text: legend_title_text,
+      side: "top",
+      //  Reference: https://plotly.com/javascript/reference/layout/#layout-legend
+      font: {
+        size: 15
+      }
+    }
+  },
+  xaxis: {
+    tickformat: x_tick_format,
+    automargin: true,
+    title: "",
+    tickangle: this.options.x_text_rotate,
+    tickmode: "auto",
+    nticks: this.options.x_tick_culling_max,
+    tickfont: {
+      size: 14,
+    },
+    categoryorder: "array",
+    categoryarray: sortedArr
+  },
+  yaxis: {
+    tickformat: y_tick_format,
+    automargin: true,
+    hoverformat: format,
+    tickangle: this.options.y_text_rotate,
+    tickfont: {
+      size: 14,
+    },
+  },
+  hovermode: "closest",
+};
+```
+
+Any of these properties can be modified to change the default behavior of the chart. For example, if you want to change the default font size of the chart, you can change the `size` property of the `tickfont` object. Additionally, each chart type has its own set of properties that can be modified by looking for the respective `trace` object. For example, each line chart type has the following properties in their `trace` objects:
+```
+var trace = {
+  x: x,
+  y: columns[tmp].slice(1),
+  type: "scatter",
+  mode: labelsMode,
+  text: convertedTextTitles,
+  textposition: "top right",
+  textfont: {
+    size: 14,
+  },
+  name: name,
+  line: {
+    width: setDefaultWidth(lineWidthsList[tmp]),
+    dash: lineTypesList[tmp],
+  },
+  hovertemplate: "%{y}<extra></extra>",
+  error_y: {},
+  error_x: {},
+};
+```
+
+**NOTE:** Though all of the properties are customizable, it's recommended to only change them if absolutely necessary, as any changes can have unintended consequences.
+
+For more information on how to customize plotly.js, see the [plotly.js documentation](https://plotly.com/javascript/).
+
+#### DataTables
+
+This extension uses [DataTables](https://datatables.net/) for table charts/visualizations. DataTables is a JavaScript library for creating interactive tables, built on top of [jQuery](https://jquery.com/).
+
+Changes and customizations of DataTables can generally be handled in `ckanext-querytool/ckanext/querytool/fanstatic/javascript/vitals.js` or `ckanext-querytool/ckanext/querytool/fanstatic/javascript/modules/table-module.js`.
+
+An example of custom changes can be found at the very top of [`vitals.js`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/vitals.js), where a feature plugin (`RowsGroup`) is used to automatically merge columns cells based on their values eqaulity.
+
+For more information on how to customize DataTables, see the [DataTables documentation](https://datatables.net/manual/).
+
+#### Leaflet
+
+This extension uses [Leaflet](https://leafletjs.com/) for map charts/visualizations. Leaflet is a JavaScript library for creating interactive maps, built on top of [OpenStreetMap](https://www.openstreetmap.org/).
+
+Changes and customizations of Leaflet can generally be handled in `ckanext-querytool/ckanext/querytool/fanstatic/javascript/modules/map-module.js`.
+
+#### General
+
+Most general jQuery and JavaScript customizations/overrides can be handled in `ckanext-querytool/ckanext/querytool/fanstatic/javascript/vitals.js`. Here's a small example where we watch for changes in the filter dropdowns and trigger a click on the "Update" button when a change is detected:
+```
+$("body").on('change','.has-filter .filter-item-value', function() {
+  $('.btn-update').trigger("click");
+})
+```
+
+For more information on how to customize jQuery and JavaScript, see the [jQuery documentation](https://api.jquery.com/) and [JavaScript documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+
+#### UI Options for Charts and Tables
+
+For most changes to the options found in the UI (for charts and tables, e.g. https://YOUR_SITE/report/edit_visualizations/REPORT_NAME), you can find the relevant code in the following files:
+
+- [viz-preview.js](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/modules/viz-preview.js)
+- [visualizations_settings.js](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/fanstatic/javascript/ckanext/querytool/fanstatic/javascript/visualizations_settings.js)
+
+#### HTML/Jinja2 Templates
+
+CKAN (and this extension) uses [Jinja2](https://jinja.palletsprojects.com/en/3.1.x/) for templating. The templates for this extension can be found in [`ckanext-querytool/ckanext/querytool/templates`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/templates). Any changes in these HTML files should be reflected immediately in the UI immediately, but if you're not seeing them, you may need to restart CKAN. 
+
+Additionally, if you need to override a template found in CKAN core, you can simply copy the file found in CKAN core into the `ckanext-querytool/ckanext/querytool/templates` directory and make your changes there. You must make sure that it's placed in the same directory structure as the original file, e.g. if you want to override the `package/read.html` template, you would copy the file from `ckan/templates/package/read.html` to `ckanext-querytool/ckanext/querytool/templates/package/read.html`.
+
+For more information on how to customize Jinja2 templates, see the [Jinja2 documentation](https://jinja.palletsprojects.com/en/3.1.x/), [CKAN Jinja2 documentation](https://docs.ckan.org/en/2.7/theming/templates.html#jinja2), and [CKAN theming documentation](https://docs.ckan.org/en/2.7/theming/templates.html#replacing-a-default-template-file).
+
+### Backend
+
+#### API/Actions
+
+The process for creating/customizing the API endpoints (Actions) is the slightly different than the [CKAN documentation](https://docs.ckan.org/en/2.7/extensions/index.html), but this is only because we have automated `get_actions` in `plugin.py` to return all actions found in [`ckanext-querytool/ckanext/querytool/logic/action`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/logic/action) (in this directory, we have 4 files: `create.py`, `delete.py`, `get.py`, and `update.py`, all of which are included in the automated loading), so they don't need to be added individually. We do this with the following code (found in [`plugin.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/plugin.py):
+```
+module_root = 'ckanext.querytool.logic.action'
+action_functions = h._get_functions(module_root)
+```
+
+As a basic example, let's say we want to create a new GET endpoint that simply returns the text "This is our new API endpoint!".
+
+1. We would simply add the following code to [`ckanext-querytool/ckanext/querytool/logic/action/get.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/logic/action/get.py):
+    ```
+    @toolkit.side_effect_free
+    def our_new_action(context, data_dict):
+        return 'This is our new API endpoint!'
+    ```
+2. Restart CKAN
+3. Visit https://YOUR_SITE/api/3/action/our_new_action, and you should see the following response:
+    ```
+    {
+      "help": "https://YOUR_SITE/api/3/action/help_show?name=our_new_action",
+      "success": true,
+      "result": "This is our new API endpoint!"
+    }
+    ```
+
+#### Helpers
+
+Helpers are re-usable functions. They're available in the backend Python code as well as in Jinja2 templates. There's basically no limit to what a helper can do. They can range from simple functions that return a string, to more complex functions that parse, filter/alter, and return data.
+
+The process for creating/customizing helpers is the same as found in the [CKAN helper documentation](https://docs.ckan.org/en/2.7/theming/templates.html#adding-your-own-template-helper-functions).
+
+As a basic example, let's say we want to create a new helper that simply returns the text "This is our new helper!".
+
+1. We would start by adding the following code to [`ckanext-querytool/ckanext/querytool/helpers.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/helpers.py):
+    ```
+    def our_new_helper():
+        return 'This is our new helper!'
+    ```
+2. Add our new helper to `get_helpers` in [`plugin.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/plugin.py):
+    ```
+    def get_helpers(self):
+        return {
+            ... OTHER HELPERS ...
+            'our_new_helper': helpers.our_new_helper
+        }
+    ```
+3. Call the new helper in another function or in a template. For example, in a template, we can call it with:
+    ```
+    {{ h.our_new_helper() }}
+    ```
+4. Restart CKAN
+
+Now, you should see the text "This is our new helper!" in the template wherever you called it (or you can add a log in the backend function you called it from to see the output in the logs).
+
+For a better idea of what helpers can be used for, you can take a look at the helpers in [`ckanext-querytool/ckanext/querytool/helpers.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/helpers.py) and [CKAN core helpers](https://github.com/ckan/ckan/blob/ckan-2.7.12/ckan/lib/helpers.py).
+
+#### Visualizations Object
+
+If you need to intercept or add new keys/values to the backend visualizations or reports objects, you can find much of the code in [`/ckanext/querytool/controllers/querytool.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/controllers/querytool.py) (for example, `edit_visualizations` retrieves the saved values from the DB and returns them to the template) and [`/ckanext/querytool/model.py`](https://github.com/datopian/ckanext-querytool/blob/master/ckanext/querytool/model.py) (this is where new DB columns are added).
 
 ## Google Analytics (GA4)
 
