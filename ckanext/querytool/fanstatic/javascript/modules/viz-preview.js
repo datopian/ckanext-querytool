@@ -1632,7 +1632,7 @@ ckan.module('querytool-viz-preview', function() {
                       };
                     } else {
                       d["marker"] = {
-                        color: "darkseagreen",
+                        color: "#8fbc8f",
                       };
                     }
                   } else {
@@ -1651,7 +1651,7 @@ ckan.module('querytool-viz-preview', function() {
   
                       if (typeof color === "undefined" || color === "") {
                         d["marker"] = {
-                          color: "darkseagreen",
+                          color: "#8fbc8f",
                         };
                       } else {
                         var new_color = color.split(": ")[1].slice(0, -1);
@@ -1668,7 +1668,7 @@ ckan.module('querytool-viz-preview', function() {
                       }
                     } else {
                       d["marker"] = {
-                        color: "darkseagreen",
+                        color: "#8fbc8f",
                       };
                     }
                   }
