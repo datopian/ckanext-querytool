@@ -1308,7 +1308,7 @@ $('body').on('change', '[id^=chart_field_axis_x_]', function () {
     $(`#chart_field_category_name_${chart_number} option[value="${selected}"]`).prop('disabled', true);
 
   //  Unsets the category when a dimension is selected
-  $(`#chart_field_category_name_${chart_number}`).val('');
+  $(`#chart_field_category_name_${chart_number}`).val('').trigger('change');
 })
 
 $('body').on('change', '#theme', function () {
@@ -1402,4 +1402,30 @@ $('.report-search-sort').on('change', function() {
   url.search = searchParams.toString();
   var newUrl = url.toString();
   window.location.href = newUrl;
+});
+
+$('body').on('change', '[id^=chart_field_x_sort_labels_]', function () {
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_x_sort_labels_${chart_number}`).is(':checked');
+
+  if(selected) {
+      var currently_sorted = $(`#chart_field_sort_${chart_number}`).val();
+
+      if(currently_sorted != 'default') {
+          $(`#chart_field_sort_${chart_number}`).val('default').trigger('change');
+      }
+  }
+});
+
+$('body').on('change', '[id^=chart_field_sort_]', function () {
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_sort_${chart_number}`).val();
+
+  if(selected != 'default') {
+      var currently_sorted = $(`#chart_field_x_sort_labels_${chart_number}`).is(':checked');
+
+      if(currently_sorted) {
+          $(`#chart_field_x_sort_labels_${chart_number}`).prop('checked', false).trigger('change');
+      }
+  }
 });
