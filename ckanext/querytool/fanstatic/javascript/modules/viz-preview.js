@@ -407,7 +407,7 @@ ckan.module('querytool-viz-preview', function() {
             // Sort data
             var sBarOrder = data_sort;
             if (
-              (this.options.chart_type !== 'sbar' || this.options.chart_type !== 'shbar')
+              (this.options.chart_type !== 'sbar' && this.options.chart_type !== 'shbar')
               && !additionalCategory
             ) {
                 this.sortData(data_sort, records, y_axis, x_axis);
