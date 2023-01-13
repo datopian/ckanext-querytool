@@ -585,12 +585,6 @@ $('.long-desc').readmore({
 });
 
 $(document).ready(function(){
-    generateColorPicker();
-    generateColorPicker2();
-
-    $("#add-visualization-btn").on('click',function(){
-        setTimeout(function() { generateColorPicker(); generateColorPicker2(); }, 1000);
-    })
 
     //get page height and display scroll button
     var pgHeight = document.body.scrollHeight;
@@ -671,68 +665,39 @@ $(document).ready(function(){
     }
   });
 
-  function generateColorPicker(){
-    $('.colorpicker').paletteColorPicker({
-        colors: [
-        {"green": "green"},
-        {"blue": "blue"},
-        {"teal": "teal"},
-        {"goldenrod": "goldenrod"},
-        {"yellow": "yellow"},
-        {"orange": "orange"},
-        {"brown": "brown"},
-        {"purple": "purple"},
-        {"red": "red"},
-        {"burlywood": "burlywood"},
-        {"coral": "coral"},
-        {"black": "black"},
-        {"darkblue": "darkblue"},
-        {"darkgray": "darkgray"},
-        {"darkolivegreen": "darkolivegreen"},
-        {"darkseagreen": "darkseagreen"},
-        {"darkslateblue": "darkslateblue"},
-        {"darkturquoise": "darkturquoise"},
-        {"deeppink": "deeppink"},
-        {"deepskyblue": "deepskyblue"},
-        {"lightgreen": "lightgreen"},
-        {"mediumvioletred": "mediumvioletred"},
-        {"midnightblue":"midnightblue"},
-        {"lightsteelblue":"lightsteelblue"},
-        {"powderblue":"powderblue"},
-        {"lightyellow":"lightyellow"},
-        {"teal":"teal"},
-        {"darkcyan":"darkcyan"},
-        {"cadetblue":"cadetblue"},
-        {"mediumaquamarine":"mediumaquamarine"},
-        {"coral":"coral"},
-        {"darkorange":"darkorange"},
-        {"sandybrown":"sandybrown"},
-        {"navajowhite":"navajowhite"},
-        {"peru":"peru"},
-        {"burlywood":"burlywood"},
-        {"tan":"tan"},
-        {"wheat":"wheat"},
-        {"papayawhip":"papayawhip"}
-        ],
-        position: 'downside',
-        clear_btn: null // default -> 'upside'
-    });
-  }
+  $(document).on('change', '[id^=chart_field_seq_starting_color_]', function() {
+    var selection = $(this).val();
+    var chart_number = this.id.split('_').slice(-1)[0];
+    
+    const gradientInput = $(`#chart_field_seq_color_${chart_number}`);
+    const oldVal = gradientInput.val().split(',');
+    const newVal = `${selection},${oldVal[1]}`;
 
-  function generateColorPicker2(){
-    console.log('generate Color picker called')
-    $('.colorpicker_sequential').paletteColorPicker({
-      custom_class: 'wide',
-      colors: [
-      {"#348F50,#56B4D3": "linear-gradient(90deg, rgba(52,143,80,1) 0%, rgba(86,180,211,1) 100%"},
-      {"#ff6e7f,#bfe9ff": "linear-gradient(90deg, rgba(255,110,127,1) 0%, rgba(191,233,255,1) 100%"},
-      {"#2b5876,#4e4376": "linear-gradient(90deg, rgba(49,71,85,1) 0%, rgba(38,160,218,1) 100%"},
-      {"#e65c00,#F9D423": "linear-gradient(90deg, rgba(230,92,0,1) 0%, rgba(249,212,35,1) 100%"},
-      ],
-      position: 'downside',
-      clear_btn: null // default -> 'upside'
-    });
-  }
+    gradientInput.val(newVal).trigger('change');
+  });
+
+  $(document).on('change', '[id^=chart_field_seq_ending_color_]', function() {
+    var selection = $(this).val();
+    var chart_number = this.id.split('_').slice(-1)[0];
+    
+    const gradientInput = $(`#chart_field_seq_color_${chart_number}`);
+    const oldVal = gradientInput.val().split(',');
+    const newVal = `${oldVal[0]},${selection}`;
+
+    gradientInput.val(newVal).trigger('change');
+  });
+
+  $(document).on('change', '[id^=chart_field_seq_color_]', function() {
+    var selection = $(this).val();
+    var chart_number = this.id.split('_').slice(-1)[0];
+    
+    const previewEl = $(`#seq_color_preview_${chart_number}`);
+    const colors = selection.split(',');
+    const startingColor = colors[0];
+    const endingColor = colors[1];
+
+    previewEl.css("background-image", `linear-gradient(to right, ${startingColor}, ${endingColor})`);
+  });
 
   $('body').on('change','[id^=chart_field_graph_]',function(){
     var selected = $(this).val();

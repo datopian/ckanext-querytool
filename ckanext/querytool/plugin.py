@@ -339,7 +339,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'filter_reports_by_permissions':
                 helpers.filter_reports_by_permissions,
             'filter_groups_by_permissions':
-                helpers.group_count_design_reports
+                helpers.group_count_design_reports,
+            'color_to_hex': 
+                helpers.color_to_hex
         }
 
     # IAuthFunctions
