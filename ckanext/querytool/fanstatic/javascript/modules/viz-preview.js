@@ -1607,33 +1607,28 @@ ckan.module('querytool-viz-preview', function() {
                 for (tmp = 0; tmp < len_data; tmp++) {
                   var color_count = 1;
                   var d = data_tmp[tmp];
-  
+
+                  //  Get the id of the element that holds the color
                   var c = "chart_field_color_" + item_no + "_" + (tmp + 1);
+
+                  //  Get the plotly object
                   var chart_field_plotly_value = chart_plotly.value;
   
                   if (chart_field_plotly_value) {
                     // there is a plotly value in the input field
                     var color_tmp = document.querySelectorAll(
-                      "[data-target=" + c + "]"
+                      "[name=" + c + "]"
                     );
-  
+
                     if (color_tmp["length"] >= 1) {
-                      var color = color_tmp[0].style.cssText;
-                      if (color) {
-                        var new_color = color.split(": ")[1].slice(0, -1);
-                        if (new_color.includes("none")) {
-                          new_color = new_color.substring(
-                            0,
-                            new_color.indexOf(" none")
-                          );
-                        }
-                      }
+                      var color = color_tmp[0].value;
+
                       d["marker"] = {
-                        color: new_color,
+                        color,
                       };
                     } else {
                       d["marker"] = {
-                        color: "darkseagreen",
+                        color: "#8fbc8f",
                       };
                     }
                   } else {
@@ -1641,14 +1636,14 @@ ckan.module('querytool-viz-preview', function() {
                     var color_tmp = document.querySelectorAll(
                       "[data-target=" + color_id + "]"
                     );
-  
+
                     if (color_tmp["length"] >= 1) {
                       var color = color_tmp[0].style.cssText;
                       // check type and do the conditions according to that
-  
+
                       if (typeof color === "undefined" || color === "") {
                         d["marker"] = {
-                          color: "darkseagreen",
+                          color: "#8fbc8f",
                         };
                       } else {
                         var new_color = color.split(": ")[1].slice(0, -1);
@@ -1665,24 +1660,24 @@ ckan.module('querytool-viz-preview', function() {
                       }
                     } else {
                       d["marker"] = {
-                        color: "darkseagreen",
+                        color: "#8fbc8f",
                       };
                     }
                   }
-  
+
                   // delete elements
                   var p = document.querySelectorAll(
                     '[id^="chart_field_color_' + item_no + '"]'
                   );
                   var color_elements = 0;
-  
+
                   for (var a = 0; a < p.length; a++) {
                     var type = p[a].tagName;
                     if (type === "INPUT") {
                       color_elements = color_elements + 1;
                     }
                   }
-  
+
                   if (color_elements > data.length) {
                     for (var a = 0; a < p.length; a++) {
                       var type = p[a].tagName;
@@ -1691,13 +1686,13 @@ ckan.module('querytool-viz-preview', function() {
                       }
                     }
                   }
-  
+
                   // add new html element
                   var elementExists = document.getElementById(c);
-  
+
                   if (elementExists) {
                     elementExists.parentElement.remove();
-  
+
                     var newcontent = document.createElement("div");
                     var html = "";
                     html += '<div class="control-group control-select">';
@@ -1710,7 +1705,7 @@ ckan.module('querytool-viz-preview', function() {
                       d["name"] +
                       "</label>";
                     html +=
-                      '<input type="text" id="chart_field_color_' +
+                      '<input type="color" id="chart_field_color_' +
                       item_no +
                       "_" +
                       (tmp + 1) +
@@ -1718,12 +1713,12 @@ ckan.module('querytool-viz-preview', function() {
                       item_no +
                       "_" +
                       (tmp + 1) +
-                      '" class="colorpicker" style="display:none;" value="' +
+                      '" class="colorpicker" value="' +
                       d["marker"]["color"] +
                       '"/> ';
                     html += "</div>";
                     newcontent.innerHTML = html;
-  
+
                     document
                       .getElementById("chart_field_plotly_" + item_no)
                       .insertAdjacentHTML("afterend", html);
@@ -1745,7 +1740,7 @@ ckan.module('querytool-viz-preview', function() {
                       d["name"] +
                       "</label>";
                     html +=
-                      '<input type="text" id="chart_field_color_' +
+                      '<input type="color" id="chart_field_color_' +
                       item_no +
                       "_" +
                       (tmp + 1) +
@@ -1753,12 +1748,12 @@ ckan.module('querytool-viz-preview', function() {
                       item_no +
                       "_" +
                       (tmp + 1) +
-                      '" class="colorpicker" style="display:none;" value="' +
+                      '" class="colorpicker" value="' +
                       d["marker"]["color"] +
                       '"/> ';
                     html += "</div>";
                     newcontent.innerHTML = html;
-  
+
                     document
                       .getElementById("chart_field_plotly_" + item_no)
                       .insertAdjacentHTML("afterend", html);
@@ -1768,7 +1763,7 @@ ckan.module('querytool-viz-preview', function() {
                       elem.parentNode.removeChild(elem);
                     }
                   }
-                  generateColorPicker();
+
                 }
   
                 data = data_tmp;
