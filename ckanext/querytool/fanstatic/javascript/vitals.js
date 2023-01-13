@@ -1343,7 +1343,7 @@ $('body').on('change', '[id^=chart_field_axis_x_]', function () {
     $(`#chart_field_category_name_${chart_number} option[value="${selected}"]`).prop('disabled', true);
 
   //  Unsets the category when a dimension is selected
-  $(`#chart_field_category_name_${chart_number}`).val('');
+  $(`#chart_field_category_name_${chart_number}`).val('').trigger('change');
 })
 
 $('body').on('change', '#theme', function () {

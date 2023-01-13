@@ -407,14 +407,8 @@ ckan.module('querytool-viz-preview', function() {
             // Sort data
             var sBarOrder = data_sort;
             if (
-                (
-                    (this.options.chart_type === 'sbar' || this.options.chart_type === 'shbar')
-                    && !this.options.category_name
-                ) 
-                //  NOTE: this part of the refactoring seems really
-                //  weird on the dist file. If something goes wrong
-                //  with sorting, check around here.
-                // || additionalCategory    //  TODO: check if this should not be commented
+              (this.options.chart_type !== 'sbar' || this.options.chart_type !== 'shbar')
+              && !additionalCategory
             ) {
                 this.sortData(data_sort, records, y_axis, x_axis);
             }
