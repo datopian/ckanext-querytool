@@ -288,7 +288,7 @@
               <input type="color" id="chart_field_seq_ending_color_{{ n }}" name="chart_field_seq_ending_color_{{ n }}" class="colorpicker" value="{{ ending_color }}" />
             </div>
 
-            <div class="seq-color-preview" style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"></div>
+            <div class="seq-color-preview" id="seq_color_preview_{{ n }}" style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"></div>
           </div>
           
           <div class="control-group control-select diver-colors-{{ n }} {% if chart %}{{ 'hidden' if chart.color_type in [2, '2'] }}{% endif %}">

@@ -673,7 +673,7 @@ $(document).ready(function(){
     const oldVal = gradientInput.val().split(',');
     const newVal = `${selection},${oldVal[1]}`;
 
-    gradientInput.val(newVal);
+    gradientInput.val(newVal).trigger('change');
   });
 
   $(document).on('change', '[id^=chart_field_seq_ending_color_]', function() {
@@ -684,7 +684,19 @@ $(document).ready(function(){
     const oldVal = gradientInput.val().split(',');
     const newVal = `${oldVal[0]},${selection}`;
 
-    gradientInput.val(newVal);
+    gradientInput.val(newVal).trigger('change');
+  });
+
+  $(document).on('change', '[id^=chart_field_seq_color_]', function() {
+    var selection = $(this).val();
+    var chart_number = this.id.split('_').slice(-1)[0];
+    
+    const previewEl = $(`#seq_color_preview_${chart_number}`);
+    const colors = selection.split(',');
+    const startingColor = colors[0];
+    const endingColor = colors[1];
+
+    previewEl.css("background-image", `linear-gradient(to right, ${startingColor}, ${endingColor})`);
   });
 
   $('body').on('change','[id^=chart_field_graph_]',function(){
