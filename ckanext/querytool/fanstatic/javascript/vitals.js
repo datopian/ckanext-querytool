@@ -665,7 +665,7 @@ $(document).ready(function(){
     }
   });
 
-  $(document).on('change', '[id^=chart_field_seq_color_starting_]', function() {
+  $(document).on('change', '[id^=chart_field_seq_starting_color_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     
@@ -676,7 +676,7 @@ $(document).ready(function(){
     gradientInput.val(newVal);
   });
 
-  $(document).on('change', '[id^=chart_field_seq_color_ending_]', function() {
+  $(document).on('change', '[id^=chart_field_seq_ending_color_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     
