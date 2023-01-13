@@ -947,3 +947,64 @@ def group_count_design_reports(current_c):
     current_c.page.item_count = len(reports)
 
     return current_c
+
+#   Transform RGB and color name to hex
+def color_to_hex(color):
+    color = str(color)
+
+    #   Detect RGB
+    if(color.startswith('rgb')):
+        numbers = re.findall(r'\d+', color)
+        r = int(numbers[0])
+        g = int(numbers[1])
+        b = int(numbers[2])
+        
+        return ('#{:02X}{:02X}{:02X}').format(r, g, b)
+
+    #   Previously supported colors dict for retrocompatibility
+    named_colors = {
+        "green": "#008000",
+        "blue": "#0000FF",
+        "teal": "#008080",
+        "goldenrod": "#DAA520",
+        "yellow": "#FFFF00",
+        "orange": "#FFA500",
+        "brown": "#A52A2A",
+        "purple": "#800080",
+        "red": "#FF0000",
+        "burlywood": "#DEB887",
+        "coral": "#FF7F50",
+        "black": "#000000",
+        "darkblue": "#00008B",
+        "darkgray": "#A9A9A9",
+        "darkolivegreen": "#556B2F",
+        "darkseagreen": "#8FBC8B",
+        "darkslateblue": "#483D8B",
+        "darkturquoise": "#00CED1",
+        "deeppink": "#FF1493",
+        "deepskyblue": "#00BFFF",
+        "lightgreen": "#90EE90",
+        "mediumvioletred": "#C71585",
+        "midnightblue": "#191970",
+        "lightsteelblue": "#B0C4DE",
+        "powderblue": "#B0E0E6",
+        "lightyellow": "#FFFFE0",
+        "teal": "#008080",
+        "darkcyan": "#008B8B",
+        "cadetblue": "#5F9EA0",
+        "mediumaquamarine": "#66CDAA",
+        "coral": "#FF7F50",
+        "darkorange": "#FF8C00",
+        "sandybrown": "#F4A460",
+        "navajowhite": "#FFDEAD",
+        "peru": "#CD853F",
+        "burlywood": "#DEB887",
+        "tan": "#D2B48C",
+        "wheat": "#F5DEB3",
+        "papayawhip": "#FFEFD5"
+    }
+
+    if color in named_colors.keys():
+        return named_colors.get(color)
+
+    return color
