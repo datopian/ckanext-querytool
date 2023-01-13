@@ -1438,3 +1438,29 @@ $('.report-search-sort').on('change', function() {
   var newUrl = url.toString();
   window.location.href = newUrl;
 });
+
+$('body').on('change', '[id^=chart_field_x_sort_labels_]', function () {
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_x_sort_labels_${chart_number}`).is(':checked');
+
+  if(selected) {
+      var currently_sorted = $(`#chart_field_sort_${chart_number}`).val();
+
+      if(currently_sorted != 'default') {
+          $(`#chart_field_sort_${chart_number}`).val('default').trigger('change');
+      }
+  }
+});
+
+$('body').on('change', '[id^=chart_field_sort_]', function () {
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#chart_field_sort_${chart_number}`).val();
+
+  if(selected != 'default') {
+      var currently_sorted = $(`#chart_field_x_sort_labels_${chart_number}`).is(':checked');
+
+      if(currently_sorted) {
+          $(`#chart_field_x_sort_labels_${chart_number}`).prop('checked', false).trigger('change');
+      }
+  }
+});
