@@ -2307,8 +2307,6 @@ ckan.module('querytool-viz-preview', function() {
               //  Mutiply it by the length of the data array
                steps = steps * data.length;
   
-              console.log('DEBUG - data.length', data.length)
-              console.log('DEBUG - data', data)
 
               //  If data is `grouped` (category is set)
               if(data.length > 1) {
