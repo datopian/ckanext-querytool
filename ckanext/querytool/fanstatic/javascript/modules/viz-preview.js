@@ -2617,6 +2617,22 @@ ckan.module('querytool-viz-preview', function() {
               modeBarButtonsToRemove: ["toImage"],
             };
   
+            //  Use Prism color palette
+            //  See: https://plotly.com/python/discrete-color/#color-sequences-in-plotly-express
+            base_info.colorway = [
+              "rgb(95, 70, 144)",
+              "rgb(29, 105, 150)",
+              "rgb(56, 166, 165)",
+              "rgb(15, 133, 84)",
+              "rgb(115, 175, 72)",
+              "rgb(237, 173, 8)",
+              "rgb(225, 124, 5)",
+              "rgb(204, 80, 62)",
+              "rgb(148, 52, 110)",
+              "rgb(111, 64, 112)",
+              "rgb(102, 102, 102)",
+            ]
+
             Plotly.newPlot(this.el[0], data, base_info, config);
 
         },
