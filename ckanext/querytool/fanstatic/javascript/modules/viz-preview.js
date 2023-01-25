@@ -407,14 +407,8 @@ ckan.module('querytool-viz-preview', function() {
             // Sort data
             var sBarOrder = data_sort;
             if (
-                (
-                    (this.options.chart_type === 'sbar' || this.options.chart_type === 'shbar')
-                    && !this.options.category_name
-                ) 
-                //  NOTE: this part of the refactoring seems really
-                //  weird on the dist file. If something goes wrong
-                //  with sorting, check around here.
-                // || additionalCategory    //  TODO: check if this should not be commented
+              (this.options.chart_type !== 'sbar' && this.options.chart_type !== 'shbar')
+              && !additionalCategory
             ) {
                 this.sortData(data_sort, records, y_axis, x_axis);
             }
@@ -1607,33 +1601,28 @@ ckan.module('querytool-viz-preview', function() {
                 for (tmp = 0; tmp < len_data; tmp++) {
                   var color_count = 1;
                   var d = data_tmp[tmp];
-  
+
+                  //  Get the id of the element that holds the color
                   var c = "chart_field_color_" + item_no + "_" + (tmp + 1);
+
+                  //  Get the plotly object
                   var chart_field_plotly_value = chart_plotly.value;
   
                   if (chart_field_plotly_value) {
                     // there is a plotly value in the input field
                     var color_tmp = document.querySelectorAll(
-                      "[data-target=" + c + "]"
+                      "[name=" + c + "]"
                     );
-  
+
                     if (color_tmp["length"] >= 1) {
-                      var color = color_tmp[0].style.cssText;
-                      if (color) {
-                        var new_color = color.split(": ")[1].slice(0, -1);
-                        if (new_color.includes("none")) {
-                          new_color = new_color.substring(
-                            0,
-                            new_color.indexOf(" none")
-                          );
-                        }
-                      }
+                      var color = color_tmp[0].value;
+
                       d["marker"] = {
-                        color: new_color,
+                        color,
                       };
                     } else {
                       d["marker"] = {
-                        color: "darkseagreen",
+                        color: "#8fbc8f",
                       };
                     }
                   } else {
@@ -1641,14 +1630,14 @@ ckan.module('querytool-viz-preview', function() {
                     var color_tmp = document.querySelectorAll(
                       "[data-target=" + color_id + "]"
                     );
-  
+
                     if (color_tmp["length"] >= 1) {
                       var color = color_tmp[0].style.cssText;
                       // check type and do the conditions according to that
-  
+
                       if (typeof color === "undefined" || color === "") {
                         d["marker"] = {
-                          color: "darkseagreen",
+                          color: "#8fbc8f",
                         };
                       } else {
                         var new_color = color.split(": ")[1].slice(0, -1);
@@ -1665,24 +1654,24 @@ ckan.module('querytool-viz-preview', function() {
                       }
                     } else {
                       d["marker"] = {
-                        color: "darkseagreen",
+                        color: "#8fbc8f",
                       };
                     }
                   }
-  
+
                   // delete elements
                   var p = document.querySelectorAll(
                     '[id^="chart_field_color_' + item_no + '"]'
                   );
                   var color_elements = 0;
-  
+
                   for (var a = 0; a < p.length; a++) {
                     var type = p[a].tagName;
                     if (type === "INPUT") {
                       color_elements = color_elements + 1;
                     }
                   }
-  
+
                   if (color_elements > data.length) {
                     for (var a = 0; a < p.length; a++) {
                       var type = p[a].tagName;
@@ -1691,13 +1680,13 @@ ckan.module('querytool-viz-preview', function() {
                       }
                     }
                   }
-  
+
                   // add new html element
                   var elementExists = document.getElementById(c);
-  
+
                   if (elementExists) {
                     elementExists.parentElement.remove();
-  
+
                     var newcontent = document.createElement("div");
                     var html = "";
                     html += '<div class="control-group control-select">';
@@ -1710,7 +1699,7 @@ ckan.module('querytool-viz-preview', function() {
                       d["name"] +
                       "</label>";
                     html +=
-                      '<input type="text" id="chart_field_color_' +
+                      '<input type="color" id="chart_field_color_' +
                       item_no +
                       "_" +
                       (tmp + 1) +
@@ -1718,12 +1707,12 @@ ckan.module('querytool-viz-preview', function() {
                       item_no +
                       "_" +
                       (tmp + 1) +
-                      '" class="colorpicker" style="display:none;" value="' +
+                      '" class="colorpicker" value="' +
                       d["marker"]["color"] +
                       '"/> ';
                     html += "</div>";
                     newcontent.innerHTML = html;
-  
+
                     document
                       .getElementById("chart_field_plotly_" + item_no)
                       .insertAdjacentHTML("afterend", html);
@@ -1745,7 +1734,7 @@ ckan.module('querytool-viz-preview', function() {
                       d["name"] +
                       "</label>";
                     html +=
-                      '<input type="text" id="chart_field_color_' +
+                      '<input type="color" id="chart_field_color_' +
                       item_no +
                       "_" +
                       (tmp + 1) +
@@ -1753,12 +1742,12 @@ ckan.module('querytool-viz-preview', function() {
                       item_no +
                       "_" +
                       (tmp + 1) +
-                      '" class="colorpicker" style="display:none;" value="' +
+                      '" class="colorpicker" value="' +
                       d["marker"]["color"] +
                       '"/> ';
                     html += "</div>";
                     newcontent.innerHTML = html;
-  
+
                     document
                       .getElementById("chart_field_plotly_" + item_no)
                       .insertAdjacentHTML("afterend", html);
@@ -1768,7 +1757,7 @@ ckan.module('querytool-viz-preview', function() {
                       elem.parentNode.removeChild(elem);
                     }
                   }
-                  generateColorPicker();
+
                 }
   
                 data = data_tmp;
@@ -2298,14 +2287,15 @@ ckan.module('querytool-viz-preview', function() {
             var colorpicker_selection = document.getElementById("color_type");
   
             if (
-              this.options.color_type == 2 ||
+              this.options.color_type == 2 || //  Is sequential
               (colorpicker_selection !== null &&
                 [null, "2"].includes(colorpicker_selection.value) &&
-                !["donut", "pie"].includes(this.options.chart_type))
+                !["donut", "pie"].includes(this.options.chart_type))  //  Isn't donut not pie
             ) {
               var steps = 0;
               var base_sequential_colors = this.options.seq_color.split(",");
   
+              //  Find the max amount of data points
               for (i = 0; i < data.length; i++) {
                 if (["scatter"].includes(this.options.chart_type)) {
                   var steps = Math.max(steps, data[i].y.length);
@@ -2314,41 +2304,59 @@ ckan.module('querytool-viz-preview', function() {
                 }
               }
   
-              steps = steps * data.length;
+              //  Mutiply it by the length of the data array
+               steps = steps * data.length;
   
-              for (i = 0; i < data.length; i++) {
+
+              //  If data is `grouped` (category is set)
+              if(data.length > 1) {
                 var sequential_colors = interpolateColors(
                   hexToRgb(base_sequential_colors[0]),
                   hexToRgb(base_sequential_colors[1]),
-                  steps
+                  data.length
                 );
-                var sequential_colors_section = [];
-  
-                for (
-                  j = Math.round((sequential_colors.length / data.length) * i);
-                  j <
-                    Math.round(
-                      (sequential_colors.length / data.length) * (i + 1)
-                    ) && sequential_colors.length;
-                  j++
-                ) {
-                  sequential_colors_section.push(sequential_colors[j]);
+
+                for (i = 0; i < data.length; i++) {
+                  data[i].marker = {
+                    color: sequential_colors[i]
+                  };
                 }
-  
-                if (
-                  !"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])
-                ) {
-                  data[i].marker = {
-                    color: sequential_colors_section,
-                  };
-                } else {
-                  data[i].marker = {
-                    color: interpolateColors(
-                      hexToRgb(base_sequential_colors[0]),
-                      hexToRgb(base_sequential_colors[1]),
-                      2
-                    ),
-                  };
+              } else {
+                for (i = 0; i < data.length; i++) {
+                  //  Generate color steps between the two colors
+                  var sequential_colors = interpolateColors(
+                    hexToRgb(base_sequential_colors[0]),
+                    hexToRgb(base_sequential_colors[1]),
+                    steps
+                  );
+                  var sequential_colors_section = [];
+    
+                  for (
+                    j = Math.round((sequential_colors.length / data.length) * i);
+                    j <
+                      Math.round(
+                        (sequential_colors.length / data.length) * (i + 1)
+                      ) && sequential_colors.length;
+                    j++
+                  ) {
+                    sequential_colors_section.push(sequential_colors[j]);
+                  }
+    
+                  if (
+                    !"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])
+                  ) {
+                    data[i].marker = {
+                      color: sequential_colors_section,
+                    };
+                  } else {
+                    data[i].marker = {
+                      color: interpolateColors(
+                        hexToRgb(base_sequential_colors[0]),
+                        hexToRgb(base_sequential_colors[1]),
+                        2
+                      ),
+                    };
+                  }
                 }
               }
             }
@@ -2609,6 +2617,22 @@ ckan.module('querytool-viz-preview', function() {
               modeBarButtonsToRemove: ["toImage"],
             };
   
+            //  Use Prism color palette
+            //  See: https://plotly.com/python/discrete-color/#color-sequences-in-plotly-express
+            base_info.colorway = [
+              "rgb(95, 70, 144)",
+              "rgb(29, 105, 150)",
+              "rgb(56, 166, 165)",
+              "rgb(15, 133, 84)",
+              "rgb(115, 175, 72)",
+              "rgb(237, 173, 8)",
+              "rgb(225, 124, 5)",
+              "rgb(204, 80, 62)",
+              "rgb(148, 52, 110)",
+              "rgb(111, 64, 112)",
+              "rgb(102, 102, 102)",
+            ]
+
             Plotly.newPlot(this.el[0], data, base_info, config);
 
         },
