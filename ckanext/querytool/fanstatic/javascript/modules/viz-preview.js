@@ -2287,14 +2287,15 @@ ckan.module('querytool-viz-preview', function() {
             var colorpicker_selection = document.getElementById("color_type");
   
             if (
-              this.options.color_type == 2 ||
+              this.options.color_type == 2 || //  Is sequential
               (colorpicker_selection !== null &&
                 [null, "2"].includes(colorpicker_selection.value) &&
-                !["donut", "pie"].includes(this.options.chart_type))
+                !["donut", "pie"].includes(this.options.chart_type))  //  Isn't donut not pie
             ) {
               var steps = 0;
               var base_sequential_colors = this.options.seq_color.split(",");
   
+              //  Find the max amount of data points
               for (i = 0; i < data.length; i++) {
                 if (["scatter"].includes(this.options.chart_type)) {
                   var steps = Math.max(steps, data[i].y.length);
@@ -2303,41 +2304,59 @@ ckan.module('querytool-viz-preview', function() {
                 }
               }
   
-              steps = steps * data.length;
+              //  Mutiply it by the length of the data array
+               steps = steps * data.length;
   
-              for (i = 0; i < data.length; i++) {
+
+              //  If data is `grouped` (category is set)
+              if(data.length > 1) {
                 var sequential_colors = interpolateColors(
                   hexToRgb(base_sequential_colors[0]),
                   hexToRgb(base_sequential_colors[1]),
-                  steps
+                  data.length
                 );
-                var sequential_colors_section = [];
-  
-                for (
-                  j = Math.round((sequential_colors.length / data.length) * i);
-                  j <
-                    Math.round(
-                      (sequential_colors.length / data.length) * (i + 1)
-                    ) && sequential_colors.length;
-                  j++
-                ) {
-                  sequential_colors_section.push(sequential_colors[j]);
+
+                for (i = 0; i < data.length; i++) {
+                  data[i].marker = {
+                    color: sequential_colors[i]
+                  };
                 }
-  
-                if (
-                  !"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])
-                ) {
-                  data[i].marker = {
-                    color: sequential_colors_section,
-                  };
-                } else {
-                  data[i].marker = {
-                    color: interpolateColors(
-                      hexToRgb(base_sequential_colors[0]),
-                      hexToRgb(base_sequential_colors[1]),
-                      2
-                    ),
-                  };
+              } else {
+                for (i = 0; i < data.length; i++) {
+                  //  Generate color steps between the two colors
+                  var sequential_colors = interpolateColors(
+                    hexToRgb(base_sequential_colors[0]),
+                    hexToRgb(base_sequential_colors[1]),
+                    steps
+                  );
+                  var sequential_colors_section = [];
+    
+                  for (
+                    j = Math.round((sequential_colors.length / data.length) * i);
+                    j <
+                      Math.round(
+                        (sequential_colors.length / data.length) * (i + 1)
+                      ) && sequential_colors.length;
+                    j++
+                  ) {
+                    sequential_colors_section.push(sequential_colors[j]);
+                  }
+    
+                  if (
+                    !"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])
+                  ) {
+                    data[i].marker = {
+                      color: sequential_colors_section,
+                    };
+                  } else {
+                    data[i].marker = {
+                      color: interpolateColors(
+                        hexToRgb(base_sequential_colors[0]),
+                        hexToRgb(base_sequential_colors[1]),
+                        2
+                      ),
+                    };
+                  }
                 }
               }
             }
@@ -2598,6 +2617,22 @@ ckan.module('querytool-viz-preview', function() {
               modeBarButtonsToRemove: ["toImage"],
             };
   
+            //  Use Prism color palette
+            //  See: https://plotly.com/python/discrete-color/#color-sequences-in-plotly-express
+            base_info.colorway = [
+              "rgb(95, 70, 144)",
+              "rgb(29, 105, 150)",
+              "rgb(56, 166, 165)",
+              "rgb(15, 133, 84)",
+              "rgb(115, 175, 72)",
+              "rgb(237, 173, 8)",
+              "rgb(225, 124, 5)",
+              "rgb(204, 80, 62)",
+              "rgb(148, 52, 110)",
+              "rgb(111, 64, 112)",
+              "rgb(102, 102, 102)",
+            ]
+
             Plotly.newPlot(this.el[0], data, base_info, config);
 
         },
