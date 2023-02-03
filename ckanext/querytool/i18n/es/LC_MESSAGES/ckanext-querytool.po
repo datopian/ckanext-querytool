@@ -1619,3 +1619,27 @@ msgstr "Disfraz"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
 msgid "Default"
 msgstr "Defecto"
+
+# Manually added translations
+msgid "Search reports"
+msgstr "Buscar informes"
+
+# Manually added translations
+msgid "Search datasets"
+msgstr "Buscar conjuntos de datos"
+
+# Manually added translations
+msgid "Starting color"
+msgstr "Color inicial"
+
+# Manually added translations
+msgid "Ending color"
+msgstr "Color final"
+
+# Manually added translations
+msgid "Download Options"
+msgstr "Opciones de descarga"
+
+# Manually added translations
+msgid "Report Icon URL"
+msgstr "URL del icono de informe"

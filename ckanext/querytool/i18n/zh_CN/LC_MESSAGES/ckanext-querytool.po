@@ -1663,3 +1663,27 @@ msgstr "风俗"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
 msgid "Default"
 msgstr "默认"
+
+# Manually added translations
+msgid "Search reports"
+msgstr "搜索报告"
+
+# Manually added translations
+msgid "Search datasets"
+msgstr "搜索数据集"
+
+# Manually added translations
+msgid "Starting color"
+msgstr "起始颜色"
+
+# Manually added translations
+msgid "Ending color"
+msgstr "结束颜色"
+
+# Manually added translations
+msgid "Download Options"
+msgstr "下载选项"
+
+# Manually added translations
+msgid "Report Icon URL"
+msgstr "报告图标 URL"

@@ -1664,3 +1664,27 @@ msgstr "Personnalisé"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
 msgid "Default"
 msgstr "Défaut"
+
+# Manually added translations
+msgid "Search reports"
+msgstr "Rechercher des rapports"
+
+# Manually added translations
+msgid "Search datasets"
+msgstr "Rechercher des ensembles de données"
+
+# Manually added translations
+msgid "Starting color"
+msgstr "Couleur initiale"
+
+# Manually added translations
+msgid "Ending color"
+msgstr "Couleur finale"
+
+# Manually added translations
+msgid "Download Options"
+msgstr "Options de téléchargement"
+
+# Manually added translations
+msgid "Report Icon URL"
+msgstr "URL de l'icône de rapport"
