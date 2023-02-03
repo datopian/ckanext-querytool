@@ -1309,6 +1309,66 @@ ckan.module('querytool-viz-preview', function() {
                 data.push(trace);
               }
             }
+
+            // Workaround for translations
+            var lang = document.documentElement.getAttribute('lang');
+
+            var i18n = {
+                'en': {
+                    'Solid': 'Solid',
+                    'Dotted': 'Dotted',
+                    'Dashed': 'Dashed',
+                    'Dash Dot': 'Dash Dot',
+                    'Regular': 'Regular',
+                    'Slim': 'Slim',
+                    'Wide': 'Wide'
+                },
+                'fr': {
+                    'Solid': 'Solide',
+                    'Dotted': 'Pointé',
+                    'Dashed': 'Trait',
+                    'Dash Dot': 'Trait et point',
+                    'Regular': 'Réguliere',
+                    'Slim': 'Mince',
+                    'Wide': 'Large'
+                },
+                'es': {
+                    'Solid': 'Sólido',
+                    'Dotted': 'Punteado',
+                    'Dashed': 'Rayado',
+                    'Dash Dot': 'Rayado punto',
+                    'Regular': 'Regular',
+                    'Slim': 'Delgado',
+                    'Wide': 'Ancho'
+                },
+                'km': {
+                    'Solid': 'រឹង',
+                    'Dotted': 'ចំនុចោះ',
+                    'Dashed': 'ដាច់ៗ',
+                    'Dash Dot': 'ដាច់ៗ ចំនុច',
+                    'Regular': 'ទៀង​ទា​ត',
+                    'Slim': 'ស្ដើង',
+                    'Wide': 'ធំទូលាយ'
+                },
+                'pt_BR': {
+                    'Solid': 'Sólida',
+                    'Dotted': 'Pontilhada',
+                    'Dashed': 'Hífen',
+                    'Dash Dot': 'Linha e ponto',
+                    'Regular': 'Regular',
+                    'Slim': 'Fina',
+                    'Wide': 'Larga'
+                },
+                'zh_CN': {
+                    'Solid': '坚硬的',
+                    'Dotted': '点缀',
+                    'Dashed': '虚线',
+                    'Dash Dot': '破折号',
+                    'Regular': '常规的',
+                    'Slim': '苗条的',
+                    'Wide': '宽的'
+                }
+            };
   
             /**** Line TYpes [dotted,solid] *****/
             var item_exists = this.el.closest(".chart_field").attr("id");
@@ -1418,27 +1478,27 @@ ckan.module('querytool-viz-preview', function() {
                     '" >';
   
                   if (html_line_type == "solid") {
-                    html += '<option value="solid" selected>Solid</option>';
+                    html += '<option value="solid" selected>' + i18n[lang]['Solid'] + '</option>';
                   } else {
-                    html += '<option value="solid">Solid</option>';
+                    html += '<option value="solid">' + i18n[lang]['Solid'] + '</option>';
                   }
   
                   if (html_line_type == "dash") {
-                    html += '<option value="dash" selected>Dashed</option>';
+                    html += '<option value="dash" selected>' + i18n[lang]['Dashed'] + '</option>';
                   } else {
-                    html += '<option value="dash">Dashed</option>';
+                    html += '<option value="dash">' + i18n[lang]['Dashed'] + '</option>';
                   }
   
                   if (html_line_type == "dashdot") {
-                    html += '<option value="dashdot" selected>Dash Dot</option>';
+                    html += '<option value="dashdot" selected>' + i18n[lang]['Dash Dot'] + '</option>';
                   } else {
-                    html += '<option value="dashdot">Dash Dot</option>';
+                    html += '<option value="dashdot">' + i18n[lang]['Dash Dot'] + '</option>';
                   }
   
                   if (html_line_type == "dot") {
-                    html += '<option value="dot" selected>Dotted</option>';
+                    html += '<option value="dot" selected>' + i18n[lang]['Dotted'] + '</option>';
                   } else {
-                    html += '<option value="dot">Dotted</option>';
+                    html += '<option value="dot">' + i18n[lang]['Dotted'] + '</option>';
                   }
   
                   html += "</select>";
@@ -1456,24 +1516,24 @@ ckan.module('querytool-viz-preview', function() {
                     '" >';
   
                   if (html_line_width == "2") {
-                    html += '<option value="2" selected>Slim</option>';
+                    html += '<option value="2" selected>' + i18n[lang]['Slim'] + '</option>';
                   } else {
-                    html += '<option value="2">Slim</option>';
+                    html += '<option value="2">' + i18n[lang]['Slim'] + '</option>';
                   }
   
                   if (
                     html_line_width == "4" ||
                     !["2", "6"].includes(html_line_width)
                   ) {
-                    html += '<option value="4" selected>Regular</option>';
+                    html += '<option value="4" selected>' + i18n[lang]['Regular'] + '</option>';
                   } else {
-                    html += '<option value="4">Regular</option>';
+                    html += '<option value="4">' + i18n[lang]['Regular'] + '</option>';
                   }
   
                   if (html_line_width == "6") {
-                    html += '<option value="6" selected>Wide</option>';
+                    html += '<option value="6" selected>' + i18n[lang]['Wide'] + '</option>';
                   } else {
-                    html += '<option value="6">Wide</option>';
+                    html += '<option value="6">' + i18n[lang]['Wide'] + '</option>';
                   }
   
                   html += "</select>";
@@ -1509,27 +1569,27 @@ ckan.module('querytool-viz-preview', function() {
                     '" >';
   
                   if (html_line_type == "solid") {
-                    html += '<option value="solid" selected>Solid</option>';
+                    html += '<option value="solid" selected>' + i18n[lang]['Solid'] + '</option>';
                   } else {
-                    html += '<option value="solid">Solid</option>';
+                    html += '<option value="solid">' + i18n[lang]['Solid'] + '</option>';
                   }
   
                   if (html_line_type == "dash") {
-                    html += '<option value="dash" selected>Dashed</option>';
+                    html += '<option value="dash" selected>' + i18n[lang]['Dashed'] + '</option>';
                   } else {
-                    html += '<option value="dash">Dashed</option>';
+                    html += '<option value="dash">' + i18n[lang]['Dashed'] + '</option>';
                   }
   
                   if (html_line_type == "dashdot") {
-                    html += '<option value="dashdot" selected>Dash Dot</option>';
+                    html += '<option value="dashdot" selected>' + i18n[lang]['Dash Dot'] + '</option>';
                   } else {
-                    html += '<option value="dashdot">Dash Dot</option>';
+                    html += '<option value="dashdot">' + i18n[lang]['Dash Dot'] + '</option>';
                   }
   
                   if (html_line_type == "dot") {
-                    html += '<option value="dot" selected>Dotted</option>';
+                    html += '<option value="dot" selected>' + i18n[lang]['Dotted'] + '</option>';
                   } else {
-                    html += '<option value="dot">Dotted</option>';
+                    html += '<option value="dot">' + i18n[lang]['Dotted'] + '</option>';
                   }
   
                   html += "</select>";
@@ -1547,24 +1607,24 @@ ckan.module('querytool-viz-preview', function() {
                     '" >';
   
                   if (html_line_width == "2") {
-                    html += '<option value="2" selected>Slim</option>';
+                    html += '<option value="2" selected>' + i18n[lang]['Slim'] + '</option>';
                   } else {
-                    html += '<option value="2">Slim</option>';
+                    html += '<option value="2">' + i18n[lang]['Slim'] + '</option>';
                   }
   
                   if (
                     html_line_width == "4" ||
                     !["2", "6"].includes(html_line_width)
                   ) {
-                    html += '<option value="4" selected>Regular</option>';
+                    html += '<option value="4" selected>' + i18n[lang]['Regular'] + '</option>';
                   } else {
-                    html += '<option value="4">Regular</option>';
+                    html += '<option value="4">' + i18n[lang]['Regular'] + '</option>';
                   }
   
                   if (html_line_width == "6") {
-                    html += '<option value="6" selected>Wide</option>';
+                    html += '<option value="6" selected>' + i18n[lang]['Wide'] + '</option>';
                   } else {
-                    html += '<option value="6">Wide</option>';
+                    html += '<option value="6">' + i18n[lang]['Wide'] + '</option>';
                   }
   
                   html += "</select>";

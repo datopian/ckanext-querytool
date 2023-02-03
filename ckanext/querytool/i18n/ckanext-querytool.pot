@@ -1844,10 +1844,6 @@ msgstr ""
 msgid "Organization"
 msgstr ""
 
-#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:112
-msgid "Download Options"
-msgstr ""
-
 #: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:115
 msgid "Enabled"
 msgstr ""
@@ -2032,3 +2028,26 @@ msgstr ""
 msgid "Go"
 msgstr ""
 
+# Manually added translations
+msgid "Search reports"
+msgstr ""
+
+# Manually added translations
+msgid "Search datasets"
+msgstr ""
+
+# Manually added translations
+msgid "Starting color"
+msgstr ""
+
+# Manually added translations
+msgid "Ending color"
+msgstr ""
+
+# Manually added translations
+msgid "Report Icon URL"
+msgstr ""
+
+# Manually added translations
+msgid "Download Options"
+msgstr ""

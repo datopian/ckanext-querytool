@@ -2397,3 +2397,27 @@ msgstr "ផ្ទាល់ខ្លួន"
 #: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
 msgid "Default"
 msgstr "លំនាំដើម"
+
+# Manually added translations
+msgid "Search reports"
+msgstr "ស្វែងរករបាយការណ៍"
+
+# Manually added translations
+msgid "Search datasets"
+msgstr "ស្វែងរកសំណុំទិន្នន័យ"
+
+# Manually added translations
+msgid "Starting color"
+msgstr "ពណ៌ចាប់ផ្តើម"
+
+# Manually added translations
+msgid "Ending color"
+msgstr "ពណ៌បញ្ចប់"
+
+# Manually added translations
+msgid "Download Options"
+msgstr "ជម្រើសទាញយក"
+
+# Manually added translations
+msgid "Report Icon URL"
+msgstr "រាយការណ៍រូបតំណាង URL"

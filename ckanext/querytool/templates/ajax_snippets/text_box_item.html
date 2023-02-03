@@ -8,10 +8,10 @@
   <div class="item-wrapper">
 
     <div class="control-group title">
-      <label class="control-label" for="text_box_description_1">Content</label>
+      <label class="control-label" for="text_box_description_1">{{ _('Content') }}</label>
       <div class="controls editor">
         
-        <textarea id="text_box_description_{{ n }}" class="textbox_desc" name="text_box_description_{{ n }}" cols="20" rows="5" placeholder="Description">{{ text_description }}</textarea>
+        <textarea id="text_box_description_{{ n }}" class="textbox_desc" name="text_box_description_{{ n }}" cols="20" rows="5" placeholder="{{ _('Description') }}">{{ text_description }}</textarea>
         <div class="control-group title-vars">
           <div class=" ">
             {% set filters = h.querytool_parse_json(info_query_filters or main_filters or '[]') %}
