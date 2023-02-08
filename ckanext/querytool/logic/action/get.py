@@ -5,6 +5,8 @@ from operator import itemgetter
 import ckan.model as m
 from ckan.common import c
 from ckan.plugins import toolkit
+import ckan.logic as logic
+import ckan.authz as authz
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
 import ckanext.querytool.helpers as h
@@ -12,6 +14,10 @@ import ckan.lib.helpers as ch
 from ckanext.querytool.lib.file_writer_service import FileWriterService
 
 log = logging.getLogger(__name__)
+
+_check_access = logic.check_access
+NotFound = logic.NotFound
+_get_or_bust = logic.get_or_bust
 
 
 def _get_context():
@@ -381,3 +387,53 @@ def querytool_get_map_data(context, data_dict):
 
     return h.get_map_data(geojson_url, map_key_field, data_key_field,
                           data_value_field, sql_string)
+
+
+def member_list(context, data_dict=None, permissions_check=None):
+    '''Return the members of a group.
+    The user must have permission to 'get' the group.
+    :param id: the id or name of the group
+    :type id: string
+    :param object_type: restrict the members returned to those of a given type,
+      e.g. ``'user'`` or ``'package'`` (optional, default: ``None``)
+    :type object_type: string
+    :param capacity: restrict the members returned to those with a given
+      capacity, e.g. ``'member'``, ``'editor'``, ``'admin'``, ``'public'``,
+      ``'private'`` (optional, default: ``None``)
+    :type capacity: string
+    :rtype: list of (id, type, capacity) tuples
+    :raises: :class:`ckan.logic.NotFound`: if the group doesn't exist
+    '''
+    model = context['model']
+
+    group = model.Group.get(_get_or_bust(data_dict, 'id'))
+    if not group:
+        raise NotFound
+
+    obj_type = data_dict.get('object_type', None)
+    capacity = data_dict.get('capacity', None)
+
+    # User must be able to update the group to remove a member from it
+    _check_access('group_show', context, data_dict)
+
+    q = model.Session.query(model.Member).\
+        filter(model.Member.group_id == group.id).\
+        filter(model.Member.state == "active")
+
+    if obj_type:
+        q = q.filter(model.Member.table_name == obj_type)
+    if capacity:
+        q = q.filter(model.Member.capacity == capacity)
+
+    trans = authz.roles_trans()
+
+    def translated_capacity(capacity):
+        if permissions_check:
+            return capacity.lower()
+        try:
+            return trans[capacity]
+        except KeyError:
+            return capacity
+
+    return [(m.table_id, m.table_name, translated_capacity(m.capacity))
+            for m in q.all()]
