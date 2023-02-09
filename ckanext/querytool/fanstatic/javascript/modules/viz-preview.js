@@ -2501,13 +2501,13 @@ ckan.module('querytool-viz-preview', function() {
               lower_bounds !== ""
             ) {
               if (options.axis && options.axis["x"]["categories"]) {
-                const lower = data.map((x) => {
+                const lower = records.map((x) => {
                   return Math.round(
                     //  TODO: check if this x is defined
                     Math.abs(x[this.options.y_axis.toLowerCase()] - x[lower_bounds])
                   );
                 });
-                const upper = data.map((x) => {
+                const upper = records.map((x) => {
                   return Math.round(
                     Math.abs(x[this.options.y_axis.toLowerCase()] - x[upper_bounds])
                   );
@@ -2559,25 +2559,26 @@ ckan.module('querytool-viz-preview', function() {
                   }
                 }
               }
-              if (options.axis && !options.axis["x"]["categories"] && data[upper_bounds] && data[lower_bounds]) {
+
+              if (options.axis && !options.axis["x"]["categories"] && records[upper_bounds] && records[lower_bounds]) {
                 for (var i = 0; i < data.length; i++) {
-                  if (data[upper_bounds][data[i].name] !== undefined) {
+                  if (records[upper_bounds][data[i].name] !== undefined) {
                     var category_keys = [];
                     var upper = [];
                     var lower = [];
   
-                    for (var j = 1; j < data[data[i].name].length; j++) {
+                    for (var j = 1; j < records[data[i].name].length; j++) {
                       upper.push(
                         Math.round(
                           Math.abs(
-                            data[data[i].name][j] - data[upper_bounds][data[i].name][j - 1]
+                            records[data[i].name][j] - records[upper_bounds][data[i].name][j - 1]
                           )
                         )
                       );
                       lower.push(
                         Math.round(
                           Math.abs(
-                            data[data[i].name][j] - data[lower_bounds][data[i].name][j - 1]
+                            records[data[i].name][j] - records[lower_bounds][data[i].name][j - 1]
                           )
                         )
                       );
