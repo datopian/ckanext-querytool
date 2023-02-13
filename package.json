@@ -2,7 +2,7 @@
   "name": "ckanext-querytool",
   "scripts": {
     "webpack": "webpack",
-    "webpack-dev": "webpack --mode=development --watch=true"
+    "webpack-dev": "webpack --mode=development --watch=true --config webpack.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",
