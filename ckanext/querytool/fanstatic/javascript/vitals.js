@@ -703,13 +703,6 @@ $(document).ready(function(){
     var selected = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
 
-    //Hide color options if pie or donut
-    if(selected=='pie' || selected=='donut') {
-      $(this).closest('.accordion').find(".color-accordion").addClass('hidden')
-    } else {
-      $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
-    }
-
     if(['line', 'spline'].includes(selected)) {
       $(this).closest('.accordion').find(".line-accordion").removeClass('hidden')
     } else {

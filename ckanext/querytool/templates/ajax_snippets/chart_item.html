@@ -238,11 +238,6 @@
       </div>
 
       {# Chart additional color setup  #}
-      {% if selected_chart_type in ['donut', 'pie'] %}
-        {% set hide_color_picker = 'hidden' %}
-      {% else %}
-        {% set hide_color_picker = '' %}
-      {% endif %}
       <div class="accordion-group {{ hide_color_picker }} color-accordion">
         <div class="accordion-heading">
           <a href="#accordion_{{ chart_id }}_chart_plotly" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
