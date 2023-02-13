@@ -710,7 +710,7 @@ $(document).ready(function(){
     }
 
     //Hide seqeuntial if not bar chart
-    if(selected=='line' || selected=='area' || selected=='spline' || selected=='donut' || selected=='pie' || selected=='scatter'){
+    if(selected=='line' || selected=='area' || selected=='spline' || selected=='scatter'){
       $(`#chart_field_color_type_${chart_number}`).val("1");
       $(`#chart_field_color_type_${chart_number}`).change();
 
