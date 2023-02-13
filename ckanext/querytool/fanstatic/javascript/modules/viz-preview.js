@@ -2303,77 +2303,98 @@ ckan.module('querytool-viz-preview', function() {
   
             var colorpicker_selection = document.getElementById("color_type");
   
+            console.log(this.options.seq_color)
+
             if (
               this.options.color_type == 2 || //  Is sequential
               (colorpicker_selection !== null &&
-                [null, "2"].includes(colorpicker_selection.value) &&
-                !["donut", "pie"].includes(this.options.chart_type))  //  Isn't donut not pie
+                [null, "2"].includes(colorpicker_selection.value)) 
             ) {
               var steps = 0;
               var base_sequential_colors = this.options.seq_color.split(",");
-  
+
               //  Find the max amount of data points
               for (i = 0; i < data.length; i++) {
                 if (["scatter"].includes(this.options.chart_type)) {
-                  var steps = Math.max(steps, data[i].y.length);
+                  steps = Math.max(steps, data[i].y.length);
                 } else {
-                  var steps = Math.max(steps, data[i].x.length);
+                  if (["donut", "pie"].includes(this.options.chart_type)) {
+                    steps = Math.max(steps, data[i].labels.length);
+                  } else {
+                    steps = Math.max(steps, data[i].x.length);
+                  }
                 }
               }
-  
+
               //  Mutiply it by the length of the data array
-               steps = steps * data.length;
-  
+              if (!["donut", "pie"].includes(this.options.chart_type)) {
+                steps = steps * data.length;
+              }
 
               //  If data is `grouped` (category is set)
-              if(data.length > 1) {
+              if (
+                data.length > 1 ||
+                ["donut", "pie"].includes(this.options.chart_type)
+              ) {
+
+                let dataLength;
+                if (["donut", "pie"].includes(this.options.chart_type)) {
+                  dataLength = data[0].labels.length;
+
+                  //  So that steps is at least 2
+                  if (dataLength < 2) dataLength = 2;
+                } else {
+                  dataLength = data.length;
+                }
+
                 var sequential_colors = interpolateColors(
                   hexToRgb(base_sequential_colors[0]),
                   hexToRgb(base_sequential_colors[1]),
-                  data.length
+                  dataLength
                 );
 
-                for (i = 0; i < data.length; i++) {
-                  data[i].marker = {
-                    color: sequential_colors[i]
+                if (["donut", "pie"].includes(this.options.chart_type)) {
+                  data[0].marker = {
+                    colors: sequential_colors,
                   };
+                } else {
+                  for (i = 0; i < dataLength; i++) {
+                    data[i].marker = {
+                      color: sequential_colors[i],
+                    };
+                  }
                 }
               } else {
-                for (i = 0; i < data.length; i++) {
-                  //  Generate color steps between the two colors
-                  var sequential_colors = interpolateColors(
-                    hexToRgb(base_sequential_colors[0]),
-                    hexToRgb(base_sequential_colors[1]),
-                    steps
-                  );
-                  var sequential_colors_section = [];
-    
-                  for (
-                    j = Math.round((sequential_colors.length / data.length) * i);
-                    j <
-                      Math.round(
-                        (sequential_colors.length / data.length) * (i + 1)
-                      ) && sequential_colors.length;
-                    j++
-                  ) {
-                    sequential_colors_section.push(sequential_colors[j]);
-                  }
-    
-                  if (
-                    !"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])
-                  ) {
-                    data[i].marker = {
-                      color: sequential_colors_section,
-                    };
-                  } else {
-                    data[i].marker = {
-                      color: interpolateColors(
-                        hexToRgb(base_sequential_colors[0]),
-                        hexToRgb(base_sequential_colors[1]),
-                        2
-                      ),
-                    };
-                  }
+                //  Generate color steps between the two colors
+                var sequential_colors = interpolateColors(
+                  hexToRgb(base_sequential_colors[0]),
+                  hexToRgb(base_sequential_colors[1]),
+                  steps
+                );
+                var sequential_colors_section = [];
+
+                for (
+                  j = 0;
+                  j < sequential_colors.length;
+                  j++
+                ) {
+                  sequential_colors_section.push(sequential_colors[j]);
+                }
+
+                if (
+                  !"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])
+                ) {
+                  data[0].marker = {
+                    color: sequential_colors_section,
+                  };
+                } else {
+                  data[0].marker = {
+                    color: interpolateColors(
+                      hexToRgb(base_sequential_colors[0]),
+                      hexToRgb(base_sequential_colors[1]),
+                      2
+                    ),
+                  };
                 }
               }
             }
