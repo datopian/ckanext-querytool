@@ -291,15 +291,27 @@
               <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
               {% set color_count = 1 %}
-              {% for a in plotly %}
-                {% set color = h.color_to_hex(a.marker.color) %}
-                {% set name = a.name %}
-                <div class="control-group control-select">
-                  <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
-                  <input type="color" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
-                </div>
-                {% set color_count = color_count + 1 %}
-              {% endfor %}
+              {% if selected_chart_type in ['pie', 'donut'] %}
+                {% for i in range(plotly[0].labels | length) %}
+                  {% set color = h.color_to_hex(plotly[0].marker.colors[i]) %}
+                  {% set name = plotly[0].labels[i] %}
+                  <div class="control-group control-select">
+                    <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
+                    <input type="color" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
+                  </div>
+                  {% set color_count = color_count + 1 %}
+                {% endfor %}
+              {% else %}
+                {% for a in plotly %}
+                  {% set color = h.color_to_hex(a.marker.color) %}
+                  {% set name = a.name %}
+                  <div class="control-group control-select">
+                    <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
+                    <input type="color" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
+                  </div>
+                  {% set color_count = color_count + 1 %}
+                {% endfor %}
+              {% endif %}
 
             {% else %}
               {# Color #}
