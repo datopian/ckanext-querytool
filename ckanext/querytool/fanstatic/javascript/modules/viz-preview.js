@@ -2303,8 +2303,6 @@ ckan.module('querytool-viz-preview', function() {
   
             var colorpicker_selection = document.getElementById("color_type");
   
-            console.log(this.options.seq_color)
-
             if (
               this.options.color_type == 2 || //  Is sequential
               (colorpicker_selection !== null &&
@@ -2354,9 +2352,31 @@ ckan.module('querytool-viz-preview', function() {
                 );
 
                 if (["donut", "pie"].includes(this.options.chart_type)) {
+
+                  //  Values and labels have to be manually  sorted
+                  //  so that we can ensure the order of the colors
+                  //  is right
+                  //  Without this, sections with equal values  may
+                  //  end up with colors swapped
+                  data[0].sort = false;
+
+                  const values = data[0].values.map((v, i) => ({
+                    value: v,
+                    label: data[0].labels[i],
+                  }));
+
+                  values.sort((a, b) => {
+                    return b.value - a.value
+                  });
+
+
+                  data[0].values = values.map(i => i.value);
+                  data[0].labels = values.map(i => i.label);
+
                   data[0].marker = {
-                    colors: sequential_colors,
+                    colors: sequential_colors.reverse(),
                   };
+
                 } else {
                   for (i = 0; i < dataLength; i++) {
                     data[i].marker = {
