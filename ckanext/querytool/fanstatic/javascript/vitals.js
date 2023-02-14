@@ -721,7 +721,6 @@ $(document).ready(function(){
       $(`.chart_field_color_wrap_${chart_number}`).removeClass('hidden');
     }
 
-
     //Hide and show x-axis options
     if(selected=='pie' || selected=='donut'){
       $(`#chart_field_x_label_${chart_number}`).attr("disabled");
@@ -764,7 +763,7 @@ $(document).ready(function(){
     }
 
 
-    //Hide bar width 
+    //Hide bar width
     if(selected=='line' || selected=='spline' || selected=='area' || selected=='pie' || selected=='donut') {
       $(`#chart_bar_width_${chart_number}`).addClass("hidden");
     } else {
@@ -779,6 +778,14 @@ $(document).ready(function(){
       $(`#chart_field_donut_hole_${chart_number}`).prop("disabled", true);
     }
 
+    //  If it's a new chart visualization, make
+    //  donut/pie  charts  colors   default  to
+    //  sequential
+    var chartFieldPlotly = $(`#chart_field_plotly_${chart_number}`).val();
+
+    if (["pie", "donut"].includes(selected) && !chartFieldPlotly) {
+      $(`#chart_field_color_type_${chart_number}`).val("2").change();
+    }
   })
 
 
