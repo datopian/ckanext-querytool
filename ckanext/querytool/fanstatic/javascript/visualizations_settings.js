@@ -580,8 +580,9 @@
                     var dropdownSecColorSchemeType = item.find('[id*=chart_field_color_type_]');  //  NOTE: mapped to nnn
                     var dropdownSecColorSchemeWrap = item.find('[class*=chart_field_color_wrap_]');  //  NOTE: mapped to nnnn
                     var dropdownSecColors = item.find('[class*=seq-colors-]');  //  NOTE: mapped to sq
-                    var dropdownSecStartingColor = item.find('[id*=chart_field_seq_starting_color_]');  //  NOTE: mapped to sq
-                    var dropdownSecEndingColor = item.find('[id*=chart_field_seq_ending_color_]');  //  NOTE: mapped to sq
+                    var dropdownSecStartingColor = item.find('[id*=chart_field_seq_starting_color_]');
+                    var dropdownSecEndingColor = item.find('[id*=chart_field_seq_ending_color_]');
+                    var dropdownSecColorPreview = item.find('[id*=seq_color_preview_]');
                     var dropdownDiverColors = item.find("[class*=diver-colors-]");  //  NOTE: mapped to dv
                     var dropdownShowAnnotations = item.find("[id*=chart_field_show_annotations_]"); //  NOTE: mapped to sa
                     
@@ -794,6 +795,7 @@
                     dropdownSecStartingColor.attr("name", "chart_field_seq_starting_color_" + order);  //  NOTE: mapped to sq
                     dropdownSecEndingColor.attr("id", "chart_field_seq_ending_color_" + order);
                     dropdownSecEndingColor.attr("name", "chart_field_seq_ending_color_" + order);
+                    dropdownSecColorPreview.attr("id", "seq_color_preview_" + order);
 
                     dropdownDiverColors.attr("class", "diver-colors-" + order),
                     
