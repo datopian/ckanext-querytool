@@ -898,6 +898,10 @@ ckan.module('querytool-viz-preview', function() {
               data = [];
               data.push(trace);
             }
+
+            if(["pie", "donut"].includes(this.options.chart_type)) {
+              data[0].direction = "clockwise";
+            }
   
             if ("scatter" === this.options.chart_type) {  
               var categories = options.axis["x"]["categories"];
