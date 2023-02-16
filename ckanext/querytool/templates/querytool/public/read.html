@@ -128,6 +128,11 @@
     <div class="controls-wrap" id="{{ querytool.name }}" >
         <div class="btn-download">
 
+              <button class="btn btn-round" data-module="fullscreen">
+                {{ _('Fullscreen') }} 
+                <img src="/base/images/fullscreen.svg" width="15"/> 
+              </button>
+
               {% set show_download = querytool.download_options %}
               {% if show_download == true %}
               <div class="btn-group dropdown">

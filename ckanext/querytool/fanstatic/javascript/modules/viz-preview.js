@@ -2698,6 +2698,13 @@ ckan.module('querytool-viz-preview', function() {
 
             Plotly.newPlot(this.el[0], data, base_info, config);
 
+            const el = this.el[0];
+            window.onresize = function() {
+              let el = $(".item-content.js-plotly-plot");
+              console.log(el[0])
+              Plotly.Plots.resize(el[0]);
+            };
+
         },
         // Get the values from dropdowns and rerender the chart.
         updateChart: function() {
