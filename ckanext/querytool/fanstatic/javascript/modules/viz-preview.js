@@ -1649,132 +1649,179 @@ ckan.module('querytool-viz-preview', function() {
                   .attr("id")
                   .split("_")
                   .pop();
-
                 var chart_plotly = document.getElementById(
                   "chart_field_plotly_" + item_no
                 );
-
-                const chartType = this.options.chart_type;
-
-                var len_data;
-                var tmp, i;
+  
+                var len_data = data.length;
+                var tmp;
                 var data_tmp = data;
+                var len_count = 1;
+  
+                for (tmp = 0; tmp < len_data; tmp++) {
+                  var color_count = 1;
+                  var d = data_tmp[tmp];
 
-                if(['pie', 'donut'].includes(chartType)) {
-                  len_data = data[0].labels.length;
-                } else {
-                  len_data = data.length;
-                }
+                  //  Get the id of the element that holds the color
+                  var c = "chart_field_color_" + item_no + "_" + (tmp + 1);
 
-                const chart_field_plotly_value = chart_plotly.value;
-
-                const colors = [];
-                const defaultColor = "#8fbc8f";
-
-                //  Get current colors
-                for (i = 0; i < len_data; i++) {
-                  //  If Plotly object exists, get the value of the color input
+                  //  Get the plotly object
+                  var chart_field_plotly_value = chart_plotly.value;
+  
                   if (chart_field_plotly_value) {
-                    const colorInputName =
-                      "chart_field_color_" + item_no + "_" + (i + 1);
-                    const colorInput = document.querySelectorAll(
-                      "[name=" + colorInputName + "]"
+                    // there is a plotly value in the input field
+                    var color_tmp = document.querySelectorAll(
+                      "[name=" + c + "]"
                     );
 
-                    let color;
+                    if (color_tmp["length"] >= 1) {
+                      var color = color_tmp[0].value;
 
-                    if (colorInput.length > 0) {
-                      color = colorInput[0].value;
+                      d["marker"] = {
+                        color,
+                      };
                     } else {
-                      color = defaultColor;
+                      d["marker"] = {
+                        color: "#8fbc8f",
+                      };
                     }
-
-                    colors.push(color);
                   } else {
-                    colors.push(defaultColor);
+                    var color_id = "chart_field_color_" + item_no;
+                    var color_tmp = document.querySelectorAll(
+                      "[data-target=" + color_id + "]"
+                    );
+
+                    if (color_tmp["length"] >= 1) {
+                      var color = color_tmp[0].style.cssText;
+                      // check type and do the conditions according to that
+
+                      if (typeof color === "undefined" || color === "") {
+                        d["marker"] = {
+                          color: "#8fbc8f",
+                        };
+                      } else {
+                        var new_color = color.split(": ")[1].slice(0, -1);
+                        if (new_color.includes("none")) {
+                          new_color = new_color.substring(
+                            0,
+                            new_color.indexOf(" none")
+                          );
+                        }
+  
+                        d["marker"] = {
+                          color: new_color,
+                        };
+                      }
+                    } else {
+                      d["marker"] = {
+                        color: "#8fbc8f",
+                      };
+                    }
                   }
-                }
 
-                //  Delete color inputs
-                //  Keep previous inputs if current amount of
-                //  colors is greater than the previous one
-                var colorInputs = $(
-                  `input[id^="chart_field_color_${item_no}"]`
-                );
+                  // delete elements
+                  var p = document.querySelectorAll(
+                    '[id^="chart_field_color_' + item_no + '"]'
+                  );
+                  var color_elements = 0;
 
-                if (colorInputs.length > len_data) {
-                  colorInputs.parent().remove();
-                }
+                  for (var a = 0; a < p.length; a++) {
+                    var type = p[a].tagName;
+                    if (type === "INPUT") {
+                      color_elements = color_elements + 1;
+                    }
+                  }
 
-                for (tmp = 0; tmp < len_data; tmp++) {
-                  let label;
-                  
-                  if (["pie", "donut"].includes(chartType)) {
-                    label = data[0].labels[tmp];
-                    
-                    //  Not an issue but this could run only once
-                    //  Actually apply colors
-                    data[0].marker = { colors };
+                  if (color_elements > data.length) {
+                    for (var a = 0; a < p.length; a++) {
+                      var type = p[a].tagName;
+                      if (type === "INPUT") {
+                        p[a].parentElement.remove();
+                      }
+                    }
+                  }
 
+                  // add new html element
+                  var elementExists = document.getElementById(c);
+
+                  if (elementExists) {
+                    elementExists.parentElement.remove();
+
+                    var newcontent = document.createElement("div");
+                    var html = "";
+                    html += '<div class="control-group control-select">';
+                    html +=
+                      '<label class="control-label" for="chart_field_color_' +
+                      item_no +
+                      "_" +
+                      (tmp + 1) +
+                      '">' +
+                      d["name"] +
+                      "</label>";
+                    html +=
+                      '<input type="color" id="chart_field_color_' +
+                      item_no +
+                      "_" +
+                      (tmp + 1) +
+                      '" name="chart_field_color_' +
+                      item_no +
+                      "_" +
+                      (tmp + 1) +
+                      '" class="colorpicker" value="' +
+                      d["marker"]["color"] +
+                      '"/> ';
+                    html += "</div>";
+                    newcontent.innerHTML = html;
+
+                    document
+                      .getElementById("chart_field_plotly_" + item_no)
+                      .insertAdjacentHTML("afterend", html);
+                    // remove Color element
+                    var elem = document.querySelector("#init_color");
+                    if (elem) {
+                      elem.parentNode.removeChild(elem);
+                    }
                   } else {
-                    var d = data_tmp[tmp];
-                    label = d["name"];
+                    var newcontent = document.createElement("div");
+                    var html = "";
+                    html += '<div class="control-group control-select">';
+                    html +=
+                      '<label class="control-label" for="chart_field_color_' +
+                      item_no +
+                      "_" +
+                      (tmp + 1) +
+                      '">' +
+                      d["name"] +
+                      "</label>";
+                    html +=
+                      '<input type="color" id="chart_field_color_' +
+                      item_no +
+                      "_" +
+                      (tmp + 1) +
+                      '" name="chart_field_color_' +
+                      item_no +
+                      "_" +
+                      (tmp + 1) +
+                      '" class="colorpicker" value="' +
+                      d["marker"]["color"] +
+                      '"/> ';
+                    html += "</div>";
+                    newcontent.innerHTML = html;
 
-                    //  Actually apply colors
-                    d.marker = {
-                      color: colors[tmp],
-                    };
+                    document
+                      .getElementById("chart_field_plotly_" + item_no)
+                      .insertAdjacentHTML("afterend", html);
+                    // remove Color element
+                    var elem = document.querySelector("#init_color");
+                    if (elem) {
+                      elem.parentNode.removeChild(elem);
+                    }
                   }
 
-                  //  Get color input
-                  var colorInputSelector = "#chart_field_color_" + item_no + "_" + (tmp + 1);
-                  var colorInput = $(colorInputSelector);
-
-                  //  If given color input already exists, delete it
-                  if (colorInput) {
-                    colorInput.parent().remove();
-                  }
-
-                  //  Create new color input
-                  var newColorInputEl = document.createElement("div");
-
-                  //  Create HTML for the new color input
-                  var html = 
-                    `
-                    <div class="control-group control-select">
-                      <label 
-                        class="control-label" 
-                        for="chart_field_color_${item_no}_${tmp + 1}"
-                      >
-                        ${label}
-                      </label>
-                      <input 
-                        type="color" 
-                        id="chart_field_color_${item_no}_${tmp + 1}"
-                        name="chart_field_color_${item_no}_${tmp + 1}"
-                        class="colorpicker" 
-                        value="${colors[tmp]}"
-                      />
-                    </div>
-                    `
-                  newColorInputEl.innerHTML = html;
-
-                  //  Add new color input to settings
-                  document
-                    .getElementById("chart_field_plotly_" + item_no)
-                    .insertAdjacentHTML("afterend", html);
-
-                  //  Remove color element
-                  //  Possibly not necessary
-                  var elem = document.querySelector("#init_color");
-                  if (elem) {
-                    elem.parentNode.removeChild(elem);
-                  }
-                  
                 }
-
+  
                 data = data_tmp;
-
+  
                 var item_no = this.el
                   .closest(".chart_field")
                   .attr("id")
@@ -1783,14 +1830,10 @@ ckan.module('querytool-viz-preview', function() {
                 var chart_plotly = document.getElementById(
                   "chart_field_plotly_" + item_no
                 );
-
-                if (
-                  typeof chart_plotly != "undefined" &&
-                  chart_plotly != null
-                ) {
-                  document.getElementById(
-                    "chart_field_plotly_" + item_no
-                  ).value = JSON.stringify(data);
+  
+                if (typeof chart_plotly != "undefined" && chart_plotly != null) {
+                  document.getElementById("chart_field_plotly_" + item_no).value =
+                    JSON.stringify(data);
                 }
               }
             } else {
@@ -2306,115 +2349,74 @@ ckan.module('querytool-viz-preview', function() {
             if (
               this.options.color_type == 2 || //  Is sequential
               (colorpicker_selection !== null &&
-                [null, "2"].includes(colorpicker_selection.value)) 
+                [null, "2"].includes(colorpicker_selection.value) &&
+                !["donut", "pie"].includes(this.options.chart_type))  //  Isn't donut not pie
             ) {
               var steps = 0;
               var base_sequential_colors = this.options.seq_color.split(",");
-
+  
               //  Find the max amount of data points
               for (i = 0; i < data.length; i++) {
                 if (["scatter"].includes(this.options.chart_type)) {
-                  steps = Math.max(steps, data[i].y.length);
+                  var steps = Math.max(steps, data[i].y.length);
                 } else {
-                  if (["donut", "pie"].includes(this.options.chart_type)) {
-                    steps = Math.max(steps, data[i].labels.length);
-                  } else {
-                    steps = Math.max(steps, data[i].x.length);
-                  }
+                  var steps = Math.max(steps, data[i].x.length);
                 }
               }
-
+  
               //  Mutiply it by the length of the data array
-              if (!["donut", "pie"].includes(this.options.chart_type)) {
-                steps = steps * data.length;
-              }
+               steps = steps * data.length;
+  
 
               //  If data is `grouped` (category is set)
-              if (
-                data.length > 1 ||
-                ["donut", "pie"].includes(this.options.chart_type)
-              ) {
-
-                let dataLength;
-                if (["donut", "pie"].includes(this.options.chart_type)) {
-                  dataLength = data[0].labels.length;
-
-                  //  So that steps is at least 2
-                  if (dataLength < 2) dataLength = 2;
-                } else {
-                  dataLength = data.length;
-                }
-
+              if(data.length > 1) {
                 var sequential_colors = interpolateColors(
                   hexToRgb(base_sequential_colors[0]),
                   hexToRgb(base_sequential_colors[1]),
-                  dataLength
+                  data.length
                 );
 
-                if (["donut", "pie"].includes(this.options.chart_type)) {
-
-                  //  Values and labels have to be manually  sorted
-                  //  so that we can ensure the order of the colors
-                  //  is right
-                  //  Without this, sections with equal values  may
-                  //  end up with colors swapped
-                  data[0].sort = false;
-
-                  const values = data[0].values.map((v, i) => ({
-                    value: v,
-                    label: data[0].labels[i],
-                  }));
-
-                  values.sort((a, b) => {
-                    return b.value - a.value
-                  });
-
-
-                  data[0].values = values.map(i => i.value);
-                  data[0].labels = values.map(i => i.label);
-
-                  data[0].marker = {
-                    colors: sequential_colors.reverse(),
+                for (i = 0; i < data.length; i++) {
+                  data[i].marker = {
+                    color: sequential_colors[i]
                   };
-
-                } else {
-                  for (i = 0; i < dataLength; i++) {
-                    data[i].marker = {
-                      color: sequential_colors[i],
-                    };
-                  }
                 }
               } else {
-                //  Generate color steps between the two colors
-                var sequential_colors = interpolateColors(
-                  hexToRgb(base_sequential_colors[0]),
-                  hexToRgb(base_sequential_colors[1]),
-                  steps
-                );
-                var sequential_colors_section = [];
-
-                for (
-                  j = 0;
-                  j < sequential_colors.length;
-                  j++
-                ) {
-                  sequential_colors_section.push(sequential_colors[j]);
-                }
-
-                if (
-                  !"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])
-                ) {
-                  data[0].marker = {
-                    color: sequential_colors_section,
-                  };
-                } else {
-                  data[0].marker = {
-                    color: interpolateColors(
-                      hexToRgb(base_sequential_colors[0]),
-                      hexToRgb(base_sequential_colors[1]),
-                      2
-                    ),
-                  };
+                for (i = 0; i < data.length; i++) {
+                  //  Generate color steps between the two colors
+                  var sequential_colors = interpolateColors(
+                    hexToRgb(base_sequential_colors[0]),
+                    hexToRgb(base_sequential_colors[1]),
+                    steps
+                  );
+                  var sequential_colors_section = [];
+    
+                  for (
+                    j = Math.round((sequential_colors.length / data.length) * i);
+                    j <
+                      Math.round(
+                        (sequential_colors.length / data.length) * (i + 1)
+                      ) && sequential_colors.length;
+                    j++
+                  ) {
+                    sequential_colors_section.push(sequential_colors[j]);
+                  }
+    
+                  if (
+                    !"rgba(NaN,NaN,NaN,1)".includes(sequential_colors_section[0])
+                  ) {
+                    data[i].marker = {
+                      color: sequential_colors_section,
+                    };
+                  } else {
+                    data[i].marker = {
+                      color: interpolateColors(
+                        hexToRgb(base_sequential_colors[0]),
+                        hexToRgb(base_sequential_colors[1]),
+                        2
+                      ),
+                    };
+                  }
                 }
               }
             }
