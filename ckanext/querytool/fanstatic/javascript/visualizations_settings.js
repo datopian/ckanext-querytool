@@ -1039,7 +1039,7 @@
                     var map_custom_title_field = item.find('[id*=map_custom_title_field_]');    //  NOTE: mapped to MT
                     var map_key_field = item.find('[id*=map_key_field_]');
                     var data_key_field = item.find('[id*=map_data_key_field_]');
-                    var map_color_scheme = item.find('[id*=map_color_scheme_]');
+                    var seq_color_field = item.find('[name*=map_seq_color_field_]');
                     var map_size = item.find('[id*=map_size_]');
                     var map_module = item.find('[id*=map_module_]');
 
@@ -1064,8 +1064,7 @@
                     map_key_field.attr('name', 'map_key_field_' + order);
                     data_key_field.attr('id', 'map_data_key_field_' + order);
                     data_key_field.attr('name', 'map_data_key_field_' + order);
-                    map_color_scheme.attr('id', 'map_color_scheme_' + order);
-                    map_color_scheme.attr('name', 'map_color_scheme_' + order);
+                    seq_color_field.attr('name', 'map_seq_color_field_' + order);
                     map_size.attr('id', 'map_size_' + order);
                     map_size.attr('name', 'map_size_' + order);
                     map_module.attr('id', 'map_module_' + order);

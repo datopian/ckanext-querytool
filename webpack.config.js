@@ -16,7 +16,6 @@ module.exports = {
     "modules/map-module": `${assetPath}/modules/map-module.js`,
     "modules/tool-embed": `${assetPath}/modules/tool-embed.js`,
     "modules/export-to-png": `${assetPath}/modules/export-to-png.js`,
-    "modules/sequential-color-picker": `${assetPath}/modules/sequential-color-picker.js`
   },
 	output: {
 		path: path.resolve(__dirname, assetPath, 'dist')

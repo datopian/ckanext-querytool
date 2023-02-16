@@ -1,6 +1,3 @@
-{% resource 'querytool/javascript/dist/modules/sequential-color-picker.js' %}
-
-
 {% import 'macros/form.html' as form %}
 {% set y_axis_values = y_axis_values.split(',') %}
 {% set main_filters = main_filters.split(',') %}
@@ -139,12 +136,11 @@
     {% set starting_color = "#feedde" %}
     {% set ending_color = "#fdbe85" %}
   {% endif %}
-  <div data-module="sequential-color-picker">
+  <div>
     <input 
         type="hidden" 
         value="{{starting_color}},{{ending_color}}" 
-        name="map_seq_color_field_{{ n }}" 
-        id="map_seq_color_field_{{ n }}"
+        name="map_seq_color_field_{{ n }}"
         class="seq-color-picker--hidden-input"
     />
 
@@ -177,7 +173,7 @@
         />
     </div>
     <div 
-        class="seq-color-preview seq-color-picker--preview" 
+        class="control-group seq-color-preview seq-color-picker--preview" 
         id="map_seq_color_preview_{{ n }}" 
         style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"
     ></div>
