@@ -675,8 +675,10 @@ class QueryToolController(base.BaseController):
                         data['map_key_field_{}'.format(id)]
                     map_item['data_key_field'] = \
                         data['map_data_key_field_{}'.format(id)]
-                    map_item['seq_color'] = \
+                    map_item['seq_colors'] = \
                         data['seq_colors_hidden_input_{}'.format(id)]
+                    map_item['data_categories'] = \
+                        data['map_data_categories_{}'.format(id)]
                     map_item['size'] = \
                         data.get('map_size_{}'.format(id))
 

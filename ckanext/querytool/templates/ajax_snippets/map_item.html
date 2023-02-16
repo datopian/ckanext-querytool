@@ -114,24 +114,10 @@
       </select>
     </div>
   </div>
-
-  <!-- {% set color_schemes = h.querytool_get_map_color_scheme() %}
-  <div class="control-group control-select">
-    <label class="control-label" for="map_color_scheme_{{ n }}">{{ _('Color scheme') }}</label>
-    <div class="controls ">
-      <select id="map_color_scheme_{{ n }}" name="map_color_scheme_{{ n }}">
-          <optgroup label="Diverging">
-          {% for color in color_schemes %}
-            <option value="{{ color.value }}" {% if map %}{{ 'selected' if color.value == map.map_color_scheme }}{% endif %}>{{ color.text }}</option>
-          {% endfor %}
-          </optgroup>
-      </select>
-    </div>
-  </div> -->
   
-  {% if map and map.seq_color %}
-    {% set starting_color = map.seq_color.split(',')[0] %}
-    {% set ending_color = map.seq_color.split(',')[1] %}
+  {% if map and map.seq_colors %}
+    {% set starting_color = map.seq_colors.split(',')[0] %}
+    {% set ending_color = map.seq_colors.split(',')[1] %}
   {% else %}
     {% set starting_color = "#feedde" %}
     {% set ending_color = "#fdbe85" %}
@@ -178,6 +164,17 @@
         style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"
     ></div>
   </div>
+
+  {% if map and map.data_categories %}
+    {% set data_categories = map.data_categories %}
+  {% endif %}
+  <div class="control-group">
+    <label class="control-label" for="map_data_categories_{{ n }}">{{ _('Data categories') }}</label>
+    <div class="controls ">
+       <input id="map_data_categories_{{ n }}" type="number" min="2" max="10" name="map_data_categories_{{ n }}" value="{{ data_categories|default (5)}}" placeholder="{{ _('Data categories, default 5') }}">
+       {{ form.info(_('An integer between 2-10.')) }}
+    </div>
+ </div>
 
   {% for item in y_axis_values %}
     {% do main_filters.append(item) %}
@@ -242,7 +239,8 @@
     {% set map_custom_title_field=map.map_custom_title_field %}
     {% set map_key_field=map.map_key_field %}
     {% set data_key_field=map.data_key_field %}
-    {% set map_color_scheme=map.map_color_scheme %}
+    {% set seq_colors=map.seq_colors %}
+    {% set data_categories=map.data_categories %}
     {% set filter_name = map.filter_name %}
     {% set filter_value = map.filter_value %}
 
@@ -259,7 +257,8 @@
     map_key_field=map_key_field,
     data_key_field=data_key_field,
     sql_string=sql_string,
-    map_color_scheme=map_color_scheme,
+    seq_colors=seq_colors,
+    data_categories=data_categories,
     y_axis_column=y_axis_column,
     filter_name=filter_name,
     filter_value=filter_value

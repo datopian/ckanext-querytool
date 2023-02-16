@@ -1043,6 +1043,7 @@
                     var sec_colors_starting_field = item.find('[id*=seq_colors_starting_]');
                     var sec_colors_ending_field = item.find('[id*=seq_colors_ending_]');
                     var sec_color_preview = item.find('[id*=seq_color_preview_]');
+                    var data_categories = item.find('[id*=map_data_categories_]');
                     var map_size = item.find('[id*=map_size_]');
                     var map_module = item.find('[id*=map_module_]');
 
@@ -1072,6 +1073,8 @@
                     sec_colors_starting_field.attr("id", "seq_colors_starting_" + order);
                     sec_colors_ending_field.attr("id", "seq_colors_ending_" + order);
                     sec_color_preview.attr("id", "seq_color_preview_" + order);
+                    data_categories.attr("id", "map_data_categories_" + order);
+                    data_categories.attr("name", "map_data_categories_" + order);
                     map_size.attr('id', 'map_size_' + order);
                     map_size.attr('name', 'map_size_' + order);
                     map_module.attr('id', 'map_module_' + order);
