@@ -761,6 +761,7 @@ def get_is_admin_or_editor_of_any_group(userobj):
         return False
 
     groups = _get_action('group_list_authz', {'id': userobj.id})
+
     is_admin_or_editor = [get_user_permission_type(userobj, group['id']) for group in groups]
 
     if len(groups) != 0 and any(t in ['admin', 'editor'] for t in is_admin_or_editor):
@@ -775,7 +776,9 @@ def get_edit_permission_for_user(userobj, group):
             return True
 
     try:
-        member_list = toolkit.get_action('member_list')({}, {'id': group})
+        member_list = toolkit.get_action('member_list')(
+            {}, {'id': group}, permissions_check=True
+        )
 
         if c.userobj.id in member_list:
             return True
@@ -790,15 +793,17 @@ def get_user_permission_type(userobj, group):
             return 'admin'
 
         try:
-            member_list = toolkit.get_action('member_list')({}, {'id': group})
+            member_list = toolkit.get_action('member_list')(
+                {}, {'id': group}, permissions_check=True
+            )
 
             for m in member_list:
                 if c.userobj.id in m:
-                    if 'Admin' in m:
+                    if 'admin' in m:
                         return 'admin'
-                    if 'Member' in m:
+                    if 'member' in m:
                         return 'member'
-                    if 'Editor' in m:
+                    if 'editor' in m:
                         return 'editor'
 
         except logic.NotFound:
