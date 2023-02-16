@@ -434,7 +434,7 @@ class QueryToolController(base.BaseController):
                     visualization['color_type'] = \
                         data.get('chart_field_color_type_{}'.format(id))
                     visualization['seq_color'] = \
-                        data.get('chart_field_seq_color_{}'.format(id))
+                        data.get('seq_colors_hidden_input_{}'.format(id))
                     visualization['title'] = \
                         data.get('chart_field_title_{}'.format(id))
                     visualization['x_text_rotate'] = \
@@ -676,7 +676,7 @@ class QueryToolController(base.BaseController):
                     map_item['data_key_field'] = \
                         data['map_data_key_field_{}'.format(id)]
                     map_item['seq_color'] = \
-                        data['map_seq_color_field_{}'.format(id)]
+                        data['seq_colors_hidden_input_{}'.format(id)]
                     map_item['size'] = \
                         data.get('map_size_{}'.format(id))
 

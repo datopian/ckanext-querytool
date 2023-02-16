@@ -665,29 +665,29 @@ $(document).ready(function(){
     }
   });
 
-  $(document).on('change', '[id^=chart_field_seq_starting_color_]', function() {
+  $(document).on('change', '[id^=seq_colors_starting_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     
-    const gradientInput = $(`#chart_field_seq_color_${chart_number}`);
+    const gradientInput = $(`#seq_colors_hidden_input_${chart_number}`);
     const oldVal = gradientInput.val().split(',');
     const newVal = `${selection},${oldVal[1]}`;
 
     gradientInput.val(newVal).trigger('change');
   });
 
-  $(document).on('change', '[id^=chart_field_seq_ending_color_]', function() {
+  $(document).on('change', '[id^=seq_colors_ending_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     
-    const gradientInput = $(`#chart_field_seq_color_${chart_number}`);
+    const gradientInput = $(`#seq_colors_hidden_input_${chart_number}`);
     const oldVal = gradientInput.val().split(',');
     const newVal = `${oldVal[0]},${selection}`;
 
     gradientInput.val(newVal).trigger('change');
   });
 
-  $(document).on('change', '[id^=chart_field_seq_color_]', function() {
+  $(document).on('change', '[id^=seq_colors_hidden_input_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     

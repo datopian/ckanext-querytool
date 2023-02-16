@@ -140,41 +140,41 @@
     <input 
         type="hidden" 
         value="{{starting_color}},{{ending_color}}" 
-        name="map_seq_color_field_{{ n }}"
-        class="seq-color-picker--hidden-input"
+        name="seq_colors_hidden_input_{{ n }}"
+        id="seq_colors_hidden_input_{{ n }}"
     />
 
     <div class="control-group control-select">
         <label 
             class="control-label" 
-            for="map_field_seq_starting_color_{{ n }}"
+            for="seq_colors_starting_{{ n }}"
         >
             {{ _('Starting color') }}
         </label>
         <input 
             type="color" 
-            id="map_field_seq_starting_color_{{ n }}" 
-            class="colorpicker seq-color-picker--starting-color" 
+            id="seq_colors_starting_{{ n }}" 
+            class="colorpicker" 
             value="{{ starting_color }}"
         />
     </div>
     <div class="control-group control-select">
         <label 
             class="control-label" 
-            for="map_field_seq_ending_color_{{ n }}"
+            for="seq_colors_ending_{{ n }}"
         >
             {{ _('Ending color') }}
         </label>
         <input 
             type="color" 
-            id="map_field_seq_ending_color_{{ n }}" 
-            class="colorpicker seq-color-picker--ending-color" 
+            id="seq_colors_ending_{{ n }}" 
+            class="colorpicker" 
             value="{{ ending_color }}" 
         />
     </div>
     <div 
-        class="control-group seq-color-preview seq-color-picker--preview" 
-        id="map_seq_color_preview_{{ n }}" 
+        class="control-group seq-color-preview" 
+        id="seq_color_preview_{{ n }}" 
         style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"
     ></div>
   </div>

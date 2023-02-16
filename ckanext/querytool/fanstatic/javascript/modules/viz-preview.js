@@ -2702,7 +2702,7 @@ ckan.module('querytool-viz-preview', function() {
             var chartTypeSelect = chartField.find('[name*=chart_field_graph_]');
             var chartTypeValue = chartTypeSelect.val();
 
-            var chartFieldSeqColor = chartField.find("[name*=chart_field_seq_color_]").val();    //  NOTE: mapped to nn
+            var chartFieldSeqColor = chartField.find("[name*=seq_colors_hidden_input_]").val();    //  NOTE: mapped to nn
             var chartFieldColorType = chartField.find("[name*=chart_field_color_type_]").val();  //  NOTE: mapped to nnn
 
             var colorSelect = chartField.find('[name*=chart_field_color_]');
