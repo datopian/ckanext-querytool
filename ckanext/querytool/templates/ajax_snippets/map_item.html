@@ -171,7 +171,7 @@
   <div class="control-group">
     <label class="control-label" for="map_data_categories_{{ n }}">{{ _('Data categories') }}</label>
     <div class="controls ">
-       <input id="map_data_categories_{{ n }}" type="number" min="2" max="10" name="map_data_categories_{{ n }}" value="{{ data_categories|default (5)}}" placeholder="{{ _('Data categories, default 5') }}">
+       <input id="map_data_categories_{{ n }}" type="number" required min="2" max="10" name="map_data_categories_{{ n }}" value="{{ data_categories|default (5)}}" placeholder="{{ _('Data categories, default 5') }}">
        {{ form.info(_('An integer between 2-10.')) }}
     </div>
  </div>
