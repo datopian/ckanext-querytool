@@ -1440,4 +1440,4 @@ $('body').on('change', '[id^=map_data_categories_]', function (e) {
     $(`#map_data_categories_${chart_number}`).val(10).change();
   }
 
-})
+});
