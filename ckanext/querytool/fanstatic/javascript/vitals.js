@@ -1439,5 +1439,4 @@ $('body').on('change', '[id^=map_data_categories_]', function (e) {
   } else if (selected > 10) {
     $(`#map_data_categories_${chart_number}`).val(10).change();
   }
-
-})
+});
