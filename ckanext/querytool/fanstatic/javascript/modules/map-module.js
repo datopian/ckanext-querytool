@@ -122,7 +122,6 @@ ckan.module('querytool-map', function($) {
             this.options.filter_name = this.mapFilterName.val();
             this.options.filter_value = this.mapFilterValue.val();
   
-  
             if (this.options.map_title_field && this.options.map_key_field &&
                 this.options.data_key_field && this.options.map_resource &&
                 this.options.y_axis_column) {
@@ -218,8 +217,6 @@ ckan.module('querytool-map', function($) {
                 this.hexToRgb(colors[1]), 
                 steps || 5
             );
-
-            console.log(steps, colors, gradient)
   
             var values = $.map(featuresValues, function(feature, key) {
                     return feature.value;
@@ -240,6 +237,13 @@ ckan.module('querytool-map', function($) {
             var scale = this.createScale(this.featuresValues);
             var opacity = 1;
             var noDataLabel = 'No data'
+
+            //  Ensure there will never be two
+            //  legends simultaneously
+            if(this.legend) {
+                this.map.removeControl(this.legend);
+            }
+
             this.legend = L.control({
                 position: 'bottomright'
             });
@@ -310,8 +314,6 @@ ckan.module('querytool-map', function($) {
           var optionalFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
           var optionalFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
           var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
-  
-          console.log(optionalFilter)
   
           //var dynamicTitle = this.options.map_custom_title_field;
           var dynamicTitle = this.renderChartTitle(this.options.map_custom_title_field,{

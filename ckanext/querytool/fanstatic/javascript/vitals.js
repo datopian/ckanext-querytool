@@ -1429,3 +1429,15 @@ $('body').on('change', '[id^=chart_field_sort_]', function () {
       }
   }
 });
+
+$('body').on('change', '[id^=map_data_categories_]', function (e) {
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#map_data_categories_${chart_number}`).val();
+
+  if(selected < 2) {
+    $(`#map_data_categories_${chart_number}`).val(2).change();
+  } else if (selected > 10) {
+    $(`#map_data_categories_${chart_number}`).val(10).change();
+  }
+
+})
