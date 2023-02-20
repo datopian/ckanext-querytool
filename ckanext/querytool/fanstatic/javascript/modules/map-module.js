@@ -25,7 +25,8 @@ ckan.module('querytool-map', function($) {
             this.mapTitleField = this.el.parent().parent().find('[id*=map_title_field_]');
             this.mapKeyField = this.el.parent().parent().find('[id*=map_key_field_]');
             this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
-            this.mapColorScheme = this.el.parent().parent().find('[id*=map_color_scheme_]');
+            this.seqColors = this.el.parent().parent().find('[id*=seq_colors_hidden_input_]');
+            this.dataCategories = this.el.parent().parent().find('[id*=map_data_categories_]');
             this.mapFilterName = this.el.parent().parent().find('[id*=map_field_filter_name_]');
             this.mapFilterValue = this.el.parent().parent().find('[id*=map_field_filter_value_]');
   
@@ -34,7 +35,8 @@ ckan.module('querytool-map', function($) {
             this.mapTitleField.change(this.onPropertyChange.bind(this));
             this.mapKeyField.change(this.onPropertyChange.bind(this));
             this.dataKeyField.change(this.onPropertyChange.bind(this));
-            this.mapColorScheme.change(this.onPropertyChange.bind(this));
+            this.seqColors.change(this.onPropertyChange.bind(this));
+            this.dataCategories.change(this.onPropertyChange.bind(this));
             this.mapFilterName.change(this.onPropertyChange.bind(this));
             this.mapFilterValue.change(this.onPropertyChange.bind(this));
   
@@ -115,7 +117,8 @@ ckan.module('querytool-map', function($) {
             this.options.data_key_field = this.dataKeyField.val();
             this.options.y_axis_column = this.valueField.val();
             this.options.measure_label = $('#choose_y_axis_column option:selected').text();
-            this.options.map_color_scheme = this.mapColorScheme.val();
+            this.options.seq_colors = this.seqColors.val();
+            this.options.data_categories = this.dataCategories.val();
             this.options.filter_name = this.mapFilterName.val();
             this.options.filter_value = this.mapFilterValue.val();
   
@@ -169,8 +172,54 @@ ckan.module('querytool-map', function($) {
             }
   
         },
+        hexToRgb(hex) {
+            var arrBuff = new ArrayBuffer(4);
+            var vw = new DataView(arrBuff);
+            hex = hex.replace(/[^0-9A-F]/gi, "");
+            vw.setUint32(0, parseInt(hex, 16), false);
+            var arrByte = new Uint8Array(arrBuff);
+
+            return arrByte[1] + "," + arrByte[2] + "," + arrByte[3];
+        },
+        interpolateColor: function(color1, color2, factor) {
+            if (arguments.length < 3) {
+              factor = 0.5;
+            }
+            var result = color1.slice();
+            for (var i = 0; i < 3; i++) {
+              result[i] = Math.round(
+                result[i] + factor * (color2[i] - color1[i])
+              );
+            }
+            return result;
+        },
+        interpolateColors: function (color1, color2, steps) {
+            var stepFactor = 1 / (steps - 1),
+                interpolatedColorArray = [];
+
+            color1 = color1.match(/\d+/g).map(Number);
+            color2 = color2.match(/\d+/g).map(Number);
+
+            for (var i = 0; i < steps; i++) {
+                var color_ = this.interpolateColor(color1, color2, stepFactor * i);
+
+                var new_color_ =
+                "rgba(" + color_[0] + "," + color_[1] + "," + color_[2] + ",1)";
+                interpolatedColorArray.push(new_color_);
+            }
+
+            return interpolatedColorArray;
+        },
         createScale: function(featuresValues) {
-            var colors = this.options.map_color_scheme.split(',');
+            const colors = this.options.seq_colors.split(',');
+            const steps = this.options.data_categories; 
+            const gradient = this.interpolateColors(
+                this.hexToRgb(colors[0]), 
+                this.hexToRgb(colors[1]), 
+                steps || 5
+            );
+
+            console.log(steps, colors, gradient)
   
             var values = $.map(featuresValues, function(feature, key) {
                     return feature.value;
@@ -182,7 +231,7 @@ ckan.module('querytool-map', function($) {
   
             return d3.scale.quantize()
                 .domain([min, max])
-                .range(colors);
+                .range(gradient);
         },
         formatNumber: function(num) {
             return (num % 1 ? num.toFixed(2) : num);
@@ -321,7 +370,7 @@ ckan.module('querytool-map', function($) {
   
                             scale = function (value) {
                                 if (value == this.featuresValues[valuesKeys[0]].value) {
-                                    var colors = this.options.map_color_scheme.split(',');
+                                    var colors = this.options.seq_colors.split(',');
                                     return colors[colors.length -1];
                                 }
                             }.bind(this)
