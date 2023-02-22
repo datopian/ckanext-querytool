@@ -275,7 +275,7 @@ def get_charts_data_formats(num=None):
         return options[:num]
     return options
 
-def get_maps_data_formats(num=None):
+def get_maps_data_formats():
     options = [{'text': _('Default'), 'value': ''},
                {'text': _('Integer e.g 2'), 'value': '.0f'},
                {'text': _('Decimal (1 digit) e.g 2.5'), 'value': '.1f'},
@@ -296,8 +296,6 @@ def get_maps_data_formats(num=None):
                    'value': ',.1f'},
                {'text': _('Comma thousands separator (2 digit) e.g 2,512.34'),
                    'value': ',.2f'}]
-    if num:
-        return options[:num]
     return options
 
 def hex_to_rgba(value, alpha):
