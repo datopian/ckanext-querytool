@@ -341,7 +341,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'filter_groups_by_permissions':
                 helpers.group_count_design_reports,
             'color_to_hex': 
-                helpers.color_to_hex
+                helpers.color_to_hex,
+            'get_maps_data_formats':
+                helpers.get_maps_data_formats
         }
 
     # IAuthFunctions
