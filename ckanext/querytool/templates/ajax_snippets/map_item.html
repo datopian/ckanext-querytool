@@ -116,12 +116,17 @@
   </div>
   
   {% set legends_formats = h.get_maps_data_formats() %}
+  {% if map %}
+    {% set legends_format_selected = map.legends_format or '.2f' %}
+  {% else %}
+    {% set legends_format_selected = '.2f' %}
+  {% endif %}
   <div class="control-group control-select">
     <label class="control-label" for="map_legends_format_{{ n }}">{{ _('Legends format') }}</label>
     <div class="controls ">
       <select id="map_legends_format_{{ n }}" name="map_legends_format_{{ n }}">
         {% for format in legends_formats %}
-          <option value="{{ format.value }}" {% if map %}{{ 'selected' if format.value == map.legends_format }}{% endif %} >{{ format.text }}</option>
+          <option value="{{ format.value }}" {{ 'selected' if format.value == legends_format_selected }} >{{ format.text }}</option>
         {% endfor %}
       </select>
     </div>
