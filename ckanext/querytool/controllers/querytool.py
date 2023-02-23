@@ -675,6 +675,8 @@ class QueryToolController(base.BaseController):
                         data['map_key_field_{}'.format(id)]
                     map_item['data_key_field'] = \
                         data['map_data_key_field_{}'.format(id)]
+                    map_item['legends_format'] = \
+                        data['map_legends_format_{}'.format(id)]
                     map_item['seq_colors'] = \
                         data['seq_colors_hidden_input_{}'.format(id)]
                     map_item['data_categories'] = \

@@ -1039,6 +1039,7 @@
                     var map_custom_title_field = item.find('[id*=map_custom_title_field_]');    //  NOTE: mapped to MT
                     var map_key_field = item.find('[id*=map_key_field_]');
                     var data_key_field = item.find('[id*=map_data_key_field_]');
+                    var map_legends_format_field = item.find('[id*=map_legends_format_]');
                     var seq_colors_field = item.find('[id*=seq_colors_hidden_input_]');
                     var sec_colors_starting_field = item.find('[id*=seq_colors_starting_]');
                     var sec_colors_ending_field = item.find('[id*=seq_colors_ending_]');
@@ -1068,6 +1069,8 @@
                     map_key_field.attr('name', 'map_key_field_' + order);
                     data_key_field.attr('id', 'map_data_key_field_' + order);
                     data_key_field.attr('name', 'map_data_key_field_' + order);
+                    map_legends_format_field.attr('id', 'map_legends_format_' + order);
+                    map_legends_format_field.attr('name', 'map_legends_format_' + order);
                     seq_colors_field.attr('id', 'seq_colors_hidden_input_' + order);
                     seq_colors_field.attr('name', 'seq_colors_hidden_input_' + order);
                     sec_colors_starting_field.attr("id", "seq_colors_starting_" + order);

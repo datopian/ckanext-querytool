@@ -27,6 +27,7 @@ ckan.module('querytool-map', function($) {
             this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
             this.seqColors = this.el.parent().parent().find('[id*=seq_colors_hidden_input_]');
             this.dataCategories = this.el.parent().parent().find('[id*=map_data_categories_]');
+            this.legendsFormat = this.el.parent().parent().find('[id*=map_legends_format_]');
             this.mapFilterName = this.el.parent().parent().find('[id*=map_field_filter_name_]');
             this.mapFilterValue = this.el.parent().parent().find('[id*=map_field_filter_value_]');
   
@@ -37,6 +38,7 @@ ckan.module('querytool-map', function($) {
             this.dataKeyField.change(this.onPropertyChange.bind(this));
             this.seqColors.change(this.onPropertyChange.bind(this));
             this.dataCategories.change(this.onPropertyChange.bind(this));
+            this.legendsFormat.change(this.onPropertyChange.bind(this));
             this.mapFilterName.change(this.onPropertyChange.bind(this));
             this.mapFilterValue.change(this.onPropertyChange.bind(this));
   
@@ -119,6 +121,7 @@ ckan.module('querytool-map', function($) {
             this.options.measure_label = $('#choose_y_axis_column option:selected').text();
             this.options.seq_colors = this.seqColors.val();
             this.options.data_categories = this.dataCategories.val();
+            this.options.legends_format = this.legendsFormat.val();
             this.options.filter_name = this.mapFilterName.val();
             this.options.filter_value = this.mapFilterValue.val();
   
@@ -230,8 +233,14 @@ ckan.module('querytool-map', function($) {
                 .domain([min, max])
                 .range(gradient);
         },
-        formatNumber: function(num) {
-            return (num % 1 ? num.toFixed(2) : num);
+        formatNumber: function(num, format = null) {
+            if(!format)
+                return (num % 1 ? num.toFixed(2) : num);
+
+            const formatter = d3.format(format);
+
+            return formatter(num);
+
         },
         createLegend: function() {
             var scale = this.createScale(this.featuresValues);
@@ -262,11 +271,13 @@ ckan.module('querytool-map', function($) {
                     labels = [];
   
                 div.appendChild(ul);
+
+                const legendsFormat = this.options.legends_format;
                 for (var i = 0, len = grades.length; i < len; i++) {
                     ul.innerHTML +=
                         '<li><span style="background:' + scale(grades[i]) + '; opacity: ' + opacity + '"></span> ' +
-                        this.formatNumber(grades[i]) +
-                        (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1]) + '</li>' : '+</li></ul>');
+                        this.formatNumber(grades[i], legendsFormat) +
+                        (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1], legendsFormat) + '</li>' : '+</li></ul>');
                 }
                 ul.innerHTML +=
                     '<li><span style="background:' + '#bdbdbd' + '; opacity: ' + opacity + '"></span> ' +
