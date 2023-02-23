@@ -233,8 +233,14 @@ ckan.module('querytool-map', function($) {
                 .domain([min, max])
                 .range(gradient);
         },
-        formatNumber: function(num) {
-            return (num % 1 ? num.toFixed(2) : num);
+        formatNumber: function(num, format = null) {
+            if(!format)
+                return (num % 1 ? num.toFixed(2) : num);
+
+            const formatter = d3.format(format);
+
+            return formatter(num);
+
         },
         createLegend: function() {
             var scale = this.createScale(this.featuresValues);
@@ -266,12 +272,12 @@ ckan.module('querytool-map', function($) {
   
                 div.appendChild(ul);
 
-                const legendsFormatterFn = d3.format(this.options.legends_format);
+                const legendsFormat = this.options.legends_format;
                 for (var i = 0, len = grades.length; i < len; i++) {
                     ul.innerHTML +=
                         '<li><span style="background:' + scale(grades[i]) + '; opacity: ' + opacity + '"></span> ' +
-                        legendsFormatterFn(grades[i]) +
-                        (grades[i + 1] ? '&ndash;' + legendsFormatterFn(grades[i + 1]) + '</li>' : '+</li></ul>');
+                        this.formatNumber(grades[i], legendsFormat) +
+                        (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1], legendsFormat) + '</li>' : '+</li></ul>');
                 }
                 ul.innerHTML +=
                     '<li><span style="background:' + '#bdbdbd' + '; opacity: ' + opacity + '"></span> ' +
