@@ -27,7 +27,7 @@ ckan.module('querytool-map', function($) {
             this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
             this.seqColors = this.el.parent().parent().find('[id*=seq_colors_hidden_input_]');
             this.dataCategories = this.el.parent().parent().find('[id*=map_data_categories_]');
-            this.legendsFormat = this.el.parent().parent().find('[id*=map_legends_format_]');
+            this.dataFormat = this.el.parent().parent().find('[id*=map_data_format_]');
             this.mapFilterName = this.el.parent().parent().find('[id*=map_field_filter_name_]');
             this.mapFilterValue = this.el.parent().parent().find('[id*=map_field_filter_value_]');
   
@@ -38,7 +38,7 @@ ckan.module('querytool-map', function($) {
             this.dataKeyField.change(this.onPropertyChange.bind(this));
             this.seqColors.change(this.onPropertyChange.bind(this));
             this.dataCategories.change(this.onPropertyChange.bind(this));
-            this.legendsFormat.change(this.onPropertyChange.bind(this));
+            this.dataFormat.change(this.onPropertyChange.bind(this));
             this.mapFilterName.change(this.onPropertyChange.bind(this));
             this.mapFilterValue.change(this.onPropertyChange.bind(this));
   
@@ -121,7 +121,7 @@ ckan.module('querytool-map', function($) {
             this.options.measure_label = $('#choose_y_axis_column option:selected').text();
             this.options.seq_colors = this.seqColors.val();
             this.options.data_categories = this.dataCategories.val();
-            this.options.legends_format = this.legendsFormat.val();
+            this.options.data_format = this.dataFormat.val();
             this.options.filter_name = this.mapFilterName.val();
             this.options.filter_value = this.mapFilterValue.val();
   
@@ -272,12 +272,12 @@ ckan.module('querytool-map', function($) {
   
                 div.appendChild(ul);
 
-                const legendsFormat = this.options.legends_format;
+                const dataFormat = this.options.data_format;
                 for (var i = 0, len = grades.length; i < len; i++) {
                     ul.innerHTML +=
                         '<li><span style="background:' + scale(grades[i]) + '; opacity: ' + opacity + '"></span> ' +
-                        this.formatNumber(grades[i], legendsFormat) +
-                        (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1], legendsFormat) + '</li>' : '+</li></ul>');
+                        this.formatNumber(grades[i], dataFormat) +
+                        (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1], dataFormat) + '</li>' : '+</li></ul>');
                 }
                 ul.innerHTML +=
                     '<li><span style="background:' + '#bdbdbd' + '; opacity: ' + opacity + '"></span> ' +
@@ -436,11 +436,11 @@ ckan.module('querytool-map', function($) {
                                                 layer.bringToFront();
                                             }
   
-                                            const legendsFormat = this.options.legends_format;
+                                            const dataFormat = this.options.data_format;
 
                                             var infoData = {
                                                 title: feature.properties[this.options.map_title_field],
-                                                measure: this.formatNumber(parseFloat(elementData['value']), legendsFormat)
+                                                measure: this.formatNumber(parseFloat(elementData['value']), dataFormat)
                                             };
   
                                             this.info.update(infoData);

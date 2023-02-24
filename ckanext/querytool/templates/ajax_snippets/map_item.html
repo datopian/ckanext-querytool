@@ -115,18 +115,18 @@
     </div>
   </div>
   
-  {% set legends_formats = h.get_maps_data_formats() %}
+  {% set data_formats = h.get_maps_data_formats() %}
   {% if map %}
-    {% set legends_format_selected = map.legends_format or '.2f' %}
+    {% set data_format_selected = map.data_format or '.2f' %}
   {% else %}
-    {% set legends_format_selected = '.2f' %}
+    {% set data_format_selected = '.2f' %}
   {% endif %}
   <div class="control-group control-select">
-    <label class="control-label" for="map_legends_format_{{ n }}">{{ _('Legends format') }}</label>
+    <label class="control-label" for="map_data_format_{{ n }}">{{ _('Data format') }}</label>
     <div class="controls ">
-      <select id="map_legends_format_{{ n }}" name="map_legends_format_{{ n }}">
-        {% for format in legends_formats %}
-          <option value="{{ format.value }}" {{ 'selected' if format.value == legends_format_selected }} >{{ format.text }}</option>
+      <select id="map_data_format_{{ n }}" name="map_data_format_{{ n }}">
+        {% for format in data_formats %}
+          <option value="{{ format.value }}" {{ 'selected' if format.value == data_format_selected }} >{{ format.text }}</option>
         {% endfor %}
       </select>
     </div>
@@ -252,7 +252,7 @@
     {% set map_custom_title_field=map.map_custom_title_field %}
     {% set map_key_field=map.map_key_field %}
     {% set data_key_field=map.data_key_field %}
-    {% set legends_format=map.legends_format %}
+    {% set data_format=map.data_format %}
     {% set seq_colors=map.seq_colors %}
     {% set data_categories=map.data_categories %}
     {% set filter_name = map.filter_name %}
@@ -270,7 +270,7 @@
     map_custom_title_field=map_custom_title_field,
     map_key_field=map_key_field,
     data_key_field=data_key_field,
-    legends_format=legends_format,
+    data_format=data_format,
     sql_string=sql_string,
     seq_colors=seq_colors,
     data_categories=data_categories,
