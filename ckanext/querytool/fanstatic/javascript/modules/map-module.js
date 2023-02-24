@@ -436,9 +436,11 @@ ckan.module('querytool-map', function($) {
                                                 layer.bringToFront();
                                             }
   
+                                            const legendsFormat = this.options.legends_format;
+
                                             var infoData = {
                                                 title: feature.properties[this.options.map_title_field],
-                                                measure: this.formatNumber(parseFloat(elementData['value']))
+                                                measure: this.formatNumber(parseFloat(elementData['value']), legendsFormat)
                                             };
   
                                             this.info.update(infoData);
