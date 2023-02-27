@@ -277,7 +277,7 @@ ckan.module('querytool-map', function($) {
                     ul.innerHTML +=
                         '<li><span style="background:' + scale(grades[i]) + '; opacity: ' + opacity + '"></span> ' +
                         this.formatNumber(grades[i], dataFormat) +
-                        (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1], dataFormat) + '</li>' : '+</li></ul>');
+                        (grades[i + 1] ? ' &ndash; ' + this.formatNumber(grades[i + 1], dataFormat) + '</li>' : '+</li></ul>');
                 }
                 ul.innerHTML +=
                     '<li><span style="background:' + '#bdbdbd' + '; opacity: ' + opacity + '"></span> ' +
