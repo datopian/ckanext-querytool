@@ -238,11 +238,6 @@
       </div>
 
       {# Chart additional color setup  #}
-      {% if selected_chart_type in ['donut', 'pie'] %}
-        {% set hide_color_picker = 'hidden' %}
-      {% else %}
-        {% set hide_color_picker = '' %}
-      {% endif %}
       <div class="accordion-group {{ hide_color_picker }} color-accordion">
         <div class="accordion-heading">
           <a href="#accordion_{{ chart_id }}_chart_plotly" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
@@ -259,7 +254,7 @@
         <div id="accordion_{{ chart_id }}_chart_plotly" class="accordion-body collapse">
           <div class="accordion-inner">
             
-          <div class="control-group control-select chart_field_color_wrap_{{ n }} {% if chart %}{{ 'hidden' if selected_chart_type in ['line','area','spline','donut','pie','scatter'] }}{% endif %}">
+          <div class="control-group control-select chart_field_color_wrap_{{ n }} {% if chart %}{{ 'hidden' if selected_chart_type in ['line','area','spline','scatter'] }}{% endif %}">
             <label class="control-label">{{ _('Color Type') }}</label> &nbsp;
             <select id="chart_field_color_type_{{ n }}" name="chart_field_color_type_{{ n }}">
               <option value=1 {% if chart %}{{ 'selected' if chart.color_type in [1, '1'] }}{% endif %}>{{ _('Divergent') }}</option>
@@ -276,16 +271,16 @@
               {% set starting_color = "#feedde" %}
               {% set ending_color = "#fdbe85" %}
             {% endif %}
-            <input type="hidden" value="{% if chart and chart.seq_color %}{{ chart.seq_color }}{% else %}#feedde,#fdbe85{% endif %}" name="chart_field_seq_color_{{ n }}" id="chart_field_seq_color_{{ n }}" />
+            <input type="hidden" value="{% if chart and chart.seq_color %}{{ chart.seq_color }}{% else %}#feedde,#fdbe85{% endif %}" name="seq_colors_hidden_input_{{ n }}" id="seq_colors_hidden_input_{{ n }}" />
             
             <div class="control-group control-select">
-              <label class="control-label" for="chart_field_color_starting_{{ n }}">{{ _('Starting color') }}</label>
-              <input type="color" id="chart_field_seq_starting_color_{{ n }}" name="chart_field_seq_starting_color_{{ n }}" class="colorpicker" value="{{ starting_color }}" />
+              <label class="control-label" for="seq_colors_starting_{{ n }}">{{ _('Starting color') }}</label>
+              <input type="color" id="seq_colors_starting_{{ n }}" name="seq_colors_starting_{{ n }}" class="colorpicker" value="{{ starting_color }}" />
             </div>
 
             <div class="control-group control-select">
-              <label class="control-label" for="chart_field_color_ending_{{ n }}">{{ _('Ending color') }}</label>
-              <input type="color" id="chart_field_seq_ending_color_{{ n }}" name="chart_field_seq_ending_color_{{ n }}" class="colorpicker" value="{{ ending_color }}" />
+              <label class="control-label" for="seq_colors_ending_{{ n }}">{{ _('Ending color') }}</label>
+              <input type="color" id="seq_colors_ending_{{ n }}" name="seq_colors_ending_{{ n }}" class="colorpicker" value="{{ ending_color }}" />
             </div>
 
             <div class="seq-color-preview" id="seq_color_preview_{{ n }}" style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"></div>
@@ -296,15 +291,27 @@
               <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
               {% set color_count = 1 %}
-              {% for a in plotly %}
-                {% set color = h.color_to_hex(a.marker.color) %}
-                {% set name = a.name %}
-                <div class="control-group control-select">
-                  <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
-                  <input type="color" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
-                </div>
-                {% set color_count = color_count + 1 %}
-              {% endfor %}
+              {% if selected_chart_type in ['pie', 'donut'] %}
+                {% for i in range(plotly[0].labels | length) %}
+                  {% set color = h.color_to_hex(plotly[0].marker.colors[i]) if "colors" in plotly[0].marker else "#8FBC8F" %}
+                  {% set name = plotly[0].labels[i] %}
+                  <div class="control-group control-select">
+                    <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
+                    <input type="color" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
+                  </div>
+                  {% set color_count = color_count + 1 %}
+                {% endfor %}
+              {% else %}
+                {% for a in plotly %}
+                  {% set color = h.color_to_hex(a.marker.color) %}
+                  {% set name = a.name %}
+                  <div class="control-group control-select">
+                    <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
+                    <input type="color" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
+                  </div>
+                  {% set color_count = color_count + 1 %}
+                {% endfor %}
+              {% endif %}
 
             {% else %}
               {# Color #}

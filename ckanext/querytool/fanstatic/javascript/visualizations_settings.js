@@ -575,11 +575,14 @@
                     //  dropdown  because  of  their  positions in the 
                     //  dist file.
                     var dropdownColorSchemeDt = item.find('[data-target*=chart_field_color_]'); //  NOTE: mapped to dr
-                    var dropdownSecColorSchemeDt = item.find('[data-target*=chart_field_seq_color_]');  //  NOTE: mapped to dtr
-                    var dropdownSecColorScheme = item.find('[id*=chart_field_seq_color_]');  //  NOTE: mapped to nn
+                    var dropdownSecColorSchemeDt = item.find('[data-target*=seq_colors_hidden_input_]');  //  NOTE: mapped to dtr
+                    var dropdownSecColorScheme = item.find('[id*=seq_colors_hidden_input_]');  //  NOTE: mapped to nn
                     var dropdownSecColorSchemeType = item.find('[id*=chart_field_color_type_]');  //  NOTE: mapped to nnn
                     var dropdownSecColorSchemeWrap = item.find('[class*=chart_field_color_wrap_]');  //  NOTE: mapped to nnnn
                     var dropdownSecColors = item.find('[class*=seq-colors-]');  //  NOTE: mapped to sq
+                    var dropdownSecStartingColor = item.find('[id*=seq_colors_starting_]');
+                    var dropdownSecEndingColor = item.find('[id*=seq_colors_ending_]');
+                    var dropdownSecColorPreview = item.find('[id*=seq_color_preview_]');
                     var dropdownDiverColors = item.find("[class*=diver-colors-]");  //  NOTE: mapped to dv
                     var dropdownShowAnnotations = item.find("[id*=chart_field_show_annotations_]"); //  NOTE: mapped to sa
                     
@@ -776,11 +779,11 @@
                     dropdownGraphType.attr('id', 'chart_field_graph_' + order);
                     dropdownGraphType.attr('name', 'chart_field_graph_' + order);
 
-                    dropdownSecColorScheme.attr("id", "chart_field_seq_color_" + order),
-                    dropdownSecColorScheme.attr("name", "chart_field_seq_color_" + order),
-                    dropdownSecColorScheme.attr("for", "chart_field_seq_color_" + order),
+                    dropdownSecColorScheme.attr("id", "seq_colors_hidden_input_" + order),
+                    dropdownSecColorScheme.attr("name", "seq_colors_hidden_input_" + order),
+                    dropdownSecColorScheme.attr("for", "seq_colors_hidden_input_" + order),
 
-                    dropdownSecColorSchemeDt.attr("data-target", "chart_field_seq_color_" + order),
+                    dropdownSecColorSchemeDt.attr("data-target", "seq_colors_hidden_input_" + order),
                     
                     dropdownSecColorSchemeType.attr("id", "chart_field_color_type_" + order),
                     dropdownSecColorSchemeType.attr("name", "chart_field_color_type_" + order),
@@ -788,6 +791,12 @@
                     dropdownSecColorSchemeWrap.attr("class", "chart_field_color_wrap_" + order),
                     
                     dropdownSecColors.attr("class", "seq-colors-" + order),
+                    dropdownSecStartingColor.attr("id", "seq_colors_starting_" + order);  //  NOTE: mapped to sq
+                    dropdownSecStartingColor.attr("name", "seq_colors_starting_" + order);  //  NOTE: mapped to sq
+                    dropdownSecEndingColor.attr("id", "seq_colors_ending_" + order);
+                    dropdownSecEndingColor.attr("name", "seq_colors_ending_" + order);
+                    dropdownSecColorPreview.attr("id", "seq_color_preview_" + order);
+
                     dropdownDiverColors.attr("class", "diver-colors-" + order),
                     
                     dropdownShowAnnotations.attr("id", "chart_field_show_annotations_" + order),
@@ -1030,7 +1039,12 @@
                     var map_custom_title_field = item.find('[id*=map_custom_title_field_]');    //  NOTE: mapped to MT
                     var map_key_field = item.find('[id*=map_key_field_]');
                     var data_key_field = item.find('[id*=map_data_key_field_]');
-                    var map_color_scheme = item.find('[id*=map_color_scheme_]');
+                    var map_data_format_field = item.find('[id*=map_data_format_]');
+                    var seq_colors_field = item.find('[id*=seq_colors_hidden_input_]');
+                    var sec_colors_starting_field = item.find('[id*=seq_colors_starting_]');
+                    var sec_colors_ending_field = item.find('[id*=seq_colors_ending_]');
+                    var sec_color_preview = item.find('[id*=seq_color_preview_]');
+                    var data_categories = item.find('[id*=map_data_categories_]');
                     var map_size = item.find('[id*=map_size_]');
                     var map_module = item.find('[id*=map_module_]');
 
@@ -1055,8 +1069,15 @@
                     map_key_field.attr('name', 'map_key_field_' + order);
                     data_key_field.attr('id', 'map_data_key_field_' + order);
                     data_key_field.attr('name', 'map_data_key_field_' + order);
-                    map_color_scheme.attr('id', 'map_color_scheme_' + order);
-                    map_color_scheme.attr('name', 'map_color_scheme_' + order);
+                    map_data_format_field.attr('id', 'map_data_format_' + order);
+                    map_data_format_field.attr('name', 'map_data_format_' + order);
+                    seq_colors_field.attr('id', 'seq_colors_hidden_input_' + order);
+                    seq_colors_field.attr('name', 'seq_colors_hidden_input_' + order);
+                    sec_colors_starting_field.attr("id", "seq_colors_starting_" + order);
+                    sec_colors_ending_field.attr("id", "seq_colors_ending_" + order);
+                    sec_color_preview.attr("id", "seq_color_preview_" + order);
+                    data_categories.attr("id", "map_data_categories_" + order);
+                    data_categories.attr("name", "map_data_categories_" + order);
                     map_size.attr('id', 'map_size_' + order);
                     map_size.attr('name', 'map_size_' + order);
                     map_module.attr('id', 'map_module_' + order);

@@ -665,29 +665,29 @@ $(document).ready(function(){
     }
   });
 
-  $(document).on('change', '[id^=chart_field_seq_starting_color_]', function() {
+  $(document).on('change', '[id^=seq_colors_starting_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     
-    const gradientInput = $(`#chart_field_seq_color_${chart_number}`);
+    const gradientInput = $(`#seq_colors_hidden_input_${chart_number}`);
     const oldVal = gradientInput.val().split(',');
     const newVal = `${selection},${oldVal[1]}`;
 
     gradientInput.val(newVal).trigger('change');
   });
 
-  $(document).on('change', '[id^=chart_field_seq_ending_color_]', function() {
+  $(document).on('change', '[id^=seq_colors_ending_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     
-    const gradientInput = $(`#chart_field_seq_color_${chart_number}`);
+    const gradientInput = $(`#seq_colors_hidden_input_${chart_number}`);
     const oldVal = gradientInput.val().split(',');
     const newVal = `${oldVal[0]},${selection}`;
 
     gradientInput.val(newVal).trigger('change');
   });
 
-  $(document).on('change', '[id^=chart_field_seq_color_]', function() {
+  $(document).on('change', '[id^=seq_colors_hidden_input_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     
@@ -703,13 +703,6 @@ $(document).ready(function(){
     var selected = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
 
-    //Hide color options if pie or donut
-    if(selected=='pie' || selected=='donut') {
-      $(this).closest('.accordion').find(".color-accordion").addClass('hidden')
-    } else {
-      $(this).closest('.accordion').find(".color-accordion").removeClass('hidden')
-    }
-
     if(['line', 'spline'].includes(selected)) {
       $(this).closest('.accordion').find(".line-accordion").removeClass('hidden')
     } else {
@@ -717,7 +710,7 @@ $(document).ready(function(){
     }
 
     //Hide seqeuntial if not bar chart
-    if(selected=='line' || selected=='area' || selected=='spline' || selected=='donut' || selected=='pie' || selected=='scatter'){
+    if(selected=='line' || selected=='area' || selected=='spline' || selected=='scatter'){
       $(`#chart_field_color_type_${chart_number}`).val("1");
       $(`#chart_field_color_type_${chart_number}`).change();
 
@@ -727,7 +720,6 @@ $(document).ready(function(){
     } else {
       $(`.chart_field_color_wrap_${chart_number}`).removeClass('hidden');
     }
-
 
     //Hide and show x-axis options
     if(selected=='pie' || selected=='donut'){
@@ -771,7 +763,7 @@ $(document).ready(function(){
     }
 
 
-    //Hide bar width 
+    //Hide bar width
     if(selected=='line' || selected=='spline' || selected=='area' || selected=='pie' || selected=='donut') {
       $(`#chart_bar_width_${chart_number}`).addClass("hidden");
     } else {
@@ -786,6 +778,14 @@ $(document).ready(function(){
       $(`#chart_field_donut_hole_${chart_number}`).prop("disabled", true);
     }
 
+    //  If it's a new chart visualization, make
+    //  donut/pie  charts  colors   default  to
+    //  sequential
+    var chartFieldPlotly = $(`#chart_field_plotly_${chart_number}`).val();
+
+    if (["pie", "donut"].includes(selected) && !chartFieldPlotly) {
+      $(`#chart_field_color_type_${chart_number}`).val("2").change();
+    }
   })
 
 
@@ -1428,4 +1428,16 @@ $('body').on('change', '[id^=chart_field_sort_]', function () {
           $(`#chart_field_x_sort_labels_${chart_number}`).prop('checked', false).trigger('change');
       }
   }
+});
+
+$('body').on('change', '[id^=map_data_categories_]', function (e) {
+  var chart_number = this.id.split('_').slice(-1)[0];
+  var selected = $(`#map_data_categories_${chart_number}`).val();
+
+  if(selected < 2) {
+    $(`#map_data_categories_${chart_number}`).val(2).change();
+  } else if (selected > 10) {
+    $(`#map_data_categories_${chart_number}`).val(10).change();
+  }
+
 });

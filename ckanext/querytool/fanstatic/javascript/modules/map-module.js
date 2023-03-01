@@ -25,7 +25,9 @@ ckan.module('querytool-map', function($) {
             this.mapTitleField = this.el.parent().parent().find('[id*=map_title_field_]');
             this.mapKeyField = this.el.parent().parent().find('[id*=map_key_field_]');
             this.dataKeyField = this.el.parent().parent().find('[id*=map_data_key_field_]');
-            this.mapColorScheme = this.el.parent().parent().find('[id*=map_color_scheme_]');
+            this.seqColors = this.el.parent().parent().find('[id*=seq_colors_hidden_input_]');
+            this.dataCategories = this.el.parent().parent().find('[id*=map_data_categories_]');
+            this.dataFormat = this.el.parent().parent().find('[id*=map_data_format_]');
             this.mapFilterName = this.el.parent().parent().find('[id*=map_field_filter_name_]');
             this.mapFilterValue = this.el.parent().parent().find('[id*=map_field_filter_value_]');
   
@@ -34,7 +36,9 @@ ckan.module('querytool-map', function($) {
             this.mapTitleField.change(this.onPropertyChange.bind(this));
             this.mapKeyField.change(this.onPropertyChange.bind(this));
             this.dataKeyField.change(this.onPropertyChange.bind(this));
-            this.mapColorScheme.change(this.onPropertyChange.bind(this));
+            this.seqColors.change(this.onPropertyChange.bind(this));
+            this.dataCategories.change(this.onPropertyChange.bind(this));
+            this.dataFormat.change(this.onPropertyChange.bind(this));
             this.mapFilterName.change(this.onPropertyChange.bind(this));
             this.mapFilterValue.change(this.onPropertyChange.bind(this));
   
@@ -115,10 +119,11 @@ ckan.module('querytool-map', function($) {
             this.options.data_key_field = this.dataKeyField.val();
             this.options.y_axis_column = this.valueField.val();
             this.options.measure_label = $('#choose_y_axis_column option:selected').text();
-            this.options.map_color_scheme = this.mapColorScheme.val();
+            this.options.seq_colors = this.seqColors.val();
+            this.options.data_categories = this.dataCategories.val();
+            this.options.data_format = this.dataFormat.val();
             this.options.filter_name = this.mapFilterName.val();
             this.options.filter_value = this.mapFilterValue.val();
-  
   
             if (this.options.map_title_field && this.options.map_key_field &&
                 this.options.data_key_field && this.options.map_resource &&
@@ -169,8 +174,52 @@ ckan.module('querytool-map', function($) {
             }
   
         },
+        hexToRgb(hex) {
+            var arrBuff = new ArrayBuffer(4);
+            var vw = new DataView(arrBuff);
+            hex = hex.replace(/[^0-9A-F]/gi, "");
+            vw.setUint32(0, parseInt(hex, 16), false);
+            var arrByte = new Uint8Array(arrBuff);
+
+            return arrByte[1] + "," + arrByte[2] + "," + arrByte[3];
+        },
+        interpolateColor: function(color1, color2, factor) {
+            if (arguments.length < 3) {
+              factor = 0.5;
+            }
+            var result = color1.slice();
+            for (var i = 0; i < 3; i++) {
+              result[i] = Math.round(
+                result[i] + factor * (color2[i] - color1[i])
+              );
+            }
+            return result;
+        },
+        interpolateColors: function (color1, color2, steps) {
+            var stepFactor = 1 / (steps - 1),
+                interpolatedColorArray = [];
+
+            color1 = color1.match(/\d+/g).map(Number);
+            color2 = color2.match(/\d+/g).map(Number);
+
+            for (var i = 0; i < steps; i++) {
+                var color_ = this.interpolateColor(color1, color2, stepFactor * i);
+
+                var new_color_ =
+                "rgba(" + color_[0] + "," + color_[1] + "," + color_[2] + ",1)";
+                interpolatedColorArray.push(new_color_);
+            }
+
+            return interpolatedColorArray;
+        },
         createScale: function(featuresValues) {
-            var colors = this.options.map_color_scheme.split(',');
+            const colors = this.options.seq_colors.split(',');
+            const steps = this.options.data_categories; 
+            const gradient = this.interpolateColors(
+                this.hexToRgb(colors[0]), 
+                this.hexToRgb(colors[1]), 
+                steps || 5
+            );
   
             var values = $.map(featuresValues, function(feature, key) {
                     return feature.value;
@@ -182,15 +231,28 @@ ckan.module('querytool-map', function($) {
   
             return d3.scale.quantize()
                 .domain([min, max])
-                .range(colors);
+                .range(gradient);
         },
-        formatNumber: function(num) {
-            return (num % 1 ? num.toFixed(2) : num);
+        formatNumber: function(num, format = null) {
+            if(!format)
+                return (num % 1 ? num.toFixed(2) : num);
+
+            const formatter = d3.format(format);
+
+            return formatter(num);
+
         },
         createLegend: function() {
             var scale = this.createScale(this.featuresValues);
             var opacity = 1;
             var noDataLabel = 'No data'
+
+            //  Ensure there will never be two
+            //  legends simultaneously
+            if(this.legend) {
+                this.map.removeControl(this.legend);
+            }
+
             this.legend = L.control({
                 position: 'bottomright'
             });
@@ -209,11 +271,13 @@ ckan.module('querytool-map', function($) {
                     labels = [];
   
                 div.appendChild(ul);
+
+                const dataFormat = this.options.data_format;
                 for (var i = 0, len = grades.length; i < len; i++) {
                     ul.innerHTML +=
                         '<li><span style="background:' + scale(grades[i]) + '; opacity: ' + opacity + '"></span> ' +
-                        this.formatNumber(grades[i]) +
-                        (grades[i + 1] ? '&ndash;' + this.formatNumber(grades[i + 1]) + '</li>' : '+</li></ul>');
+                        this.formatNumber(grades[i], dataFormat) +
+                        (grades[i + 1] ? ' &ndash; ' + this.formatNumber(grades[i + 1], dataFormat) + '</li>' : '+</li></ul>');
                 }
                 ul.innerHTML +=
                     '<li><span style="background:' + '#bdbdbd' + '; opacity: ' + opacity + '"></span> ' +
@@ -261,8 +325,6 @@ ckan.module('querytool-map', function($) {
           var optionalFilterSlug = (this.options.filter_slug === true) ? '' : this.options.filter_slug;
           var optionalFilterValue = (this.options.filter_value === true) ? '' : this.options.filter_value;
           var optionalFilter = optionalFilterName ? {name: optionalFilterName, slug: optionalFilterSlug, value: optionalFilterValue} : undefined;
-  
-          console.log(optionalFilter)
   
           //var dynamicTitle = this.options.map_custom_title_field;
           var dynamicTitle = this.renderChartTitle(this.options.map_custom_title_field,{
@@ -321,7 +383,7 @@ ckan.module('querytool-map', function($) {
   
                             scale = function (value) {
                                 if (value == this.featuresValues[valuesKeys[0]].value) {
-                                    var colors = this.options.map_color_scheme.split(',');
+                                    var colors = this.options.seq_colors.split(',');
                                     return colors[colors.length -1];
                                 }
                             }.bind(this)
@@ -374,9 +436,11 @@ ckan.module('querytool-map', function($) {
                                                 layer.bringToFront();
                                             }
   
+                                            const dataFormat = this.options.data_format;
+
                                             var infoData = {
                                                 title: feature.properties[this.options.map_title_field],
-                                                measure: this.formatNumber(parseFloat(elementData['value']))
+                                                measure: this.formatNumber(parseFloat(elementData['value']), dataFormat)
                                             };
   
                                             this.info.update(infoData);
