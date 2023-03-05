@@ -1471,6 +1471,10 @@ msgid "Date MMM DD .e.g. Jan 01"
 msgstr "日期 MMM DD ex。 1 月 1 日"
 
 # added manually
+msgid "Date MMM YY .e.g. Jan 14"
+msgstr "日期 MMM YY ex。 1 月 14 日"
+
+# added manually
 msgid "Dimension by default"
 msgstr "默认维度"
 

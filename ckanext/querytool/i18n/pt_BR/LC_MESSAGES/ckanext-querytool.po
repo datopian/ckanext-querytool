@@ -1423,6 +1423,10 @@ msgid "Date MMM DD .e.g. Jan 01"
 msgstr "Data MMM DD ex. Jan 01"
 
 # added manually
+msgid "Date MMM YY .e.g. Jan 14"
+msgstr "Data MMM AA ex. Jan 14"
+
+# added manually
 msgid "Dimension by default"
 msgstr "Dimensão por padrão"
 

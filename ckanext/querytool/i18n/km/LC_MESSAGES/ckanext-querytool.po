@@ -2203,6 +2203,10 @@ msgid "Date MMM DD .e.g. Jan 01"
 msgstr "កាលបរិច្ឆេទ ខែ ថ្ងៃទី ឧ.  មករា.០១"
 
 # added manually
+msgid "Date MMM YY .e.g. Jan 14"
+msgstr "កាលបរិច្ឆេទ ខែ ឆ្នាំ ឧ. មករា ១៤"
+
+# added manually
 msgid "Dimension by default"
 msgstr "ទំហំលំនាំដើម"
 

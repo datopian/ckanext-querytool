@@ -270,7 +270,9 @@ def get_charts_data_formats(num=None):
                {'text': _('Date MMM DD, YYYY .e.g. Jan 01, 2014'),
                    'value': '%b %d, %Y'},
                {'text': _('Date MMM DD .e.g. Jan 01'),
-                   'value': '%b %d'}]
+                   'value': '%b %d'},
+               {'text': _('Date MMM YY .e.g. Jan 14'),
+                   'value': '%b %y'}]
     if num:
         return options[:num]
     return options

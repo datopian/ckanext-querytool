@@ -1424,6 +1424,9 @@ msgstr "Fecha MMM DD, AAAA ej. Ene 01, 2014"
 msgid "Date MMM DD .e.g. Jan 01"
 msgstr "Fecha MMM DD ej. Ene 01"
 
+msgid "Date MMM YY .e.g. Jan 14"
+msgstr "Fecha MMM AA ej. Ene 14"
+
 # added manually
 msgid "Dimension by default"
 msgstr "Dimensión por defecto"
