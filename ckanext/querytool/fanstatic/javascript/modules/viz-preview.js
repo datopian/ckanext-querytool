@@ -2678,6 +2678,7 @@ ckan.module('querytool-viz-preview', function() {
                 },
               ],
               modeBarButtonsToRemove: ["toImage"],
+              locale: lang.toLocaleLowerCase().replace('_', '-')
             };
   
             //  Use Prism color palette

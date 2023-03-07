@@ -3,6 +3,11 @@
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 
+<!-- Plotly Locales -->
+{% set current_lang = request.environ.CKAN_LANG.lower().replace('_', '-') %}
+<script src="https://cdn.plot.ly/plotly-locale-{{ current_lang }}-latest.js"></script>
+<!-- --- -->
+
 {% set active_charts = chart %}
 {% set main_filters = main_filters.split(',') %}
 {% set y_axis_values = y_axis_values.split(',') %}
