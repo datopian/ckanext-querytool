@@ -92,22 +92,22 @@ msgstr "ចំនួនគត់ ឧ. ២"
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:60
 #: ckanext/querytool/helpers.py:224
 msgid "Decimal (1 digit) e.g 2.5"
-msgstr "ទស្សភាគ (១ ខ្ទង់) ឧ. ២,៥"
+msgstr "ទស្សភាគ (១ ខ្ទង់) ឧ. ២.៥"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:64
 #: ckanext/querytool/helpers.py:225
 msgid "Decimal (2 digit) e.g 2.50"
-msgstr "ទស្សភាគ (២ ខ្ទង់) ឧ. ២,៥០"
+msgstr "ទស្សភាគ (២ ខ្ទង់) ឧ. ២.៥០"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:68
 #: ckanext/querytool/helpers.py:226
 msgid "Decimal (3 digit) e.g 2.501"
-msgstr "ទស្សភាគ (៣ ខ្ទង់) ឧ. ២,៥០១"
+msgstr "ទស្សភាគ (៣ ខ្ទង់) ឧ. ២.៥០១"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:72
 #: ckanext/querytool/helpers.py:227
 msgid "Decimal (4 digit) e.g 2.5012"
-msgstr "ទស្សភាគ (៤ ខ្ទង់) ឧ. ២,៥០១២"
+msgstr "ទស្សភាគ (៤ ខ្ទង់) ឧ. ២.៥០១២"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:76
 #: ckanext/querytool/helpers.py:228

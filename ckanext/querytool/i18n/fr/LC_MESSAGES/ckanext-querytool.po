@@ -92,32 +92,32 @@ msgstr "Entier ex. 2"
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:60
 #: ckanext/querytool/helpers.py:224
 msgid "Decimal (1 digit) e.g 2.5"
-msgstr "Décimal (1 chiffre) ex. 2.5"
+msgstr "Décimal (1 chiffre) ex. 2,5"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:64
 #: ckanext/querytool/helpers.py:225
 msgid "Decimal (2 digit) e.g 2.50"
-msgstr "Décimal (2 chiffres) ex. 2.50"
+msgstr "Décimal (2 chiffres) ex. 2,50"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:68
 #: ckanext/querytool/helpers.py:226
 msgid "Decimal (3 digit) e.g 2.501"
-msgstr "Décimal (3 chiffres) ex. 2.501"
+msgstr "Décimal (3 chiffres) ex. 2,501"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:72
 #: ckanext/querytool/helpers.py:227
 msgid "Decimal (4 digit) e.g 2.5012"
-msgstr "Décimal (4 chiffres) ex. 2.5012"
+msgstr "Décimal (4 chiffres) ex. 2,5012"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:76
 #: ckanext/querytool/helpers.py:228
 msgid "Currency e.g. $2,000"
-msgstr "Monnaie ex. $2,000"
+msgstr "Monnaie ex. $2000"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:80
 #: ckanext/querytool/helpers.py:229
 msgid "Rounded e.g 2k"
-msgstr "Arrondi ex. 2m"
+msgstr "Arrondi ex. 2k"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:84
 #: ckanext/querytool/helpers.py:230
@@ -129,28 +129,28 @@ msgstr "Pourcentage (0 chiffres) ex. 25% pour 0.25"
 #: ckanext/querytool/helpers.py:232
 #, python-format
 msgid "Percentage (1 digit) e.g 25.1%% for 0.251"
-msgstr "Pourcentage (1 chiffre) ex. 25.1% pour 0.251"
+msgstr "Pourcentage (1 chiffre) ex. 25,1% pour 0.251"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:92
 #: ckanext/querytool/helpers.py:234
 #, python-format
 msgid "Percentage (2 digit) e.g 25.12%% for 0.2512"
-msgstr "Pourcentage (2 chiffres) ex. 25.12% pour 0.2512"
+msgstr "Pourcentage (2 chiffres) ex. 25,12% pour 0.2512"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:96
 #: ckanext/querytool/helpers.py:236
 msgid "Comma thousands separator (0 digit) e.g 2,512"
-msgstr "Virgule comme séparateur de milliers (0 chiffres) ex. 2,512"
+msgstr "Virgule comme séparateur de milliers (0 chiffres) ex. 2 512"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:100
 #: ckanext/querytool/helpers.py:238
 msgid "Comma thousands separator (1 digit) e.g 2,512.3"
-msgstr "Virgule comme séparateur de milliers (1 chiffre) ex. 2,512.3"
+msgstr "Virgule comme séparateur de milliers (1 chiffre) ex. 2 512,3"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:104
 #: ckanext/querytool/helpers.py:240
 msgid "Comma thousands separator (2 digit) e.g 2,512.34"
-msgstr "Virgule comme séparateur de milliers (2 chiffres) ex. 2,512.34"
+msgstr "Virgule comme séparateur de milliers (2 chiffres) ex. 2 512,34"
 
 #: ckanext/querytool/helpers.py:511
 msgid "Ascending"
