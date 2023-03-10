@@ -2698,11 +2698,13 @@ ckan.module('querytool-viz-preview', function() {
 
             Plotly.newPlot(this.el[0], data, base_info, config);
 
-            const el = this.el[0];
+            // Resize each of the charts after a window resize
+            // including fullscreen mode
             window.onresize = function() {
               let el = $(".item-content.js-plotly-plot");
-              console.log(el[0])
-              Plotly.Plots.resize(el[0]);
+              el.each((i, chart) => {
+                Plotly.Plots.resize(chart);
+              })
             };
 
         },
