@@ -2423,71 +2423,67 @@ ckan.module('querytool-viz-preview', function() {
               }
             }
   
-            //Showing Annotations on bars
+            //  Showing annotations on bars
             if (
-              "bar" === this.options.chart_type ||
-              "sbar" === this.options.chart_type
+              ["bar", "sbar", "hbar", "shbar"].includes(this.options.chart_type)
             ) {
-              //Temporarily disabling annotations on bars with categories
-              if (data.length > 1) {
-                show_annotations = false;
-              }
               if (show_annotations == true) {
-                var stacked_total = 0;
-  
-                for (var i = 0; i < data.length; i++) {
-                  for (var j = 0; j < data[i].x.length; j++) {
-                    if ("sbar" === this.options.chart_type) {
-                      stacked_total = stacked_total + data[i].y[j];
-                    } else {
-                      stacked_total = data[i].y[j];
-                    }
-  
-                    var anoData = {
-                      x: data[i].x[j],
-                      y: stacked_total,
-                      text: dataLabelFormatter(data[i].y[j]),
-                      hovertemplate: "%{y}<extra></extra>",
-                      xanchor: "center",
-                      yanchor: "bottom",
-                      showarrow: false,
-                    };
-  
-                    base_info.annotations.push(anoData);
-                  }
+                const isHorizontal = ["hbar", "shbar"].includes(this.options.chart_type);
+                const isStacked = ["sbar", "shbar"].includes(this.options.chart_type);
+                  
+                const gapBetweenGroups = 0.2;
+                const gapBetweenCols = (1 - gapBetweenGroups) / data.length;
+                const dataMidIdx = (data.length + (data.length % 2 != 0 ? 1 : 0)) / 2;
+
+                const getAnnotationPos = (dataIdx, xIdx) => {
+                  const itemRelativeIdx = dataIdx + 1 - dataMidIdx;
+                  return xIdx + itemRelativeIdx * gapBetweenCols
                 }
-              }
-            }
-            if (
-              "hbar" === this.options.chart_type ||
-              "shbar" === this.options.chart_type
-            ) {
-              //Temporarily disabling annotations on bars with categories
-              if (data.length > 1) {
-                show_annotations = false;
-              }
-              if (show_annotations == true) {
-                var stacked_total = 0;
-  
+
+                let stackedTotal = new Array(data[0].x.length).fill(0);
                 for (var i = 0; i < data.length; i++) {
                   for (var j = 0; j < data[i].x.length; j++) {
-                    if ("shbar" === this.options.chart_type) {
-                      stacked_total = stacked_total + data[i].x[j];
+                    let dataPointValue;
+
+                    //  Swap axis if it's horizontal
+                    if(isHorizontal) {
+                      dataPointValue = Number(data[i].x[j]);
                     } else {
-                      stacked_total = data[i].x[j];
+                      dataPointValue = Number(data[i].y[j]);
                     }
-  
-                    var anoData = {
-                      x: stacked_total,
-                      y: data[i].y[j],
-                      text: dataLabelFormatter(data[i].x[j]),
-                      hovertemplate: "%{y}<extra></extra>",
-                      xanchor: "left",
-                      yanchor: "center",
-                      showarrow: false,
-                    };
-  
-                    base_info.annotations.push(anoData);
+
+                    const annotationText = dataLabelFormatter(dataPointValue);
+
+                    if(annotationText != 'NaN') { 
+                      //  Value that should be displayed
+                      //  If it's stacked, sum at col index
+                      if (isStacked) {
+                        stackedTotal[j] += dataPointValue;
+                      } else {
+                        stackedTotal[j] = dataPointValue;
+                      }
+
+                      //  Base annotation object
+                      let annotationData = {
+                        text: annotationText,
+                        hovertemplate: "%{y}<extra></extra>",
+                        showarrow: false,
+                      };
+
+                      if(isHorizontal) {
+                        annotationData.x = stackedTotal[j];
+                        annotationData.y = !isStacked ? getAnnotationPos(i, j) : data[i].y[j];
+                        annotationData.xanchor = !isStacked ? "left" : "right";
+                        annotationData.yanchor = !isStacked ? "center" : "bottom";
+                      } else {
+                        annotationData.x = !isStacked ? getAnnotationPos(i, j) : data[i].x[j];
+                        annotationData.y = stackedTotal[j];
+                        annotationData.xanchor = "center";
+                        annotationData.yanchor = !isStacked ? "bottom" : "top";
+                      }
+
+                      base_info.annotations.push(annotationData);
+                    }
                   }
                 }
               }
