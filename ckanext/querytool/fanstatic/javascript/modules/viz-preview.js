@@ -2473,13 +2473,13 @@ ckan.module('querytool-viz-preview', function() {
                       if(isHorizontal) {
                         annotationData.x = stackedTotal[j];
                         annotationData.y = !isStacked ? getAnnotationPos(i, j) : data[i].y[j];
-                        annotationData.xanchor = !isStacked ? "left" : "right";
-                        annotationData.yanchor = !isStacked ? "center" : "bottom";
+                        annotationData.xanchor = "left"; 
+                        annotationData.yanchor = "center";
                       } else {
                         annotationData.x = !isStacked ? getAnnotationPos(i, j) : data[i].x[j];
                         annotationData.y = stackedTotal[j];
                         annotationData.xanchor = "center";
-                        annotationData.yanchor = !isStacked ? "bottom" : "top";
+                        annotationData.yanchor = "bottom"; 
                       }
 
                       base_info.annotations.push(annotationData);
