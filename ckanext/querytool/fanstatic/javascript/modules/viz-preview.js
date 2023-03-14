@@ -2695,6 +2695,15 @@ ckan.module('querytool-viz-preview', function() {
 
             Plotly.newPlot(this.el[0], data, base_info, config);
 
+            // Resize each of the charts after a window resize
+            // including fullscreen mode
+            window.onresize = function() {
+              let el = $(".item-content.js-plotly-plot");
+              el.each((i, chart) => {
+                Plotly.Plots.resize(chart);
+              })
+            };
+
         },
         // Get the values from dropdowns and rerender the chart.
         updateChart: function() {
