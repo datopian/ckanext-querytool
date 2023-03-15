@@ -816,7 +816,7 @@ ckan.module('querytool-viz-preview', function() {
                       type: "scatter",
                       mode: labelsMode,
                       text: convertedTextTitles,
-                      textposition: "top right",
+                      textposition: "top center",
                       textfont: {
                         size: 14,
                       },
@@ -843,7 +843,7 @@ ckan.module('querytool-viz-preview', function() {
                   mode: labelsMode,
                   text: convertedTextTitles,
                   hovertemplate: "%{y}<extra></extra>",
-                  textposition: "top right",
+                  textposition: "top center",
                   textfont: {
                     size: 14,
                   },
@@ -931,7 +931,7 @@ ckan.module('querytool-viz-preview', function() {
                       type: this.options.chart_type,
                       mode: scatterLabelsMode,
                       text: convertedTextTitles,
-                      textposition: "top right",
+                      textposition: "top center",
                       textfont: {
                         size: 14,
                       },
@@ -957,7 +957,7 @@ ckan.module('querytool-viz-preview', function() {
                   mode: scatterLabelsMode,
                   text: convertedTextTitles,
                   hovertemplate: "%{y}<extra></extra>",
-                  textposition: "top right",
+                  textposition: "top center",
                   textfont: {
                     size: 14,
                   },
@@ -1000,7 +1000,7 @@ ckan.module('querytool-viz-preview', function() {
                       type: "scatter",
                       mode: labelsMode,
                       text: convertedTextTitles,
-                      textposition: "top right",
+                      textposition: "top center",
                       hovertemplate: "%{y}<extra></extra>",
                       textfont: {
                         size: 14,
@@ -1026,7 +1026,7 @@ ckan.module('querytool-viz-preview', function() {
                   name: columns[0][0],
                   mode: labelsMode,
                   text: convertedTextTitles,
-                  textposition: "top right",
+                  textposition: "top center",
                   hovertemplate: "%{y}<extra></extra>",
                   textfont: {
                     size: 14,
@@ -1274,7 +1274,7 @@ ckan.module('querytool-viz-preview', function() {
                       y: columns[tmp].slice(1),
                       mode: labelsMode,
                       text: convertedTextTitles,
-                      textposition: "top right",
+                      textposition: "top center",
                       hovertemplate: "%{y}<extra></extra>",
                       textfont: {
                         size: 14,
@@ -1298,7 +1298,7 @@ ckan.module('querytool-viz-preview', function() {
                   y: columns[0].slice(1),
                   mode: labelsMode,
                   text: convertedTextTitles,
-                  textposition: "top right",
+                  textposition: "top center",
                   hovertemplate: "%{y}<extra></extra>",
                   textfont: {
                     size: 14,
