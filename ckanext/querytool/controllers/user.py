@@ -39,7 +39,7 @@ class QuerytoolUserController(UserController):
                 # Login request headers
                 headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
 
-                r = requests.post(url, data=data, headers=headers)
+                r = requests.post(url, data=data, headers=headers, verify=False)
 
                 # The login route already does a redirect,
                 # so we have to pick the first response
