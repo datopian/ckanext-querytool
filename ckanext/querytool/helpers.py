@@ -906,6 +906,17 @@ def get_cookie_control_config():
 
         return cookie_control_config
 
+def get_recaptcha_config():
+    sitekey = config.get('ckanext.querytool.recaptcha.sitekey', '')
+    secretkey = config.get('ckanext.querytool.recaptcha.secretkey', '')
+
+    return {
+        "sitekey": sitekey,
+        "secretkey": secretkey,
+        "enabled": sitekey and secretkey
+    }
+
+
 def get_social_media_links(social_order, admin_dict):
     social_order = social_order.split(',')
 
