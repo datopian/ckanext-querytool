@@ -30,6 +30,13 @@
 
     } else {
       $(".embed-show").removeClass("embed-show");
+
+      //  Make navbar sticky when page is being embedded
+      $(".toolbar").css("position", "fixed");
+      $(".toolbar").css("z-index", "10000");
+      const toolbarHeight = $(".toolbar").height();
+      $(".public-header .container").css("padding-top", toolbarHeight + "px");
+      $(".public-header .container-fluid").css("padding-top", toolbarHeight + "px");
     }
   });
 })($);

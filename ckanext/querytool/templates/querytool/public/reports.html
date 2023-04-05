@@ -13,9 +13,7 @@
       <li><a href="/"><i class="fa fa-home"></i></a></li>
       <li class="active">{% link_for _('All reports'), controller=c.controller, action='querytool_public_reports' %}</li>
     </ol>
-    <div class="embed-show search-reports">
-      {% snippet 'snippets/search_reports_input.html' %}
-    </div>
+    {% snippet 'snippets/embed/navbar_end_items.html' %}
   </div>
 {% endblock %}
 
