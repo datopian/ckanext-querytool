@@ -272,6 +272,18 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     controller=home_controller,
                     action='index')
 
+
+        user_controller = 'ckanext.querytool.controllers.user:QuerytoolUserController'
+        map.connect('login',
+                    '/user/login',
+                    controller=user_controller,
+                    action='login')
+
+        map.connect('logged_in',
+                    '/user/logged_in',
+                    controller=user_controller,
+                    action='logged_in')
+
         return map
 
     def after_map(self, map):
@@ -391,6 +403,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.get_available_groups,
             'get_all_parent_groups':
                 helpers.get_all_parent_groups,
+            'get_recaptcha_config': 
+                helpers.get_recaptcha_config
         }
 
     # IAuthFunctions
