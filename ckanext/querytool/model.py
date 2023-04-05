@@ -4,7 +4,7 @@ import logging
 import ckan.logic as logic
 
 from sqlalchemy import Table, Column, Index, ForeignKey
-from sqlalchemy import types, func
+from sqlalchemy import types, func, or_
 from sqlalchemy.orm import class_mapper
 try:
     from sqlalchemy.engine.result import RowProxy
@@ -15,6 +15,8 @@ from sqlalchemy.engine.reflection import Inspector
 from ckan.model.meta import orm, metadata, mapper, Session, engine
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
+from ckan.model.group import Group
+from ckan import model
 
 log = logging.getLogger(__name__)
 query_tool_table = None
@@ -303,3 +305,39 @@ def table_dictize(obj, context, **kw):
                                        context.get('metadata_modified', ''))
 
     return result_dict
+
+
+def child_group_search(query_string=None, query_children=None, **kwds):
+    '''Finds entities in the table that satisfy certain criteria.
+    :param order: Order rows by specified column.
+    :type order: string
+    '''
+
+    # Search the group table for text like the query_string and only if "name" is in query_children
+    log.error('TEST')
+    log.error(query_string)
+    log.error(query_children)
+    query_children = query_children.split(',')
+
+    # Get the group table
+    group = model.Group
+
+    # Get the group table
+    query = Session.query(group).autoflush(False)
+
+    if query_string:
+        query = query.filter(or_(
+            group.name.ilike('%' + query_string + '%'),
+            group.title.ilike('%' + query_string + '%'),
+            group.description.ilike('%' + query_string + '%')
+        ))
+
+    if query_children:
+        query = query.filter(group.name.in_(query_children))
+
+    results = query.all()
+    log.error(results)
+    for result in results:
+        log.error(result.name)
+
+    return results

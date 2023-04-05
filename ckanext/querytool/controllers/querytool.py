@@ -869,25 +869,76 @@ class QueryToolController(base.BaseController):
         List all of the available query tools
         :return: querytool list template page
         '''
-        querytools = _get_action('querytool_public_list', {'group': group})
-        group_details = _get_action('group_show', {'id': group})
-
+        from_parent = toolkit.request.params.get('from_parent_group', False)
+        parent_group_children = toolkit.request.params.get('parent_group_children', False)
         q = toolkit.request.params.get('report_q', '')
 
-        if q:
-            querytool_search_results = helpers.querytool_search(
-                query_string=q, query_group=group
-            )
-            querytool_search_results_names = [
-                querytool.name for querytool in querytool_search_results
-            ]
-            querytools = [
-                querytool for querytool in querytools if
-                querytool['name'] in querytool_search_results_names
-            ]
+        if group == '__misc__group__':
+            group = {
+                'misc_group': True,
+                'title': 'Other',
+                'description': 'Miscellaneous groups',
+                'name': '__misc__group__'
+            }
+            child_group_search_results = []
 
-        return render('querytool/public/list.html',
-                      extra_vars={'data': querytools, 'group': group_details})
+            if q:
+                child_group_search_results = helpers.child_group_search(
+                    query_string=q, query_children=parent_group_children
+                )
+
+            return render(
+                'querytool/public/list.html',
+                extra_vars={
+                    'child_groups': child_group_search_results,
+                    'group': group,
+                    'from_parent': True
+                }
+            )
+
+        group_details = _get_action('group_show', {'id': group})
+        log.error(toolkit.request.params)
+        log.error(from_parent)
+        log.error(parent_group_children)
+
+        if from_parent and parent_group_children:
+            child_group_search_results = []
+
+            if q:
+                child_group_search_results = helpers.child_group_search(
+                    query_string=q, query_children=parent_group_children
+                )
+
+            return render(
+                'querytool/public/list.html',
+                extra_vars={
+                    'child_groups': child_group_search_results,
+                    'group': group_details,
+                    'from_parent': True
+                }
+            )
+        else:
+            querytools = _get_action('querytool_public_list', {'group': group})
+
+            if q:
+                querytool_search_results = helpers.querytool_search(
+                    query_string=q, query_group=group
+                )
+                querytool_search_results_names = [
+                    querytool.name for querytool in querytool_search_results
+                ]
+                querytools = [
+                    querytool for querytool in querytools if
+                    querytool['name'] in querytool_search_results_names
+                ]
+
+            return render(
+                'querytool/public/list.html',
+                extra_vars={
+                    'data': querytools,
+                    'group': group_details
+                }
+            )
 
     def querytool_public_read(self, name):
         '''

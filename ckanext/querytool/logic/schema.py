@@ -1,3 +1,5 @@
+import logging
+
 from ckan.plugins import toolkit
 
 from ckanext.querytool.logic import validators
@@ -10,6 +12,9 @@ package_id_exists = toolkit.get_validator('package_id_exists')
 name_validator = toolkit.get_validator('name_validator')
 isodate = toolkit.get_validator('isodate')
 boolean_validator = toolkit.get_validator('boolean_validator')
+
+
+log = logging.getLogger(__name__)
 
 
 def querytool_schema():

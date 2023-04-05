@@ -12,6 +12,13 @@ from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 import ckan.lib.uploader as uploader
 import ckan.lib.app_globals as app_globals
+from ckan.common import _
+import ckan.plugins as plugins
+import ckan.lib.dictization as dictization
+import ckan.lib.dictization.model_dictize as model_dictize
+import ckan.lib.dictization.model_save as model_save
+import ckan.lib.plugins as lib_plugins
+import ckan.lib.datapreview
 
 
 from ckanext.querytool.logic import schema
@@ -22,6 +29,8 @@ check_access = logic.check_access
 _get_action = logic.get_action
 ValidationError = logic.ValidationError
 _validate = df.validate
+NotFound = logic.NotFound
+_get_or_bust = logic.get_or_bust
 
 
 log = log.getLogger(__name__)
@@ -304,3 +313,328 @@ def config_option_update(context, data_dict):
     log.info('Updated config options: {0}'.format(data))
 
     return data
+
+
+def _group_or_org_update(context, data_dict, is_org=False):
+    model = context['model']
+    user = context['user']
+    session = context['session']
+    id = _get_or_bust(data_dict, 'id')
+    is_relationship = context.get('is_relationship', False)
+
+    group = model.Group.get(id)
+    group_extras = model.Session.query(model.GroupExtra) \
+        .filter(model.GroupExtra.group_id == group.id) \
+        .all()
+
+    group_extras = {
+        group_extra.key: group_extra.value
+        for group_extra in group_extras
+        if group_extra.key in ["parent", "children"]
+    }
+
+    if data_dict.get('group_relationship_type') == 'parent':
+        data_dict['parent'] = ''
+    elif data_dict.get('group_relationship_type') == 'child':
+        data_dict['children'] = ''
+
+    context["group"] = group
+
+    if group is None:
+        raise NotFound('Group was not found.')
+
+    data_dict['type'] = group.type
+
+    # get the schema
+    group_plugin = lib_plugins.lookup_group_plugin(group.type)
+
+    try:
+        schema = group_plugin.form_to_db_schema_options({
+            'type': 'update',
+            'api': 'api_version' in context,
+            'context': context
+        })
+    except AttributeError:
+        schema = group_plugin.form_to_db_schema()
+
+    upload = uploader.get_uploader('group', group.image_url)
+    upload.update_data_dict(data_dict, 'image_url',
+                            'image_upload', 'clear_upload')
+
+    if is_org:
+        check_access('organization_update', context, data_dict)
+    else:
+        check_access('group_update', context, data_dict)
+
+    if 'api_version' not in context:
+        # old plugins do not support passing the schema so we need
+        # to ensure they still work
+        try:
+            group_plugin.check_data_dict(data_dict, schema)
+        except TypeError:
+            group_plugin.check_data_dict(data_dict)
+
+    data, errors = lib_plugins.plugin_validate(
+        group_plugin, context, data_dict, schema,
+        'organization_update' if is_org else 'group_update')
+    log.debug('group_update validate_errs=%r user=%s group=%s data_dict=%r',
+              errors, context.get('user'),
+              context.get('group').name if context.get('group') else '',
+              data_dict)
+
+    if errors:
+        session.rollback()
+        raise ValidationError(errors)
+
+    rev = model.repo.new_revision()
+    rev.author = user
+
+    if 'message' in context:
+        rev.message = context['message']
+    else:
+        rev.message = _(u'REST API: Update object %s') % data.get("name")
+
+    group = model_save.group_dict_save(
+        data, context,
+        prevent_packages_update=is_org
+    )
+
+    if is_org:
+        plugin_type = plugins.IOrganizationController
+    else:
+        plugin_type = plugins.IGroupController
+
+    for item in plugins.PluginImplementations(plugin_type):
+        item.edit(group)
+
+    if is_org:
+        activity_type = 'changed organization'
+    else:
+        activity_type = 'changed group'
+
+    activity_dict = {
+        'user_id': model.User.by_name(user.decode('utf8')).id,
+        'object_id': group.id,
+        'activity_type': activity_type,
+    }
+    # Handle 'deleted' groups.
+    # When the user marks a group as deleted this comes through here as
+    # a 'changed' group activity. We detect this and change it to a 'deleted'
+    # activity.
+    if group.state == u'deleted':
+        if session.query(ckan.model.Activity).filter_by(
+                object_id=group.id, activity_type='deleted').all():
+            # A 'deleted group' activity for this group has already been
+            # emitted.
+            # FIXME: What if the group was deleted and then activated again?
+            activity_dict = None
+        else:
+            # We will emit a 'deleted group' activity.
+            activity_dict['activity_type'] = 'deleted group'
+    if activity_dict is not None:
+        activity_dict['data'] = {
+            'group': dictization.table_dictize(group, context)
+        }
+        activity_create_context = {
+            'model': model,
+            'user': user,
+            'defer_commit': True,
+            'ignore_auth': True,
+            'session': session
+        }
+        _get_action('activity_create')(activity_create_context, activity_dict)
+        # TODO: Also create an activity detail recording what exactly changed
+        # in the group.
+
+    upload.upload(uploader.get_max_image_size())
+
+    if not context.get('defer_commit'):
+        model.repo.commit()
+
+    # Parent/Child groups
+    group_parent = data_dict.get('parent')
+    group_extras_parent = group_extras.get('parent')
+
+    group_children = data_dict.get('children', '')
+    group_children = group_children.split(',') \
+        if group_children else []
+
+    group_extras_children = group_extras.get('children', '')
+    group_extras_children = group_extras_children.split(',') \
+        if group_extras_children else []
+
+    children_to_remove = [
+        child for child in group_extras_children
+        if child not in group_children
+    ]
+    children_to_add = [
+        child for child in group_children
+        if child not in group_extras_children
+    ]
+
+    if is_relationship is False:
+        if group_parent:
+            _handle_group_parents(
+                group, group_parent, is_extras=False
+            )
+            #parent_group = _get_group_for_relationship(group_parent)
+
+            #parent_group_children = parent_group.get('children')
+
+            #if parent_group_children:
+            #    parent_group_children = parent_group_children.split(',')
+
+            #    if group.name not in parent_group_children:
+            #        parent_group_children.append(group.name)
+            #else:
+            #    parent_group_children = [group.name]
+
+            #parent_group_children = ','.join(parent_group_children)
+            #parent_group['children'] = parent_group_children
+
+            #_update_related_group(parent_group, 'parent')
+
+        elif group_extras_parent:
+            _handle_group_parents(
+                group, group_extras_parent, is_extras=True
+            )
+            #parent_group = _get_group_for_relationship(group_extras_parent)
+
+            #parent_group_children = parent_group.get('children')
+
+            #if parent_group_children:
+            #    parent_group_children = parent_group_children.split(',')
+
+            #    if group.name in parent_group_children:
+            #        parent_group_children.remove(group.name)
+            #else:
+            #    parent_group_children = []
+
+            #parent_group_children = ','.join(parent_group_children)
+            #parent_group['children'] = parent_group_children
+
+            #_update_related_group(parent_group, 'parent')
+
+        if children_to_remove:
+            _handle_group_children(
+                group, children_to_remove, update_type='remove'
+            )
+            #for child in children_to_remove:
+            #    child_group = _get_group_for_relationship(child)
+
+            #    child_group_parent = child_group.get('parent')
+
+            #    if child_group_parent == group.name:
+            #        child_group['parent'] = ''
+
+            #        _update_related_group(child_group, 'child')
+
+        if children_to_add:
+            _handle_group_children(
+                group, children_to_add, update_type='add'
+            )
+            #for child in children_to_add:
+            #    child_group = _get_group_for_relationship(child)
+
+            #    child_group_parent = child_group.get('parent')
+
+            #    if child_group_parent != group.name:
+            #        child_group['parent'] = group.name
+
+            #        _update_related_group(child_group, 'child')
+
+    # End Parent/Child groups
+
+    return model_dictize.group_dictize(group, context)
+
+
+def _handle_group_children(group, group_children, update_type=None):
+    for child in group_children:
+        child_group = _get_group_for_relationship(child)
+
+        child_group_parent = child_group.get('parent')
+
+        if update_type == 'remove':
+            if child_group_parent == group.name:
+                child_group['parent'] = ''
+        elif update_type == 'add':
+            if child_group_parent != group.name:
+                child_group['parent'] = group.name
+
+        _update_related_group(child_group, 'child')
+
+
+def _handle_group_parents(group, group_parent, is_extras=False):
+        parent_group = _get_group_for_relationship(group_parent)
+
+        parent_group_children = parent_group.get('children')
+
+        if parent_group_children:
+            parent_group_children = parent_group_children.split(',')
+
+            if is_extras is True:
+                if group.name in parent_group_children:
+                    parent_group_children.remove(group.name)
+            else:
+                if group.name not in parent_group_children:
+                    parent_group_children.append(group.name)
+        else:
+            if is_extras is True:
+                parent_group_children = []
+            else:
+                parent_group_children = [group.name]
+
+        parent_group_children = ','.join(parent_group_children)
+        parent_group['children'] = parent_group_children
+
+        _update_related_group(parent_group, 'parent')
+
+
+def _get_group_for_relationship(package_id):
+    context = {
+        'ignore_auth': True,
+        'include_extras': True,
+        'all_fields': True
+    }
+
+    return _get_action('group_show')(context, {'id': package_id})
+
+
+def _update_related_group(group, relationship_type):
+    context = {
+        'ignore_auth': True,
+        'include_extras': True,
+        'all_fields': True,
+        'is_relationship': True
+    }
+
+    group['group_relationship_type'] = relationship_type
+
+    return _get_action('group_update')(context, group)
+
+
+def group_update(context, data_dict):
+    '''Update a group.
+
+    You must be authorized to edit the group.
+
+    Plugins may change the parameters of this function depending on the value
+    of the group's ``type`` attribute, see the
+    :py:class:`~ckan.plugins.interfaces.IGroupForm` plugin interface.
+
+    For further parameters see
+    :py:func:`~ckan.logic.action.create.group_create`.
+
+    :param id: the name or id of the group to update
+    :type id: string
+
+    :returns: the updated group
+    :rtype: dictionary
+
+    '''
+    # Callers that set context['allow_partial_update'] = True can choose to not
+    # specify particular keys and they will be left at their existing
+    # values. This includes: packages, users, groups, tags, extras
+    return _group_or_org_update(
+        context, data_dict
+    )

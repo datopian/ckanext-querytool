@@ -437,3 +437,96 @@ def member_list(context, data_dict=None, permissions_check=None):
 
     return [(m.table_id, m.table_name, translated_capacity(m.capacity))
             for m in q.all()]
+
+
+@toolkit.side_effect_free
+def get_available_groups(context, data_dict):
+    '''
+    Return all groups that don't have a parent or chilren
+    :param context:
+    :param data_dict:
+    :return:
+    '''
+    groups = toolkit.get_action('group_list')(
+        {}, {}
+    )
+
+    available_groups = []
+
+    for group_name in groups:
+        group = toolkit.get_action('group_show')(
+            {}, {'id': group_name, 'include_extras': True, 'all_fields': True}
+        )
+
+        if not group.get('parent'):
+            available_groups.append(
+                {
+                    'name': group.get('name'),
+                    'title': group.get('title'),
+                    'parent': group.get('parent'),
+                    'children': group.get('children'),
+                }
+            )
+
+    return available_groups
+
+
+@toolkit.side_effect_free
+def get_all_parent_groups(context, data_dict):
+    '''
+    Return all groups that have children
+    :param context:
+    :param data_dict:
+    :return:
+    '''
+    groups = toolkit.get_action('group_list')(
+        {}, {}
+    )
+
+    parent_groups = []
+
+    for group_name in groups:
+        group = toolkit.get_action('group_show')(
+            {}, {'id': group_name, 'include_extras': True, 'all_fields': True}
+        )
+
+        if group.get('group_relationship_type') == 'parent':
+            parent_groups.append(
+                group
+            )
+
+    return parent_groups
+
+
+@toolkit.side_effect_free
+def get_group_children(context, data_dict):
+    '''
+    Return children of a group
+    :param context:
+    :param data_dict:
+    :return:
+    '''
+    group_name = data_dict.get('id')
+
+    group = toolkit.get_action('group_show')(
+        {}, {'id': group_name, 'include_extras': True, 'all_fields': True}
+    )
+
+    children_string = group.get('children')
+    group_children = []
+
+    if children_string:
+        children = children_string.split(',')
+
+        for child_name in children:
+            child = toolkit.get_action('group_show')(
+                {},
+                {'id': child_name, 'include_extras': True, 'all_fields': True}
+            )
+
+            if child:
+                group_children.append(
+                    child
+                )
+
+    return group_children

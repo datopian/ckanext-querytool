@@ -1,3 +1,5 @@
+import logging
+
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.logic.schema as ckan_schema
@@ -24,6 +26,8 @@ from ckan.lib.navl.validators import (ignore_missing,
                                       not_missing,
                                       ignore_empty
                                       )
+
+log = logging.getLogger(__name__)
 
 
 def group_form_schema():
@@ -107,8 +111,26 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         suitable for the database.
         """
         schema = group_form_schema()
-        schema.update({'additional_description' : [toolkit.get_converter('convert_to_extras'),
-                            toolkit.get_validator('ignore_missing')]})
+        schema.update(
+            {
+                'additional_description': [
+                    toolkit.get_converter('convert_to_extras'),
+                    toolkit.get_validator('ignore_missing')
+                ],
+                'group_relationship_type': [
+                    toolkit.get_converter('convert_to_extras'),
+                    toolkit.get_validator('ignore_missing')
+                ],
+                'parent': [
+                    toolkit.get_converter('convert_to_extras'),
+                    toolkit.get_validator('ignore_missing')
+                ],
+                'children': [
+                    toolkit.get_converter('convert_to_extras'),
+                    toolkit.get_validator('ignore_missing')
+                ]
+            }
+        )
         return schema
 
     def db_to_form_schema(self):
@@ -117,8 +139,26 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         format suitable for the form (optional)
         """
         schema = group_form_schema()
-        schema.update({'additional_description' : [toolkit.get_converter('convert_from_extras'),
-                            toolkit.get_validator('ignore_missing')]})
+        schema.update(
+            {
+                'additional_description': [
+                    toolkit.get_converter('convert_from_extras'),
+                    toolkit.get_validator('ignore_missing')
+                ],
+                'group_relationship_type': [
+                    toolkit.get_converter('convert_from_extras'),
+                    toolkit.get_validator('ignore_missing')
+                ],
+                'parent': [
+                    toolkit.get_converter('convert_from_extras'),
+                    toolkit.get_validator('ignore_missing')
+                ],
+                'children': [
+                    toolkit.get_converter('convert_from_extras'),
+                    toolkit.get_validator('ignore_missing')
+                ]
+            }
+        )
         return schema
 
 
@@ -198,6 +238,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
         map.connect('querytool_public_reports', '/querytool/public/reports',
                     controller=querytool_controller, action='querytool_public_reports')
+
+        map.connect('querytool_misc_groups', '/querytool/public/group/__misc__groups__',
+                    controller=querytool_controller, action='querytool_public_list')
 
         map.connect('querytool_public_list_by_group',
                     '/querytool/public/group/{group}',
@@ -340,10 +383,14 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.filter_reports_by_permissions,
             'filter_groups_by_permissions':
                 helpers.group_count_design_reports,
-            'color_to_hex': 
+            'color_to_hex':
                 helpers.color_to_hex,
             'get_maps_data_formats':
-                helpers.get_maps_data_formats
+                helpers.get_maps_data_formats,
+            'get_available_groups':
+                helpers.get_available_groups,
+            'get_all_parent_groups':
+                helpers.get_all_parent_groups,
         }
 
     # IAuthFunctions
@@ -383,7 +430,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'tiktok_url': [ignore_missing, unicode, logic.validators.url_validator],
             'twitter_url': [ignore_missing, unicode, logic.validators.url_validator],
             'whatsapp_url': [ignore_missing, unicode, logic.validators.url_validator],
-            'youtube_url': [ignore_missing, unicode, logic.validators.url_validator]
+            'youtube_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'group_parents_enabled': [ignore_missing, logic.validators.boolean_validator],
         })
 
         return schema
