@@ -3,7 +3,7 @@ import json
 import logging
 import ckan.logic as logic
 
-from sqlalchemy import Table, Column, Index, ForeignKey
+from sqlalchemy import Table, Column, Index, ForeignKey, MetaData
 from sqlalchemy import types, func, or_
 from sqlalchemy.orm import class_mapper
 try:
@@ -307,22 +307,13 @@ def table_dictize(obj, context, **kw):
     return result_dict
 
 
-def child_group_search(query_string=None, query_children=None, **kwds):
+def child_group_search(query_string=None, query_children=None, misc_group=False):
     '''Finds entities in the table that satisfy certain criteria.
     :param order: Order rows by specified column.
     :type order: string
     '''
-
-    # Search the group table for text like the query_string and only if "name" is in query_children
-    log.error('TEST')
-    log.error(query_string)
-    log.error(query_children)
-    query_children = query_children.split(',')
-
-    # Get the group table
+    query_children = query_children.split(',') if query_children else []
     group = model.Group
-
-    # Get the group table
     query = Session.query(group).autoflush(False)
 
     if query_string:
@@ -335,9 +326,51 @@ def child_group_search(query_string=None, query_children=None, **kwds):
     if query_children:
         query = query.filter(group.name.in_(query_children))
 
+    if misc_group:
+        misc_groups = logic.get_action('get_available_groups')({}, {})
+        misc_groups = [
+            g['name'] for g in misc_groups
+            if g['group_relationship_type'] != 'parent'
+        ]
+        query = query.filter(group.name.in_(misc_groups))
+
     results = query.all()
-    log.error(results)
-    for result in results:
-        log.error(result.name)
 
     return results
+
+
+def child_group_report_search(query_string=None, query_children=None):
+    '''Finds entities in the table that satisfy certain criteria.
+    :param order: Order rows by specified column.
+    :type order: string
+    '''
+    querytool = get_table('ckanext_querytool')
+    query = Session.query(querytool).autoflush(False)
+    children = query_children.split(',') if query_children else []
+    log.error('children: %s', children)
+
+    if query_string:
+        query = query.filter(or_(
+            querytool.c.name.ilike('%' + query_string + '%'),
+            querytool.c.title.ilike('%' + query_string + '%'),
+            querytool.c.description.ilike('%' + query_string + '%'),
+            querytool.c.additional_description.ilike('%' + query_string + '%'),
+            querytool.c.dataset_name.ilike('%' + query_string + '%')
+        ))
+
+    results = []
+
+    for q in query:
+        if q.group in children:
+            results.append(q)
+
+    results = [dict(zip(result.keys(), result)) for result in results]
+
+    return results
+
+
+def get_table(name):
+    meta = MetaData()
+    meta.reflect(bind=model.meta.engine)
+    table = meta.tables[name]
+    return table

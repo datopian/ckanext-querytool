@@ -30,6 +30,7 @@
 {% block tools %}
 <div class="container">
   {% set q = request.params.get('report_q') %}
+  {% set parent = request.params.get('parent') %}
   {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
   {% set sorting_selected = request.params.get('sort', 'name asc') %}
   {% set report_count = h.report_search_count(data, remove_private=True) %}
@@ -38,6 +39,9 @@
     <div class="search-input control-reports search-giant" id="report-search-box">
       <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" {% if q %} value="{{ q }}" {% endif %} />
       <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+      {% if parent %}
+        <input type="hidden" name="parent" value="{{ parent }}">
+      {% endif %}
     </div>
 
     <div class="form-select control-group control-order-by">

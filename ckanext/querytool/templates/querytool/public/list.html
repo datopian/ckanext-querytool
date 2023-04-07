@@ -39,6 +39,7 @@
     {% endif %}
 
     {% set q = request.params.get('report_q') %}
+    {% set parent = request.params.get('parent') %}
     {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
     {% set sorting_selected = request.params.get('sort', 'name asc') %}
     {% set group_count = groups | length %}
@@ -48,6 +49,7 @@
         <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search groups...') }}" {% if q %} value="{{ q }}" {% endif %} />
         <input type="hidden" id="from_parent_group" name="from_parent_group" value=True />
         <input type="hidden" id="parent_group_children" name="parent_group_children" value="{{group.children}}" />
+        <input type="hidden" id="parent" name="parent" value="{{parent}}" />
         <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
       </div>
 
@@ -129,7 +131,7 @@
           </div>
         </div>
 
-        <a class="query-tool query-btn" href="/querytool/public/reports">
+        <a class="query-tool query-btn" href="/querytool/public/reports?parent={{ group.name }}">
           <span class="btn btn-primary" role="button" style="display: block; max-width:200px; margin:0 auto; padding:10px 10px;">{{ _('See all tools') }}</span>
         </a>
         <br/><br/><br/><br/>

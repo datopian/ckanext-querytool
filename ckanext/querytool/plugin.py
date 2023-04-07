@@ -239,8 +239,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         map.connect('querytool_public_reports', '/querytool/public/reports',
                     controller=querytool_controller, action='querytool_public_reports')
 
-        map.connect('querytool_misc_groups', '/querytool/public/group/__misc__groups__',
-                    controller=querytool_controller, action='querytool_public_list')
+        map.connect('querytool_misc_groups',
+                    '/querytool/public/group/__misc__groups__',
+                    controller=querytool_controller,
+                    action='querytool_public_list')
 
         map.connect('querytool_public_list_by_group',
                     '/querytool/public/group/{group}',
@@ -383,7 +385,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.get_all_org_permissions,
             'convert_bar_width':
                 helpers.convert_bar_width,
-            'get_cookie_control_config': 
+            'get_cookie_control_config':
                 helpers.get_cookie_control_config,
             'get_social_media_links':
                 helpers.get_social_media_links,
@@ -403,7 +405,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.get_available_groups,
             'get_all_parent_groups':
                 helpers.get_all_parent_groups,
-            'get_recaptcha_config': 
+            'get_recaptcha_config':
                 helpers.get_recaptcha_config
         }
 

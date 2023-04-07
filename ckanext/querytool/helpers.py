@@ -986,9 +986,11 @@ def querytool_search(query_string=None, query_group=None):
     )))
 
 
-def parent_child_group_search(query_string=None, query_children=None):
+def parent_child_group_search(query_string=None, query_children=None, misc_group=False):
     return list(set(child_group_search(
-        query_string=query_string, query_children=query_children
+        query_string=query_string,
+        query_children=query_children,
+        misc_group=misc_group
     )))
 
 

@@ -22,6 +22,7 @@ import ckan.lib.datapreview
 
 
 from ckanext.querytool.logic import schema
+import ckanext.querytool.logic.action as querytool_action
 from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
                                     CkanextQueryToolVisualizations
 
@@ -474,143 +475,28 @@ def _group_or_org_update(context, data_dict, is_org=False):
 
     if is_relationship is False:
         if group_parent:
-            _handle_group_parents(
+            querytool_action.handle_group_parents(
                 group, group_parent, is_extras=False
             )
-            #parent_group = _get_group_for_relationship(group_parent)
-
-            #parent_group_children = parent_group.get('children')
-
-            #if parent_group_children:
-            #    parent_group_children = parent_group_children.split(',')
-
-            #    if group.name not in parent_group_children:
-            #        parent_group_children.append(group.name)
-            #else:
-            #    parent_group_children = [group.name]
-
-            #parent_group_children = ','.join(parent_group_children)
-            #parent_group['children'] = parent_group_children
-
-            #_update_related_group(parent_group, 'parent')
 
         elif group_extras_parent:
-            _handle_group_parents(
+            querytool_action.handle_group_parents(
                 group, group_extras_parent, is_extras=True
             )
-            #parent_group = _get_group_for_relationship(group_extras_parent)
-
-            #parent_group_children = parent_group.get('children')
-
-            #if parent_group_children:
-            #    parent_group_children = parent_group_children.split(',')
-
-            #    if group.name in parent_group_children:
-            #        parent_group_children.remove(group.name)
-            #else:
-            #    parent_group_children = []
-
-            #parent_group_children = ','.join(parent_group_children)
-            #parent_group['children'] = parent_group_children
-
-            #_update_related_group(parent_group, 'parent')
 
         if children_to_remove:
-            _handle_group_children(
+            querytool_action.handle_group_children(
                 group, children_to_remove, update_type='remove'
             )
-            #for child in children_to_remove:
-            #    child_group = _get_group_for_relationship(child)
-
-            #    child_group_parent = child_group.get('parent')
-
-            #    if child_group_parent == group.name:
-            #        child_group['parent'] = ''
-
-            #        _update_related_group(child_group, 'child')
 
         if children_to_add:
-            _handle_group_children(
+            querytool_action.handle_group_children(
                 group, children_to_add, update_type='add'
             )
-            #for child in children_to_add:
-            #    child_group = _get_group_for_relationship(child)
-
-            #    child_group_parent = child_group.get('parent')
-
-            #    if child_group_parent != group.name:
-            #        child_group['parent'] = group.name
-
-            #        _update_related_group(child_group, 'child')
 
     # End Parent/Child groups
 
     return model_dictize.group_dictize(group, context)
-
-
-def _handle_group_children(group, group_children, update_type=None):
-    for child in group_children:
-        child_group = _get_group_for_relationship(child)
-
-        child_group_parent = child_group.get('parent')
-
-        if update_type == 'remove':
-            if child_group_parent == group.name:
-                child_group['parent'] = ''
-        elif update_type == 'add':
-            if child_group_parent != group.name:
-                child_group['parent'] = group.name
-
-        _update_related_group(child_group, 'child')
-
-
-def _handle_group_parents(group, group_parent, is_extras=False):
-        parent_group = _get_group_for_relationship(group_parent)
-
-        parent_group_children = parent_group.get('children')
-
-        if parent_group_children:
-            parent_group_children = parent_group_children.split(',')
-
-            if is_extras is True:
-                if group.name in parent_group_children:
-                    parent_group_children.remove(group.name)
-            else:
-                if group.name not in parent_group_children:
-                    parent_group_children.append(group.name)
-        else:
-            if is_extras is True:
-                parent_group_children = []
-            else:
-                parent_group_children = [group.name]
-
-        parent_group_children = ','.join(parent_group_children)
-        parent_group['children'] = parent_group_children
-
-        _update_related_group(parent_group, 'parent')
-
-
-def _get_group_for_relationship(package_id):
-    context = {
-        'ignore_auth': True,
-        'include_extras': True,
-        'all_fields': True
-    }
-
-    return _get_action('group_show')(context, {'id': package_id})
-
-
-def _update_related_group(group, relationship_type):
-    context = {
-        'ignore_auth': True,
-        'include_extras': True,
-        'all_fields': True,
-        'is_relationship': True
-    }
-
-    group['group_relationship_type'] = relationship_type
-
-    return _get_action('group_update')(context, group)
 
 
 def group_update(context, data_dict):

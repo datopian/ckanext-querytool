@@ -465,6 +465,7 @@ def get_available_groups(context, data_dict):
                     'title': group.get('title'),
                     'parent': group.get('parent'),
                     'children': group.get('children'),
+                    'group_relationship_type': group.get('group_relationship_type')
                 }
             )
 

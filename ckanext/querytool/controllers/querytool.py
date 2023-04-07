@@ -12,6 +12,7 @@ from ckan.common import config, c, _
 from ckan.plugins import toolkit
 import ckan.lib.helpers as h
 import ckanext.querytool.helpers as helpers
+import ckanext.querytool.model as qmodel
 import ckan.lib.uploader as uploader
 from ckan.common import response, request
 
@@ -843,25 +844,57 @@ class QueryToolController(base.BaseController):
         Lists all available groups
         :return: base template
         '''
-        context = _get_context()
-        groups = helpers.get_groups()
-
-        querytools = _get_action('querytool_list_other', {'groups': groups})
-
+        parent_name = toolkit.request.params.get('parent')
         q = toolkit.request.params.get('report_q', '')
+        context = _get_context()
+        extra_vars = {}
 
-        if q:
-            querytool_search_results = helpers.querytool_search(query_string=q)
-            querytool_search_results_names = [
-                querytool.name for querytool in querytool_search_results
-            ]
+        if parent_name == '__misc__group__':
+            misc_groups = _get_action('get_available_groups', {})
+            misc_groups = ','.join([
+                group['name'] for group in misc_groups
+                if group['group_relationship_type'] != 'parent'
+            ])
+            querytool_search_results = qmodel.child_group_report_search(
+                query_string=q, query_children=misc_groups
+            )
             querytools = [
-                querytool for querytool in querytools if
-                querytool['name'] in querytool_search_results_names
+                querytool for querytool in querytool_search_results
+            ]
+            extra_vars['parent'] = parent_name
+
+        elif parent_name:
+            parent_group = _get_action('group_show', {'id': parent_name})
+            children_names = parent_group.get('children')
+
+            querytool_search_results = qmodel.child_group_report_search(
+                query_string=q, query_children=children_names
+            )
+            querytools = [
+                querytool for querytool in querytool_search_results
             ]
 
-        return render('querytool/public/reports.html',
-                      extra_vars={'data': querytools})
+        else:
+            groups = helpers.get_groups()
+
+            querytools = _get_action('querytool_list_other', {'groups': groups})
+
+            if q:
+                querytool_search_results = helpers.querytool_search(query_string=q)
+                querytool_search_results_names = [
+                    querytool.name for querytool in querytool_search_results
+                ]
+                querytools = [
+                    querytool for querytool in querytools if
+                    querytool['name'] in querytool_search_results_names
+                ]
+
+        extra_vars['data'] = querytools
+
+        return render(
+            'querytool/public/reports.html',
+            extra_vars=extra_vars
+        )
 
 
     def querytool_public_list(self, group):
@@ -884,7 +917,9 @@ class QueryToolController(base.BaseController):
 
             if q:
                 child_group_search_results = helpers.child_group_search(
-                    query_string=q, query_children=parent_group_children
+                    query_string=q,
+                    query_children=parent_group_children,
+                    misc_group=True
                 )
 
             return render(
@@ -897,9 +932,6 @@ class QueryToolController(base.BaseController):
             )
 
         group_details = _get_action('group_show', {'id': group})
-        log.error(toolkit.request.params)
-        log.error(from_parent)
-        log.error(parent_group_children)
 
         if from_parent and parent_group_children:
             child_group_search_results = []

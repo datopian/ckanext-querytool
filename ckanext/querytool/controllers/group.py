@@ -76,4 +76,3 @@ class QuerytoolGroupController(GroupController):
             abort(404, _('Group not found'))
 
         return self._render_template('group/reports.html', {'id': id})
-
