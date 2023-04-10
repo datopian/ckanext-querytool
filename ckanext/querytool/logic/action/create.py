@@ -136,12 +136,22 @@ def _group_or_org_create(context, data_dict, is_org=False):
 
     # Parent/Child groups
 
-    try:
-        group_parent = data_dict.get('parent')
-        group_children = data_dict.get('children', '')
-        group_children = group_children.split(',') \
-            if group_children else []
+    group_parent = data_dict.get('parent')
+    group_children = data_dict.get('children', '')
+    group_children = group_children.split(',') \
+        if group_children else []
 
+    groups = _get_action('group_list')(context, {})
+
+    if group_parent and group_parent not in groups:
+        group_parent = ''
+
+    group_children = [
+        child for child in group_children
+        if child in groups
+    ]
+
+    try:
         if group_parent:
             querytool_action.handle_group_parents(
                 group, group_parent, is_extras=False

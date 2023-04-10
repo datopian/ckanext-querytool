@@ -454,28 +454,38 @@ def _group_or_org_update(context, data_dict, is_org=False):
 
     # Parent/Child groups
 
-    try:
-        group_parent = data_dict.get('parent')
-        group_extras_parent = group_extras.get('parent')
+    group_parent = data_dict.get('parent')
+    group_extras_parent = group_extras.get('parent')
 
-        group_children = data_dict.get('children', '')
-        group_children = group_children.split(',') \
-            if group_children else []
+    group_children = data_dict.get('children', '')
+    group_children = group_children.split(',') \
+        if group_children else []
 
-        group_extras_children = group_extras.get('children', '')
-        group_extras_children = group_extras_children.split(',') \
-            if group_extras_children else []
+    groups = _get_action('group_list')(context, {})
 
-        children_to_remove = [
-            child for child in group_extras_children
-            if child not in group_children
-        ]
-        children_to_add = [
-            child for child in group_children
-            if child not in group_extras_children
-        ]
+    if group_parent not in groups:
+        group_parent = ''
 
-        if is_relationship is False:
+    group_children = [
+        child for child in group_children
+        if child in groups
+    ]
+
+    group_extras_children = group_extras.get('children', '')
+    group_extras_children = group_extras_children.split(',') \
+        if group_extras_children else []
+
+    children_to_remove = [
+        child for child in group_extras_children
+        if child not in group_children
+    ]
+    children_to_add = [
+        child for child in group_children
+        if child not in group_extras_children
+    ]
+
+    if is_relationship is False:
+        try:
             if group_parent:
                 querytool_action.handle_group_parents(
                     group, group_parent, is_extras=False
@@ -495,8 +505,8 @@ def _group_or_org_update(context, data_dict, is_org=False):
                 querytool_action.handle_group_children(
                     group, children_to_add, update_type='add'
                 )
-    except Exception as e:
-        log.error('Error while updating parent/child groups: %s', e)
+        except Exception as e:
+            log.error('Error while updating parent/child groups: %s', e)
 
     # End Parent/Child groups
 
