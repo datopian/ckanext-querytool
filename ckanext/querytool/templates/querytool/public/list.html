@@ -32,13 +32,14 @@
 <div class="container">
   {% if g.group_parents_enabled == 'True' and (group.group_relationship_type == 'parent' or group.name == '__misc__group__') %}
 
-    {% if not child_groups %}
+    {% set q = request.params.get('report_q') %}
+
+    {% if not child_groups and not q %}
       {% set groups = h.querytool_get_groups(parent_name=group.name) %}
     {% else %}
       {% set groups = child_groups %}
     {% endif %}
 
-    {% set q = request.params.get('report_q') %}
     {% set parent = request.params.get('parent') %}
     {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
     {% set sorting_selected = request.params.get('sort', 'name asc') %}

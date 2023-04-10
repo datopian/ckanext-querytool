@@ -347,7 +347,6 @@ def child_group_report_search(query_string=None, query_children=None):
     querytool = get_table('ckanext_querytool')
     query = Session.query(querytool).autoflush(False)
     children = query_children.split(',') if query_children else []
-    log.error('children: %s', children)
 
     if query_string:
         query = query.filter(or_(
