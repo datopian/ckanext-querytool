@@ -43,9 +43,7 @@
     {% endif %}
     <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
   </ol>
-  <div class="embed-show search-reports">
-    {% snippet 'snippets/search_reports_input.html' %}
-  </div>
+  {% snippet 'snippets/embed/navbar_end_items.html' %}
 </div>
 {% endblock %}
 
@@ -127,12 +125,6 @@
 
     <div class="controls-wrap" id="{{ querytool.name }}" >
         <div class="btn-download">
-
-              <button class="btn btn-round" data-module="fullscreen">
-                {{ _('Fullscreen') }} 
-                <img src="/base/images/fullscreen.svg" width="15"/> 
-              </button>
-
               {% set show_download = querytool.download_options %}
               {% if show_download == true %}
               <div class="btn-group dropdown">
