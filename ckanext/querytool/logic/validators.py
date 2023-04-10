@@ -52,11 +52,13 @@ def group_children_string_convert(key, data, errors, context):
         ]
     else:
         children = data[key]
-    log.error('children: %s', children)
 
-    current_index = max( [int(k[1]) for k in data.keys() if len(k) == 3 and k[0] == 'children'] + [-1] )
+    current_index = max([
+        int(k[1]) for k in data.keys()
+        if len(k) == 3 and k[0] == 'children'
+    ] + [-1])
 
-    for num, child in zip(count(current_index+1), children):
+    for num, child in zip(count(current_index + 1), children):
         data[('children', num, 'name')] = child
 
     return data
