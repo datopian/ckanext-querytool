@@ -453,46 +453,50 @@ def _group_or_org_update(context, data_dict, is_org=False):
         model.repo.commit()
 
     # Parent/Child groups
-    group_parent = data_dict.get('parent')
-    group_extras_parent = group_extras.get('parent')
 
-    group_children = data_dict.get('children', '')
-    group_children = group_children.split(',') \
-        if group_children else []
+    try:
+        group_parent = data_dict.get('parent')
+        group_extras_parent = group_extras.get('parent')
 
-    group_extras_children = group_extras.get('children', '')
-    group_extras_children = group_extras_children.split(',') \
-        if group_extras_children else []
+        group_children = data_dict.get('children', '')
+        group_children = group_children.split(',') \
+            if group_children else []
 
-    children_to_remove = [
-        child for child in group_extras_children
-        if child not in group_children
-    ]
-    children_to_add = [
-        child for child in group_children
-        if child not in group_extras_children
-    ]
+        group_extras_children = group_extras.get('children', '')
+        group_extras_children = group_extras_children.split(',') \
+            if group_extras_children else []
 
-    if is_relationship is False:
-        if group_parent:
-            querytool_action.handle_group_parents(
-                group, group_parent, is_extras=False
-            )
+        children_to_remove = [
+            child for child in group_extras_children
+            if child not in group_children
+        ]
+        children_to_add = [
+            child for child in group_children
+            if child not in group_extras_children
+        ]
 
-        elif group_extras_parent:
-            querytool_action.handle_group_parents(
-                group, group_extras_parent, is_extras=True
-            )
+        if is_relationship is False:
+            if group_parent:
+                querytool_action.handle_group_parents(
+                    group, group_parent, is_extras=False
+                )
 
-        if children_to_remove:
-            querytool_action.handle_group_children(
-                group, children_to_remove, update_type='remove'
-            )
+            elif group_extras_parent:
+                querytool_action.handle_group_parents(
+                    group, group_extras_parent, is_extras=True
+                )
 
-        if children_to_add:
-            querytool_action.handle_group_children(
-                group, children_to_add, update_type='add'
-            )
+            if children_to_remove:
+                querytool_action.handle_group_children(
+                    group, children_to_remove, update_type='remove'
+                )
+
+            if children_to_add:
+                querytool_action.handle_group_children(
+                    group, children_to_add, update_type='add'
+                )
+    except Exception as e:
+        log.error('Error while updating parent/child groups: %s', e)
 
     # End Parent/Child groups
 

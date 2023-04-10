@@ -584,12 +584,24 @@ def get_chart_sort():
     return options
 
 
-def get_groups(parent_name=None):
+def get_groups(parent_name=None, all_children=False):
     '''
     Get available Groups from the database
     return: list of groups
     '''
     groups = _get_action('group_list', {'all_fields': True})
+
+    if all_children is True:
+        child_groups = []
+
+        for group in groups:
+            group_dict = _get_action('group_show', {'id': group['id']})
+
+            if group_dict.get('group_relationship_type') != 'parent':
+                log.error(group.get('name'))
+                child_groups.append(group)
+
+        return child_groups
 
     if parent_name:
         if parent_name == '__misc__group__':

@@ -114,7 +114,7 @@ this.ckan.module('vs-groups-autocomplete', function (jQuery) {
           format: function(data) {
             var completion_options = jQuery.extend(options, {objects: true});
             return {
-              results: client.parseCompletions(data, completion_options)
+              results: module.parseCompletions(data, completion_options)
             }
           },
           key: this.options.key,
@@ -184,6 +184,82 @@ this.ckan.module('vs-groups-autocomplete', function (jQuery) {
         var request = jQuery.ajax({url: this.url(url)});
 
         return request.pipe(formatter).promise(request).then(success, error);
+      },
+
+      /* Takes a JSON response from an auto complete endpoint and normalises
+       * the data into an array of strings. This also will remove duplicates
+       * from the results (this is case insensitive).
+       *
+       * data    - The parsed JSON response from the server.
+       * options - An object of options for the method.
+       *           objects: If true returns an object of results.
+       *
+       * Examples
+       *
+       *   jQuery.getJSON(tagCompletionUrl, function (data) {
+       *     var parsed = client.parseCompletions(data);
+       *   });
+       *
+       * Returns the parsed object.
+       */
+      parseCompletions: function (data, options) {
+        if (typeof data === 'string') {
+          // Package completions are returned as a crazy string. So we handle
+          // them separately.
+          return this.parsePackageCompletions(data, options);
+        }
+
+        var map = {};
+        var raw = jQuery.isArray(data) ? data : data.ResultSet && data.ResultSet.Result || {};
+
+        var items = jQuery.map(raw, function (item) {
+          var key = typeof options.key != 'undefined' ? item[options.key] : false;
+          var label = typeof options.label != 'undefined' ? item[options.label] : false;
+
+          item = typeof item === 'string' ? item : item.name || item.Name || item.Format || '';
+          item = jQuery.trim(item);
+
+          key = key ? key : item;
+          label = label ? label : item;
+
+          var lowercased = item.toLowerCase();
+          var returnObject = options && options.objects === true;
+
+
+          if (lowercased && !map[lowercased]) {
+            map[lowercased] = 1;
+            return returnObject ? {id: key, text: label} : item;
+          }
+
+          return null;
+        });
+
+        items = jQuery.grep(items, function (item) { return item !== null; });
+
+        var returnItems = [];
+        var availableGroups = ''
+
+        jQuery.ajax({
+          url: '/api/3/action/get_available_groups',
+          type: 'GET',
+          dataType: 'json',
+          async: false,
+          success: function (data) {
+            availableGroups = data.result.filter(function (group) {
+              return group.group_relationship_type == 'child'
+            }).map(function (group) {
+              return group.name
+            })
+          }
+        });
+
+        for (let item of items) {
+          if (availableGroups.includes(item.id)) {
+            returnItems.push(item)
+          }
+        }
+
+        return returnItems;
       },
   
       /* Formatter for the select2 plugin that returns a string for use in the

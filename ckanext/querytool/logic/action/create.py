@@ -136,20 +136,23 @@ def _group_or_org_create(context, data_dict, is_org=False):
 
     # Parent/Child groups
 
-    group_parent = data_dict.get('parent')
-    group_children = data_dict.get('children', '')
-    group_children = group_children.split(',') \
-        if group_children else []
+    try:
+        group_parent = data_dict.get('parent')
+        group_children = data_dict.get('children', '')
+        group_children = group_children.split(',') \
+            if group_children else []
 
-    if group_parent:
-        querytool_action.handle_group_parents(
-            group, group_parent, is_extras=False
-        )
+        if group_parent:
+            querytool_action.handle_group_parents(
+                group, group_parent, is_extras=False
+            )
 
-    if group_children:
-        querytool_action.handle_group_children(
-            group, group_children, update_type='add'
-        )
+        if group_children:
+            querytool_action.handle_group_children(
+                group, group_children, update_type='add'
+            )
+    except Exception as e:
+        log.error('Error while creating group parent/child relationships: %s', e)
 
     # End Parent/Child groups
 
@@ -220,4 +223,3 @@ def group_create(context, data_dict):
         raise Exception(_('Trying to create an organization as a group'))
     _check_access('group_create', context, data_dict)
     return _group_or_org_create(context, data_dict)
-
