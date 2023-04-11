@@ -34,19 +34,41 @@
 {% block page_header_bg %}{% endblock %}
 
 {% block breadcrumb_custom %}
-<div class="toolbar new_toolbar">
-  <ol class="breadcrumb new_breadcrumb">
-    <li><a href="/"><i class="fa fa-home"></i></a></li>
-    <!--<li>{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list_by_group', group=querytools[0].group %}</li> -->
-    {% if group_title %}
-      <li>{% link_for group_title, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
-    {% endif %}
-    <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
-  </ol>
-  <div class="embed-show search-reports">
-    {% snippet 'snippets/search_reports_input.html' %}
-  </div>
-</div>
+  {% set from_parent = request.params.get('from_parent') or from_parent %}
+  {% set parent = request.params.get('parent') or parent %}
+  {% set parent_title = request.params.get('title') or title %}
+
+  {% if from_parent and parent and parent_title %}
+    <div class="toolbar new_toolbar">
+      <ol class="breadcrumb new_breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i></a></li>
+
+        {% if from_parent == 'True' %}
+          <li><a href="/querytool/public/group/{{ parent }}">{{ parent_title }}</a></li>
+        {% endif %}
+
+        {% if group_title %}
+          <li><a href="/querytool/public/group/{{ querytools[0].group }}?parent={{ parent }}&from_parent=True&title={{ parent_title | safe }}">{{ group_title }}</a></li>
+        {% endif %}
+
+        <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
+      </ol>
+    </div>
+  {% else %}
+    <div class="toolbar new_toolbar">
+      <ol class="breadcrumb new_breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i></a></li>
+        <!--<li>{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list_by_group', group=querytools[0].group %}</li> -->
+        {% if group_title %}
+          <li>{% link_for group_title, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
+        {% endif %}
+        <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
+      </ol>
+      <div class="embed-show search-reports">
+        {% snippet 'snippets/search_reports_input.html' %}
+      </div>
+    </div>
+  {% endif %}
 {% endblock %}
 
 <style>
@@ -77,6 +99,11 @@
 
 <form id="public-filters" class="public-filters" method="GET">
   <input type="hidden" name="embed" value="{{ 'true' if embed else 'false' }}"/>
+  {% if parent %}
+    <input type="hidden" name="parent" value="{{ parent }}">
+    <input type="hidden" id="from_parent" name="from_parent" value=True />
+    <input type="hidden" id="title" name="title" value="{{ parent_title }}" />
+  {% endif %}
 
   <!-- Filtering container -->
   <div class="public-query">

@@ -7,6 +7,12 @@
   <div class="toolbar new_toolbar">
     <ol class="breadcrumb new_breadcrumb">
       <li><a href="/"><i class="fa fa-home"></i></a></li>
+      {% set from_parent = request.params.get('from_parent') %}
+      {% set parent = request.params.get('parent') %}
+      {% set parent_title = request.params.get('title') %}
+      {% if from_parent == 'True' %}
+        <li><a href="/querytool/public/group/{{ parent }}">{{ parent_title }}</a></li>
+      {% endif %}
       <li class="active">{% link_for group.title, controller=c.controller, action='querytool_public_list', group=group.name %}</li>
     </ol>
     <div class="embed-show search-reports">
@@ -30,6 +36,10 @@
 
 {% block tools %}
 <div class="container">
+  {% set from_parent = request.params.get('from_parent') %}
+  {% set parent = request.params.get('parent') %}
+  {% set parent_title = request.params.get('title') %}
+
   {% if g.group_parents_enabled == 'True' and (group.group_relationship_type == 'parent' or group.name == '__misc__group__') %}
 
     {% set q = request.params.get('report_q') %}
@@ -48,7 +58,7 @@
     <form class="search-form no-bottom-border">
       <div class="search-input control-reports search-giant" id="report-search-box">
         <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search groups...') }}" {% if q %} value="{{ q }}" {% endif %} />
-        <input type="hidden" id="from_parent_group" name="from_parent_group" value=True />
+        <input type="hidden" id="from_parent" name="from_parent" value=True />
         <input type="hidden" id="parent_group_children" name="parent_group_children" value="{{group.children}}" />
         <input type="hidden" id="parent" name="parent" value="{{parent}}" />
         <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
@@ -101,7 +111,7 @@
                 </div>
 
                 <div class="box-content">
-                  <a class="query-tool" href="{{ url }}"><span class="tool-title">{{child_group.title}}</span></a>
+                  <a class="query-tool" href="{{ url }}?parent={{ group.name }}&from_parent=True&title={{ group.title | safe }}"><span class="tool-title">{{child_group.title}}</span></a>
 
                   <div style="min-height:55px;">
                     <div class="short-desc">
@@ -132,7 +142,7 @@
           </div>
         </div>
 
-        <a class="query-tool query-btn" href="/querytool/public/reports?parent={{ group.name }}">
+        <a class="query-tool query-btn" href="/querytool/public/reports?parent={{ group.name }}&from_parent=True&title={{ group.title | safe }}">
           <span class="btn btn-primary" role="button" style="display: block; max-width:200px; margin:0 auto; padding:10px 10px;">{{ _('See all tools') }}</span>
         </a>
         <br/><br/><br/><br/>
@@ -156,6 +166,11 @@
       <div class="search-input control-reports search-giant" id="report-search-box">
         <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" {% if q %} value="{{ q }}" {% endif %} />
         <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+        {% if parent %}
+          <input type="hidden" name="parent" value="{{ parent }}">
+          <input type="hidden" id="from_parent" name="from_parent" value=True />
+          <input type="hidden" id="title" name="title" value="{{ parent_title }}" />
+        {% endif %}
       </div>
 
       <div class="form-select control-group control-order-by">
@@ -182,7 +197,7 @@
 
       {% for querytool in data %}
         {% if not querytool.private %}
-         {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
+         {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool, parent=parent, from_parent=from_parent,  parent_title=parent_title %}
         {% endif %}
       {% endfor%}
     {% else %}

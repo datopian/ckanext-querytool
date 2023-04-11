@@ -281,19 +281,19 @@ def config_option_update(context, data_dict):
     for key, value in data.iteritems():
 
         # Set full Logo url
-        if key =='ckan.site_logo' and value and not value.startswith('http'):
+        if key == 'ckan.site_logo' and value and not value.startswith('http'):
             value = h.url_for_static('uploads/admin/{0}'.format(value))
 
         # Set full Header image url
-        if key =='header_image_url' and value and not value.startswith('http'):
+        if key == 'header_image_url' and value and not value.startswith('http'):
             value = h.url_for_static('uploads/admin/{0}'.format(value))
 
         # Set full Footer logo 1 image url
-        if key =='footer_logo_image_url' and value and not value.startswith('http'):
+        if key == 'footer_logo_image_url' and value and not value.startswith('http'):
             value = h.url_for_static('uploads/admin/{0}'.format(value))
 
         # Set full Footer logo 2 image url
-        if key =='footer_logo2_image_url' and value and not value.startswith('http'):
+        if key == 'footer_logo2_image_url' and value and not value.startswith('http'):
             value = h.url_for_static('uploads/admin/{0}'.format(value))
 
         # Save value in database

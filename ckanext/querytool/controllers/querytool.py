@@ -902,8 +902,9 @@ class QueryToolController(base.BaseController):
         List all of the available query tools
         :return: querytool list template page
         '''
-        from_parent = toolkit.request.params.get('from_parent_group', False)
+        from_parent = toolkit.request.params.get('from_parent', False)
         parent_group_children = toolkit.request.params.get('parent_group_children', False)
+        parent_title = toolkit.request.params.get('title', False)
         q = toolkit.request.params.get('report_q', '')
 
         if group == '__misc__group__':
@@ -927,7 +928,8 @@ class QueryToolController(base.BaseController):
                 extra_vars={
                     'child_groups': child_group_search_results,
                     'group': group,
-                    'from_parent': True
+                    'from_parent': True,
+                    'title': parent_title
                 }
             )
 
@@ -946,7 +948,8 @@ class QueryToolController(base.BaseController):
                 extra_vars={
                     'child_groups': child_group_search_results,
                     'group': group_details,
-                    'from_parent': True
+                    'from_parent': True,
+                    'title': parent_title
                 }
             )
         else:
@@ -964,12 +967,21 @@ class QueryToolController(base.BaseController):
                     querytool['name'] in querytool_search_results_names
                 ]
 
-            return render(
-                'querytool/public/list.html',
-                extra_vars={
+            if from_parent:
+                extra_vars = {
+                    'data': querytools,
+                    'group': group_details,
+                    'from_parent': True,
+                    'title': parent_title
+                }
+            else:
+                extra_vars = {
                     'data': querytools,
                     'group': group_details
                 }
+            return render(
+                'querytool/public/list.html',
+                extra_vars=extra_vars
             )
 
     def querytool_public_read(self, name):
@@ -1003,6 +1015,10 @@ class QueryToolController(base.BaseController):
             abort(404, _('Report not fully set.'))
 
         params = toolkit.request.params
+
+        parent = params.get('parent', None)
+        parent_title = params.get('title', None)
+        from_parent = params.get('from_parent', False)
 
         querytools = []
         items = []
@@ -1104,8 +1120,20 @@ class QueryToolController(base.BaseController):
 
         embed = True if 'embed' in params and params['embed'] == 'true' else False
 
-        return render('querytool/public/read.html',
-                      extra_vars={'querytools': querytools, 'embed': embed})
+        extra_vars = {
+            'querytools': querytools,
+            'embed': embed
+        }
+
+        if parent and parent_title and from_parent:
+            extra_vars['parent'] = parent
+            extra_vars['parent_title'] = parent_title
+            extra_vars['from_parent'] = from_parent
+
+        return render(
+            'querytool/public/read.html',
+            extra_vars=extra_vars
+        )
 
     def querytool_download_data(self, name):
         params = request.params
