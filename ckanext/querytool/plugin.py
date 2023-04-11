@@ -3,6 +3,7 @@ import logging
 import ckan.plugins as plugins
 import ckan.plugins.toolkit as toolkit
 import ckan.logic.schema as ckan_schema
+import ckan.lib.helpers as ckan_helpers
 
 from ckan.lib.plugins import DefaultTranslation
 import ckan.logic as logic
@@ -205,6 +206,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
         group_controller = 'ckanext.querytool.controllers.group:QuerytoolGroupController'
 
+        map.connect(
+            'group_edit', '/group/edit/{id}',
+            controller=group_controller, action='edit'
+        )
 
         # Query tool routes
         map.redirect('/querytool', '/querytool/groups',

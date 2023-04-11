@@ -1433,7 +1433,6 @@ $('body').on('change', '[id^=map_data_categories_]', function (e) {
 
 $('#group_relationship_type').on('change', function() {
   var selected = $(this).val();
-  console.log(selected);
 
   if (selected == 'parent') {
     // hide '#parent' and show '#child'
@@ -1448,7 +1447,6 @@ $('#group_relationship_type').on('change', function() {
 
 $(document).ready(function(){
   var selected = $('#group_relationship_type').val();
-  console.log(selected);
 
   if (selected == 'parent') {
     $('#field-parent').parent().parent().hide();

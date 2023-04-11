@@ -248,13 +248,18 @@ this.ckan.module('vs-groups-autocomplete', function (jQuery) {
             availableGroups = data.result.filter(function (group) {
               return group.group_relationship_type == 'child'
             }).map(function (group) {
-              return group.name
+              return group
             })
           }
         });
 
+        var availableGroupNames = availableGroups.map(function (group) {
+          return group.name
+        })
+
         for (let item of items) {
-          if (availableGroups.includes(item.id)) {
+          if (availableGroupNames.includes(item.id)) {
+            item.title = availableGroups[availableGroupNames.indexOf(item.id)].title
             returnItems.push(item)
           }
         }
