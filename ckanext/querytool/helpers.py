@@ -598,7 +598,6 @@ def get_groups(parent_name=None, all_children=False):
             group_dict = _get_action('group_show', {'id': group['id']})
 
             if group_dict.get('group_relationship_type') != 'parent':
-                log.error(group.get('name'))
                 child_groups.append(group)
 
         return child_groups
