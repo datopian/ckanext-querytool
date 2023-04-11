@@ -21,7 +21,7 @@
     {{ form.markdown('description', label=_('Description'), id='field-description', placeholder=_('A little information about my group...'), value=data.description, error=errors.description) }}
     {{ form.markdown('additional_description', label=_('Additional Description'), id='field-additional_description', placeholder=_('Additional description of the group...'), value=data.additional_description, error=errors.description) }}
 
-    <div {% if g.group_parents_enabled == 'False' %}hidden{% endif %}>
+    <div {% if g.group_parents_enabled != 'True' %}hidden{% endif %}>
       {% set group_dicts = h.get_available_groups(group_name=data.name) %}
 
       {{ form.select('group_relationship_type', label=_('Type'), options=[{'text': 'Parent', 'value': 'parent'}, {'text': 'Child', 'value': 'child'}], selected=data.group_relationship_type or 'child', error=errors.group_relationship_type) }}
