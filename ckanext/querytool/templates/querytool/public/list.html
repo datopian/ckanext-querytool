@@ -15,9 +15,7 @@
       {% endif %}
       <li class="active">{% link_for group.title, controller=c.controller, action='querytool_public_list', group=group.name %}</li>
     </ol>
-    <div class="embed-show search-reports">
-      {% snippet 'snippets/search_reports_input.html' %}
-    </div>
+    {% snippet 'snippets/embed/navbar_end_items.html' %}
   </div>
   
 {% endblock %}
