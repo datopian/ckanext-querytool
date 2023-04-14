@@ -2051,3 +2051,79 @@ msgstr ""
 # Manually added translations
 msgid "Download Options"
 msgstr ""
+
+# Manually added translations
+msgid "Data categories, default 5"
+msgstr ""
+
+# Manually added translations
+msgid "Data categories"
+msgstr ""
+
+# Manually added translations
+msgid "Fullscreen"
+msgstr ""
+
+# Manually added translations
+msgid "reCAPTCHA validation failed"
+msgstr ""
+
+# Manually added translations
+msgid "Parent Groups"
+msgstr ""
+
+# Manually added translations
+msgid "Enable or disable parent/child groups (visit the \"Manage\" page of a group to set its type). Parent groups will appear on the home page. Clicking on a parent group will navigate to the child groups page for the given parent."
+msgstr ""
+
+# Manually added translations
+msgid "Parent"
+msgstr ""
+
+# Manually added translations
+msgid "Child"
+msgstr ""
+
+# Manually added translations
+msgid "Children"
+msgstr ""
+
+# Manually added translations
+msgid "eg. alcohol, finance, environment"
+msgstr ""
+
+# Manually added translations
+msgid "Miscellaneous groups"
+msgstr ""
+
+# Manually added translations
+msgid "Search groups..."
+msgstr ""
+
+# Manually added translations
+msgid "No child groups belong to this parent group."
+msgstr ""
+
+# Manually added translations
+msgid "All reports"
+msgstr ""
+
+# Manually added translations
+msgid "{number} child group found for \"{query}\""
+msgid_plural "{number} child groups found for \"{query}\""
+msgstr[0] ""
+msgstr[1] ""
+
+# Manually added translations
+msgid "{number} child group found"
+msgid_plural "{number} child groups found"
+msgstr[0] ""
+msgstr[1] ""
+
+# Manually added translations
+msgid "No child groups found for \"{query}\""
+msgstr ""
+
+# Manually added translations
+msgid "No child groups found"
+msgstr ""

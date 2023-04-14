@@ -1692,3 +1692,79 @@ msgstr "Options de téléchargement"
 # Manually added translations
 msgid "Report Icon URL"
 msgstr "URL de l'icône de rapport"
+
+# Manually added translations
+msgid "Data categories, default 5"
+msgstr "Catégories de données, par défaut 5"
+
+# Manually added translations
+msgid "Data categories"
+msgstr "Catégories de données"
+
+# Manually added translations
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+# Manually added translations
+msgid "reCAPTCHA validation failed"
+msgstr "La validation de reCAPTCHA a échoué"
+
+# Manually added translations
+msgid "Parent Groups"
+msgstr "Groupes principaux"
+
+# Manually added translations
+msgid "Enable or disable parent/child groups (visit the \"Manage\" page of a group to set its type). Parent groups will appear on the home page. Clicking on a parent group will navigate to the child groups page for the given parent."
+msgstr "Activez ou désactivez les groupes principal/secondaire (visitez la page \"Gérer\" d'un groupe pour définir son type). Les groupes principaux apparaîtront sur la page d'accueil. En cliquant sur un groupe principal, vous serez dirigé vers la page des groupes secondaires assignés au groupe principal."
+
+# Manually added translations
+msgid "Parent"
+msgstr "Principal"
+
+# Manually added translations
+msgid "Child"
+msgstr "Secondaire"
+
+# Manually added translations
+msgid "Children"
+msgstr "Secondaires"
+
+# Manually added translations
+msgid "eg. alcohol, finance, environment"
+msgstr "par ex. alcool, finances, environnement"
+
+# Manually added translations
+msgid "Miscellaneous groups"
+msgstr "Divers groupes"
+
+# Manually added translations
+msgid "Search groups..."
+msgstr "Rechercher des groupes..."
+
+# Manually added translations
+msgid "No child groups belong to this parent group."
+msgstr "Aucun groupe secondaire n'appartient à ce groupe principal."
+
+# Manually added translations
+msgid "All reports"
+msgstr "Tous les rapports"
+
+# Manually added translations
+msgid "{number} child group found for \"{query}\""
+msgid_plural "{number} child groups found for \"{query}\""
+msgstr[0] "{number} groupe secondaire trouvé pour \"{query}\""
+msgstr[1] "{number} groupes secondaires trouvés pour \"{query}\""
+
+# Manually added translations
+msgid "{number} child group found"
+msgid_plural "{number} child groups found"
+msgstr[0] "{number} groupe secondaire trouvé"
+msgstr[1] "{number} groupes secondaires trouvés"
+
+# Manually added translations
+msgid "No child groups found for \"{query}\""
+msgstr "Aucun groupe secondaire trouvé pour \"{query}\""
+
+# Manually added translations
+msgid "No child groups found"
+msgstr "Aucun groupe secondaire trouvé"
