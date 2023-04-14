@@ -246,7 +246,7 @@ this.ckan.module('vs-groups-autocomplete', function (jQuery) {
           async: false,
           success: function (data) {
             availableGroups = data.result.filter(function (group) {
-              return group.group_relationship_type == 'child'
+              return group.group_relationship_type != 'parent'
             }).map(function (group) {
               return group
             })
