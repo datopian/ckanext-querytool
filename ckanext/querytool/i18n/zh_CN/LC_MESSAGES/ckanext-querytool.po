@@ -1691,3 +1691,79 @@ msgstr "下载选项"
 # Manually added translations
 msgid "Report Icon URL"
 msgstr "报告图标 URL"
+
+# Manually added translations
+msgid "Data categories, default 5"
+msgstr "数据类别，默认 5"
+
+# Manually added translations
+msgid "Data categories"
+msgstr "数据类别"
+
+# Manually added translations
+msgid "Fullscreen"
+msgstr "全屏"
+
+# Manually added translations
+msgid "reCAPTCHA validation failed"
+msgstr "reCAPTCHA验证失败"
+
+# Manually added translations
+msgid "Parent Groups"
+msgstr "主要组"
+
+# Manually added translations
+msgid "Enable or disable parent/child groups (visit the \"Manage\" page of a group to set its type). Parent groups will appear on the home page. Clicking on a parent group will navigate to the child groups page for the given parent."
+msgstr "启用或禁用主/次要组（访问组的\"管理\"页面以设置其类型）。 主要组将显示在主页上。 单击主要组，将导航到分配给主要组的次要组页面。"
+
+# Manually added translations
+msgid "Parent"
+msgstr "主要"
+
+# Manually added translations
+msgid "Child"
+msgstr "次要"
+
+# Manually added translations
+msgid "Children"
+msgstr "次要的"
+
+# Manually added translations
+msgid "eg. alcohol, finance, environment"
+msgstr "例如：酒精，金融，环境"
+
+# Manually added translations
+msgid "Miscellaneous groups"
+msgstr "其他组"
+
+# Manually added translations
+msgid "Search groups..."
+msgstr "查找组..."
+
+# Manually added translations
+msgid "No child groups belong to this parent group."
+msgstr "没有次要组属于这个主要组。"
+
+# Manually added translations
+msgid "All reports"
+msgstr "所有报告"
+
+# Manually added translations
+msgid "{number} child group found for \"{query}\""
+msgid_plural "{number} child groups found for \"{query}\""
+msgstr[0] "\"{query}\"找到{number}个次要组"
+msgstr[1] "\"{query}\"找到{number}个次要组"
+
+# Manually added translations
+msgid "{number} child group found"
+msgid_plural "{number} child groups found"
+msgstr[0] "找到{number}个次要组"
+msgstr[1] "找到{number}个次要组"
+
+# Manually added translations
+msgid "No child groups found for \"{query}\""
+msgstr "未找到\"{query}\"的任何次要组"
+
+# Manually added translations
+msgid "No child groups found"
+msgstr "未找到任何次要组"

@@ -10,7 +10,9 @@
   {{ form.input('ckan.welcome_page_title', id='field-ckan.welcome_page_title', placeholder=g.welcome_page_title or _('Welcome Page Title'), label=_('Welcome Page Title'), value=data['ckan.welcome_page_title'], error=errors['ckan.welcome_page_title']) }}
   {{ form.markdown('ckan.welcome_page_description', id='field-ckan.welcome_page_description', placeholder=g.welcome_page_description or _('Welcome Page Description'), label=_('Welcome Page Description'), value=data['ckan.welcome_page_description'], error=errors['ckan.welcome_page_description']) }}
 
-  {{ form.select('theme', label=_('Theme'), options=[{'name': 'Default', 'value': 'Default'},{'name': 'Custom', 'value': 'Custom'}], selected=data.theme, error=errors.theme) }}
+  {{ form.select('group_parents_enabled', label=_('Parent Groups'), options=[{'text': _('Enabled'), 'value': 'True'},{'text': _('Disabled'), 'value': 'False'}], selected=g.group_parents_enabled or 'False', error=errors.group_parents_enabled) }}
+
+  {{ form.select('theme', label=_('Theme'), options=[{'text': _('Default'), 'value': 'Default'},{'text': _('Custom'), 'value': 'Custom'}], selected=data.theme, error=errors.theme) }}
 
   {% set theme = data.theme %}
 
@@ -226,6 +228,8 @@
     <p><strong>{{ _('Welcome Page Title') }}:</strong> {{ _('The title presented to users on the home page.') }}</p>
 
     <p><strong>{{ _('Welcome Page Description') }}:</strong> {{ _('The description presented to users on the home page.') }}</p>
+
+    <p><strong>{{ _('Parent Groups') }}:</strong> {{ _('Enable or disable parent/child groups (visit the "Manage" page of a group to set its type). Parent groups will appear on the home page. Clicking on a parent group will navigate to the child groups page for the given parent.') }}</p>
 
     <p><strong>{{ _('Theme') }}:</strong> {{ _('This toggles between the CKAN default theme and the custom theme. The custom theme adds additional configuration options to this page.') }}</p>
 

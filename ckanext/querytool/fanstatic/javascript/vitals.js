@@ -1430,3 +1430,29 @@ $('body').on('change', '[id^=map_data_categories_]', function (e) {
   }
 
 });
+
+$('#group_relationship_type').on('change', function() {
+  var selected = $(this).val();
+
+  if (selected == 'parent') {
+    // hide '#parent' and show '#child'
+    $('#field-parent').parent().parent().hide();
+    $('#field-children').parent().parent().show();
+  } else if (selected == 'child') {
+    // hide '#child' and show '#parent'
+    $('#field-parent').parent().parent().show();
+    $('#field-children').parent().parent().hide();
+  }
+});
+
+$(document).ready(function(){
+  var selected = $('#group_relationship_type').val();
+
+  if (selected == 'parent') {
+    $('#field-parent').parent().parent().hide();
+    $('#field-children').parent().parent().show();
+  } else if (selected == 'child') {
+    $('#field-parent').parent().parent().show();
+    $('#field-children').parent().parent().hide();
+  }
+});

@@ -3,8 +3,8 @@ import json
 import logging
 import ckan.logic as logic
 
-from sqlalchemy import Table, Column, Index, ForeignKey
-from sqlalchemy import types, func
+from sqlalchemy import Table, Column, Index, ForeignKey, MetaData
+from sqlalchemy import types, func, or_
 from sqlalchemy.orm import class_mapper
 try:
     from sqlalchemy.engine.result import RowProxy
@@ -15,6 +15,8 @@ from sqlalchemy.engine.reflection import Inspector
 from ckan.model.meta import orm, metadata, mapper, Session, engine
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
+from ckan.model.group import Group
+from ckan import model
 
 log = logging.getLogger(__name__)
 query_tool_table = None
@@ -303,3 +305,71 @@ def table_dictize(obj, context, **kw):
                                        context.get('metadata_modified', ''))
 
     return result_dict
+
+
+def child_group_search(query_string=None, query_children=None, misc_group=False):
+    '''Finds entities in the table that satisfy certain criteria.
+    :param order: Order rows by specified column.
+    :type order: string
+    '''
+    query_children = query_children.split(',') if query_children else []
+    group = model.Group
+    query = Session.query(group).autoflush(False)
+
+    if query_string:
+        query = query.filter(or_(
+            group.name.ilike('%' + query_string + '%'),
+            group.title.ilike('%' + query_string + '%'),
+            group.description.ilike('%' + query_string + '%')
+        ))
+
+    if query_children:
+        query = query.filter(group.name.in_(query_children))
+
+    if misc_group:
+        misc_groups = logic.get_action('get_available_groups')({}, {})
+        misc_groups = [
+            g['name'] for g in misc_groups
+            if g['group_relationship_type'] != 'parent'
+        ]
+        query = query.filter(group.name.in_(misc_groups))
+
+    results = query.all()
+
+    return results
+
+
+def child_group_report_search(query_string=None, query_children=None):
+    '''Finds entities in the table that satisfy certain criteria.
+    :param order: Order rows by specified column.
+    :type order: string
+    '''
+    querytool = get_table('ckanext_querytool')
+    query = Session.query(querytool).autoflush(False)
+    children = query_children.split(',') if query_children else []
+
+    if query_string:
+        query = query.filter(or_(
+            querytool.c.name.ilike('%' + query_string + '%'),
+            querytool.c.title.ilike('%' + query_string + '%'),
+            querytool.c.description.ilike('%' + query_string + '%'),
+            querytool.c.additional_description.ilike('%' + query_string + '%'),
+            querytool.c.dataset_name.ilike('%' + query_string + '%')
+        ))
+
+    results = []
+
+    for q in query:
+        if q.group in children:
+            results.append(q)
+
+    results = [dict(zip(result.keys(), result)) for result in results]
+
+    return results
+
+
+def get_table(name):
+    meta = MetaData()
+    meta.reflect(bind=model.meta.engine)
+    table = meta.tables[name]
+    return table

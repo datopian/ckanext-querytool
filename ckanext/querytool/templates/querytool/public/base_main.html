@@ -65,7 +65,11 @@
   <div class="container content">
     <div class="group-items">
       <div class="row">
-      {% set groups = h.querytool_get_groups() %}
+      {% if g.group_parents_enabled == 'True' %}
+        {% set groups = h.get_all_parent_groups() + [{'misc_group': True, 'title': 'Other', 'description': 'Miscellaneous groups', 'name': '__misc__group__'}] %}
+      {% else %}
+        {% set groups = h.querytool_get_groups() %}
+      {% endif %}
       
       {% set count = 1 %}
 
