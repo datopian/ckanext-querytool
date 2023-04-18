@@ -15,6 +15,9 @@
  *   // <input name="tags" data-module="autocomplete" data-module-source="http://" />
  *
  */
+
+var availableGroups = []
+
 this.ckan.module('vs-groups-autocomplete', function (jQuery) {
     return {
       /* Options for the module */
@@ -35,6 +38,21 @@ this.ckan.module('vs-groups-autocomplete', function (jQuery) {
        * Returns nothing.
        */
       initialize: function () {
+        var currentDatasetName = document.getElementsByClassName('slug-preview-value')[0].innerText;
+
+        jQuery.ajax({
+          url: '/api/3/action/get_available_groups',
+          type: 'GET',
+          dataType: 'json',
+          async: false,
+          success: function (data) {
+            availableGroups = data.result.filter(function (group) {
+              return group.group_relationship_type != 'parent' && group.name != currentDatasetName
+            }).map(function (group) {
+              return group.name
+            })
+          }
+        });
         jQuery.proxyAll(this, /_on/, /format/);
         this.setupAutoComplete();
       },
@@ -237,22 +255,6 @@ this.ckan.module('vs-groups-autocomplete', function (jQuery) {
         items = jQuery.grep(items, function (item) { return item !== null; });
 
         var returnItems = [];
-        var availableGroups = ''
-        var currentDatasetName = document.getElementsByClassName('slug-preview-value')[0].innerText
-
-        jQuery.ajax({
-          url: '/api/3/action/get_available_groups',
-          type: 'GET',
-          dataType: 'json',
-          async: false,
-          success: function (data) {
-            availableGroups = data.result.filter(function (group) {
-              return group.group_relationship_type != 'parent' && group.name != currentDatasetName
-            }).map(function (group) {
-              return group.name
-            })
-          }
-        });
 
         for (let item of items) {
           if (availableGroups.includes(item.id)) {
