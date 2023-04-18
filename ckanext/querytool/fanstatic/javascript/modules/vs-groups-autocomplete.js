@@ -238,6 +238,7 @@ this.ckan.module('vs-groups-autocomplete', function (jQuery) {
 
         var returnItems = [];
         var availableGroups = ''
+        var currentDatasetName = document.getElementsByClassName('slug-preview-value')[0].innerText
 
         jQuery.ajax({
           url: '/api/3/action/get_available_groups',
@@ -246,20 +247,15 @@ this.ckan.module('vs-groups-autocomplete', function (jQuery) {
           async: false,
           success: function (data) {
             availableGroups = data.result.filter(function (group) {
-              return group.group_relationship_type != 'parent'
+              return group.group_relationship_type != 'parent' && group.name != currentDatasetName
             }).map(function (group) {
-              return group
+              return group.name
             })
           }
         });
 
-        var availableGroupNames = availableGroups.map(function (group) {
-          return group.name
-        })
-
         for (let item of items) {
-          if (availableGroupNames.includes(item.id)) {
-            item.title = availableGroups[availableGroupNames.indexOf(item.id)].title
+          if (availableGroups.includes(item.id)) {
             returnItems.push(item)
           }
         }
