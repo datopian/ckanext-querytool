@@ -816,7 +816,7 @@ ckan.module('querytool-viz-preview', function() {
                       type: "scatter",
                       mode: labelsMode,
                       text: convertedTextTitles,
-                      textposition: "top right",
+                      textposition: "top center",
                       textfont: {
                         size: 14,
                       },
@@ -843,7 +843,7 @@ ckan.module('querytool-viz-preview', function() {
                   mode: labelsMode,
                   text: convertedTextTitles,
                   hovertemplate: "%{y}<extra></extra>",
-                  textposition: "top right",
+                  textposition: "top center",
                   textfont: {
                     size: 14,
                   },
@@ -931,7 +931,7 @@ ckan.module('querytool-viz-preview', function() {
                       type: this.options.chart_type,
                       mode: scatterLabelsMode,
                       text: convertedTextTitles,
-                      textposition: "top right",
+                      textposition: "top center",
                       textfont: {
                         size: 14,
                       },
@@ -957,7 +957,7 @@ ckan.module('querytool-viz-preview', function() {
                   mode: scatterLabelsMode,
                   text: convertedTextTitles,
                   hovertemplate: "%{y}<extra></extra>",
-                  textposition: "top right",
+                  textposition: "top center",
                   textfont: {
                     size: 14,
                   },
@@ -1000,7 +1000,7 @@ ckan.module('querytool-viz-preview', function() {
                       type: "scatter",
                       mode: labelsMode,
                       text: convertedTextTitles,
-                      textposition: "top right",
+                      textposition: "top center",
                       hovertemplate: "%{y}<extra></extra>",
                       textfont: {
                         size: 14,
@@ -1026,7 +1026,7 @@ ckan.module('querytool-viz-preview', function() {
                   name: columns[0][0],
                   mode: labelsMode,
                   text: convertedTextTitles,
-                  textposition: "top right",
+                  textposition: "top center",
                   hovertemplate: "%{y}<extra></extra>",
                   textfont: {
                     size: 14,
@@ -1274,7 +1274,7 @@ ckan.module('querytool-viz-preview', function() {
                       y: columns[tmp].slice(1),
                       mode: labelsMode,
                       text: convertedTextTitles,
-                      textposition: "top right",
+                      textposition: "top center",
                       hovertemplate: "%{y}<extra></extra>",
                       textfont: {
                         size: 14,
@@ -1298,7 +1298,7 @@ ckan.module('querytool-viz-preview', function() {
                   y: columns[0].slice(1),
                   mode: labelsMode,
                   text: convertedTextTitles,
-                  textposition: "top right",
+                  textposition: "top center",
                   hovertemplate: "%{y}<extra></extra>",
                   textfont: {
                     size: 14,
@@ -2423,71 +2423,67 @@ ckan.module('querytool-viz-preview', function() {
               }
             }
   
-            //Showing Annotations on bars
+            //  Showing annotations on bars
             if (
-              "bar" === this.options.chart_type ||
-              "sbar" === this.options.chart_type
+              ["bar", "sbar", "hbar", "shbar"].includes(this.options.chart_type)
             ) {
-              //Temporarily disabling annotations on bars with categories
-              if (data.length > 1) {
-                show_annotations = false;
-              }
               if (show_annotations == true) {
-                var stacked_total = 0;
-  
-                for (var i = 0; i < data.length; i++) {
-                  for (var j = 0; j < data[i].x.length; j++) {
-                    if ("sbar" === this.options.chart_type) {
-                      stacked_total = stacked_total + data[i].y[j];
-                    } else {
-                      stacked_total = data[i].y[j];
-                    }
-  
-                    var anoData = {
-                      x: data[i].x[j],
-                      y: stacked_total,
-                      text: dataLabelFormatter(data[i].y[j]),
-                      hovertemplate: "%{y}<extra></extra>",
-                      xanchor: "center",
-                      yanchor: "bottom",
-                      showarrow: false,
-                    };
-  
-                    base_info.annotations.push(anoData);
-                  }
+                const isHorizontal = ["hbar", "shbar"].includes(this.options.chart_type);
+                const isStacked = ["sbar", "shbar"].includes(this.options.chart_type);
+                  
+                const gapBetweenGroups = 0.2;
+                const gapBetweenCols = (1 - gapBetweenGroups) / data.length;
+                const dataMidIdx = (data.length + (data.length % 2 != 0 ? 1 : 0)) / 2;
+
+                const getAnnotationPos = (dataIdx, xIdx) => {
+                  const itemRelativeIdx = dataIdx + 1 - dataMidIdx;
+                  return xIdx + itemRelativeIdx * gapBetweenCols
                 }
-              }
-            }
-            if (
-              "hbar" === this.options.chart_type ||
-              "shbar" === this.options.chart_type
-            ) {
-              //Temporarily disabling annotations on bars with categories
-              if (data.length > 1) {
-                show_annotations = false;
-              }
-              if (show_annotations == true) {
-                var stacked_total = 0;
-  
+
+                let stackedTotal = new Array(data[0].x.length).fill(0);
                 for (var i = 0; i < data.length; i++) {
                   for (var j = 0; j < data[i].x.length; j++) {
-                    if ("shbar" === this.options.chart_type) {
-                      stacked_total = stacked_total + data[i].x[j];
+                    let dataPointValue;
+
+                    //  Swap axis if it's horizontal
+                    if(isHorizontal) {
+                      dataPointValue = Number(data[i].x[j]);
                     } else {
-                      stacked_total = data[i].x[j];
+                      dataPointValue = Number(data[i].y[j]);
                     }
-  
-                    var anoData = {
-                      x: stacked_total,
-                      y: data[i].y[j],
-                      text: dataLabelFormatter(data[i].x[j]),
-                      hovertemplate: "%{y}<extra></extra>",
-                      xanchor: "left",
-                      yanchor: "center",
-                      showarrow: false,
-                    };
-  
-                    base_info.annotations.push(anoData);
+
+                    const annotationText = dataLabelFormatter(dataPointValue);
+
+                    if(annotationText != 'NaN') { 
+                      //  Value that should be displayed
+                      //  If it's stacked, sum at col index
+                      if (isStacked) {
+                        stackedTotal[j] += dataPointValue;
+                      } else {
+                        stackedTotal[j] = dataPointValue;
+                      }
+
+                      //  Base annotation object
+                      let annotationData = {
+                        text: annotationText,
+                        hovertemplate: "%{y}<extra></extra>",
+                        showarrow: false,
+                      };
+
+                      if(isHorizontal) {
+                        annotationData.x = stackedTotal[j];
+                        annotationData.y = !isStacked ? getAnnotationPos(i, j) : data[i].y[j];
+                        annotationData.xanchor = "left"; 
+                        annotationData.yanchor = "center";
+                      } else {
+                        annotationData.x = !isStacked ? getAnnotationPos(i, j) : data[i].x[j];
+                        annotationData.y = stackedTotal[j];
+                        annotationData.xanchor = "center";
+                        annotationData.yanchor = "bottom"; 
+                      }
+
+                      base_info.annotations.push(annotationData);
+                    }
                   }
                 }
               }
@@ -2678,6 +2674,7 @@ ckan.module('querytool-viz-preview', function() {
                 },
               ],
               modeBarButtonsToRemove: ["toImage"],
+              locale: lang.toLocaleLowerCase().replace('_', '-')
             };
   
             //  Use Prism color palette
@@ -2697,6 +2694,15 @@ ckan.module('querytool-viz-preview', function() {
             ]
 
             Plotly.newPlot(this.el[0], data, base_info, config);
+
+            // Resize each of the charts after a window resize
+            // including fullscreen mode
+            window.onresize = function() {
+              let el = $(".item-content.js-plotly-plot");
+              el.each((i, chart) => {
+                Plotly.Plots.resize(chart);
+              })
+            };
 
         },
         // Get the values from dropdowns and rerender the chart.

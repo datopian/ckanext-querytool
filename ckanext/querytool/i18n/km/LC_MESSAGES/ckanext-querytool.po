@@ -92,22 +92,22 @@ msgstr "ចំនួនគត់ ឧ. ២"
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:60
 #: ckanext/querytool/helpers.py:224
 msgid "Decimal (1 digit) e.g 2.5"
-msgstr "ទស្សភាគ (១ ខ្ទង់) ឧ. ២,៥"
+msgstr "ទស្សភាគ (១ ខ្ទង់) ឧ. ២.៥"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:64
 #: ckanext/querytool/helpers.py:225
 msgid "Decimal (2 digit) e.g 2.50"
-msgstr "ទស្សភាគ (២ ខ្ទង់) ឧ. ២,៥០"
+msgstr "ទស្សភាគ (២ ខ្ទង់) ឧ. ២.៥០"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:68
 #: ckanext/querytool/helpers.py:226
 msgid "Decimal (3 digit) e.g 2.501"
-msgstr "ទស្សភាគ (៣ ខ្ទង់) ឧ. ២,៥០១"
+msgstr "ទស្សភាគ (៣ ខ្ទង់) ឧ. ២.៥០១"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:72
 #: ckanext/querytool/helpers.py:227
 msgid "Decimal (4 digit) e.g 2.5012"
-msgstr "ទស្សភាគ (៤ ខ្ទង់) ឧ. ២,៥០១២"
+msgstr "ទស្សភាគ (៤ ខ្ទង់) ឧ. ២.៥០១២"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:76
 #: ckanext/querytool/helpers.py:228
@@ -2203,6 +2203,10 @@ msgid "Date MMM DD .e.g. Jan 01"
 msgstr "កាលបរិច្ឆេទ ខែ ថ្ងៃទី ឧ.  មករា.០១"
 
 # added manually
+msgid "Date MMM YY .e.g. Jan 14"
+msgstr "កាលបរិច្ឆេទ ខែ ឆ្នាំ ឧ. មករា ១៤"
+
+# added manually
 msgid "Dimension by default"
 msgstr "ទំហំលំនាំដើម"
 
@@ -2421,3 +2425,79 @@ msgstr "ជម្រើសទាញយក"
 # Manually added translations
 msgid "Report Icon URL"
 msgstr "រាយការណ៍រូបតំណាង URL"
+
+# Manually added translations
+msgid "Data categories, default 5"
+msgstr "ប្រភេទទិន្នន័យ, លំនាំដើម ៥"
+
+# Manually added translations
+msgid "Data categories"
+msgstr "ប្រភេទ​ទិន្នន័យ"
+
+# Manually added translations
+msgid "Fullscreen"
+msgstr "ពេញ​អេក្រង់"
+
+# Manually added translations
+msgid "reCAPTCHA validation failed"
+msgstr "ការ​ផ្ទៀងផ្ទាត់ reCAPTCHA បាន​បរាជ័យ"
+
+# Manually added translations
+msgid "Parent Groups"
+msgstr "ក្រុម​មេ"
+
+# Manually added translations
+msgid "Enable or disable parent/child groups (visit the \"Manage\" page of a group to set its type). Parent groups will appear on the home page. Clicking on a parent group will navigate to the child groups page for the given parent."
+msgstr "បើក ឬបិទ​ក្រុម​មេ/កូនក្រុម (ចូលទៅ​ទំព័រ \"គ្រប់គ្រង\" នៃ​ក្រុម​ដើម្បី​កំណត់​ប្រភេទ​របស​។ ក្រុម​មេនឹងត្រូវ​បង្ហាញនៅលើ​ទំព័រ​ដើម្បី​ជា​មេ​សុទ្ធ។ ចុចលើ​ក្រុម​មេដែល​អ្នក​ចង់ចូលទៅ​នៅ​លើវាល​ក្រុម​កូនក្រុម​សម្រាប់​មេ​ដែល​បាន​ផ្ទុកឡើង។)"
+
+# Manually added translations
+msgid "Parent"
+msgstr "មេ"
+
+# Manually added translations
+msgid "Child"
+msgstr "កូនក្រុម"
+
+# Manually added translations
+msgid "Children"
+msgstr "កូនក្រុម"
+
+# Manually added translations
+msgid "eg. alcohol, finance, environment"
+msgstr "ឧ. ការប្រើប្រាស់សកម្មភាពអាលូកូល ហិរញ្ញវត្ថុ បរិស្ថានវិទ្យា"
+
+# Manually added translations
+msgid "Miscellaneous groups"
+msgstr "ក្រុម​ផ្សេងៗ"
+
+# Manually added translations
+msgid "Search groups..."
+msgstr "ស្វែងរកក្រុម..."
+
+# Manually added translations
+msgid "No child groups belong to this parent group."
+msgstr "គ្មានក្រុម​កូនក្រុម​ទំនាក់ទំនងជាមួយ​ក្រុម​មេនេះ។"
+
+# Manually added translations
+msgid "All reports"
+msgstr "រាប់​ទាំង​របារ​ដែល​បាន​រក​ឃើញ"
+
+# Manually added translations
+msgid "{number} child group found for \"{query}\""
+msgid_plural "{number} child groups found for \"{query}\""
+msgstr[0] "{number} ក្រុមទីពីររកឃើញសម្រាប់ \"{query}\""
+msgstr[1] "{number} ក្រុមទីពីររកឃើញសម្រាប់ \"{query}\""
+
+# Manually added translations
+msgid "{number} child group found"
+msgid_plural "{number} child groups found"
+msgstr[0] "រកឃើញ {number} ក្រុមទីពីរ"
+msgstr[1] "រកឃើញ {number} ក្រុមទីពីរ"
+
+# Manually added translations
+msgid "No child groups found for \"{query}\""
+msgstr "គ្មានក្រុមទីពីររកឃើញសម្រាប់ \"{query}\""
+
+# Manually added translations
+msgid "No child groups found"
+msgstr "គ្មានក្រុមទីពីររកឃើញ។"

@@ -20,7 +20,7 @@ from ckan.plugins.toolkit import _
 import ckan.lib.helpers as h
 from ckan import logic
 
-from ckanext.querytool.model import CkanextQueryTool
+from ckanext.querytool.model import CkanextQueryTool, child_group_search
 
 log = logging.getLogger(__name__)
 
@@ -175,8 +175,6 @@ def get_color_scheme():
 
 
 def get_querytool_get_chart_colors(data):
-    print data
-    print 'in'
     try:
         data = json.loads(data)
     except:
@@ -270,7 +268,9 @@ def get_charts_data_formats(num=None):
                {'text': _('Date MMM DD, YYYY .e.g. Jan 01, 2014'),
                    'value': '%b %d, %Y'},
                {'text': _('Date MMM DD .e.g. Jan 01'),
-                   'value': '%b %d'}]
+                   'value': '%b %d'},
+               {'text': _('Date MMM YY .e.g. Jan 14'),
+                   'value': '%b %y'}]
     if num:
         return options[:num]
     return options
@@ -584,12 +584,68 @@ def get_chart_sort():
     return options
 
 
-def get_groups():
+def get_groups(parent_name=None, all_children=False):
     '''
     Get available Groups from the database
     return: list of groups
     '''
     groups = _get_action('group_list', {'all_fields': True})
+
+    if all_children is True:
+        child_groups = []
+
+        for group in groups:
+            group_dict = _get_action('group_show', {'id': group['id']})
+
+            if group_dict.get('group_relationship_type') != 'parent':
+                child_groups.append(group)
+
+        return child_groups
+
+    if parent_name:
+        if parent_name == '__misc__group__':
+            misc_groups = []
+
+            for group in groups:
+                group_dict = _get_action('group_show', {'id': group['id']})
+
+                if group_dict.get('parent') in [None, ''] \
+                   and group_dict.get('children') in [None, ''] \
+                   and group_dict.get('group_relationship_type') != 'parent':
+                    misc_groups.append(group)
+
+            return misc_groups
+        else:
+            child_groups = []
+
+            for group in groups:
+                group_dict = _get_action('group_show', {'id': group['id']})
+
+                if group_dict.get('parent') == parent_name:
+                    child_groups.append(group)
+
+            return child_groups
+
+    return groups
+
+
+def get_available_groups(group_name=None):
+    '''
+    Get available Groups from the database
+    return: list of groups
+    '''
+    groups = _get_action('get_available_groups', {})
+
+    if group_name:
+        # Remove the group from the list
+        groups = [group for group in groups if group.get('name') != group_name]
+
+    groups = [
+        {'text': '', 'value': ''},
+    ] + [
+        {'text': group.get('title'), 'value': group.get('name')}
+        for group in groups
+    ]
 
     return groups
 
@@ -904,6 +960,17 @@ def get_cookie_control_config():
 
         return cookie_control_config
 
+def get_recaptcha_config():
+    sitekey = config.get('ckanext.querytool.recaptcha.sitekey', '')
+    secretkey = config.get('ckanext.querytool.recaptcha.secretkey', '')
+
+    return {
+        "sitekey": sitekey,
+        "secretkey": secretkey,
+        "enabled": sitekey and secretkey
+    }
+
+
 def get_social_media_links(social_order, admin_dict):
     social_order = social_order.split(',')
 
@@ -928,6 +995,15 @@ def querytool_search(query_string=None, query_group=None):
     return list(set(querytool.search(
         query_string=query_string, query_group=query_group
     )))
+
+
+def parent_child_group_search(query_string=None, query_children=None, misc_group=False):
+    return list(set(child_group_search(
+        query_string=query_string,
+        query_children=query_children,
+        misc_group=misc_group
+    )))
+
 
 def report_search_count(reports, remove_private=False):
     if remove_private is False:
@@ -1034,3 +1110,11 @@ def color_to_hex(color):
         return named_colors.get(color)
 
     return color
+
+
+def get_all_parent_groups():
+    parent_groups = toolkit.get_action('get_all_parent_groups')(
+        {}, {}
+    )
+
+    return parent_groups

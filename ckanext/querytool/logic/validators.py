@@ -1,4 +1,6 @@
 import logging
+from itertools import count
+
 import ckan.plugins as p
 import ckan.lib.navl.dictization_functions as df
 
@@ -35,3 +37,28 @@ def description_length_validator(description, context):
             DESCRIPTION_MAX_LENGTH)
 
     return description
+
+
+def group_children_string_convert(key, data, errors, context):
+    '''Takes a list of children groups that is a comma-separated string (in data[key])
+    and parses tag names. These are added to the data dict, enumerated. They
+    are also validated.'''
+
+    if isinstance(data[key], basestring):
+        children = [
+            child.strip()
+            for child in data[key].split(',')
+            if child.strip()
+        ]
+    else:
+        children = data[key]
+
+    current_index = max([
+        int(k[1]) for k in data.keys()
+        if len(k) == 3 and k[0] == 'children'
+    ] + [-1])
+
+    for num, child in zip(count(current_index + 1), children):
+        data[('children', num, 'name')] = child
+
+    return data

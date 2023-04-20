@@ -802,12 +802,6 @@ $('body').on('change','[id^=chart_field_show_bounds_]',function(){
     }
 });
 
-// Hide annotation on bars with categories
-$('body').on('change','[id^=chart_field_graph_]',function(){
-  var selected = $(this).val();
-  var chart_number = this.id.split('_').slice(-1)[0];
-  hideAnnotationCheckbox(selected,chart_number);
-});
 
 $('body').on('change','[id^=chart_field_legend_]',function(){
   if($(this).attr('id').includes('title')) {
@@ -840,11 +834,6 @@ $('body').on('change','[id^=chart_field_leg_title_]',function(){
 
 });
 
-$('body').on('change','[id^=chart_field_category_name_]',function(){
-  var chart_number = this.id.split('_').slice(-1)[0];
-  var selected = $(`#chart_field_graph_${chart_number}`).val();
-  hideAnnotationCheckbox(selected,chart_number);
-});
 
 function hideAnnotationCheckbox(selected,chart_number){
   
@@ -1440,4 +1429,30 @@ $('body').on('change', '[id^=map_data_categories_]', function (e) {
     $(`#map_data_categories_${chart_number}`).val(10).change();
   }
 
+});
+
+$('#group_relationship_type').on('change', function() {
+  var selected = $(this).val();
+
+  if (selected == 'parent') {
+    // hide '#parent' and show '#child'
+    $('#field-parent').parent().parent().hide();
+    $('#field-children').parent().parent().show();
+  } else if (selected == 'child') {
+    // hide '#child' and show '#parent'
+    $('#field-parent').parent().parent().show();
+    $('#field-children').parent().parent().hide();
+  }
+});
+
+$(document).ready(function(){
+  var selected = $('#group_relationship_type').val();
+
+  if (selected == 'parent') {
+    $('#field-parent').parent().parent().hide();
+    $('#field-children').parent().parent().show();
+  } else if (selected == 'child') {
+    $('#field-parent').parent().parent().show();
+    $('#field-children').parent().parent().hide();
+  }
 });

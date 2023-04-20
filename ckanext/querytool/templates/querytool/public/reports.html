@@ -8,15 +8,30 @@
 {% endblock %}
 
 {% block breadcrumb_custom %}
-  <div class="toolbar new_toolbar embed-show">
-    <ol class="breadcrumb new_breadcrumb">
-      <li><a href="/"><i class="fa fa-home"></i></a></li>
-      <li class="active">{% link_for _('All reports'), controller=c.controller, action='querytool_public_reports' %}</li>
-    </ol>
-    <div class="embed-show search-reports">
-      {% snippet 'snippets/search_reports_input.html' %}
+  {% set from_parent = request.params.get('from_parent') or from_parent %}
+  {% set parent = request.params.get('parent') or parent %}
+  {% set parent_title = request.params.get('title') or title %}
+
+  {% if from_parent and parent and parent_title %}
+    <div class="toolbar new_toolbar">
+      <ol class="breadcrumb new_breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i></a></li>
+
+        {% if from_parent == 'True' %}
+          <li><a href="/querytool/public/group/{{ parent }}">{{ parent_title }}</a></li>
+        {% endif %}
+        <li class="active" style="color: black;">{{ _('All reports') }}</li>
+      </ol>
     </div>
-  </div>
+  {% else %}
+    <div class="toolbar new_toolbar embed-show">
+      <ol class="breadcrumb new_breadcrumb">
+        <li><a href="/"><i class="fa fa-home"></i></a></li>
+        <li class="active">{% link_for _('All reports'), controller=c.controller, action='querytool_public_reports' %}</li>
+      </ol>
+      {% snippet 'snippets/embed/navbar_end_items.html' %}
+    </div>
+  {% endif %}
 {% endblock %}
 
 {% block page_header_bg %}{% endblock %}
@@ -30,6 +45,9 @@
 {% block tools %}
 <div class="container">
   {% set q = request.params.get('report_q') %}
+  {% set from_parent = request.params.get('from_parent') or from_parent %}
+  {% set parent = request.params.get('parent') or parent %}
+  {% set parent_title = request.params.get('title') or title %}
   {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
   {% set sorting_selected = request.params.get('sort', 'name asc') %}
   {% set report_count = h.report_search_count(data, remove_private=True) %}
@@ -38,6 +56,11 @@
     <div class="search-input control-reports search-giant" id="report-search-box">
       <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" {% if q %} value="{{ q }}" {% endif %} />
       <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+      {% if parent %}
+        <input type="hidden" name="parent" value="{{ parent }}">
+        <input type="hidden" id="from_parent" name="from_parent" value=True />
+        <input type="hidden" id="title" name="title" value="{{ parent_title }}" />
+      {% endif %}
     </div>
 
     <div class="form-select control-group control-order-by">

@@ -133,6 +133,9 @@
                 }, {
                     'text': _('Date MMM DD .e.g. Jan 01'),
                     'value': '%b %d'
+                }, {
+                    'text': _('Date MMM YY .e.g. Jan 14'),
+                    'value': '%b %y'
                 }
             ];
 

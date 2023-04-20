@@ -92,32 +92,32 @@ msgstr "Entier ex. 2"
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:60
 #: ckanext/querytool/helpers.py:224
 msgid "Decimal (1 digit) e.g 2.5"
-msgstr "Décimal (1 chiffre) ex. 2.5"
+msgstr "Décimal (1 chiffre) ex. 2,5"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:64
 #: ckanext/querytool/helpers.py:225
 msgid "Decimal (2 digit) e.g 2.50"
-msgstr "Décimal (2 chiffres) ex. 2.50"
+msgstr "Décimal (2 chiffres) ex. 2,50"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:68
 #: ckanext/querytool/helpers.py:226
 msgid "Decimal (3 digit) e.g 2.501"
-msgstr "Décimal (3 chiffres) ex. 2.501"
+msgstr "Décimal (3 chiffres) ex. 2,501"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:72
 #: ckanext/querytool/helpers.py:227
 msgid "Decimal (4 digit) e.g 2.5012"
-msgstr "Décimal (4 chiffres) ex. 2.5012"
+msgstr "Décimal (4 chiffres) ex. 2,5012"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:76
 #: ckanext/querytool/helpers.py:228
 msgid "Currency e.g. $2,000"
-msgstr "Monnaie ex. $2,000"
+msgstr "Monnaie ex. $2000"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:80
 #: ckanext/querytool/helpers.py:229
 msgid "Rounded e.g 2k"
-msgstr "Arrondi ex. 2m"
+msgstr "Arrondi ex. 2k"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:84
 #: ckanext/querytool/helpers.py:230
@@ -129,28 +129,28 @@ msgstr "Pourcentage (0 chiffres) ex. 25% pour 0.25"
 #: ckanext/querytool/helpers.py:232
 #, python-format
 msgid "Percentage (1 digit) e.g 25.1%% for 0.251"
-msgstr "Pourcentage (1 chiffre) ex. 25.1% pour 0.251"
+msgstr "Pourcentage (1 chiffre) ex. 25,1% pour 0.251"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:92
 #: ckanext/querytool/helpers.py:234
 #, python-format
 msgid "Percentage (2 digit) e.g 25.12%% for 0.2512"
-msgstr "Pourcentage (2 chiffres) ex. 25.12% pour 0.2512"
+msgstr "Pourcentage (2 chiffres) ex. 25,12% pour 0.2512"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:96
 #: ckanext/querytool/helpers.py:236
 msgid "Comma thousands separator (0 digit) e.g 2,512"
-msgstr "Virgule comme séparateur de milliers (0 chiffres) ex. 2,512"
+msgstr "Virgule comme séparateur de milliers (0 chiffres) ex. 2 512"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:100
 #: ckanext/querytool/helpers.py:238
 msgid "Comma thousands separator (1 digit) e.g 2,512.3"
-msgstr "Virgule comme séparateur de milliers (1 chiffre) ex. 2,512.3"
+msgstr "Virgule comme séparateur de milliers (1 chiffre) ex. 2 512,3"
 
 #: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:104
 #: ckanext/querytool/helpers.py:240
 msgid "Comma thousands separator (2 digit) e.g 2,512.34"
-msgstr "Virgule comme séparateur de milliers (2 chiffres) ex. 2,512.34"
+msgstr "Virgule comme séparateur de milliers (2 chiffres) ex. 2 512,34"
 
 #: ckanext/querytool/helpers.py:511
 msgid "Ascending"
@@ -1469,6 +1469,10 @@ msgid "Date MMM DD .e.g. Jan 01"
 msgstr "Date MMM JJ ex. Jan 01"
 
 # added manually
+msgid "Date MMM YY .e.g. Jan 14"
+msgstr "Date MMM AA ex. Jan 14"
+
+# added manually
 msgid "Dimension by default"
 msgstr "Dimension par défaut"
 
@@ -1688,3 +1692,79 @@ msgstr "Options de téléchargement"
 # Manually added translations
 msgid "Report Icon URL"
 msgstr "URL de l'icône de rapport"
+
+# Manually added translations
+msgid "Data categories, default 5"
+msgstr "Catégories de données, par défaut 5"
+
+# Manually added translations
+msgid "Data categories"
+msgstr "Catégories de données"
+
+# Manually added translations
+msgid "Fullscreen"
+msgstr "Plein écran"
+
+# Manually added translations
+msgid "reCAPTCHA validation failed"
+msgstr "La validation de reCAPTCHA a échoué"
+
+# Manually added translations
+msgid "Parent Groups"
+msgstr "Groupes principaux"
+
+# Manually added translations
+msgid "Enable or disable parent/child groups (visit the \"Manage\" page of a group to set its type). Parent groups will appear on the home page. Clicking on a parent group will navigate to the child groups page for the given parent."
+msgstr "Activez ou désactivez les groupes principal/secondaire (visitez la page \"Gérer\" d'un groupe pour définir son type). Les groupes principaux apparaîtront sur la page d'accueil. En cliquant sur un groupe principal, vous serez dirigé vers la page des groupes secondaires assignés au groupe principal."
+
+# Manually added translations
+msgid "Parent"
+msgstr "Principal"
+
+# Manually added translations
+msgid "Child"
+msgstr "Secondaire"
+
+# Manually added translations
+msgid "Children"
+msgstr "Secondaires"
+
+# Manually added translations
+msgid "eg. alcohol, finance, environment"
+msgstr "par ex. alcool, finances, environnement"
+
+# Manually added translations
+msgid "Miscellaneous groups"
+msgstr "Divers groupes"
+
+# Manually added translations
+msgid "Search groups..."
+msgstr "Rechercher des groupes..."
+
+# Manually added translations
+msgid "No child groups belong to this parent group."
+msgstr "Aucun groupe secondaire n'appartient à ce groupe principal."
+
+# Manually added translations
+msgid "All reports"
+msgstr "Tous les rapports"
+
+# Manually added translations
+msgid "{number} child group found for \"{query}\""
+msgid_plural "{number} child groups found for \"{query}\""
+msgstr[0] "{number} groupe secondaire trouvé pour \"{query}\""
+msgstr[1] "{number} groupes secondaires trouvés pour \"{query}\""
+
+# Manually added translations
+msgid "{number} child group found"
+msgid_plural "{number} child groups found"
+msgstr[0] "{number} groupe secondaire trouvé"
+msgstr[1] "{number} groupes secondaires trouvés"
+
+# Manually added translations
+msgid "No child groups found for \"{query}\""
+msgstr "Aucun groupe secondaire trouvé pour \"{query}\""
+
+# Manually added translations
+msgid "No child groups found"
+msgstr "Aucun groupe secondaire trouvé"
