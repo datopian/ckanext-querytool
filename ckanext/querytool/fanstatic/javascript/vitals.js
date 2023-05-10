@@ -1456,3 +1456,127 @@ $(document).ready(function(){
     $('#field-children').parent().parent().hide();
   }
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+  const send2faEmailBtn = document.getElementById("send-2fa-email");
+
+  if (send2faEmailBtn) {
+    send2faEmailBtn.addEventListener("click", function(event) {
+      const mfaField = document.getElementById("mfa-email");
+      mfaField.style.display = "block";
+      const existingSuccessMessage = document.querySelector(
+        ".alert-success"
+      );
+
+      if (existingSuccessMessage) {
+        existingSuccessMessage.remove();
+      }
+
+      const existingErrorMessage = document.querySelector(
+        ".alert-danger"
+      );
+
+      if (existingErrorMessage) {
+        existingErrorMessage.remove();
+      }
+
+      event.preventDefault();
+      const username = document.getElementById("field-login").value;
+
+      $.ajax({
+        url: `/send_2fa_code/${username}`,
+        type: "POST",
+        success: function(response) {
+          const successMessage = document.createElement("p");
+
+          successMessage.innerHTML = 'A verification code has been sent. This code expires in: '
+          successMessage.classList.add("alert", "alert-success");
+          successMessage.style.marginTop = "1rem";
+          $(successMessage).css("margin-left", "130px");
+          $(successMessage).css("width", "320px");
+
+          successMessage
+
+          const countdownTimer = createCountdownTimer(600);
+          successMessage.appendChild(countdownTimer);
+
+          const twofaEmailLink = document.getElementById("mfa-email-link");
+          twofaEmailLink.parentNode.insertBefore(
+            successMessage,
+            twofaEmailLink.nextSibling
+          );
+        },
+        error: function(error) {
+          const errorMessage = document.createElement("p");
+
+          errorMessage.innerHTML = 'There was an error sending the verification code. Please try again.'
+          errorMessage.classList.add("alert", "alert-danger");
+          errorMessage.style.marginTop = "1rem";
+          errorMessage.style.marginLeft = "130px;";
+
+          const twofaEmailLink = document.getElementById("mfa-email-link");
+
+          twofaEmailLink.parentNode.insertBefore(
+            errorMessage,
+            twofaEmailLink.nextSibling
+          );
+        }
+      });
+
+      const twofaEmailLink = document.getElementById("send-2fa-email");
+      twofaEmailLink.innerHTML = "Resend verification code";
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  const loginField = document.getElementById("field-login");
+  const passwordField = document.getElementById("field-password");
+  const send2faEmailBtn = document.getElementById("mfa-email-link");
+  const mfaField = document.getElementById("field-mfa");
+
+  if (loginField && passwordField && send2faEmailBtn) {
+    loginField.addEventListener("input", function(event) {
+      if (loginField.value && passwordField.value) {
+        send2faEmailBtn.style.display = "block";
+      }
+    });
+    passwordField.addEventListener("input", function(event) {
+      if (loginField.value && passwordField.value) {
+        send2faEmailBtn.style.display = "block";
+      }
+    });
+    mfaField.addEventListener("input", function(event) {
+      if (mfaField.value) {
+        document.getElementById("login-button").style.display = "block";
+      }
+    });
+  }
+});
+
+function createCountdownTimer(duration) {
+  const countdown = document.createElement('span');
+  countdown.id = 'countdown-timer';
+  let remainingTime = duration;
+
+  function updateCountdown() {
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+    countdown.textContent = ` ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    remainingTime--;
+
+    if (remainingTime < 0) {
+      clearInterval(countdownInterval);
+      var alertElement = document.querySelector('.alert-success');
+
+      alertElement.textContent = 'Verification code expired: Please resend and try again.';
+      alertElement.classList.remove('alert-success');
+      alertElement.classList.add('alert-danger');
+    }
+  }
+
+  const countdownInterval = setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  return countdown;
+}

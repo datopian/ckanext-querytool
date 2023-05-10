@@ -291,6 +291,12 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     controller=user_controller,
                     action='logged_in')
 
+        email_auth_controller = 'ckanext.querytool.controllers.email_auth:QuerytoolEmailAuthController'
+        map.connect('send_2fa_code',
+                    '/send_2fa_code/{user}',
+                    controller=email_auth_controller,
+                    action='send_2fa_code')
+
         return map
 
     def after_map(self, map):
@@ -411,7 +417,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'get_all_parent_groups':
                 helpers.get_all_parent_groups,
             'get_recaptcha_config':
-                helpers.get_recaptcha_config
+                helpers.get_recaptcha_config,
+            'get_config_value':
+                helpers.get_config_value,
         }
 
     # IAuthFunctions
