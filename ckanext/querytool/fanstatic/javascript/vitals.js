@@ -1535,7 +1535,21 @@ document.addEventListener("DOMContentLoaded", function() {
   const send2faEmailBtn = document.getElementById("mfa-email-link");
   const mfaField = document.getElementById("field-mfa");
 
+  // Handle autofill
   if (loginField && passwordField && send2faEmailBtn) {
+    var checkAutofill = setInterval(function() {
+      var autofillUsername = document.querySelectorAll(
+        'input[id="field-login"]:-webkit-autofill'
+      );
+      var autofillPassword = document.querySelectorAll(
+        'input[id="field-password"]:-webkit-autofill'
+      );
+      if (autofillUsername.length > 0 && autofillPassword.length > 0) {
+        send2faEmailBtn.style.display = "block";
+        clearInterval(checkAutofill);
+      }
+    }, 100);
+
     loginField.addEventListener("input", function(event) {
       if (loginField.value && passwordField.value) {
         send2faEmailBtn.style.display = "block";
@@ -1580,3 +1594,16 @@ function createCountdownTimer(duration) {
 
   return countdown;
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  const loginForm = document.getElementById("login-form");
+  const loginButton = document.getElementById("login-button");
+
+  if (loginButton) {
+    loginForm.addEventListener("keypress", function(event) {
+      if (event.key == 'Enter' && loginButton.style.display === 'none') {
+        event.preventDefault();
+      }
+    });
+  }
+});

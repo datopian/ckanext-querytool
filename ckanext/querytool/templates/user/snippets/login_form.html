@@ -15,7 +15,7 @@
     {% set password_error = true if error_summary %}
     {% set mfa_enabled = h.get_config_value('ckanext.querytool.2fa_enabled') %}
     
-    <form action="{{ action }}" method="post" class="form-horizontal">
+    <form action="{{ action }}" method="post" class="form-horizontal" id="login-form">
       {{ form.errors(errors=error_summary) }}
     
       {{ form.input('login', label=_("Username"), id='field-login', value="", error=username_error, classes=["control-medium"]) }}
