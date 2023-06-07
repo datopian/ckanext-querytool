@@ -2504,8 +2504,11 @@ msgstr "គ្មានក្រុមទីពីររកឃើញ។"
 
 # Manually added translations
 msgid ""
-"Hi {user},\n\nHere's your verification"
-" code to login: {code}\n\nHave a great day!"
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
 msgstr ""
 "សួស្តី {user}។\n\nនេះគឺជាលេខកូដសន្ទនាបញ្ជាក់បើកចូលរបស់អ្នក: "
 "{code}។\n\nសូមអរគុណជាមួយនឹងថ្ងៃប្រចាំថ្ងៃ!"

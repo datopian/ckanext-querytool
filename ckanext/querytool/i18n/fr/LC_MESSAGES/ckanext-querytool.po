@@ -1771,8 +1771,11 @@ msgstr "Aucun groupe secondaire trouvé"
 
 # Manually added translations
 msgid ""
-"Hi {user},\n\nHere's your verification"
-" code to login: {code}\n\nHave a great day!"
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
 msgstr ""
 "Salut {user},\n\nVoici votre code d'authentification"
 " à deux facteurs pour vous connecter : {code}\n\nBonne journée !"

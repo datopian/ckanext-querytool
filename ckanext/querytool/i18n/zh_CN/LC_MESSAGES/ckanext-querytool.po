@@ -1770,8 +1770,11 @@ msgstr "未找到任何次要组"
 
 # Manually added translations
 msgid ""
-"Hi {user},\n\nHere's your verification"
-" code to login: {code}\n\nHave a great day!"
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
 msgstr ""
 "你好 {user}។\n\n这是您的双因素认证代码，"
 "用于登录：{code}.\n\n祝您拥有美好的一天！"

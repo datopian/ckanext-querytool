@@ -2,9 +2,11 @@ import logging
 import pyotp
 
 import ckan.lib.base as base
+import ckan.model as model
+import ckan.lib.mailer as mailer
 import ckan.logic as logic
-import ckan.lib.mailer
-from ckan.common import _
+from ckan.lib.mailer import mail_user
+from ckan.common import _, config
 import datetime
 
 from ckanext.querytool.model import VitalsSecurityTOTP
@@ -18,6 +20,8 @@ class QuerytoolEmailAuthController(base.BaseController):
     def send_2fa_code(self, user):
         try:
             user_dict = get_action('user_show')(None, {'id': user})
+            # Get user object instead
+            user_obj = model.User.get(user)
             vs_totp = VitalsSecurityTOTP()
             now = datetime.datetime.utcnow()
             challenge = vs_totp.create_for_user(
@@ -35,8 +39,12 @@ class QuerytoolEmailAuthController(base.BaseController):
                 user=user_display_name,
                 code=current_code
             )
+            site_title = config.get('ckan.site_title')
+            site_url = config.get('ckan.site_url')
 
-            ckan.lib.mailer.mail_recipient(
+            email_body += '\n\n' + site_title + '\n' + site_url
+
+            mailer.mail_recipient(
                 user_display_name,
                 user_email,
                 email_subject,

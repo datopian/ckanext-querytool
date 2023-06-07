@@ -1730,8 +1730,11 @@ msgstr "Nenhum grupo secundário encontrado"
 
 # Manually added translations
 msgid ""
-"Hi {user},\n\nHere's your verification"
-" code to login: {code}\n\nHave a great day!"
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
 msgstr ""
 "Olá {user}។\n\nAqui está o seu código de autenticação"
 " de dois fatores para fazer login: {code}.\n\nTenha um ótimo dia!"
