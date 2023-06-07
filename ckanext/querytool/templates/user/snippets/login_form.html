@@ -39,6 +39,17 @@
           <div id="mfa-email" style="display: none;">
             {{ form.input('mfa', label=_("Verification Code"), id='field-mfa', value="", error=error_summary, classes=["control-medium"], placeholder=_("Enter your verification code")) }}
           </div>
+          <script>
+            function translate(text) {
+              var translations = {
+                'A verification code has been sent. This code expires in: ': "{{ _('A verification code has been sent. This code expires in: ') }}",
+                'There was an error sending the verification code. Please try again.': "{{ _('There was an error sending the verification code. Please try again.') }}",
+                'Verification code expired: Please resend and try again.': "{{ _('Verification code expired: Please resend and try again.') }}",
+                'Resend verification code': '{{ _("Resend verification code") }}',
+              };
+              return translations[text];
+            }
+          </script>
         {% endif %}
       {% endblock %}
     

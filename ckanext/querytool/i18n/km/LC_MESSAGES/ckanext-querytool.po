@@ -2501,3 +2501,47 @@ msgstr "គ្មានក្រុមទីពីររកឃើញសម្រ
 # Manually added translations
 msgid "No child groups found"
 msgstr "គ្មានក្រុមទីពីររកឃើញ។"
+
+# Manually added translations
+msgid ""
+"Hi {user},\n\nHere's your verification"
+" code to login: {code}\n\nHave a great day!"
+msgstr ""
+"សួស្តី {user}។\n\nនេះគឺជាលេខកូដសន្ទនាបញ្ជាក់បើកចូលរបស់អ្នក: "
+"{code}។\n\nសូមអរគុណជាមួយនឹងថ្ងៃប្រចាំថ្ងៃ!"
+
+# Manually added translations
+msgid "Verification Code"
+msgstr "លេខកូដសន្ទនា"
+
+# Manually added translations
+msgid "Login failed. Bad username, password, or authentication code."
+msgstr "ការចូលបរាជ័យ។ ឈ្មោះអ្នកប្រើមិនត្រឹមត្រូវ ពាក្យសម្ងាត់ ឬលេខកូដសន្ទនា។"
+
+# Manually added translations
+msgid "A verification code has been sent. This code expires in: "
+msgstr "បានផ្ញើលេខកូដបញ្ជាក់។ លេខកូដនេះនឹងផុតកំណត់ក្នុង "
+
+# Manually added translations
+msgid "There was an error sending the verification code. Please try again."
+msgstr "មានកំហុសក្នុងការផ្ញើលេខកូដបញ្ជាក់។ សូមព្យាយាមម្ដងទៀត។"
+
+# Manually added translations
+msgid "Send verification code"
+msgstr "ផ្ញើលេខកូដបញ្ជាក់"
+
+# Manually added translations
+msgid "Resend verification code"
+msgstr "ផ្ញើលេខកូដបញ្ជាក់ម្តងទៀត"
+
+# Manually added translations
+msgid "Verification code expired: Please resend and try again."
+msgstr "លេខកូដបញ្ជាក់ផុតកំណត់។ សូមផ្ញើម្តងទៀតហើយព្យាយាមម្ដងទៀត។"
+
+# Manually added translations
+msgid "Verification code will be sent to the email address associated with your account."
+msgstr "លេខកូដសន្ទនានឹងផ្ញើទៅអាសយដ្ឋានអ៊ីមែលដែលបានភ្ជាប់ជាមួយគណនីរបស់អ្នក។"
+
+# Manually added translations
+msgid "Enter your verification code"
+msgstr "បញ្ច"

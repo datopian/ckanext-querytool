@@ -4,6 +4,7 @@ import pyotp
 import ckan.lib.base as base
 import ckan.logic as logic
 import ckan.lib.mailer
+from ckan.common import _
 import datetime
 
 from ckanext.querytool.model import VitalsSecurityTOTP
@@ -27,11 +28,12 @@ class QuerytoolEmailAuthController(base.BaseController):
             current_code = totp.at(for_time=now)
             user_display_name = user_dict['display_name']
             user_email = user_dict['email']
-            email_subject = 'Two-factor Authentication Code'
-            email_body = (
-                'Hi {},\n\nHere\'s your two-factor authentication'
-                ' code to login: {}\n\nHave a great day!').format(
-                user_display_name, current_code
+            email_subject = _('Verification Code')
+            email_body = _(
+                'Hi {user},\n\nHere\'s your verification'
+                ' code to login: {code}\n\nHave a great day!').format(
+                user=user_display_name,
+                code=current_code
             )
 
             ckan.lib.mailer.mail_recipient(

@@ -1489,7 +1489,7 @@ document.addEventListener("DOMContentLoaded", function() {
         success: function(response) {
           const successMessage = document.createElement("p");
 
-          successMessage.innerHTML = 'A verification code has been sent. This code expires in: '
+          successMessage.innerHTML = translate('A verification code has been sent. This code expires in: ')
           successMessage.classList.add("alert", "alert-success");
           successMessage.style.marginTop = "1rem";
           $(successMessage).css("margin-left", "130px");
@@ -1509,7 +1509,7 @@ document.addEventListener("DOMContentLoaded", function() {
         error: function(error) {
           const errorMessage = document.createElement("p");
 
-          errorMessage.innerHTML = 'There was an error sending the verification code. Please try again.'
+          errorMessage.innerHTML = translate('There was an error sending the verification code. Please try again.')
           errorMessage.classList.add("alert", "alert-danger");
           errorMessage.style.marginTop = "1rem";
           errorMessage.style.marginLeft = "130px;";
@@ -1524,7 +1524,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
 
       const twofaEmailLink = document.getElementById("send-2fa-email");
-      twofaEmailLink.innerHTML = "Resend verification code";
+      twofaEmailLink.innerHTML = translate("Resend verification code");
     });
   }
 });
@@ -1583,7 +1583,7 @@ function createCountdownTimer(duration) {
       clearInterval(countdownInterval);
       var alertElement = document.querySelector('.alert-success');
 
-      alertElement.textContent = 'Verification code expired: Please resend and try again.';
+      alertElement.textContent = translate('Verification code expired: Please resend and try again.');
       alertElement.classList.remove('alert-success');
       alertElement.classList.add('alert-danger');
     }

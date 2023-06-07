@@ -1768,3 +1768,47 @@ msgstr "Aucun groupe secondaire trouvé pour \"{query}\""
 # Manually added translations
 msgid "No child groups found"
 msgstr "Aucun groupe secondaire trouvé"
+
+# Manually added translations
+msgid ""
+"Hi {user},\n\nHere's your verification"
+" code to login: {code}\n\nHave a great day!"
+msgstr ""
+"Salut {user},\n\nVoici votre code d'authentification"
+" à deux facteurs pour vous connecter : {code}\n\nBonne journée !"
+
+# Manually added translations
+msgid "Verification Code"
+msgstr "Code de vérification"
+
+# Manually added translations
+msgid "Login failed. Bad username, password, or authentication code."
+msgstr "Échec de la connexion. Nom d'utilisateur, mot de passe ou code d'authentification incorrect."
+
+# Manually added translations
+msgid "A verification code has been sent. This code expires in: "
+msgstr "Un code de vérification a été envoyé. Ce code expire dans "
+
+# Manually added translations
+msgid "There was an error sending the verification code. Please try again."
+msgstr "Une erreur s'est produite lors de l'envoi du code de vérification. Veuillez réessayer."
+
+# Manually added translations
+msgid "Send verification code"
+msgstr "Envoyer le code de vérification"
+
+# Manually added translations
+msgid "Resend verification code"
+msgstr "Renvoyer le code de vérification"
+
+# Manually added translations
+msgid "Verification code expired: Please resend and try again."
+msgstr "Le code de vérification a expiré : Veuillez le renvoyer et réessayer."
+
+# Manually added translations
+msgid "Verification code will be sent to the email address associated with your account."
+msgstr "Le code de vérification sera envoyé à l'adresse e-mail associée à votre compte."
+
+# Manually added translations
+msgid "Enter your verification code"
+msgstr "Entrez votre code de vérification"
