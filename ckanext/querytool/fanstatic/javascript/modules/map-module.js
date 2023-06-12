@@ -316,7 +316,7 @@ ckan.module('querytool-map', function($) {
                     newContent += '<b>' + infoData.title + '</b><br/>'
                      + infoData.measure
                 } else {
-                    newContent += "Hover over the map"
+                    newContent += "Hover over the map for more info"
                 }
 
                 this._div.innerHTML = newContent;
