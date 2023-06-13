@@ -19,7 +19,6 @@ ckan.module('querytool-map', function($) {
 
     return {
         initialize: function() {
-
             this.initLeaflet.call(this);
             this.mapResource = this.el.parent().parent().find('[id*=map_resource_]');
             this.mapTitleField = this.el.parent().parent().find('[id*=map_title_field_]');
@@ -161,6 +160,11 @@ ckan.module('querytool-map', function($) {
                 inertiaMaxSpeed: 200,
                 dragging: !L.Browser.mobile
             }).setView([lat, lng], zoom);
+
+            //  This fixes the map overflow when a screenshot of the
+            //  map is downloaded  with  the  Download button on the
+            //  visualizations page
+            this.map.getRenderer(this.map).options.padding = 0;
 
             var osmUrl = this.options.map_config.osm_url;
             var osmAttrib = this.options.map_config.osm_attribute;
