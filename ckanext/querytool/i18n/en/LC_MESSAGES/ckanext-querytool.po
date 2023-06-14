@@ -1782,3 +1782,50 @@ msgstr "No child groups found for \"{query}\""
 # Manually added translations
 msgid "No child groups found"
 msgstr "No child groups found"
+
+# Manually added translations
+msgid ""
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
+msgstr ""
+"Hi {user},\n\nHere's your verification"
+" code to login: {code}\n\nHave a great day!"
+
+# Manually added translations
+msgid "Verification Code"
+msgstr "Verification Code"
+
+# Manually added translations
+msgid "Login failed. Bad username, password, or authentication code."
+msgstr "Login failed. Bad username, password, or authentication code."
+
+# Manually added translations
+msgid "A verification code has been sent. This code expires in: "
+msgstr "A verification code has been sent. This code expires in: "
+
+# Manually added translations
+msgid "There was an error sending the verification code. Please try again."
+msgstr "There was an error sending the verification code. Please try again."
+
+# Manually added translations
+msgid "Send verification code"
+msgstr "Send verification code"
+
+# Manually added translations
+msgid "Resend verification code"
+msgstr "Resend verification code"
+
+# Manually added translations
+msgid "Verification code expired: Please resend and try again."
+msgstr "Verification code expired: Please resend and try again."
+
+# Manually added translations
+msgid "Verification code will be sent to the email address associated with your account."
+msgstr "Verification code will be sent to the email address associated with your account."
+
+# Manually added translations
+msgid "Enter your verification code"
+msgstr "Enter your verification code"

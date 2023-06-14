@@ -1,7 +1,8 @@
 import datetime
 import json
 import logging
-import ckan.logic as logic
+import pyotp
+import sys
 
 from sqlalchemy import Table, Column, Index, ForeignKey, MetaData
 from sqlalchemy import types, func, or_
@@ -10,11 +11,13 @@ try:
     from sqlalchemy.engine.result import RowProxy
 except ImportError:
     from sqlalchemy.engine.base import RowProxy
-
 from sqlalchemy.engine.reflection import Inspector
+
+import ckan.logic as logic
 from ckan.model.meta import orm, metadata, mapper, Session, engine
 from ckan.model.types import make_uuid
 from ckan.model.domain_object import DomainObject
+from ckan.model import User
 from ckan.model.group import Group
 from ckan import model
 
@@ -373,3 +376,118 @@ def get_table(name):
     meta.reflect(bind=model.meta.engine)
     table = meta.tables[name]
     return table
+
+
+class VitalsSecurityTOTP(DomainObject):
+    user_security_totp = None
+
+    def save(self):
+        session = model.Session()
+        session.add(self)
+        session.commit()
+
+    @classmethod
+    def create_for_user(cls, user_name, created_at=None):
+        """
+        Set up the
+        :param user_name:
+        :return:  VitalsSecurityTOTP model -- saved
+        """
+        # if class is not initialized, initialize it
+        if cls.user_security_totp is None:
+            cls.user_security_totp = VitalsSecurityTOTP()
+            cls.user_security_totp.define_security_tables()
+
+        if user_name is None:
+            raise ValueError("User name parameter must be supplied")
+
+        new_secret = pyotp.random_base32()
+        user = VitalsSecurityTOTP.Session.query(User).filter(
+            User.name == user_name).first()
+        user_id = user.id
+        security_challenge = VitalsSecurityTOTP.Session.query(
+            VitalsSecurityTOTP).filter(
+                VitalsSecurityTOTP.user_id == user_id).first()
+
+        if security_challenge is None:
+            security_challenge = VitalsSecurityTOTP(
+                user_id=user_id, secret=new_secret, created_at=created_at
+            )
+        else:
+            security_challenge.secret = new_secret
+            security_challenge.created_at = created_at
+
+        security_challenge.save()
+
+        return security_challenge
+
+    @classmethod
+    def get_for_user(cls, user_name):
+        '''Finds a securityTOTP object using the user name
+        :raises ValueError if the user_name is not provided
+        '''
+        if cls.user_security_totp is None:
+            cls.user_security_totp = VitalsSecurityTOTP()
+            cls.user_security_totp.define_security_tables()
+
+        if user_name is None:
+            raise ValueError("User name parameter must be supplied")
+
+        challenger = VitalsSecurityTOTP.Session.query(VitalsSecurityTOTP)\
+            .join(User, User.id == VitalsSecurityTOTP.user_id) \
+            .filter(User.name == user_name).first()
+
+        return challenger
+
+    def check_code(self, code, created_at, user_id):
+        """ Checks that a one time password is correct against the model
+        :return boolean true if the code is valid
+        """
+        totp = pyotp.TOTP(self.secret)
+        time_diff = (datetime.datetime.utcnow() - created_at).seconds > 600
+
+        if time_diff:
+            return False
+
+        result = totp.verify(code, for_time=created_at)
+
+        if not result:
+            log.debug("Failed to verify the totp code")
+
+        return result
+
+    def __str__(self):
+        return self.__repr__().encode('ascii', 'ignore')
+
+    def define_security_tables(self):
+        self.user_security_totp = Table(
+            'user_security_totp', metadata,
+            Column('id', types.Integer, primary_key=True),
+            Column('user_id', types.UnicodeText, default=u''),
+            Column('secret', types.UnicodeText, default=u''),
+            Column('created_at', types.DateTime)
+        )
+
+        mapper(
+            VitalsSecurityTOTP,
+            self.user_security_totp
+        )
+
+    def totp_db_setup(self):
+        if self.user_security_totp is None:
+            self.define_security_tables()
+
+        if not model.package_table.exists():
+            print(
+                "Exiting: can not initialize the TOTP DB "
+                "if the CKAN database does not exist yet"
+            )
+            sys.exit(1)
+            return
+        self.user_security_totp.drop(checkfirst=True)
+
+        if not self.user_security_totp.exists():
+            self.user_security_totp.create()
+            print("Created TOTP authentication table")
+        else:
+            print("TOTP authentication table already exists -- skipping")
