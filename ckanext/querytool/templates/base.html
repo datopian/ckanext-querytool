@@ -40,6 +40,15 @@
   {% resource 'querytool/javascript/vitals.js' %}
   {% resource 'querytool/javascript/modules/fullscreen.js' %}
 
+  <script>
+    function translate(text) {
+      var translations = {
+        'Hover over the map for more info': "{{ _('Hover over the map for more info') }}"
+      };
+      return translations[text];
+    }
+  </script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
 
   {% if h.get_cookie_control_config().get('api_key') and h.get_cookie_control_config().get('enabled') %}

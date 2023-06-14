@@ -1815,3 +1815,11 @@ msgstr "Le code de vérification sera envoyé à l'adresse e-mail associée à v
 # Manually added translations
 msgid "Enter your verification code"
 msgstr "Entrez votre code de vérification"
+
+# Manually added translations
+msgid "Info box title"
+msgstr "Titre de la boîte d'informations"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "Survolez la carte pour plus d'informations"

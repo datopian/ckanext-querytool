@@ -2172,3 +2172,11 @@ msgstr ""
 # Manually added translations
 msgid "Enter your verification code"
 msgstr ""
+
+# Manually added translations
+msgid "Info box title"
+msgstr ""
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr ""

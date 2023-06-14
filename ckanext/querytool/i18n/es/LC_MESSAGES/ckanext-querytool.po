@@ -1769,3 +1769,11 @@ msgstr "El código de verificación se enviará a la dirección de correo electr
 # Manually added translations
 msgid "Enter your verification code"
 msgstr "Ingrese su código de verificación"
+
+# Manually added translations
+msgid "Info box title"
+msgstr "Título del cuadro de información"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "Pasa el cursor sobre el mapa para obtener más información"

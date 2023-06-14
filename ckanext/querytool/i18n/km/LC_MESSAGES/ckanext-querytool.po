@@ -2548,3 +2548,11 @@ msgstr "លេខកូដសន្ទនានឹងផ្ញើទៅអាស
 # Manually added translations
 msgid "Enter your verification code"
 msgstr "បញ្ច"
+
+# Manually added translations
+msgid "Info box title"
+msgstr "ចំណងជើងប្រអប់ព័ត៌មាន"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "លំហែនបន្ទាប់ពីផែនទីសម្គាល់សម្រាប់ព័ត៌មានបន្ថែម"

@@ -1814,3 +1814,11 @@ msgstr "验证码将发送到与您的账户关联的电子邮件地址。"
 # Manually added translations
 msgid "Enter your verification code"
 msgstr "请输入您的验证码。"
+
+# Manually added translations
+msgid "Info box title"
+msgstr "信息框标题"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "将鼠标悬停在地图上以获取更多信息"

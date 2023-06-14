@@ -1774,3 +1774,11 @@ msgstr "O código de verificação será enviado para o endereço de e-mail asso
 # Manually added translations
 msgid "Enter your verification code"
 msgstr "Digite o seu código de verificação."
+
+# Manually added translations
+msgid "Info box title"
+msgstr "Título da caixa de informações"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "Passe o mouse sobre o mapa para mais informações"

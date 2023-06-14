@@ -1829,3 +1829,11 @@ msgstr "Verification code will be sent to the email address associated with your
 # Manually added translations
 msgid "Enter your verification code"
 msgstr "Enter your verification code"
+
+# Manually added translations
+msgid "Info box title"
+msgstr "Info box title"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "Hover over the map for more info"
