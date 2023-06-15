@@ -1121,6 +1121,12 @@ def get_all_parent_groups():
 
 
 def get_config_value(key):
-    if config.get(key):
-        if config.get(key).lower() in ['true', 'false']:
-            return bool(config.get(key))
+    val = config.get(key)
+    if val:
+        val = val.lower()
+        if val == 'true':
+            return True
+        elif val == 'false':
+            return False
+    return val
+
