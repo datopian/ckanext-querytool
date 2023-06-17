@@ -4,9 +4,9 @@
   var ua = window.navigator.userAgent;
   var isIE11 = ua.indexOf('Trident/7.0') > -1;
   console.log('isIE11', isIE11);
-  
+
   if (isIE11) $('body').addClass('is-ie-11');
-  
+
   var api = {
     get: function(action, params, async) {
       var api_ver = 3;
@@ -266,6 +266,8 @@
         ignoreElements: function(element) {
           if (element.classList.contains('html2canvas-ignore')) return true;
         },
+        useCORS: true,
+        allowTaint: true
       }).then(function(canvas) {
         Canvas2Image.saveAsPNG(canvas);
       });
@@ -345,21 +347,21 @@
         const div = document.createElement('div');
         const title = titleObj[0].textContent;
         const trimmedTitle = $.trim(title.replace(/[\t\n]+/g, ' '));
-  
+
         if ($(window).width() < 980) {
           div.setAttribute('height', 28);
         } else {
           div.setAttribute('height', 36);
-        }   
-  
+        }
+
         div.setAttribute('width', $(parent).width());
         div.setAttribute('class', 'c3-title title-splitted');
         div.setAttribute('title', trimmedTitle);
- div.textContent = title; //titleObj.textContent; 
-  
+ div.textContent = title; //titleObj.textContent;
+
         $(parent).prepend(div);
         titleObj[0].textContent = '';
-		}	
+		}
   }
 }
 })($);
