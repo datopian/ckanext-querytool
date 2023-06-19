@@ -17,6 +17,8 @@ log = logging.getLogger(__name__)
 get_action = logic.get_action
 render = base.render
 abort = base.abort
+MFA_ENABLED = asbool(config.get('ckanext.querytool.2fa_enabled', False))
+
 
 class QuerytoolUserController(UserController):
     def login(self, error=None):
@@ -24,7 +26,7 @@ class QuerytoolUserController(UserController):
             if check_recaptcha(request):
                 base_url = config.get('ckan.site_url')
                 came_from = request.params.get('came_from')
-                
+
                 # Full login URL
                 url = base_url + h.url_for(
                     self._get_repoze_handler('login_handler_path'),
@@ -32,10 +34,14 @@ class QuerytoolUserController(UserController):
 
                 username = request.params.get('login')
                 password = request.params.get('password')
-                
+
                 # Login form data
                 data = { 'login': username, 'password': password }
-                
+
+                if MFA_ENABLED:
+                    mfa = request.params.get('mfa')
+                    data['mfa'] = mfa
+
                 # Login request headers
                 headers = { 'Content-Type': 'application/x-www-form-urlencoded' }
 
@@ -56,11 +62,14 @@ class QuerytoolUserController(UserController):
                         ('Location', '/dashboard'), 
                         ('Set-Cookie', set_cookie)
                     ]
-                
+
                     return response
                 else:
-                    error = _('Login failed. Bad username or password.')
-            
+                    if MFA_ENABLED:
+                        error = _('Login failed. Bad username, password, or authentication code.')
+                    else:
+                        error = _('Login failed. Bad username or password.')
+
             else:
                 error = _('reCAPTCHA validation failed')
 
@@ -76,7 +85,7 @@ class QuerytoolUserController(UserController):
             came_from = request.params.get('came_from')
             if not came_from:
                 came_from = h.url_for(controller='user', action='logged_in')
-            
+
             recaptcha_config = querytool_helpers.get_recaptcha_config()
             recaptcha_enabled = recaptcha_config.get('enabled', False)
 
@@ -111,7 +120,10 @@ class QuerytoolUserController(UserController):
 
             return self.me()
         else:
-            err = _('Login failed. Bad username or password.')
+            if MFA_ENABLED:
+                err = _('Login failed. Bad username, password, or authentication code.')
+            else:
+                err = _('Login failed. Bad username or password.')
             if asbool(config.get('ckan.legacy_templates', 'false')):
                 h.flash_error(err)
                 h.redirect_to(controller='user',

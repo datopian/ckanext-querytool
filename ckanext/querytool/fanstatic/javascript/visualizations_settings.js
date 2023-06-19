@@ -277,7 +277,7 @@
           ev.target.setCustomValidity(_('Template is invalid'));
         }
       });
-      
+
       $("body").on(
         "change",
         ".title-vars select",
@@ -566,7 +566,7 @@
                 }
 
                 if (item.context.id.indexOf('chart_field') >= 0) {
-                    //  NOTE: the "mapped to" comments are here to help  
+                    //  NOTE: the "mapped to" comments are here to help
                     //  with the reverse mapping of variables that  are
                     //  present in the dist version of this file.
                     //  TODO: remove "mapped to" comments after QA.
@@ -574,8 +574,8 @@
                     var dropdownColorScheme = item.find('[id*=chart_field_color_]');    //  NOTE: mapped to n
                     //  TODO: refactor the name of the next variables,
                     //  as they were brought back from a dist file.
-                    //  It was assumed  that they are related  to  the 
-                    //  dropdown  because  of  their  positions in the 
+                    //  It was assumed  that they are related  to  the
+                    //  dropdown  because  of  their  positions in the
                     //  dist file.
                     var dropdownColorSchemeDt = item.find('[data-target*=chart_field_color_]'); //  NOTE: mapped to dr
                     var dropdownSecColorSchemeDt = item.find('[data-target*=seq_colors_hidden_input_]');  //  NOTE: mapped to dtr
@@ -588,7 +588,7 @@
                     var dropdownSecColorPreview = item.find('[id*=seq_color_preview_]');
                     var dropdownDiverColors = item.find("[class*=diver-colors-]");  //  NOTE: mapped to dv
                     var dropdownShowAnnotations = item.find("[id*=chart_field_show_annotations_]"); //  NOTE: mapped to sa
-                    
+
                     if(dropdownColorSchemeDt['length'] > 1) {
                         let idx;
                         for(idx = 1; idx <= dropdownColorSchemeDt['length']; idx++) {
@@ -601,12 +601,12 @@
                                 "for",
                                 "chart_field_color_" + order + "_" + idx
                             );
-                              
+
                             dropdownColorScheme[idx].setAttribute(
                                 "id",
                                 "chart_field_color_" + order + "_" + idx
                             );
-                              
+
                             dropdownColorScheme[idx].setAttribute(
                                 "name",
                                 "chart_field_color_" + order + "_" + idx
@@ -617,17 +617,17 @@
                             "data-target",
                             "chart_field_color_" + order + "_1"
                         );
-                          
+
                         dropdownColorScheme.attr(
                             "for",
                             "chart_field_color_" + order + "_1"
                         );
-                          
+
                         dropdownColorScheme.attr(
                             "id",
                             "chart_field_color_" + order + "_1"
                         );
-                          
+
                         dropdownColorScheme.attr(
                             "name",
                             "chart_field_color_" + order + "_1"
@@ -750,7 +750,7 @@
                           "chart_field_line_type_" + order + "_1"
                         );
                       }
-    
+
                       if (lwidths["length"] > 1) {
                         let idx;
                         for (idx = 0;idx <lwidths["length"]; idx++) {
@@ -787,12 +787,12 @@
                     dropdownSecColorScheme.attr("for", "seq_colors_hidden_input_" + order),
 
                     dropdownSecColorSchemeDt.attr("data-target", "seq_colors_hidden_input_" + order),
-                    
+
                     dropdownSecColorSchemeType.attr("id", "chart_field_color_type_" + order),
                     dropdownSecColorSchemeType.attr("name", "chart_field_color_type_" + order),
-                    
+
                     dropdownSecColorSchemeWrap.attr("class", "chart_field_color_wrap_" + order),
-                    
+
                     dropdownSecColors.attr("class", "seq-colors-" + order),
                     dropdownSecStartingColor.attr("id", "seq_colors_starting_" + order);  //  NOTE: mapped to sq
                     dropdownSecStartingColor.attr("name", "seq_colors_starting_" + order);  //  NOTE: mapped to sq
@@ -801,7 +801,7 @@
                     dropdownSecColorPreview.attr("id", "seq_color_preview_" + order);
 
                     dropdownDiverColors.attr("class", "diver-colors-" + order),
-                    
+
                     dropdownShowAnnotations.attr("id", "chart_field_show_annotations_" + order),
                     dropdownShowAnnotations.attr("name", "chart_field_show_annotations_" + order),
 
@@ -931,22 +931,22 @@
 
                     plotly.attr("id", "chart_field_plotly_" + order);
                     plotly.attr("name", "chart_field_plotly_" + order);
-                    
+
                     lplotly.attr("id", "chart_field_plotly_line_" + order);
                     lplotly.attr("name", "chart_field_plotly_line_" + order);
-                      
-                    plotly_label.attr("id", "chart_field_plotly_label_" + order);  
+
+                    plotly_label.attr("id", "chart_field_plotly_label_" + order);
                     plotly_label.attr("name", "chart_field_plotly_label_" + order);
-                      
+
                     donut_hole.attr("id", "chart_field_donut_hole_" + order);
                     donut_hole.attr("name", "chart_field_donut_hole_" + order);
-                    
+
                     donut_hole_c.attr("id", "chart_donut_hole_" + order);
                     donut_hole_l.attr("for", "chart_field_donut_hole_" + order);
-                      
+
                     bar_width.attr("id", "chart_field_bar_width_" + order);
                     bar_width.attr("name", "chart_field_bar_width_" + order);
-                      
+
                     bar_width_c.attr("id", "chart_bar_width_" + order);
                     bar_width_l.attr("for", "chart_field_bar_width_" + order);
 
@@ -957,7 +957,7 @@
                         dropdownDiverColors[0].classList.remove("hidden");
                         dropdownSecColors[0].classList.add("hidden");
                     }
-                      
+
                     desc.attr("id", "chart_field_desc_" + order);
                     desc.attr("name", "chart_field_desc_" + order);
 
@@ -1014,9 +1014,9 @@
                     var line_break_desc = item.find("[id*=line_break_desc]");
 
                     incrementCopyButton();
-                    
+
                     item.attr("id","break_line_" + order),
-                      
+
                     line_break_desc.attr("id", "line_break_desc_" + order);
                     line_break_desc.attr("name", "line_break_desc_" + order);
 
@@ -1040,6 +1040,7 @@
                     var map_resource_url = item.find('[id*=map_resource_]');
                     var map_title_field = item.find('[id*=map_title_field_]');
                     var map_custom_title_field = item.find('[id*=map_custom_title_field_]');    //  NOTE: mapped to MT
+                    var map_infobox_title = item.find('[id*=map_infobox_title]');
                     var map_key_field = item.find('[id*=map_key_field_]');
                     var data_key_field = item.find('[id*=map_data_key_field_]');
                     var map_data_format_field = item.find('[id*=map_data_format_]');
@@ -1068,6 +1069,8 @@
                     map_title_field.attr('name', 'map_title_field_' + order);
                     map_custom_title_field.attr("id", "map_custom_title_field_" + order);
                     map_custom_title_field.attr("name", "map_custom_title_field_" + order);
+                    map_infobox_title.attr("id", "map_infobox_title_" + order);
+                    map_infobox_title.attr("name", "map_infobox_title_" + order);
                     map_key_field.attr('id', 'map_key_field_' + order);
                     map_key_field.attr('name', 'map_key_field_' + order);
                     data_key_field.attr('id', 'map_data_key_field_' + order);

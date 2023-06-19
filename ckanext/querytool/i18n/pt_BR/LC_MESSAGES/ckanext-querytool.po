@@ -1727,3 +1727,58 @@ msgstr "Nenhum grupo secundário encontrado para \"{query}\""
 # Manually added translations
 msgid "No child groups found"
 msgstr "Nenhum grupo secundário encontrado"
+
+# Manually added translations
+msgid ""
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
+msgstr ""
+"Olá {user}។\n\nAqui está o seu código de autenticação"
+" de dois fatores para fazer login: {code}.\n\nTenha um ótimo dia!"
+
+# Manually added translations
+msgid "Verification Code"
+msgstr "Código de verificação"
+
+# Manually added translations
+msgid "Login failed. Bad username, password, or authentication code."
+msgstr "Falha no login. Nome de usuário, senha ou código de autenticação inválidos."
+
+# Manually added translations
+msgid "A verification code has been sent. This code expires in: "
+msgstr "Um código de verificação foi enviado. Este código expira em "
+
+# Manually added translations
+msgid "There was an error sending the verification code. Please try again."
+msgstr "Ocorreu um erro ao enviar o código de verificação. Por favor, tente novamente."
+
+# Manually added translations
+msgid "Send verification code"
+msgstr "Enviar código de verificação"
+
+# Manually added translations
+msgid "Resend verification code"
+msgstr "Reenviar código de verificação"
+
+# Manually added translations
+msgid "Verification code expired: Please resend and try again."
+msgstr "Código de verificação expirado: Por favor, reenvie e tente novamente."
+
+# Manually added translations
+msgid "Verification code will be sent to the email address associated with your account."
+msgstr "O código de verificação será enviado para o endereço de e-mail associado à sua conta."
+
+# Manually added translations
+msgid "Enter your verification code"
+msgstr "Digite o seu código de verificação."
+
+# Manually added translations
+msgid "Info box title"
+msgstr "Título da caixa de informações"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "Passe o mouse sobre o mapa para mais informações"

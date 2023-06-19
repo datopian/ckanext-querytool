@@ -1118,3 +1118,15 @@ def get_all_parent_groups():
     )
 
     return parent_groups
+
+
+def get_config_value(key):
+    val = config.get(key)
+    if val:
+        val = val.lower()
+        if val == 'true':
+            return True
+        elif val == 'false':
+            return False
+    return val
+

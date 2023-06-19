@@ -12,7 +12,7 @@
 <div id="map_item_{{ n }}" class="item map visualization-fields-section">
 <div class="item-wrapper">
 
-  
+
   {# Title #}
   {% if map %}
     {% set map_custom_title = map.map_custom_title_field %}
@@ -114,7 +114,7 @@
       </select>
     </div>
   </div>
-  
+
   {% set data_formats = h.get_maps_data_formats() %}
   {% if map %}
     {% set data_format_selected = map.data_format or '.2f' %}
@@ -132,6 +132,16 @@
     </div>
   </div>
 
+  {% if map and map.map_infobox_title %}
+    {% set map_infobox_title = map.map_infobox_title %}
+  {% endif %}
+  <div class="control-group title mb-20">
+    <label class="control-label" for="map_infobox_title_{{ n }}">{{ _('Info box title') }}</label>
+    <div class="controls ">
+      <textarea id="map_infobox_title_{{ n }}" name="map_infobox_title_{{ n }}" placeholder="{{ _('Info box title') }}" rows="3">{{ map_infobox_title }}</textarea>
+    </div>
+  </div>
+
   {% if map and map.seq_colors %}
     {% set starting_color = map.seq_colors.split(',')[0] %}
     {% set ending_color = map.seq_colors.split(',')[1] %}
@@ -140,40 +150,40 @@
     {% set ending_color = "#fdbe85" %}
   {% endif %}
   <div>
-    <input 
-        type="hidden" 
-        value="{{starting_color}},{{ending_color}}" 
+    <input
+        type="hidden"
+        value="{{starting_color}},{{ending_color}}"
         name="seq_colors_hidden_input_{{ n }}"
         id="seq_colors_hidden_input_{{ n }}"
     />
 
     <div class="control-group control-select">
-        <label 
-            class="control-label" 
+        <label
+            class="control-label"
             for="seq_colors_starting_{{ n }}"
         >{{ _('Starting color') }}</label>
-        <input 
-            type="color" 
-            id="seq_colors_starting_{{ n }}" 
-            class="colorpicker" 
+        <input
+            type="color"
+            id="seq_colors_starting_{{ n }}"
+            class="colorpicker"
             value="{{ starting_color }}"
         />
     </div>
     <div class="control-group control-select">
-        <label 
-            class="control-label" 
+        <label
+            class="control-label"
             for="seq_colors_ending_{{ n }}"
         >{{ _('Ending color') }}</label>
-        <input 
-            type="color" 
-            id="seq_colors_ending_{{ n }}" 
-            class="colorpicker" 
-            value="{{ ending_color }}" 
+        <input
+            type="color"
+            id="seq_colors_ending_{{ n }}"
+            class="colorpicker"
+            value="{{ ending_color }}"
         />
     </div>
-    <div 
-        class="control-group seq-color-preview" 
-        id="seq_color_preview_{{ n }}" 
+    <div
+        class="control-group seq-color-preview"
+        id="seq_color_preview_{{ n }}"
         style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"
     ></div>
   </div>
@@ -250,6 +260,7 @@
     {% set map_resource=map.map_resource %}
     {% set map_title_field=map.map_title_field %}
     {% set map_custom_title_field=map.map_custom_title_field %}
+    {% set map_infobox_title=map.map_infobox_title %}
     {% set map_key_field=map.map_key_field %}
     {% set data_key_field=map.data_key_field %}
     {% set data_format=map.data_format %}
@@ -268,6 +279,7 @@
     map_resource=map_resource,
     map_title_field=map_title_field,
     map_custom_title_field=map_custom_title_field,
+    map_infobox_title=map_infobox_title,
     map_key_field=map_key_field,
     data_key_field=data_key_field,
     data_format=data_format,
@@ -280,3 +292,12 @@
   %}
 </div>
 </div>
+
+<script>
+  function translateMapHover(text) {
+    var translations = {
+      'Hover over the map for more info': "{{ _('Hover over the map for more info') }}"
+    };
+    return translations[text];
+  }
+</script>

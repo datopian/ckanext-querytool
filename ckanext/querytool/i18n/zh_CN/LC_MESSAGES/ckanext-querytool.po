@@ -1767,3 +1767,58 @@ msgstr "未找到\"{query}\"的任何次要组"
 # Manually added translations
 msgid "No child groups found"
 msgstr "未找到任何次要组"
+
+# Manually added translations
+msgid ""
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
+msgstr ""
+"你好 {user}។\n\n这是您的双因素认证代码，"
+"用于登录：{code}.\n\n祝您拥有美好的一天！"
+
+# Manually added translations
+msgid "Verification Code"
+msgstr "验证码"
+
+# Manually added translations
+msgid "Login failed. Bad username, password, or authentication code."
+msgstr "登录失败。用户名、密码或认证代码错误。"
+
+# Manually added translations
+msgid "A verification code has been sent. This code expires in: "
+msgstr "已发送验证码。该验证码将在 后过期。"
+
+# Manually added translations
+msgid "There was an error sending the verification code. Please try again."
+msgstr "发送验证码时出错。请重试。"
+
+# Manually added translations
+msgid "Send verification code"
+msgstr "发送验证码"
+
+# Manually added translations
+msgid "Resend verification code"
+msgstr "重新发送验证码"
+
+# Manually added translations
+msgid "Verification code expired: Please resend and try again."
+msgstr "验证码已过期，请重新发送并重试。"
+
+# Manually added translations
+msgid "Verification code will be sent to the email address associated with your account."
+msgstr "验证码将发送到与您的账户关联的电子邮件地址。"
+
+# Manually added translations
+msgid "Enter your verification code"
+msgstr "请输入您的验证码。"
+
+# Manually added translations
+msgid "Info box title"
+msgstr "信息框标题"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "将鼠标悬停在地图上以获取更多信息"

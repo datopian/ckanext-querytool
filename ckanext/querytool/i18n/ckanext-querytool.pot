@@ -2127,3 +2127,56 @@ msgstr ""
 # Manually added translations
 msgid "No child groups found"
 msgstr ""
+
+# Manually added translations
+msgid ""
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
+msgstr ""
+
+# Manually added translations
+msgid "Verification Code"
+msgstr ""
+
+# Manually added translations
+msgid "Login failed. Bad username, password, or authentication code."
+msgstr ""
+
+# Manually added translations
+msgid "A verification code has been sent. This code expires in: "
+msgstr ""
+
+# Manually added translations
+msgid "There was an error sending the verification code. Please try again."
+msgstr ""
+
+# Manually added translations
+msgid "Send verification code"
+msgstr ""
+
+# Manually added translations
+msgid "Resend verification code"
+msgstr ""
+
+# Manually added translations
+msgid "Verification code expired: Please resend and try again."
+msgstr ""
+
+# Manually added translations
+msgid "Verification code will be sent to the email address associated with your account."
+msgstr ""
+
+# Manually added translations
+msgid "Enter your verification code"
+msgstr ""
+
+# Manually added translations
+msgid "Info box title"
+msgstr ""
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr ""
