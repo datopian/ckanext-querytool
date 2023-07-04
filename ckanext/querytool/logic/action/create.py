@@ -21,7 +21,7 @@ NotFound = logic.NotFound
 log = log.getLogger(__name__)
 
 
-def _group_or_org_create(context, data_dict, is_org=False):
+def _querytool_group_or_org_create(context, data_dict, is_org=False):
     model = context['model']
     user = context['user']
     session = context['session']
@@ -50,7 +50,7 @@ def _group_or_org_create(context, data_dict, is_org=False):
 
     data, errors = lib_plugins.plugin_validate(
         group_plugin, context, data_dict, schema,
-        'organization_create' if is_org else 'group_create')
+        'organization_create' if is_org else 'querytool_group_create')
     log.debug('group_create validate_errs=%r user=%s group=%s data_dict=%r',
               errors, context.get('user'), data_dict.get('name'), data_dict)
 
@@ -169,7 +169,7 @@ def _group_or_org_create(context, data_dict, is_org=False):
     return output
 
 
-def group_create(context, data_dict):
+def querytool_group_create(context, data_dict):
     '''Create a new group.
     You must be authorized to create groups.
     Plugins may change the parameters of this function depending on the value
@@ -232,4 +232,4 @@ def group_create(context, data_dict):
         # FIXME better exception?
         raise Exception(_('Trying to create an organization as a group'))
     _check_access('group_create', context, data_dict)
-    return _group_or_org_create(context, data_dict)
+    return _querytool_group_or_org_create(context, data_dict)
