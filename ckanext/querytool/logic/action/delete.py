@@ -36,7 +36,7 @@ def querytool_delete(context, data_dict):
     CkanextQueryTool.delete(id=data_dict['name'])
 
 
-def _group_or_org_delete(context, data_dict, is_org=False):
+def _querytool_group_or_org_delete(context, data_dict, is_org=False):
     '''Delete a group.
     You must be authorized to delete the group.
     :param id: the name or id of the group
@@ -115,10 +115,10 @@ def _group_or_org_delete(context, data_dict, is_org=False):
     model.repo.commit()
 
 
-def group_delete(context, data_dict):
+def querytool_group_delete(context, data_dict):
     '''Delete a group.
     You must be authorized to delete the group.
     :param id: the name or id of the group
     :type id: string
     '''
-    return _group_or_org_delete(context, data_dict)
+    return _querytool_group_or_org_delete(context, data_dict)

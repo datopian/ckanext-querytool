@@ -210,6 +210,14 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             'group_edit', '/group/edit/{id}',
             controller=group_controller, action='edit'
         )
+        map.connect(
+            'group_new', '/group/new',
+            controller=group_controller, action='new'
+        )
+        map.connect(
+            'group_delete', '/group/delete/{id}',
+            controller=group_controller, action='delete'
+        )
 
         # Query tool routes
         map.redirect('/querytool', '/querytool/groups',
