@@ -151,7 +151,7 @@ class QuerytoolGroupController(GroupController):
             context['message'] = data_dict.get('log_message', '')
             data_dict['id'] = id
             context['allow_partial_update'] = True
-            group = self._action('group_update')(context, data_dict)
+            group = self._action('querytool_group_update')(context, data_dict)
             if id != group['name']:
                 self._force_reindex(group)
 
@@ -164,3 +164,92 @@ class QuerytoolGroupController(GroupController):
             errors = e.error_dict
             error_summary = e.error_summary
             return self.edit(id, data_dict, errors, error_summary)
+
+    def delete(self, id):
+        group_type = self._ensure_controller_matches_group_type(id)
+
+        if 'cancel' in request.params:
+            self._redirect_to_this_controller(action='edit', id=id)
+
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user}
+
+        try:
+            self._check_access('group_delete', context, {'id': id})
+        except NotAuthorized:
+            abort(403, _('Unauthorized to delete group %s') % '')
+
+        try:
+            if request.method == 'POST':
+                self._action('querytool_group_delete')(context, {'id': id})
+                if group_type == 'organization':
+                    h.flash_notice(_('Organization has been deleted.'))
+                elif group_type == 'group':
+                    h.flash_notice(_('Group has been deleted.'))
+                else:
+                    h.flash_notice(_('%s has been deleted.')
+                                   % _(group_type.capitalize()))
+                #self._redirect_to_this_controller(action='index')
+                h.redirect_to(controller='group', action='index')
+            c.group_dict = self._action('group_show')(context, {'id': id})
+        except NotAuthorized:
+            abort(403, _('Unauthorized to delete group %s') % '')
+        except NotFound:
+            abort(404, _('Group not found'))
+        return self._render_template('group/confirm_delete.html', group_type)
+
+    def new(self, data=None, errors=None, error_summary=None):
+        if data and 'type' in data:
+            group_type = data['type']
+        else:
+            group_type = self._guess_group_type(True)
+        if data:
+            data['type'] = group_type
+
+        context = {'model': model, 'session': model.Session,
+                   'user': c.user,
+                   'save': 'save' in request.params,
+                   'parent': request.params.get('parent', None)}
+        try:
+            self._check_access('group_create', context)
+        except NotAuthorized:
+            abort(403, _('Unauthorized to create a group'))
+
+        if context['save'] and not data:
+            return self._save_new(context, group_type)
+
+        data = data or {}
+        if not data.get('image_url', '').startswith('http'):
+            data.pop('image_url', None)
+
+        errors = errors or {}
+        error_summary = error_summary or {}
+        vars = {'data': data, 'errors': errors,
+                'error_summary': error_summary, 'action': 'new',
+                'group_type': group_type}
+
+        self._setup_template_variables(context, data, group_type=group_type)
+        c.form = render(self._group_form(group_type=group_type),
+                        extra_vars=vars)
+        return render(self._new_template(group_type),
+                      extra_vars={'group_type': group_type})
+
+    def _save_new(self, context, group_type=None):
+        try:
+            data_dict = clean_dict(dict_fns.unflatten(
+                tuplize_dict(parse_params(request.params))))
+            data_dict['type'] = group_type or 'group'
+            context['message'] = data_dict.get('log_message', '')
+            data_dict['users'] = [{'name': c.user, 'capacity': 'admin'}]
+            group = self._action('querytool_group_create')(context, data_dict)
+
+            # Redirect to the appropriate _read route for the type of group
+            h.redirect_to(group['type'] + '_read', id=group['name'])
+        except (NotFound, NotAuthorized), e:
+            abort(404, _('Group not found'))
+        except dict_fns.DataError:
+            abort(400, _(u'Integrity Error'))
+        except ValidationError, e:
+            errors = e.error_dict
+            error_summary = e.error_summary
+            return self.new(data_dict, errors, error_summary)

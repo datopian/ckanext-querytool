@@ -244,6 +244,7 @@
     var buttonImg = $('#download-as-image');
 
     buttonImg.on('click', function(targetElem) {
+
       var nodeList = document.querySelectorAll('.c3-lines path');
       var nodeList2 = document.querySelectorAll('.c3-axis path');
       var line_graph = Array.from(nodeList);
@@ -261,16 +262,49 @@
       // fix references
       d3.selectAll('.c3-ygrid-line.base line').attr('stroke', 'grey');
 
-      html2canvas(document.body, {
-        //fix images
-        ignoreElements: function(element) {
-          if (element.classList.contains('html2canvas-ignore')) return true;
-        },
-        useCORS: true,
-        allowTaint: true
-      }).then(function(canvas) {
-        Canvas2Image.saveAsPNG(canvas);
-      });
+      const visualizationsEl = document.getElementsByClassName("container-wrapper");
+
+      function saveAs(uri, filename) {
+        var link = document.createElement('a');
+        if (typeof link.download === 'string') {
+            link.href = uri;
+            link.download = filename;
+            //Firefox requires the link to be in the body
+            document.body.appendChild(link);
+            //simulate click
+            link.click();
+            //remove the link when done
+            document.body.removeChild(link);
+        } else {
+            window.open(uri);
+        }
+      }
+
+      if(visualizationsEl)
+        setTimeout(() => html2canvas(visualizationsEl[0], {
+          //fix images
+          ignoreElements: function(element) {
+            if (element.classList.contains('html2canvas-ignore')) return true;
+          },
+          logging: true,
+          allowTaint: false,
+          useCORS: false,
+          onclone: (document) => {
+            //  Change elements on the cloned document
+            const elementsToHide = [
+              '.leaflet-top.leaflet-left',
+              '.leaflet-top.leaflet-right',
+              '.__map-loading-indicator',
+              '.imgBtn.scrBtn',
+              '.btn',
+              '#scrollBtn'
+            ].join(', ');
+
+            $(document).find(elementsToHide).css('display', 'none');
+          }
+        }).then(function(canvas) {
+          saveAs(canvas.toDataURL(), 'report.png');
+        }), 500)
     });
 
     // Add validation for public filters if no valid values are selected
