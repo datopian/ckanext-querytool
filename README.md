@@ -532,3 +532,4 @@ To setup Google Analytics using GA4, you need to install a specific branch (`ed-
 [`ckanext-googleanalytics` with GA4 support](https://github.com/datopian/ckanext-googleanalytics/tree/ed-dev-ga4)
 
 Then follow the instructions in the ["Setup" section of the README](https://github.com/datopian/ckanext-googleanalytics/tree/ed-dev-ga4#setup).
+
