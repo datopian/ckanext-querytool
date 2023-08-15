@@ -757,6 +757,31 @@ def get_all_reports(q=None):
     return reports
 
 
+def get_orphaned_reports():
+    groups = get_groups()
+    reports = _get_action('querytool_list_other', {'groups': groups})
+    orphaned_reports = []
+    all_group_names = [group['name'] for group in groups]
+
+    for report in reports:
+        if report.get('group') not in all_group_names:
+            orphaned_reports.append(report)
+
+    return orphaned_reports
+
+
+def sort_by_orphaned_reports(reports):
+    orphaned_reports = get_orphaned_reports()
+    sorted_reports = []
+
+    # Reports in `orphaned_reports` will be sorted to the top of `reports`
+    reports = [report for report in reports if report not in orphaned_reports]
+    sorted_reports.extend(orphaned_reports)
+    sorted_reports.extend(reports)
+
+    return sorted_reports
+
+
 def get_user_permission(userobj):
     if not userobj:
         return True
@@ -883,7 +908,7 @@ def get_user_permission_type(userobj, group):
                     if 'editor' in m:
                         return 'editor'
 
-        except logic.NotFound:
+        except (logic.NotFound, logic.NotAuthorized):
             return
 
 
@@ -1016,7 +1041,7 @@ def report_search_count(reports, remove_private=False):
 
     return report_count
 
-def filter_reports_by_permissions(reports, for_groups=False):
+def filter_reports_by_permissions(reports, for_groups=False, for_sorting=False):
     user = c.userobj
 
     if user is None:
@@ -1028,7 +1053,30 @@ def filter_reports_by_permissions(reports, for_groups=False):
 
     user_groups = get_groups_for_user(user)
 
-    if for_groups is False:
+    if for_sorting is True:
+        filtered_reports = [
+            report for report in reports if
+            report['group'] in user_groups
+        ]
+
+        for report in reports:
+            if report not in filtered_reports:
+                try:
+                    group = toolkit.get_action('group_show')(
+                        {'ignore_auth': True}, {'id': report['group']}
+                    )
+
+                    user_orgs = get_all_orgs_for_user(user)
+
+                    if group['state'] == 'deleted' and report['owner_org'] \
+                       in [org['id'] for org in user_orgs]:
+                        filtered_reports.append(report)
+
+                except Exception as e:
+                    log.error(e)
+                    continue
+
+    elif for_groups is False:
         filtered_reports = [
             report for report in reports if
             report['group'] in user_groups
@@ -1130,3 +1178,12 @@ def get_config_value(key):
             return False
     return val
 
+
+def get_all_group_names():
+    try:
+        return toolkit.get_action('group_list')(
+            {}, {}
+        )
+    except Exception as e:
+        log.error(e)
+        return []

@@ -428,6 +428,12 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 helpers.get_recaptcha_config,
             'get_config_value':
                 helpers.get_config_value,
+            'get_all_group_names':
+                helpers.get_all_group_names,
+            'get_orphaned_reports':
+                helpers.get_orphaned_reports,
+            'sort_by_orphaned_reports':
+                helpers.sort_by_orphaned_reports
         }
 
     # IAuthFunctions

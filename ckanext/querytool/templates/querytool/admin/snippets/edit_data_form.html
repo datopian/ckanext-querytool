@@ -23,6 +23,14 @@ Example usage:
   {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
 {% endblock %}
 
+{% set all_groups = h.get_all_group_names() %}
+
+{% if querytool.group %}
+  {% set is_orphan = querytool.group not in all_groups %}
+{% else %}
+  {% set is_orphan = false %}
+{% endif %}
+
 {% block error_summary %}
   {{ form.errors(error_summary) }}
 {% endblock %}
@@ -50,17 +58,23 @@ Example usage:
   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload, upload_label=_('Report Icon'), url_label=_('Report Icon URL')) }}
   {{ form.input('icon', id='field-icon', classes=['hidden'], label=_('Fontawsome Icon'), placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
 
-  <div class="control-group">
-    <label for="field-group" class="control-label">{{ _('Group') }}</label>
-    <div class="controls">
-      <select id="field-group" name="group">
-        {% for group in h.querytool_get_groups(all_children=True) %}
-          {% if h.get_groups_for_user(c.userobj, group.name) or group == data.group %}
-            <option value="{{ group }}" {% if group.name == data.group|trim %}selected="selected"{% endif %}>{{ group.name }}</option>
+  <div class="report-group-select">
+    <div class="control-group">
+      <label for="field-group" class="control-label">{{ _('Group') }}</label>
+      <div class="controls">
+        <select id="field-group" name="group" {% if is_orphan %}required{% endif %}>
+          {% if is_orphan %}
+            <option value="" selected="selected"></option>
           {% endif %}
-        {% endfor %}
-      </select>
+          {% for group in h.querytool_get_groups(all_children=True) %}
+            {% if h.get_groups_for_user(c.userobj, group.name) or group == data.group %}
+              <option value="{{ group }}" {% if group.name == data.group|trim %}selected="selected"{% endif %}>{{ group.name }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
     </div>
+    {% if is_orphan %}<span class="label label-important" style="margin-bottom: 20px; margin-left: 10px;">{{ _('Previously owned by: ') }}{{ data.group }}</span>{% endif %}
   </div>
 
   {% set organizations_available = h.organizations_available('create_dataset') or h.get_all_orgs_for_user(c.userobj) %}
