@@ -39,7 +39,12 @@ Example usage:
         {{ _('Private') }}
       </span>
     {% endif %}
-    <h2>{{ querytool.title }}</h2>{% if is_orphan %}<span class="label label-important">{{ _('Orphan') }}</span>{% endif %}
+    {% if is_orphan %}
+      <span class="label label-important pull-right orphan-label">
+        {{ _('Orphan') }}
+      </span>
+    {% endif %}
+    <h2>{{ querytool.title }}</h2>
 
     <p class="muted">{{ h.markdown_extract(querytool.description, extract_length=150) }}</p>
     <p>{{_('Used dataset:')}} <a href="{{ h.url_for(controller='package', action='read', id=querytool.dataset_name) }}">{{ querytool.dataset_name }}</a></p>

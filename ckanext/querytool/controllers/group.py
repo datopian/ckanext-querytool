@@ -39,6 +39,7 @@ class QuerytoolGroupController(GroupController):
         reports = helpers._get_action('querytool_list_other', {'groups': groups})
 
         q = toolkit.request.params.get('report_q', '')
+        log.error(q)
 
         if q:
             querytool_search_results = helpers.querytool_search(query_string=q)

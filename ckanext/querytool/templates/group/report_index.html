@@ -67,7 +67,7 @@
         {% elif sorting_selected == 'name desc' %}
           {% set reports = reports | sort(attribute='title', reverse=true) %}
         {% elif sorting_selected == 'orphaned' %}
-          {% set reports = h.sort_by_orphaned_reports(reports) %}
+          {% set reports = h.sort_by_orphaned_reports(reports, q=q) %}
         {% endif %}
 
         {% for querytool in reports %}

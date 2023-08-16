@@ -770,7 +770,7 @@ def get_orphaned_reports():
     return orphaned_reports
 
 
-def sort_by_orphaned_reports(reports):
+def sort_by_orphaned_reports(reports, q=None):
     orphaned_reports = get_orphaned_reports()
     sorted_reports = []
 
@@ -778,6 +778,16 @@ def sort_by_orphaned_reports(reports):
     reports = [report for report in reports if report not in orphaned_reports]
     sorted_reports.extend(orphaned_reports)
     sorted_reports.extend(reports)
+
+    if q:
+        querytool_search_results = querytool_search(query_string=q)
+        querytool_search_results_names = [
+            querytool.name for querytool in querytool_search_results
+        ]
+        sorted_reports = [
+            querytool for querytool in sorted_reports if
+            querytool['name'] in querytool_search_results_names
+        ]
 
     return sorted_reports
 
