@@ -74,7 +74,7 @@ Example usage:
         </select>
       </div>
     </div>
-    {% if is_orphan %}<span class="label label-important" style="margin-bottom: 20px; margin-left: 10px;">{{ _('Previously owned by: ') }}{{ data.group }}</span>{% endif %}
+    {% if is_orphan %}<span class="label label-important" style="margin-bottom: 20px; margin-left: 10px;">{{ _('Previously saved in group: ') }}{{ data.group }}</span>{% endif %}
   </div>
 
   {% set organizations_available = h.organizations_available('create_dataset') or h.get_all_orgs_for_user(c.userobj) %}

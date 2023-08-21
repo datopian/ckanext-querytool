@@ -1837,3 +1837,23 @@ msgstr "Info box title"
 # Manually added translations
 msgid "Hover over the map for more info"
 msgstr "Hover over the map for more info"
+
+# Manually added translations
+msgid "Are you sure you want to delete this Group?"
+msgstr "Are you sure you want to delete this Group?"
+
+# Manually added translations
+msgid "<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>"
+msgstr "<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting  \"Reports\" tab on the \"Design Reports\" page.<i>"
+
+# Manually added translations
+msgid "Orphan"
+msgstr "Orphan"
+
+# Manually added translations
+msgid "Orphans"
+msgstr "Orphans"
+
+# Manually added translations
+msgid "Previously saved in group: "
+msgstr "Previously saved in group: "

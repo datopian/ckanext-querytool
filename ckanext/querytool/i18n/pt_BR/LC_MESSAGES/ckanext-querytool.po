@@ -1782,3 +1782,23 @@ msgstr "Título da caixa de informações"
 # Manually added translations
 msgid "Hover over the map for more info"
 msgstr "Passe o mouse sobre o mapa para mais informações"
+
+# Manually added translations
+msgid "Are you sure you want to delete this Group?"
+msgstr "Você tem certeza de que deseja deletar este Grupo?"
+
+# Manually added translations
+msgid "<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>"
+msgstr "<b>Observação</b>: <i>Os relatórios pertencentes a este Grupo se tornarão órfãos. Você precisará atribuí-los a um novo Grupo para que possam ser acessíveis ao público. Acesse a aba \"Relatórios\" na página \"Desenhar Relatórios\".<i>"
+
+# Manually added translations
+msgid "Orphan"
+msgstr "Órfão"
+
+# Manually added translations
+msgid "Orphans"
+msgstr "Órfãos"
+
+# Manually added translations
+msgid "Previously saved in group: "
+msgstr "Anteriormente salvo no grupo: "

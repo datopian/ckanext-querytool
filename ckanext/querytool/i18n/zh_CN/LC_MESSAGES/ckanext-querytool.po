@@ -1822,3 +1822,23 @@ msgstr "信息框标题"
 # Manually added translations
 msgid "Hover over the map for more info"
 msgstr "将鼠标悬停在地图上以获取更多信息"
+
+# Manually added translations
+msgid "Are you sure you want to delete this Group?"
+msgstr "你确定要删除这个群组吗？"
+
+# Manually added translations
+msgid "<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>"
+msgstr "<b>注意</b>：由这个群组拥有的报告将变成孤立报告。您需要将它们分配到一个新的群组，以便公众可以访问它们。请访问“设计报告”页面上的“报告”选项卡。"
+
+# Manually added translations
+msgid "Orphan"
+msgstr "孤立报告"
+
+# Manually added translations
+msgid "Orphans"
+msgstr "孤立报告"
+
+# Manually added translations
+msgid "Previously saved in group: "
+msgstr "之前保存在群组中："
