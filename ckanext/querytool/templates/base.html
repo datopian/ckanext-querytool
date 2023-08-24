@@ -58,5 +58,18 @@
       </div>
     {% endblock %}
   {% endif %}
+  {% set baidu_analytics_id = h.get_config_value('ckanext.querytool.baidu_analytics_id') %}
+
+  {% if baidu_analytics_id %}
+    <script>
+      var _hmt = _hmt || [];
+      (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?{{ baidu_analytics_id }}";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+      })();
+    </script>
+  {% endif %}
 {% endblock %}
 
