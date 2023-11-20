@@ -69,7 +69,8 @@
   <div class="form-actions">
     {% block delete_button %}
       {% if h.check_access('group_delete', {'id': data.id})  %}
-        <a class="btn btn-danger pull-left" href="{% url_for controller='ckanext.querytool.controllers.group:QuerytoolGroupController', action='delete', id=data.id %}" data-module="confirm-action" data-module-content="{{ _('Are you sure you want to delete this Group?') }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
+        {% resource 'querytool/javascript/modules/group-confirm-action.js' %}
+        <a class="btn btn-danger pull-left group-delete-orphan" href="{% url_for controller='ckanext.querytool.controllers.group:QuerytoolGroupController', action='delete', id=data.id %}" data-module="group-confirm-action" data-module-content="{{ _('Are you sure you want to delete this Group?') }}, {{ _('<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>') }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
       {% endif %}
     {% endblock %}
     <button class="btn btn-primary" name="save" type="submit">{% block save_text %}{{ _('Save Group') }}{% endblock %}</button>

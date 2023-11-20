@@ -1823,3 +1823,23 @@ msgstr "Titre de la boîte d'informations"
 # Manually added translations
 msgid "Hover over the map for more info"
 msgstr "Survolez la carte pour plus d'informations"
+
+# Manually added translations
+msgid "Are you sure you want to delete this Group?"
+msgstr "Êtes-vous sûr(e) de vouloir supprimer ce groupe ?"
+
+# Manually added translations
+msgid "<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>"
+msgstr "<b>Note</b> : <i>Les rapports appartenant à ce groupe deviendront des orphelins. Vous devrez les assigner à un nouveau groupe pour qu'ils soient accessibles au public. Rendez-vous sur l'onglet \"Rapports\" de la page \"Concevoir les Rapports\".<i>"
+
+# Manually added translations
+msgid "Orphan"
+msgstr "Orphelin"
+
+# Manually added translations
+msgid "Orphans"
+msgstr "Orphelins"
+
+# Manually added translations
+msgid "Previously saved in group: "
+msgstr "Précédemment enregistré dans le groupe : "

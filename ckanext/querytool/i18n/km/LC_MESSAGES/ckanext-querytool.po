@@ -2556,3 +2556,23 @@ msgstr "ចំណងជើងប្រអប់ព័ត៌មាន"
 # Manually added translations
 msgid "Hover over the map for more info"
 msgstr "លំហែនបន្ទាប់ពីផែនទីសម្គាល់សម្រាប់ព័ត៌មានបន្ថែម"
+
+# Manually added translations
+msgid "Are you sure you want to delete this Group?"
+msgstr "អ្នកប្រកាស​ឬទេថាអ្នកចង់​លុប​ក្រុមនេះ​ឬទេ?"
+
+# Manually added translations
+msgid "<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>"
+msgstr "<b>ចំណាំ</b>: <i>របាយការណ៍ដែលមានក្នុងក្រុមនេះនឹងត្រូវប្រក្រតទៅជាកូនក្រុមថ្មីដើម្បីឲ្យអ្នកគ្រប់គ្រងប្រកាសដើម្បីអាចចូលដោយសារសំរាប់អ្នកសាកល្បង។ សូមចូលទៅ​ក្រុម​នៅលើ​ផ្ទៃទិន្នន័យ \"របាយការណ៍\" នៅលើ​ផ្ទៃទិន្នន័យ \" រៀបចំរបាយការណ៍\"។<i>"
+
+# Manually added translations
+msgid "Orphan"
+msgstr "ក្រុមកូន"
+
+# Manually added translations
+msgid "Orphans"
+msgstr "ក្រុមកូន"
+
+# Manually added translations
+msgid "Previously saved in group: "
+msgstr "បានរក្សាទាំងមូលក្នុងក្រុម​ដែល​មាន​មុខ​មុខ​: "

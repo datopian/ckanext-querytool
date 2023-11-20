@@ -12,10 +12,14 @@ Example usage:
 {% set edit_data_url = h.url_for('querytool_edit', querytool='/' + querytool.name) %}
 {% set edit_visualizations_url = h.url_for('querytool_edit_visualizations', querytool= '/' + querytool.name) %}
 {% set delete_url = h.url_for('querytool_delete', querytool='/' + querytool.name) %}
-{% set user_type = h.get_user_permission_type(c.userobj, querytool.group) %}
 {% set org_user_type = h.get_user_permission_type(c.userobj, querytool.owner_org) %}
+{% set user_type = h.get_user_permission_type(c.userobj, querytool.group) or org_user_type %}
+{% set all_groups = h.get_all_group_names() %}
+{% set is_orphan = querytool.group not in all_groups %}
+{% set orphan_permissions = (is_orphan and (user_type == 'member' or user_type == 'admin')) or c.userobj.sysadmin %}
+{% set report_permissions = (h.get_groups_for_user(c.userobj, querytool.group) and (user_type == 'member' or user_type == 'admin')) or c.userobj.sysadmin %}
 
-{% if h.get_groups_for_user(c.userobj, querytool.group) and (user_type == 'member' or user_type == 'admin' or c.userobj.sysadmin) %}
+{% if report_permissions or orphan_permissions %}
 <div class="applicaitons-box">
 
   <div class="thumb">
@@ -33,6 +37,11 @@ Example usage:
       <span class="dataset-private label label-inverse pull-right">
         <i class="fa fa-lock"></i>
         {{ _('Private') }}
+      </span>
+    {% endif %}
+    {% if is_orphan %}
+      <span class="label label-important pull-right orphan-label">
+        {{ _('Orphan') }}
       </span>
     {% endif %}
     <h2>{{ querytool.title }}</h2>

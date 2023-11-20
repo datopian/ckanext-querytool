@@ -31,8 +31,8 @@
  {% block reports_list %}
     {% set q = request.params.get('report_q') %}
     {% set all_reports = h.querytool_get_all_reports(q) %}
-    {% set reports = h.filter_reports_by_permissions(all_reports) %}
-    {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
+    {% set reports = h.filter_reports_by_permissions(all_reports, for_sorting=True) %}
+    {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc'), (_('Orphans'), 'orphaned')] %}
     {% set sorting_selected = request.params.get('sort', 'name asc') %}
     {% set report_count = h.report_search_count(reports) %}
 
@@ -66,6 +66,8 @@
           {% set reports = reports | sort(attribute='title') %}
         {% elif sorting_selected == 'name desc' %}
           {% set reports = reports | sort(attribute='title', reverse=true) %}
+        {% elif sorting_selected == 'orphaned' %}
+          {% set reports = h.sort_by_orphaned_reports(reports, q=q) %}
         {% endif %}
 
         {% for querytool in reports %}

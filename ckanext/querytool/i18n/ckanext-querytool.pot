@@ -2180,3 +2180,23 @@ msgstr ""
 # Manually added translations
 msgid "Hover over the map for more info"
 msgstr ""
+
+# Manually added translations
+msgid "Are you sure you want to delete this Group?"
+msgstr ""
+
+# Manually added translations
+msgid "<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>"
+msgstr ""
+
+# Manually added translations
+msgid "Orphan"
+msgstr ""
+
+# Manually added translations
+msgid "Orphans"
+msgstr ""
+
+# Manually added translations
+msgid "Previously saved in group: "
+msgstr ""
