@@ -153,6 +153,7 @@
     <div class="controls-wrap" id="{{ querytool.name }}" >
         <div class="btn-download">
               {% set show_download = querytool.download_options %}
+              {% set baidu_analytics_id = h.get_config_value('ckanext.querytool.baidu_analytics_id') %}
               {% if show_download == true %}
               <div class="btn-group dropdown">
                 <button class="btn btn-round dropdown-toggle" data-toggle="dropdown" href="#">
@@ -166,19 +167,19 @@
                 {% set sql_query = '&sql_string=' + querytool.sql_string | replace('+', '%2B') %}
                 <ul class="dropdown-menu">
                   <li>
-                    <a href="{{ download_url }}{{ csv }}{{ sql_query }}">CSV</a>
+                    <a href="{{ download_url }}{{ csv }}{{ sql_query }}" {% if baidu_analytics_id %}onclick="_hmt.push(['_trackEvent', '{{ _('Report') }}', '{{ _('Download') }} {{ _('CSV') }}', '{{ querytool.title or querytool.name }}'])"{% endif %}>{{ _('CSV') }}</a>
                   </li>
                   <li>
-                    <a href="{{ download_url }}{{ xml }}{{ sql_query }}">XML</a>
+                    <a href="{{ download_url }}{{ xml }}{{ sql_query }}" {% if baidu_analytics_id %}onclick="_hmt.push(['_trackEvent', '{{ _('Report') }}', '{{ _('Download') }} {{ _('XML') }}', '{{ querytool.title or querytool.name }}'])"{% endif %}>{{ _('XML') }}</a>
                   </li>
                   <li>
-                    <a href="{{ download_url }}{{ json }}{{ sql_query }}">JSON</a>
+                    <a href="{{ download_url }}{{ json }}{{ sql_query }}" {% if baidu_analytics_id %}onclick="_hmt.push(['_trackEvent', '{{ _('Report') }}', '{{ _('Download') }} {{ _('JSON') }}', '{{ querytool.title or querytool.name }}'])"{% endif %}>{{ _('JSON') }}</a>
                   </li>
                   <li>
-                    <a href="{{ download_url }}{{ xlsx }}{{ sql_query }}">Microsoft Excel (OpenXML)</a>
+                    <a href="{{ download_url }}{{ xlsx }}{{ sql_query }}" {% if baidu_analytics_id %}onclick="_hmt.push(['_trackEvent', '{{ _('Report') }}', '{{ _('Download') }} {{ _('XLSX') }}', '{{ querytool.title or querytool.name }}'])"{% endif %}>{{ _('Microsoft Excel (OpenXML)') }}</a>
                   </li>
                   <li>
-                    <a id="download-as-image" href="#">Download Image</a>
+                    <a id="download-as-image" href="#" {% if baidu_analytics_id %}onclick="_hmt.push(['_trackEvent', '{{ _('Report') }}', '{{ _('Download') }} {{ _('PNG') }}', '{{ querytool.title or querytool.name }}'])"{% endif %}>{{ _('Download Image (PNG)') }}</a>
                   </li>
                 </ul>
               </div>
@@ -186,7 +187,7 @@
               
               <button class="btn btn-round" href="#embed-{{ querytools[0].name }}" 
               data-module="tool-embed" 
-              data-module-id="{{ querytools[0].id }}" >{{ _('Share') }} <img src="/base/images/share.svg" width="15"/> </button>
+              data-module-id="{{ querytools[0].id }}" {% if baidu_analytics_id %}onclick="_hmt.push(['_trackEvent', '{{ _('Report') }}', '{{ _('Share') }}', '{{ querytool.title or querytool.name }}'])"{% endif %} >{{ _('Share') }} <img src="/base/images/share.svg" width="15"/> </button>
              
         </div>
     </div>
