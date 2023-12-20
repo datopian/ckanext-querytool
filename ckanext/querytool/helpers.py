@@ -123,6 +123,8 @@ def get_filter_values(resource_id, filter_name, previous_filters=[]):
         result = _get_action('datastore_search_sql', {'sql': sql_string})
         values = [field[filter_name] for field in result.get('records', [])]
 
+
+    values = filter(lambda x: x != "" and x != None, values)
     return sorted(values)
 
 
