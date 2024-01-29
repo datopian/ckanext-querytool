@@ -228,13 +228,30 @@ ckan.module("querytool-table", function () {
           if (sv != '') {
             //  First table case - Dimension and Sub-dimension are set
             return this.render_template(
-                "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{second_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]}</td>\n                  <td>{row[second_value]}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
+                `\n          
+                <table>\n            
+                <thead>\n              
+                <tr>\n                
+                <th>{main_value|capitalize}</th>\n                
+                <th>{second_value|capitalize}</th>\n                
+                <th>{measure_label|capitalize}</th>\n              
+                </tr>\n            
+                </thead>\n            
+                <tbody>\n              
+                {% for row in rows %}\n                
+                <tr>\n                  
+                <td>{row[main_value]}</td>\n                  
+                <td>{row[second_value]}</td>\n                  
+                <td>{row[y_axis]|process_table_value|safe}</td>\n                
+                </tr>\n              {% endfor   %}\n            
+                </tbody>\n          
+                </table>\n          `,
                 o
             );
           } else {
             //  First table case - Dimension is set
             return this.render_template(
-                "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]}</td>\n                  <td>{row[y_axis]|process_table_value}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
+                "\n          <table>\n            <thead>\n              <tr>\n                <th>{main_value|capitalize}</th>\n                <th>{measure_label|capitalize}</th>\n              </tr>\n            </thead>\n            <tbody>\n              {% for row in rows %}\n                <tr>\n                  <td>{row[main_value]}</td>\n                  <td>{row[y_axis]|process_table_value|safe}</td>\n                </tr>\n              {% endfor   %}\n            </tbody>\n          </table>\n          ",
                 o
             );
         }
@@ -332,7 +349,7 @@ ckan.module("querytool-table", function () {
                       <td>{row[main_value]}</td>
                       <td>{row[second_value]}</td>
                       {% for y_axis_group in y_axis_groups %}
-                          <td>{row[y_axis_group]|process_table_value}</td>
+                          <td>{row[y_axis_group]|process_table_value|safe}</td>
                       {% endfor %}
                       </tr>
                   {% endfor %}
@@ -359,7 +376,7 @@ ckan.module("querytool-table", function () {
                       <tr>
                       <td>{row[main_value]}</td>
                       {% for y_axis_group in y_axis_groups %}
-                          <td>{row[y_axis_group]|process_table_value}</td>
+                          <td>{row[y_axis_group]|process_table_value|safe}</td>
                       {% endfor %}
                       </tr>
                   {% endfor %}
@@ -412,7 +429,7 @@ ckan.module("querytool-table", function () {
               r = d3.format(e)
             }
           }
-          return r(t);
+          return `<div style="text-align: right">${r(t)}</div>`;
       },
       countDecimals: function (t, e) {
           return Math.min((10 * t) % 1 ? 2 : t % 1 ? 1 : 0, e);
