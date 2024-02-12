@@ -42,6 +42,42 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 DATASETS_URL = 'https://sdmx-faceted-search-camstat-live.officialstatistics.org/api/search'
+MAP_SORTING = {
+    'Cambodia': 0,
+    'Banteay Meanchey': 1,
+    'Battambang': 2,
+    'Kampong Cham': 3,
+    'Kampong Chhnang': 4,
+    'Kampong Speu': 5,
+    'Kampong Thom': 6,
+    'Kampot': 7,
+    'Kandal': 8,
+    'Koh Kong': 9,
+    'Kratie': 10,
+    'Mondul Kiri': 11,
+    'Phnom Penh': 12,
+    'Preah Vihear': 13,
+    'Prey Veng': 14,
+    'Pursat': 15,
+    'Ratanak Kiri': 16,
+    'Siem Reap': 17,
+    'Preah Sihanouk': 18,
+    'Stung Treng': 19,
+    'Svay Rieng': 20,
+    'Takeo': 21,
+    'Otdar Meanchey': 22,
+    'Kep': 23,
+    'Pailin': 24,
+    'Tboung Khmum': 25,
+    'Battambang and Pailin': 31,
+    'Kampot, Preah Sihanouk and Kep': 32,
+    'Kratie, Preah Vihear and Stung Treng': 33,
+    'Mondul Kiri and Ratanak Kiri': 34,
+    'Otdar Meanchey and Siem Reap': 35,
+    'Kampot and Kep': 36,
+    'Koh Kong and Preah Sihanouk': 37,
+    'Preah Vihear and Stung Treng': 38
+}
 
 
 class UpdateCamstat(CkanCommand):
@@ -281,6 +317,8 @@ def clean_csv(data, id_removal, dataflow_agency,
                     data[i][j] = data[i][j].replace(
                         to_be_removed, ''
                     )
+                    if j == ref_area_index and id_removal[i][j] != 'REF_AREA':
+                        data[i][j] = '{}.{}'.format(str(MAP_SORTING[data[i][j]]), data[i][j])
                     cleaned += 1
 
                 # Clean up NA values
@@ -326,34 +364,35 @@ def clean_csv(data, id_removal, dataflow_agency,
     else:
         print('  + Done. {} items to clean.\n'.format(cleaned))
 
-    data = pivot_data(data)
+    # data = pivot_data(data)
 
     return data
 
-def pivot_data(data):
-    '''
-    Pivots the data from a wider and less usable format to a cleaner, vertical CSV, with one observation per row. 
-    The main issue with the original format is that the column headers we need for visualizations are in a single 
-    column themselves, instead of at the top as headers.
-    '''
-    print('  + Pivoting data...')
-
-    df = pd.DataFrame(data)
-    header_row = df.iloc[0]
-    df = df[1:]
-    df.columns = header_row
-
-    df_melted = df.melt(id_vars=[u'Dataflow', u'Indicator', u'Reference area', u'Sex',
-       u'Age group', u'Unit of measure', u'Frequency', u'Time period', u'Observation value', u'Unit multiplier',
-       u'Responsible agency', u'Data source', u'REF_AREA'], var_name='Category', value_name='Group')
-
-    columns = df_melted.columns.tolist()
-    columns = columns[:2] + columns[-2:] + columns[2:-2]
-    df_melted = df_melted[columns]
-
-    print('  + Done.\n')
-
-    return [df_melted.columns.values.tolist()] + df_melted.values.tolist()
+# def pivot_data(data):
+#     '''
+#     Pivots the data from a wider and less usable format to a cleaner, vertical CSV, with one observation per row.
+#     The main issue with the original format is that the column headers we need for visualizations are in a single
+#     column themselves, instead of at the top as headers.
+#     '''
+#
+#     print('  + Pivoting data...')
+#
+#     df = pd.DataFrame(data)
+#     header_row = df.iloc[0]
+#     df = df[1:]
+#     df.columns = header_row
+#
+#     df_melted = df.melt(id_vars=['Dataflow', 'Indicator', 'Reference area', 'Sex',
+#        'Age group', 'Unit of measure', 'Frequency', 'Time period', 'Observation value', 'Unit multiplier',
+#        'Responsible agency', 'Data source', 'REF_AREA'], var_name='Category', value_name='Group')
+#
+#     columns = df_melted.columns.tolist()
+#     columns = columns[:2] + columns[-2:] + columns[2:-2]
+#     df_melted = df_melted[columns]
+#
+#     print('  + Done.\n')
+#
+#     return [df_melted.columns.values.tolist()] + df_melted.values.tolist()
 
 
 def compare_hashes(existing_hash, new_hash):

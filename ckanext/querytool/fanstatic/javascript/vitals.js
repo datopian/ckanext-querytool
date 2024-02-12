@@ -1031,8 +1031,6 @@ $(document).ready(function(){
     queryFilters = JSON.parse(queryFilters);
     var optionalFilter = undefined;
 
-    console.log(queryFilters);
-
     //var dynamicTitle = this.options.map_custom_title_field;
     var dynamicTitle = renderChartTitle(content,{
       measure: {name: measure, alias: measure},
@@ -1053,7 +1051,7 @@ function renderChartTitle (title, options) {
   // Prepare data
   var data = {measure: options.measure.alias};
   for (let filter of options.filters) data[filter.slug] = filter.value;
-  console.log(options);
+
   if (options.optionalFilter) data.optional_filter = options.optionalFilter.value.toString();
 
   // Render and return

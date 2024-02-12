@@ -3022,10 +3022,10 @@ ckan.module('querytool-viz-preview', function() {
         sortData: function(data_sort, records, y_axis, x_axis) {
             //  Disable sorting for data with numbers like 1.A 2.B
             if (data_sort !== "default") {
-                records.forEach(function (data_sort) {
-                    isNaN(data_sort[x_axis]) && (data_sort[x_axis] = data_sort[x_axis].replace(/^\d{1,2}\./, ""));
+                records.forEach(function (record) {
+                    isNaN(record[x_axis]) && (record[x_axis] = record[x_axis].replace(/^"|"$/g, '').replace(/^\d{1,2}\./, ''));
                 });
-            } 
+            }
 
             if (data_sort === 'asc') {
                 records.sort(function(a, b) {
@@ -3077,7 +3077,7 @@ ckan.module('querytool-viz-preview', function() {
                 // Remove '1.' from the content:
                 records.forEach(function(record) {
                   if (isNaN(record[x_axis])) {
-                    record[x_axis] = record[x_axis].replace(/^\d{1,2}\./, '');
+                    record[x_axis] = record[x_axis].replace(/^"|"$/g, '').replace(/^\d{1,2}\./, '');
                   }
                 });
             }
