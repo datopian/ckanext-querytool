@@ -212,6 +212,41 @@ ckan.module('querytool-viz-preview', function() {
                     if (data.success) {
                         this.fetched_data = data.result;
 
+                        function removeCustomSorting(fetchedData) {
+                          for (var key in fetchedData) {
+                            if (fetchedData.hasOwnProperty(key)) {
+                              var name = key;
+
+                              name = name
+                                .replace(/^"|"$/g, "")
+                                .replace(/^\d{1,2}\./, "");
+
+                              if (name === "x" || !fetchedData[name]) {
+                                fetchedData[name] = fetchedData[key];
+
+                                if (Array.isArray(fetchedData[name])) {
+                                  if (name === "x") {
+                                    fetchedData[name] = fetchedData[name].map(
+                                      function (item) {
+                                        return item
+                                          .replace(/^"|"$/g, "")
+                                          .replace(/^\d{1,2}\./, "");
+                                      }
+                                    );
+                                  } else {
+                                    delete fetchedData[key];
+                                    fetchedData[name][0] = fetchedData[name][0]
+                                      .replace(/^"|"$/g, "")
+                                      .replace(/^\d{1,2}\./, "");
+                                  }
+                                }
+                              }
+                            }
+                          }
+
+                          return fetchedData;
+                        }
+
                         // Reset all metrics
                         this.y_axis_max = null;
                         this.y_axis_avg = null;
@@ -221,6 +256,8 @@ ckan.module('querytool-viz-preview', function() {
 
                         // Get max/avg/min
                         if (category) {
+                          this.fetched_data = removeCustomSorting(this.fetched_data);
+
                           this.y_axis_max = this.fetched_data.y_axis_max;
                           this.y_axis_avg = this.fetched_data.y_axis_avg;
                           this.y_axis_min = this.fetched_data.y_axis_min;
@@ -1710,7 +1747,7 @@ ckan.module('querytool-viz-preview', function() {
                   colorInputs.parent().remove();
                 }
 
-                for (tmp = 0; tmp < len_data; tmp++) {
+                for (tmp = len_data -1; tmp >=0; tmp--) {
                   let label;
                   
                   if (["pie", "donut"].includes(chartType)) {

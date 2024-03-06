@@ -982,9 +982,9 @@
                     axis_range_min_id.attr("id", "axis_range_min_" + order);
                     axis_range_max_id.attr("id", "axis_range_max_" + order);
 
-                    x_sort_labels_id.attr('id', 'x_sort_labels_' + order);
-                    x_sort_labels_name.attr('name', 'x_sort_labels_' + order);
-                    x_sort_labels_label.attr('for', 'x_sort_labels_' + order);
+                    x_sort_labels_id.attr('id', 'chart_field_x_sort_labels_' + order);
+                    x_sort_labels_name.attr('name', 'chart_field_x_sort_labels_' + order);
+                    x_sort_labels_label.attr('for', 'chart_field_x_sort_labels_' + order);
 
                     item.find("[id*=chart_field_graph_]").change();
                     incrementCopyButton();
