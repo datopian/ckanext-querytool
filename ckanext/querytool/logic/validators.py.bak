@@ -44,7 +44,7 @@ def group_children_string_convert(key, data, errors, context):
     and parses tag names. These are added to the data dict, enumerated. They
     are also validated.'''
 
-    if isinstance(data[key], str):
+    if isinstance(data[key], basestring):
         children = [
             child.strip()
             for child in data[key].split(',')
@@ -54,7 +54,7 @@ def group_children_string_convert(key, data, errors, context):
         children = data[key]
 
     current_index = max([
-        int(k[1]) for k in list(data.keys())
+        int(k[1]) for k in data.keys()
         if len(k) == 3 and k[0] == 'children'
     ] + [-1])
 

@@ -228,9 +228,9 @@ def config_option_update(context, data_dict):
 
     schema = schema_.update_configuration_schema()
 
-    available_options = list(schema.keys())
+    available_options = schema.keys()
 
-    provided_options = list(data_dict.keys())
+    provided_options = data_dict.keys()
 
     unsupported_options = set(provided_options) - set(available_options)
 
@@ -278,7 +278,7 @@ def config_option_update(context, data_dict):
         model.Session.rollback()
         raise ValidationError(errors)
 
-    for key, value in data.items():
+    for key, value in data.iteritems():
 
         # Set full Logo url
         if key == 'ckan.site_logo' and value and not value.startswith('http'):
@@ -304,7 +304,7 @@ def config_option_update(context, data_dict):
 
         # Only add it to the app_globals (`g`) object if explicitly defined
         # there
-        globals_keys = list(app_globals.app_globals_from_config_details.keys())
+        globals_keys = app_globals.app_globals_from_config_details.keys()
         if key in globals_keys:
             app_globals.set_app_global(key, value)
 
@@ -393,7 +393,7 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
     if 'message' in context:
         rev.message = context['message']
     else:
-        rev.message = _('REST API: Update object %s') % data.get("name")
+        rev.message = _(u'REST API: Update object %s') % data.get("name")
 
     group = model_save.group_dict_save(
         data, context,
@@ -422,7 +422,7 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
     # When the user marks a group as deleted this comes through here as
     # a 'changed' group activity. We detect this and change it to a 'deleted'
     # activity.
-    if group.state == 'deleted':
+    if group.state == u'deleted':
         if session.query(ckan.model.Activity).filter_by(
                 object_id=group.id, activity_type='deleted').all():
             # A 'deleted group' activity for this group has already been

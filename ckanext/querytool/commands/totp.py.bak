@@ -30,7 +30,7 @@ class VitalsSecurity(CkanCommand):
             sys.exit(1)
 
     def help(self):
-        print((self.__doc__))
+        print(self.__doc__)
 
     def init_totp(self):
         print(

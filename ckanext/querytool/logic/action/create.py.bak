@@ -64,7 +64,7 @@ def _querytool_group_or_org_create(context, data_dict, is_org=False):
     if 'message' in context:
         rev.message = context['message']
     else:
-        rev.message = _('REST API: Create object %s') % data.get("name")
+        rev.message = _(u'REST API: Create object %s') % data.get("name")
 
     group = model_save.group_dict_save(data, context)
 

@@ -8,7 +8,7 @@ except ImportError:
 import logging
 import json
 import csv
-import io
+import cStringIO
 
 import ckan.logic as logic
 
@@ -23,7 +23,7 @@ DUMP_FORMATS = 'csv', 'json', 'xml', 'xlsx'
 
 NAIVE_DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATE_FORMAT = '%Y-%m-%d'
-UTF8_BOM = '\uFEFF'.encode('utf-8')
+UTF8_BOM = u'\uFEFF'.encode(u'utf-8')
 
 log = logging.getLogger(__name__)
 
@@ -34,7 +34,7 @@ class XMLWriter(object):
         self.delimiter = \
             config.get('ckanext.dataextractor.headers_names_delimiter', "_")
         self.output = output
-        self.id_col = columns[0] == '_id'
+        self.id_col = columns[0] == u'_id'
         if self.id_col:
             columns = columns[1:]
         columns_fixed = []
@@ -44,16 +44,16 @@ class XMLWriter(object):
         log.debug(self.columns)
 
     def writerow(self, row):
-        root = Element('row')
+        root = Element(u'row')
         if self.id_col:
-            root.attrib['_id'] = str(row[0])
+            root.attrib[u'_id'] = unicode(row[0])
             row = row[1:]
         for k, v in zip(self.columns, row):
             if v is None:
-                SubElement(root, k).text = 'NULL'
+                SubElement(root, k).text = u'NULL'
                 continue
-            SubElement(root, k).text = str(v)
-        ElementTree(root).write(self.output, encoding='utf-8')
+            SubElement(root, k).text = unicode(v)
+        ElementTree(root).write(self.output, encoding=u'utf-8')
         self.output.write(b'\n')
 
 
@@ -73,8 +73,8 @@ class JSONWriter(object):
         self.output.write(json.dumps(
             row,
             ensure_ascii=False,
-            separators=(',', ':'),
-            sort_keys=True).encode('utf-8'))
+            separators=(u',', u':'),
+            sort_keys=True).encode(u'utf-8'))
 
 
 class FileWriterService():
@@ -85,7 +85,7 @@ class FileWriterService():
         columns = [x['id'] for x in fields]
         columns_utf8 = [x['id'].encode("utf-8") for x in fields]
 
-        output = io.StringIO()
+        output = cStringIO.StringIO()
 
         if d == 'semicolon':
             writer = csv.writer(output, delimiter=';')
@@ -108,17 +108,17 @@ class FileWriterService():
                              record[column].encode("utf-8")
                              for column in columns])
 
-        return io.StringIO(output.getvalue())
+        return cStringIO.StringIO(output.getvalue())
 
     def _json_writer(self, fields, records):
 
         columns = [x['id'] for x in fields]
-        output = io.StringIO()
+        output = cStringIO.StringIO()
 
         output.write(
             b'{\n  "fields": %s,\n  "records": [' % json.dumps(
-                fields, ensure_ascii=False, separators=(',', ':'))
-            .encode('utf-8'))
+                fields, ensure_ascii=False, separators=(u',', u':'))
+            .encode(u'utf-8'))
 
         # Initiate json writer and columns
         wr = JSONWriter(output, columns)
@@ -129,12 +129,12 @@ class FileWriterService():
 
         output.write(b'\n]}\n')
 
-        return io.StringIO(output.getvalue())
+        return cStringIO.StringIO(output.getvalue())
 
     def _xml_writer(self, fields, records):
 
         columns = [x['id'] for x in fields]
-        output = io.StringIO()
+        output = cStringIO.StringIO()
 
         output.write(b'<data>\n')
 
@@ -147,12 +147,12 @@ class FileWriterService():
 
         output.write(b'</data>\n')
 
-        return io.StringIO(output.getvalue())
+        return cStringIO.StringIO(output.getvalue())
 
     def _xlsx_writer(self, fields, records):
 
         columns = [x['id'] for x in fields]
-        output = io.StringIO()
+        output = cStringIO.StringIO()
 
         workbook = Workbook(output)
         worksheet = workbook.add_worksheet()
@@ -173,7 +173,7 @@ class FileWriterService():
             row += 1
 
         workbook.close()
-        return io.StringIO(output.getvalue())
+        return cStringIO.StringIO(output.getvalue())
 
     def write_to_file(self, fields, records, format, delimiter):
 
@@ -187,4 +187,4 @@ class FileWriterService():
         if format == 'xlsx':
             return self._xlsx_writer(fields, records)
         raise logic.ValidationError(_(
-            'format: must be one of %s') % ', '.join(DUMP_FORMATS))
+            u'format: must be one of %s') % u', '.join(DUMP_FORMATS))

@@ -45,7 +45,7 @@ class VitalsTOTPAuth(UsernamePasswordAuthenticator):
             return None
 
         form_vars = environ.get('webob._parsed_post_vars')
-        form_vars = dict(list(form_vars[0].items()))
+        form_vars = dict(form_vars[0].items())
 
         if not form_vars.get('mfa'):
             log.info("Could not get MFA credentials from the request")

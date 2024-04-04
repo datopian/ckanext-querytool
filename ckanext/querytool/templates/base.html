@@ -38,24 +38,24 @@
 
 {% block styles %}
   {{ super() }}
-  {% resource 'querytool/css/main.css' %}
-  {% resource 'querytool/css/palette-color-picker.css' %}
+  {% asset 'querytool/css/main.css' %}
+  {% asset 'querytool/css/palette-color-picker.css' %}
 {% endblock %}
 
 {% block bodytag %} {{ super() }} id="vs-page"{% endblock %}
 
 {% block scripts %}
   {{ super() }}
-  {% resource 'querytool/javascript/adaptive_design.js' %}
-  {% resource 'querytool/javascript/anchor_fix.js' %}
-  {% resource 'querytool/javascript/vitals.js' %}
-  {% resource 'querytool/javascript/modules/fullscreen.js' %}
+  {% asset 'querytool/javascript/adaptive_design.js' %}
+  {% asset 'querytool/javascript/anchor_fix.js' %}
+  {% asset 'querytool/javascript/vitals.js' %}
+  {% asset 'querytool/javascript/modules/fullscreen.js' %}
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
 
   {% if h.get_cookie_control_config().get('api_key') and h.get_cookie_control_config().get('enabled') %}
     {% block cookie_control %}  
-      {% resource 'querytool/javascript/modules/civic_cookies.js' %}
+      {% asset 'querytool/javascript/modules/civic_cookies.js' %}
       <script src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js" type="text/javascript"></script>
       {% set cookie_control_config = h.get_cookie_control_config() %}
       <div id="cookie-control" class="js-hide" data-module="civic_cookies" 

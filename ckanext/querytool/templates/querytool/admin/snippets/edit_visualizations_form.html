@@ -1,9 +1,9 @@
-{% import 'macros/form.html' as form %} {% resource 'querytool/vendor/c3/c3.css'
-%} {% resource 'querytool/vendor/d3/d3.js' %} {% resource
-'querytool/vendor/c3/c3.js' %} {% resource 'querytool/vendor/nunjucks.js' %} {%
+{% import 'macros/form.html' as form %} {% asset 'querytool/vendor/c3/c3.css'
+%} {% asset 'querytool/vendor/d3/d3.js' %} {% resource
+'querytool/vendor/c3/c3.js' %} {% asset 'querytool/vendor/nunjucks.js' %} {%
 resource 'querytool/javascript/dist/visualizations_settings.js' %} {% resource
 'querytool/javascript/dist/modules/viz-preview.js' %} {% resource
-'querytool/map' %} {% resource 'querytool/table' %} {% set ctrl =
+'querytool/map' %} {% asset 'querytool/table' %} {% set ctrl =
 'ckanext.querytool.controllers.querytool:QueryToolController' %} {% if data %}
 {% set name = data.name %} {% else %} {% set name = '' %} {% endif %} {% set
 action_url = h.url_for('querytool_edit_visualizations', querytool= '/' + name)

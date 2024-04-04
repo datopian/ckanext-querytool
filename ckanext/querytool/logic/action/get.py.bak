@@ -240,9 +240,9 @@ def querytool_get_chart_data(context, data_dict):
             categories_data[x_value].append(x_value)
 
         for value in category_values:
-            category_value_sql = sql_without_group + 'AND ("' + \
-                                 category + '" = ' + "'" + value + \
-                                 "'" + ') ' + 'GROUP BY' + sql_group
+            category_value_sql = sql_without_group + u'AND ("' + \
+                                 category + u'" = ' + u"'" + value + \
+                                 u"'" + u') ' + u'GROUP BY' + sql_group
 
             records = h.get_resource_data(category_value_sql)
             x.append(value)
