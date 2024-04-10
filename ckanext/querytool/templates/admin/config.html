@@ -16,7 +16,7 @@
 
   {% set theme = data.theme %}
 
-  {% resource 'querytool/javascript/modules/querytool_image_upload.js' %}
+  {% asset 'querytool/javascript/modules/querytool_image_upload.js' %}
   <div id="custom-theme" hidden>
     {% set header_is_upload = data.header_image_url and not data.header_image_url.startswith('http') %}
     {% set header_is_url = data.header_image_url and data.header_image_url.startswith('http') %}

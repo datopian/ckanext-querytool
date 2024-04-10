@@ -18,7 +18,7 @@ check if there are changes to the data. If nothing changes, the script won't do 
 the source data has changed, only those datasets will be updated.
 '''
 
-
+from __future__ import print_function
 import requests
 import csv
 import datetime
@@ -37,9 +37,8 @@ from ckan.logic import NotFound
 from ckan.model.meta import metadata
 from ckan.model.types import make_uuid
 from ckan import model
-import importlib
 
-importlib.reload(sys)
+reload(sys)
 sys.setdefaultencoding('utf-8')
 
 DATASETS_URL = 'https://sdmx-faceted-search-camstat-live.officialstatistics.org/api/search'
@@ -355,7 +354,7 @@ def clean_csv(data, id_removal, dataflow_agency,
     # Add REF_AREA column back into cleaned data
     data[0].append('REF_AREA')
 
-    for key, value in list(ref_area.items()):
+    for key, value in ref_area.items():
         data[key].append(value)
         cleaned += 1
 
@@ -764,7 +763,7 @@ def get_existing_hash(dataflow_id):
     hash_row = connection.execute(sql)
 
     try:
-        row = list(hash_row.fetchone().items())
+        row = hash_row.fetchone().items()
         existing_hash = row[3][1]
         resource_id = row[2][1]
 
@@ -878,7 +877,7 @@ def update_camstat(owner_org, languages):
             dataflow_last_extracted
         ))
 
-        for key, value in list(dataflow.items()):
+        for key, value in dataflow.items():
             print('  | {}: {}'.format(key, value))
 
         dataflow_description_updated = prepare_dataflow_description(

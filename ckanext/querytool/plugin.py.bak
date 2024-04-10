@@ -34,15 +34,15 @@ log = logging.getLogger(__name__)
 def group_form_schema():
     schema = ckan_schema.default_group_schema()
 
-    schema['description'] = [ignore_missing, str, validators.description_length_validator]
+    schema['description'] = [ignore_missing, unicode, validators.description_length_validator]
 
     schema['packages'] = {
-        "name": [not_empty, str],
+        "name": [not_empty, unicode],
         "title": [ignore_missing],
         "__extras": [ignore]
     }
     schema['users'] = {
-        "name": [not_empty, str],
+        "name": [not_empty, unicode],
         "capacity": [ignore_missing],
         "__extras": [ignore]
     }
@@ -53,9 +53,9 @@ def group_form_schema():
 
 
 class QuerytoolPlugin(plugins.SingletonPlugin):
-    #plugins.implements(plugins.ITranslation, inherit=False)
+    plugins.implements(plugins.ITranslation, inherit=False)
     plugins.implements(plugins.IConfigurer)
-    #plugins.implements(plugins.IRoutes)
+    plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.ITemplateHelpers)
@@ -194,7 +194,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     # IConfigurer
 
     def update_config(self, config_):
-        #toolkit.add_template_directory(config_, 'templates')
+        toolkit.add_template_directory(config_, 'templates')
         toolkit.add_public_directory(config_, 'public')
         toolkit.add_resource('fanstatic', 'querytool')
 
@@ -449,31 +449,31 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def update_config_schema(self, schema):
         schema.update({
-            'ckan.welcome_page_title': [ignore_missing, str],
-            'ckan.welcome_page_description': [ignore_missing, str],
-            'theme': [ignore_missing, str],
-            'header_image_url': [ignore_missing, str],
-            'header_image_upload': [ignore_missing, str],
-            'header_clear_upload': [ignore_missing, str],
-            'header_text_color': [ignore_missing, str],
-            'footer_logo_image_url': [ignore_missing, str],
-            'footer_logo_image_upload': [ignore_missing, str],
-            'footer_logo_clear_upload': [ignore_missing, str],
-            'footer_logo_text': [ignore_missing, str],
-            'footer_logo2_image_url': [ignore_missing, str],
-            'footer_logo2_image_upload': [ignore_missing, str],
-            'footer_logo2_clear_upload': [ignore_missing, str],
-            'footer_logo2_text': [ignore_missing, str],
-            'copyright_text': [ignore_missing, str],
-            'social_order': [ignore_missing, str],
-            'facebook_url': [ignore_missing, str, logic.validators.url_validator],
-            'instagram_url': [ignore_missing, str, logic.validators.url_validator],
-            'linkedin_url': [ignore_missing, str, logic.validators.url_validator],
-            'telegram_url': [ignore_missing, str, logic.validators.url_validator],
-            'tiktok_url': [ignore_missing, str, logic.validators.url_validator],
-            'twitter_url': [ignore_missing, str, logic.validators.url_validator],
-            'whatsapp_url': [ignore_missing, str, logic.validators.url_validator],
-            'youtube_url': [ignore_missing, str, logic.validators.url_validator],
+            'ckan.welcome_page_title': [ignore_missing, unicode],
+            'ckan.welcome_page_description': [ignore_missing, unicode],
+            'theme': [ignore_missing, unicode],
+            'header_image_url': [ignore_missing, unicode],
+            'header_image_upload': [ignore_missing, unicode],
+            'header_clear_upload': [ignore_missing, unicode],
+            'header_text_color': [ignore_missing, unicode],
+            'footer_logo_image_url': [ignore_missing, unicode],
+            'footer_logo_image_upload': [ignore_missing, unicode],
+            'footer_logo_clear_upload': [ignore_missing, unicode],
+            'footer_logo_text': [ignore_missing, unicode],
+            'footer_logo2_image_url': [ignore_missing, unicode],
+            'footer_logo2_image_upload': [ignore_missing, unicode],
+            'footer_logo2_clear_upload': [ignore_missing, unicode],
+            'footer_logo2_text': [ignore_missing, unicode],
+            'copyright_text': [ignore_missing, unicode],
+            'social_order': [ignore_missing, unicode],
+            'facebook_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'instagram_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'linkedin_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'telegram_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'tiktok_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'twitter_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'whatsapp_url': [ignore_missing, unicode, logic.validators.url_validator],
+            'youtube_url': [ignore_missing, unicode, logic.validators.url_validator],
             'group_parents_enabled': [ignore_missing, logic.validators.boolean_validator],
         })
 

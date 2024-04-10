@@ -156,11 +156,11 @@ class QuerytoolGroupController(GroupController):
                 self._force_reindex(group)
 
             h.redirect_to('%s_read' % group['type'], id=group['name'])
-        except (NotFound, NotAuthorized) as e:
+        except (NotFound, NotAuthorized), e:
             abort(404, _('Group not found'))
         except dict_fns.DataError:
-            abort(400, _('Integrity Error'))
-        except ValidationError as e:
+            abort(400, _(u'Integrity Error'))
+        except ValidationError, e:
             errors = e.error_dict
             error_summary = e.error_summary
             return self.edit(id, data_dict, errors, error_summary)
@@ -245,11 +245,11 @@ class QuerytoolGroupController(GroupController):
 
             # Redirect to the appropriate _read route for the type of group
             h.redirect_to(group['type'] + '_read', id=group['name'])
-        except (NotFound, NotAuthorized) as e:
+        except (NotFound, NotAuthorized), e:
             abort(404, _('Group not found'))
         except dict_fns.DataError:
-            abort(400, _('Integrity Error'))
-        except ValidationError as e:
+            abort(400, _(u'Integrity Error'))
+        except ValidationError, e:
             errors = e.error_dict
             error_summary = e.error_summary
             return self.new(data_dict, errors, error_summary)
