@@ -14,6 +14,7 @@ import ckanext.querytool.helpers as helpers
 from ckanext.querytool import actions
 from ckanext.querytool.logic import validators
 from ckanext.querytool.model import setup as model_setup
+import ckanext.querytool.commands as vs_commands
 import os
 import sys
 
@@ -61,6 +62,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IAuthFunctions)
     plugins.implements(plugins.IGroupForm, inherit=True)
+    plugins.implements(plugins.IClick)
 
     # ITranslation
     def i18n_directory(self):
@@ -478,3 +480,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         })
 
         return schema
+
+    # IClick
+
+    def get_commands(self):
+        return [vs_commands.vs]

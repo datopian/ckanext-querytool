@@ -86,11 +86,6 @@ setup(
         [ckan.plugins]
         querytool=ckanext.querytool.plugin:QuerytoolPlugin
 
-        [paste.paster_command]
-        seed_portal=ckanext.querytool.commands.seed:SeedData
-        update_camstat=ckanext.querytool.commands.camstat:UpdateCamstat
-        totp=ckanext.querytool.commands.totp:VitalsSecurity
-
         [babel.extractors]
         ckan = ckan.lib.extract:extract_ckan
     ''',
