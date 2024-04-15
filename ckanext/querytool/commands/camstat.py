@@ -109,10 +109,10 @@ def camstat(ctx):
 
         # The following functions can be
         # used for testing and debugging
-        site_user_name = site_user.get('name')
-        purge_datasets(owner_org, site_user_name)
-        purge_organization(owner_org, site_user_name)
-        drop_table()
+        # site_user_name = site_user.get('name')
+        # purge_datasets(owner_org, site_user_name)
+        # purge_organization(owner_org, site_user_name)
+        # drop_table()
 
         if not model.Session.bind.has_table('camstat_hashes'):
             setup_tables()
