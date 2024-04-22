@@ -1,0 +1,5 @@
+querytool-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-querytool.css
+  contents:
+    - style.css
