@@ -9,7 +9,7 @@ gulp.task('default', ['less', 'watch']);
 
 // Rebuild CSS from LESS
 gulp.task('less', function () {
-  return gulp.src('ckanext/querytool/fanstatic/less/*.less')
+  return gulp.src('ckanext/querytool/assets/less/*.less')
   // .pipe(sourcemaps.init()) - Uncomment when developing
   .pipe(less())
   .pipe(cleanCSS({
@@ -22,10 +22,10 @@ gulp.task('less', function () {
     ]
   }))
   // .pipe(sourcemaps.write()) - Uncomment when developing
-  .pipe(gulp.dest('ckanext/querytool/fanstatic/css'));
+  .pipe(gulp.dest('ckanext/querytool/assets/css'));
 });
 
 // Watch for LESS file changes
 gulp.task('watch', function () {
-  gulp.watch(['ckanext/querytool/fanstatic/less/**/*.less'], ['less']);
+  gulp.watch(['ckanext/querytool/assets/less/**/*.less'], ['less']);
 });
