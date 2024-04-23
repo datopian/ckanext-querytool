@@ -1,0 +1,69 @@
+{# 
+    Renders the login form.
+    
+    action        - The url that the form should be submitted to.
+    error_summary - A tuple/list of form errors.
+    
+    Example:
+    
+      {% snippet "user/snippets/login_form.html", action=c.login_handler, error_summary=error_summary %}
+    
+    #}
+    {% import 'macros/form.html' as form %}
+    
+    {% set username_error = true if error_summary %}
+    {% set password_error = true if error_summary %}
+    {% set mfa_enabled = h.get_config_value('ckanext.querytool.2fa_enabled') %}
+    
+    <form action="{{ action }}" method="post" class="form-horizontal" id="login-form">
+      {{ form.errors(errors=error_summary) }}
+    
+      {{ form.input('login', label=_("Username"), id='field-login', value="", error=username_error, classes=["control-medium"]) }}
+    
+      {{ form.input('password', label=_("Password"), id='field-password', type="password", value="", error=password_error, classes=["control-medium"]) }}
+    
+      {{ form.checkbox('remember', label=_("Remember me"), id='field-remember', checked=true, value="63072000") }}
+
+      {% block mfa_login %}
+        {% if mfa_enabled %}
+          <div class="mfa-email-link" id="mfa-email-link" style="margin-left: 130px; margin-bottom: 20px; display: none;">
+            <span class="btn" id="send-2fa-email" name="send-2fa-email">
+              {{ _('Send verification code') }}
+            </span>
+            <div class="info-block">
+              <i class="fa fa-info-circle"></i>
+              {{ _('Verification code will be sent to the email address associated with your account.') }}
+            </div>
+          </div>
+
+          <div id="mfa-email" style="display: none;">
+            {{ form.input('mfa', label=_("Verification Code"), id='field-mfa', value="", error=error_summary, classes=["control-medium"], placeholder=_("Enter your verification code")) }}
+          </div>
+          <script>
+            function translate(text) {
+              var translations = {
+                'A verification code has been sent. This code expires in: ': "{{ _('A verification code has been sent. This code expires in: ') }}",
+                'There was an error sending the verification code. Please try again.': "{{ _('There was an error sending the verification code. Please try again.') }}",
+                'Verification code expired: Please resend and try again.': "{{ _('Verification code expired: Please resend and try again.') }}",
+                'Resend verification code': '{{ _("Resend verification code") }}',
+              };
+              return translations[text];
+            }
+          </script>
+        {% endif %}
+      {% endblock %}
+    
+      {% block captcha %}
+        {% set recaptcha_config = h.get_recaptcha_config() %}
+        {% if recaptcha_config.enabled %}
+          {% snippet "user/snippets/recaptcha.html", public_key=recaptcha_config.sitekey %}
+        {% endif %}
+      {% endblock %}
+
+      <div class="form-actions" {% if mfa_enabled %}id="login-button" style="display: none;"{% endif %}>
+        {% block login_button %}
+        <button class="btn btn-primary" type="submit">{{ _('Login') }}</button>
+        {% endblock %}
+      </div>
+    </form>
+    
