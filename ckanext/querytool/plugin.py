@@ -26,7 +26,8 @@ from ckan.lib.navl.validators import (ignore_missing,
                                       ignore,
                                       if_empty_same_as,
                                       not_missing,
-                                      ignore_empty
+                                      ignore_empty,
+                                      unicode_safe,
                                       )
 
 log = logging.getLogger(__name__)
@@ -35,15 +36,15 @@ log = logging.getLogger(__name__)
 def group_form_schema():
     schema = ckan_schema.default_group_schema()
 
-    schema['description'] = [ignore_missing, str, validators.description_length_validator]
+    schema['description'] = [ignore_missing, unicode_safe, validators.description_length_validator]
 
     schema['packages'] = {
-        "name": [not_empty, str],
+        "name": [not_empty, unicode_safe],
         "title": [ignore_missing],
         "__extras": [ignore]
     }
     schema['users'] = {
-        "name": [not_empty, str],
+        "name": [not_empty, unicode_safe],
         "capacity": [ignore_missing],
         "__extras": [ignore]
     }
@@ -54,9 +55,9 @@ def group_form_schema():
 
 
 class QuerytoolPlugin(plugins.SingletonPlugin):
-    #plugins.implements(plugins.ITranslation, inherit=False)
+    # plugins.implements(plugins.ITranslation, inherit=False)
     plugins.implements(plugins.IConfigurer)
-    #plugins.implements(plugins.IRoutes)
+    # plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IActions)
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.ITemplateHelpers)
@@ -164,7 +165,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         )
         return schema
 
-
     def group_form(group_type='group'):
         return 'group/snippets/group_form.html'
 
@@ -191,7 +191,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def admins_template(self):
         return 'group/admins.html'
-
 
     # IConfigurer
 
@@ -288,7 +287,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     '/',
                     controller=home_controller,
                     action='index')
-
 
         user_controller = 'ckanext.querytool.controllers.user:QuerytoolUserController'
         map.connect('login',
@@ -446,36 +444,35 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
         return auth_functions
 
-
     # IConfigurer
 
     def update_config_schema(self, schema):
         schema.update({
-            'ckan.welcome_page_title': [ignore_missing, str],
-            'ckan.welcome_page_description': [ignore_missing, str],
-            'theme': [ignore_missing, str],
-            'header_image_url': [ignore_missing, str],
-            'header_image_upload': [ignore_missing, str],
-            'header_clear_upload': [ignore_missing, str],
-            'header_text_color': [ignore_missing, str],
-            'footer_logo_image_url': [ignore_missing, str],
-            'footer_logo_image_upload': [ignore_missing, str],
-            'footer_logo_clear_upload': [ignore_missing, str],
-            'footer_logo_text': [ignore_missing, str],
-            'footer_logo2_image_url': [ignore_missing, str],
-            'footer_logo2_image_upload': [ignore_missing, str],
-            'footer_logo2_clear_upload': [ignore_missing, str],
-            'footer_logo2_text': [ignore_missing, str],
-            'copyright_text': [ignore_missing, str],
-            'social_order': [ignore_missing, str],
-            'facebook_url': [ignore_missing, str, logic.validators.url_validator],
-            'instagram_url': [ignore_missing, str, logic.validators.url_validator],
-            'linkedin_url': [ignore_missing, str, logic.validators.url_validator],
-            'telegram_url': [ignore_missing, str, logic.validators.url_validator],
-            'tiktok_url': [ignore_missing, str, logic.validators.url_validator],
-            'twitter_url': [ignore_missing, str, logic.validators.url_validator],
-            'whatsapp_url': [ignore_missing, str, logic.validators.url_validator],
-            'youtube_url': [ignore_missing, str, logic.validators.url_validator],
+            'ckan.welcome_page_title': [ignore_missing, unicode_safe],
+            'ckan.welcome_page_description': [ignore_missing, unicode_safe],
+            'theme': [ignore_missing, unicode_safe],
+            'header_image_url': [ignore_missing, unicode_safe],
+            'header_image_upload': [ignore_missing, unicode_safe],
+            'header_clear_upload': [ignore_missing, unicode_safe],
+            'header_text_color': [ignore_missing, unicode_safe],
+            'footer_logo_image_url': [ignore_missing, unicode_safe],
+            'footer_logo_image_upload': [ignore_missing, unicode_safe],
+            'footer_logo_clear_upload': [ignore_missing, unicode_safe],
+            'footer_logo_text': [ignore_missing, unicode_safe],
+            'footer_logo2_image_url': [ignore_missing, unicode_safe],
+            'footer_logo2_image_upload': [ignore_missing, unicode_safe],
+            'footer_logo2_clear_upload': [ignore_missing, unicode_safe],
+            'footer_logo2_text': [ignore_missing, unicode_safe],
+            'copyright_text': [ignore_missing, unicode_safe],
+            'social_order': [ignore_missing, unicode_safe],
+            'facebook_url': [ignore_missing, unicode_safe, logic.validators.url_validator],
+            'instagram_url': [ignore_missing, unicode_safe, logic.validators.url_validator],
+            'linkedin_url': [ignore_missing, unicode_safe, logic.validators.url_validator],
+            'telegram_url': [ignore_missing, unicode_safe, logic.validators.url_validator],
+            'tiktok_url': [ignore_missing, unicode_safe, logic.validators.url_validator],
+            'twitter_url': [ignore_missing, unicode_safe, logic.validators.url_validator],
+            'whatsapp_url': [ignore_missing, unicode_safe, logic.validators.url_validator],
+            'youtube_url': [ignore_missing, unicode_safe, logic.validators.url_validator],
             'group_parents_enabled': [ignore_missing, logic.validators.boolean_validator],
         })
 

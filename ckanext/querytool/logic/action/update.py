@@ -228,9 +228,9 @@ def config_option_update(context, data_dict):
 
     schema = schema_.update_configuration_schema()
 
-    available_options = list(schema.keys())
+    available_options = schema.keys()
 
-    provided_options = list(data_dict.keys())
+    provided_options = data_dict.keys()
 
     unsupported_options = set(provided_options) - set(available_options)
 
@@ -238,7 +238,7 @@ def config_option_update(context, data_dict):
         msg = 'Configuration option(s) \'{0}\' can not be updated'.format(
               ' '.join(list(unsupported_options)))
 
-        raise ValidationError(msg, error_summary={'message': msg})
+        raise ValidationError({'message': msg})
 
     upload = uploader.get_uploader('admin')
     upload.update_data_dict(data_dict, 'ckan.site_logo',

@@ -1,0 +1,39 @@
+@import "inc/variables.less";
+.container {
+  .row1,
+  >.homepage-box {
+    margin-top: @grid-gutter-width*2;
+    margin-bottom: @grid-gutter-width*2;
+  }
+}
+
+.homepage {
+  .col2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100%;
+  }
+}
+
+.homepage-box {
+  padding: @grid-gutter-width - 5;
+  background-color: @color-white;
+  border-radius: @border-radius-md;
+  border:0px;
+  :first-child{
+    margin-top: 0;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .homepage {
+    &.layout-1 {
+      .row1 {
+        .col2 {
+          position: relative;
+        }
+      }
+    }
+  }
+}
