@@ -26,8 +26,8 @@
 
       {% block mfa_login %}
         {% if mfa_enabled %}
-          <div class="mfa-email-link" id="mfa-email-link" style="margin-left: 130px; margin-bottom: 20px">
-            <span class="btn" id="send-2fa-email" name="send-2fa-email">
+          <div class="mfa-email-link" id="mfa-email-link">
+            <span class="btn btn-primary" id="send-2fa-email" name="send-2fa-email">
               {{ _('Send verification code') }}
             </span>
             <div class="info-block">

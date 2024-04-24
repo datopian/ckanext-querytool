@@ -1507,7 +1507,6 @@ document.addEventListener("DOMContentLoaded", function() {
           successMessage.innerHTML = translate('A verification code has been sent. This code expires in: ')
           successMessage.classList.add("alert", "alert-success");
           successMessage.style.marginTop = "1rem";
-          $(successMessage).css("margin-left", "130px");
           $(successMessage).css("width", "320px");
 
           successMessage
