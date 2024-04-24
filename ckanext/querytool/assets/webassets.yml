@@ -3,3 +3,12 @@ querytool-css:
   output: ckanext-querytool/%(version)s-querytool.css
   contents:
     - style.css
+
+querytool-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool.js
+  contents:
+    - script.js
+  extra:
+    preload:
+      - base/main

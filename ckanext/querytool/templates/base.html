@@ -45,6 +45,7 @@
 
 {% block scripts %}
   {{ super() }}
+  {% asset 'querytool/querytool-js' %}
   {% asset 'querytool/javascript/adaptive_design.js' %}
   {% asset 'querytool/javascript/anchor_fix.js' %}
   {% asset 'querytool/javascript/vitals.js' %}

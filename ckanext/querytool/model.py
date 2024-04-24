@@ -129,7 +129,6 @@ class CkanextQueryTool(DomainObject):
 
 def define_query_tool_table():
     global query_tool_table
-
     query_tool_table = Table('ckanext_querytool', metadata,
                              Column('id', types.UnicodeText,
                                     primary_key=True,
@@ -406,7 +405,6 @@ class VitalsSecurityTOTP(DomainObject):
         security_challenge = VitalsSecurityTOTP.Session.query(
             VitalsSecurityTOTP).filter(
                 VitalsSecurityTOTP.user_id == user_id).first()
-
         if security_challenge is None:
             security_challenge = VitalsSecurityTOTP(
                 user_id=user_id, secret=new_secret, created_at=created_at
@@ -414,7 +412,7 @@ class VitalsSecurityTOTP(DomainObject):
         else:
             security_challenge.secret = new_secret
             security_challenge.created_at = created_at
-
+            
         security_challenge.save()
 
         return security_challenge

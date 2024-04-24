@@ -1392,47 +1392,6 @@ form.custom-lang-select {
   width: 100%;
   color: #444;
   font-size: sgreenpeace-js:
-  filter: rjsmin
-  output: ckanext-greenpeace/%(version)s-greenpeace.js
-  contents:
-    - script.js
-  extra:
-    preload:
-      - base/main
-
-greenpeace-css:
-  filter: cssrewrite
-  output: ckanext-greenpeace/%(version)s-greenpeace.css
-  contents:
-    - style.css
-
-ckeditor-js:
-  filter: rjsmin
-  output: ckanext-greenpeace/%(version)s-ckeditor.js
-  extra:
-    preload:
-      - base/main
-  contents:
-    - build/ckeditor.js
-    - js/ckeditor-module.js
-
-ckeditor-css:
-  filter: cssrewrite
-  output: ckanext-greenpeace/%(version)s-ckeditor.css
-  contents:
-    - ckeditor-content-style.css
-
-pages-main-js:
-  filters: rjsmin
-  output: ckanext-greenpeace/%(version)s-pages-main.js
-  extra:
-    preload:
-      - base/main
-  contents:
-    - js/pages/jquery.js
-    - js/pages/bootstrap-datepicker.js
-    - js/pages/ckedit.js
-    - js/pages/datepicker.jsmall;
 }
 .social-arrow {
   height: 100%;
