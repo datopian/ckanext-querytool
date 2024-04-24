@@ -5,10 +5,25 @@ querytool-css:
     - style.css
 
 querytool-js:
-  filter: rjsmin
   output: ckanext-querytool/%(version)s-querytool.js
-  contents:
-    - script.js
   extra:
     preload:
       - base/main
+      - vendor/bootstrap
+      - vendor/jquery
+  contents:
+    - javascript/adaptive_design.js
+    - javascript/anchor_fix.js
+    - javascript/vitals.js
+    - javascript/modules/fullscreen.js
+  filter:
+    - rjsmin
+
+querytool-image-upload-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-image-upload.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - javascript/modules/querytool_image_upload.js
