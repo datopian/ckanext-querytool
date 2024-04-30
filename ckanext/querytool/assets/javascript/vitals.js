@@ -1471,7 +1471,6 @@ $(document).ready(function(){
 
 document.addEventListener("DOMContentLoaded", function() {
   const send2faEmailBtn = document.getElementById("send-2fa-email");
-  console.log('AQUI')
 
   if (send2faEmailBtn) {
     send2faEmailBtn.addEventListener("click", function(event) {
@@ -1497,15 +1496,17 @@ document.addEventListener("DOMContentLoaded", function() {
       const username = document.getElementById("field-login").value;
 
       $.ajax({
-        url: `/send_2fa_code/${username}`,
+        url: `/api/action/send_2fa_code?user=${username}`,
         type: "POST",
+        data: {
+          user: username
+        },
         success: function(response) {
           const successMessage = document.createElement("p");
 
           successMessage.innerHTML = translate('A verification code has been sent. This code expires in: ')
           successMessage.classList.add("alert", "alert-success");
           successMessage.style.marginTop = "1rem";
-          $(successMessage).css("margin-left", "130px");
           $(successMessage).css("width", "320px");
 
           successMessage

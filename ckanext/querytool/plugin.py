@@ -12,6 +12,7 @@ import ckanext.querytool.helpers as h
 import ckanext.querytool.helpers as helpers
 
 from ckanext.querytool import actions
+from ckanext.querytool.logic import otp
 from ckanext.querytool.logic import validators
 from ckanext.querytool.model import setup as model_setup
 import ckanext.querytool.commands as vs_commands
@@ -314,14 +315,11 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     # IActions
 
+       # IActions
     def get_actions(self):
-        # Disable lru_cache
-        module_root = 'ckanext.querytool.logic.action'
-        action_functions = h._get_functions(module_root)
-        # action_functions['resource_delete'] = actions.resource_delete
-        # action_functions['resource_patch'] = actions.resource_patch
-        # action_functions['resource_update'] = actions.resource_update
-        return action_functions
+        return {
+            "send_2fa_code": otp.send_2fa_code,
+       }
 
     # IConfigurable
 
@@ -452,7 +450,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     def update_config_schema(self, schema):
         schema.update({
             'ckan.welcome_page_title': [ignore_missing, str],
-            'ckan.welcome_page_description': [ignore_missing, str],
+                'ckan.welcome_page_description': [ignore_missing, str],
             'theme': [ignore_missing, str],
             'header_image_url': [ignore_missing, str],
             'header_image_upload': [ignore_missing, str],
