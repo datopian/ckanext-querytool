@@ -147,59 +147,59 @@
       </div>
     </div></br>
 
-    <div class="control-group" id="control-group-facebook-url" {{ 'style=display:block;' if facebook else 'style=display:none;' }}>
+    <div class="control-group" id="control-group-facebook-url" {{ 'style=display:block;padding-bottom:20px;' if facebook else 'style=display:none;' }}>
       <label class="control-label" for="field-facebook-url">{{ _('Facebook URL') }}</label>
       <div class="controls">
-        <input id="field-facebook-url" type="text" name="facebook_url" value="{{ data.facebook_url }}" placeholder="https://www.facebook.com/...">
+        <input class="form-control" id="field-facebook-url" type="text" name="facebook_url" value="{{ data.facebook_url }}" placeholder="https://www.facebook.com/...">
       </div>
     </div>
 
-    <div class="control-group " id="control-group-instagram-url" {{ 'style=display:block;' if instagram else 'style=display:none;' }}>
+    <div class="control-group " id="control-group-instagram-url" {{ 'style=display:block;padding-bottom:20px;' if instagram else 'style=display:none;' }}>
       <label class="control-label" for="field-instagram-url">{{ _('Instagram URL') }}</label>
       <div class="controls">
-        <input id="field-instagram-url" type="text" name="instagram_url" value="{{ data.instagram_url }}" placeholder="https://www.instagram.com/..."/>
+        <input class="form-control" id="field-instagram-url" type="text" name="instagram_url" value="{{ data.instagram_url }}" placeholder="https://www.instagram.com/..."/>
       </div>
     </div>
 
-    <div class="control-group " id="control-group-linkedin-url" {{ 'style=display:block;' if linkedin else 'style=display:none;' }}>
+    <div class="control-group " id="control-group-linkedin-url" {{ 'style=display:block;padding-bottom:20px;' if linkedin else 'style=display:none;' }}>
       <label class="control-label" for="field-linkedin-url">{{ _('LinkedIn URL') }}</label>
       <div class="controls">
-        <input id="field-linkedin-url" type="text" name="linkedin_url" value="{{ data.linkedin_url }}" placeholder="https://www.linkedin.com/in/..."/>
+        <input class="form-control" id="field-linkedin-url" type="text" name="linkedin_url" value="{{ data.linkedin_url }}" placeholder="https://www.linkedin.com/in/..."/>
       </div>
     </div>
 
-    <div class="control-group " id="control-group-telegram-url" {{ 'style=display:block;' if telegram else 'style=display:none;' }}>
+    <div class="control-group " id="control-group-telegram-url" {{ 'style=display:block;padding-bottom:20px;' if telegram else 'style=display:none;' }}>
       <label class="control-label" for="field-telegram-url">{{ _('Telegram URL') }}</label>
       <div class="controls">
-        <input id="field-telegram-url" type="text" name="telegram_url" value="{{ data.telegram_url }}" placeholder="https://telegram.me/..."/>
+        <input class="form-control" id="field-telegram-url" type="text" name="telegram_url" value="{{ data.telegram_url }}" placeholder="https://telegram.me/..."/>
       </div>
     </div>
 
-    <div class="control-group " id="control-group-tiktok-url" {{ 'style=display:block;' if tiktok else 'style=display:none;' }}>
+    <div class="control-group " id="control-group-tiktok-url" {{ 'style=display:block;padding-bottom:20px;' if tiktok else 'style=display:none;' }}>
       <label class="control-label" for="field-tiktok-url">{{ _('TikTok URL') }}</label>
       <div class="controls">
-        <input id="field-tiktok-url" type="text" name="tiktok_url" value="{{ data.tiktok_url }}" placeholder="https://www.tiktok.com/..."/>
+        <input class="form-control" id="field-tiktok-url" type="text" name="tiktok_url" value="{{ data.tiktok_url }}" placeholder="https://www.tiktok.com/..."/>
       </div>
     </div>
 
-    <div class="control-group " id="control-group-twitter-url" {{ 'style=display:block;' if twitter else 'style=display:none;' }}>
+    <div class="control-group " id="control-group-twitter-url" {{ 'style=display:block;padding-bottom:20px;' if twitter else 'style=display:none;' }}>
       <label class="control-label" for="field-twitter-url">{{ _('Twitter URL') }}</label>
       <div class="controls">
-        <input id="field-twitter-url" type="text" name="twitter_url" value="{{ data.twitter_url }}" placeholder="https://twitter.com/..."/>
+        <input class="form-control" id="field-twitter-url" type="text" name="twitter_url" value="{{ data.twitter_url }}" placeholder="https://twitter.com/..."/>
       </div>
     </div>
 
-    <div class="control-group " id="control-group-whatsapp-url" {{ 'style=display:block;' if whatsapp else 'style=display:none;' }}>
+    <div class="control-group " id="control-group-whatsapp-url" {{ 'style=display:block;padding-bottom:20px;' if whatsapp else 'style=display:none;' }}>
       <label class="control-label" for="field-whatsapp-url">{{ _('WhatsApp URL') }}</label>
       <div class="controls">
-        <input id="field-whatsapp-url" type="text" name="whatsapp_url" value="{{ data.whatsapp_url }}" placeholder="https://wa.me/..."/>
+        <input class="form-control" id="field-whatsapp-url" type="text" name="whatsapp_url" value="{{ data.whatsapp_url }}" placeholder="https://wa.me/..."/>
       </div>
     </div>
 
-    <div class="control-group " id="control-group-youtube-url" {{ 'style=display:block;' if youtube else 'style=display:none;' }}>
+    <div class="control-group " id="control-group-youtube-url" {{ 'style=display:block;padding-bottom:20px;' if youtube else 'style=display:none;' }}>
       <label class="control-label" for="field-youtube-url">{{ _('YouTube URL') }}</label>
       <div class="controls">
-        <input id="field-youtube-url" type="text" name="youtube_url" value="{{ data.youtube_url }}" placeholder="https://www.youtube.com/..."/>
+        <input class="form-control" id="field-youtube-url" type="text" name="youtube_url" value="{{ data.youtube_url }}" placeholder="https://www.youtube.com/..."/>
       </div>
     </div>
     <input type="hidden" name="social_order" id="social-order" value="{{ ','.join(social_order) }}"/>

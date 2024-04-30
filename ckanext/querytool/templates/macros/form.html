@@ -18,7 +18,7 @@ Examples:
   {{ form.input('title', label=_('Title'), value=data.title, error=errors.title) }}
 
 #}
-{% macro input(name, id='', label='', value='', placeholder='', type='text', error="", classes=[], attrs={}, is_required=false) %}
+{% macro input(name, id='', label='', value='', placeholder='', type='text', error="", classes=[], attrs={'class': 'form-control'}, is_required=false) %}
   {%- set extra_html = caller() if caller -%}
 
   {% call input_block(id or name, label or name, error, classes, extra_html=extra_html, is_required=is_required) %}
@@ -35,7 +35,7 @@ label       - The human readable label.
 value       - The value of the input.
 checked     - If true the checkbox will be checked
 error       - An error string for the field or just true to highlight the field.
-classes     - An array of classes to apply to the control-group.
+classes     - An array of classes to apply to the form-group.
 is_required - Boolean of whether this input is requred for the form to validate
 
 Example:
@@ -46,7 +46,7 @@ Example:
 #}
 {% macro checkbox(name, id='', label='', value='', checked=false, placeholder='', error="", classes=[], attrs={}, is_required=false) %}
   {%- set extra_html = caller() if caller -%}
-  <div class="control-group{{ " " ~ classes | join(" ") }}{% if error %} error{% endif %}">
+  <div class="form-group{{ " " ~ classes | join(" ") }}{% if error %} error{% endif %}">
     <div class="controls">
       <label class="checkbox" for="{{ id or name }}">
         <input id="{{ id or name }}" type="checkbox" name="{{ name }}" value="{{ value | empty_and_escape }}" {{ "checked " if checked }} {{ attributes(attrs) }} />
@@ -82,7 +82,7 @@ Examples:
   {{ form.select('year', label=_('Year'), options=[{'name':2010, 'value': 2010},{'name': 2011, 'value': 2011}], selected=2011, error=errors.year) }}
 
 #}
-{% macro select(name, id='', label='', options='', selected='', error='', classes=[], attrs={}, is_required=false) %}
+{% macro select(name, id='', label='', options='', selected='', error='', classes=[], attrs={'class': 'form-control'}, is_required=false) %}
   {% set classes = (classes|list) %}
   {% do classes.append('control-select') %}
 
@@ -261,8 +261,8 @@ Example:
 
 #}
 {% macro input_block(for, label="", error="", classes=[], control_classes=[], extra_html="", is_required=false) %}
-  <div class="control-group{{ " error" if error }}{{ " " ~ classes | join(' ') }}">
-    <label class="control-label" for="{{ for }}">{% if is_required %}<span title="{{ _("This field is required") }}" class="control-required">*</span> {% endif %}{{ label or _('Custom') }}</label>
+  <div class="form-group{{ " error" if error }}{{ " " ~ classes | join(' ') }}">
+    <label class="form-label" for="{{ for }}">{% if is_required %}<span title="{{ _("This field is required") }}" class="control-required">*</span> {% endif %}{{ label or _('Custom') }}</label>
     <div class="controls{{ " " ~ control_classes | join(' ') }}">
       {{ caller() }}
       {% if error and error is iterable %}<span class="error-block">{{ error|join(', ') }}</span>{% endif %}
@@ -443,10 +443,19 @@ Example
     {% set placeholder = placeholder if placeholder else _('http://example.com/my-image.jpg') %}
     {% set url_label = url_label or _('Report Icon')  %}
     {% set upload_label = upload_label or _('Image')  %}
+    {% set previous_upload = data['previous_upload'] %}
   
     {% if is_upload_enabled %}
-    <div class="image-upload" data-module="querytool_image_upload" data-module-is_url="{{ 'true' if is_url else 'false' }}" data-module-is_upload="{{ 'true' if is_upload else 'false' }}"
-         data-module-field_url="{{ field_url }}" data-module-field_upload="{{ field_upload }}" data-module-field_clear="{{ field_clear }}" data-module-upload_label="{{ upload_label }}" data-module-field_name="{{ field_name }}">
+    <div class="image-upload"
+      data-module="querytool_image_upload"
+      data-module-is_url="{{ 'true' if is_url else 'false' }}"
+      data-module-is_upload="{{ 'true' if is_upload else 'false' }}"
+      data-module-field_url="{{ field_url }}"
+      data-module-field_upload="{{ field_upload }}"
+      data-module-field_clear="{{ field_clear }}"
+      data-module-upload_label="{{ upload_label }}"
+      data-module-field_name="{{ field_name }}"
+      data-module-previous_upload="{{ 'true' if previous_upload else 'false' }}">
     {% endif %}
 
     {{ input(field_url, label=url_label, id='field-image-url', placeholder=placeholder, value=data.get(field_url), error=errors.get(field_url), classes=['control-full']) }}
