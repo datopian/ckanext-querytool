@@ -365,11 +365,19 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     # IActions
 
+<<<<<<< HEAD
     # IActions
     def get_actions(self):
         return {
             "send_2fa_code": otp.send_2fa_code,
         }
+=======
+       # IActions
+    def get_actions(self):
+        return {
+            "send_2fa_code": otp.send_2fa_code,
+       }
+>>>>>>> dev/python3-upgrade
 
     # IConfigurable
 
@@ -446,6 +454,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     # IConfigurer
 
     def update_config_schema(self, schema):
+<<<<<<< HEAD
         schema.update(
             {
                 "ckan.welcome_page_title": [ignore_missing, str],
@@ -479,6 +488,36 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                 ],
             }
         )
+=======
+        schema.update({
+            'ckan.welcome_page_title': [ignore_missing, str],
+                'ckan.welcome_page_description': [ignore_missing, str],
+            'theme': [ignore_missing, str],
+            'header_image_url': [ignore_missing, str],
+            'header_image_upload': [ignore_missing, str],
+            'header_clear_upload': [ignore_missing, str],
+            'header_text_color': [ignore_missing, str],
+            'footer_logo_image_url': [ignore_missing, str],
+            'footer_logo_image_upload': [ignore_missing, str],
+            'footer_logo_clear_upload': [ignore_missing, str],
+            'footer_logo_text': [ignore_missing, str],
+            'footer_logo2_image_url': [ignore_missing, str],
+            'footer_logo2_image_upload': [ignore_missing, str],
+            'footer_logo2_clear_upload': [ignore_missing, str],
+            'footer_logo2_text': [ignore_missing, str],
+            'copyright_text': [ignore_missing, str],
+            'social_order': [ignore_missing, str],
+            'facebook_url': [ignore_missing, str, logic.validators.url_validator],
+            'instagram_url': [ignore_missing, str, logic.validators.url_validator],
+            'linkedin_url': [ignore_missing, str, logic.validators.url_validator],
+            'telegram_url': [ignore_missing, str, logic.validators.url_validator],
+            'tiktok_url': [ignore_missing, str, logic.validators.url_validator],
+            'twitter_url': [ignore_missing, str, logic.validators.url_validator],
+            'whatsapp_url': [ignore_missing, str, logic.validators.url_validator],
+            'youtube_url': [ignore_missing, str, logic.validators.url_validator],
+            'group_parents_enabled': [ignore_missing, logic.validators.boolean_validator],
+        })
+>>>>>>> dev/python3-upgrade
 
         return schema
 
