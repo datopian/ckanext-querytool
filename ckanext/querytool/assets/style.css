@@ -237,6 +237,9 @@ a {
   background-image: none;
   height: auto;
 }
+
+.masthead .main-navbar ul li a,
+.navbar-nav li a,
 .masthead .navigation .nav-pills li a {
   margin: 0;
   padding: 15px;
@@ -244,6 +247,9 @@ a {
   color: #000;
   font-weight: 500;
 }
+
+.masthead .main-navbar ul li a:hover,
+.navbar-nav li a:hover,
 .masthead .navigation .nav-pills li a:hover {
   background-color: transparent;
   border-radius: 0;
@@ -252,6 +258,8 @@ a {
   box-shadow: none;
   color: rgba(0, 0, 0, 0.7);
 }
+
+.masthead .main-navbar ul li.active a,
 .masthead .navigation .nav-pills li.active a {
   background-color: transparent;
   border-radius: 0;
@@ -1322,8 +1330,6 @@ footer .copyright {
 }
 form.custom-lang-select {
   width: 200px;
-  float: right;
-  margin: 4px 4px 20px 30px;
 }
 .custom-lang-select .select2-container {
   width: 200px;
@@ -1666,6 +1672,7 @@ a {
   background-image: none;
   height: auto;
 }
+
 .masthead .navigation .nav-pills li a {
   margin: 0;
   padding: 15px;
@@ -1673,26 +1680,28 @@ a {
   color: #000;
   font-weight: 500;
 }
+
+.masthead .main-navbar ul li a:hover,
 .masthead .navigation .nav-pills li a:hover {
   background-color: transparent;
   border-radius: 0;
-  border-bottom: 5px solid rgba(0, 86, 255, 0.7);
-  -webkit-box-shadow: none;
   box-shadow: none;
   color: rgba(0, 0, 0, 0.7);
 }
+
+.masthead .main-navbar ul li.active a,
 .masthead .navigation .nav-pills li.active a {
   background-color: transparent;
   border-radius: 0;
-  border-bottom: 5px solid #0056ff;
-  -webkit-box-shadow: none;
   box-shadow: none;
   color: rgba(0, 0, 0, 0.7);
 }
+
 .masthead .site-search {
   float: right;
-  margin-top: 5px;
+  margin-top: 0;
 }
+
 .masthead .search-input-right {
   margin-left: 20px;
 }
@@ -2751,8 +2760,6 @@ footer .copyright {
 }
 form.custom-lang-select {
   width: 200px;
-  float: right;
-  margin: 4px 4px 20px 30px;
 }
 .custom-lang-select .select2-container {
   width: 200px;
@@ -2855,4 +2862,32 @@ form.custom-lang-select {
 }
 .orphan-label {
   margin-right: 5px;
+}
+
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.gap-x-4 {
+  gap: 1rem;
+}
+
+#field-sitewide-search {
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+  font-size: 14px;
+}
+
+.site-search .btn:hover {
+  background-color: transparent;
+  color: black;
+}
+
+.masthead .main-navbar ul li:hover a {
+  background-color: transparent;
 }
