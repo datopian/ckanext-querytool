@@ -1290,24 +1290,6 @@ $(".filter-item-value").hover(function(event) {
 //  }
 //});
 
-document.querySelectorAll('.filter-item-value').forEach(element => {
-    element.addEventListener('mouseenter', function() {
-        const activeValue = this.querySelector('.active')?.getAttribute('value') || 'Default title';
-        const tooltip = document.createElement('div');
-        tooltip.style.position = 'absolute';
-        tooltip.style.right = '100%'; // Example placement, adjust as needed
-        tooltip.textContent = activeValue;
-        tooltip.className = 'tooltip'; // Add styling as needed
-
-        // Append and remove tooltip logic
-        this.appendChild(tooltip);
-        this.addEventListener('mouseleave', function() {
-            this.removeChild(tooltip);
-        });
-    });
-});
-
-
 $('body').on('click', '[id^=copy-viz-btn_]', function () {
   document.getElementById("submit-overlay").style.display = "block";
   document.getElementById("submit-overlay").style.pointerEvents = "none";
@@ -1515,15 +1497,17 @@ document.addEventListener("DOMContentLoaded", function() {
       const username = document.getElementById("field-login").value;
 
       $.ajax({
-        url: `/send_2fa_code/${username}`,
+        url: `/api/action/send_2fa_code?user=${username}`,
         type: "POST",
+        data: {
+          user: username
+        },
         success: function(response) {
           const successMessage = document.createElement("p");
 
           successMessage.innerHTML = translate('A verification code has been sent. This code expires in: ')
           successMessage.classList.add("alert", "alert-success");
           successMessage.style.marginTop = "1rem";
-          $(successMessage).css("margin-left", "130px");
           $(successMessage).css("width", "320px");
 
           successMessage

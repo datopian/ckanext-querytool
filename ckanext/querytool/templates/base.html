@@ -46,7 +46,6 @@
 {% block scripts %}
   {{ super() }}
   {% asset 'querytool/querytool-js' %}
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
 
   {% if h.get_cookie_control_config().get('api_key') and h.get_cookie_control_config().get('enabled') %}
