@@ -1,104 +1,82 @@
 {% ckan_extends %}
 {% block header_wrapper %}
-
-{% block header_account %}
-  {% if c.user %}
-    <header class="account-masthead embed-hide">
-       <div class="container-fluid">
-          {% block header_account_container_content %}
-             {{ super() }}
-          {% endblock %}
-       </div>
-    </header>
-  {% endif %}
-{% endblock %}
-<header class="navbar navbar-static-top masthead embed-hide">
-   {% block header_debug %}
-   {{ super() }}
-   {% endblock %}
-   <div class="container-fluid">
-      <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-       <span class="fa fa-bars"></span>
-      </button>
-      {% block header_logo %}
-      {# Don't show default logo. #}
-      {% endblock %}
-
-      {% if g.theme == 'Custom' %}
-      {% block lang_select_mobile %}
-      <div class="mobile">
-        {% snippet "snippets/language_selector_with_flags.html", id="mobile" %}
-      </div>
-    {% endblock %}
+  {% block header_account %}
+    {% if c.user %}
+      <header class="account-masthead embed-hide">
+        <div class="container-fluid">
+          {% block header_account_container_content %}{{ super() }}{% endblock %}
+        </div>
+      </header>
     {% endif %}
-
+  {% endblock %}
+  <header class="navbar navbar-static-top masthead embed-hide">
+    {% block header_debug %}{{ super() }}{% endblock %}
+    <div class="container-fluid">
       <div class="nav-collapse collapse">
         {% block header_site_navigation %}
-        <nav class="section navigation">
+          <nav class="section navigation">
             <ul class="nav nav-pills">
-            {% block header_site_navigation_tabs %}
+              {% block header_site_navigation_tabs %}
                 {% if c.user and h.get_user_permission(c.userobj) == True %}
-                  {{ h.build_nav_main(
-                      ('home', _('Home')),
-                      ('querytool_public_reports', _('Reports'))
+                  {{ h.build_nav_main(('home', _('Home') ),
+                  ('querytool_public_reports', _('Reports'))
                   )}}
                 {% else %}
-                  {{ h.build_nav_main(
-                    ('querytool_public', _('Home')),
-                    ('querytool_public_reports', _('Reports'))
+                  {{ h.build_nav_main(('querytool_public', _('Home') ),
+                  ('querytool_public_reports', _('Reports'))
                   )}}
                 {% endif %}
               {% endblock %}
             </ul>
-        </nav>
+          </nav>
         {% endblock %}
-
         {% if g.theme == 'Custom' %}
-        {% block lang_select_screen %}
-          <div class="screen">
-            {% snippet "snippets/language_selector_with_flags.html", id="screen" %}
-          </div>
-        {% endblock %}
+          {% block lang_select_screen %}
+            <div class="screen">{% snippet "snippets/language_selector_with_flags.html", id="screen" %}</div>
+          {% endblock %}
         {% endif %}
-
         <!-- Search groups -->
         {% if c.user and h.get_user_permission(c.userobj) == True %}
           {% block header_site_search %}
-            <form class="section site-search simple-input search-input-right" action="{% url_for controller='package', action='search' %}" method="get">
+            <form class="section site-search simple-input search-input-right"
+                  action="{% url_for controller='package', action='search' %}"
+                  method="get">
               <div class="field">
-                <label for="field-sitewide-search">{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}</label>
-                <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search datasets') }}" />
-                <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+                <label for="field-sitewide-search">
+                  {% block header_site_search_label %}{{ _("Search datasets") }}{% endblock %}
+                </label>
+                <input id="field-sitewide-search"
+                       type="text"
+                       name="q"
+                       placeholder="{{ _("Search datasets") }}" />
+                <button class="btn-search" type="submit">
+                  <i class="fa fa-search"></i>
+                </button>
               </div>
             </form>
           {% endblock %}
         {% endif %}
-
         <!-- Search reports -->
         {% snippet "snippets/search_reports_input.html" %}
-
         {% block vitalst_header_site_navigation %}
-        <nav class="section navigation default-menu">
+          <nav class="section navigation default-menu">
             <ul class="nav nav-pills">
-                {% if c.user and h.get_user_permission(c.userobj) == True %}
-                  {% block header_site_navigation_ckan %}
-                      {{ h.build_nav_main(
-                        ('search', _('Manage Data')),
-                        ('group_index', _('Design Reports')),
-                        ('organizations_index', _('Organizations')),
-                        ('about', _('About'))
-                      ) }}
-                  {% endblock %}
-                {% endif %}
+              {% if c.user and h.get_user_permission(c.userobj) == True %}
+                {% block header_site_navigation_ckan %}
+                  {{ h.build_nav_main(('search', _('Manage Data') ),
+                  ('group_index', _('Design Reports')),
+                  ('organizations_index', _('Organizations')),
+                  ('about', _('About'))
+                  ) }}
+                {% endblock %}
+              {% endif %}
             </ul>
-        </nav>
+          </nav>
         {% endblock %}
       </div>
-   </div>
-</header>
-
-
-<style>
+    </div>
+  </header>
+  <style>
   .popup h2 {
     font-size:2em;
   }
@@ -147,40 +125,43 @@
   .clearfix {
     clear:both;
   }
-</style>
-<div class="popup" id="iepopup">
-  <h2>Unsupported Browser</h2>
-  <br/> 
-  <p>You are using a web browser that is not compatible with certain features in this website. </p>
-  <p>For a full experience it is recommended you upgrade to the latest version of:</p>
-  <br/>
-
-  <div class="browsers">
-    <div class="browser">
-      <a href="https://www.google.com/intl/en_ca/chrome/" target="_blank"><img src="/base/images/chrome.png" >
-      <br/>
-      Chrome</a>
+  </style>
+  <div class="popup" id="iepopup">
+    <h2>Unsupported Browser</h2>
+    <br />
+    <p>You are using a web browser that is not compatible with certain features in this website.</p>
+    <p>For a full experience it is recommended you upgrade to the latest version of:</p>
+    <br />
+    <div class="browsers">
+      <div class="browser">
+        <a href="https://www.google.com/intl/en_ca/chrome/" target="_blank">
+          <img src="/base/images/chrome.png">
+          <br />
+        Chrome</a>
+      </div>
+      <div class="browser">
+        <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank">
+          <img src="/base/images/firefox.png">
+          <br />
+        Firefox</a>
+      </div>
+      <div class="browser">
+        <a href="https://support.apple.com/downloads/safari" target="_blank">
+          <img src="/base/images/safari.png">
+          <br />
+        Safari</a>
+      </div>
+      <div class="browser">
+        <a href="https://www.microsoft.com/en-us/edge" target="_blank">
+          <img src="/base/images/edge.png">
+          <br />
+        Edge</a>
+      </div>
+      <p class="clearfix"></p>
     </div>
-    <div class="browser">
-      <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank"><img src="/base/images/firefox.png" >
-      <br/>
-      Firefox</a>
-    </div>
-    <div class="browser">
-      <a href="https://support.apple.com/downloads/safari" target="_blank"><img src="/base/images/safari.png" >
-      <br/>
-      Safari</a>
-    </div>
-    <div class="browser">
-      <a href="https://www.microsoft.com/en-us/edge" target="_blank"><img src="/base/images/edge.png" >
-      <br/>
-      Edge</a>
-    </div>
-    <p class="clearfix"></p>
+    <br />
+    <button class="btn btn-primary" id="close_popup" onClick="close_popup()">Close</button>
+    <br />
   </div>
-  <br/>
-  <button class="btn btn-primary" id="close_popup" onClick="close_popup()">Close</button>
-  <br/>
-</div>
-<div class="shadow" id="ieshadow"></div>
+  <div class="shadow" id="ieshadow"></div>
 {% endblock %}
