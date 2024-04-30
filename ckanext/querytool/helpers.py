@@ -1181,6 +1181,9 @@ def get_all_parent_groups():
 def get_config_value(key):
     val = config.get(key)
     if val:
+        # check if val is of type list
+        if isinstance(val, list):
+            return val
         val = val.lower()
         if val == 'true':
             return True
