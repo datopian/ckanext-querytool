@@ -1324,15 +1324,16 @@ $('body').on('change', '#theme', function () {
   }
 });
 
-$(document).ready(function(){
+$(window).on('load', function() {
   var theme = $('#theme').val();
+  console.log(theme)
 
   if(theme == 'Default') {
-    $('#custom-theme').hide();
-    $('#custom-theme-help').hide();
+    $('#custom-theme').attr('hidden', true);
+    $('#custom-theme-help').attr('hidden', true);
   } else {
-    $('#custom-theme').show();
-    $('#custom-theme-help').show();
+    $('#custom-theme').removeAttr('hidden');
+    $('#custom-theme-help').removeAttr('hidden');
   }
 });
 

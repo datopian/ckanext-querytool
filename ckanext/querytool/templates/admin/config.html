@@ -1,0 +1,256 @@
+{% ckan_extends %}
+
+{% import 'macros/form.html' as form %}
+{% import 'macros/custom_autoform.html' as custom_autoform %}
+
+{% block admin_form %}
+  {{ h.csrf_input() }}
+
+  {% asset 'querytool/querytool-image-upload-js' %}
+
+  {{ custom_autoform.generate(form_items, data, errors) }}
+
+  {{ form.input('ckan.welcome_page_title', id='field-ckan.welcome_page_title', placeholder=g.welcome_page_title or _('Welcome Page Title'), label=_('Welcome Page Title'), value=data['ckan.welcome_page_title'], error=errors['ckan.welcome_page_title']) }}
+  {{ form.markdown('ckan.welcome_page_description', id='field-ckan.welcome_page_description', placeholder=g.welcome_page_description or _('Welcome Page Description'), label=_('Welcome Page Description'), value=data['ckan.welcome_page_description'], error=errors['ckan.welcome_page_description']) }}
+
+  {{ form.select('group_parents_enabled', label=_('Parent Groups'), options=[{'text': _('Enabled'), 'value': 'True'},{'text': _('Disabled'), 'value': 'False'}], selected=g.group_parents_enabled or 'False', error=errors.group_parents_enabled) }}
+
+  {{ form.select('theme', label=_('Theme'), options=[{'text': _('Default'), 'value': 'Default'},{'text': _('Custom'), 'value': 'Custom'}], selected=data.theme, error=errors.theme) }}
+
+  {% set theme = data.theme %}
+
+  <div id="custom-theme" hidden>
+    {% set header_is_upload = data.header_image_url and not data.header_image_url.startswith('http') %}
+    {% set header_is_url = data.header_image_url and data.header_image_url.startswith('http') %}
+
+    {{ form.custom_image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=header_is_url, is_upload=header_is_upload, url_label=_('Header banner'), upload_label=_('Header banner'), field_name='header_image_url', field_url='header_image_url', field_upload='header_image_upload', field_clear='header_clear_upload') }}
+
+    {% if not data.header_text_color %}
+      {% set header_text_color = '#000000' %}
+    {% else %}
+      {% set header_text_color = data.header_text_color %}
+    {% endif %}
+
+    <div>
+      <label for="header_text_color" class="control-label">{{ _('Header text color') }}</label>
+      <input type="color" id="header_text_color" name="header_text_color" value="{{ header_text_color }}" style="margin-left: 10px !important; height: 30px !important; width: 60px !important; padding: 0 0 0 0 !important;">
+    </div></br>
+
+    {% set footer_logo_is_upload = data.footer_logo_image_url and not data.footer_logo_image_url.startswith('http') %}
+    {% set footer_logo_is_url = data.footer_logo_image_url and data.footer_logo_image_url.startswith('http') %}
+
+    {{ form.custom_image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=footer_logo_is_url, is_upload=footer_logo_is_upload, url_label=_('Footer logo 1'), upload_label=_('Footer logo 1'), field_name='footer_logo_image_url', field_url='footer_logo_image_url', field_upload='footer_logo_image_upload', field_clear='footer_logo_clear_upload') }}
+
+    {{ form.markdown('footer_logo_text', id='field-footer-logo-text', placeholder=_('Footer logo 1 text'), label=_('Footer logo 1 text'), value=data.footer_logo_text, error=errors.footer_logo_text) }}
+
+    {% set footer_logo2_is_upload = data.footer_logo2_image_url and not data.footer_logo2_image_url.startswith('http') %}
+    {% set footer_logo2_is_url = data.footer_logo2_image_url and data.footer_logo2_image_url.startswith('http') %}
+
+    {{ form.custom_image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=footer_logo2_is_url, is_upload=footer_logo2_is_upload, url_label=_('Footer logo 2'), upload_label=_('Footer logo 2'), field_name='footer_logo2_image_url', field_url='footer_logo2_image_url', field_upload='footer_logo2_image_upload', field_clear='footer_logo2_clear_upload') }}
+
+    {{ form.markdown('footer_logo2_text', id='field-footer-logo2-text', placeholder=_('Footer logo 2 text'), label=_('Footer logo 2 text'), value=data.footer_logo2_text, error=errors.footer_logo2_text) }}
+
+    {{ form.markdown('copyright_text', id='field-copyright_text', placeholder=_('Copyright text'), label=_('Copyright text'), value=data.copyright_text, error=errors.copyright_text) }}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.10.2/Sortable.min.js"></script>
+
+    {% set social_order = data.social_order.split(',') or [] %}
+
+    {% if social_order | length == 1 and social_order[0] == '' %}
+      {% set social_order = [] %}
+    {% endif %}
+
+    {% set facebook = 'facebook' in social_order %}
+    {% set instagram = 'instagram' in social_order %}
+    {% set linkedin = 'linkedin' in social_order %}
+    {% set telegram = 'telegram' in social_order %}
+    {% set tiktok = 'tiktok' in social_order %}
+    {% set twitter = 'twitter' in social_order %}
+    {% set whatsapp = 'whatsapp' in social_order %}
+    {% set youtube = 'youtube' in social_order %}
+
+    <p class="social-text">{{ _('Footer Social Media Links') }}:</p>
+
+    <div class="info-block-social">
+      <i class="fa fa-info-circle"></i>
+      {{ _('Select up to 4. These will appear in the footer in the order (left to right) of "Selected"') }}
+    </div></br>
+
+    <div class="container-admin-social">
+      <div class="column-social" id="column-social-options">
+        <p class="social-options-text"><b>{{ _('Options') }}</b></label>
+        {% if not facebook %}
+          <div class="list-group-item" draggable="true" id="facebook"><img class="list-group-img" alt="facebook" src="/base/images/social/facebook.png" style="height: 20px;"> Facebook</div>
+        {% endif %}
+        {% if not instagram %}
+          <div class="list-group-item" draggable="true" id="instagram"><img class="list-group-img" alt="instagram" src="/base/images/social/instagram.png" style="height: 20px;"> Instagram</div>
+        {% endif %}
+        {% if not linkedin %}
+          <div class="list-group-item" draggable="true" id="linkedin"><img class="list-group-img" alt="linkedin" src="/base/images/social/linkedin.png" style="height: 20px;"> LinkedIn</div>
+        {% endif %}
+        {% if not telegram %}
+          <div class="list-group-item" draggable="true" id="telegram"><img class="list-group-img" alt="telegram" src="/base/images/social/telegram.png" style="height: 20px;"> Telegram</div>
+        {% endif %}
+        {% if not tiktok %}
+          <div class="list-group-item" draggable="true" id="tiktok"><img class="list-group-img" alt="tiktok" src="/base/images/social/tiktok.png" style="height: 20px;"> TikTok</div>
+        {% endif %}
+        {% if not twitter %}
+          <div class="list-group-item" draggable="true" id="twitter" ><img class="list-group-img" alt="twitter" src="/base/images/social/twitter.png" style="height: 20px;"> Twitter</div>
+        {% endif %}
+        {% if not whatsapp %}
+          <div class="list-group-item" draggable="true" id="whatsapp"><img class="list-group-img" alt="whatsapp" src="/base/images/social/whatsapp.png" style="height: 20px;"> WhatsApp</div>
+        {% endif %}
+        {% if not youtube %}
+          <div class="list-group-item" draggable="true" id="youtube"><img class="list-group-img" alt="youtube" src="/base/images/social/youtube.png" style="height: 20px;"> YouTube</div>
+        {% endif %}
+      </div>
+      <span class="social-arrow"><b>&#8594;</b></span>
+      <div class="column-social" id="column-social-selected">
+        <p class="social-selected-text"><b>{{ _('Selected') }}</b></label>
+
+        {% set social_media_list = ['facebook', 'instagram', 'linkedin', 'telegram', 'tiktok', 'twitter', 'whatsapp', 'youtube'] %}
+
+        {% for sm in social_order %}
+          <div class="list-group-item" draggable="true" id="{{ sm }}"><img class="list-group-img" alt="{{ sm }}" src="/base/images/social/{{ sm }}.png" style="height: 20px;"> {{ sm.capitalize() }}</div>
+        {% endfor %}
+
+        {#{% for sm in social_media_list %}
+          {% if sm not in social_order %}
+            <div class="list-group-item" draggable="true" id="{{ sm }}" style="display: none;"><img class="list-group-img" alt="{{ sm }}" src="/base/images/social/{{ sm }}.png" style="height: 20px;"> {{ sm.capitalize() }}</div>
+          {% endif %}
+        {% endfor %}#}
+
+        {#{% if facebook %}
+          <div class="list-group-item" draggable="true" id="facebook"><img class="list-group-img" alt="facebook" src="/base/images/social/facebook.png" style="height: 20px;"> Facebook</div>
+        {% endif %}
+        {% if instagram %}
+          <div class="list-group-item" draggable="true" id="instagram"><img class="list-group-img" alt="instagram" src="/base/images/social/instagram.png" style="height: 20px;"> Instagram</div>
+        {% endif %}
+        {% if linkedin %}
+          <div class="list-group-item" draggable="true" id="linkedin"><img class="list-group-img" alt="linkedin" src="/base/images/social/linkedin.png" style="height: 20px;"> LinkedIn</div>
+        {% endif %}
+        {% if telegram %}
+          <div class="list-group-item" draggable="true" id="telegram"><img class="list-group-img" alt="telegram" src="/base/images/social/telegram.png" style="height: 20px;"> Telegram</div>
+        {% endif %}
+        {% if tiktok %}
+          <div class="list-group-item" draggable="true" id="tiktok"><img class="list-group-img" alt="tiktok" src="/base/images/social/tiktok.png" style="height: 20px;"> TikTok</div>
+        {% endif %}
+        {% if twitter %}
+          <div class="list-group-item" draggable="true" id="twitter" ><img class="list-group-img" alt="twitter" src="/base/images/social/twitter.png" style="height: 20px;"> Twitter</div>
+        {% endif %}
+        {% if whatsapp %}
+          <div class="list-group-item" draggable="true" id="whatsapp"><img class="list-group-img" alt="whatsapp" src="/base/images/social/whatsapp.png" style="height: 20px;"> WhatsApp</div>
+        {% endif %}
+        {% if youtube %}
+          <div class="list-group-item" draggable="true" id="youtube"><img class="list-group-img" alt="youtube" src="/base/images/social/youtube.png" style="height: 20px;"> YouTube</div>
+        {% endif %}#}
+      </div>
+    </div></br>
+
+    <div class="control-group" id="control-group-facebook-url" {{ 'style=display:block;padding-bottom:20px;' if facebook else 'style=display:none;' }}>
+      <label class="control-label" for="field-facebook-url">{{ _('Facebook URL') }}</label>
+      <div class="controls">
+        <input class="form-control" id="field-facebook-url" type="text" name="facebook_url" value="{{ data.facebook_url }}" placeholder="https://www.facebook.com/...">
+      </div>
+    </div>
+
+    <div class="control-group " id="control-group-instagram-url" {{ 'style=display:block;padding-bottom:20px;' if instagram else 'style=display:none;' }}>
+      <label class="control-label" for="field-instagram-url">{{ _('Instagram URL') }}</label>
+      <div class="controls">
+        <input class="form-control" id="field-instagram-url" type="text" name="instagram_url" value="{{ data.instagram_url }}" placeholder="https://www.instagram.com/..."/>
+      </div>
+    </div>
+
+    <div class="control-group " id="control-group-linkedin-url" {{ 'style=display:block;padding-bottom:20px;' if linkedin else 'style=display:none;' }}>
+      <label class="control-label" for="field-linkedin-url">{{ _('LinkedIn URL') }}</label>
+      <div class="controls">
+        <input class="form-control" id="field-linkedin-url" type="text" name="linkedin_url" value="{{ data.linkedin_url }}" placeholder="https://www.linkedin.com/in/..."/>
+      </div>
+    </div>
+
+    <div class="control-group " id="control-group-telegram-url" {{ 'style=display:block;padding-bottom:20px;' if telegram else 'style=display:none;' }}>
+      <label class="control-label" for="field-telegram-url">{{ _('Telegram URL') }}</label>
+      <div class="controls">
+        <input class="form-control" id="field-telegram-url" type="text" name="telegram_url" value="{{ data.telegram_url }}" placeholder="https://telegram.me/..."/>
+      </div>
+    </div>
+
+    <div class="control-group " id="control-group-tiktok-url" {{ 'style=display:block;padding-bottom:20px;' if tiktok else 'style=display:none;' }}>
+      <label class="control-label" for="field-tiktok-url">{{ _('TikTok URL') }}</label>
+      <div class="controls">
+        <input class="form-control" id="field-tiktok-url" type="text" name="tiktok_url" value="{{ data.tiktok_url }}" placeholder="https://www.tiktok.com/..."/>
+      </div>
+    </div>
+
+    <div class="control-group " id="control-group-twitter-url" {{ 'style=display:block;padding-bottom:20px;' if twitter else 'style=display:none;' }}>
+      <label class="control-label" for="field-twitter-url">{{ _('Twitter URL') }}</label>
+      <div class="controls">
+        <input class="form-control" id="field-twitter-url" type="text" name="twitter_url" value="{{ data.twitter_url }}" placeholder="https://twitter.com/..."/>
+      </div>
+    </div>
+
+    <div class="control-group " id="control-group-whatsapp-url" {{ 'style=display:block;padding-bottom:20px;' if whatsapp else 'style=display:none;' }}>
+      <label class="control-label" for="field-whatsapp-url">{{ _('WhatsApp URL') }}</label>
+      <div class="controls">
+        <input class="form-control" id="field-whatsapp-url" type="text" name="whatsapp_url" value="{{ data.whatsapp_url }}" placeholder="https://wa.me/..."/>
+      </div>
+    </div>
+
+    <div class="control-group " id="control-group-youtube-url" {{ 'style=display:block;padding-bottom:20px;' if youtube else 'style=display:none;' }}>
+      <label class="control-label" for="field-youtube-url">{{ _('YouTube URL') }}</label>
+      <div class="controls">
+        <input class="form-control" id="field-youtube-url" type="text" name="youtube_url" value="{{ data.youtube_url }}" placeholder="https://www.youtube.com/..."/>
+      </div>
+    </div>
+    <input type="hidden" name="social_order" id="social-order" value="{{ ','.join(social_order) }}"/>
+
+ </div>
+
+ {% endblock %}
+
+
+{% block admin_form_help %}
+
+    {% set about_url = h.url_for(controller='home', action='about') %}
+    {% set home_url = h.url_for(controller='home', action='index') %}
+    {% set docs_url = "http://docs.ckan.org/en/{0}/theming".format(g.ckan_doc_version) %}
+    {% trans %}
+    <p><strong>Site Title:</strong> This is the title of this CKAN instance.
+        It appears in various places throughout CKAN.</p>
+    <p><strong>Style:</strong> Choose from a list of simple variations of
+        the main colour scheme to get a very quick custom theme working.</p>
+    <p><strong>Site Tag Logo:</strong> This is the logo that appears in the
+        header of all the CKAN instance templates.</p>
+    <p><strong>Custom CSS:</strong> This is a block of CSS that appears in
+        <code>&lt;head&gt;</code> tag of every page. If you wish to customize
+        the templates more fully we recommend
+        <a href="{{ docs_url }}" target="_blank">reading the documentation</a>.</p>
+    {% endtrans %}
+
+    <p><strong>{{ _('Welcome Page Title') }}:</strong> {{ _('The title presented to users on the home page.') }}</p>
+
+    <p><strong>{{ _('Welcome Page Description') }}:</strong> {{ _('The description presented to users on the home page.') }}</p>
+
+    <p><strong>{{ _('Parent Groups') }}:</strong> {{ _('Enable or disable parent/child groups (visit the "Manage" page of a group to set its type). Parent groups will appear on the home page. Clicking on a parent group will navigate to the child groups page for the given parent.') }}</p>
+
+    <p><strong>{{ _('Theme') }}:</strong> {{ _('This toggles between the CKAN default theme and the custom theme. The custom theme adds additional configuration options to this page.') }}</p>
+
+    <div id="custom-theme-help">
+    <p><strong>{{ _('Header Banner') }}:</strong> {{ _('Upload an image to set the home page banner.') }}</p>
+
+    <p><strong>{{ _('Header Text Color') }}:</strong> {{ _('This changes the text color of Welcome Page Description.') }}</p>
+
+    <p><strong>{{ _('Footer Logo 1') }}:</strong> {{ _('Upload an image to display as a logo on the left side of the footer.') }}</p>
+
+    <p><strong>{{ _('Footer Logo 1 Text') }}:</strong> {{ _('This text will be displayed to the right of the logo.') }}</p>
+
+    <p><strong>{{ _('Footer Logo 2') }}:</strong> {{ _('Upload an image to display as a second logo on the left side of the footer.') }}</p>
+
+    <p><strong>{{ _('Footer Logo 2 Text') }}:</strong> {{ _('This text will be displayed to the right of the second logo.') }}</p>
+
+    <p><strong>{{ _('Footer Copyright Text') }}:</strong> {{ _('This text will be displayed on the bottom center of the footer.') }}</p>
+
+    <p><strong>{{ _('Footer Social Media Links') }}:</strong> {{ _('This allows you to select up to 4 social media links to display on the right side of the footer. Dragging an option to "Selected" will add its URL field to this page.') }}</p>
+    </div>
+
+{% endblock %}
