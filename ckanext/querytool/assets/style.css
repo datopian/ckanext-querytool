@@ -2903,3 +2903,16 @@ form.custom-lang-select {
 .masthead .main-navbar ul li:hover a {
   background-color: transparent;
 }
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.span4 img {
+  width: 100%;
+  height: auto;
+}

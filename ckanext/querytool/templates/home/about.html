@@ -1,0 +1,43 @@
+{% asset 'querytool/css/home-page.css' %}
+
+{% extends "page.html" %}
+
+{% block subtitle %}{{ _('About') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('About'), controller='home', action='about' %}</li>
+{% endblock %}
+
+
+{% block primary %}
+
+  {% block primary_content %}
+      {% snippet "home/vs-home-page.html" %}
+  {% endblock %}
+
+  <article class="module">
+    <div class="module-content">
+      {% block about %}
+        {% if g.site_about %}
+          {{ h.render_markdown(g.site_about) }}
+        {% else %}
+          <h1 class="page-heading">{{ _('About') }}</h1>
+          <div class="row-fluid grid-cols-3 grid">
+            <div class="span4">
+               <img src="/base/images/vs-logo-blue.jpg" alt="Vital Strategies" />
+            </div>
+            <div class="span4">
+               <img src="/base/images/bloomberg-logo.jpg" alt="Bloomberg Philanlanthropies" />
+            </div>
+            <div class="span4">
+               <img src="/base/images/datopian-logo.png" alt="Datopian" />
+            </div>
+          </div>
+          {% snippet 'home/snippets/about_text.html' %}
+        {% endif %}
+      {% endblock %}
+    </div>
+  </article>
+{% endblock %}
+
+{% block secondary %}{% endblock %}
