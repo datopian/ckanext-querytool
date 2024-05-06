@@ -15,6 +15,7 @@ from ckanext.querytool import actions
 from ckanext.querytool.logic import otp
 from ckanext.querytool.logic import validators
 from ckanext.querytool.model import setup as model_setup
+from ckanext.querytool.logic.action.update import config_option_update
 import ckanext.querytool.commands as vs_commands
 import os
 import sys
@@ -63,7 +64,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IAuthFunctions)
-    plugins.implements(plugins.IGroupForm, inherit=True)
+    #plugins.implements(plugins.IGroupForm, inherit=True)
     plugins.implements(plugins.IClick)
 
     # ITranslation
@@ -317,6 +318,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     def get_actions(self):
         return {
             "send_2fa_code": otp.send_2fa_code,
+            "config_option_update": config_option_update,
        }
 
     # IConfigurable
