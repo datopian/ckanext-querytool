@@ -2862,6 +2862,15 @@ form.custom-lang-select {
 .mb-20 {
   margin-bottom: 20px !important;
 }
+
+.pb-4 {
+  padding-bottom: 1rem;
+}
+
+.bg-white {
+  background-color: #fff;
+}
+
 .report-group-select {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2902,4 +2911,72 @@ form.custom-lang-select {
 
 .masthead .main-navbar ul li:hover a {
   background-color: transparent;
+}
+
+.border-b-gray {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs >.active > a {
+  color: #555555;
+    background-color: #eeeeee;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+
+.w-full {
+  width: 100%;
+}
+
+:not(.btn-primary).btn {
+    display: inline-block;
+    padding: 4px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 20px;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: #333333;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+    background-color: #f7f7f7;
+    background-image: -moz-linear-gradient(top, #ffffff, #eaeaea);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#eaeaea));
+    background-image: -webkit-linear-gradient(top, #ffffff, #eaeaea);
+    background-image: -o-linear-gradient(top, #ffffff, #eaeaea);
+    background-image: linear-gradient(to bottom, #ffffff, #eaeaea);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffeaeaea',GradientType=0);
+    border-color: #eaeaea #eaeaea #c4c4c4;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+    border: 1px solid #cccccc;
+    border-bottom-color: #b3b3b3;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .2), 0 1px 2px rgba(0, 0, 0, .05);
+}
+
+.btn-minimal:hover {
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background-color: #0047d4;
+  background-image: none;
+    color: #fff;
+}
+
+.bg-no-image {
+  background-image: none;
+}
+
+.nav-tabs>.active>a {
+    color: #555555 !important;
+    background-color: #eeeeee !important;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+    cursor: default;
 }

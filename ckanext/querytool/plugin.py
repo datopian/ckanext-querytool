@@ -63,7 +63,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IAuthFunctions)
-    plugins.implements(plugins.IGroupForm, inherit=True)
+    #plugins.implements(plugins.IGroupForm, inherit=True)
     plugins.implements(plugins.IClick)
 
     # ITranslation
@@ -103,9 +103,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def is_fallback(self):
         False
-
-    def group_form(self):
-        return 'group/snippets/group_form.html'
 
     def group_controller(self):
         return 'group'
@@ -166,7 +163,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         )
         return schema
 
-    def group_form(group_type='group'):
+    def group_form(self, group_type='group'):
         return 'group/snippets/group_form.html'
 
     def index_template(self):
