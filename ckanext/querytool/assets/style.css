@@ -1409,7 +1409,7 @@ form.custom-lang-select {
   text-align: center;
   width: 100%;
   color: #444;
-  font-size: sgreenpeace-js:
+  font-size: small;
 }
 .social-arrow {
   height: 100%;
@@ -2979,4 +2979,17 @@ form.custom-lang-select {
     border: 1px solid #ddd;
     border-bottom-color: transparent;
     cursor: default;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.span4 img {
+  width: 100%;
+  height: auto;
 }
