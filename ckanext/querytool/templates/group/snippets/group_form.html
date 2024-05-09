@@ -6,9 +6,10 @@
     {{ form.errors(error_summary) }}
   {% endblock %}
 
+  {% asset 'querytool/querytool-group-autocomplete-js' %}
+
   {% block basic_fields %}
-    {% asset 'querytool/javascript/modules/vs-groups-autocomplete.js' %}
-    {% set attrs = {'data-module': 'slug-preview-target'} %}
+    {% set attrs = {'data-module': 'slug-preview-target', 'class': 'form-control'} %}
     {{ form.input('title', label=_('Name'), id='field-name', placeholder=_('My Group'), value=data.title, error=errors.title, classes=['control-full'], attrs=attrs) }}
 
     {# Perhaps these should be moved into the controller? #}
@@ -28,7 +29,7 @@
       {{ form.select('group_relationship_type', label=_('Type'), options=[{'text': _('Parent'), 'value': 'parent'}, {'text': _('Child'), 'value': 'child'}], selected=data.group_relationship_type or 'child', error=errors.group_relationship_type) }}
       {{ form.select('parent', id='field-parent', label=_('Parent'), options=group_dicts, selected=data.parent or '', error=errors.parent) }}
 
-      {% set child_attrs = {'data-module': 'vs-groups-autocomplete', 'data-module-tags': '', 'data-module-source': '/api/2/util/group/autocomplete?incomplete=?'} %}
+      {% set child_attrs = {'data-module': 'vs-groups-autocomplete', 'data-module-tags': '', 'data-module-source': '/api/2/util/group/autocomplete?q=?'} %}
       {{ form.input('children', id='field-children', label=_('Children'), placeholder=_('eg. alcohol, finance, environment'), value=data.children, error=errors.children, classes=['control-full'], attrs=child_attrs) }}
     </div>{% endif %}
 
@@ -39,39 +40,17 @@
 
   {% endblock %}
 
-  {% block custom_fields %}
-    {% for extra in data.extras %}
-      {% set prefix = 'extras__%d__' % loop.index0 %}
-      {{ form.custom(
-        names=(prefix ~ 'key', prefix ~ 'value', prefix ~ 'deleted'),
-        id='field-extras-%d' % loop.index,
-        label=_('Custom Field'),
-        values=(extra.key, extra.value, extra.deleted),
-        error=errors[prefix ~ 'key'] or errors[prefix ~ 'value']
-      ) }}
-    {% endfor %}
-
-    {# Add a max if 3 empty columns #}
-    {% for extra in range(data.extras|count, 3) %}
-      {% set index = (loop.index0 + data.extras|count) %}
-      {% set prefix = 'extras__%d__' % index %}
-      {{ form.custom(
-        names=(prefix ~ 'key', prefix ~ 'value', prefix ~ 'deleted'),
-        id='field-extras-%d' % index,
-        label=_('Custom Field'),
-        values=(extra.key, extra.value, extra.deleted),
-        error=errors[prefix ~ 'key'] or errors[prefix ~ 'value']
-      ) }}
-    {% endfor %}
-  {% endblock %}
-
   {{ form.required_message() }}
 
   <div class="form-actions">
     {% block delete_button %}
       {% if h.check_access('group_delete', {'id': data.id})  %}
         {% asset 'querytool/javascript/modules/group-confirm-action.js' %}
-        <a class="btn btn-danger pull-left group-delete-orphan" href="#" data-module="group-confirm-action" data-module-content="{{ _('Are you sure you want to delete this Group?') }}, {{ _('<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>') }}">{% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
+        <a class="btn btn-danger pull-left group-delete-orphan"
+           href="#"
+           data-module="group-confirm-action"
+           data-module-content="{{ _('Are you sure you want to delete this Group?') }}, {{ _('<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting &quot;Reports&quot; tab on the &quot;Design Reports&quot; page.<\i>') }}">
+          {% block delete_button_text %}{{ _('Delete') }}{% endblock %}</a>
       {% endif %}
     {% endblock %}
     <button class="btn btn-primary" name="save" type="submit">{% block save_text %}{{ _('Save Group') }}{% endblock %}</button>

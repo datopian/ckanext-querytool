@@ -20,6 +20,8 @@ import ckan.lib.dictization.model_save as model_save
 import ckan.lib.plugins as lib_plugins
 import ckan.lib.datapreview
 
+from ckan.types import Context, DataDict, ErrorDict
+
 
 from ckanext.querytool.logic import schema
 import ckanext.querytool.logic.action as querytool_action
@@ -316,17 +318,22 @@ def config_option_update(context, data_dict):
     return data
 
 
-def _querytool_group_or_org_update(context, data_dict, is_org=False):
+def _querytool_group_or_org_update(context: Context, data_dict: DataDict, is_org: bool = False):
     model = context['model']
-    user = context['user']
     session = context['session']
     id = _get_or_bust(data_dict, 'id')
+
     is_relationship = context.get('is_relationship', False)
 
     group = model.Group.get(id)
-    group_extras = model.Session.query(model.GroupExtra) \
-        .filter(model.GroupExtra.group_id == group.id) \
+    if group is None:
+        raise NotFound('Group was not found.')
+
+    group_extras = (
+        model.Session.query(model.GroupExtra)
+        .filter(model.GroupExtra.group_id == group.id)
         .all()
+    )
 
     group_extras = {
         group_extra.key: group_extra.value
@@ -341,26 +348,24 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
 
     context["group"] = group
 
-    if group is None:
-        raise NotFound('Group was not found.')
-
-    data_dict['type'] = group.type
+    data_dict_type = data_dict.get('type')
+    if data_dict_type is None:
+        data_dict['type'] = group.type
+    else:
+        if data_dict_type != group.type:
+            raise ValidationError({"message": "Type cannot be updated"})
 
     # get the schema
     group_plugin = lib_plugins.lookup_group_plugin(group.type)
-
     try:
-        schema = group_plugin.form_to_db_schema_options({
-            'type': 'update',
-            'api': 'api_version' in context,
-            'context': context
-        })
+        schema = group_plugin.form_to_db_schema_options(
+            {'type': 'update', 'api': 'api_version' in context, 'context': context}
+        )
     except AttributeError:
         schema = group_plugin.form_to_db_schema()
 
-    upload = uploader.get_uploader('group', group.image_url)
-    upload.update_data_dict(data_dict, 'image_url',
-                            'image_upload', 'clear_upload')
+    upload = uploader.get_uploader('group')
+    upload.update_data_dict(data_dict, 'image_url', 'image_upload', 'clear_upload')
 
     if is_org:
         check_access('organization_update', context, data_dict)
@@ -376,28 +381,30 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
             group_plugin.check_data_dict(data_dict)
 
     data, errors = lib_plugins.plugin_validate(
-        group_plugin, context, data_dict, schema,
-        'organization_update' if is_org else 'group_update')
-    log.debug('group_update validate_errs=%r user=%s group=%s data_dict=%r',
-              errors, context.get('user'),
-              context.get('group').name if context.get('group') else '',
-              data_dict)
+        group_plugin,
+        context,
+        data_dict,
+        schema,
+        'organization_update' if is_org else 'group_update',
+    )
+
+    group = context.get('group')
+    log.debug(
+        'group_update validate_errs=%r user=%s group=%s data_dict=%r',
+        errors,
+        context.get('user'),
+        group.name if group else '',
+        data_dict,
+    )
 
     if errors:
         session.rollback()
         raise ValidationError(errors)
 
-    rev = model.repo.new_revision()
-    rev.author = user
-
-    if 'message' in context:
-        rev.message = context['message']
-    else:
-        rev.message = _('REST API: Update object %s') % data.get("name")
+    contains_packages = 'packages' in data_dict
 
     group = model_save.group_dict_save(
-        data, context,
-        prevent_packages_update=is_org
+        data, context, prevent_packages_update=is_org or not contains_packages
     )
 
     if is_org:
@@ -407,45 +414,6 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
 
     for item in plugins.PluginImplementations(plugin_type):
         item.edit(group)
-
-    if is_org:
-        activity_type = 'changed organization'
-    else:
-        activity_type = 'changed group'
-
-    activity_dict = {
-        'user_id': model.User.by_name(user.decode('utf8')).id,
-        'object_id': group.id,
-        'activity_type': activity_type,
-    }
-    # Handle 'deleted' groups.
-    # When the user marks a group as deleted this comes through here as
-    # a 'changed' group activity. We detect this and change it to a 'deleted'
-    # activity.
-    if group.state == 'deleted':
-        if session.query(ckan.model.Activity).filter_by(
-                object_id=group.id, activity_type='deleted').all():
-            # A 'deleted group' activity for this group has already been
-            # emitted.
-            # FIXME: What if the group was deleted and then activated again?
-            activity_dict = None
-        else:
-            # We will emit a 'deleted group' activity.
-            activity_dict['activity_type'] = 'deleted group'
-    if activity_dict is not None:
-        activity_dict['data'] = {
-            'group': dictization.table_dictize(group, context)
-        }
-        activity_create_context = {
-            'model': model,
-            'user': user,
-            'defer_commit': True,
-            'ignore_auth': True,
-            'session': session
-        }
-        _get_action('activity_create')(activity_create_context, activity_dict)
-        # TODO: Also create an activity detail recording what exactly changed
-        # in the group.
 
     upload.upload(uploader.get_max_image_size())
 
@@ -458,30 +426,25 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
     group_extras_parent = group_extras.get('parent')
 
     group_children = data_dict.get('children', '')
-    group_children = group_children.split(',') \
-        if group_children else []
+    group_children = group_children.split(',') if group_children else []
 
     groups = _get_action('group_list')(context, {})
 
     if group_parent not in groups:
         group_parent = ''
 
-    group_children = [
-        child for child in group_children
-        if child in groups
-    ]
+    group_children = [child for child in group_children if child in groups]
 
     group_extras_children = group_extras.get('children', '')
-    group_extras_children = group_extras_children.split(',') \
-        if group_extras_children else []
+    group_extras_children = (
+        group_extras_children.split(',') if group_extras_children else []
+    )
 
     children_to_remove = [
-        child for child in group_extras_children
-        if child not in group_children
+        child for child in group_extras_children if child not in group_children
     ]
     children_to_add = [
-        child for child in group_children
-        if child not in group_extras_children
+        child for child in group_children if child not in group_extras_children
     ]
 
     if is_relationship is False:

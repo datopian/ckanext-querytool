@@ -14,7 +14,11 @@ import ckanext.querytool.helpers as helpers
 from ckanext.querytool import actions
 from ckanext.querytool.logic import otp
 from ckanext.querytool.logic import validators
+from ckanext.querytool.logic.action import get as vs_get_actions
+from ckanext.querytool.logic.action import update as vs_update_actions
+from ckanext.querytool.logic.action import create as vs_create_actions
 from ckanext.querytool.model import setup as model_setup
+from ckanext.querytool.views.group import querytool_group
 import ckanext.querytool.commands as vs_commands
 import os
 import sys
@@ -63,8 +67,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IAuthFunctions)
-    #plugins.implements(plugins.IGroupForm, inherit=True)
+    plugins.implements(plugins.IGroupForm, inherit=True)
     plugins.implements(plugins.IClick)
+    plugins.implements(plugins.IBlueprint)
 
     # ITranslation
     def i18n_directory(self):
@@ -97,6 +102,13 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         ckanext-{extension name}, hence your pot, po and mo files should be
         named ckanext-{extension name}.mo'''
         return 'ckanext-{name}'.format(name=self.name)
+
+    # IBlueprint
+
+    def get_blueprint(self):
+        return [querytool_group]
+
+    # IGroupForm
 
     def group_types(self):
         return ('group', )
@@ -189,6 +201,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def admins_template(self):
         return 'group/admins.html'
+
+    def prepare_group_blueprint(self, group_type):
+        return 'querytool_group'
 
     # IConfigurer
 
@@ -314,6 +329,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     def get_actions(self):
         return {
             "send_2fa_code": otp.send_2fa_code,
+            "get_available_groups": vs_get_actions.get_available_groups,
+            "querytool_group_update": vs_update_actions.querytool_group_update,
+            "querytool_group_create": vs_create_actions.querytool_group_create,
        }
 
     # IConfigurable

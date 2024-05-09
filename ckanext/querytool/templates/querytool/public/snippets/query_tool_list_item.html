@@ -1,0 +1,34 @@
+{#
+
+Creates query tool.
+
+description - The information about query tool
+title - The title of the querytool.
+name - Name of the tool
+
+Example usage:
+  {% snippet 'querytool/public/snippets/query_tool.html', querytool=data %}
+
+#}
+
+{% set tool = h.url_for('querytool_public_read', name=querytool.name) %}
+
+<div class="group-box">
+    {% if querytool.image_url %}
+      <img class="thumbnail" src="/uploads/querytool/{{ querytool.image_display_url }}" alt="{{ querytool.image_url }}">
+    {% elif querytool.icon %}
+      <i class="thumbnail fa-3x {{querytool.icon}}"></i>
+    {% else %}
+      <img class="thumbnail" src="/base/images/folder-icon-2.svg" width="70" alt="">
+    {% endif %}
+
+  <div class="box-content">
+    {% if parent and from_parent and parent_title %}
+      <a class="query-tool" href="/querytool/public/{{ querytool.name }}?parent={{ parent }}&from_parent=True&title={{ parent_title | safe }}"><span class="tool-title">{{ querytool.title }}</span></a>
+    {% else %}
+      <a class="query-tool" href="{{ tool }}"><span class="tool-title">{{ querytool.title }}</span></a>
+    {% endif %}
+    <span class="short-desc">{{ h.render_markdown(h.get_translated(querytool, 'description'), True, True) }}</span>
+  </div>
+  <p class='clearfix'></p>
+</div>

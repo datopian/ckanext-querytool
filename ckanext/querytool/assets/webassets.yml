@@ -27,3 +27,12 @@ querytool-image-upload-js:
       - base/main
   contents:
     - javascript/modules/querytool_image_upload.js
+
+querytool-group-autocomplete-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-autocomplete.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - javascript/modules/vs-groups-autocomplete.js
