@@ -868,3 +868,27 @@ div[class^="dt-header"] {
   border-radius: 25px;
   overflow-y: auto;
 }
+
+.main-home-groups-row {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-right: 0;
+  margin-left: 0;
+  --bs-gutter-x: 0;
+}
+
+.row > .home-groups {
+  margin-right: 0;
+  margin-left: 0;
+  --bs-gutter-x: 0;
+}
+
+.home-groups {
+  width: 33.3% !important;
+}
+
+.home-groups-col {
+  width: 100%;
+}

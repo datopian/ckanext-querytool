@@ -10,7 +10,7 @@
 
   {# Made it a block so that it's easier to override on files that extend this file #}
   {# as we don't want pages besides the home to have the custom background #}
-  {% if g.theme == 'Custom' %}
+  {% if g.querytool_theme == 'Custom' %}
   {% block page_header_bg %}
       <style>
         .custom-theme#header-wrapper {
@@ -64,7 +64,7 @@
   {% block tools %}
   <div class="container content">
     <div class="group-items">
-      <div class="row">
+      <div class="row main-home-groups-row">
       {% if g.group_parents_enabled == 'True' %}
         {% set groups = h.get_all_parent_groups() + [{'misc_group': True, 'title': 'Other', 'description': 'Miscellaneous groups', 'name': '__misc__group__'}] %}
       {% else %}
@@ -74,7 +74,8 @@
       {% set count = 1 %}
 
       {% for group in groups %}
-      {% set url = h.url_for('querytool_public_list_by_group', group=group.name) %}
+      {% set url = '#' %}
+      {# {%h.url_for('querytool_public_list_by_group', group=group.name) %}#}
           <!-- <div class="span4">
             <a class="query-tool box" href="{{ url }}">
             <img class="thumbnail" src="{{group.image_display_url}}" alt="{{ value }}">
@@ -86,10 +87,10 @@
         </div> -->
         
         {% if count == 1 %}
-        <div class="row">
+        <div class="row home-groups">
         {% endif %}
 
-        <div class="col-sm-3">
+        <div class="col-sm-3 home-groups-col">
           <div class="group-box-2">
             <div class="group-image-2">
               {% if group.image_display_url %}
@@ -117,7 +118,7 @@
           </div>
         </div>
       
-      {% if count == 3 %}
+      {% if count == 1 %}
       </div>
       {% endif %}
 
@@ -131,7 +132,8 @@
       </div>
     </div>
 
-    <a class="query-tool query-btn" href="{{ h.url_for("querytool_public_reports") }}">
+    {#<a class="query-tool query-btn" href="{{ h.url_for("querytool_public_reports") }}">#}
+    <a class="query-tool query-btn" href="/">
       <span class="btn btn-primary" role="button" style="display: block; max-width:200px; margin:0 auto; padding:10px 10px;">{{ _('See all tools') }}</span>
     </a>
     <br/><br/><br/><br/>

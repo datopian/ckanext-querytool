@@ -380,7 +380,7 @@ class EditGroupView(MethodView):
                 )
 
         try:
-            group = _action(u'querytool_group_update')(context, data_dict)
+            group = _action(u'group_update')(context, data_dict)
             if id != group['name']:
                 _force_reindex(group)
         except (NotFound, NotAuthorized):

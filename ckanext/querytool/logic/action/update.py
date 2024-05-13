@@ -20,13 +20,17 @@ import ckan.lib.dictization.model_save as model_save
 import ckan.lib.plugins as lib_plugins
 import ckan.lib.datapreview
 
-from ckan.types import Context, DataDict, ErrorDict
+from ckan.types.logic import ActionResult
+from ckan.types import Context, DataDict
 
 
 from ckanext.querytool.logic import schema
 import ckanext.querytool.logic.action as querytool_action
-from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
-                                    CkanextQueryToolVisualizations
+from ckanext.querytool.model import (
+    CkanextQueryTool,
+    table_dictize,
+    CkanextQueryToolVisualizations,
+)
 
 check_access = logic.check_access
 _get_action = logic.get_action
@@ -58,20 +62,18 @@ def querytool_update(context, data_dict):
     # we need the querytool name in the context for name validation
     context['querytool'] = data_dict['querytool']
     session = context['session']
-    data, errors = df.validate(data_dict, schema.querytool_schema(),
-                               context)
+    data, errors = df.validate(data_dict, schema.querytool_schema(), context)
 
     if errors:
         raise toolkit.ValidationError(errors)
 
     querytool = CkanextQueryTool.get(name=data_dict['querytool'])
-    visualizations = \
-        CkanextQueryToolVisualizations.get(name=data_dict['querytool'])
+    visualizations = CkanextQueryToolVisualizations.get(name=data_dict['querytool'])
 
     # if name is not changed don't insert in visualizations table
     is_changed = False
     if visualizations:
-        is_changed = (querytool.name == visualizations.name)
+        is_changed = querytool.name == visualizations.name
 
     if visualizations and is_changed:
         visualizations.name = data.get('name')
@@ -82,11 +84,28 @@ def querytool_update(context, data_dict):
     if not querytool:
         querytool = CkanextQueryTool()
 
-    items = ['title', 'description', 'name', 'private', 'type', 'group',
-             'dataset_name', 'owner_org', 'icon', 'image_url', 'image_display_url',
-             'filters', 'sql_string', 'related_querytools',
-             'chart_resource', 'y_axis_columns', 'additional_description', 'selection_label',
-             'report_caption', 'download_options']
+    items = [
+        'title',
+        'description',
+        'name',
+        'private',
+        'type',
+        'group',
+        'dataset_name',
+        'owner_org',
+        'icon',
+        'image_url',
+        'image_display_url',
+        'filters',
+        'sql_string',
+        'related_querytools',
+        'chart_resource',
+        'y_axis_columns',
+        'additional_description',
+        'selection_label',
+        'report_caption',
+        'download_options',
+    ]
 
     dataset_name = data.get('dataset_name')
     dataset = _get_action('package_show')(context, {'id': dataset_name})
@@ -100,10 +119,9 @@ def querytool_update(context, data_dict):
         image_upload = data_dict['image_upload']
         if isinstance(image_upload, cgi.FieldStorage):
             upload = uploader.get_uploader('querytool', image_url)
-            upload.update_data_dict(data_dict,
-                                    'image_url',
-                                    'image_upload',
-                                    'clear_upload')
+            upload.update_data_dict(
+                data_dict, 'image_url', 'image_upload', 'clear_upload'
+            )
             upload.upload(uploader)
             data_dict['image_display_url'] = upload.filename
             data['image_display_url'] = upload.filename
@@ -160,10 +178,11 @@ def querytool_visualizations_update(context, data_dict):
                 new_data = {
                     'image_url': old_img_url,
                     'image_upload': 'true',
-                    'clear_upload': 'true'
+                    'clear_upload': 'true',
                 }
-                upload.update_data_dict(new_data, 'image_url', 'image_upload',
-                                        'clear_upload')
+                upload.update_data_dict(
+                    new_data, 'image_url', 'image_upload', 'clear_upload'
+                )
                 upload.upload(uploader)
 
     if not visualizations:
@@ -238,28 +257,39 @@ def config_option_update(context, data_dict):
 
     if unsupported_options:
         msg = 'Configuration option(s) \'{0}\' can not be updated'.format(
-              ' '.join(list(unsupported_options)))
+            ' '.join(list(unsupported_options))
+        )
 
         raise ValidationError({'message': msg})
 
     upload = uploader.get_uploader('admin')
-    upload.update_data_dict(data_dict, 'ckan.site_logo',
-                            'logo_upload', 'clear_logo_upload')
+    upload.update_data_dict(
+        data_dict, 'ckan.site_logo', 'logo_upload', 'clear_logo_upload'
+    )
     upload.upload(uploader.get_max_image_size())
 
     # Upload header image for custom theme
-    upload.update_data_dict(data_dict, 'header_image_url',
-                            'header_image_upload', 'header_clear_upload')
+    upload.update_data_dict(
+        data_dict, 'header_image_url', 'header_image_upload', 'header_clear_upload'
+    )
     upload.upload(uploader.get_max_image_size())
 
     # Upload footer logo 1 for custom theme
-    upload.update_data_dict(data_dict, 'footer_logo_image_url',
-                            'footer_logo_image_upload', 'footer_logo_clear_upload')
+    upload.update_data_dict(
+        data_dict,
+        'footer_logo_image_url',
+        'footer_logo_image_upload',
+        'footer_logo_clear_upload',
+    )
     upload.upload(uploader.get_max_image_size())
 
     # Upload footer logo 2 for custom theme
-    upload.update_data_dict(data_dict, 'footer_logo2_image_url',
-                            'footer_logo2_image_upload', 'footer_logo2_clear_upload')
+    upload.update_data_dict(
+        data_dict,
+        'footer_logo2_image_url',
+        'footer_logo2_image_upload',
+        'footer_logo2_clear_upload',
+    )
     upload.upload(uploader.get_max_image_size())
 
     # Remove leftover header_image_upload
@@ -318,7 +348,9 @@ def config_option_update(context, data_dict):
     return data
 
 
-def _querytool_group_or_org_update(context: Context, data_dict: DataDict, is_org: bool = False):
+def _querytool_group_or_org_update(
+    context: Context, data_dict: DataDict, is_org: bool = False
+):
     model = context['model']
     session = context['session']
     id = _get_or_bust(data_dict, 'id')
@@ -476,10 +508,16 @@ def _querytool_group_or_org_update(context: Context, data_dict: DataDict, is_org
     return model_dictize.group_dictize(group, context)
 
 
-def querytool_group_update(context, data_dict):
-    '''Update a group.
+def querytool_group_update(
+    context: Context, data_dict: DataDict
+) -> ActionResult.GroupUpdate:
+    '''Update a querytool group.
 
     You must be authorized to edit the group.
+
+    .. note:: Update methods may delete parameters not explicitly provided in the
+        data_dict. If you want to edit only a specific attribute use `group_patch`
+        instead.
 
     Plugins may change the parameters of this function depending on the value
     of the group's ``type`` attribute, see the
@@ -498,6 +536,4 @@ def querytool_group_update(context, data_dict):
     # Callers that set context['allow_partial_update'] = True can choose to not
     # specify particular keys and they will be left at their existing
     # values. This includes: packages, users, groups, tags, extras
-    return _querytool_group_or_org_update(
-        context, data_dict
-    )
+    return _querytool_group_or_org_update(context, data_dict)
