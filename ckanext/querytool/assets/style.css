@@ -1538,9 +1538,24 @@ form.custom-lang-select {
 }
 
 #field-sitewide-search {
-  padding-top: 0rem;
-  padding-bottom: 0rem;
+  /*padding-top: 0rem;
+  padding-bottom: 0rem;*/
   font-size: 14px;
+  border: 1px solid #cccccc;
+}
+
+.report-search-sort {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+.control-order-by {
+  margin-right: 10px;
+  background-image: none !important;
+  box-shadow: unset !important;
+  border: unset !important;
+  padding-right: 0px !important;
+  margin-right: 0px !important;
 }
 
 .site-search .btn:hover {

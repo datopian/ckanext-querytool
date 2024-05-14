@@ -74,8 +74,7 @@
       {% set count = 1 %}
 
       {% for group in groups %}
-      {% set url = '#' %}
-      {# {%h.url_for('querytool_public_list_by_group', group=group.name) %}#}
+      {% set url = h.url_for('querytool.public_list', group=group.name) %}
           <!-- <div class="span4">
             <a class="query-tool box" href="{{ url }}">
             <img class="thumbnail" src="{{group.image_display_url}}" alt="{{ value }}">
