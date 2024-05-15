@@ -1,0 +1,14 @@
+{# Display a list of report items. reports - A list of reports. Example: {%
+snippet "report/snippets/report_list.html" %} #} {% block report_list %}
+<ul class="media-grid bg-white bg-no-image">
+  {% block report_list_inner %}
+  <legend>Main</legend>
+  {% for report in reports %} {% if report.type == 'main' %} {% snippet
+  "report/snippets/report_item.html", report=report, position=loop.index,
+  show_capacity=show_capacity %} {% endif %} {% endfor %}
+  <legend>Related</legend>
+  {% for report in reports %} {% if report.type == 'related' %} {% snippet
+  "report/snippets/report_item.html", report=report, position=loop.index,
+  show_capacity=show_capacity %} {% endif %} {% endfor %} {% endblock %}
+</ul>
+{% endblock %}
