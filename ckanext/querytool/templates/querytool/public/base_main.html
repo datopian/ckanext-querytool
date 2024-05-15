@@ -1,0 +1,143 @@
+{% extends "querytool/public/querytool_page.html" %}
+
+<!-- Variables -->
+{% set header_image = g.header_image_url or '' %}
+{% set header_text_color = g.header_text_color or '#ffffff' %}
+<!-- Variables -->
+
+{% block content %}
+<div class="container-wrapper">
+
+  {# Made it a block so that it's easier to override on files that extend this file #}
+  {# as we don't want pages besides the home to have the custom background #}
+  {% if g.querytool_theme == 'Custom' %}
+  {% block page_header_bg %}
+      <style>
+        .custom-theme#header-wrapper {
+          background-image: url('{{ header_image }}'); 
+          {{ 'padding: 0 0 125px 0;' if header_image else '' }}
+        }
+
+        .custom-theme#header-text {
+          color: {{ header_text_color if header_text_color else '#353535' }} !important;
+        }
+
+        .custom-theme#header-title {
+          {{ 'padding-top: 100px;' if header_image else '' }}
+        }
+      </style>
+  {% endblock %}
+  {% endif %}
+
+  <div class="public-header query-header embed-style" id="header-wrapper">
+  {% block page_header_content %}
+    {% block breadcrumb_custom %}
+      <div class="toolbar new_toolbar embed-show">
+        <ol class="breadcrumb new_breadcrumb">
+          <li><a href="/"><i class="fa fa-home active"></i></a></li>
+        </ol>
+        {% snippet 'snippets/embed/navbar_end_items.html' %}
+      </div>
+    {% endblock %}
+    
+    <div class="container">
+      <div class="row">
+        <div class="span10 offset1">
+          <div class="page-header embed-style" id="header-text">
+            {% block page_header_inner_content %}
+              {% block page_header_icon %}{% endblock %}
+              {% block page_header_title %}
+                <h1 class="embed-style" id="header-title">{{ g.welcome_page_title or _('Welcome') }}</h1>
+              {% endblock %}
+              <div class="long-desc">
+                {% block page_header_description %}
+            <p class="page-desc desc">{{ h.render_markdown(g.welcome_page_description or _('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vulputate sapien augue, ut feugiat eros pulvinar elementum. Nulla sed ante non mi fringilla molestie in et lorem.')) }}</p>
+                {% endblock %}
+              </div>
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endblock %}
+  </div>
+  {% block tools %}
+  <div class="container content">
+    <div class="group-items">
+      <div class="row main-home-groups-row">
+      {% if g.group_parents_enabled == 'True' %}
+        {% set groups = h.get_all_parent_groups() + [{'misc_group': True, 'title': 'Other', 'description': 'Miscellaneous groups', 'name': '__misc__group__'}] %}
+      {% else %}
+        {% set groups = h.querytool_get_groups() %}
+      {% endif %}
+      
+      {% set count = 1 %}
+
+      {% for group in groups %}
+      {% set url = h.url_for('querytool.public_list', group=group.name) %}
+          <!-- <div class="span4">
+            <a class="query-tool box" href="{{ url }}">
+            <img class="thumbnail" src="{{group.image_display_url}}" alt="{{ value }}">
+            <span class="tool-title">{{ group.title }}</span>
+            <span class="short-desc">{{ group.description }}</span>
+            <span class="btn btn-primary btn-box" role="button">{{ _('See tools') }}</span>
+            </a>
+          </div>
+        </div> -->
+        
+        {% if count == 1 %}
+        <div class="row home-groups">
+        {% endif %}
+
+        <div class="col-sm-3 home-groups-col">
+          <div class="group-box-2">
+            <div class="group-image-2">
+              {% if group.image_display_url %}
+                <img  src="{{group.image_display_url}}" alt="{{ value }}">
+              {% else %}
+                <img src="/base/images/icon-1.svg" alt="">
+              {% endif %}
+            </div>
+            
+            <div class="box-content">
+              <a class="query-tool" href="{{ url }}"><span class="tool-title">{{group.title}}</span></a>
+              
+              <div style="min-height:55px;">
+                <div class="short-desc">
+                  <p>{{ h.render_markdown(h.get_translated(group, 'description'), True, True) }}</p>
+                </div>
+              </div>
+              
+              {% if group.description|length < 100 %}
+                <p>&nbsp;</p>
+              {% endif %}
+
+            </div> 
+            <p class='clearfix'></p>
+          </div>
+        </div>
+      
+      {% if count == 1 %}
+      </div>
+      {% endif %}
+
+      {% if count == 3 %}
+        {% set count = 1 %}
+      {% else %}
+        {% set count = count + 1 %}
+      {% endif %}
+
+      {% endfor %}
+      </div>
+    </div>
+
+    {#<a class="query-tool query-btn" href="{{ h.url_for("querytool_public_reports") }}">#}
+    <a class="query-tool query-btn" href="/">
+      <span class="btn btn-primary" role="button" style="display: block; max-width:200px; margin:0 auto; padding:10px 10px;">{{ _('See all tools') }}</span>
+    </a>
+    <br/><br/><br/><br/>
+  </div>
+  {% endblock %}
+
+</div>
+{% endblock %}

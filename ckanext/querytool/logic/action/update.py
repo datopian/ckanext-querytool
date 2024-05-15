@@ -20,11 +20,17 @@ import ckan.lib.dictization.model_save as model_save
 import ckan.lib.plugins as lib_plugins
 import ckan.lib.datapreview
 
+from ckan.types.logic import ActionResult
+from ckan.types import Context, DataDict
+
 
 from ckanext.querytool.logic import schema
 import ckanext.querytool.logic.action as querytool_action
-from ckanext.querytool.model import CkanextQueryTool, table_dictize,\
-                                    CkanextQueryToolVisualizations
+from ckanext.querytool.model import (
+    CkanextQueryTool,
+    table_dictize,
+    CkanextQueryToolVisualizations,
+)
 
 check_access = logic.check_access
 _get_action = logic.get_action
@@ -56,20 +62,18 @@ def querytool_update(context, data_dict):
     # we need the querytool name in the context for name validation
     context['querytool'] = data_dict['querytool']
     session = context['session']
-    data, errors = df.validate(data_dict, schema.querytool_schema(),
-                               context)
+    data, errors = df.validate(data_dict, schema.querytool_schema(), context)
 
     if errors:
         raise toolkit.ValidationError(errors)
 
     querytool = CkanextQueryTool.get(name=data_dict['querytool'])
-    visualizations = \
-        CkanextQueryToolVisualizations.get(name=data_dict['querytool'])
+    visualizations = CkanextQueryToolVisualizations.get(name=data_dict['querytool'])
 
     # if name is not changed don't insert in visualizations table
     is_changed = False
     if visualizations:
-        is_changed = (querytool.name == visualizations.name)
+        is_changed = querytool.name == visualizations.name
 
     if visualizations and is_changed:
         visualizations.name = data.get('name')
@@ -80,11 +84,28 @@ def querytool_update(context, data_dict):
     if not querytool:
         querytool = CkanextQueryTool()
 
-    items = ['title', 'description', 'name', 'private', 'type', 'group',
-             'dataset_name', 'owner_org', 'icon', 'image_url', 'image_display_url',
-             'filters', 'sql_string', 'related_querytools',
-             'chart_resource', 'y_axis_columns', 'additional_description', 'selection_label',
-             'report_caption', 'download_options']
+    items = [
+        'title',
+        'description',
+        'name',
+        'private',
+        'type',
+        'group',
+        'dataset_name',
+        'owner_org',
+        'icon',
+        'image_url',
+        'image_display_url',
+        'filters',
+        'sql_string',
+        'related_querytools',
+        'chart_resource',
+        'y_axis_columns',
+        'additional_description',
+        'selection_label',
+        'report_caption',
+        'download_options',
+    ]
 
     dataset_name = data.get('dataset_name')
     dataset = _get_action('package_show')(context, {'id': dataset_name})
@@ -98,10 +119,9 @@ def querytool_update(context, data_dict):
         image_upload = data_dict['image_upload']
         if isinstance(image_upload, cgi.FieldStorage):
             upload = uploader.get_uploader('querytool', image_url)
-            upload.update_data_dict(data_dict,
-                                    'image_url',
-                                    'image_upload',
-                                    'clear_upload')
+            upload.update_data_dict(
+                data_dict, 'image_url', 'image_upload', 'clear_upload'
+            )
             upload.upload(uploader)
             data_dict['image_display_url'] = upload.filename
             data['image_display_url'] = upload.filename
@@ -158,10 +178,11 @@ def querytool_visualizations_update(context, data_dict):
                 new_data = {
                     'image_url': old_img_url,
                     'image_upload': 'true',
-                    'clear_upload': 'true'
+                    'clear_upload': 'true',
                 }
-                upload.update_data_dict(new_data, 'image_url', 'image_upload',
-                                        'clear_upload')
+                upload.update_data_dict(
+                    new_data, 'image_url', 'image_upload', 'clear_upload'
+                )
                 upload.upload(uploader)
 
     if not visualizations:
@@ -236,28 +257,39 @@ def config_option_update(context, data_dict):
 
     if unsupported_options:
         msg = 'Configuration option(s) \'{0}\' can not be updated'.format(
-              ' '.join(list(unsupported_options)))
+            ' '.join(list(unsupported_options))
+        )
 
         raise ValidationError({'message': msg})
 
     upload = uploader.get_uploader('admin')
-    upload.update_data_dict(data_dict, 'ckan.site_logo',
-                            'logo_upload', 'clear_logo_upload')
+    upload.update_data_dict(
+        data_dict, 'ckan.site_logo', 'logo_upload', 'clear_logo_upload'
+    )
     upload.upload(uploader.get_max_image_size())
 
     # Upload header image for custom theme
-    upload.update_data_dict(data_dict, 'header_image_url',
-                            'header_image_upload', 'header_clear_upload')
+    upload.update_data_dict(
+        data_dict, 'header_image_url', 'header_image_upload', 'header_clear_upload'
+    )
     upload.upload(uploader.get_max_image_size())
 
     # Upload footer logo 1 for custom theme
-    upload.update_data_dict(data_dict, 'footer_logo_image_url',
-                            'footer_logo_image_upload', 'footer_logo_clear_upload')
+    upload.update_data_dict(
+        data_dict,
+        'footer_logo_image_url',
+        'footer_logo_image_upload',
+        'footer_logo_clear_upload',
+    )
     upload.upload(uploader.get_max_image_size())
 
     # Upload footer logo 2 for custom theme
-    upload.update_data_dict(data_dict, 'footer_logo2_image_url',
-                            'footer_logo2_image_upload', 'footer_logo2_clear_upload')
+    upload.update_data_dict(
+        data_dict,
+        'footer_logo2_image_url',
+        'footer_logo2_image_upload',
+        'footer_logo2_clear_upload',
+    )
     upload.upload(uploader.get_max_image_size())
 
     # Remove leftover header_image_upload
@@ -316,17 +348,24 @@ def config_option_update(context, data_dict):
     return data
 
 
-def _querytool_group_or_org_update(context, data_dict, is_org=False):
+def _querytool_group_or_org_update(
+    context: Context, data_dict: DataDict, is_org: bool = False
+):
     model = context['model']
-    user = context['user']
     session = context['session']
     id = _get_or_bust(data_dict, 'id')
+
     is_relationship = context.get('is_relationship', False)
 
     group = model.Group.get(id)
-    group_extras = model.Session.query(model.GroupExtra) \
-        .filter(model.GroupExtra.group_id == group.id) \
+    if group is None:
+        raise NotFound('Group was not found.')
+
+    group_extras = (
+        model.Session.query(model.GroupExtra)
+        .filter(model.GroupExtra.group_id == group.id)
         .all()
+    )
 
     group_extras = {
         group_extra.key: group_extra.value
@@ -341,26 +380,24 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
 
     context["group"] = group
 
-    if group is None:
-        raise NotFound('Group was not found.')
-
-    data_dict['type'] = group.type
+    data_dict_type = data_dict.get('type')
+    if data_dict_type is None:
+        data_dict['type'] = group.type
+    else:
+        if data_dict_type != group.type:
+            raise ValidationError({"message": "Type cannot be updated"})
 
     # get the schema
     group_plugin = lib_plugins.lookup_group_plugin(group.type)
-
     try:
-        schema = group_plugin.form_to_db_schema_options({
-            'type': 'update',
-            'api': 'api_version' in context,
-            'context': context
-        })
+        schema = group_plugin.form_to_db_schema_options(
+            {'type': 'update', 'api': 'api_version' in context, 'context': context}
+        )
     except AttributeError:
         schema = group_plugin.form_to_db_schema()
 
-    upload = uploader.get_uploader('group', group.image_url)
-    upload.update_data_dict(data_dict, 'image_url',
-                            'image_upload', 'clear_upload')
+    upload = uploader.get_uploader('group')
+    upload.update_data_dict(data_dict, 'image_url', 'image_upload', 'clear_upload')
 
     if is_org:
         check_access('organization_update', context, data_dict)
@@ -376,28 +413,30 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
             group_plugin.check_data_dict(data_dict)
 
     data, errors = lib_plugins.plugin_validate(
-        group_plugin, context, data_dict, schema,
-        'organization_update' if is_org else 'group_update')
-    log.debug('group_update validate_errs=%r user=%s group=%s data_dict=%r',
-              errors, context.get('user'),
-              context.get('group').name if context.get('group') else '',
-              data_dict)
+        group_plugin,
+        context,
+        data_dict,
+        schema,
+        'organization_update' if is_org else 'group_update',
+    )
+
+    group = context.get('group')
+    log.debug(
+        'group_update validate_errs=%r user=%s group=%s data_dict=%r',
+        errors,
+        context.get('user'),
+        group.name if group else '',
+        data_dict,
+    )
 
     if errors:
         session.rollback()
         raise ValidationError(errors)
 
-    rev = model.repo.new_revision()
-    rev.author = user
-
-    if 'message' in context:
-        rev.message = context['message']
-    else:
-        rev.message = _('REST API: Update object %s') % data.get("name")
+    contains_packages = 'packages' in data_dict
 
     group = model_save.group_dict_save(
-        data, context,
-        prevent_packages_update=is_org
+        data, context, prevent_packages_update=is_org or not contains_packages
     )
 
     if is_org:
@@ -407,45 +446,6 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
 
     for item in plugins.PluginImplementations(plugin_type):
         item.edit(group)
-
-    if is_org:
-        activity_type = 'changed organization'
-    else:
-        activity_type = 'changed group'
-
-    activity_dict = {
-        'user_id': model.User.by_name(user.decode('utf8')).id,
-        'object_id': group.id,
-        'activity_type': activity_type,
-    }
-    # Handle 'deleted' groups.
-    # When the user marks a group as deleted this comes through here as
-    # a 'changed' group activity. We detect this and change it to a 'deleted'
-    # activity.
-    if group.state == 'deleted':
-        if session.query(ckan.model.Activity).filter_by(
-                object_id=group.id, activity_type='deleted').all():
-            # A 'deleted group' activity for this group has already been
-            # emitted.
-            # FIXME: What if the group was deleted and then activated again?
-            activity_dict = None
-        else:
-            # We will emit a 'deleted group' activity.
-            activity_dict['activity_type'] = 'deleted group'
-    if activity_dict is not None:
-        activity_dict['data'] = {
-            'group': dictization.table_dictize(group, context)
-        }
-        activity_create_context = {
-            'model': model,
-            'user': user,
-            'defer_commit': True,
-            'ignore_auth': True,
-            'session': session
-        }
-        _get_action('activity_create')(activity_create_context, activity_dict)
-        # TODO: Also create an activity detail recording what exactly changed
-        # in the group.
 
     upload.upload(uploader.get_max_image_size())
 
@@ -458,30 +458,25 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
     group_extras_parent = group_extras.get('parent')
 
     group_children = data_dict.get('children', '')
-    group_children = group_children.split(',') \
-        if group_children else []
+    group_children = group_children.split(',') if group_children else []
 
     groups = _get_action('group_list')(context, {})
 
     if group_parent not in groups:
         group_parent = ''
 
-    group_children = [
-        child for child in group_children
-        if child in groups
-    ]
+    group_children = [child for child in group_children if child in groups]
 
     group_extras_children = group_extras.get('children', '')
-    group_extras_children = group_extras_children.split(',') \
-        if group_extras_children else []
+    group_extras_children = (
+        group_extras_children.split(',') if group_extras_children else []
+    )
 
     children_to_remove = [
-        child for child in group_extras_children
-        if child not in group_children
+        child for child in group_extras_children if child not in group_children
     ]
     children_to_add = [
-        child for child in group_children
-        if child not in group_extras_children
+        child for child in group_children if child not in group_extras_children
     ]
 
     if is_relationship is False:
@@ -513,10 +508,16 @@ def _querytool_group_or_org_update(context, data_dict, is_org=False):
     return model_dictize.group_dictize(group, context)
 
 
-def querytool_group_update(context, data_dict):
-    '''Update a group.
+def querytool_group_update(
+    context: Context, data_dict: DataDict
+) -> ActionResult.GroupUpdate:
+    '''Update a querytool group.
 
     You must be authorized to edit the group.
+
+    .. note:: Update methods may delete parameters not explicitly provided in the
+        data_dict. If you want to edit only a specific attribute use `group_patch`
+        instead.
 
     Plugins may change the parameters of this function depending on the value
     of the group's ``type`` attribute, see the
@@ -535,6 +536,4 @@ def querytool_group_update(context, data_dict):
     # Callers that set context['allow_partial_update'] = True can choose to not
     # specify particular keys and they will be left at their existing
     # values. This includes: packages, users, groups, tags, extras
-    return _querytool_group_or_org_update(
-        context, data_dict
-    )
+    return _querytool_group_or_org_update(context, data_dict)

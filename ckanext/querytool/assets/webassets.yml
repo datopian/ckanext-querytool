@@ -4,6 +4,12 @@ querytool-css:
   contents:
     - style.css
 
+public-querytool-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-public-querytool.css
+  contents:
+    - public-querytool.css
+
 querytool-js:
   output: ckanext-querytool/%(version)s-querytool.js
   extra:
@@ -27,3 +33,22 @@ querytool-image-upload-js:
       - base/main
   contents:
     - javascript/modules/querytool_image_upload.js
+
+querytool-group-autocomplete-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-autocomplete.js
+  extra:
+    preload:
+      - base/main
+      - vendor/bootstrap
+  contents:
+    - javascript/modules/vs-groups-autocomplete.js
+
+querytool-group-confirm-action-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-confirm-action.js
+  extra:
+    preload:
+      - vendor/bootstrap
+  contents:
+    - javascript/modules/group-confirm-action.js

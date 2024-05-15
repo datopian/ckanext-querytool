@@ -1312,21 +1312,20 @@ $('body').on('change', '[id^=chart_field_axis_x_]', function () {
   $(`#chart_field_category_name_${chart_number}`).val('').trigger('change');
 })
 
-$('body').on('change', '#theme', function () {
+$('body').on('change', '#querytool_theme', function () {
   var theme = $(this).val();
 
   if(theme == 'Default') {
-    $('#custom-theme').hide();
-    $('#custom-theme-help').hide();
+    $('#custom-theme').attr('hidden', true);
+    $('#custom-theme-help').attr('hidden', true);
   } else {
-    $('#custom-theme').show();
-    $('#custom-theme-help').show();
+    $('#custom-theme').removeAttr('hidden');
+    $('#custom-theme-help').removeAttr('hidden');
   }
 });
 
 $(window).on('load', function() {
-  var theme = $('#theme').val();
-  console.log(theme)
+  var theme = $('#querytool_theme').val();
 
   if(theme == 'Default') {
     $('#custom-theme').attr('hidden', true);
@@ -1621,4 +1620,34 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   }
+});
+
+// Fix hover shading on buttons
+function addEventListenersToButtons(element) {
+    if (element.nodeType === Node.ELEMENT_NODE && element.matches(".btn-default")) {
+        console.log("Adding hover class event listeners to:", element);
+        element.addEventListener("mouseover", () => element.classList.add("hover"));
+        element.addEventListener("mouseout", () => element.classList.remove("hover"));
+    }
+    Array.from(element.childNodes).forEach(addEventListenersToButtons);
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            mutation.addedNodes.forEach((node) => {
+                addEventListenersToButtons(node);
+            });
+        });
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true,
+    });
+
+    document.querySelectorAll(".btn-default").forEach((btn) => {
+        btn.addEventListener("mouseover", () => btn.classList.add("hover"));
+        btn.addEventListener("mouseout", () => btn.classList.remove("hover"));
+    });
 });

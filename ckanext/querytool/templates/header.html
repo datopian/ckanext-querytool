@@ -3,7 +3,7 @@
   {% block header_account %}	
     {% if c.userobj %}	
       <div class="account-masthead">	
-        <div class="container">	
+        <div class="site-header container">
           {% block header_account_container_content %}	
             <div class="account avatar authed"	
                  data-module="me"	
@@ -126,7 +126,7 @@
                          name="q"	
                          placeholder="{{ _("Search Datasets") }}"	
                          aria-label="{{ h.humanize_entity_type('package', dataset_type, 'search_placeholder') or _('Search datasets...') }}" />	
-                  <button class="btn" type="submit" aria-label="{{ _("Submit") }}">	
+                  <button class="btn header-search" type="submit" aria-label="{{ _("Submit") }}">
                     <i class="fa fa-search"></i>	
                   </button>	
                 </form>	
@@ -145,7 +145,7 @@
                        name="q"	
                        placeholder="{{ _("Search Reports") }}"	
                        aria-label="{{ h.humanize_entity_type('package', dataset_type, 'search_placeholder') or _('Search datasets...') }}" />	
-                <button class="btn" type="submit" aria-label="{{ _("Submit") }}">	
+                <button class="btn header-search" type="submit" aria-label="{{ _("Submit") }}">
                   <i class="fa fa-search"></i>	
                 </button>	
               </form>	
@@ -161,23 +161,22 @@
                     {% if locale.short_name in h.get_config_value('ckan.locales_offered') %}	
                       <option value="{% url_for h.current_url(), locale=locale.short_name %}"	
                               {% if locale.short_name == current_lang %}selected="selected"{% endif %}>	
-                        <span class="fi fi-kh"></span>	
+                        <span class="fi fi-kh"></span>
                         {{ locale.display_name or locale.english_name }}	
-                      </option>	
+                      </option>
                     {% endif %}	
                   {% endfor %}	
-                </select>	
-                <button class="btn js-hide" type="submit">{{ _("Go") }}</button>	
-              </form>	
-            </div>	
-          {% endblock %}	
-        </div>	
-      </nav>	
-    </div>	
-  </header>	
-{% endblock %}	
-{% block scripts %}	
-  <script>	
+                </select>
+              </form>
+            </div>
+          {% endblock %}
+        </div>
+      </nav>
+    </div>
+  </header>
+{% endblock %}
+{% block scripts %}
+  <script>
   //  'window' must be loaded to use jQuery	
   window.addEventListener('load', async (event) => {	
     let getFlag;	

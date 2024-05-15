@@ -14,7 +14,14 @@ import ckanext.querytool.helpers as helpers
 from ckanext.querytool import actions
 from ckanext.querytool.logic import otp
 from ckanext.querytool.logic import validators
+from ckanext.querytool.logic.action import get as vs_get_actions
+from ckanext.querytool.logic.action import update as vs_update_actions
+from ckanext.querytool.logic.action import create as vs_create_actions
+from ckanext.querytool.logic.action import delete as vs_delete_actions
 from ckanext.querytool.model import setup as model_setup
+from ckanext.querytool.views.group import querytool_group
+from ckanext.querytool.views.home import querytool_home
+from ckanext.querytool.views.querytool import querytool as querytool_blueprint
 import ckanext.querytool.commands as vs_commands
 import os
 import sys
@@ -32,10 +39,10 @@ from ckan.lib.navl.validators import (
     unicode_safe,
 )
 
-
 # New imports
 from ckanext.querytool.blueprint import reports as reports_blueprint
 from ckanext.querytool.logic.action import get
+
 
 log = logging.getLogger(__name__)
 
@@ -73,8 +80,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IConfigurable)
     plugins.implements(plugins.ITemplateHelpers)
     plugins.implements(plugins.IAuthFunctions)
-    # plugins.implements(plugins.IGroupForm, inherit=True)
+    plugins.implements(plugins.IGroupForm, inherit=True)
     plugins.implements(plugins.IClick)
+    plugins.implements(plugins.IBlueprint)
 
     plugins.implements(plugins.IBlueprint)
 
@@ -112,6 +120,13 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         ckanext-{extension name}, hence your pot, po and mo files should be
         named ckanext-{extension name}.mo"""
         return "ckanext-{name}".format(name=self.name)
+
+    # IBlueprint
+
+    def get_blueprint(self):
+        return [querytool_group, querytool_home, querytool_blueprint]
+
+    # IGroupForm
 
     def group_types(self):
         return ("group",)
@@ -204,6 +219,9 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
 
     def admins_template(self):
         return "group/admins.html"
+
+    def prepare_group_blueprint(self, group_type):
+        return 'querytool_group'
 
     # IConfigurer
 
@@ -378,6 +396,13 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         return {
             "send_2fa_code": otp.send_2fa_code,
             "querytool_list_other": get.querytool_list_other,
+            "get_available_groups": vs_get_actions.get_available_groups,
+            "group_update": vs_update_actions.querytool_group_update,
+            "group_create": vs_create_actions.querytool_group_create,
+            "group_delete": vs_delete_actions.querytool_group_delete,
+            "group_purge": vs_delete_actions.querytool_group_purge,
+            "get_all_parent_groups": vs_get_actions.get_all_parent_groups,
+            "config_option_update": vs_update_actions.config_option_update,
         }
 
     # IConfigurable
@@ -478,7 +503,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     ignore_missing,
                     unicode_safe,
                     logic.validators.url_validator,
-                ],
+                ], 
                 "instagram_url": [
                     ignore_missing,
                     unicode_safe,
