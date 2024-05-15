@@ -1,0 +1,210 @@
+{% extends "querytool/public/base_main.html" %}
+{% if g.group_parents_enabled != 'True' %}
+  {% set groups = h.querytool_get_groups()[0] %}
+{% endif %}
+
+{% block breadcrumb_custom %}
+  <div class="toolbar new_toolbar">
+    <ol class="breadcrumb new_breadcrumb">
+      <li><a href="/"><i class="fa fa-home"></i></a></li>
+      {% set from_parent = request.args.get('from_parent') %}
+      {% set parent = request.args.get('parent') %}
+      {% set parent_title = request.args.get('title') %}
+      {% if from_parent == 'True' %}
+        <li><a href="/querytool/public/group/{{ parent }}">{{ parent_title }}</a></li>
+      {% endif %}
+      <li class="active">{% link_for group.title, named_route='querytool.public_list', group=group.name %}</li>
+    </ol>
+    {% snippet 'snippets/embed/navbar_end_items.html' %}
+  </div>
+  
+{% endblock %}
+
+{% block page_header_bg %}{% endblock %}
+
+{% block page_header_icon %}<img class="thumbnail" src="{{group.image_display_url}}" width=100>{% endblock %}
+
+{% block page_header_title %}<h1>{{ group.title }}</h1>{% endblock %}
+
+{% block page_header_description %}
+    <p>{{ h.render_markdown(h.get_translated(group, 'description'), True, True) }}</p>
+    </br>
+    <p>{{ h.render_markdown(h.get_translated(group, 'additional_description'), True, True) }}</p>
+{% endblock %}
+
+{% block tools %}
+<div class="container">
+  {% set from_parent = request.args.get('from_parent') %}
+  {% set parent = request.args.get('parent') %}
+  {% set parent_title = request.args.get('title') %}
+
+  {% if g.group_parents_enabled == 'True' and (group.group_relationship_type == 'parent' or group.name == '__misc__group__') %}
+
+    {% set q = request.args.get('report_q') %}
+
+    {% if not child_groups and not q %}
+      {% set groups = h.querytool_get_groups(parent_name=group.name) %}
+    {% else %}
+      {% set groups = child_groups %}
+    {% endif %}
+
+    {% set parent = request.args.get('parent') %}
+    {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
+    {% set sorting_selected = request.args.get('sort', 'name asc') %}
+    {% set group_count = groups | length %}
+
+    <form class="search-form no-bottom-border">
+      <div class="search-input control-reports search-giant" id="report-search-box">
+        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search groups...') }}" {% if q %} value="{{ q }}" {% endif %} />
+        <input type="hidden" id="from_parent" name="from_parent" value=True />
+        <input type="hidden" id="parent_group_children" name="parent_group_children" value="{{group.children}}" />
+        <input type="hidden" id="parent" name="parent" value="{{parent}}" />
+        <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+      </div>
+
+      <div class="form-select control-group control-order-by">
+        <label for="field-order-by">{{ _('Order by') }}</label>
+        <select class="report-search-sort" id="field-order-by" name="sort">
+          {% for label, value in sorting %}
+            {% if label and value %}
+              <option value="{{ value }}"{% if sorting_selected == value %} selected="selected"{% endif %}>{{ label }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <h2>
+      {% snippet "snippets/parent_groups_search_result_text.html", count=group_count, query=q %}
+      </h2>
+    </form>
+
+    {% if groups %}
+
+      {% if sorting_selected == 'name asc' %}
+        {% set groups = groups | sort(attribute='title') %}
+      {% elif sorting_selected == 'name desc' %}
+        {% set groups = groups | sort(attribute='title', reverse=true) %}
+      {% endif %}
+
+      <div class="container content">
+        <div class="group-items">
+          <div class="row">
+
+          {% set count = 1 %}
+
+          {% for child_group in groups %}
+            {% set url = h.url_for('querytool.public_list', group=child_group.name) %}
+
+            {% if count == 1 %}
+            <div class="row">
+            {% endif %}
+
+            <div class="col-sm-3">
+              <div class="group-box-2">
+                <div class="group-image-2">
+                  {% if child_group.image_display_url %}
+                    <img  src="{{group.image_display_url}}" alt="{{ value }}">
+                  {% else %}
+                    <img src="/base/images/icon-1.svg" alt="">
+                  {% endif %}
+                </div>
+
+                <div class="box-content">
+                  <a class="query-tool" href="{{ url }}?parent={{ group.name }}&from_parent=True&title={{ group.title | safe }}"><span class="tool-title">{{child_group.title}}</span></a>
+
+                  <div style="min-height:55px;">
+                    <div class="short-desc">
+                      <p>{{ h.render_markdown(child_group.description, True, True) }}</p>
+                    </div>
+                  </div>
+
+                  {% if child_group.description|length < 100 %}
+                    <p>&nbsp;</p>
+                  {% endif %}
+
+                </div> 
+                <p class='clearfix'></p>
+              </div>
+            </div>
+
+          {% if count == 1 %}
+          </div>
+          {% endif %}
+
+          {% if count == 3 %}
+            {% set count = 1 %}
+          {% else %}
+            {% set count = count + 1 %}
+          {% endif %}
+
+          {% endfor %}
+          </div>
+        </div>
+
+        <a class="query-tool query-btn" href="/querytool/public/reports?parent={{ group.name }}&from_parent=True&title={{ group.title | safe }}">
+          <span class="btn btn-primary" role="button" style="display: block; max-width:200px; margin:0 auto; padding:10px 10px;">{{ _('See all tools') }}</span>
+        </a>
+        <br/><br/><br/><br/>
+      </div>
+
+    {% else %}
+      {% if not q %}
+        <div class="alert alert-danger">
+          <strong>{{ _('No child groups belong to this parent group.') }}</strong>
+        </div>
+      {% endif %}
+    {% endif %}
+
+  {% else %}
+    {% set q = request.args.get('report_q') %}
+    {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
+    {% set sorting_selected = request.args.get('sort', 'name asc') %}
+    {% set report_count = h.report_search_count(data, remove_private=True) %}
+
+    <form class="search-form no-bottom-border">
+      <div class="search-input control-reports search-giant" id="report-search-box">
+        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" {% if q %} value="{{ q }}" {% endif %} />
+        <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+        {% if parent %}
+          <input type="hidden" name="parent" value="{{ parent }}">
+          <input type="hidden" id="from_parent" name="from_parent" value=True />
+          <input type="hidden" id="title" name="title" value="{{ parent_title }}" />
+        {% endif %}
+      </div>
+
+      <div class="form-select control-group control-order-by">
+        <label for="field-order-by">{{ _('Order by') }}</label>
+        <select class="report-search-sort" id="field-order-by" name="sort">
+          {% for label, value in sorting %}
+            {% if label and value %}
+              <option value="{{ value }}"{% if sorting_selected == value %} selected="selected"{% endif %}>{{ label }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <h2>
+      {% snippet "snippets/reports_search_result_text.html", count=report_count, query=q %}
+      </h2>
+    </form>
+    {% if data %}
+
+      {% if sorting_selected == 'name asc' %}
+        {% set data = data | sort(attribute='title') %}
+      {% elif sorting_selected == 'name desc' %}
+        {% set data = data | sort(attribute='title', reverse=true) %}
+      {% endif %}
+
+      {% for querytool in data %}
+        {% if not querytool.private %}
+         {% snippet 'querytool/public/snippets/query_tool_list_item.html', querytool=querytool, parent=parent, from_parent=from_parent,  parent_title=parent_title %}
+        {% endif %}
+      {% endfor%}
+    {% else %}
+      {% if not q %}
+        <div class="alert alert-danger">
+          <strong>{{ _('Reports are not published yet in this group') }}</strong>
+        </div>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}
