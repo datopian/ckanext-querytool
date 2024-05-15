@@ -1,0 +1,20 @@
+{% extends 'page.html' %}
+
+{% block styles %}
+  {{ super() }}
+  {% asset 'querytool/public-querytool-css' %}
+{% endblock %}
+
+{% block subtitle %}{{ _('View Reports') }}{% endblock %}
+
+{% block skip %}
+{# Keep this block empty #}
+{% endblock %}
+
+{% block header %}
+  {{ super() }}
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}

@@ -102,11 +102,7 @@ ckan.module("querytool_image_upload", function ($) {
         .insertBefore(this.field_url_input);
 
       // Update the main label (this is displayed when no data/image has been uploaded/linked)
-      //$(`label[for="${this.el.parents('form').find(field_name)}"]`).text(options.upload_label || this._('Image'));
-      //console.log('LABEL', $(`label[for="${this.el.parents('form').find(field_name)}"]`).text())
-      $('label[for="field-image-upload"]').text(
-        options.upload_label || this._("Image")
-      );
+      $(`label[for="${this.el.parents('form').find(field_name)}"]`).text(options.upload_label || this._('Image'));
 
       // Setup the file input
       this.input
@@ -119,6 +115,16 @@ ckan.module("querytool_image_upload", function ($) {
       $(window).on("load", () => {
         this.input.css("width", this.button_upload.outerWidth());
       });
+
+      this.button_url
+        .on("mouseover", () => this.button_url.addClass("hover"))
+        .on("mouseout", () => this.button_url.removeClass("hover"));
+
+      var button_width = this.button_upload.outerWidth();
+      if (button_width === 0) {
+        // unset width if it's 0
+        this.input.css("width", "");
+      }
 
       // Fields storage. Used in this.changeState
       this.fields = $("<i />")
@@ -270,6 +276,7 @@ ckan.module("querytool_image_upload", function ($) {
         .add(this.button_url)
         .add(this.input)
         .show();
+      this.input.css("width", this.button_upload.outerWidth());
     },
 
     /* Show only the URL field, hiding all others

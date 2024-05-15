@@ -15,9 +15,9 @@
 
   {{ form.select('group_parents_enabled', label=_('Parent Groups'), options=[{'text': _('Enabled'), 'value': 'True'},{'text': _('Disabled'), 'value': 'False'}], selected=g.group_parents_enabled or 'False', error=errors.group_parents_enabled) }}
 
-  {{ form.select('theme', label=_('Theme'), options=[{'text': _('Default'), 'value': 'Default'},{'text': _('Custom'), 'value': 'Custom'}], selected=data.theme, error=errors.theme) }}
+  {{ form.select('querytool_theme', label=_('Theme'), options=[{'text': _('Default'), 'value': 'Default'},{'text': _('Custom'), 'value': 'Custom'}], selected=data.querytool_theme, error=errors.theme) }}
 
-  {% set theme = data.theme %}
+  {% set theme = data.querytool_theme %}
 
   <div id="custom-theme" hidden>
     {% set header_is_upload = data.header_image_url and not data.header_image_url.startswith('http') %}

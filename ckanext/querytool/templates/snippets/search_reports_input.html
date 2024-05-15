@@ -1,0 +1,21 @@
+{# Displays a search input for datasets or groups #}
+
+<form
+  class="section site-search simple-input search-input-snippet"
+  action="/querytool/public/reports"
+  method="get"
+>
+  <div class="field">
+    <label for="field-sitewide-search">{{ _('Search reports...') }}</label>
+    <input
+      id="field-sitewide-search"
+      class="field-sitewide-search"
+      type="text"
+      name="report_q"
+      placeholder="{{ _('Search reports') }}"
+    />
+    <button class="btn-search" type="submit">
+      <i class="fa fa-search"></i>
+    </button>
+  </div>
+</form>
