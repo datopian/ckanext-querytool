@@ -2993,3 +2993,23 @@ form.custom-lang-select {
   width: 100%;
   height: auto;
 }
+
+.flex {
+  display: flex;
+}
+
+.gap-2 {
+  gap: 0.5rem;
+}
+
+.list-none {
+  list-style: none;
+}
+
+.p-0 {
+  padding: 0;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
