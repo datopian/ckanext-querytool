@@ -479,7 +479,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             {
                 "ckan.welcome_page_title": [ignore_missing, unicode_safe],
                 "ckan.welcome_page_description": [ignore_missing, unicode_safe],
-                "theme": [ignore_missing, unicode_safe],
+                "querytool_theme": [ignore_missing, unicode_safe],
                 "header_image_url": [ignore_missing, unicode_safe],
                 "header_image_upload": [ignore_missing, unicode_safe],
                 "header_clear_upload": [ignore_missing, unicode_safe],
