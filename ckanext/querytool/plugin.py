@@ -84,11 +84,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     plugins.implements(plugins.IClick)
     plugins.implements(plugins.IBlueprint)
 
-    plugins.implements(plugins.IBlueprint)
-
-    def get_blueprint(self):
-        return [reports_blueprint]
-
     # ITranslation
     def i18n_directory(self):
         """Change the directory of the *.mo translation files
@@ -124,7 +119,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     # IBlueprint
 
     def get_blueprint(self):
-        return [querytool_group, querytool_home, querytool_blueprint]
+        return [querytool_group, querytool_home, querytool_blueprint, reports_blueprint]
 
     # IGroupForm
 
