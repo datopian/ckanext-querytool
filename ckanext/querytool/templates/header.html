@@ -122,7 +122,7 @@
                          class="form-control me-2"	
                          type="text"	
                          name="q"	
-                         placeholder="{{ _('Search Datasets') }}"
+                         placeholder="{{ _('Search datasets') }}"
                          aria-label="{{ h.humanize_entity_type('package', dataset_type, 'search_placeholder') or _('Search datasets...') }}" />
                   <button class="btn header-search" type="submit" aria-label="{{ _('Submit') }}">
                     <i class="fa fa-search"></i>	
@@ -141,7 +141,7 @@
                        class="form-control me-2"	
                        type="text"	
                        name="q"	
-                       placeholder="{{ _('Search Reports') }}"
+                       placeholder="{{ _('Search reports') }}" 
                        aria-label="{{ h.humanize_entity_type('package', dataset_type, 'search_placeholder') or _('Search datasets...') }}" />	
                 <button class="btn header-search" type="submit" aria-label="{{ _('Submit') }}">
                   <i class="fa fa-search"></i>	
@@ -197,8 +197,9 @@
       if (!lang.id) { return lang.text; }	
       //  Value always comes as '/en/...''	
       const value = lang.element[0].value.split('/')[1];	
+      var lang_text = lang.text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
-      return `<span class="fi fi-${getFlag(value)}"> </span> ${lang.text}`;	
+      return `<span class="fi fi-${getFlag(value)}"> </span> ${lang_text}`;
     } 	
 
     //  Initiliazing the select with the	

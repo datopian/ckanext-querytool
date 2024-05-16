@@ -162,7 +162,7 @@
 
     <form class="search-form no-bottom-border">
       <div class="search-input control-reports search-giant" id="report-search-box">
-        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" {% if q %} value="{{ q }}" {% endif %} />
+        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports') }}" {% if q %} value="{{ q }}" {% endif %} />
         <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
         {% if parent %}
           <input type="hidden" name="parent" value="{{ parent }}">

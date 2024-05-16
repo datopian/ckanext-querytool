@@ -1857,3 +1857,23 @@ msgstr "Orphans"
 # Manually added translations
 msgid "Previously saved in group: "
 msgstr "Previously saved in group: "
+
+# Manually added translations
+msgid "No reports found"
+msgstr "No reports found"
+
+# Manually added translations
+msgid "No reports found for \"{query}\""
+msgstr "No reports found for \"{query}\""
+
+# Manually added translations
+msgid "{number} report found"
+msgid_plural "{number} reports found"
+msgstr[0] "{number} report found"
+msgstr[1] "{number} reports found"
+
+# Manually added translations
+msgid "{number} report found for \"{query}\""
+msgid_plural "{number} reports found for \"{query}\""
+msgstr[0] "{number} report found for \"{query}\""
+msgstr[1] "{number} reports found for \"{query}\""

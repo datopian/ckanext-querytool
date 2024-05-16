@@ -28,7 +28,7 @@
     </ul>
 </header>
   {% block reports_search_form %}
-    {% snippet 'snippets/search_form.html', form_id='report-search-form', type='report', query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder=h.humanize_entity_type('report', 'report', 'search placeholder') or _('Search reports...'), show_empty=request.args, no_bottom_border=true if page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
+    {% snippet 'snippets/search_form.html', form_id='report-search-form', type='report', query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder=h.humanize_entity_type('report', 'report', 'search placeholder') or _('Search reports'), show_empty=request.args, no_bottom_border=true if page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
   {% endblock %}
   {% block groups_list %}
     {% set data = page._items %}

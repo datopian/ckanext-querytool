@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Poedit 2.4.2\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"Language: zh_CN\n"
+"Language: zh_Hans_CN\n"
 
 #: ckanext/querytool/helpers.py:131
 msgid "Line"
@@ -1842,3 +1842,23 @@ msgstr "孤立报告"
 # Manually added translations
 msgid "Previously saved in group: "
 msgstr "之前保存在群组中："
+
+# Manually added translations
+msgid "No reports found"
+msgstr "未找到报告"
+
+# Manually added translations
+msgid "No reports found for \"{query}\""
+msgstr "未找到\"{query}\"的报告"
+
+# Manually added translations
+msgid "{number} report found"
+msgid_plural "{number} reports found"
+msgstr[0] "找到{number}个报告"
+msgstr[1] "找到{number}个报告"
+
+# Manually added translations
+msgid "{number} report found for \"{query}\""
+msgid_plural "{number} reports found for \"{query}\""
+msgstr[0] "\"{query}\"找到{number}个报告"
+msgstr[1] "\"{query}\"找到{number}个报告"
