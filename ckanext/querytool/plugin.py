@@ -398,6 +398,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "group_purge": vs_delete_actions.querytool_group_purge,
             "get_all_parent_groups": vs_get_actions.get_all_parent_groups,
             "config_option_update": vs_update_actions.config_option_update,
+            "querytool_public_list": get.querytool_public_list,
         }
 
     # IConfigurable

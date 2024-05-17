@@ -5,6 +5,7 @@ from ckan.lib.base import render
 from ckan.plugins import toolkit
 
 import ckanext.querytool.helpers as helpers
+import ckanext.querytool.model as qmodel
 
 log = logging.getLogger(__name__)
 
@@ -68,20 +69,20 @@ def public_list(group=None):
             },
         )
     else:
-        # The following needs to be uncommented when we get to the reports
-        querytools = {}  # _get_action('querytool_public_list')({}, {'group': group})
+        querytools = _get_action('querytool_public_list')({}, {'group': group})
+        log.error(querytools)
 
-        # if q:
-        #    querytool_search_results = helpers.querytool_search(
-        #        query_string=q, query_group=group
-        #    )
-        #    querytool_search_results_names = [
-        #        querytool.name for querytool in querytool_search_results
-        #    ]
-        #    querytools = [
-        #        querytool for querytool in querytools if
-        #        querytool['name'] in querytool_search_results_names
-        #    ]
+        if q:
+           querytool_search_results = helpers.querytool_search(
+               query_string=q, query_group=group
+           )
+           querytool_search_results_names = [
+               querytool.name for querytool in querytool_search_results
+           ]
+           querytools = [
+               querytool for querytool in querytools if
+               querytool['name'] in querytool_search_results_names
+           ]
 
         if from_parent:
             extra_vars = {
