@@ -90,21 +90,23 @@ def querytool_public_list(context, data_dict):
 
     session = context['session']
 
-    query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
-        .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
-               CkanextQueryToolVisualizations.ckanext_querytool_id)) \
+    # TODO: Fix this when visualizations are added
+    #query = session.query(CkanextQueryTool, CkanextQueryToolVisualizations) \
+    #    .join((CkanextQueryToolVisualizations, CkanextQueryTool.id ==
+    #           CkanextQueryToolVisualizations.ckanext_querytool_id)) \
+    #    .filter(CkanextQueryTool.group == group) \
+    #    .filter(CkanextQueryTool.type == 'main') \
+    #    .filter(CkanextQueryToolVisualizations.visualizations != '')
+    query = session.query(CkanextQueryTool) \
         .filter(CkanextQueryTool.group == group) \
-        .filter(CkanextQueryTool.type == 'main') \
-        .filter(CkanextQueryToolVisualizations.visualizations != '')
+        .filter(CkanextQueryTool.type == 'main')
 
     result = query.all()
     querytools_list = []
 
     if result and len(result) > 0:
         for item in result:
-            querytool = {}
-            for _ in item:
-                querytool.update(table_dictize(_, context))
+            querytool = table_dictize(item, context)
             querytools_list.append(querytool)
     return querytools_list
 
