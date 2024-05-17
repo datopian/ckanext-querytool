@@ -216,7 +216,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         return "group/admins.html"
 
     def prepare_group_blueprint(self, group_type):
-        return 'querytool_group'
+        return "querytool_group"
 
     # IConfigurer
 
@@ -498,7 +498,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
                     ignore_missing,
                     unicode_safe,
                     logic.validators.url_validator,
-                ], 
+                ],
                 "instagram_url": [
                     ignore_missing,
                     unicode_safe,
