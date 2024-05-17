@@ -1802,3 +1802,23 @@ msgstr "Órfãos"
 # Manually added translations
 msgid "Previously saved in group: "
 msgstr "Anteriormente salvo no grupo: "
+
+# Manually added translations
+msgid "No reports found"
+msgstr "Nenhum rel atório encontrado"
+
+# Manually added translations
+msgid "No reports found for \"{query}\""
+msgstr "Nenhum relatório encontrado para \"{query}\""
+
+# Manually added translations
+msgid "{number} report found"
+msgid_plural "{number} reports found"
+msgstr[0] "{number} relatório encontrado"
+msgstr[1] "{number} relatórios encontrados"
+
+# Manually added translations
+msgid "{number} report found for \"{query}\""
+msgid_plural "{number} reports found for \"{query}\""
+msgstr[0] "{number} relatório encontrado para \"{query}\""
+msgstr[1] "{number} relatórios encontrados para

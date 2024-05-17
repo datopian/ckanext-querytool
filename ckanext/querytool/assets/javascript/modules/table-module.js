@@ -54,7 +54,7 @@ ckan.module("querytool-table", function () {
           oPaginate: { sNext: "Próximo", sPrevious: "Anterior", sFirst: "Primeiro", sLast: "Último" },
           oAria: { sSortAscending: ": Ordenar colunas de forma ascendente", sSortDescending: ": Ordenar colunas de forma descendente" },
       },
-      zh_CN: {
+      zh_Hans_CN: {
           sProcessing: "处理中...",
           sLengthMenu: "显示 _MENU_ 项结果",
           sZeroRecords: "没有匹配结果",

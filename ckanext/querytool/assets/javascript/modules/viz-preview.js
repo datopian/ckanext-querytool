@@ -1400,7 +1400,7 @@ ckan.module('querytool-viz-preview', function() {
                     'Slim': 'Fina',
                     'Wide': 'Larga'
                 },
-                'zh_CN': {
+                'zh_Hans_CN': {
                     'Solid': '坚硬的',
                     'Dotted': '点缀',
                     'Dashed': '虚线',

@@ -2576,3 +2576,23 @@ msgstr "ក្រុមកូន"
 # Manually added translations
 msgid "Previously saved in group: "
 msgstr "បានរក្សាទាំងមូលក្នុងក្រុម​ដែល​មាន​មុខ​មុខ​: "
+
+# Manually added translations
+msgid "No reports found"
+msgstr "របាយការណ៍​មិន​បាន​រក​ឃើញ"
+
+# Manually added translations
+msgid "No reports found for \"{query}\""
+msgstr "របាយការណ៍​មិន​បាន​រក​ឃើញ​សម្រាប់ \"{query}\""
+
+# Manually added translations
+msgid "{number} report found"
+msgid_plural "{number} reports found"
+msgstr[0] "{number} របាយការណ៍រកឃើញ"
+msgstr[1] "{number} របាយការណ៍រកឃើញ"
+
+# Manually added translations
+msgid "{number} report found for \"{query}\""
+msgid_plural "{number} reports found for \"{query}\""
+msgstr[0] "{number} របាយការណ៍រកឃើញសម្រាប់ \"{query}\""
+msgstr[1] "{number} របាយការណ៍រកឃើញសម្រាប់ \"{query}\""

@@ -2200,3 +2200,23 @@ msgstr ""
 # Manually added translations
 msgid "Previously saved in group: "
 msgstr ""
+
+# Manually added translations
+msgid "No reports found"
+msgstr ""
+
+# Manually added translations
+msgid "No reports found for \"{query}\""
+msgstr ""
+
+# Manually added translations
+msgid "{number} report found"
+msgid_plural "{number} reports found"
+msgstr[0] ""
+msgstr[1] ""
+
+# Manually added translations
+msgid "{number} report found for \"{query}\""
+msgid_plural "{number} reports found for \"{query}\""
+msgstr[0] ""
+msgstr[1] ""

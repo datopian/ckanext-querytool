@@ -73,7 +73,7 @@ def group_form_schema():
 
 
 class QuerytoolPlugin(plugins.SingletonPlugin):
-    # plugins.implements(plugins.ITranslation, inherit=False)
+    plugins.implements(plugins.ITranslation)
     plugins.implements(plugins.IConfigurer)
     # plugins.implements(plugins.IRoutes)
     plugins.implements(plugins.IActions)
