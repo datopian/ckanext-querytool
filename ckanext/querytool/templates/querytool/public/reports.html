@@ -1,0 +1,71 @@
+{% extends "querytool/public/base_main.html" %}
+{% set groups = h.querytool_get_groups()[0] %}
+{% block breadcrumb_content %}
+  {% if c.group %}
+    <li class="active">
+      {% link_for groups[c.group], controller=c.controller, action='querytool_public_list', group=c.group %}
+    </li>
+  {% endif %}
+{% endblock %}
+{% block page_header_bg %}{% endblock %}
+{% block page_header_title %}<h1>{{ _("Reports") }}</h1>{% endblock %}
+{% block page_header_description %}<p>{{ _("List of all reports") }}</p>{% endblock %}
+{% block tools %}
+  <div class="container">
+    {% set q = request.args.get('report_q') %}
+    {% set from_parent = request.args.get('from_parent') or from_parent %}
+    {% set parent = request.args.get('parent') or parent %}
+    {% set parent_title = request.args.get('title') or title %}
+    {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
+    {% set sorting_selected = request.args.get('sort', 'name asc') %}
+    {% set report_count = h.report_search_count(data, remove_private=True) %}
+    <form class="search-form no-bottom-border">
+      <div class="search-input control-reports search-giant"
+           id="report-search-box">
+        <input id="field-sitewide-search"
+               type="text"
+               name="report_q"
+               placeholder="{{ _("Search reports...") }}"
+               {% if q %}value="{{ q }}"{% endif %} />
+        <button class="btn-search" type="submit">
+          <i class="fa fa-search"></i>
+        </button>
+        {% if parent %}
+          <input type="hidden" name="parent" value="{{ parent }}">
+          <input type="hidden" id="from_parent" name="from_parent" value=True />
+          <input type="hidden" id="title" name="title" value="{{ parent_title }}" />
+        {% endif %}
+      </div>
+      <div class="form-select control-group control-order-by">
+        <label for="field-order-by">{{ _("Order by") }}</label>
+        <select class="report-search-sort" id="field-order-by" name="sort">
+          {% for label, value in sorting %}
+            {% if label and value %}
+              <option value="{{ value }}"
+                      {% if sorting_selected == value %}selected="selected"{% endif %}>{{ label }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <h2>{% snippet "snippets/reports_search_result_text.html", count=report_count, query=q %}</h2>
+    </form>
+    {% if data %}
+      {% if sorting_selected == 'name asc' %}
+        {% set data = data | sort(attribute='title') %}
+      {% elif sorting_selected == 'name desc' %}
+        {% set data = data | sort(attribute='title', reverse=true) %}
+      {% endif %}
+      {% for querytool in data %}
+        {% if not querytool.private %}
+          {% snippet '/querytool/public/snippets/query_tool_list_item.html', querytool=querytool %}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      {% if not q %}
+        <div class="alert alert-danger">
+          <strong>{{ _("Reports are not published yet in this group") }}</strong>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+{% endblock %}
