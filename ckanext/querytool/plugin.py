@@ -22,6 +22,7 @@ from ckanext.querytool.model import setup as model_setup
 from ckanext.querytool.views.group import querytool_group
 from ckanext.querytool.views.home import querytool_home
 from ckanext.querytool.views.querytool import querytool as querytool_blueprint
+from ckanext.querytool.views import admin as admin_blueprint
 import ckanext.querytool.commands as vs_commands
 import os
 import sys
@@ -119,7 +120,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     # IBlueprint
 
     def get_blueprint(self):
-        return [querytool_group, querytool_home, querytool_blueprint, reports_blueprint]
+        return [querytool_group, querytool_home, querytool_blueprint, reports_blueprint, admin_blueprint.querytool_admin]
 
     # IGroupForm
 
