@@ -1475,11 +1475,10 @@ form.custom-lang-select {
 .list-group-img {
   padding-right: 5px;
 }
-.social-options-text {
+.social-options-text, .social-selected-text {
   text-align: center;
-}
-.social-selected-text {
-  text-align: center;
+  user-select: none;
+  pointer-events: none;
 }
 .container-admin-social {
   margin: auto;

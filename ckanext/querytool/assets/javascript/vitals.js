@@ -1355,6 +1355,7 @@ if (optionsColumn) {
     onAdd: function (evt) {
       var itemEl = evt.item;
       var currentEl = $(`#control-group-${itemEl.id}-url`)
+      currentEl.css('margin-bottom', '20px');
       updateSocialOrder()
       currentEl.show()
     },
@@ -1625,7 +1626,6 @@ document.addEventListener("DOMContentLoaded", function() {
 // Fix hover shading on buttons
 function addEventListenersToButtons(element) {
     if (element.nodeType === Node.ELEMENT_NODE && element.matches(".btn-default")) {
-        console.log("Adding hover class event listeners to:", element);
         element.addEventListener("mouseover", () => element.classList.add("hover"));
         element.addEventListener("mouseout", () => element.classList.remove("hover"));
     }
