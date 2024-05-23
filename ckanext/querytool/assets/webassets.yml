@@ -10,6 +10,24 @@ public-querytool-css:
   contents:
     - public-querytool.css
 
+variables-less:
+  filter: cssrewrite
+  output: ckanext-querytool/inc/variables.less
+  contents:
+    - inc/variables.less
+
+mixins-less:
+  filter: cssrewrite
+  output: ckanext-querytool/inc/mixins.less
+  contents:
+    - inc/mixins.less
+
+responsive-less:
+  filter: cssrewrite
+  output: ckanext-querytool/inc/responsive.less
+  contents:
+    - inc/responsive.less
+
 querytool-js:
   output: ckanext-querytool/%(version)s-querytool.js
   extra:
@@ -22,6 +40,8 @@ querytool-js:
     - javascript/anchor_fix.js
     - javascript/vitals.js
     - javascript/modules/fullscreen.js
+    - javascript/querytool_data.js
+    - javascript/public_query.js
   filter:
     - rjsmin
 

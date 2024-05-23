@@ -1,0 +1,16 @@
+{% set ctrl = "ckanext.querytool.controllers.querytool:QueryToolController" %}
+{% set s1 = stages[0] or 'active' %} {% set s2 = stages[1] or 'uncomplete' %} {%
+if s1 != 'uncomplete' %}{% set class = "stage-1" %}
+{% endif %}
+{% if s2 !=
+  'uncomplete' %}
+  {% set class = "stage-2" %}
+{% endif %}
+<ol class="stages {{ class }}">
+  <li class="first {{ s1 }}">
+    <span class="highlight">{{ _("Report data") }}</span>
+  </li>
+  <li class="last {{ s2 }}">
+    <span class="highlight">{{ _("Visualizations") }}</span>
+  </li>
+</ol>

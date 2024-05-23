@@ -23,6 +23,7 @@ from ckanext.querytool.views.group import querytool_group
 from ckanext.querytool.views.home import querytool_home
 from ckanext.querytool.views.querytool import querytool as querytool_blueprint
 from ckanext.querytool.views import admin as admin_blueprint
+from ckanext.querytool.views.reports import reports as reports_blueprint
 import ckanext.querytool.commands as vs_commands
 import os
 import sys
@@ -39,11 +40,6 @@ from ckan.lib.navl.validators import (
     ignore_empty,
     unicode_safe,
 )
-
-# New imports
-from ckanext.querytool.blueprint import reports as reports_blueprint
-from ckanext.querytool.logic.action import get
-
 
 log = logging.getLogger(__name__)
 
@@ -120,7 +116,13 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
     # IBlueprint
 
     def get_blueprint(self):
-        return [querytool_group, querytool_home, querytool_blueprint, reports_blueprint, admin_blueprint.querytool_admin]
+        return [
+            querytool_group,
+            querytool_home,
+            querytool_blueprint,
+            reports_blueprint,
+            admin_blueprint.querytool_admin,
+        ]
 
     # IGroupForm
 
@@ -386,12 +388,12 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         return map
 
     # IActions
-
-    # IActions
     def get_actions(self):
         return {
             "send_2fa_code": otp.send_2fa_code,
-            "querytool_list_other": get.querytool_list_other,
+            "querytool_list_other": vs_get_actions.querytool_list_other,
+            "querytool_get": vs_get_actions.querytool_get,
+            "querytool_update": vs_update_actions.querytool_update,
             "get_available_groups": vs_get_actions.get_available_groups,
             "group_update": vs_update_actions.querytool_group_update,
             "group_create": vs_create_actions.querytool_group_create,
@@ -399,7 +401,10 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "group_purge": vs_delete_actions.querytool_group_purge,
             "get_all_parent_groups": vs_get_actions.get_all_parent_groups,
             "config_option_update": vs_update_actions.config_option_update,
-            "querytool_public_list": get.querytool_public_list,
+            "querytool_public_list": vs_get_actions.querytool_public_list,
+            "querytool_get_numeric_resource_columns": vs_get_actions.querytool_get_numeric_resource_columns,
+            "querytool_get_resource_columns": vs_get_actions.querytool_get_resource_columns,
+            "get_filter_values": vs_get_actions.get_filter_values,
         }
 
     # IConfigurable

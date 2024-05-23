@@ -1,0 +1,30 @@
+<div id="map_module_{{ n }}" class="item-content" data-module="querytool-map"
+     data-module-map_config="{{ map_config }}"
+     data-module-map_resource="{{ map_resource }}"
+     data-module-map_title_field="{{ map_title_field }}"
+     data-module-map_custom_title_field="{{ map_custom_title_field }}"
+     data-module-map_infobox_title="{{ map_infobox_title }}"
+     data-module-map_key_field="{{ map_key_field }}"
+     data-module-data_key_field="{{ data_key_field }}"
+     data-module-data_format="{{ data_format }}"
+     data-module-sql_string="{{ sql_string }}"
+     data-module-seq_colors="{{ seq_colors }}"
+     data-module-data_categories="{{ data_categories }}"
+     data-module-y_axis_column="{{ y_axis_column }}"
+     data-module-measure_label="{{ measure_label }}"
+     data-module-filter_name="{{ filter_name }}"
+     data-module-filter_value="{{ filter_value }}"
+     data-module-info_query_filters = "{{ info_query_filters }}"
+     >
+     <div class="__map-loading-indicator">
+     Loading...
+     </div>
+</div>
+<script>
+  function translateMapHover(text) {
+    var translations = {
+      'Hover over the map for more info': "{{ _('Hover over the map for more info') }}"
+    };
+    return translations[text];
+  }
+</script>

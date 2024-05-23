@@ -1,0 +1,111 @@
+.nav-pills-hover(@border-size: @nav-pills-border-size, @border-color: @color-secondary) {
+  background-color: transparent;
+  border-radius: 0;
+  border-bottom: @border-size solid @border-color;
+  box-shadow: none;
+}
+
+.search-input-focus(@border-width: 1px) {
+  &:focus {
+    box-shadow: inset 0 0 0 @border-width @color-secondary;
+    border-color: @color-secondary;
+  }
+}
+
+.fa-icon-margin(@size) {
+  display: inline;
+  &:after {
+    content: '';
+    margin: @size;
+  }
+}
+
+.dataTable {
+  .dt-button{
+    margin: auto 2px;
+    span{
+      &:before{
+        margin-right: @grid-gutter-width/4;
+        font-family: 'FontAwesome';
+        content: "\f019";
+      }
+    }
+  }
+  .dataTables_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    table{
+      min-width: 100%;
+      table-layout: auto;
+      word-break: break-all;
+    }
+    .paginate_button {
+      &:hover {
+        background: @color-secondary;
+        border-color: @color-secondary-dark;
+      }
+      &.disabled {
+        &,
+        &:hover {
+          background: transparent;
+          border: transparent;
+        }
+      }
+      &.current {
+        &,
+        &:hover {
+          color: @color-white !important;
+          background: @color-primary;
+          border-color: @color-primary;
+        }
+      }
+    }
+    input {
+      vertical-align: baseline;
+    }
+    select {
+      margin: 0 @grid-gutter-width/4;
+      vertical-align: baseline;
+    }
+    label {
+      // color: @color-white;
+      font-weight: 500;
+      margin-bottom: 0;
+      &:after {
+        display: none;
+      }
+    }
+    .dataTables_filter {
+      input {
+        margin-bottom: 0;
+      }
+    }
+    .dt-buttons,
+    .dataTables_filter,
+    .dataTables_length {
+      background: @color-neutral-pale;
+      border: 1px solid @color-neutral-light;
+      padding: @grid-gutter-width/2 @grid-gutter-width;
+      margin-bottom: @grid-gutter-width;
+      border-radius: 3px;
+    }
+    .dataTable {
+      th,
+      &.no-footer {
+        border-color: @color-neutral-light;
+      }
+    }
+    .dataTables_empty,
+    .dataTables_info {
+      color: lighten(@color-black, 60%);
+    }
+    .dataTables_info,
+    .dataTables_paginate {
+      margin: @grid-gutter-width/2 0;
+    }
+    .dataTables_info{
+      flex: auto;
+    }
+  }
+}
