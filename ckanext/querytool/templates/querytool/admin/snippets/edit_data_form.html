@@ -180,13 +180,13 @@ Example usage:
       {% for column in columns %}
         {% set column_id = h.querytool_get_uuid() %}
         {% set measure = h.querytool_pick_first_by_attr_value(querytool.y_axis_columns, 'name', column) %}
-        <div class="control-group control-checkbox-group">
+        <div class="control-group control-checkbox-group flex" style="padding-left: 22px">
+          <label class="control-label" for="y_axis_name_{{ column_id }}">{{ column }}</label>
           <input name="y_axis_name_{{ column_id }}"
                  id="y_axis_name_{{ column_id }}"
                  type="checkbox"
                  value="{{ column }}"
                  {% if measure %}checked{% endif %} />
-          <label class="control-label" for="y_axis_name_{{ column_id }}">{{ column }}</label>
           <input name="y_axis_alias_{{ column_id }}"
                  id="y_axis_alias_{{ column_id }}"
                  type="text"

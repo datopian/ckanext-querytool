@@ -381,7 +381,7 @@ def querytool_public_read(name):
 
 reports.add_url_rule("/report", view_func=reports_list)
 reports.add_url_rule(
-    "/querytool/public/{name}", view_func=querytool_public_read, endpoint="public_read"
+    "/querytool/public/", view_func=querytool_public_read, endpoint="public_read"
 )
 reports.add_url_rule(
     "/report/edit", view_func=querytool_edit, endpoint="edit", methods=["GET", "POST"]
