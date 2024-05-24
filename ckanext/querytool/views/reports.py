@@ -2,6 +2,8 @@ import json
 import ast
 
 from flask import Blueprint
+from operator import itemgetter
+import ckan.lib.base as base
 from ckan.plugins import toolkit as tk
 import ckanext.querytool.helpers as h
 from ckan.common import _, config, g, request
@@ -43,12 +45,8 @@ def reports_list():
     return tk.render("report/index.html", extra_vars)
 
 
-def querytool_edit(querytool=None, data=None, errors=None, error_summary=None):
-    print("querytool_edit", flush=True)
-    print(querytool, flush=True)
-    print(data, flush=True)
-    print(errors, flush=True)
-    print(error_summary, flush=True)
+def querytool_edit(data=None, errors=None, error_summary=None):
+    querytool = tk.request.args.get("querytool", None)
     """
         Create/edit query tool
 
@@ -84,13 +82,13 @@ def querytool_edit(querytool=None, data=None, errors=None, error_summary=None):
         and c.userobj.sysadmin is False
         and data_dict.get("name") != ""
     ):
-        abort(403, _("Not authorized to see this page"))
+        base.abort(403, _("Not authorized to see this page"))
     else:
         if user_type not in ["admin", "editor"] and data_dict.get("name") != "":
             try:
                 tk.check_access("querytool_update", context, data_dict)
             except logic.NotAuthorized:
-                abort(403, _("Not authorized to see this page"))
+                base.abort(403, _("Not authorized to see this page"))
 
     # FIXME Had to comment out to make it work
     #    if _querytool is None and len(querytool) > 0:
@@ -102,9 +100,9 @@ def querytool_edit(querytool=None, data=None, errors=None, error_summary=None):
     # Check if the data for this querytool still exists
     if "dataset_name" in list(_querytool.keys()):
         try:
-            _get_action("package_show", {"id": _querytool["dataset_name"]})
-        except NotFound:
-            abort(
+            tk.get_action("package_show")(context, {"id": _querytool["dataset_name"]})
+        except logic.NotFound:
+            base.abort(
                 404,
                 _(
                     "The data used for creating this "
@@ -184,9 +182,7 @@ def querytool_edit(querytool=None, data=None, errors=None, error_summary=None):
         except logic.ValidationError as e:
             errors = e.error_dict
             error_summary = e.error_summary
-            return self.querytool_edit(
-                "/" + querytool, _querytool, errors, error_summary
-            )
+            return querytool_edit("/" + querytool, _querytool, errors, error_summary)
         if "save_data" in list(data.keys()):
             # redirect to querytools group
             tk.redirect_to(
@@ -244,22 +240,22 @@ def querytool_public_read(name):
     querytool = _get_action("querytool_public_read", {"name": name})
 
     if not querytool:
-        abort(404, _("Report not found."))
+        base.abort(404, _("Report not found."))
 
     # only sysadmins or organization members can access private querytool
     if querytool["private"] is True:
         context = _get_context()
         try:
             check_access("querytool_show", context, {"name": name})
-        except NotAuthorized:
-            abort(403, _("Not authorized to see this page"))
+        except logic.NotAuthorized:
+            base.abort(403, _("Not authorized to see this page"))
 
     # Check if the data for this querytool still exists
     if querytool["dataset_name"]:
         try:
             _get_action("package_show", {"id": querytool["dataset_name"]})
-        except NotFound:
-            abort(
+        except logic.NotFound:
+            base.abort(
                 404,
                 _(
                     "The data used for creating this "
@@ -269,7 +265,7 @@ def querytool_public_read(name):
             )
 
     if not querytool["visualizations"]:
-        abort(404, _("Report not fully set."))
+        logic.abort(404, _("Report not fully set."))
 
     params = tk.request.params
 
