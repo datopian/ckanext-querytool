@@ -62,9 +62,9 @@ report dict. Example:
             </li>
             <li>
               <a class="btn delete-querytool-btn"
-                 href="#"
+                 href="{{ h.url_for('reports.delete', querytool=report.name) }}"
                  data-module="confirm-action"
-                 data-module-content="{{ _("Are you sure you want to delete this Report?") }}"><span class="fa fa-trash-o" aria-hidden="true"></span> {{ _("Delete") 
+                 data-module-content="{{ _('Are you sure you want to delete this Report?') }}"><span class="fa fa-trash-o" aria-hidden="true"></span> {{ _("Delete")
               }}</a>
             </li>
           {% else %}

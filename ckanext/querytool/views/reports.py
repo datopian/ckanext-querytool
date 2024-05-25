@@ -74,6 +74,10 @@ def querytool_edit(data=None, errors=None, error_summary=None, querytool=None):
     )
 
     _querytool = tk.get_action("querytool_get")(context, data_dict)
+
+    if querytool and not _querytool:
+        base.abort(404, _("Report not found."))
+
     user_type = (
         h.get_user_permission_type(current_user.name, _querytool.get("group"))
         if _querytool
@@ -117,7 +121,6 @@ def querytool_edit(data=None, errors=None, error_summary=None, querytool=None):
 
     if tk.request.method == "POST" and not data:
         data = dict(tk.request.form)
-        print(data, flush=True)
 
         group = ast.literal_eval(data["group"])
         data.pop("group")
@@ -392,6 +395,45 @@ def querytool_public_read(name):
     return base.render("querytool/public/read.html", extra_vars=extra_vars)
 
 
+def querytool_delete(querytool):
+    """
+        Delete query tool
+
+    :return: querytools list template page
+
+    """
+
+    context = cast(
+        Context,
+        {
+            "model": model,
+            "session": model.Session,
+            "user": current_user.name,
+            "for_view": True,
+            "with_private": False,
+        },
+    )
+
+    # name = querytool[1:]
+    data_dict = {"name": querytool}
+
+    try:
+        tk.check_access("querytool_delete", context, data_dict)
+    except logic.NotAuthorized:
+        base.abort(403, _("Not authorized to see this page"))
+
+    # _querytool = tk.get_action("querytool_get", data_dict)
+
+    try:
+        junk = tk.get_action("querytool_delete")(context, data_dict)
+    except logic.NotFound:
+        base.abort(404, _("Report not found"))
+
+    ckan_helpers.flash_success(_("Report and visualizations were " "removed successfully."))
+
+    return tk.redirect_to("/report")
+
+
 reports.add_url_rule("/report", view_func=reports_list)
 reports.add_url_rule(
     "/querytool/public/", view_func=querytool_public_read, endpoint="public_read"
@@ -403,5 +445,11 @@ reports.add_url_rule(
     "/report/edit/<querytool>",
     view_func=querytool_edit,
     endpoint="edit",
+    methods=["GET", "POST"],
+)
+reports.add_url_rule(
+    "/report/delete/<querytool>",
+    view_func=querytool_delete,
+    endpoint="delete",
     methods=["GET", "POST"],
 )
