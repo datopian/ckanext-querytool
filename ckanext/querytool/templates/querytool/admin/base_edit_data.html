@@ -1,7 +1,7 @@
 {% extends "querytool/admin/base.html" %}
 {% block scripts %}
     {{ super() }}
-    {% asset 'querytool/javascript/dist/querytool_data.js' %}
+    {# {% asset 'querytool/javascript/dist/querytool_data.js' %} #}
 {% endblock %}
 {% set ctrl = "ckanext.querytool.controllers.querytool:QueryToolController" %}
 {% block subtitle %}{{ _("Edit data") }}{% endblock %}

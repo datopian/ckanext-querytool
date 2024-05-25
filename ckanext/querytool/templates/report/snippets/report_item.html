@@ -43,7 +43,7 @@ report dict. Example:
           {% set user_type = h.get_user_permission_type(c.userobj, report.group) %}
           {% set org_user_type = h.get_user_permission_type(c.userobj,
                     report.owner_org) %}
-          {% set edit_data_url = h.url_for('reports.edit', querytool='/' + report.name) %}
+          {% set edit_data_url = h.url_for('reports.edit', querytool=report.name) %}
           {% if user_type in ['admin', 'editor'] or
             user_permission and user_type != 'member' or c.userobj.sysadmin %}
             {% if

@@ -202,7 +202,7 @@
               }
             });
           })
-          .error(function (err) {
+          .fail(function (err) {
             console.log("Error " + err);
           });
       }
@@ -539,7 +539,7 @@
             );
           }
         })
-        .error(function (error) {
+        .fail(function (error) {
           yAxisColumnsNotice.css("display", "block");
           yAxisColumnsNotice.text(
             _("An error occurred while getting columns.")

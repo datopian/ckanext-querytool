@@ -1,5 +1,6 @@
 import json
 import ast
+import logging
 
 from flask import Blueprint
 from operator import itemgetter
@@ -27,6 +28,9 @@ reports = Blueprint(
 )
 
 
+log = logging.getLogger(__name__)
+
+
 def reports_list():
     extra_vars = {"group_type": "group", "is_organization": False}
     q = request.args.get("q", "")
@@ -45,16 +49,16 @@ def reports_list():
     return tk.render("report/index.html", extra_vars)
 
 
-def querytool_edit(data=None, errors=None, error_summary=None):
-    querytool = tk.request.args.get("querytool", None)
+def querytool_edit(data=None, errors=None, error_summary=None, querytool=None):
+    # querytool = tk.request.args.get("querytool", None)
     """
         Create/edit query tool
 
     :return: query create/edit template page
 
     """
-    if querytool:
-        querytool = querytool[1:]
+    # if querytool:
+    #    querytool = querytool[1:]
 
     data_dict = {"name": querytool}
 
@@ -184,9 +188,9 @@ def querytool_edit(data=None, errors=None, error_summary=None):
             error_summary = e.error_summary
             return querytool_edit("/" + querytool, _querytool, errors, error_summary)
         if "save_data" in list(data.keys()):
-            # redirect to querytools group
-            tk.redirect_to(
-                "/" + ckan_helpers.lang() + "/group/" + _querytool["group"] + "/reports"
+            # redirect to report list
+            return tk.redirect_to(
+                "/report"
             )
 
         else:
@@ -237,23 +241,32 @@ def querytool_public_read(name):
     """
     :return: base template
     """
-    querytool = _get_action("querytool_public_read", {"name": name})
+    querytool = tk.get_action("querytool_public_read", {"name": name})
 
     if not querytool:
         base.abort(404, _("Report not found."))
 
     # only sysadmins or organization members can access private querytool
     if querytool["private"] is True:
-        context = _get_context()
+        context = cast(
+            Context,
+            {
+                "model": model,
+                "session": model.Session,
+                "user": current_user.name,
+                "for_view": True,
+                "with_private": False,
+            },
+        )
         try:
-            check_access("querytool_show", context, {"name": name})
+            tk.check_access("querytool_show", context, {"name": name})
         except logic.NotAuthorized:
             base.abort(403, _("Not authorized to see this page"))
 
     # Check if the data for this querytool still exists
     if querytool["dataset_name"]:
         try:
-            _get_action("package_show", {"id": querytool["dataset_name"]})
+            tk.get_action("package_show", {"id": querytool["dataset_name"]})
         except logic.NotFound:
             base.abort(
                 404,
@@ -283,7 +296,7 @@ def querytool_public_read(name):
     items.sort(key=itemgetter("order"))
     for item in items:
 
-        q_item = _get_action("querytool_public_read", {"name": item["name"]})
+        q_item = tk.get_action("querytool_public_read", {"name": item["name"]})
         if q_item:
             q_item["visualizations"] = json.loads(q_item["visualizations"])
             q_item["visualizations"].sort(key=itemgetter("order"))
@@ -376,7 +389,7 @@ def querytool_public_read(name):
         extra_vars["parent_title"] = parent_title
         extra_vars["from_parent"] = from_parent
 
-    return render("querytool/public/read.html", extra_vars=extra_vars)
+    return base.render("querytool/public/read.html", extra_vars=extra_vars)
 
 
 reports.add_url_rule("/report", view_func=reports_list)
@@ -384,5 +397,11 @@ reports.add_url_rule(
     "/querytool/public/", view_func=querytool_public_read, endpoint="public_read"
 )
 reports.add_url_rule(
-    "/report/edit", view_func=querytool_edit, endpoint="edit", methods=["GET", "POST"]
+    "/report/new", view_func=querytool_edit, endpoint="new", methods=["GET", "POST"]
+)
+reports.add_url_rule(
+    "/report/edit/<querytool>",
+    view_func=querytool_edit,
+    endpoint="edit",
+    methods=["GET", "POST"],
 )
