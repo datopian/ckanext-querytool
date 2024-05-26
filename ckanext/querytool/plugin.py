@@ -227,6 +227,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         toolkit.add_template_directory(config_, "templates")
         toolkit.add_public_directory(config_, "public")
         toolkit.add_resource("assets", "querytool")
+        toolkit.add_resource("assets/css", "querytool-css")
+        toolkit.add_resource("assets/css/inc", "querytool-css-inc")
 
     # IRoutes
 

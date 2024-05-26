@@ -38,9 +38,9 @@
 {% endblock %}
 {% block styles %}
   {{ super() }} {% asset
-  'querytool/querytool-css' %} {% asset 'querytool/variables-less' %} {% asset
-  'querytool/mixins-less' %} {% asset 'querytool/responsive-less' %} {% asset
-  'querytool/public-querytool-css' %}
+  'querytool/querytool-css' %} {% asset 'querytool-css-inc/variables-less' %} {% asset
+  'querytool-css-inc/mixins-less' %} {% asset 'querytool-css-inc/responsive-less' %} {% asset
+  'querytool-css/public-querytool-css' %}
 {% endblock %}
 {% block bodytag %}{{ super() }} id="vs-page"{% endblock %}
 {% block scripts %}
