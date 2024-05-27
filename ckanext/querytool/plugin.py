@@ -408,6 +408,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "querytool_get_resource_columns": vs_get_actions.querytool_get_resource_columns,
             "get_filter_values": vs_get_actions.get_filter_values,
             "querytool_delete": vs_delete_actions.querytool_delete,
+            "get_available_querytools": vs_get_actions.get_available_querytools,
         }
 
     # IConfigurable

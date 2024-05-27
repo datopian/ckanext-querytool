@@ -1,5 +1,6 @@
 {% extends "page.html" %}
 {% block content %}
+    {{ h.csrf_input() }}
     {% block maintag %}{{ super() }}{% endblock %}
     <div id="content" class="container-fluid">
         {% block main_content %}

@@ -46,7 +46,8 @@ Example usage:
   {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
   {% set is_url = data.image_url and data.image_url.startswith('http') %}
   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled() , is_url=is_url, is_upload=is_upload, upload_label=_('Report Icon'), url_label=_('Report Icon URL')) }}
-  {{ form.input('icon', id='field-icon', classes=['hidden'], label=_('Fontawsome Icon') , placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
+  {#{{ form.input('icon', id='field-icon', classes=['hidden'], label=_('Fontawsome Icon') , placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon, attrs={'hidden': 'hidden'}) }}#}
+  <input type="hidden" name="icon" id="field-icon" value="{{ data.icon }}">
   <div class="report-group-select">
     <div class="control-group">
       <label for="field-group" class="control-label">{{ _("Group") }}</label>
@@ -165,7 +166,6 @@ Example usage:
   {% if data.dataset_name %}
     {% set dataset_resources = h.querytool_get_dataset_resources(data.dataset_name) %}
   {% endif %}
-  {{ data.dataset_name }}
   {% block querytool_choose_chart_resource %}
     {{ form.select('chart_resource', label=_('Resource') , options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
   {% endblock %}

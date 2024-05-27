@@ -3,7 +3,6 @@
 
   var ua = window.navigator.userAgent;
   var isIE11 = ua.indexOf('Trident/7.0') > -1;
-  console.log('isIE11', isIE11);
 
   if (isIE11) $('body').addClass('is-ie-11');
 
@@ -340,7 +339,7 @@
     });
   });
 
-  $(window).load(function() {
+  $(window).on('load', function() {
     setTimeout(function() {
       $('text.c3-title').each(function() {
         useTitleAsHtml($(this));
@@ -391,7 +390,7 @@
         div.setAttribute('width', $(parent).width());
         div.setAttribute('class', 'c3-title title-splitted');
         div.setAttribute('title', trimmedTitle);
- div.textContent = title; //titleObj.textContent;
+        div.textContent = title; //titleObj.textContent;
 
         $(parent).prepend(div);
         titleObj[0].textContent = '';

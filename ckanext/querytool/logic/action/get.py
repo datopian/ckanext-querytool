@@ -364,30 +364,37 @@ def querytool_download_data(context, data_dict):
 @toolkit.side_effect_free
 def get_available_querytools(context, data_dict):
 
-    selected_query = data_dict["exclude"]
+    selected_query = data_dict.get("exclude", [])
+    selected_query = [q for q in selected_query if q not in ["", "<application>"]]
     session = m.Session
 
-    query = (
-        session.query(CkanextQueryTool, CkanextQueryToolVisualizations)
-        .join(
-            (
-                CkanextQueryToolVisualizations,
-                CkanextQueryTool.id
-                == CkanextQueryToolVisualizations.ckanext_querytool_id,
-            )
-        )
-        .filter(CkanextQueryTool.type == "related")
-        .filter(CkanextQueryToolVisualizations.visualizations != "")
-    )
+    # TODO: Fix this when visualizations are added
+    #query = (
+    #    session.query(CkanextQueryTool, CkanextQueryToolVisualizations)
+    #    .join(
+    #        (
+    #            CkanextQueryToolVisualizations,
+    #            CkanextQueryTool.id
+    #            == CkanextQueryToolVisualizations.ckanext_querytool_id,
+    #        )
+    #    )
+    #    .filter(CkanextQueryTool.type == "related")
+    #    .filter(CkanextQueryToolVisualizations.visualizations != "")
+    #)
+    query = session.query(CkanextQueryTool).filter(CkanextQueryTool.type == "related")
 
     result = query.all()
     querytools_list = []
 
     if result and len(result) > 0:
+        #for item in result:
+        #    querytool = {}
+        #    for _ in item:
+        #        querytool.update(table_dictize(_, _get_context()))
+        #    if querytool["name"] not in selected_query:
+        #        querytools_list.append(querytool)
         for item in result:
-            querytool = {}
-            for _ in item:
-                querytool.update(table_dictize(_, _get_context()))
+            querytool = table_dictize(item, context)
             if querytool["name"] not in selected_query:
                 querytools_list.append(querytool)
     return querytools_list

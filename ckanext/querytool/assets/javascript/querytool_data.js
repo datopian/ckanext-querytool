@@ -172,7 +172,6 @@
         "data_filter_name",
         "resource_id"
       );
-      console.log($(this));
       var select_size = $(this).find("option").size
         ? $(this).find("option").size()
         : 0;
@@ -248,13 +247,21 @@
       var elem = $(this);
       var querytool_name_select_id = elem.attr("id");
       var selected = elem.find(":selected").val();
+      var csrf_field = $('meta[name=csrf_field_name]').attr('content');
+      var csrf_token = $('meta[name='+ csrf_field +']').attr('content');
+
+      $.ajaxSetup({
+        headers: {
+          "X-CSRF-Token": csrf_token
+        },
+      });
 
       var querytool_item_id = querytool_name_select_id.replace(
         "field-related-querytool",
         "related-query-item"
       );
       var selected_querytools = _getSelectedQuerytools(querytool_item_id);
-      var select_size = $(this).find("option").size();
+      //var select_size = $(this).find("option").size();
       var name = $(".slug-preview-value").text();
       selected_querytools.push(name);
       api

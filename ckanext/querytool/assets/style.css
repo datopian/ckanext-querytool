@@ -1823,3 +1823,9 @@ input[type="color"],
   -o-transition: border linear 0.2s, box-shadow linear 0.2s;
   transition: border linear 0.2s, box-shadow linear 0.2s;
 }
+
+.no-markers {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
