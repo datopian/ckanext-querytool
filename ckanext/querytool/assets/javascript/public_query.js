@@ -76,7 +76,9 @@
       filter_value_select = $('[id*=data_filter_value_]');
     }
 
-    filter_value_select.mousedown(function(event) {
+    filter_value_select.off('mousedown');
+
+    filter_value_select.on('mousedown', function(event) {
       var elem = $(this);
       var filter_value_select_id = elem.attr('id');
       var filter_value = elem.find(':selected').val();
@@ -97,11 +99,11 @@
         .parent()
         .parent()
         .parent()
-        .find('.field_resource_id')
+        .find('input[id^=resource_id_]')
         .val();
-      var select_size = $(this)
+      var select_size = elem
         .find('option')
-        .size();
+        .length;
 
       if (select_size <= 2) {
         api
@@ -135,7 +137,7 @@
       }
     });
 
-    filter_value_select.change(function(event) {
+    filter_value_select.on('change', function(event) {
       var elem = $(this);
       var filter_value_select_id = elem.attr('id');
       var filter_item_id = filter_value_select_id.replace(
