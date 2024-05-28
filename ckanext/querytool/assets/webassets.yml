@@ -4,12 +4,6 @@ querytool-css:
   contents:
     - style.css
 
-public-querytool-css:
-  filter: cssrewrite
-  output: ckanext-querytool/%(version)s-public-querytool.css
-  contents:
-    - public-querytool.css
-
 querytool-js:
   output: ckanext-querytool/%(version)s-querytool.js
   extra:
@@ -22,6 +16,8 @@ querytool-js:
     - javascript/anchor_fix.js
     - javascript/vitals.js
     - javascript/modules/fullscreen.js
+    - javascript/querytool_data.js
+    - javascript/public_query.js
   filter:
     - rjsmin
 

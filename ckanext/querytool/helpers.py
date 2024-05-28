@@ -423,7 +423,8 @@ def get_resource_columns(res_id, escape_columns=[]):
 
     try:
         result = toolkit.get_action('datastore_search')({}, data)
-    except Exception:
+    except Exception as e:
+        log.error(e)
         return []
 
     fields = [field['id'] for field in result.get('fields', [])
@@ -448,7 +449,8 @@ def get_numeric_resource_columns(res_id):
 
     try:
         result = toolkit.get_action('datastore_search')({}, data)
-    except Exception:
+    except Exception as e:
+        log.error(e)
         return []
 
     fields = [field['id'] for field in result.get('fields', [])

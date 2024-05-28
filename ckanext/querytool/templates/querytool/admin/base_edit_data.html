@@ -1,0 +1,12 @@
+{% extends "querytool/admin/base.html" %}
+{% block scripts %}
+    {{ super() }}
+    {# {% asset 'querytool/javascript/dist/querytool_data.js' %} #}
+{% endblock %}
+{% set ctrl = "ckanext.querytool.controllers.querytool:QueryToolController" %}
+{% block subtitle %}{{ _("Edit data") }}{% endblock %}
+{% block breadcrumb_content %}<li>Placeholder</li>{% endblock %}
+{% block page_header %}{% endblock %}
+{% block primary_content_inner %}
+    {% snippet 'querytool/admin/snippets/edit_data_form.html', data=data, querytool=querytool, errors=errors, error_summary=error_summary %}
+{% endblock %}

@@ -1,0 +1,17 @@
+variables-less:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-variables.css
+  contents:
+    - variables.css
+
+mixins-less:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-mixins.css
+  contents:
+    - mixins.css
+
+responsive-less:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-responsive.css
+  contents:
+    - responsive.css

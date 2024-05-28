@@ -3,7 +3,6 @@
 
   var ua = window.navigator.userAgent;
   var isIE11 = ua.indexOf('Trident/7.0') > -1;
-  console.log('isIE11', isIE11);
 
   if (isIE11) $('body').addClass('is-ie-11');
 
@@ -77,7 +76,9 @@
       filter_value_select = $('[id*=data_filter_value_]');
     }
 
-    filter_value_select.mousedown(function(event) {
+    filter_value_select.off('mousedown');
+
+    filter_value_select.on('mousedown', function(event) {
       var elem = $(this);
       var filter_value_select_id = elem.attr('id');
       var filter_value = elem.find(':selected').val();
@@ -98,11 +99,11 @@
         .parent()
         .parent()
         .parent()
-        .find('.field_resource_id')
+        .find('input[id^=resource_id_]')
         .val();
-      var select_size = $(this)
+      var select_size = elem
         .find('option')
-        .size();
+        .length;
 
       if (select_size <= 2) {
         api
@@ -136,7 +137,7 @@
       }
     });
 
-    filter_value_select.change(function(event) {
+    filter_value_select.on('change', function(event) {
       var elem = $(this);
       var filter_value_select_id = elem.attr('id');
       var filter_item_id = filter_value_select_id.replace(
@@ -340,7 +341,7 @@
     });
   });
 
-  $(window).load(function() {
+  $(window).on('load', function() {
     setTimeout(function() {
       $('text.c3-title').each(function() {
         useTitleAsHtml($(this));
@@ -391,7 +392,7 @@
         div.setAttribute('width', $(parent).width());
         div.setAttribute('class', 'c3-title title-splitted');
         div.setAttribute('title', trimmedTitle);
- div.textContent = title; //titleObj.textContent;
+        div.textContent = title; //titleObj.textContent;
 
         $(parent).prepend(div);
         titleObj[0].textContent = '';
