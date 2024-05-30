@@ -857,8 +857,13 @@ def get_datasets_for_user(userobj, package_name):
 def get_groups_for_user(userobj, group=None):
     if not userobj:
         return False
+    else:
+        if isinstance(userobj, tuple):
+            user_id = userobj[0]['id']
+        else:
+            user_id = userobj.id
 
-    groups = _get_action('group_list_authz', {'id': userobj.id})
+    groups = _get_action('group_list_authz', {'id': user_id})
     group_names = [g['name'] for g in groups]
 
     if group is None:

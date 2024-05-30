@@ -394,6 +394,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
         return {
             "send_2fa_code": otp.send_2fa_code,
             "querytool_list_other": vs_get_actions.querytool_list_other,
+            "querytool_list_by_group": vs_get_actions.querytool_list_by_group,
             "querytool_get": vs_get_actions.querytool_get,
             "querytool_update": vs_update_actions.querytool_update,
             "get_available_groups": vs_get_actions.get_available_groups,

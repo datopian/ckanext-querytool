@@ -49,15 +49,22 @@ def querytool_list_by_group(context, data_dict):
 
     if c.userobj is not None:
         if c.userobj.sysadmin is not None:
+            print('SYSADMIN', flush=True)
+            print('GROUP', flush=True)
+            print(group, flush=True)
             querytools += CkanextQueryTool.search(group=group)
         else:
+            print('INCLUDE ORGS', flush=True)
             for org in user_orgs:
                 querytools += CkanextQueryTool.search(group=group, owner_org=org["id"])
     else:
+        print('ONLY PUBLISH', flush=True)
         querytools += CkanextQueryTool.search(group=group, private=False)
 
     out = []
 
+    print('QUERYTOOLS', flush=True)
+    print(querytools, flush=True)
     for querytool in querytools:
         querytool = table_dictize(querytool, context)
         out.append(querytool)
