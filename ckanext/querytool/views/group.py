@@ -134,8 +134,6 @@ def read_reports(id: str, group_type: str, is_organization: bool):
     # unicode format (decoded from utf8)
     c.q = request.args.get("q", "")
 
-    print("CURRENT USER", flush=True)
-    print(current_user, flush=True)
     try:
         data_dict["include_datasets"] = True
         extra_vars["group_dict"] = get_action("group_show")(context, data_dict)
