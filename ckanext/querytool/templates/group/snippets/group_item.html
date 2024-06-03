@@ -11,8 +11,8 @@ Example:
       {% endfor %}
     </ul>
 #}
-{% set type = group.type or 'group' %}
-{% set url = h.url_for(type ~ '.read', id=group.name) %}
+{% set type = 'querytool_group' %}
+{% set url = h.url_for(type ~ '.reports', id=group.name) %}
 {% block item %}
 <li style="border-bottom: 1px solid rgb(191, 191, 191); padding-bottom: 20px; padding-top: 20px;">
   {% block item_inner %}
