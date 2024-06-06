@@ -376,6 +376,7 @@
     };
 
     $(document).ready(function() {
+        console.log('DOCUMENT READY')
         handleChartSortingField();
         handleRenderedVizFilters('chart');
         handleRenderedVizFilters('map');

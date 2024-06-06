@@ -1,6 +1,6 @@
 {# Creates query tool. description - The information about query tool title -
 The title of the querytool. name - Name of the tool Example usage: {% snippet
-'querytool/public/snippets/query_tool.html', querytool=data %} #} {% set tool = "#" %}
+'querytool/public/snippets/query_tool.html', querytool=data %} #}
 <div class="group-box">
   {% if querytool.image_url %}
     <img class="thumbnail"
@@ -14,12 +14,13 @@ The title of the querytool. name - Name of the tool Example usage: {% snippet
          width="70"
          alt="" />
   {% endif %}
-  <div class="box-content">
+  <div class="box-content"> 
+    {% set tool = "/querytool/public/{{ querytool.name }}?parent={{ parent }}&from_parent=True&title={{ parent_title | safe }}" %}
     {% if parent and from_parent and parent_title %}
       <a class="query-tool"
          href="/querytool/public/{{ querytool.name }}?parent={{ parent }}&from_parent=True&title={{ parent_title | safe }}"><span class="tool-title">{{ querytool.title }}</span></a>
     {% else %}
-      <a class="query-tool" href="{{ tool }}"><span class="tool-title">{{ querytool.title }}</span></a>
+      <a class="query-tool" href="/querytool/public/{{ querytool.name }}?parent={{ parent }}&from_parent=True&title={{ parent_title | safe }}"><span class="tool-title">{{ querytool.title }}</span></a>
     {% endif %}
     <span class="short-desc">{{ h.render_markdown(h.get_translated(querytool, 'description') , True,
     True) }}</span>

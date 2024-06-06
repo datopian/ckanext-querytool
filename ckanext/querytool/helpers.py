@@ -564,6 +564,8 @@ def get_resource_data(sql_string):
     if '\\0026' in sql_string:
         sql_string = sql_string.replace('\\0026', '&')
 
+    print("SQL STRING: ", flush=True)
+    print(sql_string, flush=True)
     response = toolkit.get_action('datastore_search_sql')(
         {}, {'sql': sql_string}
     )

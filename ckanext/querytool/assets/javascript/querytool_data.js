@@ -363,8 +363,7 @@
     var yAxisColumnsResults = $("#y-axis-columns-results");
     var yAxisColumnsNotice = $("#y-axis-columns-notice");
     var yAxisColumnsContainer = $("#y-axis-columns-container");
-
-    var defaultDataset = datasetField.find("option:first")[0].value;
+    var defaultDataset = datasetField.find("option:first") && datasetField.find("optiion:first").length > 0 ? datasetField.find("option:first")[0].value : null;
     var defaultResource = chartResourceSelect.find("option:first")[0];
 
     typeField.change(function (event) {
