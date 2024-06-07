@@ -33,6 +33,7 @@ Options:
 'use strict';
 // @ts-ignore
 ckan.module('querytool-viz-preview', function() {
+  console.log('TESTING')
     var api = {
         get: function(action, params) {
             var api_ver = 3;

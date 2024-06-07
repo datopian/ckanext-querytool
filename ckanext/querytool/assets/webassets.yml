@@ -40,6 +40,22 @@ querytool-group-autocomplete-js:
   contents:
     - javascript/modules/vs-groups-autocomplete.js
 
+querytool-viz-preview-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-viiz-preview.js
+  extra:
+    preload:
+      - base/main
+      - vendor/bootstrap
+      - vendor/d3/d3.js
+      - vendor/c3/c3.js
+      - vendor/canvas2image.js
+      - vendor/html12canvas.js
+      - vendor/nunjucks.js
+  contents:
+    - javascript/modules/viz-preview.js
+    - javascript/modules/viz-preview.js
+
 querytool-group-confirm-action-js:
   filter: rjsmin
   output: ckanext-querytool/%(version)s-querytool-confirm-action.js

@@ -217,6 +217,8 @@ def querytool_get_resource_data(context, data_dict):
 
 @toolkit.side_effect_free
 def querytool_get_chart_data(context, data_dict):
+    print("DATA DICT", flush=True)
+    print(data_dict, flush=True)
 
     category = data_dict.get("category")
     sql_string = data_dict.get("sql_string")

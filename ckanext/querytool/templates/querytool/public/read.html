@@ -1,20 +1,15 @@
 {% asset 'querytool/vendor/c3/c3.css' %}
-{% asset 'querytool/vendor/d3/d3.js' %}
-{% asset 'querytool/vendor/c3/c3.js' %}
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-{% asset 'querytool/vendor/canvas2image.js' %}
-{% asset 'querytool/vendor/html2canvas.js' %}
-{% asset 'querytool/vendor/nunjucks.js' %}
-{% resource "querytool/javascript/dist/public_query.js" %}
-{% asset 'querytool/javascript/dist/modules/viz-preview.js' %}
 
-<script src="
-https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js
-"></script>
+<script src="https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+{% block scripts %}
+{% asset 'querytool/querytool-viz-preview-js' %}
+{% endblock %}
 
 {% asset 'querytool/map' %}
 {% asset 'querytool/table' %}
@@ -37,9 +32,9 @@ https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js
 {% block page_header_bg %}{% endblock %}
 
 {% block breadcrumb_custom %}
-  {% set from_parent = request.params.get('from_parent') or from_parent %}
-  {% set parent = request.params.get('parent') or parent %}
-  {% set parent_title = request.params.get('title') or title %}
+  {% set from_parent = request.args.get('from_parent') or from_parent %}
+  {% set parent = request.args.get('parent') or parent %}
+  {% set parent_title = request.args.get('title') or title %}
 
   {% if from_parent and parent and parent_title %}
     <div class="toolbar new_toolbar">
@@ -54,18 +49,17 @@ https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js
           <li><a href="/querytool/public/group/{{ querytools[0].group }}?parent={{ parent }}&from_parent=True&title={{ parent_title | safe }}">{{ group_title }}</a></li>
         {% endif %}
 
-        <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
+        <li class="active">FIXME</li>
       </ol>
     </div>
   {% else %}
     <div class="toolbar new_toolbar">
       <ol class="breadcrumb new_breadcrumb">
         <li><a href="/"><i class="fa fa-home"></i></a></li>
-        <!--<li>{% link_for querytools[0].group, controller=c.controller, action='querytool_public_list_by_group', group=querytools[0].group %}</li> -->
         {% if group_title %}
-          <li>{% link_for group_title, controller=c.controller, action='querytool_public_list', group=querytools[0].group %}</li>
+          <li>FIXME</li>
         {% endif %}
-        <li class="active">{% link_for querytools[0].title, controller=c.controller, action='querytool_public_read', name=querytools[0].name %}</li>
+        <li class="active">FIXME</li>
       </ol>
       {% snippet 'snippets/embed/navbar_end_items.html' %}
     </div>
@@ -161,7 +155,7 @@ https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js
                 <button class="btn btn-round dropdown-toggle" data-toggle="dropdown" href="#">
                   {{ _('Download') }} <img src="/base/images/download.svg" width="15" /> 
                 </button>
-                {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}
+                {% set download_url = '#FIXME' %}
                 {% set csv = '?format=csv'%}
                 {% set xml = '?format=xml'%}
                 {% set json = '?format=json'%}

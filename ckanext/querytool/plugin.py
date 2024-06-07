@@ -409,6 +409,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "querytool_get_resource_columns": vs_get_actions.querytool_get_resource_columns,
             "get_filter_values": vs_get_actions.get_filter_values,
             "querytool_delete": vs_delete_actions.querytool_delete,
+            "querytool_public_read": vs_get_actions.querytool_public_read,
+            "querytool_get_chart_data": vs_get_actions.querytool_get_chart_data,
             "get_available_querytools": vs_get_actions.get_available_querytools,
         }
 
