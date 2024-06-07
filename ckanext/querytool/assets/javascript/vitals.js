@@ -653,16 +653,15 @@ $(document).ready(function(){
     });
   });
 
-
-  $(document).ready(function(){
+  $(document).on('load', function() {
     $('[id^=chart_field_color_type_]').serializeArray().forEach((item, i) => {
       var color_type = item.value;
       if([1, '1'].includes(color_type)){
-          $(`.diver-colors-${i+1}`).removeClass('hidden')
-          $(`.seq-colors-${i+1}`).addClass('hidden')
+          $(`.diver-colors-${i+1}`).removeAttr('hidden')
+          $(`.seq-colors-${i+1}`).attr('hidden', 'true')
       } else {
-          $(`.diver-colors-${i+1}`).addClass('hidden')
-          $(`.seq-colors-${i+1}`).removeClass('hidden')
+          $(`.diver-colors-${i+1}`).attr('hidden', 'true')
+          $(`.seq-colors-${i+1}`).removeAttr('hidden')
       }
     })
   });
@@ -671,11 +670,11 @@ $(document).ready(function(){
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
     if(selection == 1){
-        $(`.diver-colors-${chart_number}`).removeClass('hidden')
-        $(`.seq-colors-${chart_number}`).addClass('hidden')
+        $(`.diver-colors-${chart_number}`).removeAttr('hidden')
+        $(`.seq-colors-${chart_number}`).attr('hidden', 'true')
     } else {
-        $(`.diver-colors-${chart_number}`).addClass('hidden')
-        $(`.seq-colors-${chart_number}`).removeClass('hidden')
+        $(`.diver-colors-${chart_number}`).attr('hidden', 'true')
+        $(`.seq-colors-${chart_number}`).removeAttr('hidden')
     }
   });
 

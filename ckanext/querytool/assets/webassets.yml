@@ -47,13 +47,12 @@ querytool-viz-preview-js:
     preload:
       - base/main
       - vendor/bootstrap
-      - vendor/d3/d3.js
-      - vendor/c3/c3.js
-      - vendor/canvas2image.js
-      - vendor/html12canvas.js
-      - vendor/nunjucks.js
   contents:
-    - javascript/modules/viz-preview.js
+    - vendor/d3/d3.js
+    - vendor/c3/c3.js
+    - vendor/canvas2image.js
+    - vendor/html2canvas.js
+    - vendor/nunjucks.js
     - javascript/modules/viz-preview.js
 
 querytool-group-confirm-action-js:
@@ -64,3 +63,116 @@ querytool-group-confirm-action-js:
       - vendor/bootstrap
   contents:
     - javascript/modules/group-confirm-action.js
+
+querytool-visualizations-settings-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-visualizations-settings.js
+  extra:
+    preload:
+      - base/main
+      - vendor/bootstrap
+  contents:
+    - javascript/visualizations_settings.js
+
+querytool-leaflet-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-map.js
+  extra:
+    preload:
+      - base/main
+      - vendor/bootstrap
+  contents:
+    - vendor/leaflet/leaflet-src.js
+    - javascript/modules/map-module.js
+
+querytool-leaflet-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-querytool-map.css
+  contents:
+    - vendor/leaflet/leaflet.css
+
+querytool-datatables-js:
+  output: ckanext-querytool/%(version)s-vendor-datatables.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/datatables/dataTables.js
+    - vendor/datatables/dataTables.buttons.js
+    - vendor/datatables/buttons.html5.js
+    - vendor/datatables/pdfmake.js
+    - vendor/datatables/vfs_fonts.js
+    - vendor/datatables/jszip.js
+    - javascript/dist/modules/table-module.js
+
+querytool-datatables-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-vendor-datatables.css
+  contents:
+    - vendor/datatables/dataTables.css
+
+vendor-c3-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-vendor-c3.css
+  contents:
+    - vendor/c3/c3.css
+
+vendor-c3-js:
+  output: ckanext-querytool/%(version)s-vendor-c3.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/c3/c3.js
+
+vendor-d3-js:
+  output: ckanext-querytool/%(version)s-vendor-d3.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/d3/d3.js
+
+vendor-nunjucks-js:
+  output: ckanext-querytool/%(version)s-vendor-nunjucks.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/nunjucks.js
+
+vendor-dragula-js:
+  output: ckanext-querytool/%(version)s-vendor-dragula.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/dragula/dragula.js
+
+vendor-dragula-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-vendor-dragula.css
+  contents:
+    - vendor/dragula/dragula.css
+
+vendor-plotly-js:
+  output: ckanext-querytool/%(version)s-vendor-plotly.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/plotly/plotly.js
+
+vendor-d3-min-js:
+  output: ckanext-querytool/%(version)s-vendor-d3-min.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/d3/d3.min.js
+
+vendor-flag-icons-min-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-vendor-flag-icons-min.css
+  contents:
+    - vendor/flag-icons.min.css

@@ -1222,14 +1222,25 @@
 
 })(ckan.i18n.ngettext, $);
 
-$(document).on('show','.accordion', function (e) {
-    //$('.accordion-heading i').toggleClass(' ');
-    $(e.target).prev('.accordion-heading').addClass('accordion-opened');
-});
+$(document).on('click', '.accordion-toggle', function (e) {
+    e.preventDefault(); // Prevent the default anchor behavior
 
-$(document).on('hide','.accordion', function (e) {
-   $(this).find('.accordion-heading').not($(e.target)).removeClass('accordion-opened');
-   //$('.accordion-heading i').toggleClass('fa-chevron-right fa-chevron-down');
+    var accordionToggle = $(this);
+    var accordionHeading = accordionToggle.closest('.accordion-heading');
+    var accordionGroup = accordionHeading.closest('.accordion-group');
+    var target = $(accordionToggle.attr('href'));
+    var isAlreadyOpen = target.hasClass('show');
+
+    accordionGroup.siblings('.accordion-group').find('.accordion-body.show').collapse('hide');
+    accordionGroup.siblings('.accordion-group').find('.accordion-heading').removeClass('accordion-opened');
+
+    target.collapse('toggle');
+
+    if (isAlreadyOpen) {
+        accordionHeading.removeClass('accordion-opened');
+    } else {
+        accordionHeading.addClass('accordion-opened');
+    }
 });
 
 // Locate all chart type select elements and add change event listener:

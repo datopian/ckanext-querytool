@@ -37,7 +37,7 @@
             {{ _('General') }}
           </a>
         </div>
-        <div id="accordion_{{ chart_id }}_general" class="accordion-body collapse in">
+        <div id="accordion_{{ chart_id }}_general" class="accordion-body collapse show">
           <div class="accordion-inner">
             {# Type #}
             {% if chart %}
@@ -288,10 +288,10 @@
               <input type="color" id="seq_colors_ending_{{ n }}" name="seq_colors_ending_{{ n }}" class="colorpicker" value="{{ ending_color }}" />
             </div>
 
-            <div class="seq-color-preview" id="seq_color_preview_{{ n }}" style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"></div>
+            <div class="seq-color-preview" id="seq_color_preview_{{ n }}" style="background-image: linear-gradient(to right, ' ~ starting_color ~ ', ' ~ ending_color ~ ');"></div>
           </div>
           
-          <div class="control-group control-select diver-colors-{{ n }} {% if chart %}{{ 'hidden' if chart.color_type in [2, '2'] }}{% endif %}">
+          <div class="control-group control-select diver-colors-{{ n }}" {% if chart %}{{ 'hidden' if chart.color_type in [2, '2'] }}{% endif %}>
             {% if plotly %}
               <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
@@ -1096,7 +1096,7 @@
     <span class="grippy"></span>
 
     {# Legacy #}
-    {% if chart %}
+    {#{% if chart %}
       {% set tooltip_name = chart.tooltip_name %}
     {% endif %}
     <div class="control-group hidden">
@@ -1131,7 +1131,7 @@
        <div class="controls ">
           <input id="chart_field_tick_count_{{ n }}" type="number" min="0" name="chart_field_tick_count_{{ n }}" value="{{ tick_count }}" placeholder="{{ _('Default') }}">
        </div>
-    </div>
+    </div>#}
 
   </div>
 <!--  <div style="width:65%;">-->

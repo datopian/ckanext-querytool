@@ -412,6 +412,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "querytool_public_read": vs_get_actions.querytool_public_read,
             "querytool_get_chart_data": vs_get_actions.querytool_get_chart_data,
             "get_available_querytools": vs_get_actions.get_available_querytools,
+            "querytool_get_visualizations": vs_get_actions.querytool_get_visualizations,
         }
 
     # IConfigurable
