@@ -158,7 +158,7 @@ https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js
               {% set show_download = querytool.download_options %}
               {% if show_download == true %}
               <div class="btn-group dropdown">
-                <button class="btn btn-round dropdown-toggle" data-toggle="dropdown" href="#">
+                <button class="btn btn-round dropdown-toggle" data-toggle="dropdown">
                   {{ _('Download') }} <img src="/base/images/download.svg" width="15" /> 
                 </button>
                 {% set download_url = h.url_for('querytool_download_data', name=querytool.name) %}

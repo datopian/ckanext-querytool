@@ -3,6 +3,7 @@ querytool-css:
   output: ckanext-querytool/%(version)s-querytool.css
   contents:
     - style.css
+    - vendor/bootstrap/css/bootstrap.css
 
 querytool-js:
   output: ckanext-querytool/%(version)s-querytool.js

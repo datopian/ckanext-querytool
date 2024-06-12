@@ -360,7 +360,7 @@ def querytool_download_data(context, data_dict):
 
     writer = FileWriterService()
     stream = writer.write_to_file(fields, records, data_format, "comma")
-    return stream.getvalue()
+    return stream
 
 
 @toolkit.side_effect_free

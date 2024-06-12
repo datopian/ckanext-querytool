@@ -2093,14 +2093,11 @@ ckan.module("querytool-viz-preview", function () {
         }
       }
 
-      var title_id = this.el.context
-        ? this.el.context.parentElement.children[0].id
-        : null;
-
-      if (this.el.context) {
-        if (this.el.context.parentElement.querySelector(".additional_desc")) {
+      var title_id = this.el.parent().children().first().attr('id')
+      if (this.el.parent()) {
+        if (this.el.parent().children(".additional_desc")) {
           var desc_id =
-            this.el.context.parentElement.querySelector(".additional_desc").id;
+            this.el.parent().children(".additional_desc").attr('id');
           if (desc_id) {
             var converter = new showdown.Converter();
             var convertedDesc = converter.makeHtml(desc);
