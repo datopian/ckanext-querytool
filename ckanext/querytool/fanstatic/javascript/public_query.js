@@ -150,6 +150,7 @@
 
   function handleRenderedVisualizationsFilters() {
     var filter_value_select = $('[id*=viz_filter_value_]');
+    console.log('TESTING VIZ FILTER ')
 
     filter_value_select.mousedown(function(event) {
       var elem = $(this);

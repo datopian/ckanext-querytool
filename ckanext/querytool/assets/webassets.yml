@@ -55,7 +55,10 @@ querytool-viz-preview-js:
       - vendor/nunjucks.js
   contents:
     - javascript/modules/viz-preview.js
-    - javascript/modules/viz-preview.js
+    - javascript/modules/tool-embed.js
+    - javascript/public_query.js
+    - javascript/vitals.js
+    - javascript/querytool_data.js
 
 querytool-group-confirm-action-js:
   filter: rjsmin
