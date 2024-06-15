@@ -288,7 +288,7 @@
               <input type="color" id="seq_colors_ending_{{ n }}" name="seq_colors_ending_{{ n }}" class="colorpicker" value="{{ ending_color }}" />
             </div>
 
-            <div class="seq-color-preview" id="seq_color_preview_{{ n }}" style="background-image: linear-gradient(to right, ' ~ starting_color ~ ', ' ~ ending_color ~ ');"></div>
+            <div class="seq-color-preview" id="seq_color_preview_{{ n }}" style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"></div>
           </div>
           
           <div class="control-group control-select diver-colors-{{ n }}" {% if chart %}{{ 'hidden' if chart.color_type in [2, '2'] }}{% endif %}>
@@ -661,10 +661,12 @@
             {% set data_formats = h.queytool_get_charts_data_formats() %}
             {% if selected_chart_type in ['pie', 'donut'] %}
               {% set data_formats_option = false %}
+              {% set hide_data_format = 'hidden' %}
             {% else %}
               {% set data_formats_option = true %}
+              {% set hide_data_format = '' %}
             {% endif %}
-            <div class="control-group control-select">
+            <div class="control-group control-select {{hide_data_format}}" id="chart_field_data_format_control_{{ n }}">
               <label class="control-label" for="chart_field_data_format_{{ n }}">{{ _('Data format') }}</label>
               <div class="controls ">
                 <select id="chart_field_data_format_{{ n }}" name="chart_field_data_format_{{ n }}" {{'' if data_formats_option else 'disabled'}}>

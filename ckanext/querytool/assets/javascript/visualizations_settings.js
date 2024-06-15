@@ -221,7 +221,7 @@
             var filter_name = $('#' + filter_name_select_id).find(":selected").val();
             var vizForm = $('#visualizations-form');
             var resource_id = vizForm.data('chartResource');
-            var select_size = $(this).find("option").size();
+            var select_size = $(this).find("option").length;
             var vizForm = $('#visualizations-form');
             var mainFilters = vizForm.data('mainFilters');
 
@@ -557,6 +557,7 @@
             $.each(items, function(i, item) {
 
                 item = $(item);
+                var itemId = item.attr('id');
                 var order = i + 1;
 
                 function incrementCopyButton() {
@@ -566,7 +567,8 @@
                     copyButtonId.attr("id", "copy-viz-btn_" + order), copyButtonName.attr("name", "copy-viz-btn_" + order);
                 }
 
-                if (item.context.id.indexOf('chart_field') >= 0) {
+                //if (item.context.id.indexOf('chart_field') >= 0) {
+                if (itemId.includes('chart_field')) {
                     //  NOTE: the "mapped to" comments are here to help
                     //  with the reverse mapping of variables that  are
                     //  present in the dist version of this file.
@@ -990,7 +992,8 @@
                     item.find("[id*=chart_field_graph_]").change();
                     incrementCopyButton();
 
-                } else if (item.context.id.indexOf('text_box') >= 0) {
+                //} else if (item.context.id.indexOf('text_box') >= 0) {
+                } else if (itemId.includes('text_box')) {
 
                     var description = item.find('[id*=text_box_description_]');
                     var size = item.find('[id*=text_box_size_]');
@@ -1010,7 +1013,8 @@
                     column_width.attr("id", "text_box_column_width_" + order),
                     column_width.attr("name", "text_box_column_width_" + order);
 
-                } else if (item.context.id.indexOf("break_line") >= 0) {
+                //} else if (item.context.id.indexOf("break_line") >= 0) {
+                } else if (itemId.includes("break_line")) {
 
                     var line_break_desc = item.find("[id*=line_break_desc]");
 
@@ -1021,7 +1025,8 @@
                     line_break_desc.attr("id", "line_break_desc_" + order);
                     line_break_desc.attr("name", "line_break_desc_" + order);
 
-                } else if (item.context.id.indexOf('image_item') >= 0) {
+                //} else if (item.context.id.indexOf('image_item') >= 0) {
+                } else if (itemId.includes('image_item')) {
 
                     var url = item.find('[name*=media_image_url_]');
                     var size = item.find('[id*=image_field_size_]');
@@ -1037,7 +1042,8 @@
                     upload.attr('name', 'media_image_upload_' + order);
                     clear.attr('name', 'media_clear_upload_' + order);
 
-                } else if (item.context.id.indexOf('map_item') >= 0) {
+                //} else if (item.context.id.indexOf('map_item') >= 0) {
+                } else if (itemId.includes('map_item')) {
                     var map_resource_url = item.find('[id*=map_resource_]');
                     var map_title_field = item.find('[id*=map_title_field_]');
                     var map_custom_title_field = item.find('[id*=map_custom_title_field_]');    //  NOTE: mapped to MT
@@ -1104,7 +1110,8 @@
                     selectMapFilterVisibility.attr('name', 'map_field_filter_visibility_' + order);
                     selectMapFilterVisibilityDiv.attr('id', 'map_div_filter_visibility_' + order);
 
-                } else if (item.context.id.indexOf('table_item') >= 0) {
+                //} else if (item.context.id.indexOf('table_item') >= 0) {
+                } else if (itemId.includes('table_item')) {
                     var table_size = item.find('[id*=table_size_]');
                     var table_data_format = item.find('[id*=table_data_format_]');
                     var table_main_value = item.find('[id*=table_main_value_]');

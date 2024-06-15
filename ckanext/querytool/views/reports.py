@@ -193,13 +193,13 @@ def querytool_edit(data=None, errors=None, error_summary=None, querytool=None):
             return querytool_edit("/" + querytool, _querytool, errors, error_summary)
         if "save_data" in list(data.keys()):
             # redirect to report list
-            return tk.redirect_to(
+            return ckan_helpers.redirect_to(
                 "/report"
             )
 
         else:
             # redirect to manage visualisations
-            url = h.url_for(
+            url = ckan_helpers.url_for(
                 "reports.edit_visualizations", querytool=_querytool["name"]
             )
             return ckan_helpers.redirect_to(url)
@@ -305,7 +305,8 @@ def edit_visualizations(
         _visualization_items = {"name": querytool}
 
     if tk.request.method == "POST" and not data:
-        data = dict(tk.request.POST)
+        data = dict(tk.request.form)
+        data_form = tk.request.form
 
         is_copy = False
         copy_id = [k for k in list(data.keys()) if k.startswith("copy-viz-btn_")]
@@ -432,10 +433,13 @@ def edit_visualizations(
                 visualization["chart_padding_bottom"] = data.get(
                     "chart_field_chart_padding_bottom_{}".format(id)
                 )
-                visualization["static_reference_columns"] = (
-                    tk.request.POST.getall(
-                        "chart_field_static_reference_columns_%s" % id
-                    )
+                # visualization["static_reference_columns"] = (
+                #    tk.request.POST.getall(
+                #        "chart_field_static_reference_columns_%s" % id
+                #    )
+                # )
+                visualization["static_reference_columns"] = data_form.getlist(
+                    "chart_field_static_reference_columns_%s" % id
                 )
                 visualization["static_reference_label"] = data.get(
                     "chart_field_static_reference_label_%s" % id
@@ -760,28 +764,29 @@ def edit_visualizations(
                 "querytool_visualizations_update")(context, _visualization_items
             )
             if is_copy:
-                h.flash_success(_("Visualization Successfully copied"))
+                ckan_helpers.flash_success(_("Visualization Successfully copied"))
             else:
-                h.flash_success(_("Visualizations Successfully updated."))
+                ckan_helpers.flash_success(_("Visualizations Successfully updated."))
         except logic.ValidationError as e:
             errors = e.error_dict
             error_summary = e.error_summary
-            return querytool_edit("/" + querytool, data, errors, error_summary)
+            return querytool_edit(querytool, data, errors, error_summary)
 
         if "save-edit-data" in list(data.keys()):
             # redirect to edit data
-            url = ckan_helpers.url_for("querytool_edit", querytool="/" + _querytool["name"])
+            return ckan_helpers.redirect_to("reports.edit", querytool=_querytool["name"])
         elif is_copy is True:
             # reload page with new visualization
-            url = ckan_helpers.url_for(
+            return ckan_helpers.redirect_to(
                 "reports.edit_visualizations", querytool=_querytool["name"]
             )
         else:
-            ckan_helpers.redirect_to(
-                "/" + h.lang() + "/group/" + _querytool["group"] + "/reports"
+            #return ckan_helpers.redirect_to(
+            #    "/" + ckan_helpers.lang() + "/group" + "/reports/" + _querytool["group"]
+            #)
+            return ckan_helpers.redirect_to(
+                "reports.reports_list"
             )
-
-        ckan_helpers.redirect_to(url)
 
     if not data:
         data = _visualization_items
@@ -835,7 +840,6 @@ def edit_visualizations(
     vars = {"data": data, "errors": errors, "error_summary": error_summary}
 
     return base.render("querytool/admin/base_edit_visualizations.html", extra_vars=vars)
-
 
 
 def querytool_public_read(name):

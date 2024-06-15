@@ -2268,7 +2268,6 @@ ckan.module("querytool-viz-preview", function () {
           t: 30,
           pad: 5,
         },
-        title: titleVal,
         showlegend: show_legend, //show legend value
         legend: {
           xanchor: "left",
@@ -2308,6 +2307,14 @@ ckan.module("querytool-viz-preview", function () {
         },
         hovermode: "closest",
       };
+
+      if (titleVal) {
+        base_info.title = {
+          text: titleVal,
+          yref: "paper",
+          automargin: true,
+        }
+      }
 
       if (["sbar", "shbar"].includes(this.options.chart_type)) {
         base_info.barmode = "stack";
@@ -3010,7 +3017,7 @@ ckan.module("querytool-viz-preview", function () {
       var axisXValue = axisXSelect.val();
 
       var axisYSelect = chartField.find("[name*=chart_field_axis_y_]");
-      var axisYValue = axisYSelect.val();
+      var axisYValue = axisYSelect.val() ? axisYSelect.val() : $("#choose_y_axis_column option:selected").val();
 
       var chartTitle = chartField.find("textarea[name*=chart_field_title_]");
       var chartTitleVal = chartTitle.val();

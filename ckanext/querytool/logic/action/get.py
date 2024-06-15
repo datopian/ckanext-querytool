@@ -217,9 +217,6 @@ def querytool_get_resource_data(context, data_dict):
 
 @toolkit.side_effect_free
 def querytool_get_chart_data(context, data_dict):
-    print("DATA DICT", flush=True)
-    print(data_dict, flush=True)
-
     category = data_dict.get("category")
     sql_string = data_dict.get("sql_string")
     x_axis = data_dict.get("x_axis")
@@ -233,6 +230,7 @@ def querytool_get_chart_data(context, data_dict):
     sql_without_group = sql_string.split("GROUP BY")[0]
     sql_group = sql_string.split("GROUP BY")[1]
     categories_data = {}
+    log.error(data_dict)
 
     if chart_filter:
         previous_filters.append(chart_filter)
