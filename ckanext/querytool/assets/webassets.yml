@@ -4,6 +4,7 @@ querytool-css:
   contents:
     - style.css
     - vendor/bootstrap/css/bootstrap.css
+    - vendor/leaflet/leaflet.css
 
 querytool-js:
   output: ckanext-querytool/%(version)s-querytool.js
@@ -54,7 +55,9 @@ querytool-viz-preview-js:
       - vendor/html12canvas.js
       - vendor/nunjucks.js
   contents:
+    - vendor/leaflet/leaflet-src.js
     - javascript/modules/viz-preview.js
+    - javascript/modules/map-module.js
     - javascript/modules/tool-embed.js
     - javascript/public_query.js
     - javascript/vitals.js

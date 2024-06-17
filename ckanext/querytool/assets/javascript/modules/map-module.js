@@ -19,6 +19,7 @@ ckan.module('querytool-map', function($) {
 
     return {
         initialize: function() {
+            console.log('STARTING')
             this.initLeaflet.call(this);
             this.mapResource = this.el.parent().parent().find('[id*=map_resource_]');
             this.mapTitleField = this.el.parent().parent().find('[id*=map_title_field_]');
@@ -350,7 +351,7 @@ ckan.module('querytool-map', function($) {
             filters: queryFilters,
             optionalFilter: optionalFilter,
           })
-          var title_id = this.el.context.parentElement.children[0].id;
+          var title_id = this.el.parent().children().first().attr('id')
           if(title_id && dynamicTitle != true){
             document.getElementById(title_id).innerHTML =  dynamicTitle;
             document.getElementById(title_id).style.display = "block";
@@ -379,7 +380,7 @@ ckan.module('querytool-map', function($) {
                 sqlStringExceptSelect = sqlStringExceptSelect + filterSql;
             }
 
-            api.post('querytool_get_map_data', {
+            api.get('querytool_get_map_data', {
                     geojson_url: mapURL,
                     map_key_field: this.options.map_key_field,
                     data_key_field: this.options.data_key_field,

@@ -498,7 +498,6 @@ def get_geojson_properties(url):
 
 def get_map_data(geojson_url, map_key_field, data_key_field,
                  data_value_field, from_where_clause):
-
     geojson_keys = []
     # response = urllib.urlopen(geojson_url)
     resp = requests.get(geojson_url, verify=False)
@@ -512,17 +511,25 @@ def get_map_data(geojson_url, map_key_field, data_key_field,
           '", SUM("' + data_value_field + '") as ' + \
           '"' + data_value_field + '"' + from_where_clause + \
           ' GROUP BY "' + data_key_field + '"'
+    print(sql, flush=True)
+
+    context = {
+        "model": m,
+        "session": m.Session,
+        "user": c.user or c.author,
+        "auth_user_obj": c.userobj,
+    }
 
     response = toolkit.get_action('datastore_search_sql')(
-        {}, {'sql': sql}
+        context, {'sql': sql}
     )
+    print(response, flush=True)
     records_to_lower = []
     for record in response['records']:
         records_to_lower.append({k.lower(): v for k, v in list(record.items())})
     response['records'] = records_to_lower
 
     mapping = {}
-
     for record in records_to_lower:
 
         key = record[data_key_field.lower()]
