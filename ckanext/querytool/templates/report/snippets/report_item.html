@@ -49,16 +49,14 @@ report dict. Example:
             {% if
               org_user_type in ['admin', 'editor'] %}
               <li>
-                <a class="btn" href="{{ edit_data_url }}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit
-                 filters and data') }}</a>
+                <a class="btn" href="{{ edit_data_url }}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit filters and data') }}</a>
               </li>
             {% endif %}
             <li>
-              <a class="btn" href="#" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit
-               visualizations') }}</a>
+              <a class="btn" href="{{ h.url_for('reports.edit_visualizations', querytool=report.name) }}" type="submit" name="edit"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Edit visualizations') }}</a>
             </li>
             <li>
-              <a class="btn" href="#" type="submit" name="view"><span class="fa fa-eye" aria-hidden="true"></span> {{ _("View") }}</a>
+              <a class="btn" href="{{ h.url_for('querytool.querytool_public_read', name=report.name) }}" type="submit" name="view"><span class="fa fa-eye" aria-hidden="true"></span> {{ _("View") }}</a>
             </li>
             <li>
               <a class="btn delete-querytool-btn"
