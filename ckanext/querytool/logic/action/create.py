@@ -34,6 +34,15 @@ def _querytool_group_or_org_create(
     session = context['session']
     data_dict['is_organization'] = is_org
 
+    # Set default empty values for parent/child groups if none provided
+    group_parent = data_dict.get("parent")
+    group_children = data_dict.get("children", "")
+    group_relationship_type = data_dict.get("group_relationship_type")
+
+    data_dict["parent"] = group_parent
+    data_dict["children"] = group_children
+    data_dict["group_relationship_type"] = group_relationship_type
+
     upload = uploader.get_uploader('group')
     upload.update_data_dict(data_dict, 'image_url', 'image_upload', 'clear_upload')
     # get the schema
@@ -122,8 +131,6 @@ def _querytool_group_or_org_create(
 
     # Parent/Child groups
 
-    group_parent = data_dict.get('parent')
-    group_children = data_dict.get('children', '')
     group_children = group_children.split(',') if group_children else []
 
     groups = _get_action('group_list')(context, {})

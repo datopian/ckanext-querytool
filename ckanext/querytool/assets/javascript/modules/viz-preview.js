@@ -2098,6 +2098,7 @@ ckan.module("querytool-viz-preview", function () {
         if (this.el.parent().children(".additional_desc")) {
           var desc_id =
             this.el.parent().children(".additional_desc").attr('id');
+
           if (desc_id) {
             var converter = new showdown.Converter();
             var convertedDesc = converter.makeHtml(desc);
@@ -2305,6 +2306,13 @@ ckan.module("querytool-viz-preview", function () {
         },
         hovermode: "closest",
       };
+      if (titleVal) {
+        base_info.title = {
+          text: titleVal,
+          yref: "paper",
+          automargin: true,
+        }
+      }
 
       if (["sbar", "shbar"].includes(this.options.chart_type)) {
         base_info.barmode = "stack";

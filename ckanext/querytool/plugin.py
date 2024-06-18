@@ -414,6 +414,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "get_available_querytools": vs_get_actions.get_available_querytools,
             "querytool_download_data": vs_get_actions.querytool_download_data,
             "querytool_get_map_data": vs_get_actions.querytool_get_map_data,
+            "querytool_get_visualizations": vs_get_actions.querytool_get_visualizations,
+            "querytool_visualizations_update": vs_update_actions.querytool_visualizations_update,
         }
 
     # IConfigurable

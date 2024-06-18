@@ -653,16 +653,16 @@ $(document).ready(function(){
     });
   });
 
-
-  $(document).ready(function(){
+  $(function() {
     $('[id^=chart_field_color_type_]').serializeArray().forEach((item, i) => {
       var color_type = item.value;
+
       if([1, '1'].includes(color_type)){
-          $(`.diver-colors-${i+1}`).removeClass('hidden')
-          $(`.seq-colors-${i+1}`).addClass('hidden')
+          $(`.diver-colors-${i+1}`).removeClass('hidden');
+          $(`.seq-colors-${i+1}`).addClass('hidden');
       } else {
-          $(`.diver-colors-${i+1}`).addClass('hidden')
-          $(`.seq-colors-${i+1}`).removeClass('hidden')
+          $(`.diver-colors-${i+1}`).addClass('hidden');
+          $(`.seq-colors-${i+1}`).removeClass('hidden');
       }
     })
   });
@@ -670,12 +670,13 @@ $(document).ready(function(){
   $(document).on('change', '[id^=chart_field_color_type_]', function() {
     var selection = $(this).val();
     var chart_number = this.id.split('_').slice(-1)[0];
+
     if(selection == 1){
-        $(`.diver-colors-${chart_number}`).removeClass('hidden')
-        $(`.seq-colors-${chart_number}`).addClass('hidden')
+        $(`.diver-colors-${chart_number}`).removeClass('hidden');
+        $(`.seq-colors-${chart_number}`).addClass('hidden');
     } else {
-        $(`.diver-colors-${chart_number}`).addClass('hidden')
-        $(`.seq-colors-${chart_number}`).removeClass('hidden')
+        $(`.diver-colors-${chart_number}`).addClass('hidden');
+        $(`.seq-colors-${chart_number}`).removeClass('hidden');
     }
   });
 
@@ -785,9 +786,11 @@ $(document).ready(function(){
     }
 
     if(selected=='pie' || selected=='donut') {
+      $(`#chart_field_data_format_control_${chart_number}`).addClass("hidden");
       $(`#chart_donut_hole_${chart_number}`).removeClass("hidden");
       $(`#chart_field_donut_hole_${chart_number}`).removeProp("disabled");
     } else {
+      $(`#chart_field_data_format_control_${chart_number}`).removeClass("hidden");
       $(`#chart_donut_hole_${chart_number}`).addClass("hidden");
       $(`#chart_field_donut_hole_${chart_number}`).prop("disabled", true);
     }
@@ -959,18 +962,22 @@ $('body').on('change','[id^=chart_field_lower_bounds_]',function(){
   disableBounds('upper', selected, chart_number);
 });
 
-$('body').on('load','[id^=chart_field_upper_bounds_]',function(){
-  var selected = $(this).val();
-  var chart_number = this.id.split('_').slice(-1)[0];
+$(function(){
+  $('[id^=chart_field_upper_bounds_]').serializeArray().forEach((item, i) => {
+    var selected = item.value;
+    var chart_number = item.name.split('_').slice(-1)[0];
 
-  disableBounds('lower', selected, chart_number);
+    disableBounds('lower', selected, chart_number);
+  })
 })
 
-$('body').on('load','[id^=chart_field_upper_bounds_]',function(){
-  var selected = $(this).val();
-  var chart_number = this.id.split('_').slice(-1)[0];
+$(function(){
+  $('[id^=chart_field_lower_bounds_]').serializeArray().forEach((item, i) => {
+    var selected = item.value;
+    var chart_number = item.name.split('_').slice(-1)[0];
 
-  disableBounds('lower', selected, chart_number);
+    disableBounds('upper', selected, chart_number);
+  })
 })
 
 function disableBounds(bound, selected, chart_number){
