@@ -151,6 +151,7 @@
 
   function handleRenderedVisualizationsFilters() {
     var filter_value_select = $('[id*=viz_filter_value_]');
+    console.log('TESTING FILTER', filter_value_select)
 
     filter_value_select.mousedown(function(event) {
       var elem = $(this);
@@ -178,7 +179,7 @@
       var resource_id = $('#' + filter_resource_input_id).val();
       var select_size = $(this)
         .find('option')
-        .size();
+        .length;
 
       if (select_size <= 1) {
         api

@@ -412,6 +412,8 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "querytool_public_read": vs_get_actions.querytool_public_read,
             "querytool_get_chart_data": vs_get_actions.querytool_get_chart_data,
             "get_available_querytools": vs_get_actions.get_available_querytools,
+            "querytool_download_data": vs_get_actions.querytool_download_data,
+            "querytool_get_map_data": vs_get_actions.querytool_get_map_data,
             "querytool_get_visualizations": vs_get_actions.querytool_get_visualizations,
             "querytool_visualizations_update": vs_update_actions.querytool_visualizations_update,
         }
@@ -478,6 +480,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "get_all_group_names": helpers.get_all_group_names,
             "get_orphaned_reports": helpers.get_orphaned_reports,
             "sort_by_orphaned_reports": helpers.sort_by_orphaned_reports,
+            "get_map_data": helpers.get_map_data,
         }
 
     # IAuthFunctions

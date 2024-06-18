@@ -1,7 +1,7 @@
 {% asset 'querytool/vendor/c3/c3.css' %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-
 <script src="https://cdn.jsdelivr.net/npm/nunjucks@3.2.4/browser/nunjucks.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
@@ -151,37 +151,36 @@
         <div class="btn-download">
               {% set show_download = querytool.download_options %}
               {% if show_download == true %}
-              <div class="btn-group dropdown">
-                <button class="btn btn-round dropdown-toggle" data-toggle="dropdown" href="#">
+              <div class="dropdown">
+                <button class="btn btn-round dropdown-toggle" type="button" id="dropdownDownloadMenu" data-bs-toggle="dropdown" aria-expanded="false">
                   {{ _('Download') }} <img src="/base/images/download.svg" width="15" /> 
                 </button>
-                {% set download_url = '#FIXME' %}
+                {% set download_url = h.url_for('querytool.querytool_download_data', name=querytool.name) %}
                 {% set csv = '?format=csv'%}
                 {% set xml = '?format=xml'%}
                 {% set json = '?format=json'%}
                 {% set xlsx = '?format=xlsx'%}
                 {% set sql_query = '&sql_string=' + querytool.sql_string | replace('+', '%2B') %}
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu" aria-labelledby="dropdownDownloadMenu">
                   <li>
-                    <a href="{{ download_url }}{{ csv }}{{ sql_query }}">CSV</a>
+                    <a class="dropdown-item" href="{{ download_url }}{{ csv }}{{ sql_query }}">CSV</a>
                   </li>
                   <li>
-                    <a href="{{ download_url }}{{ xml }}{{ sql_query }}">XML</a>
+                    <a class="dropdown-item" href="{{ download_url }}{{ xml }}{{ sql_query }}">XML</a>
                   </li>
                   <li>
-                    <a href="{{ download_url }}{{ json }}{{ sql_query }}">JSON</a>
+                    <a class="dropdown-item" href="{{ download_url }}{{ json }}{{ sql_query }}">JSON</a>
                   </li>
                   <li>
-                    <a href="{{ download_url }}{{ xlsx }}{{ sql_query }}">Microsoft Excel (OpenXML)</a>
+                    <a class="dropdown-item" href="{{ download_url }}{{ xlsx }}{{ sql_query }}">Microsoft Excel (OpenXML)</a>
                   </li>
                   <li>
-                    <a id="download-as-image" href="#">Download Image</a>
+                    <a class="dropdown-item" id="download-as-image" href="#">Download Image</a>
                   </li>
                 </ul>
               </div>
               {% endif %}
-              
-              <button class="btn btn-round" href="#embed-{{ querytools[0].name }}" 
+        <button class="btn btn-round" data-bs-toggle="modal"  type="button" data-bs-target="#embed-{{ querytools[0].id}}" 
               data-module="tool-embed" 
               data-module-id="{{ querytools[0].id }}" >{{ _('Share') }} <img src="/base/images/share.svg" width="15"/> </button>
              
@@ -253,12 +252,16 @@
 </form>
 {% endblock %}
 {% block footer %}
-<div id="embed-{{ querytools[0].id }}" class="modal tool-embed hide">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal">&times;</button>
+<div class="modal fade" id="embed-{{ querytools[0].id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">
     <h3><b>{{ _('Embed report view') }}</b></h3>
-  </div>
-  <div class="modal-body">
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
     <p class="embed-content">{{ _('You can copy and paste the embed code') }}</p>
     <div class="row-fluid">
       <div class="span6">
@@ -274,6 +277,10 @@
       <label>URL: </label>
       <div class="input-append">
         <input class="span4" id="appendedInputButtons" type="text" value="">
+      </div>
+    </div>
+      </div>
+      <div class="modal-footer">
         <button class="btn copyToClipboard" type="button">{{ _('Copy') }}</button>
       </div>
     </div>

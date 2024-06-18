@@ -358,7 +358,7 @@ def querytool_download_data(context, data_dict):
 
     writer = FileWriterService()
     stream = writer.write_to_file(fields, records, data_format, "comma")
-    return stream.getvalue()
+    return stream
 
 
 @toolkit.side_effect_free
@@ -409,7 +409,6 @@ def querytool_get_geojson_properties(context, data_dict):
 
 @toolkit.side_effect_free
 def querytool_get_map_data(context, data_dict):
-
     geojson_url = data_dict.get("geojson_url")
     map_key_field = data_dict.get("map_key_field")
     data_key_field = data_dict.get("data_key_field")

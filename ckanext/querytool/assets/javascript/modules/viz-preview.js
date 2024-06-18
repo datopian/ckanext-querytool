@@ -2093,14 +2093,12 @@ ckan.module("querytool-viz-preview", function () {
         }
       }
 
-      var title_id = this.el.context
-        ? this.el.context.parentElement.children[0].id
-        : null;
-
-      if (this.el.context) {
-        if (this.el.context.parentElement.querySelector(".additional_desc")) {
+      var title_id = this.el.parent().children().first().attr('id')
+      if (this.el.parent()) {
+        if (this.el.parent().children(".additional_desc")) {
           var desc_id =
-            this.el.context.parentElement.querySelector(".additional_desc").id;
+            this.el.parent().children(".additional_desc").attr('id');
+
           if (desc_id) {
             var converter = new showdown.Converter();
             var convertedDesc = converter.makeHtml(desc);
@@ -2268,6 +2266,7 @@ ckan.module("querytool-viz-preview", function () {
           t: 30,
           pad: 5,
         },
+        title: titleVal,
         showlegend: show_legend, //show legend value
         legend: {
           xanchor: "left",
@@ -2307,7 +2306,6 @@ ckan.module("querytool-viz-preview", function () {
         },
         hovermode: "closest",
       };
-
       if (titleVal) {
         base_info.title = {
           text: titleVal,
@@ -3017,7 +3015,7 @@ ckan.module("querytool-viz-preview", function () {
       var axisXValue = axisXSelect.val();
 
       var axisYSelect = chartField.find("[name*=chart_field_axis_y_]");
-      var axisYValue = axisYSelect.val() ? axisYSelect.val() : $("#choose_y_axis_column option:selected").val();
+      var axisYValue = axisYSelect.val();
 
       var chartTitle = chartField.find("textarea[name*=chart_field_title_]");
       var chartTitleVal = chartTitle.val();
