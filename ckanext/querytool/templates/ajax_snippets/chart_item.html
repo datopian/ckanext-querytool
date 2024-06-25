@@ -31,14 +31,14 @@
     <div class="accordion" id="accordion_{{ chart_id }}">
 
       {# General #}
-      <div class="accordion-group">
-        <div class="accordion-heading accordion-opened">
-          <a href="#accordion_{{ chart_id }}_general" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item">
+        <div class="accordion-header accordion-opened">
+          <button aria-controls="accordion_{{ chart_id }}_general" data-bs-target="#accordion_{{ chart_id }}_general" type="button" class="accordion-button" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('General') }}
-          </a>
+          </button>
         </div>
-        <div id="accordion_{{ chart_id }}_general" class="accordion-body collapse show">
-          <div class="accordion-inner">
+        <div id="accordion_{{ chart_id }}_general" class="accordion-collapse collapse show">
+          <div class="accordion-body">
             {# Type #}
             {% if chart %}
               {% set selected_chart_type = chart.graph %}
@@ -169,11 +169,11 @@
       {% else %}
         {% set hide_line_options = 'hidden' %}
       {% endif %}
-      <div class="accordion-group {{ hide_line_options }} line-accordion">
-        <div class="accordion-heading">
-          <a href="#accordion_{{ chart_id }}_line_plotly" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item {{ hide_line_options }} line-accordion">
+        <div class="accordion-header">
+          <button type="button" data-bs-target="#accordion_{{ chart_id }}_line_plotly" class="accordion-button collapsed" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('Line Options') }}
-          </a>
+          </button>
         </div>
         {% if chart %}
           {% if chart.plotly %}
@@ -183,8 +183,8 @@
 
 
 
-        <div id="accordion_{{ chart_id }}_line_plotly" class="accordion-body collapse">
-          <div class="accordion-inner line-width-type">
+        <div id="accordion_{{ chart_id }}_line_plotly" class="accordion-collapse collapse">
+          <div class="accordion-body line-width-type">
 
             <div class="header-labels">
               <label id="lbl-1">{{ _('Type') }}</label>
@@ -243,11 +243,11 @@
       </div>
 
       {# Chart additional color setup  #}
-      <div class="accordion-group {{ hide_color_picker }} color-accordion">
-        <div class="accordion-heading">
-          <a href="#accordion_{{ chart_id }}_chart_plotly" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item {{ hide_color_picker }} color-accordion">
+        <div class="accordion-header">
+          <button type="button" data-bs-target="#accordion_{{ chart_id }}_chart_plotly" class="accordion-button collapsed" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('Color Section') }}
-          </a>
+          </button>
         </div>
         {% if chart %}
           {% if chart.plotly %}
@@ -256,8 +256,8 @@
         {% endif %}
 
 
-        <div id="accordion_{{ chart_id }}_chart_plotly" class="accordion-body collapse">
-          <div class="accordion-inner">
+        <div id="accordion_{{ chart_id }}_chart_plotly" class="accordion-collapse collapse">
+          <div class="accordion-body">
             
           <div class="control-group control-select chart_field_color_wrap_{{ n }} {% if chart %}{{ 'hidden' if selected_chart_type in ['line','area','spline','scatter'] }}{% endif %}">
             <label class="control-label">{{ _('Color Type') }}</label> &nbsp;
@@ -334,14 +334,14 @@
       </div>
 
       {# X-axis #}
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a href="#accordion_{{ chart_id }}_x_axis" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button type="button" data-bs-target="#accordion_{{ chart_id }}_x_axis" class="accordion-button collapsed" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('X-axis') }}
-          </a>
+          </button>
         </div>
-        <div id="accordion_{{ chart_id }}_x_axis" class="accordion-body collapse">
-          <div class="accordion-inner">
+        <div id="accordion_{{ chart_id }}_x_axis" class="accordion-collapse collapse">
+          <div class="accordion-body">
 
             {# X-axis title #}
             {% if chart %}
@@ -519,16 +519,14 @@
       </div>
 
       {# Y-axis #}
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a href="#accordion_{{ chart_id }}_y_axis" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button data-bs-target="#accordion_{{ chart_id }}_y_axis" type="button" class="accordion-button collapsed" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('Y-axis') }}
           </a>
         </div>
-        <div id="accordion_{{ chart_id }}_y_axis" class="accordion-body collapse">
-          <div class="accordion-inner">
-
-
+        <div id="accordion_{{ chart_id }}_y_axis" class="accordion-collapse collapse">
+          <div class="accordion-body ">
             {# Y-axis title #}
             {% if chart %}
               {% set y_label = chart.y_label %}
@@ -635,14 +633,14 @@
       </div>
 
       {# Additional Options #}
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a href="#accordion_{{ chart_id }}_graph" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button type="button" data-bs-target="#accordion_{{ chart_id }}_graph" class="accordion-button collapsed" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('Additional Options') }}
-          </a>
+          </button>
         </div>
-        <div id="accordion_{{ chart_id }}_graph" class="accordion-body collapse">
-          <div class="accordion-inner">
+        <div id="accordion_{{ chart_id }}_graph" class="accordion-collapse collapse">
+          <div class="accordion-body">
             
             {# X sorting #}
             {% set sort_options = h.querytool_get_chart_sort() %}
@@ -903,14 +901,14 @@
       </div>
 
       {# Optional Filter #}
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a href="#accordion_{{ chart_id }}_optional_filter" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button type="button" data-bs-target="#accordion_{{ chart_id }}_optional_filter" class="accordion-button collapsed" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('Optional Filter') }}
-          </a>
+          </button>
         </div>
-        <div id="accordion_{{ chart_id }}_optional_filter" class="accordion-body collapse">
-          <div class="accordion-inner">
+        <div id="accordion_{{ chart_id }}_optional_filter" class="accordion-collapse collapse">
+          <div class="accordion-body">
 
             {# Optional Filter #}
             <div class="control-group control-select">
@@ -962,14 +960,14 @@
       </div>
 
       {# Static Reference #}
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a href="#accordion_{{ chart_id }}_static_reference" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button type="button" data-bs-target="#accordion_{{ chart_id }}_static_reference" class="accordion-button collapsed" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('Static Reference') }}
-          </a>
+          </button>
         </div>
-        <div id="accordion_{{ chart_id }}_static_reference" class="accordion-body collapse">
-          <div class="accordion-inner">
+        <div id="accordion_{{ chart_id }}_static_reference" class="accordion-collapse collapse">
+          <div class="accordion-body">
 
             {# Static Reference Columns #}
             {% if selected_chart_type in ['pie', 'donut'] %}
@@ -1016,14 +1014,14 @@
       </div>
 
       {# Dynamic Reference #}
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a href="#accordion_{{ chart_id }}_dynamic_reference" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <button type="button" data-bs-target="#accordion_{{ chart_id }}_dynamic_reference" class="accordion-button collapsed" data-bs-toggle="collapse" data-parent="#accordion_{{ chart_id }}">
             {{ _('Dynamic Reference') }}
-          </a>
+          </button>
         </div>
-        <div id="accordion_{{ chart_id }}_dynamic_reference" class="accordion-body collapse">
-          <div class="accordion-inner">
+        <div id="accordion_{{ chart_id }}_dynamic_reference" class="accordion-collapse collapse">
+          <div class="accordion-body">
 
             {# Dynamic Reference Type #}
             {% if selected_chart_type in ['pie', 'donut'] %}
@@ -1090,7 +1088,7 @@
 
     {# Controls #}
     <input type="hidden" id="chart_field_axis_y_{{ n }}" name="chart_field_axis_y_{{ n }}" {% if chart %} value="{{ chart.y_axis }}" {% endif %} />
-    <ul class="inline text-right chart-actions">
+    <ul class="inline text-right chart-actions flex items-center gap-x-4 p-0 mt-4">
        <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
        <li><button class="btn copy-chart-btn" type="submit" id="copy-viz-btn_{{ n }}" name="copy-viz-btn_{{ n }}"><span class="fa fa-copy" aria-hidden="true"></span> {{ _('Copy') }}</button></li>
        <li><a class="btn update-chart-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>
