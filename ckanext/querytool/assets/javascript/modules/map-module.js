@@ -107,10 +107,12 @@ ckan.module('querytool-map', function($) {
                             this.resetMap.call(this);
                         }
                     }.bind(this))
-                    .error(function(error) {
+                    .fail(function(error) {
+                        console.log(error);
                         this.resetMap.call(this);
                     }.bind(this));
             } else {
+                console.log('No resource selected');
                 this.resetMap.call(this);
             }
         },
