@@ -399,10 +399,10 @@
             {% else %}
               {% set x_label_hide_option = true %}
             {% endif %}
-            <div class="control-group ">
+            <div class="control-group flex items-center gap-x-4">
                <label class="control-label" for="chart_field_x_label_hide_{{ n }}">{{ _('Hide title') }}</label>
                <div class="controls ">
-                  <input id="chart_field_x_label_hide_{{ n }}" type="checkbox" name="chart_field_x_label_hide_{{ n }}" value="{{ x_label_hide }}" {% if x_label_hide=='true' %}checked{% endif %} >
+                  <input id="chart_field_x_label_hide_{{ n }}" class="chart-checkbox" type="checkbox" name="chart_field_x_label_hide_{{ n }}" value="{{ x_label_hide }}" {% if x_label_hide=='true' %}checked{% endif %} >
                </div>
             </div>
 
@@ -415,10 +415,10 @@
             {% else %}
               {% set x_from_zero_option = true %}
             {% endif %}
-            <div class="control-group ">
+            <div class="control-group flex items-center gap-x-4">
                <label class="control-label" for="chart_field_x_from_zero_{{ n }}">{{ _('Start from zero') }}</label>
                <div class="controls ">
-                  <input id="chart_field_x_from_zero_{{ n }}" type="checkbox" name="chart_field_x_from_zero_{{ n }}" value="{{ x_from_zero }}" {% if x_from_zero=='true' %}checked{% endif %} {{''if x_from_zero_option else 'disabled'}}>
+                  <input id="chart_field_x_from_zero_{{ n }}"  class="chart-checkbox" type="checkbox" name="chart_field_x_from_zero_{{ n }}" value="{{ x_from_zero }}" {% if x_from_zero=='true' %}checked{% endif %} {{''if x_from_zero_option else 'disabled'}}>
                </div> 
             </div>
 

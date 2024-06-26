@@ -1868,3 +1868,58 @@ ol.inline {
 .mt-4 {
   margin-top: 1rem;
 }
+
+.item-wrapper .control-group .controls select,
+.item-wrapper .control-group .controls textarea,
+.item-wrapper .control-group .controls input,
+.accordion-body .control-group .controls select,
+.accordion-body .control-group .controls textarea,
+.accordion-body .control-group .controls input {
+  width: 100%;
+  min-width: 100%;
+}
+
+div[class^="seq-colors"] .control-group {
+  display: flex;
+  align-items: center;
+}
+
+div[class^="seq-colors"] .control-label {
+  min-width: 100px;
+}
+
+.chart-checkbox {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 0.25rem;
+  border: 1px solid #d1d5db;
+  color: #4f46e5;
+}
+
+.chart-checkbox:focus {
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.5);
+}
+
+.table_item {
+  display: grid;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+@media (min-width: 768px) {
+  .table_item {
+    grid-template-columns: repeat(9, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .table_item .item-wrapper {
+    grid-column: span 2 / span 2;
+  }
+  .table_item .preview-wrapper {
+    grid-column: span 7 / span 7;
+  }
+  .table_item > .chart-actions {
+    grid-column: span 9 / span 9;
+  }
+}
