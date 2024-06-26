@@ -1922,4 +1922,20 @@ div[class^="seq-colors"] .control-label {
   .table_item > .chart-actions {
     grid-column: span 9 / span 9;
   }
+  .accordion-header {
+    min-width: 415px;
+  }
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.line-width-type .control-select {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
 }
