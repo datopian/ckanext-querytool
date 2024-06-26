@@ -436,15 +436,6 @@ def get_geojson_resources():
     return [{"text": r["name"], "value": r["url"]} for r in result.get("results", [])]
 
 
-def test_url(url):
-    try:
-        response = requests.get(url, verify=False)
-        return response.status_code
-    except Exception as e:
-        log.error(e)
-        return 0
-
-
 def _get_s3_presigned_url(url):
     error = None
 

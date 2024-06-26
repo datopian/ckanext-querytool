@@ -483,7 +483,6 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "sort_by_orphaned_reports": helpers.sort_by_orphaned_reports,
             "get_map_data": helpers.get_map_data,
             "get_geojson_properties": helpers.get_geojson_properties,
-            "test_url": helpers.test_url,
         }
 
     # IAuthFunctions
