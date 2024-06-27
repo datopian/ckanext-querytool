@@ -1,4 +1,8 @@
 {% extends "page.html" %}
+{% block styles %}
+  {{ super() }} {% asset
+  'querytool/admin-css' %} 
+{% endblock %}
 {% block content %}
     {{ h.csrf_input() }}
     {% block maintag %}{{ super() }}{% endblock %}

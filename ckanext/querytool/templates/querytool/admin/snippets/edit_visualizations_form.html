@@ -49,7 +49,7 @@
   {% block charts %}
   <legend class="sticky-title">
     {{ _('Visualizations') }}
-    <ul class="inline pull-right">
+    <ul class="inline pull-right flex items-center gap-x-4">
       {% if h.get_user_permission_type(c.userobj, data.owner_org) in ['admin', 'editor'] %}
       <li>
         <button
@@ -93,7 +93,7 @@
 
   <fieldset>
     <div id="choose-y-axis-column-container">
-      <ul class="inline">
+      <ul class="inline flex items-center gap-x-4 p-0">
         <li>
           {{ form.select(
               'item_type',
