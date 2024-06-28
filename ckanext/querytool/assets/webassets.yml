@@ -6,6 +6,12 @@ querytool-css:
     - vendor/bootstrap/css/bootstrap.css
     - vendor/leaflet/leaflet.css
 
+admin-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-admin-querytool.css
+  contents:
+    - css/admin-query-tool.css
+
 querytool-js:
   output: ckanext-querytool/%(version)s-querytool.js
   extra:
