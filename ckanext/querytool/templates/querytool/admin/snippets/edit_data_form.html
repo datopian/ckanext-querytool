@@ -42,7 +42,9 @@ Example usage:
   {{ form.prepend('name', id='field-name', label=_('URL') , prepend=prefix, placeholder=_('eg. my-report'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
   {{ form.markdown('description', id='field-description', label=_('Main Description') , placeholder=_('Start the first line with # to identify the publicly visible title. Add other optional text in a new line.'), value=data.description, error=errors.description) }}
   {{ form.markdown('additional_description', label=_('Additional Description') , id='field-additional_description', placeholder=_('Additional description for the report...'), value=data.additional_description, error=errors.additional_description) }}
+    <div class='max-w-13'>
   {{ form.input('report_caption', id='field-report-caption', label=_('Report Caption') , placeholder=_('Caption for reports'), value=data.report_caption, error=errors.report_caption) }}
+    </div>
   {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
   {% set is_url = data.image_url and data.image_url.startswith('http') %}
   {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled() , is_url=is_url, is_upload=is_upload, upload_label=_('Report Icon'), url_label=_('Report Icon URL')) }}
@@ -151,7 +153,7 @@ Example usage:
       <label class="control-label" for="field-datasets">
         <span title="This field is required" class="control-required">*</span>{{ _("Dataset") }}
       </label>
-      <div class="controls">
+      <div class="controls max-w-13">
         <select id="field-datasets" name="dataset_name" data-module="autocomplete">
           <option value="" {{ 'selected' if not data.dataset_name }}>-- {{ _("Choose Dataset") }} --
           </option>
@@ -170,7 +172,7 @@ Example usage:
     {{ form.select('chart_resource', label=_('Resource') , options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
   {% endblock %}
   <legend>{{ _("Measure(s)") }}</legend>
-  <div class="selection_label" style='margin-left:22px;'>
+  <div class="selection_label max-w-13" style='margin-left:22px;'>
     {{ form.input('selection_label', id='field-selection-label', label=_('Selection Label') , placeholder=data.selection_label or _('Displayed Measure'), value=data.selection_label, error=errors.selection_label) }}
   </div>
   {% set columns = h.querytool_get_numeric_resource_columns(data.chart_resource) %}

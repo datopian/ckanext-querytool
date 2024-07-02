@@ -50,7 +50,9 @@ Example usage:
 
   {{ form.markdown('description', id='field-description', label=_('Main Description'), placeholder=_('Start the first line with # to identify the publicly visible title. Add other optional text in a new line.'), value=data.description, error=errors.description) }}
   {{ form.markdown('additional_description', label=_('Additional Description'), id='field-additional_description', placeholder=_('Additional description for the report...'), value=data.additional_description, error=errors.additional_description) }}
+    <div class='max-w-13'>
   {{ form.input('report_caption', id='field-report-caption', label=_('Report Caption'), placeholder=_('Caption for reports'), value=data.report_caption, error=errors.report_caption) }}
+    </div>
 
   {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
   {% set is_url = data.image_url and data.image_url.startswith('http') %}
