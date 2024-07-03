@@ -81,6 +81,7 @@
     {% set selected_y_axis_column = data.y_axis_column %}
   {% endif %}
   <div class="chart-global-controls">
+      <div class="max-w-13" style="margin-top: 30px">
     {{ form.select(
         'choose_y_axis_column',
         'choose_y_axis_column',
@@ -88,13 +89,13 @@
         options=data.y_axis_options,
         selected=selected_y_axis_column
       ) 
-    }}
+        }}</div>
   </div>
 
   <fieldset>
     <div id="choose-y-axis-column-container">
       <ul class="inline flex items-center gap-x-4 p-0">
-        <li>
+        <li class="controls">
           {{ form.select(
               'item_type',
               'item_type',
