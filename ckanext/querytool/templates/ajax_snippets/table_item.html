@@ -9,7 +9,6 @@
 
 <div id="table_item_{{ n }}" class="item table_item visualization-fields-section">
   <div class="item-wrapper">
-
      {% if table %}
         {% set table_title = table.title %}
       {% endif %}
@@ -45,7 +44,7 @@
         </div>
       </div>
       <div class="control-group title-help">
-        <div class="controls" style="width: 197px;">
+        <div class="controls">
           {% set template_tooltip = "<pre><p>Variables<br>---<br>{measure}<br>{optional_filter}<br>*use drop-down list to select variables based on application filters</p><p>Processed variables<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>etc</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>Full templates syntax</a></b></p><p class='muted'><b>Please note:</b> Single braces '{}' are used for variables</p>" %}
           <span class="editor-info-block">{% trans %}You can use <a href="#templates" title="" data-trigger="focus" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="Templates quick reference" data-container="body">Templates</a> here{% endtrans %}</span>
         </div>
@@ -192,7 +191,7 @@
       info_query_filters = info_query_filters
     %}
   </div>
-  <ul class="inline text-right chart-actions flex items-center p-0 justify-end">
+  <ul class="inline text-right chart-actions flex items-center p-0 table-admin">
     <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
     <li><button class="btn copy-chart-btn" type="submit" id="copy-viz-btn_{{ n }}" name="copy-viz-btn_{{ n }}"><span class="fa fa-copy" aria-hidden="true"></span> {{ _('Copy') }}</button></li>
     <li><a class="btn update-table-btn"><span class="fa fa-refresh" aria-hidden="true"></span> {{ _('Update') }}</a></li>

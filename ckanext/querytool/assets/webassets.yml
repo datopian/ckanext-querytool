@@ -187,3 +187,11 @@ vendor-flag-icons-min-css:
   output: ckanext-querytool/%(version)s-vendor-flag-icons-min.css
   contents:
     - vendor/flag-icons.min.css
+
+vendor-save-svg-png-js:
+  output: ckanext-querytool/%(version)s-vendor-save-svg-png.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/save-svg-png.js

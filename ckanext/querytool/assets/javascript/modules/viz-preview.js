@@ -245,7 +245,6 @@ ckan.module("querytool-viz-preview", function () {
     },
     // Get the data from Datastore.
     get_resource_datа: function (sql) {
-      console.log('THIS', this)
       var category =
         this.options.category_name === true ? "" : this.options.category_name; // NOTE: mapped to n
       var x_axis = this.options.x_axis === true ? "" : this.options.x_axis; // NOTE: mapped to i

@@ -1,7 +1,7 @@
 /* Image Upload
  *
  */
-ckan.module("querytool_image_upload", function ($) {
+ckan.module("querytool-image-upload", function ($) {
   return {
     /* options object can be extended using data-module-* attributes */
     options: {

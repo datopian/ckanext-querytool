@@ -82,7 +82,6 @@ def public_list(group=None):
         )
     else:
         querytools = _get_action("querytool_public_list")({}, {"group": group})
-        log.error(querytools)
 
         if q:
             querytool_search_results = helpers.querytool_search(

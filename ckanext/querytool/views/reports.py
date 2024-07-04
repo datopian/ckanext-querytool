@@ -3,6 +3,7 @@ import ast
 import logging
 
 from flask import Blueprint
+from werkzeug.datastructures import FileStorage as FlaskFileStorage
 from operator import itemgetter
 import ckan.lib.base as base
 from ckan.plugins import toolkit as tk
@@ -193,9 +194,7 @@ def querytool_edit(data=None, errors=None, error_summary=None, querytool=None):
             return querytool_edit("/" + querytool, _querytool, errors, error_summary)
         if "save_data" in list(data.keys()):
             # redirect to report list
-            return ckan_helpers.redirect_to(
-                "/report"
-            )
+            return ckan_helpers.redirect_to("/report")
 
         else:
             # redirect to manage visualisations
@@ -249,7 +248,6 @@ def edit_visualizations(
 
     :return: query edit template page
     """
-    log.error(querytool)
 
     data_dict = {"name": querytool}
 
@@ -299,7 +297,9 @@ def edit_visualizations(
                 ),
             )
 
-    _visualization_items = tk.get_action("querytool_get_visualizations")(context, data_dict)
+    _visualization_items = tk.get_action("querytool_get_visualizations")(
+        context, data_dict
+    )
 
     if _visualization_items is None:
         _visualization_items = {"name": querytool}
@@ -307,6 +307,7 @@ def edit_visualizations(
     if tk.request.method == "POST" and not data:
         data = dict(tk.request.form)
         data_form = tk.request.form
+        data_files = tk.request.files
 
         is_copy = False
         copy_id = [k for k in list(data.keys()) if k.startswith("copy-viz-btn_")]
@@ -383,12 +384,8 @@ def edit_visualizations(
                 visualization["type"] = "chart"
                 visualization["order"] = int(id)
                 visualization["graph"] = data.get("chart_field_graph_{}".format(id))
-                visualization["x_axis"] = data.get(
-                    "chart_field_axis_x_{}".format(id)
-                )
-                visualization["y_axis"] = data.get(
-                    "chart_field_axis_y_{}".format(id)
-                )
+                visualization["x_axis"] = data.get("chart_field_axis_x_{}".format(id))
+                visualization["y_axis"] = data.get("chart_field_axis_y_{}".format(id))
                 visualization["color"] = data.get("chart_field_color_{}".format(id))
                 visualization["color_type"] = data.get(
                     "chart_field_color_type_{}".format(id)
@@ -421,12 +418,8 @@ def edit_visualizations(
                 visualization["tick_count"] = data.get(
                     "chart_field_tick_count_{}".format(id)
                 )
-                visualization["y_label"] = data.get(
-                    "chart_field_y_label_{}".format(id)
-                )
-                visualization["x_label"] = data.get(
-                    "chart_field_x_label_{}".format(id)
-                )
+                visualization["y_label"] = data.get("chart_field_y_label_{}".format(id))
+                visualization["x_label"] = data.get("chart_field_x_label_{}".format(id))
                 visualization["size"] = data.get("chart_field_size_{}".format(id))
                 # visualization['chart_padding_left'] = \
                 #     data.get('chart_field_chart_padding_left_{}'.format(id))
@@ -457,18 +450,12 @@ def edit_visualizations(
                 visualization["additional_description"] = data.get(
                     "chart_field_desc_{}".format(id)
                 )
-                visualization["plotly"] = data.get(
-                    "chart_field_plotly_{}".format(id)
-                )
+                visualization["plotly"] = data.get("chart_field_plotly_{}".format(id))
 
                 def line_attr_search(data, id, line_attr):
                     base_id = "chart_field_{}_{}_".format(line_attr, id)
                     line_count = len(
-                        [
-                            True
-                            for key, value in list(data.items())
-                            if base_id in key
-                        ]
+                        [True for key, value in list(data.items()) if base_id in key]
                     )
                     line_attrs = []
 
@@ -480,12 +467,8 @@ def edit_visualizations(
 
                     return ",".join(line_attrs)
 
-                visualization["line_types"] = line_attr_search(
-                    data, id, "line_type"
-                )
-                visualization["line_widths"] = line_attr_search(
-                    data, id, "line_width"
-                )
+                visualization["line_types"] = line_attr_search(data, id, "line_type")
+                visualization["line_widths"] = line_attr_search(data, id, "line_width")
 
                 bar_width = data.get("chart_field_bar_width_{}".format(id))
 
@@ -496,8 +479,7 @@ def edit_visualizations(
                 else:
                     visualization["bar_width"] = str(
                         round(
-                            float(data.get("chart_field_bar_width_{}".format(id)))
-                            / 10,
+                            float(data.get("chart_field_bar_width_{}".format(id))) / 10,
                             2,
                         )
                     )
@@ -639,28 +621,38 @@ def edit_visualizations(
 
                 break_lines.append(break_line)
 
-            if k.startswith("media_image_url_"):
+            if k.startswith("image_url_") or k.startswith("url_"):
                 image = {}
                 id = k.split("_")[-1]
                 image["type"] = "image"
                 image["order"] = int(id)
+                image_url = data.get(
+                    "image_url_{}".format(id), data.get("url_{}".format(id))
+                )
+                image_upload = data_files.get("image_upload_{}".format(id), "")
 
-                image_url = data["media_image_url_{}".format(id)]
+                if image_upload:
+                    image_obj = {
+                        f"image_url_{id}": image_url,
+                        f"image_upload_{id}": image_upload,
+                    }
 
-                if h.uploads_enabled():
-                    image_upload = data["media_image_upload_{}".format(id)]
-                    if isinstance(image_upload, cgi.FieldStorage):
-                        upload = uploader.get_uploader("vs", image_url)
-                        upload.update_data_dict(
-                            data,
-                            "media_image_url_{}".format(id),
-                            "media_image_upload_{}".format(id),
-                            "False",
-                        )
-                        upload.upload(uploader)
-                        image_url = upload.filename
+                    try:
+                        if isinstance(image_upload, FlaskFileStorage):
+                            upload = uploader.get_uploader("vs", image_url)
+                            upload.update_data_dict(
+                                image_obj,
+                                "image_url_{}".format(id),
+                                "image_upload_{}".format(id),
+                                "False",
+                            )
+                            upload.upload(uploader)
+                            image_url = upload.filename
 
-                    image["url"] = image_url
+                    except Exception as e:
+                        log.error(e)
+
+                image["url"] = image_url
 
                 images.append(image)
 
@@ -678,16 +670,10 @@ def edit_visualizations(
                     "map_infobox_title_{}".format(id)
                 )
                 map_item["map_key_field"] = data["map_key_field_{}".format(id)]
-                map_item["data_key_field"] = data[
-                    "map_data_key_field_{}".format(id)
-                ]
+                map_item["data_key_field"] = data["map_data_key_field_{}".format(id)]
                 map_item["data_format"] = data["map_data_format_{}".format(id)]
-                map_item["seq_colors"] = data[
-                    "seq_colors_hidden_input_{}".format(id)
-                ]
-                map_item["data_categories"] = data[
-                    "map_data_categories_{}".format(id)
-                ]
+                map_item["seq_colors"] = data["seq_colors_hidden_input_{}".format(id)]
+                map_item["data_categories"] = data["map_data_categories_{}".format(id)]
                 map_item["size"] = data.get("map_size_{}".format(id))
 
                 if data.get("map_field_filter_name_{}".format(id)):
@@ -718,9 +704,7 @@ def edit_visualizations(
                 table_item["order"] = int(id)
                 table_item["y_axis"] = data["choose_y_axis_column"]
                 table_item["main_value"] = data["table_main_value_{}".format(id)]
-                table_item["second_value"] = data[
-                    "table_second_value_{}".format(id)
-                ]
+                table_item["second_value"] = data["table_second_value_{}".format(id)]
                 table_item["title"] = data["table_field_title_{}".format(id)]
                 table_item["data_format"] = data["table_data_format_{}".format(id)]
                 if data.get("table_field_filter_name_{}".format(id)):
@@ -760,8 +744,8 @@ def edit_visualizations(
             _visualization_items["y_axis_column"] = ""
 
         try:
-            junk = tk.get_action(
-                "querytool_visualizations_update")(context, _visualization_items
+            junk = tk.get_action("querytool_visualizations_update")(
+                context, _visualization_items
             )
             if is_copy:
                 ckan_helpers.flash_success(_("Visualization Successfully copied"))
@@ -774,19 +758,19 @@ def edit_visualizations(
 
         if "save-edit-data" in list(data.keys()):
             # redirect to edit data
-            return ckan_helpers.redirect_to("reports.edit", querytool=_querytool["name"])
+            return ckan_helpers.redirect_to(
+                "reports.edit", querytool=_querytool["name"]
+            )
         elif is_copy is True:
             # reload page with new visualization
             return ckan_helpers.redirect_to(
                 "reports.edit_visualizations", querytool=_querytool["name"]
             )
         else:
-            #return ckan_helpers.redirect_to(
+            # return ckan_helpers.redirect_to(
             #    "/" + ckan_helpers.lang() + "/group" + "/reports/" + _querytool["group"]
-            #)
-            return ckan_helpers.redirect_to(
-                "reports.reports_list"
-            )
+            # )
+            return ckan_helpers.redirect_to("reports.reports_list")
 
     if not data:
         data = _visualization_items
@@ -818,9 +802,7 @@ def edit_visualizations(
         main_filters_names.append(filter["name"])
     data["main_filters_names"] = ",".join(main_filters_names)
 
-    data["y_axis_columns"] = h.parse_y_axis_columns(
-        data.get("y_axis_columns")
-    )
+    data["y_axis_columns"] = h.parse_y_axis_columns(data.get("y_axis_columns"))
 
     data["y_axis_options"] = [
         {"value": column["name"], "text": column["alias"]}
@@ -1031,7 +1013,9 @@ def querytool_delete(querytool):
     except logic.NotFound:
         base.abort(404, _("Report not found"))
 
-    ckan_helpers.flash_success(_("Report and visualizations were " "removed successfully."))
+    ckan_helpers.flash_success(
+        _("Report and visualizations were " "removed successfully.")
+    )
 
     return tk.redirect_to("/report")
 
