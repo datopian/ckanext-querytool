@@ -37,21 +37,23 @@
   </script>
 {% endblock %}
 {% block styles %}
-  {{ super() }} {% asset
-  'querytool/querytool-css' %} {% asset 'querytool-css-inc/variables-less' %} {% asset
-  'querytool-css-inc/mixins-less' %} {% asset 'querytool-css-inc/responsive-less' %} {% asset
-  'querytool-css/public-querytool-css' %}
+  {{ super() }}
+  {% asset 'querytool/querytool-css' %}
+  {% asset 'querytool-css-inc/variables-less' %}
+  {% asset 'querytool-css-inc/mixins-less' %}
+  {% asset 'querytool-css-inc/responsive-less' %}
+  {% asset 'querytool-css/public-querytool-css' %}
+  {% asset 'querytool/querytool-js' %}
 {% endblock %}
 {% block bodytag %}{{ super() }} id="vs-page"{% endblock %}
 {% block scripts %}
-  {{ super() }} {% asset
-  'querytool/querytool-js' %}
+  {{ super() }}
+  {% asset 'querytool/querytool-js' %}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
   {% if h.get_cookie_control_config().get('api_key') and
     h.get_cookie_control_config().get('enabled') %}
     {% block cookie_control %}
-      {%
-      asset 'querytool/javascript/modules/civic_cookies.js' %}
+      {% asset 'querytool/javascript/modules/civic_cookies.js' %}
       <script src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js"
               type="text/javascript"></script>
       {% set cookie_control_config = h.get_cookie_control_config() %}

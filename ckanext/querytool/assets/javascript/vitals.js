@@ -1029,8 +1029,7 @@ $("#field-ckan-site-intro-text").closest('.control-group').hide();
 $("#field-ckan-site-about").closest('.control-group').hide();
 
 
-//Render chart title for textbox
-$(document).ready(function(){
+$(function(){
   $('.textbox').each(function(){
     var content = $(this).html();
     var measure = $(this).attr("data-measure");
@@ -1657,4 +1656,25 @@ document.addEventListener("DOMContentLoaded", function () {
         btn.addEventListener("mouseover", () => btn.classList.add("hover"));
         btn.addEventListener("mouseout", () => btn.classList.remove("hover"));
     });
+});
+
+// Fixes copy, delete, update button spacing/formatting for tables
+$(function(){
+  $('.table-admin').each(function(){
+    var tableAdmin = $(this);
+    var itemWrapper = tableAdmin.parent().find('.item-wrapper');
+
+    if (itemWrapper.length > 0) {
+      var computedStyle = window.getComputedStyle(itemWrapper[0]);
+      var itemWrapperWidth = parseFloat(computedStyle.width);
+
+      if (!isNaN(itemWrapperWidth)) {
+        tableAdmin.width(itemWrapperWidth);
+      } else {
+        console.log('Unable to determine width of item-wrapper');
+      }
+    } else {
+      console.log('No item-wrapper found for', tableAdmin);
+    }
+  });
 });

@@ -417,6 +417,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "querytool_get_visualizations": vs_get_actions.querytool_get_visualizations,
             "querytool_get_resource_data": vs_get_actions.querytool_get_resource_data,
             "querytool_visualizations_update": vs_update_actions.querytool_visualizations_update,
+            "querytool_get_geojson_properties": vs_get_actions.querytool_get_geojson_properties,
         }
 
     # IConfigurable
@@ -482,6 +483,7 @@ class QuerytoolPlugin(plugins.SingletonPlugin):
             "get_orphaned_reports": helpers.get_orphaned_reports,
             "sort_by_orphaned_reports": helpers.sort_by_orphaned_reports,
             "get_map_data": helpers.get_map_data,
+            "get_geojson_properties": helpers.get_geojson_properties,
         }
 
     # IAuthFunctions

@@ -2003,3 +2003,19 @@ div[class^="seq-colors"] .control-label {
 .controls select:disabled {
   background-color: #e9ecef;
 }
+
+.js .image-upload .controls {
+  max-width: 25%;
+}
+
+.viz-crud-item {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  justify-content: unset;
+
+  li {
+    margin-right: 10px;
+  }
+}

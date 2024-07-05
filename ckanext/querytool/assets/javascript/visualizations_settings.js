@@ -376,7 +376,6 @@
     };
 
     $(document).ready(function() {
-        console.log('DOCUMENT READY')
         handleChartSortingField();
         handleRenderedVizFilters('chart');
         handleRenderedVizFilters('map');
@@ -1028,19 +1027,19 @@
                 //} else if (item.context.id.indexOf('image_item') >= 0) {
                 } else if (itemId.includes('image_item')) {
 
-                    var url = item.find('[name*=media_image_url_]');
+                    var url = item.find('[name*=image_url_]');
                     var size = item.find('[id*=image_field_size_]');
-                    var upload = item.find('[name*=media_image_upload_]');
-                    var clear = item.find('[name*=media_clear_upload_]');
+                    var upload = item.find('[name*=image_upload_]');
+                    var clear = item.find('[name*=clear_upload_]');
 
                     incrementCopyButton();
 
                     item.attr('id', 'image_item_' + order);
-                    url.attr('name', 'media_image_url_' + order);
+                    url.attr('name', 'image_url_' + order);
                     size.attr('id', 'image_field_size_' + order);
                     size.attr('name', 'image_field_size_' + order);
-                    upload.attr('name', 'media_image_upload_' + order);
-                    clear.attr('name', 'media_clear_upload_' + order);
+                    upload.attr('name', 'image_upload_' + order);
+                    clear.attr('name', 'clear_upload_' + order);
 
                 //} else if (item.context.id.indexOf('map_item') >= 0) {
                 } else if (itemId.includes('map_item')) {
@@ -1188,14 +1187,14 @@
         if (item_id) {
             mediaImage = item.find('#field-image-url');
             mediaUpload = item.find('#field-image-upload');
-            fieldImageUrl = 'media_image_url_' + item_id;
-            fieldImageUpload = 'media_image_upload_' + item_id;
+            fieldImageUrl = 'image_url_' + item_id;
+            fieldImageUpload = 'image_upload_' + item_id;
 
 
             if (uploadsEnabled == 'True') {
 
-                imageUploadModule = item.find('[data-module="custom-image-upload"]');
-                imageUploadModule.attr('data-module', 'image-upload');
+                imageUploadModule = item.find('[data-module="querytool-image-upload"]');
+                imageUploadModule.attr('data-module', 'querytool-image-upload');
                 imageUploadModule.attr('data-module-field_upload', fieldImageUpload);
                 imageUploadModule.attr('data-module-field_url', fieldImageUrl);
 
@@ -1208,11 +1207,11 @@
         }
 
         if (item_id) {
-            image_url_inputs = $('[name*=media_image_url_' + item_id + ']');
-            image_upload_inputs = $('[name*=media_image_upload_' + item_id + ']');
+            image_url_inputs = $('[name*=image_url_' + item_id + ']');
+            image_upload_inputs = $('[name*=image_upload_' + item_id + ']');
         } else {
-            image_url_inputs = $('[name*=media_image_url_]');
-            image_upload_inputs = $('[name*=media_image_upload_]');
+            image_url_inputs = $('[name*=image_url_]');
+            image_upload_inputs = $('[name*=image_upload_]');
         }
 
 

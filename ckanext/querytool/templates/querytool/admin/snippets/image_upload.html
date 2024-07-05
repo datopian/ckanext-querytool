@@ -1,0 +1,43 @@
+{#
+Creates image upload page
+data - Data about the image
+n - Order of the item
+Example usage:
+{% snippet 'querytool/admin/snippets/image_upload.html', data=data,n=order  %}
+#}
+
+{% if data %}
+  {% set n =  data.order | string %}
+  {% set media_type =  data.media_type %}
+  {% set image_url_value =  data.url %}
+  {% set image_url = 'image_url_' + n %}
+  {% set image_upload = 'image_upload_' + n %}
+  {% set clear_upload = 'clear_upload_' + n %}
+  {% set is_upload = image_url and not image_url.startswith('http') %}
+  {% set is_url = image_url and image_url.startswith('http') %}
+{% endif %}
+
+{% set data_module = 'querytool-image-upload' %}
+
+  <div
+     class="image-upload"
+     data-module="{{ data_module }}"
+     data-module-is_url="{{ is_url or 'false' }}"
+     data-module-is_upload="{{ is_upload or 'false' }}"
+     data-module-field_url="{{ image_url }}"
+     data-module-field_upload="{{ image_upload }}"
+     data-module-field_clear="{{ clear_upload }}"
+     data-module-upload_label="{{ _('Image') }}">
+     <div class="control-group control-full">
+        <label class="control-label" for="field-image-url">{% if not viz_edit %}{{ _('Report Icon') }}{% else %}{{ _('Image') }}{% endif %}</label>
+        <div class="controls ">
+           <input id="field-image-url" type="text" name="{{ image_url }}" value="{{ image_url_value }}" placeholder="http://example.com/my-image.jpg">
+        </div>
+     </div>
+     <div class="control-group control-full">
+        <label class="control-label" for="field-image-upload">{{ _('Image') }} </label>
+        <div class="controls ">
+           <input id="field-image-upload" type="file" name="{{ image_upload }}" value="{{ image_url }}" placeholder="">
+        </div>
+     </div>
+  </div>

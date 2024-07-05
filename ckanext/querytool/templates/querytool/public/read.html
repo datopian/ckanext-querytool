@@ -1,4 +1,4 @@
-{% asset 'querytool/vendor/c3/c3.css' %}
+{% asset 'querytool/vendor-c3-css' %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
@@ -8,12 +8,14 @@
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 
 {% block scripts %}
-{% asset 'querytool/querytool-viz-preview-js' %}
+  {% asset 'querytool/querytool-viz-preview-js' %}
 {% endblock %}
 
-{% asset 'querytool/map' %}
-{% asset 'querytool/table' %}
-{% asset 'querytool/share' %}
+{% asset 'querytool/querytool-leaflet-js' %}
+{% asset 'querytool/querytool-leaflet-css' %}
+{% asset 'querytool/querytool-datatables-js' %}
+{% asset 'querytool/querytool-datatables-css' %}
+{% asset 'querytool/vendor-save-svg-png-js' %}
 
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
