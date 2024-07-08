@@ -485,7 +485,7 @@ ckan.module('querytool-map', function($) {
                         this.resetMap.call(this);
                     }
                 }.bind(this))
-                .error(function(error) {
+                .fail(function(error) {
                     this.resetMap.call(this);
                 }.bind(this));
 
