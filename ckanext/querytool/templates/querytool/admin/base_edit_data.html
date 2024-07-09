@@ -5,7 +5,7 @@
 {% endblock %}
 {% set ctrl = "ckanext.querytool.controllers.querytool:QueryToolController" %}
 {% block subtitle %}{{ _("Edit data") }}{% endblock %}
-{% block breadcrumb_content %}<li>Placeholder</li>{% endblock %}
+{% block breadcrumb_content %}<li>{% link_for _('Reports Folders'), named_route='reports.reports_list' %}</li>{% endblock %}
 {% block page_header %}{% endblock %}
 {% block primary_content_inner %}
     {% snippet 'querytool/admin/snippets/edit_data_form.html', data=data, querytool=querytool, errors=errors, error_summary=error_summary %}

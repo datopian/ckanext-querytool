@@ -85,7 +85,7 @@
             <div class="control-group title">
               <label class="control-label" for="chart_field_title_{{ n }}">{{ _('Title') }}</label>
               <div class="controls ">
-                <textarea class="minus-b-6px" id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" placeholder="{{ _('Chart title') }}" rows="3">{{ chart_title }}</textarea>
+                <textarea id="chart_field_title_{{ n }}" name="chart_field_title_{{ n }}" placeholder="{{ _('Chart title') }}" rows="3">{{ chart_title }}</textarea>
               </div>
             </div>
 
@@ -127,7 +127,7 @@
             <div class="control-group desc" style="margin-bottom:0;">
               <label class="control-label" for="chart_field_desc_{{ n }}">{{ _('Additional Description') }}</label>
               <div class="controls ">
-                <textarea class="minus-b-6px" id="chart_field_desc_{{ n }}" name="chart_field_desc_{{ n }}" placeholder="{{ _('Additional description') }}" rows="3">{{ additional_description }}</textarea>
+                <textarea id="chart_field_desc_{{ n }}" name="chart_field_desc_{{ n }}" placeholder="{{ _('Additional description') }}" rows="3">{{ additional_description }}</textarea>
               </div>
             </div>
             <div class="control-group desc-vars" style="margin-bottom:0;">
@@ -356,7 +356,7 @@
             <div class="control-group x-title">
                <label class="control-label" for="chart_field_x_label_{{ n }}">{{ _('X axis title') }}</label>
                <div class="controls ">
-                  <textarea class="minus-b-6px" id="chart_field_x_label_{{ n }}" name="chart_field_x_label_{{ n }}" placeholder="{{ _('Dimension by default') }}" rows="3">{{ x_label }}</textarea>
+                  <textarea id="chart_field_x_label_{{ n }}" name="chart_field_x_label_{{ n }}" placeholder="{{ _('Dimension by default') }}" rows="3">{{ x_label }}</textarea>
                </div>
             </div>
 
@@ -540,7 +540,7 @@
             <div class="control-group y-title mb-0">
                <label class="control-label" for="chart_field_y_label_{{ n }}">{{ _('Y axis title') }}</label>
                <div class="controls ">
-                  <textarea class="minus-b-6px" id="chart_field_y_label_{{ n }}" name="chart_field_y_label_{{ n }}" placeholder="{{ _('Measure by default') }}" {{'' if y_label_option else 'disabled'}} rows="3">{{ y_label }}</textarea>
+                  <textarea id="chart_field_y_label_{{ n }}" name="chart_field_y_label_{{ n }}" placeholder="{{ _('Measure by default') }}" {{'' if y_label_option else 'disabled'}} rows="3">{{ y_label }}</textarea>
                </div>
             </div>
 
