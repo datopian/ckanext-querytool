@@ -19,8 +19,6 @@
 
 {% import 'macros/form.html' as form %}
 {% extends "querytool/public/base_main.html" %}
-{% set groups = h.querytool_get_groups() %}
-{% set group_title = h.querytool_get_group_title(querytools[0].group) %}
 
 
 {% block header %}
@@ -34,6 +32,9 @@
 {% block page_header_bg %}{% endblock %}
 
 {% block breadcrumb_custom %}
+  {% set groups = h.querytool_get_groups() %}
+  {% set group_title = h.querytool_get_group_title(querytools[0].group) %}
+
   {% set from_parent = request.args.get('from_parent') or from_parent %}
   {% set parent = request.args.get('parent') or parent %}
   {% set parent_title = request.args.get('title') or title %}
@@ -51,7 +52,7 @@
           <li><a href="/querytool/public/group/{{ querytools[0].group }}?parent={{ parent }}&from_parent=True&title={{ parent_title | safe }}">{{ group_title }}</a></li>
         {% endif %}
 
-        <li class="active">FIXME</li>
+        <li class="active"><a href="/querytool/public/{{ querytools[0].name }}">{{ querytools[0].title }}</a></li>
       </ol>
     </div>
   {% else %}
@@ -59,9 +60,9 @@
       <ol class="breadcrumb new_breadcrumb">
         <li><a href="/"><i class="fa fa-home"></i></a></li>
         {% if group_title %}
-          <li>FIXME</li>
+          <li><a href="/querytool/public/group/{{ querytools[0].group }}">{{ group_title }}</a></li>
         {% endif %}
-        <li class="active">FIXME</li>
+        <li class="active"><a href="/querytool/public/{{ querytools[0].name }}">{{ querytools[0].title }}</a></li>
       </ol>
       {% snippet 'snippets/embed/navbar_end_items.html' %}
     </div>

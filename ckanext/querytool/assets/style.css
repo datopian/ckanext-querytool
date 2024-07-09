@@ -444,6 +444,7 @@ a {
   box-shadow: none;
   background-color: #0047d4;
   color: #fff;
+  text-decoration: none !important;
 }
 .primary .btn .fa,
 .public-query .btn .fa,
@@ -1599,7 +1600,7 @@ form.custom-lang-select {
   width: 100%;
 }
 
-:not(.btn-primary).btn:not(.btn-danger).btn {
+:not(.btn-primary).btn:not(.btn-danger).btn:not(.btn-round).btn:not(.btn-update).btn {
   display: inline-block;
   padding: 4px 12px;
   margin-bottom: 0;
@@ -1641,6 +1642,7 @@ form.custom-lang-select {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.2),
     0 1px 2px rgba(0, 0, 0, 0.05);
+  text-decoration: none !important;
 }
 
 .btn-minimal:hover {
@@ -1733,7 +1735,7 @@ form.custom-lang-select {
   background-color: #0047d4 !important;
 }
 
-:not(.btn-primary).btn:not(.btn-danger).btn:hover {
+:not(.btn-primary).btn:not(.btn-danger).btn:not(.btn-round).btn:not(.btn-update).btn:hover {
   filter: brightness(85%);
 }
 
@@ -2018,4 +2020,84 @@ div[class^="seq-colors"] .control-label {
   li {
     margin-right: 10px;
   }
+}
+
+.control-custom {
+  font-size: unset;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+  text-decoration: underline !important;
+}
+
+.navbar .nav > li > a:hover {
+  text-decoration: none !important;
+}
+
+.page-header .nav-tabs > li > a:hover {
+  text-decoration: none !important;
+  background-color: #fdfdfd;
+}
+
+.masthead .main-navbar > ul > li > a:hover {
+  text-decoration: none !important;
+}
+
+.masthead, .navbar {
+  padding-bottom: 0 !important;
+  min-height: 64px !important;
+}
+
+:not(.btn-primary).btn:not(.btn-danger).btn:not(.btn-round).btn:not(.btn-update).btn:not(.delete-querytool-btn).btn:hover {
+  background-color: #0047d4 !important;
+  color: #fff !important;
+  background-image: unset !important;
+  text-shadow: unset !important;
+  filter: unset !important;
+}
+
+.js .image-upload .btn.hover {
+  text-shadow: unset !important;
+  background-color: #0047d4 !important;
+  color: #fff !important;
+}
+
+[for^=field-extras-] {
+  padding-right: 8px;
+}
+
+[id^=field-extras-] {
+  margin-right: 16px;
+}
+
+.controls.editor, .controls > textarea[id^="chart_field_"] {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn.btn-update {
+  padding: unset !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  line-height: 20px !important;
+}
+
+a.btn.delete-querytool-btn:hover {
+  background-color: #cf0000 !important;
+  background-image: unset !important;
+  color: #fff !important;
+  text-shadow: unset !important;
+  filter: unset !important;
+}
+
+.btn-default > i {
+  margin-right: 8px;
+}
+
+.btn > span {
+  margin-right: 4px;
 }

@@ -711,7 +711,7 @@ def get_group_title(group_name):
 
     for group in groups:
         if group.get("name") == group_name:
-            group_title = group.get("title")
+            group_title = group.get("title") or group["name"]
 
     return group_title
 
