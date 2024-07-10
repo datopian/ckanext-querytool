@@ -9,7 +9,7 @@ Example:
 
 #}
 {% block group_list %}
-<ul class="media-grid bg-white bg-no-image" data-module="media-grid">
+<ul class="media-grid bg-white bg-no-image">
 	{% block group_list_inner %}
   {% for group in groups %}
     {% snippet "group/snippets/group_item.html", group=group, position=loop.index, show_capacity=show_capacity %}
