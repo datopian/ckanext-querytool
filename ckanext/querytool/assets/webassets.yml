@@ -103,6 +103,7 @@ querytool-leaflet-css:
     - vendor/leaflet/leaflet.css
 
 querytool-datatables-js:
+  filter: rjsmin
   output: ckanext-querytool/%(version)s-vendor-datatables.js
   extra:
     preload:
@@ -129,6 +130,7 @@ vendor-c3-css:
     - vendor/c3/c3.css
 
 vendor-c3-js:
+  filter: rjsmin
   output: ckanext-querytool/%(version)s-vendor-c3.js
   extra:
     preload:
@@ -137,6 +139,7 @@ vendor-c3-js:
     - vendor/c3/c3.js
 
 vendor-d3-js:
+  filter: rjsmin
   output: ckanext-querytool/%(version)s-vendor-d3.js
   extra:
     preload:
@@ -145,6 +148,7 @@ vendor-d3-js:
     - vendor/d3/d3.js
 
 vendor-nunjucks-js:
+  filter: rjsmin
   output: ckanext-querytool/%(version)s-vendor-nunjucks.js
   extra:
     preload:
@@ -153,6 +157,7 @@ vendor-nunjucks-js:
     - vendor/nunjucks.js
 
 vendor-dragula-js:
+  filter: rjsmin
   output: ckanext-querytool/%(version)s-vendor-dragula.js
   extra:
     preload:
@@ -161,6 +166,7 @@ vendor-dragula-js:
     - vendor/dragula/dragula.js
 
 vendor-dragula-css:
+  filter: rjsmin
   filter: cssrewrite
   output: ckanext-querytool/%(version)s-vendor-dragula.css
   contents:
