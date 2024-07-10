@@ -1,16 +1,18 @@
 {% import 'macros/form.html' as form %}
 
 {% asset 'querytool/vendor-c3-css' %}
+{% asset 'querytool/querytool-leaflet-css' %}
+{% block scripts %}
 {% asset 'querytool/vendor-d3-js' %}
 {% asset 'querytool/vendor-c3-js' %}
-{% asset 'querytool/vendor-nunjucks-js' %}
 {% asset 'querytool/querytool-visualizations-settings-js' %}
 {% asset 'querytool/querytool-viz-preview-js' %}
+{% asset 'querytool/vendor-nunjucks-js' %}
 {% asset 'querytool/querytool-leaflet-js' %}
-{% asset 'querytool/querytool-leaflet-css' %}
 {% asset 'querytool/querytool-datatables-js' %}
 {% asset 'querytool/querytool-datatables-css' %}
 {% asset 'querytool/querytool-image-upload-js' %}
+{% endblock %}
 
 {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
 
