@@ -1693,7 +1693,7 @@ ckan.module("querytool-viz-preview", function () {
             var html = "";
             html += '<div class="control-group control-select">';
             html +=
-              '<label class="control-label line_type_label" for="chart_field_line_type_' +
+              '<label class="control-label line_type_label" style="width:120px;" for="chart_field_line_type_' +
               item_no +
               "_" +
               (tmp + 1) +
@@ -2026,7 +2026,7 @@ ckan.module("querytool-viz-preview", function () {
 
             //  Create HTML for the new color input
             var html = `
-                    <div class="control-group control-select">
+                    <div class="control-group control-select grid grid-cols-2">
                       <label 
                         class="control-label" 
                         for="chart_field_color_${item_no}_${tmp + 1}"
