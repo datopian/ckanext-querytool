@@ -292,30 +292,30 @@
             <div class="seq-color-preview" id="seq_color_preview_{{ n }}" style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"></div>
           </div>
           
-          <div class="control-group control-select diver-colors-{{ n }}" {% if chart %}{{ 'hidden' if chart.color_type in [2, '2'] }}{% endif %}>
+          <div class="control-group control-select diver-colors-{{ n }} {% if chart %}{{ 'hidden' if chart.color_type in [2, '2'] }}{% endif %}">
             {% if plotly %}
               <input type="hidden" id="chart_field_plotly_{{ n }}" name="chart_field_plotly_{{ n }}" {% if chart %} value="{{ chart.plotly }}" {% endif %} />
 
-              {% set color_count = 1 %}
+              {% set counter = {'color_count': 1} %}
               {% if selected_chart_type in ['pie', 'donut'] %}
                 {% for i in range(plotly[0].labels | length) %}
                   {% set color = h.color_to_hex(plotly[0].marker.colors[i]) if "colors" in plotly[0].marker else "#8FBC8F" %}
                   {% set name = plotly[0].labels[i] %}
                   <div class="control-group control-select grid grid-cols-2">
-                    <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
-                    <input type="color" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
+                    <label class="control-label" for="chart_field_color_{{ n }}_{{ counter.color_count }}">{{ name }}</label>
+                    <input type="color" id="chart_field_color_{{ n }}_{{ counter.color_count }}" name="chart_field_color_{{ n }}_{{ counter.color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
                   </div>
-                  {% set color_count = color_count + 1 %}
+                  {% set counter = counter.update({'color_count': counter.color_count + 1}) or counter %}
                 {% endfor %}
               {% else %}
                 {% for a in plotly %}
                   {% set color = h.color_to_hex(a.marker.color) %}
                   {% set name = a.name %}
-                  <div class="control-group control-select control-select grid grid-cols-2">
-                    <label class="control-label" for="chart_field_color_{{ n }}_{{ color_count }}">{{ name }}</label>
-                    <input type="color" id="chart_field_color_{{ n }}_{{ color_count }}" name="chart_field_color_{{ n }}_{{ color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
+                  <div class="control-group control-select grid grid-cols-2">
+                    <label class="control-label" for="chart_field_color_{{ n }}_{{ counter.color_count }}">{{ name }}</label>
+                    <input type="color" id="chart_field_color_{{ n }}_{{ counter.color_count }}" name="chart_field_color_{{ n }}_{{ counter.color_count }}" class="colorpicker" value="{% if chart %}{{ color }}{% else %}#8FBC8F{% endif %}" />
                   </div>
-                  {% set color_count = color_count + 1 %}
+                  {% set counter = counter.update({'color_count': counter.color_count + 1}) or counter %}
                 {% endfor %}
               {% endif %}
 

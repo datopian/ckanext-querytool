@@ -1351,7 +1351,7 @@ body {
 .line-row select {
   width: 150px;
 }
-.line_type_label {
+.line_type_label, label[for^="chart_field_line_type_"] {
   width: 120px;
 }
 #chart_field_line_type_1_1,
@@ -1937,10 +1937,10 @@ div[class^="seq-colors"] .control-label {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.line-width-type .control-select {
+/*.line-width-type .control-select {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
+}*/
 
 .max-w-13 {
   max-width: 13.75rem;
@@ -2074,9 +2074,10 @@ a:hover {
   margin-right: 16px;
 }
 
-.controls.editor, .controls > textarea[id^="chart_field_"] {
+.controls.editor, .controls > textarea[id^="chart_field_"], .controls > textarea[id^="map_custom_title_field_"] {
   display: flex;
   flex-direction: column;
+  padding-bottom: 0;
 }
 
 .btn.btn-update {
@@ -2093,11 +2094,11 @@ a.btn.delete-querytool-btn:hover {
   text-shadow: unset !important;
   filter: unset !important;
 }
-
-.btn-default > i {
-  margin-right: 8px;
+.image-upload > div > div > .btn.btn-default > i {
+  margin-right: 6px;
 }
 
-.btn > span {
-  margin-right: 4px;
+select[id*="-map_y_axis_column"] {
+  width: 100% !important;
 }
+

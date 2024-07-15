@@ -444,7 +444,11 @@ Example
     {% set url_label = url_label or _('Report Icon')  %}
     {% set upload_label = upload_label or _('Image')  %}
     {% set previous_upload = data['previous_upload'] %}
-  
+
+    {% if not errors %}
+      {% set errors = {} %}
+    {% endif %}
+
     {% if is_upload_enabled %}
     <div class="image-upload"
       data-module="querytool-image-upload"

@@ -96,11 +96,16 @@
       );
       var filter_name = $('#' + filter_name_input_id).val();
       var resource_id = elem
-        .parent()
-        .parent()
-        .parent()
-        .find('input[id^=resource_id_]')
-        .val();
+         .parent()
+         .parent()
+         .parent()
+         .find('input[id^=resource_id]')
+         .val() || elem
+         .parent()
+         .parent()
+         .parent()
+         .find('.field_resource_id')
+         .val();
       var select_size = elem
         .find('option')
         .length;

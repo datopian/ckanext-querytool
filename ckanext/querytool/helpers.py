@@ -122,6 +122,7 @@ def get_filter_values(resource_id, filter_name, previous_filters=[]):
         values = [field[filter_name] for field in result.get("records", [])]
 
     values = [x for x in values if x != "" and x != None]
+
     return sorted(values)
 
 
