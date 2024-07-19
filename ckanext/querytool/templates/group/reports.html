@@ -13,7 +13,7 @@
       {% if report.type == 'main' %}
 
         {% set edit_data_url = h.url_for('reports.edit', querytool=report.name) %}
-        {% set delete_url = h.url_for('reports.delete', querytool='report.name') %}
+        {% set delete_url = h.url_for('reports.delete', querytool=report.name) %}
         {% set member_type = h.get_user_permission_type(userobj, report.group) %}
 
         {% if h.get_groups_for_user(userobj, report.group) and (member_type == 'member' or member_type == 'admin' or userobj.sysadmin) %}
@@ -67,11 +67,11 @@
     {% endfor %}
 
     <legend>{{ _('Related') }}</legend>
-    {% for querytool in reports %}
-      {% if querytool.type == 'related' %}
+    {% for report in reports %}
+      {% if report.type == 'related' %}
 
         {% set edit_data_url = h.url_for('reports.edit', querytool=report.name) %}
-        {% set delete_url = h.url_for('reports.delete', querytool='report.name') %}
+        {% set delete_url = h.url_for('reports.delete', querytool=report.name) %}
         {% set member_type = h.get_user_permission_type(userobj, report.group) %}
 
         <div class="query-item">
