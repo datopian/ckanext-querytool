@@ -193,8 +193,11 @@ def querytool_edit(data=None, errors=None, error_summary=None, querytool=None):
             error_summary = e.error_summary
             return querytool_edit("/" + querytool, _querytool, errors, error_summary)
         if "save_data" in list(data.keys()):
+            url = ckan_helpers.url_for(
+                "querytool_group.reports", id=group['name']
+            )
             # redirect to report list
-            return ckan_helpers.redirect_to("/report")
+            return ckan_helpers.redirect_to(url)
 
         else:
             # redirect to manage visualisations
@@ -770,7 +773,10 @@ def edit_visualizations(
             # return ckan_helpers.redirect_to(
             #    "/" + ckan_helpers.lang() + "/group" + "/reports/" + _querytool["group"]
             # )
-            return ckan_helpers.redirect_to("reports.reports_list")
+            url = ckan_helpers.url_for(
+                "querytool_group.reports", id=_querytool['group']
+            )
+            return ckan_helpers.redirect_to(url)
 
     if not data:
         data = _visualization_items
