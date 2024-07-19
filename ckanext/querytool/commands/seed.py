@@ -52,7 +52,7 @@ def seed():
 
     connection = model.Session.connection()
     current_path = os.path.dirname(__file__)
-    seed_path = os.path.join(current_path, "..", "seed", "dump_copy.sql")
+    seed_path = os.path.join(current_path, "..", "seed", "dump.sql")
     seed_resource_dir = os.path.join(current_path, "..", "seed", "resources")
 
     sql = ""
