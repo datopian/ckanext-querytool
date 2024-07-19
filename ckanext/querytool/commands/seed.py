@@ -39,8 +39,28 @@ def seed():
     """
     Seed the portal with test organizations, groups, datasets, reports, and visualizations
     """
-    admin_name = input('\nEnter the admin login name: ')
-    admin_api_key = input('\nEnter the admin API key: ')
+
+    resources_exist = []
+
+    for id, resource in list(RESOURCES.items()):
+        try:
+            toolkit.get_action("resource_show")({}, {"id": id})
+            print("\nERROR: The resource {} already exists. ")
+            resources_exist.append((id, resource))
+        except logic.NotFound:
+            continue
+
+    if len(resources_exist) > 0:
+        print("\nERROR: The portal already has seed data: \n\n")
+
+        for id, resource in resources_exist:
+            print(f"Resource ID: {id}\nResource Name: {resource}\n\n")
+
+        print("Exiting...\n")
+        quit()
+
+    admin_name = input("\nEnter the admin login name: ")
+    admin_api_key = input("\nEnter the admin API key: ")
 
     try:
         admin = toolkit.get_action("user_show")({}, {"id": admin_name})
