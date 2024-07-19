@@ -1871,6 +1871,14 @@ ol.inline {
   margin-top: 1rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
 .item-wrapper .control-group .controls select,
 .item-wrapper .control-group .controls textarea,
 .item-wrapper .control-group .controls input,
