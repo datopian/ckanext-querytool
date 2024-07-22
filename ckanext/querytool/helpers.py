@@ -636,46 +636,33 @@ def get_groups(parent_name=None, all_children=False):
     Get available Groups from the database
     return: list of groups
     """
-    groups = _get_action("group_list", {"all_fields": True})
+    groups = _get_action("group_list", {})
+    group_dicts = []
 
-    if all_children is True:
-        child_groups = []
+    for group in groups:
+        group_dict = _get_action("group_show", {"id": group})
 
-        for group in groups:
-            group_dict = _get_action("group_show", {"id": group["id"]})
-
+        if all_children is True:
             if group_dict.get("group_relationship_type") != "parent":
-                child_groups.append(group)
+                group_dicts.append(group_dict)
 
-        return child_groups
-
-    if parent_name:
-        if parent_name == "__misc__group__":
-            misc_groups = []
-
-            for group in groups:
-                group_dict = _get_action("group_show", {"id": group["id"]})
-
+        elif parent_name:
+            if parent_name == "__misc__group__":
                 if (
                     group_dict.get("parent") in [None, ""]
                     and group_dict.get("children") in [None, ""]
                     and group_dict.get("group_relationship_type") != "parent"
                 ):
-                    misc_groups.append(group)
+                    group_dicts.append(group_dict)
 
-            return misc_groups
-        else:
-            child_groups = []
-
-            for group in groups:
-                group_dict = _get_action("group_show", {"id": group["id"]})
-
+            else:
                 if group_dict.get("parent") == parent_name:
-                    child_groups.append(group)
+                    group_dicts.append(group_dict)
 
-            return child_groups
+        else:
+            group_dicts.append(group_dict)
 
-    return groups
+    return group_dicts
 
 
 def get_available_groups(group_name=None):

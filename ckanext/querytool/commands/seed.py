@@ -46,15 +46,18 @@ def seed():
         try:
             toolkit.get_action("resource_show")({}, {"id": id})
             print("\nERROR: The resource {} already exists. ")
+            log.warn(f"Resource {resource} already exists.")
             resources_exist.append((id, resource))
         except logic.NotFound:
             continue
 
     if len(resources_exist) > 0:
         print("\nERROR: The portal already has seed data: \n\n")
+        log.warn("The portal already has seed data: \n\n")
 
         for id, resource in resources_exist:
             print(f"Resource ID: {id}\nResource Name: {resource}\n\n")
+            log.warn(f"Resource ID: {id}\nResource Name: {resource}\n\n")
 
         print("Exiting...\n")
         quit()
@@ -66,6 +69,7 @@ def seed():
         admin = toolkit.get_action("user_show")({}, {"id": admin_name})
     except logic.NotFound:
         print('\nERROR: "{}" is not a valid name. Try again.\n'.format(admin_name))
+        log.warn(f"Invalid admin name: {admin_name}")
         quit()
 
     admin_id = str(admin.get("id"))
@@ -87,23 +91,28 @@ def seed():
         connection.execute(sql)
         model.Session.flush()
         model.Session.commit()
+        log.info("Successfully inserted SQL dump!")
     except exc.IntegrityError:
         print(
             "\nERROR: The DB has existing data that's conflicting with "
             "this tool. This command must be run on a fresh DB.\n"
         )
+        log.error("DB has existing data that's conflicting with this tool.")
         model.Session.rollback()
         quit()
     except Exception as e:
         print("\nERROR: {}\n".format(e))
+        log.error(f"Error seeding the portal: {e}")
         model.Session.rollback()
         quit()
 
     print("\nUploading resources...\n")
+    log.info("Uploading resources...")
 
     for id, resource in list(RESOURCES.items()):
         try:
             print("Uploading resource: {}".format(resource))
+            log.info(f"Uploading resource: {resource}")
 
             with open(os.path.join(seed_resource_dir, resource), "rb") as f:
                 requests.post(
@@ -114,5 +123,7 @@ def seed():
                 )
         except Exception as e:
             print("\nError uploading {}: {}".format(resource, e))
+            log.error(f"Error uploading {resource}: {e}")
 
     print("\nSuccessfully seeded the portal with test data!\n")
+    log.info("Successfully seeded the portal with test data!")

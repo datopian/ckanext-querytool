@@ -17,7 +17,6 @@
 
 {% block content_primary_nav %}
   {{ h.build_nav_icon(group_type + '.read', h.humanize_entity_type('package', dataset_type, 'content tab') or _('Datasets'), id=group_dict.name, icon='sitemap') }}
-  {{ h.build_nav_icon('activity.group_activity', _('Activity Stream'), id=group_dict.name, offset=0, icon='clock') }}
   {{ h.build_nav_icon(group_type + '.about', _('About'), id=group_dict.name, icon='info-circle') }}
   {{ h.build_nav_icon('querytool_group.reports', _('Reports'), id=group_dict.name, icon='info-circle') }}
 {% endblock %}
