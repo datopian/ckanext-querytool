@@ -2110,3 +2110,6 @@ select[id*="-map_y_axis_column"] {
   width: 100% !important;
 }
 
+svg.main-svg .infolayer .g-gtitle {
+    display: none;
+}
