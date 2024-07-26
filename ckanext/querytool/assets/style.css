@@ -1,4 +1,4 @@
-@import url(//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);
+/*@import url(//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css);*/
 @font-face {
   font-family: "Open Sans";
   font-style: italic;
@@ -2112,4 +2112,8 @@ select[id*="-map_y_axis_column"] {
 
 svg.main-svg .infolayer .g-gtitle {
     display: none;
+}
+
+.account-masthead .account ul li a {
+  display: inline !important;
 }

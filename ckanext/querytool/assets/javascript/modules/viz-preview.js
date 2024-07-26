@@ -2265,7 +2265,6 @@ ckan.module("querytool-viz-preview", function () {
           t: 30,
           pad: 5,
         },
-        title: titleVal,
         showlegend: show_legend, //show legend value
         legend: {
           xanchor: "left",
@@ -2305,13 +2304,6 @@ ckan.module("querytool-viz-preview", function () {
         },
         hovermode: "closest",
       };
-      if (titleVal) {
-        base_info.title = {
-          text: titleVal,
-          yref: "paper",
-          automargin: true,
-        }
-      }
 
       if (["sbar", "shbar"].includes(this.options.chart_type)) {
         base_info.barmode = "stack";
@@ -2699,13 +2691,17 @@ ckan.module("querytool-viz-preview", function () {
           );
           const isStacked = ["sbar", "shbar"].includes(this.options.chart_type);
 
+          const groupCount = data.length;
           const gapBetweenGroups = 0.2;
           const gapBetweenCols = (1 - gapBetweenGroups) / data.length;
-          const dataMidIdx = (data.length + (data.length % 2 != 0 ? 1 : 0)) / 2;
+          const dataMidIdx = (groupCount + (groupCount % 2 != 0 ? 1 : 0)) / 2;
 
           const getAnnotationPos = (dataIdx, xIdx) => {
-            const itemRelativeIdx = dataIdx + 1 - dataMidIdx;
-            return xIdx + itemRelativeIdx * gapBetweenCols;
+            const groupWidth = gapBetweenCols * (groupCount - 1);
+            const groupCenter = groupWidth / 2;
+            const barOffset = dataIdx * gapBetweenCols;
+
+            return xIdx - groupCenter + barOffset;
           };
 
           let stackedTotal = new Array(data[0].x.length).fill(0);
