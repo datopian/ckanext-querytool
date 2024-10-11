@@ -4,6 +4,8 @@ import cgi
 import time
 import logging as log
 
+from werkzeug.datastructures import FileStorage as FlaskFileStorage
+
 from ckan.common import config
 import ckan.logic as logic
 import ckan.logic.schema as schema_
@@ -38,6 +40,8 @@ ValidationError = logic.ValidationError
 _validate = df.validate
 NotFound = logic.NotFound
 _get_or_bust = logic.get_or_bust
+
+ALLOWED_UPLOAD_TYPES = (cgi.FieldStorage, FlaskFileStorage)
 
 
 log = log.getLogger(__name__)
@@ -115,19 +119,18 @@ def querytool_update(context, data_dict):
 
     image_url = data_dict["image_url"]
 
-    # FIXME
-    # if h.uploads_enabled():
-    #     image_upload = data_dict['image_upload']
-    #     if isinstance(image_upload, cgi.FieldStorage):
-    #         upload = uploader.get_uploader('querytool', image_url)
-    #         upload.update_data_dict(
-    #             data_dict, 'image_url', 'image_upload', 'clear_upload'
-    #         )
-    #         upload.upload(uploader)
-    #         data_dict['image_display_url'] = upload.filename
-    #         data['image_display_url'] = upload.filename
-    #     else:
-    #         data['image_display_url'] = querytool.image_display_url
+    if image_url:
+        image_upload = data_dict['image_upload']
+        if isinstance(image_upload, ALLOWED_UPLOAD_TYPES):
+            upload = uploader.get_uploader('querytool', image_url)
+            upload.update_data_dict(
+                data_dict, 'image_url', 'image_upload', 'clear_upload'
+            )
+            upload.upload(uploader)
+            data_dict['image_display_url'] = upload.filename
+            data['image_display_url'] = upload.filename
+        else:
+            data['image_display_url'] = querytool.image_display_url
 
     for item in items:
         setattr(querytool, item, data.get(item))
@@ -374,9 +377,11 @@ def _querytool_group_or_org_update(
         if group_extra.key in ["parent", "children"]
     }
 
-    if data_dict.get("group_relationship_type") == "parent":
+    if not data_dict.get("group_relationship_type"):
+        data_dict["group_relationship_type"] = ""
+    if not data_dict.get("parent"):
         data_dict["parent"] = ""
-    elif data_dict.get("group_relationship_type") == "child":
+    if not data_dict.get("children"):
         data_dict["children"] = ""
 
     context["group"] = group

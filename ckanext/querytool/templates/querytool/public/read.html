@@ -44,7 +44,7 @@
       <ol class="breadcrumb new_breadcrumb">
         <li><a href="/"><i class="fa fa-home"></i></a></li>
 
-        {% if from_parent == 'True' %}
+        {% if from_parent == 'True' and parent != 'None' %}
           <li><a href="/querytool/public/group/{{ parent }}">{{ parent_title }}</a></li>
         {% endif %}
 

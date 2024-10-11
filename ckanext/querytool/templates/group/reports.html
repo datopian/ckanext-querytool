@@ -20,12 +20,16 @@
         <div class="applicaitons-box">
 
           <div class="thumb">
-            {% if report.image_url %}
-            <img src="/uploads/querytool/{{report.image_display_url}}" width="40" alt="{{ report.image_url }}">
+            {% if report.image_display_url %}
+              {% if 'http' in report.image_display_url %}
+                <img src="{{ report.image_display_url }}" alt="{{ report.name }}" style="max-width: 100% !important;" />
+              {% else %}
+                <img src="/uploads/querytool/{{ report.image_display_url }}" alt="{{ report.name }}" style="max-width: 100% !important;" />
+              {% endif %}
             {% elif report.icon %}
-            <i class="fa-3x {{report.icon}}"></i>
+              <i class="fa-3x {{report.icon}}"></i>
             {% else %}
-            <img src="/base/images/icon-1.svg" width="40" alt="{{ _('View Reports') }}">
+              <img src="/base/images/icon-1.svg" width="40" alt="{{ _('View Reports') }}">
             {% endif %}
           </div>
         

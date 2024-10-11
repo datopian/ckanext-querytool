@@ -34,6 +34,7 @@ Example usage:
   {% endif %}
   {% block error_summary %}{{ form.errors(error_summary) }}{% endblock %}
   <legend>{{ _("Basic info") }}</legend>
+  {% asset 'querytool/querytool-image-upload-js' %}
   {{ form.input('title', id='field-title', label=_('Title') , placeholder=_('Title of the interactive report'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}, is_required=true) }}
   {% set prefix = h.url_for('reports.public_read', name= '') %}
   {% set domain = h.url_for('reports.public_read', name= '') %}
@@ -47,7 +48,7 @@ Example usage:
     </div>
   {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
   {% set is_url = data.image_url and data.image_url.startswith('http') %}
-  {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled() , is_url=is_url, is_upload=is_upload, upload_label=_('Report Icon'), url_label=_('Report Icon URL')) }}
+  {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload, upload_label=_('Report Icon'), url_label=_('Report Icon URL')) }}
   {#{{ form.input('icon', id='field-icon', classes=['hidden'], label=_('Fontawsome Icon') , placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon, attrs={'hidden': 'hidden'}) }}#}
   <input type="hidden" name="icon" id="field-icon" value="{{ data.icon }}">
   <div class="report-group-select">

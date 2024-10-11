@@ -13,7 +13,16 @@ report dict. Example:
     {% block item_inner %}
       <div class="group-image" style="margin-top: 15px">
         {% block image %}
-          <img src="{{ report.image_display_url or h.url_for_static("/base/images/folder-icon-2.svg") }}" alt="{{ report.name }}" />
+
+          {% if report.image_display_url %}
+            {% if 'http' in report.image_display_url %}
+              <img src="{{ report.image_display_url }}" alt="{{ report.name }}" />
+            {% else %}
+              <img src="/uploads/querytool/{{ report.image_display_url }}" alt="{{ report.name }}" />
+            {% endif %}
+          {% else %}
+            <img src="/base/images/icon-1.svg" alt="{{ report.name }}" />
+          {% endif %}
         {% endblock %}
       </div>
       <div class="content-box"

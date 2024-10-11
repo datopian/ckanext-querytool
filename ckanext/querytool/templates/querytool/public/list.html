@@ -22,7 +22,7 @@
 
 {% block page_header_bg %}{% endblock %}
 
-{% block page_header_icon %}<img class="thumbnail" src="{{group.image_display_url}}" width=100>{% endblock %}
+{% block page_header_icon %}<img class="thumbnail" src="{{ group.image_display_url }}" style="width: 100px;">{% endblock %}
 
 {% block page_header_title %}<h1>{{ group.title }}</h1>{% endblock %}
 
@@ -102,7 +102,11 @@
               <div class="group-box-2">
                 <div class="group-image-2">
                   {% if child_group.image_display_url %}
-                    <img  src="{{group.image_display_url}}" alt="{{ value }}">
+                    {% if 'http' in child_group.image_display_url %}
+                      <img src="{{ child_group.image_display_url }}" alt="{{ child_group.image_display_url }}" />
+                    {% else %}
+                      <img src="/uploads/group/{{ child_group.image_display_url }}" alt="{{ child_group.image_display_url }}" />
+                    {% endif %}
                   {% else %}
                     <img src="/base/images/icon-1.svg" alt="">
                   {% endif %}

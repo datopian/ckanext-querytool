@@ -123,6 +123,7 @@ def querytool_edit(data=None, errors=None, error_summary=None, querytool=None):
 
     if tk.request.method == "POST" and not data:
         data = dict(tk.request.form)
+        data_files = tk.request.files
 
         group = ast.literal_eval(data["group"])
         data.pop("group")
@@ -184,6 +185,7 @@ def querytool_edit(data=None, errors=None, error_summary=None, querytool=None):
         _querytool["selection_label"] = data.get("selection_label")
         _querytool["report_caption"] = data.get("report_caption")
         _querytool["download_options"] = data.get("download_options")
+        _querytool["image_upload"] = data_files.get("image_upload", "")
 
         try:
             junk = tk.get_action("querytool_update")(context, _querytool)
