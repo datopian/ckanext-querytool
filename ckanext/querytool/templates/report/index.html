@@ -1,0 +1,58 @@
+{% extends "page.html" %}
+{% block subtitle %}{{ h.humanize_entity_type('group', group_type, 'page title') or _('Groups') }}{% endblock %}
+{% set sorting_selected = request.args.get('sort') %}
+{% block breadcrumb_content %}
+  <li class="active">
+    {% link_for h.humanize_entity_type('group', group_type, 'breadcrumb') or _('Groups'), named_route=group_type+'.index' %}
+  </li>
+{% endblock %}
+{% block page_header %}{% endblock %}
+{% block page_primary_action %}
+  {% if h.check_access('group_create') %}
+    {% link_for h.humanize_entity_type('group', group_type, 'add link') or _('Add Group'), named_route=group_type+'.new', class_='btn btn-primary', icon='plus-square' %}
+  {% endif %}
+  {% if h.check_access('querytool_update') %}
+    {% link_for _('New Report'), named_route='reports.new', class_='btn btn-primary', icon='plus-square' %}
+  {% endif %}
+{% endblock %}
+{% block primary_content_inner %}
+  <h1 class="heading">{{ _("Reports") }}</h1>
+  <header class="page-header pb-4 bg-white">
+    <ul class="nav nav-tabs w-full border-b-gray">
+      <li>
+        <a href="/group">{{ _("Groups") }}</a>
+      </li>
+      <li class="active">
+        <a href="/report">{{ _("Reports") }}</a>
+      </li>
+    </ul>
+  </header>
+  {% block reports_search_form %}
+    {% snippet 'snippets/search_form.html', form_id='report-search-form', type='report', query=q, sorting_selected=sort_by_selected, count=page.item_count, placeholder=h.humanize_entity_type('report', 'report', 'search placeholder') or _('Search reports'), show_empty=request.args, no_bottom_border=true if page.items, sorting = [(_('Name Ascending'), 'title asc'), (_('Name Descending'), 'title desc')] %}
+  {% endblock %}
+  {% block groups_list %}
+    {% set data = page._items %}
+    {% if data %}
+      {% if sorting_selected == 'title asc' %}
+        {% set data = data | sort(attribute='title') %}
+      {% elif sorting_selected == 'title desc' %}
+        {% set data = data | sort(attribute='title', reverse=true) %}
+      {% endif %}
+    {% endif %}
+    {% if data %}
+      {% if data %}
+        {% snippet "report/snippets/report_list.html", reports=data %}
+      {% endif %}
+    {% else %}
+      <p class="empty">
+        {{ h.humanize_entity_type('group', group_type, 'no any objects') or _('There are currently no groups for this site') }}.
+        {% if h.check_access('group_create') %}
+          {% link_for _('How about creating one?'), named_route=group_type+'.new' %}</a>.
+        {% endif %}
+      </p>
+    {% endif %}
+  {% endblock %}
+{% endblock %}
+{% block secondary_content %}
+  {% snippet "report/snippets/report_helper.html", group_type=group_type %}
+{% endblock %}

@@ -1,4 +1,4 @@
 include README.md
 include LICENSE.md
 include requirements.txt
-recursive-include ckanext/querytool *.html *.json *.js *.less *.css *.mo
+recursive-include ckanext/querytool *.html *.json *.js *.less *.css *.mo *.yml *.yaml

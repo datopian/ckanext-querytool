@@ -1,0 +1,236 @@
+{#
+
+Creates layout for a query tool fields.
+
+title - The title of the query tool.
+description - description what kind of data is in the query tool.
+name - name of the query tool (unique)
+
+Example usage:
+  {% snippet 'querytool/snippets/edit_data_form.html', querytool=querytool, data=data, errors= errors%}
+
+#}
+{% import 'macros/form.html' as form %}
+
+{% if querytool %}
+  {% set action_url = h.url_for('querytool_edit', querytool= '/' + querytool.name) %}
+{% else %}
+  {% set action_url = h.url_for('querytool_edit', querytool= '') %}
+{% endif %}
+{% set datasets = h.querytool_get_datasets() %}
+<form method="post" action="{{ action_url }}" class="form-horizontal" id="" enctype="multipart/form-data">
+{% block stages %}
+  {% snippet 'querytool/admin/snippets/stages.html', stages=['active', 'complete'] %}
+{% endblock %}
+
+{% set all_groups = h.get_all_group_names() %}
+
+{% if querytool.group %}
+  {% set is_orphan = querytool.group not in all_groups %}
+{% else %}
+  {% set is_orphan = false %}
+{% endif %}
+
+{% block error_summary %}
+  {{ form.errors(error_summary) }}
+{% endblock %}
+
+
+  <legend>{{ _('Basic info') }}</legend>
+
+  {{ form.input('title', id='field-title', label=_('Title'), placeholder=_('Title of the interactive report'), value=data.title, error=errors.title, classes=['control-full', 'control-large'], attrs={'data-module': 'slug-preview-target', 'class': 'form-control'}, is_required=true) }}
+
+
+  {% set prefix = h.url_for('querytool_public_read', name= '') %}
+  {% set domain = h.url_for('querytool_public_read', name= '') %}
+  {% set domain = domain|replace("http://", "")|replace("https://", "") %}
+  {% set attrs = {'data-module': 'slug-preview-slug', 'data-module-prefix': domain, 'data-module-placeholder': '<application>', 'class': 'form-control input-sm'} %}
+
+  {{ form.prepend('name', id='field-name', label=_('URL'), prepend=prefix, placeholder=_('eg. my-report'), value=data.name, error=errors.name, attrs=attrs, is_required=true) }}
+
+  {{ form.markdown('description', id='field-description', label=_('Main Description'), placeholder=_('Start the first line with # to identify the publicly visible title. Add other optional text in a new line.'), value=data.description, error=errors.description) }}
+  {{ form.markdown('additional_description', label=_('Additional Description'), id='field-additional_description', placeholder=_('Additional description for the report...'), value=data.additional_description, error=errors.additional_description) }}
+    <div class='max-w-13'>
+  {{ form.input('report_caption', id='field-report-caption', label=_('Report Caption'), placeholder=_('Caption for reports'), value=data.report_caption, error=errors.report_caption) }}
+    </div>
+
+  {% set is_upload = data.image_url and not data.image_url.startswith('http') %}
+  {% set is_url = data.image_url and data.image_url.startswith('http') %}
+
+  {{ form.image_upload(data, errors, is_upload_enabled=h.uploads_enabled(), is_url=is_url, is_upload=is_upload, upload_label=_('Report Icon'), url_label=_('Report Icon URL')) }}
+  {{ form.input('icon', id='field-icon', classes=['hidden'], label=_('Fontawsome Icon'), placeholder=_('Add class of the font-awsome icon. ex: fa fa-plus-square'), value=data.icon) }}
+
+  <div class="report-group-select">
+    <div class="control-group">
+      <label for="field-group" class="control-label">{{ _('Group') }}</label>
+      <div class="controls">
+        <select id="field-group" name="group" {% if is_orphan %}required{% endif %}>
+          {% if is_orphan %}
+            <option value="" selected="selected"></option>
+          {% endif %}
+          {% for group in h.querytool_get_groups(all_children=True) %}
+            {% if h.get_groups_for_user(c.userobj, group.name) or group == data.group %}
+              <option value="{{ group }}" {% if group.name == data.group|trim %}selected="selected"{% endif %}>{{ group.name }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+    {% if is_orphan %}<span class="label label-important" style="margin-bottom: 20px; margin-left: 10px;">{{ _('Previously saved in group: ') }}{{ data.group }}</span>{% endif %}
+  </div>
+
+  {% set organizations_available = h.organizations_available('create_dataset') or h.get_all_orgs_for_user(c.userobj) %}
+  {% set current_organization = h.get_organization(data.get('owner_org')) %}
+  {% set org_ids = [] %}
+
+  {% for org in organizations_available %}
+    {{ org_ids.append(org['id']) or '' }}
+  {% endfor %}
+
+  {% if data.owner_org and data.owner_org not in org_ids %}
+    {{ organizations_available.append(current_organization) or '' }}
+  {% endif %}
+
+  <div class="control-group">
+    <label for="field-organizations" class="control-label">{{ _('Organization') }}</label>
+    <div class="controls">
+      <select id="field-organizations" name="owner_org">
+        {% for organization in organizations_available %}
+          {% if h.get_orgs_for_user(c.userobj, organization.name) or organization.id == data.owner_org %}
+            <option value="{{ organization.id }}" {% if organization.id == data.owner_org|trim %}selected="selected"{% endif %}>{{ organization.display_name }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="field-type" class="control-label">{{ _('Type') }}</label>
+    <div class="controls">
+      <select id="field-type" name="type">
+        {% for option in [('main', _('Main')), ('related', _('Related'))] %}
+        <option value="{{ option[0] }}" {% if option[0] == data.type|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <div class="control-group">
+    <label for="field-private" class="control-label">{{ _('Visibility') }}</label>
+    <div class="controls">
+      <select id="field-private" name="private" disabled>
+        {% for option in [('True', _('Private')), ('False', _('Public'))] %}
+        <option value="{{ option[0] }}" {% if option[0] == data.private|trim %}selected="selected"{% endif %}>{{ option[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label for="field-download" class="control-label">{{ _('Download Options') }}</label>
+    <div class="controls">
+      <select id="field-download" name="download_options">
+        {% for option in [(True, _('Enabled')), (False, _('Disabled'))] %}
+        <option value="{{ option[0] }}" {% if option[0] == data.download_options %}selected="selected"{% endif %}>{{ option[1] }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+  <hr>
+  <fieldset id="related_querytools">
+    {% if data.related_querytools  %}
+      {% for querytool in data.related_querytools %}
+        {% snippet 'ajax_snippets/related_querytool_item.html', n=querytool.order, querytool_name=querytool.name %}
+      {% endfor %}
+    {% endif %}
+  </fieldset>
+
+  <div class="control-group">
+    <a class="btn btn-info" id="add-related-querytool">
+      <span class="fa fa-plus-square"></span>
+      <span class="fa-label">{{_('Add Related Report')}}</span>
+    </a>
+  </div>
+  {% set user_datasets = [] %}
+
+  {% for d in datasets %}
+    {% if h.get_datasets_for_user(c.userobj, d) %}
+      {{ user_datasets.append(d) or '' }}
+    {% endif %}
+  {% endfor %}
+
+  {% if data.dataset_name and data.dataset_name not in user_datasets %}
+    {{ user_datasets.append(data.dataset_name) or '' }}
+  {% endif %}
+
+  <legend>{{ _('Select dataset and resource') }}</legend>
+  {% block querytool_dataset %}
+    <div class="control-group">
+      <label class="control-label" for="field-datasets"><span title="This field is required" class="control-required">*</span>{{ _("Dataset") }}</label>
+      <div class="controls">
+        <select id="field-datasets" name="dataset_name" data-module="autocomplete">
+          <option value="" {{ 'selected' if not data.dataset_name }}>-- {{ _('Choose Dataset') }} --</option>
+          {% for dataset in user_datasets %}
+            <option value="{{ dataset }}" {{ 'selected' if dataset == data.dataset_name }}>{{ dataset }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  {% endblock %}
+
+  {% if data.dataset_name %}
+      {% set dataset_resources = h.querytool_get_dataset_resources(data.dataset_name) %}
+  {% endif %}
+
+  {% block querytool_choose_chart_resource %}
+    {{ form.select('chart_resource', label=_('Resource'), options=dataset_resources, selected=data.chart_resource, error=errors.chart_resource, attrs={'required': 'required'}) }}
+  {% endblock %}
+
+  <legend>{{ _('Measure(s)') }}</legend>
+  <div class="selection_label" style='margin-left:22px;'>
+    {{ form.input('selection_label', id='field-selection-label', label=_('Selection Label'), placeholder=data.selection_label or _('Displayed Measure'), value=data.selection_label, error=errors.selection_label) }}
+  </div>
+  {% set columns = h.querytool_get_numeric_resource_columns(data.chart_resource) %}
+  <div id="y-axis-columns-container" {% if columns | length == 0 %} style="display: none;" {% endif %}>
+    <div id="y-axis-columns-results">
+      {% for column in columns %}
+        {% set column_id = h.querytool_get_uuid() %}
+        {% set measure = h.querytool_pick_first_by_attr_value(querytool.y_axis_columns, 'name', column) %}
+        <div class="control-group control-checkbox-group">
+          <input name="y_axis_name_{{ column_id }}" id="y_axis_name_{{ column_id }}" type="checkbox" value="{{ column }}" {% if measure %} checked {% endif %} />
+          <label class="control-label" for="y_axis_name_{{ column_id }}">{{ column }}</label>
+          <input name="y_axis_alias_{{ column_id }}" id="y_axis_alias_{{ column_id }}" type="text" placeholder="{{ _('Optional label') }}" value="{{ measure.alias }}">
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <em class="muted"
+      id="y-axis-columns-notice"
+      {% if data.chart_resource %} style="display: none;" {% endif %}>{{ _('Please choose a resource to see available numeric columns.') }}</em><br><br>
+
+  {% block querytool_main_filters %}
+    <legend>{{ _('Filter(s)') }}</legend>
+
+    <fieldset id="main-filters">
+
+      {% if data.filters  %}
+        {% for filter in data.filters %}
+          {% snippet 'ajax_snippets/filter_item.html', n=filter.order, active_filters=c.active_filters, selected_filter=filter %}
+        {% endfor %}
+      {% endif %}
+
+    </fieldset>
+
+    <div class="control-group">
+      <a class="btn btn-info" id="add-filter-button">
+        <span class="fa fa-plus-square"></span>
+        <span class="fa-label">{{_('Add Filter')}}</span>
+      </a>
+    </div>
+  {% endblock %}
+
+<div class="form-actions">
+  <button type="submit" class="btn btn-success" name="save_data">{{ _('Save') }}</button>
+  <button type="submit" class="btn" name="save"><span class="fa fa-pencil" aria-hidden="true"></span> {{ _('Add/Edit Visualizations') }}</button>
+</div>
+</form>

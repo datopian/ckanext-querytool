@@ -1,5 +1,5 @@
 <!-- Variables -->
-{% set theme = g.theme or 'Default' %}
+{% set theme = g.querytool_theme or 'Default' %}
 
 {% set section_1__text = g.footer_logo_text or ' ' %}
 {% set section_2__text = g.footer_logo2_text or ' ' %}
@@ -23,6 +23,8 @@
               padding-bottom: 0;
               padding-top: 0;
               width: auto;
+              width: 100% !important;
+              max-width: 100% !important;
           }
       </style>
       <div class="custom-footer">
@@ -59,7 +61,6 @@
             <p>
               <strong>{{ _('Powered by') }}</strong>
               <a class="hide-text ckan-footer-logo logo" href="http://ckan.org">
-                CKAN
               </a>
             </p>
           </div>

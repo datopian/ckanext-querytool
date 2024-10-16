@@ -1,0 +1,71 @@
+{% ckan_extends %}
+
+{% block meta %}
+  {{ super() }}
+  <!-- Reference: https://flagicons.lipis.dev/ -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
+
+  {% set current_lang = request.environ.CKAN_LANG %}
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Khmer">
+<style>div:has(.fi-kh) { font-family: Khmer !important }</style>
+  {% if current_lang == 'km' %}
+    <style>
+      *:not(i):not(.fa) {font-family: Khmer !important}
+    </style>
+  {% endif %}
+
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <script>
+    function checkIE() {
+      if (window.document.documentMode) {
+        // Do IE stuff
+        document.getElementById("iepopup").style.display = "block";
+        document.getElementById("ieshadow").style.display = "block"
+      }
+    }
+
+    function close_popup() {
+        document.getElementById("iepopup").style.display = "none";
+        document.getElementById("ieshadow").style.display = "none"
+    }
+
+    window.onload = checkIE;
+  </script>
+{% endblock %}
+
+{% block styles %}
+  {{ super() }}
+  {% asset 'querytool/querytool-css' %}
+{% endblock %}
+
+{% block bodytag %} {{ super() }} id="vs-page"{% endblock %}
+
+{% block scripts %}
+  {{ super() }}
+  {% asset 'querytool/javascript/adaptive_design.js' %}
+  {% asset 'querytool/javascript/anchor_fix.js' %}
+  {% asset 'querytool/javascript/vitals.js' %}
+  {% asset 'querytool/javascript/modules/fullscreen.js' %}
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.9.0/showdown.min.js"></script>
+
+  {% if h.get_cookie_control_config().get('api_key') and h.get_cookie_control_config().get('enabled') %}
+    {% block cookie_control %}  
+      {% asset 'querytool/javascript/modules/civic_cookies.js' %}
+      <script src="https://cc.cdn.civiccomputing.com/9/cookieControl-9.x.min.js" type="text/javascript"></script>
+      {% set cookie_control_config = h.get_cookie_control_config() %}
+      <div id="cookie-control" class="js-hide" data-module="civic_cookies" 
+                            data-module-enabled="{{ cookie_control_config.get('enabled') }}"
+                            data-module-api_key="{{ cookie_control_config.get('api_key') }}"
+                            data-module-license_type="{{ cookie_control_config.get('license_type') }}"
+                            data-module-popup_position="{{ cookie_control_config.get('popup_position') }}"
+                            data-module-theme_color="{{ cookie_control_config.get('theme_color') }}"
+                            data-module-initial_state="{{ cookie_control_config.get('initial_state') }}"
+                            data-module-text="{{ cookie_control_config.get('text') }}">
+      </div>
+    {% endblock %}
+  {% endif %}
+{% endblock %}

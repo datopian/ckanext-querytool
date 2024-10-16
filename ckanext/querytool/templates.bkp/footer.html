@@ -1,0 +1,81 @@
+<!-- Variables -->
+{% set theme = g.theme or 'Default' %}
+
+{% set section_1__text = g.footer_logo_text or ' ' %}
+{% set section_2__text = g.footer_logo2_text or ' ' %}
+
+{% set section_1__image = g.footer_logo_image_url or ' ' %}
+{% set section_2__image = g.footer_logo2_image_url or ' ' %}
+
+{% set social_media_links = h.get_social_media_links(g.social_order, g) %}
+
+{% set copyright_text = g.copyright_text or ' ' %}
+<!-- Variables -->
+
+<footer class="site-footer embed-hide">
+  <div class="container">
+    {# If not text is set, uses default footer #}
+    {% if theme == 'Default' %}
+      {% snippet "snippets/default_footer.html" %}
+    {% else %}
+      <style>
+          .site-footer .container {
+              padding-bottom: 0;
+              padding-top: 0;
+              width: auto;
+          }
+      </style>
+      <div class="custom-footer">
+        {% if section_1__text %}
+          <div class="footer-markdown logo-item">
+            <img src="{{ section_1__image }}" style="margin-right: 10px;">
+            <div>
+              {{ h.render_markdown(section_1__text) }}
+            </div>
+          </div>
+        {% endif %}
+        {% if section_2__text %}
+          <div class="footer-markdown logo-item">
+            <img src="{{ section_2__image }}" style="margin-right: 10px;">
+            <div>
+              {{ h.render_markdown(section_2__text) }}
+            </div>
+          </div>
+        {% endif %}
+        {% if social_media_links %}
+          <div>
+            <p><strong>{{ _('Subscribe and follow us') }}</strong></p>
+            <span class="social-media">
+                {% for social_media in social_media_links %}
+                  <a href="{{ social_media.link }}">
+                    <img alt="{{ social_media.type }}" src="/base/images/social/{{ social_media.type }}.png">
+                  </a>
+                {% endfor %}
+            </span>
+          </div>
+        {% endif %}
+        <div class="supporters">
+          <div class="attribution">
+            <p>
+              <strong>{{ _('Powered by') }}</strong>
+              <a class="hide-text ckan-footer-logo logo" href="http://ckan.org">
+                CKAN
+              </a>
+            </p>
+          </div>
+          <div class="attribution">
+            <p>
+              <strong>{{ _('Supported by') }}</strong><br>
+              <a class="hide-text" href="https://www.vitalstrategies.org">
+                <img src="/base/images/logos/vital-strategies.svg" class="logo">
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        {{ h.render_markdown(copyright_text) }}
+      </div>
+    {% endif %}
+  </div>
+</footer>

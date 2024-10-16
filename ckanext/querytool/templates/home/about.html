@@ -1,4 +1,4 @@
-{% resource 'querytool/css/home-page.css' %}
+{% asset 'querytool/css/home-page.css' %}
 
 {% extends "page.html" %}
 
@@ -22,7 +22,7 @@
           {{ h.render_markdown(g.site_about) }}
         {% else %}
           <h1 class="page-heading">{{ _('About') }}</h1>
-          <div class="row-fluid">
+          <div class="row-fluid grid-cols-3 grid">
             <div class="span4">
                <img src="/base/images/vs-logo-blue.jpg" alt="Vital Strategies" />
             </div>

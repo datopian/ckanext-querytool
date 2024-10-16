@@ -1,186 +1,215 @@
-{% ckan_extends %}
-{% block header_wrapper %}
-
-{% block header_account %}
-  {% if c.user %}
-    <header class="account-masthead embed-hide">
-       <div class="container-fluid">
-          {% block header_account_container_content %}
-             {{ super() }}
+{% set dataset_type = h.default_package_type() %}	
+{% block header_wrapper %}	
+  {% block header_account %}	
+    {% if c.userobj %}	
+      <div class="account-masthead">	
+        <div class="site-header container">
+          {% block header_account_container_content %}	
+            <div class="account avatar authed"	
+                 data-module="me"	
+                 data-me="{{ c.userobj.id }}">	
+              <ul class="list-unstyled">	
+                {% block header_account_logged %}	
+                  {% if c.userobj.sysadmin %}	
+                    <li>	
+                      <a href="{{ h.url_for('admin.index') }}"
+                         title="{{ _('Sysadmin settings') }}">
+                        <i class="fa fa-gavel" aria-hidden="true"></i>	
+                        <span class="text">{{ _("Admin") }}</span>	
+                      </a>	
+                    </li>	
+                  {% endif %}	
+                  {% block header_account_profile %}	
+                    <li>	
+                      <a href="{{ h.url_for('user.read', id=c.userobj.name) }}"	
+                         class="image"	
+                         title="{{ _('View profile') }}">
+                        {{ h.user_image((c.user if c and c.user else '') , size=22) }}	
+                        <span class="username">{{ c.userobj.display_name }}</span>	
+                      </a>	
+                    </li>	
+                  {% endblock %}	
+                  {% block header_dashboard %}	
+                    <li>	
+                      <a href="{{ h.url_for('dashboard.datasets') }}"
+                         title="{{ _('View dashboard') }}">
+                        <i class="fa fa-tachometer" aria-hidden="true"></i>	
+                        <span class="text">{{ _("Dashboard") }}</span>	
+                      </a>	
+                    </li>	
+                  {% endblock %}	
+                  {% block header_account_settings_link %}	
+                    <li>	
+                      <a href="{{ h.url_for('user.edit', id=c.userobj.name) }}"	
+                         title="{{ _('Profile settings') }}">
+                        <i class="fa fa-cog" aria-hidden="true"></i>	
+                        <span class="text">{{ _("Profile settings") }}</span>	
+                      </a>	
+                    </li>	
+                  {% endblock %}	
+                  {% block header_account_log_out_link %}	
+                    <li>	
+                      <a href="{{ h.url_for('user.logout') }}" title="{{ _('Log out') }}">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <span class="text">{{ _('Log out') }}</span>
+                      </a>
+                    </li>	
+                  {% endblock %}	
+                {% endblock %}	
+              </ul>	
+            </div>	
+          {% endblock %}	
+        {% endif %}	
+      </div>	
+    </div>	
+  {% endblock %}	
+  <header class="masthead">	
+    <div class="">	
+      {% block header_debug %}	
+        {% if g.debug and not g.debug_supress_header %}	
+          <div class="debug">	
+            Blueprint : {{ g.blueprint }}	
+            <br />	
+            View : {{ g.view }}	
+          </div>	
+        {% endif %}	
+      {% endblock %}	
+      <nav class="navbar navbar-expand-lg navbar-light">	
+        <button class="navbar-toggler"	
+                type="button"	
+                data-bs-toggle="collapse"	
+                data-bs-target="#main-navigation-toggle"	
+                aria-controls="main-navigation-toggle"	
+                aria-expanded="false"	
+                aria-label="{{ _('Toggle navigation') }}">
+          <span class="fa fa-bars text-white"></span>	
+        </button>	
+        <div class="main-navbar collapse navbar-collapse justify-between"	
+             id="main-navigation-toggle">	
+          <ul class="navbar-nav mb-2 mb-lg-0">	
+            {% block header_site_navigation %}	
+              {% block header_site_navigation_tabs %}	
+                {% set org_type = h.default_group_type('organization') %}	
+                {% set group_type = h.default_group_type('group') %}	
+                {{ h.build_nav_main(('home.index', _('Home') ),	
+                ('querytool.querytool_public_reports', _('Reports')) ) }}
+              {% endblock %}	
+            </ul>	
+          {% endblock %}	
+          {% block header_site_search %}	
+            <div class="d-flex items-center gap-x-4">	
+              {% if c.user and h.get_user_permission(c.userobj) == True %}	
+                <nav class="section navigation default-menu">	
+                  <ul class="nav nav-pills">	
+                    {% block header_site_navigation_ckan %}	
+                      {% set org_type = h.default_group_type('organization') %}	
+                      {% set group_type = h.default_group_type('group') %}	
+                      {{ h.build_nav_main((dataset_type ~ '.search', h.humanize_entity_type('package', dataset_type, 'main nav') or _('Manage Data'), ["dataset", "resource"]),	
+                      (group_type ~ '.index', h.humanize_entity_type('group', group_type, 'main nav') or _('Design Reports'), ['group']),	
+                      (org_type ~ '.index', h.humanize_entity_type('organization', org_type, 'main nav') or _('Organizations'), ['org']),	
+                      ('home.about', _('About'))	
+                      ) }}	
+                    {% endblock %}	
+                  </ul>	
+                </nav>	
+              {% endif %}	
+              {% if c.user and h.get_user_permission(c.userobj) == True %}	
+                <form class="d-flex site-search"	
+                      action="{% url_for dataset_type ~ '.search' %}"	
+                      method="get">	
+                  <label class="d-none" for="field-sitewide-search">{{ _("Search Datasets...") }}</label>
+                  <input id="field-sitewide-search"	
+                         class="form-control me-2"	
+                         type="text"	
+                         name="q"	
+                         placeholder="{{ _('Search datasets') }}"
+                         aria-label="{{ h.humanize_entity_type('package', dataset_type, 'search_placeholder') or _('Search datasets...') }}" />
+                  <button class="btn header-search" type="submit" aria-label="{{ _('Submit') }}">
+                    <i class="fa fa-search"></i>	
+                  </button>	
+                </form>	
+              {% endif %}	
+              <form class="d-flex site-search"	
+                    action="{% url_for dataset_type ~ '.search' %}"	
+                    method="get">	
+                <label class="d-none" for="field-sitewide-search">	
+                  {% block header_site_search_label %}	
+                    {{ h.humanize_entity_type('package', dataset_type, 'search_placeholder') or _('Search Datasets...') }}	
+                  {% endblock %}	
+                </label>	
+                <input id="field-sitewide-search"	
+                       class="form-control me-2"	
+                       type="text"	
+                       name="q"	
+                       placeholder="{{ _('Search reports') }}" 
+                       aria-label="{{ h.humanize_entity_type('package', dataset_type, 'search_placeholder') or _('Search datasets...') }}" />	
+                <button class="btn header-search" type="submit" aria-label="{{ _('Submit') }}">
+                  <i class="fa fa-search"></i>	
+                </button>	
+              </form>	
+              {% set current_lang = request.environ.CKAN_LANG %}	
+              <form class="form-inline custom-lang-select"	
+                    action="{% url_for 'util.internal_redirect' %}"	
+                    style="padding-top: 3px"	
+                    data-module="select-switch"	
+                    method="POST">	
+                {{ h.csrf_input() }}	
+                <select id="field-lang-select-flags-header" name="url">	
+                  {% for locale in h.get_available_locales() %}	
+                    {% if locale.short_name in h.get_config_value('ckan.locales_offered') %}	
+                      <option value="{% url_for h.current_url(), locale=locale.short_name %}"	
+                              {% if locale.short_name == current_lang %}selected="selected"{% endif %}>	
+                        <span class="fi fi-kh"></span>
+                        {{ locale.display_name or locale.english_name }}	
+                      </option>
+                    {% endif %}	
+                  {% endfor %}	
+                </select>
+              </form>
+            </div>
           {% endblock %}
-       </div>
-    </header>
-  {% endif %}
+        </div>
+      </nav>
+    </div>
+  </header>
 {% endblock %}
-<header class="navbar navbar-static-top masthead embed-hide">
-   {% block header_debug %}
-   {{ super() }}
-   {% endblock %}
-   <div class="container-fluid">
-      <button data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar" type="button">
-       <span class="fa fa-bars"></span>
-      </button>
-      {% block header_logo %}
-      {# Don't show default logo. #}
-      {% endblock %}
+{% block scripts %}
+  <script>
+  //  'window' must be loaded to use jQuery	
+  window.addEventListener('load', async (event) => {	
+    let getFlag;	
 
-      {% if g.theme == 'Custom' %}
-      {% block lang_select_mobile %}
-      <div class="mobile">
-        {% snippet "snippets/language_selector_with_flags.html", id="mobile" %}
-      </div>
-    {% endblock %}
-    {% endif %}
+    //  Most flag libs  use ISO 3166-2 code to	
+    //  index the flags instead of lang codes,	
+    //  for many countries may speak  the same	
+    //  language natively. To get around  this	
+    //  there's this json file that associates	
+    //  lang codes to country codes  and  that	
+    //  can be extended as needed.	
+    await $.getJSON(`/base/resources/lang-flags.json`, (data) => {	
+      getFlag = (code) => data[code];	
+    });	
 
-      <div class="nav-collapse collapse">
-        {% block header_site_navigation %}
-        <nav class="section navigation">
-            <ul class="nav nav-pills">
-            {% block header_site_navigation_tabs %}
-                {% if c.user and h.get_user_permission(c.userobj) == True %}
-                  {{ h.build_nav_main(
-                      ('home', _('Home')),
-                      ('querytool_public_reports', _('Reports'))
-                  )}}
-                {% else %}
-                  {{ h.build_nav_main(
-                    ('querytool_public', _('Home')),
-                    ('querytool_public_reports', _('Reports'))
-                  )}}
-                {% endif %}
-              {% endblock %}
-            </ul>
-        </nav>
-        {% endblock %}
+    //  select2 sanitizes the it's innerHTML	
+    //  by default. To get  around this it's	
+    //  needed to reformat the options... 	
+    const format = (lang) => {	
+      if (!lang.id) { return lang.text; }	
+      //  Value always comes as '/en/...''	
+      const value = lang.element[0].value.split('/')[1];	
+      var lang_text = lang.text.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
-        {% if g.theme == 'Custom' %}
-        {% block lang_select_screen %}
-          <div class="screen">
-            {% snippet "snippets/language_selector_with_flags.html", id="screen" %}
-          </div>
-        {% endblock %}
-        {% endif %}
+      return `<span class="fi fi-${getFlag(value)}"> </span> ${lang_text}`;
+    } 	
 
-        <!-- Search groups -->
-        {% if c.user and h.get_user_permission(c.userobj) == True %}
-          {% block header_site_search %}
-            <form class="section site-search simple-input search-input-right" action="{% url_for controller='package', action='search' %}" method="get">
-              <div class="field">
-                <label for="field-sitewide-search">{% block header_site_search_label %}{{ _('Search datasets') }}{% endblock %}</label>
-                <input id="field-sitewide-search" type="text" name="q" placeholder="{{ _('Search datasets') }}" />
-                <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
-              </div>
-            </form>
-          {% endblock %}
-        {% endif %}
+    //  Initiliazing the select with the	
+    //  proper options	
+    $("#field-lang-select-flags-header").select2({	
+      formatResult: format,	
+      formatSelection: format,	
+      escapeMarkup: function(m) { return m; }	
+    })	
+  });	
+  </script>	
+{% endblock %}	
 
-        <!-- Search reports -->
-        {% snippet "snippets/search_reports_input.html" %}
-
-        {% block vitalst_header_site_navigation %}
-        <nav class="section navigation default-menu">
-            <ul class="nav nav-pills">
-                {% if c.user and h.get_user_permission(c.userobj) == True %}
-                  {% block header_site_navigation_ckan %}
-                      {{ h.build_nav_main(
-                        ('search', _('Manage Data')),
-                        ('group_index', _('Design Reports')),
-                        ('organizations_index', _('Organizations')),
-                        ('about', _('About'))
-                      ) }}
-                  {% endblock %}
-                {% endif %}
-            </ul>
-        </nav>
-        {% endblock %}
-      </div>
-   </div>
-</header>
-
-
-<style>
-  .popup h2 {
-    font-size:2em;
-  }
-
-  .popup {
-    background-color:#fff;
-    padding:50px 20px;
-    border-radius:4px;
-    position:fixed;
-    top:20%;
-    min-width:50%;
-    left:50%;
-    text-align:center;
-    transform: translate(-50%,0);
-    z-index:30000;
-    display: none;
-  }
-  
-  .shadow{
-    width:100%;
-    height:100vh;
-    background-color:rgba(161,161,161,.5);
-    position:fixed;
-    left:0;
-    top:0;
-    z-index:2000;
-    display: none;
-  }
-
-  .browsers {
-    width:100%;
-  }
-
-  .browser {
-    margin-top:20px;
-    padding:10px;
-    float:left;
-    width:22%;
-  }
-
-  .browser img {
-    width:120px;
-    margin-bottom:20px;
-  }
-
-  .clearfix {
-    clear:both;
-  }
-</style>
-<div class="popup" id="iepopup">
-  <h2>Unsupported Browser</h2>
-  <br/> 
-  <p>You are using a web browser that is not compatible with certain features in this website. </p>
-  <p>For a full experience it is recommended you upgrade to the latest version of:</p>
-  <br/>
-
-  <div class="browsers">
-    <div class="browser">
-      <a href="https://www.google.com/intl/en_ca/chrome/" target="_blank"><img src="/base/images/chrome.png" >
-      <br/>
-      Chrome</a>
-    </div>
-    <div class="browser">
-      <a href="https://www.mozilla.org/en-CA/firefox/new/" target="_blank"><img src="/base/images/firefox.png" >
-      <br/>
-      Firefox</a>
-    </div>
-    <div class="browser">
-      <a href="https://support.apple.com/downloads/safari" target="_blank"><img src="/base/images/safari.png" >
-      <br/>
-      Safari</a>
-    </div>
-    <div class="browser">
-      <a href="https://www.microsoft.com/en-us/edge" target="_blank"><img src="/base/images/edge.png" >
-      <br/>
-      Edge</a>
-    </div>
-    <p class="clearfix"></p>
-  </div>
-  <br/>
-  <button class="btn btn-primary" id="close_popup" onClick="close_popup()">Close</button>
-  <br/>
-</div>
-<div class="shadow" id="ieshadow"></div>
-{% endblock %}

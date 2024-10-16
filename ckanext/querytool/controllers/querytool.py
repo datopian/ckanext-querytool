@@ -174,7 +174,7 @@ class QueryToolController(base.BaseController):
             _querytool = {}
 
         # Check if the data for this querytool still exists
-        if 'dataset_name' in _querytool.keys():
+        if 'dataset_name' in list(_querytool.keys()):
             try:
                 _get_action('package_show',
                             {'id': _querytool['dataset_name']})
@@ -194,7 +194,7 @@ class QueryToolController(base.BaseController):
             filters = []
             y_axis_columns = []
             related_querytools = []
-            for k, v in data.items():
+            for k, v in list(data.items()):
 
                 if k.startswith('data_filter_name_'):
                     filter = {}
@@ -231,7 +231,7 @@ class QueryToolController(base.BaseController):
                 _querytool['filters'] = ''
                 sql_string = ''
 
-            if 'private' not in data.keys():
+            if 'private' not in list(data.keys()):
                 _querytool['private'] = True
 
             if any(related_querytools):
@@ -254,12 +254,12 @@ class QueryToolController(base.BaseController):
             try:
                 junk = _get_action('querytool_update', _querytool)
                 h.flash_success(_('Data Successfully updated.'))
-            except ValidationError, e:
+            except ValidationError as e:
                 errors = e.error_dict
                 error_summary = e.error_summary
                 return self.querytool_edit('/' + querytool, _querytool,
                                            errors, error_summary)
-            if 'save_data' in data.keys():
+            if 'save_data' in list(data.keys()):
                 # redirect to querytools group
                 toolkit.redirect_to('/'+h.lang()+'/group/'+_querytool['group']+'/reports')
 
@@ -293,9 +293,7 @@ class QueryToolController(base.BaseController):
         if _querytool.get('y_axis_columns'):
             _querytool['y_axis_columns'] = helpers.parse_y_axis_columns(
                 _querytool.get('y_axis_columns'))
-            _querytool['y_axis_names'] = map(
-                lambda column: column['name'],
-                _querytool['y_axis_columns'])
+            _querytool['y_axis_names'] = [column['name'] for column in _querytool['y_axis_columns']]
 
         vars = {'data': data, 'errors': errors,
                 'error_summary': error_summary,
@@ -358,7 +356,7 @@ class QueryToolController(base.BaseController):
             data = dict(toolkit.request.POST)
 
             is_copy = False
-            copy_id = [k for k in data.keys() if k.startswith('copy-viz-btn_')]
+            copy_id = [k for k in list(data.keys()) if k.startswith('copy-viz-btn_')]
 
             if len(copy_id) == 1:
                 is_copy = True
@@ -370,7 +368,7 @@ class QueryToolController(base.BaseController):
             existing_visualizations = {}
 
             if copy_id is not None:
-                for key, value in data.items():
+                for key, value in list(data.items()):
                     if key == 'save':
                         continue
 
@@ -414,7 +412,7 @@ class QueryToolController(base.BaseController):
             tables = []
             break_lines = []
 
-            for k, v in data.items():
+            for k, v in list(data.items()):
                 '''
                 TODO: save visualizations with key value e.g {'charts' :[]
                 # 'images': []} for easier itteration
@@ -485,7 +483,7 @@ class QueryToolController(base.BaseController):
                     def line_attr_search(data, id, line_attr):
                         base_id = 'chart_field_{}_{}_'.format(line_attr, id)
                         line_count = len([
-                            True for key, value in data.items()
+                            True for key, value in list(data.items())
                             if base_id in key
                         ])
                         line_attrs = []
@@ -758,13 +756,13 @@ class QueryToolController(base.BaseController):
                     h.flash_success(_('Visualization Successfully copied'))
                 else:
                     h.flash_success(_('Visualizations Successfully updated.'))
-            except ValidationError, e:
+            except ValidationError as e:
                 errors = e.error_dict
                 error_summary = e.error_summary
                 return self.querytool_edit('/' + querytool, data,
                                            errors, error_summary)
 
-            if 'save-edit-data' in data.keys():
+            if 'save-edit-data' in list(data.keys()):
                 # redirect to edit data
                 url = h.url_for('querytool_edit',
                                 querytool='/' + _querytool['name'])
@@ -812,18 +810,14 @@ class QueryToolController(base.BaseController):
         data['y_axis_columns'] = helpers.parse_y_axis_columns(
             data.get('y_axis_columns'))
 
-        data['y_axis_options'] = map(
-            lambda column: {'value': column['name'], 'text': column['alias']},
-            data['y_axis_columns'])
+        data['y_axis_options'] = [{'value': column['name'], 'text': column['alias']} for column in data['y_axis_columns']]
 
         # We need y_axis_columns names in comma separated
         # format because ajax snippets only support String parameters
         # This parameter is used for removing
         # Y axis values from the rest of the
         #  filtering options and the X axis values in viz items
-        data['y_axis_values'] = ','.join(map(
-            lambda column: column['name'],
-            data['y_axis_columns']))
+        data['y_axis_values'] = ','.join([column['name'] for column in data['y_axis_columns']])
         data['owner_org'] = _querytool.get('owner_org')
 
         vars = {'data': data, 'errors': errors,
@@ -1024,7 +1018,7 @@ class QueryToolController(base.BaseController):
 
         querytools = []
         items = []
-        items.append({u'order': 0, u'name': querytool['name']})
+        items.append({'order': 0, 'name': querytool['name']})
 
         if querytool['related_querytools']:
             items.extend(json.loads(querytool['related_querytools']))
@@ -1045,7 +1039,7 @@ class QueryToolController(base.BaseController):
                 q_name = q_item['name']
                 new_filters = json.loads(q_item['filters'])
 
-                for k, v in params.items():
+                for k, v in list(params.items()):
                     # Update query filters
                     if k.startswith('{}_data_filter_name_'.format(q_name)):
                         id = k.split('_')[-1]

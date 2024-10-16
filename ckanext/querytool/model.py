@@ -7,10 +7,8 @@ import sys
 from sqlalchemy import Table, Column, Index, ForeignKey, MetaData
 from sqlalchemy import types, func, or_
 from sqlalchemy.orm import class_mapper
-try:
-    from sqlalchemy.engine.result import RowProxy
-except ImportError:
-    from sqlalchemy.engine.base import RowProxy
+
+from sqlalchemy.engine import Row as RowProxy
 from sqlalchemy.engine.reflection import Inspector
 
 import ckan.logic as logic
@@ -131,7 +129,6 @@ class CkanextQueryTool(DomainObject):
 
 def define_query_tool_table():
     global query_tool_table
-
     query_tool_table = Table('ckanext_querytool', metadata,
                              Column('id', types.UnicodeText,
                                     primary_key=True,
@@ -143,19 +140,19 @@ def define_query_tool_table():
                                     types.UnicodeText,
                                     nullable=False),
                              Column('description', types.UnicodeText,
-                                    default=u''),
+                                    default=''),
                              Column('dataset_name', types.UnicodeText,
                                     nullable=False),
                              Column('chart_resource', types.UnicodeText,
                                     nullable=False),
                              Column('filters', types.UnicodeText,
-                                    default=u''),
+                                    default=''),
                              Column('y_axis_columns', types.UnicodeText,
-                                    default=u''),
+                                    default=''),
                              Column('sql_string', types.UnicodeText,
-                                    default=u''),
+                                    default=''),
                              Column('related_querytools', types.UnicodeText,
-                                    default=u''),
+                                    default=''),
                              Column('created', types.DateTime,
                                     default=datetime.datetime.utcnow),
                              Column('modified', types.DateTime,
@@ -181,11 +178,11 @@ def define_query_tool_table():
                                     types.UnicodeText,
                                     nullable=False),
                              Column('additional_description', types.UnicodeText,
-                                    default=u''),
+                                    default=''),
                              Column('selection_label', types.UnicodeText,
-                                    default=u''),
+                                    default=''),
                              Column('report_caption', types.UnicodeText,
-                                    default=u''),
+                                    default=''),
                              Column('download_options', types.Boolean,
                                     default=True),
                              Index('ckanext_querytool_id_idx',
@@ -258,7 +255,7 @@ def define_querytool_visualizations_table():
         properties={'ckanext_querytool': orm.relation(CkanextQueryTool,
                     backref=orm.backref('ckanext_querytool_visualizations',
                                         collection_class=orm.collections.
-                                        attribute_mapped_collection(u'id'),
+                                        attribute_mapped_collection('id'),
                                         cascade='all, delete, delete-orphan',
                                         ),
         )
@@ -271,7 +268,7 @@ def table_dictize(obj, context, **kw):
     result_dict = {}
 
     if isinstance(obj, RowProxy):
-        fields = obj.keys()
+        fields = list(obj.keys())
     else:
         ModelClass = obj.__class__
         table = class_mapper(ModelClass).mapped_table
@@ -297,7 +294,7 @@ def table_dictize(obj, context, **kw):
         elif isinstance(value, list):
             result_dict[name] = value
         else:
-            result_dict[name] = unicode(value)
+            result_dict[name] = str(value)
 
     result_dict.update(kw)
 
@@ -366,7 +363,7 @@ def child_group_report_search(query_string=None, query_children=None):
         if q.group in children:
             results.append(q)
 
-    results = [dict(zip(result.keys(), result)) for result in results]
+    results = [dict(list(zip(list(result.keys()), result))) for result in results]
 
     return results
 
@@ -408,7 +405,6 @@ class VitalsSecurityTOTP(DomainObject):
         security_challenge = VitalsSecurityTOTP.Session.query(
             VitalsSecurityTOTP).filter(
                 VitalsSecurityTOTP.user_id == user_id).first()
-
         if security_challenge is None:
             security_challenge = VitalsSecurityTOTP(
                 user_id=user_id, secret=new_secret, created_at=created_at
@@ -416,7 +412,7 @@ class VitalsSecurityTOTP(DomainObject):
         else:
             security_challenge.secret = new_secret
             security_challenge.created_at = created_at
-
+            
         security_challenge.save()
 
         return security_challenge
@@ -463,8 +459,8 @@ class VitalsSecurityTOTP(DomainObject):
         self.user_security_totp = Table(
             'user_security_totp', metadata,
             Column('id', types.Integer, primary_key=True),
-            Column('user_id', types.UnicodeText, default=u''),
-            Column('secret', types.UnicodeText, default=u''),
+            Column('user_id', types.UnicodeText, default=''),
+            Column('secret', types.UnicodeText, default=''),
             Column('created_at', types.DateTime)
         )
 

@@ -1,11 +1,38 @@
+{% import 'macros/form.html' as form %}
 <div id="image_item_{{ n }}" class="item image_item visualization-fields-section">
    <div class="item-wrapper">
-      {% snippet 'querytool/admin/snippets/image_upload.html', data=data,n=n  %}
-      <ul class="inline text-right chart-actions">
+
+      {#{% snippet 'querytool/admin/snippets/image_upload.html', data=data, n=n, viz_edit=True %}#}
+
+      {% if not data %}
+         {% set data = {} %}
+      {% else %}
+         {% set errors = data.errors or {} %}
+      {% endif %}
+
+      {% set viz_is_upload = data.url and not data.url.startswith('http') %}
+      {% set viz_is_url = data.url and data.url.startswith('http') %}
+
+      {{ form.custom_image_upload(
+          data,
+          errors,
+          is_upload_enabled=h.uploads_enabled(),
+          is_url=viz_is_url,
+          is_upload=viz_is_upload,
+          url_label=_('Image URL'),
+          upload_label=_('Image'),
+          field_name='image_url_' + (n | string),
+          field_url='image_url_' + (n | string),
+          field_upload='image_upload_' + (n | string),
+          field_clear='clear_upload_' + (n | string)
+      ) }}
+
+
+      <ul class="viz-crud-item text-right chart-actions">
          <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
          <li><button class="btn copy-chart-btn" type="submit" id="copy-viz-btn_{{ n }}" name="copy-viz-btn_{{ n }}"><span class="fa fa-copy" aria-hidden="true"></span> {{ _('Copy') }}</button></li>
       </ul>
-      <input type="hidden" id="image_upload_{{ n }}" name="image_upload_{{ n }}" value="{{ image_upload }}"/>
+
       <span class="grippy"></span>
    </div>
 </div>

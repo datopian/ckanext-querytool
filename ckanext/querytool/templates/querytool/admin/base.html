@@ -1,32 +1,23 @@
 {% extends "page.html" %}
-
-{% block content %}
-    {% block maintag %}{{ super() }}{% endblock %}
-      <div id="content" class="container-fluid">
-        {% block main_content %}
-          {% block flash %}
-            {{ super() }}
-          {% endblock %}
-
-          {% block toolbar %}
-            {{ super() }}
-          {% endblock %}
-
-          <div class="row-fluid wrapper no-nav">
-            {% block primary %}
-              <div class="primary span12">
-                {% block primary_content %}
-                  {{ super() }}
-                {% endblock %}
-              </div>
-            {% endblock %}
-          </div>
-        {% endblock %}
-      </div>
-    </div>
+{% block styles %}
+  {{ super() }} {% asset
+  'querytool/admin-css' %} 
 {% endblock %}
-
-
-
-
-
+{% block content %}
+    {{ h.csrf_input() }}
+    {% block maintag %}{{ super() }}{% endblock %}
+    <div id="content" class="container-fluid">
+        {% block main_content %}
+            {% block flash %}{{ super() }}{% endblock %}
+            {% block toolbar %}{{ super() }}{% endblock %}
+            <div class="row-fluid wrapper no-nav">
+                {% block primary %}
+                    <div class="">
+                        {% block primary_content %}{{ super() }}{% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}

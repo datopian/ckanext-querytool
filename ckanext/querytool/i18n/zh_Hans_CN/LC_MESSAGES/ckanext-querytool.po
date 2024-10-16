@@ -1,0 +1,1864 @@
+# Translations template for ckanext-querytool.
+# Copyright (C) 2019 ORGANIZATION
+# This file is distributed under the same license as the ckanext-querytool
+# project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: ckanext-querytool 1.2a62\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2019-04-21 15:00+0600\n"
+"PO-Revision-Date: 2021-03-09 11:35-0500\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.3.4\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_Hans_CN\n"
+
+#: ckanext/querytool/helpers.py:131
+msgid "Line"
+msgstr "线图"
+
+#: ckanext/querytool/helpers.py:132
+msgid "Bar"
+msgstr "柱状图"
+
+#: ckanext/querytool/helpers.py:133
+msgid "Horizontal bar"
+msgstr "水平柱状图"
+
+#: ckanext/querytool/helpers.py:134
+msgid "Stacked bar"
+msgstr "堆叠柱状图"
+
+#: ckanext/querytool/helpers.py:135
+msgid "Stacked horizontal bar"
+msgstr "水平堆叠柱状图"
+
+#: ckanext/querytool/helpers.py:136
+msgid "Area"
+msgstr "区域"
+
+#: ckanext/querytool/helpers.py:137
+msgid "Spline"
+msgstr "样条曲线图"
+
+#: ckanext/querytool/helpers.py:138
+msgid "Donut"
+msgstr "圆环图"
+
+#: ckanext/querytool/helpers.py:139
+msgid "Pie"
+msgstr "饼图"
+
+#: ckanext/querytool/helpers.py:140
+msgid "Scatter"
+msgstr "散点图"
+
+#: ckanext/querytool/helpers.py:209
+msgid "Horizontal"
+msgstr "水平的"
+
+#: ckanext/querytool/helpers.py:210
+msgid "Diagonal"
+msgstr "斜线的"
+
+#: ckanext/querytool/helpers.py:211
+msgid "Vertical"
+msgstr "垂直的"
+
+#: ckanext/querytool/helpers.py:212
+msgid "Reverse"
+msgstr "翻转"
+
+#: ckanext/querytool/helpers.py:222 ckanext/querytool/helpers.py:510
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:596
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:605
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:614
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:623
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:632
+msgid "Default"
+msgstr "默认"
+
+#: ckanext/querytool/helpers.py:223
+msgid "Integer e.g 2"
+msgstr "整数（例如2）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:60
+#: ckanext/querytool/helpers.py:224
+msgid "Decimal (1 digit) e.g 2.5"
+msgstr "小数（1位，例如2.5）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:64
+#: ckanext/querytool/helpers.py:225
+msgid "Decimal (2 digit) e.g 2.50"
+msgstr "小数（2位，例如2.50）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:68
+#: ckanext/querytool/helpers.py:226
+msgid "Decimal (3 digit) e.g 2.501"
+msgstr "小数（3位，例如2.501）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:72
+#: ckanext/querytool/helpers.py:227
+msgid "Decimal (4 digit) e.g 2.5012"
+msgstr "小数（4位，例如2.5012）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:76
+#: ckanext/querytool/helpers.py:228
+msgid "Currency e.g. $2,000"
+msgstr "货币（例如$2.000）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:80
+#: ckanext/querytool/helpers.py:229
+msgid "Rounded e.g 2k"
+msgstr "取整（例如2k）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:84
+#: ckanext/querytool/helpers.py:230
+#, python-format
+msgid "Percentage (0 digit) e.g 25%% for 0.25"
+msgstr "百分比（整数，例如25%代表0.25）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:88
+#: ckanext/querytool/helpers.py:232
+#, python-format
+msgid "Percentage (1 digit) e.g 25.1%% for 0.251"
+msgstr "百分比（一位小数，例如25.1%代表0.251）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:92
+#: ckanext/querytool/helpers.py:234
+#, python-format
+msgid "Percentage (2 digit) e.g 25.12%% for 0.2512"
+msgstr "百分比（两位小数，例如25.12%代表0.2512）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:96
+#: ckanext/querytool/helpers.py:236
+msgid "Comma thousands separator (0 digit) e.g 2,512"
+msgstr "带千位分隔符的整数（例如2,512）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:100
+#: ckanext/querytool/helpers.py:238
+msgid "Comma thousands separator (1 digit) e.g 2,512.3"
+msgstr "带千位分隔符的一位小数（例如2,512.3）"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:104
+#: ckanext/querytool/helpers.py:240
+msgid "Comma thousands separator (2 digit) e.g 2,512.34"
+msgstr "带千位分隔符的两位小数（例如2,512.34）"
+
+#: ckanext/querytool/helpers.py:511
+msgid "Ascending"
+msgstr "升序"
+
+#: ckanext/querytool/helpers.py:512
+msgid "Descending"
+msgstr "降序"
+
+#: ckanext/querytool/controllers/querytool.py:62
+#: ckanext/querytool/controllers/querytool.py:81
+#: ckanext/querytool/controllers/querytool.py:101
+#: ckanext/querytool/controllers/querytool.py:122
+#: ckanext/querytool/controllers/querytool.py:152
+#: ckanext/querytool/controllers/querytool.py:301
+#: ckanext/querytool/controllers/querytool.py:666
+msgid "Not authorized to see this page"
+msgstr "未授权查看此页"
+
+#: ckanext/querytool/controllers/querytool.py:127
+msgid "Report not found"
+msgstr "未找到报告"
+
+#: ckanext/querytool/controllers/querytool.py:129
+msgid "Report and visualizations were removed successfully."
+msgstr "报告和可视化已成功删除。"
+
+#: ckanext/querytool/controllers/querytool.py:157
+#: ckanext/querytool/controllers/querytool.py:306
+#: ckanext/querytool/controllers/querytool.py:658
+msgid "Report not found."
+msgstr "未找到报告。"
+
+#: ckanext/querytool/controllers/querytool.py:168
+#: ckanext/querytool/controllers/querytool.py:314
+#: ckanext/querytool/controllers/querytool.py:674
+msgid ""
+"The data used for creating this report has been removed by the administrator."
+msgstr "管理员已删除了用于创建此报告的数据。"
+
+#: ckanext/querytool/controllers/querytool.py:231
+msgid "Data Successfully updated."
+msgstr "数据已成功更新。"
+
+#: ckanext/querytool/controllers/querytool.py:564
+msgid "Visualizations Successfully updated."
+msgstr "已成功更新可视化视图。"
+
+#: ckanext/querytool/controllers/querytool.py:679
+msgid "Report not fully set."
+msgstr "报告未完全设置。"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:337
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:147
+msgid "Please choose a resource to see available numeric columns."
+msgstr "请选择资源以查看可用的数字列。"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:414
+msgid "Maximum number of allowed related reports reached."
+msgstr "相关报告的数量已达到所允许的最大值。"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:438
+msgid "-- Choose resource --"
+msgstr "--选择资源--"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:441
+msgid "Unnamed resource"
+msgstr "未命名的数据源"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:472
+msgid "No columns retrieved."
+msgstr "没有检索到列。"
+
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:476
+#: ckanext/querytool/fanstatic/javascript/querytool_data.js:481
+msgid "An error occurred while getting columns."
+msgstr "获取列时发生错误。"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:242
+msgid "Template is invalid"
+msgstr "模板无效"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:260
+msgid "Click to select one or more"
+msgstr "点击来选择一个或多个"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:271
+msgid "Static Reference Columns: maximum one column per measure"
+msgstr "静态参考列：每个变量只能设置一个"
+
+#: ckanext/querytool/fanstatic/javascript/visualizations_settings.js:307
+msgid "Please create at least one visualization."
+msgstr "请创建至少一个可视化内容。"
+
+#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:200
+#: ckanext/querytool/fanstatic/javascript/modules/viz-preview.js:204
+msgid "Chart could not be created."
+msgstr "无法创建图表。"
+
+#: ckanext/querytool/lib/file_writer_service.py:189
+#, python-format
+msgid "format: must be one of %s"
+msgstr "格式：必须符合%s样式"
+
+#: ckanext/querytool/logic/validators.py:21
+msgid "This report name already exists. Choose another."
+msgstr "该报告名称已经存在。请选择其它名称。"
+
+#: ckanext/querytool/templates/footer.html:4
+msgid "About Vital Strategies"
+msgstr "关于Vital Strategies"
+
+#: ckanext/querytool/templates/header.html:30
+#: ckanext/querytool/templates/querytool/public/base_main.html:14
+msgid "Home"
+msgstr "主页"
+
+#: ckanext/querytool/templates/header.html:34
+msgid "Manage Data"
+msgstr "管理数据"
+
+#: ckanext/querytool/templates/header.html:35
+msgid "Design Reports"
+msgstr "设计报告"
+
+#: ckanext/querytool/templates/header.html:36
+#: ckanext/querytool/templates/querytool/public/querytool_page.html:8
+msgid "View Reports"
+msgstr "查看报告"
+
+#: ckanext/querytool/templates/header.html:51
+msgid "Organizations"
+msgstr "组织"
+
+#: ckanext/querytool/templates/header.html:52
+msgid "Groups"
+msgstr "组"
+
+#: ckanext/querytool/templates/header.html:53
+#: ckanext/querytool/templates/home/about.html:3
+#: ckanext/querytool/templates/home/about.html:6
+#: ckanext/querytool/templates/home/about.html:16
+msgid "About"
+msgstr "关于"
+
+#: ckanext/querytool/templates/ajax_snippets/break_line_item.html:5
+msgid "Break line"
+msgstr "换行线"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:28
+msgid "General"
+msgstr "概述"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:41
+msgid "Type"
+msgstr "类型"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:45
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:404
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:13
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:25
+msgid "Dimension"
+msgstr "维度"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:62
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:35
+msgid "Category"
+msgstr "类别"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:65
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:407
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:16
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:98
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:38
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:53
+msgid "Select column"
+msgstr "选择列"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:76
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:139
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:90
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:55
+msgid "Size"
+msgstr "尺寸"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:89
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:56
+msgid "Color"
+msgstr "颜色"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:115
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:17
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
+msgid "Title"
+msgstr "标题"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:117
+msgid "Chart title"
+msgstr "图表标题"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:122
+msgid "Additional Description"
+msgstr "附加说明"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:124
+msgid "Additional description"
+msgstr "附加说明"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:125
+msgid "Add variable to title"
+msgstr "在标题上添加变量"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:132
+msgid "Add variable to description"
+msgstr "在标题上添加变量"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:126
+msgid "Capitalized"
+msgstr "首字母大写"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:127
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:134
+msgid "Measure"
+msgstr "指标"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:131
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:138
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:396
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:95
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:50
+msgid "Optional Filter"
+msgstr "可选的筛选项"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:133
+msgid "lowercase"
+msgstr "小写"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:140
+msgid "Color Section"
+msgstr "颜色部分"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:146
+#, python-format
+msgid ""
+"You can use <a href=\"#templates\" title=\"\" data-target=\"popover\" data-"
+"content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
+"\"Templates quick reference\">Templates</a> here"
+msgstr ""
+"您可以在此处使用 <a href=\"#templates\" title=\"\" data-target=\"popover\" "
+"data-content=\"%(template_tooltip)s\" data-html=\"true\" data-original-title="
+"\"Templates quick reference\">模板</a>"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:154
+msgid "Color Type"
+msgstr "颜色种类"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:159
+msgid "X-axis"
+msgstr "X轴"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:168
+msgid "Data sorting"
+msgstr "数据排序"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:186
+msgid "Label orientation"
+msgstr "标签方向"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:206
+msgid "Force label in multiple lines"
+msgstr "强制标签内容换行"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:222
+msgid "Max number of text labels"
+msgstr "最大文本标签数量"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:236
+msgid "Y-axis"
+msgstr "Y轴"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:252
+msgid "Y axis title"
+msgstr "Y轴标题"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:254
+msgid "Measure by default"
+msgstr "默认变量"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:268
+msgid "Hide title"
+msgstr "隐藏标题"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:284
+msgid "Start from zero"
+msgstr "从0开始"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:302
+msgid "Y axis label format"
+msgstr "Y轴标签格式"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:247
+msgid "X axis title"
+msgstr "X轴标题"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:355
+msgid "X axis label format"
+msgstr "X轴标签格式"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:320
+msgid "Additional Options"
+msgstr "额外选项"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:335
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:101
+msgid "Data format"
+msgstr "数据格式"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:355
+msgid "Show data labels"
+msgstr "显示数据标签"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:366
+msgid "Show legend"
+msgstr "显示图例"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:382
+msgid "Show labels as percentages"
+msgstr "使用百分比的形式显示标签"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:398
+msgid "Donut hole"
+msgstr "环形图内径大小"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:415
+msgid "Bar width"
+msgstr "条宽度"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:417
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:107
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:61
+msgid "Default value"
+msgstr "默认值"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:420
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:28
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:110
+#: ckanext/querytool/templates/ajax_snippets/public_filter_item.html:28
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:64
+msgid "Select value"
+msgstr "选择值"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:430
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:119
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:72
+msgid "Filter Label"
+msgstr "筛选项名称"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:432
+msgid "Enter filter Label"
+msgstr "输入筛选项名称"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:438
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:128
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:80
+msgid "Filter visibility"
+msgstr "筛选项是否可见"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:441
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:49
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:131
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:83
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:83
+msgid "Public"
+msgstr "公开"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:442
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:50
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:132
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:84
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:83
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:21
+msgid "Private"
+msgstr "仅自己"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:455
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:497
+msgid "Static Reference"
+msgstr "静态参考"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:468
+msgid "Static Reference Columns"
+msgstr "静态参考列"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:495
+msgid "Static Reference Label"
+msgstr "静态参考列名称"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:509
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:561
+msgid "Dynamic Reference"
+msgstr "动态参考"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:522
+msgid "Dynamic Reference Type"
+msgstr "动态参考类型"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:525
+msgid "Select type"
+msgstr "选择类型"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:543
+msgid "Dynamic Reference Factor"
+msgstr "动态参考因子"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:559
+msgid "Dynamic Reference Label"
+msgstr "动态参考列名称"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:575
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:7
+#: ckanext/querytool/templates/ajax_snippets/image_item.html:5
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:150
+#: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:14
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:135
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:21
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
+msgid "Delete"
+msgstr "删除"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:576
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:136
+#: ckanext/querytool/templates/querytool/public/read.html:106
+msgid "Update"
+msgstr "更新"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:25
+msgid "Default Value"
+msgstr "默认值"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:37
+msgid "Label"
+msgstr "标签"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:41
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:123
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:76
+msgid "Enter filter label"
+msgstr "输入筛选器名称"
+
+#: ckanext/querytool/templates/ajax_snippets/filter_item.html:46
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:80
+msgid "Visibility"
+msgstr "是否可见"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:16
+msgid "Map resource"
+msgstr "地图数据源"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:19
+msgid "Select map resource"
+msgstr "选择地图数据源"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:35
+msgid "Title field"
+msgstr "标题字段"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:38
+msgid "Select title field"
+msgstr "选择标题字段"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:49
+msgid "Map key field"
+msgstr "地图匹配字段"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:52
+msgid "Select map key field"
+msgstr "选择地图匹配字段"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:63
+msgid "Data key field"
+msgstr "数据匹配字段"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:66
+msgid "Select data key field"
+msgstr "选择数据匹配字段"
+
+#: ckanext/querytool/templates/ajax_snippets/map_item.html:76
+msgid "Color scheme"
+msgstr "颜色主题"
+
+#: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:8
+msgid "Edit"
+msgstr "编辑"
+
+#: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:18
+msgid "Related Report"
+msgstr "相关报告"
+
+#: ckanext/querytool/templates/ajax_snippets/related_querytool_item.html:21
+msgid "Select Report"
+msgstr "选择报告"
+
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:19
+msgid "Table title"
+msgstr "表标题"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
+msgid "Content"
+msgstr "内容"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:7
+msgid "Description"
+msgstr "描述"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:7
+msgid "VIA Data"
+msgstr "VIA Data"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:9
+msgid ""
+"VIA Data is a platform that allows Ministries of Health and other public "
+"health organizations to publish visual, interactive and accessible data "
+"reports from a wide range of health topics. VIA Data has a simple interface "
+"that minimizes the time dedicated to creating reports while providing the "
+"essential visual and interactive elements for public access to data. It was "
+"developed on opensource license with minimal technological requirements."
+msgstr ""
+"VIA Data是一个供卫生部和其他公共卫生组织发布各种健康主题的可视的，交互式的和"
+"可访问的数据报告的平台。VIA Data具有简单的界面，可最大程度地减少创建报告所需"
+"的时间，同时为公众访问数据提供必要的视觉和交互元素。它是基于开放源代码许可证"
+"开发的，具有最低的技术要求。"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:22
+msgid "Using the Platform"
+msgstr "使用平台"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:24
+msgid ""
+"Internal and public users of the platform have access to different levels of "
+"tool functionality."
+msgstr "平台的内部和公共用户可以访问的工具功能级别不同。"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:27
+msgid "Internal users"
+msgstr "内部用户"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:28
+msgid ""
+"Internal users of the platform, once logged in, can upload and manage new "
+"datasets in the <i>Manage Data</i> tab; and create and edit interactive "
+"reports in the <i>Design Reports</i> tab."
+msgstr ""
+"平台的内部用户登录后可以在<i> 管理数据 </ i>标签中上传和管理新的数据集；并在"
+"<i> 设计报告 </ i>标签中创建和编辑交互式报告。"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:31
+msgid "Public users"
+msgstr "公共用户"
+
+#: ckanext/querytool/templates/home/vs-home-page.html:32
+msgid ""
+"Public users can visualize and interact with published interactive reports "
+"accessible via the <i>View Reports</i> tab."
+msgstr "公共用户可以通过<i> 主页</i>标签访问已发布的可视化的交互式报告。"
+
+#: ckanext/querytool/templates/home/snippets/about_text.html:1
+msgid ""
+"<p>Online access to public health data is generally limited. Most countries "
+"do not have an integrated tool for public users to access their data and "
+"although some have well-developed tools, they often have limited "
+"functionality or complicated interfaces. To make it easier for public health "
+"agencies to publish their data, Vital Strategies, as part of the Data for "
+"Health Initiative, created VIA Data. VIA Data is a platform to create "
+"visual, interactive and accessible data reports with easy-to-use tools for "
+"(1) uploading and managing data and (2) designing visually attractive "
+"reports with such data. </p> <p>VIA Data has features and benefits aimed at "
+"simplifying its use and minimizing the human, physical and monetary "
+"resources required for its operation. Benefits of the platform include: "
+"developed in opensource language which makes improvements and customizations "
+"free and easy to share; focus placed on essential visual and interactive "
+"elements that prioritize public access to data; ease-of-use for "
+"administrators and public users; and scalability of functions and content to "
+"support different types of data sources and audiences.</p> <p><a href="
+"\"https://www.vitalstrategies.org\">Vital Strategies </a> is a global public "
+"health organization whose goal is to strengthen public health systems. Vital "
+"Strategies partners with governments to design and implement public health "
+"initiatives that bridge the gap between public health needs and solutions, "
+"especially in low- and middle- income countries. It operates in every region "
+"in the world.</p> <p><a href=\"https://www.bloomberg.org/program/public-"
+"health/data-health/\">The Data for Health Initiative</a> co-funded by "
+"Bloomberg Philanthropies and the Australian government, aims to help "
+"governments use data strategically to target resources and policies that "
+"will translate into saving lives and improved health.</p> <p> <a href="
+"\"https://www.datopian.com\">Datopian</a> is an open data solutions provider "
+"spun off from Open Knowledge. Datopian provides services and products for "
+"governments, institutions, and local authorities to publish open data, such "
+"as: CKAN hosting, CKAN technical support, custom open data website and CKAN "
+"extension development.</p> </p> "
+msgstr ""
+"<p>在线访问公共卫生数据通常受到限制。大多数国家和地区没有供公共用户访问其数据"
+"的集成工具，尽管一些国家和地区拥有完善的工具，但它们通常功能有限或界面复杂。"
+"为了使公共卫生机构更方便地发布数据，Vital Strategies在“数据为健康项目”支持"
+"下，创建了VIA Data。VIA Data是一个使用易操作的工具来创建可视的，交互式的和可"
+"访问的数据报告的平台，该工具用于（1）上传和管理数据，以及（2）使用此类数据设"
+"计具有视觉吸引力的报告。 </p> <p>VIA Data具有的功能和特点，旨在简化其使用并最"
+"大程度地减少操作该平台所需的人力，物力和财力。该平台的优势包括：以开源语言开"
+"发，可自由，轻松地共享改进和定制；功能重点聚焦于基本的视觉和互动元素，以优先"
+"支持公众访问数据；便于管理员和公共用户使用；具有功能和内容的可扩展性，可以支"
+"持不同类型的数据源和受众。</p> <p> <a href=\"https://www.vitalstrategies.org"
+"\">Vital Strategies卫健策略</a>是一个以强化公共卫生系统为目标的全球公共卫生组"
+"织。卫健策略与政府合作，在全球各个地区设计并实施公共卫生项目，以弥合各国，特"
+"别是中低收入国家，公共卫生需求与解决方案之间的差距。 </p> <p> <a href="
+"\"https://www.bloomberg.org/program/public-health/data-health/\"> The Data "
+"for Health Initiative </p> <p> <a href=\"https://www.bloomberg.org/program/"
+"public-health/data-health/\">数据为健康项目</a>由彭博基金会和澳大利亚政府共同"
+"资助，旨在帮助政府策略性地利用数据来优化资源配置及制定政策，以挽救生命和改善"
+"健康状况。</p> <p> <a href=\"https://www.datopian.com\">Datopian</a> 是从"
+"Open Knowledge衍生出的开放数据解决方案提供商。 Datopian为政府，机构和地方当局"
+"发布开放数据提供服务和产品，例如：CKAN托管，CKAN技术支持，自定义开放数据网站"
+"和CKAN扩展开发。</p> </p> "
+
+#: ckanext/querytool/templates/group/index.html:24
+#: ckanext/querytool/templates/group/index.html:27
+#: ckanext/querytool/templates/group/read_base.html:6
+#: ckanext/querytool/templates/group/report_index.html:24
+#: ckanext/querytool/templates/group/report_index.html:28
+msgid "Reports"
+msgstr "报告书"
+
+#: ckanext/querytool/templates/group/snippets/group_form.html:21
+msgid "Additional description of the group..."
+msgstr "群组的其他说明"
+
+#: ckanext/querytool/templates/macros/form.html:126
+#, python-format
+msgid ""
+"You can use <a href=\"#markdown\" title=\"Markdown quick reference\" data-"
+"target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html=\"true"
+"\">Markdown formatting</a> here"
+msgstr ""
+"您可以在此处使用 <a href=\"#markdown\" title=\"Markdown quick reference\" "
+"data-target=\"popover\" data-content=\"%(markdown_tooltip)s\" data-html="
+"\"true\">Markdown 格式</a>"
+
+#: ckanext/querytool/templates/macros/form.html:235
+msgid "Remove"
+msgstr "移除"
+
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "This field is required"
+msgstr "该字段为必填项"
+
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "Custom"
+msgstr "自定义"
+
+#: ckanext/querytool/templates/macros/form.html:290
+msgid "The form contains invalid entries:"
+msgstr "表单包括不合法的输入内容："
+
+#: ckanext/querytool/templates/macros/form.html:395
+msgid "Required field"
+msgstr "必填项"
+
+#: ckanext/querytool/templates/macros/form.html:410
+msgid "http://example.com/my-image.jpg"
+msgstr "http://example.com/my-image.jpg"
+
+#: ckanext/querytool/templates/macros/form.html:411
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:33
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:47
+msgid "Report Icon"
+msgstr "报告图标"
+
+#: ckanext/querytool/templates/macros/form.html:412
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:31
+#: ckanext/querytool/templates/querytool/admin/snippets/image_upload.html:39
+msgid "Image"
+msgstr "图片"
+
+#: ckanext/querytool/templates/macros/form.html:424
+msgid "Clear Upload"
+msgstr "清除上传数据"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:6
+msgid "Source"
+msgstr "源"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:6
+msgid "http://example.com/dataset.json"
+msgstr "http://example.com/dataset.json"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:10
+msgid "Author"
+msgstr "作者"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:10
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:16
+msgid "Joe Bloggs"
+msgstr "Joe Bloggs"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:12
+msgid "Author Email"
+msgstr "作者邮箱"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:12
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:18
+msgid "joe@example.com"
+msgstr "joe@example.com"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:16
+msgid "Maintainer"
+msgstr "维护者"
+
+#: ckanext/querytool/templates/package/snippets/package_metadata_fields.html:18
+msgid "Maintainer Email"
+msgstr "维护者邮箱"
+
+#: ckanext/querytool/templates/querytool/admin/base_edit_data.html:11
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:34
+msgid "Edit data"
+msgstr "编辑数据"
+
+#: ckanext/querytool/templates/querytool/admin/base_edit_data.html:14
+#: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:12
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:10
+#: ckanext/querytool/templates/querytool/admin/base_list.html:8
+msgid "Reports Folders"
+msgstr "报告文件夹"
+
+#: ckanext/querytool/templates/querytool/admin/base_edit_visualizations.html:9
+msgid "Manage Visualizations"
+msgstr "管理可视化视图"
+
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:6
+#: ckanext/querytool/templates/querytool/admin/base_list.html:4
+msgid "New Interactive Report"
+msgstr "新交互式报告"
+
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:18
+#: ckanext/querytool/templates/querytool/admin/base_list.html:24
+msgid "New Report"
+msgstr "新报告"
+
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:40
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:41
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:42
+#: ckanext/querytool/templates/querytool/admin/base_groups.html:43
+#: ckanext/querytool/templates/querytool/admin/base_list.html:13
+msgid "Other"
+msgstr "其它"
+
+#: ckanext/querytool/templates/querytool/admin/base_list.html:30
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
+msgid "Main"
+msgstr "主要"
+
+#: ckanext/querytool/templates/querytool/admin/base_list.html:36
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:73
+msgid "Related"
+msgstr "相关"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:31
+msgid "Basic info"
+msgstr "基本信息"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:33
+msgid "Title of the interactive report"
+msgstr "交互式报告的标题"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
+msgid "URL"
+msgstr "URL"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:40
+msgid "eg. my-report"
+msgstr "例如：我的报告"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
+msgid "Main Description"
+msgstr "主要说明"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:42
+msgid ""
+"Start the first line with # to identify the publicly visible title. Add "
+"other optional text in a new line."
+msgstr "第一行以＃开头，以标注公开可见的标题。您可以使用markdown命令编辑文本。"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:43
+msgid "Additional description for the report..."
+msgstr "报告的附加说明"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Report Caption"
+msgstr "报告标题"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:44
+msgid "Caption for reports"
+msgstr "报告标题"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:45
+msgid "Public Folder"
+msgstr "公用文件夹"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:57
+msgid "Organization"
+msgstr "组织"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:67
+msgid "Settings"
+msgstr "设置"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:70
+msgid "Report Type"
+msgstr "报告类型"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:101
+msgid "Add Related Report"
+msgstr "添加相关报告"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:105
+msgid "Select dataset and resource"
+msgstr "选择数据集和数据源"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:108
+msgid "Dataset"
+msgstr "数据集"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:111
+msgid "Choose Dataset"
+msgstr "选择数据集"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:125
+msgid "Resource"
+msgstr "数据源"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:129
+msgid "Measure(s)"
+msgstr "指标"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:140
+msgid "Selection Label"
+msgstr "选择标签"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:149
+msgid "Optional label"
+msgstr "可选标签"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:150
+msgid "Filter(s)"
+msgstr "筛选项"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:165
+msgid "Add Filter"
+msgstr "增加筛选项"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:171
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:35
+msgid "Save"
+msgstr "保存"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_data_form.html:172
+msgid "Add/Edit Visualizations"
+msgstr "添加/编辑可视化"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:32
+#: ckanext/querytool/templates/querytool/admin/snippets/stages.html:12
+msgid "Visualizations"
+msgstr "可视化视图"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:42
+msgid "Default measure"
+msgstr "默认指标"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Visualization type"
+msgstr "可视化视图类型"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "— Select type —"
+msgstr "—选择类型—"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Chart"
+msgstr "图表"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Map"
+msgstr "地图"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Text box"
+msgstr "文本框"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:49
+msgid "Table"
+msgstr "表格"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/edit_visualizations_form.html:52
+msgid "Add visualization"
+msgstr "增加可视化视图"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:27
+msgid "Used dataset:"
+msgstr "已用数据集："
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:28
+msgid "Type:"
+msgstr "类型："
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:31
+msgid "Edit filters and data"
+msgstr "编辑筛选项和数据"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:32
+msgid "Edit visualizations"
+msgstr "编辑可视化视图"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:33
+msgid "View"
+msgstr "预览"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/query_tools.html:34
+msgid "Are you sure you want to delete this Report?"
+msgstr "您确定要删除此报告吗？"
+
+#: ckanext/querytool/templates/querytool/admin/snippets/stages.html:9
+msgid "Report data"
+msgstr "报告数据"
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:33
+msgid "Welcome"
+msgstr "欢迎"
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:54
+msgid "See tools"
+msgstr "查看工具"
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:91
+msgid "See Tools"
+msgstr "查看工具"
+
+#: ckanext/querytool/templates/querytool/public/base_main.html:112
+msgid "See all tools"
+msgstr "查看所有工具"
+
+#: ckanext/querytool/templates/querytool/public/list.html:26
+msgid "Reports are not published yet in this group"
+msgstr "该组中尚无已发布的报告"
+
+#: ckanext/querytool/templates/querytool/public/read.html:64
+msgid "Displayed Measure"
+msgstr "显示统计指标"
+
+#: ckanext/querytool/templates/querytool/public/read.html:81
+msgid "Download"
+msgstr "下载"
+
+#: ckanext/querytool/templates/querytool/public/read.html:157
+msgid "View more"
+msgstr "查看更多"
+
+#: ckanext/querytool/templates/querytool/public/read.html:130
+#: ckanext/querytool/templates/querytool/public/read.html:292
+msgid "Download image"
+msgstr "下载图片"
+
+#: ckanext/querytool/templates/querytool/public/read.html:251
+msgid "Share"
+msgstr "分享"
+
+#: ckanext/querytool/templates/querytool/public/read.html:256
+msgid "Copy"
+msgstr "复制"
+
+#: ckanext/querytool/templates/querytool/public/read.html:268
+msgid "Embed"
+msgstr "嵌入"
+
+#: ckanext/querytool/templates/querytool/public/read.html:274
+msgid "Embed report view"
+msgstr "嵌入报告视图"
+
+#: ckanext/querytool/templates/querytool/public/read.html:277
+msgid "You can copy and paste the embed code"
+msgstr "您可以复制并粘贴嵌入代码"
+
+#: ckanext/querytool/templates/querytool/public/read.html:280
+msgid "Width"
+msgstr "宽度"
+
+#: ckanext/querytool/templates/querytool/public/read.html:283
+msgid "Height"
+msgstr "高度"
+
+#: ckanext/querytool/templates/querytool/public/read.html:286
+msgid "Code"
+msgstr "代码"
+
+#: ckanext/querytool/templates/querytool/public/snippets/query_tool_list_item.html:29
+msgid "Go to tool"
+msgstr "转到工具"
+
+#: ckanext/querytool/templates/snippets/language_selector.html:3
+msgid "Language"
+msgstr "语言"
+
+#: ckanext/querytool/templates/snippets/language_selector.html:11
+msgid "Go"
+msgstr "去"
+
+#: Added manually
+msgid "Single color"
+msgstr "单色"
+
+#: Added manually
+msgid "Diverging"
+msgstr "发散"
+
+#: Added manually
+msgid "What are Reports?"
+msgstr "有什么报告？"
+
+#: Added manually
+msgid ""
+"Interactive data access reports make it easier for public users "
+"to find a fact and visualize data. They are ideal to present "
+"information from large data sources but can be developed with "
+"any type of data."
+msgstr ""
+"交互式数据访问报告使公共用户可以轻松找到事实并可视化数据。 "
+"它们是呈现大型数据源信息的理想选择，但可以使用任何类型的数据进行开发。"
+
+#: Added manually
+msgid "Variables"
+msgstr "变数"
+
+#: Added manually
+msgid "use drop-down list to select variables based on application filters"
+msgstr "使用下拉列表根据应用程序过滤器选择变量"
+
+#: Added manually
+msgid "etc"
+msgstr "etc"
+
+#: Added manually
+msgid "Processed variables"
+msgstr "处理变量"
+
+#: Added manually
+msgid "Full templates syntax"
+msgstr "完整的 templates 语法"
+
+#: Added manually
+msgid "Please note:"
+msgstr "请注意："
+
+#: Added manually
+msgid "Single braces '{}' are used for variables"
+msgstr "单括号 '{}' 用于变量"
+
+#: Added manually
+msgid "Templates quick reference"
+msgstr "Templates 快速参考"
+
+#: Added manually
+msgid "You can use"
+msgstr "您可以在这里使用"
+
+#: Added manually
+msgid "Templates"
+msgstr "Templates"
+
+#: Added manually
+msgid "here"
+msgstr " "
+
+#: Added manually
+msgid "Markdown quick reference"
+msgstr "Markdown 快速参考"
+
+#: Added manually
+msgid "Markdown formatting"
+msgstr "Markdown 格式"
+
+#: Added manually
+msgid "Full markdown syntax"
+msgstr "完整的 markdown 语法"
+
+#: Added manually
+msgid "Bold text"
+msgstr "粗体文字"
+
+#: Added manually
+msgid "italic text"
+msgstr "斜体文字"
+
+#: Added manually
+msgid "or"
+msgstr "或者"
+
+#: Added manually
+msgid "HTML tags are stripped out for security reasons"
+msgstr "出于安全原因，HTML标记被剥离"
+
+#: ckan/templates/user/edit_user_form.html:29
+msgid "Sysadmin Password"
+msgstr "系统管理员密码"
+
+#: ckan/templates/user/dashboard.html:19 ckan/templates/user/dashboard.html:37
+msgid "News feed"
+msgstr "新闻提要"
+
+#: ckan/templates/user/snippets/followee_dropdown.html:14
+#: ckan/templates/user/snippets/followee_dropdown.html:15
+msgid "Activity from:"
+msgstr "活动来自："
+
+#: ckanext/querytool/templates/admin/config.html:9
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "Welcome Page Title"
+msgstr "主页页面标题"
+
+#: ckanext/querytool/templates/admin/config.html:19
+msgid "The title presented to users on the home page."
+msgstr "在首页上向用户显示的标题。"
+
+#: ckanext/querytool/templates/admin/config.html:10
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "Welcome Page Description"
+msgstr "主页说明"
+
+#: ckanext/querytool/templates/admin/config.html:21
+msgid "The description presented to users on the home page."
+msgstr "在主页上向用户显示的描述。"
+
+#: ckan/controllers/admin.py:58
+msgid "Homepage"
+msgstr "主页"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Half"
+msgstr "一半"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Full"
+msgstr "满的"
+
+#: ckan/templates/macros/autoform.html:62
+msgid "Site logo"
+msgstr "网站徽标"
+
+#: ckan/templates/admin/config.html:33
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This"
+" is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>About:</strong> This text will appear on this CKAN"
+" instances <a href=\"%(about_url)s\">about page</a>.</p> <p><strong>Intro "
+"Text:</strong> This text will appear on this CKAN instances <a "
+"href=\"%(home_url)s\">home page</a> as a welcome to visitors.</p> "
+"<p><strong>Custom CSS:</strong> This is a block of CSS that appears in "
+"<code>&lt;head&gt;</code> tag of every page. If you wish to customize the "
+"templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+"<p><strong>Homepage:</strong> This is for choosing a predefined layout for "
+"the modules that appear on your homepage.</p> "
+msgstr ""
+" <p><strong>网站标题：</strong>这是此CKAN实例的标题。 "
+"它出现在整个CKAN的各个地方。</p> <p><strong>风格：</strong>"
+"从主要配色方案的简单变化列表中进行选择，即可快速完成自定义主题的工作。</p> <p>"
+"<strong>网站标记徽标：</strong>这是出现在所有CKAN实例模板标题中的徽标。"
+"</p> <p><strong>关于：</strong>该文本将显示在此CKAN实例"
+"<a href=\"%(about_url)s\">关于页面</a>上。</p> <p>"
+"<strong>文字介绍：</strong>这段文字将在此CKAN实例<a "
+"href=\"%(home_url)s\">首页</a>上显示，以欢迎访问者。</p> "
+"<p><strong>自定义CSS：</strong>这是CSS块，显示在每个页面的"
+"<code>&lt;head&gt;</code>标记中。如果您希望更全面地自定义模板，我们建议"
+"<a href=\"%(docs_url)s\" target=\"_blank\">阅读文档</a>。"
+"</p> <p><strong>主页：</strong>这是为您的主页上显示的模块选择预定义的布局。</p>"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:542
+msgid "Show annotations"
+msgstr "显示注释"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:564
+msgid "Show bounds"
+msgstr "显示边界"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:574
+msgid "Lower bounds"
+msgstr "下限"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:587
+msgid "Upper bounds"
+msgstr "上限"
+
+#: ckanext/querytool/templates/ajax_snippets/table_item.html:66
+msgid "Sub-dimension"
+msgstr "子维度"
+
+#: ckanext/querytool/templates/ajax_snippets/text_box_item.html:10
+msgid "Column Width"
+msgstr "列宽"
+
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:496
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:514
+msgid "An integer or decimal between 0.1-10."
+msgstr "0.1-10 之间的整数或小数。"
+
+# added manually
+msgid "Line Options"
+msgstr "线路选项"
+
+# added manually
+msgid "Solid"
+msgstr "坚硬的"
+
+# added manually
+msgid "Dashed"
+msgstr "虚线"
+
+# added manually
+msgid "Dash Dot"
+msgstr "破折号"
+
+# added manually
+msgid "Dotted"
+msgstr "点缀"
+
+# added manually
+msgid "Slim"
+msgstr "苗条的"
+
+# added manually
+msgid "Regular"
+msgstr "常规的"
+
+# added manually
+msgid "Wide"
+msgstr "宽的"
+
+# added manually
+msgid "Set axis range"
+msgstr "设置轴范围"
+
+# added manually
+msgid "Axis range minimum"
+msgstr "轴范围最小值"
+
+# added manually
+msgid "Axis minimum"
+msgstr "最小轴"
+
+# added manually
+msgid "Axis range maximum"
+msgstr "轴范围最大值"
+
+# added manually
+msgid "Axis maximum"
+msgstr "轴最大值"
+
+# added manually
+msgid "Show legend title"
+msgstr "显示图例标题"
+
+# added manually
+msgid "Custom legend title"
+msgstr "自定义图例标题"
+
+# added manually
+msgid "Width of bar, default 5.0"
+msgstr "条的宽度，默认 5.0"
+
+# added manually
+msgid "Sort x axis labels"
+msgstr "订购 x 轴标签"
+
+# added manually
+msgid "Date DD/MM/YYYY .e.g. 01/01/2014"
+msgstr "日期 DD/MM/YYYY 例如。 2014 年 1 月 1 日"
+
+# added manually
+msgid "Date YYYY/MM/DD .e.g. 2014/01/01"
+msgstr "日期 YYYY/MM/DD 例如。 2014 年 1 月 1 日"
+
+# added manually
+msgid "Date YYYY/MM .e.g. 2014/01"
+msgstr "日期 YYYY/MM 例如。 2014/01"
+
+# added manually
+msgid "Date MM/YYYY .e.g. 01/2014"
+msgstr "日期 MM/YYYY 例如。 01/2014"
+
+# added manually
+msgid "Date DD/MM .e.g. 01/01"
+msgstr "日期 DD/MM ex。 01/01"
+
+# added manually
+msgid "Date MM/YY .e.g. 01/14"
+msgstr "日期 MM/YY ex。 01/14"
+
+# added manually
+msgid "Date YYYY .e.g. 2014"
+msgstr "日期 YYYY ex。 2014"
+
+# added manually
+msgid "Date MMM DD, YYYY .e.g. Jan 01, 2014"
+msgstr "日期 MMM DD、YYYY ex。 2014 年 1 月 1 日"
+
+# added manually
+msgid "Date MMM DD .e.g. Jan 01"
+msgstr "日期 MMM DD ex。 1 月 1 日"
+
+# added manually
+msgid "Date MMM YY .e.g. Jan 14"
+msgstr "日期 MMM YY ex。 1 月 14 日"
+
+# added manually
+msgid "Dimension by default"
+msgstr "默认维度"
+
+# added manually
+msgid "Measure by default"
+msgstr "默认指标"
+
+# added manually
+msgid "Enabled"
+msgstr "启用"
+
+# added manually
+msgid "Disabled"
+msgstr "禁用"
+
+# added manually
+msgid "Sequential"
+msgstr "顺序的"
+
+# added manually
+msgid "Divergent"
+msgstr "分歧的"
+
+# added manually
+msgid "Color"
+msgstr "颜色"
+
+#: ckanext/querytool/templates/admin/config.html:213
+#, python-format
+msgid ""
+" <p><strong>Site Title:</strong> This is the title of this CKAN instance. It "
+"appears in various places throughout CKAN.</p> <p><strong>Style:</strong> "
+"Choose from a list of simple variations of the main colour scheme to get a "
+"very quick custom theme working.</p> <p><strong>Site Tag Logo:</strong> This "
+"is the logo that appears in the header of all the CKAN instance "
+"templates.</p> <p><strong>Custom CSS:</strong> This is a block of CSS that "
+"appears in <code>&lt;head&gt;</code> tag of every page. If you wish to "
+"customize the templates more fully we recommend <a href=\"%(docs_url)s\" "
+"target=\"_blank\">reading the documentation</a>.</p> "
+msgstr ""
+" <p><strong>站点标题：</strong> 这是这个 CKAN 实例的标题它出现在整个 CKAN 的各个地方。"
+"</p> <p><strong>风格：</strong> 从主要配色方案的简单变体列表中进行选择，以获得非常快速的自定义主题。"
+"</p> <p><strong>站点标签徽标：</strong> 这是出现在所有 CKAN 实例模板标题中的徽标。"
+"</p> <p><strong>自定义 CSS：</strong> 这是出现在每个页面的 <code>&lt;head&gt;</code> 标记中的 CSS 块。"
+"如果您希望更全面地自定义模板，我们建议您<a href=\"%(docs_url)s\" target=\"_blank\">阅读文档。</a></p> "
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/admin/config.html:230
+msgid "Theme"
+msgstr "主题"
+
+#: ckanext/querytool/templates/admin/config.html:230
+msgid ""
+"This toggles between the CKAN default theme and the custom theme. The custom "
+"theme adds additional configuration options to this page."
+msgstr "在 CKAN 默认主题和自定义主题之间切换。自定义主题为此页面添加了额外的配置选项。"
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Header Banner"
+msgstr "页眉横幅"
+
+#: ckanext/querytool/templates/admin/config.html:233
+msgid "Upload an image to set the home page banner."
+msgstr "上传图片设置首页横幅。"
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "Header Text Color"
+msgstr "标题文本颜色"
+
+#: ckanext/querytool/templates/admin/config.html:235
+msgid "This changes the text color of Welcome Page Description."
+msgstr "这会更改欢迎页面描述的文本颜色。"
+
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Footer Logo 1"
+msgstr "页脚徽标 1"
+
+#: ckanext/querytool/templates/admin/config.html:237
+msgid "Upload an image to display as a logo on the left side of the footer."
+msgstr "上传图像以在页脚左侧显示为徽标。"
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "Footer Logo 1 Text"
+msgstr "页脚徽标 1 文本"
+
+#: ckanext/querytool/templates/admin/config.html:239
+msgid "This text will be displayed to the right of the logo."
+msgstr "此文本将显示在徽标的右侧。"
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Footer Logo 2"
+msgstr "页脚徽标 2"
+
+#: ckanext/querytool/templates/admin/config.html:241
+msgid "Upload an image to display as a second logo on the left side of the footer."
+msgstr "上传图像以在页脚左侧显示为第二个徽标。"
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "Footer Logo 2 Text"
+msgstr "页脚徽标 2 文本"
+
+#: ckanext/querytool/templates/admin/config.html:243
+msgid "This text will be displayed to the right of the second logo."
+msgstr "此文本将显示在第二个徽标的右侧。"
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "Footer Copyright Text"
+msgstr "页脚版权文本"
+
+#: ckanext/querytool/templates/admin/config.html:245
+msgid "This text will be displayed on the bottom center of the footer."
+msgstr "此文本将显示在页脚的底部中心。"
+
+#: ckanext/querytool/templates/admin/config.html:68
+#: ckanext/querytool/templates/admin/config.html:247
+msgid "Footer Social Media Links"
+msgstr "页脚社交媒体链接"
+
+#: ckanext/querytool/templates/admin/config.html:247
+msgid ""
+"This allows you to select up to 4 social media links to display on the right "
+"side of the footer. Dragging an option to \"Selected\" will add its URL field"
+" to this page."
+msgstr "这允许您选择最多 4 个社交媒体链接显示在页脚的右侧。将选项拖动到“已选择”会将其 URL 字段添加到此页面。"
+
+#: ckanext/querytool/templates/admin/config.html:22
+msgid "Header banner"
+msgstr "标题横幅"
+
+#: ckanext/querytool/templates/admin/config.html:31
+msgid "Header text color"
+msgstr "标题文字颜色"
+
+#: ckanext/querytool/templates/admin/config.html:38
+msgid "Footer logo 1"
+msgstr "页脚标志 1"
+
+#: ckanext/querytool/templates/admin/config.html:40
+msgid "Footer logo 1 text"
+msgstr "页脚徽标 1 文本"
+
+#: ckanext/querytool/templates/admin/config.html:45
+msgid "Footer logo 2"
+msgstr "页脚标志 2"
+
+#: ckanext/querytool/templates/admin/config.html:47
+msgid "Footer logo 2 text"
+msgstr "页脚标志 2 文本"
+
+#: ckanext/querytool/templates/admin/config.html:49
+msgid "Copyright text"
+msgstr "版权文本"
+
+#: ckanext/querytool/templates/admin/config.html:72
+msgid ""
+"Select up to 4. These will appear in the footer in the order (left to right) "
+"of \"Selected\""
+msgstr "最多选择 4 个。这些将按照“已选择”的顺序（从左到右）出现在页脚中"
+
+#: ckanext/querytool/templates/admin/config.html:77
+msgid "Options"
+msgstr "选项"
+
+#: ckanext/querytool/templates/admin/config.html:105
+msgid "Selected"
+msgstr "已选中"
+
+#: ckanext/querytool/templates/footer.html:64
+msgid "Powered by"
+msgstr "基于"
+
+#: ckanext/querytool/templates/footer.html:72
+msgid "Supported by"
+msgstr "支持者"
+
+#: ckanext/querytool/templates/footer.html:49
+msgid "Subscribe and follow us"
+msgstr "订阅并关注我们"
+
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/macros/form.html:265
+msgid "Custom"
+msgstr "风俗"
+
+#: ckanext/querytool/helpers.py:234 ckanext/querytool/helpers.py:558
+#: ckanext/querytool/templates/admin/config.html:13
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1084
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1093
+#: ckanext/querytool/templates/ajax_snippets/chart_item.html:1102
+msgid "Default"
+msgstr "默认"
+
+# Manually added translations
+msgid "Search reports"
+msgstr "搜索报告"
+
+# Manually added translations
+msgid "Search datasets"
+msgstr "搜索数据集"
+
+# Manually added translations
+msgid "Starting color"
+msgstr "起始颜色"
+
+# Manually added translations
+msgid "Ending color"
+msgstr "结束颜色"
+
+# Manually added translations
+msgid "Download Options"
+msgstr "下载选项"
+
+# Manually added translations
+msgid "Report Icon URL"
+msgstr "报告图标 URL"
+
+# Manually added translations
+msgid "Data categories, default 5"
+msgstr "数据类别，默认 5"
+
+# Manually added translations
+msgid "Data categories"
+msgstr "数据类别"
+
+# Manually added translations
+msgid "Fullscreen"
+msgstr "全屏"
+
+# Manually added translations
+msgid "reCAPTCHA validation failed"
+msgstr "reCAPTCHA验证失败"
+
+# Manually added translations
+msgid "Parent Groups"
+msgstr "主要组"
+
+# Manually added translations
+msgid "Enable or disable parent/child groups (visit the \"Manage\" page of a group to set its type). Parent groups will appear on the home page. Clicking on a parent group will navigate to the child groups page for the given parent."
+msgstr "启用或禁用主/次要组（访问组的\"管理\"页面以设置其类型）。 主要组将显示在主页上。 单击主要组，将导航到分配给主要组的次要组页面。"
+
+# Manually added translations
+msgid "Parent"
+msgstr "主要"
+
+# Manually added translations
+msgid "Child"
+msgstr "次要"
+
+# Manually added translations
+msgid "Children"
+msgstr "次要的"
+
+# Manually added translations
+msgid "eg. alcohol, finance, environment"
+msgstr "例如：酒精，金融，环境"
+
+# Manually added translations
+msgid "Miscellaneous groups"
+msgstr "其他组"
+
+# Manually added translations
+msgid "Search groups..."
+msgstr "查找组..."
+
+# Manually added translations
+msgid "No child groups belong to this parent group."
+msgstr "没有次要组属于这个主要组。"
+
+# Manually added translations
+msgid "All reports"
+msgstr "所有报告"
+
+# Manually added translations
+msgid "{number} child group found for \"{query}\""
+msgid_plural "{number} child groups found for \"{query}\""
+msgstr[0] "\"{query}\"找到{number}个次要组"
+msgstr[1] "\"{query}\"找到{number}个次要组"
+
+# Manually added translations
+msgid "{number} child group found"
+msgid_plural "{number} child groups found"
+msgstr[0] "找到{number}个次要组"
+msgstr[1] "找到{number}个次要组"
+
+# Manually added translations
+msgid "No child groups found for \"{query}\""
+msgstr "未找到\"{query}\"的任何次要组"
+
+# Manually added translations
+msgid "No child groups found"
+msgstr "未找到任何次要组"
+
+# Manually added translations
+msgid ""
+"Hi {user},\n"
+"\n"
+"Here's your verification code to login: {code}\n"
+"\n"
+"Have a great day!"
+msgstr ""
+"你好 {user}។\n\n这是您的双因素认证代码，"
+"用于登录：{code}.\n\n祝您拥有美好的一天！"
+
+# Manually added translations
+msgid "Verification Code"
+msgstr "验证码"
+
+# Manually added translations
+msgid "Login failed. Bad username, password, or authentication code."
+msgstr "登录失败。用户名、密码或认证代码错误。"
+
+# Manually added translations
+msgid "A verification code has been sent. This code expires in: "
+msgstr "已发送验证码。该验证码将在 后过期。"
+
+# Manually added translations
+msgid "There was an error sending the verification code. Please try again."
+msgstr "发送验证码时出错。请重试。"
+
+# Manually added translations
+msgid "Send verification code"
+msgstr "发送验证码"
+
+# Manually added translations
+msgid "Resend verification code"
+msgstr "重新发送验证码"
+
+# Manually added translations
+msgid "Verification code expired: Please resend and try again."
+msgstr "验证码已过期，请重新发送并重试。"
+
+# Manually added translations
+msgid "Verification code will be sent to the email address associated with your account."
+msgstr "验证码将发送到与您的账户关联的电子邮件地址。"
+
+# Manually added translations
+msgid "Enter your verification code"
+msgstr "请输入您的验证码。"
+
+# Manually added translations
+msgid "Info box title"
+msgstr "信息框标题"
+
+# Manually added translations
+msgid "Hover over the map for more info"
+msgstr "将鼠标悬停在地图上以获取更多信息"
+
+# Manually added translations
+msgid "Are you sure you want to delete this Group?"
+msgstr "你确定要删除这个群组吗？"
+
+# Manually added translations
+msgid "<b>Note</b>: <i>Reports owned by this Group will become orphans. You will need to assign them to a new Group for them to be accessible to the public by visiting \"Reports\" tab on the \"Design Reports\" page.<i>"
+msgstr "<b>注意</b>：由这个群组拥有的报告将变成孤立报告。您需要将它们分配到一个新的群组，以便公众可以访问它们。请访问“设计报告”页面上的“报告”选项卡。"
+
+# Manually added translations
+msgid "Orphan"
+msgstr "孤立报告"
+
+# Manually added translations
+msgid "Orphans"
+msgstr "孤立报告"
+
+# Manually added translations
+msgid "Previously saved in group: "
+msgstr "之前保存在群组中："
+
+# Manually added translations
+msgid "No reports found"
+msgstr "未找到报告"
+
+# Manually added translations
+msgid "No reports found for \"{query}\""
+msgstr "未找到\"{query}\"的报告"
+
+# Manually added translations
+msgid "{number} report found"
+msgid_plural "{number} reports found"
+msgstr[0] "找到{number}个报告"
+msgstr[1] "找到{number}个报告"
+
+# Manually added translations
+msgid "{number} report found for \"{query}\""
+msgid_plural "{number} reports found for \"{query}\""
+msgstr[0] "\"{query}\"找到{number}个报告"
+msgstr[1] "\"{query}\"找到{number}个报告"

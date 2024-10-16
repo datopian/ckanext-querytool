@@ -1797,3 +1797,23 @@ msgstr "Huérfanos"
 # Manually added translations
 msgid "Previously saved in group: "
 msgstr "Guardado previamente en el grupo: "
+
+# Manually added translations
+msgid "No reports found"
+msgstr "No se encontraron informes"
+
+# Manually added translations
+msgid "No reports found for \"{query}\""
+msgstr "No se encontraron informes para \"{query}\""
+
+# Manually added translations
+msgid "{number} report found"
+msgid_plural "{number} reports found"
+msgstr[0] "{number} informe encontrado"
+msgstr[1] "{number} informes encontrados"
+
+# Manually added translations
+msgid "{number} report found for \"{query}\""
+msgid_plural "{number} reports found for \"{query}\""
+msgstr[0] "{number} informe encontrado para \"{query}\""
+msgstr[1] "{number} informes encontrados para \"{query}\""

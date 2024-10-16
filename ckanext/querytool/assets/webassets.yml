@@ -1,0 +1,181 @@
+querytool-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-querytool.css
+  contents:
+    - style.css
+    - vendor/bootstrap/css/bootstrap.css
+    - vendor/leaflet/leaflet.css
+
+admin-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-admin-querytool.css
+  contents:
+    - css/admin-query-tool.css
+
+querytool-js:
+  output: ckanext-querytool/%(version)s-querytool.js
+  extra:
+    preload:
+      - base/main
+      - vendor/jquery
+      - vendor/bootstrap
+  contents:
+    - javascript/adaptive_design.js
+    - javascript/anchor_fix.js
+    - javascript/vitals.js
+    - javascript/modules/fullscreen.js
+    - javascript/querytool_data.js
+    - javascript/public_query.js
+  filter:
+    - rjsmin
+
+querytool-image-upload-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-image-upload.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - javascript/modules/querytool_image_upload.js
+
+querytool-group-autocomplete-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-autocomplete.js
+  extra:
+    preload:
+      - base/main
+      - vendor/bootstrap
+  contents:
+    - javascript/modules/vs-groups-autocomplete.js
+
+querytool-viz-preview-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-viz-preview.js
+  extra:
+    preload:
+      - base/main
+      - vendor/bootstrap
+      #- vendor/d3/d3.js
+      #- vendor/c3/c3.js
+      #- vendor/canvas2image.js
+      #- vendor/html12canvas.js
+      #- vendor/nunjucks.js
+  contents:
+    - javascript/modules/viz-preview.js
+    - javascript/modules/tool-embed.js
+    - javascript/public_query.js
+    - javascript/querytool_data.js
+
+querytool-group-confirm-action-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-confirm-action.js
+  extra:
+    preload:
+      - vendor/bootstrap
+  contents:
+    - javascript/modules/group-confirm-action.js
+
+querytool-visualizations-settings-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-visualizations-settings.js
+  extra:
+    preload:
+      - base/main
+      - vendor/bootstrap
+  contents:
+    - javascript/visualizations_settings.js
+
+querytool-leaflet-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-querytool-map.js
+  extra:
+    preload:
+      - base/main
+      - vendor/bootstrap
+  contents:
+    - vendor/leaflet/leaflet-src.js
+    - javascript/modules/map-module.js
+
+querytool-leaflet-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-querytool-map.css
+  contents:
+    - vendor/leaflet/leaflet.css
+
+querytool-datatables-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-vendor-datatables.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/datatables/dataTables.js
+    - vendor/datatables/dataTables.buttons.js
+    - vendor/datatables/buttons.html5.js
+    - vendor/datatables/pdfmake.js
+    - vendor/datatables/vfs_fonts.js
+    - vendor/datatables/jszip.js
+    - javascript/dist/modules/table-module.js
+
+querytool-datatables-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-vendor-datatables.css
+  contents:
+    - vendor/datatables/dataTables.css
+
+vendor-c3-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-vendor-c3.css
+  contents:
+    - vendor/c3/c3.css
+
+vendor-c3-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-vendor-c3.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/c3/c3.js
+
+vendor-d3-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-vendor-d3.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/d3/d3.js
+
+vendor-nunjucks-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-vendor-nunjucks.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/nunjucks.js
+
+vendor-dragula-js:
+  filter: rjsmin
+  output: ckanext-querytool/%(version)s-vendor-dragula.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/dragula/dragula.js
+
+vendor-dragula-css:
+  filter: rjsmin
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-vendor-dragula.css
+  contents:
+    - vendor/dragula/dragula.css
+
+vendor-save-svg-png-js:
+  output: ckanext-querytool/%(version)s-vendor-save-svg-png.js
+  extra:
+    preload:
+      - base/main
+  contents:
+    - vendor/save-svg-png.js

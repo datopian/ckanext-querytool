@@ -8,12 +8,13 @@ except ImportError:
 import logging
 import json
 import csv
-import cStringIO
+import io
+import tempfile
 
 import ckan.logic as logic
 
 from xlsxwriter.workbook import Workbook
-from xml.etree.cElementTree import Element, SubElement, ElementTree
+from xml.etree.ElementTree import Element, SubElement, ElementTree, tostring
 from ckan.common import _
 
 from datetime import date, timedelta, datetime
@@ -23,7 +24,7 @@ DUMP_FORMATS = 'csv', 'json', 'xml', 'xlsx'
 
 NAIVE_DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 DATE_FORMAT = '%Y-%m-%d'
-UTF8_BOM = u'\uFEFF'.encode(u'utf-8')
+UTF8_BOM = '\uFEFF'.encode('utf-8')
 
 log = logging.getLogger(__name__)
 
@@ -33,28 +34,28 @@ class XMLWriter(object):
 
         self.delimiter = \
             config.get('ckanext.dataextractor.headers_names_delimiter', "_")
-        self.output = output
-        self.id_col = columns[0] == u'_id'
+        self.output = io.BytesIO(output.getvalue().encode())
+        self.id_col = columns[0] == '_id'
         if self.id_col:
             columns = columns[1:]
         columns_fixed = []
         for column in columns:
             columns_fixed.append(column.replace(" ", self.delimiter))
         self.columns = columns_fixed
+        self.rows = []
         log.debug(self.columns)
 
     def writerow(self, row):
-        root = Element(u'row')
+        root = Element('row')
         if self.id_col:
-            root.attrib[u'_id'] = unicode(row[0])
+            root.attrib['_id'] = str(row[0])
             row = row[1:]
         for k, v in zip(self.columns, row):
             if v is None:
-                SubElement(root, k).text = u'NULL'
+                SubElement(root, k).text = 'NULL'
                 continue
-            SubElement(root, k).text = unicode(v)
-        ElementTree(root).write(self.output, encoding=u'utf-8')
-        self.output.write(b'\n')
+            SubElement(root, k).text = str(v)
+        self.rows.append(root)
 
 
 class JSONWriter(object):
@@ -67,14 +68,14 @@ class JSONWriter(object):
 
         if self.first:
             self.first = False
-            self.output.write(b'\n    ')
+            self.output.write('\n    ')
         else:
-            self.output.write(b',\n    ')
+            self.output.write(',\n    ')
         self.output.write(json.dumps(
             row,
             ensure_ascii=False,
-            separators=(u',', u':'),
-            sort_keys=True).encode(u'utf-8'))
+            separators=(',', ':'),
+            sort_keys=True))
 
 
 class FileWriterService():
@@ -83,9 +84,9 @@ class FileWriterService():
         d = str(delimiter).lower()
 
         columns = [x['id'] for x in fields]
-        columns_utf8 = [x['id'].encode("utf-8") for x in fields]
+        columns_utf8 = [x['id'] for x in fields]
 
-        output = cStringIO.StringIO()
+        output = io.StringIO()
 
         if d == 'semicolon':
             writer = csv.writer(output, delimiter=';')
@@ -105,20 +106,20 @@ class FileWriterService():
                              if record[column] is None or
                              type(record[column]) in [int, float]
                              else
-                             record[column].encode("utf-8")
+                             record[column]
                              for column in columns])
 
-        return cStringIO.StringIO(output.getvalue())
+        return io.StringIO(output.getvalue())
 
     def _json_writer(self, fields, records):
 
         columns = [x['id'] for x in fields]
-        output = cStringIO.StringIO()
+        output = io.StringIO()
 
         output.write(
-            b'{\n  "fields": %s,\n  "records": [' % json.dumps(
-                fields, ensure_ascii=False, separators=(u',', u':'))
-            .encode(u'utf-8'))
+            '{\n  "fields": %s,\n  "records": [' % json.dumps(
+                fields, ensure_ascii=False, separators=(',', ':'))
+            )
 
         # Initiate json writer and columns
         wr = JSONWriter(output, columns)
@@ -127,16 +128,14 @@ class FileWriterService():
         for record in records:
             wr.writerow([record[column] for column in columns])
 
-        output.write(b'\n]}\n')
+        output.write('\n]}\n')
 
-        return cStringIO.StringIO(output.getvalue())
+        return io.StringIO(output.getvalue())
 
     def _xml_writer(self, fields, records):
 
         columns = [x['id'] for x in fields]
-        output = cStringIO.StringIO()
-
-        output.write(b'<data>\n')
+        output = io.StringIO()
 
         # Initiate xml writer and columns
         wr = XMLWriter(output, columns)
@@ -145,35 +144,44 @@ class FileWriterService():
         for record in records:
             wr.writerow([record[column] for column in columns])
 
-        output.write(b'</data>\n')
+        data = Element('data')
+        for row in wr.rows:
+            data.append(row)
 
-        return cStringIO.StringIO(output.getvalue())
+        xml_string = tostring(data).decode()
+
+        return io.StringIO(xml_string)
 
     def _xlsx_writer(self, fields, records):
 
         columns = [x['id'] for x in fields]
-        output = cStringIO.StringIO()
+        output = io.StringIO()
 
-        workbook = Workbook(output)
-        worksheet = workbook.add_worksheet()
+        with tempfile.NamedTemporaryFile(delete=False) as tmp:
+            temp_name = tmp.name
+            workbook = Workbook(tmp.name)
+            worksheet = workbook.add_worksheet()
 
-        # Writing headers
-        col = 0
-        for c in columns:
-            worksheet.write(0, col, c)
-            col += 1
-
-        # Writing records
-        row = 1
-        for record in records:
+            # Writing headers
             col = 0
-            for column in columns:
-                worksheet.write(row, col, record[column])
+            for c in columns:
+                worksheet.write(0, col, c)
                 col += 1
-            row += 1
 
-        workbook.close()
-        return cStringIO.StringIO(output.getvalue())
+            # Writing records
+            row = 1
+            for record in records:
+                col = 0
+                for column in columns:
+                    worksheet.write(row, col, record[column])
+                    col += 1
+                row += 1
+
+            workbook.close()
+        with open(temp_name, 'rb') as f:
+            content = f.read()
+            print(content, flush=True)
+            return io.BytesIO(content)
 
     def write_to_file(self, fields, records, format, delimiter):
 
@@ -187,4 +195,4 @@ class FileWriterService():
         if format == 'xlsx':
             return self._xlsx_writer(fields, records)
         raise logic.ValidationError(_(
-            u'format: must be one of %s') % u', '.join(DUMP_FORMATS))
+            'format: must be one of %s') % ', '.join(DUMP_FORMATS))

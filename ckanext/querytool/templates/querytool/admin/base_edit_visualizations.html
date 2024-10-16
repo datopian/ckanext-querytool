@@ -1,6 +1,6 @@
-{% resource 'querytool/vendor/dragula/dragula.css' %}
-{% resource 'querytool/vendor/dragula/dragula.js' %}
-{% resource 'querytool/css/admin-query-tool.css' %}
+{% asset 'querytool/vendor-dragula-css' %}
+{% asset 'querytool/vendor-dragula-js' %}
+{% asset 'querytool-css/admin-querytool-css' %}
 
 {% extends "querytool/admin/base.html" %}
 
@@ -9,7 +9,7 @@
 {% block subtitle %}{{ _('Manage Visualizations') }}{% endblock %}
 
 {% block breadcrumb_content %}
-  <li>{% link_for _('Reports Folders'), controller=ctrl, action='groups' %}</li>
+  <li>{% link_for _('Reports Folders'), named_route='reports.reports_list' %}</li>
 {% endblock %}
 
 {% block page_header %}

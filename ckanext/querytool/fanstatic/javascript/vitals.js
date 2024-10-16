@@ -1281,14 +1281,14 @@ $(".filter-item-value").hover(function(event) {
 
 });
 
-$(".filter-item-value").tooltip({
-  placement: 'right',
-  trigger: 'hover',
-  container: 'body',
-  title: function(e) {
-    return $(this).find('.active').attr('value');
-  }
-});
+//$(".filter-item-value").tooltip({
+//  placement: 'right',
+//  trigger: 'hover',
+//  container: 'body',
+//  title: function(e) {
+//    return $(this).find('.active').attr('value');
+//  }
+//});
 
 $('body').on('click', '[id^=copy-viz-btn_]', function () {
   document.getElementById("submit-overlay").style.display = "block";
@@ -1471,6 +1471,7 @@ $(document).ready(function(){
 
 document.addEventListener("DOMContentLoaded", function() {
   const send2faEmailBtn = document.getElementById("send-2fa-email");
+  console.log('AQUI')
 
   if (send2faEmailBtn) {
     send2faEmailBtn.addEventListener("click", function(event) {

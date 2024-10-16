@@ -1,0 +1,12 @@
+
+public-querytool-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-public-querytool.css
+  contents:
+    - public-query-tool.css
+
+admin-querytool-css:
+  filter: cssrewrite
+  output: ckanext-querytool/%(version)s-admin-querytool.css
+  contents:
+    - admin-query-tool.css

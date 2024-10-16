@@ -1,0 +1,39 @@
+@import "variables.less";
+@import "mixins.less";
+
+@media (max-width: 767px) {
+    body {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    .navbar-static-top {
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+
+    .new_toolbar {
+        flex-direction: column;
+        .search-reports {
+            margin-left: 25px;
+            margin-right: auto;
+            .field-sitewide-search {
+                width: 210px;
+            }
+
+        }
+
+        .embed-navbar-items {
+            margin-left: 0px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+    }
+}

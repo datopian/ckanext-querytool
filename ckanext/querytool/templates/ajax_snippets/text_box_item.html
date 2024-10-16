@@ -10,7 +10,7 @@
     <div class="control-group title">
       <label class="control-label" for="text_box_description_1">{{ _('Content') }}</label>
       <div class="controls editor">
-        
+
         <textarea id="text_box_description_{{ n }}" class="textbox_desc" name="text_box_description_{{ n }}" cols="20" rows="5" placeholder="{{ _('Description') }}">{{ text_description }}</textarea>
         <div class="control-group title-vars">
           <div class=" ">
@@ -37,18 +37,16 @@
         <div class="control-group title-help">
           <div class=" ">
             {% set template_tooltip = "<pre><p>" + _('Variables') + "<br>---<br>{measure}<br>{optional_filter}<br>*" + _('use drop-down list to select variables based on application filters') + "</p><p>" + _('Processed variables') + "<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>" + _('etc') + "</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>" + _('Full templates syntax') + "</a></b></p><p class='muted'><b>" + _('Please note:') + " " + "</b>" + _('Single braces \'{}\' are used for variables') + "</p>" %}
-            <span class="editor-info-block textbox_info">{{_('You can use')}} <a href="#templates" title="" data-trigger="focus" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="{{_('Templates quick reference')}}" data-container="body">{{_('Templates')}}</a> {{_('here')}}</span>
+            <span class="editor-info-block">{{_('You can use')}} <a href="#templates" title="" data-trigger="focus" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="{{_('Templates quick reference')}}" data-container="body">{{_('Templates')}}</a> {{_('here')}}</span>
           </div>
         </div>
-        
+
       </div>
     </div>
 
-    
+    {{ form.select('text_box_column_width_' ~ n, id='text_box_column_width_' ~ n, label=_('Column Width'), options=[{'text':_('Half'), 'value': 'Half'},{'text': _('Full'), 'value': 'Full'}], selected=column_width, attrs={'class': 'control-select'}) }}
 
-    {{ form.select('text_box_column_width_' ~ n, id='text_box_column_width_' ~ n, label=_('Column Width'), options=[{'text':_('Half'), 'value': 'Half'},{'text': _('Full'), 'value': 'Full'}], selected=column_width) }}
-
-    <ul class="inline text-right chart-actions">
+    <ul class="viz-crud-item text-right chart-actions">
       <li class="remove"><a class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
       <li><button class="btn copy-chart-btn" type="submit" id="copy-viz-btn_{{ n }}" name="copy-viz-btn_{{ n }}"><span class="fa fa-copy" aria-hidden="true"></span> {{ _('Copy') }}</button></li>
     </ul>

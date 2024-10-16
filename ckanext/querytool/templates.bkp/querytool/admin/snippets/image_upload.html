@@ -1,0 +1,52 @@
+{#
+Creates image upload page
+data - Data about the image
+n - Order of the item
+Example usage:
+{% snippet 'querytool/admin/snippets/image_upload.html', data=data,n=order  %}
+#}
+{% set uploads_enabled = h.uploads_enabled() %}
+{% if data %}
+{% set n =  data.order | string %}
+{% set media_type =  data.media_type %}
+{% set image_url =  data.url %}
+{% set media_image_url = 'media_image_url_' + n %}
+{% set media_image_upload = 'media_image_upload_' + n %}
+{% set media_clear_upload = 'media_clear_upload_' + n %}
+{% set is_upload = image_url and not image_url.startswith('http') %}
+{% set is_url = image_url and image_url.startswith('http') %}
+{% set data_module = 'image-upload' %}
+{% else %}
+{% set data_module = 'custom-image-upload' %}
+{% endif %}
+{% if uploads_enabled %}
+<div
+   class="image-upload"
+   data-module="{{ data_module }}"
+   data-module-is_url="{{ is_url or 'false' }}"
+   data-module-is_upload="{{ is_upload or 'false' }}"
+   data-module-field_url="{{ media_image_url }}"
+   data-module-field_upload="{{ media_image_upload }}"
+   data-module-field_clear="{{ media_clear_upload }}"
+   data-module-upload_label={{_("Image")}}>
+   <div class="control-group control-full">
+      <label class="control-label" for="field-image-url">{{ _('Report Icon') }}</label>
+      <div class="controls ">
+         <input id="field-image-url" type="text" name="{{ media_image_url }}" value="{{ image_url }}" placeholder="http://example.com/my-image.jpg">
+      </div>
+   </div>
+   <div class="control-group control-full">
+      <label class="control-label" for="field-image-upload">{{ _('Image') }} </label>
+      <div class="controls ">
+         <input id="field-image-upload" type="file" name="{{ media_image_upload }}" value="{{ image_url }}" placeholder="">
+      </div>
+   </div>
+</div>
+{% else %}
+<div class="control-group control-full">
+   <label class="control-label" for="field-image-url">{{ _('Report Icon') }}</label>
+   <div class="controls ">
+      <input id="field-image-url" type="text" name="{{ media_image_url }}" value="{{ image_url }}" placeholder="http://example.com/my-image.jpg">
+   </div>
+</div>
+{% endif %}

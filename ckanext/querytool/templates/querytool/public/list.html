@@ -7,13 +7,13 @@
   <div class="toolbar new_toolbar">
     <ol class="breadcrumb new_breadcrumb">
       <li><a href="/"><i class="fa fa-home"></i></a></li>
-      {% set from_parent = request.params.get('from_parent') %}
-      {% set parent = request.params.get('parent') %}
-      {% set parent_title = request.params.get('title') %}
+      {% set from_parent = request.args.get('from_parent') %}
+      {% set parent = request.args.get('parent') %}
+      {% set parent_title = request.args.get('title') %}
       {% if from_parent == 'True' %}
         <li><a href="/querytool/public/group/{{ parent }}">{{ parent_title }}</a></li>
       {% endif %}
-      <li class="active">{% link_for group.title, controller=c.controller, action='querytool_public_list', group=group.name %}</li>
+      <li class="active">{% link_for group.title, named_route='querytool.public_list', group=group.name %}</li>
     </ol>
     {% snippet 'snippets/embed/navbar_end_items.html' %}
   </div>
@@ -22,7 +22,7 @@
 
 {% block page_header_bg %}{% endblock %}
 
-{% block page_header_icon %}<img class="thumbnail" src="{{group.image_display_url}}" width=100>{% endblock %}
+{% block page_header_icon %}<img class="thumbnail" src="{{ group.image_display_url }}" style="width: 100px;">{% endblock %}
 
 {% block page_header_title %}<h1>{{ group.title }}</h1>{% endblock %}
 
@@ -34,13 +34,13 @@
 
 {% block tools %}
 <div class="container">
-  {% set from_parent = request.params.get('from_parent') %}
-  {% set parent = request.params.get('parent') %}
-  {% set parent_title = request.params.get('title') %}
+  {% set from_parent = request.args.get('from_parent') %}
+  {% set parent = request.args.get('parent') %}
+  {% set parent_title = request.args.get('title') %}
 
   {% if g.group_parents_enabled == 'True' and (group.group_relationship_type == 'parent' or group.name == '__misc__group__') %}
 
-    {% set q = request.params.get('report_q') %}
+    {% set q = request.args.get('report_q') %}
 
     {% if not child_groups and not q %}
       {% set groups = h.querytool_get_groups(parent_name=group.name) %}
@@ -48,9 +48,9 @@
       {% set groups = child_groups %}
     {% endif %}
 
-    {% set parent = request.params.get('parent') %}
+    {% set parent = request.args.get('parent') %}
     {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
-    {% set sorting_selected = request.params.get('sort', 'name asc') %}
+    {% set sorting_selected = request.args.get('sort', 'name asc') %}
     {% set group_count = groups | length %}
 
     <form class="search-form no-bottom-border">
@@ -92,7 +92,7 @@
           {% set count = 1 %}
 
           {% for child_group in groups %}
-            {% set url = h.url_for('querytool_public_list_by_group', group=child_group.name) %}
+            {% set url = h.url_for('querytool.public_list', group=child_group.name) %}
 
             {% if count == 1 %}
             <div class="row">
@@ -102,7 +102,11 @@
               <div class="group-box-2">
                 <div class="group-image-2">
                   {% if child_group.image_display_url %}
-                    <img  src="{{group.image_display_url}}" alt="{{ value }}">
+                    {% if 'http' in child_group.image_display_url %}
+                      <img src="{{ child_group.image_display_url }}" alt="{{ child_group.image_display_url }}" />
+                    {% else %}
+                      <img src="/uploads/group/{{ child_group.image_display_url }}" alt="{{ child_group.image_display_url }}" />
+                    {% endif %}
                   {% else %}
                     <img src="/base/images/icon-1.svg" alt="">
                   {% endif %}
@@ -126,7 +130,7 @@
               </div>
             </div>
 
-          {% if count == 3 %}
+          {% if count == 1 %}
           </div>
           {% endif %}
 
@@ -155,14 +159,14 @@
     {% endif %}
 
   {% else %}
-    {% set q = request.params.get('report_q') %}
+    {% set q = request.args.get('report_q') %}
     {% set sorting = [(_('Name Ascending'), 'name asc'), (_('Name Descending'), 'name desc')] %}
-    {% set sorting_selected = request.params.get('sort', 'name asc') %}
+    {% set sorting_selected = request.args.get('sort', 'name asc') %}
     {% set report_count = h.report_search_count(data, remove_private=True) %}
 
     <form class="search-form no-bottom-border">
       <div class="search-input control-reports search-giant" id="report-search-box">
-        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports...') }}" {% if q %} value="{{ q }}" {% endif %} />
+        <input id="field-sitewide-search" type="text" name="report_q" placeholder="{{ _('Search reports') }}" {% if q %} value="{{ q }}" {% endif %} />
         <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
         {% if parent %}
           <input type="hidden" name="parent" value="{{ parent }}">

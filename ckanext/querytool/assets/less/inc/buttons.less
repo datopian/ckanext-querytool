@@ -1,0 +1,125 @@
+  @import "variables.less";
+  @import "mixins.less";
+  
+  .btn {
+    background-image: none;
+    box-shadow: none;
+    border-radius: 4px;
+    &:hover {
+      box-shadow: none;
+      background-color: @color-primary-2;
+      color:@color-white;
+    }
+  }
+
+  .primary,
+  .secodary,
+  .public-query,
+  .site-footer {
+    .btn {
+      .fa {
+        .fa-icon-margin(0 @fa-margin 0 0);
+      }
+    }
+  }
+
+  .btn-primary {
+    background-color: @color-primary;
+    &:focus {
+      background-color: @color-primary;
+    }
+    &:hover {
+      background-color: @color-primary-2;
+    }
+  }
+
+  .btn-secondary {
+    background-color: @color-secondary-dark;
+    border-color: @color-secondary;
+    color: @color-white;
+    text-shadow: none;
+    &:focus,
+    &:hover {
+      color: @color-white;
+      background-color: darken(@color-secondary-dark, 5%);
+    }
+  }
+
+  .btn-danger {
+    background-color: @color-error;
+  }
+
+  //.btn-success {
+    //background-color: @color-success;
+  //}
+
+  .btn,
+  label {
+    font-weight: 400;
+  }
+
+  .btn-large {
+    .caret {
+      margin-top: @grid-gutter-width/2 - 2;
+      margin-left: @grid-gutter-width/4;
+    }
+  }
+
+  .btn-download {
+    &,
+    .btn-group{
+      display: flex;
+      .btn{
+        padding: @grid-gutter-width;
+      }
+    }
+    .btn {
+      padding-left: @grid-gutter-width*1.5;
+      padding-right: @grid-gutter-width*1.5;
+      font-weight: 500;
+      font-size: @base-font-size + 6;
+      font-family: inherit;
+      border: transparent;
+    }
+  }
+
+  .btn-update {
+    font-size: @base-font-size + 6;
+    padding: @grid-gutter-width;
+    border-color: transparent;
+    font-weight: 500;
+    font-family: inherit;
+    border-radius: 4px;
+  }
+
+  .btn-filter-toggle {
+    &.on {
+      border-color: @color-success;
+      background-color: @color-success;
+    }
+  }
+
+  .btn-chart-download {
+    cursor: pointer;
+    float:right;
+    z-index: 10;
+    color: #000;
+    font-size: 1em;
+    // margin: 7px 0px;
+  }
+
+  .form-actions {
+    .btn {
+      margin-left: @grid-gutter-width/2;
+    }
+  }
+
+
+.btn-ordinary {
+  background-color:@color-primary-mid;
+}
+
+.btn-ordinary:hover,.btn-ordinary:focus, .btn-ordinary:active {
+  background-color:@color-light;
+  color:#000;
+}

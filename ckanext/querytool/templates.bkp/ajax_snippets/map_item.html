@@ -1,0 +1,303 @@
+{% import 'macros/form.html' as form %}
+{% set y_axis_values = y_axis_values.split(',') %}
+{% set main_filters = main_filters.split(',') %}
+{% set columns = h.querytool_get_resource_columns(chart_resource, y_axis_values) %}
+
+{% if map and map.filter_name %}
+  {% set class = '' %}
+{% else %}
+  {% set class = 'hidden' %}
+{% endif %}
+
+<div id="map_item_{{ n }}" class="item map visualization-fields-section">
+<div class="item-wrapper">
+
+
+  {# Title #}
+  {% if map %}
+    {% set map_custom_title = map.map_custom_title_field %}
+  {% endif %}
+  <div class="control-group title">
+    <label class="control-label" for="map_custom_title_field_{{ n }}">{{ _('Title') }}</label>
+    <div class="controls ">
+      <textarea id="map_custom_title_field_{{ n }}" name="map_custom_title_field_{{ n }}" placeholder="{{ _('Map title') }}" rows="3">{{ map_custom_title }}</textarea>
+    </div>
+  </div>
+
+  <div class="control-group title-vars">
+    <div class="controls ">
+      {% set filters = h.querytool_parse_json(info_query_filters or '[]') %}
+      {% set filters = filters|sort(attribute='order') %}
+      <select>
+        <option value="" disabled selected>{{_('Add variable to title')}}</option>
+        <optgroup label="{{_('Capitalized')}}">
+          <option value="{measure|capitalize}">{{_('Measure')}}</option>
+          {% for filter in filters %}
+            <option value="{{'{%s|capitalize}' % filter.slug}}">{{ filter.alias }}</option>
+          {% endfor %}
+          <option value="{optional_filter|capitalize}">{{_('Optional Filter')}}</option>
+        </optgroup>
+        <optgroup label="{{_('lowercase')}}" class='text-lowercase'>
+          <option value="{measure|lower}">{{_('Measure')}}</option>
+          {% for filter in filters %}
+            <option value="{{'{%s|lower}' % filter.slug}}">{{ filter.alias }}</option>
+          {% endfor %}
+          <option value="{optional_filter|lower}">{{_('Optional Filter')}}</option>
+        </optgroup>
+      </select>
+
+    </div>
+  </div>
+  <div class="control-group title-help">
+    <div class="controls ">
+      {% set template_tooltip = "<pre><p>" + _('Variables') + "<br>---<br>{measure}<br>{optional_filter}<br>*" + _('use drop-down list to select variables based on application filters') + "</p><p>" + _('Processed variables') + "<br>---<br>{measure|capitalize}<br>{measure|lower}<br>{measure|upper}<br>" + _('etc') + "</p></pre><p><b><a href='https://mozilla.github.io/nunjucks/templating.html#variables' target='_blank'>" + _('Full templates syntax') + "</a></b></p><p class='muted'><b>" + _('Please note:') + " " + "</b>" + _('Single braces \'{}\' are used for variables') + "</p>" %}
+      <span class="editor-info-block">{{_('You can use')}} <a href="#templates" title="" data-trigger="focus" data-target="popover" data-content="{{ template_tooltip }}" data-html="true" data-original-title="{{_('Templates quick reference')}}" data-container="body">{{_('Templates')}}</a> {{_('here')}}</span>
+    </div>
+  </div>
+
+  {% set resources = h.querytool_get_geojson_resources() %}
+  <div class="control-group control-select">
+    <label class="control-label" for="map_resource_{{ n }}">{{ _('Map resource') }}</label>
+    <div class="controls ">
+      <select id="map_resource_{{ n }}" name="map_resource_{{ n }}" required=required>
+      <option value="">&mdash; {{ _('Select map resource') }} &mdash;</option>
+      {% for resource in resources %}
+        {% set isSelected = map and h.querytool_get_dataset_url_path(map.map_resource) == h.querytool_get_dataset_url_path(resource.value) %}
+        <option value="{{ resource.value }}" {% if isSelected  %}selected{% endif %} >{{resource.text}}</option>
+      {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  {% if map %}
+    {% set map_properties = h.querytool_get_geojson_properties(map.map_resource) %}
+  {% else %}
+    {% set map_properties = [] %}
+  {% endif %}
+
+  <div class="control-group control-select">
+    <label class="control-label" for="map_title_field_{{ n }}">{{ _('Title field') }}</label>
+    <div class="controls ">
+      <select id="map_title_field_{{ n }}" name="map_title_field_{{ n }}" required=required>
+      <option value="">&mdash; {{ _('Select title field') }} &mdash;</option>
+      {% if map_properties %}
+        {% for property in map_properties %}
+          <option value="{{ property.value }}" {% if map %}{{ 'selected' if property.value == map.map_title_field }}{% endif %} >{{property.text}}</option>
+        {% endfor %}
+      {% endif %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group control-select">
+    <label class="control-label" for="map_key_field_{{ n }}">{{ _('Map key field') }}</label>
+    <div class="controls ">
+      <select id="map_key_field_{{ n }}" name="map_key_field_{{ n }}" required=required>
+      <option value="">&mdash; {{ _('Select map key field') }} &mdash;</option>
+      {% if map_properties %}
+        {% for property in map_properties %}
+          <option value="{{ property.value }}" {% if map %}{{ 'selected' if property.value == map.map_key_field }}{% endif %} >{{property.text}}</option>
+        {% endfor %}
+      {% endif %}
+      </select>
+    </div>
+  </div>
+
+  <div class="control-group control-select">
+    <label class="control-label" for="map_data_key_field_{{ n }}">{{ _('Data key field') }}</label>
+    <div class="controls ">
+      <select id="map_data_key_field_{{ n }}" name="map_data_key_field_{{ n }}" required=required>
+        <option value="">&mdash; {{ _('Select data key field') }} &mdash;</option>
+        {% for column in columns %}
+        <option value="{{column}}"{% if map %}{{ 'selected' if column == map.data_key_field }}{% endif %}>{{column}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  {% set data_formats = h.get_maps_data_formats() %}
+  {% if map %}
+    {% set data_format_selected = map.data_format or '.2f' %}
+  {% else %}
+    {% set data_format_selected = '.2f' %}
+  {% endif %}
+  <div class="control-group control-select">
+    <label class="control-label" for="map_data_format_{{ n }}">{{ _('Data format') }}</label>
+    <div class="controls ">
+      <select id="map_data_format_{{ n }}" name="map_data_format_{{ n }}">
+        {% for format in data_formats %}
+          <option value="{{ format.value }}" {{ 'selected' if format.value == data_format_selected }} >{{ format.text }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  {% if map and map.map_infobox_title %}
+    {% set map_infobox_title = map.map_infobox_title %}
+  {% endif %}
+  <div class="control-group title mb-20">
+    <label class="control-label" for="map_infobox_title_{{ n }}">{{ _('Info box title') }}</label>
+    <div class="controls ">
+      <textarea id="map_infobox_title_{{ n }}" name="map_infobox_title_{{ n }}" placeholder="{{ _('Info box title') }}" rows="3">{{ map_infobox_title }}</textarea>
+    </div>
+  </div>
+
+  {% if map and map.seq_colors %}
+    {% set starting_color = map.seq_colors.split(',')[0] %}
+    {% set ending_color = map.seq_colors.split(',')[1] %}
+  {% else %}
+    {% set starting_color = "#feedde" %}
+    {% set ending_color = "#fdbe85" %}
+  {% endif %}
+  <div>
+    <input
+        type="hidden"
+        value="{{starting_color}},{{ending_color}}"
+        name="seq_colors_hidden_input_{{ n }}"
+        id="seq_colors_hidden_input_{{ n }}"
+    />
+
+    <div class="control-group control-select">
+        <label
+            class="control-label"
+            for="seq_colors_starting_{{ n }}"
+        >{{ _('Starting color') }}</label>
+        <input
+            type="color"
+            id="seq_colors_starting_{{ n }}"
+            class="colorpicker"
+            value="{{ starting_color }}"
+        />
+    </div>
+    <div class="control-group control-select">
+        <label
+            class="control-label"
+            for="seq_colors_ending_{{ n }}"
+        >{{ _('Ending color') }}</label>
+        <input
+            type="color"
+            id="seq_colors_ending_{{ n }}"
+            class="colorpicker"
+            value="{{ ending_color }}"
+        />
+    </div>
+    <div
+        class="control-group seq-color-preview"
+        id="seq_color_preview_{{ n }}"
+        style="background-image: linear-gradient(to right, {{ starting_color }}, {{ ending_color }});"
+    ></div>
+  </div>
+
+  {% if map and map.data_categories %}
+    {% set data_categories = map.data_categories %}
+  {% endif %}
+  <div class="control-group">
+    <label class="control-label" for="map_data_categories_{{ n }}">{{ _('Data categories') }}</label>
+    <div class="controls ">
+       <input id="map_data_categories_{{ n }}" type="number" required min="2" max="10" name="map_data_categories_{{ n }}" value="{{ data_categories|default (5)}}" placeholder="{{ _('Data categories, default 5') }}">
+       {{ form.info(_('An integer between 2-10.')) }}
+    </div>
+ </div>
+
+  {% for item in y_axis_values %}
+    {% do main_filters.append(item) %}
+  {% endfor %}
+
+  {% set map_filters = h.querytool_get_resource_columns(chart_resource, main_filters) %}
+
+  <div class="control-group control-select">
+    <label class="control-label" for="map_field_filter_name_{{ n }}">{{ _('Optional Filter') }}</label>
+    <div class="controls ">
+      <select id="map_field_filter_name_{{ n }}" name="map_field_filter_name_{{ n }}">
+        <option value="">&mdash; {{ _('Select column') }} &mdash;</option>
+        {% for filter in map_filters %}
+        <option value="{{filter}}"{% if map %}{{ 'selected' if filter == map.filter_name }}{% endif %}>{{filter}}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </div>
+
+  <div id="map_div_filter_value_{{ n }}" class="control-group control-select {{ class }}">
+    <label class="control-label" for="map_field_filter_value_{{ n }}">{{ _('Default value') }}</label>
+    <div class="controls ">
+      <select id="map_field_filter_value_{{ n }}" name="map_field_filter_value_{{ n }}" >
+        <option value="">&mdash; {{ _('Select value') }} &mdash;</option>
+        {% if map and map.filter_value %}
+        <option value="{{ map.filter_value }}" selected>{{ map.filter_value }}</option>
+        {% endif %}
+      </select>
+    </div>
+  </div>
+
+  <div id="map_div_filter_alias_{{ n }}" class="control-group {{ class }}">
+    <label class="control-label" for="map_field_filter_alias_{{ n }}">{{ _('Filter Label') }}</label>
+    <div class="controls ">
+      <input id="map_field_filter_alias_{{ n }}" name="map_field_filter_alias_{{ n }}"
+           {% if map and map.filter_alias %}value="{{map.filter_alias}}"{% else %}value=""{% endif %}
+           placeholder="{{ _('Enter filter label') }}" type="text">
+    </div>
+  </div>
+
+  <div id="map_div_filter_visibility_{{ n }}" class="control-group control-select {{ class }}">
+    <label class="control-label" for="map_field_filter_visibility_{{ n }}">{{ _('Filter visibility') }}</label>
+    <div class="controls ">
+      <select id="map_field_filter_visibility_{{ n }}" name="map_field_filter_visibility_{{ n }}" >
+        <option value="public" {{ 'selected' if map and map.filter_visibility == 'public' }}>{{ _('Public') }}</option>
+        <option value="private" {{ 'selected' if map and map.filter_visibility == 'private' }}>{{ _('Private') }}</option>
+      </select>
+    </div>
+  </div>
+
+  <ul class="inline text-right chart-actions">
+    <li class="remove"><a id="delete-item-btn" class="btn delete-item-btn">{% block delete_button_text %}<span class="fa fa-trash-o" aria-hidden="true"></span> {{ _('Delete') }}{% endblock %}</a></li>
+    <li><button class="btn copy-chart-btn" type="submit" id="copy-viz-btn_{{ n }}" name="copy-viz-btn_{{ n }}"><span class="fa fa-copy" aria-hidden="true"></span> {{ _('Copy') }}</button></li>
+  </ul>
+
+  <span class="grippy"></span>
+</div>
+<div class="preview-wrapper">
+  {% if map %}
+    {% set map_resource=map.map_resource %}
+    {% set map_title_field=map.map_title_field %}
+    {% set map_custom_title_field=map.map_custom_title_field %}
+    {% set map_infobox_title=map.map_infobox_title %}
+    {% set map_key_field=map.map_key_field %}
+    {% set data_key_field=map.data_key_field %}
+    {% set data_format=map.data_format %}
+    {% set seq_colors=map.seq_colors %}
+    {% set data_categories=map.data_categories %}
+    {% set filter_name = map.filter_name %}
+    {% set filter_value = map.filter_value %}
+
+    <p id="map_title" style="display:none; opacity:0; width:0; height:0;"></p>
+  {% endif %}
+  {% set map_config = h.querytool_get_map_config() %}
+  {% snippet 'ajax_snippets/map_module.html',
+    map_config=map_config,
+    n=n,
+    measure_label = measure_label,
+    map_resource=map_resource,
+    map_title_field=map_title_field,
+    map_custom_title_field=map_custom_title_field,
+    map_infobox_title=map_infobox_title,
+    map_key_field=map_key_field,
+    data_key_field=data_key_field,
+    data_format=data_format,
+    sql_string=sql_string,
+    seq_colors=seq_colors,
+    data_categories=data_categories,
+    y_axis_column=y_axis_column,
+    filter_name=filter_name,
+    filter_value=filter_value
+  %}
+</div>
+</div>
+
+<script>
+  function translateMapHover(text) {
+    var translations = {
+      'Hover over the map for more info': "{{ _('Hover over the map for more info') }}"
+    };
+    return translations[text];
+  }
+</script>

@@ -9,14 +9,10 @@ Example:
 
 #}
 {% block group_list %}
-<ul class="group-list" style="margin:0;padding:0;">
+<ul class="media-grid bg-white bg-no-image">
 	{% block group_list_inner %}
   {% for group in groups %}
-    {% set user_permission = h.get_groups_for_user(c.userobj, group.name) %}
-
-    {% if user_permission == True %}
-        {% snippet "group/snippets/group_item.html", group=group, position=loop.index %}
-    {% endif %}
+    {% snippet "group/snippets/group_item.html", group=group, position=loop.index, show_capacity=show_capacity %}
   {% endfor %}
   {% endblock %}
 </ul>

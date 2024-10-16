@@ -1,5 +1,5 @@
 {% set current_lang = request.environ.CKAN_LANG %}
-<form class="form-inline form-select custom-lang-select" action="{% url_for controller='util', action='redirect' %}" data-module="select-switch" method="POST">
+<form class="form-inline form-select custom-lang-select" action="{% url_for 'util.internal_redirect' %}" data-module="select-switch" method="POST">
   <select id="field-lang-select-flags-{{id}}" name="url">
     {% for locale in h.get_available_locales() %}
       <option value="{% url_for h.current_url(), locale=locale.short_name %}" {% if locale.short_name == current_lang %}selected="selected"{% endif %}>

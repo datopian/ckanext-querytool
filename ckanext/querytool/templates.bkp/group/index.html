@@ -1,0 +1,39 @@
+{% ckan_extends %}
+
+{% block subtitle %}{{ _('Groups') }}{% endblock %}
+
+{% block breadcrumb_content %}
+  <li class="active">{% link_for _('Design Reports'), controller='group', action='index' %}</li>
+{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block page_primary_action %}
+  {% if h.check_access('group_create') %}
+    {% link_for _('Add Group'), controller='ckanext.querytool.controllers.group:QuerytoolGroupController', action='new', class_='btn btn-primary', icon='plus-square' %}
+  {% endif %}
+
+  {% set ctrl = 'ckanext.querytool.controllers.querytool:QueryToolController' %}
+
+  {% if h.check_access('querytool_update') and h.get_is_admin_or_editor_of_any_group(c.userobj) %}
+    {% link_for _('New Report'), controller=ctrl, action='querytool_edit', querytool='', class_='btn btn-primary', icon='plus-square' %}
+  {% endif %}
+{% endblock %}
+
+{% block primary_content_inner %}
+  {% set c = h.filter_groups_by_permissions(c) %}
+
+  <h1 class="heading">{{ _('Reports') }}</h1>
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="/group">{{ _('Groups') }}</a></li>
+      <li><a href="{{ h.url_for(controller='ckanext.querytool.controllers.group:QuerytoolGroupController', action='read_all_reports', ) }}">{{ _('Reports') }}</a></li>
+      
+    </ul>
+
+    <div class="tab-content" style="display:block">
+      {{ super() }}
+    </div>
+
+{% endblock %}
+
+{{ super() }}
