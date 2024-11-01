@@ -16,12 +16,12 @@ report dict. Example:
 
           {% if report.image_display_url %}
             {% if 'http' in report.image_display_url %}
-              <img src="{{ report.image_display_url }}" alt="{{ report.name }}" />
+              <img class="querytool-thumbnail-groups-report" src="{{ report.image_display_url }}" alt="{{ report.name }}" />
             {% else %}
-              <img src="/uploads/querytool/{{ report.image_display_url }}" alt="{{ report.name }}" />
+              <img class="querytool-thumbnail-groups-report" src="/uploads/querytool/{{ report.image_display_url }}" alt="{{ report.name }}" />
             {% endif %}
           {% else %}
-            <img src="/base/images/icon-1.svg" alt="{{ report.name }}" />
+            <img class="querytool-thumbnail-groups-report" src="/base/images/icon-1.svg" alt="{{ report.name }}" />
           {% endif %}
         {% endblock %}
       </div>
