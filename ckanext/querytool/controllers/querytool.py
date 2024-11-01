@@ -652,7 +652,7 @@ class QueryToolController(base.BaseController):
                                                     .format(
                                                         id),
                                                     'False')
-                            upload.upload(uploader)
+                            upload.upload(uploader.get_max_image_size())
                             image_url = upload.filename
 
                         image['url'] = image_url

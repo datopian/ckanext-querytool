@@ -19,7 +19,7 @@
         {% if h.get_groups_for_user(userobj, report.group) and (member_type == 'member' or member_type == 'admin' or userobj.sysadmin) %}
         <div class="applicaitons-box">
 
-          <div class="thumb">
+          <div class="querytool-thumbnail">
             {% if report.image_display_url %}
               {% if 'http' in report.image_display_url %}
                 <img src="{{ report.image_display_url }}" alt="{{ report.name }}" style="max-width: 100% !important;" />
