@@ -1279,9 +1279,7 @@ body {
   margin-right: 20px;
 }
 .group-image img {
-  max-width: 100% !important;
   max-height: 100% !important;
-  margin: 0 auto !important;
 }
 .tool-title {
   margin: 0 0 0 0 !important;

@@ -651,7 +651,7 @@ def edit_visualizations(
                                 "image_upload_{}".format(id),
                                 "False",
                             )
-                            upload.upload(uploader)
+                            upload.upload(uploader.get_max_image_size())
                             image_url = upload.filename
 
                     except Exception as e:

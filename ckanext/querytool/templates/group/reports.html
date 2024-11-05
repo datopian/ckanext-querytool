@@ -19,7 +19,7 @@
         {% if h.get_groups_for_user(userobj, report.group) and (member_type == 'member' or member_type == 'admin' or userobj.sysadmin) %}
         <div class="applicaitons-box">
 
-          <div class="thumb">
+          <div class="querytool-thumbnail-groups">
             {% if report.image_display_url %}
               {% if 'http' in report.image_display_url %}
                 <img src="{{ report.image_display_url }}" alt="{{ report.name }}" style="max-width: 100% !important;" />
@@ -40,7 +40,7 @@
                 {{ _('Private') }}
               </span>
             {% endif %}
-            <h2>{{ report.title }}</h2>
+            <h3 class="media-heading">{{ report.title }}</h3>
         
             <p class="muted">{{ h.markdown_extract(report.description, extract_length=150) }}</p>
 <p>{{_('Used dataset:')}} <a href="{{ h.url_for('dataset.read', id=report.dataset_name)}}">{{ report.dataset_name }}</a></p>
@@ -87,7 +87,7 @@
                 {{ _('Private') }}
               </span>
             {% endif %}
-            <h2>{{ report.title }}</h2>
+            <h3 class="media-heading">{{ report.title }}</h3>
 
             <p class="muted">{{ h.markdown_extract(report.description, extract_length=150) }}</p>
             <p>{{_('Used dataset:')}} <a href="{{ h.url_for('dataset.read', id=report.dataset_name)}}">{{ report.dataset_name }}</a></p>

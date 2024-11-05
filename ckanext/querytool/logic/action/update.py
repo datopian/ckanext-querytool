@@ -126,7 +126,7 @@ def querytool_update(context, data_dict):
             upload.update_data_dict(
                 data_dict, 'image_url', 'image_upload', 'clear_upload'
             )
-            upload.upload(uploader)
+            upload.upload(uploader.get_max_image_size())
             data_dict['image_display_url'] = upload.filename
             data['image_display_url'] = upload.filename
         else:
@@ -187,7 +187,7 @@ def querytool_visualizations_update(context, data_dict):
                 upload.update_data_dict(
                     new_data, "image_url", "image_upload", "clear_upload"
                 )
-                upload.upload(uploader)
+                upload.upload(uploader.get_max_image_size())
 
     if not visualizations:
         visualizations = CkanextQueryToolVisualizations()

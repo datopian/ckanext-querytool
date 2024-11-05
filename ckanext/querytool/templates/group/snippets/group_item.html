@@ -16,7 +16,7 @@ Example:
 {% block item %}
 <li style="border-bottom: 1px solid rgb(191, 191, 191); padding-bottom: 20px; padding-top: 20px;">
   {% block item_inner %}
-  <div class="group-image" style="margin-top:15px;">
+  <div class="group-image" style="margin-top:22px;">
     {% block image %}
       <img src="{{ group.image_display_url or h.url_for_static('/base/images/folder-icon-2.svg') }}" alt="{{ group.name }}" >
     {% endblock %}
