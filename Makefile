@@ -7,7 +7,7 @@ list:
 
 assets:
 	npx gulp less &&\
-        npm run webpack
+    npm run webpack
 
 readme:
 	npx doctoc README.md

@@ -55,11 +55,6 @@ querytool-viz-preview-js:
     preload:
       - base/main
       - vendor/bootstrap
-      #- vendor/d3/d3.js
-      #- vendor/c3/c3.js
-      #- vendor/canvas2image.js
-      #- vendor/html12canvas.js
-      #- vendor/nunjucks.js
   contents:
     - javascript/modules/viz-preview.js
     - javascript/modules/tool-embed.js
@@ -166,7 +161,6 @@ vendor-dragula-js:
     - vendor/dragula/dragula.js
 
 vendor-dragula-css:
-  filter: rjsmin
   filter: cssrewrite
   output: ckanext-querytool/%(version)s-vendor-dragula.css
   contents:
