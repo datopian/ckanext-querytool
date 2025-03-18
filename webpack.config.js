@@ -1,5 +1,5 @@
 const path = require('path');
-const assetPath = './ckanext/querytool/fanstatic/javascript';
+const assetPath = './ckanext/querytool/assets/javascript';
 require('@babel/polyfill')
 
 module.exports = {
