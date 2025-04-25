@@ -9,7 +9,7 @@ from sqlalchemy import types, func, or_
 from sqlalchemy.orm import class_mapper
 
 from sqlalchemy.engine import Row as RowProxy
-from sqlalchemy import inspect
+from sqlalchemy.engine.reflection import Inspector
 
 import ckan.logic as logic
 from ckan.model.meta import orm, metadata, mapper, Session, engine
@@ -25,49 +25,48 @@ query_tool_visualizations_table = None
 
 
 def setup():
-    global query_tool_table, query_tool_visualizations_table
-
+    # Check if query tool table exist
     if query_tool_table is None:
         define_query_tool_table()
         log.debug('Querytool table defined in memory.')
-
-    # Bind al engine de CKAN
-    query_tool_table.metadata.bind = model.meta.engine
-
     if not query_tool_table.exists():
-        log.debug("Querytool table does not exist. Creating table.")
         query_tool_table.create()
     else:
         log.debug('Querytool table already exists.')
-        model.Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS owner_org TEXT;')
-        model.Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS icon TEXT;')
-        model.Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS additional_description TEXT;')
-        model.Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS image_url TEXT;')
-        model.Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS image_display_url TEXT;')
-        model.Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS selection_label TEXT;')
-        model.Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS report_caption TEXT;')
-        model.Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS download_options BOOLEAN;')
-        model.Session.commit()
+        # add `owner_org` column if not exists:
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS owner_org TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS icon TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS additional_description TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS image_url TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS image_display_url TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS selection_label TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS report_caption TEXT;')
+        Session.execute('ALTER TABLE ckanext_querytool ADD COLUMN IF NOT EXISTS download_options BOOLEAN;')
+        Session.commit()
+    inspector = Inspector.from_engine(engine)
 
-    inspector = inspect(model.meta.engine)
-    index_names = [index['name'] for index in inspector.get_indexes('ckanext_querytool')]
+    index_names =\
+        [index['name'] for index in
+            inspector.get_indexes('ckanext_querytool')]
 
     if 'ckanext_querytool_id_idx' not in index_names:
         log.debug('Creating index for Querytool.')
-        Index('ckanext_querytool_id_idx', query_tool_table.c.id).create()
+        Index('ckanext_querytool_id_idx',
+              query_tool_table.c.id).create()
 
+    # Check if query tool visualizations table exist
     if query_tool_visualizations_table is None:
         define_querytool_visualizations_table()
         log.debug('Querytool visualizations table defined in memory.')
-
-    query_tool_visualizations_table.metadata.bind = model.meta.engine
-
     if not query_tool_visualizations_table.exists():
         query_tool_visualizations_table.create()
     else:
         log.debug('Querytool visualizations table already exists.')
+    inspector = Inspector.from_engine(engine)
 
-    index_names = [index['name'] for index in inspector.get_indexes('ckanext_querytool_visualizations')]
+    index_names =\
+        [index['name'] for index in
+            inspector.get_indexes('ckanext_querytool_visualizations')]
 
     if 'ckanext_querytool_visualizations_id_idx' not in index_names:
         log.debug('Creating index for Querytool visualizations.')
